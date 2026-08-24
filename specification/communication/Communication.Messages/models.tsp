@@ -839,6 +839,7 @@ union ParticipantKind {
   external: "external",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.c2025_04_01_Preview)
 @doc("Request payload for sending a conversation message.")
 model SendConversationMessageOptions {
@@ -856,6 +857,7 @@ model SendConversationMessageResult {
   messageId: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.c2025_04_01_Preview)
 @resource("messages/conversations")
 @doc("Request payload for creating a conversation.")
@@ -1026,6 +1028,7 @@ union MessagePlatformKind {
   whatsApp: "whatsApp",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.c2025_04_01_Preview)
 @doc("Request payload for adding participants to a conversation.")
 model AddParticipantsOptions {
@@ -1033,6 +1036,7 @@ model AddParticipantsOptions {
   participants: ConversationParticipant[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.c2025_04_01_Preview)
 @doc("Request payload for removing participants from a conversation.")
 model RemoveParticipantsOptions {

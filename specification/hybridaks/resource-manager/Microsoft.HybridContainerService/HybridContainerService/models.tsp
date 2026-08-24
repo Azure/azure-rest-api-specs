@@ -487,12 +487,14 @@ model AgentPoolProfile {
   /**
    * The particular KubernetesVersion Image OS Type (Linux, Windows)
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: OsType;
 
   /**
    * Specifies the OS SKU used by the agent pool. The default is CBLMariner if OSType is Linux. The default is Windows2019 when OSType is Windows.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osSKU?: OSSKU;
 
   /**
@@ -865,6 +867,7 @@ model ProvisionedClusterPoolUpgradeProfile {
   /**
    * The particular KubernetesVersion Image OS Type (Linux, Windows)
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: OsType;
 
@@ -963,6 +966,7 @@ model AgentPoolProvisioningStatusStatus {
 /**
  * The list kubeconfig result response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListCredentialResponse {
   /**
    * Operation Id
@@ -1111,12 +1115,14 @@ model KubernetesVersionReadiness {
   /**
    * The particular KubernetesVersion Image OS Type (Linux, Windows)
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /**
    * Specifies the OS SKU used by the agent pool. The default is CBLMariner if OSType is Linux. The default is Windows2019 when OSType is Windows.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osSku?: OSSKU;
 
   /**
@@ -1236,6 +1242,7 @@ model VirtualNetworkProperties {
   /**
    * IP Address Prefix of the network
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddressPrefix?: string;
 
   /**

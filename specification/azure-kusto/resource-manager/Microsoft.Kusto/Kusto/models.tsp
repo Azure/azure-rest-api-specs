@@ -3643,6 +3643,7 @@ model EventGridConnectionProperties {
 /**
  * Class representing the Kusto CosmosDb data connection properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbDataConnectionProperties {
   /**
    * The case-sensitive name of the existing target table in your cluster. Retrieved data is ingested into this table.

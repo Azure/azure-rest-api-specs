@@ -55,6 +55,11 @@ enum Versions {
    * The 2025-07-01 API version.
    */
   v2025_07_01: "2025-07-01",
+
+  /**
+   * The 2025-09-01 API version.
+   */
+  v2025_09_01: "2025-09-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -94,6 +99,10 @@ enum Features {
   /** Interconnect group resource type for managing interconnect groups. */
   @added(Versions.v2025_07_01)
   interconnectGroup,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2025_09_01)
+  firstPartyServiceTag,
 }
 
 /**
@@ -257,6 +266,12 @@ union LoadBalancerSkuName {
    * Gateway
    */
   Gateway: "Gateway",
+
+  /**
+   * Service load balancer SKU.
+   */
+  @added(Versions.v2025_09_01)
+  Service: "Service",
 }
 
 /**
@@ -291,6 +306,19 @@ union LoadBalancerScope {
    * Private
    */
   Private: "Private",
+}
+
+/**
+ * The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.
+ */
+@added(Versions.v2025_09_01)
+union LoadBalancerMode {
+  string,
+
+  /**
+   * Advanced mode, which enables additional capabilities on a Standard SKU load balancer.
+   */
+  Advanced: "Advanced",
 }
 
 /**
@@ -823,6 +851,7 @@ union NetworkInterfaceAuxiliarySku {
  * The domain name label scope. If a domain name label and a domain name label scope are specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 enum PublicIpAddressDnsSettingsDomainNameLabelScope {
   /**
    * TenantReuse
@@ -913,6 +942,7 @@ model NetworkInterfacePropertiesFormat {
   /**
    * A list of IPConfigurations of the network interface.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipConfigurations?: NetworkInterfaceIPConfiguration[];
 
   /**
@@ -1141,18 +1171,21 @@ model SubnetPropertiesFormat {
   /**
    * An array of references to the network interface IP configurations using subnet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipConfigurations?: IPConfiguration[];
 
   /**
    * Array of IP configuration profiles which reference this subnet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipConfigurationProfiles?: IPConfigurationProfile[];
 
   /**
    * Array of IpAllocation which reference this subnet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAllocations?: SubResource[];
 
   /**
@@ -1350,6 +1383,7 @@ model PublicIPAddressPropertiesFormat {
   /**
    * The IP configuration associated with the public IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipConfiguration?: IPConfiguration;
 
@@ -1367,11 +1401,13 @@ model PublicIPAddressPropertiesFormat {
    * The list of tags associated with the public IP address.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipTags?: IpTag[];
 
   /**
    * The IP address associated with the public IP address resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 
   /**
@@ -1420,6 +1456,13 @@ model PublicIPAddressPropertiesFormat {
    * Specify what happens to the public IP address when the VM using it is deleted
    */
   deleteOption?: DeleteOptions;
+
+  /**
+   * Whether the public IP address SKU has been upgraded from Standard to StandardV2.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  upgradedToV2?: boolean;
 }
 
 /**
@@ -1476,17 +1519,29 @@ model DdosSettings {
  * Contains the IpTag associated with the object.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IpTag {
   /**
    * The IP tag type. Example: FirstPartyUsage.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipTagType?: string;
 
   /**
    * The value of the IP tag associated with the public IP. Example: SQL.
    */
   tag?: string;
+
+  /**
+   * The resource ID of the first party service tag associated with the IP tag.
+   */
+  @added(Versions.v2025_09_01)
+  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firstPartyServiceTags";
+    }
+  ]>;
 }
 
 /**
@@ -1775,6 +1830,7 @@ model IpamPoolPrefixAllocation {
   /**
    * Number of IP addresses to allocate.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   numberOfIpAddresses?: string;
 
   /**
@@ -2004,9 +2060,16 @@ model FrontendIPConfigurationPropertiesFormat {
    */
   @added(Versions.v2025_07_01)
   ddosSettings?: DdosFrontendIpConfigurationSettings;
+
+  /**
+   * Enables UDP flow tracking for traffic associated with the frontend IP configuration. When enabled, packets belonging to the same UDP flow are consistently directed to the same backend instance. This setting applies to all associated load balancing rules and takes precedence over rule-level enableConnectionTracking settings.
+   */
+  @added(Versions.v2025_09_01)
+  enableConnectionTracking?: boolean;
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Versions.v2025_07_01)
 model DdosFrontendIpConfigurationSettings {
   /** The reference to the DDoS Custom Policy resource. */
@@ -2084,6 +2147,7 @@ model ApplicationGatewayBackendAddress {
   /**
    * IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 }
 
@@ -2225,6 +2289,7 @@ model LoadBalancerBackendAddressPropertiesFormat {
   /**
    * IP Address belonging to the referenced virtual network.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 
   /**
@@ -2855,6 +2920,7 @@ model PrivateEndpointProperties {
   /**
    * Specifies the IP version type for the private IPs of the private endpoint. If not defined, this defaults to IPv4.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipVersionType?: PrivateEndpointIPVersionType = PrivateEndpointIPVersionType.IPv4;
 
   /**
@@ -2881,6 +2947,7 @@ model PrivateEndpointProperties {
   /**
    * A list of IP configurations of the private endpoint. This will be used to map to the First Party Service's endpoints.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipConfigurations?: PrivateEndpointIPConfiguration[];
 
   /**
@@ -2909,6 +2976,7 @@ model CustomDnsConfigPropertiesFormat {
   /**
    * A list of private ip addresses of the private endpoint.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddresses?: string[];
 }
 
@@ -2921,11 +2989,13 @@ model PrivateLinkServiceProperties {
   /**
    * An array of references to the load balancer IP configurations.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   loadBalancerFrontendIpConfigurations?: FrontendIPConfiguration[];
 
   /**
    * An array of private link service IP configurations.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipConfigurations?: PrivateLinkServiceIpConfiguration[];
 
   /**
@@ -3257,21 +3327,25 @@ model NatGatewayPropertiesFormat {
   /**
    * An array of public ip addresses V4 associated with the nat gateway resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddresses?: SubResource[];
 
   /**
    * An array of public ip addresses V6 associated with the nat gateway resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpAddressesV6?: SubResource[];
 
   /**
    * An array of public ip prefixes V4 associated with the nat gateway resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpPrefixes?: SubResource[];
 
   /**
    * An array of public ip prefixes V6 associated with the nat gateway resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpPrefixesV6?: SubResource[];
 
   /**
@@ -3378,7 +3452,7 @@ model LoadBalancingRulePropertiesFormat {
   disableOutboundSnat?: boolean;
 
   /**
-   * Defines whether connections between 2 communicating endpoints can be tracked and associated to the same backend VM over its lifetime when using UDP protocol.
+   * Enables UDP flow tracking for the load balancing rule. This property is retained for rule-level configuration compatibility. When enableConnectionTracking is specified on the associated frontend IP configuration, the frontend setting takes precedence.
    */
   enableConnectionTracking?: boolean;
 
@@ -3774,6 +3848,7 @@ model PrivateEndpointIPConfigurationProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceIpConfiguration extends SubResource {
   /**
@@ -3803,6 +3878,7 @@ model PrivateLinkServiceIpConfiguration extends SubResource {
  * Properties of private link service IP configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceIpConfigurationProperties {
   /**
@@ -3859,6 +3935,7 @@ model RoutePropertiesFormat {
   /**
    * The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   nextHopIpAddress?: string;
 
   /**
@@ -3890,6 +3967,7 @@ model RouteNextHopEcmp {
   /**
    * List of next hop IP addresses for ECMP routing. Must contain between 2 and 64 IP addresses.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @minItems(2)
   @maxItems(64)
   nextHopIpAddresses: string[];
@@ -3998,6 +4076,13 @@ model LoadBalancerPropertiesFormat {
    * Indicates the scope of the load balancer: external (Public) or internal (Private).
    */
   scope?: LoadBalancerScope;
+
+  /**
+   * The load balancer mode. Set to `Advanced` to enable additional capabilities on a Standard SKU load balancer. Advanced mode must be specified at creation and cannot be changed afterward.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  mode?: LoadBalancerMode;
 }
 
 /**
@@ -4084,6 +4169,7 @@ model VirtualNetworkPropertiesFormat {
   /**
    * Array of IpAllocation which reference this VNET.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAllocations?: SubResource[];
 
   /**
@@ -4133,6 +4219,7 @@ model AddressSpace {
  * DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DhcpOptions {
   /**

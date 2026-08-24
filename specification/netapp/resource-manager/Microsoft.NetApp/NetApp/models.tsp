@@ -225,6 +225,24 @@ union ActiveDirectoryStatus {
 }
 
 /**
+ * Indicates the secure LDAP mode for encrypting communication between ANF storage and customer LDAP servers.
+ */
+@added(Versions.v2026_06_15_preview)
+union SecureLdapType {
+  string,
+
+  /**
+   * LDAP traffic is encrypted using LDAP over TLS.
+   */
+  LdapOverTLS: "LdapOverTLS",
+
+  /**
+   * LDAP traffic is not encrypted.
+   */
+  None: "None",
+}
+
+/**
  * The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault
  */
 union KeySource {
@@ -253,6 +271,8 @@ union KeySource {
 @added(Versions.v2026_04_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union ElasticKeySource {
   string,
 

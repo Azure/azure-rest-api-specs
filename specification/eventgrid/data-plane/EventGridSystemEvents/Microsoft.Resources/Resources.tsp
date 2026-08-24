@@ -61,6 +61,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     clientRequestId?: string;
 
     /** The client IP address. */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     clientIpAddress?: string;
 
     /** The request method. */

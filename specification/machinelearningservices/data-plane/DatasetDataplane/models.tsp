@@ -341,6 +341,7 @@ model AssetId {
 }
 
 /** Batch response containing resolved data URIs. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BatchDataUriResponse {
   /** Map of resolved data URIs. */
   values?: Record<DataUriV2Response>;
@@ -393,6 +394,7 @@ model CreateUnregisteredOutputData {
 }
 
 /** Request for data call operations (preview, profile, schema). */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataCallRequest {
   /** The data URI. */
   dataUri?: string;
@@ -465,6 +467,7 @@ model DataField {
 }
 
 /** A resolved data URI response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataUriV2Response {
   /** The URI. */
   uri?: string;
@@ -879,6 +882,7 @@ model HttpResponseMessage {
 }
 
 /** A nested structure of errors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InnerErrorResponse {
   /** The error code. */
   code?: string;
@@ -898,6 +902,7 @@ model KeyValuePairStringIEnumerable {
 }
 
 /** A long-running operation response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LongRunningOperationResponse {
   /** The completion result. */
   completionResult?: string;

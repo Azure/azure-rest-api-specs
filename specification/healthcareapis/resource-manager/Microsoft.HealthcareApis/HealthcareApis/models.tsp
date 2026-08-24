@@ -361,6 +361,7 @@ model ServicesProperties {
   /**
    * The settings for the Cosmos DB database backing the service.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDbConfiguration?: ServiceCosmosDbConfigurationInfo;
 
   /**
@@ -413,6 +414,7 @@ model ServiceAccessPolicyEntry {
 /**
  * The settings for the Cosmos DB database backing the service.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model ServiceCosmosDbConfigurationInfo {
   /**
    * The provisioned throughput for the backing database.

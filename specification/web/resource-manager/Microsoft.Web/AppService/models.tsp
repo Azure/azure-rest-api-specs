@@ -20,24 +20,28 @@ namespace Microsoft.Web;
 scalar stringApplicationJson extends string;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmBadRequestResponse {
   ...TypeSpec.Http.Response<400>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmNotFoundResponse {
   ...TypeSpec.Http.Response<404>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmConflictResponse {
   ...TypeSpec.Http.Response<409>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmTooManyRequestsResponse {
   ...TypeSpec.Http.Response<429>;
@@ -1870,6 +1874,7 @@ model AseV3NetworkingConfigurationProperties {
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -3615,7 +3620,7 @@ model FunctionsScaleAndConcurrency {
   alwaysReady?: FunctionsAlwaysReadyConfig[];
 
   /**
-   * The maximum number of instances for the function app.
+   * The maximum number of on demand instances per function group.
    */
   maximumInstanceCount?: int32;
 
@@ -6241,6 +6246,7 @@ model DiagnosticDetectorCollection
  * Class representing Response from Diagnostic Detectors
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DiagnosticDetectorResponse extends ProxyOnlyResource {
   /**
    * DiagnosticDetectorResponse resource specific properties
@@ -8623,6 +8629,7 @@ model StaticSite {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using x-ms-secret without format:password to match existing swagger."
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension directly to avoid format:password from @secret."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-secret' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to the @secret decorator."
   @extension("x-ms-secret", true)
   repositoryToken?: string;
 
@@ -13559,6 +13566,7 @@ model DeletedAppRestoreRequestProperties {
  * Details about app recovery operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SnapshotRestoreRequest extends ProxyOnlyResource {
   /**
    * SnapshotRestoreRequest resource specific properties
@@ -14353,6 +14361,7 @@ model RegenerateActionParameter {
 /**
  * Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -15101,6 +15110,7 @@ model RequestHistoryProperties {
 /**
  * A request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model Request {
   /**
    * A list of all the headers attached to the request.
@@ -15122,6 +15132,7 @@ model Request {
 /**
  * A response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model Response {
   /**
    * A list of all the headers attached to the response.
@@ -15989,6 +16000,7 @@ model HttpScaleRule {
 /**
  * A request to approve or reject a private endpoint connection
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrivateLinkConnectionApprovalRequest {
   /**
    * The state of a private link connection
@@ -16137,6 +16149,7 @@ model AppserviceGithubToken {
 /**
  * Appservice Github token request content.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AppserviceGithubTokenRequest {
   /**
    * Code string to exchange for Github Access token

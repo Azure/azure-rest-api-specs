@@ -419,6 +419,7 @@ model AnalyzeBatchDocumentsRequest {
   overwriteExisting?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Error response object.")
 @error
 model DocumentIntelligenceErrorResponse {

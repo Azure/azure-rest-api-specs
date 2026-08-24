@@ -608,6 +608,7 @@ model ExportJobResultUrl {
 /**
  * Project assets that need to be imported.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImportJobOptions {
   /**
    * Parameters needed to create the project.
@@ -642,6 +643,7 @@ model Assets {
 }
 
 /** Response payload after synonyms updated successfully. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateSynonymsWithNoContentResponse {
   @doc("Status code.")
   @statusCode
@@ -924,6 +926,7 @@ model UpdateQnaSourceRecord {
 /**
  * Boolean flag used to refresh data from the Source.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RefreshSourceOptions {
   /**
    * Boolean flag used to refresh data from the Source.
@@ -932,6 +935,7 @@ model RefreshSourceOptions {
 }
 
 /** A list of QnAs to be updated. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateQnaOptions is UpdateQnaRecord[];
 
 /**
@@ -982,16 +986,19 @@ model FeedbackRecord {
 /**
  * The request has been accepted for processing, but processing has not yet completed.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AcceptedResponse is TypeSpec.Http.AcceptedResponse;
 
 /**
  * There is no content to send for this request, but the headers may be useful.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NoContentResponse is TypeSpec.Http.NoContentResponse;
 
 /**
  * Feedback recorded successfully.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddFeedBackNoContentResponse is NoContentResponse;
 
 alias ExportJobResponse = AcceptedResponse;

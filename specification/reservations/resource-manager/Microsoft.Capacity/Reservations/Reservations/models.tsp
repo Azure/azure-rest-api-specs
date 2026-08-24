@@ -2202,6 +2202,7 @@ model OperationList {
 /**
  * The response containing operation information
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OperationResponse {
   /**
    * Name of the operation

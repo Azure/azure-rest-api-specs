@@ -44,6 +44,7 @@ model Operation {
   /**
    * The display information for the operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   display?: {
     /**
      * Service provider: Microsoft Devices.

@@ -83,6 +83,7 @@ model ComputeRuntimeDto {
 }
 
 /** CosmosDB settings. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbSettings {
   /** Collections throughput. */
   collectionsThroughput?: int32;
@@ -91,6 +92,7 @@ model CosmosDbSettings {
 /** Encryption configuration. */
 model EncryptionProperty {
   /** The byok cosmosdb account that customer brings to store customer's data with encryption. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDbResourceId?: string;
 
   /** Identity to be used with the keyVault. */
@@ -237,6 +239,7 @@ model PrivateLinkServiceConnectionState {
 /** Service managed resources settings. */
 model ServiceManagedResourcesSettings {
   /** CosmosDB settings. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDb?: CosmosDbSettings;
 }
 

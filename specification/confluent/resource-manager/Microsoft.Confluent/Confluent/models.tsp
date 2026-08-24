@@ -303,6 +303,7 @@ model ConfluentAgreementProperties {
 /**
  * Default error response for resource provider
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ResourceProviderDefaultErrorResponse {
   /**
@@ -1221,6 +1222,7 @@ model AccessRoleBindingNameListSuccessResponse {
 /**
  * Result of GET request to list Confluent operations.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetEnvironmentsResponse is Azure.Core.Page<SCEnvironmentRecord>;
 
 /**
@@ -1283,6 +1285,7 @@ model SCMetadataEntity {
 /**
  * Result of GET request to list clusters in the environment of a confluent organization
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListClustersSuccessResponse is Azure.Core.Page<SCClusterRecord>;
 
 /**
@@ -1427,6 +1430,7 @@ model SCClusterByokEntity {
 /**
  * Result of GET request to list schema registry clusters in the environment of a confluent organization
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListSchemaRegistryClustersResponse
   is Azure.Core.Page<SchemaRegistryClusterRecord>;
 
@@ -1826,11 +1830,13 @@ model PartnerInfoBase {
 /**
  * Result of GET request to list connectors in the cluster of a confluent organization
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListConnectorsSuccessResponse is Azure.Core.Page<ConnectorResource>;
 
 /**
  * Result of GET request to list topics in the cluster of a confluent organization
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ListTopicsSuccessResponse is Azure.Core.Page<TopicRecord>;
 
 /**
@@ -2572,6 +2578,7 @@ model AccessPointProperties {
  * SaaS guid & PublisherId for Activate and Validate SaaS Resource
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Microsoft.Confluent.Versions.v2026_06_02_preview)
 model ActivateSaaSParameterRequest {
   /**
@@ -2589,6 +2596,7 @@ model ActivateSaaSParameterRequest {
  * Marketplace SaaS resource details.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Microsoft.Confluent.Versions.v2026_06_02_preview)
 model SaaSResourceDetailsResponse
   is Azure.ResourceManager.CommonTypes.ProxyResource {
@@ -2615,6 +2623,7 @@ model SaaSData {
  * Response of get latest linked SaaS resource operation
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Microsoft.Confluent.Versions.v2026_06_02_preview)
 model LatestLinkedSaaSResponse {
   /**

@@ -17,7 +17,7 @@ alias KeyVaultOperation<
 #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union Error {
   null,
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backcompatibility with existing clients"
   {
     /**
      * The error code.

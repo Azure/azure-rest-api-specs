@@ -830,6 +830,7 @@ model QueryRewritesValuesDebugInfo {
 }
 
 /** Parameters for filtering, sorting, faceting, paging, and other search query behaviors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchRequest {
   /** A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. */
   count?: boolean;
@@ -1211,6 +1212,7 @@ model SuggestResult {
 }
 
 /** Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SuggestRequest {
   /** An OData expression that filters the documents considered for suggestions. */
   filter?: string;
@@ -1339,6 +1341,7 @@ model AutocompleteItem {
 }
 
 /** Parameters for fuzzy matching, and other autocomplete query behaviors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AutocompleteRequest {
   /** The search text on which to base autocomplete results. */
   search: string;

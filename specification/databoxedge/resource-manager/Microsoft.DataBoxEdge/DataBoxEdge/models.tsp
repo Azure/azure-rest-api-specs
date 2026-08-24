@@ -3709,6 +3709,7 @@ model RawCertificateData {
 /**
  * The upload registration certificate response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UploadCertificateResponse {
   /**
    * Specifies authentication type.
@@ -3974,6 +3975,7 @@ model ComputeResource {
 /**
  * Resource Move details
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataBoxEdgeMoveRequest {
   /**
    * Target resource group ARMId
@@ -4498,6 +4500,7 @@ model LoadBalancerConfig {
   /**
    * Load balancer ipconfig
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipRange?: string[];
 }
 

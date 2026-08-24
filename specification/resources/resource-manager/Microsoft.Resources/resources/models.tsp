@@ -635,6 +635,7 @@ model Permission {
 /**
  * The provider registration definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ProviderRegistrationRequest {
   /**
    * The provider consent.
@@ -893,6 +894,7 @@ model ResourceGroupPatchable {
 /**
  * Export resource group template request parameters.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExportTemplateRequest {
   /**
    * The IDs of the resources to filter the export by. To export all resources, supply an array with single entry '*'.

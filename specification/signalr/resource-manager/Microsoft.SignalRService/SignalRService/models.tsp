@@ -1039,6 +1039,7 @@ model SignalRNetworkACLs {
   /**
    * IP rules for filtering public traffic
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   @maxItems(30)
   ipRules?: IPRule[];

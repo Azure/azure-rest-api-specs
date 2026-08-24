@@ -2043,6 +2043,7 @@ model HypervSiteUpdateProperties {
 /**
  * DependencyMap ServiceMap extensions Client GroupMembers Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsClientGroupMembersRequest {
   /**
    * id of machine
@@ -2301,6 +2302,7 @@ model HypervSiteUsage {
 /**
  * DependencyMap ServiceMap extensions ExportDependencies Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsExportDependenciesRequest {
   /**
    * start time
@@ -2318,6 +2320,7 @@ model DependencyMapServiceMapextensionsExportDependenciesRequest {
 /**
  * The body of export machine errors request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExportMachineErrorsRequest {
   /**
    * Gets or sets the properties.
@@ -2338,6 +2341,7 @@ model RequestExportMachineErrorsProperties {
 /**
  * DependencyMap ServiceMapextensions Scope MapRequest
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsScopeMapRequest {
   /**
    * start time
@@ -2360,6 +2364,7 @@ model DependencyMapServiceMapextensionsScopeMapRequest {
 /**
  * DependencyMap ServiceMap extensions SingleMachine DetailedMap Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest {
   /**
    * id of machine
@@ -2797,6 +2802,7 @@ model HypervMachineProperties {
   /**
    * Operating System Details extracted from the guest             bu executing script inside the guest VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   guestOsDetails?: GuestOsDetails;
 
@@ -3077,6 +3083,7 @@ model HypervNetworkAdapter {
   /**
    * Static IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   staticIpAddress?: string;
 
@@ -3099,6 +3106,7 @@ model HypervNetworkAdapter {
   /**
    * Gets IP addresses for the machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddressList?: string[];
 
@@ -3110,46 +3118,55 @@ model HypervNetworkAdapter {
   /**
    * Gets or sets Type of the IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddressType?: string;
 }
 
 /**
  * Second level object.  Data related to a machine's operating system.             Serialized and stored as part of Machine Rest object.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model GuestOsDetails {
   /**
    * Gets or sets the type of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
    * Gets or sets the Name of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osName?: string;
 
   /**
    * Gets or sets the Version of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVersion?: string;
 
   /**
    * Gets or sets the Architecture of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osArchitecture?: string;
 
   /**
    * Gets or sets the Distro of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDistro?: string;
 
   /**
    * Gets or sets the Major Version of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osMajorVersion?: string;
 
   /**
    * Gets or sets the Variant of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVariant?: string;
 
   /**
@@ -3567,6 +3584,7 @@ model SqlServerApplication {
   /**
    * Gets or sets the value which reflects if Named Pipe is enabled or not.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   isTcpIpEnabled?: boolean;
 
@@ -3742,36 +3760,43 @@ model OperatingSystem {
   /**
    * Gets or sets the type of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
    * Gets or sets the Name of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osName?: string;
 
   /**
    * Gets or sets the Version of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVersion?: string;
 
   /**
    * Gets or sets the Architecture of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osArchitecture?: string;
 
   /**
    * Gets or sets the Distro of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDistro?: string;
 
   /**
    * Gets or sets the Major Version of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osMajorVersion?: string;
 
   /**
    * Gets or sets the Variant of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVariant?: string;
 }
 
@@ -3997,6 +4022,7 @@ model RunAsAccountProperties {
 /**
  * DependencyMap ServiceMap extensions ServerGroup Members Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DependencyMapServiceMapextensionsServerGroupMembersRequest {
   /**
    * port of server
@@ -4117,6 +4143,7 @@ model ImportSiteUpdateProperties {
 /**
  * Import URI response class.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SasUriResponse {
   /**
    * Gets or sets the job ARM ID.
@@ -4384,6 +4411,7 @@ model ImportMachineProperties {
   /**
    * IP Addresses.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddresses?: string[];
 
@@ -4585,21 +4613,25 @@ model WebRoleOperatingSystem {
   /**
    * Gets or sets the type of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
    * Gets or sets the Name of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osName?: string;
 
   /**
    * Gets or sets the Version of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osVersion?: string;
 
   /**
    * Gets or sets the Architecture of the operating system.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osArchitecture?: string;
 }
 
@@ -4650,6 +4682,7 @@ model MasterSiteUpdateProperties {
 /**
  * ErrorSummaryRequest body
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorSummaryRequest {
   /**
    * Gets or sets the Appliance Name.
@@ -4825,6 +4858,7 @@ model SQLInventoryImportBody {
 /**
  * ExportSqlServerRequest body
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExportSqlServersRequest {
   /**
    * Gets or sets the Appliance Name.
@@ -5421,6 +5455,7 @@ model SqlServerProperties {
   /**
    * Gets or sets size of temp database.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   tempDbSizeInMb?: float32;
 
   /**
@@ -5654,6 +5689,7 @@ model SqlServerV2UpdateProperties {
   /**
    * Gets or sets size of temp database.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   tempDbSizeInMb?: float32;
 
   /**
@@ -5866,6 +5902,7 @@ model DiscoverySiteDataSourceProperties {
 /**
  * ExportWebAppsRequest body
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExportWebAppsRequest {
   /**
    * filter options.
@@ -6185,6 +6222,7 @@ model FrontEndBinding {
   /**
    * Gets or sets the IP Address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 }
 
@@ -7141,6 +7179,7 @@ model ServerSiteResourceUpdateProperties {
 /**
  * The properties of ServerSiteUsageResponse.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ServerSiteUsageResponse {
   /**
    * Gets or sets the number of run as accounts in the site.
@@ -7215,6 +7254,7 @@ model ServerProperties {
    *             bu executing
    * script inside the guest VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   guestOsDetails?: GuestOsDetails;
 
@@ -7451,6 +7491,7 @@ model ServerNetworkAdapter {
   /**
    * Gets IP addresses for the machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddressList?: string[];
 
@@ -7462,6 +7503,7 @@ model ServerNetworkAdapter {
   /**
    * Gets or sets Type of the IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddressType?: string;
 }
 
@@ -7722,6 +7764,7 @@ model VmwareSiteUsage {
 /**
  * ExportMachinesRequest body
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExportMachinesRequest {
   /**
    * filter options.
@@ -7966,6 +8009,7 @@ model VmwareMachineProperties {
    *             bu executing
    * script inside the guest VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   guestOsDetails?: GuestOsDetails;
 
@@ -8284,6 +8328,7 @@ model VmwareNetworkAdapter {
   /**
    * Gets IP addresses for the machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddressList?: string[];
 
@@ -8295,6 +8340,7 @@ model VmwareNetworkAdapter {
   /**
    * Gets or sets Type of the IP address.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddressType?: string;
 }
 

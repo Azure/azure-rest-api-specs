@@ -231,6 +231,7 @@ model RemoveTextBlocklistItemsOptions {
   blocklistItemIds: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ContentSafety.Versions.v2024_09_01)
 @doc("The request of analyzing potential direct or indirect injection attacks.")
 model ShieldPromptOptions {
@@ -265,6 +266,7 @@ model DocumentInjectionAnalysisResult {
   attackDetected: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ContentSafety.Versions.v2024_09_01)
 @doc("The request of detecting potential protected material present in the given text.")
 model DetectTextProtectedMaterialOptions {
@@ -332,6 +334,7 @@ model ProvenanceContent {
   uri: url;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ContentSafety.Versions.v2026_07_01_preview)
 @doc("Input describing the media to inspect using Content Provenance Detection.")
 model DetectProvenanceOptions {
