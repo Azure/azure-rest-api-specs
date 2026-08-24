@@ -78,9 +78,8 @@ interface LogicApps {
   createOrUpdateStable is LogicAppOps.CreateOrUpdateSync<
     LogicApp,
     {},
-
-      | ArmResourceUpdatedResponse<LogicApp>
-      | ArmResourceCreatedSyncResponse<LogicApp>,
+    | ArmResourceUpdatedResponse<LogicApp>
+    | ArmResourceCreatedSyncResponse<LogicApp>,
     true
   >;
 

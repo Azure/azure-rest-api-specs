@@ -14,8 +14,10 @@ namespace Microsoft.EdgeOrder;
  * Specifies the properties or parameters for an order. Order is a grouping of one or more order items.
  */
 @parentResource(ResourceGroupLocationResource)
-model OrderResource
-  is Azure.ResourceManager.ProxyResource<OrderProperties, false> {
+model OrderResource is Azure.ResourceManager.ProxyResource<
+  OrderProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OrderResource,
     KeyName = "orderName",

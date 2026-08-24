@@ -2552,6 +2552,7 @@ model AutomationAccountProperties {
   /**
    * URL of automation hybrid service which is used for hybrid worker on-boarding.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   automationHybridServiceUrl?: string;
 }
 
@@ -5755,6 +5756,7 @@ model SourceControlCreateOrUpdateProperties {
   /**
    * The repo url of the source control.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @maxLength(2000)
   repoUrl?: string;
 
@@ -5825,6 +5827,7 @@ model SourceControlProperties {
   /**
    * The repo url of the source control.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   repoUrl?: string;
 
   /**

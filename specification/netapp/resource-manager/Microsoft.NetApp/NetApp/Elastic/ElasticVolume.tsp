@@ -24,6 +24,10 @@ namespace Microsoft.NetApp;
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 @parentResource(ElasticCapacityPool)
 model ElasticVolume is TrackedResource<ElasticVolumeProperties> {
   ...ResourceNameParameter<
@@ -46,6 +50,10 @@ model ElasticVolume is TrackedResource<ElasticVolumeProperties> {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticVolumeProperties {
   /** A unique file path for the volume. Used when creating mount targets. This needs to be unique within the elastic capacity pool. */
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
@@ -118,6 +126,10 @@ model ElasticVolumeProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticVolumeDataProtectionProperties {
   /** Used to apply a snapshot policy to a volume. */
   snapshot?: ElasticVolumeSnapshotProperties;
@@ -134,6 +146,10 @@ model ElasticVolumeDataProtectionProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticVolumeDataProtectionPatchProperties {
   /** Used to apply a snapshot policy to a volume. */
   snapshot?: ElasticVolumeSnapshotProperties;
@@ -150,8 +166,13 @@ model ElasticVolumeDataProtectionPatchProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticMountTargetProperties {
   /** The mount target's IPv4 address, used to mount the volume */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ipAddress?: ipV4Address;
 
@@ -170,6 +191,10 @@ model ElasticMountTargetProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticVolumePatchProperties {
   /** Maximum size allowed for a volume in bytes. Valid values are in the range 1GiB to 16TiB. Values expressed in bytes as multiples of 1 GiB. */
   @minValue(1073741824)
@@ -197,6 +222,10 @@ model ElasticVolumePatchProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticVolumeSnapshotProperties {
   /** Snapshot Policy ResourceId */
   snapshotPolicyResourceId?: Azure.Core.armResourceIdentifier<[
@@ -214,6 +243,10 @@ model ElasticVolumeSnapshotProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticVolumeBackupProperties {
   /** ResourceId used to identify Elastic Backup Policy */
   elasticBackupPolicyResourceId?: Azure.Core.armResourceIdentifier<[
@@ -241,6 +274,10 @@ model ElasticVolumeBackupProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union ElasticVolumePolicyEnforcement {
   string,
 
@@ -259,6 +296,10 @@ union ElasticVolumePolicyEnforcement {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticSmbProperties {
   /** Used to enable or disable encryption for in-flight SMB data volume. This flag can be modified during Elastic volume update operation as well. Only applicable for SMB protocol Elastic volumes. */
   smbEncryption?: ElasticSmbEncryption = ElasticSmbEncryption.Disabled;
@@ -272,6 +313,10 @@ model ElasticSmbProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticSmbPatchProperties {
   /** Used to enable or disable encryption for in-flight SMB data volume. This flag can be modified during Elastic volume update operation as well. Only applicable for SMB protocol Elastic volumes. */
   smbEncryption?: ElasticSmbEncryption;
@@ -285,6 +330,10 @@ model ElasticSmbPatchProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union ElasticSmbEncryption {
   string,
 
@@ -303,6 +352,10 @@ union ElasticSmbEncryption {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union ElasticVolumeRestorationState {
   string,
 
@@ -326,6 +379,10 @@ union ElasticVolumeRestorationState {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticExportPolicy {
   /** Export policy rule */
   @identifiers(#["ruleIndex"])
@@ -340,6 +397,10 @@ model ElasticExportPolicy {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticExportPolicyRule {
   /** Controls the priority of the export policy rule. When connecting to the volume the rule with the lowest index that applies to the connecting client is used */
   @maxValue(5)
@@ -369,6 +430,10 @@ model ElasticExportPolicyRule {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ElasticVolumeRevert {
   /** Resource identifier used to identify the Elastic Snapshot. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -387,6 +452,10 @@ model ElasticVolumeRevert {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union ElasticUnixAccessRule {
   string,
 
@@ -408,6 +477,10 @@ union ElasticUnixAccessRule {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union ElasticNfsv3Access {
   string,
 
@@ -426,6 +499,10 @@ union ElasticNfsv3Access {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union ElasticNfsv4Access {
   string,
 
@@ -444,6 +521,10 @@ union ElasticNfsv4Access {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union ElasticRootAccess {
   string,
 
@@ -462,6 +543,10 @@ union ElasticRootAccess {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union ElasticProtocolType {
   string,
 
@@ -483,6 +568,10 @@ union ElasticProtocolType {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 union SnapshotDirectoryVisibility {
   string,
 
@@ -503,6 +592,10 @@ interface ElasticVolumes {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   get is ArmResourceRead<ElasticVolume>;
 
   /** Create or update the specified volume within the capacity pool */
@@ -513,6 +606,10 @@ interface ElasticVolumes {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticVolume>;
 
   /** Patch the specified elastic volume */
@@ -523,6 +620,10 @@ interface ElasticVolumes {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   update is ArmCustomPatchAsync<
     ElasticVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -541,6 +642,10 @@ interface ElasticVolumes {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticVolume>;
 
   /** List all Elastic Volumes within the Elastic Capacity Pool */
@@ -551,6 +656,10 @@ interface ElasticVolumes {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   listByElasticPool is ArmResourceListByParent<ElasticVolume>;
 
   /** Revert an Elastic Volume to the snapshot specified in the body */
@@ -561,6 +670,10 @@ interface ElasticVolumes {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   revert is ArmResourceActionAsync<
     ElasticVolume,
     ElasticVolumeRevert,

@@ -13,7 +13,6 @@ import {
   TspConfigCsharpDpEmitterOutputDirSubRule,
   TspConfigCsharpDpNamespaceSubRule,
   TspConfigCsharpMgmtEmitterOutputDirSubRule,
-  TspConfigCsharpMgmtEmitterRequiredSubRule,
   TspConfigCsharpMgmtNamespaceSubRule,
   TspConfigGoDpContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
@@ -30,6 +29,7 @@ import {
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
+  TspConfigLegacyCsharpEmitterForbiddenSubRule,
   TspConfigPythonDpEmitterOutputDirSubRule,
   TspConfigPythonMgmtEmitterOutputDirSubRule,
   TspConfigPythonMgmtNamespaceSubRule,
@@ -613,11 +613,10 @@ const csharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
 );
 
-// Test cases for CSharp mgmt emitter requirement rule
-const csharpMgmtEmitterRequiredTestCases: Case[] = [
+// Test cases for the legacy CSharp emitter rule
+const legacyCsharpEmitterForbiddenTestCases: Case[] = [
   {
-    description:
-      "Mgmt emitter required: pass when @azure-typespec/http-client-csharp-mgmt is in emit array",
+    description: "Legacy CSharp emitter forbidden: pass with management-plane replacement in emit",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
@@ -625,11 +624,11 @@ emit:
   - "@azure-typespec/http-client-csharp-mgmt"
 `,
     success: true,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
   },
   {
     description:
-      "Mgmt emitter required: pass when @azure-typespec/http-client-csharp-mgmt is in options",
+      "Legacy CSharp emitter forbidden: pass with management-plane replacement in options",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
@@ -639,10 +638,10 @@ options:
     namespace: "Azure.ResourceManager.Compute"
 `,
     success: true,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
   },
   {
-    description: "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is in emit",
+    description: "Legacy CSharp emitter forbidden: fail in management-plane emit",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
@@ -650,11 +649,10 @@ emit:
   - "@azure-tools/typespec-csharp"
 `,
     success: false,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
   },
   {
-    description:
-      "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is in options",
+    description: "Legacy CSharp emitter forbidden: fail in management-plane options",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
@@ -664,10 +662,10 @@ options:
     namespace: "Azure.ResourceManager.Compute"
 `,
     success: false,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
   },
   {
-    description: "Mgmt emitter required: fail when both legacy and new emitters coexist",
+    description: "Legacy CSharp emitter forbidden: fail when both management emitters coexist",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
@@ -676,28 +674,54 @@ emit:
   - "@azure-typespec/http-client-csharp-mgmt"
 `,
     success: false,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
   },
   {
-    description: "Mgmt emitter required: pass when no .NET emitter is configured",
+    description: "Legacy CSharp emitter forbidden: pass when no .NET emitter is configured",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
   - "@azure-tools/typespec-autorest"
 `,
     success: true,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
   },
   {
-    description: "Mgmt emitter required: skip for data-plane folder",
+    description: "Legacy CSharp emitter forbidden: fail in data-plane emit",
     folder: "contosowidgetmanager/Contoso.WidgetManager/",
     tspconfigContent: `
 emit:
   - "@azure-tools/typespec-autorest"
   - "@azure-tools/typespec-csharp"
 `,
+    success: false,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description: "Legacy CSharp emitter forbidden: fail in data-plane options",
+    folder: "contosowidgetmanager/Contoso.WidgetManager/",
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.Contoso.WidgetManager"
+`,
+    success: false,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description: "Legacy CSharp emitter forbidden: pass with data-plane replacement",
+    folder: "contosowidgetmanager/Contoso.WidgetManager/",
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.Contoso.WidgetManager"
+`,
     success: true,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
   },
 ];
 
@@ -1012,8 +1036,8 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpEmitterOutputTestCases,
-    // csharp mgmt emitter requirement
-    ...csharpMgmtEmitterRequiredTestCases,
+    // legacy csharp emitter
+    ...legacyCsharpEmitterForbiddenTestCases,
     // variable resolution in emitter-output-dir
     ...emitterOutputDirWithNamespaceVariableTestCases,
   ];

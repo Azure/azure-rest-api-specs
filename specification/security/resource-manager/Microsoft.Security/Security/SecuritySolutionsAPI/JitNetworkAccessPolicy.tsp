@@ -19,11 +19,10 @@ using Common;
 namespace SecuritySolutionsAPI;
 
 @parentResource(ArmLocationResource)
-model JitNetworkAccessPolicy
-  is Azure.ResourceManager.ProxyResource<
-    JitNetworkAccessPolicyProperties,
-    false
-  > {
+model JitNetworkAccessPolicy is Azure.ResourceManager.ProxyResource<
+  JitNetworkAccessPolicyProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = JitNetworkAccessPolicy,
     KeyName = "jitNetworkAccessPolicyName",

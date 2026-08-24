@@ -13,11 +13,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MachineLearningServices;
 
 @parentResource(Workspace)
-model ServerlessEndpoint
-  is Azure.ResourceManager.TrackedResource<
-    ServerlessEndpointProperties,
-    false
-  > {
+model ServerlessEndpoint is Azure.ResourceManager.TrackedResource<
+  ServerlessEndpointProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ServerlessEndpoint,
     KeyName = "name",
