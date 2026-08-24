@@ -475,13 +475,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An optional OData filter for executable artifacts. The filter supports `artifactType`, the `eq` operator, and `or`, with values `cli`, `powershell`, `bicep`, and `arm`. The `remediationSteps` artifact is always returned. When omitted, all approved executable artifacts are returned. A partially fulfilled filter returns 200 with details in `filterResult`; an entirely invalid filter, unsupported field, or unsupported operator returns `InvalidRequest` through the default error response.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -2673,68 +2666,6 @@
         ]
       }
     },
-    "RemediationFilterRejectionReason": {
-      "type": "string",
-      "description": "The reason an executable artifact filter value was rejected.",
-      "enum": [
-        "UnsupportedArtifactType",
-        "ArtifactUnavailable"
-      ],
-      "x-ms-enum": {
-        "name": "RemediationFilterRejectionReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UnsupportedArtifactType",
-            "value": "UnsupportedArtifactType",
-            "description": "The requested artifact type is not supported."
-          },
-          {
-            "name": "ArtifactUnavailable",
-            "value": "ArtifactUnavailable",
-            "description": "The requested artifact type is supported but is not available."
-          }
-        ]
-      }
-    },
-    "RemediationFilterResult": {
-      "type": "object",
-      "description": "Details about how an executable artifact filter was fulfilled.",
-      "properties": {
-        "requestedValues": {
-          "type": "array",
-          "description": "The executable artifact types requested by the client.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "fulfilledValues": {
-          "type": "array",
-          "description": "The requested executable artifact types included in the response.",
-          "items": {
-            "$ref": "#/definitions/RemediationArtifactType"
-          },
-          "readOnly": true
-        },
-        "rejectedValues": {
-          "type": "array",
-          "description": "The requested executable artifact types that were not included.",
-          "items": {
-            "$ref": "#/definitions/RemediationRejectedFilterValue"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "value"
-          ]
-        }
-      },
-      "required": [
-        "requestedValues",
-        "fulfilledValues",
-        "rejectedValues"
-      ]
-    },
     "RemediationMethod": {
       "type": "object",
       "description": "A method for applying a remediation.",
@@ -2942,11 +2873,6 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        },
-        "filterResult": {
-          "$ref": "#/definitions/RemediationFilterResult",
-          "description": "Details about partially fulfilled executable artifact filters.",
-          "readOnly": true
         }
       },
       "required": [
@@ -2959,26 +2885,6 @@
         "version",
         "artifacts",
         "methods"
-      ]
-    },
-    "RemediationRejectedFilterValue": {
-      "type": "object",
-      "description": "An executable artifact filter value that could not be fulfilled.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The rejected filter value.",
-          "readOnly": true
-        },
-        "reason": {
-          "$ref": "#/definitions/RemediationFilterRejectionReason",
-          "description": "The reason the filter value was rejected.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "value",
-        "reason"
       ]
     },
     "RemediationStep": {

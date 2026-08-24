@@ -106,47 +106,6 @@ model RemediationArtifact {
   content: string;
 }
 
-/** The reason an executable artifact filter value was rejected. */
-@added(Versions.v2026_09_01_preview)
-union RemediationFilterRejectionReason {
-  string,
-
-  /** The requested artifact type is not supported. */
-  UnsupportedArtifactType: "UnsupportedArtifactType",
-
-  /** The requested artifact type is supported but is not available. */
-  ArtifactUnavailable: "ArtifactUnavailable",
-}
-
-/** An executable artifact filter value that could not be fulfilled. */
-@added(Versions.v2026_09_01_preview)
-model RemediationRejectedFilterValue {
-  /** The rejected filter value. */
-  @visibility(Lifecycle.Read)
-  value: string;
-
-  /** The reason the filter value was rejected. */
-  @visibility(Lifecycle.Read)
-  reason: RemediationFilterRejectionReason;
-}
-
-/** Details about how an executable artifact filter was fulfilled. */
-@added(Versions.v2026_09_01_preview)
-model RemediationFilterResult {
-  /** The executable artifact types requested by the client. */
-  @visibility(Lifecycle.Read)
-  requestedValues: string[];
-
-  /** The requested executable artifact types included in the response. */
-  @visibility(Lifecycle.Read)
-  fulfilledValues: RemediationArtifactType[];
-
-  /** The requested executable artifact types that were not included. */
-  @identifiers(#["value"])
-  @visibility(Lifecycle.Read)
-  rejectedValues: RemediationRejectedFilterValue[];
-}
-
 /** A parameter used by a remediation method. */
 @added(Versions.v2026_09_01_preview)
 model RemediationMethodParameter {
@@ -264,10 +223,6 @@ model RemediationProperties {
   @identifiers(#[])
   @visibility(Lifecycle.Read)
   methods: RemediationMethod[];
-
-  /** Details about partially fulfilled executable artifact filters. */
-  @visibility(Lifecycle.Read)
-  filterResult?: RemediationFilterResult;
 }
 
 /** The remediation information for an Advisor recommendation type. */
@@ -289,14 +244,7 @@ interface Remediations {
   /** Gets the approved remediation information for a recommendation type. */
   get is ArmResourceRead<
     Remediation,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      /**
-       * An optional OData filter for executable artifacts. The filter supports `artifactType`, the `eq` operator, and `or`, with values `cli`, `powershell`, `bicep`, and `arm`. The `remediationSteps` artifact is always returned. When omitted, all approved executable artifacts are returned. A partially fulfilled filter returns 200 with details in `filterResult`; an entirely invalid filter, unsupported field, or unsupported operator returns `InvalidRequest` through the default error response.
-       */
-      @query("$filter")
-      $filter?: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 }
 

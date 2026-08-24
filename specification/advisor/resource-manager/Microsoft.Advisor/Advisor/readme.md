@@ -50,12 +50,6 @@ suppressions:
     where:
       - $.definitions["AssessmentTypeListResult"]
       - $.definitions["WorkloadListResult"]
-  - code: ParametersInPointGet
-    reason: The remediation point GET requires the optional OData $filter for executable artifact types. This exception requires ARM API Modeling approval.
-    from:
-      - openapi.json
-    where:
-      - $.paths["/providers/Microsoft.Advisor/remediations/{recommendationTypeId}"].get.parameters
 ```
 
 ### Tag: package-2026-03-preview
