@@ -15,9 +15,8 @@ model ApprovalCallbackRequest {
   @doc("Resource Id of the item being approved or rejected")
   resourceId: armResourceIdentifier;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
   @doc("Resource request action indicating action which needed to be performed upon calling approval-callback post action")
-  resourceRequestAction: "Create" | "Delete" | "Update" | "Reset" | string;
+  resourceRequestAction: VirtualEnclaveApprovalCallbackResourceAction;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
   @doc("Approval status indicating 'Approved' or 'Rejected'")
@@ -45,7 +44,6 @@ model ApprovalActionResponse {
 
 @doc("Request body for calling post-action")
 model ApprovalDeletionCallbackRequest {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
   @doc("Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action")
-  resourceRequestAction: "Create" | "Delete" | "Update" | string;
+  resourceRequestAction: VirtualEnclaveApprovalDeletionCallbackResourceAction;
 }

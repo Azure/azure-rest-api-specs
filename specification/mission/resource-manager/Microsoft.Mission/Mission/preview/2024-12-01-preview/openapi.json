@@ -3737,17 +3737,8 @@
       "description": "Request body for calling post-action",
       "properties": {
         "resourceRequestAction": {
-          "type": "string",
-          "description": "Resource request action indicating action which needed to be performed upon calling approval-callback post action",
-          "enum": [
-            "Create",
-            "Delete",
-            "Update",
-            "Reset"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualEnclaveApprovalCallbackResourceAction",
+          "description": "Resource request action indicating action which needed to be performed upon calling approval-callback post action"
         },
         "approvalStatus": {
           "type": "string",
@@ -3775,16 +3766,8 @@
       "description": "Request body for calling post-action",
       "properties": {
         "resourceRequestAction": {
-          "type": "string",
-          "description": "Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action",
-          "enum": [
-            "Create",
-            "Delete",
-            "Update"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualEnclaveApprovalDeletionCallbackResourceAction",
+          "description": "Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action"
         }
       },
       "required": [
@@ -5218,28 +5201,12 @@
           "readOnly": true
         },
         "option": {
-          "type": "string",
-          "description": "Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).",
-          "enum": [
-            "Allow",
-            "Deny",
-            "ExceptionOnly",
-            "NotApplicable"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualEnclaveGovernedServiceItemOption",
+          "description": "Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable)."
         },
         "enforcement": {
-          "type": "string",
-          "description": "Initiative enforcement (Enabled or Disabled).",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualEnclaveGovernedServiceItemEnforcement",
+          "description": "Initiative enforcement (Enabled or Disabled)."
         },
         "auditOnly": {
           "type": "boolean",
@@ -5310,7 +5277,35 @@
             "Advanced"
           ],
           "x-ms-enum": {
-            "modelAsString": true
+            "name": "VirtualEnclaveMaintenanceModeConfigurationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "On",
+                "value": "On",
+                "description": "Maintenance mode is on."
+              },
+              {
+                "name": "CannotDelete",
+                "value": "CanNotDelete",
+                "description": "Resources cannot be deleted while maintenance mode is active."
+              },
+              {
+                "name": "Off",
+                "value": "Off",
+                "description": "Maintenance mode is off."
+              },
+              {
+                "name": "General",
+                "value": "General",
+                "description": "General maintenance mode is active."
+              },
+              {
+                "name": "Advanced",
+                "value": "Advanced",
+                "description": "Advanced maintenance mode is active."
+              }
+            ]
           }
         },
         "principals": {
@@ -5331,7 +5326,25 @@
             "Off"
           ],
           "x-ms-enum": {
-            "modelAsString": true
+            "name": "VirtualEnclaveMaintenanceModeJustification",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Networking",
+                "value": "Networking",
+                "description": "Maintenance mode is required for networking changes."
+              },
+              {
+                "name": "Governance",
+                "value": "Governance",
+                "description": "Maintenance mode is required for governance changes."
+              },
+              {
+                "name": "Off",
+                "value": "Off",
+                "description": "No maintenance mode justification applies."
+              }
+            ]
           }
         }
       },
@@ -5344,18 +5357,8 @@
       "description": "Maintenance Mode Patch Model",
       "properties": {
         "mode": {
-          "type": "string",
-          "description": "Current mode of Maintenance Mode Configuration",
-          "enum": [
-            "On",
-            "CanNotDelete",
-            "Off",
-            "General",
-            "Advanced"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualEnclaveMaintenanceModeConfigurationMode",
+          "description": "Current mode of Maintenance Mode Configuration"
         },
         "principals": {
           "type": "array",
@@ -5365,16 +5368,8 @@
           }
         },
         "justification": {
-          "type": "string",
-          "description": "Justification for entering or exiting Maintenance Mode",
-          "enum": [
-            "Networking",
-            "Governance",
-            "Off"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualEnclaveMaintenanceModeJustification",
+          "description": "Justification for entering or exiting Maintenance Mode"
         }
       }
     },
@@ -5430,16 +5425,8 @@
           "description": "The object id associated with the principal"
         },
         "type": {
-          "type": "string",
-          "description": "The type of the object id. We currently allow users, groups, and service principals",
-          "enum": [
-            "User",
-            "Group",
-            "ServicePrincipal"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualEnclavePrincipalType",
+          "description": "The type of the object id. We currently allow users, groups, and service principals"
         }
       },
       "required": [
@@ -5992,6 +5979,204 @@
         ]
       }
     },
+    "VirtualEnclaveApprovalCallbackResourceAction": {
+      "type": "string",
+      "description": "The resource action for an approval callback.",
+      "enum": [
+        "Create",
+        "Delete",
+        "Update",
+        "Reset"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualEnclaveApprovalCallbackResourceAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create the resource."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete the resource."
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Update the resource."
+          },
+          {
+            "name": "Reset",
+            "value": "Reset",
+            "description": "Reset the resource."
+          }
+        ]
+      }
+    },
+    "VirtualEnclaveApprovalDeletionCallbackResourceAction": {
+      "type": "string",
+      "description": "The resource action for an approval deletion callback.",
+      "enum": [
+        "Create",
+        "Delete",
+        "Update"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualEnclaveApprovalDeletionCallbackResourceAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create the resource."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete the resource."
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Update the resource."
+          }
+        ]
+      }
+    },
+    "VirtualEnclaveGovernedServiceItemEnforcement": {
+      "type": "string",
+      "description": "The enforcement state for a governed service.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualEnclaveGovernedServiceItemEnforcement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enforcement is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Enforcement is disabled."
+          }
+        ]
+      }
+    },
+    "VirtualEnclaveGovernedServiceItemOption": {
+      "type": "string",
+      "description": "The governance option for a governed service.",
+      "enum": [
+        "Allow",
+        "Deny",
+        "ExceptionOnly",
+        "NotApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualEnclaveGovernedServiceItemOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the governed service."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny the governed service."
+          },
+          {
+            "name": "ExceptionOnly",
+            "value": "ExceptionOnly",
+            "description": "Allow only configured exceptions for the governed service."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The governance option does not apply to the governed service."
+          }
+        ]
+      }
+    },
+    "VirtualEnclaveMaintenanceModeConfigurationMode": {
+      "type": "string",
+      "description": "The maintenance mode for a virtual enclave.",
+      "enum": [
+        "On",
+        "CanNotDelete",
+        "Off",
+        "General",
+        "Advanced"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualEnclaveMaintenanceModeConfigurationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Maintenance mode is on."
+          },
+          {
+            "name": "CannotDelete",
+            "value": "CanNotDelete",
+            "description": "Resources cannot be deleted while maintenance mode is active."
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Maintenance mode is off."
+          },
+          {
+            "name": "General",
+            "value": "General",
+            "description": "General maintenance mode is active."
+          },
+          {
+            "name": "Advanced",
+            "value": "Advanced",
+            "description": "Advanced maintenance mode is active."
+          }
+        ]
+      }
+    },
+    "VirtualEnclaveMaintenanceModeJustification": {
+      "type": "string",
+      "description": "The justification for entering or exiting virtual enclave maintenance mode.",
+      "enum": [
+        "Networking",
+        "Governance",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualEnclaveMaintenanceModeJustification",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Networking",
+            "value": "Networking",
+            "description": "Maintenance mode is required for networking changes."
+          },
+          {
+            "name": "Governance",
+            "value": "Governance",
+            "description": "Maintenance mode is required for governance changes."
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "No maintenance mode justification applies."
+          }
+        ]
+      }
+    },
     "VirtualEnclavePatchModel": {
       "type": "object",
       "description": "Virtual Enclave Patch Model",
@@ -6049,6 +6234,36 @@
           "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
           "description": "Maintenance Mode configuration."
         }
+      }
+    },
+    "VirtualEnclavePrincipalType": {
+      "type": "string",
+      "description": "The type of a virtual enclave principal.",
+      "enum": [
+        "User",
+        "Group",
+        "ServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualEnclavePrincipalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A user principal."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "A group principal."
+          },
+          {
+            "name": "ServicePrincipal",
+            "value": "ServicePrincipal",
+            "description": "A service principal."
+          }
+        ]
       }
     },
     "VirtualEnclaveProperties": {
