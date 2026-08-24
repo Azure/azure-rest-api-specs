@@ -88,7 +88,7 @@ interface VirtualMachineDiagnosticRunCommands {
    * The operation to delete the diagnostic run command.
    */
   #suppress "deprecated" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Preserve ARM response-code contract for run command delete operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @added(Versions.v2026_04_01)
   delete is VirtualMachineDiagnosticRunCommandOps.DeleteWithoutOkAsync<
@@ -180,7 +180,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
    * The operation to delete the VMSS VM diagnostic run command.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Preserve ARM response-code contract for run command delete operations"
   @added(Versions.v2026_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_Delete")
   delete is VirtualMachineScaleSetVMDiagnosticRunCommandOps.DeleteWithoutOkAsync<

@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2026-09-01-only
+tag: package-2026-09-01
 
 directive:
   - where:
@@ -877,29 +877,6 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/diagnosticRunCommands/{runCommandName}"].get.parameters
     reason: Required query parameter for GET
 ```
-### Tag: package-2025-12-03
-
-These settings apply only when `--tag=package-2025-12-03` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-12-03'
-input-file:
-  - stable/2026-03-01/ComputeRP.json
-  - stable/2026-03-02/DiskRP.json
-  - stable/2021-07-01/skus.json
-  - stable/2025-12-03/GalleryRP.json
-```
-
-### Tag: package-2026-03-02
-
-These settings apply only when `--tag=package-2026-03-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-2026-03-02'
-input-file:
-  - stable/2026-03-01/ComputeRP.json
-  - stable/2026-03-02/DiskRP.json
-  - stable/2021-07-01/skus.json
-  - stable/2025-03-03/GalleryRP.json
-```
 
 ### Tag: package-2026-09-01
 
@@ -929,9 +906,9 @@ These settings apply only when `--tag=package-2026-04-01` is specified on the co
 ``` yaml $(tag) == 'package-2026-04-01'
 input-file:
   - stable/2026-04-01/ComputeRP.json
-  - stable/2025-01-02/DiskRP.json
+  - stable/2026-03-02/DiskRP.json
   - stable/2021-07-01/skus.json
-  - stable/2024-03-03/GalleryRP.json
+  - stable/2025-12-03/GalleryRP.json
 ```
 
 ### Tag: package-2026-04-01-only
@@ -941,6 +918,30 @@ These settings apply only when `--tag=package-2026-04-01-only` is specified on t
 ```yaml $(tag) == 'package-2026-04-01-only'
 input-file:
   - stable/2026-04-01/ComputeRP.json
+```
+
+### Tag: package-2025-12-03
+
+These settings apply only when `--tag=package-2025-12-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-12-03'
+input-file:
+  - stable/2026-03-01/ComputeRP.json
+  - stable/2026-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2025-12-03/GalleryRP.json
+```
+
+### Tag: package-2026-03-02
+
+These settings apply only when `--tag=package-2026-03-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-03-02'
+input-file:
+  - stable/2026-03-01/ComputeRP.json
+  - stable/2026-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2025-03-03/GalleryRP.json
 ```
 
 ### Tag: package-2026-03-01
@@ -955,15 +956,6 @@ input-file:
   - stable/2025-03-03/GalleryRP.json
 ```
 
-### Tag: package-2026-03-02-only
-
-These settings apply only when `--tag=package-2026-03-02-only` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-03-02-only'
-input-file:
-  - stable/2026-03-02/DiskRP.json
-```
-
 ### Tag: package-2026-03-01-only
 
 These settings apply only when `--tag=package-2026-03-01-only` is specified on the command line.
@@ -971,6 +963,15 @@ These settings apply only when `--tag=package-2026-03-01-only` is specified on t
 ```yaml $(tag) == 'package-2026-03-01-only'
 input-file:
   - stable/2026-03-01/ComputeRP.json
+```
+
+### Tag: package-2026-03-02-only
+
+These settings apply only when `--tag=package-2026-03-02-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-02-only'
+input-file:
+  - stable/2026-03-02/DiskRP.json
 ```
 
 ### Tag: package-2025-11-01
@@ -993,7 +994,6 @@ These settings apply only when `--tag=package-2025-11-01-only` is specified on t
 input-file:
   - stable/2025-11-01/ComputeRP.json
 ```
-
 
 ### Tag: package-2025-04-01
 

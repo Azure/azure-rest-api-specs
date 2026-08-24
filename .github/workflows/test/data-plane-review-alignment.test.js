@@ -28,6 +28,7 @@ import { createMockCore } from "./mocks.js";
 
 /** Repo root, from .github/workflows/test. */
 const REAL_ROOT = join(import.meta.dirname, "..", "..", "..");
+const LOCKED_WORKFLOW_FILE = ".github/workflows/data-plane-api-review.lock.yml";
 
 /**
  * @param {string} path
@@ -188,14 +189,37 @@ describe("data-plane review workflow scope", () => {
     const content = await readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8");
 
     expect(content).not.toContain("checkout: false");
-    expect(content).toContain("checkout:\n  ref: ${{ github.event.pull_request.base.sha }}");
+    expect(content).toContain("checkout:\n  sparse-checkout:");
+    expect(content).not.toContain("ref: ${{ github.workflow_sha }}");
     expect(content).toContain(".github/agents");
     expect(content).toContain(".github/skills/azure-api-review");
     expect(content).toContain("allowed: [get_file_contents, pull_request_read, search_code]");
     expect(content).toContain('"jq"');
     expect(content).toContain('"nl"');
-    expect(content).toContain("Read PR metadata and PR-authored files only through the");
+    expect(content).toContain("Read PR\n  metadata and PR-authored files only through the");
     expect(content).toContain("Do not emulate it with a general-purpose");
+  });
+
+  it("checks out the trusted event commit instead of a potentially stale PR base", async () => {
+    const [source, compiled] = await Promise.all([
+      readFile(join(REAL_ROOT, WORKFLOW_FILE), "utf8"),
+      readFile(join(REAL_ROOT, LOCKED_WORKFLOW_FILE), "utf8"),
+    ]);
+
+    expect(source).not.toContain("ref: ${{ github.workflow_sha }}");
+    expect(source).not.toContain("pull.base.sha");
+    expect(source).not.toContain("resolve_pr_base");
+
+    const checkoutIndex = compiled.indexOf("- name: Checkout repository\n");
+    const checkoutEndIndex = compiled.indexOf(
+      "- name: Clear partial clone markers after sparse checkout",
+      checkoutIndex,
+    );
+    expect(checkoutIndex).toBeGreaterThan(-1);
+    expect(checkoutEndIndex).toBeGreaterThan(checkoutIndex);
+    const checkoutStep = compiled.slice(checkoutIndex, checkoutEndIndex);
+    expect(checkoutStep.match(/uses: actions\/checkout@/g)).toHaveLength(1);
+    expect(checkoutStep).not.toContain("ref:");
   });
 
   it("keeps Phase 2 manually gated, non-blocking, and capped at five inline findings", async () => {
@@ -210,6 +234,8 @@ describe("data-plane review workflow scope", () => {
     expect(workflow).toContain("allowed-events: [COMMENT]");
     expect(workflow).toContain("Always call `add_comment` exactly once");
     expect(workflow).toContain("Questions are not findings and always remain in the summary");
+    expect(workflow).toContain("Post the complete finding\n   at the first instance");
+    expect(workflow).toContain("further repetitions are omitted for brevity");
     expect(rollout).toContain("The workflow is at **Phase 2**");
     expect(rollout).toContain("The manually applied label is the safety control");
     expect(rollout).toContain("not a hard rollout gate");
