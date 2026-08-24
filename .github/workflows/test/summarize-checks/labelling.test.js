@@ -425,6 +425,26 @@ describe("update labels", () => {
         targetBranch: "main",
       },
     },
+    {
+      description:
+        "Add-only: keeps an existing data-plane-review-requested when the PR no longer qualifies (e.g. a manual request)",
+      existingLabels: ["data-plane-review-requested", "other-label"],
+      expectedLabelsToAdd: [],
+      expectedLabelsToRemove: [],
+      impactAssessment: {
+        suppressionReviewRequired: false,
+        rpaasChange: false,
+        newRP: false,
+        rpaasRPMissing: false,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: false,
+        dataPlaneRequired: false,
+        typeSpecChanged: false,
+        isNewApiVersion: false,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
   ];
   it.each(testCases)(
     "$description",

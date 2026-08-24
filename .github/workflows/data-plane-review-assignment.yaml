@@ -5,12 +5,13 @@
 # picks the individual member; this workflow only requests the team.
 #
 # Two triggers, because the `data-plane-review-requested` label can arrive two ways:
-#   - `pull_request_target: labeled` — manual label, plus the sign-off that clears it.
+#   - `pull_request_target: labeled` — the label applied manually.
 #   - `workflow_run` on "Summarize Checks" — the auto-applied label. It is applied with the
 #     default GITHUB_TOKEN, which does not re-trigger `labeled` workflows, so this path
 #     reconciles the request from the PR's live labels instead.
 #
-# `unlabeled` is not handled: native delegation owns the individual reviewer.
+# Sign-off and `unlabeled` are not handled: the durable `data-plane-review-signoff` label
+# gates merge on its own, and native delegation owns the individual reviewer.
 name: "Data-Plane API Review - Assign Reviewers"
 
 on:
@@ -30,16 +31,9 @@ permissions:
   contents: read
   pull-requests: write
 
-# Serialize runs per PR so racing events do not interleave. `pull_request_target` keys on the
-# PR number directly; `workflow_run` keys on the triggering run's head SHA (the PR number is
-# only resolved inside the job). Do not cancel in-progress runs: a cancelled run could drop a
-# team request mid-flight.
-concurrency:
-  group: >-
-    data-plane-review-assignment-${{
-      github.event.pull_request.number || github.event.workflow_run.head_sha
-    }}
-  cancel-in-progress: false
+# No `concurrency` block: the job is idempotent, like the other workflow_run label-reaction
+# workflows here. A PR-scoped group isn't possible on the workflow_run path anyway
+# (workflow_run.head_sha is the base tip, shared across open PRs).
 
 jobs:
   assign-reviewers:

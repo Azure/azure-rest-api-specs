@@ -496,7 +496,10 @@ export function processImpactAssessment(labelContext, impactAssessment) {
     "data-plane-review-requested",
     labelContext.present,
   );
-  dataPlaneReviewRequestedLabel.shouldBePresent = false;
+  // Add-only: default to current presence so reconciliation never removes it. A qualifying
+  // PR adds it below; otherwise it's left as-is. Preserves manual requests and avoids a
+  // remove/re-add flip that would re-queue an approved PR.
+  dataPlaneReviewRequestedLabel.shouldBePresent = dataPlaneReviewRequestedLabel.present ?? false;
 
   const typeSpecLabel = new Label("TypeSpec", labelContext.present);
   typeSpecLabel.shouldBePresent = impactAssessment.typeSpecChanged || false;
@@ -546,11 +549,8 @@ export function processImpactAssessment(labelContext, impactAssessment) {
     if (impactAssessment.isNewApiVersion) {
       newApiVersionLabel.shouldBePresent = true;
 
-      // Data-plane new API versions need stewardship review. Classify purely from PR
-      // content; never read the protected data-plane-review-signoff label here (its presence
-      // isn't proof of sign-off, and reading it would be racy). The gate requires sign-off
-      // whenever this label is present, and only assign-reviewers.js clears it, on a
-      // verified sign-off.
+      // Classify from PR content only; never read the protected signoff label here (racy,
+      // not proof of sign-off). The label is add-only, so an approved PR is never re-queued.
       if (impactAssessment.dataPlaneRequired) {
         dataPlaneReviewRequestedLabel.shouldBePresent = true;
       }
@@ -843,15 +843,16 @@ const rulesPri0dataPlane = [
   // and https://github.com/Azure/azure-sdk-tools/issues/6612
   //
   //   IF the label data-plane-review-requested is present,
-  //   THEN require the label data-plane-review-signoff.
+  //   THEN require data-plane-review-signoff (or, during migration, the legacy
+  //   APIStewardshipBoard-SignedOff).
   //
-  // data-plane-review-requested is auto-applied in processImpactAssessment above whenever a
-  // data-plane PR introduces a new API version, so the previous data-plane + new-api-version
-  // fallback prerequisite is no longer needed.
+  // data-plane-review-requested is auto-applied in processImpactAssessment above, so the old
+  // data-plane + new-api-version fallback is no longer needed. The legacy signoff is accepted
+  // as a transition bridge; remove it once no open PR carries it (tracked in #45521).
   {
     precedence: 0,
     anyPrerequisiteLabels: ["data-plane-review-requested"],
-    anyRequiredLabels: ["data-plane-review-signoff"],
+    anyRequiredLabels: ["data-plane-review-signoff", "APIStewardshipBoard-SignedOff"],
     troubleshootingGuide:
       `Your PR requires an API stewardship board review as it introduces a new API version (label: <code>new-api-version</code>). ` +
       `Send an email to ${href("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")} with your PR link for offline review.`,

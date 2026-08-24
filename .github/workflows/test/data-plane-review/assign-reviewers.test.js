@@ -1,42 +1,28 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.js";
 
-vi.mock("fs/promises", () => ({
-  readFile: vi.fn(),
-}));
-vi.mock("js-yaml", () => ({
-  default: { load: vi.fn() },
-}));
-
-import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 import assignReviewers, {
   REVIEWER_TEAM,
   SIGNOFF_LABEL,
   TRIGGER_LABEL,
 } from "../../src/data-plane-review/assign-reviewers.js";
 
-/** Mock protected-labels config (as yaml.load would return). Gates the sign-off label. */
-const protectedLabelsConfig = {
-  "data-plane-review-signoff": ["username1", "username2"],
+/** A durable `review_requested` timeline event for our team, as GitHub records it. */
+const teamRequestedEvent = {
+  event: "review_requested",
+  requested_team: { slug: REVIEWER_TEAM },
 };
 
-function setupConfigMock() {
-  /** @type {ReturnType<typeof vi.fn>} */ (readFile).mockResolvedValue("yaml-content");
-  /** @type {ReturnType<typeof vi.fn>} */ (yaml.load).mockReturnValue(protectedLabelsConfig);
-}
-
 /**
- * Set the labels returned by the live `listLabelsOnIssue` read (paginated). The sign-off path
- * reads labels live rather than from the cached event payload.
+ * Set the issue events returned by the durable `listEvents` read used to dedupe the team
+ * request. GitHub records a `review_requested` event when the team is requested, and it
+ * survives delegation swapping the team for an individual.
  *
  * @param {ReturnType<typeof createMockGithub>} github
- * @param {string[]} names
+ * @param {object[]} events
  */
-function setLiveLabels(github, names) {
-  /** @type {any} */ (github.rest.issues).listLabelsOnIssue = vi
-    .fn()
-    .mockResolvedValue({ data: names.map((name) => ({ name })) });
+function setTimelineEvents(github, events) {
+  /** @type {any} */ (github.rest.issues).listEvents = vi.fn().mockResolvedValue({ data: events });
 }
 
 /**
@@ -134,7 +120,6 @@ describe("assign-reviewers", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    setupConfigMock();
     github = createMockGithub();
     context = createMockContext();
     context.eventName = "pull_request_target";
@@ -144,7 +129,7 @@ describe("assign-reviewers", () => {
     /** @type {any} */ (github.rest.pulls).requestReviewers = vi.fn().mockResolvedValue({});
   });
 
-  it("ignores labels other than the trigger or sign-off label", async () => {
+  it("ignores labels other than the trigger label", async () => {
     context.payload = createPayload({ action: "labeled", labelName: "some-other-label" });
     await assignReviewers(args());
 
@@ -167,15 +152,39 @@ describe("assign-reviewers", () => {
     expect(github.rest.issues.createComment).not.toHaveBeenCalled();
   });
 
-  it("does not re-request the team when it is already a requested reviewer", async () => {
-    context.payload = createPayload({
-      action: "labeled",
-      labelName: TRIGGER_LABEL,
-      requestedTeams: [{ slug: REVIEWER_TEAM }],
-    });
+  it("does not re-request the team when it was already requested (timeline event present)", async () => {
+    context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
+    setTimelineEvents(github, [teamRequestedEvent]);
     await assignReviewers(args());
 
     expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
+  });
+
+  it("does not re-request after delegation swapped the team for an individual", async () => {
+    // The team is no longer in requested_teams (delegation removed it), but the durable
+    // review_requested timeline event remains, so we must not re-request.
+    context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
+    setTimelineEvents(github, [
+      teamRequestedEvent,
+      { event: "review_request_removed", requested_team: { slug: REVIEWER_TEAM } },
+    ]);
+    await assignReviewers(args());
+
+    expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
+  });
+
+  it("requests the team when only unrelated reviewers are on the PR", async () => {
+    // A review_requested event for a different team/user must not be mistaken for our handoff.
+    context.payload = createPayload({ action: "labeled", labelName: TRIGGER_LABEL });
+    setTimelineEvents(github, [
+      { event: "review_requested", requested_team: { slug: "some-other-team" } },
+      { event: "review_requested", requested_reviewer: { login: "someone" } },
+    ]);
+    await assignReviewers(args());
+
+    expect(/** @type {any} */ (github.rest.pulls).requestReviewers).toHaveBeenCalledWith(
+      expect.objectContaining({ team_reviewers: [REVIEWER_TEAM] }),
+    );
   });
 
   describe("workflow_run handoff", () => {
@@ -217,12 +226,10 @@ describe("assign-reviewers", () => {
       expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
     });
 
-    it("does not re-request the team when it is already a requested reviewer", async () => {
+    it("does not re-request the team when it was already requested (timeline event present)", async () => {
       context.payload = createWorkflowRunPayload();
-      setPullRequest(github, {
-        labels: [TRIGGER_LABEL],
-        requestedTeams: [{ slug: REVIEWER_TEAM }],
-      });
+      setPullRequest(github, { labels: [TRIGGER_LABEL] });
+      setTimelineEvents(github, [teamRequestedEvent]);
 
       await assignReviewers(args());
 
@@ -245,128 +252,6 @@ describe("assign-reviewers", () => {
       await assignReviewers(args());
 
       expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
-    });
-  });
-
-  describe("sign-off", () => {
-    it("clears the review-request label when the sign-off label is applied", async () => {
-      context.payload = createPayload({
-        action: "labeled",
-        labelName: SIGNOFF_LABEL,
-        sender: "username1",
-      });
-      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL, "data-plane"]);
-
-      await assignReviewers(args());
-
-      expect(/** @type {any} */ (github.rest.issues).removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({
-          owner: "owner",
-          repo: "repo",
-          issue_number: 42,
-          name: TRIGGER_LABEL,
-        }),
-      );
-      // Sign-off syncs labels silently, matching the ARM sign-off flows — no comment.
-      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
-    });
-
-    it("reads the shared config only once while authorizing a sign-off", async () => {
-      context.payload = createPayload({
-        action: "labeled",
-        labelName: SIGNOFF_LABEL,
-        sender: "username1",
-      });
-      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
-
-      await assignReviewers(args());
-
-      expect(readFile).toHaveBeenCalledTimes(1);
-    });
-
-    it("does not request the team when signing off", async () => {
-      context.payload = createPayload({
-        action: "labeled",
-        labelName: SIGNOFF_LABEL,
-        sender: "username1",
-      });
-      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
-
-      await assignReviewers(args());
-
-      expect(/** @type {any} */ (github.rest.pulls).requestReviewers).not.toHaveBeenCalled();
-    });
-
-    it("is a no-op on sign-off when the review-request label is absent", async () => {
-      context.payload = createPayload({
-        action: "labeled",
-        labelName: SIGNOFF_LABEL,
-        sender: "username1",
-      });
-      setLiveLabels(github, [SIGNOFF_LABEL, "data-plane"]);
-
-      await assignReviewers(args());
-
-      expect(/** @type {any} */ (github.rest.issues).removeLabel).not.toHaveBeenCalled();
-      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
-    });
-
-    it("does not clear the request label when the sign-off was retracted before this ran", async () => {
-      // The event fired on sign-off, but a live read shows it is already gone.
-      context.payload = createPayload({
-        action: "labeled",
-        labelName: SIGNOFF_LABEL,
-        sender: "username1",
-      });
-      setLiveLabels(github, [TRIGGER_LABEL, "data-plane"]);
-
-      await assignReviewers(args());
-
-      expect(/** @type {any} */ (github.rest.issues).removeLabel).not.toHaveBeenCalled();
-      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
-    });
-
-    it("does not clear the request label when an unauthorized user applies sign-off", async () => {
-      context.payload = createPayload({
-        action: "labeled",
-        labelName: SIGNOFF_LABEL,
-        sender: "random-user",
-      });
-      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
-
-      await assignReviewers(args());
-
-      expect(/** @type {any} */ (github.rest.issues).removeLabel).not.toHaveBeenCalled();
-    });
-
-    it("clears the request label when a trusted bot applies sign-off", async () => {
-      context.payload = createPayload({
-        action: "labeled",
-        labelName: SIGNOFF_LABEL,
-        sender: "azure-sdk",
-      });
-      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
-
-      await assignReviewers(args());
-
-      expect(/** @type {any} */ (github.rest.issues).removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: TRIGGER_LABEL }),
-      );
-    });
-
-    it("does not fail when the label was already removed (404)", async () => {
-      /** @type {any} */ (github.rest.issues).removeLabel = vi
-        .fn()
-        .mockRejectedValue(Object.assign(new Error("Not Found"), { status: 404 }));
-      context.payload = createPayload({
-        action: "labeled",
-        labelName: SIGNOFF_LABEL,
-        sender: "username1",
-      });
-      setLiveLabels(github, [SIGNOFF_LABEL, TRIGGER_LABEL]);
-
-      await expect(assignReviewers(args())).resolves.toBeUndefined();
-      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     });
   });
 });

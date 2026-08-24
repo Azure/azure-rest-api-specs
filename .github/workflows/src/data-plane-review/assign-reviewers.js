@@ -1,8 +1,4 @@
-import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 import { extractInputs } from "../context.js";
-import { removeLabelIfPresent } from "../package-name-approval/labels.js";
-import { ALLOWED_BOT_LOGINS } from "../protected-labels/check-label.js";
 
 /**
  * Intake label for data-plane stewardship review. The merge gate keys off the same label
@@ -11,99 +7,30 @@ import { ALLOWED_BOT_LOGINS } from "../protected-labels/check-label.js";
  */
 export const TRIGGER_LABEL = "data-plane-review-requested";
 
-/** Path (relative to repo root) to the protected-labels config that lists the sign-off approvers. */
-const PROTECTED_LABELS_PATH = ".github/protected-labels.yml";
-
 /**
- * Sign-off label — the gated approval that clears the merge gate. Applying it clears the
- * fulfilled {@link TRIGGER_LABEL}. {@link TRIGGER_LABEL} is machine-applied and not gated.
- * Its authorized-users list in `protected-labels.yml` also gates who may apply it.
+ * Sign-off label: the durable approval that satisfies the merge gate. It coexists with
+ * {@link TRIGGER_LABEL}; this workflow never removes the request label. Who may apply it is
+ * enforced centrally by the protected-labels workflow.
  */
 export const SIGNOFF_LABEL = "data-plane-review-signoff";
 
 /**
- * GitHub team requested as reviewer on intake. The team has code-review auto-assignment
- * enabled, so GitHub replaces the team request with one of
- * its members using the team's routing algorithm; the workflow never picks the individual,
- * it only requests the team. Kept as a constant here; unifying assignment + sign-off
- * authorization onto this team in config is tracked separately (issue #45487).
+ * GitHub team requested as reviewer on intake. The team has code-review auto-assignment, so
+ * GitHub delegates the team request to a member; this workflow only requests the team.
+ * Unifying assignment + sign-off authorization onto this team is tracked in #45487.
  */
 export const REVIEWER_TEAM = "azure-data-plane-api-reviewers";
 
 /**
- * Read and parse the shared `protected-labels.yml` config.
- *
- * @returns {Promise<Record<string, unknown>>}
- */
-async function loadConfig() {
-  const content = await readFile(PROTECTED_LABELS_PATH, "utf8");
-  return /** @type {Record<string, unknown>} */ (yaml.load(content) ?? {});
-}
-
-/**
- * Flatten a config entry into a deduplicated, trimmed list of logins. An entry is either a
- * flat array of logins or an object keyed by plane (`{ "management-plane": [...],
- * "data-plane": [...] }`); both shapes are supported.
- *
- * @param {unknown} entry
- * @returns {string[]}
- */
-function extractLogins(entry) {
-  /** @type {unknown[]} */
-  let logins = [];
-  if (Array.isArray(entry)) {
-    logins = entry;
-  } else if (entry && typeof entry === "object") {
-    logins = Object.values(/** @type {Record<string, unknown>} */ (entry)).flatMap((value) =>
-      Array.isArray(value) ? /** @type {unknown[]} */ (value) : [],
-    );
-  }
-
-  return [
-    ...new Set(
-      logins
-        .filter((/** @type {unknown} */ r) => typeof r === "string" && r.trim().length > 0)
-        .map((r) => /** @type {string} */ (r).trim()),
-    ),
-  ];
-}
-
-/**
- * Case-insensitive membership test.
- *
- * @param {string[]} list
- * @param {string} login
- */
-function includesLogin(list, login) {
-  const lower = login.toLowerCase();
-  return list.some((entry) => entry.toLowerCase() === lower);
-}
-
-/**
- * Users authorized to apply the gated {@link SIGNOFF_LABEL}: its authorized-users list plus
- * the `global-approvers` list from `protected-labels.yml` (the same set that workflow
- * enforces). Trusted bots are handled separately by the caller via {@link ALLOWED_BOT_LOGINS}.
- *
- * @returns {Promise<string[]>}
- */
-async function loadAuthorizedSigners() {
-  const config = await loadConfig();
-  const signers = extractLogins(config[SIGNOFF_LABEL]);
-  const globals = extractLogins(config["global-approvers"]);
-  return [...new Set([...signers, ...globals])];
-}
-
-/**
- * Assign the stewardship review team, or complete the review on sign-off.
+ * Assign the stewardship review team.
  *
  * Two entry paths:
- * 1. `pull_request_target: labeled` — a manual {@link TRIGGER_LABEL} requests the team; a
- *    {@link SIGNOFF_LABEL} clears the fulfilled request label.
- * 2. `workflow_run` on "Summarize Checks" — reconciles the team request for the
- *    auto-applied {@link TRIGGER_LABEL} (see {@link assignFromWorkflowRun}).
+ * 1. `pull_request_target: labeled` — a manual {@link TRIGGER_LABEL} requests the team.
+ * 2. `workflow_run` on "Summarize Checks" — reconciles the auto-applied {@link TRIGGER_LABEL}
+ *    (see {@link assignFromWorkflowRun}).
  *
- * `unlabeled` is intentionally not handled: native delegation owns the individual reviewer,
- * so the automation never removes a reviewer it did not pick.
+ * Sign-off and `unlabeled` are not handled: {@link SIGNOFF_LABEL} gates merge on its own, and
+ * native delegation owns the individual reviewer.
  *
  * @param {import("@actions/github-script").AsyncFunctionArguments} args
  */
@@ -118,43 +45,23 @@ export default async function assignReviewers({ github, context, core }) {
 
   const targetLabel = payload.label?.name;
 
-  // Sign-off completes the review, so clear the fulfilled request label.
-  if (targetLabel === SIGNOFF_LABEL) {
-    const { owner, repo, issue_number } = await extractInputs(github, context, core);
-    return await completeReviewOnSignOff({
-      github,
-      core,
-      owner,
-      repo,
-      prNumber: issue_number,
-      payload,
-    });
-  }
-
   if (targetLabel !== TRIGGER_LABEL) {
-    core.info(`Label '${targetLabel}' is not '${TRIGGER_LABEL}' or '${SIGNOFF_LABEL}', skipping.`);
+    core.info(`Label '${targetLabel}' is not '${TRIGGER_LABEL}', skipping.`);
     return;
   }
 
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
-  await requestReviewerTeam({
-    github,
-    core,
-    owner,
-    repo,
-    prNumber: issue_number,
-    requestedTeams: payload.pull_request.requested_teams,
-  });
+  await requestReviewerTeam({ github, core, owner, repo, prNumber: issue_number });
 }
 
 /**
  * Reconcile the team request after "Summarize Checks" completes. The intake label is
- * auto-applied with the default `GITHUB_TOKEN`, which does not re-trigger `labeled`
- * workflows, so this is the only path that reacts to it.
+ * auto-applied with the default `GITHUB_TOKEN`, which does not re-trigger `labeled` workflows,
+ * so this is the only path that reacts to it.
  *
- * The event carries no label payload, so the decision reads live PR state: request the team
- * only when the PR is open, non-draft, still carries {@link TRIGGER_LABEL}, is not signed
- * off, and does not already have the team requested. All conditions are idempotent.
+ * With no label payload, the decision reads live PR state: request only when the PR is open,
+ * non-draft, still carries {@link TRIGGER_LABEL}, and is not signed off. All conditions are
+ * idempotent, and {@link requestReviewerTeam} dedupes the request itself.
  *
  * @param {Pick<import("@actions/github-script").AsyncFunctionArguments, "github" | "context" | "core">} args
  */
@@ -192,22 +99,14 @@ async function assignFromWorkflowRun({ github, context, core }) {
     return;
   }
 
-  await requestReviewerTeam({
-    github,
-    core,
-    owner,
-    repo,
-    prNumber: issue_number,
-    requestedTeams: /** @type {{ slug?: string }[]} */ (
-      /** @type {unknown} */ (pr.requested_teams ?? [])
-    ),
-  });
+  await requestReviewerTeam({ github, core, owner, repo, prNumber: issue_number });
 }
 
 /**
- * Request {@link REVIEWER_TEAM} as a reviewer so the team's code-review auto-assignment
- * delegates to one member. Skips the request if the team is already pending on the PR so
- * repeated events do not queue a second delegation.
+ * Request {@link REVIEWER_TEAM} so its code-review auto-assignment delegates to a member.
+ * Requests at most once per PR: dedupes on the durable `review_requested` timeline event,
+ * which survives delegation swapping the team for an individual (the live `requested_teams`
+ * is emptied on delegation, so it alone would let a later run re-request and re-notify).
  *
  * @param {object} params
  * @param {import("@actions/github-script").AsyncFunctionArguments["github"]} params.github
@@ -215,16 +114,22 @@ async function assignFromWorkflowRun({ github, context, core }) {
  * @param {string} params.owner
  * @param {string} params.repo
  * @param {number} params.prNumber
- * @param {{ slug?: string }[] | undefined} params.requestedTeams - teams already requested on the PR
  */
-async function requestReviewerTeam({ github, core, owner, repo, prNumber, requestedTeams }) {
-  // requested_teams lists teams whose request is still pending (before delegation swaps the
-  // team for a member). If our team is already pending, another run already requested it.
-  const alreadyRequested = (requestedTeams ?? []).some(
-    (t) => (t.slug ?? "").toLowerCase() === REVIEWER_TEAM.toLowerCase(),
-  );
+async function requestReviewerTeam({ github, core, owner, repo, prNumber }) {
+  const events = await github.paginate(github.rest.issues.listEvents, {
+    owner,
+    repo,
+    issue_number: prNumber,
+    per_page: 100,
+  });
+  const alreadyRequested = events.some((event) => {
+    if (event.event !== "review_requested") return false;
+    const requestedTeam = /** @type {{ requested_team?: { slug?: string } }} */ (event)
+      .requested_team;
+    return (requestedTeam?.slug ?? "").toLowerCase() === REVIEWER_TEAM.toLowerCase();
+  });
   if (alreadyRequested) {
-    core.info(`Team '${REVIEWER_TEAM}' is already a requested reviewer; nothing to do.`);
+    core.info(`Team '${REVIEWER_TEAM}' was already requested on PR #${prNumber}; nothing to do.`);
     return;
   }
 
@@ -235,66 +140,4 @@ async function requestReviewerTeam({ github, core, owner, repo, prNumber, reques
     team_reviewers: [REVIEWER_TEAM],
   });
   core.info(`Requested review from team '${REVIEWER_TEAM}'.`);
-}
-
-/**
- * On sign-off, clear the fulfilled {@link TRIGGER_LABEL} so the request no longer shows as
- * pending. The assigned reviewer is left in place. No comment is posted, matching the ARM
- * sign-off flows. Safe against the merge gate: once {@link SIGNOFF_LABEL} is present the
- * gate's required-label condition is already satisfied.
- *
- * The signer is verified against the authorized approver list first. Because a label removed
- * with the default token does not re-trigger a workflow, an unverified path could let an
- * unauthorized sign-off clear the request label before `protected-labels` reverts the bogus
- * label. Skipping unauthorized signers keeps that reversal the source of truth.
- *
- * This in-workflow authorization check duplicates the protected-labels authorization list
- * only because the clearing action lives in this separate job. Consolidating the clearing
- * into the trusted central label flow removes this duplicate check; tracked in issue #45494.
- *
- * @param {object} params
- * @param {import("@actions/github-script").AsyncFunctionArguments["github"]} params.github
- * @param {import("@actions/github-script").AsyncFunctionArguments["core"]} params.core
- * @param {string} params.owner
- * @param {string} params.repo
- * @param {number} params.prNumber
- * @param {import("@octokit/webhooks-types").PullRequestLabeledEvent} params.payload
- */
-async function completeReviewOnSignOff({ github, core, owner, repo, prNumber, payload }) {
-  const signer = payload.sender?.login ?? "";
-  if (!ALLOWED_BOT_LOGINS.includes(signer)) {
-    const authorizedSigners = await loadAuthorizedSigners();
-    if (!includesLogin(authorizedSigners, signer)) {
-      core.info(
-        `'${signer}' is not authorized to apply '${SIGNOFF_LABEL}'; leaving '${TRIGGER_LABEL}' ` +
-          `for the protected-labels workflow to reconcile.`,
-      );
-      return;
-    }
-  }
-
-  // Read the labels live rather than from the cached event payload.
-  const currentLabels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner,
-    repo,
-    issue_number: prNumber,
-    per_page: 100,
-  });
-  const currentLabelNames = currentLabels.map((label) => label.name);
-
-  if (!currentLabelNames.includes(SIGNOFF_LABEL)) {
-    core.info(
-      `'${SIGNOFF_LABEL}' is no longer present on PR #${prNumber}; sign-off was retracted before ` +
-        `this ran, leaving '${TRIGGER_LABEL}' in place.`,
-    );
-    return;
-  }
-
-  if (!currentLabelNames.includes(TRIGGER_LABEL)) {
-    core.info(`'${TRIGGER_LABEL}' not present on PR #${prNumber}; nothing to clear on sign-off.`);
-    return;
-  }
-
-  await removeLabelIfPresent(github, owner, repo, prNumber, TRIGGER_LABEL);
-  core.info(`Sign-off recorded on PR #${prNumber}; cleared '${TRIGGER_LABEL}'.`);
 }
