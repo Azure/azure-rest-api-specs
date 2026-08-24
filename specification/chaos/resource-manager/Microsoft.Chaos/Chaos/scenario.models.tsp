@@ -284,7 +284,6 @@ model RunAfter {
   /**
    * Array of action dependencies.
    */
-  @minItems(1)
   @identifiers(#["name"])
   items: ActionDependency[];
 }
