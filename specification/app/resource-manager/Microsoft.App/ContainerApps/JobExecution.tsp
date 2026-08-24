@@ -26,7 +26,6 @@ model JobExecution
 }
 
 @@doc(JobExecution.name, "Job execution name.");
-@@doc(
-  JobExecution.properties,
+@@doc(JobExecution.properties,
   "Container Apps Job execution specific properties."
 );

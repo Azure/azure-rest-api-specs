@@ -13,34 +13,29 @@ using Microsoft.App;
 @@clientLocation(getCustomDomainVerificationId, "ContainerAppsAPIClient", "go");
 @@clientLocation(Jobs.jobExecution, "ContainerAppsAPIClient", "go");
 
-@@clientName(
-  VnetConfiguration.platformReservedDnsIP,
+@@clientName(VnetConfiguration.platformReservedDnsIP,
   "platformReservedDnsIp",
   "java"
 );
 @@clientName(RegistryInfo.registryUserName, "registryUsername", "java");
 @@clientName(CustomHostnameAnalysisResult.hostName, "hostname", "java");
-@@clientName(
-  AzureActiveDirectoryLogin.disableWWWAuthenticate,
+@@clientName(AzureActiveDirectoryLogin.disableWWWAuthenticate,
   "disableWwwAuthenticate",
   "java"
 );
-@@clientName(
-  ContainerApps.listCustomHostNameAnalysis,
+@@clientName(ContainerApps.listCustomHostNameAnalysis,
   "listCustomHostnameAnalysis",
   "java"
 );
 
 @@clientLocation(Jobs.jobExecution, Microsoft.App, "java,javascript");
 @@clientName(RuntimeJavaJavaAgent, "RuntimeJavaAgent", "go,python");
-@@clientName(
-  RuntimeJavaJavaAgentLogging,
+@@clientName(RuntimeJavaJavaAgentLogging,
   "RuntimeJavaAgentLogging",
   "go,python"
 );
 @@clientName(RuntimeJavaJavaAgent, "ContainerAppRuntimeJavaAgent", "csharp");
-@@clientName(
-  RuntimeJavaJavaAgentLogging.loggerSettings,
+@@clientName(RuntimeJavaJavaAgentLogging.loggerSettings,
   "LoggerSettings",
   "csharp"
 );
@@ -121,34 +116,29 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(Microsoft.App.Usage.unit, UsageUnit, "csharp");
 
-@@alternateType(
-  OpenIdConnectClientCredential.method,
+@@alternateType(OpenIdConnectClientCredential.method,
   OpenIdConnectClientCredentialMethod,
   "csharp"
 );
 
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   Azure.Core.armResourceType,
   "csharp"
 );
 
 @@alternateType(ConnectedEnvironmentProperties.staticIp, ipV4Address, "csharp");
 
-@@alternateType(
-  ContainerAppProperties.managedEnvironmentId,
+@@alternateType(ContainerAppProperties.managedEnvironmentId,
   armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(
-  ContainerAppProperties.environmentId,
+@@alternateType(ContainerAppProperties.environmentId,
   armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(
-  ContainerAppProperties.outboundIpAddresses,
+@@alternateType(ContainerAppProperties.outboundIpAddresses,
   ipV4Address[],
   "csharp"
 );
@@ -162,8 +152,7 @@ union OpenIdConnectClientCredentialMethod {
 @@alternateType(SourceControlProperties.repoUrl, url, "csharp");
 
 // C# @@clientName customizations.
-@@clientName(
-  AvailableWorkloadProfilesOperationGroup.get,
+@@clientName(AvailableWorkloadProfilesOperationGroup.get,
   "GetAvailableWorkloadProfiles",
   "csharp"
 );
@@ -180,42 +169,36 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(BuildToken.expires, "ExpiresOn", "csharp");
 
-@@clientName(
-  ManagedEnvironments.list,
+@@clientName(ManagedEnvironments.list,
   "GetManagedEnvironmentPrivateLinkResources",
   "csharp"
 );
 
 @@clientName(Jobs.stopExecution, "StopExecutionJob", "csharp");
 
-@@clientName(
-  ManagedEnvironmentUsagesOperationGroup.list,
+@@clientName(ManagedEnvironmentUsagesOperationGroup.list,
   "GetManagedEnvironmentUsages",
   "csharp"
 );
 
 @@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
 
-@@clientName(
-  OpenIdConnectClientCredentialMethod,
+@@clientName(OpenIdConnectClientCredentialMethod,
   "ContainerAppOpenIdConnectClientCredentialMethod",
   "csharp"
 );
 
-@@clientName(
-  ContainerAppsLabelHistory.listLabelHistory,
+@@clientName(ContainerAppsLabelHistory.listLabelHistory,
   "ListLabelHistory",
   "csharp"
 );
 
-@@clientName(
-  ContainerAppsDiagnostics.getRevision,
+@@clientName(ContainerAppsDiagnostics.getRevision,
   "GetRevisionDiagnostic",
   "csharp"
 );
 
-@@clientName(
-  ManagedEnvironments.checkNameAvailability,
+@@clientName(ManagedEnvironments.checkNameAvailability,
   "CheckContainerAppNameAvailability",
   "csharp"
 );
@@ -229,38 +212,32 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(AllowedPrincipals, "ContainerAppAllowedPrincipals", "csharp");
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "ContainerAppNameAvailabilityContent",
   "csharp"
 );
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   "ResourceType",
   "csharp"
 );
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
   "ContainerAppNameAvailabilityResult",
   "csharp"
 );
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
   "ContainerAppNameUnavailableReason",
   "csharp"
 );
 
-@@clientName(
-  Applicability,
+@@clientName(Applicability,
   "ContainerAppAvailableWorkloadProfileApplicability",
   "csharp"
 );
@@ -269,8 +246,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(Apple.enabled, "IsEnabled", "csharp");
 
-@@clientName(
-  AppleRegistration,
+@@clientName(AppleRegistration,
   "ContainerAppAppleRegistrationConfiguration",
   "csharp"
 );
@@ -287,52 +263,44 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(AuthPlatform.enabled, "IsEnabled", "csharp");
 
-@@clientName(
-  AvailableWorkloadProfile,
+@@clientName(AvailableWorkloadProfile,
   "ContainerAppAvailableWorkloadProfile",
   "csharp"
 );
 
-@@clientName(
-  AvailableWorkloadProfileProperties,
+@@clientName(AvailableWorkloadProfileProperties,
   "ContainerAppAvailableWorkloadProfileProperties",
   "csharp"
 );
 
-@@clientName(
-  AvailableWorkloadProfileProperties.memoryGiB,
+@@clientName(AvailableWorkloadProfileProperties.memoryGiB,
   "MemoryInGiB",
   "csharp"
 );
 
-@@clientName(
-  AzureActiveDirectory,
+@@clientName(AzureActiveDirectory,
   "ContainerAppAzureActiveDirectoryConfiguration",
   "csharp"
 );
 
 @@clientName(AzureActiveDirectory.enabled, "IsEnabled", "csharp");
 
-@@clientName(
-  AzureActiveDirectoryLogin,
+@@clientName(AzureActiveDirectoryLogin,
   "ContainerAppAzureActiveDirectoryLoginConfiguration",
   "csharp"
 );
 
-@@clientName(
-  AzureActiveDirectoryLogin.disableWWWAuthenticate,
+@@clientName(AzureActiveDirectoryLogin.disableWWWAuthenticate,
   "IsWwwAuthenticationDisabled",
   "csharp"
 );
 
-@@clientName(
-  AzureActiveDirectoryRegistration,
+@@clientName(AzureActiveDirectoryRegistration,
   "ContainerAppAzureActiveDirectoryRegistrationConfiguration",
   "csharp"
 );
 
-@@clientName(
-  AzureActiveDirectoryValidation,
+@@clientName(AzureActiveDirectoryValidation,
   "ContainerAppAzureActiveDirectoryValidationConfiguration",
   "csharp"
 );
@@ -341,8 +309,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(AzureFileProperties, "ContainerAppAzureFileProperties", "csharp");
 
-@@clientName(
-  AzureStaticWebApps,
+@@clientName(AzureStaticWebApps,
   "ContainerAppAzureStaticWebAppsConfiguration",
   "csharp"
 );
@@ -353,14 +320,12 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(BillingMeter, "ContainerAppBillingMeter", "csharp");
 
-@@clientName(
-  BillingMeterProperties,
+@@clientName(BillingMeterProperties,
   "ContainerAppBillingMeterProperties",
   "csharp"
 );
 
-@@clientName(
-  BillingMeterProperties.category,
+@@clientName(BillingMeterProperties.category,
   "WorkloadProfileCategory",
   "csharp"
 );
@@ -369,24 +334,21 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(Certificate, "ContainerAppCertificate", "csharp");
 
-@@clientName(
-  CertificateKeyVaultProperties,
+@@clientName(CertificateKeyVaultProperties,
   "ContainerAppCertificateKeyVaultProperties",
   "csharp"
 );
 
 @@clientName(CertificatePatch, "ContainerAppCertificatePatch", "csharp");
 
-@@clientName(
-  CertificateProperties,
+@@clientName(CertificateProperties,
   "ContainerAppCertificateProperties",
   "csharp"
 );
 
 @@clientName(CertificateProperties.valid, "IsValid", "csharp");
 
-@@clientName(
-  CertificateProvisioningState,
+@@clientName(CertificateProvisioningState,
   "ContainerAppCertificateProvisioningState",
   "csharp"
 );
@@ -395,8 +357,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(Configuration, "ContainerAppConfiguration", "csharp");
 
-@@clientName(
-  ConnectedEnvironment,
+@@clientName(ConnectedEnvironment,
   "ContainerAppConnectedEnvironment",
   "csharp"
 );
@@ -413,28 +374,24 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(Certificates.update, "Update", "csharp");
 
-@@clientName(
-  ConnectedEnvironmentProvisioningState,
+@@clientName(ConnectedEnvironmentProvisioningState,
   "ContainerAppConnectedEnvironmentProvisioningState",
   "csharp"
 );
 
-@@clientName(
-  ConnectedEnvironmentStorage,
+@@clientName(ConnectedEnvironmentStorage,
   "ContainerAppConnectedEnvironmentStorage",
   "csharp"
 );
 
-@@clientName(
-  ConnectedEnvironmentsDaprComponents,
+@@clientName(ConnectedEnvironmentsDaprComponents,
   "ContainerAppConnectedEnvironmentDaprComponents",
   "csharp"
 );
 
 @@clientName(Container, "ContainerAppContainer", "csharp");
 
-@@clientName(
-  ContainerAppProperties.outboundIpAddresses,
+@@clientName(ContainerAppProperties.outboundIpAddresses,
   "OutboundIPAddressList",
   "csharp"
 );
@@ -447,14 +404,12 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(ContainerAppProbeHttpGet, "ContainerAppHttpRequestInfo", "csharp");
 
-@@clientName(
-  ContainerAppProbeHttpGetHttpHeadersItem,
+@@clientName(ContainerAppProbeHttpGetHttpHeadersItem,
   "ContainerAppHttpHeaderInfo",
   "csharp"
 );
 
-@@clientName(
-  ContainerAppProbeTcpSocket,
+@@clientName(ContainerAppProbeTcpSocket,
   "ContainerAppTcpSocketRequestInfo",
   "csharp"
 );
@@ -463,8 +418,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(CookieExpiration, "ContainerAppCookieExpiration", "csharp");
 
-@@clientName(
-  CookieExpirationConvention,
+@@clientName(CookieExpirationConvention,
   "ContainerAppCookieExpirationConvention",
   "csharp"
 );
@@ -473,32 +427,27 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(CustomDomain, "ContainerAppCustomDomain", "csharp");
 
-@@clientName(
-  CustomDomainConfiguration,
+@@clientName(CustomDomainConfiguration,
   "ContainerAppCustomDomainConfiguration",
   "csharp"
 );
 
-@@clientName(
-  CustomHostnameAnalysisResult,
+@@clientName(CustomHostnameAnalysisResult,
   "ContainerAppCustomHostnameAnalysisResult",
   "csharp"
 );
 
-@@clientName(
-  CustomHostnameAnalysisResultCustomDomainVerificationFailureInfo,
+@@clientName(CustomHostnameAnalysisResultCustomDomainVerificationFailureInfo,
   "ContainerAppCustomDomainVerificationFailureInfo",
   "csharp"
 );
 
-@@clientName(
-  CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem,
+@@clientName(CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem,
   "ContainerAppCustomDomainVerificationFailureInfoDetailsItem",
   "csharp"
 );
 
-@@clientName(
-  CustomOpenIdConnectProvider,
+@@clientName(CustomOpenIdConnectProvider,
   "ContainerAppCustomOpenIdConnectProviderConfiguration",
   "csharp"
 );
@@ -511,8 +460,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(DaprComponent, "ContainerAppDaprComponent", "csharp");
 
-@@clientName(
-  DaprComponents,
+@@clientName(DaprComponents,
   "ContainerAppManagedEnvironmentDaprComponents",
   "csharp"
 );
@@ -523,8 +471,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(ConnectedEnvironmentsDaprComponents.delete, "Delete", "csharp");
 
-@@clientName(
-  ConnectedEnvironmentsDaprComponents.createOrUpdate,
+@@clientName(ConnectedEnvironmentsDaprComponents.createOrUpdate,
   "CreateOrUpdate",
   "csharp"
 );
@@ -541,34 +488,29 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(DaprAppHealth.enabled, "IsEnabled", "csharp");
 
-@@clientName(
-  DefaultAuthorizationPolicy,
+@@clientName(DefaultAuthorizationPolicy,
   "ContainerAppDefaultAuthorizationPolicy",
   "csharp"
 );
 
 @@clientName(Diagnostics, "ContainerAppDiagnostic", "csharp");
 
-@@clientName(
-  DiagnosticDataProviderMetadata,
+@@clientName(DiagnosticDataProviderMetadata,
   "ContainerAppDiagnosticDataProviderMetadata",
   "csharp"
 );
 
-@@clientName(
-  DiagnosticDataProviderMetadataPropertyBagItem,
+@@clientName(DiagnosticDataProviderMetadataPropertyBagItem,
   "ContainerAppDiagnosticDataProviderMetadataPropertyBagItem",
   "csharp"
 );
 
-@@clientName(
-  DiagnosticDataTableResponseColumn,
+@@clientName(DiagnosticDataTableResponseColumn,
   "ContainerAppDiagnosticDataColumn",
   "csharp"
 );
 
-@@clientName(
-  DiagnosticDataTableResponseObject,
+@@clientName(DiagnosticDataTableResponseObject,
   "ContainerAppDiagnosticDataTableResult",
   "csharp"
 );
@@ -577,48 +519,41 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(DiagnosticRendering.type, "DiagnosticRenderingType", "csharp");
 
-@@clientName(
-  DiagnosticsDataApiResponse,
+@@clientName(DiagnosticsDataApiResponse,
   "ContainerAppDiagnosticsDataApiResult",
   "csharp"
 );
 
-@@clientName(
-  CSharpDiagnosticsDefinition,
+@@clientName(CSharpDiagnosticsDefinition,
   "ContainerAppDiagnosticsMetadata",
   "csharp"
 );
 
-@@clientName(
-  DiagnosticsProperties,
+@@clientName(DiagnosticsProperties,
   "ContainerAppDiagnosticsProperties",
   "csharp"
 );
 
 @@clientName(DiagnosticsStatus, "ContainerAppDiagnosticsStatus", "csharp");
 
-@@clientName(
-  DiagnosticSupportTopic,
+@@clientName(DiagnosticSupportTopic,
   "ContainerAppDiagnosticSupportTopic",
   "csharp"
 );
 
-@@clientName(
-  DnsVerificationTestResult,
+@@clientName(DnsVerificationTestResult,
   "ContainerAppDnsVerificationTestResult",
   "csharp"
 );
 
-@@clientName(
-  EnvironmentAuthToken,
+@@clientName(EnvironmentAuthToken,
   "ContainerAppEnvironmentAuthToken",
   "csharp"
 );
 
 @@clientName(EnvironmentAuthTokenProperties.expires, "ExpireOn", "csharp");
 
-@@clientName(
-  EnvironmentProvisioningState,
+@@clientName(EnvironmentProvisioningState,
   "ContainerAppEnvironmentProvisioningState",
   "csharp"
 );
@@ -631,8 +566,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(ExtendedLocation.type, "ExtendedLocationType", "csharp");
 
-@@clientName(
-  ExtendedLocationTypes,
+@@clientName(ExtendedLocationTypes,
   "ContainerAppExtendedLocationType",
   "csharp"
 );
@@ -643,8 +577,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(ForwardProxy, "ContainerAppForwardProxy", "csharp");
 
-@@clientName(
-  ForwardProxyConvention,
+@@clientName(ForwardProxyConvention,
   "ContainerAppForwardProxyConvention",
   "csharp"
 );
@@ -653,14 +586,12 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(GitHub.enabled, "IsEnabled", "csharp");
 
-@@clientName(
-  GithubActionConfiguration,
+@@clientName(GithubActionConfiguration,
   "ContainerAppGitHubActionConfiguration",
   "csharp"
 );
 
-@@clientName(
-  GithubActionConfiguration.githubPersonalAccessToken,
+@@clientName(GithubActionConfiguration.githubPersonalAccessToken,
   "GitHubPersonalAccessToken",
   "csharp"
 );
@@ -677,8 +608,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(HttpRouteConfig, "ContainerAppHttpRouteConfig", "csharp");
 
-@@clientName(
-  HttpRouteConfigProperties,
+@@clientName(HttpRouteConfigProperties,
   "ContainerAppHttpRouteConfigProperties",
   "csharp"
 );
@@ -687,20 +617,17 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(HttpRouteMatch.caseSensitive, "IsCaseSensitive", "csharp");
 
-@@clientName(
-  HttpRouteProvisioningErrors,
+@@clientName(HttpRouteProvisioningErrors,
   "ContainerAppHttpRouteProvisioningErrors",
   "csharp"
 );
 
-@@clientName(
-  HttpRouteProvisioningErrors.timestamp,
+@@clientName(HttpRouteProvisioningErrors.timestamp,
   "ErrorOccurredOn",
   "csharp"
 );
 
-@@clientName(
-  HttpRouteProvisioningState,
+@@clientName(HttpRouteProvisioningState,
   "ContainerAppHttpRouteProvisioningState",
   "csharp"
 );
@@ -713,56 +640,48 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(HttpSettings, "ContainerAppHttpSettings", "csharp");
 
-@@clientName(
-  IdentityProviders,
+@@clientName(IdentityProviders,
   "ContainerAppIdentityProvidersConfiguration",
   "csharp"
 );
 
 @@clientName(IdentitySettings, "ContainerAppIdentitySettings", "csharp");
 
-@@clientName(
-  IdentitySettingsLifeCycle,
+@@clientName(IdentitySettingsLifeCycle,
   "ContainerAppIdentitySettingsLifeCycle",
   "csharp"
 );
 
 @@clientName(Ingress, "ContainerAppIngressConfiguration", "csharp");
 
-@@clientName(
-  Ingress.ipSecurityRestrictions,
+@@clientName(Ingress.ipSecurityRestrictions,
   "IPSecurityRestrictions",
   "csharp"
 );
 
-@@clientName(
-  IngressClientCertificateMode,
+@@clientName(IngressClientCertificateMode,
   "ContainerAppIngressClientCertificateMode",
   "csharp"
 );
 
-@@clientName(
-  IngressConfiguration,
+@@clientName(IngressConfiguration,
   "ManagedEnvironmentIngressConfiguration",
   "csharp"
 );
 
-@@clientName(
-  IngressTransportMethod,
+@@clientName(IngressTransportMethod,
   "ContainerAppIngressTransportMethod",
   "csharp"
 );
 
 @@clientName(InitContainer, "ContainerAppInitContainer", "csharp");
 
-@@clientName(
-  IpSecurityRestrictionRule,
+@@clientName(IpSecurityRestrictionRule,
   "ContainerAppIPSecurityRestrictionRule",
   "csharp"
 );
 
-@@clientName(
-  IpSecurityRestrictionRule.ipAddressRange,
+@@clientName(IpSecurityRestrictionRule.ipAddressRange,
   "IPAddressRange",
   "csharp"
 );
@@ -773,8 +692,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(JobConfiguration, "ContainerAppJobConfiguration", "csharp");
 
-@@clientName(
-  JobConfigurationEventTriggerConfig,
+@@clientName(JobConfigurationEventTriggerConfig,
   "EventTriggerConfiguration",
   "csharp"
 );
@@ -783,32 +701,27 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(JobExecutionBase, "ContainerAppJobExecutionBase", "csharp");
 
-@@clientName(
-  JobExecutionTemplate,
+@@clientName(JobExecutionTemplate,
   "ContainerAppJobExecutionTemplate",
   "csharp"
 );
 
-@@clientName(
-  JobPatchPropertiesProperties,
+@@clientName(JobPatchPropertiesProperties,
   "ContainerAppJobPatchProperties",
   "csharp"
 );
 
-@@clientName(
-  JobPatchPropertiesProperties.outboundIpAddresses,
+@@clientName(JobPatchPropertiesProperties.outboundIpAddresses,
   "OutboundIPAddresses",
   "csharp"
 );
 
-@@clientName(
-  JobProperties.outboundIpAddresses,
+@@clientName(JobProperties.outboundIpAddresses,
   "OutboundIPAddresses",
   "csharp"
 );
 
-@@clientName(
-  JobProvisioningState,
+@@clientName(JobProvisioningState,
   "ContainerAppJobProvisioningState",
   "csharp"
 );
@@ -829,22 +742,19 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(Kind, "ContainerAppKind", "csharp");
 
-@@clientName(
-  LifecycleConfiguration,
+@@clientName(LifecycleConfiguration,
   "SessionPoolLifecycleConfiguration",
   "csharp"
 );
 
 @@clientName(LifecycleType, "SessionPoolLifecycleType", "csharp");
 
-@@clientName(
-  LogAnalyticsConfiguration,
+@@clientName(LogAnalyticsConfiguration,
   "ContainerAppLogAnalyticsConfiguration",
   "csharp"
 );
 
-@@clientName(
-  LogAnalyticsConfiguration.dynamicJsonColumns,
+@@clientName(LogAnalyticsConfiguration.dynamicJsonColumns,
   "UseDynamicJsonColumns",
   "csharp"
 );
@@ -853,16 +763,14 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(LogLevel, "ContainerAppDaprLogLevel", "csharp");
 
-@@clientName(
-  MaintenanceConfigurationResource,
+@@clientName(MaintenanceConfigurationResource,
   "ContainerAppMaintenanceConfiguration",
   "csharp"
 );
 
 @@clientName(ManagedCertificate, "ContainerAppManagedCertificate", "csharp");
 
-@@clientName(
-  ManagedCertificateDomainControlValidation.CNAME,
+@@clientName(ManagedCertificateDomainControlValidation.CNAME,
   "Cname",
   "csharp"
 );
@@ -881,50 +789,43 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(Certificates.deleteCertificates, "Delete", "csharp");
 
-@@clientName(
-  Certificates.createOrUpdateCertificates,
+@@clientName(Certificates.createOrUpdateCertificates,
   "CreateOrUpdate",
   "csharp"
 );
 
 @@clientName(Certificates.updateCertificates, "Update", "csharp");
 
-@@clientName(
-  ManagedEnvironmentProperties.zoneRedundant,
+@@clientName(ManagedEnvironmentProperties.zoneRedundant,
   "IsZoneRedundant",
   "csharp"
 );
 
-@@clientName(
-  ManagedEnvironmentStorage,
+@@clientName(ManagedEnvironmentStorage,
   "ContainerAppManagedEnvironmentStorage",
   "csharp"
 );
 
-@@clientName(
-  ManagedIdentitySetting,
+@@clientName(ManagedIdentitySetting,
   "SessionPoolManagedIdentitySetting",
   "csharp"
 );
 
-@@clientName(
-  ManagedEnvironmentPropertiesPeerTrafficConfigurationEncryption.enabled,
+@@clientName(ManagedEnvironmentPropertiesPeerTrafficConfigurationEncryption.enabled,
   "IsEnabled",
   "csharp"
 );
 
 @@clientName(Mtls.enabled, "IsMtlsEnabled", "csharp");
 
-@@clientName(
-  NfsAzureFileProperties,
+@@clientName(NfsAzureFileProperties,
   "ContainerAppNfsAzureFileProperties",
   "csharp"
 );
 
 @@clientName(Nonce, "ContainerAppLoginNonce", "csharp");
 
-@@clientName(
-  OpenIdConnectClientCredential,
+@@clientName(OpenIdConnectClientCredential,
   "ContainerAppOpenIdConnectClientCredential",
   "csharp"
 );
@@ -933,46 +834,39 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(OpenIdConnectLogin, "ContainerAppOpenIdConnectLogin", "csharp");
 
-@@clientName(
-  OpenIdConnectRegistration,
+@@clientName(OpenIdConnectRegistration,
   "ContainerAppOpenIdConnectRegistration",
   "csharp"
 );
 
-@@clientName(
-  PrivateEndpointConnection,
+@@clientName(PrivateEndpointConnection,
   "ContainerAppPrivateEndpointConnection",
   "csharp"
 );
 
-@@clientName(
-  PrivateEndpointConnectionProvisioningState,
+@@clientName(PrivateEndpointConnectionProvisioningState,
   "ContainerAppPrivateEndpointConnectionProvisioningState",
   "csharp"
 );
 
-@@clientName(
-  PrivateEndpointServiceConnectionStatus,
+@@clientName(PrivateEndpointServiceConnectionStatus,
   "ContainerAppPrivateEndpointServiceConnectionStatus",
   "csharp"
 );
 
 @@clientName(PrivateLinkResource, "ContainerAppPrivateLink", "csharp");
 
-@@clientName(
-  PrivateLinkServiceConnectionState,
+@@clientName(PrivateLinkServiceConnectionState,
   "ContainerAppPrivateLinkServiceConnectionState",
   "csharp"
 );
 
-@@clientName(
-  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
 
-@@clientName(
-  CertificateType.ServerSSLCertificate,
+@@clientName(CertificateType.ServerSSLCertificate,
   "ServerSslCertificate",
   "csharp"
 );
@@ -985,8 +879,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(PatchCollection, "ContainerAppsPatchList", "csharp");
 
-@@clientName(
-  DaprSubscriptionBulkSubscribeOptions,
+@@clientName(DaprSubscriptionBulkSubscribeOptions,
   "DaprSubscriptionBulkSubscribeConfig",
   "csharp"
 );
@@ -1027,8 +920,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(RevisionHealthState, "ContainerAppRevisionHealthState", "csharp");
 
-@@clientName(
-  RevisionProvisioningState,
+@@clientName(RevisionProvisioningState,
   "ContainerAppRevisionProvisioningState",
   "csharp"
 );
@@ -1045,8 +937,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(ScheduledEntry, "ManagedEnvironmentScheduledEntry", "csharp");
 
-@@clientName(
-  ScheduledEntries,
+@@clientName(ScheduledEntries,
   "ContainerAppMaintenanceScheduledEntries",
   "csharp"
 );
@@ -1055,8 +946,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(Secret, "ContainerAppWritableSecret", "csharp");
 
-@@clientName(
-  SecretKeyVaultProperties,
+@@clientName(SecretKeyVaultProperties,
   "ContainerAppSecretKeyVaultProperties",
   "csharp"
 );
@@ -1069,16 +959,14 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(SourceControl, "ContainerAppSourceControl", "csharp");
 
-@@clientName(
-  SourceControlProperties.githubActionConfiguration,
+@@clientName(SourceControlProperties.githubActionConfiguration,
   "GitHubActionConfiguration",
   "csharp"
 );
 
 @@clientName(SourceControlProperties.repoUrl, "RepoUri", "csharp");
 
-@@clientName(
-  SourceControlOperationState,
+@@clientName(SourceControlOperationState,
   "ContainerAppSourceControlOperationState",
   "csharp"
 );
@@ -1093,8 +981,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(TokenStore.enabled, "IsEnabled", "csharp");
 
-@@clientName(
-  BlobStorageTokenStore.sasUrlSettingName,
+@@clientName(BlobStorageTokenStore.sasUrlSettingName,
   "AzureBlobStorageSasUrlSettingName",
   "csharp"
 );
@@ -1115,8 +1002,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(ContainerType.PythonLTS, "PythonLts", "csharp");
 
-@@clientName(
-  UnauthenticatedClientActionV2,
+@@clientName(UnauthenticatedClientActionV2,
   "ContainerAppUnauthenticatedClientActionV2",
   "csharp"
 );
@@ -1143,8 +1029,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(LogicAppProperties, "ContainerAppLogicAppConfiguration", "csharp");
 
-@@clientName(
-  WorkflowEnvelopeProperties,
+@@clientName(WorkflowEnvelopeProperties,
   "LogicAppWorkflowEnvelopeProperties",
   "csharp"
 );
@@ -1163,14 +1048,12 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(WorkloadProfile.minimumCount, "MinimumNodeCount", "csharp");
 
-@@clientName(
-  workloadProfileStates,
+@@clientName(workloadProfileStates,
   "ContainerAppWorkloadProfileState",
   "csharp"
 );
 
-@@clientName(
-  WorkloadProfileStatesProperties,
+@@clientName(WorkloadProfileStatesProperties,
   "ContainerAppWorkloadProfileStateProperties",
   "csharp"
 );
@@ -1209,82 +1092,70 @@ union OpenIdConnectClientCredentialMethod {
 // C# @@usage customizations.
 @@usage(LogicAppProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  ContainerAppAuthToken,
+@@usage(ContainerAppAuthToken,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
-@@usage(
-  AvailableWorkloadProfile,
+@@usage(AvailableWorkloadProfile,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
-@@usage(
-  AvailableWorkloadProfileProperties,
+@@usage(AvailableWorkloadProfileProperties,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
 @@usage(BillingMeter, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  BillingMeterProperties,
+@@usage(BillingMeterProperties,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
 @@usage(Diagnostics, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  DiagnosticsProperties,
+@@usage(DiagnosticsProperties,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
-@@usage(
-  DiagnosticsDefinition,
+@@usage(DiagnosticsDefinition,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
 @@usage(DiagnosticsStatus, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  DiagnosticDataProviderMetadata,
+@@usage(DiagnosticDataProviderMetadata,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
-@@usage(
-  DiagnosticDataProviderMetadataPropertyBagItem,
+@@usage(DiagnosticDataProviderMetadataPropertyBagItem,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
-@@usage(
-  DiagnosticDataTableResponseObject,
+@@usage(DiagnosticDataTableResponseObject,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
-@@usage(
-  DiagnosticDataTableResponseColumn,
+@@usage(DiagnosticDataTableResponseColumn,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
 @@usage(DiagnosticRendering, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  DiagnosticsDataApiResponse,
+@@usage(DiagnosticsDataApiResponse,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
-@@usage(
-  DiagnosticSupportTopic,
+@@usage(DiagnosticSupportTopic,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
@@ -1299,28 +1170,24 @@ union OpenIdConnectClientCredentialMethod {
 
 @@usage(Revision, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  workloadProfileStates,
+@@usage(workloadProfileStates,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
-@@usage(
-  WorkloadProfileStatesProperties,
+@@usage(WorkloadProfileStatesProperties,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
-@@usage(
-  JavaComponentProperties,
+@@usage(JavaComponentProperties,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
 @@usage(WorkflowEnvelope, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  WorkflowEnvelopeProperties,
+@@usage(WorkflowEnvelopeProperties,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
@@ -1331,15 +1198,13 @@ union OpenIdConnectClientCredentialMethod {
 
 @@usage(UsageUnit, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  OpenIdConnectClientCredentialMethod,
+@@usage(OpenIdConnectClientCredentialMethod,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
 
 // C# @@doc customizations.
-@@doc(
-  JobPatchProperties.properties,
+@@doc(JobPatchProperties.properties,
   "Container Apps Job patch resource properties."
 );
 
@@ -1349,13 +1214,11 @@ union OpenIdConnectClientCredentialMethod {
 
 @@doc(TemplateUpdateStatus, "Session pool template update status.");
 
-@@doc(
-  ActiveRevisionsMode,
+@@doc(ActiveRevisionsMode,
   "Controls how active revisions are handled for the Container app."
 );
 
-@@doc(
-  Configuration.activeRevisionsMode,
+@@doc(Configuration.activeRevisionsMode,
   "Controls how active revisions are handled for the Container app."
 );
 

@@ -77,9 +77,7 @@ interface LogicApps {
   createOrUpdateStable is LogicAppOps.CreateOrUpdateSync<
     LogicApp,
     {},
-
-      | ArmResourceUpdatedResponse<LogicApp>
-      | ArmResourceCreatedSyncResponse<LogicApp>,
+    ArmResourceUpdatedResponse<LogicApp> | ArmResourceCreatedSyncResponse<LogicApp>,
     true
   >;
 
@@ -168,15 +166,12 @@ interface LogicApps {
 }
 
 @@doc(LogicApp.name, "Name of the Logic App, the extension resource.");
-@@doc(
-  LogicApp.properties,
+@@doc(LogicApp.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(
-  LogicApps.createOrUpdate::parameters.resource,
+@@doc(LogicApps.createOrUpdate::parameters.resource,
   "Logic app resource properties."
 );
-@@doc(
-  LogicApps.deployWorkflowArtifacts::parameters.body,
+@@doc(LogicApps.deployWorkflowArtifacts::parameters.body,
   "Application settings and files of the workflow."
 );

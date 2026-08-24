@@ -67,7 +67,6 @@ interface ManagedEnvironmentsStorages {
 
 @@doc(ManagedEnvironmentStorage.name, "Name of the storage.");
 @@doc(ManagedEnvironmentStorage.properties, "Storage properties");
-@@doc(
-  ManagedEnvironmentsStorages.createOrUpdate::parameters.resource,
+@@doc(ManagedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "Configuration details of storage."
 );
