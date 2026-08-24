@@ -35,7 +35,7 @@ union VoiceAgentWebSocketMessage {
 @doc("A stable v1 message sent by the service over a voice-agent WebSocket.")
 @usage(VoiceAgentServerEventUsage)
 @oneOf
-// This diverges from the upstream OpenAI RT in that is adding a few types (this is ok), and missing a few other ('conversation.created, "input_audio_buffer.dtmf_event_received"), need to confirm if this is intentional or inadvertant
+// This diverges from the upstream OpenAI RT in that is adding a few types (this is ok), and missing a few other ('conversation.created, "input_audio_buffer.dtmf_event_received"), need to confirm if this is intentional or inadvertent
 union VoiceAgentServerEvent {
   conversation_item_added: OpenAI.RealtimeServerEventConversationItemAdded,
   conversation_item_created: OpenAI.RealtimeServerEventConversationItemCreated,
