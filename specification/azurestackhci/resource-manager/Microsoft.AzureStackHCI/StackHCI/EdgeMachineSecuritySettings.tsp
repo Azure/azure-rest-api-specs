@@ -55,11 +55,4 @@ interface EdgeMachineSecuritySettingsOperations {
    */
   @added(Versions.v2026_10_15_preview)
   listByEdgeMachine is ArmResourceListByParent<EdgeMachineSecuritySettings>;
-
-  /**
-   * Trigger refresh sync for edge machine security settings.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @added(Versions.v2026_10_15_preview)
-  refresh is ArmResourceActionNoContentAsync<EdgeMachineSecuritySettings, void>;
 }
