@@ -76,6 +76,7 @@ alias ToolboxShellToolType = "shell";
 alias ToolboxMCPToolType = "mcp";
 alias ToolboxAzureAISearchToolType = "azure_ai_search";
 alias ToolboxOpenApiToolType = "openapi";
+alias ToolboxA2AToolType = "a2a";
 alias ToolboxA2APreviewToolType = "a2a_preview";
 alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
@@ -103,9 +104,8 @@ union ToolboxToolType {
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
   toolbox_search: ToolboxSearchToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
-
-  @removed(Versions.v1)
   web_iq_preview: ToolboxWebIQPreviewToolType,
+  a2a: ToolboxA2AToolType,
 }
 
 /**
@@ -255,6 +255,14 @@ model OpenApiToolboxTool extends ToolboxTool {
 /**
  * An A2A tool stored in a toolbox.
  */
+model A2AToolboxTool extends ToolboxTool {
+  type: ToolboxA2AToolType;
+  ...ToolFields<A2ATool>;
+}
+
+/**
+ * An A2A tool stored in a toolbox.
+ */
 @extension("x-ms-foundry-meta", PreviewTool)
 model A2APreviewToolboxTool extends ToolboxTool {
   type: ToolboxA2APreviewToolType;
@@ -299,7 +307,6 @@ model FabricIQPreviewToolboxTool extends ToolboxTool {
 /**
  * A WebIQ tool stored in a toolbox.
  */
-@removed(Versions.v1)
 @extension("x-ms-foundry-meta", PreviewTool)
 model WebIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxWebIQPreviewToolType;

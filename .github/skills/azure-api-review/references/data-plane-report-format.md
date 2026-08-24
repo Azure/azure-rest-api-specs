@@ -258,6 +258,24 @@ accountKey: string;
 behavior, which are not observable in a specification.
 ````
 
+### Unattended inline projection
+
+The document above is the **canonical report** used by interactive sessions and
+the eval suite. An unattended workflow may project that report across validated
+safe-output channels without inventing a second finding format:
+
+- An inline comment contains one complete canonical finding body, without its
+  severity heading, attached to the finding's verified changed line.
+- The summary indexes inline findings with **bare** rule IDs so it does not
+  duplicate them as bracketed findings.
+- Findings beyond the configured inline cap, findings without a valid diff
+  anchor, and all Questions remain in the summary.
+- The inline cap is a ceiling, not a quota. Never create weak findings to fill
+  it.
+
+Unless a workflow explicitly provides this projection, emit the canonical
+document shape unchanged.
+
 ## Rules for the report
 
 - **Identify yourself as an agent in the first line.** The report may be posted
@@ -270,6 +288,11 @@ behavior, which are not observable in a specification.
   with multiple line references.
 - **Every finding** carries a bracketed rule ID, a `file:line`, a quoted source
   excerpt, a reason, and a concrete fix. No fix, no finding.
+- **Link both layers of authority.** Link the local rule for its reviewer-specific
+  interpretation and, when that rule lists an authoritative upstream source,
+  also link the most specific upstream Guidelines or TypeSpec anchor. The local
+  reference explains the check; the upstream link lets authors verify the
+  original contract.
 - **No praise sections, no summary of what the PR does, no restating the diff.**
   The author knows what they wrote.
 - **Never** claim CI status you have not read, and never duplicate a finding CI

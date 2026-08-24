@@ -14,7 +14,7 @@ const AgentServerPersistenceContract = #{
 const AgentServerPersistenceRequiredPreviews = #{
   contract: "agentserver-persistence",
   usage: "cross-language-sdk-persistence",
-  required_previews: #[FoundryFeaturesOptInKeys.routines_v1_preview],
+  required_previews: #[FoundryFeaturesOptInKeys.routines_v2_preview],
 };
 
 // ---------------------------------------------------------------------------
@@ -150,6 +150,7 @@ model AgentServerTaskRecord {
 }
 
 /** Request body for creating an AgentServer durable task record. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @extension("x-ms-foundry-meta", AgentServerPersistenceContract)
 model AgentServerTaskCreateRequest {
   /** Optional caller-supplied task identifier. If omitted, the provider generates one. */
@@ -202,6 +203,7 @@ model AgentServerTaskError {
 }
 
 /** Cursor-paged list response for AgentServer durable task records. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @extension("x-ms-foundry-meta", AgentServerPersistenceContract)
 model AgentServerTaskListResponse {
   /** Object discriminator. Always `list`. */

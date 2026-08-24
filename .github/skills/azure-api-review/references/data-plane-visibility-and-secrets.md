@@ -15,6 +15,15 @@ Applies to data-plane TypeSpec. Data-plane expresses mutability through
 [`property-mutability.md`](property-mutability.md) -- What-If noise, ARM Change
 Analysis -- does not apply; the underlying principle does.
 
+> **Authoritative upstream:** [field mutability](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-field-mutability),
+> [round-trippable resource schemas](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-response-body-is-resource-schema),
+> [no secrets in GET responses](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-no-secrets-in-get-response),
+> [retrieving secrets through POST](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-secrets-allowed-in-post-response),
+> and
+> [null response values](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json-null-response-values)
+> in the Azure REST API Guidelines. This file maps that wire contract to
+> TypeSpec visibility; the upstream Guidelines take precedence.
+
 Secret **detection** signals live in [`secret-detection.md`](secret-detection.md)
 and are not restated here. This file covers how visibility and secrecy interact.
 

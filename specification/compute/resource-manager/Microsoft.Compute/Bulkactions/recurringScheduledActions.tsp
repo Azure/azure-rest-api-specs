@@ -16,9 +16,12 @@ namespace Microsoft.Compute;
 // ScheduledActions (SA) — the recurring `scheduledActions` resource
 // family, folded into the BulkActions project.
 //
-// NAMING NOTE: SA collision-renames take the `RecurringScheduledActions*`
-// prefix because BulkActions already claimed
-// `ScheduledAction*` for its own shared types.
+// NAMING NOTE: SA collision-renames take the `ScheduledActions*` prefix to avoid
+// colliding with BulkActions' bare shared types (e.g. `ProvisioningState`,
+// `DeadlineType`, `ExecutionParameters`, `RetryPolicy`) that coexist in this shared
+// `Microsoft.Compute` namespace. (These were named `RecurringScheduledActions*`
+// through 2026-07-06-preview; renamed to `ScheduledActions*` in 2026-08-06-preview
+// via `@renamedFrom`.)
 // =====================================================================
 
 // ------------------ Shared enums ------------------
@@ -158,6 +161,30 @@ union OccurrenceState {
   string,
 }
 
+// The provisioning state of a resource within an occurrence.
+@added(Versions.`2026-08-06-preview`)
+@doc("The provisioning state of a scheduled-action resource within an occurrence.")
+union OccurrenceResourceProvisioningState {
+  ResourceProvisioningState,
+
+  @doc("The resource has been created")
+  Created: "Created",
+
+  @doc("The resource has been scheduled")
+  Scheduled: "Scheduled",
+
+  @doc("The resource is going through cancellation")
+  Cancelling: "Cancelling",
+
+  @doc("The resource is being rescheduled")
+  Rescheduling: "Rescheduling",
+
+  @doc("The resource is in an invalid state")
+  InvalidState: "InvalidState",
+
+  string,
+}
+
 @added(Versions.`2026-07-06-preview`)
 @doc("The type of notification supported")
 union NotificationType {
@@ -190,11 +217,15 @@ union ResourceOperationStatus {
 
 // NAMING NOTE: renamed from `ProvisioningState` to avoid colliding with the
 // BulkActions LaunchBulkInstancesOperation `ProvisioningState`; takes the
-// `RecurringScheduledActions*` identity (see file header).
+// `ScheduledActions*` identity (see file header).
 @added(Versions.`2026-07-06-preview`)
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsProvisioningState"
+)
 @doc("Provisioning state of the scheduled action resource.")
 @lroStatus
-union RecurringScheduledActionsProvisioningState {
+union ScheduledActionsProvisioningState {
   ResourceProvisioningState,
 
   @doc("Resource is being deleted.")
@@ -243,12 +274,16 @@ model NotificationProperties {
 // couple to the BulkActions type pool: a BulkActions change to its shared types can no longer
 // alter the SA contract. Bulk-VM-specific leakage is intentionally dropped — `verifyVmAgentHealth`
 // (an executeStart concept) and the `GetInstanceView` operation value. Names take the
-// `RecurringScheduledActions*` collision-rename prefix (see file header), since these coexist in
+// `ScheduledActions*` collision-rename prefix (see file header), since these coexist in
 // the `Microsoft.Compute` namespace with the BulkActions originals.
 
 @added(Versions.`2026-07-06-preview`)
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsDeadlineType"
+)
 @doc("The type of deadline the scheduled action follows for its schedule.")
-union RecurringScheduledActionsDeadlineType {
+union ScheduledActionsDeadlineType {
   @doc("Default value of Unknown.")
   Unknown: "Unknown",
 
@@ -262,8 +297,12 @@ union RecurringScheduledActionsDeadlineType {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsResourceOperationType"
+)
 @doc("The resource operation to take on a scheduled-action failure.")
-union RecurringScheduledActionsResourceOperationType {
+union ScheduledActionsResourceOperationType {
   @doc("The default value for this enum type")
   Unknown: "Unknown",
 
@@ -286,8 +325,12 @@ union RecurringScheduledActionsResourceOperationType {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsRetryPolicy"
+)
 @doc("Retry policy the scheduled action can pass")
-model RecurringScheduledActionsRetryPolicy {
+model ScheduledActionsRetryPolicy {
   @doc("Retry count for the request")
   retryCount?: int32;
 
@@ -295,17 +338,21 @@ model RecurringScheduledActionsRetryPolicy {
   retryWindowInMinutes?: int32;
 
   @doc("Action to take on failure")
-  onFailureAction?: RecurringScheduledActionsResourceOperationType;
+  onFailureAction?: ScheduledActionsResourceOperationType;
 }
 
 @added(Versions.`2026-07-06-preview`)
+@renamedFrom(
+  Versions.`2026-08-06-preview`,
+  "RecurringScheduledActionsExecutionParameters"
+)
 @doc("The execution parameters the scheduled action is supposed to follow")
-model RecurringScheduledActionsExecutionParameters {
+model ScheduledActionsExecutionParameters {
   @doc("Details that could optimize the user's request")
   optimizationPreference?: OptimizationPreference;
 
   @doc("Retry policy the user can pass")
-  retryPolicy?: RecurringScheduledActionsRetryPolicy;
+  retryPolicy?: ScheduledActionsRetryPolicy;
 }
 
 // ------------------ ScheduledAction resource + models ------------------
@@ -329,10 +376,10 @@ model ScheduledActionsSchedule {
   requestedDaysOfTheMonth?: DayOfTheMonth[];
 
   @doc("The execution parameters the scheduled action is supposed to follow")
-  executionParameters?: RecurringScheduledActionsExecutionParameters;
+  executionParameters?: ScheduledActionsExecutionParameters;
 
   @doc("The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt.")
-  deadlineType?: RecurringScheduledActionsDeadlineType;
+  deadlineType?: ScheduledActionsDeadlineType;
 }
 
 @added(Versions.`2026-07-06-preview`)
@@ -484,7 +531,7 @@ model ScheduledActionProperties {
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
-  provisioningState?: RecurringScheduledActionsProvisioningState;
+  provisioningState?: ScheduledActionsProvisioningState;
 }
 
 @added(Versions.`2026-07-06-preview`)
@@ -516,7 +563,7 @@ model ScheduledActionPropertiesUpdate {
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
-  provisioningState?: RecurringScheduledActionsProvisioningState;
+  provisioningState?: ScheduledActionsProvisioningState;
 }
 
 @added(Versions.`2026-07-06-preview`)
@@ -619,7 +666,8 @@ model OccurrenceResource is ScheduledActionResource {
 
   @doc("The current state of the resource")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  @typeChangedFrom(Versions.`2026-08-06-preview`, ResourceProvisioningState)
+  provisioningState?: OccurrenceResourceProvisioningState;
 
   @doc("Error details for the resource. Only populated if resource is in failed state.")
   @visibility(Lifecycle.Read)
@@ -670,7 +718,8 @@ model OccurrenceExtensionProperties {
 
   @doc("The current state of the resource")
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  @typeChangedFrom(Versions.`2026-08-06-preview`, ResourceProvisioningState)
+  provisioningState?: OccurrenceResourceProvisioningState;
 
   @doc("Error details for the resource. Only populated if resource is in failed state.")
   @visibility(Lifecycle.Read)

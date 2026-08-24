@@ -652,12 +652,14 @@ model VoiceAgentVersionObject {
 model VoiceAgentObject {
   ...OmitProperties<AgentObject, "versions">;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("The latest version of the voice agent.")
   versions: {
     latest: VoiceAgentVersionObject;
   };
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("The request to create a new version of a voice agent.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model CreateVoiceAgentVersionRequest {
@@ -667,6 +669,7 @@ model CreateVoiceAgentVersionRequest {
   definition: VoiceAgentDefinition;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("The request to create a voice agent.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model CreateVoiceAgentRequest {
@@ -691,12 +694,14 @@ model CreateVoiceAgentRequest {
   agent_card?: AgentCard;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("The request to update a voice agent by adding a new version.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model UpdateVoiceAgentRequest {
   ...OmitProperties<CreateVoiceAgentVersionRequest, "draft">;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   The inputs for generating a voice agent. A few high-level inputs plus a natural-language `goal`
   are expanded into a full, editable `VoiceAgentDefinition`, which is then created via the standard voice
