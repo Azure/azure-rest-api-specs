@@ -227,6 +227,14 @@ interface ManagedVirtualNodePools {
   get is ArmResourceRead<ManagedVirtualNodePool, Error = CloudError>;
 
   /**
+   * List managed virtual node pools by resource group.
+   */
+  listByResourceGroup is ArmResourceListByParent<
+    ManagedVirtualNodePool,
+    Error = CloudError
+  >;
+
+  /**
    * Create or update a managed virtual node pool.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<

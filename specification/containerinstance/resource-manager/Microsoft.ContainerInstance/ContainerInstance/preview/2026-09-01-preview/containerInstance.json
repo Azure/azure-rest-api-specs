@@ -1770,6 +1770,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/managedVirtualNodePools": {
+      "get": {
+        "operationId": "ManagedVirtualNodePools_ListByResourceGroup",
+        "tags": [
+          "ManagedVirtualNodePools"
+        ],
+        "description": "List managed virtual node pools by resource group.",
+        "x-ms-examples": {
+          "List managed virtual node pools by resource group": {
+            "$ref": "./examples/ManagedVirtualNodePool_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNodePoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/managedVirtualNodePools/{managedVirtualNodePoolName}": {
       "get": {
         "operationId": "ManagedVirtualNodePools_Get",
@@ -5285,6 +5327,27 @@
         "aksClusterResourceId",
         "managedIdentityResourceId",
         "aiAgentGroupResourceId"
+      ]
+    },
+    "ManagedVirtualNodePoolListResult": {
+      "type": "object",
+      "description": "The response of a ManagedVirtualNodePool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedVirtualNodePool items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedVirtualNodePool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ManagedVirtualNodePoolUpdate": {
