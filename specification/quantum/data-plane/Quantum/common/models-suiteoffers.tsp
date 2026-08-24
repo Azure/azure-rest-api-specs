@@ -27,6 +27,12 @@ union SuiteOfferScope {
 
   /** The usage is applied at the target level. */
   Target: "Target",
+
+  /** The usage is applied at the subscription target level. */
+  SubscriptionTarget: "SubscriptionTarget",
+
+  /** The usage is applied at the workspace target level. */
+  WorkspaceTarget: "WorkspaceTarget",
 }
 
 /** The accumulated quota usage values for a suite offer provider. */
@@ -55,6 +61,10 @@ model QuotaUsageData {
   /** The scope at which the quota usage is applied. */
   @visibility(Lifecycle.Read)
   scope: SuiteOfferScope;
+
+  /** The unique identifier for the target, when the usage is scoped to a target. */
+  @visibility(Lifecycle.Read)
+  targetId?: string;
 
   /** The accumulated quota usage values. */
   @visibility(Lifecycle.Read)
