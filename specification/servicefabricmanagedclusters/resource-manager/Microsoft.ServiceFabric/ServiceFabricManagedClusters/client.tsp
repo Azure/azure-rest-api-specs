@@ -730,7 +730,7 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(
   ManagedApplyMaintenanceWindow.post,
-  "PostManagedApplyMaintenanceWindow",
+  "PostManagedApplyMaintenanceWindowWithContent",
   "csharp"
 );
 @@clientName(
