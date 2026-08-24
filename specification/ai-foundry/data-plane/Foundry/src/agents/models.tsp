@@ -11,7 +11,8 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview,
-    AgentDefinitionOptInKeys.draft_agents_v1_preview
+    AgentDefinitionOptInKeys.draft_agents_v1_preview,
+    AgentDefinitionOptInKeys.digital_worker_v1_preview
   ],
 };
 
@@ -30,7 +31,7 @@ model CreateAgentVersionRequest {
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
 
-  @doc("(Preview) The type of digital worker.")
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -179,7 +180,7 @@ model AgentObject {
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
 
-  @doc("(Preview) The type of digital worker.")
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
   @extension(
     "x-ms-foundry-meta",
     #{

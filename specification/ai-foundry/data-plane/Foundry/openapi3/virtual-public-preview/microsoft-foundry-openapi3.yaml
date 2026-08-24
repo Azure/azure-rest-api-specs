@@ -521,6 +521,7 @@ paths:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
           - DraftAgents=V1Preview
+          - DigitalWorker=V1Preview
       tags:
         - Agents
       requestBody:
@@ -2910,6 +2911,7 @@ paths:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
           - DraftAgents=V1Preview
+          - DigitalWorker=V1Preview
       tags:
         - Agent Versions
       requestBody:
@@ -42641,7 +42643,7 @@ components:
           description: The endpoint configuration for the agent
         digital_worker_type:
           $ref: '#/components/schemas/DigitalWorkerType'
-          description: (Preview) The type of digital worker.
+          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
           x-ms-foundry-meta:
             conditional_previews:
               - DigitalWorker=V1Preview
@@ -45755,12 +45757,13 @@ components:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
               - DraftAgents=V1Preview
+              - DigitalWorker=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
         digital_worker_type:
           $ref: '#/components/schemas/DigitalWorkerType'
-          description: (Preview) The type of digital worker.
+          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
           x-ms-foundry-meta:
             conditional_previews:
               - DigitalWorker=V1Preview
@@ -45782,6 +45785,7 @@ components:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
           - DraftAgents=V1Preview
+          - DigitalWorker=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -45893,12 +45897,13 @@ components:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
               - DraftAgents=V1Preview
+              - DigitalWorker=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
         digital_worker_type:
           $ref: '#/components/schemas/DigitalWorkerType'
-          description: (Preview) The type of digital worker.
+          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
           x-ms-foundry-meta:
             conditional_previews:
               - DigitalWorker=V1Preview
@@ -46046,7 +46051,7 @@ components:
           description: The blueprint reference for the agent.
         digital_worker_type:
           $ref: '#/components/schemas/DigitalWorkerType'
-          description: (Preview) The type of digital worker.
+          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
           x-ms-foundry-meta:
             conditional_previews:
               - DigitalWorker=V1Preview
@@ -46096,7 +46101,7 @@ components:
           description: The blueprint reference for the agent.
         digital_worker_type:
           $ref: '#/components/schemas/DigitalWorkerType'
-          description: (Preview) The type of digital worker.
+          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
           x-ms-foundry-meta:
             conditional_previews:
               - DigitalWorker=V1Preview
@@ -81740,6 +81745,7 @@ components:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
               - DraftAgents=V1Preview
+              - DigitalWorker=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -81748,6 +81754,7 @@ components:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
           - DraftAgents=V1Preview
+          - DigitalWorker=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -82030,7 +82037,7 @@ components:
           description: The endpoint configuration for the agent
         digital_worker_type:
           $ref: '#/components/schemas/DigitalWorkerType'
-          description: (Preview) The type of digital worker.
+          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
           x-ms-foundry-meta:
             conditional_previews:
               - DigitalWorker=V1Preview
