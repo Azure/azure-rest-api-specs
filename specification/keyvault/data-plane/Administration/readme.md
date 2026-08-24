@@ -38,6 +38,15 @@ input-file:
   - preview/2026-05-01-preview/administration.json
 ```
 
+### Tag: package-preview-2026-04-01
+
+These settings apply only when `--tag=package-preview-2026-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-04-01'
+input-file:
+  - stable/2026-04-01/administration.json
+```
+
 ### Tag: package-preview-2026-03-01-preview
 
 These settings apply only when `--tag=package-preview-2026-03-01-preview` is specified on the command line.
