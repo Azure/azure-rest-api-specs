@@ -16,7 +16,7 @@ model ApprovalCallbackRequest {
   resourceId: armResourceIdentifier;
 
   @doc("Resource request action indicating action which needed to be performed upon calling approval-callback post action")
-  resourceRequestAction: VirtualEnclaveApprovalCallbackResourceAction;
+  resourceRequestAction: ApprovalCallbackResourceRequestAction;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
   @doc("Approval status indicating 'Approved' or 'Rejected'")
@@ -45,5 +45,5 @@ model ApprovalActionResponse {
 @doc("Request body for calling post-action")
 model ApprovalDeletionCallbackRequest {
   @doc("Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action")
-  resourceRequestAction: VirtualEnclaveApprovalDeletionCallbackResourceAction;
+  resourceRequestAction: ApprovalDeletionCallbackResourceRequestAction;
 }

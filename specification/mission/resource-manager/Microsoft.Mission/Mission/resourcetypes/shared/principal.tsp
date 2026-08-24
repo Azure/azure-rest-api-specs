@@ -7,5 +7,5 @@ model Principal {
   id: string;
 
   @doc("The type of the object id. We currently allow users, groups, and service principals")
-  type: VirtualEnclavePrincipalType;
+  type: PrincipalType;
 }

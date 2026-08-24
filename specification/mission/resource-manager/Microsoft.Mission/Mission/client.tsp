@@ -5,6 +5,43 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Mission;
 
 @@clientName(
+  GovernedServiceItemOption,
+  "VirtualEnclaveGovernedServiceItemOption",
+  "csharp"
+);
+@@clientName(
+  GovernedServiceItemEnforcement,
+  "VirtualEnclaveGovernedServiceItemEnforcement",
+  "csharp"
+);
+@@clientName(
+  GovernedServiceItemPolicyAction,
+  "VirtualEnclaveGovernedServiceItemPolicyAction",
+  "csharp"
+);
+@@clientName(
+  MaintenanceModeConfigurationMode,
+  "VirtualEnclaveMaintenanceModeConfigurationMode",
+  "csharp"
+);
+@@clientName(
+  MaintenanceModeConfigurationJustification,
+  "VirtualEnclaveMaintenanceModeJustification",
+  "csharp"
+);
+@@clientName(PrincipalType, "VirtualEnclavePrincipalType", "csharp");
+@@clientName(
+  ApprovalCallbackResourceRequestAction,
+  "VirtualEnclaveApprovalCallbackResourceAction",
+  "csharp"
+);
+@@clientName(
+  ApprovalDeletionCallbackResourceRequestAction,
+  "VirtualEnclaveApprovalDeletionCallbackResourceAction",
+  "csharp"
+);
+
+@@clientName(
   Azure.ResourceManager.CommonTypes.MoboBrokerResource,
   "VirtualEnclaveManagedOnBehalfOfBroker",
   "csharp"

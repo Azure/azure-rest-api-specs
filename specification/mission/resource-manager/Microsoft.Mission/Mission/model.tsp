@@ -39,7 +39,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.Mission;
 
 @doc("The governance option for a governed service.")
-union VirtualEnclaveGovernedServiceItemOption {
+union GovernedServiceItemOption {
   string,
 
   @doc("Allow the governed service.")
@@ -56,7 +56,7 @@ union VirtualEnclaveGovernedServiceItemOption {
 }
 
 @doc("The enforcement state for a governed service.")
-union VirtualEnclaveGovernedServiceItemEnforcement {
+union GovernedServiceItemEnforcement {
   string,
 
   @doc("Enforcement is enabled.")
@@ -67,7 +67,7 @@ union VirtualEnclaveGovernedServiceItemEnforcement {
 }
 
 @doc("The policy action for a governed service.")
-union VirtualEnclaveGovernedServiceItemPolicyAction {
+union GovernedServiceItemPolicyAction {
   string,
 
   @doc("Audit policy violations without enforcing the policy.")
@@ -81,7 +81,7 @@ union VirtualEnclaveGovernedServiceItemPolicyAction {
 }
 
 @doc("The maintenance mode for a virtual enclave.")
-union VirtualEnclaveMaintenanceModeConfigurationMode {
+union MaintenanceModeConfigurationMode {
   string,
 
   @doc("Maintenance mode is on.")
@@ -101,7 +101,7 @@ union VirtualEnclaveMaintenanceModeConfigurationMode {
 }
 
 @doc("The justification for entering or exiting virtual enclave maintenance mode.")
-union VirtualEnclaveMaintenanceModeJustification {
+union MaintenanceModeConfigurationJustification {
   string,
 
   @doc("Maintenance mode is required for networking changes.")
@@ -115,7 +115,7 @@ union VirtualEnclaveMaintenanceModeJustification {
 }
 
 @doc("The type of a virtual enclave principal.")
-union VirtualEnclavePrincipalType {
+union PrincipalType {
   string,
 
   @doc("A user principal.")
@@ -129,7 +129,7 @@ union VirtualEnclavePrincipalType {
 }
 
 @doc("The resource action for an approval callback.")
-union VirtualEnclaveApprovalCallbackResourceAction {
+union ApprovalCallbackResourceRequestAction {
   string,
 
   @doc("Create the resource.")
@@ -146,7 +146,7 @@ union VirtualEnclaveApprovalCallbackResourceAction {
 }
 
 @doc("The resource action for an approval deletion callback.")
-union VirtualEnclaveApprovalDeletionCallbackResourceAction {
+union ApprovalDeletionCallbackResourceRequestAction {
   string,
 
   @doc("Create the resource.")

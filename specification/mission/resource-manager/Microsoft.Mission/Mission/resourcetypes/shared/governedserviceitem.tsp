@@ -71,10 +71,10 @@ model GovernedServiceItem {
   serviceName?: string;
 
   @doc("Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).")
-  option?: VirtualEnclaveGovernedServiceItemOption;
+  option?: GovernedServiceItemOption;
 
   @doc("Initiative enforcement (Enabled or Disabled).")
-  enforcement?: VirtualEnclaveGovernedServiceItemEnforcement;
+  enforcement?: GovernedServiceItemEnforcement;
 
   @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policies set to auditOnly (True or False).")
@@ -82,7 +82,7 @@ model GovernedServiceItem {
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Enforcement mode for policy. AuditOnly, Enforce, or None.")
-  policyAction?: VirtualEnclaveGovernedServiceItemPolicyAction;
+  policyAction?: GovernedServiceItemPolicyAction;
 
   @doc("Initiatives associated with this service.")
   @visibility(Lifecycle.Read)
