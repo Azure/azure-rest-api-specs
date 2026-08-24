@@ -1777,11 +1777,6 @@
           "ManagedVirtualNodePools"
         ],
         "description": "List managed virtual node pools by resource group.",
-        "x-ms-examples": {
-          "List managed virtual node pools by resource group": {
-            "$ref": "./examples/ManagedVirtualNodePool_ListByResourceGroup.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1807,6 +1802,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List managed virtual node pools by resource group": {
+            "$ref": "./examples/ManagedVirtualNodePool_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1819,11 +1819,6 @@
           "ManagedVirtualNodePools"
         ],
         "description": "Get the properties of the specified managed virtual node pool.",
-        "x-ms-examples": {
-          "Get a managed virtual node pool": {
-            "$ref": "./examples/ManagedVirtualNodePool_Get.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1858,6 +1853,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a managed virtual node pool": {
+            "$ref": "./examples/ManagedVirtualNodePool_Get.json"
+          }
         }
       },
       "put": {
@@ -1866,11 +1866,6 @@
           "ManagedVirtualNodePools"
         ],
         "description": "Create or update a managed virtual node pool.",
-        "x-ms-examples": {
-          "Create or update a managed virtual node pool": {
-            "$ref": "./examples/ManagedVirtualNodePool_CreateOrUpdate.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1932,6 +1927,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a managed virtual node pool": {
+            "$ref": "./examples/ManagedVirtualNodePool_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ManagedVirtualNodePool"
@@ -1943,12 +1943,7 @@
         "tags": [
           "ManagedVirtualNodePools"
         ],
-        "description": "Update a managed virtual node pool. Only tags and limited set of properties can be updated.",
-        "x-ms-examples": {
-          "Patch a managed virtual node pool": {
-            "$ref": "./examples/ManagedVirtualNodePool_Patch.json"
-          }
-        },
+        "description": "Update a managed virtual node pool. Only tags and a limited set of properties can be updated.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2007,6 +2002,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Patch a managed virtual node pool": {
+            "$ref": "./examples/ManagedVirtualNodePool_Patch.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ManagedVirtualNodePool"
@@ -2019,11 +2019,6 @@
           "ManagedVirtualNodePools"
         ],
         "description": "Delete a managed virtual node pool.",
-        "x-ms-examples": {
-          "Delete a managed virtual node pool": {
-            "$ref": "./examples/ManagedVirtualNodePool_Delete.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2068,6 +2063,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a managed virtual node pool": {
+            "$ref": "./examples/ManagedVirtualNodePool_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2627,6 +2627,18 @@
     }
   },
   "definitions": {
+    "AiAgentGroupResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerInstance/aiAgentsGroups"
+          }
+        ]
+      }
+    },
     "AiAgentsGroup": {
       "type": "object",
       "description": "An AiAgentsGroup tracked resource.",
@@ -2800,7 +2812,7 @@
     "AksClusterResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "The ARM resource ID of the AKS cluster.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -2847,36 +2859,6 @@
           "type": "string",
           "description": "The application gateway backend address pool ARM resource Id."
         }
-      }
-    },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
       }
     },
     "AzureFileShareAccessType": {
@@ -5182,7 +5164,7 @@
     "ManagedIdentityResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "The ARM resource ID of the managed identity.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -5231,6 +5213,27 @@
         }
       }
     },
+    "ManagedVirtualNodePoolListResult": {
+      "type": "object",
+      "description": "The response of a ManagedVirtualNodePool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedVirtualNodePool items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedVirtualNodePool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ManagedVirtualNodePoolPatchProperties": {
       "type": "object",
       "description": "Updatable resource-specific properties for `ManagedVirtualNodePool` PATCH.",
@@ -5254,7 +5257,7 @@
       "description": "Properties of a managed virtual node pool.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ManagedVirtualNodePoolProvisioningState",
           "description": "The status of the last provisioning operation on the resource.",
           "readOnly": true
         },
@@ -5329,26 +5332,53 @@
         "aiAgentGroupResourceId"
       ]
     },
-    "ManagedVirtualNodePoolListResult": {
-      "type": "object",
-      "description": "The response of a ManagedVirtualNodePool list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ManagedVirtualNodePool items on this page",
-          "items": {
-            "$ref": "#/definitions/ManagedVirtualNodePool"
+    "ManagedVirtualNodePoolProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a ManagedVirtualNodePool resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedVirtualNodePoolProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning request was accepted but not yet started."
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
+        ]
+      }
     },
     "ManagedVirtualNodePoolUpdate": {
       "type": "object",
@@ -5918,18 +5948,6 @@
         "requests"
       ]
     },
-    "AiAgentGroupResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "The ARM resource ID of the AiAgentGroup.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.ContainerInstance/aiAgentsGroups"
-          }
-        ]
-      }
-    },
     "Scheme": {
       "type": "string",
       "description": "The scheme.",
@@ -6061,18 +6079,6 @@
         }
       }
     },
-    "SubnetResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "The ARM resource ID of the subnet.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.Network/virtualNetworks/subnets"
-          }
-        ]
-      }
-    },
     "SubnetReference": {
       "type": "object",
       "description": "A reference to a subnet resource.",
@@ -6093,6 +6099,18 @@
       "required": [
         "id"
       ]
+    },
+    "SubnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
     },
     "UpdateProfile": {
       "type": "object",
