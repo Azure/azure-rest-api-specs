@@ -72,7 +72,7 @@ interface BastionHosts {
   >;
 
   /**
-   * Updates the BastionHost resource
+   * Updates Tags for BastionHost resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_05_01)
@@ -228,7 +228,7 @@ interface BastionHosts {
 
 @@doc(
   BastionHosts.update::parameters.properties,
-  "Parameters supplied to update the BastionHost resource."
+  "Parameters supplied to update BastionHost tags."
 );
 @@doc(
   BastionHosts.putBastionShareableLink::parameters.body,
