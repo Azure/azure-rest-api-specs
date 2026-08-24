@@ -1,0 +1,34 @@
+name: SDK Autogen
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  sdk-autogen:
+    if: >
+      github.event.issue.pull_request != null &&
+      (github.event.comment.body == '/sdk-autogen' ||
+       startsWith(github.event.comment.body, '/sdk-autogen '))
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+          persist-credentials: false
+
+      - name: Create and assign SDK regeneration issue
+        id: create-issue
+        uses: actions/github-script@v8
+        with:
+          # Cross-repository issue creation and Copilot assignment require a user token.
+          github-token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          script: |
+            const { runSdkAutogen } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-autogen.js');
+            return await runSdkAutogen({ github, context, core });
