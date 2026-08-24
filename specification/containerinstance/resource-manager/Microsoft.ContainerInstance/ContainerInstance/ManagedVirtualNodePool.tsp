@@ -260,13 +260,19 @@ interface ManagedVirtualNodePools {
   >;
 }
 
-@@doc(ManagedVirtualNodePool.name, "The name of the managed virtual node pool.");
-@@doc(ManagedVirtualNodePool.properties,
+@@doc(
+  ManagedVirtualNodePool.name,
+  "The name of the managed virtual node pool."
+);
+@@doc(
+  ManagedVirtualNodePool.properties,
   "The properties of the managed virtual node pool."
 );
-@@doc(ManagedVirtualNodePools.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedVirtualNodePools.createOrUpdate::parameters.resource,
   "The managed virtual node pool to create or update."
 );
-@@doc(ManagedVirtualNodePools.update::parameters.properties,
+@@doc(
+  ManagedVirtualNodePools.update::parameters.properties,
   "The managed virtual node pool patch object."
 );
