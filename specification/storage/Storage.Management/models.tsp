@@ -1169,36 +1169,6 @@ union StorageConnectorDataSourceType {
   Azure_DataShare: "Azure_DataShare",
 
   /**
-   * NetApp ONTAP data source type.
-   */
-  @added(Versions.v2026_09_01)
-  NetAppOntap: "NetAppOntap",
-
-  /**
-   * Azure NetApp Files data source type.
-   */
-  @added(Versions.v2026_09_01)
-  AzureNetAppFiles: "AzureNetAppFiles",
-
-  /**
-   * Dell OneFS data source type.
-   */
-  @added(Versions.v2026_09_01)
-  DellOneFs: "DellOneFs",
-
-  /**
-   * AWS S3 data source type.
-   */
-  @added(Versions.v2026_09_01)
-  AwsS3: "AwsS3",
-
-  /**
-   * S3-compatible data source type.
-   */
-  @added(Versions.v2026_09_01)
-  S3Compatible: "S3Compatible",
-
-  /**
    * Azure DataShare data source type.
    */
   @added(Versions.v2026_09_01)
