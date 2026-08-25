@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./ApiManagementGatewayResource.tsp";
+import "./AIGatewayResource.tsp";
 import "./ApiContract.tsp";
 import "./ApiReleaseContract.tsp";
 import "./OperationContract.tsp";
@@ -102,8 +103,13 @@ enum Versions {
   /**
    * The 2025-09-01-preview API version.
    */
-  @previewVersion
   v2025_09_01_preview: "2025-09-01-preview",
+
+  /**
+   * The 2026-09-01-preview API version.
+   */
+  @previewVersion
+  v2026_09_01_preview: "2026-09-01-preview",
 }
 
 @armResourceOperations(#{ omitTags: true })

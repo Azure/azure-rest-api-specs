@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default-workspace",
+    "modelProviderName": "foundry-provider",
+    "resource": {
+      "properties": {
+        "kind": "Foundry",
+        "displayName": "Foundry provider",
+        "foundry": {
+          "endpoint": "https://example-foundry.services.ai.azure.com",
+          "resourceIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account"
+          ],
+          "authentication": {
+            "kind": "ManagedIdentity"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default-workspace/modelProviders/foundry-provider",
+        "name": "foundry-provider",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders",
+        "etag": "W/\"1\"",
+        "properties": {
+          "kind": "Foundry",
+          "displayName": "Foundry provider",
+          "foundry": {
+            "endpoint": "https://example-foundry.services.ai.azure.com",
+            "resourceIds": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account"
+            ],
+            "authentication": {
+              "kind": "ManagedIdentity"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default-workspace/modelProviders/foundry-provider",
+        "name": "foundry-provider",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders",
+        "etag": "W/\"1\"",
+        "properties": {
+          "kind": "Foundry",
+          "displayName": "Foundry provider",
+          "foundry": {
+            "endpoint": "https://example-foundry.services.ai.azure.com",
+            "resourceIds": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account"
+            ],
+            "authentication": {
+              "kind": "ManagedIdentity"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayModelProviderResources_CreateOrUpdate",
+  "title": "Create a Foundry model provider"
+}
