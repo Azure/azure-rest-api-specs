@@ -44,17 +44,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@alternateType(
-  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScope.id,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  Microsoft.KubernetesConfiguration.PrivateEndpointConnection.id,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  Microsoft.KubernetesConfiguration.PrivateLinkResource.id,
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
