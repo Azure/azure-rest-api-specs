@@ -49,7 +49,7 @@ jobs:
         ((github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
          (github.event.label.name == 'Approved-Suppression' ||
           github.event.label.name == 'ARMAutoSignedOff-Test' ||
-          github.event.label.name == 'ARMReviewerSignoffRequired' ||
+          github.event.label.name == 'ARMManualSignoffRequired' ||
           github.event.label.name == 'ARMReview' ||
           github.event.label.name == 'NotReadyForARMReview' ||
           github.event.label.name == 'SuppressionReviewRequired'))))
@@ -72,12 +72,12 @@ jobs:
             .github
 
       - id: get-label-action
-        name: ARM Universal Auto SignOff - Status
+        name: ARM Universal Auto SignOff
         uses: actions/github-script@v8
         with:
           script: |
             const { default: getLabelAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-universal-auto-signoff-status.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-universal-auto-signoff.js');
             return await getLabelAction({ github, context, core });
 
       # Pilot mode owns only the test label; it never changes ARMSignedOff.

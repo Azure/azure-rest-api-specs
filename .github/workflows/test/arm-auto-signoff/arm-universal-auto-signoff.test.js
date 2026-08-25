@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { CommitStatusState } from "../../../shared/src/github.js";
 import { ArmAutoSignoffLabel } from "../../src/arm-auto-signoff/arm-auto-signoff-labels.js";
-import { getLabelActionImpl } from "../../src/arm-auto-signoff/arm-universal-auto-signoff-status.js";
+import { getLabelActionImpl } from "../../src/arm-auto-signoff/arm-universal-auto-signoff.js";
 import { LabelAction } from "../../src/label.js";
 import { createMockCore, createMockGithub as createMockGithubBase } from "../mocks.js";
 
@@ -78,11 +78,11 @@ describe("getLabelActionImpl", () => {
     expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.None);
   });
 
-  it("removes the pilot label when reviewer signoff is required", async () => {
+  it("removes the pilot label when manual signoff is required", async () => {
     const github = createMockGithub({
       labelNames: [
         "ARMReview",
-        ArmAutoSignoffLabel.ArmReviewerSignoffRequired,
+        ArmAutoSignoffLabel.ArmManualSignoffRequired,
         ArmAutoSignoffLabel.ArmAutoSignedOffTest,
       ],
     });

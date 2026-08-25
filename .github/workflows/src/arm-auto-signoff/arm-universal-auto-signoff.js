@@ -125,7 +125,7 @@ async function getDesiredLabelAction({
   const labelsAllowSignoff =
     labelNames.includes("ARMReview") &&
     !labelNames.includes("NotReadyForARMReview") &&
-    !labelNames.includes(ArmAutoSignoffLabel.ArmReviewerSignoffRequired) &&
+    !labelNames.includes(ArmAutoSignoffLabel.ArmManualSignoffRequired) &&
     (!labelNames.includes("SuppressionReviewRequired") ||
       labelNames.includes("Approved-Suppression"));
 
