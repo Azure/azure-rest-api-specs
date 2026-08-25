@@ -793,6 +793,7 @@ model BatchErrorDetail {
 }
 
 @doc("The result of a listing the usage metrics for an Account.")
+@removed(Versions.v2026_08_01)
 model BatchPoolListUsageMetricsResult {
   @doc("The Pool usage metrics data.")
   @pageItems
@@ -805,6 +806,7 @@ model BatchPoolListUsageMetricsResult {
 }
 
 @doc("Usage metrics for a Pool across an aggregation interval.")
+@removed(Versions.v2026_08_01)
 model BatchPoolUsageMetrics {
   @doc("The ID of the Pool whose metrics are aggregated in this entry.")
   poolId: string;
