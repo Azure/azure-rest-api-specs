@@ -1,5 +1,6 @@
 import "../openai/responses/models.tsp";
 import "../common/servicepatterns.tsp";
+import "../skills/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -13,7 +14,8 @@ const AllConditionalAgentDefinitionPreviews = #{
     AgentDefinitionOptInKeys.external_agents_v1_preview,
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     AgentDefinitionOptInKeys.draft_agents_v1_preview,
-    AgentDefinitionOptInKeys.digital_worker_v1_preview
+    AgentDefinitionOptInKeys.digital_worker_v1_preview,
+    AgentDefinitionOptInKeys.github_copilot_v1_preview
   ],
 };
 
@@ -344,6 +346,9 @@ model PromptAgentDefinition extends AgentDefinition {
   @doc("The model deployment to use for this agent.")
   `model`: string;
 
+  @doc("The managed runtime and agent loop used to execute this prompt agent.")
+  harness?: AgentHarness;
+
   @doc("A system (or developer) message inserted into the model's context.")
   instructions?: string | null;
 
@@ -388,6 +393,84 @@ model PromptAgentDefinition extends AgentDefinition {
 
   @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
   structured_inputs?: Record<StructuredInputDefinition>;
+}
+
+@doc("A managed runtime and agent loop used to execute a prompt agent.")
+@discriminator("type")
+model AgentHarness {
+  @doc("The type of managed harness.")
+  type: string;
+}
+
+@doc("The GitHub Copilot managed harness for prompt agents.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+)
+model GitHubCopilotHarness extends AgentHarness {
+  @doc("The type of managed harness. Always `github_copilot_preview`.")
+  type: "github_copilot_preview";
+
+  @doc("The Foundry skills to provision into the managed harness environment.")
+  skills?: SkillReference[];
+
+  @doc("The managed compute environment configuration for the harness.")
+  environment?: HarnessEnvironment;
+
+  @doc("Controls access to customer-configurable GitHub Copilot built-in capabilities.")
+  builtin_capabilities?: BuiltInCapabilitiesConfiguration;
+}
+
+@doc("A reference to a versioned Foundry skill.")
+model SkillReference {
+  @doc("The name of the skill.")
+  name: SkillName;
+
+  @doc("The skill version. If omitted, the current default version is resolved and pinned when the agent version is created.")
+  version?: string;
+}
+
+@doc("Managed compute environment settings for a harness.")
+model HarnessEnvironment {
+  @doc("The CPU allocated to the harness environment. CPU and memory must be specified together.")
+  @example("1")
+  cpu?: string;
+
+  @doc("The memory allocated to the harness environment. CPU and memory must be specified together.")
+  @example("2Gi")
+  memory?: string;
+
+  @doc("The number of seconds without agent activity before the harness environment is suspended.")
+  idle_timeout_seconds?: int32;
+}
+
+@doc("Configuration that allows or denies GitHub Copilot built-in capabilities.")
+model BuiltInCapabilitiesConfiguration {
+  @doc("The built-in capabilities that may be used. If omitted, all capabilities permitted by service and organizational policy are allowed.")
+  allowed?: BuiltInCapability[];
+
+  @doc("The built-in capabilities that may not be used. Denied capabilities take precedence over allowed capabilities.")
+  denied?: BuiltInCapability[];
+}
+
+@doc("A customer-configurable GitHub Copilot built-in capability.")
+union BuiltInCapability {
+  string,
+
+  @doc("Read and search files in the harness workspace.")
+  filesystem_read: "filesystem_read",
+
+  @doc("Create and modify files in the harness workspace.")
+  filesystem_write: "filesystem_write",
+
+  @doc("Execute operating-system commands.")
+  shell: "shell",
+
+  @doc("Fetch content and search external network resources.")
+  web: "web",
+
+  @doc("Delegate work to additional agents.")
+  subagents: "subagents",
 }
 
 /**

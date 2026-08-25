@@ -86,13 +86,14 @@ op FoundryDataPlaneOperation<
 
 // ---- Feature opt-in keys & preview headers ----
 
-/** Feature opt-in keys for agent definition operations supporting hosted or workflow agents. */
+/** Feature opt-in keys for agent definition operations supporting conditional preview features. */
 union AgentDefinitionOptInKeys {
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
   draft_agents_v1_preview: "DraftAgents=V1Preview",
   voice_agents_v1_preview: "VoiceAgents=V1Preview",
   digital_worker_v1_preview: "DigitalWorker=V1Preview",
+  github_copilot_v1_preview: "GitHubCopilot=V1Preview",
 
   @removed(Versions.v1)
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
