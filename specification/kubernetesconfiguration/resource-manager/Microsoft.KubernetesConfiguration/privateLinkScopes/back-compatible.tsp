@@ -6,12 +6,12 @@ using Microsoft.KubernetesConfiguration;
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.get,
   "PrivateLinkScopes",
-  "!java"
+  "!java,!csharp"
 );
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.createOrUpdate,
   "PrivateLinkScopes",
-  "!java"
+  "!java,!csharp"
 );
 @@clientName(
   KubernetesConfigurationPrivateLinkScopes.createOrUpdate::parameters.resource,
@@ -20,7 +20,7 @@ using Microsoft.KubernetesConfiguration;
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.updateTags,
   "PrivateLinkScopes",
-  "!java"
+  "!java,!csharp"
 );
 @@clientName(
   KubernetesConfigurationPrivateLinkScopes.updateTags::parameters.properties,
@@ -30,17 +30,17 @@ using Microsoft.KubernetesConfiguration;
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.delete,
   "PrivateLinkScopes",
-  "!java"
+  "!java,!csharp"
 );
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.listByResourceGroup,
   "PrivateLinkScopes",
-  "!java"
+  "!java,!csharp"
 );
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.list,
   "PrivateLinkScopes",
-  "!java"
+  "!java,!csharp"
 );
 
 @@clientName(

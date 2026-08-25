@@ -4,6 +4,11 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(
+  Microsoft.KubernetesConfiguration.ProvisioningState,
+  "KubernetesConfigurationPrivateLinkScopeProvisioningState",
+  "csharp"
+);
+@@clientName(
   Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationPrivateLinkScopesMgmtClient",
   "python"
