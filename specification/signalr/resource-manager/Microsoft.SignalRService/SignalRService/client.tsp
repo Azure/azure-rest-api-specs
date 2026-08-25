@@ -388,7 +388,16 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   "SignalRClientConnectionCountRule",
   "csharp"
 );
-@@clientName(IPRule, "SignalRIPRule", "csharp");
+@@clientName(
+  IPRule,
+  Azure.ClientGenerator.Core.exact("SignalRIpRule"),
+  "csharp"
+);
+@@clientName(
+  SignalRNetworkACLs.ipRules,
+  Azure.ClientGenerator.Core.exact("IpRules"),
+  "csharp"
+);
 @@clientName(RouteSettings, "SignalRRouteSettings", "csharp");
 @@clientName(ServerlessSettings, "SignalRServerlessSettings", "csharp");
 @@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
