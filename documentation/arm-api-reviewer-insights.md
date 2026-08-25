@@ -103,33 +103,53 @@ outcome, and it gives the author early confidence rather than a wait.
 
 ### By severity
 
-| Severity   | Findings | Share |                      |
-| ---------- | -------: | ----: | -------------------- |
-| Blocking   |      472 | 23.3% | ███████████          |
-| Warning    |      864 | 42.7% | ████████████████████ |
-| Suggestion |      688 | 34.0% | ████████████████     |
+```mermaid
+pie showData
+    title Findings by severity
+    "Warning" : 864
+    "Suggestion" : 688
+    "Blocking" : 472
+```
 
 Roughly one finding in four is blocking. The agent is not flooding authors with
 must-fix items; most feedback is advisory.
 
 ### By issue type
 
-| Issue type                     | Findings | Share |                      |
-| ------------------------------ | -------: | ----: | -------------------- |
-| Schema and property design     |      502 | 24.8% | ████████████████████ |
-| Documentation and examples     |      221 | 10.9% | █████████            |
-| Resource modeling              |      193 |  9.5% | ████████             |
-| Suppressions and tooling       |      173 |  8.5% | ███████              |
-| Long-running operations        |      162 |  8.0% | ██████               |
-| Operations and HTTP semantics  |      156 |  7.7% | ██████               |
-| Versioning and compatibility   |      154 |  7.6% | ██████               |
-| Naming, enums, and identifiers |       80 |  4.0% | ███                  |
-| Security and secrets           |       68 |  3.4% | ███                  |
-| SDK and client impact          |       20 |  1.0% | █                    |
-| Review readiness and CI        |        4 |  0.2% | █                    |
+| Issue type                     | Findings | Share |
+| ------------------------------ | -------: | ----: |
+| Schema and property design     |      502 | 24.8% |
+| Documentation and examples     |      221 | 10.9% |
+| Resource modeling              |      193 |  9.5% |
+| Suppressions and tooling       |      173 |  8.5% |
+| Long-running operations        |      162 |  8.0% |
+| Operations and HTTP semantics  |      156 |  7.7% |
+| Versioning and compatibility   |      154 |  7.6% |
+| Naming, enums, and identifiers |       80 |  4.0% |
+| Security and secrets           |       68 |  3.4% |
+| SDK and client impact          |       20 |  1.0% |
+| Review readiness and CI        |        4 |  0.2% |
 
 Categories cover 86 percent of findings. The remainder are left uncategorized
 rather than assigned by guesswork.
+
+### An example of each
+
+Every category below links to a real finding on a public pull request.
+
+| Issue type                     | Example                                                                                      | What the agent found                                                                                                                                           |
+| ------------------------------ | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Schema and property design     | [PR 42753](https://github.com/Azure/azure-rest-api-specs/pull/42753#discussion_r3313920968)  | `publisherType` was typed as a plain string while its description listed a closed set of values. Modelled as an extensible enum so SDKs generate typed values. |
+| Documentation and examples     | [PR 43018](https://github.com/Azure/azure-rest-api-specs/pull/43018#discussion_r3384342272)  | An example placed `properties` beside `body` instead of inside it, so the payload did not match the response schema it claimed to demonstrate.                 |
+| Resource modeling              | [PR 44986](https://github.com/Azure/azure-rest-api-specs/pull/44986#discussion_r3820618459)  | A new `managedBy` property was declared inside the `properties` bag. That name is reserved for the ARM resource envelope.                                      |
+| Suppressions and tooling       | [PR 45470](https://github.com/Azure/azure-rest-api-specs/pull/45470#issuecomment-5398120882) | Six suppressions still carried the placeholder reason `FIXME: Update justification`, silencing rules with no stated rationale.                                 |
+| Long-running operations        | [PR 45458](https://github.com/Azure/azure-rest-api-specs/pull/45458#discussion_r3778300069)  | An asynchronous PATCH returned only `Location` and `Retry-After` on its 202. ARM also requires `Azure-AsyncOperation` so clients can poll terminal state.      |
+| Operations and HTTP semantics  | [PR 45194](https://github.com/Azure/azure-rest-api-specs/pull/45194#discussion_r3806540883)  | A PUT accepted `ManifestPutContent` but returned `ManifestInfo`. PUT request and response must use the same model.                                             |
+| Versioning and compatibility   | [PR 45637](https://github.com/Azure/azure-rest-api-specs/pull/45637#discussion_r3845237370)  | A published property was renamed and retyped from enum to boolean inside an existing stable version, breaking shipped clients.                                 |
+| Naming, enums, and identifiers | [PR 41963](https://github.com/Azure/azure-rest-api-specs/pull/41963#discussion_r3254892983)  | A property named `id` on a nested model collided with the ARM resource identifier convention, making response payloads ambiguous.                              |
+| Security and secrets           | [PR 44499](https://github.com/Azure/azure-rest-api-specs/pull/44499#discussion_r3739613255)  | Three properties returning SAS URIs, which are bearer credentials, were not marked `x-ms-secret`, so tooling would log and cache them.                         |
+| SDK and client impact          | [PR 44988](https://github.com/Azure/azure-rest-api-specs/pull/44988#discussion_r3707965989)  | `x-ms-client-flatten` was applied to a newly introduced resource type. It is retained only for backward compatibility and is not used in new specifications.   |
+| Review readiness and CI        | [PR 43301](https://github.com/Azure/azure-rest-api-specs/pull/43301#discussion_r3259888147)  | A newly added specification file was missing its trailing newline, against repository convention.                                                              |
 
 ### Contract risk
 
