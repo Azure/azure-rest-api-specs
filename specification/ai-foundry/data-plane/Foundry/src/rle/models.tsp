@@ -325,7 +325,7 @@ model RLEStepResult {
   @doc("Gymnasium info payload.")
   info?: RLEJsonObject;
 
-  @doc("Legacy metadata payload. The SDK maps it to `info` when `info` is absent.")
+  @doc("Legacy metadata payload.")
   metadata?: RLEJsonObject;
 }
 

@@ -8,6 +8,7 @@ tags:
   - name: Voice Agent Versions
   - name: AgentServer Task Storage
   - name: EvaluationSuiteGenerationJobs
+  - name: ReinforcementLearning
   - name: Responses Root
     description: Responses
   - name: Responses
@@ -38470,6 +38471,1035 @@ paths:
             schema:
               $ref: '#/components/schemas/RedTeam'
         description: Redteam to be run
+  /rl_environments:
+    post:
+      operationId: RLEnvironments_createEnvironment
+      description: Create a new hosted RLE environment, or a new version of an existing one.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEnvironment'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRLEnvironmentRequest'
+        description: The environment to create.
+    get:
+      operationId: RLEnvironments_listEnvironments
+      description: List all hosted RLE environments in the project.
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: Optional environment name filter. When set, returns at most a single matching environment.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of environments to return. Defaults to 100; valid range is [1, 100].
+          schema:
+            type: integer
+            format: int32
+          explode: false
+        - name: continuationToken
+          in: query
+          required: false
+          description: Opaque continuation token from a previous page's `nextContinuationToken`. Omit to fetch the first page.
+          schema:
+            type: string
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order for the page. Defaults to descending by creation time.
+          schema:
+            $ref: '#/components/schemas/RLEPaginationOrder'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRLEnvironmentsResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups:
+    post:
+      operationId: RLEInstanceGroups_createInstanceGroup
+      description: Create a new RLE instance group under the given environment version. The service mints `id`.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment to lease instances from.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment to lease instances from.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEInstanceGroup'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRLEInstanceGroupRequest'
+        description: The instance group to create.
+    get:
+      operationId: RLEInstanceGroups_listInstanceGroups
+      description: List RLE instance groups under the given environment version.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of instance groups to return. Defaults to 100; valid range is [1, 100].
+          schema:
+            type: integer
+            format: int32
+          explode: false
+        - name: continuationToken
+          in: query
+          required: false
+          description: Opaque continuation token from a previous page's `nextContinuationToken`. Omit to fetch the first page.
+          schema:
+            type: string
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order for the page. Defaults to descending by creation time.
+          schema:
+            $ref: '#/components/schemas/RLEPaginationOrder'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRLEInstanceGroupsResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}:
+    get:
+      operationId: RLEInstanceGroups_getInstanceGroup
+      description: Get an RLE instance group by identifier.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEInstanceGroup'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+    delete:
+      operationId: RLEInstanceGroups_deleteInstanceGroup
+      description: Delete an RLE instance group. All instances owned by the group are released.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances:
+    post:
+      operationId: RLEInstances_createInstance
+      description: |-
+        Lease a new RLE instance under the instance group. Returns `201` when the instance
+        is ready, `202` when it is still provisioning, or `429` (with `Retry-After`) when
+        the group is at its active-instance limit.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier to lease the instance under.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEInstance'
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEInstance'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances/{instanceId}:
+    get:
+      operationId: RLEInstances_getInstance
+      description: Get an RLE instance by identifier.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier the instance belongs to.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEInstance'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+    delete:
+      operationId: RLEInstances_deleteInstance
+      description: 'Delete an RLE instance: the backing runtime is stopped and the instance is removed.'
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier the instance belongs to.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances/{instanceId}/openenv/health:
+    get:
+      operationId: RLEInstanceRuntime_health
+      description: Return environment health details.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier the instance belongs to.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                unevaluatedProperties: {}
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances/{instanceId}/openenv/metadata:
+    get:
+      operationId: RLEInstanceRuntime_getMetadata
+      description: Return environment metadata.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier the instance belongs to.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                unevaluatedProperties: {}
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances/{instanceId}/openenv/reset:
+    post:
+      operationId: RLEInstanceRuntime_reset
+      description: Start a new episode and return the initial observation.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier the instance belongs to.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEStepResult'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RLEResetRequest'
+        description: Reset request body.
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances/{instanceId}/openenv/schema:
+    get:
+      operationId: RLEInstanceRuntime_schema
+      description: Return environment-provided action and observation schemas.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier the instance belongs to.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                unevaluatedProperties: {}
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances/{instanceId}/openenv/state:
+    get:
+      operationId: RLEInstanceRuntime_state
+      description: Return the current environment state.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier the instance belongs to.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEnvironmentState'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{environmentName}/versions/{environmentVersion}/instance_groups/{instanceGroupId}/instances/{instanceId}/openenv/step:
+    post:
+      operationId: RLEInstanceRuntime_step
+      description: Apply an action and return the resulting transition.
+      parameters:
+        - name: environmentName
+          in: path
+          required: true
+          description: Name of the registered RLE environment.
+          schema:
+            type: string
+        - name: environmentVersion
+          in: path
+          required: true
+          description: Version of the registered RLE environment.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Instance group identifier the instance belongs to.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEStepResult'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RLEStepRequest'
+        description: Step request body.
+  /rl_environments/{name}:
+    get:
+      operationId: RLEnvironments_getEnvironment
+      description: Get a hosted RLE environment by name. Returns the latest version of the environment.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEnvironment'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{name}/versions:
+    get:
+      operationId: RLEnvironments_listRLEnvironmentVersions
+      description: List historical versions of a hosted RLE environment.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of versions to return. Defaults to 100; valid range is [1, 100].
+          schema:
+            type: integer
+            format: int32
+          explode: false
+        - name: continuationToken
+          in: query
+          required: false
+          description: Opaque continuation token from a previous page's `nextContinuationToken`. Omit to fetch the first page.
+          schema:
+            type: string
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order for the page. Defaults to ascending by version.
+          schema:
+            $ref: '#/components/schemas/RLEPaginationOrder'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRLEnvironmentVersionsResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+  /rl_environments/{name}/versions/{version}:
+    get:
+      operationId: RLEnvironments_getEnvironmentVersion
+      description: Get a specific version of a hosted RLE environment by name and version.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: Environment version identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RLEnvironment'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
+    delete:
+      operationId: RLEnvironments_deleteEnvironmentVersion
+      description: Delete a specific version of a hosted RLE environment.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: Environment version identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - ReinforcementLearning
   /routines:
     get:
       operationId: listRoutines
@@ -45914,6 +46944,37 @@ components:
             - Must start and end with alphanumeric characters,
             - Can contain hyphens in the middle
             - Must not exceed 63 characters.
+    CreateRLEInstanceGroupRequest:
+      type: object
+      properties:
+        maxActiveInstances:
+          type: integer
+          format: int32
+          description: Maximum number of concurrently-active instances the group may hold. Optional; defaults to 1 when omitted.
+        metadata:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Optional free-form correlation/tag key-values. `external_job_id` is a reserved well-known key for the upstream Training API job / AML run.
+        resourceProfile:
+          $ref: '#/components/schemas/RLEInstanceGroupResourceProfile'
+          description: Optional forward-compatible resource allocation hints. Recorded only in this version.
+      description: Request body for creating an RLE instance group. The environment name and version are supplied in the request URI.
+    CreateRLEnvironmentRequest:
+      type: object
+      required:
+        - acrImagePath
+      properties:
+        name:
+          type: string
+          description: Optional caller-provided display name for the environment.
+        acrImagePath:
+          type: string
+          description: Container image reference (Azure Container Registry path) that backs the environment.
+        versionBump:
+          $ref: '#/components/schemas/RLEnvironmentVersionBump'
+          description: Optional semantic-version bump to apply when a new version of an existing environment is created. Defaults to a patch bump when omitted.
+      description: Request body for creating a hosted RLE environment.
     CreateSkillVersionFromFilesBody:
       type: object
       properties:
@@ -50230,6 +51291,48 @@ components:
             - failed
             - cancelled
       description: Extensible status values shared by Foundry jobs.
+    ListRLEInstanceGroupsResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RLEInstanceGroup'
+          description: Instance groups on this page.
+        nextContinuationToken:
+          type: string
+          description: Opaque token for fetching the next page. Absent when there are no more results.
+      description: A page of RLE instance groups, with an opaque continuation token for fetching the next page.
+    ListRLEnvironmentVersionsResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RLEnvironment'
+          description: Environment versions on this page. Each item is a full environment snapshot for a specific version.
+        nextContinuationToken:
+          type: string
+          description: Opaque token for fetching the next page. Absent when there are no more results.
+      description: A page of environment versions, with an opaque continuation token for fetching the next page.
+    ListRLEnvironmentsResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RLEnvironment'
+          description: Environments on this page.
+        nextContinuationToken:
+          type: string
+          description: Opaque token for fetching the next page. Absent when there are no more results.
+      description: A page of hosted RLE environments, with an opaque continuation token for fetching the next page.
     LoraConfig:
       type: object
       properties:
@@ -79342,6 +80445,270 @@ components:
           type: string
           description: The version string for the protocol, e.g. 'v0.1.1'.
       description: A record mapping for a single protocol and its version.
+    RLEInstance:
+      type: object
+      required:
+        - instanceId
+        - instanceGroupId
+        - status
+        - createdAtUtc
+        - updatedAtUtc
+      properties:
+        instanceId:
+          type: string
+          description: Instance identifier, assigned by the service. Globally unique.
+          readOnly: true
+        instanceGroupId:
+          type: string
+          description: Identifier of the owning RLE instance group.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/RLEInstanceStatus'
+          description: Runtime status of the instance.
+          readOnly: true
+        baseUrl:
+          type: string
+          description: Base URL clients use to reach the instance's data-plane (OpenEnv) endpoints, when running.
+          readOnly: true
+        error:
+          type: string
+          description: Failure detail when the instance enters the `Failed` state.
+          readOnly: true
+        createdAtUtc:
+          type: string
+          format: date-time
+          description: Timestamp the instance was created, in UTC.
+          readOnly: true
+        updatedAtUtc:
+          type: string
+          format: date-time
+          description: Timestamp the instance was last updated, in UTC.
+          readOnly: true
+      description: |-
+        A leased runtime unit owned by an RLE instance group (replaces the former
+        "sandbox" concept). Combines the owning instance-group identity, the runtime
+        identity, runtime status, and the base URL used to reach its data-plane
+        (OpenEnv) endpoints.
+    RLEInstanceGroup:
+      type: object
+      required:
+        - id
+        - projectId
+        - environmentName
+        - environmentVersion
+        - maxActiveInstances
+        - createdAtUtc
+        - updatedAtUtc
+      properties:
+        id:
+          type: string
+          description: Instance group identifier, assigned by the service.
+          readOnly: true
+        projectId:
+          type: string
+          description: Foundry project identifier that owns this instance group.
+          readOnly: true
+        environmentName:
+          type: string
+          description: Name of the registered RLE environment the group's instances are leased from.
+          readOnly: true
+        environmentVersion:
+          type: string
+          description: Version of the registered RLE environment the group's instances are leased from.
+          readOnly: true
+        maxActiveInstances:
+          type: integer
+          format: int32
+          description: Maximum number of concurrently-active instances the group may hold. Defaults to 1 when omitted on create.
+          readOnly: true
+        metadata:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: |-
+            Free-form correlation/tag key-values, persisted opaquely by RLE and echoed on
+            responses. `external_job_id` is a reserved well-known key that carries the
+            upstream Training API job / AML run this group backs.
+        resourceProfile:
+          $ref: '#/components/schemas/RLEInstanceGroupResourceProfile'
+          description: Forward-compatible resource allocation hints. Recorded but not scheduled against in this version.
+        createdAtUtc:
+          type: string
+          format: date-time
+          description: Timestamp the instance group was created, in UTC.
+          readOnly: true
+        updatedAtUtc:
+          type: string
+          format: date-time
+          description: Timestamp the instance group was last updated, in UTC.
+          readOnly: true
+      description: |-
+        A first-class group of RLE instances leased for a single reinforcement-learning
+        training job. Created under a specific version of a registered environment; the
+        environment name and version are carried in the request URI.
+    RLEInstanceGroupResourceProfile:
+      type: object
+      properties:
+        cpu:
+          type: string
+          description: Requested CPU allocation hint, encoded as a string (e.g. "1", "2", "500m").
+        memory:
+          type: string
+          description: Requested memory allocation hint, for example "2Gi".
+        disk:
+          type: string
+          description: Requested disk allocation hint, for example "10Gi".
+      description: Forward-compatible resource allocation hints for an instance group. Recorded but not scheduled against in this version.
+    RLEInstanceStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Creating
+            - Running
+            - Stopped
+            - Failed
+            - Deleted
+      description: Runtime status of an RLE instance, as observed by RLE from the backing runtime.
+    RLEPaginationOrder:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - asc
+            - desc
+      description: Sort order for continuation-token pagination.
+    RLEResetRequest:
+      type: object
+      properties:
+        seed:
+          type: integer
+          format: int32
+          description: Optional deterministic seed for the next episode.
+        episodeId:
+          type: string
+          description: Optional caller-provided episode identifier.
+      description: Request body for starting or restarting an RLE environment episode.
+    RLEStepRequest:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          type: object
+          unevaluatedProperties: {}
+          description: Environment-specific action payload.
+      description: Request body for applying an action to the current RLE episode.
+    RLEStepResult:
+      type: object
+      properties:
+        observation:
+          type: object
+          unevaluatedProperties: {}
+          description: Environment-specific observation payload.
+        reward:
+          type: number
+          format: double
+          description: Reward for the transition, when the environment provides one.
+        terminated:
+          type: boolean
+          description: True when the episode reached a natural terminal state.
+        truncated:
+          type: boolean
+          description: True when an external limit ended the episode.
+        done:
+          type: boolean
+          description: Legacy single terminal flag. New payloads should prefer `terminated` and `truncated`.
+        info:
+          type: object
+          unevaluatedProperties: {}
+          description: Gymnasium info payload.
+        metadata:
+          type: object
+          unevaluatedProperties: {}
+          description: Legacy metadata payload.
+      description: Outcome returned by RLE `reset` and `step` in the OpenEnv / Gymnasium wire shape.
+    RLEnvironment:
+      type: object
+      required:
+        - id
+        - projectId
+        - name
+        - acrImagePath
+        - version
+        - diskImageConversionStatus
+        - createdAtUtc
+        - updatedAtUtc
+      properties:
+        id:
+          type: string
+          description: Hosted RLE environment identifier, assigned by the service.
+          readOnly: true
+        projectId:
+          type: string
+          description: Foundry project identifier that owns this environment.
+          readOnly: true
+        name:
+          type: string
+          description: Display name for the environment. Assigned by the service when not supplied on create.
+          readOnly: true
+        acrImagePath:
+          type: string
+          description: Container image reference (Azure Container Registry path) that backs the environment.
+          readOnly: true
+        version:
+          type: string
+          description: Latest version identifier for the environment image.
+          readOnly: true
+        diskImageConversionStatus:
+          $ref: '#/components/schemas/RLEnvironmentDiskImageConversionStatus'
+          description: Status of the asynchronous conversion from the ACR container image to a disk image usable by leased instances.
+          readOnly: true
+        diskImageConversionError:
+          type: string
+          description: Error details from the most recent disk image conversion attempt, when `diskImageConversionStatus` is `Failed`.
+          readOnly: true
+        createdAtUtc:
+          type: string
+          format: date-time
+          description: Timestamp the environment was first created, in UTC.
+          readOnly: true
+        updatedAtUtc:
+          type: string
+          format: date-time
+          description: Timestamp the environment was last updated, in UTC.
+          readOnly: true
+      description: A hosted reinforcement-learning environment that instances are leased from.
+    RLEnvironmentDiskImageConversionStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - NotRequested
+            - Pending
+            - Ready
+            - Failed
+      description: Status of the asynchronous ACR image to disk image conversion. Serialized as its string name.
+    RLEnvironmentState:
+      type: object
+      properties:
+        episode_id:
+          type: string
+          description: Current episode identifier, when one is active.
+        step_count:
+          type: integer
+          format: int32
+          description: Number of completed steps in the current episode.
+      description: Snapshot returned by the RLE environment `state` endpoint.
+    RLEnvironmentVersionBump:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Major
+            - Minor
+            - Patch
+      description: Semantic-version component to bump when creating a new version of an existing RLE environment.
     RaiConfig:
       type: object
       required:
@@ -80497,6 +81864,22 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
+    SimulationSeedDataGenerationJobOptions:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - simulation_seed
+          description: The data generation job type, which is SimulationSeed for this model.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobOptions'
+      description: The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     Skill:
       type: object
       required:
@@ -80838,22 +82221,6 @@ components:
           azure_ai_model: '#/components/schemas/AzureAIModelTargetUpdate'
           azure_ai_agent: '#/components/schemas/AzureAIAgentTargetUpdate'
       description: Base class for targets with discriminator support.
-    SimulationSeedDataGenerationJobOptions:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - simulation_seed
-          description: The data generation job type, which is SimulationSeed for this model.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     TaxonomyCategory:
       type: object
       required:
@@ -81372,8 +82739,8 @@ components:
           description: The data generation job type, which is Traces for this model.
         redact_private_content:
           type: boolean
-          default: true
           description: Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.
+          default: true
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with Traces type.

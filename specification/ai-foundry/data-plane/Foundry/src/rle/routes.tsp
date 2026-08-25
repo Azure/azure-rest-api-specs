@@ -245,9 +245,9 @@ interface RLEInstanceGroups {
 interface RLEInstances {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Backend lease: create takes no client body, mints the id, and is non-idempotent, so it is a non-standard collection action rather than a PUT."
   @doc("""
-    Lease a new RLE instance under the instance group. Returns `201` with the new
-    instance, or `429` (with `Retry-After`) when the group is at its active-instance
-    limit.
+    Lease a new RLE instance under the instance group. Returns `201` when the instance
+    is ready, `202` when it is still provisioning, or `429` (with `Retry-After`) when
+    the group is at its active-instance limit.
     """)
   @post
   createInstance is FoundryDataPlaneOperation<
@@ -264,7 +264,7 @@ interface RLEInstances {
       @path
       instanceGroupId: string;
     },
-    ResourceCreatedResponse<RLEInstance>
+    ResourceCreatedOrAcceptedResponse<RLEInstance>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes resource-level operations under a flat route shape."

@@ -92,6 +92,9 @@ alias AssetBase = {
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
   T;
 
+alias ResourceCreatedOrAcceptedResponse<T extends TypeSpec.Reflection.Model> =
+  (TypeSpec.Http.Response<201> & T) | (TypeSpec.Http.Response<202> & T);
+
 alias MetadataPropertyForRequest = {
   /**
    * Set of 16 key-value pairs that can be attached to an object. This can be
