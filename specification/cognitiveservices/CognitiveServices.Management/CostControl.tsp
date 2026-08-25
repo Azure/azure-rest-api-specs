@@ -454,11 +454,9 @@ interface CostControls {
   /**
    * Deletes a cost control.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The synchronous service endpoint returns 200 on successful deletion and does not return 204."
   delete is ArmResourceDeleteSync<
     CostControl,
-    Parameters = CostControlIfMatchHeader,
-    Response = ArmDeletedResponse
+    Parameters = CostControlIfMatchHeader
   >;
 
   /**
