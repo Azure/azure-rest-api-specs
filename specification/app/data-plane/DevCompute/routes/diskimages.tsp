@@ -299,7 +299,9 @@ interface DiskimagesOperations {
   >;
 
   /** Gets the status of an async disk image operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "An explicit operation ID is required to avoid repeating the noun and violating OperationIdNounVerb."
   @summary("Gets the status of an async disk image operation.")
+  @TypeSpec.OpenAPI.operationId("DiskimagesOperations_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/diskimages/operations/{operationId}")
   @get
   getDiskimagesOperations is Foundations.Operation<
