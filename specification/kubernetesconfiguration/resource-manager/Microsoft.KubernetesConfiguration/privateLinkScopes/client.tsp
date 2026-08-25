@@ -23,16 +23,6 @@ using Azure.ClientGenerator.Core;
   "KubernetesConfigurationPrivateLinkResource",
   "csharp"
 );
-@@clientName(
-  Microsoft.KubernetesConfiguration.PrivateEndpointConnections.listByPrivateLinkScope,
-  "GetPrivateEndpointConnectionsByPrivateLinkScope",
-  "csharp"
-);
-@@clientName(
-  Microsoft.KubernetesConfiguration.PrivateLinkResources.listByPrivateLinkScope,
-  "GetPrivateLinkResourcesByPrivateLinkScope",
-  "csharp"
-);
 @@alternateType(
   Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopeProperties.clusterResourceId,
   Azure.Core.armResourceIdentifier,
@@ -46,6 +36,21 @@ using Azure.ClientGenerator.Core;
 @@alternateType(
   Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing C# pageable collection."
+@@Legacy.markAsPageable(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnections.listByPrivateLinkScope,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing C# pageable collection."
+@@Legacy.markAsPageable(
+  Microsoft.KubernetesConfiguration.PrivateLinkResources.listByPrivateLinkScope,
   "csharp"
 );
 @@clientName(
