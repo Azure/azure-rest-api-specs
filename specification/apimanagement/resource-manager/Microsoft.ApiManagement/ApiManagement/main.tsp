@@ -93,7 +93,6 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "ApiManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ApiManagement;
 
 /**
@@ -103,12 +102,14 @@ enum Versions {
   /**
    * The 2025-09-01-preview API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_09_01_preview: "2025-09-01-preview",
 
   /**
    * The 2026-09-01-preview API version.
    */
   @previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_09_01_preview: "2026-09-01-preview",
 }
 

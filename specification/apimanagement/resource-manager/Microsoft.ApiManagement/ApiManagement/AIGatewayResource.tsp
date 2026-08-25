@@ -174,6 +174,23 @@ model AiGatewayWorkspaceProperties {
   provisioningState?: AiGatewayProvisioningState;
 }
 
+/** Properties for updating an AI Gateway workspace. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayWorkspaceUpdateProperties {
+  /** Display name of the workspace. */
+  displayName?: string;
+
+  /** Description of the workspace. */
+  description?: string;
+}
+
+/** Parameters for updating an AI Gateway workspace. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayWorkspaceUpdateParameters {
+  /** Workspace properties to update. */
+  properties?: AiGatewayWorkspaceUpdateProperties;
+}
+
 /** An AI Gateway workspace resource. */
 @added(Versions.v2026_09_01_preview)
 @parentResource(AiGatewayResource)
@@ -243,6 +260,83 @@ model AiGatewayCustomProviderConfiguration {
   authentication: AiGatewayCustomAuthentication;
 }
 
+/** API key credentials for updating an upstream service. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayApiKeyCredentialUpdate {
+  /** Name of the HTTP header that carries the API key. */
+  headerName?: string;
+
+  /** Secret API key value. */
+  @secret
+  value?: string;
+}
+
+/** Foundry authentication settings to update. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayFoundryAuthenticationUpdate {
+  /** Authentication type. */
+  kind?: "ManagedIdentity";
+}
+
+/** Foundry model provider settings to update. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayFoundryProviderConfigurationUpdate {
+  /** Foundry endpoint. */
+  endpoint?: string;
+
+  /** Cognitive Services account resource identifiers available to this provider. */
+  resourceIds?: string[];
+
+  /** Authentication configuration. */
+  authentication?: AiGatewayFoundryAuthenticationUpdate;
+}
+
+/** Custom model provider authentication settings to update. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayCustomAuthenticationUpdate {
+  /** Authentication type. */
+  kind?: "ApiKey";
+
+  /** API key configuration. */
+  apiKey?: AiGatewayApiKeyCredentialUpdate;
+}
+
+/** Custom model provider settings to update. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayCustomProviderConfigurationUpdate {
+  /** Provider base endpoint. */
+  endpoint?: string;
+
+  /** Authentication configuration. */
+  authentication?: AiGatewayCustomAuthenticationUpdate;
+}
+
+/** Properties for updating an AI Gateway model provider. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayModelProviderUpdateProperties {
+  /** Model provider type. */
+  kind?: AiGatewayModelProviderKind;
+
+  /** Display name of the model provider. */
+  displayName?: string;
+
+  /** Description of the model provider. */
+  description?: string;
+
+  /** Foundry configuration. */
+  foundry?: AiGatewayFoundryProviderConfigurationUpdate;
+
+  /** Custom provider configuration. */
+  custom?: AiGatewayCustomProviderConfigurationUpdate;
+}
+
+/** Parameters for updating an AI Gateway model provider. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayModelProviderUpdateParameters {
+  /** Model provider properties to update. */
+  properties?: AiGatewayModelProviderUpdateProperties;
+}
+
 /** Properties of an AI Gateway model provider. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayModelProviderProperties {
@@ -297,11 +391,31 @@ model AiGatewayModelDeployment {
   modelVersion?: string;
 }
 
+/** Deployment details to update on an AI Gateway model. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayModelDeploymentUpdate {
+  /** ARM resource identifier of the provider deployment. */
+  resourceId?: string;
+
+  /** Provider-side model name. */
+  modelName?: string;
+
+  /** Provider-side model version. */
+  modelVersion?: string;
+}
+
 /** A fallback target for a model policy. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayFallbackTarget {
   /** Resource identifier of a model in the same workspace. */
   modelId: string;
+}
+
+/** A fallback target to update on a model policy. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayFallbackTargetUpdate {
+  /** Resource identifier of a model in the same workspace. */
+  modelId?: string;
 }
 
 /** The type of an inline AI Gateway policy. */
@@ -446,6 +560,97 @@ model AiGatewayPolicy {
   maxAgeSeconds?: int32;
 }
 
+/** An inline policy to update on an AI Gateway model or tool server. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayPolicyUpdate {
+  /** Policy type. */
+  type?: AiGatewayPolicyType;
+
+  /** Token count allowed during a token limit period. */
+  count?: int64;
+
+  /** Token limit period. */
+  period?: AiGatewayTokenLimitPeriod;
+
+  /** Key used to partition a token or request rate limit counter. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The counter key selects a public request attribute and is not a credential."
+  counterKey?: string;
+
+  /** Content safety service endpoint. */
+  endpoint?: string;
+
+  /** Content safety service key. */
+  @secret
+  key?: string;
+
+  /** Hate-content severity threshold. */
+  hateSeverity?: AiGatewayContentSafetySeverity;
+
+  /** Violence-content severity threshold. */
+  violenceSeverity?: AiGatewayContentSafetySeverity;
+
+  /** Sexual-content severity threshold. */
+  sexualSeverity?: AiGatewayContentSafetySeverity;
+
+  /** Self-harm-content severity threshold. */
+  selfHarmSeverity?: AiGatewayContentSafetySeverity;
+
+  /** Consecutive failure count that opens a fallback circuit. */
+  threshold?: int32;
+
+  /** Duration for which the fallback circuit remains open. */
+  tripDurationSeconds?: int32;
+
+  /** Ordered fallback model targets. */
+  @identifiers(#[])
+  fallbackTargets?: AiGatewayFallbackTargetUpdate[];
+
+  /** IP filtering action. */
+  action?: AiGatewayIpFilterAction;
+
+  /** CIDR ranges to allow or deny. */
+  cidrRanges?: string[];
+
+  /** Request count allowed during the configured period. */
+  callsPerPeriod?: int64;
+
+  /** Request rate limit period in seconds. */
+  periodSeconds?: int32;
+
+  /** Origins allowed by a CORS policy. */
+  allowedOrigins?: string[];
+
+  /** HTTP methods allowed by a CORS policy. */
+  allowedMethods?: string[];
+
+  /** HTTP headers allowed by a CORS policy. */
+  allowedHeaders?: string[];
+
+  /** Browser preflight cache duration in seconds. */
+  maxAgeSeconds?: int32;
+}
+
+/** Properties for updating an AI Gateway model. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayModelUpdateProperties {
+  /** Description of the model. */
+  description?: string;
+
+  /** Provider deployment details. */
+  deployment?: AiGatewayModelDeploymentUpdate;
+
+  /** Inline policies applied to this model. */
+  @identifiers(#[])
+  policies?: AiGatewayPolicyUpdate[];
+}
+
+/** Parameters for updating an AI Gateway model. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayModelUpdateParameters {
+  /** Model properties to update. */
+  properties?: AiGatewayModelUpdateProperties;
+}
+
 /** Properties of an AI Gateway model. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayModelProperties {
@@ -550,6 +755,91 @@ model AiGatewayToolServerEndpoint {
   credentials: AiGatewayToolServerCredentials;
 }
 
+/** Tool server credentials to update. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayToolServerCredentialsUpdate {
+  /** Credential type. */
+  kind?: AiGatewayToolServerCredentialKind;
+
+  /** API key configuration. */
+  apiKey?: AiGatewayApiKeyCredentialUpdate;
+}
+
+/** MCP URL endpoint settings to update. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayMcpUrlConfigurationUpdate {
+  /** Backend MCP server endpoint. */
+  endpoint?: string;
+
+  /** MCP transport. */
+  transport?: AiGatewayMcpTransport;
+}
+
+/** OpenAPI document source settings to update. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayOpenApiSpecSourceUpdate {
+  /** Source type. */
+  kind?: AiGatewayOpenApiSpecSourceKind;
+
+  /** Base64-encoded OpenAPI document. */
+  contentBase64?: bytes;
+
+  /** URL of the OpenAPI document. */
+  url?: string;
+}
+
+/** OpenAPI-backed MCP endpoint settings to update. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayOpenApiConfigurationUpdate {
+  /** OpenAPI document source. */
+  specSource?: AiGatewayOpenApiSpecSourceUpdate;
+}
+
+/** A tool server endpoint to update. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayToolServerEndpointUpdate {
+  /** Runtime path exposed for this endpoint. */
+  url?: string;
+
+  /** Endpoint type. */
+  kind?: AiGatewayToolServerEndpointKind;
+
+  /** Backend MCP URL configuration. */
+  @clientName("mcpUri", "csharp")
+  mcpUrl?: AiGatewayMcpUrlConfigurationUpdate;
+
+  /** OpenAPI configuration. */
+  openApi?: AiGatewayOpenApiConfigurationUpdate;
+
+  /** Backend credentials. */
+  credentials?: AiGatewayToolServerCredentialsUpdate;
+}
+
+/** Properties for updating an AI Gateway tool server. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayToolServerUpdateProperties {
+  /** Display name of the tool server. */
+  displayName?: string;
+
+  /** Description of the tool server. */
+  description?: string;
+
+  /** Endpoint configurations exposed by this tool server. */
+  @identifiers(#[])
+  endpoints?: AiGatewayToolServerEndpointUpdate[];
+
+  /** Inline policies applied to this tool server. */
+  @identifiers(#[])
+  policies?: AiGatewayPolicyUpdate[];
+}
+
+/** Parameters for updating an AI Gateway tool server. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayToolServerUpdateParameters {
+  /** Tool server properties to update. */
+  properties?: AiGatewayToolServerUpdateProperties;
+}
+
 /** Properties of an AI Gateway tool server. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerProperties {
@@ -615,6 +905,20 @@ model AiGatewayApiKeyProperties {
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
   provisioningState?: AiGatewayProvisioningState;
+}
+
+/** Properties for updating an AI Gateway API key. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayApiKeyUpdateProperties {
+  /** Display name of the key. */
+  displayName?: string;
+}
+
+/** Parameters for updating an AI Gateway API key. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayApiKeyUpdateParameters {
+  /** API key properties to update. */
+  properties?: AiGatewayApiKeyUpdateProperties;
 }
 
 /** An AI Gateway API key resource. */
@@ -734,7 +1038,7 @@ interface AiGatewayWorkspaceResources {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AiGatewayWorkspaceResource,
-    PatchModel = AiGatewayWorkspaceResource,
+    PatchModel = AiGatewayWorkspaceUpdateParameters,
     Parameters = AiGatewayIfMatchRequired
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -755,7 +1059,7 @@ interface AiGatewayModelProviderResources {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AiGatewayModelProviderResource,
-    PatchModel = AiGatewayModelProviderResource,
+    PatchModel = AiGatewayModelProviderUpdateParameters,
     Parameters = AiGatewayIfMatchRequired
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -785,7 +1089,7 @@ interface AiGatewayModelResources {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AiGatewayModelResource,
-    PatchModel = AiGatewayModelResource,
+    PatchModel = AiGatewayModelUpdateParameters,
     Parameters = AiGatewayIfMatchRequired
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -806,7 +1110,7 @@ interface AiGatewayToolServerResources {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AiGatewayToolServerResource,
-    PatchModel = AiGatewayToolServerResource,
+    PatchModel = AiGatewayToolServerUpdateParameters,
     Parameters = AiGatewayIfMatchRequired
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -836,7 +1140,7 @@ interface AiGatewayApiKeyResources {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AiGatewayApiKeyResource,
-    PatchModel = AiGatewayApiKeyResource,
+    PatchModel = AiGatewayApiKeyUpdateParameters,
     Parameters = AiGatewayIfMatchRequired
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -883,6 +1187,8 @@ interface AiGatewayWorkspaceModelOperations {
     aiGatewayName: string,
 
     /** Workspace resource name. */
-    @path workspaceName: string,
+    @pattern("^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$")
+    @path
+    workspaceName: string,
   ): ArmResponse<ResourceListResult<AiGatewayModelResource>> | ErrorResponse;
 }
