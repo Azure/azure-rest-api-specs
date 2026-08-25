@@ -134,7 +134,7 @@ interface ContentpackagesOperations {
   >;
 
   /** Creates a content package by uploading binary content. The request body should contain the binary content of the package, and optional labels can be provided as query parameters. The response will include details of the created content package. */
-  @summary("Creates a content package by uploading binary content.\nThe request body should contain the binary content of the package, and optional labels can be provided\nas query parameters.\nThe response will include details of the created content package.")
+  @summary("Uploads a content package.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/contentpackages/upload")
   @post
   postContentpackagesUpload is Foundations.Operation<
