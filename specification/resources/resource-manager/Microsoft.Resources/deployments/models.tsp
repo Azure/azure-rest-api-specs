@@ -444,7 +444,7 @@ enum ChangeType {
   /**
    * The resource is not supported by What-If.
    */
-  Unsupported,
+  Unsupported
 }
 
 /**
@@ -476,6 +476,11 @@ enum PropertyChangeType {
    * The property will not be set or updated.
    */
   NoEffect,
+
+  /**
+   * The resource is an array item that has been moved within the array.
+   */
+  ArrayItemMove
 }
 
 /**
@@ -1619,6 +1624,18 @@ model WhatIfPropertyChange {
    */
   @identifiers(#["path"])
   children?: WhatIfPropertyChange[];
+
+  /**
+   * The index of the property before the deployment is executed.
+   * Will only be present in `ArrayItemMove` changes.
+   */
+  beforeIndex?: int32;
+
+  /**
+   * The index of the property after the deployment is executed.
+   * Will only be present in `ArrayItemMove` changes.
+   */
+  afterIndex?: int32;
 }
 
 /**
