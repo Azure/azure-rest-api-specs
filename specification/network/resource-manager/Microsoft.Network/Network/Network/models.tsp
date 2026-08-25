@@ -10339,7 +10339,11 @@ model SessionRecordingIdentity {
   type: SessionRecordingIdentityType;
 
   /** User assigned identity to use for accessing blob container Uri. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identity type systemAssigned. */
-  userAssignedIdentityId?: Azure.Core.armResourceIdentifier;
+  userAssignedIdentityId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
