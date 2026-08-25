@@ -65,7 +65,7 @@ interface VnetConnections {
   get is ArmResourceRead<VnetConnection>;
 
   /** Create or update a VnetConnection. */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VnetConnection>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<VnetConnection>;
 
   /** Delete a VnetConnection. */
   delete is ArmResourceDeleteWithoutOkAsync<
