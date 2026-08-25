@@ -16,13 +16,13 @@ figure is drawn from pull request data in the two specification repositories.
 
 - [At a glance](#at-a-glance)
 - [How a review runs](#how-a-review-runs)
-- [1. Reach](#1-reach)
-- [2. What the agent finds](#2-what-the-agent-finds)
-- [3. Compared with human review](#3-compared-with-human-review)
-- [4. Delivering on the documented scope](#4-delivering-on-the-documented-scope)
-- [5. What a review costs](#5-what-a-review-costs)
-- [6. Known limitations and planned work](#6-known-limitations-and-planned-work)
-- [7. How these numbers were produced](#7-how-these-numbers-were-produced)
+- [Reach](#reach)
+- [What the agent finds](#what-the-agent-finds)
+- [Compared with human review](#compared-with-human-review)
+- [Delivering on the documented scope](#delivering-on-the-documented-scope)
+- [What a review costs](#what-a-review-costs)
+- [Known limitations and planned work](#known-limitations-and-planned-work)
+- [How these numbers were produced](#how-these-numbers-were-produced)
 
 ---
 
@@ -56,13 +56,13 @@ Three points summarize the impact:
 ## How a review runs
 
 ```mermaid
-flowchart LR
-    A[Pull request<br/>opened or updated] --> B{In scope?}
-    B -->|No| Z[No review]
-    B -->|Yes| C[Reviewer agent<br/>applies rule set]
-    C --> D[Critic agent<br/>verifies findings]
-    D --> E[Findings posted<br/>as PR comments]
-    E --> F[Human reviewer<br/>confirms and labels]
+graph TD
+    A["Pull request opened or updated"] --> B{"In scope?"}
+    B -->|No| Z["No review"]
+    B -->|Yes| C["Reviewer agent applies rule set"]
+    C --> D["Critic agent verifies findings"]
+    D --> E["Findings posted as PR comments"]
+    E --> F["Human reviewer confirms and labels"]
 ```
 
 The agent proposes; a person decides. Findings are posted as ordinary pull
@@ -75,7 +75,7 @@ a public pull request costs more than a missed one.
 
 ---
 
-## 1. Reach
+## Reach
 
 | Measure                                 | Value |
 | --------------------------------------- | ----: |
@@ -99,7 +99,7 @@ outcome, and it gives the author early confidence rather than a wait.
 
 ---
 
-## 2. What the agent finds
+## What the agent finds
 
 ### By severity
 
@@ -159,7 +159,7 @@ the uncategorized findings.
 
 ---
 
-## 3. Compared with human review
+## Compared with human review
 
 To measure the difference the agent makes, we compared two matched three-month
 windows: **May through July 2025**, when review was human-only, against **May
@@ -217,11 +217,11 @@ now addresses contract risk and less addresses polish.
 > context-dependent, so 23 percent of them resist categorization, against almost
 > none of the agent's, which carry an explicit rule identifier. Those
 > unclassified comments are excluded rather than redistributed, so the gaps shown
-> are an upper bound. See [section 7](#7-how-these-numbers-were-produced).
+> are an upper bound. See [How these numbers were produced](#how-these-numbers-were-produced).
 
 ---
 
-## 4. Delivering on the documented scope
+## Delivering on the documented scope
 
 The [agent documentation](api-reviewer-agent.md) states what the agent reviews
 and which rule areas it covers. Findings data confirms each claim.
@@ -261,7 +261,7 @@ subset of easily detected issues.
 
 ---
 
-## 5. What a review costs
+## What a review costs
 
 Each automated run records its own resource usage. These figures cover 126 runs
 between 7 and 24 August 2026.
@@ -287,7 +287,7 @@ between 7 and 24 August 2026.
 
 ---
 
-## 6. Known limitations and planned work
+## Known limitations and planned work
 
 The agent is in active development. Known gaps are tracked as public issues.
 
@@ -322,7 +322,7 @@ the most direct way to improve the agent.
 
 ---
 
-## 7. How these numbers were produced
+## How these numbers were produced
 
 **Sources.** All figures come from pull request comments and workflow run
 records in `Azure/azure-rest-api-specs` and `Azure/azure-rest-api-specs-pr`.
@@ -331,15 +331,15 @@ is used; every comment in the window is counted.
 
 **Windows.** Three windows appear in this page and are not interchangeable:
 
-| Window                   | Used for         | Scope                                         |
-| ------------------------ | ---------------- | --------------------------------------------- |
-| 22 Apr - 24 Aug 2026     | Sections 1, 2, 4 | Every agent review since introduction         |
-| May - Jul, 2025 and 2026 | Section 3        | Matched three-month year-over-year comparison |
-| 7 - 24 Aug 2026          | Section 5        | Automated workflow runs, which began 7 August |
+| Window                   | Used for                     | Scope                                         |
+| ------------------------ | ---------------------------- | --------------------------------------------- |
+| 22 Apr - 24 Aug 2026     | Reach, findings, and scope   | Every agent review since introduction         |
+| May - Jul, 2025 and 2026 | Comparison with human review | Matched three-month year-over-year comparison |
+| 7 - 24 Aug 2026          | Review cost                  | Automated workflow runs, which began 7 August |
 
-Section 3 counts 259 agent-reviewed changes for May through July. Section 1
-counts 412 pull requests since April. Both are correct; they measure different
-periods and apply different de-duplication.
+The comparison counts 259 agent-reviewed changes for May through July. The reach
+figures count 412 pull requests since April. Both are correct; they measure
+different periods and apply different de-duplication.
 
 **Counting rules.**
 
@@ -355,11 +355,12 @@ periods and apply different de-duplication.
 
 - Categories cover 86 percent of agent findings and 77 percent of human
   comments. The uncategorized remainder is excluded, not redistributed.
-- Section 3 compares two different years. Specification volume, service mix, and
-  reviewer staffing all changed between them; the agent is not the only variable.
+- The year-over-year comparison spans two different years. Specification volume,
+  service mix, and reviewer staffing all changed between them; the agent is not
+  the only variable.
 - AI credits are a billing unit, not a currency amount. Converting to cost
   depends on the applicable agreement.
-- Section 5 covers the automated workflow only. Interactive reviews run on
+- Cost figures cover the automated workflow only. Interactive reviews run on
   developer machines and do not emit usage records.
 
 ---
