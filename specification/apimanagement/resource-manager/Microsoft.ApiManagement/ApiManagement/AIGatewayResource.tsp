@@ -207,7 +207,7 @@ model AiGatewayApiKeyCredential {
 @added(Versions.v2026_09_01_preview)
 model AiGatewayFoundryAuthentication {
   /** Authentication type. */
-  kind: AiGatewayModelProviderAuthenticationKind.ManagedIdentity;
+  kind: "ManagedIdentity";
 }
 
 /** Foundry model provider configuration. */
@@ -227,7 +227,7 @@ model AiGatewayFoundryProviderConfiguration {
 @added(Versions.v2026_09_01_preview)
 model AiGatewayCustomAuthentication {
   /** Authentication type. */
-  kind: AiGatewayModelProviderAuthenticationKind.ApiKey;
+  kind: "ApiKey";
 
   /** API key configuration. */
   apiKey: AiGatewayApiKeyCredential;
@@ -878,7 +878,9 @@ interface AiGatewayWorkspaceModelOperations {
     ...ResourceGroupParameter,
 
     /** AI Gateway resource name. */
-    @path aiGatewayName: string,
+    @pattern("^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$")
+    @path
+    aiGatewayName: string,
 
     /** Workspace resource name. */
     @path workspaceName: string,
