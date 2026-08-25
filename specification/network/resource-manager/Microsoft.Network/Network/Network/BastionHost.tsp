@@ -233,6 +233,10 @@ interface BastionHosts {
   "Parameters supplied to update BastionHost tags."
 );
 @@doc(
+  BastionHosts.update::parameters.properties,
+  "Parameters supplied to update BastionHost tags or identity."
+);
+@@doc(
   BastionHosts.putBastionShareableLink::parameters.body,
   "Post request for Create/Delete/Get Bastion Shareable Link endpoints."
 );
