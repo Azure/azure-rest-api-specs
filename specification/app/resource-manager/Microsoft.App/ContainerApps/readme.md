@@ -78,6 +78,23 @@ directive:
     from: openapi.json
     reason: |
       Pre-existing. Using the same error response as other APIs.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}/vnetConnections/{vnetConnectionName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}/vnetConnections/{vnetConnectionName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}/vnetConnections/{vnetConnectionName}"].put.responses["201"].schema
+    reason: |
+      TypeSpec models provisioningState as read-only, but the emitter represents it as a
+      $ref with a sibling readOnly annotation, which OpenAPI ignores. Enabling
+      use-read-only-status-schema produces the compliant definition-level annotation,
+      but applies project-wide and changes 47 status schemas, including 45 unrelated to
+      SandboxGroup and VnetConnection. Suppress these seven affected response schemas
+      until the emitter supports a scoped compliant representation.
 ```
 
 ### Tag: package-preview-2025-10-02-preview

@@ -15,6 +15,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./ContainerAppsSessionPool.tsp";
+import "./SandboxGroup.tsp";
+import "./VnetConnection.tsp";
 import "./SourceControl.tsp";
 import "./ContainerApp.tsp";
 import "./ContainerAppsBuild.tsp";
