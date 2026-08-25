@@ -17,6 +17,8 @@ control-plane resource rules, see
 none of it applies here.
 
 > **Authoritative upstream:** [performing an action](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#actions),
+> [resource action URL pattern](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#actions-url-pattern-for-resource-action),
+> [collection action URL pattern](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#actions-url-pattern-for-collection-action),
 > [do not use actions for CRUD](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#actions-no-actions-for-crud),
 > [collections](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#collections),
 > [API versioning](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#versioning),
@@ -166,6 +168,64 @@ they are hard to see in a linear read of a multi-file TypeSpec project.
 
 See [`data-plane-design-decisions.md`](data-plane-design-decisions.md) `DDP-001`
 for the full trade-off matrix. Never blocking; present the trade-off and ask.
+
+---
+
+## DP-MODEL-06: Action routes use colon syntax
+
+- **Rule ID:** `DP-MODEL-06`
+- **Canonical names:** `actions-url-pattern-for-resource-action`,
+  `actions-url-pattern-for-collection-action`
+- **Severity:** Warning
+
+A POST action **SHOULD** append `:<action>` to the URL of the resource or
+collection it acts on:
+
+```text
+/<resource-collection>/<resource-id>:<action>
+/<resource-collection>:<action>
+```
+
+First establish that the operation is an action: it performs a computation,
+state transition, bulk operation, or structured search that cannot be expressed
+as standard CRUD. A POST alone is not evidence; POST resource creation is not
+an action and this rule does not apply.
+
+On a route introduced or modified by the PR, flag a slash-delimited or
+standalone verb path:
+
+```tsp
+// BAD -- "analyze" looks like a child resource.
+@route("/documents/analyze")
+analyze is Azure.Core.RpcOperation<AnalysisInput, AnalysisResult>;
+
+// GOOD -- the colon identifies an action on the documents collection.
+@route("/documents:analyze")
+analyze is Azure.Core.RpcOperation<AnalysisInput, AnalysisResult>;
+```
+
+The same distinction applies to an individual resource:
+`/documents/{documentName}:archive`, not
+`/documents/{documentName}/archive`.
+
+### Stay silent when
+
+- The operation creates a resource with POST rather than invoking an action.
+- The route is unchanged from a published API version. Renaming it would be a
+  breaking change; use `DP-VERSION-01` only when the PR itself changes it.
+- An external protocol the service implements mandates the route shape.
+- A shipped service consistently uses a different action-route convention and
+  the new route follows it. The Guidelines introduction prioritizes consistency
+  for existing GA services; ask a question rather than forcing one route to
+  diverge.
+
+If the action has no meaningful resource or collection noun to attach to, do
+not recommend `/:action`. Revisit the resource model under `DP-MODEL-01` and
+`DP-MODEL-02`.
+
+When flagging, cite the newly added or modified `@route`, name the resource or
+collection the action operates on, and propose the complete replacement path.
+The upstream statements are `YOU SHOULD`, so this rule is never Blocking.
 
 ---
 

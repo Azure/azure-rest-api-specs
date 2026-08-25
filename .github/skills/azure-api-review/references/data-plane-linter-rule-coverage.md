@@ -109,12 +109,12 @@ extends `@azure-tools/typespec-azure-rulesets/data-plane`. The agent is
 Three cases where the naive reading of "there is a rule for that" is wrong. Each
 of these is a place a reviewer would otherwise wrongly stay silent.
 
-| Rule                      | Ruleset state                                                | Why the agent still owns something                                                                                                                                                                                                                                                    |
-| ------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `non-breaking-versioning` | **Explicitly disabled** (`false`) in the data-plane ruleset. | Backward-compatibility across versions is **not** linted on data-plane. The agent owns breaking-change judgment entirely -- removed properties, narrowed unions, tightened optionality, changed types in a **stable** version. This is the single largest 🔒-looking-but-🤖 area.     |
-| `documentation-required`  | Enabled.                                                     | It enforces that `@doc` **exists**, not that it says anything. `@doc("The name.")` passes. Doc **quality** is 🤖 Agent-only -- see [`data-plane-naming-and-docs.md`](data-plane-naming-and-docs.md).                                                                                  |
-| `casing-style`            | Enabled.                                                     | It checks declaration casing. It does not judge whether a correctly cased name is **clear**. `cfg`, `data1`, `flag2` all pass. Naming clarity is 🤖 Agent-only.                                                                                                                       |
-| `use-standard-operations` | Enabled.                                                     | It forces operations through `Azure.Core` templates, which makes several Guidelines statements true-by-construction. It does **not** decide whether the resource being operated on should exist, or whether a POST action is a CRUD operation in disguise. Modeling is 🤖 Agent-only. |
+| Rule                      | Ruleset state                                                | Why the agent still owns something                                                                                                                                                                                                                                                                                                                   |
+| ------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `non-breaking-versioning` | **Explicitly disabled** (`false`) in the data-plane ruleset. | Backward-compatibility across versions is **not** linted on data-plane. The agent owns breaking-change judgment entirely -- removed properties, narrowed unions, tightened optionality, changed types in a **stable** version. This is the single largest 🔒-looking-but-🤖 area.                                                                    |
+| `documentation-required`  | Enabled.                                                     | It enforces that `@doc` **exists**, not that it says anything. `@doc("The name.")` passes. Doc **quality** is 🤖 Agent-only -- see [`data-plane-naming-and-docs.md`](data-plane-naming-and-docs.md).                                                                                                                                                 |
+| `casing-style`            | Enabled.                                                     | It checks declaration casing. It does not judge whether a correctly cased name is **clear**. `cfg`, `data1`, `flag2` all pass. Naming clarity is 🤖 Agent-only.                                                                                                                                                                                      |
+| `use-standard-operations` | Enabled.                                                     | It forces operations through `Azure.Core` templates, which makes several Guidelines statements true-by-construction. It does **not** decide whether the resource being operated on should exist, whether a POST action is CRUD in disguise, or whether a genuine action is attached to its resource URL with `:<action>`. Modeling is 🤖 Agent-only. |
 
 ### ❓ Unresolved names
 
@@ -197,18 +197,18 @@ That premise is **assumed, not demonstrated**; see the caveat in
 
 No mechanical rule exists or is planned. These are the areas the agent is for.
 
-| Area                                                                                 | Reference                                                                                 |
-| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| Resource modeling, addressability, action-vs-resource, `actions-no-actions-for-crud` | [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md)                      |
-| Error-code craftsmanship (stable codes, `target`, actionable messages)               | [`data-plane-error-design.md`](data-plane-error-design.md)                                |
-| Naming clarity and doc quality beyond mere presence                                  | [`data-plane-naming-and-docs.md`](data-plane-naming-and-docs.md)                          |
-| LRO status-monitor semantics and paging shape consistency                            | [`data-plane-lro-and-paging.md`](data-plane-lro-and-paging.md)                            |
-| Visibility lifecycle consistency, write-only properties, secrets                     | [`data-plane-visibility-and-secrets.md`](data-plane-visibility-and-secrets.md)            |
-| Breaking changes vs. the previous stable version                                     | [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md) (versioning section) |
-| Version segments in newly-added routes (`DP-VERSION-04`)                             | [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md) (versioning section) |
-| Grey-area design trade-offs                                                          | [`data-plane-design-decisions.md`](data-plane-design-decisions.md)                        |
-| Secret detection                                                                     | [`secret-detection.md`](secret-detection.md) (cross-cutting)                              |
-| Allowlist-vs-denylist `pattern` constraints                                          | [`pattern-validation.md`](pattern-validation.md) (cross-cutting)                          |
+| Area                                                                                        | Reference                                                                                 |
+| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Resource modeling, addressability, action-vs-resource, and action URL shape (`DP-MODEL-06`) | [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md)                      |
+| Error-code craftsmanship (stable codes, `target`, actionable messages)                      | [`data-plane-error-design.md`](data-plane-error-design.md)                                |
+| Naming clarity and doc quality beyond mere presence                                         | [`data-plane-naming-and-docs.md`](data-plane-naming-and-docs.md)                          |
+| LRO status-monitor semantics and paging shape consistency                                   | [`data-plane-lro-and-paging.md`](data-plane-lro-and-paging.md)                            |
+| Visibility lifecycle consistency, write-only properties, secrets                            | [`data-plane-visibility-and-secrets.md`](data-plane-visibility-and-secrets.md)            |
+| Breaking changes vs. the previous stable version                                            | [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md) (versioning section) |
+| Version segments in newly-added routes (`DP-VERSION-04`)                                    | [`data-plane-resource-modeling.md`](data-plane-resource-modeling.md) (versioning section) |
+| Grey-area design trade-offs                                                                 | [`data-plane-design-decisions.md`](data-plane-design-decisions.md)                        |
+| Secret detection                                                                            | [`secret-detection.md`](secret-detection.md) (cross-cutting)                              |
+| Allowlist-vs-denylist `pattern` constraints                                                 | [`pattern-validation.md`](pattern-validation.md) (cross-cutting)                          |
 
 ---
 

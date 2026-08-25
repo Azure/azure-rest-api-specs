@@ -4,7 +4,7 @@ description: |
 
   Covers DP-MODEL-01 (CRUD in disguise), DP-MODEL-02 (addressability),
   DP-MODEL-03 (collection vs singleton), DP-MODEL-04 (operation symmetry),
-  DP-MODEL-05 (sub-resource pointers). See
+  DP-MODEL-05 (sub-resource pointers), and DP-MODEL-06 (action URL shape). See
   references/data-plane-resource-modeling.md.
 
 tags:
@@ -81,3 +81,34 @@ stimuli:
       - The agent proposes a concrete resource shape - a @resource with a @key and the corresponding StandardResourceOperations - rather than only describing the problem.
       - Findings are anchored to specific line numbers and to specific operations or models.
       - The agent does not report azure-core linter-owned rules.
+
+  - name: action-route-missing-colon
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/action-route-shape.tsp"
+          dest: "specification/documentanalysis/data-plane/Contoso.DocumentAnalysis/stable/2026-01-01/documents.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to the newly
+      introduced POST action route. This is a new service introducing its first
+      stable API version. Report findings with rule IDs, line numbers, and fix
+      suggestions.
+
+      File: specification/documentanalysis/data-plane/Contoso.DocumentAnalysis/stable/2026-01-01/documents.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports missing colon action route"
+        config:
+          pattern: "\\*\\*\\[DP-MODEL-06\\]"
+      - type: prompt
+    rubric:
+      - The agent identifies `/documents/analyze` as a newly introduced action route that should use the collection action form `/documents:analyze`, and reports it under DP-MODEL-06.
+      - The agent distinguishes this derived-result computation from CRUD and does not report DP-MODEL-01.
+      - The finding cites the route line and proposes the complete replacement path `/documents:analyze`.
+      - The finding is Warning severity or lower, never Blocking, because the upstream guidance is YOU SHOULD.
+      - The agent does not report linter-owned rules or recommend changing the standard CRUD operations in the fixture.
