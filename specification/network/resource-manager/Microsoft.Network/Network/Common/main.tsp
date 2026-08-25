@@ -3806,7 +3806,11 @@ model ApprovalReference {
   /**
    * The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection.
    */
-  privateEndpointId?: string;
+  privateEndpointId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/privateEndpoints";
+    }
+  ]>;
 }
 
 /**

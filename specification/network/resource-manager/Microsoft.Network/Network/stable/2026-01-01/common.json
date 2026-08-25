@@ -1402,7 +1402,15 @@
       "properties": {
         "privateEndpointId": {
           "type": "string",
-          "description": "The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection."
+          "format": "arm-id",
+          "description": "The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateEndpoints"
+              }
+            ]
+          }
         }
       }
     },
