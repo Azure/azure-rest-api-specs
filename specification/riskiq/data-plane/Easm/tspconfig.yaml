@@ -1,0 +1,34 @@
+parameters:
+  "service-dir":
+    default: "sdk/easm"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+  disable:
+    "@azure-tools/typespec-azure-core/composition-over-inheritance": "New rule"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/easm.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Analytics.Defender.Easm
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/defendereasm-rest"
+    is-modular-library: false
+    package-details:
+      name: "@azure-rest/defender-easm-rest"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-analytics-defender-easm"
+    namespace: com.azure.analytics.defender.easm
+    partial-update: true
+    flavor: azure
+    api-version: "2023-03-01-preview"
