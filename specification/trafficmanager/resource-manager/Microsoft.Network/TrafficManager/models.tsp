@@ -147,7 +147,7 @@ union AllowedEndpointRecordType {
 /**
  * When record type is set, a traffic manager profile will allow only endpoints that match this type.
  */
-@added(Versions.v2024_04_01_preview)
+@added(Versions.v2026_09_01)
 union RecordType {
   string,
 
@@ -482,7 +482,7 @@ model ProfileProperties {
   /**
    * When record type is set, a traffic manager profile will allow only endpoints that match this type.
    */
-  @added(Versions.v2024_04_01_preview)
+  @added(Versions.v2026_09_01)
   recordType?: RecordType;
 }
 
