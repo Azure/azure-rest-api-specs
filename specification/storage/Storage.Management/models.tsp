@@ -1165,7 +1165,44 @@ union StorageConnectorDataSourceType {
   /**
    * Azure DataShare data source type.
    */
+  @removed(Versions.v2026_09_01)
   Azure_DataShare: "Azure_DataShare",
+
+  /**
+   * NetApp ONTAP data source type.
+   */
+  @added(Versions.v2026_09_01)
+  NetAppOntap: "NetAppOntap",
+
+  /**
+   * Azure NetApp Files data source type.
+   */
+  @added(Versions.v2026_09_01)
+  AzureNetAppFiles: "AzureNetAppFiles",
+
+  /**
+   * Dell OneFS data source type.
+   */
+  @added(Versions.v2026_09_01)
+  DellOneFs: "DellOneFs",
+
+  /**
+   * AWS S3 data source type.
+   */
+  @added(Versions.v2026_09_01)
+  AwsS3: "AwsS3",
+
+  /**
+   * S3-compatible data source type.
+   */
+  @added(Versions.v2026_09_01)
+  S3Compatible: "S3Compatible",
+
+  /**
+   * Azure DataShare data source type.
+   */
+  @added(Versions.v2026_09_01)
+  AzureDataShare: "AzureDataShare",
 
   string,
 }
@@ -3686,6 +3723,12 @@ model StorageDataCollaborationPolicyProperties {
    * Indicates whether storage connectors are allowed to created or managed on the storage account.
    */
   allowStorageConnectors?: boolean;
+
+  /**
+   * Indicates whether Blob Access Point configurations are allowed to be created or managed on the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  allowStorageBlobAccessPointConfigurations?: boolean;
 
   /**
    * Indicates whether data shares are allowed to be created or managed on the storage account.
@@ -6482,6 +6525,7 @@ model StorageConnectorProperties {
    * System-generated creation time of the Storage Connector in ISO 8601 date-time format (YYYY-MM-DDTHH:mm:ssZ).
    * Not a valid input parameter during creating.
    */
+  @removed(Versions.v2026_09_01)
   @visibility(Lifecycle.Read)
   creationTime?: string;
 
