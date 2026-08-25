@@ -114,6 +114,7 @@ using Azure.AI.Projects;
 @@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
 @@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
+@@clientName(A2ATool.a2a_version, exact("a2a_version"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 
@@ -252,7 +253,11 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
 
 // All emitted Python classes already have "items" in the base class, so we need to pick another name
-@@clientName(OptimizationInlineDatasetInput.items, "dataset_items", "python");
+@@clientName(
+  AgentOptimizationInlineDatasetInput.items,
+  "dataset_items",
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Class renames related to Responses
