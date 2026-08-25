@@ -70,8 +70,12 @@ directive:
   - where:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/connectors/{connectorName}"].patch.parameters[5].schema.properties.properties
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/dataShares/{dataShareName}"].patch.parameters[5].schema.properties.properties
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobAccessPointConfigurations/{blobAccessPointConfigurationName}"].patch.parameters[5].schema.properties.properties
     suppress: PatchBodyParametersSchema
-    reason: We have used kind property as discriminator to support polymorphic resource and during patch also need to pass discriminator to allow patch on certain polymorphic resource type property.
+    reason: >
+      Connector and DataShare PATCH carry forward their existing polymorphic
+      discriminator requirements. Blob Access Point also requires a source
+      discriminator to select the concrete polymorphic shape being updated.
 
   - where:
     - $.definitions["Azure.Core.uuid"].format
