@@ -9,6 +9,41 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.KubernetesConfiguration.PublicNetworkAccessType,
+  "KubernetesConfigurationPrivateLinkScopePublicNetworkAccessType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnection,
+  "KubernetesConfigurationPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateLinkResource,
+  "KubernetesConfigurationPrivateLinkResource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnections.getByPrivateLinkScope,
+  "GetPrivateEndpointConnectionsByPrivateLinkScope",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateLinkResources.getByPrivateLinkScope,
+  "GetPrivateLinkResourcesByPrivateLinkScope",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopeProperties.clusterResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopeProperties.privateLinkScopeId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@clientName(
   Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationPrivateLinkScopesMgmtClient",
   "python"
