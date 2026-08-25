@@ -43,6 +43,21 @@ using Azure.ClientGenerator.Core;
   Azure.Core.uuid,
   "csharp"
 );
+@@alternateType(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScope.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnection.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.KubernetesConfiguration.PrivateLinkResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(
   Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationPrivateLinkScopesMgmtClient",
