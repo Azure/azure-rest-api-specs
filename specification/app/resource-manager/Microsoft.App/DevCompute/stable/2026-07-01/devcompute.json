@@ -251,7 +251,7 @@
         "tags": [
           "SandboxGroups"
         ],
-        "description": "Patches a SandboxGroup. Only patching of tags is supported.",
+        "description": "Patches a SandboxGroup.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -671,6 +671,28 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/SandboxGroupPatchProperties",
+          "description": "SandboxGroup properties that can be updated."
+        }
+      }
+    },
+    "SandboxGroupPatchProperties": {
+      "type": "object",
+      "description": "SandboxGroup resource specific properties for patch requests.",
+      "properties": {
+        "environmentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the Azure Container Apps environment to link to the sandbox group. A sandbox group can be linked after creation, but the link cannot then be changed or removed. For subsequent create-or-update (PUT) requests, specify the same environment ID; omitting or changing it returns 409 Conflict. Omitting it from an update (PATCH) request leaves the existing link unchanged.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.App/managedEnvironments"
+              }
+            ]
+          }
         }
       }
     },
@@ -678,6 +700,23 @@
       "type": "object",
       "description": "SandboxGroup resource specific properties.",
       "properties": {
+        "environmentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the Azure Container Apps environment to link to the sandbox group. A sandbox group can be linked after creation, but the link cannot then be changed or removed. For subsequent create-or-update (PUT) requests, specify the same environment ID; omitting or changing it returns 409 Conflict. Omitting it from an update (PATCH) request leaves the existing link unchanged.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.App/managedEnvironments"
+              }
+            ]
+          }
+        },
+        "defaultDomain": {
+          "type": "string",
+          "description": "The default domain of the linked Azure Container Apps environment. Sandbox endpoints use subdomains of this domain. This read-only property is populated by the service and is omitted when no environment is linked.",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/SandboxGroupProvisioningState",
           "readOnly": true

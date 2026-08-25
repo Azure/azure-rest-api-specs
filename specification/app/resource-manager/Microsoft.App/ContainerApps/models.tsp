@@ -1623,28 +1623,27 @@ model BlobStorageTokenStore {
   /**
    * The name of the app secrets containing the SAS URL of the blob storage containing the tokens.
    */
-  @madeRequired(Versions.v2026_01_01)
-  sasUrlSettingName: string;
+  sasUrlSettingName?: string;
 
   /**
    * The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   blobContainerUri?: string;
 
   /**
    * The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   clientId?: string;
 
   /**
    * The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   managedIdentityResourceId?: string;
 }
 
@@ -2689,14 +2688,14 @@ model ManagedEnvironmentProperties {
    * Environment level Application Insights configuration
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   appInsightsConfiguration?: AppInsightsConfiguration;
 
   /**
    * Environment Open Telemetry configuration
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   openTelemetryConfiguration?: OpenTelemetryConfiguration;
 
   /**
@@ -4364,7 +4363,7 @@ model JobExecutionProperties {
    * Detailed status of the job execution.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   detailedStatus?: ExecutionStatus;
 
   /**
@@ -4372,7 +4371,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   reason?: string;
 
   /**
@@ -4380,7 +4379,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   message?: string;
 }
 
@@ -6106,7 +6105,6 @@ model SessionPoolProperties {
    * The template status of the session pool, showing active template, or desired template during session pool update. This is only available if the containerType is CustomContainer.
    */
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   templateUpdateStatus?: TemplateUpdateStatus;
 
@@ -6947,6 +6945,12 @@ model ContainerAppProperties {
   environmentId?: string;
 
   /**
+   * Networking configuration for the Container App.
+   */
+  @added(Versions.v2026_07_01)
+  networking?: ContainerAppNetworkingConfiguration;
+
+  /**
    * Workload profile name to pin for container app execution.
    */
   workloadProfileName?: string;
@@ -7003,6 +7007,18 @@ model ContainerAppProperties {
    */
   @visibility(Lifecycle.Read)
   eventStreamEndpoint?: string;
+}
+
+/**
+ * Networking configuration for a Container App. Only supported for Container Apps deployed into an Express managed environment.
+ */
+@added(Versions.v2026_07_01)
+model ContainerAppNetworkingConfiguration {
+  /**
+   * Resource ID of a subnet used for outbound (egress) traffic from this Container App. Only supported for Container Apps in an Express managed environment. Mutually exclusive with the environment-level VNet configuration and immutable after the Container App is created.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  outboundVnetSubnetId?: string;
 }
 
 /**
@@ -7712,6 +7728,12 @@ model Scale {
    * Optional. KEDA Polling Interval in seconds. Defaults to 30 seconds if not set.
    */
   pollingInterval?: int32;
+
+  /**
+   * Optional. Whether custom scale rules can override the automatic scale rules. This property is only applicable to Function Apps.
+   */
+  @added(Versions.v2026_07_01)
+  allowScalingRuleOverride?: boolean;
 
   /**
    * Scaling rules.
@@ -8614,7 +8636,7 @@ model ReplicaContainer {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   debugEndpoint?: string;
 }
 
