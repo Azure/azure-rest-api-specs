@@ -370,7 +370,7 @@ model ResourceMetricSignalDefinitionProperties
   dimensionFilterV1?: string;
 
   @added(Versions.v2026_09_01_preview)
-  @doc("Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.")
+  @doc("Optional: Dimension filter to apply to the dimension.")
   @minLength(1)
   @maxLength(2048)
   dimensionFilter?: string;
