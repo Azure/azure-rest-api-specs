@@ -103,30 +103,30 @@ outcome, and it gives the author early confidence rather than a wait.
 
 ### By severity
 
-| Severity   | Findings | Share |                                |
-| ---------- | -------: | ----: | ------------------------------ |
-| Blocking   |      472 | 23.3% | `###############`              |
-| Warning    |      864 | 42.7% | `############################` |
-| Suggestion |      688 | 34.0% | `######################`       |
+| Severity   | Findings | Share |                      |
+| ---------- | -------: | ----: | -------------------- |
+| Blocking   |      472 | 23.3% | ███████████          |
+| Warning    |      864 | 42.7% | ████████████████████ |
+| Suggestion |      688 | 34.0% | ████████████████     |
 
 Roughly one finding in four is blocking. The agent is not flooding authors with
 must-fix items; most feedback is advisory.
 
 ### By issue type
 
-| Issue type                     | Findings | Share |                                |
-| ------------------------------ | -------: | ----: | ------------------------------ |
-| Schema and property design     |      502 | 24.8% | `############################` |
-| Documentation and examples     |      221 | 10.9% | `############`                 |
-| Resource modeling              |      193 |  9.5% | `###########`                  |
-| Suppressions and tooling       |      173 |  8.5% | `##########`                   |
-| Long-running operations        |      162 |  8.0% | `#########`                    |
-| Operations and HTTP semantics  |      156 |  7.7% | `#########`                    |
-| Versioning and compatibility   |      154 |  7.6% | `#########`                    |
-| Naming, enums, and identifiers |       80 |  4.0% | `####`                         |
-| Security and secrets           |       68 |  3.4% | `####`                         |
-| SDK and client impact          |       20 |  1.0% | `#`                            |
-| Review readiness and CI        |        4 |  0.2% | `#`                            |
+| Issue type                     | Findings | Share |                      |
+| ------------------------------ | -------: | ----: | -------------------- |
+| Schema and property design     |      502 | 24.8% | ████████████████████ |
+| Documentation and examples     |      221 | 10.9% | █████████            |
+| Resource modeling              |      193 |  9.5% | ████████             |
+| Suppressions and tooling       |      173 |  8.5% | ███████              |
+| Long-running operations        |      162 |  8.0% | ██████               |
+| Operations and HTTP semantics  |      156 |  7.7% | ██████               |
+| Versioning and compatibility   |      154 |  7.6% | ██████               |
+| Naming, enums, and identifiers |       80 |  4.0% | ███                  |
+| Security and secrets           |       68 |  3.4% | ███                  |
+| SDK and client impact          |       20 |  1.0% | █                    |
+| Review readiness and CI        |        4 |  0.2% | █                    |
 
 Categories cover 86 percent of findings. The remainder are left uncategorized
 rather than assigned by guesswork.
