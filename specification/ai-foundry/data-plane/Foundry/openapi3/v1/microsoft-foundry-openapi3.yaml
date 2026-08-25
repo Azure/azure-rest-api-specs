@@ -48125,46 +48125,21 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - MemoryStores=V1Preview
-    Microsoft365AgenticUserCommunicationProtocol:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - activityProtocol
-      description: The protocol used to communicate with the agentic user.
-    Microsoft365AgenticUserTemplate:
+    Microsoft365PermissionScopes:
       type: object
+      required:
+        - resourceAppId
+        - scopes
       properties:
-        id:
+        resourceAppId:
           type: string
-          description: Identifier of the agentic-user template.
-        file:
-          type: string
-          description: Name of the agentic-user template file embedded in the generated app package.
-        schemaVersion:
-          $ref: '#/components/schemas/Microsoft365AgenticUserTemplateSchemaVersion'
-          description: Schema version of the agentic-user template.
-          default: 0.1.0-preview
-        agentIdentityBlueprintId:
-          type: string
-          description: Blueprint identity client id used for the agentic user.
-        communicationProtocol:
-          $ref: '#/components/schemas/Microsoft365AgenticUserCommunicationProtocol'
-          description: |-
-            Communication protocol used by the agentic user. When omitted, Microsoft 365 defaults to
-            `activityProtocol`.
-      description: |-
-        An agentic-user template describing how the agent participates as an agentic user in Microsoft 365.
-        Only used when `useAgenticUserTemplate` is true on the publish request.
-    Microsoft365AgenticUserTemplateSchemaVersion:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - 0.1.0-preview
-      description: |-
-        Schema version of the Microsoft 365 agentic-user template embedded in the generated Teams app
-        package. Extensible: Microsoft 365 may add versions independently of this API.
+          description: Application id of the resource that exposes the requested delegated scopes.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: Delegated scope names requested from the resource application. Must not be empty.
+      description: A set of delegated permission scopes requested from a single resource application.
     Microsoft365PublishDefaults:
       type: object
       properties:
@@ -48182,6 +48157,9 @@ components:
         appRegistrationClientId:
           type: string
           description: The app-registration client id associated with the agent.
+        botServiceArmId:
+          type: string
+          description: ARM resource id of the Azure Bot Service associated with the previously-published app, if any.
         appVersion:
           type: string
           description: The most recently published app version.
@@ -48230,21 +48208,38 @@ components:
           description: |-
             ARM resource id of the Azure Bot Service that fronts this agent in Microsoft Teams. Required for
             workspaces on the default bot-based Teams backend; optional for workspaces on the API-based backend.
+            Must not be supplied when `publishAsAutopilot` is true.
         publishAsAutopilot:
           type: boolean
           description: |-
             When true, the agent is published as an autopilot (digital worker) agent: the bot id is taken from
             the agent's blueprint identity and the generated Teams manifest is marked as a digital worker.
-        useAgenticUserTemplate:
-          type: boolean
-          description: When true, the supplied `agenticUserTemplate` is embedded in the generated Teams app package.
-          default: false
-        agenticUserTemplate:
-          $ref: '#/components/schemas/Microsoft365AgenticUserTemplate'
-          description: Optional agentic-user template. Required when `useAgenticUserTemplate` is true.
+        accessBoundaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityProtocolAccessBoundary'
+          description: |-
+            Activity-protocol access boundaries to apply to the agent when publishing as an autopilot agent.
+            An empty list clears the existing boundaries. When omitted, the existing boundaries are left
+            unchanged.
+        optionalPermissionScopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Microsoft365PermissionScopes'
+          description: |-
+            Exact selection of delegated permission scopes to grant to the autopilot blueprint. May only be
+            supplied when `publishAsAutopilot` is true. When omitted or empty, the platform's default
+            permission set is used. Mandatory platform permissions are always granted and are not affected by
+            this value.
         publishScope:
           $ref: '#/components/schemas/Microsoft365PublishScope'
           description: Publish scope for the Teams app.
+        canRespondWithoutMention:
+          type: boolean
+          description: |-
+            Controls how the published agent responds to Teams messages: when true it responds to all messages
+            on its surfaces, when false only when it is at-mentioned. When omitted, the agent's existing Teams
+            message-notification setting is left unchanged.
         appVersion:
           type: string
           description: |-

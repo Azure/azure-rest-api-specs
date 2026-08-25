@@ -1,3 +1,5 @@
+import "../agents/models.tsp";
+
 using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
@@ -20,51 +22,19 @@ union Microsoft365PublishScope {
   tenant: "Tenant",
 }
 
-/**
- * Schema version of the Microsoft 365 agentic-user template embedded in the generated Teams app
- * package. Extensible: Microsoft 365 may add versions independently of this API.
- */
-union Microsoft365AgenticUserTemplateSchemaVersion {
-  string,
-
-  /** Development preview version of the agentic-user template schema. */
-  v0_1_0_preview: "0.1.0-preview",
-}
-
-/** The protocol used to communicate with the agentic user. */
-union Microsoft365AgenticUserCommunicationProtocol {
-  string,
-
-  /** The Microsoft 365 Activity Protocol. */
-  activityProtocol: "activityProtocol",
-}
-
 // ---------------------------------------------------------------------------
 // Request models
 // ---------------------------------------------------------------------------
 
 /**
- * An agentic-user template describing how the agent participates as an agentic user in Microsoft 365.
- * Only used when `useAgenticUserTemplate` is true on the publish request.
+ * A set of delegated permission scopes requested from a single resource application.
  */
-model Microsoft365AgenticUserTemplate {
-  /** Identifier of the agentic-user template. */
-  id?: string;
+model Microsoft365PermissionScopes {
+  /** Application id of the resource that exposes the requested delegated scopes. */
+  resourceAppId: string;
 
-  /** Name of the agentic-user template file embedded in the generated app package. */
-  file?: string;
-
-  /** Schema version of the agentic-user template. */
-  schemaVersion?: Microsoft365AgenticUserTemplateSchemaVersion = "0.1.0-preview";
-
-  /** Blueprint identity client id used for the agentic user. */
-  agentIdentityBlueprintId?: string;
-
-  /**
-   * Communication protocol used by the agentic user. When omitted, Microsoft 365 defaults to
-   * `activityProtocol`.
-   */
-  communicationProtocol?: Microsoft365AgenticUserCommunicationProtocol;
+  /** Delegated scope names requested from the resource application. Must not be empty. */
+  scopes: string[];
 }
 
 /**
@@ -82,6 +52,7 @@ model Microsoft365PublishRequest {
   /**
    * ARM resource id of the Azure Bot Service that fronts this agent in Microsoft Teams. Required for
    * workspaces on the default bot-based Teams backend; optional for workspaces on the API-based backend.
+   * Must not be supplied when `publishAsAutopilot` is true.
    */
   botServiceArmId?: string;
 
@@ -91,14 +62,30 @@ model Microsoft365PublishRequest {
    */
   publishAsAutopilot?: boolean;
 
-  /** When true, the supplied `agenticUserTemplate` is embedded in the generated Teams app package. */
-  useAgenticUserTemplate?: boolean = false;
+  /**
+   * Activity-protocol access boundaries to apply to the agent when publishing as an autopilot agent.
+   * An empty list clears the existing boundaries. When omitted, the existing boundaries are left
+   * unchanged.
+   */
+  accessBoundaries?: ActivityProtocolAccessBoundary[];
 
-  /** Optional agentic-user template. Required when `useAgenticUserTemplate` is true. */
-  agenticUserTemplate?: Microsoft365AgenticUserTemplate;
+  /**
+   * Exact selection of delegated permission scopes to grant to the autopilot blueprint. May only be
+   * supplied when `publishAsAutopilot` is true. When omitted or empty, the platform's default
+   * permission set is used. Mandatory platform permissions are always granted and are not affected by
+   * this value.
+   */
+  optionalPermissionScopes?: Microsoft365PermissionScopes[];
 
   /** Publish scope for the Teams app. */
   publishScope: Microsoft365PublishScope;
+
+  /**
+   * Controls how the published agent responds to Teams messages: when true it responds to all messages
+   * on its surfaces, when false only when it is at-mentioned. When omitted, the agent's existing Teams
+   * message-notification setting is left unchanged.
+   */
+  canRespondWithoutMention?: boolean;
 
   /**
    * App version (for example `1.2.3`) written into the Teams manifest. May contain only digits and
@@ -185,6 +172,9 @@ model Microsoft365PublishDefaults {
 
   /** The app-registration client id associated with the agent. */
   appRegistrationClientId?: string;
+
+  /** ARM resource id of the Azure Bot Service associated with the previously-published app, if any. */
+  botServiceArmId?: string;
 
   /** The most recently published app version. */
   appVersion?: string;
