@@ -27,11 +27,13 @@ model DecompileOperationSuccessResponse {
    * An array of key-value pairs containing the entryPoint string as the key for the Bicep file decompiled from the ARM json template
    */
   @identifiers(#["path"])
+  @visibility(Lifecycle.Read)
   files: FileDefinition[];
 
   /**
    * The file path to the main Bicep file generated from the decompiled ARM json template.
    */
+  @visibility(Lifecycle.Read)
   entryPoint: string;
 }
 
@@ -42,10 +44,12 @@ model FileDefinition {
   /**
    * The file path of the Bicep file.
    */
+  @visibility(Lifecycle.Read)
   path?: string;
 
   /**
    * The contents of the Bicep file.
    */
+  @visibility(Lifecycle.Read)
   contents?: string;
 }
