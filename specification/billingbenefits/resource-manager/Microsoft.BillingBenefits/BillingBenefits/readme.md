@@ -55,7 +55,6 @@ directive:
     reason: According to ARM's guide 200 is returned when PUT call finishes.
   - suppress: TrackedResourcePatchOperation
     from: billingbenefits.json
-    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
   - suppress: TenantLevelAPIsNotAllowed
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
@@ -126,15 +125,6 @@ input-file:
   - stable/2026-06-01/billingbenefits.json
 ```
 
-### Tag: package-preview-2026-02-01-preview
-
-These settings apply only when `--tag=package-preview-2026-02-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2026-02-01-preview'
-input-file:
-  - preview/2026-02-01-preview/billingbenefits.json
-```
-
 ### Tag: package-preview-2025-12-01-preview
 
 These settings apply only when `--tag=package-preview-2025-12-01-preview` is specified on the command line.
@@ -160,6 +150,15 @@ These settings apply only when `--tag=package-preview-2024-11-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2024-11-01-preview'
 input-file:
   - preview/2024-11-01-preview/billingbenefits.json
+```
+
+### Tag: package-2022-11-01
+
+These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11-01'
+input-file:
+  - stable/2022-11-01/billingbenefits.json
 ```
 
 ---
