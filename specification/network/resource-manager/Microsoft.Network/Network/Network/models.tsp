@@ -28021,7 +28021,6 @@ union NeuroShieldResponseMode {
    * Requires explicit customer approval before serving mitigations.
    */
   Manual: "Manual",
-
 }
 
 /**
