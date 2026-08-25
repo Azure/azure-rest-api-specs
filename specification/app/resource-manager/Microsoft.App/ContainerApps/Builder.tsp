@@ -15,6 +15,7 @@ namespace Microsoft.App;
  * Information about the SourceToCloud builder resource.
  */
 @removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
 model BuilderResource
   is Azure.ResourceManager.TrackedResource<BuilderProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model BuilderResource
 }
 
 @removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
 @armResourceOperations
 interface Builders {
   /**

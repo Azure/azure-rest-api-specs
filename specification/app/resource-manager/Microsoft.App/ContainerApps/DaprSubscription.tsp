@@ -16,6 +16,7 @@ namespace Microsoft.App;
  * Dapr PubSub Event Subscription.
  */
 @removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
 @parentResource(ManagedEnvironment)
 model DaprSubscription
   is Azure.ResourceManager.ProxyResource<DaprSubscriptionProperties> {
@@ -52,6 +53,7 @@ alias DaprSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
 @armResourceOperations
 interface DaprSubscriptions {
   /**

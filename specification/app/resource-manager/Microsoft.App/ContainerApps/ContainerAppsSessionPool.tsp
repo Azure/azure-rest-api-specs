@@ -82,6 +82,7 @@ interface ContainerAppsSessionPools {
    */
   @summary("Fetch the MCP server credentials of a session pool.")
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_03_02_preview)
   fetchMcpServerCredentials is ArmResourceActionSync<
     SessionPool,
     void,
@@ -93,6 +94,7 @@ interface ContainerAppsSessionPools {
    */
   @summary("Rotate and fetch the rotated MCP server credentials of a session pool.")
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_03_02_preview)
   rotateMcpServerCredentials is ArmResourceActionSync<
     SessionPool,
     void,
