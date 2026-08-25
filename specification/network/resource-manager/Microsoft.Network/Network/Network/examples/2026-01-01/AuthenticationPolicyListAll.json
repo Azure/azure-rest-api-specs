@@ -23,8 +23,7 @@
                 "jwksUri": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys",
                 "audience": "api://11111111-1111-1111-1111-111111111111",
                 "clientId": "11111111-1111-1111-1111-111111111111"
-              },
-              "associatedResources": []
+              }
             }
           },
           {
@@ -36,18 +35,19 @@
             "properties": {
               "provisioningState": "Succeeded",
               "resourceGuid": "33333333-3333-3333-3333-333333333333",
-              "userTrustProviderType": "oidc",
+              "userTrustProviderType": "entra",
               "onUnauthenticatedRequest": "authenticate",
               "authenticationProperties": {
-                "issuer": "https://issuer.example.com/",
-                "authEndpoint": "https://issuer.example.com/oauth2/v2.0/authorize",
-                "tokenEndpoint": "https://issuer.example.com/oauth2/v2.0/token",
+                "issuer": "https://login.microsoftonline.com/55555555-5555-5555-5555-555555555555/",
                 "clientId": "44444444-4444-4444-4444-444444444444",
+                "clientSecret": "https://myvault.vault.azure.net/secrets/authpolicy2-secret",
                 "scope": [
-                  "openid"
-                ]
-              },
-              "associatedResources": []
+                  "openid",
+                  "profile"
+                ],
+                "sessionTimeout": "86400",
+                "sessionCookieName": "ApplicationGatewayUserSession"
+              }
             }
           }
         ]
@@ -55,5 +55,5 @@
     }
   },
   "operationId": "AuthenticationPolicies_ListAll",
-  "title": "Lists all authentication policies in a subscription"
+  "title": "Lists JWT validation and user sign-in authentication policies in a subscription"
 }

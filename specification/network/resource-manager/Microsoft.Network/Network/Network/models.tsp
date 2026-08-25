@@ -7754,6 +7754,13 @@ model ApplicationGatewayUrlPathMapPropertiesFormat {
   defaultLoadDistributionPolicy?: SubResource;
 
   /**
+   * Default authentication configuration bindings of the routing map. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @maxItems(1)
+  defaultAuthConfigs?: ApplicationGatewayAuthConfig[];
+
+  /**
    * Path rule of URL path map resource.
    */
   pathRules?: ApplicationGatewayPathRule[];
@@ -7933,9 +7940,10 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
   entraJWTValidationConfig?: SubResource;
 
   /**
-   * Authentication and authorization configuration bindings of the request routing rule.
+   * Authentication configuration bindings of the request routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.
    */
   @added(Versions.v2026_01_01)
+  @maxItems(1)
   authConfigs?: ApplicationGatewayAuthConfig[];
 
   /**
@@ -8007,6 +8015,13 @@ model ApplicationGatewayRoutingRulePropertiesFormat {
    * Listener resource of the application gateway.
    */
   listener?: SubResource;
+
+  /**
+   * Authentication configuration bindings of the routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @maxItems(1)
+  authConfigs?: ApplicationGatewayAuthConfig[];
 
   /**
    * The provisioning state of the request routing rule resource.
@@ -8706,7 +8721,7 @@ model ApplicationGatewayEntraJWTValidationConfigPropertiesFormat {
 }
 
 /**
- * An authentication and authorization configuration binding for a request routing rule. Links a named configuration to an authentication policy and/or an authorization policy.
+ * An authentication configuration binding for an Application Gateway routing rule or routing map.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other application gateway models"
 @added(Versions.v2026_01_01)
@@ -8721,11 +8736,6 @@ model ApplicationGatewayAuthConfig {
    * Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource.
    */
   authenticationPolicy?: SubResource;
-
-  /**
-   * Reference to the authorization policy resource.
-   */
-  authorizationPolicy?: SubResource;
 }
 
 /**

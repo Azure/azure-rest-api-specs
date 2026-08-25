@@ -50,10 +50,10 @@ model AuthenticationPolicy extends Common.Resource {
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 model AuthenticationPolicyPropertiesFormat {
-  /** The type of the user trust provider. */
-  userTrustProviderType?: UserTrustProviderType;
+  /** The type of the user trust provider. Only Microsoft Entra is supported. */
+  userTrustProviderType: UserTrustProviderType;
 
-  /** The action to take when a request is unauthenticated. */
+  /** The action to take when a request is unauthenticated. When omitted, user sign-in policies default to `authenticate` and JWT validation policies default to `deny`. */
   onUnauthenticatedRequest?: OnUnauthenticatedRequest;
 
   /** The authentication provider configuration for the policy. */
@@ -82,15 +82,6 @@ model AuthenticationProviderProperties {
   /** The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/ */
   issuer: string;
 
-  /** The OIDC Authorization Endpoint. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/oauth2/v2.0/authorize */
-  authEndpoint?: string;
-
-  /** The OIDC Token Endpoint. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/oauth2/v2.0/token */
-  tokenEndpoint?: string;
-
-  /** The OIDC User Info Endpoint. Example: https://graph.microsoft.com/oidc/userinfo */
-  userInfoEndpoint?: string;
-
   /** The JSON Web Key Set (JWKS) URI used to retrieve the public keys for JWT validation. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/discovery/v2.0/keys */
   jwksUri?: string;
 
@@ -100,11 +91,12 @@ model AuthenticationProviderProperties {
   /** The Application (client) ID for the related application registered in Microsoft Entra ID. */
   clientId: string;
 
-  /** The Key Vault secret URL containing the client secret for authentication. Example: https://myvault.vault.azure.net/secrets/mysecret */
+  /** The Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. Example: https://myvault.vault.azure.net/secrets/mysecret */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This property holds a Key Vault secret URL reference (not the secret value itself), so it is not sensitive data."
   clientSecret?: string;
 
-  /** The scopes used by an application during authentication to authorize access to a user's details. */
+  /** The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported. */
+  @maxItems(10)
   scope?: string[];
 
   /** The timeout of the session cookie used for user authentication, in seconds. Applicable to the Application Gateway post-OIDC workflow. */
@@ -118,14 +110,10 @@ model AuthenticationProviderProperties {
  * Type of the user trust provider.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP enums"
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service accepts only the Microsoft Entra provider in this API version, so the union is intentionally closed."
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 union UserTrustProviderType {
-  string,
-
-  /** OpenID Connect (OIDC) trust provider type. */
-  Oidc: "oidc",
-
   /** Microsoft Entra trust provider type. */
   Entra: "entra",
 }
@@ -164,7 +152,7 @@ interface AuthenticationPolicies {
    * Creates or updates an authentication policy with the specified name within a resource group.
    */
   @tag("AuthenticationPolicies")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AuthenticationPolicy,
     Error = CloudError
   >;
@@ -173,9 +161,9 @@ interface AuthenticationPolicies {
    * Deletes the specified authentication policy.
    */
   @tag("AuthenticationPolicies")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ArmResourceDeleteSync<
     AuthenticationPolicy,
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response = ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

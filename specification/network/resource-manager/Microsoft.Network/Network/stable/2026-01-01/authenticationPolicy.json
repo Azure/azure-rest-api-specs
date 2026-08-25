@@ -74,7 +74,7 @@
           }
         },
         "x-ms-examples": {
-          "Lists all authentication policies in a subscription": {
+          "Lists JWT validation and user sign-in authentication policies in a subscription": {
             "$ref": "./examples/AuthenticationPolicyListAll.json"
           }
         },
@@ -116,7 +116,7 @@
           }
         },
         "x-ms-examples": {
-          "Lists all authentication policies in a resource group": {
+          "Lists authentication policies in a resource group": {
             "$ref": "./examples/AuthenticationPolicyList.json"
           }
         },
@@ -166,7 +166,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets an authentication policy within a resource group": {
+          "Gets a JWT validation authentication policy within a resource group": {
             "$ref": "./examples/AuthenticationPolicyGet.json"
           }
         }
@@ -216,6 +216,17 @@
             "description": "Resource 'AuthenticationPolicy' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/AuthenticationPolicy"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -226,10 +237,15 @@
           }
         },
         "x-ms-examples": {
-          "Creates or updates an authentication policy within a resource group": {
+          "Creates or updates a user sign-in authentication policy within a resource group": {
             "$ref": "./examples/AuthenticationPolicyCreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AuthenticationPolicy"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "AuthenticationPolicies_Delete",
@@ -257,20 +273,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "204": {
             "description": "Resource does not exist."
           },
@@ -285,11 +287,7 @@
           "Deletes an authentication policy within a resource group": {
             "$ref": "./examples/AuthenticationPolicyDelete.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     }
   },
@@ -341,11 +339,11 @@
       "properties": {
         "userTrustProviderType": {
           "$ref": "./common.json#/definitions/UserTrustProviderType",
-          "description": "The type of the user trust provider."
+          "description": "The type of the user trust provider. Only Microsoft Entra is supported."
         },
         "onUnauthenticatedRequest": {
           "$ref": "./common.json#/definitions/OnUnauthenticatedRequest",
-          "description": "The action to take when a request is unauthenticated."
+          "description": "The action to take when a request is unauthenticated. When omitted, user sign-in policies default to `authenticate` and JWT validation policies default to `deny`."
         },
         "authenticationProperties": {
           "$ref": "#/definitions/AuthenticationProviderProperties",
@@ -371,6 +369,7 @@
         }
       },
       "required": [
+        "userTrustProviderType",
         "authenticationProperties"
       ]
     },
@@ -381,18 +380,6 @@
         "issuer": {
           "type": "string",
           "description": "The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/"
-        },
-        "authEndpoint": {
-          "type": "string",
-          "description": "The OIDC Authorization Endpoint. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/oauth2/v2.0/authorize"
-        },
-        "tokenEndpoint": {
-          "type": "string",
-          "description": "The OIDC Token Endpoint. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/oauth2/v2.0/token"
-        },
-        "userInfoEndpoint": {
-          "type": "string",
-          "description": "The OIDC User Info Endpoint. Example: https://graph.microsoft.com/oidc/userinfo"
         },
         "jwksUri": {
           "type": "string",
@@ -408,11 +395,12 @@
         },
         "clientSecret": {
           "type": "string",
-          "description": "The Key Vault secret URL containing the client secret for authentication. Example: https://myvault.vault.azure.net/secrets/mysecret"
+          "description": "The Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. Example: https://myvault.vault.azure.net/secrets/mysecret"
         },
         "scope": {
           "type": "array",
-          "description": "The scopes used by an application during authentication to authorize access to a user's details.",
+          "description": "The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported.",
+          "maxItems": 10,
           "items": {
             "type": "string"
           }

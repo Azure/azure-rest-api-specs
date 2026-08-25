@@ -8,14 +8,9 @@
       "location": "WestUs",
       "properties": {
         "userTrustProviderType": "entra",
-        "onUnauthenticatedRequest": "deny",
+        "onUnauthenticatedRequest": "authenticate",
         "authenticationProperties": {
           "issuer": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/",
-          "authEndpoint": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/authorize",
-          "tokenEndpoint": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token",
-          "userInfoEndpoint": "https://graph.microsoft.com/oidc/userinfo",
-          "jwksUri": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys",
-          "audience": "api://11111111-1111-1111-1111-111111111111",
           "clientId": "11111111-1111-1111-1111-111111111111",
           "clientSecret": "https://myvault.vault.azure.net/secrets/authpolicy-secret",
           "scope": [
@@ -40,14 +35,9 @@
           "provisioningState": "Succeeded",
           "resourceGuid": "22222222-2222-2222-2222-222222222222",
           "userTrustProviderType": "entra",
-          "onUnauthenticatedRequest": "deny",
+          "onUnauthenticatedRequest": "authenticate",
           "authenticationProperties": {
             "issuer": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/",
-            "authEndpoint": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/authorize",
-            "tokenEndpoint": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token",
-            "userInfoEndpoint": "https://graph.microsoft.com/oidc/userinfo",
-            "jwksUri": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys",
-            "audience": "api://11111111-1111-1111-1111-111111111111",
             "clientId": "11111111-1111-1111-1111-111111111111",
             "clientSecret": "https://myvault.vault.azure.net/secrets/authpolicy-secret",
             "scope": [
@@ -56,12 +46,15 @@
             ],
             "sessionTimeout": "86400",
             "sessionCookieName": "ApplicationGatewayUserSession"
-          },
-          "associatedResources": []
+          }
         }
       }
     },
     "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
+        "Retry-After": 10
+      },
       "body": {
         "name": "authPolicy1",
         "type": "Microsoft.Network/authenticationPolicies",
@@ -69,17 +62,12 @@
         "location": "WestUs",
         "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
         "properties": {
-          "provisioningState": "Creating",
+          "provisioningState": "Succeeded",
           "resourceGuid": "22222222-2222-2222-2222-222222222222",
           "userTrustProviderType": "entra",
-          "onUnauthenticatedRequest": "deny",
+          "onUnauthenticatedRequest": "authenticate",
           "authenticationProperties": {
             "issuer": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/",
-            "authEndpoint": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/authorize",
-            "tokenEndpoint": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token",
-            "userInfoEndpoint": "https://graph.microsoft.com/oidc/userinfo",
-            "jwksUri": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys",
-            "audience": "api://11111111-1111-1111-1111-111111111111",
             "clientId": "11111111-1111-1111-1111-111111111111",
             "clientSecret": "https://myvault.vault.azure.net/secrets/authpolicy-secret",
             "scope": [
@@ -88,12 +76,11 @@
             ],
             "sessionTimeout": "86400",
             "sessionCookieName": "ApplicationGatewayUserSession"
-          },
-          "associatedResources": []
+          }
         }
       }
     }
   },
   "operationId": "AuthenticationPolicies_CreateOrUpdate",
-  "title": "Creates or updates an authentication policy within a resource group"
+  "title": "Creates or updates a user sign-in authentication policy within a resource group"
 }
