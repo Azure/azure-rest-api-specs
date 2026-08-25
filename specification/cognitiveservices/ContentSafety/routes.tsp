@@ -87,7 +87,7 @@ interface ImageOperations {
 interface UnifiedOperations {
   @summary("Unified Moderate")
   @doc("A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.")
-  @route("/unifiedModerate")
+  @route("/content:unifiedModerate")
   @post
   unifiedModerate is Azure.Core.RpcOperation<
     {
@@ -166,7 +166,7 @@ interface TextBlocklists {
   >;
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @route("/provenance")
 @doc("Content Provenance Detection operations that inspect media for Microsoft-issued C2PA and imperceptible watermark signals indicating the content was created or modified using AI.")
 interface ContentProvenanceOperations {

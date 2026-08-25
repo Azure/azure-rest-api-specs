@@ -61,6 +61,52 @@
   },
   "tags": [],
   "paths": {
+    "/content:unifiedModerate": {
+      "post": {
+        "operationId": "UnifiedOperations_UnifiedModerate",
+        "summary": "Unified Moderate",
+        "description": "A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The unified moderation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnifiedModerateOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UnifiedModerateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Moderate content using an ACS policy": {
+            "$ref": "./examples/UnifiedModerate.json"
+          }
+        }
+      }
+    },
     "/image:analyze": {
       "post": {
         "operationId": "ImageOperations_AnalyzeImage",
@@ -780,52 +826,6 @@
         "x-ms-examples": {
           "Shield Prompt": {
             "$ref": "./examples/ShieldPrompt.json"
-          }
-        }
-      }
-    },
-    "/unifiedModerate": {
-      "post": {
-        "operationId": "UnifiedOperations_UnifiedModerate",
-        "summary": "Unified Moderate",
-        "description": "A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The unified moderation request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UnifiedModerateOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UnifiedModerateResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Moderate content using an ACS policy": {
-            "$ref": "./examples/UnifiedModerate.json"
           }
         }
       }

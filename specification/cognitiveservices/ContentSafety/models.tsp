@@ -504,7 +504,7 @@ alias ProvenanceServiceTraits = NoRepeatableRequests &
 
 alias ProvenanceResourceOps = ResourceOperations<ProvenanceServiceTraits>;
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @resource("operations")
 @doc("Status and result of an asynchronous Content Provenance Detection operation.")
 model ProvenanceDetectOperation
@@ -522,7 +522,7 @@ model ProvenanceDetectOperation
   lastUpdatedAt?: utcDateTime;
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Kind of asynchronous Content Provenance Detection operation.")
 union ProvenanceOperationKind {
   string,
@@ -531,7 +531,7 @@ union ProvenanceOperationKind {
   Detect: "Detect",
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Source content descriptor for a Content Provenance Detection operation.")
 model ProvenanceContent {
   @doc("Blob URI of the media to inspect. Media up to 100 MB is supported. Supported formats: image (JPEG, PNG, GIF, WebP), audio (MP3, WAV), and video (MP4).")
@@ -539,14 +539,14 @@ model ProvenanceContent {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Input describing the media to inspect using Content Provenance Detection.")
 model DetectProvenanceOptions {
   @doc("Source content to inspect.")
   content: ProvenanceContent;
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Top-level outcome of a Content Provenance Detection operation.")
 union DetectOutcome {
   string,
@@ -561,7 +561,7 @@ union DetectOutcome {
   ProvenanceDetected: "ProvenanceDetected",
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("A Microsoft-issued provenance signal indicating the media was created or modified using AI.")
 model DetectedProvenance {
   @doc("Detected provenance record type.")
@@ -577,7 +577,7 @@ model DetectedProvenance {
   timestamp?: utcDateTime;
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Detected provenance record type.")
 union DetectedProvenanceType {
   string,
@@ -589,7 +589,7 @@ union DetectedProvenanceType {
   Watermark: "Watermark",
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Result of a Content Provenance Detection operation.")
 model DetectProvenanceResult {
   @doc("Top-level outcome of the Content Provenance Detection operation.")
