@@ -26,6 +26,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.AuthenticationState,
+  "HorizonDBAuthenticationState",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.HorizonDbCluster,
   "HorizonDBCluster",
   "csharp"
@@ -42,12 +47,12 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbAdministratorPropertiesForAdd,
-  "HorizonDBAdministratorPropertiesForAdd",
+  "HorizonDBAdministratorContentProperties",
   "csharp"
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbAdministratorAdd,
-  "HorizonDBAdministratorAdd",
+  "HorizonDBAdministratorContent",
   "csharp"
 );
 @@clientName(
