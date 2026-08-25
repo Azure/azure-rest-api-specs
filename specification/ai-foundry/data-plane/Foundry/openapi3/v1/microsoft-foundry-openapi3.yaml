@@ -1745,7 +1745,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/VoiceConversationItem'
+                      $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -1824,7 +1824,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VoiceConversationItem'
+                $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
         4XX:
           description: Client error
           content:
@@ -2260,7 +2260,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/VoiceConversationItem'
+                      $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -54178,7 +54178,7 @@ components:
                 contentEncoding: base64
           description: |-
             The image(s) to edit. Must be a supported image file or an array of images.
-              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`
+              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`
               file less than 50MB. You can provide up to 16 images.
               `chatgpt-image-latest` follows the same input constraints as GPT image models.
               For `dall-e-2`, you can only provide one image, and it should be a square
@@ -54197,24 +54197,27 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Allows to set transparency for the background of the generated image(s).
-              This parameter is only supported for the GPT image models. Must be one of
-              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
-              model will automatically determine the best background for the image.
-              If `transparent`, the output format needs to support transparency, so it
-              should be set to either `png` (default value) or `webp`.
+            Set the background of the generated image(s). This parameter is only
+              supported for the GPT image models. Must be one of `transparent`, `opaque`,
+              or `auto` (default value). When `auto` is used, the model will automatically
+              determine the best background for the image.
+              Transparent backgrounds are available for supported GPT Image models. For
+              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
+              using `transparent`, set the output format to `png` or `webp`.
         model:
           anyOf:
             - type: string
             - type: string
               enum:
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The model to use for image generation. Defaults to `gpt-image-1.5`.
+          description: The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -54306,12 +54309,14 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - dall-e-3
                 - gpt-image-1
                 - gpt-image-1-mini
             - type: 'null'
-          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
+          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
           x-oaiTypeLabel: string
           default: dall-e-2
         'n':
@@ -54409,12 +54414,13 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Allows to set transparency for the background of the generated image(s).
-              This parameter is only supported for the GPT image models. Must be one of
-              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
-              model will automatically determine the best background for the image.
-              If `transparent`, the output format needs to support transparency, so it
-              should be set to either `png` (default value) or `webp`.
+            Set the background of the generated image(s). This parameter is only
+              supported for the GPT image models. Must be one of `transparent`, `opaque`,
+              or `auto` (default value). When `auto` is used, the model will automatically
+              determine the best background for the image.
+              Transparent backgrounds are available for supported GPT Image models. For
+              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
+              using `transparent`, set the output format to `png` or `webp`.
           default: auto
         style:
           anyOf:
@@ -56339,11 +56345,13 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The model to use for image editing.
+          description: The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.
           x-oaiTypeLabel: string
           default: gpt-image-1.5
         images:
@@ -56435,7 +56443,7 @@ components:
                 - opaque
                 - auto
             - type: 'null'
-          description: Background behavior for generated image output.
+          description: Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.
           default: auto
         stream:
           anyOf:
@@ -58991,6 +58999,8 @@ components:
                 - gpt-image-1
                 - gpt-image-1-mini
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
           default: gpt-image-1
         quality:
           type: string
@@ -59044,8 +59054,11 @@ components:
             - opaque
             - auto
           description: |-
-            Background type for the generated image. One of `transparent`,
-              `opaque`, or `auto`. Default: `auto`.
+            Set the background of the generated image. One of `transparent`,
+              `opaque`, or `auto`. Transparent backgrounds are available for
+              supported GPT Image models. For `gpt-image-2` and
+              `gpt-image-2-2026-04-21`, this support is in preview. When using
+              `transparent`, set the output format to `png` or `webp`. Default: `auto`.
           default: auto
         input_fidelity:
           anyOf:
@@ -59772,7 +59785,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 10485760
+          maxLength: 20971520
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
@@ -60916,7 +60929,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 10485760
+          maxLength: 20971520
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
@@ -68222,7 +68235,7 @@ components:
           description: The event type, must be `session.update`.
           x-stainless-const: true
         session:
-          $ref: '#/components/schemas/RealtimeSessionCreateRequestUnion'
+          $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestUnion'
           description: |-
             Update the Realtime session. Choose either a realtime
               session or a transcription session.
@@ -68303,14 +68316,17 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          message: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
           function_call: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall'
           function_call_output: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput'
           mcp_approval_response: '#/components/schemas/OpenAI.RealtimeMCPApprovalResponse'
           mcp_list_tools: '#/components/schemas/OpenAI.RealtimeMCPListTools'
           mcp_call: '#/components/schemas/OpenAI.RealtimeMCPToolCall'
           mcp_approval_request: '#/components/schemas/OpenAI.RealtimeMCPApprovalRequest'
-          message: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: A single item within a Realtime conversation.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemFunctionCall:
       type: object
       required:
@@ -68349,10 +68365,21 @@ components:
         arguments:
           type: string
           description: 'The arguments of the function call. This is a JSON-encoded string representing the arguments passed to the function, for example `{"arg1": "value1", "arg2": 42}`.'
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A function call item in a Realtime conversation.
       title: Realtime function call item
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemFunctionCallOutput:
       type: object
       required:
@@ -68388,10 +68415,24 @@ components:
         output:
           type: string
           description: The output of the function call, this is free text and can contain any information or simply be empty.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
+        name:
+          type: string
+          description: "The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`."
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A function call output item in a Realtime conversation.
       title: Realtime function call output item
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessage:
       type: object
       required:
@@ -68407,9 +68448,9 @@ components:
       discriminator:
         propertyName: role
         mapping:
+          system: '#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem'
           user: '#/components/schemas/OpenAI.RealtimeConversationItemMessageUser'
           assistant: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant'
-          system: '#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
     OpenAI.RealtimeConversationItemMessageAssistant:
@@ -68452,10 +68493,21 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistantContent'
           description: The content of the message.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: An assistant message item in a Realtime conversation.
       title: Realtime assistant message item
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageAssistantContent:
       type: object
       properties:
@@ -68510,10 +68562,21 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageSystemContent'
           description: The content of the message.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: A system message in a Realtime conversation can be used to provide additional context or instructions to the model. This is similar but distinct from the instruction prompt provided at the start of a conversation, as system messages can be added at any point in the conversation. For major changes to the conversation's behavior, use instructions, but for smaller updates (e.g. "the user is now asking about a different topic"), use system messages.
       title: Realtime system message item
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageSystemContent:
       type: object
       properties:
@@ -68572,10 +68635,21 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageUserContent'
           description: The content of the message.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: A user message item in a Realtime conversation.
       title: Realtime user message item
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageUserContent:
       type: object
       properties:
@@ -68774,10 +68848,21 @@ components:
         arguments:
           type: string
           description: A JSON string of arguments for the tool.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item requesting human approval of a tool invocation.
       title: Realtime MCP approval request
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPApprovalResponse:
       type: object
       required:
@@ -68805,10 +68890,21 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item responding to an MCP approval request.
       title: Realtime MCP approval response
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPError:
       type: object
       required:
@@ -68865,10 +68961,21 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item listing tools available on an MCP server.
       title: Realtime MCP list tools
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPProtocolError:
       type: object
       required:
@@ -68925,10 +69032,21 @@ components:
             - type: 'null'
         error:
           $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item representing an invocation of a tool on an MCP server.
       title: Realtime MCP tool call
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPToolExecutionError:
       type: object
       required:
@@ -69171,7 +69289,7 @@ components:
             - type: string
             - type: 'null'
         item:
-          $ref: '#/components/schemas/VoiceConversationItem'
+          $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: |-
@@ -69222,7 +69340,7 @@ components:
             - type: string
             - type: 'null'
         item:
-          $ref: '#/components/schemas/VoiceConversationItem'
+          $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: |-
@@ -69307,7 +69425,7 @@ components:
             - type: string
             - type: 'null'
         item:
-          $ref: '#/components/schemas/VoiceConversationItem'
+          $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: |-
@@ -69608,7 +69726,7 @@ components:
           description: The event type, must be `conversation.item.retrieved`.
           x-stainless-const: true
         item:
-          $ref: '#/components/schemas/VoiceConversationItem'
+          $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Returned when a conversation item is retrieved with `conversation.item.retrieve`. This is provided as a way to fetch the server's representation of an item, for example to get access to the post-processed audio data after noise cancellation and VAD. It includes the full content of the Item, including audio data.
@@ -69663,7 +69781,7 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
           description: The duration up to which the audio was truncated, in milliseconds.
         item:
-          $ref: '#/components/schemas/VoiceAssistantMessageItem'
+          $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
           description: The assistant message after truncation, when the service returns the updated item.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
@@ -70601,7 +70719,7 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
           description: The index of the content part in the item's content array.
         part:
-          $ref: '#/components/schemas/VoiceAgentResponseEventContentPart'
+          $ref: '#/components/schemas/OpenAI.RealtimeServerEventResponseContentPartDonePart'
           description: The content part that is done.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
@@ -70624,6 +70742,23 @@ components:
                   "text": "Sure, I can help with that."
               }
           }
+    OpenAI.RealtimeServerEventResponseContentPartDonePart:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - audio
+            - text
+        text:
+          type: string
+        audio:
+          type: string
+        transcript:
+          type: string
+        format:
+          $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
+          description: The audio format, when this is an audio content part.
     OpenAI.RealtimeServerEventResponseCreated:
       type: object
       required:
@@ -71107,7 +71242,7 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
           description: The index of the output item in the Response.
         item:
-          $ref: '#/components/schemas/VoiceConversationItem'
+          $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: Returned when a new Item is created during Response generation.
@@ -71154,7 +71289,7 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
           description: The index of the output item in the Response.
         item:
-          $ref: '#/components/schemas/VoiceConversationItem'
+          $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeServerEvent'
       description: |-
@@ -79792,10 +79927,6 @@ components:
           type: string
           description: The name of the RAI policy to apply.
       description: Configuration for Responsible AI (RAI) content filtering and safety features.
-    RealtimeSessionCreateRequestUnion:
-      anyOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestGA'
-        - $ref: '#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGA'
     RecurrenceSchedule:
       type: object
       required:
@@ -82427,7 +82558,7 @@ components:
       description: The avatar video resolution.
     VoiceAgentClientEvent:
       oneOf:
-        - $ref: '#/components/schemas/VoiceAgentClientEventConversationItemCreate'
+        - $ref: '#/components/schemas/OpenAI.RealtimeClientEventConversationItemCreate'
         - $ref: '#/components/schemas/OpenAI.RealtimeClientEventConversationItemDelete'
         - $ref: '#/components/schemas/OpenAI.RealtimeClientEventConversationItemRetrieve'
         - $ref: '#/components/schemas/OpenAI.RealtimeClientEventConversationItemTruncate'
@@ -82440,32 +82571,6 @@ components:
         - $ref: '#/components/schemas/VoiceAgentClientEventSessionUpdate'
         - $ref: '#/components/schemas/VoiceAgentClientEventSessionAvatarConnect'
       description: A stable v1 message sent by a client over a voice-agent WebSocket.
-    VoiceAgentClientEventConversationItemCreate:
-      type: object
-      required:
-        - type
-        - item
-      properties:
-        event_id:
-          type: string
-          maxLength: 512
-          description: Optional client-generated ID used to identify this event.
-        type:
-          type: string
-          enum:
-            - conversation.item.create
-          description: The event type, must be `conversation.item.create`.
-          x-stainless-const: true
-        previous_item_id:
-          type: string
-          description: |-
-            The ID of the preceding item after which the new item will be inserted. If not set, the new item will be appended to the end of the conversation.
-              If set to `root`, the new item will be added to the beginning of the conversation.
-              If set to an existing ID, it allows an item to be inserted mid-conversation. If the ID cannot be found, an error will be returned and the item will not be added.
-        item:
-          $ref: '#/components/schemas/VoiceConversationItem'
-          description: The conversation item to create.
-      description: The `conversation.item.create` client event.
     VoiceAgentClientEventSessionAvatarConnect:
       type: object
       required:
@@ -82811,7 +82916,7 @@ components:
         output:
           type: array
           items:
-            $ref: '#/components/schemas/VoiceConversationItem'
+            $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
           description: The items produced by the live response.
       allOf:
         - type: object
@@ -82956,11 +83061,11 @@ components:
         input:
           type: array
           items:
-            $ref: '#/components/schemas/VoiceConversationItem'
+            $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
           description: Conversation items used as inline response input.
         pre_generated_assistant_message:
           anyOf:
-            - $ref: '#/components/schemas/VoiceAssistantMessageItem'
+            - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
             - type: 'null'
           description: A pre-generated assistant message used to begin the response.
         interim_response:
@@ -82969,24 +83074,6 @@ components:
             - type: 'null'
           description: Interim-response settings for this response.
       description: Parameters accepted by a voice-agent `response.create` event.
-    VoiceAgentResponseEventContentPart:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - audio
-            - text
-        text:
-          type: string
-        audio:
-          type: string
-        transcript:
-          type: string
-        format:
-          $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
-          description: The audio format, when this is an audio content part.
-      description: A content part carried by a `response.content_part.*` server event.
     VoiceAgentSemanticVadTurnDetection:
       type: object
       required:
@@ -83696,23 +83783,6 @@ components:
       enum:
         - realtime
       description: The WebSocket subprotocol supported by a voice-agent connection.
-    VoiceAssistantMessageItem:
-      type: object
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant'
-      description: An assistant message item. Only `output_text` and `output_audio` content are valid for assistant messages.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAudioCodec:
       anyOf:
         - type: string
@@ -84138,21 +84208,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceConversationItem:
-      oneOf:
-        - $ref: '#/components/schemas/VoiceSystemMessageItem'
-        - $ref: '#/components/schemas/VoiceUserMessageItem'
-        - $ref: '#/components/schemas/VoiceAssistantMessageItem'
-        - $ref: '#/components/schemas/VoiceFunctionCallItem'
-        - $ref: '#/components/schemas/VoiceFunctionCallOutputItem'
-        - $ref: '#/components/schemas/VoiceMcpListToolsItem'
-        - $ref: '#/components/schemas/VoiceMcpCallItem'
-        - $ref: '#/components/schemas/VoiceMcpApprovalRequestItem'
-        - $ref: '#/components/schemas/VoiceMcpApprovalResponseItem'
-      description: A persisted item in a voice conversation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceConversationStatus:
       anyOf:
         - type: string
@@ -84211,43 +84266,6 @@ components:
             - high
             - default
       description: The sensitivity threshold for semantic end-of-utterance detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceFunctionCallItem:
-      type: object
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall'
-      description: A function call request item.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceFunctionCallOutputItem:
-      type: object
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-        name:
-          type: string
-          description: "The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`."
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput'
-      description: A function call output item.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -84397,74 +84415,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceMcpApprovalRequestItem:
-      type: object
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeMCPApprovalRequest'
-      description: An MCP approval request item.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceMcpApprovalResponseItem:
-      type: object
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeMCPApprovalResponse'
-      description: An MCP approval response item (client-created).
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceMcpCallItem:
-      type: object
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeMCPToolCall'
-      description: An MCP call item.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceMcpListToolsItem:
-      type: object
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeMCPListTools'
-      description: An MCP list-tools item.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceModelType:
       anyOf:
         - type: string
@@ -84592,7 +84542,7 @@ components:
         output:
           type: array
           items:
-            $ref: '#/components/schemas/VoiceConversationItem'
+            $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
           description: The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.
         conversation_id:
           type: string
@@ -84755,23 +84705,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceSystemMessageItem:
-      type: object
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem'
-      description: A system message item. Only `input_text` content is valid for system messages.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceSystemTool:
       type: object
       required:
@@ -84883,23 +84816,6 @@ components:
             - avatar-voice-sync
             - azure-realtime-native
       description: The voice implementation. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceUserMessageItem:
-      type: object
-      properties:
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageUser'
-      description: A user message item. `input_text`, `input_audio`, and `input_image` content are valid for user messages.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
