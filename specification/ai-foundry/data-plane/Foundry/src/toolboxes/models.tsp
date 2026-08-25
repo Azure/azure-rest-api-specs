@@ -358,6 +358,12 @@ model ToolboxSkillReference extends ToolboxSkill {
   version?: string;
 }
 
+@doc("The versions associated with a toolbox.")
+model ToolboxVersions {
+  @doc("The latest version of the toolbox.")
+  latest: ToolboxVersionObject;
+}
+
 @doc("A toolbox that stores reusable tool definitions for agents.")
 model ToolboxObject {
   @doc("The unique identifier of the toolbox.")
@@ -366,6 +372,12 @@ model ToolboxObject {
   @doc("The name of the toolbox.")
   @maxLength(256)
   name: string;
+
+  @doc("The Unix timestamp (seconds) when the toolbox was last updated. This value changes when a new toolbox version is created or the toolbox is updated.")
+  updated_at: FoundryTimestamp;
+
+  @doc("The versions associated with the toolbox.")
+  versions: ToolboxVersions;
 
   @doc("The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.")
   default_version: string;
