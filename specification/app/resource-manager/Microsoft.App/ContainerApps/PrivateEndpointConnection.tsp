@@ -14,6 +14,15 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.App;
+
+model ContainerAppsPrivateLinkResourceNameParameter
+  is Azure.ResourceManager.CommonTypes.PrivateLinkResourceNameParameter;
+
+@@path(
+  ContainerAppsPrivateLinkResourceNameParameter.name,
+  "privateLinkResourceName"
+);
+
 /**
  * The Private Endpoint Connection resource.
  */
@@ -89,11 +98,7 @@ alias ContainerAppPrivateLinkResourceOps = Azure.ResourceManager.Legacy.LegacyOp
     containerAppName: string;
   },
   {
-    /** Name of the Private Link Resource. */
-    @path
-    @segment("privateLinkResources")
-    @key
-    privateLinkResourceName: string;
+    ...ContainerAppsPrivateLinkResourceNameParameter;
   }
 >;
 
@@ -112,11 +117,7 @@ alias ManagedEnvironmentPrivateLinkResourceOps = Azure.ResourceManager.Legacy.Le
     environmentName: string;
   },
   {
-    /** Name of the Private Link Resource. */
-    @path
-    @segment("privateLinkResources")
-    @key
-    privateLinkResourceName: string;
+    ...ContainerAppsPrivateLinkResourceNameParameter;
   }
 >;
 
@@ -159,13 +160,13 @@ interface PrivateEndpointConnections {
 @tag("PrivateEndpointConnections")
 interface ContainerAppPrivateEndpointConnections {
   /**
-   * Get a private endpoint connection for a given Container App.
+   * Gets the details of a private endpoint connection associated with a Container App.
    */
   @summary("Get a private endpoint connection for a given Container App.")
   get is ContainerAppPrivateEndpointConnectionOps.Read<PrivateEndpointConnection>;
 
   /**
-   * Update the state of a private endpoint connection for a given Container App.
+   * Creates a private endpoint connection or updates its connection state for a Container App.
    */
   @summary("Update the state of a private endpoint connection for a given Container App.")
   createOrUpdate is ContainerAppPrivateEndpointConnectionOps.CreateOrUpdateAsync<
@@ -175,13 +176,13 @@ interface ContainerAppPrivateEndpointConnections {
   >;
 
   /**
-   * Delete a private endpoint connection for a given Container App.
+   * Deletes the specified private endpoint connection associated with a Container App.
    */
   @summary("Delete a private endpoint connection for a given Container App.")
   delete is ContainerAppPrivateEndpointConnectionOps.DeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**
-   * List private endpoint connections for a given Container App.
+   * Lists all private endpoint connections associated with a Container App.
    */
   @summary("List private endpoint connections for a given Container App.")
   list is ContainerAppPrivateEndpointConnectionOps.List<PrivateEndpointConnection>;
@@ -193,7 +194,7 @@ interface ContainerAppPrivateEndpointConnections {
 @tag("PrivateLinkResources")
 interface ContainerAppPrivateLinkResources {
   /**
-   * List private link resources for a given Container App.
+   * Lists the private link resources supported by a Container App.
    */
   @summary("List private link resources for a given Container App.")
   list is ContainerAppPrivateLinkResourceOps.List<
@@ -202,7 +203,7 @@ interface ContainerAppPrivateLinkResources {
   >;
 
   /**
-   * Get a private link resource for a given Container App.
+   * Gets the details of a private link resource supported by a Container App.
    */
   @summary("Get a private link resource for a given Container App.")
   get is ContainerAppPrivateLinkResourceOps.Read<PrivateLinkResource>;
@@ -214,7 +215,7 @@ interface ContainerAppPrivateLinkResources {
 @tag("PrivateLinkResources")
 interface ManagedEnvironmentPrivateLinkResources {
   /**
-   * Get a private link resource for a given managed environment.
+   * Gets the details of a private link resource supported by a managed environment.
    */
   @summary("Get a private link resource for a given managed environment.")
   get is ManagedEnvironmentPrivateLinkResourceOps.Read<PrivateLinkResource>;

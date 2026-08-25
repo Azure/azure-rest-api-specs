@@ -3069,7 +3069,7 @@
           "PrivateEndpointConnections"
         ],
         "summary": "List private endpoint connections for a given Container App.",
-        "description": "List private endpoint connections for a given Container App.",
+        "description": "Lists all private endpoint connections associated with a Container App.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3121,7 +3121,7 @@
           "PrivateEndpointConnections"
         ],
         "summary": "Get a private endpoint connection for a given Container App.",
-        "description": "Get a private endpoint connection for a given Container App.",
+        "description": "Gets the details of a private endpoint connection associated with a Container App.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3175,7 +3175,7 @@
           "PrivateEndpointConnections"
         ],
         "summary": "Update the state of a private endpoint connection for a given Container App.",
-        "description": "Update the state of a private endpoint connection for a given Container App.",
+        "description": "Creates a private endpoint connection or updates its connection state for a Container App.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3260,7 +3260,7 @@
           "PrivateEndpointConnections"
         ],
         "summary": "Delete a private endpoint connection for a given Container App.",
-        "description": "Delete a private endpoint connection for a given Container App.",
+        "description": "Deletes the specified private endpoint connection associated with a Container App.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3331,7 +3331,7 @@
           "PrivateLinkResources"
         ],
         "summary": "List private link resources for a given Container App.",
-        "description": "List private link resources for a given Container App.",
+        "description": "Lists the private link resources supported by a Container App.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3383,7 +3383,7 @@
           "PrivateLinkResources"
         ],
         "summary": "Get a private link resource for a given Container App.",
-        "description": "Get a private link resource for a given Container App.",
+        "description": "Gets the details of a private link resource supported by a Container App.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3405,9 +3405,12 @@
           {
             "name": "privateLinkResourceName",
             "in": "path",
-            "description": "Name of the Private Link Resource.",
+            "description": "The name of the private link associated with the Azure resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-zA-Z0-9]*$"
           }
         ],
         "responses": {
@@ -9103,7 +9106,7 @@
           "PrivateLinkResources"
         ],
         "summary": "Get a private link resource for a given managed environment.",
-        "description": "Get a private link resource for a given managed environment.",
+        "description": "Gets the details of a private link resource supported by a managed environment.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -9125,9 +9128,12 @@
           {
             "name": "privateLinkResourceName",
             "in": "path",
-            "description": "Name of the Private Link Resource.",
+            "description": "The name of the private link associated with the Azure resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-zA-Z0-9]*$"
           }
         ],
         "responses": {
