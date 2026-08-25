@@ -10511,6 +10511,9 @@
           }
         },
         "x-ms-examples": {
+          "List environment storages with managed identity": {
+            "$ref": "./examples/ManagedEnvironmentsStorages_List_Identity.json"
+          },
           "List environments storages by subscription": {
             "$ref": "./examples/ManagedEnvironmentsStorages_List.json"
           }
@@ -10566,6 +10569,9 @@
           }
         },
         "x-ms-examples": {
+          "Get an environment storage with managed identity": {
+            "$ref": "./examples/ManagedEnvironmentsStorages_Get_Identity.json"
+          },
           "get a environments storage": {
             "$ref": "./examples/ManagedEnvironmentsStorages_Get.json"
           },
@@ -10637,6 +10643,9 @@
           }
         },
         "x-ms-examples": {
+          "Create an environment storage with managed identity": {
+            "$ref": "./examples/ManagedEnvironmentsStorages_CreateOrUpdate_Identity.json"
+          },
           "Create or update environments storage": {
             "$ref": "./examples/ManagedEnvironmentsStorages_CreateOrUpdate.json"
           },
@@ -11805,6 +11814,10 @@
       "type": "object",
       "description": "Azure File Properties.",
       "properties": {
+        "identity": {
+          "type": "string",
+          "description": "Resource ID of a managed identity to authenticate with Azure File, or System to use a system-assigned identity."
+        },
         "accountName": {
           "type": "string",
           "description": "Storage account name for azure file."
