@@ -29407,12 +29407,51 @@
         },
         "description": "A AI Search Index resource."
       },
+      "ActivityProtocolAccessBoundary": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "read.1on1.developers",
+              "read.1on1.manager",
+              "read.1on1.allowlisted",
+              "read.1on1.tenant",
+              "write.1on1.developers",
+              "write.1on1.manager",
+              "write.1on1.allowlisted",
+              "write.1on1.tenant",
+              "read.group.developers",
+              "read.group.allowlisted",
+              "read.group.manager-invited",
+              "read.group.manager-present",
+              "read.group.tenant",
+              "write.group.developers",
+              "write.group.allowlisted",
+              "write.group.manager-invited",
+              "write.group.manager-present",
+              "write.group.tenant"
+            ]
+          }
+        ],
+        "description": "An access boundary for the activity protocol."
+      },
       "ActivityProtocolConfiguration": {
         "type": "object",
         "properties": {
           "enable_m365_public_endpoint": {
             "type": "boolean",
             "description": "Whether to enable the M365 public endpoint for the activity protocol."
+          },
+          "access_boundaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivityProtocolAccessBoundary"
+            },
+            "description": "The access boundaries for the activity protocol.",
+            "readOnly": true
           }
         },
         "description": "Configuration specific to the activity protocol."
