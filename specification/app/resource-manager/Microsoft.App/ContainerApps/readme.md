@@ -50,6 +50,40 @@ directive:
       Do not introduce breaking changes in GA services
 ```
 
+### Tag: package-preview-2026-04-01-preview
+
+These settings apply only when `--tag=package-preview-2026-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-04-01-preview'
+input-file:
+  - preview/2026-04-01-preview/ArtifactApps.json
+  - preview/2026-04-01-preview/Artifacts.json
+  - preview/2026-04-01-preview/AuthConfigs.json
+  - preview/2026-04-01-preview/AvailableWorkloadProfiles.json
+  - preview/2026-04-01-preview/BillingMeters.json
+  - preview/2026-04-01-preview/CommonDefinitions.json
+  - preview/2026-04-01-preview/ConnectedEnvironments.json
+  - preview/2026-04-01-preview/ConnectedEnvironmentsCertificates.json
+  - preview/2026-04-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - preview/2026-04-01-preview/ConnectedEnvironmentsStorages.json
+  - preview/2026-04-01-preview/ContainerApps.json
+  - preview/2026-04-01-preview/ContainerAppsRevisions.json
+  - preview/2026-04-01-preview/Diagnostics.json
+  - preview/2026-04-01-preview/Global.json
+  - preview/2026-04-01-preview/JavaComponents.json
+  - preview/2026-04-01-preview/Jobs.json
+  - preview/2026-04-01-preview/LogicAppsExtension.json
+  - preview/2026-04-01-preview/ManagedEnvironments.json
+  - preview/2026-04-01-preview/ManagedEnvironmentsDaprComponents.json
+  - preview/2026-04-01-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - preview/2026-04-01-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - preview/2026-04-01-preview/ManagedEnvironmentsStorages.json
+  - preview/2026-04-01-preview/SessionPools.json
+  - preview/2026-04-01-preview/SourceControls.json
+  - preview/2026-04-01-preview/Subscriptions.json
+  - preview/2026-04-01-preview/Usages.json
+```
+
 ### Tag: package-preview-2025-10-02-preview
 
 These settings apply only when `--tag=package-preview-2025-10-02-preview` is specified on the command line.

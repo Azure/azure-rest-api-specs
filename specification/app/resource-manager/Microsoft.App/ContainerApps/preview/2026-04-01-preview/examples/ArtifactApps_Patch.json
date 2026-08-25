@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "artifactAppName": "myartifactapp",
+    "api-version": "2026-04-01-preview",
+    "artifactAppEnvelope": {
+      "tags": {
+        "env": "production"
+      },
+      "properties": {
+        "description": "Updated artifact app description"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/artifactApps/myartifactapp",
+        "name": "myartifactapp",
+        "type": "Microsoft.App/artifactApps",
+        "location": "East US",
+        "tags": {
+          "env": "production"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Updated artifact app description",
+          "artifactId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/artifacts/myartifact",
+          "targetEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "status": "Running"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/locations/eastus/operationResults/YXJ0aWZhY3RBcHBzOmFiY2RlZmdoLTEyMzQtNTY3OC05MGFiLWNkZWYxMjM0NTY3OA?api-version=2026-04-01-preview"
+      }
+    }
+  }
+}

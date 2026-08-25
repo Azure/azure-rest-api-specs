@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "artifactName": "myartifact",
+    "api-version": "2026-04-01-preview",
+    "artifactEnvelope": {
+      "tags": {
+        "env": "production"
+      },
+      "properties": {
+        "description": "Updated artifact description",
+        "version": "2.0.0"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/artifacts/myartifact",
+        "name": "myartifact",
+        "type": "Microsoft.App/artifacts",
+        "location": "East US",
+        "tags": {
+          "env": "production"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Updated artifact description",
+          "artifactType": "Container",
+          "version": "2.0.0"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/locations/eastus/operationResults/YXJ0aWZhY3RzOmFiY2RlZmdoLTEyMzQtNTY3OC05MGFiLWNkZWYxMjM0NTY3OA?api-version=2026-04-01-preview"
+      }
+    }
+  }
+}
