@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "Discounts",
+          "properties": {
+            "appliedScopeType": "BillingAccount",
+            "discountTypeProperties": {
+              "applyDiscountOn": "Purchase",
+              "conditions": [
+                {
+                  "type": "equalAny",
+                  "conditionName": "Cloud",
+                  "value": [
+                    "US-Sec"
+                  ]
+                }
+              ],
+              "discountCombinationRule": "BestOf",
+              "discountPercentage": 14,
+              "discountType": "Sku",
+              "productFamilyName": "Azure",
+              "productId": "DZH318Z0BQ35",
+              "skuId": "0001"
+            },
+            "displayName": "Virtual Machines D Series Discount",
+            "endAt": "2027-07-01T23:59:59Z",
+            "entityType": "Primary",
+            "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+            "startAt": "2026-07-01T00:00:00Z"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Benefit_Validate",
+  "title": "DiscountsValidateCreate"
+}

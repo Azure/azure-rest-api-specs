@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "30000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "benefits-rg",
+    "conditionalCreditName": "caco-20250101-001",
+    "transactionName": "txn-67890",
+    "api-version": "2026-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/benefits-rg/providers/Microsoft.BillingBenefits/conditionalCredits/caco-20250101-001/transactions/txn-67890",
+        "name": "txn-67890",
+        "type": "Microsoft.BillingBenefits/conditionalCredits/transactions",
+        "properties": {
+          "date": "2025-07-20T10:30:00Z",
+          "chargeType": "Usage",
+          "billingStatus": "Closed",
+          "invoiceResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000/billingProfiles/DDFF-TTNN-BG7-GGG/invoices/INV-X001540275",
+          "amountInBillingCurrency": {
+            "currencyCode": "USD",
+            "amount": 300.0
+          },
+          "amountInPricingCurrency": {
+            "currencyCode": "USD",
+            "amount": 300.0
+          },
+          "productCode": "UPN24243",
+          "productDetails": {
+            "skuTitle": "Premium Block Blob Storage",
+            "productFamily": "Azure",
+            "productType": "Premium Block Blob Storage",
+            "serviceFamily": "Storage",
+            "publisherType": "Microsoft"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ConditionalCreditTransactions_Get",
+  "title": "ConditionalCreditTransactionGet"
+}
