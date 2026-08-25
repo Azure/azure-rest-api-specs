@@ -29,7 +29,7 @@ model CostControl
   /**
    * The entity tag used for optimistic concurrency.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The service returns etag on the cost control resource envelope and uses it for conditional updates and deletes."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name — EntityTagProperty uses 'eTag'"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
