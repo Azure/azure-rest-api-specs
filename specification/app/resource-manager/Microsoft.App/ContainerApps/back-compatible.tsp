@@ -141,6 +141,10 @@ using Microsoft.App;
   PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "privateEndpointConnectionEnvelope"
 );
+@@clientName(
+  ContainerAppPrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "privateEndpointConnectionEnvelope"
+);
 @@clientLocation(
   PrivateEndpointConnections.delete,
   "ManagedEnvironmentPrivateEndpointConnections"
