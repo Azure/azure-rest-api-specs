@@ -10357,6 +10357,22 @@ model BastionSessionRecordingConfiguration {
 }
 
 /**
+ * Parameters supplied to update the Bastion Host identity or tags.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_01_01)
+model BastionHostUpdate {
+  /**
+   * The identity of the BastionHost, if configured.
+   */
+  @added(Versions.v2026_01_01)
+  identity?: Common.ManagedServiceIdentity;
+
+  ...TagsObject;
+}
+
+/**
  * Describes a Virtual Machine.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

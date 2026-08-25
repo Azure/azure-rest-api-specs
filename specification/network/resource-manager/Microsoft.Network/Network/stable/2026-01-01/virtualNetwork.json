@@ -2526,7 +2526,7 @@
         "tags": [
           "BastionHosts"
         ],
-        "description": "Updates Tags for BastionHost resource",
+        "description": "Updates Tags or identity for BastionHost resource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2547,23 +2547,10 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to update BastionHost tags.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "identity": {
-                  "$ref": "./common.json#/definitions/ManagedServiceIdentity",
-                  "description": "The identity of the BastionHost, if configured."
-                },
-                "tags": {
-                  "type": "object",
-                  "description": "Resource tags.",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/BastionHostUpdate"
             }
           }
         ],
@@ -15375,6 +15362,23 @@
           "description": "Sets the IP ACL rules for Developer Bastion Host.",
           "items": {
             "$ref": "#/definitions/IPRule"
+          }
+        }
+      }
+    },
+    "BastionHostUpdate": {
+      "type": "object",
+      "description": "Parameters supplied to update the Bastion Host identity or tags.",
+      "properties": {
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the BastionHost, if configured."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
