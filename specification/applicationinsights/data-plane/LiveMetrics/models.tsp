@@ -295,6 +295,7 @@ union DocumentType {
  * Request document type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model Request extends DocumentIngress {
   @doc("Telemetry type for Request.")
   DocumentType: DocumentType.Request;
