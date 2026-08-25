@@ -21614,6 +21614,10 @@
                       ],
                       "description": "The agent used for this response"
                     },
+                    "model_selection_details": {
+                      "$ref": "#/components/schemas/ModelSelectionDetails",
+                      "description": "Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router."
+                    },
                     "content_filters": {
                       "type": "array",
                       "items": {
@@ -44933,6 +44937,117 @@
           ]
         }
       },
+      "ModelRouterAttempt": {
+        "type": "object",
+        "required": [
+          "model",
+          "result"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "The model targeted in this attempt."
+          },
+          "result": {
+            "$ref": "#/components/schemas/ModelRouterAttemptResult",
+            "description": "How this attempt concluded — whether the model served the request successfully or encountered an error."
+          }
+        },
+        "description": "A single routing attempt targeting a specific model."
+      },
+      "ModelRouterAttemptError": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "A service-defined error code."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable description of the error."
+          }
+        },
+        "description": "Error details returned by a model routing attempt."
+      },
+      "ModelRouterAttemptResult": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599,
+            "description": "The HTTP status code returned by the model."
+          },
+          "headers": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ModelRouterResponseHeaderValue"
+            },
+            "description": "Response headers returned by the model."
+          },
+          "error": {
+            "$ref": "#/components/schemas/ModelRouterAttemptError",
+            "description": "Error details returned when the attempt did not succeed."
+          }
+        },
+        "description": "The HTTP-style result returned by a model routing attempt."
+      },
+      "ModelRouterDetails": {
+        "type": "object",
+        "required": [
+          "mode",
+          "routing_trace"
+        ],
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/ModelRouterMode",
+            "description": "The routing mode for the request."
+          },
+          "routing_trace": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoutingTraceEntry"
+            },
+            "description": "Ordered trace of routing decisions. Contains one entry for Chat Completions, and may contain multiple entries for Responses API or agent scenarios where multiple inference turns occur."
+          }
+        },
+        "description": "Routing decision metadata from Model Router."
+      },
+      "ModelRouterMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "cost",
+              "quality"
+            ]
+          }
+        ],
+        "description": "The routing mode used by Model Router for the request."
+      },
+      "ModelRouterResponseHeaderValue": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "description": "A value returned in a response header from a model routing attempt."
+      },
       "ModelSamplingParams": {
         "type": "object",
         "properties": {
@@ -44961,6 +45076,19 @@
           }
         },
         "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
+      },
+      "ModelSelectionDetails": {
+        "type": "object",
+        "required": [
+          "model_router_details"
+        ],
+        "properties": {
+          "model_router_details": {
+            "$ref": "#/components/schemas/ModelRouterDetails",
+            "description": "Routing decision metadata from Model Router. Present when the request was handled by Model Router."
+          }
+        },
+        "description": "Model selection metadata providing visibility into routing decisions."
       },
       "ModelSourceData": {
         "type": "object",
@@ -51989,6 +52117,10 @@
                 "type": "null"
               }
             ]
+          },
+          "model_selection_details": {
+            "$ref": "#/components/schemas/ModelSelectionDetails",
+            "description": "Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router."
           }
         },
         "description": "Represents a chat completion response returned by model, based on the provided input.",
@@ -75665,6 +75797,10 @@
             ],
             "description": "The agent used for this response"
           },
+          "model_selection_details": {
+            "$ref": "#/components/schemas/ModelSelectionDetails",
+            "description": "Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router."
+          },
           "content_filters": {
             "type": "array",
             "items": {
@@ -85280,6 +85416,33 @@
             "Routines=V2Preview"
           ]
         }
+      },
+      "RoutingTraceEntry": {
+        "type": "object",
+        "required": [
+          "latency_ms",
+          "attempts"
+        ],
+        "properties": {
+          "output_id": {
+            "type": "string",
+            "description": "Identifier of the output item/turn this routing decision is associated with. This is omitted for Chat Completions."
+          },
+          "latency_ms": {
+            "type": "integer",
+            "format": "uint32",
+            "description": "Time in milliseconds spent in the routing decision for this turn."
+          },
+          "attempts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelRouterAttempt"
+            },
+            "minItems": 1,
+            "description": "Ordered list of routing attempts. First element is the initial selection; subsequent elements are fallback attempts. There is always at least one attempt."
+          }
+        },
+        "description": "A single entry in the routing trace representing one inference turn. Each entry contains the latency and the ordered list of attempts for that turn."
       },
       "RubricBasedEvaluatorDefinition": {
         "type": "object",
