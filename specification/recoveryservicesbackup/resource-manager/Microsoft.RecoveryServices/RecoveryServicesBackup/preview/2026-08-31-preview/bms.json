@@ -196,9 +196,6 @@
       "name": "ChildJobDetailsFromCrossTenantVault"
     },
     {
-      "name": "BackupUsageSummariesFromCrossTenantVault"
-    },
-    {
       "name": "OperationFromCrossTenantVault"
     },
     {
@@ -1894,14 +1891,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "filter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "skipToken Filter.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "skipToken"
           }
         ],
         "responses": {
@@ -2152,80 +2141,6 @@
           "final-state-schema": "#/definitions/ValidateOperationsResponse"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupUsageSummaries": {
-      "get": {
-        "operationId": "BackupUsageSummariesFromCrossTenantVault_List",
-        "tags": [
-          "BackupUsageSummariesFromCrossTenantVault",
-          "CrossTenant"
-        ],
-        "description": "Fetches backup management usage summaries from the source vault in a different tenant.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the recovery services vault.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "skipToken Filter.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "skipToken"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CrossTenantBackupManagementUsageList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Cross-Tenant Backup Usage Summaries": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/ListCrossTenantBackupUsageSummaries.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupValidateOperation": {
@@ -11134,6 +11049,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URI to fetch the next page of results, if any."
         }
       }
@@ -11528,24 +11444,6 @@
             "value": "Recover"
           }
         ]
-      }
-    },
-    "CrossTenantBackupManagementUsageList": {
-      "type": "object",
-      "description": "List of backup management usage summaries for cross-tenant restore operations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of backup management usage summaries.",
-          "items": {
-            "$ref": "#/definitions/BackupManagementUsage"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of resources."
-        }
       }
     },
     "CrossTenantJobResourceList": {
@@ -12609,7 +12507,16 @@
           "type": "array",
           "description": "Protected item IDs for which recovery points should be fetched.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems"
+                }
+              ]
+            }
           }
         }
       }

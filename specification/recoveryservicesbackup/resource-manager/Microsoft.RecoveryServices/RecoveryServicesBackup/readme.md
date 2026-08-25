@@ -634,10 +634,6 @@ directive:
     from: bms.json
     where: $.definitions.BulkRestoreRecoveryPointsResponse.properties.value
     reason: The value member of BulkRestoreRecoveryPointsResponse is a dynamic map keyed by the source protected item's ARM ID (service ResourceDictionary<RecoveryPoint>). The key set is caller-supplied and unbounded, so the response is inherently an additionalProperties map and cannot be expressed as a fixed-property object without diverging from the shipped wire.
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: bms.json
-    where: $.definitions.CrossTenantBackupManagementUsageList
-    reason: CrossTenantBackupManagementUsageList is a list of backup-management usage summaries (BackupManagementUsage), which are non-resource metering records with no id/name/type. It is a usage/metrics collection returned by the pass-through summaries GET, not a collection of ARM resources, so ARM resource-identity properties do not apply to it.
   - suppress: LroErrorContent
     from: bms.json
     reason: The azure backup service's API infra handles the conversation from exceptions to custom error CloudError. Changing this would be breaking change for our service.

@@ -6780,7 +6780,11 @@ model FetchRPForBulkRestoreRequest {
   /**
    * Protected item IDs for which recovery points should be fetched.
    */
-  protectedItemIds?: string[];
+  protectedItemIds?: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
+    }
+  ]>[];
 }
 
 /**
@@ -6797,7 +6801,7 @@ model BulkRestoreRecoveryPointsResponse {
   /**
    * The URI to fetch the next page of results, if any.
    */
-  nextLink?: string;
+  nextLink?: url;
 }
 
 /**

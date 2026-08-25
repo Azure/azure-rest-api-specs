@@ -708,7 +708,6 @@ interface BackupChildJobsFromCrossTenantVault {
     JobResource,
     Parameters = {
       ...ListFilterParameter;
-      ...ListSkipTokenParameter;
     },
     Response = ArmResponse<CrossTenantJobResourceList>
   >;
@@ -727,45 +726,6 @@ interface ChildJobDetailsFromCrossTenantVault {
   @added(Versions.v2026_08_31_preview)
   @tag("CrossTenant")
   get is BackupChildJobsFromCrossTenantVaultOps.Read<JobResource>;
-}
-
-// LegacyOperations alias for routes parented at the mapping resource,
-// child = backupUsageSummaries.
-alias BackupUsageSummariesFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...StandardResourceGroupParams;
-    ...CrossTenantVaultMappingParentParameters;
-  },
-  {
-    @doc("Backup usage summary name.")
-    @path
-    @segment("backupUsageSummaries")
-    @key
-    usageName: string;
-  },
-  ResourceName = "BackupUsageSummariesFromCrossTenantVault"
->;
-
-@added(Versions.v2026_03_31_preview)
-@removed(Versions.v2026_05_01)
-@added(Versions.v2026_05_31_preview)
-@removed(Versions.v2026_07_01)
-@added(Versions.v2026_08_31_preview)
-@armResourceOperations
-interface BackupUsageSummariesFromCrossTenantVault {
-  /**
-   * Fetches backup management usage summaries from the source vault in a different tenant.
-   */
-  @added(Versions.v2026_08_31_preview)
-  @tag("CrossTenant")
-  list is BackupUsageSummariesFromCrossTenantVaultOps.List<
-    CrossTenantVaultMapping,
-    Parameters = {
-      ...ListFilterParameter;
-      ...ListSkipTokenParameter;
-    },
-    Response = ArmResponse<CrossTenantBackupManagementUsageList>
-  >;
 }
 
 @added(Versions.v2026_03_31_preview)
@@ -943,25 +903,6 @@ model CrossTenantJobResourceList {
   @pageItems
   @identifiers(#[])
   value?: JobResource[];
-
-  /**
-   * The uri to fetch the next page of resources.
-   */
-  @nextLink
-  nextLink?: string;
-}
-
-/**
- * List of backup management usage summaries for cross-tenant restore operations.
- */
-@added(Versions.v2026_08_31_preview)
-model CrossTenantBackupManagementUsageList {
-  /**
-   * List of backup management usage summaries.
-   */
-  @pageItems
-  @identifiers(#[])
-  value?: BackupManagementUsage[];
 
   /**
    * The uri to fetch the next page of resources.
