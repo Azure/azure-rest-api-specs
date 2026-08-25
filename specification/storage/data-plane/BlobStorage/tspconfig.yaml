@@ -31,10 +31,15 @@ options:
       name: "@azure/storage-blob"
       description: "Azure.Storage.Blob Service"
     flavor: azure
-  # "@azure-tools/typespec-java":
-  #   emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-blob"
-  #   namespace: com.azure.storage.blob
-  #   flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-blob"
+    namespace: "com.azure.storage.blob"
+    flavor: azure
+    generate-tests: false
+    customization-class: "customization/src/main/java/BlobStorageCustomizations.java"
+    models-subpackage: "implementation.models"
+    custom-types-subpackage: "models"
+    custom-types: "AccessTier,AccountKind,AppendBlobItem,AppendBlobRequestConditions,ArchiveStatus,BlobAccessPolicy,BlobAnalyticsLogging,BlobAudience,BlobBeginCopySourceRequestConditions,BlobContainerAccessPolicies,BlobContainerEncryptionScope,BlobContainerItem,BlobContainerItemProperties,BlobContainerListDetails,BlobContainerProperties,BlobCopyInfo,BlobCopySourceTagsMode,BlobCorsRule,BlobDownloadAsyncResponse,BlobDownloadContentAsyncResponse,BlobDownloadContentResponse,BlobDownloadHeaders,BlobDownloadResponse,BlobErrorCode,BlobHttpHeaders,BlobImmutabilityPolicy,BlobImmutabilityPolicyMode,BlobItem,BlobItemProperties,BlobLeaseRequestConditions,BlobLegalHoldResult,BlobListDetails,BlobMetrics,BlobPrefix,BlobProperties,BlobQueryArrowField,BlobQueryArrowFieldType,BlobQueryArrowSerialization,BlobQueryAsyncResponse,BlobQueryDelimitedSerialization,BlobQueryError,BlobQueryHeaders,BlobQueryJsonSerialization,BlobQueryParquetSerialization,BlobQueryProgress,BlobQueryResponse,BlobQuerySerialization,BlobRange,BlobRequestConditions,BlobRetentionPolicy,BlobSeekableByteChannelReadResult,BlobServiceProperties,BlobServiceStatistics,BlobSignedIdentifier,BlobStorageException,BlobType,Block,BlockBlobItem,BlockList,BlockListType,BlockLookupList,ClearRange,ConsistentReadControl,CopyStatusType,CpkInfo,CustomerProvidedKey,DeleteSnapshotsOptionType,DownloadRetryOptions,EncryptionAlgorithmType,FileShareTokenIntent,GeoReplication,GeoReplicationStatus,KeyInfo,LeaseDurationType,LeaseStateType,LeaseStatusType,ListBlobContainersIncludeType,ListBlobContainersOptions,ListBlobsIncludeItem,ListBlobsOptions,ObjectReplicationPolicy,ObjectReplicationRule,ObjectReplicationStatus,PageBlobCopyIncrementalRequestConditions,PageBlobItem,PageBlobRequestConditions,PageList,PageRange,PageRangeItem,ParallelTransferOptions,PathRenameMode,PublicAccessType,RehydratePriority,SequenceNumberActionType,SkuName,StaticWebsite,StorageAccountInfo,StorageResponseSerializationFormat,SyncCopyStatusType,TaggedBlobItem,UserDelegationKey"
   "@azure-tools/typespec-rust":
     package-dir: "azure_storage_blob"
     crate-name: "azure_storage_blob"

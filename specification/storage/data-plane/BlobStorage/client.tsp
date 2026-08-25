@@ -1301,3 +1301,61 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
   "rust"
 )
 scalar HttpRange extends string;
+
+// ---- Java customizations (translated from the csharp scope; java shipped names track csharp) ----
+@@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "java");
+@@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "java");
+@@clientName(StorageErrorCode, "BlobErrorCode", "java");
+@@clientName(Blob, "BlobRestClient", "java");
+@@clientName(Container, "ContainerRestClient", "java");
+@@clientName(Container.listBlobs, "ListBlobFlatSegment", "java");
+@@clientName(Service, "ServiceRestClient", "java");
+@@clientName(BlockBlob, "BlockBlobRestClient", "java");
+@@clientName(PageBlob, "PageBlobRestClient", "java");
+@@clientName(AppendBlob, "AppendBlobRestClient", "java");
+@@clientName(BlobProperties, "BlobPropertiesInternal", "java");
+@@clientName(ImmutabilityPolicyMode, "BlobImmutabilityPolicyMode", "java");
+@@clientName(SignedIdentifiers, "BlobSignedIdentifiers", "java");
+@@clientName(LeaseDuration, "LeaseDurationType", "java");
+@@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "java");
+@@clientName(Blob.setProperties, "SetHttpHeaders", "java");
+@@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "java");
+@@clientName(Container.findBlobsByTags, "FilterBlobs", "java");
+@@clientName(Service.findBlobsByTags, "FilterBlobs", "java");
+@@clientName(Service.listContainers, "ListContainersSegment", "java");
+@@clientName(QueryType, "QueryFormatType", "java");
+@@clientName(QueryType.JSON, "Json", "java");
+@@clientName(ArrowField, "ArrowFieldInternal", "java");
+@@clientName(ArrowConfiguration, "ArrowTextConfigurationInternal", "java");
+@@clientName(ContainerItem, "ContainerItemInternal", "java");
+@@clientName(ContainerProperties, "ContainerPropertiesInternal", "java");
+@@clientName(JsonTextConfiguration, "JsonTextConfigurationInternal", "java");
+@@clientName(StorageServiceStats, "BlobServiceStatistics", "java");
+@@clientName(AccessPolicy.start, "PolicyStartsOn", "java");
+@@clientName(AccessPolicy.expiry, "PolicyExpiresOn", "java");
+@@clientName(AccessPolicy.permission, "Permissions", "java");
+@@clientName(Metrics.includeApis, "IncludeApis", "java");
+@@clientName(BlobType.BlockBlob, "Block", "java");
+@@clientName(BlobType.PageBlob, "Page", "java");
+@@clientName(BlobType.AppendBlob, "Append", "java");
+@@clientName(SkuName.StandardLRS, "StandardLrs", "java");
+@@clientName(SkuName.StandardGRS, "StandardGrs", "java");
+@@clientName(SkuName.StandardRAGRS, "StandardRagrs", "java");
+@@clientName(SkuName.StandardZRS, "StandardZrs", "java");
+@@clientName(SkuName.PremiumLRS, "PremiumLrs", "java");
+@@clientName(SkuName.StandardGZRS, "StandardGzrs", "java");
+@@clientName(SkuName.PremiumZRS, "PremiumZrs", "java");
+@@clientName(SkuName.StandardRAGZRS, "StandardRagzrs", "java");
+@@clientName(BlobDeleteTypeCustom, "BlobDeleteType", "java");
+@@access(BlobProperties, Access.internal, "java");
+@@access(BlobItem, Access.internal, "java");
+@@access(ArrowField, Access.internal, "java");
+@@access(ArrowConfiguration, Access.internal, "java");
+@@access(ContainerItem, Access.internal, "java");
+@@access(ContainerProperties, Access.internal, "java");
+@@access(DelimitedTextConfiguration, Access.internal, "java");
+@@access(JsonTextConfiguration, Access.internal, "java");
+@@access(BlobDeleteTypeCustom, Access.internal, "java");
+// Emit the error enum + list responses standalone for java (queue lesson).
+@@access(StorageErrorCode, Access.public, "java");
+@@usage(StorageErrorCode, Usage.output, "java");
