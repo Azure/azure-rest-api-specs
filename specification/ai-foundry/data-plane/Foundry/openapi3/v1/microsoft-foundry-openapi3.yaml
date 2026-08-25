@@ -41393,7 +41393,7 @@ components:
         - message
       properties:
         code:
-          $ref: '#/components/schemas/AgentInsightRunErrorCode'
+          type: string
           description: Stable, machine-readable error category.
         message:
           type: string
@@ -41723,25 +41723,13 @@ components:
       type: object
       properties:
         lookback_hours:
-          type: integer
-          format: int32
-          minimum: 3
+          type: number
+          format: double
           maximum: 2160
-          description: Optional number of hours of trace history to analyze. Defaults to 168.
+          description: Optional finite positive number of hours of trace history to analyze, up to 2,160. Defaults to 168.
+          exclusiveMinimum: 0
           default: 168
       description: Inputs used when creating an agent insight run.
-    AgentInsightRunErrorCode:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - DeploymentNotFound
-            - Forbidden
-            - ServiceUnavailable
-            - DownstreamFailure
-            - DownstreamTimeout
-            - InternalError
-      description: Public error categories returned for a failed Agent Insights run. Named values are the current stable categories; clients must accept previously unseen values.
     AgentInsightRunResult:
       type: object
       required:

@@ -222,33 +222,10 @@ model AgentInsightUpdate {
   status?: AgentInsightStatus;
 }
 
-/** Public error categories returned for a failed Agent Insights run. Named values are the current stable categories; clients must accept previously unseen values. */
-union AgentInsightRunErrorCode {
-  string,
-
-  /** A configured agent, model deployment, or telemetry resource was not found or is unsupported. */
-  deployment_not_found: "DeploymentNotFound",
-
-  /** The execution identity cannot access a required dependency. */
-  forbidden: "Forbidden",
-
-  /** A required Agent Insights dependency is unavailable. */
-  service_unavailable: "ServiceUnavailable",
-
-  /** A required Agent Insights dependency returned an error. */
-  downstream_failure: "DownstreamFailure",
-
-  /** Analysis exceeded the run deadline. */
-  downstream_timeout: "DownstreamTimeout",
-
-  /** The run failed because of an internal error. */
-  internal_error: "InternalError",
-}
-
 /** Structured error information for an Agent Insights run failure. */
 model AgentInsightError {
   /** Stable, machine-readable error category. */
-  code: AgentInsightRunErrorCode;
+  code: string;
 
   /** Human-readable description of the error. */
   message: string;
@@ -415,10 +392,10 @@ union AgentInsightRunStatus {
 
 /** Inputs used when creating an agent insight run. */
 model AgentInsightRunCreate {
-  /** Optional number of hours of trace history to analyze. Defaults to 168. */
-  @minValue(3)
+  /** Optional finite positive number of hours of trace history to analyze, up to 2,160. Defaults to 168. */
+  @minValueExclusive(0)
   @maxValue(2160)
-  lookback_hours?: int32 = 168;
+  lookback_hours?: float64 = 168;
 }
 
 /** Result statistics produced when an agent insight run succeeds. */
