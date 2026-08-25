@@ -93,7 +93,8 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
   T;
 
 alias ResourceCreatedOrAcceptedResponse<T extends TypeSpec.Reflection.Model> =
-  (TypeSpec.Http.Response<201> & T) | (TypeSpec.Http.Response<202> & T);
+  | (TypeSpec.Http.Response<201> & T)
+  | (TypeSpec.Http.Response<202> & T);
 
 alias MetadataPropertyForRequest = {
   /**

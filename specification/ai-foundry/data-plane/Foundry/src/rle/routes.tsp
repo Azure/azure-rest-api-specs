@@ -26,7 +26,8 @@ interface RLEnvironments {
   createEnvironment is FoundryDataPlaneOperation<
     {
       @doc("The environment to create.")
-      @body body: CreateRLEnvironmentRequest;
+      @body
+      body: CreateRLEnvironmentRequest;
     },
     ResourceCreatedResponse<RLEnvironment>
   >;
@@ -154,7 +155,8 @@ interface RLEInstanceGroups {
       environmentVersion: string;
 
       @doc("The instance group to create.")
-      @body body: CreateRLEInstanceGroupRequest;
+      @body
+      body: CreateRLEInstanceGroupRequest;
     },
     ResourceCreatedResponse<RLEInstanceGroup>
   >;
@@ -351,7 +353,8 @@ interface RLEInstanceRuntime {
       instanceId: string;
 
       @doc("Reset request body.")
-      @body body: RLEResetRequest;
+      @body
+      body: RLEResetRequest;
     },
     RLEStepResult
   >;
@@ -379,7 +382,8 @@ interface RLEInstanceRuntime {
       instanceId: string;
 
       @doc("Step request body.")
-      @body body: RLEStepRequest;
+      @body
+      body: RLEStepRequest;
     },
     RLEStepResult
   >;
