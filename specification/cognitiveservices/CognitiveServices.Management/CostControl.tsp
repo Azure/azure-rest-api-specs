@@ -88,6 +88,32 @@ model CostControlPatch {
 }
 
 /**
+ * Account-level connections used to publish cost control telemetry and events.
+ */
+@added(Versions.v2026_09_15_preview)
+model CostControlConnections {
+  /**
+   * The full resource ID of the Application Insights connection.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted appInsightsConnectionId from an explicit null in PATCH so callers can clear the value."
+  appInsightsConnectionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.MachineLearningServices/workspaces/connections";
+    }
+  ]> | null;
+
+  /**
+   * The full resource ID of the optional Event Grid connection.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted eventGridConnectionId from an explicit null in PATCH so callers can clear the value."
+  eventGridConnectionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.MachineLearningServices/workspaces/connections";
+    }
+  ]> | null;
+}
+
+/**
  * A cost limit and the population to which it applies.
  */
 @added(Versions.v2026_09_15_preview)

@@ -12357,6 +12357,15 @@
               ]
             }
           }
+        },
+        "costControlConnections": {
+          "$ref": "#/definitions/CostControlConnections",
+          "description": "The account-level connections used to publish cost control telemetry and events. Configure this property after account creation.",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       }
     },
@@ -15788,6 +15797,38 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "CostControlConnections": {
+      "type": "object",
+      "description": "Account-level connections used to publish cost control telemetry and events.",
+      "properties": {
+        "appInsightsConnectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full resource ID of the Application Insights connection.",
+          "x-nullable": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.MachineLearningServices/workspaces/connections"
+              }
+            ]
+          }
+        },
+        "eventGridConnectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full resource ID of the optional Event Grid connection.",
+          "x-nullable": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.MachineLearningServices/workspaces/connections"
+              }
+            ]
+          }
+        }
+      }
     },
     "CostControlDimension": {
       "type": "object",

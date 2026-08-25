@@ -1712,6 +1712,14 @@ model AccountProperties {
       type: "Microsoft.CognitiveServices/accounts/costControls";
     }
   ]>[];
+
+  /**
+   * The account-level connections used to publish cost control telemetry and events. Configure this property after account creation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted costControlConnections object from an explicit null in PATCH so callers can clear the value."
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  costControlConnections?: CostControlConnections | null;
 }
 
 /**
