@@ -156,8 +156,9 @@ namespace Azure.AI.Projects {
     output_id?: string;
 
     /** Time in milliseconds spent in the routing decision for this turn. */
+    #suppress "@azure-tools/typespec-azure-core/known-encoding" "Service uses milliseconds."
     @encode(DurationKnownEncoding.milliseconds, uint32)
-    latency_ms: duration;    
+    latency_ms: duration;
 
     /** Ordered list of routing attempts. First element is the initial selection; subsequent elements are fallback attempts. There is always at least one attempt. */
     @minItems(1)
