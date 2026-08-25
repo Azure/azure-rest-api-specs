@@ -119,6 +119,7 @@ union AiGatewayApiKeyTarget {
 }
 
 /** Properties of an AI Gateway. */
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "The AI Gateway resource supports updating ARM tags; its RP-specific properties are read-only."
 @added(Versions.v2026_09_01_preview)
 model AiGatewayProperties {
   /** Runtime hostname used to invoke this AI Gateway. */
@@ -155,9 +156,6 @@ model AiGatewayUpdateParameters {
   /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM resource tags are represented as a string map."
   tags?: Record<string>;
-
-  /** AI Gateway properties. */
-  properties?: AiGatewayProperties;
 }
 
 /** Properties of an AI Gateway workspace. */
