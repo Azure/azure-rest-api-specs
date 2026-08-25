@@ -328,6 +328,7 @@ namespace Azure.ResourceManager.Models {
  * Deletes an existing New Relic monitor resource from your Azure subscription, removing the integration and stopping the observability of your Azure resources through New Relic
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Override to reorder parameters for the Go SDK"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Operation is intentionally declared at namespace scope to preserve the existing Go SDK parameter ordering."
 op newRelicMonitorResourceDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,

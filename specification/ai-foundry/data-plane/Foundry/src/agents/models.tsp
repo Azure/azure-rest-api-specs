@@ -162,6 +162,7 @@ model AgentObject {
   @visibility(Lifecycle.Read)
   state_source?: AgentStateSource;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("The latest version of the agent.")
   versions: {
     latest: AgentVersionObject;
@@ -335,7 +336,7 @@ model PromptAgentDefinition extends AgentDefinition {
     """)
   tools?: OpenAI.Tool[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @doc("""
     How the model should select which tool (or tools) to use when generating a response.
     See the `tools` parameter to see how to specify which tools the model can call.
@@ -360,10 +361,10 @@ model PromptAgentDefinitionTextOptions {
 }
 
 /**
-* The workflow agent definition. Microsoft Foundry is retiring workflows on December 1, 2026. 
-* If you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows,
-* see the [Migration guide](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide).
-*/
+ * The workflow agent definition. Microsoft Foundry is retiring workflows on December 1, 2026.
+ * If you're looking to build new workflows, use Microsoft Agent Framework. To migrate existing workflows,
+ * see the [Migration guide](https://learn.microsoft.com/azure/foundry/agents/concepts/workflow#migration-guide).
+ */
 #deprecated "deprecated"
 @extension(
   "x-ms-foundry-meta",
@@ -381,6 +382,30 @@ model ContainerConfiguration {
   @doc("The container image for the hosted agent.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image: string;
+
+  @doc("""
+    The id (or name) of the Foundry project connection that provides the credentials used to
+    authenticate to the private container registry hosting `image`. The connection abstracts the
+    auth mechanism — for example a managed-identity-federated token exchange, or a username/token
+    secret — so registry credentials are never part of the agent definition. Omit for public images
+    or registries already reachable by the platform's default identity (for example, Azure Container Registry).
+    """)
+  @example("my-registry-connection")
+  registry_connection_id?: string;
+}
+
+@doc("Session defaults applied to sessions created for a hosted agent version.")
+model SessionConfiguration {
+  @doc("""
+    The idle duration, in seconds, before a session's sandbox is suspended. Optional — when
+    unset, the server default of 900 seconds is used. Must be between 300 and 3600 seconds
+    (inclusive).
+    """)
+  @minValue(duration.fromISO("PT300S"))
+  @maxValue(duration.fromISO("PT3600S"))
+  @example(duration.fromISO("PT300S"))
+  @encode(DurationKnownEncoding.seconds, int32)
+  idle_timeout_seconds?: duration = duration.fromISO("PT900S");
 }
 
 @doc("Code-based deployment configuration for a hosted agent.")
@@ -472,6 +497,10 @@ model HostedAgentDefinition extends AgentDefinition {
 
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
   telemetry_config?: TelemetryConfig;
+
+  @doc("Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.")
+  @example(#{ idle_timeout_seconds: duration.fromISO("PT300S") })
+  session_configuration?: SessionConfiguration;
 }
 
 @doc("The container app agent definition.")

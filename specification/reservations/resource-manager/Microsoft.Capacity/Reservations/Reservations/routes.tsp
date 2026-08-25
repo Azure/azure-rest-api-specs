@@ -68,7 +68,9 @@ interface ReservationOperationGroup {
 /**
  * Get the regions and skus that are available for RI purchase for the specified Azure subscription.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" ""
 @summary("Get the regions and skus that are available for RI purchase for the specified Azure subscription.")
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/catalogs")
 @get
