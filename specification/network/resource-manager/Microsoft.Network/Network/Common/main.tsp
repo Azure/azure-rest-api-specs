@@ -102,7 +102,7 @@ enum Features {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   virtualNetworkAppliance,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  /** NeuroShield resource types. */
   @added(Versions.v2026_01_01)
   neuroShield,
 

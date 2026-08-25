@@ -28024,10 +28024,10 @@ model NeuroShieldPatch {
 /**
  * ARM tracked resource representing a NeuroShield instance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to suppress non-resource metadata in emitted payloads for the ARM resource envelope."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Uses the package's ChildResource and TrackedResource ARM envelope pattern for nested NeuroShield resources."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Resource envelope inheritance is required to emit standard ARM id, name, type, and systemData fields."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-01-01 follows this project-wide convention."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "The shared CommonTrackedResource is a private legacy template required to preserve the existing Microsoft.Network ARM resource envelope."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "The legacy Microsoft.Network project models tracked resources through the shared custom CommonTrackedResource envelope, matching existing IPAM resources."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance from CommonTrackedResource is required by this legacy project to emit the standard ARM id, name, type, location, tags, and systemData fields."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network uses Azure.ResourceManager.Legacy feature templates to emit feature-specific Swagger files from the shared project."
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.neuroShield)
 model NeuroShieldResource extends CommonTrackedResource {
