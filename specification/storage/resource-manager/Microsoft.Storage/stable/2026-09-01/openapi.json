@@ -17991,15 +17991,15 @@
       "type": "string",
       "description": "The type of the backing data source for storage connector",
       "enum": [
-        "AzureDataShare"
+        "Azure_DataShare"
       ],
       "x-ms-enum": {
         "name": "StorageConnectorDataSourceType",
         "modelAsString": true,
         "values": [
           {
-            "name": "AzureDataShare",
-            "value": "AzureDataShare",
+            "name": "Azure_DataShare",
+            "value": "Azure_DataShare",
             "description": "Azure DataShare data source type."
           }
         ]
@@ -18038,6 +18038,11 @@
               }
             ]
           }
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "System-generated creation time of the Storage Connector in ISO 8601 date-time format (YYYY-MM-DDTHH:mm:ssZ).\nNot a valid input parameter during creating.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
