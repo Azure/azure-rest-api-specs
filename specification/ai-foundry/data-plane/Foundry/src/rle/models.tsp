@@ -2,6 +2,7 @@ import "../common/service.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -98,6 +99,7 @@ model RLEnvironment {
   updatedAtUtc: utcDateTime;
 }
 
+@clientName("CreateRLEnvironmentContent", "csharp")
 @doc("Request body for creating a hosted RLE environment.")
 model CreateRLEnvironmentRequest {
   @doc("Optional caller-provided display name for the environment.")
@@ -110,6 +112,7 @@ model CreateRLEnvironmentRequest {
   versionBump?: RLEnvironmentVersionBump;
 }
 
+@clientName("ListRLEnvironmentsResult", "csharp")
 @doc("A page of hosted RLE environments, with an opaque continuation token for fetching the next page.")
 model ListRLEnvironmentsResponse {
   @doc("Environments on this page.")
@@ -119,6 +122,7 @@ model ListRLEnvironmentsResponse {
   nextContinuationToken?: string;
 }
 
+@clientName("ListRLEnvironmentVersionsResult", "csharp")
 @doc("A page of environment versions, with an opaque continuation token for fetching the next page.")
 model ListRLEnvironmentVersionsResponse {
   @doc("Environment versions on this page. Each item is a full environment snapshot for a specific version.")
@@ -193,6 +197,7 @@ model RLEInstanceGroup {
   updatedAtUtc: utcDateTime;
 }
 
+@clientName("CreateRLEInstanceGroupContent", "csharp")
 @doc("Request body for creating an RLE instance group. The environment name and version are supplied in the request URI.")
 model CreateRLEInstanceGroupRequest {
   @doc("Maximum number of concurrently-active instances the group may hold. Optional; defaults to 1 when omitted.")
@@ -205,6 +210,7 @@ model CreateRLEInstanceGroupRequest {
   resourceProfile?: RLEInstanceGroupResourceProfile;
 }
 
+@clientName("ListRLEInstanceGroupsResult", "csharp")
 @doc("A page of RLE instance groups, with an opaque continuation token for fetching the next page.")
 model ListRLEInstanceGroupsResponse {
   @doc("Instance groups on this page.")
@@ -260,6 +266,7 @@ model RLEInstance {
   @visibility(Lifecycle.Read)
   status: RLEInstanceStatus;
 
+  @clientName("baseUri", "csharp")
   @doc("Base URL clients use to reach the instance's data-plane (OpenEnv) endpoints, when running.")
   @visibility(Lifecycle.Read)
   baseUrl?: string;
@@ -281,6 +288,7 @@ model RLEInstance {
 // Runtime (data-plane) request and response shapes
 // ============================================================================
 
+@clientName("RLEResetContent", "csharp")
 @doc("Request body for starting or restarting an RLE environment episode.")
 model RLEResetRequest {
   @doc("Optional deterministic seed for the next episode.")
@@ -290,6 +298,7 @@ model RLEResetRequest {
   episodeId?: string;
 }
 
+@clientName("RLEStepContent", "csharp")
 @doc("Request body for applying an action to the current RLE episode.")
 model RLEStepRequest {
   @doc("Environment-specific action payload.")
