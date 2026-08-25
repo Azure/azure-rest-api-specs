@@ -10688,6 +10688,57 @@
         }
       }
     },
+    "CapacityGpuGroup": {
+      "type": "object",
+      "description": "GPU capacity for devices grouped by type, mode, and partition size.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "GPU type represented by the group.",
+          "readOnly": true
+        },
+        "mode": {
+          "type": "string",
+          "description": "GPU assignment mode represented by the group.",
+          "readOnly": true
+        },
+        "partitionSizeInMB": {
+          "type": "string",
+          "description": "Partition size in megabytes, represented as a decimal string.",
+          "readOnly": true
+        },
+        "totalAssignableGpuCount": {
+          "type": "string",
+          "description": "Total number of assignable GPUs, represented as a decimal string.",
+          "readOnly": true
+        },
+        "reservedAssignableGpuCount": {
+          "type": "string",
+          "description": "Number of assignable GPUs reserved by policy, represented as a decimal string.",
+          "readOnly": true
+        },
+        "consumedAssignableGpuCount": {
+          "type": "string",
+          "description": "Number of assignable GPUs consumed by workloads, represented as a decimal string.",
+          "readOnly": true
+        },
+        "totalPartitionableGpuCount": {
+          "type": "string",
+          "description": "Total number of partitionable GPUs, represented as a decimal string.",
+          "readOnly": true
+        },
+        "reservedPartitionableGpuCount": {
+          "type": "string",
+          "description": "Number of partitionable GPUs reserved by policy, represented as a decimal string.",
+          "readOnly": true
+        },
+        "consumedPartitionableGpuCount": {
+          "type": "string",
+          "description": "Number of partitionable GPUs consumed by workloads, represented as a decimal string.",
+          "readOnly": true
+        }
+      }
+    },
     "CapacityGpuSnapshot": {
       "type": "object",
       "description": "Cluster-wide GPU capacity summary.",
@@ -10727,6 +10778,19 @@
           "format": "int32",
           "description": "GPU-P partitions available for placement.",
           "readOnly": true
+        },
+        "groups": {
+          "type": "array",
+          "description": "GPU capacity grouped by type, mode, and partition size.",
+          "items": {
+            "$ref": "#/definitions/CapacityGpuGroup"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "type",
+            "mode",
+            "partitionSizeInMB"
+          ]
         },
         "lastUpdated": {
           "type": "string",
@@ -11086,6 +11150,37 @@
           "type": "string",
           "format": "date-time",
           "description": "Last storage update time.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityVolumeSnapshot": {
+      "type": "object",
+      "description": "Capacity details for a volume reported by the cluster.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the volume.",
+          "readOnly": true
+        },
+        "path": {
+          "type": "string",
+          "description": "Path of the volume.",
+          "readOnly": true
+        },
+        "sizeInBytes": {
+          "type": "string",
+          "description": "Total size of the volume in bytes, represented as a decimal string.",
+          "readOnly": true
+        },
+        "sizeRemainingInBytes": {
+          "type": "string",
+          "description": "Remaining size of the volume in bytes, represented as a decimal string.",
+          "readOnly": true
+        },
+        "sizeConsumedInBytes": {
+          "type": "string",
+          "description": "Consumed size of the volume in bytes, represented as a decimal string.",
           "readOnly": true
         }
       }
@@ -11882,6 +11977,12 @@
             ]
           },
           "readOnly": true
+        },
+        "localAvailabilityZoneCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of local availability zones configured in the cluster.",
+          "readOnly": true
         }
       }
     },
@@ -12382,6 +12483,37 @@
         }
       ],
       "x-ms-discriminator-value": "DeleteVolume"
+    },
+    "DeploymentCapacityPolicy": {
+      "type": "object",
+      "description": "Day Zero capacity placement policy supplied via Deployment Settings. Mirrors the\npatchable shape of AppliedCapacityPolicy so the values can be plumbed into the\nCapacity Settings singleton at cluster creation time.",
+      "properties": {
+        "cpuOvercommitRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Cluster-wide CPU overcommit ratio used to calculate effective vCPU capacity.",
+          "minimum": 1
+        },
+        "systemReservationRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Cluster-wide system reservation ratio that holds back a fraction of effective\ncapacity for platform and system overhead. Default: 0.05.",
+          "minimum": 0.05
+        },
+        "failureDomainReservationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of failure domains to reserve for n+1/n+2 style placement planning.",
+          "minimum": 0
+        },
+        "reservedNodes": {
+          "type": "array",
+          "description": "Explicit node names held back from placement for upgrade or maintenance.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "DeploymentCluster": {
       "type": "object",
@@ -14044,7 +14176,9 @@
         "AzureStackLCMUserCredential",
         "DefaultARBApplication",
         "LocalAdminCredential",
-        "WitnessStorageKey"
+        "WitnessStorageKey",
+        "chapCredential",
+        "mutualChapCredential"
       ],
       "x-ms-enum": {
         "name": "EceSecrets",
@@ -14069,6 +14203,16 @@
             "name": "WitnessStorageKey",
             "value": "WitnessStorageKey",
             "description": "WitnessStorageKey used for setting up a cloud witness for AzureStackHCI cluster."
+          },
+          {
+            "name": "chapCredential",
+            "value": "chapCredential",
+            "description": "chapCredential used for iSCSI CHAP authentication during edge machine node preparation."
+          },
+          {
+            "name": "mutualChapCredential",
+            "value": "mutualChapCredential",
+            "description": "mutualChapCredential used for iSCSI mutual (bidirectional) CHAP authentication during edge machine node preparation."
           }
         ]
       }
@@ -17269,6 +17413,12 @@
           "$ref": "#/definitions/Architecture",
           "description": "CPU architecture of the machine, for example amd64 or arm64.",
           "readOnly": true
+        },
+        "logicalCoreCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of logical (SMT/hyper-threaded) cores in the machine, synchronized from Arc Machine DetectedProperties.",
+          "readOnly": true
         }
       }
     },
@@ -18862,6 +19012,7 @@
         "NotStarted",
         "InProgress",
         "Completed",
+        "Skipped",
         "Failed"
       ],
       "x-ms-enum": {
@@ -18882,6 +19033,11 @@
             "name": "Completed",
             "value": "Completed",
             "description": "Operation has completed successfully."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "Operation was skipped."
           },
           {
             "name": "Failed",
@@ -21113,6 +21269,10 @@
               }
             ]
           }
+        },
+        "capacityPolicy": {
+          "$ref": "#/definitions/DeploymentCapacityPolicy",
+          "description": "Optional Day Zero capacity policy used to seed the cluster's Capacity Settings\nsingleton during deployment. When omitted, the service uses its own defaults."
         }
       }
     },
@@ -22498,6 +22658,7 @@
         "GrantInProgress",
         "RevokeInProgress",
         "Succeeded",
+        "PartiallySucceeded",
         "Failed"
       ],
       "x-ms-enum": {
@@ -22523,6 +22684,11 @@
             "name": "Succeeded",
             "value": "Succeeded",
             "description": "The last operation completed successfully."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The last operation succeeded on some nodes but failed on others."
           },
           {
             "name": "Failed",
@@ -22672,6 +22838,17 @@
           "$ref": "#/definitions/CapacityStorageSnapshot",
           "description": "Storage capacity aggregated from eligible user Cluster Volume resources.",
           "readOnly": true
+        },
+        "volumes": {
+          "type": "array",
+          "description": "Capacity details for volumes reported by the cluster.",
+          "items": {
+            "$ref": "#/definitions/CapacityVolumeSnapshot"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "cpu": {
           "$ref": "#/definitions/CapacityCpuSnapshot",
@@ -24027,6 +24204,11 @@
           "type": "integer",
           "format": "int64",
           "description": "Number of storage disks in the device with $CanPool as true.",
+          "readOnly": true
+        },
+        "localAvailabilityZoneName": {
+          "type": "string",
+          "description": "Local availability zone name assigned to this edge machine after a ConfigureLocalAvailabilityZone job succeeds.",
           "readOnly": true
         }
       }

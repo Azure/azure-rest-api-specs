@@ -589,6 +589,12 @@ union RemoteSupportProvisioningState {
   Succeeded: "Succeeded",
 
   /**
+   * The last operation succeeded on some nodes but failed on others.
+   */
+  @added(Versions.v2026_10_15_preview)
+  PartiallySucceeded: "PartiallySucceeded",
+
+  /**
    * The last operation failed.
    */
   Failed: "Failed",
@@ -842,6 +848,18 @@ union EceSecrets {
    * WitnessStorageKey used for setting up a cloud witness for AzureStackHCI cluster.
    */
   WitnessStorageKey: "WitnessStorageKey",
+
+  /**
+   * chapCredential used for iSCSI CHAP authentication during edge machine node preparation.
+   */
+  @added(Versions.v2026_10_15_preview)
+  chapCredential: "chapCredential",
+
+  /**
+   * mutualChapCredential used for iSCSI mutual (bidirectional) CHAP authentication during edge machine node preparation.
+   */
+  @added(Versions.v2026_10_15_preview)
+  mutualChapCredential: "mutualChapCredential",
 }
 
 /**
@@ -1836,6 +1854,10 @@ union LifecycleOperationStatus {
   /** Operation has completed successfully. */
   Completed: "Completed",
 
+  /** Operation was skipped. */
+  @added(Versions.v2026_10_15_preview)
+  Skipped: "Skipped",
+
   /** Operation has failed. */
   Failed: "Failed",
 }
@@ -2601,6 +2623,13 @@ model ClusterReportedProperties {
    */
   @visibility(Lifecycle.Read)
   hardwareClass?: HardwareClass = HardwareClass.Medium;
+
+  /**
+   * Number of local availability zones configured in the cluster.
+   */
+  @added(Versions.v2026_10_15_preview)
+  @visibility(Lifecycle.Read)
+  localAvailabilityZoneCount?: int32;
 }
 
 /**
@@ -4011,6 +4040,45 @@ model OptionalServices {
    */
   @added(Versions.v2026_10_15_preview)
   confidentialVmIntent?: ConfidentialVmIntent = ConfidentialVmIntent.Disable;
+
+  /**
+   * Optional Day Zero capacity policy used to seed the cluster's Capacity Settings
+   * singleton during deployment. When omitted, the service uses its own defaults.
+   */
+  @added(Versions.v2026_10_15_preview)
+  capacityPolicy?: DeploymentCapacityPolicy;
+}
+
+/**
+ * Day Zero capacity placement policy supplied via Deployment Settings. Mirrors the
+ * patchable shape of AppliedCapacityPolicy so the values can be plumbed into the
+ * Capacity Settings singleton at cluster creation time.
+ */
+@added(Versions.v2026_10_15_preview)
+model DeploymentCapacityPolicy {
+  /**
+   * Cluster-wide CPU overcommit ratio used to calculate effective vCPU capacity.
+   */
+  @minValue(1.0)
+  cpuOvercommitRatio?: float32;
+
+  /**
+   * Cluster-wide system reservation ratio that holds back a fraction of effective
+   * capacity for platform and system overhead. Default: 0.05.
+   */
+  @minValue(0.05)
+  systemReservationRatio?: float32;
+
+  /**
+   * Number of failure domains to reserve for n+1/n+2 style placement planning.
+   */
+  @minValue(0)
+  failureDomainReservationCount?: int32;
+
+  /**
+   * Explicit node names held back from placement for upgrade or maintenance.
+   */
+  reservedNodes?: string[];
 }
 
 /**
@@ -7982,6 +8050,13 @@ model HardwareProfile {
   @added(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   architecture?: Architecture;
+
+  /**
+   * Number of logical (SMT/hyper-threaded) cores in the machine, synchronized from Arc Machine DetectedProperties.
+   */
+  @added(Versions.v2026_10_15_preview)
+  @visibility(Lifecycle.Read)
+  logicalCoreCount?: int64;
 }
 
 /**
@@ -7994,6 +8069,13 @@ model StorageProfile {
    */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
+
+  /**
+   * Local availability zone name assigned to this edge machine after a ConfigureLocalAvailabilityZone job succeeds.
+   */
+  @added(Versions.v2026_10_15_preview)
+  @visibility(Lifecycle.Read)
+  localAvailabilityZoneName?: string;
 }
 
 /**
@@ -11631,6 +11713,11 @@ model ReportedCapacitySnapshot {
   @visibility(Lifecycle.Read)
   storage?: CapacityStorageSnapshot;
 
+  /** Capacity details for volumes reported by the cluster. */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["id"])
+  volumes?: CapacityVolumeSnapshot[];
+
   /** CPU capacity summary. */
   @visibility(Lifecycle.Read)
   cpu?: CapacityCpuSnapshot;
@@ -11676,6 +11763,30 @@ model CapacityStorageSnapshot {
   /** Last storage update time. */
   @visibility(Lifecycle.Read)
   lastUpdated?: utcDateTime;
+}
+
+/** Capacity details for a volume reported by the cluster. */
+@added(Versions.v2026_10_15_preview)
+model CapacityVolumeSnapshot {
+  /** Unique identifier of the volume. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /** Path of the volume. */
+  @visibility(Lifecycle.Read)
+  path?: string;
+
+  /** Total size of the volume in bytes, represented as a decimal string. */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: string;
+
+  /** Remaining size of the volume in bytes, represented as a decimal string. */
+  @visibility(Lifecycle.Read)
+  sizeRemainingInBytes?: string;
+
+  /** Consumed size of the volume in bytes, represented as a decimal string. */
+  @visibility(Lifecycle.Read)
+  sizeConsumedInBytes?: string;
 }
 
 /** Cluster-wide CPU capacity summary. */
@@ -11781,9 +11892,55 @@ model CapacityGpuSnapshot {
   @visibility(Lifecycle.Read)
   effectiveAvailablePartitionCount?: int32;
 
+  /** GPU capacity grouped by type, mode, and partition size. */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["type", "mode", "partitionSizeInMB"])
+  groups?: CapacityGpuGroup[];
+
   /** Last GPU inventory update time. */
   @visibility(Lifecycle.Read)
   lastUpdated?: utcDateTime;
+}
+
+/** GPU capacity for devices grouped by type, mode, and partition size. */
+@added(Versions.v2026_10_15_preview)
+model CapacityGpuGroup {
+  /** GPU type represented by the group. */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /** GPU assignment mode represented by the group. */
+  @visibility(Lifecycle.Read)
+  mode?: string;
+
+  /** Partition size in megabytes, represented as a decimal string. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches the capacity response wire format."
+  @visibility(Lifecycle.Read)
+  partitionSizeInMB?: string;
+
+  /** Total number of assignable GPUs, represented as a decimal string. */
+  @visibility(Lifecycle.Read)
+  totalAssignableGpuCount?: string;
+
+  /** Number of assignable GPUs reserved by policy, represented as a decimal string. */
+  @visibility(Lifecycle.Read)
+  reservedAssignableGpuCount?: string;
+
+  /** Number of assignable GPUs consumed by workloads, represented as a decimal string. */
+  @visibility(Lifecycle.Read)
+  consumedAssignableGpuCount?: string;
+
+  /** Total number of partitionable GPUs, represented as a decimal string. */
+  @visibility(Lifecycle.Read)
+  totalPartitionableGpuCount?: string;
+
+  /** Number of partitionable GPUs reserved by policy, represented as a decimal string. */
+  @visibility(Lifecycle.Read)
+  reservedPartitionableGpuCount?: string;
+
+  /** Number of partitionable GPUs consumed by workloads, represented as a decimal string. */
+  @visibility(Lifecycle.Read)
+  consumedPartitionableGpuCount?: string;
 }
 
 /** Cluster-wide workload networking capacity summary. */
