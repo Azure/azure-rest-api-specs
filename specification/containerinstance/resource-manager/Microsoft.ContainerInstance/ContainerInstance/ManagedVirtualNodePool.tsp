@@ -235,6 +235,14 @@ interface ManagedVirtualNodePools {
   >;
 
   /**
+   * List managed virtual node pools by subscription.
+   */
+  listBySubscription is ArmListBySubscription<
+    ManagedVirtualNodePool,
+    Error = CloudError
+  >;
+
+  /**
    * Create or update a managed virtual node pool.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
