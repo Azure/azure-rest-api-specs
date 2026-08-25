@@ -866,12 +866,7 @@ interface Blob {
         @header("x-ms-access-tier-inferred")
         accessTierInferred?: boolean;
 
-        /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-        #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-        @added(Versions.v2026_10_06)
-        @encode("rfc7231")
-        @header("x-ms-access-tier-change-time")
-        accessTierChangeTime?: utcDateTime;
+        ...AccessTierChangeTimeResponseHeaderV2026_10_06;
 
         /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
         @added(Versions.v2026_10_06)
@@ -943,12 +938,7 @@ interface Blob {
         @header("x-ms-access-tier-inferred")
         accessTierInferred?: boolean;
 
-        /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-        #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-        @added(Versions.v2026_10_06)
-        @encode("rfc7231")
-        @header("x-ms-access-tier-change-time")
-        accessTierChangeTime?: utcDateTime;
+        ...AccessTierChangeTimeResponseHeaderV2026_10_06;
 
         /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
         @added(Versions.v2026_10_06)
@@ -1035,11 +1025,7 @@ interface Blob {
       @alternateType(string, "go")
       archiveStatus?: ArchiveStatus;
 
-      /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-      @encode("rfc7231")
-      @header("x-ms-access-tier-change-time")
-      accessTierChangeTime?: utcDateTime;
+      ...AccessTierChangeTimeResponseHeader;
 
       /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
       @added(Versions.v2026_06_06)
@@ -2260,12 +2246,7 @@ interface BlockBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
-
-      /** The CRC64 hash of the content. */
-      @added(Versions.v2026_10_06)
-      @header("x-ms-content-crc64")
-      contentCrc64?: bytes;
-
+      ...ContentCrc64ResponseHeaderV2026_10_06;
       ...VersionIdResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;

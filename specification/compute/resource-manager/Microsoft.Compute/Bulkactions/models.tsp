@@ -890,6 +890,19 @@ model GetOperationStatusResponse {
   results: Array<ResourceOperation>;
 }
 
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The paged response for virtual machine operation statuses in a BulkCreateCustom operation.")
+model BulkCreateCustomOperationStatusListResult {
+  @pageItems
+  @identifiers(#["resourceId"])
+  @doc("The virtual machine operation statuses on this page.")
+  results: Array<ResourceOperation>;
+
+  @nextLink
+  @doc("The link to the next page of operation statuses.")
+  nextLink?: url;
+}
+
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Static read response for the singleton bulk VM operations proxy endpoint")
 model BulkVmOperationsReadResponse {
