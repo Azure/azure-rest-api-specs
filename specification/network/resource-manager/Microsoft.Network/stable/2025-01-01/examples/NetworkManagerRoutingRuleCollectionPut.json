@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "configurationName": "myTestRoutingConfig",
+    "ruleCollectionName": "testRuleCollection",
+    "ruleCollection": {
+      "properties": {
+        "description": "A sample policy",
+        "appliesTo": [
+          {
+            "networkGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/routingConfigurations/myTestRoutingConfig/ruleCollections/testRuleCollection",
+        "name": "myTestRoutingConfig",
+        "type": "Microsoft.Network/networkManagers/routingConfigurations/ruleCollections",
+        "systemData": {
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "createdAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z"
+        },
+        "properties": {
+          "description": "A sample policy",
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "disableBgpRoutePropagation": "False",
+          "appliesTo": [
+            {
+              "networkGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/routingConfigurations/myTestRoutingConfig",
+        "name": "myTestRoutingConfig",
+        "type": "Microsoft.Network/networkManagers/routingConfigurations",
+        "systemData": {
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "createdAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z"
+        },
+        "properties": {
+          "description": "A sample policy",
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "disableBgpRoutePropagation": "False",
+          "appliesTo": [
+            {
+              "networkGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
