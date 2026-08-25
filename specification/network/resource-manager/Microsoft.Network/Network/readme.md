@@ -5169,9 +5169,15 @@ directive:
     reason: The resource name parameter 'virtualNetworkGatewayName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
   - suppress: ResourceNameRestriction
     from: expressRoute.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}/listKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}/listKeys"]
     reason: The resource name parameters 'circuitName', 'authorizationName' and 'expressRoutePortName' are existing parent/resource path parameters shipped in prior API versions without a 'pattern' restriction. Adding a pattern constraint now would be a breaking change, and these same parameters are referenced by all existing ExpressRoute circuit/port authorization APIs.
   - suppress: LatestVersionOfCommonTypesMustBeUsed
     from: expressRoute.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}/listKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}/listKeys"]
     reason: expressRoute.json references common-types v5 uniformly across the entire file. The common-types version is set project-wide by the TypeSpec emitter, so the new listKeys paths inherit v5 like every other path. Upgrading only these paths to v6 would create an inconsistent mix of common-types versions within a single file; a file-wide v5-to-v6 upgrade is out of scope for this change.
   - suppress: ParametersInPost
     from: virtualNetworkGateway.json
