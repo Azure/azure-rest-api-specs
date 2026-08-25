@@ -10914,7 +10914,7 @@ model AuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -26929,12 +26929,6 @@ enum SingletonResource {
 
 @mediaTypeHint("application/json")
 scalar stringApplicationJson extends string;
-
-/**
- * A secret string value that is masked by tooling and SDKs. Emits `format: password`.
- */
-@secret
-scalar secretString extends string;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
