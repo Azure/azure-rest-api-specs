@@ -127,6 +127,9 @@
       "name": "AvailableWorkloadProfiles"
     },
     {
+      "name": "AvailableEnvironmentModes"
+    },
+    {
       "name": "BillingMeters"
     },
     {
@@ -319,6 +322,49 @@
         "x-ms-examples": {
           "List Container Apps Jobs by subscription": {
             "$ref": "./examples/Jobs_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/availableManagedEnvironmentsModes": {
+      "get": {
+        "operationId": "AvailableEnvironmentModes_List",
+        "tags": [
+          "AvailableEnvironmentModes"
+        ],
+        "summary": "Get available environment modes by location.",
+        "description": "Gets the environment modes available to a subscription in a location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AvailableEnvironmentModesCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailableEnvironmentModes_List": {
+            "$ref": "./examples/AvailableEnvironmentModes_List.json"
           }
         },
         "x-ms-pageable": {
@@ -10042,6 +10088,66 @@
           "description": "The RuntimeVersion of the Authentication / Authorization feature in use for the current app.\nThe setting in this value can control the behavior of certain features in the Authentication / Authorization module."
         }
       }
+    },
+    "AvailableEnvironmentMode": {
+      "type": "object",
+      "description": "An environment mode available to the subscription.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The Azure region in which the environment mode is available.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/AvailableEnvironmentModeProperties",
+          "description": "The environment mode details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvailableEnvironmentModeProperties": {
+      "type": "object",
+      "description": "Details that describe an available environment mode.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the environment mode.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the environment mode.",
+          "readOnly": true
+        }
+      }
+    },
+    "AvailableEnvironmentModesCollection": {
+      "type": "object",
+      "description": "Collection of environment modes available in the location.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AvailableEnvironmentMode items on this page",
+          "items": {
+            "$ref": "#/definitions/AvailableEnvironmentMode"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "AvailableOperations": {
       "type": "object",
