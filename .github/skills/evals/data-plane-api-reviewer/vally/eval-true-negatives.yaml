@@ -103,6 +103,10 @@ stimuli:
         config:
           pattern: "\\*\\*\\[DP-MODEL-01\\]"
       - type: output-not-matches
+        name: "no action-route false positive"
+        config:
+          pattern: "\\*\\*\\[DP-MODEL-06\\]"
+      - type: output-not-matches
         name: "no blocking findings"
         config:
           pattern: "(?is)^\\s*#{1,6}[^\\n]*\\bBlocking\\b[^\\n]*\\n(?:(?!\\s*#{1,6})[^\\n]*\\n)*?\\s*(?:[-*+]\\s*|\\d+[.)]\\s*)?\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\]"
@@ -110,6 +114,7 @@ stimuli:
     rubric:
       - "`POST /text:analyze` is a genuine computation, not a CRUD operation in disguise. It creates no addressable resource, retains nothing, and its result cannot be fetched by identity later. The @doc says so explicitly."
       - The agent MUST NOT report DP-MODEL-01 (CRUD in disguise) or recommend converting the analyze action into a resource with PUT/GET/DELETE. That is the specific trap this stimulus exists to catch, and any such finding is a test failure.
+      - The agent MUST NOT report DP-MODEL-06 because `/text:analyze` already follows the collection action URL pattern.
       - The agent MUST NOT report any Blocking (🔴) finding.
       - Recognising in prose that the action is legitimate, or asking a clarifying question at 💡 Suggestion severity, is acceptable and does not affect the grade.
 

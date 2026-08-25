@@ -119,6 +119,7 @@ shape, and against treating terse documentation as suspicious. Both files are
 linter-clean without depending on the interlock.
 
 ### `version-pairs/tn-standard-mandated-route/`
+
 Class 7, the linter→agent handoff. Every route carries a `/v2` prefix, applied
 at namespace level, and it is **identical in both versions** — this PR does not
 introduce it. The namespace `@doc` states that `/v2/` is fixed by the OCI
@@ -130,7 +131,7 @@ breaking change; and an external protocol dictates the shape.
 
 **This is the only fixture that tests the premise `DP-VERSION-04` rests on.**
 The lint rule for this guideline was withdrawn because all 254 corpus sites
-were unfixable; the agent's claim to it is *solely* that it can tell a new route
+were unfixable; the agent's claim to it is _solely_ that it can tell a new route
 from a pre-existing one. Paired with `new-route-version-segment/` in
 `eval-versioning.yaml`: an agent passing the positive while failing this one is
 not making the distinction, it is flagging every `/v2/` it sees — the withdrawn
@@ -173,6 +174,7 @@ full marks — that trigger is capped at Question severity. Consumed by
 `tn-error-prose-without-codes`.
 
 ## Positive fixtures — findings are expected
+
 The original fixtures are mostly dense capability probes. The two rationale
 fixtures are deliberately sparse: each has one supported design finding amid
 otherwise conventional surface.
@@ -180,7 +182,7 @@ otherwise conventional surface.
 `version-pairs/new-route-version-segment/` extends that pattern to versioning,
 and is deliberately the hardest positive in the corpus. Its `/v2/` route carries
 a fluent justification — the evaluation engine is versioned independently, so
-callers pin the engine they tested against — that is *plausible but invalid*: it
+callers pin the engine they tested against — that is _plausible but invalid_: it
 describes an internal design preference, not conformance to a protocol the
 service does not control. `DP-VERSION-04` grants an exception only for the
 latter. The fixture therefore tests whether the reviewer **evaluates** a stated
@@ -192,7 +194,8 @@ signal of a true negative. Here it is attached to a real defect.
 | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
 | `typespec-data-plane/crud-in-disguise.tsp`         | `DP-MODEL-01` ×3 — a PATCH, a DELETE, and a LIST all expressed as POST actions                                                                                                                                                                 | `eval-resource-modeling.yaml`      |
 | `typespec-data-plane/resource-modeling-smell.tsp`  | `DP-MODEL-02` (identity and lifecycle but no addressable path), `DP-MODEL-01` ×4, `DP-MODEL-04` (no update path at all)                                                                                                                        | `eval-resource-modeling.yaml`      |
-| `typespec-data-plane/error-design.tsp`             | `DP-ERR-05` (bespoke envelope), `DP-ERR-01` trigger 2 (one `InvalidRequest` code for many distinct failures), `DP-ERR-02` (no `target`), `DP-ERR-04` (no `innererror`), `DP-ERR-03` (unactionable messages, one leaking a stack trace)                | `eval-error-design.yaml`           |
+| `typespec-data-plane/action-route-shape.tsp`       | Exactly one `DP-MODEL-06`: a legitimate analysis action uses `/documents/analyze` instead of the collection action form `/documents:analyze`; conventional CRUD operations prevent an RPC-only modeling finding.                               | `eval-resource-modeling.yaml`      |
+| `typespec-data-plane/error-design.tsp`             | `DP-ERR-05` (bespoke envelope), `DP-ERR-01` trigger 2 (one `InvalidRequest` code for many distinct failures), `DP-ERR-02` (no `target`), `DP-ERR-04` (no `innererror`), `DP-ERR-03` (unactionable messages, one leaking a stack trace)         | `eval-error-design.yaml`           |
 | `typespec-data-plane/lro-and-paging.tsp`           | `DP-LRO-01` (status monitor with no `error`, no result path), `DP-LRO-03` (cancel exists but `Canceled` unreachable), `DP-LRO-04` (`@pollingOperation` points at the model), `DP-PAGE-01/02/03`                                                | `eval-lro-and-paging.yaml`         |
 | `typespec-data-plane/naming-clarity.tsp`           | `DP-NAME-01` ×4 (abbreviations, numeric suffixes), `DP-NAME-02` ×2 (unit-less), `DP-NAME-03` (mode as boolean), `DP-NAME-04` ×4 (three spellings of "created" in one service)                                                                  | `eval-naming-and-docs.yaml`        |
 | `typespec-data-plane/doc-quality.tsp`              | `DP-DOC-01` ×3 (tautologies), `DP-DOC-02` (undocumented union members), `DP-DOC-03` ×2 (undocumented filter grammar, unstated exclusivity invariant), `DP-NAME-02` ×2                                                                          | `eval-naming-and-docs.yaml`        |
