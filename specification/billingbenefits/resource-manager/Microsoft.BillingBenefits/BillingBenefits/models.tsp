@@ -35,7 +35,7 @@ model BenefitVersionedExpansionProperties {
   ...BenefitCommonVersionedProperties;
 
   /**
-   * Amount of the benefit that has been consumed.
+   * Amount of benefit that has been consumed
    */
   @visibility(Lifecycle.Read)
   @typeChangedFrom(Versions.v2026_07_01_preview, Price)
