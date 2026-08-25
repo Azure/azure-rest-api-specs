@@ -45,32 +45,32 @@ using Microsoft.KubernetesConfiguration;
 
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.get,
-  "KubernetesConfigurationPrivateLinkScopes",
+  "PrivateLinkScopesOperations",
   "csharp"
 );
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.createOrUpdate,
-  "KubernetesConfigurationPrivateLinkScopes",
+  "PrivateLinkScopesOperations",
   "csharp"
 );
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.updateTags,
-  "KubernetesConfigurationPrivateLinkScopes",
+  "PrivateLinkScopesOperations",
   "csharp"
 );
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.delete,
-  "KubernetesConfigurationPrivateLinkScopes",
+  "PrivateLinkScopesOperations",
   "csharp"
 );
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.listByResourceGroup,
-  "KubernetesConfigurationPrivateLinkScopes",
+  "PrivateLinkScopesOperations",
   "csharp"
 );
 @@clientLocation(
   KubernetesConfigurationPrivateLinkScopes.list,
-  "KubernetesConfigurationPrivateLinkScopes",
+  "PrivateLinkScopesOperations",
   "csharp"
 );
 
