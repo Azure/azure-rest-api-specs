@@ -354,56 +354,37 @@ union EvaluatorDiagnosticChangeType {
   history_imported: "history_imported",
 }
 
-/** The evaluator-version creation diagnostic change kind. */
-alias VersionCreatedDiagnosticChangeKind = "version_created";
-
-/** The rubric-dimension addition diagnostic change kind. */
-alias DimensionAddedDiagnosticChangeKind = "dimension_added";
-
-/** The rubric-dimension update diagnostic change kind. */
-alias DimensionUpdatedDiagnosticChangeKind = "dimension_updated";
-
-/** The rubric-dimension removal diagnostic change kind. */
-alias DimensionRemovedDiagnosticChangeKind = "dimension_removed";
-
-/** The evaluator-definition update diagnostic change kind. */
-alias DefinitionUpdatedDiagnosticChangeKind = "definition_updated";
-
-/** The rubric-health computation diagnostic change kind. */
-alias HealthComputedDiagnosticChangeKind = "health_computed";
-
-/** The rubric-health invalidation diagnostic change kind. */
-alias HealthInvalidatedDiagnosticChangeKind = "health_invalidated";
-
 @doc("The supported evaluator diagnostic change shapes.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDiagnosticChangeKind {
   string,
 
   @doc("An evaluator version was created.")
-  version_created: VersionCreatedDiagnosticChangeKind,
+  version_created: "version_created",
 
   @doc("A rubric dimension was added.")
-  dimension_added: DimensionAddedDiagnosticChangeKind,
+  dimension_added: "dimension_added",
 
   @doc("A rubric dimension was updated.")
-  dimension_updated: DimensionUpdatedDiagnosticChangeKind,
+  dimension_updated: "dimension_updated",
 
   @doc("A rubric dimension was removed.")
-  dimension_removed: DimensionRemovedDiagnosticChangeKind,
+  dimension_removed: "dimension_removed",
 
   @doc("Functional evaluator fields outside individual dimensions were updated.")
-  definition_updated: DefinitionUpdatedDiagnosticChangeKind,
+  definition_updated: "definition_updated",
 
   @doc("Rubric health was computed.")
-  health_computed: HealthComputedDiagnosticChangeKind,
+  health_computed: "health_computed",
 
   @doc("A prior rubric health snapshot was invalidated.")
-  health_invalidated: HealthInvalidatedDiagnosticChangeKind,
+  health_invalidated: "health_invalidated",
 }
 
-/** Fields shared by every evaluator diagnostic change. */
-alias EvaluatorDiagnosticChangeProperties = {
+@doc("The shared fields for every evaluator diagnostic change.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorDiagnosticChangeBase {
   @doc("The server-recorded time when the change occurred.")
   occurred_at: utcDateTime;
 
@@ -419,7 +400,10 @@ alias EvaluatorDiagnosticChangeProperties = {
   @doc("The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.")
   @pattern("^[0-9a-f]{64}$")
   content_hash: string;
-};
+
+  @doc("The diagnostic change shape.")
+  type: EvaluatorDiagnosticChangeKind;
+}
 
 @doc("A change to one functional evaluator field.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
@@ -452,11 +436,8 @@ model RubricHealthDelta {
 
 @doc("A diagnostic change recording the creation of an evaluator version.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model VersionCreatedDiagnosticChange {
-  ...EvaluatorDiagnosticChangeProperties;
-
-  @doc("The diagnostic change shape.")
-  type: VersionCreatedDiagnosticChangeKind;
+model VersionCreatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
+  type: EvaluatorDiagnosticChangeKind.version_created;
 
   @doc("The preceding evaluator version, when one exists.")
   prior_version?: string;
@@ -467,11 +448,8 @@ model VersionCreatedDiagnosticChange {
 
 @doc("A diagnostic change recording the addition of a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DimensionAddedDiagnosticChange {
-  ...EvaluatorDiagnosticChangeProperties;
-
-  @doc("The diagnostic change shape.")
-  type: DimensionAddedDiagnosticChangeKind;
+model DimensionAddedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
+  type: EvaluatorDiagnosticChangeKind.dimension_added;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
   dimension_id: string;
@@ -485,11 +463,8 @@ model DimensionAddedDiagnosticChange {
 
 @doc("A diagnostic change recording an update to a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DimensionUpdatedDiagnosticChange {
-  ...EvaluatorDiagnosticChangeProperties;
-
-  @doc("The diagnostic change shape.")
-  type: DimensionUpdatedDiagnosticChangeKind;
+model DimensionUpdatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
+  type: EvaluatorDiagnosticChangeKind.dimension_updated;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
   dimension_id: string;
@@ -506,11 +481,8 @@ model DimensionUpdatedDiagnosticChange {
 
 @doc("A diagnostic change recording the removal of a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DimensionRemovedDiagnosticChange {
-  ...EvaluatorDiagnosticChangeProperties;
-
-  @doc("The diagnostic change shape.")
-  type: DimensionRemovedDiagnosticChangeKind;
+model DimensionRemovedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
+  type: EvaluatorDiagnosticChangeKind.dimension_removed;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
   dimension_id: string;
@@ -524,11 +496,8 @@ model DimensionRemovedDiagnosticChange {
 
 @doc("A diagnostic change recording functional evaluator changes outside individual dimensions.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DefinitionUpdatedDiagnosticChange {
-  ...EvaluatorDiagnosticChangeProperties;
-
-  @doc("The diagnostic change shape.")
-  type: DefinitionUpdatedDiagnosticChangeKind;
+model DefinitionUpdatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
+  type: EvaluatorDiagnosticChangeKind.definition_updated;
 
   @doc("The functional field changes applied.")
   @minItems(1)
@@ -537,11 +506,8 @@ model DefinitionUpdatedDiagnosticChange {
 
 @doc("A diagnostic change recording a rubric health computation.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model HealthComputedDiagnosticChange {
-  ...EvaluatorDiagnosticChangeProperties;
-
-  @doc("The diagnostic change shape.")
-  type: HealthComputedDiagnosticChangeKind;
+model HealthComputedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
+  type: EvaluatorDiagnosticChangeKind.health_computed;
 
   @doc("The computed rubric health snapshot.")
   health: RubricHealth;
@@ -558,18 +524,15 @@ model HealthComputedDiagnosticChange {
 
 @doc("A diagnostic change recording that a prior rubric health snapshot no longer applies.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model HealthInvalidatedDiagnosticChange {
-  ...EvaluatorDiagnosticChangeProperties;
-
-  @doc("The diagnostic change shape.")
-  type: HealthInvalidatedDiagnosticChangeKind;
+model HealthInvalidatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
+  type: EvaluatorDiagnosticChangeKind.health_invalidated;
 
   @doc("Component-level diagnostic details associated with the invalidation.")
   messages?: EvaluatorDiagnosticMessage[];
 }
 
 @doc("An append-only evaluator version, dimension, definition, or rubric health diagnostic change.")
-@discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
+@oneOf
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDiagnosticChange {
   @doc("An evaluator version creation change.")

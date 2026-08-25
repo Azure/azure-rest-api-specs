@@ -31263,42 +31263,15 @@
       "DefinitionUpdatedDiagnosticChange": {
         "type": "object",
         "required": [
-          "occurred_at",
-          "actor",
-          "change_type",
-          "content_hash",
           "type",
           "field_changes"
         ],
         "properties": {
-          "occurred_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The server-recorded time when the change occurred."
-          },
-          "actor": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
-            "description": "The user or service responsible for the change."
-          },
-          "change_type": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
-            "description": "A stable machine-readable classification describing why the change occurred."
-          },
-          "explanation": {
-            "type": "string",
-            "description": "A bounded deterministic summary of the change."
-          },
-          "content_hash": {
-            "type": "string",
-            "pattern": "^[0-9a-f]{64}$",
-            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies."
-          },
           "type": {
             "type": "string",
             "enum": [
               "definition_updated"
-            ],
-            "description": "The diagnostic change shape."
+            ]
           },
           "field_changes": {
             "type": "array",
@@ -31309,6 +31282,11 @@
             "description": "The functional field changes applied."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeBase"
+          }
+        ],
         "description": "A diagnostic change recording functional evaluator changes outside individual dimensions.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -31648,43 +31626,16 @@
       "DimensionAddedDiagnosticChange": {
         "type": "object",
         "required": [
-          "occurred_at",
-          "actor",
-          "change_type",
-          "content_hash",
           "type",
           "dimension_id",
           "after"
         ],
         "properties": {
-          "occurred_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The server-recorded time when the change occurred."
-          },
-          "actor": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
-            "description": "The user or service responsible for the change."
-          },
-          "change_type": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
-            "description": "A stable machine-readable classification describing why the change occurred."
-          },
-          "explanation": {
-            "type": "string",
-            "description": "A bounded deterministic summary of the change."
-          },
-          "content_hash": {
-            "type": "string",
-            "pattern": "^[0-9a-f]{64}$",
-            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies."
-          },
           "type": {
             "type": "string",
             "enum": [
               "dimension_added"
-            ],
-            "description": "The diagnostic change shape."
+            ]
           },
           "dimension_id": {
             "type": "string",
@@ -31702,6 +31653,11 @@
             "description": "The public dimension fields changed, when reported."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeBase"
+          }
+        ],
         "description": "A diagnostic change recording the addition of a rubric dimension.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -31712,43 +31668,16 @@
       "DimensionRemovedDiagnosticChange": {
         "type": "object",
         "required": [
-          "occurred_at",
-          "actor",
-          "change_type",
-          "content_hash",
           "type",
           "dimension_id",
           "before"
         ],
         "properties": {
-          "occurred_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The server-recorded time when the change occurred."
-          },
-          "actor": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
-            "description": "The user or service responsible for the change."
-          },
-          "change_type": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
-            "description": "A stable machine-readable classification describing why the change occurred."
-          },
-          "explanation": {
-            "type": "string",
-            "description": "A bounded deterministic summary of the change."
-          },
-          "content_hash": {
-            "type": "string",
-            "pattern": "^[0-9a-f]{64}$",
-            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies."
-          },
           "type": {
             "type": "string",
             "enum": [
               "dimension_removed"
-            ],
-            "description": "The diagnostic change shape."
+            ]
           },
           "dimension_id": {
             "type": "string",
@@ -31766,6 +31695,11 @@
             "description": "The public dimension fields changed, when reported."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeBase"
+          }
+        ],
         "description": "A diagnostic change recording the removal of a rubric dimension.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -31776,44 +31710,17 @@
       "DimensionUpdatedDiagnosticChange": {
         "type": "object",
         "required": [
-          "occurred_at",
-          "actor",
-          "change_type",
-          "content_hash",
           "type",
           "dimension_id",
           "before",
           "after"
         ],
         "properties": {
-          "occurred_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The server-recorded time when the change occurred."
-          },
-          "actor": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
-            "description": "The user or service responsible for the change."
-          },
-          "change_type": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
-            "description": "A stable machine-readable classification describing why the change occurred."
-          },
-          "explanation": {
-            "type": "string",
-            "description": "A bounded deterministic summary of the change."
-          },
-          "content_hash": {
-            "type": "string",
-            "pattern": "^[0-9a-f]{64}$",
-            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies."
-          },
           "type": {
             "type": "string",
             "enum": [
               "dimension_updated"
-            ],
-            "description": "The diagnostic change shape."
+            ]
           },
           "dimension_id": {
             "type": "string",
@@ -31835,6 +31742,11 @@
             "description": "The public dimension fields changed, when reported."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeBase"
+          }
+        ],
         "description": "A diagnostic change recording an update to a rubric dimension.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -33403,7 +33315,6 @@
         }
       },
       "EvaluatorDiagnosticChange": {
-        "type": "object",
         "oneOf": [
           {
             "$ref": "#/components/schemas/VersionCreatedDiagnosticChange"
@@ -33427,19 +33338,63 @@
             "$ref": "#/components/schemas/HealthInvalidatedDiagnosticChange"
           }
         ],
+        "description": "An append-only evaluator version, dimension, definition, or rubric health diagnostic change.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorDiagnosticChangeBase": {
+        "type": "object",
+        "required": [
+          "occurred_at",
+          "actor",
+          "change_type",
+          "content_hash",
+          "type"
+        ],
+        "properties": {
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The server-recorded time when the change occurred."
+          },
+          "actor": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
+            "description": "The user or service responsible for the change."
+          },
+          "change_type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
+            "description": "A stable machine-readable classification describing why the change occurred."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "A bounded deterministic summary of the change."
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies."
+          },
+          "type": {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeKind",
+            "description": "The diagnostic change shape."
+          }
+        },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "version_created": "#/components/schemas/VersionCreatedDiagnosticChange",
             "dimension_added": "#/components/schemas/DimensionAddedDiagnosticChange",
             "dimension_updated": "#/components/schemas/DimensionUpdatedDiagnosticChange",
             "dimension_removed": "#/components/schemas/DimensionRemovedDiagnosticChange",
             "definition_updated": "#/components/schemas/DefinitionUpdatedDiagnosticChange",
             "health_computed": "#/components/schemas/HealthComputedDiagnosticChange",
-            "health_invalidated": "#/components/schemas/HealthInvalidatedDiagnosticChange"
+            "health_invalidated": "#/components/schemas/HealthInvalidatedDiagnosticChange",
+            "version_created": "#/components/schemas/VersionCreatedDiagnosticChange"
           }
         },
-        "description": "An append-only evaluator version, dimension, definition, or rubric health diagnostic change.",
+        "description": "The shared fields for every evaluator diagnostic change.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -34991,42 +34946,15 @@
       "HealthComputedDiagnosticChange": {
         "type": "object",
         "required": [
-          "occurred_at",
-          "actor",
-          "change_type",
-          "content_hash",
           "type",
           "health"
         ],
         "properties": {
-          "occurred_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The server-recorded time when the change occurred."
-          },
-          "actor": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
-            "description": "The user or service responsible for the change."
-          },
-          "change_type": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
-            "description": "A stable machine-readable classification describing why the change occurred."
-          },
-          "explanation": {
-            "type": "string",
-            "description": "A bounded deterministic summary of the change."
-          },
-          "content_hash": {
-            "type": "string",
-            "pattern": "^[0-9a-f]{64}$",
-            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies."
-          },
           "type": {
             "type": "string",
             "enum": [
               "health_computed"
-            ],
-            "description": "The diagnostic change shape."
+            ]
           },
           "health": {
             "$ref": "#/components/schemas/RubricHealth",
@@ -35048,6 +34976,11 @@
             "description": "Component-level diagnostic details associated with the computation."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeBase"
+          }
+        ],
         "description": "A diagnostic change recording a rubric health computation.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -35058,41 +34991,14 @@
       "HealthInvalidatedDiagnosticChange": {
         "type": "object",
         "required": [
-          "occurred_at",
-          "actor",
-          "change_type",
-          "content_hash",
           "type"
         ],
         "properties": {
-          "occurred_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The server-recorded time when the change occurred."
-          },
-          "actor": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
-            "description": "The user or service responsible for the change."
-          },
-          "change_type": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
-            "description": "A stable machine-readable classification describing why the change occurred."
-          },
-          "explanation": {
-            "type": "string",
-            "description": "A bounded deterministic summary of the change."
-          },
-          "content_hash": {
-            "type": "string",
-            "pattern": "^[0-9a-f]{64}$",
-            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies."
-          },
           "type": {
             "type": "string",
             "enum": [
               "health_invalidated"
-            ],
-            "description": "The diagnostic change shape."
+            ]
           },
           "messages": {
             "type": "array",
@@ -35102,6 +35008,11 @@
             "description": "Component-level diagnostic details associated with the invalidation."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeBase"
+          }
+        ],
         "description": "A diagnostic change recording that a prior rubric health snapshot no longer applies.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -78967,41 +78878,14 @@
       "VersionCreatedDiagnosticChange": {
         "type": "object",
         "required": [
-          "occurred_at",
-          "actor",
-          "change_type",
-          "content_hash",
           "type"
         ],
         "properties": {
-          "occurred_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The server-recorded time when the change occurred."
-          },
-          "actor": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticActor",
-            "description": "The user or service responsible for the change."
-          },
-          "change_type": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeType",
-            "description": "A stable machine-readable classification describing why the change occurred."
-          },
-          "explanation": {
-            "type": "string",
-            "description": "A bounded deterministic summary of the change."
-          },
-          "content_hash": {
-            "type": "string",
-            "pattern": "^[0-9a-f]{64}$",
-            "description": "The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies."
-          },
           "type": {
             "type": "string",
             "enum": [
               "version_created"
-            ],
-            "description": "The diagnostic change shape."
+            ]
           },
           "prior_version": {
             "type": "string",
@@ -79012,6 +78896,11 @@
             "description": "The evaluator generation job that created the version, when applicable."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDiagnosticChangeBase"
+          }
+        ],
         "description": "A diagnostic change recording the creation of an evaluator version.",
         "x-ms-foundry-meta": {
           "required_previews": [

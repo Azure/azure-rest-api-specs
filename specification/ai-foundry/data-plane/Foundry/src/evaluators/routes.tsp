@@ -21,53 +21,74 @@ alias ListEvaluatorVersionsParameters = {
 };
 
 /** Query parameters for listing evaluator diagnostics grouped by evaluator version. */
-alias ListEvaluatorDiagnosticsParameters = {
+alias ListEvaluatorDiagnosticsPageLimitQueryParameter = {
+  ...OmitProperties<PageLimitQueryParameter, "limit">;
+
   @doc("The maximum number of evaluator-version groups to return. The value must be between 1 and 100, inclusive. The default is 20.")
-  @Http.query
+  @query
   @minValue(1)
   @maxValue(100)
   limit?: int32 = 20;
+};
+
+alias ListEvaluatorDiagnosticsPageOrderQueryParameter = {
+  ...OmitProperties<PageOrderQueryParameter, "order">;
 
   @doc("Sort order for evaluator-version groups and their nested changes. Version groups use evaluator-version ordering; nested changes use `occurred_at` and preserve service write order for ties. The default is `desc`.")
-  @Http.query
+  @query
   order?: PageOrder = "desc";
+};
+
+alias ListEvaluatorDiagnosticsPageAfterQueryParameter = {
+  ...OmitProperties<PageAfterQueryParameter, "after">;
 
   @doc("An evaluator-version cursor for the next page.")
-  @Http.query
+  @query
   @continuationToken
   after?: string;
+};
+
+alias ListEvaluatorDiagnosticsPageBeforeQueryParameter = {
+  ...OmitProperties<PageBeforeQueryParameter, "before">;
 
   @doc("An evaluator-version cursor for the previous page.")
-  @Http.query
+  @query
   before?: string;
+};
+
+alias ListEvaluatorDiagnosticsParameters = {
+  ...ListEvaluatorDiagnosticsPageLimitQueryParameter;
+  ...ListEvaluatorDiagnosticsPageOrderQueryParameter;
+  ...ListEvaluatorDiagnosticsPageAfterQueryParameter;
+  ...ListEvaluatorDiagnosticsPageBeforeQueryParameter;
 
   @doc("Inclusive lower bound for the diagnostic change occurrence time.")
-  @Http.query
+  @query
   start_time?: utcDateTime;
 
   @doc("Inclusive upper bound for the diagnostic change occurrence time.")
-  @Http.query
+  @query
   end_time?: utcDateTime;
 
   @doc("Inclusive lower evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.")
-  @Http.query
+  @query
   from_version?: string;
 
   @doc("Inclusive upper evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.")
-  @Http.query
+  @query
   to_version?: string;
 
   @doc("Filter diagnostic changes for one public rubric dimension identifier. If a caller changes an identifier, query the prior and new identifiers separately because the change is recorded as removal plus addition.")
-  @Http.query
+  @query
   dimension_id?: string;
 
   @doc("Filter diagnostic changes that apply to one canonical functional evaluator state.")
-  @Http.query
+  @query
   @pattern("^[0-9a-f]{64}$")
   content_hash?: string;
 
   @doc("Filter by one or more diagnostic change shapes by repeating the query parameter.")
-  @Http.query(#{ explode: true })
+  @query(#{ explode: true })
   type?: EvaluatorDiagnosticChangeKind[];
 };
 
