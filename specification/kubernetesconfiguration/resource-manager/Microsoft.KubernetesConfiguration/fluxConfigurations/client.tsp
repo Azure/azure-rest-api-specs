@@ -127,7 +127,11 @@ using Microsoft.KubernetesConfiguration;
   "FluxConfigurationsKustomization",
   "csharp"
 );
-@@clientName(KustomizationPatchDefinition, "KustomizationPatch", "csharp");
+@@clientName(
+  KustomizationPatchDefinition,
+  "FluxConfigurationsKustomizationPatch",
+  "csharp"
+);
 @@clientName(LayerSelectorDefinition, "FluxLayerSelector", "csharp");
 @@clientName(LayerSelectorPatchDefinition, "FluxLayerSelectorPatch", "csharp");
 @@clientName(MatchOidcIdentityDefinition, "MatchOidcIdentity", "csharp");
