@@ -8293,6 +8293,14 @@ model ContainerAppsFunctionProperties {
 /**
  * Container App Label History collection ARM resource.
  */
+@removed(Versions.v2026_01_01)
+@renamedFrom(Versions.v2026_01_01, "LabelHistoryCollection")
+model LabelHistoryPreviewCollection is Azure.Core.Page<LabelHistoryPreview>;
+
+/**
+ * Container App Label History collection ARM resource.
+ */
+@added(Versions.v2026_07_01)
 model LabelHistoryCollection is Azure.Core.Page<LabelHistory>;
 
 /**

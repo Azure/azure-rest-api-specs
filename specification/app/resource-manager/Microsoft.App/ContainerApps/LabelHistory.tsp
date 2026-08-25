@@ -16,6 +16,21 @@ namespace Microsoft.App;
  * Container App Label History.
  */
 @removed(Versions.v2026_01_01)
+@renamedFrom(Versions.v2026_01_01, "LabelHistory")
+@parentResource(ContainerApp)
+model LabelHistoryPreview
+  is Azure.ResourceManager.ProxyResource<LabelHistoryProperties> {
+  ...ResourceNameParameter<
+    Resource = LabelHistoryPreview,
+    KeyName = "labelName",
+    SegmentName = "labelHistory",
+    NamePattern = "^[-\\w\\._\\(\\)]+$"
+  >;
+}
+
+/**
+ * Container App Label History.
+ */
 @added(Versions.v2026_07_01)
 @parentResource(ContainerApp)
 model LabelHistory
@@ -23,12 +38,12 @@ model LabelHistory
   ...ResourceNameParameter<
     Resource = LabelHistory,
     KeyName = "labelName",
-    SegmentName = "labelHistory",
+    SegmentName = "labelHistories",
     NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
 }
 
-alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias LabelHistoryPreviewOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -53,7 +68,64 @@ alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ErrorType = DefaultErrorResponse
 >;
 
+alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Container App. */
+    @path
+    @segment("containerApps")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    containerAppName: string;
+  },
+  {
+    /** Name of the label. */
+    @path
+    @segment("labelHistories")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    labelName: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
+
 @removed(Versions.v2026_01_01)
+@renamedFrom(Versions.v2026_01_01, "ContainerAppsLabelHistory")
+@armResourceOperations
+interface ContainerAppsLabelHistoryPreview {
+  /**
+   * Gets the revision history associated with a Container App label.
+   */
+  @summary("Get the history of a label.")
+  getLabelHistory is LabelHistoryPreviewOps.Read<LabelHistoryPreview>;
+
+  /**
+   * Deletes the revision history associated with a Container App label.
+   */
+  @summary("Delete the history of a label.")
+  deleteLabelHistory is LabelHistoryPreviewOps.DeleteSync<LabelHistoryPreview>;
+
+  /**
+   * Lists the label revision histories for a Container App.
+   */
+  @summary("Get the Label History for a given Container App.")
+  listLabelHistory is LabelHistoryPreviewOps.List<
+    LabelHistoryPreview,
+    Parameters = {
+      /**
+       * The filter to apply on the operation.
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    Response = ArmResponse<LabelHistoryPreviewCollection>
+  >;
+}
+
 @added(Versions.v2026_07_01)
 @armResourceOperations
 interface ContainerAppsLabelHistory {
@@ -86,6 +158,11 @@ interface ContainerAppsLabelHistory {
   >;
 }
 
+@@doc(LabelHistoryPreview.name, "Name of the Container App label.");
+@@doc(
+  LabelHistoryPreview.properties,
+  "Container App Label History resource specific properties"
+);
 @@doc(LabelHistory.name, "Name of the Container App label.");
 @@doc(
   LabelHistory.properties,
