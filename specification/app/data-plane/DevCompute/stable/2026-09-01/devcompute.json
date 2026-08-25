@@ -35,16 +35,16 @@
   ],
   "security": [
     {
-      "AzureDataPlaneS2sAuth": [
+      "OAuth2Auth": [
         "https://management.azuredevcompute.io/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AzureDataPlaneS2sAuth": {
+    "OAuth2Auth": {
       "type": "oauth2",
-      "description": "Microsoft Entra ID client-credentials authentication for Azure data-plane service-to-service operations.",
-      "flow": "application",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
         "https://management.azuredevcompute.io/.default": ""
       },
@@ -466,43 +466,6 @@
       "required": [
         "fileCacheSizeLimit",
         "name"
-      ]
-    },
-    "AzureDataPlaneClientCredentialsFlow": {
-      "type": "object",
-      "description": "Microsoft Entra ID client-credentials authentication for Azure data-plane service-to-service operations.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 client-credentials flow type.",
-          "enum": [
-            "clientCredentials"
-          ],
-          "x-ms-enum": {
-            "name": "DevComputeOAuth2FlowType",
-            "modelAsString": false
-          }
-        },
-        "tokenUrl": {
-          "type": "string",
-          "description": "Microsoft Entra ID token endpoint.",
-          "enum": [
-            "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "scopes": {
-          "type": "array",
-          "description": "OAuth2 scopes required by the service.",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "tokenUrl",
-        "scopes"
       ]
     },
     "Base64": {

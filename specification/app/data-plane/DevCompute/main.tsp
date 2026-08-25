@@ -23,31 +23,17 @@ using Azure.Core;
     endpoint: url,
   }
 )
-@useAuth(AzureDataPlaneS2sAuth)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.authorizationCode,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://management.azuredevcompute.io/.default"],
+    }
+  ]>
+)
 namespace AzureDevCompute;
-
-/** Microsoft Entra ID client-credentials authentication for Azure data-plane service-to-service operations. */
-model AzureDataPlaneClientCredentialsFlow {
-  /** OAuth2 client-credentials flow type. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The standard OAuth2FlowType member emits a Swagger enum without the x-ms-enum metadata required by OAV; this property-level extension preserves the existing authentication wire contract."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "The standard OAuth2FlowType member emits a Swagger enum without the x-ms-enum metadata required by OAV; this property-level extension preserves the existing authentication wire contract."
-  @TypeSpec.OpenAPI.extension(
-    "x-ms-enum",
-    #{ name: "DevComputeOAuth2FlowType", modelAsString: false }
-  )
-  type: OAuth2FlowType.clientCredentials;
-
-  /** Microsoft Entra ID token endpoint. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix"
-  tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token";
-
-  /** OAuth2 scopes required by the service. */
-  scopes: ["https://management.azuredevcompute.io/.default"];
-}
-
-/** Microsoft Entra ID client-credentials authentication for Azure data-plane service-to-service operations. */
-model AzureDataPlaneS2sAuth
-  is OAuth2Auth<[AzureDataPlaneClientCredentialsFlow]>;
 
 /** Supported ADC Data Plane API versions. */
 enum ApiVersions {

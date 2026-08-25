@@ -72,7 +72,6 @@ namespace AzureDevCompute {
   /** Azure-scoped Sandbox CRUD operations. */
   @tag("Sandboxes")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/sandboxes")
-  @useAuth(AzureDataPlaneS2sAuth)
   interface AzureSandboxes {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure.Core StandardResourceOperations.ResourceList cannot preserve the existing Page, PageSize, and labels query parameter names or the array response without changing the established wire contract."
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This list operation uses a custom response model to preserve the existing bare-array wire contract, which the rule misclassifies as a single-object response."
