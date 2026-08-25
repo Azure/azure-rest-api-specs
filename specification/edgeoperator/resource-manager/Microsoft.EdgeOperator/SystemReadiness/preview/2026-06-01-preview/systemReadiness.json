@@ -1,0 +1,182 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.EdgeOperator - Azure Local Disconnected Operations system readiness",
+    "version": "2026-06-01-preview",
+    "description": "Microsoft.EdgeOperator Resource Provider management API for Azure Local Disconnected Operations (ALDO) system readiness.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SystemReadinessOperations"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOperator/systemReadiness/default": {
+      "get": {
+        "operationId": "SystemReadinessOperations_Get",
+        "tags": [
+          "SystemReadinessOperations"
+        ],
+        "description": "Gets the Azure Local Disconnected Operations (ALDO) system readiness status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SystemReadiness"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SystemReadinessOperations_Get": {
+            "$ref": "./examples/SystemReadinessOperations_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorMessageDetail": {
+      "type": "object",
+      "description": "The error messages reported for a single readiness category. Messages are present when the category is not ready and a specific error is available.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "The name of the readiness category (for example, `services`, `diagnostics`, `identity`, `networking`)."
+        },
+        "errorMessageDetails": {
+          "type": "array",
+          "description": "The list of error messages reported for the category. Present when the category is not ready and a specific error is available; otherwise empty.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "categoryName",
+        "errorMessageDetails"
+      ]
+    },
+    "ReadinessStatusDetail": {
+      "type": "object",
+      "description": "The readiness percentage reported for a single readiness category.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "The name of the readiness category (for example, `services`, `diagnostics`, `identity`, `networking`)."
+        },
+        "readinessPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The readiness percentage reported by the category, from 0 (not ready) to 100 (fully ready).",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "categoryName",
+        "readinessPercentage"
+      ]
+    },
+    "SystemReadiness": {
+      "type": "object",
+      "description": "The system readiness status for Azure Local Disconnected Operations (ALDO).\nReports whether the ALDO system is ready. This is a read-only singleton resource — the only\naccepted resource name is `default`.\n\nThe subscription in the request path must be the Operator subscription. This subscription is used\nonly for the access check: the resource provider verifies it on every request, and only operators\nhave access to the Operator subscription and can therefore invoke the Microsoft.EdgeOperator APIs.\nRequests scoped to any other subscription are rejected.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SystemReadinessProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SystemReadinessProperties": {
+      "type": "object",
+      "description": "The readiness state of the Azure Local Disconnected Operations (ALDO) system.\nAll fields are computed by the resource provider and are read-only.",
+      "properties": {
+        "systemReady": {
+          "type": "boolean",
+          "description": "Indicates whether the system is ready. `true` when every readiness category has reported 100 percent.",
+          "readOnly": true
+        },
+        "readinessStatusDetails": {
+          "type": "array",
+          "description": "The readiness percentage reported for each readiness category.",
+          "items": {
+            "$ref": "#/definitions/ReadinessStatusDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "categoryName"
+          ]
+        },
+        "errorMessages": {
+          "type": "array",
+          "description": "The error messages reported for each readiness category. A category presents messages when it is not ready and a specific error is available.",
+          "items": {
+            "$ref": "#/definitions/ErrorMessageDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "categoryName"
+          ]
+        }
+      },
+      "required": [
+        "systemReady",
+        "readinessStatusDetails",
+        "errorMessages"
+      ]
+    }
+  },
+  "parameters": {}
+}

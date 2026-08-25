@@ -1,0 +1,58 @@
+{
+  "title": "SystemReadinessOperations_Get",
+  "operationId": "SystemReadinessOperations_Get",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.EdgeOperator/systemReadiness/default",
+        "name": "default",
+        "type": "Microsoft.EdgeOperator/systemReadiness",
+        "properties": {
+          "systemReady": false,
+          "readinessStatusDetails": [
+            {
+              "categoryName": "services",
+              "readinessPercentage": 100
+            },
+            {
+              "categoryName": "diagnostics",
+              "readinessPercentage": 0
+            },
+            {
+              "categoryName": "identity",
+              "readinessPercentage": 100
+            },
+            {
+              "categoryName": "networking",
+              "readinessPercentage": 50
+            }
+          ],
+          "errorMessages": [
+            {
+              "categoryName": "services",
+              "errorMessageDetails": []
+            },
+            {
+              "categoryName": "diagnostics",
+              "errorMessageDetails": [
+                "Diagnostics agent is not reporting."
+              ]
+            },
+            {
+              "categoryName": "identity",
+              "errorMessageDetails": []
+            },
+            {
+              "categoryName": "networking",
+              "errorMessageDetails": []
+            }
+          ]
+        }
+      }
+    }
+  }
+}
