@@ -21,7 +21,12 @@ token -- even when the property is not explicitly annotated as a secret.
 **Authoritative references:**
 
 - [Azure Resource Provider Contract -- Secret Handling](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
-- [Azure REST API Guidelines -- Handling Secrets](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
+- [Azure REST API Guidelines -- no secrets in GET responses](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-no-secrets-in-get-response)
+- [Azure REST API Guidelines -- retrieving secrets through POST](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-secrets-allowed-in-post-response)
+
+The property-name, documentation, example, and suppression signals below are
+reviewer heuristics for finding likely secrets before they violate that
+upstream handling contract; they are not additional upstream requirements.
 
 ## Detection Signals
 
