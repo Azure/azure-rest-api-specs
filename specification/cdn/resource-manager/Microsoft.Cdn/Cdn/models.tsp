@@ -61,6 +61,7 @@ union SecretType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_04_01_preview)
   MtlsCertificateChain: "MtlsCertificateChain",
 }
 
@@ -298,6 +299,56 @@ union AfdCipherSuiteSetType {
   TLS12_2023: "TLS12_2023",
 }
 
+/**
+ * Server TLS group policy that will be used for Https. Standard and Enhanced are service-managed sets; Custom allows specifying serverTlsGroups explicitly.
+ */
+@added(Versions.v2026_07_01)
+union AfdServerTlsGroupPolicy {
+  string,
+
+  /** Uses the standard service-managed set of server TLS groups. */
+  Standard: "Standard",
+
+  /** Uses the enhanced service-managed set of server TLS groups. */
+  Enhanced: "Enhanced",
+
+  /** Uses the server TLS groups specified by serverTlsGroups. */
+  Custom: "Custom",
+}
+
+/**
+ * Supported key-exchange groups and curves. The ML-KEM groups are hybrid post-quantum groups.
+ */
+@added(Versions.v2026_07_01)
+union AfdServerTlsGroup {
+  string,
+
+  /** Hybrid post-quantum group combining secp256r1 with ML-KEM-768. */
+  SecP256r1MLKEM768: "SecP256r1MLKEM768",
+
+  /** Hybrid post-quantum group combining secp384r1 with ML-KEM-1024. */
+  SecP384r1MLKEM1024: "SecP384r1MLKEM1024",
+
+  /** Hybrid post-quantum group combining X25519 with ML-KEM-768. */
+  X25519MLKEM768: "X25519MLKEM768",
+
+  /** The prime256v1 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  prime256v1: "prime256v1",
+
+  /** The X25519 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  X25519: "X25519",
+
+  /** The secp384r1 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  secp384r1: "secp384r1",
+
+  /** The secp521r1 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  secp521r1: "secp521r1",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AfdCustomizedCipherSuiteForTls12 {
   string,
@@ -329,6 +380,7 @@ union AfdCustomizedCipherSuiteForTls13 {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 union MtlsScenarioType {
   string,
   ClientCertificateRequiredAndValidated: "ClientCertificateRequiredAndValidated",
@@ -384,6 +436,7 @@ union EnabledState {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 union EnforceMtlsEnabledState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -401,6 +454,41 @@ union OriginAuthenticationType {
   SystemAssignedIdentity: "SystemAssignedIdentity",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UserAssignedIdentity: "UserAssignedIdentity",
+}
+
+/**
+ * The HTTP request header where the origin authentication token is placed when forwarding the request to the origin.
+ */
+@added(Versions.v2026_04_01_preview)
+union OriginAuthenticationTokenDestinationHeader {
+  string,
+
+  /**
+   * Place the token in the standard `Authorization` request header (default behavior).
+   */
+  Authorization: "Authorization",
+
+  /**
+   * Place the token in the `X-Azure-Authorization` request header to avoid conflicts with an existing `Authorization` header set by the client.
+   */
+  XAzureAuthorization: "X-Azure-Authorization",
+}
+
+/**
+ * The validation mode for certificate name check at origin level. Only applicable when enforceCertificateNameCheck is true.
+ */
+@added(Versions.v2026_07_01)
+union CertificateNameCheckValidationMode {
+  string,
+
+  /** Validate the certificate against the origin hostname. */
+  OriginHostname: "OriginHostname",
+
+  /** Validate the certificate against custom certificate subjects. */
+  CustomCertificateSubject: "CustomCertificateSubject",
+
+  /** Validate the certificate against the incoming host header. */
+  IncomingHostHeader: "IncomingHostHeader",
 }
 
 /**
@@ -549,11 +637,13 @@ union DeliveryRuleActionName {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_04_01_preview)
   EdgeAction: "EdgeAction",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_04_01_preview)
   AfdUrlSigning: "AfdUrlSigning",
 }
 
@@ -1476,6 +1566,7 @@ union ManagedRuleExclusionSelectorMatchOperator {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 union CertificateRevocationCheckEnabledState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1487,6 +1578,7 @@ union CertificateRevocationCheckEnabledState {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 union TypeName {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1581,6 +1673,7 @@ union DeliveryRuleActionParametersType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_04_01_preview)
   DeliveryRuleEdgeActionParameters: "DeliveryRuleEdgeActionParameters",
 }
 
@@ -2090,6 +2183,7 @@ union DestinationProtocol {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 union InvocationPoint {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2683,6 +2777,7 @@ model AFDDomainUpdatePropertiesParameters {
    */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_04_01_preview)
   mtlsSettings?: AFDDomainMtlsParameters;
 
   /**
@@ -2699,7 +2794,6 @@ model AFDDomainUpdatePropertiesParameters {
 /**
  * The JSON object that contains the properties to secure a domain.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AFDDomainHttpsParameters {
   /**
@@ -2721,6 +2815,18 @@ model AFDDomainHttpsParameters {
    * Customized cipher suites object that will be used for Https when cipherSuiteSetType is Customized.
    */
   customizedCipherSuiteSet?: AFDDomainHttpsCustomizedCipherSuiteSet;
+
+  /**
+   * Server TLS group policy that will be used for Https.
+   */
+  @added(Versions.v2026_07_01)
+  serverTlsGroupPolicy?: AfdServerTlsGroupPolicy;
+
+  /**
+   * Server TLS groups that will be used for Https when serverTlsGroupPolicy is Custom.
+   */
+  @added(Versions.v2026_07_01)
+  serverTlsGroups?: AfdServerTlsGroup[];
 
   /**
    * Resource reference to the secret. ie. subs/rg/profile/secret
@@ -2750,6 +2856,7 @@ model AFDDomainHttpsCustomizedCipherSuiteSet {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 @discriminator("scenario")
 model AFDDomainMtlsParameters {
   /**
@@ -2829,6 +2936,7 @@ model AFDEndpointPropertiesUpdateParameters {
    */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_04_01_preview)
   enforceMtls?: EnforceMtlsEnabledState;
 }
 
@@ -3013,6 +3121,12 @@ model OriginAuthenticationProperties {
    * The scope used when requesting token from Microsoft Entra. For example, for Azure Blob Storage, scope could be "https://storage.azure.com/.default".
    */
   scope?: url;
+
+  /**
+   * The HTTP request header where the origin authentication token will be placed when forwarding the request to the origin. If not specified, the service will use the `Authorization` header for backward compatibility.
+   */
+  @added(Versions.v2026_04_01_preview)
+  tokenDestinationHeader?: OriginAuthenticationTokenDestinationHeader;
 }
 
 /**
@@ -3113,6 +3227,20 @@ model AFDOriginUpdatePropertiesParameters {
    * Whether to enable certificate name check at origin level
    */
   enforceCertificateNameCheck?: boolean = true;
+
+  /**
+   * The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true.
+   */
+  @added(Versions.v2026_07_01)
+  certificateNameCheckValidationMode?: CertificateNameCheckValidationMode;
+
+  /**
+   * The list of custom certificate subjects to validate against. Only applicable when certificateNameCheckValidationMode is 'CustomCertificateSubject'. Must contain 1 or 2 entries.
+   */
+  @added(Versions.v2026_07_01)
+  @minItems(1)
+  @maxItems(2)
+  customCertificateSubjects?: string[];
 }
 
 /**
@@ -3676,6 +3804,7 @@ model DeploymentVersionChange {
 /**
  * Metrics Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MetricsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3730,6 +3859,7 @@ model Components1Gs0LlpSchemasMetricsresponsePropertiesSeriesItemsPropertiesData
 /**
  * Rankings Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RankingsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3777,6 +3907,7 @@ model RankingsResponseTablesPropertiesItemsMetricsItem {
 /**
  * Continents Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ContinentsResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   continents?: ContinentsResponseContinentsItem[];
@@ -3801,6 +3932,7 @@ model ContinentsResponseCountryOrRegionsItem {
 /**
  * Resources Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourcesResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpoints?: ResourcesResponseEndpointsItem[];
@@ -3847,6 +3979,7 @@ model ResourcesResponseCustomDomainsItem {
 /**
  * Waf Metrics Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WafMetricsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3901,6 +4034,7 @@ model Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesD
 /**
  * Waf Rankings Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WafRankingsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6012,6 +6146,7 @@ model PolicySettingsAfd {
   /**
    * If action type is redirect, this field represents redirect URL for the client.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   redirectUrl?: string;
 
   /**
@@ -6452,6 +6587,7 @@ model AzureFirstPartyManagedCertificate extends Certificate {}
 
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 @pattern("^((?!xn--)[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,61}$")
 scalar Fqdn extends string;
 
@@ -6460,6 +6596,7 @@ scalar Fqdn extends string;
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 model ClientCertificateRequiredAndValidatedAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6488,6 +6625,7 @@ model ClientCertificateRequiredAndValidatedAdvancedSettings
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 model ClientCertificateRequiredAndOriginValidatesAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6501,6 +6639,7 @@ model ClientCertificateRequiredAndOriginValidatesAdvancedSettings
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 model ClientCertificateValidatedIfPresentedAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6529,6 +6668,7 @@ model ClientCertificateValidatedIfPresentedAdvancedSettings
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 model CompleteMtlsPassthroughToOriginAdvancedSettings
   extends AFDDomainMtlsParameters {
   /**
@@ -6593,6 +6733,12 @@ model SecurityPolicyWebApplicationFirewallAssociation {
    * List of paths
    */
   patternsToMatch?: string[];
+
+  /**
+   * List of routes.
+   */
+  @added(Versions.v2026_04_01_preview)
+  routes?: ResourceReference[];
 }
 
 /**
@@ -6610,6 +6756,12 @@ model SecurityPolicyWebApplicationFirewallParameters
    */
   @identifiers(#[])
   associations?: SecurityPolicyWebApplicationFirewallAssociation[];
+
+  /**
+   * Indicates if this is a profile-level WAF policy.
+   */
+  @added(Versions.v2026_04_01_preview)
+  isProfileLevel?: boolean;
 
   /**
    * The type of the Security policy to create.
@@ -6769,6 +6921,7 @@ model AzureFirstPartyManagedCertificateParameters extends SecretParameters {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 model AfdSecretMtlsCertificateChain extends SecretParameters {
   /**
    * Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}
@@ -6798,6 +6951,7 @@ model AfdSecretMtlsCertificateChain extends SecretParameters {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 model AfdUrlSigningAction extends DeliveryRuleAction {
   /**
    * Defines the parameters for the action.
@@ -6815,6 +6969,7 @@ model AfdUrlSigningAction extends DeliveryRuleAction {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 model AfdUrlSigningActionParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   typeName: TypeName;
@@ -7965,6 +8120,7 @@ model OriginGroupOverrideActionParameters extends DeliveryRuleActionParameters {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 model EdgeAction extends DeliveryRuleAction {
   /**
    * Defines the parameters for the action.
@@ -7982,6 +8138,7 @@ model EdgeAction extends DeliveryRuleAction {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_04_01_preview)
 model DeliveryRuleEdgeActionParameters extends DeliveryRuleActionParameters {
   /**
    * defines the edge action that will be invoked.

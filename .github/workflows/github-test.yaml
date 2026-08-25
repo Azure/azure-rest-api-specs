@@ -6,9 +6,13 @@ on:
       - main
     paths:
       - .github/**
+      # Root package.json pins TypeSpec Azure packages verified by .github alignment tests.
+      - package.json
   pull_request:
     paths:
       - .github/**
+      # Root package.json pins TypeSpec Azure packages verified by .github alignment tests.
+      - package.json
   workflow_dispatch:
 
 permissions:
@@ -29,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           sparse-checkout: |
             .github

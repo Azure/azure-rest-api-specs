@@ -52,7 +52,8 @@ interface ContinuousWebJobOps
         @segment("continuouswebjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteContinuousWebJob"
     > {}
 
 @tag("WebApps")
@@ -96,11 +97,10 @@ interface ContinuousWebJobs {
   startContinuousWebJob is ContinuousWebJobOps.ActionSync<
     ContinuousWebJob,
     void,
-
-      | {
-          @body body: void;
-        }
-      | ArmNotFoundResponse,
+    | {
+        @body body: void;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -113,11 +113,10 @@ interface ContinuousWebJobs {
   stopContinuousWebJob is ContinuousWebJobOps.ActionSync<
     ContinuousWebJob,
     void,
-
-      | {
-          @body body: void;
-        }
-      | ArmNotFoundResponse,
+    | {
+        @body body: void;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -148,7 +147,8 @@ interface ContinuousWebJobOperationGroupOps
         @segment("continuouswebjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotContinuousWebJob"
     > {}
 
 @tag("WebApps")
@@ -192,11 +192,10 @@ interface ContinuousWebJobOperationGroup {
   startContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<
     ContinuousWebJob,
     void,
-
-      | {
-          @body body: void;
-        }
-      | ArmNotFoundResponse,
+    | {
+        @body body: void;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -209,11 +208,10 @@ interface ContinuousWebJobOperationGroup {
   stopContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<
     ContinuousWebJob,
     void,
-
-      | {
-          @body body: void;
-        }
-      | ArmNotFoundResponse,
+    | {
+        @body body: void;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }

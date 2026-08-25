@@ -36,6 +36,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Microsoft.Support" })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Support;
 
 /**
@@ -45,14 +46,12 @@ enum Versions {
   /**
    * The 2024-04-01 API version.
    */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_04_01: "2024-04-01",
 
   /**
-   * The 2026-06-01 API version.
+   * The 2025-06-01-preview API version.
    */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2026_06_01: "2026-06-01",
+  v2025_06_01_preview: "2025-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
