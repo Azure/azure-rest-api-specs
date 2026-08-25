@@ -40,7 +40,3 @@ These settings apply only when `--tag=package-2026-08-01-preview` is specified o
 input-file:
   - preview/2026-08-01-preview/devcompute.json
 ```
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md).
