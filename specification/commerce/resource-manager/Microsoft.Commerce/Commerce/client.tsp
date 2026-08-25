@@ -11,7 +11,15 @@ using Microsoft.Commerce;
   "GetUsageAggregates",
   "csharp"
 );
+@@clientName(AggregationGranularity, "CommerceUsageAggregationGranularity", "csharp");
+@@clientName(MeterInfo, "CommerceMeterInfo", "csharp");
+@@clientName(MonetaryCommitment, "CommerceMonetaryCommitment", "csharp");
+@@clientName(MonetaryCredit, "CommerceMonetaryCredit", "csharp");
+@@clientName(OfferTermInfo, "CommerceOfferTermInfo", "csharp");
+@@clientName(ResourceRateCardInfo, "CommerceRateCardInfo", "csharp");
+@@clientName(RecurringCharge, "CommerceRecurringCharge", "csharp");
 @@clientName(RecurringCharge.RecurringCharge, "Amount", "csharp");
+@@clientName(UsageAggregation, "CommerceUsageAggregation", "csharp");
 @@clientName(OfferTermInfoName, "KnownOfferTermInfoName", "csharp");
 
 /** Name of the offer term. */
