@@ -98,6 +98,23 @@ directive:
       The use-read-only-status-schema workaround was tested, but it changes the schemas emitted
       for existing API versions and caused 76 cross-version breaking-change findings.
       Remove this suppression when the emitter uses an allOf wrapper that preserves readOnly.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}/vnetConnections/{vnetConnectionName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}/vnetConnections/{vnetConnectionName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}/vnetConnections/{vnetConnectionName}"].put.responses["201"].schema
+    reason: |
+      TypeSpec models provisioningState as read-only, but the emitter represents it as a
+      $ref with a sibling readOnly annotation, which OpenAPI ignores. Enabling
+      use-read-only-status-schema produces the compliant definition-level annotation,
+      but applies project-wide and changes 47 status schemas, including 45 unrelated to
+      SandboxGroup and VnetConnection. Suppress these seven affected response schemas
+      until the emitter supports a scoped compliant representation.
   - suppress: UnSupportedPatchProperties
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].patch.parameters[5]

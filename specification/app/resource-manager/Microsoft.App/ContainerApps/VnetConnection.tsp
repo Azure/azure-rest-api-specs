@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./SandboxGroup.tsp";
 
 using TypeSpec.Rest;
@@ -9,10 +10,12 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 
 /** A virtual network connection associated with a SandboxGroup. */
+@added(Versions.v2026_07_01)
 @parentResource(SandboxGroup)
 model VnetConnection is ProxyResource<VnetConnectionProperties> {
   ...ResourceNameParameter<
@@ -24,6 +27,7 @@ model VnetConnection is ProxyResource<VnetConnectionProperties> {
 }
 
 /** VnetConnection resource specific properties. */
+@added(Versions.v2026_07_01)
 model VnetConnectionProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Description is on the referenced type to avoid emitting a sibling of $ref."
   @visibility(Lifecycle.Read)
@@ -38,6 +42,7 @@ model VnetConnectionProperties {
 }
 
 /** Provisioning state of the VnetConnection. */
+@added(Versions.v2026_07_01)
 @lroStatus
 union VnetConnectionProvisioningState {
   string,
@@ -53,6 +58,7 @@ union VnetConnectionProvisioningState {
   Deleting: "Deleting",
 }
 
+@added(Versions.v2026_07_01)
 @armResourceOperations
 interface VnetConnections {
   /** Get the properties of a VnetConnection. */
