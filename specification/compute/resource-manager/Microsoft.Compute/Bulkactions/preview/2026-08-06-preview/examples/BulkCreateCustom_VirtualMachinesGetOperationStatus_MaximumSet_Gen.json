@@ -1,0 +1,41 @@
+{
+  "title": "BulkCreateCustom_VirtualMachinesGetOperationStatus_MaximumSet",
+  "operationId": "BulkCreateCustom_VirtualMachinesGetOperationStatus",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "700935bc-adf2-4176-b9ad-c571731c09fc",
+    "resourceGroupName": "local-test-rg",
+    "location": "eastus",
+    "name": "00000000-0000-0000-0000-000000000102"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "resourceId": "/subscriptions/700935bc-adf2-4176-b9ad-c571731c09fc/resourceGroups/local-test-rg/providers/Microsoft.Compute/virtualMachines/vm-001",
+            "operation": {
+              "operationId": "3303b164-d533-4f5d-8cb2-54f9585fc55c",
+              "resourceId": "/subscriptions/700935bc-adf2-4176-b9ad-c571731c09fc/resourceGroups/local-test-rg/providers/Microsoft.Compute/virtualMachines/vm-001",
+              "opType": "Create",
+              "subscriptionId": "700935bc-adf2-4176-b9ad-c571731c09fc",
+              "deadline": "2026-08-04T15:40:08.2802082+00:00",
+              "deadlineType": "InitiateAt",
+              "state": "PendingScheduling",
+              "timezone": "UTC",
+              "retryPolicy": {
+                "retryCount": 1,
+                "retryWindowInMinutes": 60
+              }
+            },
+            "virtualMachineInfo": {
+              "vmSize": "Standard_D4as_v5",
+              "zone": "1"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/700935bc-adf2-4176-b9ad-c571731c09fc/resourceGroups/local-test-rg/providers/Microsoft.Compute/locations/eastus/bulkCreateCustom/00000000-0000-0000-0000-000000000102/virtualMachinesGetOperationStatus?api-version=2026-08-06-preview&$skiptoken=page2"
+      }
+    }
+  }
+}
