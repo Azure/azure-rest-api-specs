@@ -43,6 +43,37 @@ using Microsoft.KubernetesConfiguration;
   "!java,!csharp"
 );
 
+@@clientLocation(
+  KubernetesConfigurationPrivateLinkScopes.get,
+  "KubernetesConfigurationPrivateLinkScopes",
+  "csharp"
+);
+@@clientLocation(
+  KubernetesConfigurationPrivateLinkScopes.createOrUpdate,
+  "KubernetesConfigurationPrivateLinkScopes",
+  "csharp"
+);
+@@clientLocation(
+  KubernetesConfigurationPrivateLinkScopes.updateTags,
+  "KubernetesConfigurationPrivateLinkScopes",
+  "csharp"
+);
+@@clientLocation(
+  KubernetesConfigurationPrivateLinkScopes.delete,
+  "KubernetesConfigurationPrivateLinkScopes",
+  "csharp"
+);
+@@clientLocation(
+  KubernetesConfigurationPrivateLinkScopes.listByResourceGroup,
+  "KubernetesConfigurationPrivateLinkScopes",
+  "csharp"
+);
+@@clientLocation(
+  KubernetesConfigurationPrivateLinkScopes.list,
+  "KubernetesConfigurationPrivateLinkScopes",
+  "csharp"
+);
+
 @@clientName(
   PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "properties"
