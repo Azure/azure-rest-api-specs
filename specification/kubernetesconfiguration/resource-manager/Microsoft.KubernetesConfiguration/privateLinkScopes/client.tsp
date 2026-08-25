@@ -24,12 +24,12 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.KubernetesConfiguration.PrivateEndpointConnections.getByPrivateLinkScope,
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnections.listByPrivateLinkScope,
   "GetPrivateEndpointConnectionsByPrivateLinkScope",
   "csharp"
 );
 @@clientName(
-  Microsoft.KubernetesConfiguration.PrivateLinkResources.getByPrivateLinkScope,
+  Microsoft.KubernetesConfiguration.PrivateLinkResources.listByPrivateLinkScope,
   "GetPrivateLinkResourcesByPrivateLinkScope",
   "csharp"
 );
