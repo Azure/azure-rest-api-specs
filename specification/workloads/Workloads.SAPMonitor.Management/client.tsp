@@ -31,6 +31,12 @@ using Microsoft.Workloads;
 @@clientName(ProviderInstance, "SapProviderInstance", "csharp");
 @@clientName(SapLandscapeMonitorResource, "SapLandscapeMonitor", "csharp");
 @@clientName(UpdateMonitorRequest, "SapMonitorPatch", "csharp");
+@@clientName(Health, "WorkloadsSapMonitorHealth", "csharp");
+@@clientName(
+  ProviderSpecificProperties,
+  "SapProviderInstanceSpecificProperties",
+  "csharp"
+);
 
 @@clientName(RoutingPreference, "SapRoutingPreference", "csharp");
 @@clientName(SslPreference, "SapSslPreference", "csharp");
@@ -121,6 +127,11 @@ using Microsoft.Workloads;
 
 @@clientName(Alert, "SapMonitorAlert", "csharp");
 @@clientName(AlertProperties, "SapMonitorAlertProperties", "csharp");
+@@clientName(
+  AlertTemplateProperties,
+  "SapMonitorAlertTemplateProperties",
+  "csharp"
+);
 @@clientName(AlertQueryParameter, "SapMonitorAlertQueryContent", "csharp");
 @@clientName(AlertRuleProperties, "SapMonitorAlertRuleProperties", "csharp");
 @@clientName(ConditionalOperator, "AlertRuleConditionalOperator", "csharp");
