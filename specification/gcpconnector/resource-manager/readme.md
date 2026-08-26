@@ -36,13 +36,13 @@ These settings apply only when `--tag=package-2027-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2027-01-01'
 input-file:
-  - Microsoft.GcpConnector/stable/2027-01-01/cloudFunction.json
-  - Microsoft.GcpConnector/stable/2027-01-01/computeInstance.json
-  - Microsoft.GcpConnector/stable/2027-01-01/operations.json
-  - Microsoft.GcpConnector/stable/2027-01-01/storageBucket.json
-  - Microsoft.GcpConnector/stable/2027-01-01/bigQueryDataset.json
-  - Microsoft.GcpConnector/stable/2027-01-01/sqlAdminInstance.json
-  - Microsoft.GcpConnector/stable/2027-01-01/containerClusters.json
+  - Microsoft.GcpConnector/CloudFunction/stable/2027-01-01/cloudFunction.json
+  - Microsoft.GcpConnector/ComputeInstance/stable/2027-01-01/computeInstance.json
+  - Microsoft.GcpConnector/GcpConnector/stable/2027-01-01/operations.json
+  - Microsoft.GcpConnector/StorageBucket/stable/2027-01-01/storageBucket.json
+  - Microsoft.GcpConnector/BigQueryDataset/stable/2027-01-01/bigQueryDataset.json
+  - Microsoft.GcpConnector/SQLAdminInstances/stable/2027-01-01/sqlAdminInstance.json
+  - Microsoft.GcpConnector/ContainerClusters/stable/2027-01-01/containerClusters.json
 ```
 
 ## Suppression
