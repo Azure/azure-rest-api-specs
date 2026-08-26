@@ -190,9 +190,10 @@ model SubAgent {
   agent_capabilities: string;
 
   @doc("The wall-clock timeout, in seconds, for each invocation of this subagent. When omitted, the service timeout is used.")
-  @minValue(5)
-  @maxValue(1200)
-  invoke_timeout_seconds?: int32;
+  @encode(DurationKnownEncoding.seconds, int32)
+  @minValue(duration.fromISO("PT5S"))
+  @maxValue(duration.fromISO("PT20M"))
+  invoke_timeout_seconds?: duration;
 }
 
 @doc("Policy for delivering responses while a voice agent waits for a subagent.")
@@ -202,9 +203,10 @@ model ResponsePolicy {
   immediate_ack?: boolean;
 
   @doc("The number of seconds without subagent content or user input before the voice agent provides a gap-filling response.")
-  @minValue(5)
-  @maxValue(120)
-  gap_filling_interval?: int32;
+  @encode(DurationKnownEncoding.seconds, int32)
+  @minValue(duration.fromISO("PT5S"))
+  @maxValue(duration.fromISO("PT2M"))
+  gap_filling_interval?: duration;
 
   @doc("Instructions used to generate the immediate acknowledgement.")
   ack_instructions?: string;
@@ -216,9 +218,10 @@ model ResponsePolicy {
   progress_instructions?: string;
 
   @doc("The minimum number of seconds between spoken progress updates.")
-  @minValue(5)
-  @maxValue(300)
-  progress_update_interval?: int32;
+  @encode(DurationKnownEncoding.seconds, int32)
+  @minValue(duration.fromISO("PT5S"))
+  @maxValue(duration.fromISO("PT5M"))
+  progress_update_interval?: duration;
 }
 
 @doc("Session-start greeting configuration for a voice agent.")
