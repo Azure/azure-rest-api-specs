@@ -557,9 +557,9 @@ interface Queries {
   /**
    * Get top resource consuming queries of a database
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI operation is emitted into the existing databases.json file under legacy feature-file output splitting instead of creating a new feature file."
   @added(Versions.v2026_08_01_preview)
-  @Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+  @Azure.ResourceManager.Legacy.feature(Features.Databases)
   @tag("TopQueries")
   @list
   @get
@@ -568,6 +568,32 @@ interface Queries {
     Database,
     void,
     ArmResponse<TopQueriesDatabaseListResult>
+  >;
+}
+
+@armResourceOperations(#{ omitTags: true })
+interface TopQueryStatistics {
+  /**
+   * Get query statistics.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI operation is emitted into the existing databases.json file under legacy feature-file output splitting instead of creating a new feature file."
+  @added(Versions.v2026_08_01_preview)
+  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @tag("TopQueryStatistics")
+  @list
+  @get
+  @action("statistics")
+  listByQuery is ArmResourceActionSync<
+    Database,
+    void,
+    ArmResponse<QueryStatisticsDatabaseListResult>,
+    Parameters = {
+      /** The query ID. */
+      @path
+      @segment("topQueries")
+      @pattern("^[0-9]*$")
+      topQueryName: string;
+    }
   >;
 }
 

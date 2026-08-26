@@ -13393,18 +13393,18 @@ model TopQueries {
 /**
  * A list of top resource consuming queries on database
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model TopQueriesDatabaseListResult is Azure.Core.Page<TopQueriesDatabase>;
 
 /**
  * A list of top resource consuming queries on database
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy database query responses included resource identity fields such as name, type, and id. The current service models this response as a ProxyResource, so inheritance is retained to preserve that contract."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model TopQueriesDatabase extends CommonTypes.ProxyResource {
   /**
    * Requested number of top queries.
@@ -13446,14 +13446,14 @@ model TopQueriesDatabase extends CommonTypes.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This legacy response has no properties field; its query fields are serialized at the root alongside id, name, and type. Moving this field under properties would change the structure."
   @visibility(Lifecycle.Read)
-  observationStartTime?: string;
+  observationStartTime?: utcDateTime;
 
   /**
    * The end time for the metric.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This legacy response has no properties field; its query fields are serialized at the root alongside id, name, and type. Moving this field under properties would change the structure."
   @visibility(Lifecycle.Read)
-  observationEndTime?: string;
+  observationEndTime?: utcDateTime;
 
   /**
    * List of top resource consuming queries with appropriate metric data
@@ -13466,9 +13466,9 @@ model TopQueriesDatabase extends CommonTypes.ProxyResource {
 /**
  * Metrics of a query execution.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model QueryMetrics {
   /**
    * Unique query id
@@ -13486,15 +13486,15 @@ model QueryMetrics {
 /**
  * Properties of a query metrics interval.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model QueryMetricIntervalDetails {
   /**
    * The start time for the metric interval.
    */
   @visibility(Lifecycle.Read)
-  intervalStartTime?: string;
+  intervalStartTime?: utcDateTime;
 
   /**
    * Execution count of a query in this interval.
@@ -13512,9 +13512,9 @@ model QueryMetricIntervalDetails {
 /**
  * Properties of a topquery metric in one interval.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model QueryMetric {
   /**
    * The name information for the metric.
@@ -13542,35 +13542,11 @@ model QueryMetric {
 }
 
 /**
- * A list of requested query texts - contains one item.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
-model QueryTextResult is Azure.Core.Page<QueryTextDatabase>;
-
-/**
- * Text of requested query.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy database query responses included resource identity fields such as name, type, and id. The current service models this response as a ProxyResource, so inheritance is retained to preserve that contract."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
-model QueryTextDatabase extends CommonTypes.ProxyResource {
-  /**
-   * Query text.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This legacy response has no properties field; queryText is serialized at the root alongside id, name, and type. Moving it under properties would change the wire structure."
-  @visibility(Lifecycle.Read)
-  queryText?: string;
-}
-
-/**
  * A list of a query execution statistics
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model QueryStatisticsDatabaseListResult
   is Azure.Core.Page<QueryStatisticsDatabase>;
 
@@ -13578,9 +13554,9 @@ model QueryStatisticsDatabaseListResult
  * A query execution statistics.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy database query responses included resource identity fields such as name, type, and id. The current service models this response as a ProxyResource, so inheritance is retained to preserve that contract."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model QueryStatisticsDatabase extends CommonTypes.ProxyResource {
   /**
    * Query id.
@@ -13600,9 +13576,9 @@ model QueryStatisticsDatabase extends CommonTypes.ProxyResource {
 /**
  * A query metrics interval.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model IntervalQuery {
   /**
    * Interval type (length).
@@ -13614,7 +13590,7 @@ model IntervalQuery {
    * The start time for the metric (ISO-8601 format).
    */
   @visibility(Lifecycle.Read)
-  intervalStartTime?: string;
+  intervalStartTime?: utcDateTime;
 
   /**
    * Execution count of a query in this interval.
@@ -13632,9 +13608,9 @@ model IntervalQuery {
 /**
  * A query metric.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
 model MetricQuery {
   /**
    * The name information for the metric.
@@ -13684,16 +13660,6 @@ model MetricQuery {
   @visibility(Lifecycle.Read)
   stdev?: float64;
 }
-
-/**
- * Resource properties for a database top query.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "A database top query is a read-only addressable child resource whose endpoint-specific data is returned by the queryText and statistics actions; it has no shared properties payload."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "A database top query represents an existing executed query and has no provisioning lifecycle."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_08_01_preview)
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseQueries)
-model DatabaseTopQueryProperties {}
 
 /**
  * Validate azure key vault encryption key.

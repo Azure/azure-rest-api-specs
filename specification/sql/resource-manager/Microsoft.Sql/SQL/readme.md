@@ -49,7 +49,6 @@ input-file:
   - preview/2026-08-01-preview/databaseOperations.json
   - preview/2026-08-01-preview/databaseRecommendedActions.json
   - preview/2026-08-01-preview/databases.json
-  - preview/2026-08-01-preview/databaseQueries.json
   - preview/2026-08-01-preview/databaseSchemas.json
   - preview/2026-08-01-preview/databaseSecurityAlertPolicies.json
   - preview/2026-08-01-preview/databaseSqlVulnerabilityAssessmentBaselines.json
@@ -199,7 +198,6 @@ input-file:
   - preview/2025-08-01-preview/databaseOperations.json
   - preview/2025-08-01-preview/databaseRecommendedActions.json
   - preview/2025-08-01-preview/databases.json
-  - preview/2025-08-01-preview/databaseQueries.json
   - preview/2025-08-01-preview/databaseSchemas.json
   - preview/2025-08-01-preview/databaseSecurityAlertPolicies.json
   - preview/2025-08-01-preview/databaseSqlVulnerabilityAssessmentBaselines.json
@@ -349,7 +347,6 @@ input-file:
   - preview/2025-02-01-preview/databaseOperations.json
   - preview/2025-02-01-preview/databaseRecommendedActions.json
   - preview/2025-02-01-preview/databases.json
-  - preview/2025-02-01-preview/databaseQueries.json
   - preview/2025-02-01-preview/databaseSchemas.json
   - preview/2025-02-01-preview/databaseSecurityAlertPolicies.json
   - preview/2025-02-01-preview/databaseSqlVulnerabilityAssessmentBaselines.json
@@ -499,7 +496,6 @@ input-file:
   - stable/2025-01-01/databaseOperations.json
   - stable/2025-01-01/databaseRecommendedActions.json
   - stable/2025-01-01/databases.json
-  - stable/2025-01-01/databaseQueries.json
   - stable/2025-01-01/databaseSchemas.json
   - stable/2025-01-01/databaseSecurityAlertPolicies.json
   - stable/2025-01-01/databaseSqlVulnerabilityAssessmentBaselines.json
@@ -3891,15 +3887,11 @@ suppressions:
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"].get.responses.default.schema["$ref"]
   - code: ResourceNameRestriction
-    from: databaseQueries.json
+    from: databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries"]
     reason: serverName and databaseName are ancestor resource name parameters. The pattern will be added for them across the RP in a future update.
   - code: ResourceNameRestriction
-    from: databaseQueries.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/queryText"]
-    reason: serverName and databaseName are ancestor resource name parameters. The pattern will be added for them across the RP in a future update.
-  - code: ResourceNameRestriction
-    from: databaseQueries.json
+    from: databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/statistics"]
     reason: serverName and databaseName are ancestor resource name parameters. The pattern will be added for them across the RP in a future update.
   - code: ResourceNameRestriction

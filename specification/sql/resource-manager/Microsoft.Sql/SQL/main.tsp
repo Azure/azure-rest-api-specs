@@ -25,7 +25,6 @@ import "./DatabaseColumn.tsp";
 import "./ImportExportExtensionsOperationResult.tsp";
 import "./RecommendedAction.tsp";
 import "./Database.tsp";
-import "./DatabaseTopQuery.tsp";
 import "./DatabaseSchema.tsp";
 import "./DatabaseSecurityAlertPolicy.tsp";
 import "./DatabaseSqlVulnerabilityAssessmentBaselineSet.tsp";
@@ -166,8 +165,6 @@ enum Features {
   DatabaseExtensions,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DatabaseOperations,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "DatabaseQueries is an internal feature identifier used only to split generated OpenAPI files; client-facing documentation is provided on its operations."
-  DatabaseQueries,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DatabaseRecommendedActions,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
