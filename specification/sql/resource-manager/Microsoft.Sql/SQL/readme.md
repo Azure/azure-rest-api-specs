@@ -3887,6 +3887,14 @@ suppressions:
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"].get.responses.default.schema["$ref"]
   - code: ResourceNameRestriction
+    from: databases.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries"]
+    reason: serverName and databaseName are ancestor resource name parameters. The pattern will be added for them across the RP in a future update.
+  - code: ResourceNameRestriction
+    from: databases.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/statistics"]
+    reason: serverName and databaseName are ancestor resource name parameters. The pattern will be added for them across the RP in a future update.
+  - code: ResourceNameRestriction
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"]
   - code: ParameterNotDefinedInGlobalParameters
