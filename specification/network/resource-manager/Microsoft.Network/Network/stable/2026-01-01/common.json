@@ -359,6 +359,48 @@
         ]
       }
     },
+    "ApplicationGatewayAdvancedRoutingConditionType": {
+      "type": "string",
+      "description": "The type of request property that an advanced routing condition is evaluated against.",
+      "enum": [
+        "Header",
+        "QueryString",
+        "Path",
+        "ClientIP",
+        "Method"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewayAdvancedRoutingConditionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Header",
+            "value": "Header",
+            "description": "The condition is evaluated against an HTTP request header identified by propertyName."
+          },
+          {
+            "name": "QueryString",
+            "value": "QueryString",
+            "description": "The condition is evaluated against a query string argument identified by propertyName."
+          },
+          {
+            "name": "Path",
+            "value": "Path",
+            "description": "The condition is evaluated against the request path. propertyName is not applicable."
+          },
+          {
+            "name": "ClientIP",
+            "value": "ClientIP",
+            "description": "The condition is evaluated against the client IP address. propertyName and propertyValueMatcher are not applicable."
+          },
+          {
+            "name": "Method",
+            "value": "Method",
+            "description": "The condition is evaluated against the HTTP method. propertyName and propertyValueMatcher are not applicable."
+          }
+        ]
+      }
+    },
     "ApplicationGatewayBackendHealthServerHealth": {
       "type": "string",
       "description": "Health of backend server.",
@@ -772,7 +814,8 @@
       "description": "Rule type.",
       "enum": [
         "Basic",
-        "PathBasedRouting"
+        "PathBasedRouting",
+        "AdvancedRouting"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewayRequestRoutingRuleType",
@@ -787,6 +830,11 @@
             "name": "PathBasedRouting",
             "value": "PathBasedRouting",
             "description": "PathBasedRouting"
+          },
+          {
+            "name": "AdvancedRouting",
+            "value": "AdvancedRouting",
+            "description": "AdvancedRouting"
           }
         ]
       }
