@@ -28095,12 +28095,7 @@ model NeuroShieldResource is Azure.ResourceManager.TrackedResource<
   NeuroShieldProperties,
   false
 > {
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Keep the ARM-standard top-level etag used by the reviewed NeuroShield contract for optimistic concurrency."
-  @visibility(Lifecycle.Read)
-  etag?: string;
+  ...Azure.ResourceManager.EntityTagProperty;
 
   /**
    * The name of the resource.
@@ -28112,6 +28107,8 @@ model NeuroShieldResource is Azure.ResourceManager.TrackedResource<
   @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
   name: string;
 }
+
+@@encodedName(NeuroShieldResource.eTag, "application/json", "etag");
 
 /**
  * Extension deployment status for a protected resource.
