@@ -169,7 +169,7 @@ model VoiceAgentAvatarIceServer {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The session model is a wire-compatible specialization of the persisted avatar configuration and adds only runtime transport fields."
 @doc("Avatar settings accepted by the stable voice-agent WebSocket contract.")
-model VoiceAgentSessionAvatarConfig extends VoiceAvatarConfig {
+model VoiceAgentSessionAvatarConfig extends VoiceAgentAvatarConfig {
   ice_servers?: VoiceAgentAvatarIceServer[] | null;
 }
 
@@ -195,7 +195,7 @@ model VoiceAgentSessionUpdateConfig {
   output_modalities?: VoiceOutputModality[];
 
   @doc("The input- and output-audio settings for the session.")
-  audio?: VoiceAudioConfig;
+  audio?: VoiceAgentAudioConfig;
 
   @doc("The avatar settings for the session.")
   avatar?: VoiceAgentSessionAvatarConfig;
@@ -225,7 +225,7 @@ model VoiceAgentSessionUpdateConfig {
   interim_response?: VoiceAgentInterimResponseConfig;
 
   @doc("A proactive assistant greeting started after session configuration.")
-  greeting?: VoiceGreetingConfig;
+  greeting?: VoiceAgentGreetingConfig;
 }
 
 @doc("The session configuration accepted by a voice-agent session update event.")
@@ -267,7 +267,7 @@ model VoiceAgentResponseCreateParams {
   output_modalities?: VoiceOutputModality[];
 
   @doc("Response-specific audio settings.")
-  audio?: PickProperties<VoiceAudioConfig, "output">;
+  audio?: PickProperties<VoiceAgentAudioConfig, "output">;
 
   @doc("Conversation items used as inline response input.")
   input?: OpenAI.RealtimeConversationItem[];

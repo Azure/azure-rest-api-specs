@@ -39401,42 +39401,6 @@
         ],
         "description": "Extensible status values shared by Foundry jobs."
       },
-      "LlmGeneratedVoiceGreetingConfig": {
-        "type": "object",
-        "required": [
-          "type",
-          "prompt"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "llm_generated"
-            ]
-          },
-          "prompt": {
-            "type": "string",
-            "minLength": 1,
-            "description": "The Handlebars prompt that guides the opening turn."
-          },
-          "tool_choice": {
-            "$ref": "#/components/schemas/VoiceAgentToolChoice",
-            "description": "The tool-selection policy for the opening response. Defaults to `none`.",
-            "default": "none"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceGreetingConfig"
-          }
-        ],
-        "description": "A greeting authored by the session model from a scoped opening-turn prompt.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "LoraConfig": {
         "type": "object",
         "properties": {
@@ -85658,37 +85622,6 @@
         ],
         "description": "The transport protocol for telemetry export."
       },
-      "TemplateVoiceGreetingConfig": {
-        "type": "object",
-        "required": [
-          "type",
-          "text"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "template"
-            ]
-          },
-          "text": {
-            "type": "string",
-            "minLength": 1,
-            "description": "The Handlebars text template spoken at session start."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceGreetingConfig"
-          }
-        ],
-        "description": "A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "TestingCriterionAzureAIEvaluator": {
         "type": "object",
         "required": [
@@ -87037,6 +86970,235 @@
         ],
         "description": "An animation output produced by a voice-agent session."
       },
+      "VoiceAgentAudioConfig": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/VoiceAgentAudioInputConfig",
+            "description": "Input (microphone) audio configuration."
+          },
+          "output": {
+            "$ref": "#/components/schemas/VoiceAgentAudioOutputConfig",
+            "description": "Output (agent speech) audio configuration."
+          }
+        },
+        "description": "The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentAudioInputConfig": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
+            "description": "The input audio format."
+          },
+          "noise_reduction": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentNoiseReduction"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Input noise reduction. Set to null to disable."
+          },
+          "turn_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentTurnDetection"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Turn (end-of-speech) detection. Server-side turn detection is enabled by default; set to null to disable it, in which case the client must trigger responses manually."
+          },
+          "echo_cancellation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEchoCancellation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional server-side echo cancellation settings."
+          },
+          "transcription": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentInputTranscription"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Asynchronous input-audio transcription. Set to null to disable transcription."
+          }
+        },
+        "description": "Input audio configuration for a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentAudioOutputConfig": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
+            "description": "The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM."
+          },
+          "voice": {
+            "type": "string",
+            "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar."
+          },
+          "voice_type": {
+            "$ref": "#/components/schemas/VoiceType",
+            "description": "The voice implementation."
+          },
+          "voice_locale": {
+            "type": "string",
+            "description": "The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "speed": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0.25,
+            "maximum": 1.5,
+            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.",
+            "default": 1
+          },
+          "voice_temperature": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "custom_lexicon_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "custom_text_normalization_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "prefer_locales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "style": {
+            "type": "string",
+            "description": "The voice speaking style. Applies only when `voice_type` is `azure-standard`."
+          },
+          "pitch": {
+            "type": "string",
+            "description": "The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "volume": {
+            "type": "string",
+            "description": "The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
+          },
+          "custom_voice_endpoint_id": {
+            "type": "string",
+            "description": "The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`."
+          },
+          "personal_voice_model": {
+            "type": "string",
+            "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
+          },
+          "output_audio_timestamp_types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentAudioTimestampType"
+            },
+            "description": "Timestamp kinds to include with output audio. Applies to every `voice_type`."
+          }
+        },
+        "description": "Output audio configuration for a voice agent.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`; the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.\n`format` and `output_audio_timestamp_types` apply to every voice type.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentAudioTimestampType": {
+        "type": "string",
+        "enum": [
+          "word"
+        ],
+        "description": "An output-audio timestamp kind supported by a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentAvatarConfig": {
+        "type": "object",
+        "required": [
+          "type",
+          "character"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentAvatarType",
+            "description": "The avatar type."
+          },
+          "character": {
+            "type": "string",
+            "description": "The avatar character identifier, e.g. 'lisa'."
+          },
+          "style": {
+            "type": "string",
+            "description": "The avatar style, e.g. 'casual-sitting'."
+          },
+          "customized": {
+            "type": "boolean",
+            "description": "Whether the avatar is a customer-customized avatar. Defaults to false.",
+            "default": false
+          },
+          "output_protocol": {
+            "$ref": "#/components/schemas/VoiceAgentAvatarOutputProtocol",
+            "description": "The transport used to deliver the avatar video stream."
+          },
+          "model": {
+            "type": "string",
+            "description": "The avatar model identifier."
+          },
+          "video": {
+            "$ref": "#/components/schemas/VoiceAgentAvatarVideoParams",
+            "description": "Avatar video encoder and presentation settings."
+          },
+          "scene": {
+            "$ref": "#/components/schemas/VoiceAgentAvatarScene",
+            "description": "Avatar placement and motion settings."
+          },
+          "output_audit_audio": {
+            "type": "boolean",
+            "description": "Whether audit audio is emitted with avatar output. Defaults to false.",
+            "default": false
+          }
+        },
+        "description": "Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentAvatarIceServer": {
         "type": "object",
         "required": [
@@ -87073,6 +87235,27 @@
           }
         },
         "description": "An ICE server used for avatar WebRTC negotiation."
+      },
+      "VoiceAgentAvatarOutputProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "webrtc",
+              "websocket",
+              "websocket-binary"
+            ]
+          }
+        ],
+        "description": "The transport used to deliver the avatar video stream.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentAvatarScene": {
         "type": "object",
@@ -87127,6 +87310,26 @@
           }
         },
         "description": "Avatar placement and motion settings."
+      },
+      "VoiceAgentAvatarType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "video_avatar",
+              "photo_avatar"
+            ]
+          }
+        ],
+        "description": "The avatar type.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentAvatarVideoBackground": {
         "type": "object",
@@ -87216,6 +87419,242 @@
           }
         },
         "description": "The avatar video resolution."
+      },
+      "VoiceAgentAzureSemanticVadEnTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_semantic_vad_en"
+            ]
+          },
+          "threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Activation threshold for voice activity detection, from 0 to 1."
+          },
+          "prefix_padding_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Audio to include before detected speech, in milliseconds."
+          },
+          "silence_duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Silence required to end speech detection, in milliseconds."
+          },
+          "idle_timeout_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Maximum idle time before the detector ends the turn, in milliseconds."
+          },
+          "end_of_utterance_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceDetection"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
+          },
+          "speech_duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Minimum speech duration required to trigger detection, in milliseconds."
+          },
+          "remove_filler_words": {
+            "type": "boolean",
+            "description": "Whether filler words are removed from transcription.",
+            "default": false
+          },
+          "create_response": {
+            "type": "boolean",
+            "description": "Whether a response is created automatically when speech stops.",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "description": "Whether user speech may interrupt the agent's response.",
+            "default": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
+          }
+        ],
+        "description": "English-optimized Azure semantic voice activity detection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentAzureSemanticVadMultilingualTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_semantic_vad_multilingual"
+            ]
+          },
+          "threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Activation threshold for voice activity detection, from 0 to 1."
+          },
+          "prefix_padding_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Audio to include before detected speech, in milliseconds."
+          },
+          "silence_duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Silence required to end speech detection, in milliseconds."
+          },
+          "idle_timeout_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Maximum idle time before the detector ends the turn, in milliseconds."
+          },
+          "end_of_utterance_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceDetection"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
+          },
+          "speech_duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Minimum speech duration required to trigger detection, in milliseconds."
+          },
+          "remove_filler_words": {
+            "type": "boolean",
+            "description": "Whether filler words are removed from transcription.",
+            "default": false
+          },
+          "create_response": {
+            "type": "boolean",
+            "description": "Whether a response is created automatically when speech stops.",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "description": "Whether user speech may interrupt the agent's response.",
+            "default": true
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "BCP-47 language codes used for speech detection."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
+          }
+        ],
+        "description": "Multilingual Azure semantic voice activity detection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentAzureSemanticVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_semantic_vad"
+            ]
+          },
+          "threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Activation threshold for voice activity detection, from 0 to 1."
+          },
+          "prefix_padding_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Audio to include before detected speech, in milliseconds."
+          },
+          "silence_duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Silence required to end speech detection, in milliseconds."
+          },
+          "idle_timeout_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Maximum idle time before the detector ends the turn, in milliseconds."
+          },
+          "end_of_utterance_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceDetection"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
+          },
+          "speech_duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Minimum speech duration required to trigger detection, in milliseconds."
+          },
+          "remove_filler_words": {
+            "type": "boolean",
+            "description": "Whether filler words are removed from transcription.",
+            "default": false
+          },
+          "create_response": {
+            "type": "boolean",
+            "description": "Whether a response is created automatically when speech stops.",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "description": "Whether user speech may interrupt the agent's response.",
+            "default": true
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "BCP-47 language codes used for speech detection."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
+          }
+        ],
+        "description": "Azure semantic voice activity detection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentClientEvent": {
         "oneOf": [
@@ -87349,11 +87788,11 @@
             "description": "A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts."
           },
           "greeting": {
-            "$ref": "#/components/schemas/VoiceGreetingConfig",
+            "$ref": "#/components/schemas/VoiceAgentGreetingConfig",
             "description": "Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools."
           },
           "audio": {
-            "$ref": "#/components/schemas/VoiceAudioConfig",
+            "$ref": "#/components/schemas/VoiceAgentAudioConfig",
             "description": "The audio configuration, including input and output formats, voice, turn detection, noise reduction, and\ntranscription. These values are session defaults; a client may override supported fields when connecting."
           },
           "output_modalities": {
@@ -87382,7 +87821,7 @@
             "description": "Interim-response settings for latency and tool execution."
           },
           "avatar": {
-            "$ref": "#/components/schemas/VoiceAvatarConfig",
+            "$ref": "#/components/schemas/VoiceAgentAvatarConfig",
             "description": "Optional avatar configuration. These values are session defaults and may be overridden when connecting."
           },
           "tools": {
@@ -87463,6 +87902,76 @@
         ],
         "description": "The source of reference audio used for echo cancellation."
       },
+      "VoiceAgentEndOfUtteranceDetection": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "model": {
+            "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceDetectionModel",
+            "description": "The semantic detection model."
+          },
+          "threshold_level": {
+            "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceThresholdLevel",
+            "description": "The sensitivity threshold."
+          },
+          "timeout_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The detection timeout in milliseconds."
+          }
+        },
+        "description": "Semantic end-of-utterance detection configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentEndOfUtteranceDetectionModel": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "semantic_detection_v1",
+              "semantic_detection_v1_en",
+              "semantic_detection_v1_multilingual",
+              "smart_end_of_turn_detection"
+            ]
+          }
+        ],
+        "description": "The semantic end-of-utterance detection model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentEndOfUtteranceThresholdLevel": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "default"
+            ]
+          }
+        ],
+        "description": "The sensitivity threshold for semantic end-of-utterance detection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentFunctionTool": {
         "type": "object",
         "required": [
@@ -87496,6 +88005,124 @@
           }
         ],
         "description": "A native function tool executed by the client."
+      },
+      "VoiceAgentGreetingConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The greeting mode."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "template": "#/components/schemas/VoiceAgentTemplateGreetingConfig",
+            "llm_generated": "#/components/schemas/VoiceAgentLlmGeneratedGreetingConfig"
+          }
+        },
+        "description": "Session-start greeting configuration for a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentInputTranscription": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "language": {
+            "type": "string",
+            "description": "The language of the input audio. Supplying the input language in\n  [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\n  will improve accuracy and latency."
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "An optional text to guide the model's style or continue a previous audio\n  segment.\n  For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).\n  For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example \"expect words related to technology\".\n  Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions."
+          },
+          "delay": {
+            "type": "string",
+            "enum": [
+              "minimal",
+              "low",
+              "medium",
+              "high",
+              "xhigh"
+            ],
+            "description": "Controls how long the model waits before emitting transcription text.\n  Higher values can improve transcription accuracy at the cost of latency.\n  Only supported with `gpt-realtime-whisper` in GA Realtime sessions."
+          },
+          "model": {
+            "$ref": "#/components/schemas/VoiceAgentInputTranscriptionModel",
+            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`."
+          },
+          "custom_speech": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Optional customer custom speech deployment configuration, keyed by locale."
+          },
+          "phrase_list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional phrase hints that bias recognition toward domain terms."
+          }
+        },
+        "description": "Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription\noptions with the Azure and MAI transcription models, custom speech models, and phrase hints.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentInputTranscriptionModel": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "whisper-1",
+              "gpt-realtime-whisper",
+              "gpt-4o-transcribe",
+              "gpt-4o-mini-transcribe",
+              "gpt-4o-transcribe-diarize",
+              "gpt-transcribe",
+              "gpt-live-transcribe",
+              "mai-transcribe",
+              "azure-speech"
+            ]
+          }
+        ],
+        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\nAdditional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentInterimResponseConfig": {
         "type": "object",
@@ -87547,6 +88174,42 @@
           }
         ],
         "description": "A condition that may trigger an interim response."
+      },
+      "VoiceAgentLlmGeneratedGreetingConfig": {
+        "type": "object",
+        "required": [
+          "type",
+          "prompt"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "llm_generated"
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Handlebars prompt that guides the opening turn."
+          },
+          "tool_choice": {
+            "$ref": "#/components/schemas/VoiceAgentToolChoice",
+            "description": "The tool-selection policy for the opening response. Defaults to `none`.",
+            "default": "none"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentGreetingConfig"
+          }
+        ],
+        "description": "A greeting authored by the session model from a scoped opening-turn prompt.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentLlmInterimResponseConfig": {
         "type": "object",
@@ -87721,6 +88384,45 @@
           }
         ],
         "description": "An MCP tool available to a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentNoiseReduction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentNoiseReductionType",
+            "description": "The noise reduction mode."
+          }
+        },
+        "description": "Input audio noise reduction configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentNoiseReductionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "near_field",
+              "far_field",
+              "azure_deep_noise_suppression"
+            ]
+          }
+        ],
+        "description": "The input audio noise reduction mode.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -87916,7 +88618,7 @@
             "type": "object",
             "properties": {
               "output": {
-                "$ref": "#/components/schemas/VoiceAudioOutputConfig",
+                "$ref": "#/components/schemas/VoiceAgentAudioOutputConfig",
                 "description": "Output (agent speech) audio configuration."
               }
             },
@@ -87987,7 +88689,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
+            "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
           }
         ],
         "description": "OpenAI semantic VAD turn-detection settings."
@@ -88632,6 +89334,73 @@
         },
         "description": "Details of a non-fatal warning."
       },
+      "VoiceAgentServerVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "threshold": {
+            "$ref": "#/components/schemas/OpenAI.numeric"
+          },
+          "prefix_padding_ms": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "silence_duration_ms": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "create_response": {
+            "type": "boolean",
+            "default": true
+          },
+          "interrupt_response": {
+            "type": "boolean",
+            "default": true
+          },
+          "idle_timeout_ms": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "server_vad"
+            ]
+          },
+          "speech_duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Minimum speech duration required to trigger detection, in milliseconds."
+          },
+          "end_of_utterance_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentEndOfUtteranceDetection"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
+          }
+        ],
+        "description": "Server-side voice activity detection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentSessionAvatarConfig": {
         "type": "object",
         "properties": {
@@ -88651,7 +89420,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/VoiceAvatarConfig"
+            "$ref": "#/components/schemas/VoiceAgentAvatarConfig"
           }
         ],
         "description": "Avatar settings accepted by the stable voice-agent WebSocket contract."
@@ -88713,7 +89482,7 @@
             "description": "The output modalities enabled for the session."
           },
           "audio": {
-            "$ref": "#/components/schemas/VoiceAudioConfig",
+            "$ref": "#/components/schemas/VoiceAgentAudioConfig",
             "description": "The input- and output-audio settings for the session."
           },
           "avatar": {
@@ -88762,7 +89531,7 @@
             "description": "Interim-response settings for latency and tool execution."
           },
           "greeting": {
-            "$ref": "#/components/schemas/VoiceGreetingConfig",
+            "$ref": "#/components/schemas/VoiceAgentGreetingConfig",
             "description": "A proactive assistant greeting started after session configuration."
           },
           "object": {
@@ -88834,7 +89603,7 @@
             "description": "The output modalities enabled for the session."
           },
           "audio": {
-            "$ref": "#/components/schemas/VoiceAudioConfig",
+            "$ref": "#/components/schemas/VoiceAgentAudioConfig",
             "description": "The input- and output-audio settings for the session."
           },
           "avatar": {
@@ -88883,7 +89652,7 @@
             "description": "Interim-response settings for latency and tool execution."
           },
           "greeting": {
-            "$ref": "#/components/schemas/VoiceGreetingConfig",
+            "$ref": "#/components/schemas/VoiceAgentGreetingConfig",
             "description": "A proactive assistant greeting started after session configuration."
           }
         },
@@ -88916,6 +89685,91 @@
         ],
         "description": "A static interim response selected from configured text."
       },
+      "VoiceAgentSystemTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "system"
+            ],
+            "description": "The type of the tool. Always `system`."
+          },
+          "name": {
+            "$ref": "#/components/schemas/VoiceAgentSystemToolName",
+            "description": "The service-managed control action. Known values are stable; additional values may be added over time."
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of the system tool."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentTool"
+          }
+        ],
+        "description": "A service-managed control that acts on the active voice session without customer code or external authentication.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentSystemToolName": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "end_conversation"
+            ]
+          }
+        ],
+        "description": "A service-managed voice-session control action. Known values are stable; additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTemplateGreetingConfig": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "template"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Handlebars text template spoken at session start."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentGreetingConfig"
+          }
+        ],
+        "description": "A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentTool": {
         "type": "object",
         "required": [
@@ -88932,8 +89786,8 @@
           "mapping": {
             "function": "#/components/schemas/VoiceAgentFunctionTool",
             "mcp": "#/components/schemas/VoiceAgentMcpTool",
-            "system": "#/components/schemas/VoiceSystemTool",
-            "toolbox": "#/components/schemas/VoiceToolboxTool"
+            "system": "#/components/schemas/VoiceAgentSystemTool",
+            "toolbox": "#/components/schemas/VoiceAgentToolboxTool"
           }
         },
         "description": "A tool usable by a voice agent.",
@@ -88983,6 +89837,47 @@
           }
         ],
         "description": "When a tool invocation creates a follow-up response. Additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentToolboxTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "toolbox_name",
+          "toolbox_version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "toolbox"
+            ],
+            "description": "The type of the tool. Always `toolbox`."
+          },
+          "toolbox_name": {
+            "type": "string",
+            "description": "The name of the toolbox to attach."
+          },
+          "toolbox_version": {
+            "type": "string",
+            "description": "The immutable version of the toolbox to attach."
+          },
+          "response_scheduling": {
+            "$ref": "#/components/schemas/VoiceAgentToolResponseScheduling",
+            "description": "When the toolbox invocation creates a follow-up response. Defaults to `when_idle`.",
+            "default": "when_idle"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentTool"
+          }
+        ],
+        "description": "A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -89075,22 +89970,78 @@
       "VoiceAgentTurnDetection": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VoiceServerVadTurnDetection"
+            "$ref": "#/components/schemas/VoiceAgentServerVadTurnDetection"
           },
           {
             "$ref": "#/components/schemas/VoiceAgentSemanticVadTurnDetection"
           },
           {
-            "$ref": "#/components/schemas/VoiceAzureSemanticVadTurnDetection"
+            "$ref": "#/components/schemas/VoiceAgentAzureSemanticVadTurnDetection"
           },
           {
-            "$ref": "#/components/schemas/VoiceAzureSemanticVadEnTurnDetection"
+            "$ref": "#/components/schemas/VoiceAgentAzureSemanticVadEnTurnDetection"
           },
           {
-            "$ref": "#/components/schemas/VoiceAzureSemanticVadMultilingualTurnDetection"
+            "$ref": "#/components/schemas/VoiceAgentAzureSemanticVadMultilingualTurnDetection"
           }
         ],
         "description": "Turn-detection settings accepted by a stable voice-agent session."
+      },
+      "VoiceAgentTurnDetectionConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentTurnDetectionType",
+            "description": "The turn-detection strategy."
+          },
+          "auto_truncate": {
+            "type": "boolean",
+            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
+            "default": false
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "semantic_vad": "#/components/schemas/VoiceAgentSemanticVadTurnDetection",
+            "azure_semantic_vad": "#/components/schemas/VoiceAgentAzureSemanticVadTurnDetection",
+            "azure_semantic_vad_en": "#/components/schemas/VoiceAgentAzureSemanticVadEnTurnDetection",
+            "azure_semantic_vad_multilingual": "#/components/schemas/VoiceAgentAzureSemanticVadMultilingualTurnDetection",
+            "server_vad": "#/components/schemas/VoiceAgentServerVadTurnDetection"
+          }
+        },
+        "description": "Turn-detection configuration for a voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTurnDetectionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "server_vad",
+              "semantic_vad",
+              "azure_semantic_vad",
+              "azure_semantic_vad_en",
+              "azure_semantic_vad_multilingual"
+            ]
+          }
+        ],
+        "description": "The turn-detection strategy. Additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentWebSocketMessage": {
         "oneOf": [
@@ -89131,25 +90082,6 @@
           ]
         }
       },
-      "VoiceAudioConfig": {
-        "type": "object",
-        "properties": {
-          "input": {
-            "$ref": "#/components/schemas/VoiceAudioInputConfig",
-            "description": "Input (microphone) audio configuration."
-          },
-          "output": {
-            "$ref": "#/components/schemas/VoiceAudioOutputConfig",
-            "description": "Output (agent speech) audio configuration."
-          }
-        },
-        "description": "The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAudioContainerFormat": {
         "anyOf": [
           {
@@ -89163,151 +90095,6 @@
           }
         ],
         "description": "An audio container format. Additional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAudioInputConfig": {
-        "type": "object",
-        "properties": {
-          "format": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
-            "description": "The input audio format."
-          },
-          "noise_reduction": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceNoiseReduction"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Input noise reduction. Set to null to disable."
-          },
-          "turn_detection": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentTurnDetection"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Turn (end-of-speech) detection. Server-side turn detection is enabled by default; set to null to disable it, in which case the client must trigger responses manually."
-          },
-          "echo_cancellation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentEchoCancellation"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Optional server-side echo cancellation settings."
-          },
-          "transcription": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceInputTranscription"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Asynchronous input-audio transcription. Set to null to disable transcription."
-          }
-        },
-        "description": "Input audio configuration for a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAudioOutputConfig": {
-        "type": "object",
-        "properties": {
-          "format": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
-            "description": "The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM."
-          },
-          "voice": {
-            "type": "string",
-            "description": "The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar."
-          },
-          "voice_type": {
-            "$ref": "#/components/schemas/VoiceType",
-            "description": "The voice implementation."
-          },
-          "voice_locale": {
-            "type": "string",
-            "description": "The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "speed": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0.25,
-            "maximum": 1.5,
-            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.",
-            "default": 1
-          },
-          "voice_temperature": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_lexicon_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_text_normalization_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "prefer_locales": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "style": {
-            "type": "string",
-            "description": "The voice speaking style. Applies only when `voice_type` is `azure-standard`."
-          },
-          "pitch": {
-            "type": "string",
-            "description": "The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "volume": {
-            "type": "string",
-            "description": "The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`."
-          },
-          "custom_voice_endpoint_id": {
-            "type": "string",
-            "description": "The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`."
-          },
-          "personal_voice_model": {
-            "type": "string",
-            "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
-          },
-          "output_audio_timestamp_types": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAudioTimestampType"
-            },
-            "description": "Timestamp kinds to include with output audio. Applies to every `voice_type`."
-          }
-        },
-        "description": "Output audio configuration for a voice agent.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`; the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.\n`format` and `output_audio_timestamp_types` apply to every voice type.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -89328,348 +90115,6 @@
           }
         ],
         "description": "A voice-audio participant role. Additional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAudioTimestampType": {
-        "type": "string",
-        "enum": [
-          "word"
-        ],
-        "description": "An output-audio timestamp kind supported by a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAvatarConfig": {
-        "type": "object",
-        "required": [
-          "type",
-          "character"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/VoiceAvatarType",
-            "description": "The avatar type."
-          },
-          "character": {
-            "type": "string",
-            "description": "The avatar character identifier, e.g. 'lisa'."
-          },
-          "style": {
-            "type": "string",
-            "description": "The avatar style, e.g. 'casual-sitting'."
-          },
-          "customized": {
-            "type": "boolean",
-            "description": "Whether the avatar is a customer-customized avatar. Defaults to false.",
-            "default": false
-          },
-          "output_protocol": {
-            "$ref": "#/components/schemas/VoiceAvatarOutputProtocol",
-            "description": "The transport used to deliver the avatar video stream."
-          },
-          "model": {
-            "type": "string",
-            "description": "The avatar model identifier."
-          },
-          "video": {
-            "$ref": "#/components/schemas/VoiceAgentAvatarVideoParams",
-            "description": "Avatar video encoder and presentation settings."
-          },
-          "scene": {
-            "$ref": "#/components/schemas/VoiceAgentAvatarScene",
-            "description": "Avatar placement and motion settings."
-          },
-          "output_audit_audio": {
-            "type": "boolean",
-            "description": "Whether audit audio is emitted with avatar output. Defaults to false.",
-            "default": false
-          }
-        },
-        "description": "Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAvatarOutputProtocol": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "webrtc",
-              "websocket",
-              "websocket-binary"
-            ]
-          }
-        ],
-        "description": "The transport used to deliver the avatar video stream.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAvatarType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "video_avatar",
-              "photo_avatar"
-            ]
-          }
-        ],
-        "description": "The avatar type.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAzureSemanticVadEnTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_semantic_vad_en"
-            ]
-          },
-          "threshold": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Activation threshold for voice activity detection, from 0 to 1."
-          },
-          "prefix_padding_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Audio to include before detected speech, in milliseconds."
-          },
-          "silence_duration_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Silence required to end speech detection, in milliseconds."
-          },
-          "idle_timeout_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Maximum idle time before the detector ends the turn, in milliseconds."
-          },
-          "end_of_utterance_detection": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
-          },
-          "speech_duration_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Minimum speech duration required to trigger detection, in milliseconds."
-          },
-          "remove_filler_words": {
-            "type": "boolean",
-            "description": "Whether filler words are removed from transcription.",
-            "default": false
-          },
-          "create_response": {
-            "type": "boolean",
-            "description": "Whether a response is created automatically when speech stops.",
-            "default": true
-          },
-          "interrupt_response": {
-            "type": "boolean",
-            "description": "Whether user speech may interrupt the agent's response.",
-            "default": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
-          }
-        ],
-        "description": "English-optimized Azure semantic voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAzureSemanticVadMultilingualTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_semantic_vad_multilingual"
-            ]
-          },
-          "threshold": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Activation threshold for voice activity detection, from 0 to 1."
-          },
-          "prefix_padding_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Audio to include before detected speech, in milliseconds."
-          },
-          "silence_duration_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Silence required to end speech detection, in milliseconds."
-          },
-          "idle_timeout_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Maximum idle time before the detector ends the turn, in milliseconds."
-          },
-          "end_of_utterance_detection": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
-          },
-          "speech_duration_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Minimum speech duration required to trigger detection, in milliseconds."
-          },
-          "remove_filler_words": {
-            "type": "boolean",
-            "description": "Whether filler words are removed from transcription.",
-            "default": false
-          },
-          "create_response": {
-            "type": "boolean",
-            "description": "Whether a response is created automatically when speech stops.",
-            "default": true
-          },
-          "interrupt_response": {
-            "type": "boolean",
-            "description": "Whether user speech may interrupt the agent's response.",
-            "default": true
-          },
-          "languages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "BCP-47 language codes used for speech detection."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
-          }
-        ],
-        "description": "Multilingual Azure semantic voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAzureSemanticVadTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_semantic_vad"
-            ]
-          },
-          "threshold": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Activation threshold for voice activity detection, from 0 to 1."
-          },
-          "prefix_padding_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Audio to include before detected speech, in milliseconds."
-          },
-          "silence_duration_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Silence required to end speech detection, in milliseconds."
-          },
-          "idle_timeout_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Maximum idle time before the detector ends the turn, in milliseconds."
-          },
-          "end_of_utterance_detection": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
-          },
-          "speech_duration_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Minimum speech duration required to trigger detection, in milliseconds."
-          },
-          "remove_filler_words": {
-            "type": "boolean",
-            "description": "Whether filler words are removed from transcription.",
-            "default": false
-          },
-          "create_response": {
-            "type": "boolean",
-            "description": "Whether a response is created automatically when speech stops.",
-            "default": true
-          },
-          "interrupt_response": {
-            "type": "boolean",
-            "description": "Whether user speech may interrupt the agent's response.",
-            "default": true
-          },
-          "languages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "BCP-47 language codes used for speech detection."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
-          }
-        ],
-        "description": "Azure semantic voice activity detection.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -89752,194 +90197,6 @@
           ]
         }
       },
-      "VoiceEndOfUtteranceDetection": {
-        "type": "object",
-        "required": [
-          "model"
-        ],
-        "properties": {
-          "model": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceDetectionModel",
-            "description": "The semantic detection model."
-          },
-          "threshold_level": {
-            "$ref": "#/components/schemas/VoiceEndOfUtteranceThresholdLevel",
-            "description": "The sensitivity threshold."
-          },
-          "timeout_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "The detection timeout in milliseconds."
-          }
-        },
-        "description": "Semantic end-of-utterance detection configuration.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceEndOfUtteranceDetectionModel": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "semantic_detection_v1",
-              "semantic_detection_v1_en",
-              "semantic_detection_v1_multilingual",
-              "smart_end_of_turn_detection"
-            ]
-          }
-        ],
-        "description": "The semantic end-of-utterance detection model.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceEndOfUtteranceThresholdLevel": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "low",
-              "medium",
-              "high",
-              "default"
-            ]
-          }
-        ],
-        "description": "The sensitivity threshold for semantic end-of-utterance detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceGreetingConfig": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "The greeting mode."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "template": "#/components/schemas/TemplateVoiceGreetingConfig",
-            "llm_generated": "#/components/schemas/LlmGeneratedVoiceGreetingConfig"
-          }
-        },
-        "description": "Session-start greeting configuration for a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceInputTranscription": {
-        "type": "object",
-        "required": [
-          "model"
-        ],
-        "properties": {
-          "language": {
-            "type": "string",
-            "description": "The language of the input audio. Supplying the input language in\n  [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\n  will improve accuracy and latency."
-          },
-          "languages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "minItems": 1,
-            "description": "Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
-          },
-          "keywords": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
-          },
-          "prompt": {
-            "type": "string",
-            "description": "An optional text to guide the model's style or continue a previous audio\n  segment.\n  For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).\n  For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example \"expect words related to technology\".\n  Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions."
-          },
-          "delay": {
-            "type": "string",
-            "enum": [
-              "minimal",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ],
-            "description": "Controls how long the model waits before emitting transcription text.\n  Higher values can improve transcription accuracy at the cost of latency.\n  Only supported with `gpt-realtime-whisper` in GA Realtime sessions."
-          },
-          "model": {
-            "$ref": "#/components/schemas/VoiceInputTranscriptionModel",
-            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`."
-          },
-          "custom_speech": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "Optional customer custom speech deployment configuration, keyed by locale."
-          },
-          "phrase_list": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Optional phrase hints that bias recognition toward domain terms."
-          }
-        },
-        "description": "Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription\noptions with the Azure and MAI transcription models, custom speech models, and phrase hints.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceInputTranscriptionModel": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "whisper-1",
-              "gpt-realtime-whisper",
-              "gpt-4o-transcribe",
-              "gpt-4o-mini-transcribe",
-              "gpt-4o-transcribe-diarize",
-              "gpt-transcribe",
-              "gpt-live-transcribe",
-              "mai-transcribe",
-              "azure-speech"
-            ]
-          }
-        ],
-        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\nAdditional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceItemAudioResponse": {
         "type": "object",
         "required": [
@@ -90012,45 +90269,6 @@
           }
         ],
         "description": "How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),\nwhich the service derives from the selected model.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceNoiseReduction": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/VoiceNoiseReductionType",
-            "description": "The noise reduction mode."
-          }
-        },
-        "description": "Input audio noise reduction configuration.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceNoiseReductionType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "near_field",
-              "far_field",
-              "azure_deep_noise_suppression"
-            ]
-          }
-        ],
-        "description": "The input audio noise reduction mode.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -90316,224 +90534,6 @@
           }
         },
         "description": "The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceServerVadTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "threshold": {
-            "$ref": "#/components/schemas/OpenAI.numeric"
-          },
-          "prefix_padding_ms": {
-            "$ref": "#/components/schemas/OpenAI.integer"
-          },
-          "silence_duration_ms": {
-            "$ref": "#/components/schemas/OpenAI.integer"
-          },
-          "create_response": {
-            "type": "boolean",
-            "default": true
-          },
-          "interrupt_response": {
-            "type": "boolean",
-            "default": true
-          },
-          "idle_timeout_ms": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.integer"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "server_vad"
-            ]
-          },
-          "speech_duration_ms": {
-            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
-            "description": "Minimum speech duration required to trigger detection, in milliseconds."
-          },
-          "end_of_utterance_detection": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceEndOfUtteranceDetection"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Semantic end-of-utterance detection configuration. Set to null to disable it."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceTurnDetection"
-          }
-        ],
-        "description": "Server-side voice activity detection.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceSystemTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "system"
-            ],
-            "description": "The type of the tool. Always `system`."
-          },
-          "name": {
-            "$ref": "#/components/schemas/VoiceSystemToolName",
-            "description": "The service-managed control action. Known values are stable; additional values may be added over time."
-          },
-          "description": {
-            "type": "string",
-            "description": "An optional description of the system tool."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentTool"
-          }
-        ],
-        "description": "A service-managed control that acts on the active voice session without customer code or external authentication.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceSystemToolName": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "end_conversation"
-            ]
-          }
-        ],
-        "description": "A service-managed voice-session control action. Known values are stable; additional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceToolboxTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "toolbox_name",
-          "toolbox_version"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "toolbox"
-            ],
-            "description": "The type of the tool. Always `toolbox`."
-          },
-          "toolbox_name": {
-            "type": "string",
-            "description": "The name of the toolbox to attach."
-          },
-          "toolbox_version": {
-            "type": "string",
-            "description": "The immutable version of the toolbox to attach."
-          },
-          "response_scheduling": {
-            "$ref": "#/components/schemas/VoiceAgentToolResponseScheduling",
-            "description": "When the toolbox invocation creates a follow-up response. Defaults to `when_idle`.",
-            "default": "when_idle"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentTool"
-          }
-        ],
-        "description": "A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceTurnDetection": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/VoiceTurnDetectionType",
-            "description": "The turn-detection strategy."
-          },
-          "auto_truncate": {
-            "type": "boolean",
-            "description": "Whether the input audio buffer is truncated automatically when speech stops.",
-            "default": false
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "semantic_vad": "#/components/schemas/VoiceAgentSemanticVadTurnDetection",
-            "azure_semantic_vad": "#/components/schemas/VoiceAzureSemanticVadTurnDetection",
-            "azure_semantic_vad_en": "#/components/schemas/VoiceAzureSemanticVadEnTurnDetection",
-            "azure_semantic_vad_multilingual": "#/components/schemas/VoiceAzureSemanticVadMultilingualTurnDetection",
-            "server_vad": "#/components/schemas/VoiceServerVadTurnDetection"
-          }
-        },
-        "description": "Turn-detection configuration for a voice agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceTurnDetectionType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "server_vad",
-              "semantic_vad",
-              "azure_semantic_vad",
-              "azure_semantic_vad_en",
-              "azure_semantic_vad_multilingual"
-            ]
-          }
-        ],
-        "description": "The turn-detection strategy. Additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
