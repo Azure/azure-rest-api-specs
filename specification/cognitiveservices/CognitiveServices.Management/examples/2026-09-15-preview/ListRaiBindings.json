@@ -1,0 +1,30 @@
+{
+  "operationId": "RaiBindings_List",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-09-15-preview",
+    "$top": 50,
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "List RAI bindings",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiBindings/chat-guard",
+            "name": "chat-guard",
+            "type": "Microsoft.CognitiveServices/accounts/raiBindings",
+            "etag": "\"00000000-0000-0000-0000-000000000002\"",
+            "properties": {
+              "boundResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/aoai-account/deployments/chat-prod",
+              "targetPolicyName": "agent-guard"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiBindings?api-version=2026-09-15-preview&%24top=50&%24skiptoken=Y2hhdC1ndWFyZA=="
+      }
+    }
+  }
+}

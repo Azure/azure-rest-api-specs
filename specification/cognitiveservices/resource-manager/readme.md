@@ -41,6 +41,27 @@ These settings apply only when `--tag=package-2026-09-15-preview` is specified o
 input-file:
   - Microsoft.CognitiveServices/preview/2026-09-15-preview/cognitiveservices.json
 suppressions:
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: The acs property embeds a separately versioned Agent Control Specification document. These fields retain the canonical ACS snake_case wire names so customers can import, export, validate, and round-trip ACS manifests without translation; generated SDKs expose idiomatic camelCase names through x-ms-client-name.
+    from: cognitiveservices.json
+    where:
+      - $.definitions.RaiAcsHarmConfiguration.properties.harm_config_id
+      - $.definitions.RaiAcsInterventionPoint.properties.policy_target
+      - $.definitions.RaiAcsInterventionPoint.properties.policy_target_kind
+      - $.definitions.RaiAcsInterventionPoints.properties.pre_tool_call
+      - $.definitions.RaiAcsInterventionPoints.properties.post_tool_call
+      - $.definitions.RaiAcsManifest.properties.agent_control_specification_version
+      - $.definitions.RaiAcsManifest.properties.intervention_points
+      - $.definitions.RaiAcsModerationBindingExtension.properties.subject_format
+      - $.definitions.RaiAcsModerationBindingExtension.properties.harm_configs
+      - $.definitions.RaiAcsModerationBindingExtension.properties.external_safety_providers
+      - $.definitions.RaiAcsPolicyBinding.properties.aacs_moderation
+  - code: AvoidAdditionalProperties
+    reason: The canonical ACS manifest defines metadata as an extensible JSON object and policies as a map keyed by logical policy identifier. Replacing these maps with fixed properties or arrays would break ACS manifest portability and round-tripping.
+    from: cognitiveservices.json
+    where:
+      - $.definitions.RaiAcsManifest.properties.metadata
+      - $.definitions.RaiAcsManifest.properties.policies
   - code: PutResponseCodes
     reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated). Preview-only bug fix correcting the contract before GA.
     where:
