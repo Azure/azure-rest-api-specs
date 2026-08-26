@@ -29,18 +29,6 @@ union ProvisioningState {
   string,
 }
 
-@added(ApiVersions.v2026_06_01_preview)
-@doc("Identifies how a wave plan was produced.")
-union PlanSource {
-  @doc("The wave plan was produced by the system solver.")
-  SystemGenerated: "SystemGenerated",
-
-  @doc("The wave plan was uploaded by the customer.")
-  Imported: "Imported",
-
-  string,
-}
-
 @doc("The artifact download mode.")
 @added(ApiVersions.v2026_08_01_preview)
 union ArtifactDownloadMode {

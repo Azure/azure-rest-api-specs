@@ -1671,7 +1671,6 @@
           "description": "The Artifact Store version id for the run's committed files.",
           "readOnly": true
         }
-      }
       },
       "required": [
         "artifactId",
@@ -1814,17 +1813,6 @@
       "type": "object",
       "description": "Data model of Download URL for wave recommendation report.",
       "properties": {
-        "sasUri": {
-          "type": "string",
-          "description": "Time-bound SAS URL to the wave-plan artifact. Expires at expirationTime; never persisted on the wave-plan document.",
-          "readOnly": true
-        },
-        "expirationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC instant after which sasUri ceases to be valid.",
-          "readOnly": true
-        },
         "wavePlanName": {
           "type": "string",
           "description": "The deterministic wave-plan resource name matching the persisted row's wavePlanName.",
@@ -1862,8 +1850,6 @@
         }
       },
       "required": [
-        "sasUri",
-        "expirationTime",
         "wavePlanName",
         "provisioningState",
         "planSource",
@@ -1939,16 +1925,6 @@
           "description": "The wave-plan name.",
           "readOnly": true
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation on the wave plan.",
-          "readOnly": true
-        },
-        "planSource": {
-          "$ref": "#/definitions/PlanSource",
-          "description": "How the wave plan was produced. Always Imported for plans produced by importWavePlan.",
-          "readOnly": true
-        },
         "assessmentArmId": {
           "type": "string",
           "description": "The assessment ARM identifier the plan belongs to.",
@@ -1977,66 +1953,12 @@
       },
       "required": [
         "wavePlanName",
-        "planSource",
         "assessmentArmId",
         "migrationPath",
         "provisioningState",
         "planSource",
         "artifactProperties"
       ]
-    },
-    "MigrateProjectProperties": {
-      "type": "object",
-      "description": "Properties of a migrate project.",
-      "properties": {
-        "registeredTools": {
-          "type": "array",
-          "description": "Register tools inside project.",
-          "items": {
-            "$ref": "#/definitions/Items"
-          },
-          "readOnly": true
-        },
-        "serviceEndpoint": {
-          "type": "string",
-          "description": "Service endpoint."
-        },
-        "summary": {
-          "type": "object",
-          "description": "Project summary.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ProjectSummary"
-          },
-          "readOnly": true
-        },
-        "lastSummaryRefreshedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last summary refresh time.",
-          "readOnly": true
-        },
-        "refreshSummaryState": {
-          "$ref": "#/definitions/RefreshSummaryState",
-          "description": "Refresh summary state.",
-          "readOnly": true
-        },
-        "utilityStorageAccountId": {
-          "type": "string",
-          "description": "Utility storage account id."
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Gets or sets the state of public network access."
-        },
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "Gets the private endpoint connections.",
-          "items": {
-            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-          },
-          "readOnly": true
-        }
-      }
     },
     "MigrationEntity": {
       "type": "object",
@@ -2358,33 +2280,6 @@
         ]
       }
     },
-    "ProjectSummary": {
-      "type": "object",
-      "description": "Project summary.",
-      "properties": {
-        "instanceType": {
-          "type": "string",
-          "description": "Instance type.",
-          "readOnly": true
-        },
-        "refreshSummaryState": {
-          "$ref": "#/definitions/RefreshSummaryState",
-          "description": "Refresh summary state."
-        },
-        "lastSummaryRefreshedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last summary refresh time."
-        },
-        "extendedSummary": {
-          "type": "object",
-          "description": "Extended summary.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation.",
@@ -2439,36 +2334,6 @@
         ]
       },
       "readOnly": true
-    },
-    "PublicNetworkAccess": {
-      "type": "string",
-      "description": "Gets or sets the state of public network access.",
-      "enum": [
-        "NotSpecified",
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "PublicNetworkAccess",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "NotSpecified Network Access"
-          },
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled Network Access"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled Network Access"
-          }
-        ]
-      }
     },
     "RefreshEntitiesRequest": {
       "type": "object",
@@ -2546,42 +2411,6 @@
           },
           "readOnly": true
         }
-      }
-    },
-    "RefreshSummaryState": {
-      "type": "string",
-      "description": "Refresh summary state.",
-      "enum": [
-        "Started",
-        "InProgress",
-        "Completed",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "RefreshSummaryState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Started",
-            "value": "Started",
-            "description": "Started State"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress State"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Completed State"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed State"
-          }
-        ]
       }
     },
     "ServerMigrationSpecificProperties": {
