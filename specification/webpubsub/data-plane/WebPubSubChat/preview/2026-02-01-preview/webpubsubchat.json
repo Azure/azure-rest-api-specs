@@ -1474,6 +1474,54 @@
         }
       }
     },
+    "ChatPermission": {
+      "type": "string",
+      "description": "A permission that can be assigned to a chat role.",
+      "enum": [
+        "user.create_room",
+        "user.fetch_all_rooms",
+        "room.publish_message",
+        "room.history",
+        "room.invite",
+        "room.remove_user"
+      ],
+      "x-ms-enum": {
+        "name": "ChatPermission",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserCreateRoom",
+            "value": "user.create_room",
+            "description": "Allows a user to create chat rooms."
+          },
+          {
+            "name": "UserFetchAllRooms",
+            "value": "user.fetch_all_rooms",
+            "description": "Allows a user to list the rooms they belong to."
+          },
+          {
+            "name": "RoomPublishMessage",
+            "value": "room.publish_message",
+            "description": "Allows a room member to publish messages."
+          },
+          {
+            "name": "RoomHistory",
+            "value": "room.history",
+            "description": "Allows a room member to read message history."
+          },
+          {
+            "name": "RoomInvite",
+            "value": "room.invite",
+            "description": "Allows a room member to add users to a room."
+          },
+          {
+            "name": "RoomRemoveUser",
+            "value": "room.remove_user",
+            "description": "Allows a room operator to remove users from a room."
+          }
+        ]
+      }
+    },
     "ChatRole": {
       "type": "object",
       "description": "Represents a chat role.\nA role name must start with 'user.' or 'room.' prefix.\nA role must contain either user permissions or room permissions, but not both.",
@@ -1490,7 +1538,7 @@
           "type": "array",
           "description": "Permissions associated with the role. Do not mix user permissions and room permissions in one role.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ChatPermission"
           }
         },
         "etag": {
