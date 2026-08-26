@@ -62,7 +62,6 @@ interface ManagedTrafficConfigResources {
    */
   getManagedTrafficConfig is ArmResourceRead<
     ManagedTrafficConfigResource,
-    Parameters = ManagedTrafficConfigExpandParameter,
     Error = DefaultErrorResponse
   >;
 
