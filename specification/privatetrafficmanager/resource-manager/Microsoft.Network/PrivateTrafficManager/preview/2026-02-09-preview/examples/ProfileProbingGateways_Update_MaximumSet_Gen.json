@@ -1,0 +1,34 @@
+{
+  "title": "ProfileProbingGateways_Update_MaximumSet",
+  "operationId": "ProfileProbingGateways_Update",
+  "parameters": {
+    "api-version": "2026-02-09-preview",
+    "subscriptionId": "10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA",
+    "resourceGroupName": "rgprivateTrafficManager",
+    "privateTrafficManagerProfileName": "my-profile",
+    "profileProbingGatewayName": "myProbingGateway",
+    "properties": {
+      "properties": {
+        "probingGatewayId": "/subscriptions/A1B2C3D4-E5F6-7890-ABCD-1234567890EF/resourceGroups/rgProbingInfra/providers/Microsoft.Network/probingGateways/pgw-westus-001"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/my-profile/probingGateways/myProbingGateway",
+        "name": "myProbingGateway",
+        "type": "Microsoft.Network/privateTrafficManagerProfiles/probingGateways",
+        "properties": {
+          "probingGatewayId": "/subscriptions/A1B2C3D4-E5F6-7890-ABCD-1234567890EF/resourceGroups/rgProbingInfra/providers/Microsoft.Network/probingGateways/pgw-westus-001",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
