@@ -23,8 +23,11 @@ model WebAppAssessmentV3 is ProxyResource<WebAppAssessmentV3Properties> {
 }
 
 @doc("WebApp assessment resource properties.")
-model WebAppAssessmentV3Properties
-  is AssessmentProperties<Scope, WebAppAssessmentSettings, AssessmentDetails> {
+model WebAppAssessmentV3Properties is AssessmentProperties<
+  Scope,
+  WebAppAssessmentSettings,
+  AssessmentDetails
+> {
   @doc("Gets or sets the machine assessment ARM ID for VM fallback.")
   fallbackMachineAssessmentArmId?: string;
 }

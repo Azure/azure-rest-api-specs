@@ -2,6 +2,7 @@
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace DefenderForStorageAPI;
@@ -117,19 +119,6 @@ interface DefenderForStorageSettings {
   >;
 
   /**
-   * Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.
-   */
-  @tag("DefenderForStorage")
-  @tag("Antimalware")
-  @tag("Scan")
-  startMalwareScan is DefenderForStorageSettingsOps.ActionSync<
-    DefenderForStorageSetting,
-    void,
-    ArmResponse<MalwareScan>,
-    ErrorType = CloudError
-  >;
-
-  /**
    * Cancels a Defender for Storage malware scan for the specified storage account.
    */
   @tag("DefenderForStorage")
@@ -142,6 +131,53 @@ interface DefenderForStorageSettings {
     ArmResponse<MalwareScan>,
     ErrorType = CloudError
   >;
+
+  /**
+   * Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.
+   */
+  // Hand-written (not built from DefenderForStorageSettingsOps.ActionSync<>) so the request
+  // body can be versioned: only the `body` parameter is @added(v2026), so the operation
+  // exists in all versions but the optional StartMalwareScanRequest body only appears in
+  // 2026-01-01-preview. This keeps 2025-09-01-preview byte-identical to main while adding
+  // the on-demand scan filters in 2026. ActionSync<> can't express a per-version body.
+  //
+  // The path parameters are declared inline (matching the DefenderForStorageSettingsOps
+  // legacy alias) rather than via ResourceInstanceParameters<>, so the URL keeps the
+  // existing `resourceId` scope naming instead of switching to `resourceUri`. Route
+  // assembly is driven by @armResourceAction + the @segment/@key decorators (no explicit
+  // @route), which avoids the path-parameter duplication seen when combining an explicit
+  // @route with @armResourceOperations.
+  @tag("DefenderForStorage")
+  @tag("Antimalware")
+  @tag("Scan")
+  @armResourceAction(DefenderForStorageSetting)
+  @post
+  startMalwareScan(
+    ...ApiVersionParameter,
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path(#{ allowReserved: true })
+    @key
+    resourceId: string,
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security",
+
+    /** The defender for storage setting name. */
+    @path
+    @segment("defenderForStorageSettings")
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    settingName: SettingName,
+
+    /** Optional request body to filter which blobs and files to scan. */
+    @added(Versions.v2026_01_01_preview)
+    @bodyRoot
+    body?: StartMalwareScanRequest,
+  ): ArmResponse<MalwareScan> | CloudError;
 
   /**
    * Gets the Defender for Storage malware scan for the specified storage resource.

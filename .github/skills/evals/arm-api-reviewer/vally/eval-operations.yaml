@@ -4,10 +4,21 @@ description: |
   Validates detection of PATCH body violations, PUT response schema mismatches,
   DELETE response issues, and LRO pattern violations.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
+tags:
+  area: arm-api-reviewer
+
 defaults:
   runs: 1
   timeout: "300s"
-  model: claude-opus-4.6-1m
+  model: claude-opus-4.6
   judge_model: claude-sonnet-4.6
 
 scoring:

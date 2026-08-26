@@ -13,8 +13,10 @@ namespace Microsoft.DataBox;
 /**
  * Job Resource.
  */
-model JobResource
-  is Azure.ResourceManager.TrackedResource<JobProperties, false> {
+model JobResource is Azure.ResourceManager.TrackedResource<
+  JobProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = JobResource,
     KeyName = "jobName",

@@ -128,7 +128,7 @@ as license to recommend deletion.
    `ProvisioningStateMustBeReadOnly`: confirm no `provisioningState`
    property in the emitted swagger is shaped as `{ "$ref": "...",
 "readOnly": true }`, because `readOnly` siblings of `$ref` are
-   ignored per JSON Schema).
+   ignored per JSON Schema). For TypeSpec projects, the preferred remedy is the emitter option `use-read-only-status-schema: true` in `tspconfig.yaml` -- recommend it over keeping the suppression; see [`provisioning-state.md`](./provisioning-state.md), section "`ProvisioningStateMustBeReadOnly` -- Emitter Workaround".
 3. **Name the safe alternative explicitly.** If the rule still fires
    on the emitted artifact, the alternatives are (a) fix the source so
    the emitter produces a compliant shape, or (b) narrow the

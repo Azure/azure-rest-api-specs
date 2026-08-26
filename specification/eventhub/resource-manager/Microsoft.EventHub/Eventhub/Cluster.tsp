@@ -122,10 +122,9 @@ interface Clusters {
   patch is ArmResourceActionSync<
     Cluster,
     ClusterQuotaConfigurationProperties,
-
-      | ArmResponse<ClusterQuotaConfigurationProperties>
-      | ArmResourceCreatedSyncResponse<ClusterQuotaConfigurationProperties>
-      | AcceptedResponse,
+    | ArmResponse<ClusterQuotaConfigurationProperties>
+    | ArmResourceCreatedSyncResponse<ClusterQuotaConfigurationProperties>
+    | AcceptedResponse,
     Error = ErrorResponse
   >;
 

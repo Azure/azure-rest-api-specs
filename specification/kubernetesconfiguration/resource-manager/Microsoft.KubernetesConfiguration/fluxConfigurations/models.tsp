@@ -1465,7 +1465,6 @@ model KustomizationPatchDefinition {
    * Enable/disable garbage collections of Kubernetes objects created by this Kustomization.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   prune?: boolean | null;
 
   /**

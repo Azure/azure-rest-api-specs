@@ -14,8 +14,10 @@ namespace ScheduledQueryRuleApi;
 /**
  * The scheduled query rule resource.
  */
-model ScheduledQueryRuleResource
-  is Azure.ResourceManager.ProxyResource<ScheduledQueryRuleProperties, false> {
+model ScheduledQueryRuleResource is Azure.ResourceManager.ProxyResource<
+  ScheduledQueryRuleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ScheduledQueryRuleResource,
     KeyName = "ruleName",
