@@ -219,6 +219,11 @@ union OpenIdConnectClientCredentialMethod {
   "ListLabelHistory",
   "csharp"
 );
+@@clientName(
+  ContainerAppsLabelHistoryPreview.listLabelHistory,
+  "ListLabelHistory",
+  "csharp"
+);
 
 @@clientName(
   ContainerAppsDiagnostics.getRevision,
@@ -1217,6 +1222,7 @@ union OpenIdConnectClientCredentialMethod {
 
 // C# @@scope customizations.
 @@scope(ContainerAppsLabelHistory.listLabelHistory, "!csharp");
+@@scope(ContainerAppsLabelHistoryPreview.listLabelHistory, "!csharp");
 
 // C# @@usage customizations.
 @@usage(LogicAppProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");

@@ -524,17 +524,17 @@ union JobRunningState {
   string,
 
   /**
-   * Ready
+   * The job is ready to run.
    */
   Ready: "Ready",
 
   /**
-   * Progressing
+   * The job is transitioning to its target state.
    */
   Progressing: "Progressing",
 
   /**
-   * Suspended
+   * The job is suspended.
    */
   Suspended: "Suspended",
 }
@@ -3899,7 +3899,7 @@ model JobProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   runningState?: JobRunningState;
 
   /**
@@ -5599,17 +5599,17 @@ union Status {
   string,
 
   /**
-   * Succeeded
+   * The label operation completed successfully.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The label operation failed.
    */
   Failed: "Failed",
 
   /**
-   * Starting
+   * The label operation is starting.
    */
   Starting: "Starting",
 }
@@ -5858,7 +5858,7 @@ union DotNetComponentType {
   string,
 
   /**
-   * AspireDashboard
+   * An Aspire dashboard component.
    */
   AspireDashboard: "AspireDashboard",
 }
@@ -5870,27 +5870,27 @@ union DotNetComponentProvisioningState {
   string,
 
   /**
-   * Succeeded
+   * The .NET component was provisioned successfully.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The .NET component failed to provision.
    */
   Failed: "Failed",
 
   /**
-   * Canceled
+   * Provisioning of the .NET component was canceled.
    */
   Canceled: "Canceled",
 
   /**
-   * Deleting
+   * The .NET component is being deleted.
    */
   Deleting: "Deleting",
 
   /**
-   * InProgress
+   * The .NET component is being provisioned.
    */
   InProgress: "InProgress",
 }
@@ -8235,6 +8235,24 @@ model HttpGet {
 model ContainerAppsFunctionCollection is Azure.Core.Page<ContainerAppsFunction>;
 
 /**
+ * The state of a Container App function.
+ */
+@added(Versions.v2026_07_01)
+union ContainerAppsFunctionState {
+  string,
+
+  /**
+   * The function is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The function is disabled.
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * Function resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8260,13 +8278,29 @@ model ContainerAppsFunctionProperties {
   /**
    * Indicates whether the function is disabled.
    */
+  @removed(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
+
+  /**
+   * The state of the function.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  state?: ContainerAppsFunctionState;
 }
 
 /**
  * Container App Label History collection ARM resource.
  */
+@removed(Versions.v2026_01_01)
+@renamedFrom(Versions.v2026_01_01, "LabelHistoryCollection")
+model LabelHistoryPreviewCollection is Azure.Core.Page<LabelHistoryPreview>;
+
+/**
+ * Container App Label History collection ARM resource.
+ */
+@added(Versions.v2026_07_01)
 model LabelHistoryCollection is Azure.Core.Page<LabelHistory>;
 
 /**
@@ -8277,9 +8311,8 @@ model LabelHistoryProperties {
   /**
    * List of label history records.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @identifiers(#["label"])
+  @identifiers(#[])
   records?: LabelHistoryRecordItem[];
 }
 

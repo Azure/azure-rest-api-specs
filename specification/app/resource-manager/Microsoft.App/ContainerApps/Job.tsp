@@ -175,13 +175,13 @@ interface Jobs {
   >;
 
   /**
-   * Resumes a suspended job
+   * Resumes execution for a suspended Container Apps job.
    */
   @tag("Jobs")
   @summary("Resumes a suspended job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   resume is ArmResourceActionAsyncBase<
     Job,
     void,
@@ -194,13 +194,13 @@ interface Jobs {
   >;
 
   /**
-   * Suspends a job
+   * Suspends execution for a running Container Apps job.
    */
   @tag("Jobs")
   @summary("Suspends a job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @removed(Versions.v2026_01_01)
-  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_01)
   suspend is ArmResourceActionAsyncBase<
     Job,
     void,
