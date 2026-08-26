@@ -26,7 +26,7 @@ model ServerFarmSilo
     Resource = ServerFarmSilo,
     KeyName = "siloName",
     SegmentName = "silos",
-    NamePattern = "^[A-Za-z0-9-]{1,24}$"
+    NamePattern = "^[A-Za-z0-9_@-]{1,50}$"
   >;
 }
 

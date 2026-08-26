@@ -25,7 +25,7 @@ model SiteSilo is Azure.ResourceManager.ProxyResource<SiteSiloProperties> {
     Resource = SiteSilo,
     KeyName = "siloName",
     SegmentName = "silos",
-    NamePattern = "^[A-Za-z0-9-]{1,24}$"
+    NamePattern = "^[A-Za-z0-9_@-]{1,50}$"
   >;
 }
 
@@ -97,7 +97,6 @@ interface SiteSiloVirtualNetworkConnectionOps
         @path
         @segment("silos")
         @key
-        @pattern("^[A-Za-z0-9-]{1,24}$")
         siloName: string,
       },
       {
@@ -105,7 +104,6 @@ interface SiteSiloVirtualNetworkConnectionOps
         @path
         @segment("virtualNetworkConnections")
         @key
-        @pattern("^[A-Za-z0-9_@-]{1,50}$")
         vnetName: string,
       },
       ResourceName = "SiteSiloVirtualNetworkConnection"
