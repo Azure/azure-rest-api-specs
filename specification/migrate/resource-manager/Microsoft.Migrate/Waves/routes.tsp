@@ -176,10 +176,12 @@ interface Runbooks {
   delete is ArmResourceDeleteWithoutOkAsync<Runbook>;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Starts an execution of the runbook.")
   @action("execute")
   execute is ArmResourceActionAsync<Runbook, void, RunbookExecution>;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Regenerates the runbook from its current scope and configuration.")
   @action("regenerate")
   regenerate is ArmResourceActionAsync<Runbook, void, Runbook>;
 
@@ -200,14 +202,17 @@ interface Runbooks {
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Validates the runbook input and returns the validated runbook.")
   @action("validateInput")
   validateInput is ArmResourceActionAsync<Runbook, void, Runbook>;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Adds a step to the runbook.")
   @action("addStep")
   addStep is ArmResourceActionAsync<Runbook, RunbookStepAddRequest, Runbook>;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Updates a step in the runbook.")
   @action("updateStep")
   updateStep is ArmResourceActionAsync<
     Runbook,
@@ -216,6 +221,7 @@ interface Runbooks {
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Deletes a step from the runbook.")
   @action("deleteStep")
   deleteStep is ArmResourceActionAsync<
     Runbook,
@@ -224,6 +230,7 @@ interface Runbooks {
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Merges multiple runbook workstreams into one workstream.")
   @action("mergeWorkstreams")
   mergeWorkstreams is ArmResourceActionAsync<
     Runbook,
@@ -232,6 +239,7 @@ interface Runbooks {
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Splits selected steps into a new runbook workstream.")
   @action("splitWorkstream")
   splitWorkstream is ArmResourceActionAsync<
     Runbook,
@@ -271,6 +279,7 @@ interface RunbookExecutions {
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Performs an action on the runbook execution.")
   @action("performAction")
   performAction is ArmResourceActionAsync<
     RunbookExecution,
@@ -279,6 +288,7 @@ interface RunbookExecutions {
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Updates the status of a step in the runbook execution.")
   @action("updateStepStatus")
   updateStepStatus is ArmResourceActionAsync<
     RunbookExecution,
@@ -287,6 +297,7 @@ interface RunbookExecutions {
   >;
 
   @added(ApiVersions.v2026_08_01_preview)
+  @doc("Provides an approval decision for a step in the runbook execution.")
   @action("provideApproval")
   provideApproval is ArmResourceActionAsync<
     RunbookExecution,
