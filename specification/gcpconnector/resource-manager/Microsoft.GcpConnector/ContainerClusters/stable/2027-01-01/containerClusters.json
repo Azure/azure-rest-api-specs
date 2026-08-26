@@ -2314,7 +2314,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password to use for HTTP basic authentication."
+          "format": "password",
+          "description": "The password to use for HTTP basic authentication.",
+          "x-ms-secret": true
         },
         "clientCertificateConfig": {
           "$ref": "#/definitions/ClientCertificateConfig",
@@ -2330,7 +2332,9 @@
         },
         "clientKey": {
           "type": "string",
-          "description": "Base64-encoded private key used by clients to authenticate to the cluster endpoint."
+          "format": "password",
+          "description": "Base64-encoded private key used by clients to authenticate to the cluster endpoint.",
+          "x-ms-secret": true
         }
       }
     },

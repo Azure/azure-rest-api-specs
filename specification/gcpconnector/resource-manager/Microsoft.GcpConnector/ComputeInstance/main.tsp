@@ -469,7 +469,7 @@ model ReservationAffinity {
   /**
    * Corresponds to the label key of a reservation resource. To target a SPECIFIC_RESERVATION by name, specify googleapis.com/reservation-name as the key and specify the name of your reservation as its value.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. This is a reservation resource label key name, not key material."
   key?: string;
 
   /**
@@ -500,7 +500,7 @@ model SchedulingNodeAffinity {
   /**
    * Corresponds to the label key of Node resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. This is a node resource label key name, not key material."
   key?: string;
 
   /**

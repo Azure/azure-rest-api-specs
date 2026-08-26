@@ -455,7 +455,7 @@ model NodeConfig {
   /**
    * The Customer Managed Encryption Key used to encrypt the boot disk attached to each node in the node pool. This should be of the form projects/[KEY_PROJECT_ID]/locations/[LOCATION]/keyRings/[RING_NAME]/cryptoKeys/[KEY_NAME]. For more information about protecting resources with Cloud KMS Keys please see: https://cloud.google.com/compute/docs/disks/customer-managed-encryption
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. This is the resource path of a Cloud KMS key (projects/*/locations/*/keyRings/*/cryptoKeys/*), i.e. an identifier, not key material."
   bootDiskKmsKey?: string;
 
   /**
@@ -1149,7 +1149,7 @@ model MasterAuth {
   /**
    * The password to use for HTTP basic authentication.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   password?: string;
 
   /**
@@ -1170,7 +1170,7 @@ model MasterAuth {
   /**
    * Base64-encoded private key used by clients to authenticate to the cluster endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   clientKey?: string;
 }
 
@@ -2028,7 +2028,7 @@ model AutoprovisioningNodePoolDefaults {
   /**
    * Boot disk KMS key for NAP created node pools
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. This is the resource path of a Cloud KMS key (projects/*/locations/*/keyRings/*/cryptoKeys/*), i.e. an identifier, not key material."
   bootDiskKmsKey?: string;
 
   /**
@@ -3030,7 +3030,7 @@ model NodeTaint {
   /**
    * Key for taint
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. This is the name of a Kubernetes taint key, not key material."
   key?: string;
 
   /**
@@ -3079,7 +3079,7 @@ model ReservationAffinity {
   /**
    * Corresponds to the label key of a reservation resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. This is a reservation resource label key name, not key material."
   key?: string;
 
   /**
@@ -3263,7 +3263,7 @@ model NodeAffinity {
   /**
    * Key for NodeAffinity
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. This is a node affinity label key name, not key material."
   key?: string;
 
   /**

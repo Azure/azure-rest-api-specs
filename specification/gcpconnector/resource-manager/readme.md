@@ -61,6 +61,7 @@ directive:
       - $.definitions.InstanceParams.properties.resourceManagerTags
       - $.definitions.SetCommonInstanceMetadataOperationMetadata.properties.perLocationOperations
       - $.definitions.Status.properties.details
+      - $.definitions.Status.properties.details.items
 
   - suppress: AvoidAdditionalProperties
     reason: 1. Properties in GCP definition represents user defined gcpTags.
@@ -111,6 +112,17 @@ directive:
       - $.definitions.SQLAdminInstanceProperties.properties.gcpTags
       - $.definitions.SQLAdminInstanceTagsUpdate.properties.tags
       - $.definitions.Settings.properties.userLabels
+
+  - suppress: XMSSecretInResponse
+    reason:
+      False positive. `bootDiskKmsKey` is not a secret. It is the relative resource
+      name of a Cloud KMS key used for boot disk encryption, in the form
+      `projects/<project>/locations/<location>/keyRings/<ring>/cryptoKeys/<key>`.
+      It is an identifier only and contains no key material or credentials.
+    from: containerClusters.json
+    where:
+      - $.definitions.AutoprovisioningNodePoolDefaults.properties.bootDiskKmsKey
+      - $.definitions.NodeConfig.properties.bootDiskKmsKey
 ```
 
 ---
