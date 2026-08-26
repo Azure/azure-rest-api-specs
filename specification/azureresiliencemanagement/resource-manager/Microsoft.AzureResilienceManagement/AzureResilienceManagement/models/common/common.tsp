@@ -45,6 +45,10 @@ union ProvisioningState {
 
   @doc("Change accepted for processing")
   Accepted: "Accepted",
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("The resource needs attention from the user.")
+  NeedsAttention: "NeedsAttention",
 }
 
 /**

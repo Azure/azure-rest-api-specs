@@ -11,6 +11,7 @@ using OpenAPI;
 namespace Microsoft.Migrate;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("ARM model of AKS Assessment Options.")
 @parentResource(AssessmentProject)
 model AKSAssessmentOptions is ProxyResource<AKSAssessmentOptionsProperties> {

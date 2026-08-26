@@ -63,7 +63,63 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 <a id="reviewer-posted-parity"></a>
 
-See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). The hard rules, post-post verification procedure, and worked examples live there; this section is a pointer so the three instruction files cannot drift.
+See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). It defines the two **review modes** (interactive, where findings are presented to a human who decides what to post; and autonomous, where the agreed finding set is posted and addressed threads are resolved without a human gate), the hard rules, the post-post verification procedure, and worked examples. This section is a pointer so the three instruction files cannot drift.
+
+### Approval-Label Awareness (REQUIRED)
+
+At the session SHA, inspect the complete set of labels returned with the PR
+metadata. Record the exact, case-sensitive names of approval labels relevant to
+API review:
+
+- API breaking-change approvals: labels beginning with
+  `BreakingChange-Approved-`.
+- API versioning approvals: labels beginning with `Versioning-Approved-`.
+- OpenAPI suppression approval: `Approved-Suppression`.
+- TypeSpec suppression approval: `Approved-TypeSpecSuppression`.
+
+Do not treat SDK-language approval labels, package-name approvals, namespace
+approvals, or an arbitrary label containing the word `Approved` as API-review
+approval. The canonical breaking-change and versioning label definitions live
+in [`.github/shared/src/breaking-change.js`](../shared/src/breaking-change.js).
+
+**Review preamble disclosure.** In the review-body preamble, immediately after
+the sentence that identifies the reviewed commit, include exactly one of:
+
+```text
+Approval labels observed: `<label-1>`, `<label-2>`.
+```
+
+```text
+Approval labels observed: none.
+```
+
+This line is required even when the review finds no breaking changes or
+suppressions. It demonstrates that the reviewer inspected the PR labels rather
+than inferring approval from the PR text or CI status.
+
+**Finding-specific awareness.** An approval label is context, not proof that a
+particular finding was reviewed or a reason to hide, downgrade, or omit the
+finding. Every posted breaking-change or suppression finding MUST include an
+`**Approval context:**` paragraph before the suggested fix:
+
+- Cross-version breaking changes check `BreakingChange-Approved-*`.
+- Same-version or published-version exceptions check `Versioning-Approved-*`.
+- OpenAPI suppression findings check `Approved-Suppression`.
+- TypeSpec suppression findings check `Approved-TypeSpecSuppression`.
+
+- **Matching label observed:** name the exact label and ask the author to
+  confirm that it covers this specific breaking change or suppression. State
+  that if it does, the only remaining action for this comment is to resolve the
+  conversation; otherwise the author must obtain the appropriate approval or
+  address the finding.
+- **No matching label observed:** state which approval label family was checked
+  and that no matching label was present at the session SHA. Ask the author to
+  confirm whether approval exists. State that if the change is already approved,
+  they should ensure the appropriate label is applied and resolve the
+  conversation; otherwise they must obtain approval or address the finding.
+
+Never claim that a specific finding is approved solely because a broad PR-level
+label is present. The author must confirm that the approval covers that finding.
 
 **False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
 
@@ -406,7 +462,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState requirements including terminal states, transition rules, invalid values, and format-specific guidance.
 
 - A resource with async PUT or PATCH **MUST** have a `provisioningState` property (readOnly) with terminal states `Succeeded`, `Failed`, and `Canceled` (single 'l'). It represents only the latest LRO status, not resource health. POST actions do **not** affect it.
-  (Also enforced by: `ProvisioningStateMustBeReadOnly` linter rule — but only checks readOnly, not terminal state completeness)
+  (Also enforced by: `ProvisioningStateMustBeReadOnly` linter rule — but only checks readOnly, not terminal state completeness). When this rule is suppressed or fails LintDiff on a TypeSpec project, recommend the emitter option `use-read-only-status-schema: true` in `tspconfig.yaml` — see [`provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md), section "`ProvisioningStateMustBeReadOnly` -- Emitter Workaround".
 - If a user includes `provisioningState` in a PUT request body, the RP **MUST** ignore it if the value matches, or reject with `400 Bad Request` if it does not.
 
 ### 6.6 `202` Response and Polling Headers (RPC-Async-V1-07, RPC-Async-V1-06, RPC-Async-V1-14)
@@ -909,6 +965,7 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 - The `name` property in the `checkNameAvailability` request **MUST** have `pattern` and `maxLength` constraints matching the target resource type's name validation rules.
 - At minimum, the `name` field **SHOULD** be constrained to valid ARM resource name characters (alphanumeric, hyphens, underscores, periods). Example: `"pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,259}$"`, `"maxLength": 260`.
+- The `pattern` constraint **MUST** use allowlist (positive character class) syntax. Denylist (negated character class `[^...]`) syntax **MUST NOT** be used as the primary character-matching construct (`OAPI-PATTERN-ALLOWLIST`). A denylist such as `^[^<>%&:\\?/]+$` permits emoji, control characters, and non-Latin scripts that the service almost certainly rejects. Severity: **Blocking** for new properties/parameters; **Warning** for existing ones. See [`.github/skills/azure-api-review/references/pattern-validation.md`](../skills/azure-api-review/references/pattern-validation.md) for detection guidance, the severity matrix, and fix examples.
 - If a spec defines a custom `checkNameAvailability` request model with a bare `string` `name` field (no `pattern`, no `maxLength`), flag it as a **security concern** and instruct the author to add constraints.
 - **Why:** Unconstrained string inputs to backend queries are a SQL/NoSQL injection risk. Input validation in the spec provides client-side SDK validation and signals to implementers that the field requires server-side sanitization.
 
@@ -1151,6 +1208,8 @@ When reviewing ARM resource-manager swagger files, verify:
 
 - ✅ `checkNameAvailability` uses common-types `CheckNameAvailabilityRequest` / `CheckNameAvailabilityResponse` — not custom request/response models (CNA-003)
 - ✅ `name` field has `pattern` and `maxLength` constraints — not a bare unconstrained string (CNA-004)
+- ✅ `name` field `pattern` uses allowlist syntax (positive character class) — not denylist (`[^...]`) (OAPI-PATTERN-ALLOWLIST, CNA-004)
+- ✅ All `pattern` constraints across path parameters, query parameters, and body properties use allowlist syntax — no denylist (`[^...]`) as the primary construct (`OAPI-PATTERN-ALLOWLIST`): Blocking for new, Warning for existing
 
 ### Tenant-Level APIs
 
