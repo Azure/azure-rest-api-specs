@@ -101,11 +101,12 @@ interface SiteSiloVirtualNetworkConnectionOps
         siloName: string,
       },
       {
-        /** Name of the virtual network connection. */
+        /** Name of the virtual network. */
         @path
         @segment("virtualNetworkConnections")
         @key
-        virtualNetwork: "virtualNetwork",
+        @pattern("^[A-Za-z0-9][A-Za-z0-9._-]{0,62}[A-Za-z0-9_]$")
+        vnetName: string,
       },
       ResourceName = "SiteSiloVirtualNetworkConnection"
     > {}
@@ -115,7 +116,7 @@ interface SiteSiloVirtualNetworkConnectionOps
 @armResourceOperations(#{ omitTags: true })
 interface SiteSiloVirtualNetworkConnections {
   /**
-   * Gets the virtual network the silo is connected to.
+   * Gets a virtual network the silo is connected to, by name.
    */
   getSiteSiloVnetConnection is SiteSiloVirtualNetworkConnectionOps.Read<
     SwiftVirtualNetwork,
@@ -143,11 +144,12 @@ interface SiteSiloVirtualNetworkConnections {
   >;
 
   /**
-   * Deletes the virtual network connection from a silo.
+   * Deletes a connection from a silo to a named virtual network.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The silo virtual network connection is deleted synchronously and returns 200 on success or 404 when it does not exist."
   deleteSiteSiloVnetConnection is SiteSiloVirtualNetworkConnectionOps.DeleteSync<
     SwiftVirtualNetwork,
-    Response = ArmDeletedResponse | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }

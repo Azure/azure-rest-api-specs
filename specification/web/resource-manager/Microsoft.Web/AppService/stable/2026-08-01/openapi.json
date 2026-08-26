@@ -16356,6 +16356,9 @@
             "description": "Name of the app.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ManagedTrafficConfigExpandParameter"
           }
         ],
         "responses": {
@@ -19721,13 +19724,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/{vnetName}": {
       "get": {
         "operationId": "SiteSiloVirtualNetworkConnections_GetSiteSiloVnetConnection",
         "tags": [
           "WebApps"
         ],
-        "description": "Gets the virtual network the silo is connected to.",
+        "description": "Gets a virtual network the silo is connected to, by name.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -19752,6 +19755,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9-]{1,24}$"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the virtual network.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,62}[A-Za-z0-9_]$"
           }
         ],
         "responses": {
@@ -19804,6 +19815,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9-]{1,24}$"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the virtual network.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,62}[A-Za-z0-9_]$"
           },
           {
             "name": "resource",
@@ -19867,6 +19886,14 @@
             "pattern": "^[A-Za-z0-9-]{1,24}$"
           },
           {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the virtual network.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,62}[A-Za-z0-9_]$"
+          },
+          {
             "name": "properties",
             "in": "body",
             "description": "Resource create parameters.",
@@ -19901,7 +19928,7 @@
         "tags": [
           "WebApps"
         ],
-        "description": "Deletes the virtual network connection from a silo.",
+        "description": "Deletes a connection from a silo to a named virtual network.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -19926,14 +19953,23 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9-]{1,24}$"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the virtual network.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,62}[A-Za-z0-9_]$"
           }
         ],
         "responses": {
           "200": {
             "description": "Resource deleted successfully."
           },
-          "204": {
-            "description": "Resource does not exist."
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
