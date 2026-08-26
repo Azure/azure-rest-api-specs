@@ -2455,12 +2455,6 @@ model FileShareProperties {
    * File Share Paid Bursting properties.
    */
   fileSharePaidBursting?: FileSharePropertiesFileSharePaidBursting;
-
-  /**
-   * Indicates whether change feed event logging is enabled for the file share.
-   */
-  @added(Versions.v2026_06_01)
-  changeFeedEnabled?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3222,12 +3216,6 @@ model StorageAccountPropertiesCreateParameters {
    */
   @added(Versions.v2026_06_01)
   allowCrossTenantDelegationSas?: boolean;
-
-  /**
-   * Indicates whether Files change feed event logging is enabled for the storage account.
-   */
-  @added(Versions.v2026_06_01)
-  enableFilesChangeFeed?: boolean;
 }
 
 /**
@@ -3971,12 +3959,6 @@ model StorageAccountProperties {
    */
   @added(Versions.v2026_06_01)
   allowCrossTenantDelegationSas?: boolean;
-
-  /**
-   * Indicates whether Files change feed event logging is enabled for the storage account.
-   */
-  @added(Versions.v2026_06_01)
-  enableFilesChangeFeed?: boolean;
 }
 
 /**
@@ -4536,12 +4518,6 @@ model StorageAccountPropertiesUpdateParameters {
    */
   @added(Versions.v2026_06_01)
   allowCrossTenantDelegationSas?: boolean;
-
-  /**
-   * Indicates whether Files change feed event logging is enabled for the storage account.
-   */
-  @added(Versions.v2026_06_01)
-  enableFilesChangeFeed?: boolean;
 }
 
 /**
