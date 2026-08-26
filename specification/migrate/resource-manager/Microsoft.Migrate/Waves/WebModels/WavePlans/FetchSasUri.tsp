@@ -8,6 +8,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name consistent with existing wave plan action models in this API"
 @doc("Request body for the fetchSASUri action.")
 @added(ApiVersions.v2026_06_01_preview)
 model FetchSasUriRequest {
@@ -21,6 +22,7 @@ model FetchSasUriRequest {
   sasVersionId?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name consistent with existing wave plan action models in this API"
 @doc("Response payload for the fetchSASUri action.")
 @added(ApiVersions.v2026_06_01_preview)
 model FetchSasUriResponse {

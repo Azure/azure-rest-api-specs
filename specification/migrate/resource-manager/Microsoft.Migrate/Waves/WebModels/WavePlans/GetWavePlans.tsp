@@ -9,6 +9,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name consistent with existing wave plan action models in this API"
 @doc("Request body for the getWavePlans listing action.")
 @added(ApiVersions.v2026_06_01_preview)
 model GetWavePlansRequest {
@@ -19,6 +20,7 @@ model GetWavePlansRequest {
   migrationPath?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name consistent with existing wave plan action models in this API"
 @doc("Response payload for the getWavePlans listing action.")
 @added(ApiVersions.v2026_06_01_preview)
 model GetWavePlansResponse {
