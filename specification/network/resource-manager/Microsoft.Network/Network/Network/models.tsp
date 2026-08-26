@@ -539,6 +539,45 @@ union ApplicationGatewayRequestRoutingRuleType {
    * PathBasedRouting
    */
   PathBasedRouting: "PathBasedRouting",
+
+  /**
+   * AdvancedRouting
+   */
+  @added(Versions.v2026_01_01)
+  AdvancedRouting: "AdvancedRouting",
+}
+
+/**
+ * The type of request property that an advanced routing condition is evaluated against.
+ */
+@added(Versions.v2026_01_01)
+union ApplicationGatewayAdvancedRoutingConditionType {
+  string,
+
+  /**
+   * The condition is evaluated against an HTTP request header identified by propertyName.
+   */
+  Header: "Header",
+
+  /**
+   * The condition is evaluated against a query string argument identified by propertyName.
+   */
+  QueryString: "QueryString",
+
+  /**
+   * The condition is evaluated against the request path. propertyName is not applicable.
+   */
+  Path: "Path",
+
+  /**
+   * The condition is evaluated against the client IP address. propertyName and propertyValueMatcher are not applicable.
+   */
+  ClientIP: "ClientIP",
+
+  /**
+   * The condition is evaluated against the HTTP method. propertyName and propertyValueMatcher are not applicable.
+   */
+  Method: "Method",
 }
 
 /**
@@ -6382,6 +6421,12 @@ model ApplicationGatewayPropertiesFormat {
   urlPathMaps?: ApplicationGatewayUrlPathMap[];
 
   /**
+   * Advanced routing maps of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
+   */
+  @added(Versions.v2026_01_01)
+  advancedRoutingMaps?: ApplicationGatewayAdvancedRoutingMap[];
+
+  /**
    * Request routing rules of the application gateway resource.
    */
   requestRoutingRules?: ApplicationGatewayRequestRoutingRule[];
@@ -6395,6 +6440,12 @@ model ApplicationGatewayPropertiesFormat {
    * Rewrite rules for the application gateway resource.
    */
   rewriteRuleSets?: ApplicationGatewayRewriteRuleSet[];
+
+  /**
+   * Advanced routing condition sets of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
+   */
+  @added(Versions.v2026_01_01)
+  advancedRoutingConditionSets?: ApplicationGatewayAdvancedRoutingConditionSet[];
 
   /**
    * Redirect configurations of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
@@ -7844,6 +7895,255 @@ model ApplicationGatewayPathRulePropertiesFormat {
 }
 
 /**
+ * Advanced routing map of an application gateway. Holds the advanced routing rules evaluated for requests handled by an AdvancedRouting request routing rule, along with the configuration applied when no rule matches.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Application Gateway child resources extend SubResource for consistency with the existing resource shape"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingMap extends SubResource {
+  /**
+   * Properties of the application gateway advanced routing map.
+   */
+  properties?: ApplicationGatewayAdvancedRoutingMapPropertiesFormat;
+
+  /**
+   * Name of the advanced routing map that is unique within an Application Gateway.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Properties of advanced routing map of the application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingMapPropertiesFormat {
+  /**
+   * Default backend address pool resource of the advanced routing map. Required unless defaultRedirectConfiguration is specified.
+   */
+  defaultBackendAddressPool?: SubResource;
+
+  /**
+   * Default backend http settings resource of the advanced routing map. Required unless defaultRedirectConfiguration is specified.
+   */
+  defaultBackendHttpSettings?: SubResource;
+
+  /**
+   * Default redirect configuration resource of the advanced routing map. Cannot be combined with defaultBackendAddressPool or defaultBackendHttpSettings.
+   */
+  defaultRedirectConfiguration?: SubResource;
+
+  /**
+   * Default rewrite rule set resource of the advanced routing map.
+   */
+  defaultRewriteRuleSet?: SubResource;
+
+  /**
+   * Advanced routing rules of the advanced routing map. Each rule must specify a priority that is unique within the map.
+   */
+  advancedRoutingRules: ApplicationGatewayAdvancedRoutingRule[];
+
+  /**
+   * The provisioning state of the advanced routing map resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Advanced routing rule of an application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Application Gateway child resources extend SubResource for consistency with the existing resource shape"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingRule extends SubResource {
+  /**
+   * Properties of the application gateway advanced routing rule.
+   */
+  properties?: ApplicationGatewayAdvancedRoutingRulePropertiesFormat;
+
+  /**
+   * Name of the advanced routing rule that is unique within an advanced routing map.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Properties of advanced routing rule of the application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingRulePropertiesFormat {
+  /**
+   * Priority of the advanced routing rule. Must be unique within the containing advanced routing map. Rules are evaluated in ascending priority order.
+   */
+  @maxValue(1000)
+  @minValue(1)
+  priority: int32;
+
+  /**
+   * Advanced routing condition set resource evaluated by this rule.
+   */
+  advancedRoutingConditionSet?: SubResource;
+
+  /**
+   * Backend address pool resource of the advanced routing rule. Required unless redirectConfiguration is specified.
+   */
+  backendAddressPool?: SubResource;
+
+  /**
+   * Backend http settings resource of the advanced routing rule. Required unless redirectConfiguration is specified.
+   */
+  backendHttpSettings?: SubResource;
+
+  /**
+   * Redirect configuration resource of the advanced routing rule. Cannot be combined with backendAddressPool or backendHttpSettings.
+   */
+  redirectConfiguration?: SubResource;
+
+  /**
+   * Rewrite rule set resource of the advanced routing rule.
+   */
+  rewriteRuleSet?: SubResource;
+
+  /**
+   * The provisioning state of the advanced routing rule resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Advanced routing condition set of an application gateway. Referenced by advanced routing rules to determine whether a request matches.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Application Gateway child resources extend SubResource for consistency with the existing resource shape"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingConditionSet extends SubResource {
+  /**
+   * Properties of the application gateway advanced routing condition set.
+   */
+  properties?: ApplicationGatewayAdvancedRoutingConditionSetPropertiesFormat;
+
+  /**
+   * Name of the advanced routing condition set that is unique within an Application Gateway.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Properties of advanced routing condition set of the application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingConditionSetPropertiesFormat {
+  /**
+   * Routing conditions of the condition set. All conditions must be satisfied for the referencing advanced routing rule to match.
+   */
+  @identifiers(#[])
+  routingConditions: ApplicationGatewayAdvancedRoutingCondition[];
+
+  /**
+   * The provisioning state of the advanced routing condition set resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * A condition evaluated as part of an advanced routing condition set.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingCondition {
+  /**
+   * The type of request property the condition is evaluated against.
+   */
+  conditionType: ApplicationGatewayAdvancedRoutingConditionType;
+
+  /**
+   * Name of the request property the condition is evaluated against. Required when conditionType is Header or QueryString, and not applicable when conditionType is Path, ClientIP or Method.
+   */
+  propertyName?: string;
+
+  /**
+   * Values the request property is matched against. Exactly one of propertyValues or propertyValueMatcher must be specified.
+   */
+  propertyValues?: string[];
+
+  /**
+   * Pattern the request property is matched against. Exactly one of propertyValues or propertyValueMatcher must be specified. Not applicable when conditionType is ClientIP or Method.
+   */
+  propertyValueMatcher?: ApplicationGatewayAdvancedRoutingPropertyValueMatcher;
+}
+
+/**
+ * Matches the value of a request property against a fixed string or regular expression.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingPropertyValueMatcher {
+  /**
+   * The pattern, either fixed string or regular expression, that the request property value is evaluated against.
+   */
+  pattern: string;
+
+  /**
+   * Setting this parameter to truth value with force the pattern to do a case in-sensitive comparison.
+   */
+  ignoreCase?: boolean = true;
+
+  /**
+   * Setting this value as truth will force to check the negation of the condition given by the user in the pattern field.
+   */
+  negate?: boolean;
+}
+
+/**
  * Request routing rule of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -7910,6 +8210,12 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
    * URL path map resource of the application gateway.
    */
   urlPathMap?: SubResource;
+
+  /**
+   * Advanced routing map resource of the application gateway.
+   */
+  @added(Versions.v2026_01_01)
+  advancedRoutingMap?: SubResource;
 
   /**
    * Rewrite Rule Set resource in Basic rule of the application gateway.
