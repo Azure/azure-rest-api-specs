@@ -36,6 +36,10 @@ go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 ```
 
+### Stamp-specific tag overrides
+
+These settings select a stamp-specific default tag and only apply when the corresponding stamp flag is passed on the command line (`--package-passivestamp` or `--package-activestamp`). They are intentionally kept out of the `Basic Information` section so the readme declares a single default tag.
+
 ```yaml $(package-passivestamp)
 tag: package-passivestamp-2023-01-15
 ```
