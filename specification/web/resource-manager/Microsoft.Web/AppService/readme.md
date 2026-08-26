@@ -111,6 +111,10 @@ directive:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork"]
     reason: The silo virtual network connection is a singleton child resource, so its final segment is the fixed literal virtualNetwork rather than a name template parameter. The rule accepts only a template parameter or the literal default for a nested resource name, so this is a false positive for a singleton. The virtualNetwork literal is required for consistency with the existing App Service singleton /sites/{name}/networkConfig/virtualNetwork, which exposes the same SwiftVirtualNetwork resource and is reported by this same rule in every prior API version.
+  - suppress: XmsPageableForListCalls
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}/virtualNetworkIntegrations"].get
+    reason: This GET is an ARM action on the silo resource rather than a collection GET. It returns the fixed set of virtual network integrations for a single silo and has no continuation contract. The rule classifies an operation as a list purely by counting path segments, so any GET shaped action on a resource produces an even segment count and is treated as a list, which is the known TypeSpec false positive tracked by https://github.com/Azure/azure-openapi-validator/issues/646. The response is a bare array, so x-ms-pageable would have no item property to reference. This shape matches the existing App Service virtual network endpoints under serverfarms/{name}/virtualNetworkConnections and sites/{name}/virtualNetworkConnections, which are reported by this same rule in every prior API version.
 ```
 
 ### Tag: package-2026-08
