@@ -1202,6 +1202,17 @@
             "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1215,7 +1226,11 @@
           "Update Private Endpoint Connection": {
             "$ref": "./examples/PrivateEndpointConnectionPut.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PrivateEndpointConnectionsInterface_Delete",
@@ -2145,7 +2160,10 @@
           "description": "Provisioning state of the private endpoint connection.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
     },
     "PrivateEndpointReference": {
       "type": "object",

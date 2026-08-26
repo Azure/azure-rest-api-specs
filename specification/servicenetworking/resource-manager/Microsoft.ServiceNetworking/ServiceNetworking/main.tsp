@@ -375,7 +375,7 @@ model PrivateEndpointConnectionProperties {
   privateEndpoint?: PrivateEndpointReference;
 
   /** The connection state of the private endpoint connection. */
-  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
 
   /** Provisioning state of the private endpoint connection. */
   @visibility(Lifecycle.Read)
@@ -542,7 +542,7 @@ interface TrafficControllerInterface {
 @armResourceOperations
 interface PrivateEndpointConnectionsInterface {
   get is ArmResourceRead<PrivateEndpointConnection>;
-  update is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
+  update is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
   delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
   listByTrafficController is ArmResourceListByParent<PrivateEndpointConnection>;
 }
