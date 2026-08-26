@@ -34,6 +34,16 @@ tag: package-2027-01-01
 
 ```yaml
 directive:
+  - suppress: OperationsAPIImplementation
+    reason: The Operations API for Microsoft.GcpConnector is defined once for the whole resource provider in the GcpConnector spec (GcpConnector/stable/2027-01-01/operations.json).
+  - suppress: XMSSecretInResponse
+    reason:
+      False positive. `sourceToken` is not a secret. It is an opaque identifier used to
+      correlate Firebase function source deployments; it is not a credential and is not
+      used for authentication. The service returns it in GET/PUT/PATCH responses, as
+      reflected in the examples.
+    where:
+      - $.definitions.BuildConfig.properties.sourceToken
   - suppress: AvoidAdditionalProperties
     reason: Properties in the GCP definition represent user-defined tags, labels and environment variables.
     where:

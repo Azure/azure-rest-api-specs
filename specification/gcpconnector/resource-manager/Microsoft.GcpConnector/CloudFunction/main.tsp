@@ -133,7 +133,7 @@ model BuildConfig {
   /**
    * An identifier for Firebase function sources. Disclaimer: This field is only supported for Firebase function deployments.
    */
-  @secret
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret. This is an opaque identifier used to correlate Firebase function source deployments, not a credential or token used for authentication."
   sourceToken?: string;
 
   @doc("Name of the Cloud Build Custom Worker Pool that should be used to build the function. The format of this field is `projects/{project}/locations/{region}/workerPools/{workerPool}` where {project} and {region} are the project id and region respectively where the worker pool is defined and {workerPool} is the short name of the worker pool. If the project id is not the same as the function, then the Cloud Functions Service Agent (service-@gcf-admin-robot.iam.gserviceaccount.com) must be granted the role Cloud Build Custom Workers Builder (roles/cloudbuild.customworkers.builder) in the project.")

@@ -34,6 +34,8 @@ tag: package-2027-01-01
 
 ```yaml
 directive:
+  - suppress: OperationsAPIImplementation
+    reason: The Operations API for Microsoft.GcpConnector is defined once for the whole resource provider in the GcpConnector spec (GcpConnector/stable/2027-01-01/operations.json).
   - suppress: AvoidAdditionalProperties
     reason: Properties in the GCP definition represent user-defined tags, labels and free-form metadata.
     where:
