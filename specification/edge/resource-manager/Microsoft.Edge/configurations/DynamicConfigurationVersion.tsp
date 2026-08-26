@@ -11,7 +11,7 @@ namespace Microsoft.Edge;
 
 @doc("Dynamic Configuration Properties")
 model DynamicConfigurationVersionProperties {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Suppress no-unnamed-union since property represents a flexible configuration value"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Suppress no-unnamed-types since property represents a flexible configuration value"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | Record<unknown> is required to support both legacy string-encoded JSON and structured object payloads during client migration from prior API versions"
   @doc("Values of configuration version")
   @typeChangedFrom(Versions.v2026_05_01_preview, string)
