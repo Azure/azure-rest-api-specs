@@ -2512,6 +2512,12 @@ model ConnectedEnvironmentStorageProperties {
  */
 model AzureFileProperties {
   /**
+   * Resource ID of a managed identity to authenticate with Azure File, or System to use a system-assigned identity.
+   */
+  @added(Versions.v2026_03_02_preview)
+  identity?: string;
+
+  /**
    * Storage account name for azure file.
    */
   accountName?: string;
