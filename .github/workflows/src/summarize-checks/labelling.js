@@ -843,16 +843,17 @@ const rulesPri0dataPlane = [
   // and https://github.com/Azure/azure-sdk-tools/issues/6612
   //
   //   IF the label data-plane-review-requested is present,
-  //   THEN require data-plane-review-signoff (or, during migration, the legacy
-  //   APIStewardshipBoard-SignedOff).
+  //   THEN require data-plane-review-signoff.
   //
   // data-plane-review-requested is auto-applied in processImpactAssessment above, so the old
-  // data-plane + new-api-version fallback is no longer needed. The legacy signoff is accepted
-  // as a transition bridge; remove it once no open PR carries it (tracked in #45521).
+  // data-plane + new-api-version fallback is no longer needed. The gate reads only the new
+  // protected sign-off label; the legacy APIStewardshipBoard-SignedOff is not accepted (it is
+  // no longer protected, so accepting it would let anyone satisfy the gate). Existing legacy
+  // sign-offs are migrated by re-stamping with data-plane-review-signoff (see #45521).
   {
     precedence: 0,
     anyPrerequisiteLabels: ["data-plane-review-requested"],
-    anyRequiredLabels: ["data-plane-review-signoff", "APIStewardshipBoard-SignedOff"],
+    anyRequiredLabels: ["data-plane-review-signoff"],
     troubleshootingGuide:
       `Your PR requires an API stewardship board review as it introduces a new API version (label: <code>new-api-version</code>). ` +
       `Send an email to ${href("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")} with your PR link for offline review.`,
