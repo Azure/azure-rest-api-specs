@@ -17,6 +17,35 @@ alias VoiceAgentClientEventUsage = Usage.input | Usage.json;
 alias VoiceAgentServerEventUsage = Usage.output | Usage.json;
 alias VoiceAgentWebSocketMessageUsage = Usage.input | Usage.output | Usage.json;
 
+union VoiceAgentClientEventTypeExtension {
+  session_avatar_connect: "session.avatar.connect",
+}
+
+union VoiceAgentServerEventTypeExtension {
+  warning: "warning",
+  session_avatar_connecting: "session.avatar.connecting",
+  session_avatar_switch_to_speaking: "session.avatar.switch_to_speaking",
+  session_avatar_switch_to_idle: "session.avatar.switch_to_idle",
+  response_audio_timestamp_delta: "response.audio_timestamp.delta",
+  response_audio_timestamp_done: "response.audio_timestamp.done",
+  response_animation_blendshapes_delta: "response.animation_blendshapes.delta",
+  response_animation_blendshapes_done: "response.animation_blendshapes.done",
+  response_animation_viseme_delta: "response.animation_viseme.delta",
+  response_animation_viseme_done: "response.animation_viseme.done",
+  response_video_delta: "response.video.delta",
+}
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Voice-only literals in the imported OpenAI discriminator union preserves a single polymorphic hierarchy."
+@@copyVariants(
+  OpenAI.RealtimeClientEventType,
+  VoiceAgentClientEventTypeExtension
+);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Voice-only literals in the imported OpenAI discriminator union preserves a single polymorphic hierarchy."
+@@copyVariants(
+  OpenAI.RealtimeServerEventType,
+  VoiceAgentServerEventTypeExtension
+);
+
 @doc("The WebSocket subprotocol supported by a voice-agent connection.")
 union VoiceAgentWebSocketSubprotocol {
   realtime: "realtime",
