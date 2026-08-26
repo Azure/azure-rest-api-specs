@@ -158,6 +158,10 @@ model AgentObject {
   @visibility(Lifecycle.Read)
   state: AgentState;
 
+  @doc("The administrative configuration state of the agent. This reflects whether the agent was explicitly enabled or disabled, independently of identity-derived operational state.")
+  @visibility(Lifecycle.Read)
+  configuration_state?: AgentState;
+
   @doc("The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.")
   @visibility(Lifecycle.Read)
   state_source?: AgentStateSource;
