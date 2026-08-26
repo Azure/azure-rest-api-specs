@@ -6,6 +6,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Migrate;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Data model of Download URL for wave recommendation report.")
 @added(ApiVersions.v2025_12_01_preview)
 model GenerateWavePlanRequest {
@@ -16,6 +17,7 @@ model GenerateWavePlanRequest {
   migrationPath?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Data model of Download URL for wave recommendation report.")
 @added(ApiVersions.v2025_12_01_preview)
 model GenerateWavePlanResponse {
