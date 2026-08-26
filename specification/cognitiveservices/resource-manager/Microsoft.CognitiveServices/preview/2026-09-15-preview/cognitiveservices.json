@@ -73,6 +73,12 @@
       "name": "SubscriptionRaiPolicy"
     },
     {
+      "name": "RaiRegos"
+    },
+    {
+      "name": "RaiBindings"
+    },
+    {
       "name": "RaiBlocklists"
     },
     {
@@ -9352,6 +9358,279 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBindings": {
+      "get": {
+        "operationId": "RaiBindings_List",
+        "tags": [
+          "RaiBindings"
+        ],
+        "description": "Lists RAI bindings on an account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "$ref": "#/parameters/RaiBindingListParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RaiBindingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List RAI bindings": {
+            "$ref": "./examples/ListRaiBindings.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBindings/{raiBindingName}": {
+      "get": {
+        "operationId": "RaiBindings_Get",
+        "tags": [
+          "RaiBindings"
+        ],
+        "description": "Gets one RAI binding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "raiBindingName",
+            "in": "path",
+            "description": "The name of the RAI binding.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RaiBinding"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the returned resource representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a RAI binding": {
+            "$ref": "./examples/GetRaiBinding.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RaiBindings_CreateOrUpdate",
+        "tags": [
+          "RaiBindings"
+        ],
+        "description": "Creates or replaces one RAI binding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "raiBindingName",
+            "in": "path",
+            "description": "The name of the RAI binding.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "$ref": "#/parameters/RaiResourcePutConditionalHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/RaiResourcePutConditionalHeaders.ifNoneMatch"
+          },
+          {
+            "name": "raiBinding",
+            "in": "body",
+            "description": "The RAI binding.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiBinding"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RaiBinding"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the returned resource representation."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RaiBinding"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the returned resource representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Bind an Azure OpenAI deployment to an ACS policy": {
+            "$ref": "./examples/PutRaiBinding.json"
+          },
+          "Update a RAI binding target conditionally across subscriptions": {
+            "$ref": "./examples/UpdateRaiBinding.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RaiBindings_Delete",
+        "tags": [
+          "RaiBindings"
+        ],
+        "description": "Deletes one RAI binding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "raiBindingName",
+            "in": "path",
+            "description": "The name of the RAI binding.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "$ref": "#/parameters/RaiResourceDeleteConditionalHeaders"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a RAI binding": {
+            "$ref": "./examples/DeleteRaiBinding.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists": {
       "get": {
         "operationId": "RaiBlocklists_List",
@@ -10101,9 +10380,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RaiPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the returned resource representation."
+              }
             }
           },
           "default": {
@@ -10114,6 +10399,9 @@
           }
         },
         "x-ms-examples": {
+          "Get an ACS policy": {
+            "$ref": "./examples/GetRaiPolicyAcs.json"
+          },
           "GetRaiPolicy": {
             "$ref": "./examples/GetRaiPolicy.json"
           }
@@ -10154,6 +10442,12 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
+            "$ref": "#/parameters/RaiResourcePutConditionalHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/RaiResourcePutConditionalHeaders.ifNoneMatch"
+          },
+          {
             "name": "raiPolicy",
             "in": "body",
             "description": "Properties describing the Content Filters.",
@@ -10165,15 +10459,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'RaiPolicy' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RaiPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the returned resource representation."
+              }
             }
           },
           "201": {
-            "description": "Resource 'RaiPolicy' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/RaiPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the returned resource representation."
+              }
             }
           },
           "default": {
@@ -10184,11 +10490,17 @@
           }
         },
         "x-ms-examples": {
+          "Create an ACS policy with optional policy dependencies": {
+            "$ref": "./examples/PutRaiPolicyAcs.json"
+          },
           "PutRaiPolicy": {
             "$ref": "./examples/PutRaiPolicy.json"
           },
           "PutRaiPolicyWithEgress": {
             "$ref": "./examples/PutRaiPolicyWithEgress.json"
+          },
+          "Replace an ACS policy conditionally": {
+            "$ref": "./examples/UpdateRaiPolicyAcs.json"
           }
         }
       },
@@ -10225,6 +10537,9 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "$ref": "#/parameters/RaiResourceDeleteConditionalHeaders"
           }
         ],
         "responses": {
@@ -10253,6 +10568,9 @@
           }
         },
         "x-ms-examples": {
+          "Delete an ACS policy": {
+            "$ref": "./examples/DeleteRaiPolicyAcs.json"
+          },
           "DeleteRaiPolicy": {
             "$ref": "./examples/DeleteRaiPolicy.json"
           }
@@ -10261,6 +10579,279 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiRegos": {
+      "get": {
+        "operationId": "RaiRegos_List",
+        "tags": [
+          "RaiRegos"
+        ],
+        "description": "Lists reusable Rego artifacts on an account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "$ref": "#/parameters/RaiRegoListParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RaiRegoListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List reusable Rego artifacts": {
+            "$ref": "./examples/ListRaiRegos.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiRegos/{raiRegoName}": {
+      "get": {
+        "operationId": "RaiRegos_Get",
+        "tags": [
+          "RaiRegos"
+        ],
+        "description": "Gets one reusable Rego artifact.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "raiRegoName",
+            "in": "path",
+            "description": "The name of the reusable Rego artifact.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RaiRego"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the returned resource representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a reusable Rego artifact": {
+            "$ref": "./examples/GetRaiRego.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RaiRegos_CreateOrUpdate",
+        "tags": [
+          "RaiRegos"
+        ],
+        "description": "Creates or replaces one reusable Rego artifact.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "raiRegoName",
+            "in": "path",
+            "description": "The name of the reusable Rego artifact.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "$ref": "#/parameters/RaiResourcePutConditionalHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/RaiResourcePutConditionalHeaders.ifNoneMatch"
+          },
+          {
+            "name": "raiRego",
+            "in": "body",
+            "description": "The reusable Rego artifact.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiRego"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RaiRego"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the returned resource representation."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RaiRego"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the returned resource representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a reusable Rego artifact": {
+            "$ref": "./examples/PutRaiRego.json"
+          },
+          "Replace a reusable Rego artifact conditionally": {
+            "$ref": "./examples/UpdateRaiRego.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RaiRegos_Delete",
+        "tags": [
+          "RaiRegos"
+        ],
+        "description": "Deletes one reusable Rego artifact.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "raiRegoName",
+            "in": "path",
+            "description": "The name of the reusable Rego artifact.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "$ref": "#/parameters/RaiResourceDeleteConditionalHeaders"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a reusable Rego artifact": {
+            "$ref": "./examples/DeleteRaiRego.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiToolLabels": {
@@ -19010,6 +19601,377 @@
         ]
       }
     },
+    "RaiAcsEmptyObject": {
+      "type": "object",
+      "description": "An object that must contain no properties."
+    },
+    "RaiAcsHarmCategory": {
+      "type": "string",
+      "description": "Harm categories supported by the Unified Moderate text profile.",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence",
+        "PromptInjection",
+        "ProtectedMaterialText",
+        "ProtectedMaterialCode"
+      ],
+      "x-ms-enum": {
+        "name": "RaiAcsHarmCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "Hate-related content."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "Self-harm-related content."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "Sexual content."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "Violent content."
+          },
+          {
+            "name": "PromptInjection",
+            "value": "PromptInjection",
+            "description": "Prompt-injection content."
+          },
+          {
+            "name": "ProtectedMaterialText",
+            "value": "ProtectedMaterialText",
+            "description": "Protected text material."
+          },
+          {
+            "name": "ProtectedMaterialCode",
+            "value": "ProtectedMaterialCode",
+            "description": "Protected source-code material."
+          }
+        ]
+      }
+    },
+    "RaiAcsHarmConfiguration": {
+      "type": "object",
+      "description": "Selects one AACS harm-detector configuration.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/RaiAcsHarmCategory",
+          "description": "The logical harm category exposed under input.snapshot.moderation.harm."
+        },
+        "harm_config_id": {
+          "type": "string",
+          "description": "The AACS detector configuration identifier. When supplied, it must be the\nconfiguration supported for the selected category.",
+          "minLength": 1,
+          "x-ms-client-name": "harmConfigId"
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "RaiAcsInterventionPoint": {
+      "type": "object",
+      "description": "Binds one logical policy to an ACS intervention point.",
+      "properties": {
+        "policy_target": {
+          "$ref": "#/definitions/RaiAcsPolicyTarget",
+          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
+          "x-ms-client-name": "policyTarget"
+        },
+        "policy_target_kind": {
+          "$ref": "#/definitions/RaiAcsPolicyTargetKind",
+          "description": "The semantic kind of the projected policy target.",
+          "x-ms-client-name": "policyTargetKind"
+        },
+        "policy": {
+          "$ref": "#/definitions/RaiAcsPolicyBinding",
+          "description": "The logical policy evaluated at this intervention point."
+        },
+        "annotations": {
+          "$ref": "#/definitions/RaiAcsEmptyObject",
+          "description": "Standard ACS annotation bindings are disabled; when present, this object must be empty."
+        }
+      },
+      "required": [
+        "policy_target",
+        "policy_target_kind",
+        "policy"
+      ]
+    },
+    "RaiAcsInterventionPoints": {
+      "type": "object",
+      "description": "Intervention points supported by the Unified Moderate AACS host profile.",
+      "properties": {
+        "input": {
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "description": "The policy evaluated for user input."
+        },
+        "pre_tool_call": {
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "description": "The policy evaluated before a tool call.",
+          "x-ms-client-name": "preToolCall"
+        },
+        "post_tool_call": {
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "description": "The policy evaluated after a tool call.",
+          "x-ms-client-name": "postToolCall"
+        },
+        "output": {
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "description": "The policy evaluated for final output."
+        }
+      }
+    },
+    "RaiAcsManifest": {
+      "type": "object",
+      "description": "The closed Rego-only Agent Control Specification profile supported by\nUnified Moderate.",
+      "properties": {
+        "agent_control_specification_version": {
+          "type": "string",
+          "description": "The declared Agent Control Specification manifest version.",
+          "x-ms-client-name": "agentControlSpecificationVersion"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Non-policy manifest metadata.",
+          "additionalProperties": {}
+        },
+        "policies": {
+          "type": "object",
+          "description": "Named Rego policies in this manifest.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsRegoPolicyDefinition"
+          }
+        },
+        "intervention_points": {
+          "$ref": "#/definitions/RaiAcsInterventionPoints",
+          "description": "ACS intervention-point bindings. At least one intervention point is required.",
+          "x-ms-client-name": "interventionPoints"
+        },
+        "tools": {
+          "$ref": "#/definitions/RaiAcsEmptyObject",
+          "description": "Tool catalogs are disabled; when present, this object must be empty."
+        },
+        "annotators": {
+          "$ref": "#/definitions/RaiAcsEmptyObject",
+          "description": "Standard ACS annotator dispatch is disabled; when present, this object must be empty."
+        }
+      },
+      "required": [
+        "agent_control_specification_version",
+        "policies",
+        "intervention_points"
+      ]
+    },
+    "RaiAcsModerationBindingExtension": {
+      "type": "object",
+      "description": "AACS-specific moderation work performed before ACS evaluates the selected\nRego query.",
+      "properties": {
+        "subject_format": {
+          "$ref": "#/definitions/RaiAcsModerationSubjectFormat",
+          "description": "How the selected policy target is represented to moderation capabilities.",
+          "x-ms-client-name": "subjectFormat"
+        },
+        "harm_configs": {
+          "type": "array",
+          "description": "Harm signals requested for this intervention point.",
+          "items": {
+            "$ref": "#/definitions/RaiAcsHarmConfiguration"
+          },
+          "x-ms-client-name": "harmConfigs",
+          "x-ms-identifiers": [
+            "category"
+          ]
+        },
+        "blocklists": {
+          "type": "array",
+          "description": "Reserved for future blocklist tasks. Current service validation permits only an empty optional array.",
+          "items": {
+            "$ref": "#/definitions/RaiAcsEmptyObject"
+          },
+          "x-ms-identifiers": []
+        },
+        "external_safety_providers": {
+          "type": "array",
+          "description": "Reserved for future external-provider tasks. Current service validation permits only an empty optional array.",
+          "items": {
+            "$ref": "#/definitions/RaiAcsEmptyObject"
+          },
+          "x-ms-client-name": "externalSafetyProviders",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "subject_format",
+        "harm_configs"
+      ]
+    },
+    "RaiAcsModerationSubjectFormat": {
+      "type": "string",
+      "description": "The representation sent to AACS moderation capabilities.",
+      "enum": [
+        "text",
+        "canonical_json"
+      ],
+      "x-ms-enum": {
+        "name": "RaiAcsModerationSubjectFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Text",
+            "value": "text",
+            "description": "Moderates the selected policy target as text."
+          },
+          {
+            "name": "CanonicalJson",
+            "value": "canonical_json",
+            "description": "Moderates the canonical JSON representation of the selected policy target."
+          }
+        ]
+      }
+    },
+    "RaiAcsPolicyBinding": {
+      "type": "object",
+      "description": "Identifies the logical policy evaluated at an ACS intervention point.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The logical policy identifier.",
+          "minLength": 1
+        },
+        "query": {
+          "type": "string",
+          "description": "An optional intervention-specific Rego query override.",
+          "minLength": 1
+        },
+        "aacs_moderation": {
+          "$ref": "#/definitions/RaiAcsModerationBindingExtension",
+          "description": "Optional AACS moderation capabilities invoked before Rego evaluation.",
+          "x-ms-client-name": "aacsModeration"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "RaiAcsPolicyDefinitionType": {
+      "type": "string",
+      "description": "The policy language supported by the Unified Moderate AACS host profile.",
+      "enum": [
+        "rego"
+      ],
+      "x-ms-enum": {
+        "name": "RaiAcsPolicyDefinitionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Rego",
+            "value": "rego",
+            "description": "A policy evaluated by Rego."
+          }
+        ]
+      }
+    },
+    "RaiAcsPolicyTarget": {
+      "type": "string",
+      "description": "Canonical policy targets supported by the Unified Moderate AACS host profile.",
+      "enum": [
+        "$snap.input",
+        "$snap.output",
+        "$snap.tool_call.args",
+        "$snap.tool_result.value"
+      ],
+      "x-ms-enum": {
+        "name": "RaiAcsPolicyTarget",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Input",
+            "value": "$snap.input",
+            "description": "Selects the incoming user input."
+          },
+          {
+            "name": "Output",
+            "value": "$snap.output",
+            "description": "Selects the assistant output."
+          },
+          {
+            "name": "ToolArguments",
+            "value": "$snap.tool_call.args",
+            "description": "Selects tool-call arguments."
+          },
+          {
+            "name": "ToolResult",
+            "value": "$snap.tool_result.value",
+            "description": "Selects a tool result."
+          }
+        ]
+      }
+    },
+    "RaiAcsPolicyTargetKind": {
+      "type": "string",
+      "description": "Canonical target kinds supported by the Unified Moderate AACS host profile.",
+      "enum": [
+        "user_input",
+        "assistant_output",
+        "tool_args",
+        "tool_result"
+      ],
+      "x-ms-enum": {
+        "name": "RaiAcsPolicyTargetKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserInput",
+            "value": "user_input",
+            "description": "The target contains user input."
+          },
+          {
+            "name": "AssistantOutput",
+            "value": "assistant_output",
+            "description": "The target contains assistant output."
+          },
+          {
+            "name": "ToolArguments",
+            "value": "tool_args",
+            "description": "The target contains tool-call arguments."
+          },
+          {
+            "name": "ToolResult",
+            "value": "tool_result",
+            "description": "The target contains a tool result."
+          }
+        ]
+      }
+    },
+    "RaiAcsRegoPolicyDefinition": {
+      "type": "object",
+      "description": "A Rego policy definition in the Unified Moderate AACS host profile.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RaiAcsPolicyDefinitionType",
+          "description": "The policy language. This profile supports only Rego."
+        },
+        "query": {
+          "type": "string",
+          "description": "The fully qualified Rego query evaluated for this policy.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "query"
+      ]
+    },
     "RaiActionType": {
       "type": "string",
       "description": "The action types to apply to the content filters",
@@ -19046,6 +20008,86 @@
           }
         ]
       }
+    },
+    "RaiBinding": {
+      "type": "object",
+      "description": "An account-scoped binding from an Azure resource to an ACS policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RaiBindingProperties",
+          "description": "Properties of the RAI binding."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource ETag.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RaiBindingListResult": {
+      "type": "object",
+      "description": "The list of account-scoped RAI bindings.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page."
+        },
+        "value": {
+          "type": "array",
+          "description": "The RAI bindings in this page.",
+          "items": {
+            "$ref": "#/definitions/RaiBinding"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RaiBindingProperties": {
+      "type": "object",
+      "description": "Properties of a binding from an Azure resource to an ACS policy.",
+      "properties": {
+        "boundResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A valid ARM resource ID of the resource to bind to the target RAI policy.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "targetPolicyName": {
+          "type": "string",
+          "description": "The same-account ACS policy name targeted by the binding.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+        }
+      },
+      "required": [
+        "boundResourceId",
+        "targetPolicyName"
+      ]
     },
     "RaiBlockListItemsResult": {
       "type": "object",
@@ -19843,6 +20885,58 @@
         ]
       }
     },
+    "RaiPolicyCustomExternalSafetyProviderReference": {
+      "type": "object",
+      "description": "A customer-visible reference to a subscription-level external safety provider.",
+      "properties": {
+        "externalSafetyProviderName": {
+          "type": "string",
+          "description": "The registered external safety-provider name.",
+          "minLength": 1
+        },
+        "managedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Optional managed identity used when invoking the external safety provider."
+        },
+        "source": {
+          "$ref": "#/definitions/RaiPolicyContentSource",
+          "description": "The request stage at which the provider runs."
+        },
+        "blocking": {
+          "type": "boolean",
+          "description": "Whether a provider rejection blocks the request."
+        }
+      },
+      "required": [
+        "externalSafetyProviderName",
+        "source"
+      ]
+    },
+    "RaiPolicyFormat": {
+      "type": "string",
+      "description": "The public representation used by a RAI policy body.",
+      "enum": [
+        "ContentFilters",
+        "ACS"
+      ],
+      "x-ms-enum": {
+        "name": "RaiPolicyFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ContentFilters",
+            "value": "ContentFilters",
+            "description": "A legacy content-filter policy."
+          },
+          {
+            "name": "ACS",
+            "value": "ACS",
+            "description": "An Agent Control Specification policy."
+          }
+        ]
+      }
+    },
     "RaiPolicyListResult": {
       "type": "object",
       "description": "The list of cognitive services RaiPolicies.",
@@ -19899,6 +20993,29 @@
       "type": "object",
       "description": "Azure OpenAI Content Filters properties.",
       "properties": {
+        "format": {
+          "$ref": "#/definitions/RaiPolicyFormat",
+          "description": "The policy representation. Omission selects ContentFilters when creating a policy. ACS policy\ncreation and replacement require ACS.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "acs": {
+          "$ref": "#/definitions/RaiAcsManifest",
+          "description": "The ACS manifest. Required by service validation when format is ACS."
+        },
+        "acsRegos": {
+          "type": "array",
+          "description": "Reusable same-account Rego resources loaded with the ACS manifest.",
+          "items": {
+            "$ref": "#/definitions/RaiRegoReference"
+          },
+          "x-ms-identifiers": [
+            "regoName"
+          ]
+        },
         "type": {
           "$ref": "#/definitions/RaiPolicyType",
           "description": "Content Filters policy type.",
@@ -19938,6 +21055,17 @@
           },
           "x-ms-identifiers": []
         },
+        "customExternalSafetyProviders": {
+          "type": "array",
+          "description": "Optional external safety-provider references used by this policy.",
+          "items": {
+            "$ref": "#/definitions/RaiPolicyCustomExternalSafetyProviderReference"
+          },
+          "x-ms-identifiers": [
+            "externalSafetyProviderName",
+            "source"
+          ]
+        },
         "egressPolicy": {
           "$ref": "#/definitions/RaiEgressPolicyConfig",
           "description": "Egress (outbound network) policy controlling which external endpoints sandboxed\nagents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions."
@@ -19965,6 +21093,144 @@
           }
         ]
       }
+    },
+    "RaiRego": {
+      "type": "object",
+      "description": "An account-scoped reusable Rego artifact.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RaiRegoProperties",
+          "description": "Properties of the reusable Rego artifact."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource ETag.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RaiRegoEncoding": {
+      "type": "string",
+      "description": "The transport encoding of reusable Rego source.",
+      "enum": [
+        "None",
+        "Base64"
+      ],
+      "x-ms-enum": {
+        "name": "RaiRegoEncoding",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The Rego property contains plain UTF-8 source."
+          },
+          {
+            "name": "Base64",
+            "value": "Base64",
+            "description": "The Rego property contains Base64-encoded UTF-8 source."
+          }
+        ]
+      }
+    },
+    "RaiRegoListResult": {
+      "type": "object",
+      "description": "The list of account-scoped reusable Rego resources.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page."
+        },
+        "value": {
+          "type": "array",
+          "description": "The Rego resources in this page.",
+          "items": {
+            "$ref": "#/definitions/RaiRego"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RaiRegoProperties": {
+      "type": "object",
+      "description": "Properties of an account-scoped reusable Rego resource.",
+      "properties": {
+        "encoding": {
+          "type": "string",
+          "description": "How the Rego source is encoded on the wire. The default is None.",
+          "default": "None",
+          "enum": [
+            "None",
+            "Base64"
+          ],
+          "x-ms-enum": {
+            "name": "RaiRegoEncoding",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "The Rego property contains plain UTF-8 source."
+              },
+              {
+                "name": "Base64",
+                "value": "Base64",
+                "description": "The Rego property contains Base64-encoded UTF-8 source."
+              }
+            ]
+          }
+        },
+        "rego": {
+          "type": "string",
+          "description": "Rego source in the selected transport encoding.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "rego"
+      ]
+    },
+    "RaiRegoReference": {
+      "type": "object",
+      "description": "References one reusable Rego resource on the same account.",
+      "properties": {
+        "regoName": {
+          "type": "string",
+          "description": "The same-account Rego resource name.",
+          "minLength": 2,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{1,63}$"
+        }
+      },
+      "required": [
+        "regoName"
+      ]
+    },
+    "RaiResourceEtagResponseHeader": {
+      "type": "object",
+      "description": "ETag response header returned by RAI resource GET and PUT operations."
     },
     "RaiSafetyProviderConfig": {
       "type": "object",
@@ -21444,5 +22710,55 @@
       ]
     }
   },
-  "parameters": {}
+  "parameters": {
+    "RaiBindingListParameters": {
+      "name": "$top",
+      "in": "query",
+      "description": "The maximum number of RAI bindings to return. Defaults to 50.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 50,
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "RaiRegoListParameters": {
+      "name": "$top",
+      "in": "query",
+      "description": "The maximum number of reusable Rego artifacts to return. Defaults to 10.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 10,
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "RaiResourceDeleteConditionalHeaders": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "Proceed only when the current resource ETag matches this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "RaiResourcePutConditionalHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "Proceed only when the current resource ETag matches this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "RaiResourcePutConditionalHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "Proceed only when no current resource ETag matches this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    }
+  }
 }
