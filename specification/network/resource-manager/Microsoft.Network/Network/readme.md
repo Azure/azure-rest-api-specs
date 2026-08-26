@@ -263,9 +263,6 @@ suppressions:
   # New TypeSpec-generated resource that follows the established Network RP legacy Resource
   # pattern (the same shared base type used by every existing Network resource). The findings
   # below are inherent to that shared pattern and are handled consistently with sibling resources.
-  - code: ResourceNameRestriction
-    from: authenticationPolicy.json
-    reason: The 'authenticationPolicyName' path parameter follows the Network RP convention of not defining a 'pattern' restriction, consistent with all other Network RP resource name parameters (e.g. virtualNetworkName, virtualNetworkGatewayName).
   - code: ProvisioningStateMustBeReadOnly
     from: authenticationPolicy.json
     reason: >-
@@ -276,9 +273,22 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: authenticationPolicy.json
     reason: AuthenticationPolicy extends the local Network RP Resource base type (common.json#/definitions/Resource), the established envelope for all Network RP resources. Its id/name/type read-only properties are defined on the shared base and referenced via allOf, consistent with every other Network RP resource.
-  - code: TrackedResourcePatchOperation
+  - code: DeleteResponseCodes
     from: authenticationPolicy.json
-    reason: AuthenticationPolicy intentionally does not expose a PATCH operation; updates are performed via CreateOrUpdate (PUT), consistent with the Network RP resource lifecycle convention.
+    reason: AuthenticationPolicy DELETE is synchronous and the service returns only 204 with no response body; advertising a 200 response would not match the implemented service contract.
+  - code: DeleteOperationResponses
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy DELETE is synchronous and the service returns only 204 with no response body; the generic rule's required 200 response is not implemented by the service.
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy uses the Network RP shared Resource and SubResource definitions from common.json, consistent with all resources in this API package.
+  - code: RequiredReadOnlySystemData
+    from: authenticationPolicy.json
+    reason: Network RP resources in this package intentionally use the legacy shared Resource envelope, which does not expose systemData.
+  - code: SchemaDescriptionOrTitle
+    from: common.json
+    where: $.definitions.UserTrustProviderType
+    reason: The TypeSpec union is documented, but the Swagger 2.0 emitter does not carry that documentation to this closed single-value union in the shared common.json file.
   - code: XMSSecretInResponse
     from: authenticationPolicy.json
     reason: clientSecret holds a Key Vault secret URL reference (e.g. https://myvault.vault.azure.net/secrets/mysecret), not the secret value itself, so it is safe to return in responses and is not marked x-ms-secret.
@@ -298,7 +308,6 @@ directive:
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
-
 
 ### Tag: package-2025-09-01
 

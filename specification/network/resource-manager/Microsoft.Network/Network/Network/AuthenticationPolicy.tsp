@@ -107,11 +107,9 @@ model AuthenticationProviderProperties {
   sessionCookieName?: string;
 }
 
-/**
- * Type of the user trust provider.
- */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP enums"
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service accepts only the Microsoft Entra provider in this API version, so the union is intentionally closed."
+@doc("Type of the user trust provider.")
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 union UserTrustProviderType {
@@ -155,6 +153,18 @@ interface AuthenticationPolicies {
   @tag("AuthenticationPolicies")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AuthenticationPolicy,
+    Error = CloudError
+  >;
+
+  /**
+   * Updates an authentication policy's tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "AuthenticationPolicy supports the established Network RP tags-only PATCH operation."
+  @tag("AuthenticationPolicies")
+  @patch(#{ implicitOptionality: false })
+  updateTags is ArmCustomPatchSync<
+    AuthenticationPolicy,
+    PatchModel = TagsObject,
     Error = CloudError
   >;
 

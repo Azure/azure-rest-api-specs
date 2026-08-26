@@ -7757,6 +7757,7 @@ model ApplicationGatewayUrlPathMapPropertiesFormat {
    * Default authentication configuration bindings of the routing map. Authentication policies can only be bound to Application Gateways using a v2 SKU.
    */
   @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
   @maxItems(1)
   defaultAuthConfigs?: ApplicationGatewayAuthConfig[];
 
@@ -7943,6 +7944,7 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
    * Authentication configuration bindings of the request routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.
    */
   @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
   @maxItems(1)
   authConfigs?: ApplicationGatewayAuthConfig[];
 
@@ -8020,6 +8022,7 @@ model ApplicationGatewayRoutingRulePropertiesFormat {
    * Authentication configuration bindings of the routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.
    */
   @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
   @maxItems(1)
   authConfigs?: ApplicationGatewayAuthConfig[];
 
