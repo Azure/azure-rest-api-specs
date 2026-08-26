@@ -1,0 +1,10 @@
+- tool: TypeSpecValidation
+  path: "**"
+  rules:
+    - SdkTspConfigValidation
+  reason: >
+    Permanent exemption. No SDKs are generated from the Microsoft.GcpConnector TypeSpec
+    projects, so no language emitters are configured in tspconfig.yaml. Customer-facing
+    SDKs for the GCP public cloud connector scenario are generated from the
+    Microsoft.HybridConnectivity resource provider instead.
+    Responsibility: Service team with SDK team collaboration
