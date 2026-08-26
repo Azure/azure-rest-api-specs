@@ -22,6 +22,7 @@ namespace Azure.AI.Projects {
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
     web_iq_preview: "web_iq_preview",
+    github_copilot_toolset_preview: "github_copilot_toolset_preview",
   }
 
   // General availability tools:
@@ -117,7 +118,7 @@ namespace Azure.AI.Projects {
       required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
     }
   )
-  model GitHubCopilotToolsetPreview {
+  model GitHubCopilotToolsetPreview extends OpenAI.Tool {
     @doc("The type of the toolset. Always `github_copilot_toolset_preview`.")
     type: "github_copilot_toolset_preview";
 
@@ -126,15 +127,6 @@ namespace Azure.AI.Projects {
 
     @doc("Per-tool configuration overrides. Duplicate built-in tool names are not allowed.")
     configs?: GitHubCopilotToolsetConfig[];
-  }
-
-  @doc("A tool or toolset configuration available to a prompt agent.")
-  union PromptAgentTool {
-    @doc("An OpenAI-compatible tool.")
-    openai: OpenAI.Tool,
-
-    @doc("Configuration overrides for GitHub Copilot built-in tools.")
-    github_copilot_toolset_preview: GitHubCopilotToolsetPreview,
   }
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"

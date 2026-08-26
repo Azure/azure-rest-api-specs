@@ -381,7 +381,7 @@ model PromptAgentDefinition extends AgentDefinition {
     An array of tools the model may call while generating a response. You
     can specify which tool to use by setting the `tool_choice` parameter.
     """)
-  tools?: PromptAgentTool[];
+  tools?: OpenAI.Tool[];
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @doc("""
