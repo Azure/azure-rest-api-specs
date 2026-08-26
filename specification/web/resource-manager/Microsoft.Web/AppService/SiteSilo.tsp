@@ -122,10 +122,8 @@ interface SiteSiloVirtualNetworkConnections {
   /**
    * Adds a virtual network connection to a silo, or updates the connection properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The silo virtual network connection is created synchronously and only returns 200; it never returns 201."
   createOrUpdateSiteSiloVnetConnection is SiteSiloVirtualNetworkConnectionOps.CreateOrUpdateSync<
     SwiftVirtualNetwork,
-    Response = ArmResourceUpdatedResponse<SwiftVirtualNetwork>,
     OverrideErrorType = DefaultErrorResponse
   >;
 
