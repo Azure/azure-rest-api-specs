@@ -565,6 +565,11 @@ namespace ApplicationInsightsManagementClient;
   "WorkbookType",
   "csharp"
 );
+@@clientName(
+  WorkbookTemplatesApi.WorkbookTemplateProperties.localized,
+  "LocalizedGalleries",
+  "csharp"
+);
 @@clientName(Components.ApplicationInsightsComponent.etag, "ETag", "csharp");
 @@clientName(WorkbooksApi.Workbook.etag, "ETag", "csharp");
 @@clientName(
@@ -658,6 +663,31 @@ namespace ApplicationInsightsManagementClient;
 @@alternateType(
   WorkbooksApi.WorkbookProperties.sourceId,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Components.ComponentsResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WebTestsApi.WebtestsResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Components.PrivateLinkScopedResource.ResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WebTestsApi.WebTestGeolocation.Id,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  WebTestsApi.WebTestPropertiesRequest.RequestUrl,
+  url,
   "csharp"
 );
 @@alternateType(
