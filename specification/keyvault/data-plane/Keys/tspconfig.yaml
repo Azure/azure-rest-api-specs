@@ -10,6 +10,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -25,20 +26,18 @@ options:
     "namespace": "azure.keyvault.keys._generated"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-keys"
   "@azure-tools/typespec-java":
-    api-version: "2025-07-01"
+    api-version: "2026-01-01-preview"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-keys"
     namespace: "com.azure.security.keyvault.keys"
     models-subpackage: "implementation.models"
-    custom-types: "KeyAttestation,KeyCurveName,KeyExportEncryptionAlgorithm,KeyOperation,KeyRotationPolicyAction,KeyType,ReleaseKeyResult"
+    custom-types: "KeyAttestation,KeyCurveName,KeyExportEncryptionAlgorithm,KeyOperation,KeyRotationPolicyAction,KeyType,ReleaseKeyResult,ExternalKey"
     custom-types-subpackage: "models"
     customization-class: "customizations/src/main/java/KeysCustomizations.java"
     use-eclipse-language-server: false
     generate-tests: false
     generate-samples: false
     include-api-view-properties: false
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/keyvault-keys"
     experimental-extensible-enums: true
@@ -59,7 +58,7 @@ options:
     crate-name: "azure_security_keyvault_keys"
     crate-version: "0.0.1"
     emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
-    api-version: "2025-07-01"
+    api-version: "2026-03-01-preview"
     omit-constructors: true
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:

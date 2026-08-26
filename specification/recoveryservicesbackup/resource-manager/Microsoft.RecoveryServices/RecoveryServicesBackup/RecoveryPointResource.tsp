@@ -81,6 +81,8 @@ interface RecoveryPoints {
   @removed(Versions.v2026_02_01)
   @added(Versions.v2026_03_31_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_31_preview)
+  @removed(Versions.v2026_07_01)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     RecoveryPointResource,

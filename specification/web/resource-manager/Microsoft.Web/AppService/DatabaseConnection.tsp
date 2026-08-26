@@ -60,7 +60,8 @@ interface DatabaseConnectionOps
         @key
         @pattern("^[a-zA-Z0-9]+$")
         databaseConnectionName: string,
-      }
+      },
+      ResourceName = "StaticSiteBuildDatabaseConnection"
     > {}
 
 @tag("StaticSites")
@@ -150,7 +151,8 @@ interface DatabaseConnectionOperationGroupOps
         @key
         @pattern("^[a-zA-Z0-9]+$")
         databaseConnectionName: string,
-      }
+      },
+      ResourceName = "StaticSiteDatabaseConnection"
     > {}
 
 @tag("StaticSites")

@@ -14,8 +14,10 @@ namespace Microsoft.Chaos;
 /**
  * PrivateAccesses tracked resource.
  */
-model PrivateAccess
-  is Azure.ResourceManager.TrackedResource<PrivateAccessProperties, false> {
+model PrivateAccess is Azure.ResourceManager.TrackedResource<
+  PrivateAccessProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PrivateAccess,
     KeyName = "privateAccessName",

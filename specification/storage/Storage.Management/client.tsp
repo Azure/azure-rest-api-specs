@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
+using TypeSpec.Http;
 using Microsoft.Storage;
 
 @@clientName(ProvisioningState, "StorageAccountProvisioningState", "csharp");
@@ -374,13 +376,22 @@ union CSharpBlobInventoryPolicyName {
 /**
  * Get properties of specified deleted account resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op getDeletedAccountCustomized(
   apiVersion: string,
+
+  @path
   deletedAccountName: string,
+
+  @path
   location: Azure.Core.azureLocation,
+
   ...Azure.ResourceManager.ProviderNamespace<Microsoft.Storage.DeletedAccount>,
+
+  @path
   subscriptionId: Azure.Core.uuid,
 ):
   | Azure.ResourceManager.ArmResponse<Microsoft.Storage.DeletedAccount>
@@ -390,13 +401,22 @@ op getDeletedAccountCustomized(
 /**
  * Get properties of specified deleted account resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op getDeletedAccountCustomizedForJs(
   ...Azure.ResourceManager.ApiVersionParameter,
+
+  @path
   deletedAccountName: string,
+
+  @path
   location: Azure.Core.azureLocation,
+
   ...Azure.ResourceManager.ProviderNamespace<Microsoft.Storage.DeletedAccount>,
+
+  @path
   subscriptionId: Azure.Core.uuid,
 ):
   | Azure.ResourceManager.ArmResponse<Microsoft.Storage.DeletedAccount>

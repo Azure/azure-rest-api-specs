@@ -58,7 +58,8 @@ interface ProcessInfoOps
         @segment("processes")
         @key
         processId: string,
-      }
+      },
+      ResourceName = "SiteInstanceProcess"
     > {}
 
 @tag("WebApps")
@@ -105,16 +106,15 @@ interface ProcessInfos {
   getInstanceProcessDump is ProcessInfoOps.ActionSync<
     ProcessInfo,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "*/*";
 
-      | {
-          @header("Content-Type")
-          contentType: "*/*";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | ArmNotFoundResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -153,7 +153,8 @@ interface ProcessInfoOperationGroupOps
         @segment("processes")
         @key
         processId: string,
-      }
+      },
+      ResourceName = "SiteProcess"
     > {}
 
 @tag("WebApps")
@@ -200,16 +201,15 @@ interface ProcessInfoOperationGroup {
   getProcessDump is ProcessInfoOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "*/*";
 
-      | {
-          @header("Content-Type")
-          contentType: "*/*";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | ArmNotFoundResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -260,7 +260,8 @@ interface InstanceProcessSlotOps
         @segment("processes")
         @key
         processId: string,
-      }
+      },
+      ResourceName = "SiteSlotInstanceProcess"
     > {}
 
 @tag("WebApps")
@@ -308,16 +309,15 @@ interface InstanceProcessSlotOperationGroup {
   getInstanceProcessDumpSlot is InstanceProcessSlotOps.ActionSync<
     ProcessInfo,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "*/*";
 
-      | {
-          @header("Content-Type")
-          contentType: "*/*";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | ArmNotFoundResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -362,7 +362,8 @@ interface ProcessSlotOperationGroupOps
         @segment("processes")
         @key
         processId: string,
-      }
+      },
+      ResourceName = "SiteSlotProcess"
     > {}
 
 @tag("WebApps")
@@ -409,16 +410,15 @@ interface ProcessSlotOperationGroup {
   getProcessDumpSlot is ProcessSlotOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "*/*";
 
-      | {
-          @header("Content-Type")
-          contentType: "*/*";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | ArmNotFoundResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 

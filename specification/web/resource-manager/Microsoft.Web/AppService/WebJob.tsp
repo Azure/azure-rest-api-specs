@@ -57,7 +57,8 @@ interface WebJobOps
         @segment("webjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotWebJob"
     > {}
 
 @tag("WebApps")
@@ -103,7 +104,8 @@ interface WebJobOperationGroupOps
         @segment("webjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteWebJob"
     > {}
 
 @tag("WebApps")

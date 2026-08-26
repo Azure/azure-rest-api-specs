@@ -1,4 +1,4 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+// NOTE: Operations in this file are client customizations/overrides, intentionally not modeled as standard ARM resource operations.
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
@@ -19,8 +19,8 @@ using Microsoft.Search;
 
 namespace Customizations;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Purpose described by consuming operations."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Pre-existing API contract: x-ms-parameter-grouping name."
 model `search-management-request-options` {
   /**
    * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
@@ -32,8 +32,10 @@ model `search-management-request-options` {
 /**
  * Checks whether or not the given search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
 @action("servicesCheckNameAvailability")
 op servicesCheckNameAvailabilityCustomization(
@@ -46,15 +48,17 @@ op servicesCheckNameAvailabilityCustomization(
    */
   body: CheckNameAvailabilityInput,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<CheckNameAvailabilityOutput> | CloudError;
 
 /**
  * Checks whether or not the given search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
 op servicesCheckNameAvailabilityCustomizationForJs(
   ...ApiVersionParameter,
@@ -71,15 +75,17 @@ op servicesCheckNameAvailabilityCustomizationForJs(
    */
   type: "searchServices",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<CheckNameAvailabilityOutput> | CloudError;
 
 /**
  * Get a list of all Azure AI Search quota usages across the subscription.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
 @action("usagesListBySubscription")
 op usagesListBySubscriptionCustomization(
@@ -88,16 +94,18 @@ op usagesListBySubscriptionCustomization(
   ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   ...LocationResourceParameter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No request body."
   body: void,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<QuotaUsagesListResult> | CloudError;
 
 /**
  * Gets the quota usage for a search SKU in the given subscription.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 op usageBySubscriptionSkuCustomization(
   ...ApiVersionParameter,
@@ -110,43 +118,49 @@ op usageBySubscriptionSkuCustomization(
   @path
   skuName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<QuotaUsageResult> | CloudError;
 
 /**
  * Gets a list of all Search services in the given subscription.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
 @action("searchServicesListBySubscription")
 op searchServicesListBySubscriptionCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<SearchServiceListResult> | CloudError;
 
 /**
  * Gets a list of all Search services in the given resource group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 op searchServicesListByResourceGroupCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...CommonTypes.ResourceGroupNameParameter,
   ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<SearchServiceListResult> | CloudError;
 
 /**
  * Gets the search service with the given name in the given resource group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
 @action("searchGetCustomization")
@@ -163,15 +177,17 @@ op searchGetCustomization(
   @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
   searchServiceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<SearchService> | CloudError;
 
 /**
  * Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
 @put
 @action("searchCreateOrUpdateCustomization")
@@ -193,16 +209,18 @@ op searchCreateOrUpdateCustomization(
    */
   resource: SearchService,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<SearchService> | CloudError;
 
 /**
  * Updates an existing search service in the given resource group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Client-only override: retains PATCH payload."
 @autoRoute
 @patch(#{ implicitOptionality: false })
 @action("searchUpdateCustomization")
@@ -224,15 +242,17 @@ op searchUpdateCustomization(
    */
   properties: SearchServiceUpdate,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<SearchService> | CloudError;
 
 /**
  * Deletes a search service in the given resource group, along with its associated resources.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
 @autoRoute
 @delete
 @action("searchDeleteCustomization")
@@ -249,14 +269,16 @@ op searchDeleteCustomization(
   @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
   searchServiceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): OkResponse | NoContentResponse | NotFoundResponse | CloudError;
 
 /**
  * Generates a new query key for the specified search service. You can create up to 50 query keys per service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @post
 op queryKeysCreateCustomization(
@@ -277,16 +299,18 @@ op queryKeysCreateCustomization(
   @path
   name: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No request body."
   resource: void,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<QueryKey> | CloudError;
 
 /**
  * Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @delete
 op queryKeysDeleteCustomization(
@@ -307,16 +331,18 @@ op queryKeysDeleteCustomization(
   @path
   key: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No request body."
   body: void,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): OkResponse | NoContentResponse | NotFoundResponse | CloudError;
 
 /**
  * Gets the primary and secondary admin API keys for the specified Azure AI Search service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @post
 op adminKeysGetCustomization(
@@ -332,16 +358,18 @@ op adminKeysGetCustomization(
   @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
   searchServiceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No request body."
   body: void,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<AdminKeyResult> | CloudError;
 
 /**
  * Returns the list of query API keys for the given Azure AI Search service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @post
 @action("queryKeysListBySearchService")
@@ -358,16 +386,18 @@ op queryKeysListBySearchServiceCustomization(
   @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
   searchServiceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No request body."
   body: void,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<ListQueryKeysResult> | CloudError;
 
 /**
  * Gets a list of all private endpoint connections in the given service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
 @action("privateEndpointConnectionsListByService")
@@ -384,14 +414,16 @@ op privateEndpointConnectionsListByServiceCustomization(
   @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
   searchServiceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): PrivateEndpointConnectionListResult | CloudError;
 
 /**
  * Gets the details of the private endpoint connection to the search service in the given resource group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
 op privateEndpointConnectionsGetCustomization(
@@ -413,14 +445,16 @@ op privateEndpointConnectionsGetCustomization(
   @path
   privateEndpointConnectionName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<Microsoft.Search.PrivateEndpointConnection> | CloudError;
 
 /**
  * Updates a private endpoint connection to the search service in the given resource group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @put
 op privateEndpointConnectionsUpdateCustomization(
@@ -447,7 +481,7 @@ op privateEndpointConnectionsUpdateCustomization(
    */
   resource: Microsoft.Search.PrivateEndpointConnection,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ):
   | ArmResourceUpdatedResponse<Microsoft.Search.PrivateEndpointConnection>
@@ -456,7 +490,9 @@ op privateEndpointConnectionsUpdateCustomization(
 /**
  * Disconnects the private endpoint connection and deletes it from the search service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @delete
 op privateEndpointConnectionsDeleteCustomization(
@@ -478,7 +514,7 @@ op privateEndpointConnectionsDeleteCustomization(
   @path
   privateEndpointConnectionName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ):
   | ArmResponse<Microsoft.Search.PrivateEndpointConnection>
@@ -488,7 +524,9 @@ op privateEndpointConnectionsDeleteCustomization(
 /**
  * Gets a list of all supported private link resource types for the given service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
 @action("privateLinkResourcesCustomization")
@@ -505,16 +543,18 @@ op privateLinkResourcesListSupportedCustomization(
   @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
   searchServiceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No request body."
   body: void,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<PrivateLinkResourcesResult> | CloudError;
 
 /**
  * Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @post
 op privateLinkResourcesRegenerateCustomization(
@@ -535,17 +575,19 @@ op privateLinkResourcesRegenerateCustomization(
   @path
   keyKind: AdminKeyKind,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "No request body."
   body: void,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<AdminKeyResult> | CloudError;
 
 /**
  * Gets a list of all shared private link resources managed by the given service.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
 @action("sharedPrivateLinkResourcesCustomization")
@@ -562,15 +604,17 @@ op SharedPrivateLinkResourcesListByServiceCustomization(
   @pattern("^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$")
   searchServiceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): SharedPrivateLinkResourceListResult | CloudError;
 
 /**
  * Gets the details of the shared private link resource managed by the search service in the given resource group.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 @autoRoute
 @get
 op SharedPrivateLinkResourcesGetCustomization(
@@ -592,16 +636,18 @@ op SharedPrivateLinkResourcesGetCustomization(
   @path
   sharedPrivateLinkResourceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ): ArmResponse<SharedPrivateLinkResource> | CloudError;
 
 /**
  * Initiates the creation or update of a shared private link resource managed by the search service in the given resource group.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Client-only override: retains async operation headers."
 @autoRoute
 @put
 op SharedPrivateLinkResourcesCreateOrUpdateCustomization(
@@ -628,7 +674,7 @@ op SharedPrivateLinkResourcesCreateOrUpdateCustomization(
    */
   resource: SharedPrivateLinkResource,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ):
   | ArmResourceUpdatedResponse<SharedPrivateLinkResource>
@@ -645,10 +691,12 @@ op SharedPrivateLinkResourcesCreateOrUpdateCustomization(
 /**
  * Initiates the deletion of the shared private link resource from the search service.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Client-only override: retains async operation headers."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Client-only override: retains response contract."
 @autoRoute
 @delete
 op SharedPrivateLinkResourcesDeleteCustomization(
@@ -670,7 +718,7 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   @path
   sharedPrivateLinkResourceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented on the request-options model."
   params?: `search-management-request-options`,
 ):
   | ArmAcceptedLroResponse<
@@ -1200,6 +1248,18 @@ model AccessRulePropertiesSubscriptionsItem {
   uuid,
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  SearchService,
+  "resource-rbac-roles",
+  #{
+    SearchIndexDataContributor: "8ebe5a00-799e-43f5-93ac-243d3dce84a7",
+    SearchIndexDataReader: "1407120a-92aa-4202-b7e9-c0e197c71c8f",
+    SearchServiceContributor: "7ca78c08-252a-4471-8644-bb5ff32d4ba0",
+  },
+  "csharp"
+);
 @@alternateType(QuotaUsageResult.id, armResourceIdentifier, "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
@@ -1316,6 +1376,8 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
 @@clientName(SkuOffering, "SearchSkuOffering", "csharp");
 @@clientName(SkuLimits, "SearchSkuLimits", "csharp");
 @@clientName(Offerings.list, "GetOfferings", "csharp");
+@@clientName(Offerings.fetch, "FetchOfferings", "csharp");
+@@clientName(OfferingsResult, "SearchOfferingsResult", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(

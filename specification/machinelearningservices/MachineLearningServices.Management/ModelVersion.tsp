@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(ModelContainer)
-model ModelVersion
-  is Azure.ResourceManager.ProxyResource<ModelVersionProperties, false> {
+model ModelVersion is Azure.ResourceManager.ProxyResource<
+  ModelVersionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ModelVersion,
     KeyName = "version",
