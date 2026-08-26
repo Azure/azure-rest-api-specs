@@ -34,6 +34,7 @@ model AuthenticationPolicy extends Common.Resource {
   @path
   @key("authenticationPolicyName")
   @segment("authenticationPolicies")
+  @pattern("^[A-Za-z0-9_-]{1,80}$")
   @maxLength(80)
   name: string;
 

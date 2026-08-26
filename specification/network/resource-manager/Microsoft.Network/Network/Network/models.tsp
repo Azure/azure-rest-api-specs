@@ -8735,7 +8735,7 @@ model ApplicationGatewayAuthConfig {
   /**
    * Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource.
    */
-  authenticationPolicy?: SubResource;
+  authenticationPolicy: SubResource;
 }
 
 /**
