@@ -13,6 +13,22 @@ const deprecatedRulesets = new Map<string, string>([
   ],
 ]);
 
+// Ruleset required when any client (language) emitter has options defined
+const clientSdkRuleset = "@azure-tools/typespec-azure-rulesets/client-sdk";
+
+// Known client (language) emitters. When any of these has options defined in tspconfig.yaml,
+// the client-sdk ruleset must be enabled. Excludes non-client emitters such as
+// "@azure-tools/typespec-autorest" (swagger) and "@azure-tools/typespec-client-generator-cli".
+const clientEmitters = [
+  "@azure-tools/typespec-csharp",
+  "@azure-typespec/http-client-csharp",
+  "@azure-typespec/http-client-csharp-mgmt",
+  "@azure-tools/typespec-python",
+  "@azure-tools/typespec-java",
+  "@azure-tools/typespec-ts",
+  "@azure-tools/typespec-go",
+];
+
 export class LinterRulesetRule implements Rule {
   readonly name = "LinterRuleset";
 
@@ -88,6 +104,28 @@ export class LinterRulesetRule implements Rule {
         "linter:\n" +
         "  extends:\n" +
         `    - "${requiredRuleset}"`;
+    }
+
+    // If any client (language) emitter has options defined, the client-sdk ruleset is required.
+    const emittersWithOptions = clientEmitters.filter(
+      (emitter) => config?.options?.[emitter] !== undefined,
+    );
+    if (emittersWithOptions.length > 0 && !linterExtends?.includes(clientSdkRuleset)) {
+      success = false;
+      if (errorOutput) {
+        errorOutput += "\n\n";
+      }
+      errorOutput +=
+        "tspconfig.yaml defines options for the following client emitter(s):\n" +
+        "\n" +
+        emittersWithOptions.map((emitter) => `    - "${emitter}"`).join("\n") +
+        "\n" +
+        "\n" +
+        "so it must define the following property:\n" +
+        "\n" +
+        "linter:\n" +
+        "  extends:\n" +
+        `    - "${clientSdkRuleset}"`;
     }
 
     return {
