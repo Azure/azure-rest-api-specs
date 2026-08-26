@@ -94,6 +94,9 @@ using Azure.AI.Projects;
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
 
+// Preserve the existing JavaScript operation name.
+@@clientName(EvaluationRules.delete, "delete", "javascript");
+
 // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, exact("MEMORY_1GB"), "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`4g`, exact("MEMORY_4GB"), "python");
@@ -439,6 +442,9 @@ using Azure.AI.Projects;
 // Beta Schedules sub‐client
 // --------------------------------------------------------------------------------
 
+// Preserve the existing JavaScript operation name.
+@@clientName(Schedules.delete, "delete", "javascript");
+
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
 @@clientName(Schedule.id, "schedule_id");
 
@@ -474,6 +480,9 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Beta Evaluation Taxonomies sub-client
 // --------------------------------------------------------------------------------
+
+// Preserve the existing JavaScript operation name.
+@@clientName(EvaluationTaxonomies.delete, "delete", "javascript");
 
 // Note that we can't rename it in src\openai-evaluations\models.tsp, since in
 // src\evaluations\models.tsp we already define EvaluationTarget (not for v1).
