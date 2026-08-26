@@ -35,6 +35,7 @@ interface RLEnvironments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with continuation-token pagination."
   @doc("List all hosted RLE environments in the project.")
   @get
+  @list
   listEnvironments is FoundryDataPlaneOperation<
     {
       @doc("Optional environment name filter. When set, returns at most a single matching environment.")
@@ -47,6 +48,7 @@ interface RLEnvironments {
 
       @doc("Opaque continuation token from a previous page's `nextContinuationToken`. Omit to fetch the first page.")
       @query
+      @continuationToken
       continuationToken?: string;
 
       @doc("Sort order for the page. Defaults to descending by creation time.")
@@ -107,6 +109,7 @@ interface RLEnvironments {
   @doc("List historical versions of a hosted RLE environment.")
   @route("{name}/versions")
   @get
+  @list
   listRLEnvironmentVersions is FoundryDataPlaneOperation<
     {
       @doc("Environment name.")
@@ -119,6 +122,7 @@ interface RLEnvironments {
 
       @doc("Opaque continuation token from a previous page's `nextContinuationToken`. Omit to fetch the first page.")
       @query
+      @continuationToken
       continuationToken?: string;
 
       @doc("Sort order for the page. Defaults to ascending by version.")
@@ -164,6 +168,7 @@ interface RLEInstanceGroups {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple list with continuation-token pagination."
   @doc("List RLE instance groups under the given environment version.")
   @get
+  @list
   listInstanceGroups is FoundryDataPlaneOperation<
     {
       @doc("Name of the registered RLE environment.")
@@ -180,6 +185,7 @@ interface RLEInstanceGroups {
 
       @doc("Opaque continuation token from a previous page's `nextContinuationToken`. Omit to fetch the first page.")
       @query
+      @continuationToken
       continuationToken?: string;
 
       @doc("Sort order for the page. Defaults to descending by creation time.")

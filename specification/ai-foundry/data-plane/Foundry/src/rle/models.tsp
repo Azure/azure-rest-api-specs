@@ -116,9 +116,11 @@ model CreateRLEnvironmentRequest {
 @doc("A page of hosted RLE environments, with an opaque continuation token for fetching the next page.")
 model ListRLEnvironmentsResponse {
   @doc("Environments on this page.")
+  @pageItems
   data: RLEnvironment[];
 
   @doc("Opaque token for fetching the next page. Absent when there are no more results.")
+  @continuationToken
   nextContinuationToken?: string;
 }
 
@@ -126,9 +128,11 @@ model ListRLEnvironmentsResponse {
 @doc("A page of environment versions, with an opaque continuation token for fetching the next page.")
 model ListRLEnvironmentVersionsResponse {
   @doc("Environment versions on this page. Each item is a full environment snapshot for a specific version.")
+  @pageItems
   data: RLEnvironment[];
 
   @doc("Opaque token for fetching the next page. Absent when there are no more results.")
+  @continuationToken
   nextContinuationToken?: string;
 }
 
@@ -214,9 +218,11 @@ model CreateRLEInstanceGroupRequest {
 @doc("A page of RLE instance groups, with an opaque continuation token for fetching the next page.")
 model ListRLEInstanceGroupsResponse {
   @doc("Instance groups on this page.")
+  @pageItems
   data: RLEInstanceGroup[];
 
   @doc("Opaque token for fetching the next page. Absent when there are no more results.")
+  @continuationToken
   nextContinuationToken?: string;
 }
 
