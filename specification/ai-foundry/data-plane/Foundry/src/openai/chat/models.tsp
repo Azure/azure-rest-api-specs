@@ -3,9 +3,16 @@ import "../../common/models.tsp";
 using Azure.Core.Experimental;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Experimental features applied to augment inherited OpenAI models"
 namespace Azure.AI.Projects {
+  const ModelRoutersRequiredPreviews = #{
+    conditional_previews: #[
+      FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+    ],
+  };
+
   @@changePropertyType(OpenAI.CreateChatCompletionRequest.`model`, string);
   @@changePropertyType(OpenAI.CreateChatCompletionResponse.`model`, string);
   @@doc(
@@ -31,6 +38,7 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.CreateChatCompletionResponse,
     {
+      @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
       /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
       model_selection_details?: ModelSelectionDetails,
     }
