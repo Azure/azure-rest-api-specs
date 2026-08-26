@@ -103,6 +103,14 @@ directive:
   - suppress: LroErrorContent
     from: openapi.json
     reason: The silo long-running PUT intentionally returns the App Service error schema (DefaultErrorResponse) that every other Microsoft.Web operation in this specification uses, rather than the common-types ARM error schema. Keeping a single consistent error contract across the entire App Service surface is required for compatibility with existing App Service clients that parse the service's native error format.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork"]
+    reason: The silo virtual network connection is a singleton child resource whose resource name is the fixed literal virtualNetwork, so the path already has an even number of segments. The rule reports it only because it treats default as the sole acceptable singleton name literal, which is the known TypeSpec singleton false positive tracked by https://github.com/Azure/azure-openapi-validator/issues/646. The virtualNetwork literal is required for consistency with the existing App Service singleton /sites/{name}/networkConfig/virtualNetwork, which exposes the same SwiftVirtualNetwork resource and is reported by this same rule in every prior API version.
+  - suppress: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork"]
+    reason: The silo virtual network connection is a singleton child resource, so its final segment is the fixed literal virtualNetwork rather than a name template parameter. The rule accepts only a template parameter or the literal default for a nested resource name, so this is a false positive for a singleton. The virtualNetwork literal is required for consistency with the existing App Service singleton /sites/{name}/networkConfig/virtualNetwork, which exposes the same SwiftVirtualNetwork resource and is reported by this same rule in every prior API version.
 ```
 
 ### Tag: package-2026-08
