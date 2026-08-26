@@ -685,11 +685,7 @@ namespace ApplicationInsightsManagementClient;
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(
-  WebTestsApi.WebTestPropertiesRequest.RequestUrl,
-  url,
-  "csharp"
-);
+@@alternateType(WebTestsApi.WebTestPropertiesRequest.RequestUrl, url, "csharp");
 @@alternateType(
   Components.ApplicationInsightsComponentProperties.TenantId,
   Azure.Core.uuid,
