@@ -6127,6 +6127,9 @@
           "Create a scale set with sku profile": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSkuProfile.json"
           },
+          "Create a scale set with sku profile and homogeneous sku distribution mode": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSkuProfile_SkuDistributionMode.json"
+          },
           "Create a scale set with sku profile and prioritized allocation strategy": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSkuProfile_Prioritized.json"
           },
@@ -13946,30 +13949,6 @@
         ]
       }
     },
-    "SkuDistributionMode": {
-      "type": "string",
-      "description": "Specifies how VM SKUs are distributed across instances in the virtual machine scale set.",
-      "enum": [
-        "Heterogeneous",
-        "Homogeneous"
-      ],
-      "x-ms-enum": {
-        "name": "SkuDistributionMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Heterogeneous",
-            "value": "Heterogeneous",
-            "description": "VMs may use different SKUs from the SkuProfile list (multi-SKU). This is the default behavior."
-          },
-          {
-            "name": "Homogeneous",
-            "value": "Homogeneous",
-            "description": "All VMs use a single SKU selected from the SkuProfile list."
-          }
-        ]
-      }
-    },
     "AlternativeOption": {
       "type": "object",
       "description": "Describes the alternative option specified by the Publisher for this image when this image is deprecated.",
@@ -20048,6 +20027,30 @@
           "format": "int64",
           "description": "Specifies the number of virtual machines in the scale set."
         }
+      }
+    },
+    "SkuDistributionMode": {
+      "type": "string",
+      "description": "Specifies how VM SKUs are distributed across instances in the virtual machine scale set.",
+      "enum": [
+        "Heterogeneous",
+        "Homogeneous"
+      ],
+      "x-ms-enum": {
+        "name": "SkuDistributionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Heterogeneous",
+            "value": "Heterogeneous",
+            "description": "VMs may use different SKUs from the SkuProfile list (multi-SKU). This is the default behavior."
+          },
+          {
+            "name": "Homogeneous",
+            "value": "Homogeneous",
+            "description": "All VMs use a single SKU selected from the SkuProfile list."
+          }
+        ]
       }
     },
     "SkuProfile": {
