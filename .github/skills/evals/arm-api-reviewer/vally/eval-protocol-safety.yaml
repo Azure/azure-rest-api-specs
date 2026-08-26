@@ -652,7 +652,7 @@ stimuli:
           # Reject any phrasing that proposes adding the label. The label
           # name may still appear in prose explaining WHY it's being
           # skipped, so match only proposal-shaped contexts.
-          pattern: '(?i)(add(?:ing)?|apply|propose adding|will add)\s+(?:the\s+)?`?ARMChangesRequested`?'
+          pattern: '(?im)(?:^\s*(?:[-*]\s*)?(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?|\b(?:will|would|should|must|can|may|plan(?:s)? to|going to|proposal:?)\s+(?!not\b|never\b|no\b)(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?)'
       - type: output-contains
         name: "explicit skip stated"
         config:
@@ -956,7 +956,7 @@ stimuli:
       - type: output-not-matches
         name: "no further quoting permutation proposed"
         config:
-          pattern: "(?is)(try|retry|attempt).{0,60}(different|another|escap|single quote|double quote).{0,40}quot"
+          pattern: '(?is)\b(?:will|would|should|must|can|may|plan(?:s)? to|going to|next action:?)\s+(?!not\b|never\b|no\b)(?:try|retry|attempt)\b.{0,60}(?:different|another|escap|single quote|double quote).{0,40}quot'
       - type: prompt
     rubric:
       - The failure is diagnosed as a client-side PowerShell quoting problem, not a GitHub or data problem
@@ -993,11 +993,11 @@ stimuli:
       - type: output-not-matches
         name: "severity NOT downgraded to Warning"
         config:
-          pattern: '(?is)downgrad.{0,40}(to\s+)?Warning'
+          pattern: '(?is)(?:\b(?:will|would|should|must|can|may|is|are|was|were|gets?|got)\s+(?!not\b|never\b|no\b)(?:be\s+|being\s+)?downgrad\w*.{0,40}(?:to\s+)?Warning|\b(?:severity|finding)\s+(?:is\s+)?downgrad\w*.{0,20}\bfrom\b.{0,20}\bBlocking\b.{0,20}(?:to|->)\s*Warning)'
       - type: output-not-matches
         name: "ARMChangesRequested NOT proposed for add"
         config:
-          pattern: '(?i)(add(?:ing)?|apply|propose adding|will add)\s+(?:the\s+)?`?ARMChangesRequested`?'
+          pattern: '(?im)(?:^\s*(?:[-*]\s*)?(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?|\b(?:will|would|should|must|can|may|plan(?:s)? to|going to|proposal:?)\s+(?!not\b|never\b|no\b)(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?)'
       - type: output-matches
         name: "unavailability disclosed"
         config:

@@ -368,8 +368,9 @@ describe("ARM API review workflow", () => {
 
     expect(source).toContain("permissions:\n    pull-requests: read\n  steps:");
     expect(source).toContain(
-      "**At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued**",
+      "**At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued",
     );
+    expect(source).toContain("_and_ the Critic returned a verdict**");
     expect(source).toContain("**No Blocking finding queued for publication**");
     expect(source).toContain(
       "clean, covered,\n  clarification-only, Critic-dropped, or overflow-only",
@@ -500,7 +501,7 @@ describe("ARM API review posting reliability", () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
     expect(source).toContain(
-      'fill the disclosure slot above -- between the "Reviewed PR" line and the "Approval labels observed" line -- with this line verbatim',
+      "Fill the scoped-review disclosure slot whenever **either** a scoped review ran",
     );
     expect(source).toContain("The summary block order is fixed");
     expect(source).toContain(
@@ -599,8 +600,10 @@ describe("ARM API review consistency and hardening", () => {
     expect(agent).toContain("| Property design / naming | 5 |");
     expect(agent).toContain("| Documentation gaps | 3 |");
     expect(agent).toContain("Overall inline budget is **50** posted comments.");
-    // Caps govern posting, not analysis: the chat report still shows everything.
-    expect(agent).toContain("The caps govern what is **posted**, not what is analysed.");
+    // Caps govern posting, not analysis, but over-cap candidates are never
+    // rendered as verified findings: only a count and themes are disclosed.
+    expect(agent).toContain("The caps govern what is **posted**, not what is analysed");
+    expect(agent).toContain("disclosed **only as a count and themes**");
     expect(agent).toContain(
       "N additional findings were identified but not posted inline. Key themes: [list].",
     );
@@ -639,6 +642,94 @@ describe("ARM API review consistency and hardening", () => {
     // The agent must not prescribe the very pattern it forbids. A live session
     // looped on exactly this recipe from its own Failure Modes table.
     expect(agent).not.toContain("--jq '.[-5:][]");
+  });
+  it("scopes the Blocking-consensus rule so it cannot cap severity when the Critic is unavailable", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // Both files require High/Medium Critic confidence to post Blocking. With
+    // the downgrade removed, an unscoped version of that rule would cap every
+    // Blocking finding at Warning on a Critic-unavailable run, contradicting the
+    // parity rule that severity is preserved.
+    expect(workflow).toContain("When the Critic returned a verdict, post a Blocking finding only");
+    expect(agent).toContain("This rule applies **only when the Critic returned a verdict**");
+    expect(agent).toContain(
+      "this consensus rule does **not** apply and severity is **preserved unchanged**",
+    );
+  });
+
+  it("gives the label rules a single unambiguous outcome per case", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    // Rule 1 and the Critic-unavailable rule both matched the case
+    // (Blocking queued AND Critic unavailable) with opposite outcomes and no
+    // stated precedence. Rule 1 now carries the Critic condition itself.
+    expect(source).toContain(
+      "**At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued _and_ the Critic returned a verdict**",
+    );
+  });
+
+  it("checks truncation before deciding there is nothing to review", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    // `specification/` sorts after documentation/, eng/, profile/, profiles/, so
+    // a >3,000-file PR can fill the window with non-spec paths. Calling noop on
+    // that would silently skip a PR the agent never actually looked at.
+    expect(source).toContain("**Check whether it was truncated before deciding anything**");
+    expect(source).toContain("`files-truncated` is true, do **not** call `noop`");
+    expect(source).toContain("call `report_incomplete`");
+  });
+
+  it("gives the Critic-unavailable disclosure a slot in the fixed summary template", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    // This disclosure is the compensating control for preserving Blocking
+    // severity while withholding the label, so it needs a real slot in a
+    // template whose order is declared fixed.
+    expect(source).toContain("<critic-unavailable caution block");
+    expect(source).toContain("**Independent Critic verification did not run.**");
+    expect(source).toContain("then the Critic-unavailable caution block when applicable");
+
+    // Truncation must be able to trigger the disclosure on its own, since a PR
+    // can be truncated without exceeding the size cap.
+    expect(source).toContain(
+      "whenever **either** a scoped review ran (Trigger Validation step 4) **or** Trigger Validation step 3 recorded `files-truncated: true`",
+    );
+  });
+
+  it("keeps the agent's overflow disclosure on a surface that actually exists", async () => {
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // The interactive agent posts no summary comment by default, so the
+    // review-body preamble is the only always-present surface. Over-cap
+    // candidates also need a legal action token, or they get posted (breaking
+    // the cap) or dropped (breaking the disclosure).
+    expect(agent).toContain("OVERFLOW-NOT-POSTED");
+    expect(agent).toContain("this agent does not post a summary comment by default");
+    expect(agent).toContain("never rendered as canonical finding bodies");
+  });
+
+  it("carves the post-condition out of the Step 8 no-re-fetch rule", async () => {
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // Step 8 declares its own exception list exhaustive, so the new
+    // post-condition needed an explicit carve-out the way the session-SHA
+    // recheck already has one.
+    expect(agent).toContain("A second exception is the **Visible-attribution post-condition**");
+    expect(agent).toContain("a verification read, not plan re-derivation");
+  });
+
+  it("names both recorded human deviations in the parity sections", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // MANUAL DECISION REQUIRED lets a human approve posting a finding the
+    // automated run would drop, without an override marker. Claiming the
+    // override is the only deviation was inaccurate.
+    for (const source of [workflow, agent]) {
+      expect(source).toContain("escalate to `MANUAL DECISION REQUIRED`");
+      expect(source).toContain("Both are explicit, recorded human actions");
+    }
   });
 });
 

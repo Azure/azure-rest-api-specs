@@ -88,11 +88,11 @@ the default branch and may not appear in the PR Checks tab.
 
 ### Labels
 
-| Label                 | Effect                                                                                                                                               |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `skip-arm-review`     | Opts out of automated ARM API review for this PR                                                                                                     |
-| `ARMChangesRequested` | Added by the workflow when blocking findings are found; `WaitForARMFeedback` is removed at the same time                                             |
-| `WaitForARMFeedback`  | Gates automated reviews. A clean automated review leaves it unchanged because only a human ARM reviewer can advance or sign off the ARM review queue |
+| Label                 | Effect                                                                                                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `skip-arm-review`     | Opts out of automated ARM API review for this PR                                                                                                                         |
+| `ARMChangesRequested` | Added by the workflow when Critic-verified blocking findings are found; `WaitForARMFeedback` is removed at the same time. Not added when the Critic could not be reached |
+| `WaitForARMFeedback`  | Gates automated reviews. A clean automated review leaves it unchanged because only a human ARM reviewer can advance or sign off the ARM review queue                     |
 
 ### Opting out
 
@@ -532,7 +532,10 @@ You confirm the plan before any comments are posted, resolved, or replied to.
 After posting review comments, the agent can also propose label changes on the PR:
 
 - **Add** `ARMChangesRequested` only when at least one Blocking finding was
-  posted. Warning/suggestion-only and clarification-only reviews do not add it.
+  posted **and** the review Critic verified it. Warning/suggestion-only and
+  clarification-only reviews do not add it, and neither does a run where the
+  Critic could not be reached: those findings still post at full severity, but
+  a human decides whether they should move the ARM review queue.
 - **Remove** `WaitForARMFeedback` (if present) since ARM feedback has been provided.
 
 The agent will propose these changes and wait for your explicit approval

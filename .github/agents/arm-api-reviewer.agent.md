@@ -342,14 +342,15 @@ feedback in every context. These are the same everywhere and must not drift:
 - **Label policy** -- `ARMChangesRequested` only when a Blocking finding is published **and** the Critic verified it.
 
 Exactly one thing differs, by design: **the human approval gate**. This agent
-presents findings in chat and posts only after the reviewer approves, and that
+presents findings in chat and posts only after the reviewer approves. That
 reviewer may record an explicit override (`critic: override` plus a validated
-`override-reason`). The unattended workflow has no human and no override path. A
-run in which the human takes no override action MUST produce the same posted
-finding set as an automated run. Both repositories run the automated workflow
-(`arm-api-review.md` exists in each and the two copies MUST stay identical), so
-a pull request in either repository can receive both an automated and an
-interactive review. These rules are what keep those outcomes consistent.
+`override-reason`), or escalate to `MANUAL DECISION REQUIRED` and approve
+posting per row. Both are explicit, recorded human actions. The unattended
+workflow has neither path. Absent either action, a run MUST produce the same
+posted finding set as an automated run. Both repositories run the automated
+workflow (`arm-api-review.md` exists in each and the two copies MUST stay
+identical), so a pull request in either repository can receive both an automated
+and an interactive review. These rules are what keep those outcomes consistent.
 
 ## Operating Mode
 
@@ -899,7 +900,7 @@ A generic summary theme without an affected element and actionable guidance does
 
 Overall inline budget is **50** posted comments. If the total across categories would exceed 50, post the highest-severity findings inline (security and breaking changes first). Replies and thread resolutions from Step 5.5 have their own budgets and do **not** consume the 50.
 
-The caps govern what is **posted**, not what is analysed. The Step 6 chat report still renders **every** finding so the human sees the full picture; findings that exceed a category cap are marked as overflow in the report and collected into the Step 8 summary with the note: _"N additional findings were identified but not posted inline. Key themes: [list]."_ Never silently drop an over-cap finding -- an undisclosed cap is indistinguishable from a missed violation.
+The caps govern what is **posted**, not what is analysed, but an over-cap candidate is **not** a verified finding. The agreed posting set is selected after these limits are applied, and only that set goes to the Critic. Excluded candidates are therefore disclosed **only as a count and themes**, never rendered as canonical finding bodies and never described in a way that implies the Critic verified them. In the Step 6 report, give each excluded candidate the action `OVERFLOW-NOT-POSTED` in the per-finding action table rather than a posting action, so it is visible to the human without being mistaken for something that will be posted. In Step 8, disclose the aggregate in the **review-body preamble** as an extra sentence (this agent does not post a summary comment by default, so the preamble is the surface that always exists): use _"N additional findings were identified but not posted inline. Key themes: [list]."_ when the overall 50-comment budget is the binding limit, and _"N additional warning/suggestion candidates were identified but not individually verified or posted. Key themes: [list]. Review the full checklist in `arm-api-review.instructions.md`."_ when a category cap is. Never silently drop an over-cap candidate: an undisclosed cap is indistinguishable from a missed violation.
 
 **Process visibility: surface critic activity only when it changes what the reviewer should do.** The critic always runs (Step 7) - but its presence is internal quality control, not narrative. On the happy path, the reviewer sees clean findings with no critic annotations. The critic only becomes visible when something is materially different: severity was downgraded, classification was flipped, findings were dropped, the critic FAILed and was overridden, or independent verification could not be performed at all.
 
@@ -975,13 +976,16 @@ Per-finding posting action and per-existing-thread disposition built in Step 5.5
 
 **Per-finding actions** (every finding listed in the sections above maps to exactly one row):
 
-| No. | Finding (file - line) | Rule        | Action             | Anchor (existing thread URL, if any) |
-| --- | --------------------- | ----------- | ------------------ | ------------------------------------ |
-| 1   | `<file> - line <N>`   | `<rule-id>` | POST-NEW           | -                                    |
-| 2   | `<file> - line <N>`   | `<rule-id>` | SKIP-COVERED       | `<existing-comment-url>`             |
-| 3   | `<file> - line <N>`   | `<rule-id>` | RESOLVE-AND-REPOST | `<existing-comment-url>`             |
-| 4   | `<file> - line <N>`   | `<rule-id>` | REPLY-LINE-SHIFT   | `<existing-comment-url>`             |
-| 5   | `<file> - line <N>`   | `<rule-id>` | CLARIFY-CONFLICT   | `<existing-comment-or-review-url>`   |
+| No. | Finding (file - line) | Rule        | Action              | Anchor (existing thread URL, if any) |
+| --- | --------------------- | ----------- | ------------------- | ------------------------------------ |
+| 1   | `<file> - line <N>`   | `<rule-id>` | POST-NEW            | -                                    |
+| 2   | `<file> - line <N>`   | `<rule-id>` | SKIP-COVERED        | `<existing-comment-url>`             |
+| 3   | `<file> - line <N>`   | `<rule-id>` | RESOLVE-AND-REPOST  | `<existing-comment-url>`             |
+| 4   | `<file> - line <N>`   | `<rule-id>` | REPLY-LINE-SHIFT    | `<existing-comment-url>`             |
+| 5   | `<file> - line <N>`   | `<rule-id>` | CLARIFY-CONFLICT    | `<existing-comment-or-review-url>`   |
+| 6   | `<file> - line <N>`   | `<rule-id>` | OVERFLOW-NOT-POSTED | -                                    |
+
+`OVERFLOW-NOT-POSTED` is the action for a candidate excluded by a category cap or the 50-comment budget (see **Output budgets** above). It is not in the agreed posting set, the Critic does not verify it, and it is never posted inline; it is disclosed in aggregate in the Step 8 review-body preamble. Use this action rather than POST-NEW (which would breach the cap) or silently omitting the row (which would hide the finding).
 
 **Existing-thread dispositions** (include rows only when the action is THANK-AND-RESOLVE or PROPOSE-HUMAN-RESOLVE; omit this entire table when empty):
 
@@ -1115,7 +1119,7 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
 7. **Iteration with convergence detection.** Re-invoke the Critic after revisions. Stop iterating when one of these conditions is met:
    - **Convergence**: the Critic returns zero `FAIL`s **and** no new candidate missed violations (i.e., its `Likely missed violations` section is empty or every item was already considered in the prior iteration). At that point the report is stable.
    - **Hard cap**: iteration 3. If any `FAIL` is outstanding at iteration 3, set the (internally tracked) `Next-step recommendation` to `MANUAL DECISION REQUIRED`, render the corresponding exception banner at the top of the Step 6 report, and escalate both the report and the Critic's last output to the human. The cap is the single exit condition; there is no separate wave-thrash branch. (Reduced from 5 to keep the Reviewer<->Critic loop tight; extra iterations rarely converged and the interactive checkpoint at iteration 3 already routes hard cases to the human.)
-8. **Consensus rule for `Blocking` severity.** A finding may only be posted at `Blocking` severity when **both** the Reviewer's Step 6 assigned severity is `Blocking` **and** the Critic returns High or Medium confidence on that finding (Re-validation Procedure step 5). If the Critic returned Low confidence on a Blocking finding or recommended DOWNGRADE, the finding is automatically capped at `Warning` for posting. The human can upgrade back to Blocking via the override mechanism (with the standard `critic: override` telemetry marker plus a valid `override-reason` per the [protocol's Override-reason validator](./protocols/arm-api-review-critic.protocol.md#override-reason-validator)). This prevents the most damaging failure mode -- a public PR comment marked Blocking that turns out to be wrong.
+8. **Consensus rule for `Blocking` severity.** This rule applies **only when the Critic returned a verdict**. In that case a finding may only be posted at `Blocking` severity when **both** the Reviewer's Step 6 assigned severity is `Blocking` **and** the Critic returns High or Medium confidence on that finding (Re-validation Procedure step 5). If the Critic returned Low confidence on a Blocking finding or recommended DOWNGRADE, the finding is automatically capped at `Warning` for posting. The human can upgrade back to Blocking via the override mechanism (with the standard `critic: override` telemetry marker plus a valid `override-reason` per the [protocol's Override-reason validator](./protocols/arm-api-review-critic.protocol.md#override-reason-validator)). This prevents the most damaging failure mode -- a public PR comment marked Blocking that turns out to be wrong. When `critic-mode` is `unavailable` no confidence is ever returned, so this consensus rule does **not** apply and severity is **preserved unchanged** rather than capped (see [Review context parity](#review-context-parity)); the compensating control is that Step 9 withholds `ARMChangesRequested` for that run.
 9. **Reconciliation `FAIL`s.** If the Critic returns `FAIL` on any **reconciliation** entry (Critic verdict track `Reconciliation accuracy`), these resolutions are available in priority order:
 
 - **Retry incomplete inventory**: for `inventory-incomplete`, fetch and paginate all three discussion surfaces again. If that remains impossible, use the explicit `reconciliation skipped` path or stop. This failure cannot be overridden.
@@ -1249,7 +1253,7 @@ Reply `(a)` or `(b)`. I will not present findings, post comments, or iterate fur
 
 **Critic gate (from Step 7).** You **MAY NOT** proceed past step 1 of this section unless the report's `Next-step recommendation` is `READY TO POST` or `REVISE RECOMMENDED`. If it is `MANUAL DECISION REQUIRED` (including the case where the Critic returned `FAIL` on any reconciliation entry that was not corrected per Step 7 item 9), you must escalate to the human and obtain explicit per-row approval before any posting or thread resolution.
 
-**No re-fetching of existing PR comments here.** The existing-comment inventory was built in Step 5.5, presented to the human in the Step 6 `Reconciliation Plan` section, and verified by the Critic in Step 7. Step 8 **executes** that plan; it does not re-derive it. Re-fetching the comment list now risks introducing duplicates or thrashing on a different snapshot than what the human approved. The only exception is when Step 5.5 ran in "reconciliation skipped" mode (banner rendered in Step 6) - in that case all findings default to POST-NEW, no Scenario E/F actions are available, and no thread resolutions happen.
+**No re-fetching of existing PR comments here.** The existing-comment inventory was built in Step 5.5, presented to the human in the Step 6 `Reconciliation Plan` section, and verified by the Critic in Step 7. Step 8 **executes** that plan; it does not re-derive it. Re-fetching the comment list now risks introducing duplicates or thrashing on a different snapshot than what the human approved. The only exception is when Step 5.5 ran in "reconciliation skipped" mode (banner rendered in Step 6) - in that case all findings default to POST-NEW, no Scenario E/F actions are available, and no thread resolutions happen. A second exception is the **Visible-attribution post-condition** defined below: it runs _after_ the last posting action and is a verification read, not plan re-derivation, so it cannot introduce duplicates or thrash the approved snapshot.
 
 **Session-SHA recheck is still required.** Before the first mutating action (post, reply, resolve, label), call `pull_request_read(method: "get")` and confirm `head.sha` still equals the session SHA pinned in Step 1. This is a PR metadata read, not a comment re-fetch, and does not violate the rule above. If the SHA has moved, abort per Step 1's session-invalidation rule - posting against a stale tree corrupts the PR review history.
 
@@ -1379,7 +1383,7 @@ Execute the label changes that were **already approved as part of the bundled St
 
 1. If the human chose `Cancel` at the Step 8 prompt, the label changes are also cancelled. Skip the rest of this step.
 2. If the human chose `Execute plan` or `Execute selectively`, call `issue_write(method: "update")` after the last posting action in Step 8, passing the complete desired label set: preserve every unrelated current label, add or remove only the approved labels below.
-   - **Add** the `ARMChangesRequested` label **only if** at least one Blocking POST-NEW or Blocking RESOLVE-AND-REPOST action was actually executed. If no blocking finding was posted (clean spec; warning/suggestion-only review; or every finding was SKIP-COVERED, REPLY-LINE-SHIFT, or CLARIFY-CONFLICT), do **not** add `ARMChangesRequested` -- it would falsely signal that the author has blocking changes to address and mislead downstream bots. This matches the autonomous workflow's label behavior.
+   - **Add** the `ARMChangesRequested` label **only if** at least one Blocking POST-NEW or Blocking RESOLVE-AND-REPOST action was actually executed **and** the Critic verified the run (`critic-mode` is not `unavailable`). If no blocking finding was posted (clean spec; warning/suggestion-only review; or every finding was SKIP-COVERED, REPLY-LINE-SHIFT, or CLARIFY-CONFLICT), do **not** add `ARMChangesRequested` -- it would falsely signal that the author has blocking changes to address and mislead downstream bots. If Blocking findings were posted but `critic-mode` is `unavailable`, likewise do **not** add the label: the findings keep their original severity, but nothing independently verified them, so the run must not move the human ARM review queue. Both conditions match the autonomous workflow's label behavior.
    - **Remove** the `WaitForARMFeedback` label only if it was present on the PR at Step 8 approval time; otherwise skip the removal. (Removal is independent of the posted-comment count: the review ran to completion either way.)
 3. Report to the human reviewer which labels were added and removed (and, when applicable, which were intentionally skipped and why).
 
