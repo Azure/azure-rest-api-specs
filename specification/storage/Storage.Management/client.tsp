@@ -989,6 +989,7 @@ namespace Azure.ResourceManager.Models {
 // @@alternateType decorators for C# backward compat types
 @@alternateType(ResourceAccessRule.resourceId, armResourceIdentifier, "csharp");
 @@alternateType(VirtualNetworkRule.id, armResourceIdentifier, "csharp");
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@alternateType(ResourceAccessRule.tenantId, uuid, "csharp");
 @@alternateType(ActiveDirectoryProperties.domainGuid, uuid, "csharp");
 @@alternateType(EncryptionScopeKeyVaultProperties.keyUri, url, "csharp");
