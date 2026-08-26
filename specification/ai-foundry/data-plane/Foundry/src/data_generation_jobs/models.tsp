@@ -296,11 +296,8 @@ model AgentDataGenerationJobSource extends DataGenerationJobSource {
 model TracesDataGenerationJobSource extends DataGenerationJobSource {
   ...TracesJobSource;
 
-  @doc("Optional explicit list of trace IDs to include. Mutually exclusive with `kql_where_clause`.")
+  @doc("Optional explicit list of trace IDs to include.")
   trace_ids?: string[];
-
-  @doc("Optional KQL where clause used to filter traces. Mutually exclusive with `trace_ids`.")
-  kql_where_clause?: string;
 }
 
 @doc("File source for data generation jobs — Azure OpenAI file input.")
