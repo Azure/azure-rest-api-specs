@@ -509,14 +509,6 @@ model AgentOptimizationLatencyUsageEntry {
   @encode(DurationKnownEncoding.milliseconds, float64)
   avg_latency_ms: duration;
 
-  @doc("p50 (median) per-call latency. Omitted when the sample was too small to compute. Wire representation: milliseconds as a float.")
-  @encode(DurationKnownEncoding.milliseconds, float64)
-  p50_latency_ms?: duration;
-
-  @doc("p95 per-call latency. Omitted when the sample was too small to compute. Wire representation: milliseconds as a float.")
-  @encode(DurationKnownEncoding.milliseconds, float64)
-  p95_latency_ms?: duration;
-
   @doc("Total number of calls contributing to this entry.")
   call_count: int64;
 }
