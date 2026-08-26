@@ -6502,7 +6502,7 @@
             "description": "The name of the ServerFarmSilo",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_@-]{1,50}$"
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
           }
         ],
         "responses": {
@@ -6554,7 +6554,7 @@
             "description": "The name of the ServerFarmSilo",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_@-]{1,50}$"
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
           },
           {
             "name": "resource",
@@ -6637,7 +6637,7 @@
             "description": "The name of the ServerFarmSilo",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_@-]{1,50}$"
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
           }
         ],
         "responses": {
@@ -6674,6 +6674,63 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}/virtualNetworkIntegrations": {
+      "get": {
+        "operationId": "ServerFarmSiloResources_GetServerFarmSiloVnetIntegrations",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "description": "Gets the virtual network integrations associated with an App Service plan silo.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siloName",
+            "in": "path",
+            "description": "The name of the ServerFarmSilo",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SwiftVirtualNetwork"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the virtual network integrations of an App Service plan silo": {
+            "$ref": "./examples/ServerFarmSiloResources_GetServerFarmSiloVnetIntegrations.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/sites": {
@@ -15993,6 +16050,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List the last known good state of a web app": {
+            "$ref": "./examples/LastKnownGoodResources_ListLastKnownGoods.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -16242,6 +16304,9 @@
             "description": "Name of the app.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ManagedTrafficConfigExpandParameter"
           }
         ],
         "responses": {
@@ -18983,6 +19048,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/refreshSilos": {
+      "post": {
+        "operationId": "SiteSiloResources_RefreshSiteSilos",
+        "tags": [
+          "WebApps"
+        ],
+        "description": "Forces a fresh revision for an Active Backup primary Web App and re-syncs all of its silos. The refresh request is recorded synchronously; silos then converge asynchronously — track progress through each silo's revisionNumber.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Force a fresh revision and re-sync all silos of a web app": {
+            "$ref": "./examples/SiteSiloResources_RefreshSiteSilos.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/resetSlotConfig": {
       "post": {
         "operationId": "WebApps_ResetProductionSlotConfig",
@@ -19439,7 +19547,7 @@
             "description": "The name of the SiteSilo",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_@-]{1,50}$"
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
           }
         ],
         "responses": {
@@ -19491,7 +19599,7 @@
             "description": "The name of the SiteSilo",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_@-]{1,50}$"
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
           },
           {
             "name": "resource",
@@ -19574,7 +19682,7 @@
             "description": "The name of the SiteSilo",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_@-]{1,50}$"
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
           }
         ],
         "responses": {
@@ -19611,6 +19719,234 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork": {
+      "get": {
+        "operationId": "SiteSiloVirtualNetworkConnections_GetSiteSiloVnetConnection",
+        "tags": [
+          "WebApps"
+        ],
+        "description": "Gets the virtual network the silo is connected to.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siloName",
+            "in": "path",
+            "description": "Name of the silo.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the virtual network connection of a web app silo": {
+            "$ref": "./examples/SiteSiloVirtualNetworkConnections_GetSiteSiloVnetConnection.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SiteSiloVirtualNetworkConnections_CreateOrUpdateSiteSiloVnetConnection",
+        "tags": [
+          "WebApps"
+        ],
+        "description": "Adds a virtual network connection to a silo, or updates the connection properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siloName",
+            "in": "path",
+            "description": "Name of the silo.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SwiftVirtualNetwork' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the virtual network connection of a web app silo": {
+            "$ref": "./examples/SiteSiloVirtualNetworkConnections_CreateOrUpdateSiteSiloVnetConnection.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "SiteSiloVirtualNetworkConnections_UpdateSiteSiloVnetConnection",
+        "tags": [
+          "WebApps"
+        ],
+        "description": "Updates the properties of a virtual network connection on a silo.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siloName",
+            "in": "path",
+            "description": "Name of the silo.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the virtual network connection of a web app silo": {
+            "$ref": "./examples/SiteSiloVirtualNetworkConnections_UpdateSiteSiloVnetConnection.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SiteSiloVirtualNetworkConnections_DeleteSiteSiloVnetConnection",
+        "tags": [
+          "WebApps"
+        ],
+        "description": "Deletes the virtual network connection from a silo.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siloName",
+            "in": "path",
+            "description": "Name of the silo.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the virtual network connection of a web app silo": {
+            "$ref": "./examples/SiteSiloVirtualNetworkConnections_DeleteSiteSiloVnetConnection.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sitecontainers": {
@@ -46761,6 +47097,12 @@
           "format": "date-time",
           "description": "Time when the last known good revision was created.",
           "readOnly": true
+        },
+        "revisionNumber": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Monotonic revision number that was marked as last known good.",
+          "readOnly": true
         }
       }
     },
@@ -51187,6 +51529,16 @@
           "description": "Provisioning state of the silo.",
           "readOnly": true
         },
+        "provisioningDetails": {
+          "type": "string",
+          "description": "Customer-facing, translated detail describing why the silo is Failed or Degraded. Null when the silo is healthy.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Stable machine-readable error code paired with provisioningDetails. Null when the silo is healthy.",
+          "readOnly": true
+        },
         "createdTime": {
           "type": "string",
           "format": "date-time",
@@ -51276,7 +51628,8 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "Deleting"
+        "Deleting",
+        "Degraded"
       ],
       "x-ms-enum": {
         "name": "SiloProvisioningState",
@@ -51306,6 +51659,11 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Resource is being deleted asynchronously."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Silo is routable and serving its previous revision, but the last background sync failed to converge. Distinct from Failed, which means there is no usable silo."
           }
         ]
       },
@@ -53303,6 +53661,16 @@
         "provisioningState": {
           "$ref": "#/definitions/SiloProvisioningState",
           "description": "Provisioning state of the silo.",
+          "readOnly": true
+        },
+        "provisioningDetails": {
+          "type": "string",
+          "description": "Customer-facing, translated detail describing why the silo is Failed or Degraded. Null when the silo is healthy.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Stable machine-readable error code paired with provisioningDetails. Null when the silo is healthy.",
           "readOnly": true
         },
         "followLastKnownGood": {
@@ -58873,6 +59241,14 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedTrafficConfigExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "description": "Set to `endpoints` to return the unprojected endpoint collection, including both weight and priority for every endpoint.",
+      "required": false,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./AppServicePlan.tsp";
+import "./SwiftVirtualNetwork.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -25,7 +26,7 @@ model ServerFarmSilo
     Resource = ServerFarmSilo,
     KeyName = "siloName",
     SegmentName = "silos",
-    NamePattern = "^[A-Za-z0-9_@-]{1,50}$"
+    NamePattern = "^[A-Za-z0-9-]{1,24}$"
   >;
 }
 
@@ -63,6 +64,18 @@ interface ServerFarmSiloResources {
    */
   deleteServerFarmSilo is ArmResourceDeleteWithoutOkAsync<
     ServerFarmSilo,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Gets the virtual network integrations associated with an App Service plan silo.
+   */
+  @get
+  @action("virtualNetworkIntegrations")
+  getServerFarmSiloVnetIntegrations is ArmResourceActionSync<
+    ServerFarmSilo,
+    void,
+    ArmResponse<SwiftVirtualNetwork[]>,
     Error = DefaultErrorResponse
   >;
 }
