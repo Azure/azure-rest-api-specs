@@ -1030,6 +1030,14 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the resource. Required for an update.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -1106,12 +1114,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           },
           {
             "name": "properties",
@@ -1187,12 +1190,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           }
         ],
         "responses": {
@@ -1460,12 +1458,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           },
           {
             "name": "properties",
@@ -1549,12 +1542,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           }
         ],
         "responses": {
@@ -1593,13 +1581,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}/listValues": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}/listSecrets": {
       "post": {
-        "operationId": "AiGatewayApiKeyResources_ListValues",
+        "operationId": "AiGatewayApiKeyResources_ListSecrets",
         "tags": [
           "AiGatewayApiKeyResources"
         ],
-        "description": "Returns primary and secondary key values once.",
+        "description": "Returns primary and secondary key values.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1642,19 +1630,19 @@
           }
         },
         "x-ms-examples": {
-          "List AI Gateway API key values": {
-            "$ref": "./examples/AiGatewayApiKeyListValues.json"
+          "List AI Gateway API key secrets": {
+            "$ref": "./examples/AiGatewayApiKeyListSecrets.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}/regenerate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}/regeneratePrimaryKey": {
       "post": {
-        "operationId": "AiGatewayApiKeyResources_Regenerate",
+        "operationId": "AiGatewayApiKeyResources_RegeneratePrimaryKey",
         "tags": [
           "AiGatewayApiKeyResources"
         ],
-        "description": "Regenerates the selected API key value.",
+        "description": "Regenerates the primary API key value.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1680,23 +1668,11 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AiGatewayApiKeyRegenerateRequest"
-            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AiGatewayApiKeyRegenerateResult"
-            }
+          "204": {
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1706,8 +1682,60 @@
           }
         },
         "x-ms-examples": {
-          "Regenerate an AI Gateway API key": {
-            "$ref": "./examples/AiGatewayApiKeyRegenerate.json"
+          "Regenerate the primary AI Gateway API key": {
+            "$ref": "./examples/AiGatewayApiKeyRegeneratePrimaryKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}/regenerateSecondaryKey": {
+      "post": {
+        "operationId": "AiGatewayApiKeyResources_RegenerateSecondaryKey",
+        "tags": [
+          "AiGatewayApiKeyResources"
+        ],
+        "description": "Regenerates the secondary API key value.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "apiKeyName",
+            "in": "path",
+            "description": "The name of the AiGatewayApiKeyResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regenerate the secondary AI Gateway API key": {
+            "$ref": "./examples/AiGatewayApiKeyRegenerateSecondaryKey.json"
           }
         }
       }
@@ -1941,12 +1969,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           },
           {
             "name": "properties",
@@ -2030,12 +2053,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           }
         ],
         "responses": {
@@ -2335,12 +2353,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           },
           {
             "name": "properties",
@@ -2432,12 +2445,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           }
         ],
         "responses": {
@@ -2522,7 +2530,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AiGatewayCredentialMetadata"
+              "$ref": "#/definitions/AiGatewayCredentialValue"
             }
           },
           "default": {
@@ -2533,7 +2541,7 @@
           }
         },
         "x-ms-examples": {
-          "List model provider credential metadata": {
+          "List model provider credentials": {
             "$ref": "./examples/AiGatewayModelProviderListCredentials.json"
           }
         }
@@ -2832,12 +2840,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           },
           {
             "name": "properties",
@@ -2937,12 +2940,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           }
         ],
         "responses": {
@@ -3297,12 +3295,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           },
           {
             "name": "properties",
@@ -3394,12 +3387,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "ETag of the resource, or * for an unconditional operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
+            "$ref": "#/parameters/If-Match"
           }
         ],
         "responses": {
@@ -54887,26 +54875,31 @@
           "type": "string",
           "description": "Display name of the key."
         },
-        "primaryKeyHint": {
+        "state": {
           "type": "string",
-          "description": "Hint containing the final characters of the primary key.",
+          "description": "Subscription state."
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time.",
           "readOnly": true
         },
-        "secondaryKeyHint": {
+        "expirationDate": {
           "type": "string",
-          "description": "Hint containing the final characters of the secondary key.",
-          "readOnly": true
+          "format": "date-time",
+          "description": "Optional expiration time."
         },
-        "primaryValue": {
+        "primaryKey": {
           "type": "string",
           "format": "password",
-          "description": "Primary key value returned only when it is initially issued.",
+          "description": "Primary key value. Omitted from ordinary read responses.",
           "x-ms-secret": true
         },
-        "secondaryValue": {
+        "secondaryKey": {
           "type": "string",
           "format": "password",
-          "description": "Secondary key value returned only when it is initially issued.",
+          "description": "Secondary key value. Omitted from ordinary read responses.",
           "x-ms-secret": true
         },
         "provisioningState": {
@@ -54916,39 +54909,6 @@
         }
       }
     },
-    "AiGatewayApiKeyRegenerateRequest": {
-      "type": "object",
-      "description": "Request to regenerate one API key slot.",
-      "properties": {
-        "target": {
-          "$ref": "#/definitions/AiGatewayApiKeyTarget",
-          "description": "Key slot to regenerate."
-        }
-      },
-      "required": [
-        "target"
-      ]
-    },
-    "AiGatewayApiKeyRegenerateResult": {
-      "type": "object",
-      "description": "Result of regenerating an API key.",
-      "properties": {
-        "target": {
-          "$ref": "#/definitions/AiGatewayApiKeyTarget",
-          "description": "Regenerated key slot."
-        },
-        "value": {
-          "type": "string",
-          "format": "password",
-          "description": "Newly generated secret value.",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "target",
-        "value"
-      ]
-    },
     "AiGatewayApiKeyResource": {
       "type": "object",
       "description": "An AI Gateway API key resource.",
@@ -54957,9 +54917,9 @@
           "$ref": "#/definitions/AiGatewayApiKeyProperties",
           "description": "The resource-specific properties for this resource."
         },
-        "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "ETag of the resource.",
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -55031,6 +54991,15 @@
         "displayName": {
           "type": "string",
           "description": "Display name of the key."
+        },
+        "state": {
+          "type": "string",
+          "description": "Subscription state."
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional expiration time."
         }
       }
     },
@@ -55038,13 +55007,13 @@
       "type": "object",
       "description": "Primary and secondary API key values.",
       "properties": {
-        "primaryValue": {
+        "primaryKey": {
           "type": "string",
           "format": "password",
           "description": "Primary API key value.",
           "x-ms-secret": true
         },
-        "secondaryValue": {
+        "secondaryKey": {
           "type": "string",
           "format": "password",
           "description": "Secondary API key value.",
@@ -55052,8 +55021,8 @@
         }
       },
       "required": [
-        "primaryValue",
-        "secondaryValue"
+        "primaryKey",
+        "secondaryKey"
       ]
     },
     "AiGatewayContentSafetySeverity": {
@@ -55092,18 +55061,17 @@
         ]
       }
     },
-    "AiGatewayCredentialMetadata": {
+    "AiGatewayCredentialValue": {
       "type": "object",
-      "description": "Metadata returned for model provider credentials.",
+      "description": "Credential returned for a model provider.",
       "properties": {
-        "configured": {
-          "type": "boolean",
-          "description": "Whether credentials have been configured."
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Stored credential value.",
+          "x-ms-secret": true
         }
-      },
-      "required": [
-        "configured"
-      ]
+      }
     },
     "AiGatewayCustomAuthentication": {
       "type": "object",
@@ -55209,14 +55177,16 @@
       "description": "Authentication configuration for a Foundry model provider.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Authentication type.",
-          "enum": [
-            "ManagedIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/AiGatewayModelProviderAuthenticationKind",
+          "description": "Authentication type."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
+          "description": "Managed identity settings. Applicable when kind is ManagedIdentity."
+        },
+        "apiKey": {
+          "$ref": "#/definitions/AiGatewayApiKeyCredential",
+          "description": "API key configuration. Required when kind is ApiKey."
         }
       },
       "required": [
@@ -55228,14 +55198,16 @@
       "description": "Foundry authentication settings to update.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Authentication type.",
-          "enum": [
-            "ManagedIdentity"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/AiGatewayModelProviderAuthenticationKind",
+          "description": "Authentication type."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
+          "description": "Managed identity settings."
+        },
+        "apiKey": {
+          "$ref": "#/definitions/AiGatewayApiKeyCredentialUpdate",
+          "description": "API key configuration."
         }
       }
     },
@@ -55260,7 +55232,6 @@
         }
       },
       "required": [
-        "endpoint",
         "resourceIds",
         "authentication"
       ]
@@ -55310,6 +55281,20 @@
         ]
       }
     },
+    "AiGatewayManagedIdentityAuthentication": {
+      "type": "object",
+      "description": "Managed identity settings for a model provider.",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "Token audience requested for managed identity authentication."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of a user-assigned managed identity."
+        }
+      }
+    },
     "AiGatewayMcpTransport": {
       "type": "string",
       "description": "Transport used to connect to an MCP server.",
@@ -55332,30 +55317,29 @@
       "type": "object",
       "description": "MCP URL endpoint configuration.",
       "properties": {
-        "endpoint": {
+        "url": {
           "type": "string",
           "description": "Backend MCP server endpoint."
         },
         "transport": {
-          "$ref": "#/definitions/AiGatewayMcpTransport",
+          "$ref": "#/definitions/AiGatewayToolServerMcpTransport",
           "description": "MCP transport."
         }
       },
       "required": [
-        "endpoint",
-        "transport"
+        "url"
       ]
     },
     "AiGatewayMcpUrlConfigurationUpdate": {
       "type": "object",
       "description": "MCP URL endpoint settings to update.",
       "properties": {
-        "endpoint": {
+        "url": {
           "type": "string",
           "description": "Backend MCP server endpoint."
         },
         "transport": {
-          "$ref": "#/definitions/AiGatewayMcpTransport",
+          "$ref": "#/definitions/AiGatewayToolServerMcpTransport",
           "description": "MCP transport."
         }
       }
@@ -55403,6 +55387,11 @@
       "type": "object",
       "description": "Properties of an AI Gateway model.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the model.",
+          "x-ms-client-name": "displayName"
+        },
         "description": {
           "type": "string",
           "description": "Description of the model."
@@ -55421,8 +55410,7 @@
           "description": "Runtime endpoints supported by this model.",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "policies": {
           "type": "array",
@@ -55439,7 +55427,9 @@
         }
       },
       "required": [
-        "deployment"
+        "name",
+        "deployment",
+        "supportedEndpoints"
       ]
     },
     "AiGatewayModelProviderAuthenticationKind": {
@@ -55498,9 +55488,10 @@
           "$ref": "#/definitions/AiGatewayModelProviderKind",
           "description": "Model provider type. This value cannot be changed after creation."
         },
-        "displayName": {
+        "name": {
           "type": "string",
-          "description": "Display name of the model provider."
+          "description": "Display name of the model provider.",
+          "x-ms-client-name": "displayName"
         },
         "description": {
           "type": "string",
@@ -55521,7 +55512,8 @@
         }
       },
       "required": [
-        "kind"
+        "kind",
+        "name"
       ]
     },
     "AiGatewayModelProviderResource": {
@@ -55532,9 +55524,9 @@
           "$ref": "#/definitions/AiGatewayModelProviderProperties",
           "description": "The resource-specific properties for this resource."
         },
-        "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "ETag of the resource.",
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -55583,9 +55575,10 @@
           "$ref": "#/definitions/AiGatewayModelProviderKind",
           "description": "Model provider type."
         },
-        "displayName": {
+        "name": {
           "type": "string",
-          "description": "Display name of the model provider."
+          "description": "Display name of the model provider.",
+          "x-ms-client-name": "displayName"
         },
         "description": {
           "type": "string",
@@ -55609,9 +55602,9 @@
           "$ref": "#/definitions/AiGatewayModelProperties",
           "description": "The resource-specific properties for this resource."
         },
-        "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "ETag of the resource.",
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -55656,6 +55649,11 @@
       "type": "object",
       "description": "Properties for updating an AI Gateway model.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the model.",
+          "x-ms-client-name": "displayName"
+        },
         "description": {
           "type": "string",
           "description": "Description of the model."
@@ -55671,6 +55669,13 @@
             "$ref": "#/definitions/AiGatewayPolicyUpdate"
           },
           "x-ms-identifiers": []
+        },
+        "supportedEndpoints": {
+          "type": "array",
+          "description": "Runtime endpoints supported by this model.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -55701,8 +55706,8 @@
       "type": "object",
       "description": "Source of an OpenAPI document.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/AiGatewayOpenApiSpecSourceKind",
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerOpenApiSourceType",
           "description": "Source type."
         },
         "contentBase64": {
@@ -55716,7 +55721,7 @@
         }
       },
       "required": [
-        "kind"
+        "type"
       ]
     },
     "AiGatewayOpenApiSpecSourceKind": {
@@ -55747,8 +55752,8 @@
       "type": "object",
       "description": "OpenAPI document source settings to update.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/AiGatewayOpenApiSpecSourceKind",
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerOpenApiSourceType",
           "description": "Source type."
         },
         "contentBase64": {
@@ -56115,9 +56120,9 @@
           "$ref": "#/definitions/AiGatewayProperties",
           "description": "The resource-specific properties for this resource."
         },
-        "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "ETag of the resource.",
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -56187,6 +56192,66 @@
         ]
       }
     },
+    "AiGatewayToolServerAccessState": {
+      "type": "string",
+      "description": "Tool server access state.",
+      "enum": [
+        "active",
+        "blocked"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "Tool server is available."
+          },
+          {
+            "name": "Blocked",
+            "value": "blocked",
+            "description": "Tool server is blocked."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerAuthenticationType": {
+      "type": "string",
+      "description": "Endpoint authentication type.",
+      "enum": [
+        "none",
+        "header",
+        "oauth2",
+        "managedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "No authentication."
+          },
+          {
+            "name": "Header",
+            "value": "header",
+            "description": "Static HTTP header authentication."
+          },
+          {
+            "name": "OAuth2",
+            "value": "oauth2",
+            "description": "OAuth 2.0 authentication."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "managedIdentity",
+            "description": "Managed identity authentication."
+          }
+        ]
+      }
+    },
     "AiGatewayToolServerCredentialKind": {
       "type": "string",
       "description": "Authentication type used by a tool server endpoint.",
@@ -56215,30 +56280,62 @@
       "type": "object",
       "description": "Credentials for a tool server endpoint.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/AiGatewayToolServerCredentialKind",
-          "description": "Credential type."
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerAuthenticationType",
+          "description": "Authentication type."
         },
-        "apiKey": {
-          "$ref": "#/definitions/AiGatewayApiKeyCredential",
-          "description": "API key configuration. Required when kind is ApiKey."
+        "headers": {
+          "type": "object",
+          "format": "password",
+          "description": "Static headers injected when calling the endpoint.",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "x-ms-secret": true
+        },
+        "oauth2": {
+          "$ref": "#/definitions/AiGatewayToolServerOauth2Authentication",
+          "description": "OAuth 2.0 configuration."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayToolServerManagedIdentityAuthentication",
+          "description": "Managed identity configuration."
         }
       },
       "required": [
-        "kind"
+        "type"
       ]
     },
     "AiGatewayToolServerCredentialsUpdate": {
       "type": "object",
       "description": "Tool server credentials to update.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/AiGatewayToolServerCredentialKind",
-          "description": "Credential type."
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerAuthenticationType",
+          "description": "Authentication type."
         },
-        "apiKey": {
-          "$ref": "#/definitions/AiGatewayApiKeyCredentialUpdate",
-          "description": "API key configuration."
+        "headers": {
+          "type": "object",
+          "format": "password",
+          "description": "Static headers injected when calling the endpoint.",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "x-ms-secret": true
+        },
+        "oauth2": {
+          "$ref": "#/definitions/AiGatewayToolServerOauth2Authentication",
+          "description": "OAuth 2.0 configuration."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayToolServerManagedIdentityAuthentication",
+          "description": "Managed identity configuration."
         }
       }
     },
@@ -56246,17 +56343,21 @@
       "type": "object",
       "description": "A tool server endpoint.",
       "properties": {
-        "url": {
+        "id": {
           "type": "string",
-          "description": "Runtime path exposed for this endpoint."
+          "description": "Stable endpoint identifier. Generated when omitted."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Optional namespace used to prefix tool names."
         },
         "kind": {
-          "$ref": "#/definitions/AiGatewayToolServerEndpointKind",
+          "$ref": "#/definitions/AiGatewayToolServerEndpointSourceKind",
           "description": "Endpoint type."
         },
-        "mcpUrl": {
+        "mcp": {
           "$ref": "#/definitions/AiGatewayMcpUrlConfiguration",
-          "description": "Backend MCP URL configuration. Required when kind is McpUrl."
+          "description": "Backend MCP configuration. Required when kind is mcp."
         },
         "openApi": {
           "$ref": "#/definitions/AiGatewayOpenApiConfiguration",
@@ -56265,12 +56366,22 @@
         "credentials": {
           "$ref": "#/definitions/AiGatewayToolServerCredentials",
           "description": "Backend credentials."
+        },
+        "tools": {
+          "type": "array",
+          "description": "Upstream tool names or glob patterns to expose.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether endpoint failure fails the whole federation."
         }
       },
       "required": [
-        "url",
         "kind",
-        "credentials"
+        "required"
       ]
     },
     "AiGatewayToolServerEndpointKind": {
@@ -56297,21 +56408,49 @@
         ]
       }
     },
+    "AiGatewayToolServerEndpointSourceKind": {
+      "type": "string",
+      "description": "Endpoint source kind.",
+      "enum": [
+        "mcp",
+        "openApi"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerEndpointSourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mcp",
+            "value": "mcp",
+            "description": "MCP server endpoint."
+          },
+          {
+            "name": "OpenApi",
+            "value": "openApi",
+            "description": "OpenAPI document endpoint."
+          }
+        ]
+      }
+    },
     "AiGatewayToolServerEndpointUpdate": {
       "type": "object",
       "description": "A tool server endpoint to update.",
       "properties": {
-        "url": {
+        "id": {
           "type": "string",
-          "description": "Runtime path exposed for this endpoint."
+          "description": "Stable endpoint identifier."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Optional namespace used to prefix tool names."
         },
         "kind": {
-          "$ref": "#/definitions/AiGatewayToolServerEndpointKind",
+          "$ref": "#/definitions/AiGatewayToolServerEndpointSourceKind",
           "description": "Endpoint type."
         },
-        "mcpUrl": {
+        "mcp": {
           "$ref": "#/definitions/AiGatewayMcpUrlConfigurationUpdate",
-          "description": "Backend MCP URL configuration."
+          "description": "Backend MCP configuration."
         },
         "openApi": {
           "$ref": "#/definitions/AiGatewayOpenApiConfigurationUpdate",
@@ -56320,20 +56459,197 @@
         "credentials": {
           "$ref": "#/definitions/AiGatewayToolServerCredentialsUpdate",
           "description": "Backend credentials."
+        },
+        "tools": {
+          "type": "array",
+          "description": "Upstream tool names or glob patterns to expose.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether endpoint failure fails the whole federation."
         }
+      }
+    },
+    "AiGatewayToolServerManagedIdentityAuthentication": {
+      "type": "object",
+      "description": "Managed identity authentication for a tool server endpoint.",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "Token audience for managed identity authentication."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of a user-assigned managed identity."
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
+    "AiGatewayToolServerMcpTransport": {
+      "type": "string",
+      "description": "MCP transport protocol.",
+      "enum": [
+        "streamableHttp"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerMcpTransport",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StreamableHttp",
+            "value": "streamableHttp",
+            "description": "Streamable HTTP transport."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerOauth2Authentication": {
+      "type": "object",
+      "description": "OAuth 2.0 authentication for a tool server endpoint.",
+      "properties": {
+        "authorizationUrl": {
+          "type": "string",
+          "description": "OAuth authorization endpoint."
+        },
+        "tokenUrl": {
+          "type": "string",
+          "description": "OAuth token endpoint."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "OAuth client identifier."
+        },
+        "clientSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "OAuth client secret.",
+          "x-ms-secret": true
+        },
+        "scopes": {
+          "type": "array",
+          "description": "OAuth scopes to request.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "grantType": {
+          "$ref": "#/definitions/AiGatewayToolServerOauth2GrantType",
+          "description": "OAuth grant type."
+        },
+        "authorizationParameters": {
+          "type": "object",
+          "description": "Additional authorization endpoint parameters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tokenParameters": {
+          "type": "object",
+          "description": "Additional token endpoint parameters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Current OAuth connection status.",
+          "readOnly": true
+        },
+        "loginLink": {
+          "type": "string",
+          "description": "Login link used to complete interactive authorization.",
+          "readOnly": true
+        }
+      }
+    },
+    "AiGatewayToolServerOauth2GrantType": {
+      "type": "string",
+      "description": "OAuth 2.0 grant type.",
+      "enum": [
+        "clientCredentials",
+        "authorizationCode"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerOauth2GrantType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClientCredentials",
+            "value": "clientCredentials",
+            "description": "Client credentials grant."
+          },
+          {
+            "name": "AuthorizationCode",
+            "value": "authorizationCode",
+            "description": "Authorization code grant."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerOpenApiSourceType": {
+      "type": "string",
+      "description": "OpenAPI document source type.",
+      "enum": [
+        "inline",
+        "url"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerOpenApiSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inline",
+            "value": "inline",
+            "description": "Inline OpenAPI document."
+          },
+          {
+            "name": "Url",
+            "value": "url",
+            "description": "OpenAPI document fetched from a URL."
+          }
+        ]
       }
     },
     "AiGatewayToolServerProperties": {
       "type": "object",
       "description": "Properties of an AI Gateway tool server.",
       "properties": {
-        "displayName": {
+        "name": {
           "type": "string",
-          "description": "Display name of the tool server."
+          "description": "Display name of the tool server.",
+          "x-ms-client-name": "displayName"
         },
         "description": {
           "type": "string",
           "description": "Description of the tool server."
+        },
+        "accessState": {
+          "$ref": "#/definitions/AiGatewayToolServerAccessState",
+          "description": "Whether the tool server is available to callers."
+        },
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerType",
+          "description": "Tool server type.",
+          "x-ms-client-name": "toolServerType"
+        },
+        "allowList": {
+          "type": "array",
+          "description": "Tool names or patterns explicitly allowed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blocked": {
+          "type": "array",
+          "description": "Tool names or patterns explicitly blocked.",
+          "items": {
+            "type": "string"
+          }
         },
         "endpoints": {
           "type": "array",
@@ -56342,7 +56658,7 @@
             "$ref": "#/definitions/AiGatewayToolServerEndpoint"
           },
           "x-ms-identifiers": [
-            "url"
+            "id"
           ]
         },
         "policies": {
@@ -56353,6 +56669,14 @@
           },
           "x-ms-identifiers": []
         },
+        "path": {
+          "type": "string",
+          "description": "Runtime path for the tool server."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Whether a subscription is required to invoke the tool server."
+        },
         "provisioningState": {
           "$ref": "#/definitions/AiGatewayProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -56360,7 +56684,7 @@
         }
       },
       "required": [
-        "endpoints"
+        "type"
       ]
     },
     "AiGatewayToolServerResource": {
@@ -56371,9 +56695,9 @@
           "$ref": "#/definitions/AiGatewayToolServerProperties",
           "description": "The resource-specific properties for this resource."
         },
-        "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "ETag of the resource.",
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -56408,19 +56732,21 @@
       "type": "object",
       "description": "Secret value configured on one tool server endpoint.",
       "properties": {
-        "url": {
+        "id": {
           "type": "string",
-          "description": "Runtime endpoint path."
+          "description": "Stable endpoint identifier."
         },
-        "value": {
-          "type": "string",
-          "format": "password",
-          "description": "Secret value, when one is configured.",
-          "x-ms-secret": true
+        "credentials": {
+          "$ref": "#/definitions/AiGatewayToolServerCredentials",
+          "description": "Endpoint authentication including secret values."
+        },
+        "openApi": {
+          "$ref": "#/definitions/AiGatewayOpenApiConfiguration",
+          "description": "OpenAPI configuration including inline content."
         }
       },
       "required": [
-        "url"
+        "id"
       ]
     },
     "AiGatewayToolServerSecrets": {
@@ -56434,13 +56760,43 @@
             "$ref": "#/definitions/AiGatewayToolServerSecret"
           },
           "x-ms-identifiers": [
-            "url"
+            "id"
           ]
         }
       },
       "required": [
         "endpoints"
       ]
+    },
+    "AiGatewayToolServerType": {
+      "type": "string",
+      "description": "How a tool server is exposed.",
+      "enum": [
+        "mcp",
+        "openApi",
+        "connector"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mcp",
+            "value": "mcp",
+            "description": "Federates one or more MCP servers."
+          },
+          {
+            "name": "OpenApi",
+            "value": "openApi",
+            "description": "Exposes tools generated from OpenAPI documents."
+          },
+          {
+            "name": "Connector",
+            "value": "connector",
+            "description": "Exposes a connector-backed tool server."
+          }
+        ]
+      }
     },
     "AiGatewayToolServerUpdateParameters": {
       "type": "object",
@@ -56456,13 +56812,37 @@
       "type": "object",
       "description": "Properties for updating an AI Gateway tool server.",
       "properties": {
-        "displayName": {
+        "name": {
           "type": "string",
-          "description": "Display name of the tool server."
+          "description": "Display name of the tool server.",
+          "x-ms-client-name": "displayName"
         },
         "description": {
           "type": "string",
           "description": "Description of the tool server."
+        },
+        "accessState": {
+          "$ref": "#/definitions/AiGatewayToolServerAccessState",
+          "description": "Whether the tool server is available to callers."
+        },
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerType",
+          "description": "Tool server type.",
+          "x-ms-client-name": "toolServerType"
+        },
+        "allowList": {
+          "type": "array",
+          "description": "Tool names or patterns explicitly allowed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blocked": {
+          "type": "array",
+          "description": "Tool names or patterns explicitly blocked.",
+          "items": {
+            "type": "string"
+          }
         },
         "endpoints": {
           "type": "array",
@@ -56479,6 +56859,14 @@
             "$ref": "#/definitions/AiGatewayPolicyUpdate"
           },
           "x-ms-identifiers": []
+        },
+        "path": {
+          "type": "string",
+          "description": "Runtime path for the tool server."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Whether a subscription is required to invoke the tool server."
         }
       }
     },
@@ -56499,9 +56887,10 @@
       "type": "object",
       "description": "Properties of an AI Gateway workspace.",
       "properties": {
-        "displayName": {
+        "name": {
           "type": "string",
-          "description": "Display name of the workspace."
+          "description": "Display name of the workspace.",
+          "x-ms-client-name": "displayName"
         },
         "description": {
           "type": "string",
@@ -56512,7 +56901,11 @@
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "name",
+        "description"
+      ]
     },
     "AiGatewayWorkspaceResource": {
       "type": "object",
@@ -56522,9 +56915,9 @@
           "$ref": "#/definitions/AiGatewayWorkspaceProperties",
           "description": "The resource-specific properties for this resource."
         },
-        "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "ETag of the resource.",
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -56569,9 +56962,10 @@
       "type": "object",
       "description": "Properties for updating an AI Gateway workspace.",
       "properties": {
-        "displayName": {
+        "name": {
           "type": "string",
-          "description": "Display name of the workspace."
+          "description": "Display name of the workspace.",
+          "x-ms-client-name": "displayName"
         },
         "description": {
           "type": "string",
@@ -69967,5 +70361,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "If-Match": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The If-Match header that makes a request conditional.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    }
+  }
 }

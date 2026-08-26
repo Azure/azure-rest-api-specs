@@ -143,29 +143,23 @@ model AiGatewayResource is Azure.ResourceManager.TrackedResource<
     SegmentName = "aigateways",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
-
-  /** ETag of the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AI Gateway resources expose an ETag for optimistic concurrency."
-  @visibility(Lifecycle.Read)
-  etag?: Azure.Core.eTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 /** Parameters for updating an AI Gateway. */
 @added(Versions.v2026_09_01_preview)
-model AiGatewayUpdateParameters {
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM resource tags are represented as a string map."
-  tags?: Record<string>;
-}
+model AiGatewayUpdateParameters
+  is Azure.ResourceManager.Foundations.TagsUpdateModel<AiGatewayResource>;
 
 /** Properties of an AI Gateway workspace. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayWorkspaceProperties {
   /** Display name of the workspace. */
-  displayName?: string;
+  @encodedName("application/json", "name")
+  displayName: string;
 
   /** Description of the workspace. */
-  description?: string;
+  description: string;
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
@@ -176,6 +170,7 @@ model AiGatewayWorkspaceProperties {
 @added(Versions.v2026_09_01_preview)
 model AiGatewayWorkspaceUpdateProperties {
   /** Display name of the workspace. */
+  @encodedName("application/json", "name")
   displayName?: string;
 
   /** Description of the workspace. */
@@ -200,11 +195,7 @@ model AiGatewayWorkspaceResource
     SegmentName = "workspaces",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
-
-  /** ETag of the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AI Gateway resources expose an ETag for optimistic concurrency."
-  @visibility(Lifecycle.Read)
-  etag?: Azure.Core.eTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 /** API key credentials for an upstream service. */
@@ -222,14 +213,30 @@ model AiGatewayApiKeyCredential {
 @added(Versions.v2026_09_01_preview)
 model AiGatewayFoundryAuthentication {
   /** Authentication type. */
-  kind: "ManagedIdentity";
+  kind: AiGatewayModelProviderAuthenticationKind;
+
+  /** Managed identity settings. Applicable when kind is ManagedIdentity. */
+  managedIdentity?: AiGatewayManagedIdentityAuthentication;
+
+  /** API key configuration. Required when kind is ApiKey. */
+  apiKey?: AiGatewayApiKeyCredential;
+}
+
+/** Managed identity settings for a model provider. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayManagedIdentityAuthentication {
+  /** Token audience requested for managed identity authentication. */
+  resource?: string;
+
+  /** Client ID of a user-assigned managed identity. */
+  clientId?: string;
 }
 
 /** Foundry model provider configuration. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayFoundryProviderConfiguration {
   /** Foundry endpoint. */
-  endpoint: string;
+  endpoint?: string;
 
   /** Cognitive Services account resource identifiers available to this provider. */
   resourceIds: string[];
@@ -273,7 +280,13 @@ model AiGatewayApiKeyCredentialUpdate {
 @added(Versions.v2026_09_01_preview)
 model AiGatewayFoundryAuthenticationUpdate {
   /** Authentication type. */
-  kind?: "ManagedIdentity";
+  kind?: AiGatewayModelProviderAuthenticationKind;
+
+  /** Managed identity settings. */
+  managedIdentity?: AiGatewayManagedIdentityAuthentication;
+
+  /** API key configuration. */
+  apiKey?: AiGatewayApiKeyCredentialUpdate;
 }
 
 /** Foundry model provider settings to update. */
@@ -316,6 +329,7 @@ model AiGatewayModelProviderUpdateProperties {
   kind?: AiGatewayModelProviderKind;
 
   /** Display name of the model provider. */
+  @encodedName("application/json", "name")
   displayName?: string;
 
   /** Description of the model provider. */
@@ -342,7 +356,8 @@ model AiGatewayModelProviderProperties {
   kind: AiGatewayModelProviderKind;
 
   /** Display name of the model provider. */
-  displayName?: string;
+  @encodedName("application/json", "name")
+  displayName: string;
 
   /** Description of the model provider. */
   description?: string;
@@ -369,11 +384,7 @@ model AiGatewayModelProviderResource
     SegmentName = "modelProviders",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
-
-  /** ETag of the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AI Gateway resources expose an ETag for optimistic concurrency."
-  @visibility(Lifecycle.Read)
-  etag?: Azure.Core.eTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 /** Deployment details for an AI Gateway model. */
@@ -631,6 +642,10 @@ model AiGatewayPolicyUpdate {
 /** Properties for updating an AI Gateway model. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayModelUpdateProperties {
+  /** Display name of the model. */
+  @encodedName("application/json", "name")
+  displayName?: string;
+
   /** Description of the model. */
   description?: string;
 
@@ -640,6 +655,9 @@ model AiGatewayModelUpdateProperties {
   /** Inline policies applied to this model. */
   @identifiers(#[])
   policies?: AiGatewayPolicyUpdate[];
+
+  /** Runtime endpoints supported by this model. */
+  supportedEndpoints?: string[];
 }
 
 /** Parameters for updating an AI Gateway model. */
@@ -652,6 +670,10 @@ model AiGatewayModelUpdateParameters {
 /** Properties of an AI Gateway model. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayModelProperties {
+  /** Display name of the model. */
+  @encodedName("application/json", "name")
+  displayName: string;
+
   /** Description of the model. */
   description?: string;
 
@@ -663,8 +685,7 @@ model AiGatewayModelProperties {
   deployment: AiGatewayModelDeployment;
 
   /** Runtime endpoints supported by this model. */
-  @visibility(Lifecycle.Read)
-  supportedEndpoints?: string[];
+  supportedEndpoints: string[];
 
   /** Inline policies applied to this model. */
   @identifiers(#[])
@@ -686,38 +707,183 @@ model AiGatewayModelResource
     SegmentName = "models",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
+  ...Azure.ResourceManager.EntityTagProperty;
+}
 
-  /** ETag of the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AI Gateway resources expose an ETag for optimistic concurrency."
+/** How a tool server is exposed. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayToolServerType {
+  string,
+
+  /** Federates one or more MCP servers. */
+  Mcp: "mcp",
+
+  /** Exposes tools generated from OpenAPI documents. */
+  OpenApi: "openApi",
+
+  /** Exposes a connector-backed tool server. */
+  Connector: "connector",
+}
+
+/** Endpoint source kind. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayToolServerEndpointSourceKind {
+  string,
+
+  /** MCP server endpoint. */
+  Mcp: "mcp",
+
+  /** OpenAPI document endpoint. */
+  OpenApi: "openApi",
+}
+
+/** Endpoint authentication type. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayToolServerAuthenticationType {
+  string,
+
+  /** No authentication. */
+  None: "none",
+
+  /** Static HTTP header authentication. */
+  Header: "header",
+
+  /** OAuth 2.0 authentication. */
+  OAuth2: "oauth2",
+
+  /** Managed identity authentication. */
+  ManagedIdentity: "managedIdentity",
+}
+
+/** OAuth 2.0 grant type. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayToolServerOauth2GrantType {
+  string,
+
+  /** Client credentials grant. */
+  ClientCredentials: "clientCredentials",
+
+  /** Authorization code grant. */
+  AuthorizationCode: "authorizationCode",
+}
+
+/** MCP transport protocol. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayToolServerMcpTransport {
+  string,
+
+  /** Streamable HTTP transport. */
+  StreamableHttp: "streamableHttp",
+}
+
+/** OpenAPI document source type. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayToolServerOpenApiSourceType {
+  string,
+
+  /** Inline OpenAPI document. */
+  Inline: "inline",
+
+  /** OpenAPI document fetched from a URL. */
+  Url: "url",
+}
+
+/** Tool server access state. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayToolServerAccessState {
+  string,
+
+  /** Tool server is available. */
+  Active: "active",
+
+  /** Tool server is blocked. */
+  Blocked: "blocked",
+}
+
+/** Managed identity authentication for a tool server endpoint. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayToolServerManagedIdentityAuthentication {
+  /** Token audience for managed identity authentication. */
+  resource: string;
+
+  /** Client ID of a user-assigned managed identity. */
+  clientId?: string;
+}
+
+/** OAuth 2.0 authentication for a tool server endpoint. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayToolServerOauth2Authentication {
+  /** OAuth authorization endpoint. */
+  @clientName("authorizationUri", "csharp")
+  authorizationUrl?: string;
+
+  /** OAuth token endpoint. */
+  @clientName("tokenUri", "csharp")
+  tokenUrl?: string;
+
+  /** OAuth client identifier. */
+  clientId?: string;
+
+  /** OAuth client secret. */
+  @secret
+  clientSecret?: string;
+
+  /** OAuth scopes to request. */
+  scopes?: string[];
+
+  /** OAuth grant type. */
+  grantType?: AiGatewayToolServerOauth2GrantType;
+
+  /** Additional authorization endpoint parameters. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The implemented OAuth contract supports arbitrary provider-specific authorization parameters."
+  authorizationParameters?: Record<string>;
+
+  /** Additional token endpoint parameters. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The implemented OAuth contract supports arbitrary provider-specific token parameters."
+  tokenParameters?: Record<string>;
+
+  /** Current OAuth connection status. */
   @visibility(Lifecycle.Read)
-  etag?: Azure.Core.eTag;
+  status?: string;
+
+  /** Login link used to complete interactive authorization. */
+  @visibility(Lifecycle.Read)
+  loginLink?: string;
 }
 
 /** Credentials for a tool server endpoint. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerCredentials {
-  /** Credential type. */
-  kind: AiGatewayToolServerCredentialKind;
+  /** Authentication type. */
+  type: AiGatewayToolServerAuthenticationType;
 
-  /** API key configuration. Required when kind is ApiKey. */
-  apiKey?: AiGatewayApiKeyCredential;
+  /** Static headers injected when calling the endpoint. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The implemented header credential contract supports arbitrary HTTP header names."
+  @secret
+  headers?: Record<string[]>;
+
+  /** OAuth 2.0 configuration. */
+  oauth2?: AiGatewayToolServerOauth2Authentication;
+
+  /** Managed identity configuration. */
+  managedIdentity?: AiGatewayToolServerManagedIdentityAuthentication;
 }
 
 /** MCP URL endpoint configuration. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayMcpUrlConfiguration {
   /** Backend MCP server endpoint. */
-  endpoint: string;
+  url: string;
 
   /** MCP transport. */
-  transport: AiGatewayMcpTransport;
+  transport?: AiGatewayToolServerMcpTransport;
 }
 
 /** Source of an OpenAPI document. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayOpenApiSpecSource {
   /** Source type. */
-  kind: AiGatewayOpenApiSpecSourceKind;
+  type: AiGatewayToolServerOpenApiSourceType;
 
   /** Base64-encoded OpenAPI document. Required when kind is Inline. */
   contentBase64?: bytes;
@@ -736,48 +902,64 @@ model AiGatewayOpenApiConfiguration {
 /** A tool server endpoint. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerEndpoint {
-  /** Runtime path exposed for this endpoint. */
-  url: string;
+  /** Stable endpoint identifier. Generated when omitted. */
+  id?: string;
+
+  /** Optional namespace used to prefix tool names. */
+  `namespace`?: string;
 
   /** Endpoint type. */
-  kind: AiGatewayToolServerEndpointKind;
+  kind: AiGatewayToolServerEndpointSourceKind;
 
-  /** Backend MCP URL configuration. Required when kind is McpUrl. */
-  @clientName("mcpUri", "csharp")
-  mcpUrl?: AiGatewayMcpUrlConfiguration;
+  /** Backend MCP configuration. Required when kind is mcp. */
+  mcp?: AiGatewayMcpUrlConfiguration;
 
   /** OpenAPI configuration. Required when kind is McpFromOpenApi. */
   openApi?: AiGatewayOpenApiConfiguration;
 
   /** Backend credentials. */
-  credentials: AiGatewayToolServerCredentials;
+  credentials?: AiGatewayToolServerCredentials;
+
+  /** Upstream tool names or glob patterns to expose. */
+  tools?: string[];
+
+  /** Whether endpoint failure fails the whole federation. */
+  required: boolean;
 }
 
 /** Tool server credentials to update. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerCredentialsUpdate {
-  /** Credential type. */
-  kind?: AiGatewayToolServerCredentialKind;
+  /** Authentication type. */
+  type?: AiGatewayToolServerAuthenticationType;
 
-  /** API key configuration. */
-  apiKey?: AiGatewayApiKeyCredentialUpdate;
+  /** Static headers injected when calling the endpoint. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The implemented header credential contract supports arbitrary HTTP header names."
+  @secret
+  headers?: Record<string[]>;
+
+  /** OAuth 2.0 configuration. */
+  oauth2?: AiGatewayToolServerOauth2Authentication;
+
+  /** Managed identity configuration. */
+  managedIdentity?: AiGatewayToolServerManagedIdentityAuthentication;
 }
 
 /** MCP URL endpoint settings to update. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayMcpUrlConfigurationUpdate {
   /** Backend MCP server endpoint. */
-  endpoint?: string;
+  url?: string;
 
   /** MCP transport. */
-  transport?: AiGatewayMcpTransport;
+  transport?: AiGatewayToolServerMcpTransport;
 }
 
 /** OpenAPI document source settings to update. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayOpenApiSpecSourceUpdate {
   /** Source type. */
-  kind?: AiGatewayOpenApiSpecSourceKind;
+  type?: AiGatewayToolServerOpenApiSourceType;
 
   /** Base64-encoded OpenAPI document. */
   contentBase64?: bytes;
@@ -796,31 +978,53 @@ model AiGatewayOpenApiConfigurationUpdate {
 /** A tool server endpoint to update. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerEndpointUpdate {
-  /** Runtime path exposed for this endpoint. */
-  url?: string;
+  /** Stable endpoint identifier. */
+  id?: string;
+
+  /** Optional namespace used to prefix tool names. */
+  `namespace`?: string;
 
   /** Endpoint type. */
-  kind?: AiGatewayToolServerEndpointKind;
+  kind?: AiGatewayToolServerEndpointSourceKind;
 
-  /** Backend MCP URL configuration. */
-  @clientName("mcpUri", "csharp")
-  mcpUrl?: AiGatewayMcpUrlConfigurationUpdate;
+  /** Backend MCP configuration. */
+  mcp?: AiGatewayMcpUrlConfigurationUpdate;
 
   /** OpenAPI configuration. */
   openApi?: AiGatewayOpenApiConfigurationUpdate;
 
   /** Backend credentials. */
   credentials?: AiGatewayToolServerCredentialsUpdate;
+
+  /** Upstream tool names or glob patterns to expose. */
+  tools?: string[];
+
+  /** Whether endpoint failure fails the whole federation. */
+  required?: boolean;
 }
 
 /** Properties for updating an AI Gateway tool server. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerUpdateProperties {
   /** Display name of the tool server. */
+  @encodedName("application/json", "name")
   displayName?: string;
 
   /** Description of the tool server. */
   description?: string;
+
+  /** Whether the tool server is available to callers. */
+  accessState?: AiGatewayToolServerAccessState;
+
+  /** Tool server type. */
+  @encodedName("application/json", "type")
+  toolServerType?: AiGatewayToolServerType;
+
+  /** Tool names or patterns explicitly allowed. */
+  allowList?: string[];
+
+  /** Tool names or patterns explicitly blocked. */
+  blocked?: string[];
 
   /** Endpoint configurations exposed by this tool server. */
   @identifiers(#[])
@@ -829,6 +1033,12 @@ model AiGatewayToolServerUpdateProperties {
   /** Inline policies applied to this tool server. */
   @identifiers(#[])
   policies?: AiGatewayPolicyUpdate[];
+
+  /** Runtime path for the tool server. */
+  path?: string;
+
+  /** Whether a subscription is required to invoke the tool server. */
+  subscriptionRequired?: boolean;
 }
 
 /** Parameters for updating an AI Gateway tool server. */
@@ -842,18 +1052,38 @@ model AiGatewayToolServerUpdateParameters {
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerProperties {
   /** Display name of the tool server. */
+  @encodedName("application/json", "name")
   displayName?: string;
 
   /** Description of the tool server. */
   description?: string;
 
+  /** Whether the tool server is available to callers. */
+  accessState?: AiGatewayToolServerAccessState;
+
+  /** Tool server type. */
+  @encodedName("application/json", "type")
+  toolServerType: AiGatewayToolServerType;
+
+  /** Tool names or patterns explicitly allowed. */
+  allowList?: string[];
+
+  /** Tool names or patterns explicitly blocked. */
+  blocked?: string[];
+
   /** Endpoint configurations exposed by this tool server. */
-  @identifiers(#["url"])
-  endpoints: AiGatewayToolServerEndpoint[];
+  @identifiers(#["id"])
+  endpoints?: AiGatewayToolServerEndpoint[];
 
   /** Inline policies applied to this tool server. */
   @identifiers(#[])
   policies?: AiGatewayPolicy[];
+
+  /** Runtime path for the tool server. */
+  path?: string;
+
+  /** Whether a subscription is required to invoke the tool server. */
+  subscriptionRequired?: boolean;
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
@@ -871,11 +1101,7 @@ model AiGatewayToolServerResource
     SegmentName = "toolServers",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
-
-  /** ETag of the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AI Gateway resources expose an ETag for optimistic concurrency."
-  @visibility(Lifecycle.Read)
-  etag?: Azure.Core.eTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 /** Properties of an AI Gateway API key. */
@@ -884,21 +1110,23 @@ model AiGatewayApiKeyProperties {
   /** Display name of the key. */
   displayName?: string;
 
-  /** Hint containing the final characters of the primary key. */
+  /** Subscription state. */
+  state?: string;
+
+  /** Creation time. */
   @visibility(Lifecycle.Read)
-  primaryKeyHint?: string;
+  createdDate?: utcDateTime;
 
-  /** Hint containing the final characters of the secondary key. */
-  @visibility(Lifecycle.Read)
-  secondaryKeyHint?: string;
+  /** Optional expiration time. */
+  expirationDate?: utcDateTime;
 
-  /** Primary key value returned only when it is initially issued. */
+  /** Primary key value. Omitted from ordinary read responses. */
   @secret
-  primaryValue?: string;
+  primaryKey?: string;
 
-  /** Secondary key value returned only when it is initially issued. */
+  /** Secondary key value. Omitted from ordinary read responses. */
   @secret
-  secondaryValue?: string;
+  secondaryKey?: string;
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
@@ -910,6 +1138,12 @@ model AiGatewayApiKeyProperties {
 model AiGatewayApiKeyUpdateProperties {
   /** Display name of the key. */
   displayName?: string;
+
+  /** Subscription state. */
+  state?: string;
+
+  /** Optional expiration time. */
+  expirationDate?: utcDateTime;
 }
 
 /** Parameters for updating an AI Gateway API key. */
@@ -930,37 +1164,36 @@ model AiGatewayApiKeyResource
     SegmentName = "apiKeys",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
-
-  /** ETag of the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AI Gateway resources expose an ETag for optimistic concurrency."
-  @visibility(Lifecycle.Read)
-  etag?: Azure.Core.eTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
-/** Metadata returned for model provider credentials. */
+/** Credential returned for a model provider. */
 @added(Versions.v2026_09_01_preview)
-model AiGatewayCredentialMetadata {
-  /** Whether credentials have been configured. */
-  configured: boolean;
+model AiGatewayCredentialValue {
+  /** Stored credential value. */
+  @secret
+  value?: string;
 }
 
 /** Secret values configured on tool server endpoints. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerSecrets {
   /** Endpoint secret values. */
-  @identifiers(#["url"])
+  @identifiers(#["id"])
   endpoints: AiGatewayToolServerSecret[];
 }
 
 /** Secret value configured on one tool server endpoint. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerSecret {
-  /** Runtime endpoint path. */
-  url: string;
+  /** Stable endpoint identifier. */
+  id: string;
 
-  /** Secret value, when one is configured. */
-  @secret
-  value?: string;
+  /** Endpoint authentication including secret values. */
+  credentials?: AiGatewayToolServerCredentials;
+
+  /** OpenAPI configuration including inline content. */
+  openApi?: AiGatewayOpenApiConfiguration;
 }
 
 /** Primary and secondary API key values. */
@@ -968,30 +1201,11 @@ model AiGatewayToolServerSecret {
 model AiGatewayApiKeyValues {
   /** Primary API key value. */
   @secret
-  primaryValue: string;
+  primaryKey: string;
 
   /** Secondary API key value. */
   @secret
-  secondaryValue: string;
-}
-
-/** Request to regenerate one API key slot. */
-@added(Versions.v2026_09_01_preview)
-@clientName("AiGatewayApiKeyRegenerateContent", "csharp")
-model AiGatewayApiKeyRegenerateRequest {
-  /** Key slot to regenerate. */
-  target: AiGatewayApiKeyTarget;
-}
-
-/** Result of regenerating an API key. */
-@added(Versions.v2026_09_01_preview)
-model AiGatewayApiKeyRegenerateResult {
-  /** Regenerated key slot. */
-  target: AiGatewayApiKeyTarget;
-
-  /** Newly generated secret value. */
-  @secret
-  value: string;
+  secondaryKey: string;
 }
 
 alias AiGatewayIfMatchOptional = {
@@ -1000,26 +1214,23 @@ alias AiGatewayIfMatchOptional = {
   ifMatch?: string;
 };
 
-alias AiGatewayIfMatchRequired = {
-  /** ETag of the resource, or * for an unconditional operation. */
-  @header("If-Match")
-  ifMatch: string;
-};
-
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations
 interface AiGatewayResources {
   get is ArmResourceRead<AiGatewayResource>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AiGatewayResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    AiGatewayResource,
+    Parameters = AiGatewayIfMatchOptional
+  >;
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AiGatewayResource,
     PatchModel = AiGatewayUpdateParameters,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
     AiGatewayResource,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   listByResourceGroup is ArmResourceListByParent<AiGatewayResource>;
   listBySubscription is ArmListBySubscription<AiGatewayResource>;
@@ -1037,11 +1248,11 @@ interface AiGatewayWorkspaceResources {
   update is ArmCustomPatchAsync<
     AiGatewayWorkspaceResource,
     PatchModel = AiGatewayWorkspaceUpdateParameters,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
     AiGatewayWorkspaceResource,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   listByAiGateway is ArmResourceListByParent<AiGatewayWorkspaceResource>;
 }
@@ -1058,11 +1269,11 @@ interface AiGatewayModelProviderResources {
   update is ArmCustomPatchAsync<
     AiGatewayModelProviderResource,
     PatchModel = AiGatewayModelProviderUpdateParameters,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
     AiGatewayModelProviderResource,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   listByWorkspace is ArmResourceListByParent<AiGatewayModelProviderResource>;
 
@@ -1072,7 +1283,7 @@ interface AiGatewayModelProviderResources {
   listCredentials is ArmResourceActionSync<
     AiGatewayModelProviderResource,
     void,
-    ArmResponse<AiGatewayCredentialMetadata>
+    ArmResponse<AiGatewayCredentialValue>
   >;
 }
 
@@ -1088,11 +1299,11 @@ interface AiGatewayModelResources {
   update is ArmCustomPatchAsync<
     AiGatewayModelResource,
     PatchModel = AiGatewayModelUpdateParameters,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
     AiGatewayModelResource,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   listByModelProvider is ArmResourceListByParent<AiGatewayModelResource>;
 }
@@ -1109,11 +1320,11 @@ interface AiGatewayToolServerResources {
   update is ArmCustomPatchAsync<
     AiGatewayToolServerResource,
     PatchModel = AiGatewayToolServerUpdateParameters,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
     AiGatewayToolServerResource,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   listByWorkspace is ArmResourceListByParent<AiGatewayToolServerResource>;
 
@@ -1139,30 +1350,39 @@ interface AiGatewayApiKeyResources {
   update is ArmCustomPatchAsync<
     AiGatewayApiKeyResource,
     PatchModel = AiGatewayApiKeyUpdateParameters,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<
     AiGatewayApiKeyResource,
-    Parameters = AiGatewayIfMatchRequired
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   listByAiGateway is ArmResourceListByParent<AiGatewayApiKeyResource>;
 
-  /** Returns primary and secondary key values once. */
+  /** Returns primary and secondary key values. */
   @post
-  @action("listValues")
-  listValues is ArmResourceActionSync<
+  @action("listSecrets")
+  listSecrets is ArmResourceActionSync<
     AiGatewayApiKeyResource,
     void,
     ArmResponse<AiGatewayApiKeyValues>
   >;
 
-  /** Regenerates the selected API key value. */
+  /** Regenerates the primary API key value. */
   @post
-  @action("regenerate")
-  regenerate is ArmResourceActionSync<
+  @action("regeneratePrimaryKey")
+  regeneratePrimaryKey is ArmResourceActionSync<
     AiGatewayApiKeyResource,
-    AiGatewayApiKeyRegenerateRequest,
-    ArmResponse<AiGatewayApiKeyRegenerateResult>
+    void,
+    ArmNoContentResponse
+  >;
+
+  /** Regenerates the secondary API key value. */
+  @post
+  @action("regenerateSecondaryKey")
+  regenerateSecondaryKey is ArmResourceActionSync<
+    AiGatewayApiKeyResource,
+    void,
+    ArmNoContentResponse
   >;
 }
 
