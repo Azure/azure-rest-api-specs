@@ -298,6 +298,37 @@ using Microsoft.EventHub;
 @@clientName(AccessRights, "EventHubsAccessRight", "csharp");
 @@clientName(ConsumerGroup, "EventHubsConsumerGroup", "csharp");
 @@clientName(SchemaGroup, "EventHubsSchemaGroup", "csharp");
+
+// 2026-07-01-preview: align the Fabric shortcut and upgrade preference types with the
+// "EventHubs" prefix used by every other public model in this package.
+@@clientName(FabricShortcut, "EventHubsFabricShortcut", "csharp");
+@@clientName(
+  FabricShortcutProperties,
+  "EventHubsFabricShortcutProperties",
+  "csharp"
+);
+@@clientName(
+  FabricShortcutConfiguration,
+  "EventHubsFabricShortcutConfiguration",
+  "csharp"
+);
+@@clientName(FabricShortcutStatus, "EventHubsFabricShortcutStatus", "csharp");
+@@clientName(FabricShortcutType, "EventHubsFabricShortcutType", "csharp");
+@@clientName(UpgradePreferences, "EventHubsUpgradePreferences", "csharp");
+@@clientName(
+  UpgradePreferencesProperties,
+  "EventHubsUpgradePreferencesProperties",
+  "csharp"
+);
+@@clientName(
+  UpgradePreferenceDayOfWeek,
+  "EventHubsUpgradePreferenceDayOfWeek",
+  "csharp"
+);
+@@clientName(MaintenanceWindow, "EventHubsMaintenanceWindow", "csharp");
+@@clientName(ExceptionWindow, "EventHubsExceptionWindow", "csharp");
+@@clientName(ExceptionWindowAction, "EventHubsExceptionWindowAction", "csharp");
+@@clientName(UpgradeStatus, "EventHubsUpgradeStatus", "csharp");
 @@clientName(FailOverProperties.force, "IsForced", "csharp");
 @@usage(ClusterQuotaConfigurationProperties, Usage.input, "csharp");
 @@usage(CheckNameAvailabilityParameter, Usage.input | Usage.output, "csharp");
