@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
@@ -410,6 +411,7 @@ model Step {
 /**
  * Common error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -1094,6 +1096,27 @@ model Deployment {
    * Boolean flag indicating whether the deployment is a rollback deployment.
    */
   isCloudInitiatedRollback?: boolean;
+
+  /**
+   * The protocol the device should use when downloading the update payload.
+   * Defaults to "https".
+   */
+  @added(Versions.v2026_06_01)
+  downloadSecurity?: DownloadSecurity = DownloadSecurity.https;
+}
+
+/**
+ * The protocol the device should use when downloading the update payload.
+ */
+@added(Versions.v2026_06_01)
+union DownloadSecurity {
+  string,
+
+  /** Download update payload over HTTPS. */
+  https: "https",
+
+  /** Download update payload over HTTP. */
+  http: "http",
 }
 
 /**
@@ -1332,6 +1355,7 @@ model LogCollection {
   /**
    * The log collection id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-name' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientName in client.tsp."
   @extension("x-ms-client-name", "logCollectionId")
   operationId?: string;
 
@@ -1392,6 +1416,7 @@ model LogCollectionOperationDetailedStatus {
   /**
    * The device diagnostics operation id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-name' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientName in client.tsp."
   @extension("x-ms-client-name", "logCollectionId")
   operationId?: string;
 

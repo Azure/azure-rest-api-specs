@@ -5,6 +5,8 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.StorageSync;
 
+@@clientName(Microsoft.StorageSync, "StorageSyncMgmtClient", "python");
+
 @@scope(locationOperationStatusGet, "!csharp");
 @@scope(OperationStatusOperationGroup.get, "!csharp");
 @@scope(Operations.list, "!csharp");
@@ -12,6 +14,11 @@ using Microsoft.StorageSync;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+  "csharp,javascript"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the established flattened StorageSync SDK model shape."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CloudEndpointUpdateParameters.properties,
   "csharp"
 );
 

@@ -28,6 +28,7 @@ import "./PrivateEndpointConnectionResource.tsp";
 import "./GlobalParameterResource.tsp";
 import "./ChangeDataCaptureResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

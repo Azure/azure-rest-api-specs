@@ -1974,6 +1974,7 @@ model BuildConfiguration {
   /**
    * Base OS used to build and run the app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   baseOs?: string;
 
   /**
@@ -2128,6 +2129,7 @@ model CertificateKeyVaultProperties {
   /**
    * URL pointing to the Azure Key Vault secret that holds the certificate.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyVaultUrl?: url;
 }
 
@@ -2496,6 +2498,7 @@ model SecretKeyVaultProperties {
   /**
    * URL pointing to the Azure Key Vault secret.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyVaultUrl?: string;
 }
 
@@ -3105,6 +3108,7 @@ model DiskEncryptionConfigurationKeyVaultConfiguration {
   /**
    * Key URL pointing to a key in KeyVault. Version segment of the Url is required.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl?: url;
 
   /**
@@ -6542,6 +6546,7 @@ model SourceControlProperties {
   /**
    * The repo url which will be integrated to ContainerApp.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   repoUrl?: string;
 
   /**
@@ -6629,6 +6634,7 @@ model RegistryInfo {
   /**
    * registry server Url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   registryUrl?: string;
 
   /**
@@ -6700,6 +6706,7 @@ model EnvironmentVariable {
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -6990,6 +6997,7 @@ model Secret {
   /**
    * Azure Key Vault URL pointing to the secret referenced by the container app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyVaultUrl?: string;
 }
 
@@ -7869,6 +7877,7 @@ model ContainerAppSecret {
   /**
    * Azure Key Vault URL pointing to the secret referenced by the container app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   keyVaultUrl?: string;
 }
@@ -7967,6 +7976,7 @@ model ContainerAppsBuildConfiguration {
   /**
    * Base OS used to build and run the app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   baseOs?: string;
 
@@ -8246,6 +8256,7 @@ model PatchDetailsNewLayer {
   /**
    * The OS name and its version in the new run image for the target image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osAndVersion?: string;
 }
 
@@ -8266,6 +8277,7 @@ model PatchDetailsOldLayer {
   /**
    * The OS name and its version in the old run image for the target image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osAndVersion?: string;
 }
 

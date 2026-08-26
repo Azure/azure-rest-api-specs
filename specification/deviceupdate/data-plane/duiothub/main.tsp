@@ -11,12 +11,15 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 /**
  * Device Update for IoT Hub is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for IoT Hub handle the updates.
@@ -31,9 +34,11 @@ using Azure.Core;
     /**
      * The Device Update for IoT Hub account endpoint (hostname only, no protocol).
      */
+    #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing OpenAPI endpoint format."
     @extension("x-ms-parameter-grouping", #{ name: "account-options" })
     @extension("x-ms-parameter-location", "client")
     @format("url")
+    @alternateType(url, "csharp")
     endpoint: string,
   }
 )
@@ -66,4 +71,11 @@ enum Versions {
    * The 2022-10-01 API version.
    */
   v2022_10_01: "2022-10-01",
+
+  /**
+   * The 2026-06-01 API version. Adds the optional `downloadSecurity` field on
+   * Deployment so callers can choose the protocol the device should use when
+   * downloading update payload (defaults to "https").
+   */
+  v2026_06_01: "2026-06-01",
 }

@@ -65,7 +65,8 @@ alias EnrollmentAccountOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     enrollmentAccountName: string;
-  }
+  },
+  "BillingDepartmentEnrollmentAccount"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -152,7 +153,8 @@ alias EnrollmentAccountOperationGroupOps = Azure.ResourceManager.Legacy.Extensio
     @key
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     enrollmentAccountName: string;
-  }
+  },
+  "BillingEnrollmentAccount"
 >;
 
 alias EnrollmentAccountOperationGroupNoPatternOps = Azure.ResourceManager.Legacy.ExtensionOperations<

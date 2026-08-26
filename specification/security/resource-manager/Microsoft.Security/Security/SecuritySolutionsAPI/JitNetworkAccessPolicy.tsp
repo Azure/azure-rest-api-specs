@@ -19,11 +19,10 @@ using Common;
 namespace SecuritySolutionsAPI;
 
 @parentResource(ArmLocationResource)
-model JitNetworkAccessPolicy
-  is Azure.ResourceManager.ProxyResource<
-    JitNetworkAccessPolicyProperties,
-    false
-  > {
+model JitNetworkAccessPolicy is Azure.ResourceManager.ProxyResource<
+  JitNetworkAccessPolicyProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = JitNetworkAccessPolicy,
     KeyName = "jitNetworkAccessPolicyName",
@@ -55,7 +54,7 @@ alias JitNetworkAccessPoliciesInitiateOps = Azure.ResourceManager.Legacy.RoutedO
     @path
     @segment("locations")
     @key
-    ascLocation: string;
+    ascLocation: Azure.Core.azureLocation;
 
     /** Name of a Just-in-Time access configuration policy. */
     @path

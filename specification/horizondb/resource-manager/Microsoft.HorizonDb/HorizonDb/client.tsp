@@ -26,13 +26,48 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.AuthenticationState,
+  "HorizonDBAuthenticationState",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.HorizonDbCluster,
   "HorizonDBCluster",
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministrator,
+  "HorizonDBAdministrator",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministratorProperties,
+  "HorizonDBAdministratorProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministratorPropertiesForAdd,
+  "HorizonDBAdministratorContentProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministratorAdd,
+  "HorizonDBAdministratorContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbAdministrators,
+  "HorizonDBAdministrators",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PrincipalTypes,
+  "HorizonDBPrincipalType",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
-  "HorizonDBClusterForPatchUpdate",
+  "HorizonDBClusterPatch",
   "csharp"
 );
 @@clientName(
@@ -82,7 +117,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbParameterGroupForPatchUpdate,
-  "HorizonDBParameterGroupForPatchUpdate",
+  "HorizonDBParameterGroupPatch",
   "csharp"
 );
 @@clientName(
@@ -118,6 +153,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.updateStatus,
+  "updateStatusPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
   Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.delete,
   "deletePrivateEndpointConnection",
   "csharp"
@@ -139,7 +179,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbReplicaForPatchUpdate,
-  "HorizonDBReplicaForPatchUpdate",
+  "HorizonDBReplicaPatch",
   "csharp"
 );
 @@clientName(
@@ -187,6 +227,11 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Azure.ResourceManager.PrivateEndpointConnectionProperties,
   "HorizonDBPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionUpdate.properties,
+  "HorizonDBPrivateEndpointConnectionPatchProperties",
   "csharp"
 );
 @@clientName(

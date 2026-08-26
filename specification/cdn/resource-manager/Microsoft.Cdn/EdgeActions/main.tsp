@@ -6,6 +6,7 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./edgeactionsbasemodels.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -40,6 +41,7 @@ model EdgeAction is TrackedResource<EdgeActionProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
 @@extension(EdgeAction.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(EdgeAction.properties, "x-ms-mutability", #["read", "create"]);
@@ -55,6 +57,7 @@ model EdgeActionVersion is TrackedResource<EdgeActionVersionProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
 @@extension(EdgeActionVersion.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(
@@ -75,6 +78,7 @@ model EdgeActionExecutionFilter
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
 @@extension(EdgeActionExecutionFilter.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(
@@ -94,14 +98,14 @@ interface EdgeActions {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeAction>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
   >;
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
 
+  @doc("A long-running resource action.")
   @removed(Versions.`2025-12-01-preview`)
   addAttachment is ArmResourceActionAsync<
     EdgeAction,
@@ -110,6 +114,7 @@ interface EdgeActions {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Operation matches 2024 baseline with 200, 202 responses"
+  @doc("A long-running resource action.")
   @removed(Versions.`2025-12-01-preview`)
   deleteAttachment is ArmResourceActionNoContentAsync<
     EdgeAction,
@@ -134,12 +139,12 @@ interface EdgeActionVersions {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionVersion>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
+  @doc("A long-running resource action.")
   deployVersionCode is ArmResourceActionAsync<
     EdgeActionVersion,
     VersionCode,
@@ -187,10 +192,9 @@ interface EdgeActionExecutionFilters {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionExecutionFilter>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionExecutionFilter>;
 }

@@ -17,6 +17,7 @@ import "./Domain.tsp";
 import "./DomainOwnershipIdentifier.tsp";
 import "./TopLevelDomain.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

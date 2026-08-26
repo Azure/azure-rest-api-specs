@@ -21,6 +21,7 @@ import "./ServerEndpoint.tsp";
 import "./RegisteredServer.tsp";
 import "./Workflow.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -45,10 +46,17 @@ enum Versions {
    * The 2022-09-01 API version.
    */
   v2022_09_01: "2022-09-01",
+
+  /**
+   * The 2025-12-01 API version.
+   */
+  v2025_12_01: "2025-12-01",
 }
 
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")

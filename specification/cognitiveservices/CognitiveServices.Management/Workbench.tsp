@@ -20,9 +20,14 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @parentResource(Project)
-model Workbench
-  is Azure.ResourceManager.ProxyResource<WorkbenchProperties, false> {
+model Workbench is Azure.ResourceManager.ProxyResource<
+  WorkbenchProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Workbench,
     KeyName = "workbenchName",
@@ -60,6 +65,9 @@ model Workbench
 
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @armResourceOperations
 interface Workbenches {
   /**

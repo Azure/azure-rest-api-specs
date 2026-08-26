@@ -58,7 +58,8 @@ interface WikiContractOps
         @segment("wikis")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "ServiceApiWiki"
     > {}
 
 @armResourceOperations
@@ -222,7 +223,8 @@ interface ProductWikiOps
         @segment("wikis")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "ServiceProductWiki"
     > {}
 
 @armResourceOperations

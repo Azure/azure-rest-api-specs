@@ -3,10 +3,10 @@ import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path from "path";
 import { simpleGit } from "simple-git";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { parse } from "../tsp-config.js";
-import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { parse } from "../tsp-config.ts";
+import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.ts";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");

@@ -104,8 +104,7 @@
         "tags": [
           "MigrateProjects"
         ],
-        "summary": "Create Waves From Plan",
-        "description": "Creates Wave resources from the latest Active wave plan for the supplied (assessmentArmId, migrationPath) tuple.",
+        "description": "Create waves from a previously generated wave plan based on assessment data and selected wave names.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -179,8 +178,7 @@
         "tags": [
           "MigrateProjects"
         ],
-        "summary": "Fetch Upload SAS URI",
-        "description": "Mints a short-lived write-targeted SAS URL pointing into a server-managed CSV staging container. Callers PUT a wave-plan CSV to this URL and then reference the same URL on importWavePlan. Empty request body; synchronous (no LRO).",
+        "description": "Mint a write-only SAS URI for customer CSV uploads, later consumed by importWavePlan.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -198,6 +196,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FetchSasUriRequest"
+            }
           }
         ],
         "responses": {
@@ -301,8 +308,7 @@
         "tags": [
           "MigrateProjects"
         ],
-        "summary": "Get Wave Plans",
-        "description": "Lists wave plans for an assessment. When migrationPath is supplied, restricts results to that (assessmentArmId, migrationPath) combination. Returns the entire result set in a single page; ordered by wavePlanVersion descending within each migration path.",
+        "description": "List wave plans previously generated for a given assessment, optionally scoped to a migration path.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -358,8 +364,7 @@
         "tags": [
           "MigrateProjects"
         ],
-        "summary": "Import Wave Plan",
-        "description": "Imports a customer-authored wave plan from a CSV upload as a new wave plan resource; supersedes any existing plan for the (assessmentArmId, migrationPath) tuple.",
+        "description": "Ingest a customer-uploaded wave-plan CSV and produce the updated wave-plan artifacts. Long-running operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1652,32 +1657,42 @@
         "query"
       ]
     },
-    "AzureResourceProperties": {
+    "ArtifactProperties": {
       "type": "object",
-      "description": "Common properties for all azure tracked and proxy resources.",
+      "description": "Artifact Store identity for a wave plan run. Consumers use the artifact ARM id and version id to reference or share the committed artifact and resolve time-bound download access.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
+        "artifactId": {
+          "type": "string",
+          "description": "The ARM id of the Artifact Store artifact the run's files are committed under.",
+          "readOnly": true
+        },
+        "versionId": {
+          "type": "string",
+          "description": "The Artifact Store version id for the run's committed files.",
           "readOnly": true
         }
       }
+      },
+      "required": [
+        "artifactId",
+        "versionId"
+      ]
     },
     "CreateWavesFromPlanRequest": {
       "type": "object",
-      "description": "Request body for the createWavesFromPlan action.",
+      "description": "Request body for creating waves from a wave plan.",
       "properties": {
         "assessmentArmId": {
           "type": "string",
-          "description": "ARM Id of the source assessment. Used together with migrationPath so the server can resolve the latest Active wave plan for the (assessmentArmId, migrationPath) tuple at LRO start."
+          "description": "The assessment ARM ID to capture migration preference, saving and scope."
         },
         "migrationPath": {
           "type": "string",
-          "description": "Migration path of the wave plan to create waves from. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift."
+          "description": "The migration path preference."
         },
         "waveSelection": {
           "type": "array",
-          "description": "Optional subset of waves from the resolved plan to create, identified by waveName plus the desired waveDisplayName for each. When omitted, all waves in the resolved plan are created.",
+          "description": "The wave selection list. If null or empty, all waves from the wave plan will be included.",
           "items": {
             "$ref": "#/definitions/WaveSelectionItem"
           },
@@ -1693,41 +1708,41 @@
     },
     "CreateWavesFromPlanResponse": {
       "type": "object",
-      "description": "Response body for the createWavesFromPlan action. Top-level counters describe the outcome; when at least one wave failed, sasUri and expirationTime carry a pointer to a per-invocation outcome-report CSV. On all-success or all-skipped runs both fields are omitted.",
+      "description": "Response for the create waves from plan operation.",
       "properties": {
         "totalWaves": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of waves the operation attempted to create.",
+          "description": "The total number of waves in the wave plan.",
           "readOnly": true
         },
         "succeededWaves": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of waves that were created successfully.",
+          "description": "The count of successfully created waves.",
           "readOnly": true
         },
         "failedWaves": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of waves that failed to create.",
+          "description": "The count of failed wave creations.",
           "readOnly": true
         },
         "skippedWaves": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of waves that were skipped (for example, a wave with the same name already existed and the conflict policy was skip).",
+          "description": "The count of skipped waves.",
           "readOnly": true
         },
         "sasUri": {
           "type": "string",
-          "description": "Time-bound, read-only SAS URL to a per-invocation outcome-report CSV enumerating each failed wave with a failureReason and remediation column. Present only when failedWaves is greater than zero.",
+          "description": "The read-only SAS URI for the exported error CSV.",
           "readOnly": true
         },
         "expirationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "UTC instant after which sasUri ceases to be valid. Present only when sasUri is present.",
+          "description": "The expiry timestamp (UTC) for the error CSV SAS URI.",
           "readOnly": true
         }
       },
@@ -1738,19 +1753,41 @@
         "skippedWaves"
       ]
     },
+    "FetchSasUriRequest": {
+      "type": "object",
+      "description": "Request body for the fetchSASUri action.",
+      "properties": {
+        "assessmentArmId": {
+          "type": "string",
+          "description": "The assessment ARM ID identifying the wave plan to amend."
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "The migration path identifying the wave plan to amend."
+        },
+        "sasVersionId": {
+          "type": "string",
+          "description": "An optional caller-supplied SAS version ID folded into the deterministic staging blob name so concurrent upload sessions stage to distinct blobs."
+        }
+      },
+      "required": [
+        "assessmentArmId",
+        "migrationPath"
+      ]
+    },
     "FetchSasUriResponse": {
       "type": "object",
-      "description": "Response body for the fetchSASUri action.",
+      "description": "Response payload for the fetchSASUri action.",
       "properties": {
         "sasUri": {
           "type": "string",
-          "description": "Write-targeted short-lived SAS URL pointing into the server-managed CSV staging container. Callers PUT their wave-plan CSV payload to this URL and then pass the same URL verbatim as the sasUri field on importWavePlan.",
+          "description": "The write-targeted SAS URI to which the caller should PUT the CSV payload.",
           "readOnly": true
         },
         "expirationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "UTC instant after which sasUri ceases to be valid.",
+          "description": "The UTC expiration timestamp of the returned SAS URI.",
           "readOnly": true
         }
       },
@@ -1761,21 +1798,21 @@
     },
     "GenerateWavePlanRequest": {
       "type": "object",
-      "description": "Request body for the generateWavePlan action.",
+      "description": "Data model of Download URL for wave recommendation report.",
       "properties": {
         "assessmentArmId": {
           "type": "string",
-          "description": "ARM Id of the assessment for which the wave plan report is to be generated. Required from API version 2026-06-01-preview onwards."
+          "description": "ARM Id of the assessment for which the wave plan report is to be generated."
         },
         "migrationPath": {
           "type": "string",
-          "description": "Migration path for which the wave plan report is to be generated. Required from API version 2026-06-01-preview onwards. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift."
+          "description": "Optional. Specify the migration path for which the wave plan report is to be generated. If not specified, the default will be used"
         }
       }
     },
     "GenerateWavePlanResponse": {
       "type": "object",
-      "description": "Response body for the generateWavePlan action.",
+      "description": "Data model of Download URL for wave recommendation report.",
       "properties": {
         "sasUri": {
           "type": "string",
@@ -1790,27 +1827,37 @@
         },
         "wavePlanName": {
           "type": "string",
-          "description": "Server-allocated friendly identifier for the wave plan. Output-only.",
+          "description": "The deterministic wave-plan resource name matching the persisted row's wavePlanName.",
           "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation on the wave plan.",
+          "description": "The provisioning state of the persisted wave-plan row.",
           "readOnly": true
         },
         "planSource": {
           "$ref": "#/definitions/PlanSource",
-          "description": "How the wave plan was produced. Always SystemGenerated for plans produced by generateWavePlan.",
+          "description": "The plan source (SystemGenerated for all generated runs).",
           "readOnly": true
         },
         "assessmentArmId": {
           "type": "string",
-          "description": "ARM Id of the source assessment the wave plan was generated from. Echoed from the request.",
+          "description": "The assessment ARM ID this plan was generated for.",
           "readOnly": true
         },
         "migrationPath": {
           "type": "string",
-          "description": "Migration path the wave plan was generated for. Echoed from the request. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift.",
+          "description": "The canonical migration-path string this plan was generated for.",
+          "readOnly": true
+        },
+        "artifactProperties": {
+          "$ref": "#/definitions/ArtifactProperties",
+          "description": "The Artifact Store identity (artifactId, versionId) this run's files are committed under, used to resolve time-bound download access.",
+          "readOnly": true
+        },
+        "summary": {
+          "$ref": "#/definitions/WavePlanSummary",
+          "description": "The plan-level summary (number of waves, risk, confidence).",
           "readOnly": true
         }
       },
@@ -1820,20 +1867,22 @@
         "wavePlanName",
         "provisioningState",
         "planSource",
-        "assessmentArmId"
+        "assessmentArmId",
+        "migrationPath",
+        "artifactProperties"
       ]
     },
     "GetWavePlansRequest": {
       "type": "object",
-      "description": "Request body for the getWavePlans action.",
+      "description": "Request body for the getWavePlans listing action.",
       "properties": {
         "assessmentArmId": {
           "type": "string",
-          "description": "ARM Id of the source assessment. Required."
+          "description": "The assessment ARM ID to scope the listing to."
         },
         "migrationPath": {
           "type": "string",
-          "description": "Optional migration path. When provided, restricts results to the supplied (assessmentArmId, migrationPath) combination; when omitted, returns wave plans across every migration path that has plans for the assessment. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift."
+          "description": "The optional migration path filter. When omitted, plans across all migration paths are returned."
         }
       },
       "required": [
@@ -1842,15 +1891,17 @@
     },
     "GetWavePlansResponse": {
       "type": "object",
-      "description": "Response body for the getWavePlans action.",
+      "description": "Response payload for the getWavePlans listing action.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of wave plan summary items. Returned in a single page; ordered by wavePlanVersion descending within each migration path.",
+          "description": "The wave plan list items. Always present; empty when no plans match the filter.",
           "items": {
-            "$ref": "#/definitions/WavePlanSummary"
+            "$ref": "#/definitions/WavePlanListItem"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "wavePlanName"
+          ]
         }
       },
       "required": [
@@ -1863,30 +1914,29 @@
       "properties": {
         "assessmentArmId": {
           "type": "string",
-          "description": "ARM Id of the source assessment. Must belong to the same subscription, resource group, and migrate project as the request URL."
+          "description": "The assessment ARM ID to scope the import to."
         },
         "migrationPath": {
           "type": "string",
-          "description": "Migration path that the supplied wave plan applies to. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift."
+          "description": "The migration path identifying the existing wave plan being amended."
         },
-        "sasUri": {
+        "sasVersionId": {
           "type": "string",
-          "description": "SAS-signed URL to the customer-uploaded CSV. The recommended way to obtain this URL is to call fetchSASUri, PUT the CSV payload to the URL it returns, then pass that same URL verbatim here. The URL is fetched once during import and is neither persisted on the resulting wave plan nor echoed back on read."
+          "description": "An optional caller-supplied SAS version ID. Must match the value passed to fetchSASUri when the CSV was staged."
         }
       },
       "required": [
         "assessmentArmId",
-        "migrationPath",
-        "sasUri"
+        "migrationPath"
       ]
     },
     "ImportWavePlanResponse": {
       "type": "object",
-      "description": "Response body for the importWavePlan action.",
+      "description": "Response payload for the importWavePlan action.",
       "properties": {
         "wavePlanName": {
           "type": "string",
-          "description": "Server-allocated friendly identifier for the imported wave plan. Output-only.",
+          "description": "The wave-plan name.",
           "readOnly": true
         },
         "provisioningState": {
@@ -1901,23 +1951,27 @@
         },
         "assessmentArmId": {
           "type": "string",
-          "description": "ARM Id of the source assessment the wave plan was imported for. Echoed from the request.",
+          "description": "The assessment ARM identifier the plan belongs to.",
           "readOnly": true
         },
         "migrationPath": {
           "type": "string",
-          "description": "Migration path the wave plan was imported for. Echoed from the request. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift.",
+          "description": "The migration path the plan was generated for.",
           "readOnly": true
         },
-        "sasUri": {
-          "type": "string",
-          "description": "Time-bound SAS URL to the parsed wave-plan JSON. Expires at expirationTime; never persisted on the wave-plan document.",
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the plan.",
           "readOnly": true
         },
-        "expirationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC instant after which sasUri ceases to be valid.",
+        "planSource": {
+          "$ref": "#/definitions/PlanSource",
+          "description": "The source of the plan.",
+          "readOnly": true
+        },
+        "artifactProperties": {
+          "$ref": "#/definitions/ArtifactProperties",
+          "description": "The Artifact Store identity (artifactId, versionId) this plan's files are committed under, used to resolve time-bound download access.",
           "readOnly": true
         }
       },
@@ -1926,185 +1980,9 @@
         "planSource",
         "assessmentArmId",
         "migrationPath",
-        "sasUri",
-        "expirationTime"
-      ]
-    },
-    "Items": {
-      "type": "string",
-      "description": "Items Enum",
-      "enum": [
-        "ServerDiscovery",
-        "ServerAssessment",
-        "ServerMigration",
-        "Cloudamize",
-        "Turbonomic",
-        "Zerto",
-        "CorentTech",
-        "ServerAssessmentV1",
-        "ServerMigration_Replication",
-        "Carbonite",
-        "DataMigrationAssistant",
-        "DatabaseMigrationService",
-        "Device42",
-        "JetStream",
-        "RackWare",
-        "UnifyCloud",
-        "Flexera",
-        "ServerDiscovery_Import",
-        "Lakeside",
-        "AppServiceMigrationAssistant",
-        "Movere",
-        "CloudSphere",
-        "Modernization",
-        "ServerMigration_DataReplication",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "Items",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServerDiscovery",
-            "value": "ServerDiscovery",
-            "description": "Server Discovery Item"
-          },
-          {
-            "name": "ServerAssessment",
-            "value": "ServerAssessment",
-            "description": "Server Assessment Item"
-          },
-          {
-            "name": "ServerMigration",
-            "value": "ServerMigration",
-            "description": "Server Migration Item"
-          },
-          {
-            "name": "Cloudamize",
-            "value": "Cloudamize",
-            "description": "Cloudamize Item"
-          },
-          {
-            "name": "Turbonomic",
-            "value": "Turbonomic",
-            "description": "Turbonomic Item"
-          },
-          {
-            "name": "Zerto",
-            "value": "Zerto",
-            "description": "Zerto Item"
-          },
-          {
-            "name": "CorentTech",
-            "value": "CorentTech",
-            "description": "CorentTech Item"
-          },
-          {
-            "name": "ServerAssessmentV1",
-            "value": "ServerAssessmentV1",
-            "description": "ServerAssessmentV1"
-          },
-          {
-            "name": "ServerMigration_Replication",
-            "value": "ServerMigration_Replication",
-            "description": "ServerMigration_Replication"
-          },
-          {
-            "name": "Carbonite",
-            "value": "Carbonite",
-            "description": "Carbonite Item"
-          },
-          {
-            "name": "DataMigrationAssistant",
-            "value": "DataMigrationAssistant",
-            "description": "DataMigrationAssistant Item"
-          },
-          {
-            "name": "DatabaseMigrationService",
-            "value": "DatabaseMigrationService",
-            "description": "DatabaseMigrationService Item"
-          },
-          {
-            "name": "Device42",
-            "value": "Device42",
-            "description": "Device42 Item"
-          },
-          {
-            "name": "JetStream",
-            "value": "JetStream",
-            "description": "JetStream Item"
-          },
-          {
-            "name": "RackWare",
-            "value": "RackWare",
-            "description": "RackWare Item"
-          },
-          {
-            "name": "UnifyCloud",
-            "value": "UnifyCloud",
-            "description": "UnifyCloud Item"
-          },
-          {
-            "name": "Flexera",
-            "value": "Flexera",
-            "description": "Flexera Item"
-          },
-          {
-            "name": "ServerDiscovery_Import",
-            "value": "ServerDiscovery_Import",
-            "description": "ServerDiscovery_Import Item."
-          },
-          {
-            "name": "Lakeside",
-            "value": "Lakeside",
-            "description": "Lakeside Item"
-          },
-          {
-            "name": "AppServiceMigrationAssistant",
-            "value": "AppServiceMigrationAssistant",
-            "description": "AppServiceMigrationAssistant Item"
-          },
-          {
-            "name": "Movere",
-            "value": "Movere",
-            "description": "Movere Item"
-          },
-          {
-            "name": "CloudSphere",
-            "value": "CloudSphere",
-            "description": "CloudSphere Item"
-          },
-          {
-            "name": "Modernization",
-            "value": "Modernization",
-            "description": "Modernization Item"
-          },
-          {
-            "name": "ServerMigration_DataReplication",
-            "value": "ServerMigration_DataReplication",
-            "description": "ServerMigration_DataReplication Item"
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown Item"
-          }
-        ]
-      }
-    },
-    "MigrateProject": {
-      "type": "object",
-      "description": "A Migrate project Resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MigrateProjectProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
+        "provisioningState",
+        "planSource",
+        "artifactProperties"
       ]
     },
     "MigrateProjectProperties": {
@@ -2458,7 +2336,7 @@
     },
     "PlanSource": {
       "type": "string",
-      "description": "Identifies how a wave plan was produced.",
+      "description": "The source of a wave plan.",
       "enum": [
         "SystemGenerated",
         "Imported"
@@ -2470,12 +2348,12 @@
           {
             "name": "SystemGenerated",
             "value": "SystemGenerated",
-            "description": "The wave plan was produced by the system solver."
+            "description": "Plan generated by the system."
           },
           {
             "name": "Imported",
             "value": "Imported",
-            "description": "The wave plan was uploaded by the customer."
+            "description": "Plan imported by the user."
           }
         ]
       }
@@ -2921,7 +2799,9 @@
       },
       "required": [
         "scopeId",
+        "taskType",
         "displayName",
+        "isEditable",
         "status",
         "scope"
       ]
@@ -3135,54 +3015,80 @@
         "value"
       ]
     },
-    "WavePlanSummary": {
+    "WavePlanListItem": {
       "type": "object",
-      "description": "Summary metadata for a single wave plan returned by getWavePlans, plus a time-bound SAS URL to stream the wave-plan JSON.",
+      "description": "A single wave-plan entry in the getWavePlans response.",
       "properties": {
         "wavePlanName": {
           "type": "string",
-          "description": "Server-allocated friendly identifier for the wave plan.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation on the wave plan.",
-          "readOnly": true
-        },
-        "planSource": {
-          "$ref": "#/definitions/PlanSource",
-          "description": "How the wave plan was produced.",
+          "description": "The wave-plan name.",
           "readOnly": true
         },
         "assessmentArmId": {
           "type": "string",
-          "description": "ARM Id of the source assessment.",
+          "description": "The assessment ARM identifier the plan belongs to.",
           "readOnly": true
         },
         "migrationPath": {
           "type": "string",
-          "description": "Migration path the wave plan was produced for. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift.",
+          "description": "The migration path the plan was generated for.",
           "readOnly": true
         },
-        "sasUri": {
-          "type": "string",
-          "description": "Time-bound SAS URL to the wave-plan JSON for this item. Minted on demand on every response; never persisted on the wave-plan document.",
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the plan.",
           "readOnly": true
         },
-        "expirationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC instant after which sasUri ceases to be valid.",
+        "planSource": {
+          "$ref": "#/definitions/PlanSource",
+          "description": "The source of the plan.",
+          "readOnly": true
+        },
+        "artifactProperties": {
+          "$ref": "#/definitions/ArtifactProperties",
+          "description": "The Artifact Store identity (artifactId, versionId) this plan's files are committed under, used to resolve time-bound download access.",
+          "readOnly": true
+        },
+        "summary": {
+          "$ref": "#/definitions/WavePlanSummary",
+          "description": "The plan-level summary (number of waves, risk, confidence).",
           "readOnly": true
         }
       },
       "required": [
         "wavePlanName",
-        "planSource",
         "assessmentArmId",
         "migrationPath",
-        "sasUri",
-        "expirationTime"
+        "provisioningState",
+        "planSource",
+        "artifactProperties"
+      ]
+    },
+    "WavePlanSummary": {
+      "type": "object",
+      "description": "Plan-level summary surfaced on the generateWavePlan and getWavePlans responses.",
+      "properties": {
+        "numberOfWaves": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of waves in the plan.",
+          "readOnly": true
+        },
+        "risk": {
+          "type": "string",
+          "description": "The plan-level overall risk bucket (Low/Medium/High).",
+          "readOnly": true
+        },
+        "confidence": {
+          "type": "string",
+          "description": "The plan-level overall confidence label (Low/Medium/High).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "numberOfWaves",
+        "risk",
+        "confidence"
       ]
     },
     "WaveProperties": {
@@ -3241,20 +3147,19 @@
     },
     "WaveSelectionItem": {
       "type": "object",
-      "description": "Identifies a single wave from the resolved wave plan to create, together with the display name that should be applied to the resulting wave resource.",
+      "description": "A wave selection item with name and optional display name.",
       "properties": {
         "waveName": {
           "type": "string",
-          "description": "Name of the wave in the resolved wave plan to create. Must match a wave entry produced by the source plan."
+          "description": "The ARM-compliant wave resource name used to create the wave."
         },
         "waveDisplayName": {
           "type": "string",
-          "description": "Display name to assign to the wave resource that is created. Free-form, human-readable label surfaced in tooling."
+          "description": "Optional friendly name used during wave creation."
         }
       },
       "required": [
-        "waveName",
-        "waveDisplayName"
+        "waveName"
       ]
     }
   },

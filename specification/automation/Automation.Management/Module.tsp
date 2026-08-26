@@ -270,7 +270,8 @@ alias Python3PackageOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("python3Packages")
     @key
     packageName: string;
-  }
+  },
+  ResourceName = "AutomationPython3Package"
 >;
 
 @armResourceOperations

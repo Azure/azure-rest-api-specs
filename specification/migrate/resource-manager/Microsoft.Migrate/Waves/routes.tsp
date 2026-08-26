@@ -2,11 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
 import "./ApiVersions.tsp";
-import "./WebModels/Waves/GenerateWavePlan.tsp";
-import "./WebModels/Waves/FetchSasUri.tsp";
-import "./WebModels/Waves/ImportWavePlan.tsp";
-import "./WebModels/Waves/GetWavePlans.tsp";
-import "./WebModels/Waves/CreateWavesFromPlan.tsp";
+import "./WebModels/WavePlans/GenerateWavePlan.tsp";
+import "./WebModels/WavePlans/CreateWavesFromPlan.tsp";
+import "./WebModels/WavePlans/GetWavePlans.tsp";
+import "./WebModels/WavePlans/FetchSasUri.tsp";
+import "./WebModels/WavePlans/ImportWavePlan.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
 import "./WebModels/RefreshEntities/RefreshEntities.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
@@ -29,6 +29,7 @@ namespace Microsoft.Migrate;
 
 @armResourceOperations
 interface MigrateProjects {
+  @doc("A long-running resource action.")
   @added(ApiVersions.v2025_12_01_preview)
   generateWavePlan is ArmResourceActionAsync<
     MigrateProject,
@@ -46,27 +47,16 @@ interface MigrateProjects {
   >;
 
   @added(ApiVersions.v2026_06_01_preview)
-  @doc("Mints a short-lived write-targeted SAS URL pointing into a server-managed CSV staging container. Callers PUT a wave-plan CSV to this URL and then reference the same URL on importWavePlan. Empty request body; synchronous (no LRO).")
-  @summary("Fetch Upload SAS URI")
-  @action("fetchSASUri")
-  fetchSasUri is ArmResourceActionSync<
+  @doc("Create waves from a previously generated wave plan based on assessment data and selected wave names.")
+  createWavesFromPlan is ArmResourceActionAsync<
     MigrateProject,
-    void,
-    FetchSasUriResponse
+    CreateWavesFromPlanRequest,
+    CreateWavesFromPlanResponse
   >;
 
   @added(ApiVersions.v2026_06_01_preview)
-  @doc("Imports a customer-authored wave plan from a CSV upload as a new wave plan resource; supersedes any existing plan for the (assessmentArmId, migrationPath) tuple.")
-  @summary("Import Wave Plan")
-  importWavePlan is ArmResourceActionAsync<
-    MigrateProject,
-    ImportWavePlanRequest,
-    ImportWavePlanResponse
-  >;
-
-  @added(ApiVersions.v2026_06_01_preview)
-  @doc("Lists wave plans for an assessment. When migrationPath is supplied, restricts results to that (assessmentArmId, migrationPath) combination. Returns the entire result set in a single page; ordered by wavePlanVersion descending within each migration path.")
-  @summary("Get Wave Plans")
+  @doc("List wave plans previously generated for a given assessment, optionally scoped to a migration path.")
+  @action("getWavePlans")
   getWavePlans is ArmResourceActionSync<
     MigrateProject,
     GetWavePlansRequest,
@@ -74,12 +64,21 @@ interface MigrateProjects {
   >;
 
   @added(ApiVersions.v2026_06_01_preview)
-  @doc("Creates Wave resources from the latest Active wave plan for the supplied (assessmentArmId, migrationPath) tuple.")
-  @summary("Create Waves From Plan")
-  createWavesFromPlan is ArmResourceActionAsync<
+  @doc("Mint a write-only SAS URI for customer CSV uploads, later consumed by importWavePlan.")
+  @action("fetchSASUri")
+  fetchSasUri is ArmResourceActionSync<
     MigrateProject,
-    CreateWavesFromPlanRequest,
-    CreateWavesFromPlanResponse
+    FetchSasUriRequest,
+    FetchSasUriResponse
+  >;
+
+  @added(ApiVersions.v2026_06_01_preview)
+  @doc("Ingest a customer-uploaded wave-plan CSV and produce the updated wave-plan artifacts. Long-running operation.")
+  @action("importWavePlan")
+  importWavePlan is ArmResourceActionAsync<
+    MigrateProject,
+    ImportWavePlanRequest,
+    ImportWavePlanResponse
   >;
 }
 

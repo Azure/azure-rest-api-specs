@@ -219,7 +219,8 @@ interface WorkspaceApiSchemaOps
         @minLength(1)
         @maxLength(80)
         schemaId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiSchema"
     > {}
 
 @armResourceOperations
