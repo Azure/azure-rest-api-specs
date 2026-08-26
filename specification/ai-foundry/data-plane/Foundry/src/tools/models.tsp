@@ -77,8 +77,8 @@ namespace Azure.AI.Projects {
     tool_configs?: Record<ToolConfig>;
   };
 
-  @doc("A customer-configurable GitHub Copilot built-in capability.")
-  union GitHubCopilotBuiltInCapability {
+  @doc("A customer-configurable GitHub Copilot built-in tool.")
+  union GitHubCopilotBuiltInTool {
     @doc("Read and search files in the harness workspace.")
     filesystem_read: "filesystem_read",
 
@@ -95,22 +95,22 @@ namespace Azure.AI.Projects {
     subagents: "subagents",
   }
 
-  @doc("The default enablement setting for GitHub Copilot built-in capabilities.")
+  @doc("The default enablement setting for GitHub Copilot built-in tools.")
   model GitHubCopilotToolsetDefaultConfig {
-    @doc("Whether built-in capabilities are enabled by default. Defaults to true.")
+    @doc("Whether built-in tools are enabled by default. Defaults to true.")
     enabled?: boolean = true;
   }
 
-  @doc("An enablement override for a GitHub Copilot built-in capability.")
+  @doc("An enablement override for a GitHub Copilot built-in tool.")
   model GitHubCopilotToolsetConfig {
-    @doc("The built-in capability to configure.")
-    name: GitHubCopilotBuiltInCapability;
+    @doc("The built-in tool to configure.")
+    name: GitHubCopilotBuiltInTool;
 
-    @doc("Whether the capability is enabled. If omitted, the toolset default applies.")
+    @doc("Whether the built-in tool is enabled. If omitted, the toolset default applies.")
     enabled?: boolean;
   }
 
-  @doc("Configuration overrides for GitHub Copilot built-in capabilities.")
+  @doc("Configuration overrides for GitHub Copilot built-in tools.")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -121,10 +121,10 @@ namespace Azure.AI.Projects {
     @doc("The type of the toolset. Always `github_copilot_toolset_preview`.")
     type: "github_copilot_toolset_preview";
 
-    @doc("The default configuration for built-in capabilities. If omitted, capabilities are enabled by default.")
+    @doc("The default configuration for built-in tools. If omitted, built-in tools are enabled by default.")
     default_config?: GitHubCopilotToolsetDefaultConfig;
 
-    @doc("Per-capability configuration overrides. Duplicate capability names are not allowed.")
+    @doc("Per-tool configuration overrides. Duplicate built-in tool names are not allowed.")
     configs?: GitHubCopilotToolsetConfig[];
   }
 
@@ -133,7 +133,7 @@ namespace Azure.AI.Projects {
     @doc("An OpenAI-compatible tool.")
     openai: OpenAI.Tool,
 
-    @doc("Configuration overrides for GitHub Copilot built-in capabilities.")
+    @doc("Configuration overrides for GitHub Copilot built-in tools.")
     github_copilot_toolset_preview: GitHubCopilotToolsetPreview,
   }
 
