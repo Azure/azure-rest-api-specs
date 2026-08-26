@@ -13,8 +13,10 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of a Dedicated Capacity resource.
  */
-model DedicatedCapacity
-  is Azure.ResourceManager.TrackedResource<DedicatedCapacityProperties, true> {
+model DedicatedCapacity is Azure.ResourceManager.TrackedResource<
+  DedicatedCapacityProperties,
+  true
+> {
   ...ResourceNameParameter<
     Resource = DedicatedCapacity,
     KeyName = "dedicatedCapacityName",

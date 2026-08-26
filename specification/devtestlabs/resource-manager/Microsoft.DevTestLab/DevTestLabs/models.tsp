@@ -1423,11 +1423,13 @@ model CustomImagePropertiesFromVm {
   /**
    * The Windows OS information of the VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   windowsOsInfo?: WindowsOsInfo;
 
   /**
    * The Linux OS information of the VM.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   linuxOsInfo?: LinuxOsInfo;
 }
 
@@ -1877,6 +1879,7 @@ model NetworkInterfaceProperties {
 /**
  * Properties of a virtual machine that determine how it is connected to a load balancer.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model SharedPublicIpAddressConfiguration {
   /**
    * The incoming NAT rules

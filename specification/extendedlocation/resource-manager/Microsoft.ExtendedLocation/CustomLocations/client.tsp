@@ -101,13 +101,17 @@ using TypeSpec.Rest;
 @@usage(EnabledResourceTypePropertiesTypesMetadataItem, Usage.input, "csharp");
 
 @@override(CustomLocations.update, customLocationsUpdate, "javascript");
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op customLocationsUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
   provider: "Microsoft.ExtendedLocation",
+
+  @path
   resourceName: string,
 
   /**
@@ -127,15 +131,22 @@ op customLocationsUpdate(
   | Azure.ResourceManager.CommonTypes.ErrorResponse;
 @@override(ResourceSyncRules.update, resourceSyncRulesUpdate, "javascript");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op resourceSyncRulesUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
   provider: "Microsoft.ExtendedLocation",
+
+  @path
   resourceName: string,
+
+  @path
   childResourceName: string,
+
   properties?: resourceSyncRuleProperties,
 
   /**

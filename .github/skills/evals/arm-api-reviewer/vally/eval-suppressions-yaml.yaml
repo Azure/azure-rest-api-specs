@@ -8,6 +8,17 @@ description: |
   field are flagged, and new entries that suppress security-related
   rules with vague or absent justification are treated as Blocking.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
+tags:
+  area: arm-api-reviewer
+
 defaults:
   runs: 1
   timeout: "180s"
@@ -17,6 +28,7 @@ defaults:
 scoring:
   threshold: 0.7
 
+# Quote rubric entries containing `: `; YAML otherwise parses them as mappings, but Vally requires strings.
 stimuli:
   # 140001 — New suppressions.yaml entry without a reason field
   - name: detect-suppressions-yaml-no-reason
@@ -63,7 +75,7 @@ stimuli:
       - type: prompt
     rubric:
       - The `NoUnreferencedTypes` entry on `noreasonsvc/NoReason.Management` is flagged because it has no `reason:` field at all
-      - The `RequireDocumentation` entry on `vaguesvc/Vague.Management` is flagged because `reason: existing pattern` is a vague, non-actionable placeholder
+      - "The `RequireDocumentation` entry on `vaguesvc/Vague.Management` is flagged because `reason: existing pattern` is a vague, non-actionable placeholder"
       - The pre-existing `FolderStructure / MustUseV2` entry on `existingsvc/Existing.Management` is NOT flagged as a new finding — it was carried over from the base branch
       - The agent identifies each finding by the `tool` + `rules` + `paths` tuple, not by line number alone
       - The agent classifies both new findings as `[NEW]` (they did not exist on the base branch)

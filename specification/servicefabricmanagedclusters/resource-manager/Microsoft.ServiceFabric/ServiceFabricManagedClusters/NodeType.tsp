@@ -564,6 +564,7 @@ model NodeTypeProperties {
   /**
    * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2026_02_01)
   enableResilientEphemeralOsDisk?: boolean;
 
@@ -877,6 +878,7 @@ model VaultSecretGroup {
  * Azure resource identifier.
  */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backwards compatibility to match existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-azure-resource' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.ResourceManager resource types."
 @OpenAPI.extension("x-ms-azure-resource", true)
 model SubResource {
   /**

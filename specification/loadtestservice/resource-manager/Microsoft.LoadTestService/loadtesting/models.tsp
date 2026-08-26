@@ -252,6 +252,7 @@ model LoadTestProperties {
   encryption?: EncryptionProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Check quota availability response object.")
 model CheckQuotaAvailabilityResponse {
   @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
@@ -327,8 +328,7 @@ model QuotaBucketRequestPropertiesDimensions {
 model PagedOutboundEnvironmentEndpoint
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;
 
-model LoadTestResourceUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-    LoadTestResource,
-    LoadTestProperties
-  >;
+model LoadTestResourceUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  LoadTestResource,
+  LoadTestProperties
+>;
