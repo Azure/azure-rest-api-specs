@@ -11,7 +11,11 @@ using Microsoft.Commerce;
   "GetUsageAggregates",
   "csharp"
 );
-@@clientName(AggregationGranularity, "CommerceUsageAggregationGranularity", "csharp");
+@@clientName(
+  AggregationGranularity,
+  "CommerceUsageAggregationGranularity",
+  "csharp"
+);
 @@clientName(MeterInfo, "CommerceMeterInfo", "csharp");
 @@clientName(MonetaryCommitment, "CommerceMonetaryCommitment", "csharp");
 @@clientName(MonetaryCredit, "CommerceMonetaryCredit", "csharp");
