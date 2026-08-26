@@ -193,7 +193,7 @@ model VoiceAgentSessionUpdateConfig {
   metadata?: Record<string>;
 
   @doc("Interim-response settings for latency and tool execution.")
-  interim_response?: VoiceAgentInterimResponse;
+  interim_response?: VoiceAgentInterimResponseConfig;
 
   @doc("A proactive assistant greeting started after session configuration.")
   greeting?: VoiceGreetingConfig;
@@ -247,7 +247,7 @@ model VoiceAgentResponseCreateParams {
   pre_generated_assistant_message?: OpenAI.RealtimeConversationItem | null;
 
   @doc("Interim-response settings for this response.")
-  interim_response?: VoiceAgentInterimResponse | null;
+  interim_response?: VoiceAgentInterimResponseConfig | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."

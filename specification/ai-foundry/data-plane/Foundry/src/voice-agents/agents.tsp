@@ -39,6 +39,7 @@ union VoiceAgentMaxOutputTokens {
 
 @doc("A condition that may trigger an interim response.")
 union VoiceAgentInterimResponseTrigger {
+  string,
   latency: "latency",
   tool: "tool",
 }
@@ -85,14 +86,6 @@ model VoiceAgentLlmInterimResponseConfig
   max_completion_tokens?: int32 = 50;
 }
 
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Interim response settings are selected by their `type` property."
-@doc("Interim-response settings for latency and tool execution.")
-@oneOf
-union VoiceAgentInterimResponse {
-  static: VoiceAgentStaticInterimResponseConfig,
-  llm: VoiceAgentLlmInterimResponseConfig,
-}
-
 @doc("""
   The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
   managed speech-to-speech experience. Establish realtime voice sessions through
@@ -134,7 +127,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   include?: VoiceAgentSessionIncludeOption[];
 
   @doc("Interim-response settings for latency and tool execution.")
-  interim_response?: VoiceAgentInterimResponse;
+  interim_response?: VoiceAgentInterimResponseConfig;
 
   @doc("Optional avatar configuration. These values are session defaults and may be overridden when connecting.")
   avatar?: VoiceAvatarConfig;

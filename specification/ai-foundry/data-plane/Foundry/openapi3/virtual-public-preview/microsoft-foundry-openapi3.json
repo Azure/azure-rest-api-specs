@@ -90665,7 +90665,7 @@
             "description": "Additional fields to include in service outputs."
           },
           "interim_response": {
-            "$ref": "#/components/schemas/VoiceAgentInterimResponse",
+            "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig",
             "description": "Interim-response settings for latency and tool execution."
           },
           "avatar": {
@@ -90784,17 +90784,6 @@
         ],
         "description": "A native function tool executed by the client."
       },
-      "VoiceAgentInterimResponse": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentStaticInterimResponseConfig"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentLlmInterimResponseConfig"
-          }
-        ],
-        "description": "Interim-response settings for latency and tool execution."
-      },
       "VoiceAgentInterimResponseConfig": {
         "type": "object",
         "required": [
@@ -90825,17 +90814,24 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "llm_interim_response": "#/components/schemas/VoiceAgentLlmInterimResponseConfig",
-            "static_interim_response": "#/components/schemas/VoiceAgentStaticInterimResponseConfig"
+            "static_interim_response": "#/components/schemas/VoiceAgentStaticInterimResponseConfig",
+            "llm_interim_response": "#/components/schemas/VoiceAgentLlmInterimResponseConfig"
           }
         },
         "description": "Fields shared by interim-response configurations."
       },
       "VoiceAgentInterimResponseTrigger": {
-        "type": "string",
-        "enum": [
-          "latency",
-          "tool"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "latency",
+              "tool"
+            ]
+          }
         ],
         "description": "A condition that may trigger an interim response."
       },
@@ -91234,7 +91230,7 @@
           "interim_response": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/VoiceAgentInterimResponse"
+                "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
               },
               {
                 "type": "null"
@@ -92033,7 +92029,7 @@
             "description": "Up to 16 string key-value pairs attached to the session."
           },
           "interim_response": {
-            "$ref": "#/components/schemas/VoiceAgentInterimResponse",
+            "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig",
             "description": "Interim-response settings for latency and tool execution."
           },
           "greeting": {
@@ -92154,7 +92150,7 @@
             "description": "Up to 16 string key-value pairs attached to the session."
           },
           "interim_response": {
-            "$ref": "#/components/schemas/VoiceAgentInterimResponse",
+            "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig",
             "description": "Interim-response settings for latency and tool execution."
           },
           "greeting": {
