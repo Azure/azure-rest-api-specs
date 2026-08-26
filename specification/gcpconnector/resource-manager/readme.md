@@ -34,7 +34,7 @@ tag: package-2027-01-01
 
 These settings apply only when `--tag=package-2027-01-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2027-01-01'
+```yaml $(tag) == 'package-2027-01-01'
 input-file:
   - Microsoft.GcpConnector/stable/2027-01-01/cloudFunction.json
   - Microsoft.GcpConnector/stable/2027-01-01/computeInstance.json
@@ -47,7 +47,7 @@ input-file:
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: AvoidAdditionalProperties
     reason: 1. Properties in GCP definition represents user defined gcpTags.
@@ -112,6 +112,7 @@ directive:
       - $.definitions.SQLAdminInstanceTagsUpdate.properties.tags
       - $.definitions.Settings.properties.userLabels
 ```
+
 ---
 
 # Code Generation
@@ -128,6 +129,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
