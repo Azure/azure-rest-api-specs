@@ -35,6 +35,7 @@ model DeploymentExtended
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 

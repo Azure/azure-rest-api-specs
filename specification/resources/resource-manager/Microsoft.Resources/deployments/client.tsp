@@ -148,7 +148,12 @@ using Microsoft.Resources;
 @@clientName(Deployments.exportTemplateAtScope, "ExportTemplate", "csharp");
 @@clientName(Deployments.validateAtScope, "Validate", "csharp");
 @@clientName(Deployments.checkExistenceAtScope, "CheckExistence", "csharp");
-@@alternateType(KeyVaultReference.id, armResourceIdentifier, "csharp");
+@@scope(Deployments.checkExistenceAtScope, "csharp");
+@@alternateType(
+  KeyVaultParameterReference.keyVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
 @@clientName(
   Azure.ResourceManager.Foundations.ErrorAdditionalInfo.type,
   "ErrorAdditionalInfoType",
@@ -273,8 +278,6 @@ using Microsoft.Resources;
 @@scope(DeploymentOperationsOperationGroup.get, "!csharp");
 @@scope(DeploymentOperationsOperationGroup.list, "!csharp");
 
-@@scope(Deployments.checkExistenceAtScope, "!csharp"); // Remove this setting once https://github.com/Azure/azure-sdk-for-net/issues/58746 get fixed
-
 @@apiVersion(ProviderResourceType.apiVersions, false);
 @@apiVersion(AliasPath.apiVersions, false);
 @@responseAsBool(Deployments.checkExistenceAtScope, "javascript");
@@ -291,3 +294,9 @@ using Microsoft.Resources;
   "javascript"
 );
 @@responseAsBool(DeploymentExtendedOperationGroup.checkExistence, "javascript");
+
+namespace Azure.ResourceManager.Models {
+  model WritableSubResource {
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
