@@ -1417,9 +1417,9 @@ model PolicyExemptionProperties {
   assignmentScopeValidation?: AssignmentScopeValidation;
 
   /**
-   * The mode indicating how the policy exemption is managed. Defaults to Admin when not specified.
+   * The mode indicating how the policy exemption is managed.
    */
-  exemptionManagementMode?: ExemptionManagementMode;
+  exemptionManagementMode?: ExemptionManagementMode = ExemptionManagementMode.Admin;
 }
 
 /**
@@ -1452,7 +1452,7 @@ model PolicyExemptionUpdateProperties {
   assignmentScopeValidation?: AssignmentScopeValidation;
 
   /**
-   * The mode indicating how the policy exemption is managed. Defaults to Admin when not specified.
+   * The mode indicating how the policy exemption is managed.
    */
   exemptionManagementMode?: ExemptionManagementMode;
 }

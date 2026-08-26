@@ -6492,8 +6492,29 @@
           "description": "The option whether validate the exemption is at or under the assignment scope."
         },
         "exemptionManagementMode": {
-          "$ref": "#/definitions/ExemptionManagementMode",
-          "description": "The mode indicating how the policy exemption is managed. Defaults to Admin when not specified."
+          "type": "string",
+          "description": "The mode indicating how the policy exemption is managed.",
+          "default": "Admin",
+          "enum": [
+            "Admin",
+            "UserSelfServe"
+          ],
+          "x-ms-enum": {
+            "name": "ExemptionManagementMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Admin",
+                "value": "Admin",
+                "description": "This mode means the exemption is managed by an administrator and requires permission for the policy exemption action."
+              },
+              {
+                "name": "UserSelfServe",
+                "value": "UserSelfServe",
+                "description": "This mode means the exemption is managed by the user it applies to, through the self-serve exemption settings on the policy assignment."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -6532,7 +6553,7 @@
         },
         "exemptionManagementMode": {
           "$ref": "#/definitions/ExemptionManagementMode",
-          "description": "The mode indicating how the policy exemption is managed. Defaults to Admin when not specified."
+          "description": "The mode indicating how the policy exemption is managed."
         }
       }
     },
