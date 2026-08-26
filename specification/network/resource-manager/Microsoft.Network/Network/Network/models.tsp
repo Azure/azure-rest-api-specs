@@ -28088,21 +28088,17 @@ model NeuroShieldPatch {
 /**
  * ARM tracked resource representing a NeuroShield instance.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "The shared CommonTrackedResource is a private legacy template required to preserve the existing Microsoft.Network ARM resource envelope."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "The legacy Microsoft.Network project models tracked resources through the shared custom CommonTrackedResource envelope, matching existing IPAM resources."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance from CommonTrackedResource is required by this legacy project to emit the standard ARM id, name, type, location, tags, and systemData fields."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network uses Azure.ResourceManager.Legacy feature templates to emit feature-specific Swagger files from the shared project."
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.neuroShield)
-model NeuroShieldResource extends CommonTrackedResource {
-  /**
-   * Properties of the NeuroShield resource.
-   */
-  properties: NeuroShieldProperties;
-
+model NeuroShieldResource is Azure.ResourceManager.TrackedResource<
+  NeuroShieldProperties,
+  false
+> {
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Keep the ARM-standard top-level etag used by the reviewed NeuroShield contract for optimistic concurrency."
   @visibility(Lifecycle.Read)
   etag?: string;
 
@@ -28218,20 +28214,14 @@ model NeuroShieldProtectedResourceProperties {
 /**
  * ARM proxy child resource representing a protected resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to suppress non-resource metadata in emitted payloads for the ARM child-resource envelope."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Nested protected resources are modeled as ARM child resources with parent-linked resource identity."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "ProxyResource inheritance is required to emit the standard ARM nested-resource envelope."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-01-01 follows this project-wide convention."
 @added(Versions.v2026_01_01)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.neuroShield)
 @parentResource(NeuroShieldResource)
-model NeuroShieldProtectedResource extends CommonProxyResource {
-  /**
-   * Properties of the protected resource.
-   */
-  properties: NeuroShieldProtectedResourceProperties;
-
+model NeuroShieldProtectedResource is Azure.ResourceManager.ProxyResource<
+  NeuroShieldProtectedResourceProperties,
+  false
+> {
   /**
    * The name of the protected resource.
    */
@@ -28351,12 +28341,8 @@ model NeuroShieldFindingProperties {
 /**
  * ARM proxy child resource representing a finding.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to suppress non-resource metadata in emitted payloads for the ARM child-resource envelope."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "System-generated findings are modeled as nested ARM child resources under protected resources."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "ProxyResource inheritance is required to emit the standard ARM nested-resource envelope."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-01-01 follows this project-wide convention."
 @added(Versions.v2026_01_01)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.neuroShield)
 @parentResource(NeuroShieldProtectedResource)
 model NeuroShieldFinding
@@ -28518,12 +28504,8 @@ model NeuroShieldMitigationProperties {
 /**
  * ARM proxy child resource representing a mitigation.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to suppress non-resource metadata in emitted payloads for the ARM child-resource envelope."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "System-generated mitigations are modeled as nested ARM child resources under protected resources."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "ProxyResource inheritance is required to emit the standard ARM nested-resource envelope."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-01-01 follows this project-wide convention."
 @added(Versions.v2026_01_01)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.neuroShield)
 @parentResource(NeuroShieldProtectedResource)
 model NeuroShieldMitigation
