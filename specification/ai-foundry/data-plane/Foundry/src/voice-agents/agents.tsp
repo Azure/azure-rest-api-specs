@@ -71,6 +71,9 @@ model VoiceAgentDefinition {
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
+  @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
+  subagent_config?: SubAgentConfig;
+
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
@@ -80,6 +83,48 @@ model VoiceAgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
+
+@doc("Configuration for sibling Foundry text agents that a voice agent may consult, and for delivery of their responses.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model SubAgentConfig {
+  @doc("The sibling Foundry text agents, in the same project, that this voice agent may consult.")
+  @minItems(1)
+  subagents: SubAgent[];
+
+  @doc("Policy for acknowledging forwarded requests and filling gaps while waiting for a subagent response.")
+  response_policy?: ResponsePolicy;
+}
+
+@doc("A sibling Foundry text agent that a voice agent may consult as a background specialist.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model SubAgent {
+  @doc("The name of the subagent. The subagent must be in the same project as the voice agent.")
+  agent_name: string;
+
+  @doc("The version of the subagent. When omitted, the active version is used.")
+  agent_version?: string;
+
+  @doc("A description of the subagent's capabilities, used by the voice agent to decide whether to forward a query.")
+  agent_capabilities: string;
+}
+
+@doc("Policy for delivering responses while a voice agent waits for a subagent.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model ResponsePolicy {
+  @doc("Whether the voice agent provides an immediate acknowledgement before forwarding a request to a subagent.")
+  immediate_ack?: boolean;
+
+  @doc("Instructions that guide how the voice agent phrases the immediate acknowledgement. Ignored when `immediate_ack` is not `true`. When omitted, the service uses its default phrasing.")
+  ack_instructions?: string;
+
+  @doc("The number of seconds without subagent content or user input before the voice agent provides a gap-filling response.")
+  @minValue(5)
+  @maxValue(120)
+  gap_filling_interval?: int32;
+
+  @doc("Instructions that guide how the voice agent phrases a gap-filling response. Ignored when `gap_filling_interval` is omitted. When omitted, the service uses its default phrasing.")
+  gap_filling_instructions?: string;
 }
 
 @doc("""
