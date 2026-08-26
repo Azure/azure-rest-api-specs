@@ -21,6 +21,7 @@ model BulkActionVMProperties {
   @doc("Specifies additional capabilities enabled or disabled on the virtual machine.")
   additionalCapabilities?: AdditionalCapabilities;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.")
   osProfile?: OSProfile;
 
@@ -1013,6 +1014,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   @doc("The dns settings to be applied on the network interfaces.")
   dnsSettings?: VirtualMachineNetworkInterfaceDnsSettingsConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies the IP configurations of the network interface.")
   @identifiers(#["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
@@ -1104,6 +1106,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
   @doc("The dns settings to be applied on the publicIP addresses .")
   dnsSettings?: VirtualMachinePublicIPAddressDnsSettingsConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The list of IP tags associated with the public IP address.")
   @identifiers(#[])
   ipTags?: VirtualMachineIpTag[];
@@ -1132,9 +1135,11 @@ model VirtualMachinePublicIPAddressDnsSettingsConfiguration {
   domainNameLabelScope?: DomainNameLabelScopeTypes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Contains the IP tag associated with the public IP address.")
 model VirtualMachineIpTag {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP tag type. Example: FirstPartyUsage.")
   ipTagType?: string;
 

@@ -27,8 +27,6 @@ model Flow is Azure.ResourceManager.TrackedResource<FlowProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-model ArmFlowResponse is ArmResponse<Flow>;
-
 @armResourceOperations
 interface Flows {
   /**
@@ -70,17 +68,17 @@ interface Flows {
   /**
    * Disables the specified flow
    */
-  disable is ArmResourceActionAsync<Flow, void, ArmFlowResponse>;
+  disable is ArmResourceActionAsync<Flow, void, Flow>;
 
   /**
    * Enables the specified flow.
    */
-  enable is ArmResourceActionAsync<Flow, void, ArmFlowResponse>;
+  enable is ArmResourceActionAsync<Flow, void, Flow>;
 
   /**
    * Generate a compliant passphrase for the specified flow.
    */
-  generatePassphrase is ArmResourceActionAsync<Flow, void, ArmFlowResponse>;
+  generatePassphrase is ArmResourceActionAsync<Flow, void, Flow>;
 
   /**
    * Get the destination endpoint ports for the specified flow.
@@ -121,7 +119,7 @@ interface Flows {
   /**
    * Links the specified flow.
    */
-  link is ArmResourceActionAsync<Flow, ResourceBody, ArmFlowResponse>;
+  link is ArmResourceActionAsync<Flow, ResourceBody, Flow>;
 
   /**
    * Set the destination endpoint ports for the specified flow.
@@ -129,7 +127,7 @@ interface Flows {
   setDestinationEndpointPorts is ArmResourceActionAsync<
     Flow,
     SetDestinationEndpointPorts,
-    ArmFlowResponse
+    Flow
   >;
 
   /**
@@ -138,26 +136,18 @@ interface Flows {
   setDestinationEndpoints is ArmResourceActionAsync<
     Flow,
     SetDestinationEndpoints,
-    ArmFlowResponse
+    Flow
   >;
 
   /**
    * Sets the passphrase of the specified flow.
    */
-  setPassphrase is ArmResourceActionAsync<
-    Flow,
-    SetStreamPassphrase,
-    ArmFlowResponse
-  >;
+  setPassphrase is ArmResourceActionAsync<Flow, SetStreamPassphrase, Flow>;
 
   /**
    * Set the source addresses for the specified flow.
    */
-  setSourceAddresses is ArmResourceActionAsync<
-    Flow,
-    SetSourceAddresses,
-    ArmFlowResponse
-  >;
+  setSourceAddresses is ArmResourceActionAsync<Flow, SetSourceAddresses, Flow>;
 }
 
 @@maxLength(Flow.name, 64);

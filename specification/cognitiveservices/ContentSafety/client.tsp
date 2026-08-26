@@ -21,6 +21,7 @@ interface ContentSafetyClient {
   name: "ContentProvenanceClient",
   service: ContentSafety,
 })
+@TypeSpec.Http.route("/provenance")
 interface ContentProvenanceClient {
   detect is ContentSafety.ContentProvenanceOperations.detect;
   getOperationStatus is ContentSafety.ContentProvenanceOperations.getOperationStatus;
