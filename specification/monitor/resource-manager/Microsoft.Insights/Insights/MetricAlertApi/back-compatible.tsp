@@ -7,6 +7,11 @@ using MetricAlertApi;
 @@Legacy.flattenProperty(MetricAlertResourcePatch.properties);
 
 @@clientLocation(MetricAlertResources.get, "MetricAlerts");
+@@clientLocation(MetricAlertResources.createOrUpdateV1, "MetricAlerts");
+@@clientName(
+  MetricAlertResources.createOrUpdateV1::parameters.resource,
+  "parameters"
+);
 @@clientLocation(MetricAlertResources.createOrUpdate, "MetricAlerts");
 @@clientName(
   MetricAlertResources.createOrUpdate::parameters.resource,
