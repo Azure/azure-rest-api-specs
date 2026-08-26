@@ -633,6 +633,12 @@ directive:
     from: bms.json
     reason: |
       crossTenantVaultMappingName on the CrossTenantVaultMapping resource model has a real pattern (^[A-Za-z][A-Za-z0-9]{1,99}$). The remaining ResourceNameRestriction surface comes from vaultName, which is inherited from the parent VaultResource with NamePattern="" for backward compatibility across all stable api-versions (2025-02-01, 2025-08-01, 2026-01-01). Adding a pattern at the source would propagate via shared TypeSpec into all stable versions and trip openapi-diff rule 1036 (ConstraintChanged) on every vault path.
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    from: stable/2023-01-15/bms.json
+    reason: The CRR / cross-region-restore / passive-stamp APIs (backupCrossRegionRestore, backupCrrJob(s), backupCrrOperationResults/Status, backupAadProperties, recoveryPoints/accessToken) are served only on passive stamps and are intentionally excluded from the active default tag, which targets active-stamp surface only.
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    from: stable/2016-06-01/registeredIdentities.json
+    reason: registeredIdentities is a legacy API version not present in the active default tag surface.
 
 suppressions:
   - from: bms.json
