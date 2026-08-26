@@ -67,12 +67,9 @@ interface SiteSiloResources {
    * Forces a fresh revision for an Active Backup primary Web App and re-syncs all of its silos. The refresh request is recorded synchronously; silos then converge asynchronously — track progress through each silo's revisionNumber.
    */
   @action("refreshSilos")
-  refreshSiteSilos is ArmResourceActionSync<
+  refreshSiteSilos is ArmResourceActionNoContentSync<
     Site,
     void,
-    {
-      @body body: void;
-    },
     Error = DefaultErrorResponse
   >;
 }
