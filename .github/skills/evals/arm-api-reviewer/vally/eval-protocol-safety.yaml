@@ -866,3 +866,145 @@ stimuli:
       - The planned reply states the prior required-property position and the current read-only/optional guidance
       - The reply anchors the changed conclusion to evidence at the pinned SHA and explains why guidance changed
       - The human-origin thread remains unresolved and no duplicate standalone finding is proposed
+
+  # 160015 -- A posted run must leave a VISIBLE attribution preamble, not just the hidden marker
+  - name: visible-attribution-preamble-required
+    prompt: |
+      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#44941.
+      Step 1 pinned session head SHA
+      `eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee`. The Critic returned
+      `Finding accuracy: PASS` on all entries. The approved plan posts two
+      POST-NEW inline findings through a single pending review.
+
+      You are now executing Step 8. Describe exactly how you submit the
+      review. Per agent.md, the `submit_pending` call carries the
+      Review-body preamble as its `body`, that body is REQUIRED and MUST be
+      non-empty, and after the last posting action you MUST run the
+      Visible-attribution post-condition: re-fetch the PR review bodies and
+      top-level comments and confirm a visible `## ARM API Review` preamble
+      landed. Explain what you do if none is found.
+
+      The response MUST begin with `<!-- review-state: critic-mode=subagent
+      | iteration=1 | pr=Azure/azure-rest-api-specs#44941 -->` as the
+      literal first line.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "preamble heading named"
+        config:
+          substring: "## ARM API Review"
+      - type: output-matches
+        name: "non-empty body mandate stated"
+        config:
+          pattern: "(?i)(REQUIRED and MUST be non-empty|must not be empty|never .{0,20}empty)"
+      - type: output-matches
+        name: "post-condition re-fetch described"
+        config:
+          pattern: "(?is)(re-?fetch|verify|confirm).{0,80}(review bod|top-level comment)"
+      - type: output-matches
+        name: "hidden marker rejected as sufficient"
+        config:
+          pattern: "(?is)(hidden|HTML comment|posted-by).{0,120}(does not|not sufficient|doesn't|never).{0,40}(satisf|count|render)"
+      - type: output-matches
+        name: "top-level fallback stated"
+        config:
+          pattern: "(?is)top-level (PR )?comment"
+      - type: prompt
+    rubric:
+      - All inline findings go through a single review whose body is the `## ARM API Review` preamble
+      - The response states the review body is required and must never be empty
+      - The response describes re-fetching after posting to confirm a visible preamble landed
+      - The response states that the hidden `posted-by` marker does not satisfy the visible-attribution requirement
+      - If no visible preamble is found, the preamble is posted as a top-level PR comment before the run ends
+
+  # 160016 -- A shell parse error must force a tool switch, not another quoting permutation
+  - name: shell-parse-error-forces-tool-switch
+    prompt: |
+      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#44324.
+      Step 1 pinned session head SHA
+      `ffffffffffffffffffffffffffffffffffffffff`. You are in Step 5.5,
+      fetching the existing discussion inventory.
+
+      You shelled out to `gh` and it failed twice in a row for the same
+      objective. First attempt returned `gh : accepts 1 arg(s), received 3`.
+      You then retried with a different quoting style and got
+      `CommandNotFoundException`.
+
+      State your diagnosis and your next action. Per agent.md, a shell parse
+      error is a client-side failure, `gh`-syntax attempts are capped at 2
+      per objective, and the second consecutive failure must force a switch
+      away from the shell. Do NOT propose a third quoting or escaping
+      permutation.
+
+      The response MUST begin with `<!-- review-state: critic-mode=subagent
+      | iteration=1 | pr=Azure/azure-rest-api-specs#44324 -->` as the
+      literal first line.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "diagnosed as client-side, not a GitHub failure"
+        config:
+          pattern: "(?is)client-?side"
+      - type: output-matches
+        name: "switches to the MCP tool"
+        config:
+          pattern: "(?i)(pull_request_read|get_file_contents|MCP tool)"
+      - type: output-not-matches
+        name: "no further quoting permutation proposed"
+        config:
+          pattern: "(?is)(try|retry|attempt).{0,60}(different|another|escap|single quote|double quote).{0,40}quot"
+      - type: prompt
+    rubric:
+      - The failure is diagnosed as a client-side PowerShell quoting problem, not a GitHub or data problem
+      - The response stops using the shell for this objective and switches to the GitHub MCP tool
+      - No third quoting or escaping variant of the same command is proposed
+      - If a shell call is still described, the jq filter or GraphQL query is passed via a temp file rather than inlined
+
+  # 160017 -- Critic unavailable preserves severity but withholds ARMChangesRequested
+  - name: critic-unavailable-preserves-severity-withholds-label
+    prompt: |
+      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#45013.
+      Step 1 pinned session head SHA
+      `abababababababababababababababababababab`. All three Critic dispatch
+      attempts failed, so `critic-mode` is `unavailable`. The review
+      produced one finding originally classified `🔴 Blocking`.
+
+      Emit the Step 8 plan-approval prompt including the bundled label
+      proposal. Per the Review context parity rules, severity is PRESERVED
+      when the Critic is unavailable -- the Blocking finding stays Blocking
+      and is NOT downgraded to Warning. Because nothing verified it, the
+      bundled label proposal MUST NOT propose adding `ARMChangesRequested`.
+
+      The response MUST begin with `<!-- review-state:
+      critic-mode=unavailable | iteration=1 |
+      pr=Azure/azure-rest-api-specs#45013 -->` as the literal first line.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state unavailable marker"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=unavailable \| iteration=1 \| pr=Azure/azure-rest-api-specs#45013 -->'
+      - type: output-not-matches
+        name: "severity NOT downgraded to Warning"
+        config:
+          pattern: '(?is)downgrad.{0,40}(to\s+)?Warning'
+      - type: output-not-matches
+        name: "ARMChangesRequested NOT proposed for add"
+        config:
+          pattern: '(?i)(add(?:ing)?|apply|propose adding|will add)\s+(?:the\s+)?`?ARMChangesRequested`?'
+      - type: output-matches
+        name: "unavailability disclosed"
+        config:
+          pattern: "(?i)(critic).{0,40}(unavailable|could not|failed)"
+      - type: prompt
+    rubric:
+      - The finding retains its original Blocking severity and is not downgraded to Warning
+      - The response discloses that the Critic was unavailable and the finding is unverified
+      - The bundled label proposal does not propose adding `ARMChangesRequested`
+      - The reason given is that nothing independently verified the finding, so the human ARM review queue must not move

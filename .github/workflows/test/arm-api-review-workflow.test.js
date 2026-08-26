@@ -445,16 +445,42 @@ describe("ARM API review posting reliability", () => {
     expect(collapsed).toContain("`telemetry: degraded` field and a `reason:` field");
   });
 
-  it("leaves no exception to the ARMChangesRequested label rule", async () => {
+  it("leaves no metadata-driven exception to the ARMChangesRequested label rule", async () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    expect(source).toContain("These two rules are **exhaustive**.");
+    expect(source).toContain("These three rules are **exhaustive**.");
     expect(source).toContain(
       "draft status, a `[Test]` or `[Do-Not-Merge]` title, a revert, a bot-authored PR, or the author's stated intent not to merge are **not** grounds to skip a label change",
     );
+    // The decision now has exactly two inputs, not one: a Blocking finding must
+    // be queued AND the Critic must have verified it. PR metadata still may not
+    // influence the outcome.
     expect(source).toContain(
-      "The only input to this decision is whether a Blocking finding was queued.",
+      "There are exactly **two** inputs to this decision: whether a Blocking finding was queued for publication, and whether the Critic verified it.",
     );
+    expect(source).toContain(
+      "Nothing else, and in particular nothing read from PR metadata, may change the outcome.",
+    );
+  });
+
+  it("withholds ARMChangesRequested when the Critic could not verify the findings", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    // Severity is preserved when the Critic is unavailable, so the label rule is
+    // the compensating control: unverified Blocking findings still publish, but
+    // they must not move the human ARM review queue.
+    expect(source).toContain(
+      "leave all three labels unchanged, **even when Blocking findings were queued**",
+    );
+  });
+
+  it("preserves finding severity when the Critic is unavailable", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    expect(source).toContain("**preserve each finding's original severity**");
+    // The old auto-downgrade must be gone, not merely supplemented: severity may
+    // not depend on which review context the PR happened to go through.
+    expect(source).not.toContain("downgrade Blocking findings to Warning");
   });
 
   it("makes the Step 8 summary comment unconditional", async () => {
@@ -509,6 +535,110 @@ describe("ARM API review posting reliability", () => {
     // contradicted the workflow's unconditional Step 8 mandate.
     expect(collapsed).not.toContain("the agent does not post summary comments by default");
     expect(collapsed).toContain("its Step 8 posts a summary comment on **every** run");
+  });
+});
+
+describe("ARM API review consistency and hardening", () => {
+  it("detects a truncated pull request file list", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    // Pagination alone does not make the count reliable: the files endpoint is
+    // hard-capped at 3,000 entries and returns no truncation flag.
+    expect(source).toContain(
+      "hard-caps `GET /repos/{owner}/{repo}/pulls/{number}/files` at **3,000 entries**",
+    );
+    expect(source).toContain("the returned entry count is exactly **3,000**");
+    // A zero `changed_files` alongside a non-empty list is its own signal,
+    // because GitHub zeroes the PR counters on very large diffs.
+    expect(source).toContain(
+      "`changed_files` is **0** while `get_files` returned a non-empty list",
+    );
+    expect(source).toContain("files-truncated: true");
+    expect(source).toContain(
+      "Never present the returned entry count as the size of the pull request.",
+    );
+  });
+
+  it("reports the authoritative total in the scoped-review disclosure", async () => {
+    const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+
+    expect(source).toContain("**`N` is the authoritative total, never the truncated count.**");
+    expect(source).toContain('write "an undetermined number of" in place of `N`');
+    // The disclosure must name where coverage actually stopped.
+    expect(source).toContain("coverage stops at <last-covered-path> in path order");
+  });
+
+  it("documents review-context parity in both prompts", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    for (const source of [workflow, agent]) {
+      expect(source).toContain("Review context parity");
+      expect(source).toContain("**Output budgets**");
+      expect(source).toContain("**Severity policy**");
+      expect(source).toContain("**Default finding set**");
+      expect(source).toContain("**Label policy**");
+      // The human approval gate is the single intentional difference.
+      expect(source).toContain("human approval gate");
+    }
+
+    // Both repositories run this workflow, so the two copies must stay
+    // identical or feedback diverges by repository.
+    expect(workflow).toContain("Treat any divergence between the two copies as a defect.");
+  });
+
+  it("gives the reviewer agent the same output budgets as the workflow", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    expect(workflow).toContain("Security issues: no cap (always post)");
+    expect(agent).toContain("**Output budgets (identical to the automated workflow).**");
+    // Same per-category caps in both contexts, or identical APIs get different
+    // feedback depending on how the review was started.
+    expect(agent).toContain("| ARM contract violations | 15 |");
+    expect(agent).toContain("| Property design / naming | 5 |");
+    expect(agent).toContain("| Documentation gaps | 3 |");
+    expect(agent).toContain("Overall inline budget is **50** posted comments.");
+    // Caps govern posting, not analysis: the chat report still shows everything.
+    expect(agent).toContain("The caps govern what is **posted**, not what is analysed.");
+    expect(agent).toContain(
+      "N additional findings were identified but not posted inline. Key themes: [list].",
+    );
+  });
+
+  it("requires a non-empty review body and a visible attribution preamble in the agent", async () => {
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // Ported from the workflow, which already enforced this. Empty-body reviews
+    // left findings with no provenance but a hidden HTML marker.
+    expect(agent).toContain("This body is **REQUIRED and MUST be non-empty**");
+    expect(agent).toContain("substitute `unknown` for that one value");
+    expect(agent).toContain(
+      "Dropping the body is never an acceptable fallback for a missing field.",
+    );
+
+    // Post-condition: re-fetch and confirm a visible preamble actually landed.
+    expect(agent).toContain("**Visible-attribution post-condition (MANDATORY");
+    expect(agent).toContain("does **not** satisfy this check");
+    expect(agent).toContain("post the preamble template above as a **top-level PR comment**");
+  });
+
+  it("teaches PowerShell-safe gh fallbacks and caps shell-syntax retries", async () => {
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    expect(agent).toContain("Shell fallback discipline");
+    expect(agent).toContain("**Never inline a `jq` filter or a GraphQL query.**");
+    expect(agent).toContain("bare `|` inside double quotes is a **pipeline operator**");
+    expect(agent).toContain("**`gh pr diff` has no `-- <pathspec>` filter.**");
+
+    // Loop-breaker: a shell parse error is client-side and must force a tool
+    // switch instead of another quoting permutation.
+    expect(agent).toContain("**Shell parse error** (any step)");
+    expect(agent).toContain("Cap `gh`-syntax attempts at **2 total** per objective.");
+
+    // The agent must not prescribe the very pattern it forbids. A live session
+    // looped on exactly this recipe from its own Failure Modes table.
+    expect(agent).not.toContain("--jq '.[-5:][]");
   });
 });
 

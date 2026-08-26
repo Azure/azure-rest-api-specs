@@ -126,6 +126,33 @@ The GitHub Actions workflow applies the same rules as the VS Code agent:
 
 Files outside `specification/**` are skipped.
 
+### Consistency across review contexts
+
+The reviewer runs in two contexts — the unattended GitHub Actions workflow and
+the interactive **ARM API Reviewer** agent in VS Code — across two repositories,
+public `Azure/azure-rest-api-specs` and private `Azure/azure-rest-api-specs-pr`.
+Identical API changes receive identical feedback in all of them. The rule
+sources, the per-category output budgets, the severity policy, the default
+finding set, and the `ARMChangesRequested` label policy are all shared.
+
+Two consequences worth knowing as an author or reviewer:
+
+- **The only intentional difference is the human approval gate.** The
+  interactive agent shows findings in chat and posts only after a reviewer
+  approves, and that reviewer can record an explicit, justified override of a
+  Critic decision. The automated workflow has no human in the loop and no
+  override path. Absent an override, both produce the same posted findings.
+- **When independent verification is unavailable, severity is preserved, not
+  softened.** If the review Critic cannot run, findings keep their original
+  severity and the summary says so plainly. Because nothing verified them, that
+  run does **not** apply `ARMChangesRequested`; a human decides whether the
+  finding should move the ARM review queue.
+
+The automated workflow exists in both repositories and the two copies are kept
+identical, so a pull request in either one can receive an automated review as
+well as an interactive one. The shared rules above are what keep the outcomes
+consistent.
+
 ### Bot identity and comment deduplication
 
 The automated workflow posts review comments under a stable bot identity.
