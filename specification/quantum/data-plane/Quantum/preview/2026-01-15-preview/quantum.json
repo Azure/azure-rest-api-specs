@@ -151,10 +151,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/QuotaUsageData"
-              }
+              "$ref": "#/definitions/PagedQuotaUsageData"
             }
           },
           "default": {
@@ -2109,6 +2106,27 @@
           "description": "The Quota items on this page",
           "items": {
             "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedQuotaUsageData": {
+      "type": "object",
+      "description": "Paged collection of QuotaUsageData items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaUsageData items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaUsageData"
           }
         },
         "nextLink": {
