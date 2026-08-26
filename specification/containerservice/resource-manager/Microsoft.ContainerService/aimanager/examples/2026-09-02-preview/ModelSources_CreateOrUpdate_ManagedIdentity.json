@@ -1,0 +1,87 @@
+{
+  "title": "ModelSources_CreateOrUpdate_ManagedIdentity",
+  "operationId": "ModelSources_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-08-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgaimanagers",
+    "If-Match": "\"00000000-0000-0000-0000-000000000000\"",
+    "If-None-Match": "*",
+    "aiManagerName": "aimanager1",
+    "modelSourceName": "foundry",
+    "resource": {
+      "properties": {
+        "sourceType": "MicrosoftFoundry",
+        "description": "Foundry model source",
+        "microsoftFoundry": {
+          "projectResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.CognitiveServices/accounts/test-account/projects/test-model-project"
+        },
+        "credential": {
+          "managedIdentity": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mytestidentity"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sourceType": "MicrosoftFoundry",
+          "description": "Foundry model source",
+          "microsoftFoundry": {
+            "projectResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.CognitiveServices/accounts/test-account/projects/test-model-project"
+          },
+          "credential": {
+            "managedIdentity": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mytestidentity"
+            }
+          }
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/foundry",
+        "name": "foundry",
+        "type": "Microsoft.ContainerService/aiManagers/modelSources",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sourceType": "MicrosoftFoundry",
+          "description": "Foundry model source",
+          "microsoftFoundry": {
+            "projectResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.CognitiveServices/accounts/test-account/projects/test-model-project"
+          },
+          "credential": {
+            "managedIdentity": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mytestidentity"
+            }
+          }
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/foundry",
+        "name": "foundry",
+        "type": "Microsoft.ContainerService/aiManagers/modelSources",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}

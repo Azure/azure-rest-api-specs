@@ -12,7 +12,6 @@ using Azure.ResourceManager;
 namespace Microsoft.ContainerService;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@added(Versions.v2026_05_02_preview)
 @doc("An AI model exposed by Microsoft.ContainerService. Read-only, globally-shared catalog entry that is platform-maintained and auto-provisioned by the resource provider. Can be referenced by `ModelDeployment` resources.")
 @parentResource(SubscriptionLocationResource)
 @resource("aiModels")
@@ -27,7 +26,6 @@ model AIModel is ProxyResource<AIModelProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AIModel is platform-maintained and auto-provisioned by the resource provider; it does not expose a provisioning lifecycle to callers."
-@added(Versions.v2026_05_02_preview)
 @doc("AI model properties.")
 model AIModelProperties {
   @visibility(Lifecycle.Read)
@@ -43,7 +41,6 @@ model AIModelProperties {
   spec: ModelSpec;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("The specification of a model. All fields are read-only.")
 model ModelSpec {
   @visibility(Lifecycle.Read)
@@ -61,14 +58,12 @@ model ModelSpec {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Reserved as an extensibility envelope so future versions can add optional filters without changing the SDK method signature."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(Versions.v2026_05_02_preview)
 @doc("Request body for the AI model `calculateCost` action.")
 model CalculateCostRequest {
   // intentionally empty for v1; future versions may add filters
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(Versions.v2026_05_02_preview)
 @doc("Response body for the AI model `calculateCost` action.")
 model CalculateCostResponse {
   @visibility(Lifecycle.Read)
@@ -81,7 +76,6 @@ model CalculateCostResponse {
   plans: CalculateCostPlan[];
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("A GPU SKU pricing plan returned by the `calculateCost` action. Describes the cost of running a single model replica on the specified `vmSize`. To estimate the cost of running multiple replicas, scale `totalHourlyPrice` by the desired replica count, bounded by `maxAvailableReplicas`.")
 model CalculateCostPlan {
   @visibility(Lifecycle.Read)
@@ -133,7 +127,6 @@ model CalculateCostPlan {
   infeasibilityReason?: InfeasibilityReason;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("Estimated relative inference performance of a single model replica on a given GPU SKU. Each metric is a scaling coefficient in the range `[0, 1]` relative to the best-performing SKU for this model, which scores `1`.")
 model ServingPerformanceEstimation {
   @visibility(Lifecycle.Read)
@@ -149,7 +142,6 @@ model ServingPerformanceEstimation {
   relativeThroughputScore: float32;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("Reason explaining why a `CalculateCostPlan` is not deployable. This is a per-plan annotation surfaced inside a successful `calculateCost` response, not an ARM error envelope.")
 model InfeasibilityReason {
   @visibility(Lifecycle.Read)
@@ -161,7 +153,6 @@ model InfeasibilityReason {
   message: string;
 }
 
-@added(Versions.v2026_05_02_preview)
 @doc("The reason a `CalculateCostPlan` is not deployable.")
 union InfeasibleCode {
   string,
@@ -177,7 +168,6 @@ union InfeasibleCode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
-@added(Versions.v2026_05_02_preview)
 @armResourceOperations
 interface AIModels {
   get is ArmResourceRead<AIModel>;
