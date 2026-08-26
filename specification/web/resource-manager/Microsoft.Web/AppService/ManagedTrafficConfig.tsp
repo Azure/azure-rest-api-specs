@@ -31,12 +31,12 @@ model ManagedTrafficConfigResource
 }
 
 /**
- * Query parameter controlling whether the managed traffic configuration endpoint collection is returned unprojected. By default the endpoints are projected for the current trafficMode — only the relevant routing dimension is returned (weight for Active, priority for Passive). Pass `$expand=endpoints` to receive every persisted field.
+ * Query parameter controlling whether the managed traffic configuration endpoint collection is returned without projection. By default the endpoints are projected for the current trafficMode — only the relevant routing dimension is returned (weight for Active, priority for Passive). Pass `$expand=endpoints` to receive every persisted field.
  */
 @added(Versions.v2026_08_01)
 model ManagedTrafficConfigExpandParameter {
   /**
-   * Set to `endpoints` to return the unprojected endpoint collection, including both weight and priority for every endpoint.
+   * Set to `endpoints` to return the endpoint collection without projection, including both weight and priority for every endpoint.
    */
   @query("$expand")
   $expand?: string;
