@@ -38,7 +38,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 using Autorest;
 
 @armProviderNamespace
