@@ -81,6 +81,26 @@ directive:
   - suppress: ProvisioningStateMustBeReadOnly
     from: openapi.json
     where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/resume"].post.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/suspend"].post.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/privateEndpointConnections/{privateEndpointConnectionName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.responses["201"].schema
+    reason: |
+      The TypeSpec properties are read-only, but typespec-autorest emits readOnly as a sibling
+      of $ref. The validator discards sibling properties while resolving $ref and reports a
+      false positive. This emitter issue is tracked by
+      https://github.com/Azure/typespec-azure/issues/2042.
+      The use-read-only-status-schema workaround was tested, but it changes the schemas emitted
+      for existing API versions and caused 76 cross-version breaking-change findings.
+      Remove this suppression when the emitter uses an allOf wrapper that preserves readOnly.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].get.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].put.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}"].put.responses["201"].schema
@@ -95,6 +115,27 @@ directive:
       but applies project-wide and changes 47 status schemas, including 45 unrelated to
       SandboxGroup and VnetConnection. Suppress these seven affected response schemas
       until the emitter supports a scoped compliant representation.
+  - suppress: UnSupportedPatchProperties
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/dotNetComponents/{name}"].patch.parameters[5]
+    reason: |
+      The published preview PATCH contract uses the full resource schema. Its provisioningState
+      property is read-only in TypeSpec, but typespec-autorest emits readOnly as a sibling of
+      $ref, which the validator discards while resolving the schema. Changing to a dedicated
+      PATCH model redirected two published model references and removed provisioningState, id,
+      name, type, and systemData from the existing preview PATCH request.
+      This emitter issue is tracked by https://github.com/Azure/typespec-azure/issues/2042.
+      Remove this suppression when the emitter uses an allOf wrapper that preserves readOnly.
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    from: openapi.json
+    where: $..['$ref']
+    reason: |
+      This established API family uses ARM common types v5. Moving only the 2026-07-01 version
+      to v6 changes the identity, SKU, and plan schemas, including newly required properties,
+      and caused 12 cross-version breaking-change findings. The rule reports on the common-types
+      $ref nodes throughout this API family, so the suppression is scoped to $ref nodes only.
+      Remove this suppression when the API family can migrate common types without changing
+      its existing wire contract.
 ```
 
 ### Tag: package-preview-2025-10-02-preview
