@@ -57,7 +57,7 @@ Three points summarize the impact:
 
 ```mermaid
 graph TD
-    A["Pull request opened or updated"] --> B{"In scope?"}
+    A["Trigger: label, comment, or push"] --> B{"In scope?"}
     B -->|No| Z["No review"]
     B -->|Yes| C["Reviewer agent applies rule set"]
     C --> D["Critic agent verifies findings"]
@@ -72,6 +72,40 @@ and sign-off remain with the human reviewer.
 A second agent, the Critic, independently re-verifies each finding against the
 specification before it is posted. Its purpose is precision: a wrong comment on
 a public pull request costs more than a missed one.
+
+### What starts a review
+
+Only users with write access or above can start a review. That keeps
+externally-authored fork pull requests from triggering one automatically.
+
+| Trigger                         | How it starts                                                                                                      |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `WaitForARMFeedback` label      | A reviewer adds the label to a pull request. This is the usual route.                                              |
+| `/arm-review` comment           | Anyone with write access comments `/arm-review` on the pull request. Useful for re-running a review after changes. |
+| Push to a labelled pull request | Once the label is present, later pushes re-trigger the review automatically.                                       |
+
+### Two worked examples
+
+**Label triggered.** On
+[PR 45618](https://github.com/Azure/azure-rest-api-specs/pull/45618), a reviewer
+added `WaitForARMFeedback` at 05:24:44. The workflow started three seconds later
+and posted
+[three findings](https://github.com/Azure/azure-rest-api-specs/pull/45618#discussion_r3859980788)
+at 05:47:59, twenty-three minutes after the label was applied.
+
+**Comment triggered.** On PR 30089 in the private specification repository, an
+author commented `/arm-review` at 06:29:42. The workflow started three seconds
+later and posted its
+[findings](https://github.com/Azure/azure-rest-api-specs-pr/pull/30089#issuecomment-5421546953)
+at 06:36:41, seven minutes after the command.
+
+> [!NOTE]
+> The comment-triggered example is in `Azure/azure-rest-api-specs-pr`, so the
+> link resolves only for those with access to that repository. Every
+> `/arm-review` run to date has been on a private pull request.
+
+In both cases the review begins within seconds of the trigger. The elapsed time
+is the review itself, and it scales with how much the pull request changed.
 
 ---
 
