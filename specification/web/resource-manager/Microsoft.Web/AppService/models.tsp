@@ -16537,11 +16537,6 @@ union SiloProvisioningState {
    * Resource is being deleted asynchronously.
    */
   Deleting: "Deleting",
-
-  /**
-   * Silo is routable and serving its previous revision, but the last background sync failed to converge. Distinct from Failed, which means there is no usable silo.
-   */
-  Degraded: "Degraded",
 }
 
 /**
@@ -16649,18 +16644,6 @@ model SiteSiloProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: SiloProvisioningState;
-
-  /**
-   * Customer-facing, translated detail describing why the silo is Failed or Degraded. Null when the silo is healthy.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningDetails?: string;
-
-  /**
-   * Stable machine-readable error code paired with provisioningDetails. Null when the silo is healthy.
-   */
-  @visibility(Lifecycle.Read)
-  errorCode?: string;
 
   /**
    * Whether the silo should follow the last known good revision.
@@ -16789,18 +16772,6 @@ model ServerFarmSiloProperties {
   provisioningState?: SiloProvisioningState;
 
   /**
-   * Customer-facing, translated detail describing why the silo is Failed or Degraded. Null when the silo is healthy.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningDetails?: string;
-
-  /**
-   * Stable machine-readable error code paired with provisioningDetails. Null when the silo is healthy.
-   */
-  @visibility(Lifecycle.Read)
-  errorCode?: string;
-
-  /**
    * Time when the silo was created.
    */
   @visibility(Lifecycle.Read)
@@ -16848,12 +16819,6 @@ model LastKnownGoodProperties {
    */
   @visibility(Lifecycle.Read)
   createdTime?: utcDateTime;
-
-  /**
-   * Monotonic revision number that was marked as last known good.
-   */
-  @visibility(Lifecycle.Read)
-  revisionNumber?: int64;
 }
 
 /**

@@ -30,18 +30,6 @@ model ManagedTrafficConfigResource
   >;
 }
 
-/**
- * Query parameter controlling whether the managed traffic configuration endpoint collection is returned unprojected. By default the endpoints are projected for the current trafficMode — only the relevant routing dimension is returned (weight for Active, priority for Passive). Pass `$expand=endpoints` to receive every persisted field.
- */
-@added(Versions.v2026_08_01)
-model ManagedTrafficConfigExpandParameter {
-  /**
-   * Set to `endpoints` to return the unprojected endpoint collection, including both weight and priority for every endpoint.
-   */
-  @query("$expand")
-  $expand?: string;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "ManagedTrafficConfig does not support delete."
 @added(Versions.v2026_08_01)
 @tag("WebApps")
@@ -52,7 +40,6 @@ interface ManagedTrafficConfigResources {
    */
   listManagedTrafficConfigs is ArmResourceListByParent<
     ManagedTrafficConfigResource,
-    Parameters = ManagedTrafficConfigExpandParameter,
     Response = ArmResponse<ManagedTrafficConfigCollection>,
     Error = DefaultErrorResponse
   >;
@@ -62,7 +49,6 @@ interface ManagedTrafficConfigResources {
    */
   getManagedTrafficConfig is ArmResourceRead<
     ManagedTrafficConfigResource,
-    Parameters = ManagedTrafficConfigExpandParameter,
     Error = DefaultErrorResponse
   >;
 
