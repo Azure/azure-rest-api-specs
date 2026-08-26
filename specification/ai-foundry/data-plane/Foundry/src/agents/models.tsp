@@ -15,7 +15,8 @@ const AllConditionalAgentDefinitionPreviews = #{
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     AgentDefinitionOptInKeys.draft_agents_v1_preview,
     AgentDefinitionOptInKeys.digital_worker_v1_preview,
-    AgentDefinitionOptInKeys.github_copilot_v1_preview
+    AgentDefinitionOptInKeys.github_copilot_v1_preview,
+    AgentDefinitionOptInKeys.skills_v1_preview
   ],
 };
 
@@ -343,14 +344,17 @@ model AgentDefinition {
 model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
 
-  @doc("The model deployment to use for this agent.")
-  `model`: string;
-
   @doc("The managed runtime and agent loop used to execute this prompt agent.")
   harness?: AgentHarness;
 
+  @doc("The model deployment to use for this agent.")
+  `model`: string;
+
   @doc("A system (or developer) message inserted into the model's context.")
   instructions?: string | null;
+
+  @doc("The Foundry skills available to this prompt agent. An omitted skill version is resolved and pinned when the agent version is created.")
+  skills?: SkillReference[];
 
   @doc("""
     What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -377,7 +381,7 @@ model PromptAgentDefinition extends AgentDefinition {
     An array of tools the model may call while generating a response. You
     can specify which tool to use by setting the `tool_choice` parameter.
     """)
-  tools?: OpenAI.Tool[];
+  tools?: PromptAgentTool[];
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @doc("""
@@ -410,6 +414,7 @@ model AgentHarness {
 model GitHubCopilotHarness extends AgentHarness {
   @doc("The type of managed harness. Always `github_copilot_preview`.")
   type: "github_copilot_preview";
+<<<<<<< HEAD
 
   @doc("The Foundry skills to provision into the managed harness environment.")
   skills?: SkillReference[];
@@ -422,6 +427,12 @@ model GitHubCopilotHarness extends AgentHarness {
 }
 
 @doc("A reference to a versioned Foundry skill.")
+=======
+}
+
+@doc("A reference to a versioned Foundry skill.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+>>>>>>> 97b5312b686 (Align Copilot harness API with review decisions)
 model SkillReference {
   @doc("The name of the skill.")
   name: SkillName;
@@ -430,6 +441,7 @@ model SkillReference {
   version?: string;
 }
 
+<<<<<<< HEAD
 @doc("Managed compute environment settings for a harness.")
 model HarnessEnvironment {
   @doc("The CPU allocated to the harness environment. CPU and memory must be specified together.")
@@ -473,6 +485,8 @@ union BuiltInCapability {
   subagents: "subagents",
 }
 
+=======
+>>>>>>> 97b5312b686 (Align Copilot harness API with review decisions)
 /**
  * Configuration options for a text response from the model. Can be plain text or structured JSON data.
  */

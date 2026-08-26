@@ -77,6 +77,66 @@ namespace Azure.AI.Projects {
     tool_configs?: Record<ToolConfig>;
   };
 
+  @doc("A customer-configurable GitHub Copilot built-in capability.")
+  union GitHubCopilotBuiltInCapability {
+    @doc("Read and search files in the harness workspace.")
+    filesystem_read: "filesystem_read",
+
+    @doc("Create and modify files in the harness workspace.")
+    filesystem_write: "filesystem_write",
+
+    @doc("Execute operating-system commands.")
+    shell: "shell",
+
+    @doc("Fetch content and search external network resources.")
+    web: "web",
+
+    @doc("Delegate work to additional agents.")
+    subagents: "subagents",
+  }
+
+  @doc("The default enablement setting for GitHub Copilot built-in capabilities.")
+  model GitHubCopilotToolsetDefaultConfig {
+    @doc("Whether built-in capabilities are enabled by default. Defaults to true.")
+    enabled?: boolean = true;
+  }
+
+  @doc("An enablement override for a GitHub Copilot built-in capability.")
+  model GitHubCopilotToolsetConfig {
+    @doc("The built-in capability to configure.")
+    name: GitHubCopilotBuiltInCapability;
+
+    @doc("Whether the capability is enabled. If omitted, the toolset default applies.")
+    enabled?: boolean;
+  }
+
+  @doc("Configuration overrides for GitHub Copilot built-in capabilities.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+    }
+  )
+  model GitHubCopilotToolsetPreview {
+    @doc("The type of the toolset. Always `github_copilot_toolset_preview`.")
+    type: "github_copilot_toolset_preview";
+
+    @doc("The default configuration for built-in capabilities. If omitted, capabilities are enabled by default.")
+    default_config?: GitHubCopilotToolsetDefaultConfig;
+
+    @doc("Per-capability configuration overrides. Duplicate capability names are not allowed.")
+    configs?: GitHubCopilotToolsetConfig[];
+  }
+
+  @doc("A tool or toolset configuration available to a prompt agent.")
+  union PromptAgentTool {
+    @doc("An OpenAI-compatible tool.")
+    openai: OpenAI.Tool,
+
+    @doc("Configuration overrides for GitHub Copilot built-in capabilities.")
+    github_copilot_toolset_preview: GitHubCopilotToolsetPreview,
+  }
+
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(
     OpenAI.MCPTool,

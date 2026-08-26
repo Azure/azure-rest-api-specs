@@ -94,6 +94,7 @@ union AgentDefinitionOptInKeys {
   voice_agents_v1_preview: "VoiceAgents=V1Preview",
   digital_worker_v1_preview: "DigitalWorker=V1Preview",
   github_copilot_v1_preview: "GitHubCopilot=V1Preview",
+  skills_v1_preview: "Skills=V1Preview",
 
   @removed(Versions.v1)
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
