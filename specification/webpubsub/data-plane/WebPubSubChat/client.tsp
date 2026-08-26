@@ -19,11 +19,39 @@ model WebPubSubChatServiceClientOptions {
 interface WebPubSubChatServiceClient
   extends WebPubSubChat.WebPubSubChatServiceClient {}
 
+@@clientName(
+  WebPubSubChat.ChatConversation,
+  "WebPubSubChatConversation",
+  "csharp"
+);
 @@clientName(WebPubSubChat.ChatMessage, "WebPubSubChatMessage", "csharp");
+@@clientName(WebPubSubChat.ChatRole, "WebPubSubChatRole", "csharp");
+@@clientName(WebPubSubChat.ChatRoom, "WebPubSubChatRoom", "csharp");
+@@clientName(
+  WebPubSubChat.ChatRoomMember,
+  "WebPubSubChatRoomMember",
+  "csharp"
+);
+@@clientName(WebPubSubChat.ChatUser, "WebPubSubChatUser", "csharp");
+@@clientName(
+  WebPubSubChat.HumanChatUser,
+  "WebPubSubHumanChatUser",
+  "csharp"
+);
+@@clientName(
+  WebPubSubChat.ChatUserKind,
+  "WebPubSubChatUserKind",
+  "csharp"
+);
 @@clientName(
   WebPubSubChat.MessageContent,
   "WebPubSubChatMessageContent",
   "csharp"
+);
+@@clientName(
+  Azure.Core.MaxPageSizeQueryParameter.maxpagesize,
+  "maxPageSize",
+  "javascript"
 );
 
 @@clientInitialization(
