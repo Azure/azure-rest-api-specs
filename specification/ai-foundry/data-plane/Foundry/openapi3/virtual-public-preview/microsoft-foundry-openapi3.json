@@ -816,7 +816,8 @@
             "WorkflowAgents=V1Preview",
             "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
-            "DraftAgents=V1Preview"
+            "DraftAgents=V1Preview",
+            "DigitalWorker=V1Preview"
           ]
         },
         "tags": [
@@ -4462,7 +4463,8 @@
             "WorkflowAgents=V1Preview",
             "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
-            "DraftAgents=V1Preview"
+            "DraftAgents=V1Preview",
+            "DigitalWorker=V1Preview"
           ]
         },
         "tags": [
@@ -31946,6 +31948,7 @@
           "ExternalAgents=V1Preview",
           "DraftAgents=V1Preview",
           "VoiceAgents=V1Preview",
+          "DigitalWorker=V1Preview",
           "HostedAgents=V1Preview",
           "ContainerAgents=V1Preview"
         ],
@@ -32482,6 +32485,15 @@
           "agent_endpoint": {
             "$ref": "#/components/schemas/AgentEndpointConfig",
             "description": "The endpoint configuration for the agent"
+          },
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "instance_identity": {
             "$ref": "#/components/schemas/AgentIdentity",
@@ -36583,13 +36595,23 @@
                 "WorkflowAgents=V1Preview",
                 "ExternalAgents=V1Preview",
                 "VoiceAgents=V1Preview",
-                "DraftAgents=V1Preview"
+                "DraftAgents=V1Preview",
+                "DigitalWorker=V1Preview"
               ]
             }
           },
           "blueprint_reference": {
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
+          },
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "draft": {
             "type": "boolean",
@@ -36615,7 +36637,8 @@
             "WorkflowAgents=V1Preview",
             "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
-            "DraftAgents=V1Preview"
+            "DraftAgents=V1Preview",
+            "DigitalWorker=V1Preview"
           ]
         }
       },
@@ -36740,13 +36763,23 @@
                 "WorkflowAgents=V1Preview",
                 "ExternalAgents=V1Preview",
                 "VoiceAgents=V1Preview",
-                "DraftAgents=V1Preview"
+                "DraftAgents=V1Preview",
+                "DigitalWorker=V1Preview"
               ]
             }
           },
           "blueprint_reference": {
             "$ref": "#/components/schemas/AgentBlueprintReference",
             "description": "The blueprint reference for the agent."
+          },
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
           },
           "draft": {
             "type": "boolean",
@@ -38105,6 +38138,20 @@
           }
         ],
         "description": "A message authored by a developer to guide the model during evaluation."
+      },
+      "DigitalWorkerType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "m365"
+            ]
+          }
+        ],
+        "description": "The type of digital worker."
       },
       "Dimension": {
         "type": "object",
@@ -87041,7 +87088,8 @@
                 "WorkflowAgents=V1Preview",
                 "ExternalAgents=V1Preview",
                 "VoiceAgents=V1Preview",
-                "DraftAgents=V1Preview"
+                "DraftAgents=V1Preview",
+                "DigitalWorker=V1Preview"
               ]
             }
           },
@@ -87055,7 +87103,8 @@
             "WorkflowAgents=V1Preview",
             "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
-            "DraftAgents=V1Preview"
+            "DraftAgents=V1Preview",
+            "DigitalWorker=V1Preview"
           ]
         }
       },

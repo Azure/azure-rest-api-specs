@@ -12,7 +12,8 @@ const AllConditionalAgentDefinitionPreviews = #{
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview,
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    AgentDefinitionOptInKeys.draft_agents_v1_preview
+    AgentDefinitionOptInKeys.draft_agents_v1_preview,
+    AgentDefinitionOptInKeys.digital_worker_v1_preview
   ],
 };
 
@@ -30,6 +31,17 @@ model CreateAgentVersionRequest {
 
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
+
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
+  )
+  digital_worker_type?: DigitalWorkerType;
 
   @doc("(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.")
   @extension(
@@ -102,7 +114,7 @@ model CreateAgentRequest {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
-  ...OmitProperties<CreateAgentVersionRequest, "draft">;
+  ...OmitProperties<CreateAgentVersionRequest, "draft" | "digital_worker_type">;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -171,6 +183,17 @@ model AgentObject {
 
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
+
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
+  )
+  digital_worker_type?: DigitalWorkerType;
 
   @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
@@ -286,6 +309,14 @@ union AgentKind {
 
   @removed(Versions.v1)
   container_app: "container_app",
+}
+
+@doc("The type of digital worker.")
+union DigitalWorkerType {
+  string,
+
+  @doc("A Microsoft 365 digital worker.")
+  m365: "m365",
 }
 
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
