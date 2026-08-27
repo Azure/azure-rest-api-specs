@@ -778,7 +778,7 @@ An API version's lifecycle stage governs where it is allowed to live. Check the
 target repository and branch alongside the version's folder, because a version
 can be schema-correct and still be in the wrong place.
 
-- A `private preview` version **MUST NOT** appear in the public specs repo, on `main` or any other branch. ARM private previews belong on `RPSaaSMaster` in the private specs repo, gated by Azure Feature Exposure Control flags (APIVER-PRIVATE-IN-PUBLIC).
+- A `private preview` version **MUST NOT** appear in the public specs repo, on `main` or any other branch. ARM private previews belong on `RPSaaSMaster` in the private specs repo, gated by Azure Feature Exposure Control flags (APIVER-PRIVATE-IN-PUBLIC). A deliberate promotion to public preview is **not** a violation: that is how a private preview goes public. The fix path is [aka.ms/azsdk/move-pr](https://aka.ms/azsdk/move-pr).
 - An `in development` version **MUST NOT** appear in public `main`. A public `release-*` branch is its correct home (APIVER-DEV-IN-MAIN).
 - A GA version **MUST** sit under a `stable` folder with no `-preview` suffix, and **MUST NOT** be feature-flag gated (APIVER-GA-FOLDER).
 - A public preview version **MUST** sit under a `preview` folder **and** carry a `-preview` suffix, and **MUST NOT** be feature-flag gated (APIVER-PREVIEW-FOLDER).

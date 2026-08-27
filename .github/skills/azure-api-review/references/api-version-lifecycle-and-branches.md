@@ -59,6 +59,20 @@ services are expected to have their own preview onboarding mechanism.
 **Severity: Blocking.** Publishing a private preview to the public repository
 exposes a contract that was deliberately limited to selected customers.
 
+**Not a violation: a deliberate promotion.** Copying specs from the private repo
+to the public repo is how a `private preview` becomes a `public preview`, so the
+mere fact that a previously private version now appears in a public pull request
+is not by itself a finding. Treat it as a promotion, not a leak, when the version
+satisfies APIVER-PREVIEW-FOLDER and any feature-flag gating is being removed as
+part of the change. Flag it only when the pull request is copying the version
+across while it is still meant to stay private, for example when the folder still
+declares a stage the placement contradicts.
+
+When this rule does fire, the fix is the documented move process at
+[aka.ms/azsdk/move-pr](https://aka.ms/azsdk/move-pr), which also covers
+disabling feature flags and publishing customer-facing documentation. Point the
+author there rather than asking them to simply delete the files.
+
 ## APIVER-DEV-IN-MAIN -- in-development versions must not reach public `main`
 
 An `in development` API version **MUST NOT** be present in the public specs repo

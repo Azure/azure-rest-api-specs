@@ -1089,6 +1089,23 @@ describe("API version lifecycle rules", () => {
     expect(reference).toContain("APIVER-PRIVATE-IN-PUBLIC");
   });
 
+  it("does not treat a private-to-public promotion as a leak", async () => {
+    // Copying specs from the private repo to the public repo is exactly how a
+    // private preview becomes a public preview, so a bare "this version was
+    // private" check would flag every legitimate promotion PR. The carve-out
+    // and the fix link have to survive in the instructions text too, because
+    // that is what both review paths actually load.
+    const [reference, instructions] = await Promise.all([
+      readFile(join(ROOT, REFERENCE_FILE), "utf8"),
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+    ]);
+
+    expect(collapseWhitespace(reference)).toMatch(/promotion, not a leak/i);
+    expect(reference).toContain("aka.ms/azsdk/move-pr");
+    expect(collapseWhitespace(instructions)).toMatch(/not\*{0,2} a violation/i);
+    expect(instructions).toContain("aka.ms/azsdk/move-pr");
+  });
+
   it("uses a category slug the Critic marker vocabulary accepts", async () => {
     // Findings carry a category into the telemetry marker, and the Critic
     // rejects any value outside its closed vocabulary. A reference that names
