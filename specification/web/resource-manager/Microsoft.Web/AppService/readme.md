@@ -102,7 +102,10 @@ directive:
     reason: MSDeploy is the intentional name matching the existing service API.
   - suppress: LroErrorContent
     from: openapi.json
-    reason: The silo long-running PUT intentionally returns the App Service error schema (DefaultErrorResponse) that every other Microsoft.Web operation in this specification uses, rather than the common-types ARM error schema. Keeping a single consistent error contract across the entire App Service surface is required for compatibility with existing App Service clients that parse the service's native error format.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"]
+    reason: The silo long-running PUT and DELETE operations on these two paths intentionally return the App Service error schema (DefaultErrorResponse) that every other Microsoft.Web operation in this specification uses, rather than the common-types ARM error schema. Keeping a single consistent error contract across the entire App Service surface is required for compatibility with existing App Service clients that parse the service's native error format. These two silo resource paths are the only long-running operations introduced by API version 2026-08-01; the suppression is scoped to them so it cannot mask this rule for any other operation.
   - suppress: EvenSegmentedPathForPutOperation
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork"]
