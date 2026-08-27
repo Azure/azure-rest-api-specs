@@ -763,6 +763,36 @@ describe("ARM API review consistency and hardening", () => {
       expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
     }
   });
+  it("maps every tracked issue type to a cap bucket and records cap provenance", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // The cap buckets are coarser than the tracked issue types, so ~10% of
+    // findings previously mapped to no bucket and the agent had to guess which
+    // limit applied.
+    expect(workflow).toContain("Which cap applies to a finding");
+    for (const issueType of [
+      "Security and secrets",
+      "Versioning and compatibility",
+      "Resource modeling",
+      "Operations and HTTP semantics",
+      "Long-running operations",
+      "Suppressions and tooling",
+      "Review readiness and CI",
+      "Schema and property design",
+      "Naming, enums, and identifiers",
+      "SDK and client impact",
+      "Documentation and examples",
+    ]) {
+      expect(workflow, `unmapped issue type: ${issueType}`).toContain(issueType);
+    }
+    expect(workflow).toContain("never treat it as uncapped");
+
+    // The caps are safety limits, not telemetry-derived values. Say so, so the
+    // next person does not assume the numbers were measured.
+    expect(workflow).toContain("not values derived from telemetry");
+    expect(agent).toContain("operational safety limits, not telemetry-derived values");
+  });
 });
 
 describe("ARM API review live-run regressions", () => {

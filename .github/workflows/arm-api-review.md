@@ -712,6 +712,39 @@ still posted **first** when selecting what goes inline, and an over-cap finding
 in either category is never silently dropped: disclose it in the summary like
 any other overflow.
 
+**Where these numbers come from.** They are operational safety limits, not
+values derived from telemetry. The 15 / 5 / 3 limits predate the current
+telemetry; the 10 / 10 limits were added to bound a previously unbounded worst
+case. Measured against the findings recorded in
+`documentation/arm-api-reviewer-insights.md` (412 pull requests, 343 with at
+least one finding), every cap sits well above the observed per-pull-request
+average, so caps bind only on outlier changes: security averages 0.20 findings
+per pull request, breaking changes 0.45, ARM contract 1.49, property design /
+naming 1.70, documentation 0.64. Revisit these numbers against that page rather
+than adjusting them by feel.
+
+**Which cap applies to a finding.** The cap buckets above are coarser than the
+issue types tracked in the insights page, so map each finding as follows before
+counting it against a cap. Every tracked issue type maps to exactly one bucket;
+none is exempt.
+
+| Issue type (insights page)     | Cap bucket               |
+| ------------------------------ | ------------------------ |
+| Security and secrets           | Security                 |
+| Versioning and compatibility   | Breaking changes         |
+| Resource modeling              | ARM contract             |
+| Operations and HTTP semantics  | ARM contract             |
+| Long-running operations        | ARM contract             |
+| Suppressions and tooling       | ARM contract             |
+| Review readiness and CI        | ARM contract             |
+| Schema and property design     | Property design / naming |
+| Naming, enums, and identifiers | Property design / naming |
+| SDK and client impact          | Property design / naming |
+| Documentation and examples     | Documentation gaps       |
+
+A finding that fits no row maps to the bucket of its nearest listed type; never
+treat it as uncapped.
+
 **Inline comment budget:** The workflow allows up to 50 inline review comments
 (`create-pull-request-review-comment`). With every category now capped, the
 per-category limits bound the total at 43, so this budget should not be reached;
