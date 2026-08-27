@@ -27,7 +27,7 @@ This file contains **ARM control plane–specific** review rules that supplement
 
 Flag every violation clearly with the file path, the **exact line number** (e.g., `line 42` or `line 10-15` for ranges), the JSON path (e.g., `$.definitions.Widget.properties.name`), the specific rule ID, and a concrete suggestion for how to fix it. Vague references like "near end of file" or "around line 50" are not acceptable -- always resolve the actual line number by reading the file content. Respond in markdown format.
 
-### Rule Citation Format (REQUIRED for posted PR comments)
+## Rule Citation Format (REQUIRED for posted PR comments)
 
 Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown hyperlink to the rule's authoritative location in this repository. A bare rule ID without a link is **not acceptable** -- reviewers and authors must be able to one-click navigate to the exact section that defines the rule.
 
@@ -59,13 +59,13 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 > **[NEW] 🔴 Blocking** **[[OAPI034](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/property-mutability.md#oapi034) / [Section 12.1](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/arm-api-review.instructions.md#121-use-post-actions-sparingly)]** ...
 
-### Reviewer-Posted Parity
+## Reviewer-Posted Parity
 
 <a id="reviewer-posted-parity"></a>
 
 See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). It defines the two **review modes** (interactive, where findings are presented to a human who decides what to post; and autonomous, where the agreed finding set is posted and addressed threads are resolved without a human gate), the hard rules, the post-post verification procedure, and worked examples. This section is a pointer so the three instruction files cannot drift.
 
-### Approval-Label Awareness (REQUIRED)
+## Approval-Label Awareness (REQUIRED)
 
 At the session SHA, inspect the complete set of labels returned with the PR
 metadata. Record the exact, case-sensitive names of approval labels relevant to

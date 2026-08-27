@@ -153,6 +153,11 @@ identical, so a pull request in either one can receive an automated review as
 well as an interactive one. The shared rules above are what keep the outcomes
 consistent.
 
+The automated review also runs on a **pinned model**, so every run reviews with
+the same model and the behavior changes only in a reviewed commit rather than
+drifting from run to run. The ARM eval suite pins the same model, so eval results
+reflect what production actually does.
+
 ### Bot identity and comment deduplication
 
 The automated workflow posts review comments under a stable bot identity.
@@ -243,10 +248,10 @@ safety gate before findings are presented for posting. On the happy path the
 Critic is invisible in chat; it becomes visible only when it materially
 changed a finding (downgrade, reclassification, drop) or could not run.
 
-| Agent                 | Who invokes it                         | Why it exists                                                                                                                                                                                                                                                                  |
-| --------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ARM API Reviewer      | You                                    | Optimized for **recall**: find every spec violation that should be flagged.                                                                                                                                                                                                    |
-| ARM API Review Critic | The Reviewer (automatically at Step 7) | Optimized for **precision**: independently re-fetch files, re-quote rule text verbatim, and re-classify `[NEW]`/`[EXISTING]` for every finding before it is posted. A separate agent with a narrower tool surface (read-only) is what makes the verification non-rubber-stamp. |
+| Agent                 | Who invokes it                         | Why it exists                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ARM API Reviewer      | You                                    | Optimized for **recall**: find every spec violation that should be flagged.                                                                                                                                                                                                                                                                                                                                 |
+| ARM API Review Critic | The Reviewer (automatically at Step 7) | Optimized for **precision**: independently re-fetch files, re-quote rule text verbatim, and re-classify `[NEW]`/`[EXISTING]` for every finding before it is posted. A separate agent with a narrower tool surface (read-only) is what makes the verification non-rubber-stamp. When the Critic cannot be reached, the run says so and the findings are reported as unverified rather than silently skipped. |
 
 In VS Code the Critic is hidden from the agents picker via `user-invocable: false`.
 In IDEs that don't honor that flag (Claude Code, github.com Copilot), the
@@ -348,7 +353,7 @@ The report is organized by severity and origin:
 
 Each finding includes:
 
-- **Rule ID** -- e.g., `RPC-Put-V1-01`, `ARG001`, `TSP-2.1`
+- **Rule ID** -- e.g., `RPC-Put-V1-01`, `ARG001`, `TSP-REQUIRED-V1`
 - **File path and line number** -- exact location (e.g., `line 42` or `line 10-15`)
 - **JSON path** (for OpenAPI) -- e.g., `$.paths['/widgets'].put.responses.200`
 - **Issue description** -- what is wrong
@@ -371,6 +376,12 @@ Standalone findings and summaries carry the per-finding marker below.
 Consolidated top-level conflict clarifications use the reconciliation marker
 shown afterward. Reply-only reconciliation messages remain inside an existing
 thread and do not need a marker.
+
+The marker's fields and their order are the same everywhere, but the delimiter
+depends on where the comment came from. An interactive VS Code review posts it
+as the hidden HTML comment shown here. The automated workflow posts the same
+fields as a single italic plain-text line instead, because its publisher strips
+HTML comments before they reach GitHub. Either form is a valid marker.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -491,7 +502,7 @@ scenarios:
   this scope explicit by stating:
   - the **count** of Scenario E rows (auto-resolved) and Scenario F rows
     (per-thread approval),
-  - the **URLs** of the agent threads that will be auto-resolved (first 5
+  - the **URLs** of the agent threads that will be auto-resolved (first 15
     inline, rest in the plan table),
   - the **alternative**: choose **Execute selectively** to keep specific
     Scenario E rows unresolved, or **Cancel** to leave every existing

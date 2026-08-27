@@ -241,12 +241,15 @@ Do not flood a PR with comments. Prioritize and cap:
 4. **Property design / naming** -- post up to 5
 5. **Documentation gaps** -- post up to 3
 
+These per-category caps total **43** inline comments, below the overall inline
+budget of **50**.
+
 Security and breaking-change findings are still selected first when deciding
 what goes inline.
 
 If more findings exist beyond the cap, summarize them in a single comment:
-"_N additional warnings/suggestions were identified but not posted individually.
-Key themes: [list]. The author should review the full checklist in
+"_N additional warning/suggestion candidates were identified but not
+individually verified or posted. Key themes: [list]. Review the full checklist in
 `arm-api-review.instructions.md`._"
 
 ---
@@ -280,11 +283,16 @@ addressed in the latest changes._"
 
 After posting comments:
 
-- If any 🔴 Blocking findings were posted:
+- If any 🔴 Blocking findings were posted **and** the ARM API Review Critic
+  verified them:
   **Add** `ARMChangesRequested`, **remove** `WaitForARMFeedback` (if present).
 - If no blocking findings:
   **Remove** `WaitForARMFeedback` (if present). Do not add
   `ARMChangesRequested`.
+- If the Critic could not be reached, do **not** add `ARMChangesRequested` even
+  when Blocking findings were posted. Those findings keep their severity, but
+  nothing independently verified them, so a human decides whether they should
+  move the ARM review queue.
 
 ---
 

@@ -118,12 +118,19 @@ permissions:
 # safe.
 checkout: false
 # Pin the engine to Copilot explicitly (also the repo default) so the compiled
-# workflow uses GitHub Actions token-based inference. The model is intentionally
-# left unpinned: it resolves to `vars.GH_AW_MODEL_AGENT_COPILOT`, matching the
-# repo default. (A future model pin would need to be co-managed with the ARM
-# eval suite under .github/skills/evals/arm-api-reviewer/, as data-plane does.)
+# workflow uses GitHub Actions token-based inference.
+#
+# The model is pinned so every run reviews with the same model. Left unpinned it
+# resolves to `vars.GH_AW_MODEL_AGENT_COPILOT || ... || 'auto'`, which can pick a
+# different model per run, so identical specs could get different feedback. ARM
+# review is judgement-heavy, so it gets a high-end model at high reasoning
+# effort. `effort` accepts only low/medium/high; `xhigh` is a compile-time error.
+# Keep this in step with the ARM eval suite under
+# .github/skills/evals/arm-api-reviewer/, which pins the same model, and with
+# the copy of this file in Azure/azure-rest-api-specs-pr.
 engine:
   id: copilot
+model: claude-opus-5?effort=high
 tools:
   github:
     # Read-only toolsets only; `safe-outputs` below is the ONLY write channel.
@@ -183,6 +190,15 @@ safe-outputs:
     max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   noop:
+  # Threat detection is a bounded scan of already-completed agent output, not the
+  # review itself, so it is pinned to a smaller model. Pinning it still removes
+  # run-to-run variation; left unset it resolves through the `detection` alias.
+  # `engine.model` is reported as deprecated, but it is the only supported way to
+  # set this: `model` is not a valid field under `threat-detection`.
+  threat-detection:
+    engine:
+      id: copilot
+      model: claude-sonnet-4.6
   messages:
     footer: "> 🔍 *ARM API review by [{workflow_name}]({run_url})*"
     run-started: "🔍 [{workflow_name}]({run_url}) is reviewing this PR for ARM API compliance…"
@@ -833,7 +849,7 @@ is the intended trade-off; an invisible one does not exist.
 Correct (one italic line, pipe-separated, no HTML comment delimiters):
 
 ```text
-_posted-by: arm-api-reviewer-agent | rule: RPC-Versioning | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000_
+_posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000_
 ```
 
 Incorrect (HTML comment -- deleted by the sanitizer before publication):
@@ -845,7 +861,7 @@ Incorrect (HTML comment -- deleted by the sanitizer before publication):
 Incorrect (fields split across lines -- cannot be parsed):
 
 ```text
-rule: RPC-Versioning
+rule: RPC-Put-V1-11
 severity: blocking
 posted-by: arm-api-reviewer-agent
 ```

@@ -1,6 +1,6 @@
 ---
 name: ARM API Reviewer
-description: Reviews Azure REST API specification PRs for conformance to Azure REST API Guidelines, ARM RPC rules, and repository conventions. Findings are verified by the ARM API Review Critic subagent before being presented.
+description: Reviews Azure REST API specification PRs for conformance to Azure REST API Guidelines, ARM RPC rules, and repository conventions. Findings are verified by the ARM API Review Critic subagent before being presented; when the Critic cannot be reached, the run says so and the findings are presented as unverified.
 # Tool surface principle: explicit allowlist over `github/*` wildcard, per
 # `.github/agents/README.md` Conventions. Read-only tools cover Steps 1-7
 # (fetch PR, fetch files, diff, fetch existing comments). Mutating tools
@@ -276,22 +276,22 @@ The review proceeds through ten numbered steps. Steps 1-7 are internal
 human, gated by Critic verification. Click any step to jump to its full
 specification.
 
-| #   | Step                                                                                                            | Visibility       | Purpose                                                                         |
-| --- | --------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------- |
-| 1   | [Identify Changed Files & Choose Review Depth](#step-1-identify-changed-files-and-choose-review-depth)          | internal         | Pin session SHA; fast path vs full review.                                      |
-| 2   | [Load Applicable Rule Sets](#step-2-load-the-applicable-rule-sets)                                              | internal         | Lazy-load instruction files.                                                    |
-| 3   | [Breaking Change Comparison](#step-3-breaking-change-comparison)                                                | internal         | Diff against previous version.                                                  |
-| 3.5 | [API Graph & Data-Flow Analysis](#step-35-api-graph--data-flow-analysis-think-in-graphs-before-lists)           | internal         | Build Mermaid resource / operation / data-flow graphs.                          |
-| 4   | [Systematic Review](#step-4-systematic-review)                                                                  | internal         | Apply checklists; run three multi-perspective passes.                           |
-| 4.5 | [Downstream-CI Impact Check](#step-45-downstream-ci-impact-check-mandatory)                                     | internal         | Verify fixes that add/tighten output do not trigger required LintDiff rules.    |
-| 4a  | [New vs. Existing Issue Classification](#step-4a-new-vs-existing-issue-classification)                          | internal         | Tag every issue `[NEW]` or `[EXISTING]`.                                        |
-| 5   | [Cross-File Consistency](#step-5-cross-file-consistency)                                                        | internal         | Refs, examples, readme tags, TypeSpec conversion completeness.                  |
-| 5.5 | [Existing Comment Reconciliation Plan](#step-55-existing-comment-reconciliation-plan)                           | internal         | Inventory prior comments; plan per-finding actions.                             |
-| 6   | [Assemble Findings Report (internal draft)](#step-6-assemble-findings-report-internal-draft)                    | internal         | Produce structured report artifact -- **not** shown to the human yet.           |
-| 7   | [Mandatory Critic Review (gate)](#step-7-mandatory-critic-review--gate--no-findings-leave-this-step-unverified) | internal         | Dispatch Critic subagent; iterate up to 3x; fold corrections; handle overrides. |
-| 8   | [Execute the Validated Reconciliation Plan](#step-8-execute-the-validated-reconciliation-plan)                  | **user-visible** | Present report; human approves; post comments; bundled Step 9 labels.           |
-| 9   | [Update PR Labels](#step-9-update-pr-labels)                                                                    | user-visible     | Add `ARMChangesRequested`, remove `WaitForARMFeedback`.                         |
-| 10  | [Clean Up Local Workspace](#step-10-clean-up-local-workspace-mandatory)                                         | internal         | Mandatory probe-and-remove of agent artifacts.                                  |
+| #   | Step                                                                                                             | Visibility       | Purpose                                                                         |
+| --- | ---------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------- |
+| 1   | [Identify Changed Files & Choose Review Depth](#step-1-identify-changed-files-and-choose-review-depth)           | internal         | Pin session SHA; fast path vs full review.                                      |
+| 2   | [Load Applicable Rule Sets](#step-2-load-the-applicable-rule-sets)                                               | internal         | Lazy-load instruction files.                                                    |
+| 3   | [Breaking Change Comparison](#step-3-breaking-change-comparison)                                                 | internal         | Diff against previous version.                                                  |
+| 3.5 | [API Graph & Data-Flow Analysis](#step-35-api-graph--data-flow-analysis-think-in-graphs-before-lists)            | internal         | Build Mermaid resource / operation / data-flow graphs.                          |
+| 4   | [Systematic Review](#step-4-systematic-review)                                                                   | internal         | Apply checklists; run three multi-perspective passes.                           |
+| 4.5 | [Downstream-CI Impact Check](#step-45-downstream-ci-impact-check-mandatory)                                      | internal         | Verify fixes that add/tighten output do not trigger required LintDiff rules.    |
+| 4a  | [New vs. Existing Issue Classification](#step-4a-new-vs-existing-issue-classification)                           | internal         | Tag every issue `[NEW]` or `[EXISTING]`.                                        |
+| 5   | [Cross-File Consistency](#step-5-cross-file-consistency)                                                         | internal         | Refs, examples, readme tags, TypeSpec conversion completeness.                  |
+| 5.5 | [Existing Comment Reconciliation Plan](#step-55-existing-comment-reconciliation-plan)                            | internal         | Inventory prior comments; plan per-finding actions.                             |
+| 6   | [Assemble Findings Report (internal draft)](#step-6-assemble-findings-report-internal-draft)                     | internal         | Produce structured report artifact -- **not** shown to the human yet.           |
+| 7   | [Mandatory Critic Review (gate)](#step-7-mandatory-critic-review-gate----no-findings-leave-this-step-unverified) | internal         | Dispatch Critic subagent; iterate up to 3x; fold corrections; handle overrides. |
+| 8   | [Execute the Validated Reconciliation Plan](#step-8-execute-the-validated-reconciliation-plan)                   | **user-visible** | Present report; human approves; post comments; bundled Step 9 labels.           |
+| 9   | [Update PR Labels](#step-9-update-pr-labels)                                                                     | user-visible     | Add `ARMChangesRequested`, remove `WaitForARMFeedback`.                         |
+| 10  | [Clean Up Local Workspace](#step-10-clean-up-local-workspace-mandatory)                                          | internal         | Mandatory probe-and-remove of agent artifacts.                                  |
 
 Supporting sections referenced throughout:
 
@@ -898,6 +898,8 @@ A generic summary theme without an affected element and actionable guidance does
 | Property design / naming | 5          |
 | Documentation gaps       | 3          |
 
+These per-category caps total **43** inline comments.
+
 Overall inline budget is **50** posted comments. If the total across categories would exceed 50, post the highest-severity findings inline (security and breaking changes first). Replies and thread resolutions from Step 5.5 have their own budgets and do **not** consume the 50.
 
 The caps govern what is **posted**, not what is analysed, but an over-cap candidate is **not** a verified finding. The agreed posting set is selected after these limits are applied, and only that set goes to the Critic. Excluded candidates are therefore disclosed **only as a count and themes**, never rendered as canonical finding bodies and never described in a way that implies the Critic verified them. In the Step 6 report, give each excluded candidate the action `OVERFLOW-NOT-POSTED` in the per-finding action table rather than a posting action, so it is visible to the human without being mistaken for something that will be posted. In Step 8, disclose the aggregate in the **review-body preamble** as an extra sentence (this agent does not post a summary comment by default, so the preamble is the surface that always exists): use _"N additional findings were identified but not posted inline. Key themes: [list]."_ when the overall 50-comment budget is the binding limit, and _"N additional warning/suggestion candidates were identified but not individually verified or posted. Key themes: [list]. Review the full checklist in `arm-api-review.instructions.md`."_ when a category cap is. Never silently drop an over-cap candidate: an undisclosed cap is indistinguishable from a missed violation.
@@ -1308,8 +1310,8 @@ Substitution rules:
 
 - `<N>`: the Critic iteration count from Step 7.
 - `<verification-status>`: `critic-verified` only when the Critic returned a
-  verdict that was folded into the posting set. Use `Critic unavailable;
-reviewer self-check only` when all dispatch attempts failed. Never combine
+  verdict that was folded into the posting set. When all Critic dispatch attempts
+  failed, use `Critic unavailable; reviewer self-check only`. Never combine
   `critic-verified` with an unavailable outcome.
 - `<outcome>`: one of `converged` (Critic returned PASS or WARN with no unresolved corrections), `manual decision` (the report's `Next-step recommendation` was `MANUAL DECISION REQUIRED` and the human approved posting anyway), `override applied` (one or more findings carry a `critic: override` marker), or `unavailable -- reviewer self-check` (all Critic dispatch attempts failed; auto-unavailable fallback fired). Pick the **highest-severity** label that applies; precedence is `unavailable` > `manual decision` > `override applied` > `converged`.
 - `<short-sha>`: the **first 7 characters** of the session SHA pinned in Step 1, used as the link's display text.

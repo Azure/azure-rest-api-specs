@@ -274,7 +274,7 @@ results in your PR description or as a comment:
 
 > **Baseline:** results recorded before the eval files declared
 > `environment.skills` were produced without the `azure-api-review` skill loaded
-> and describe bare-model behaviour on the stimulus prompts. They are not
+> and describe bare-model behavior on the stimulus prompts. They are not
 > comparable to skill-loaded results -- the first skill-loaded run establishes a
 > new baseline rather than showing a regression or improvement.
 

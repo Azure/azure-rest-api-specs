@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { readFile, readdir } from "fs/promises";
 import { load } from "js-yaml";
 import { join } from "path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
@@ -732,6 +732,35 @@ describe("ARM API review consistency and hardening", () => {
     for (const source of [workflow, agent]) {
       expect(source).toContain("escalate to `MANUAL DECISION REQUIRED`");
       expect(source).toContain("Both are explicit, recorded human actions");
+    }
+  });
+  it("pins the model so every run reviews with the same one", async () => {
+    const [source, compiled] = await readWorkflowFiles();
+
+    // Left unpinned the model resolves to `... || 'auto'`, which can pick a
+    // different model per run, so identical specs could get different feedback.
+    expect(source).toContain("model: claude-opus-5?effort=high");
+    // Threat detection is pinned too, so no phase is left resolving at runtime.
+    expect(source).toContain("model: claude-sonnet-4.6");
+
+    // The compiled lock must carry literals, not a `vars.` fallback expression.
+    expect(compiled).toContain("COPILOT_MODEL: claude-opus-5?effort=high");
+    expect(compiled).toContain("COPILOT_MODEL: claude-sonnet-4.6");
+    expect(compiled).not.toContain("COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT");
+  });
+
+  it("keeps the eval suite on the same model as production", async () => {
+    const dir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
+    const files = (await readdir(dir)).filter((f) => f.endsWith(".yaml"));
+    expect(files.length).toBeGreaterThan(0);
+
+    for (const file of files) {
+      const text = await readFile(join(dir, file), "utf8");
+      // The agent under test must match the production model, or eval results
+      // describe a model that never reviews a real PR.
+      expect(text, `${file} agent model`).toContain("model: claude-opus-5");
+      // The judge is a separate role and deliberately stays cheaper.
+      expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
     }
   });
 });

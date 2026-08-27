@@ -806,7 +806,7 @@ Iteration: <n> of 3
 | 1   | RPC-Put-V1-11 | `specs/foo.json` line 142 | PASS                 | High       | Post as-is                     |
 | 2   | OAPI027       | `specs/foo.json` line 88  | PASS                 | High       | DOWNGRADE Blocking -> Warning  |
 | 3   | OAPI099       | `specs/foo.json` line 210 | FAIL: rule-not-found | n/a        | DROP                           |
-| 4   | RPC-Get-V1-04 | `specs/foo.json` line 305 | FAIL: misclassified  | n/a        | RECLASSIFY [NEW] -> [EXISTING] |
+| 4   | RPC-Get-V1-08 | `specs/foo.json` line 305 | FAIL: misclassified  | n/a        | RECLASSIFY [NEW] -> [EXISTING] |
 
 ### Per-reconciliation-entry annotations
 
