@@ -7099,6 +7099,14 @@
           "description": "Firewall SKU type, Default will be STANDARD.",
           "default": "STANDARD"
         },
+        "sessionDrainTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A configurable period, in minutes, that allows firewall instances to continue\nserving existing traffic during scale-in or rolling upgrade events, before the\ninstance is removed from the pool. If not specified, a default of 15 is applied.",
+          "default": 15,
+          "minimum": 15,
+          "maximum": 120
+        },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "Network settings"
@@ -7503,6 +7511,22 @@
         "backendConfiguration": {
           "$ref": "#/definitions/EndpointConfiguration",
           "description": "Backend configurations"
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration, in minutes, for which an inbound destination NAT session matching\nthis frontend setting is permitted to stay inactive prior to termination. If not\nspecified, a default of 4 is applied.",
+          "default": 4,
+          "minimum": 4,
+          "maximum": 100
+        },
+        "tcpReset": {
+          "$ref": "#/definitions/TcpReset",
+          "description": "Whether a TCP reset is sent when an inactive inbound session matching this\nfrontend setting is terminated. If not specified, a default of Disabled is applied."
+        },
+        "loadDistribution": {
+          "$ref": "#/definitions/LoadDistribution",
+          "description": "The hash algorithm used to distribute inbound traffic matching this frontend\nsetting. If not specified, a default of Default (five-tuple hash) is applied."
         }
       },
       "required": [
@@ -7733,6 +7757,30 @@
       "required": [
         "value"
       ]
+    },
+    "LoadDistribution": {
+      "type": "string",
+      "description": "Hash algorithm used to distribute inbound traffic, allowing you to select the\nalgorithm that best supports your application traffic.",
+      "enum": [
+        "Default",
+        "SourceIP"
+      ],
+      "x-ms-enum": {
+        "name": "LoadDistribution",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Five-tuple hash: source IP, source port, destination IP, destination port and protocol."
+          },
+          {
+            "name": "SourceIP",
+            "value": "SourceIP",
+            "description": "Two-tuple hash: source IP and destination IP."
+          }
+        ]
+      }
     },
     "LocalRulesResource": {
       "type": "object",
@@ -8389,6 +8437,18 @@
           "items": {
             "type": "string"
           }
+        },
+        "outboundIdleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration, in minutes, for which an outbound source NAT session is permitted\nto stay inactive prior to termination. If not specified, a default of 4 is applied.",
+          "default": 4,
+          "minimum": 4,
+          "maximum": 120
+        },
+        "outboundTcpReset": {
+          "$ref": "#/definitions/TcpReset",
+          "description": "Whether a TCP reset is sent when an inactive outbound source NAT session is\nterminated. If not specified, a default of Enabled is applied."
         }
       },
       "required": [
@@ -9463,6 +9523,30 @@
         "key",
         "value"
       ]
+    },
+    "TcpReset": {
+      "type": "string",
+      "description": "Whether a TCP reset is sent when a session is terminated. A TCP reset is a signal\nsent to the client and server during session termination events that allows\napplications to handle the disconnection more gracefully than an abrupt,\nuncontrolled closure.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "TcpReset",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "A TCP reset is sent to the client and server when a session is terminated."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "No TCP reset is sent; the session is terminated without notifying the client or server."
+          }
+        ]
+      }
     },
     "UsageType": {
       "type": "string",

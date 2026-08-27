@@ -59,7 +59,10 @@
                     },
                     "port": "80"
                   },
-                  "protocol": "TCP"
+                  "protocol": "TCP",
+                  "idleTimeoutInMinutes": 15,
+                  "tcpReset": "Disabled",
+                  "loadDistribution": "SourceIP"
                 }
               ],
               "isPanoramaManaged": "TRUE",
@@ -126,7 +129,9 @@
                     "addressSpace": "10.1.1.0/24",
                     "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
                   }
-                }
+                },
+                "outboundIdleTimeoutInMinutes": 20,
+                "outboundTcpReset": "Enabled"
               },
               "panEtag": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
               "panoramaConfig": {
@@ -145,7 +150,8 @@
                 "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "usageType": "PAYG"
               },
-              "provisioningState": "Accepted"
+              "provisioningState": "Accepted",
+              "sessionDrainTimeoutInMinutes": 30
             },
             "systemData": {
               "createdAt": "2022-09-09T05:08:24.229Z",

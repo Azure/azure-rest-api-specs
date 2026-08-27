@@ -312,6 +312,52 @@ union EnableStatus {
   Disabled: "Disabled",
 }
 
+// Deliberately a dedicated type rather than a reuse of EnableStatus: the wire values
+// coincide but the semantics are unrelated, and sharing one type caused a generated-client
+// name collision downstream. Keep these separate.
+/**
+ * Whether a TCP reset is sent when a session is terminated. A TCP reset is a signal
+ * sent to the client and server during session termination events that allows
+ * applications to handle the disconnection more gracefully than an abrupt,
+ * uncontrolled closure.
+ */
+@added(Versions.v2026_08_27_preview)
+union TcpReset {
+  string,
+
+  /**
+   * A TCP reset is sent to the client and server when a session is terminated.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * No TCP reset is sent; the session is terminated without notifying the client or server.
+   */
+  Disabled: "Disabled",
+}
+
+// Wire values mirror Azure Load Balancer's loadDistribution verbatim, so no mapping layer
+// is needed between this contract and the underlying load balancer. The enum is extensible
+// (modelAsString), so further modes can be added later without a breaking change.
+/**
+ * Hash algorithm used to distribute inbound traffic, allowing you to select the
+ * algorithm that best supports your application traffic.
+ */
+@added(Versions.v2026_08_27_preview)
+union LoadDistribution {
+  string,
+
+  /**
+   * Five-tuple hash: source IP, source port, destination IP, destination port and protocol.
+   */
+  Default: "Default",
+
+  /**
+   * Two-tuple hash: source IP and destination IP.
+   */
+  SourceIP: "SourceIP",
+}
+
 /**
  * Possible log types
  */
@@ -1247,6 +1293,20 @@ model FirewallDeploymentProperties {
   @added(Versions.v2026_01_26_preview)
   firewallSku?: string = "STANDARD";
 
+  // Instance-lifecycle setting, not network topology - hence the properties root next to
+  // firewallSku rather than inside networkProfile. Recorded as design Decision F; the
+  // partner nests this inside dataPathInfo but the ARM shape deliberately does not mirror
+  // the partner shape.
+  /**
+   * A configurable period, in minutes, that allows firewall instances to continue
+   * serving existing traffic during scale-in or rolling upgrade events, before the
+   * instance is removed from the pool. If not specified, a default of 15 is applied.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(15)
+  @maxValue(120)
+  sessionDrainTimeoutInMinutes?: int32 = 15;
+
   /**
    * Network settings
    */
@@ -1350,6 +1410,26 @@ model NetworkProfile {
    * Array of ipv4 destination address for which source NAT is to be performed
    */
   privateSourceNatRulesDestination?: string[];
+
+  // The 120 maximum here intentionally differs from the 100 maximum on the inbound
+  // FrontendSetting.idleTimeoutInMinutes, and the Enabled default on outboundTcpReset
+  // intentionally differs from the Disabled default on FrontendSetting.tcpReset. Both
+  // asymmetries were confirmed by the partner - do not normalize them.
+  /**
+   * The duration, in minutes, for which an outbound source NAT session is permitted
+   * to stay inactive prior to termination. If not specified, a default of 4 is applied.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(4)
+  @maxValue(120)
+  outboundIdleTimeoutInMinutes?: int32 = 4;
+
+  /**
+   * Whether a TCP reset is sent when an inactive outbound source NAT session is
+   * terminated. If not specified, a default of Enabled is applied.
+   */
+  @added(Versions.v2026_08_27_preview)
+  outboundTcpReset?: TcpReset;
 }
 
 /**
@@ -1566,6 +1646,34 @@ model FrontendSetting {
    * Backend configurations
    */
   backendConfiguration: EndpointConfiguration;
+
+  // The 100 maximum here intentionally differs from the 120 maximum on the outbound
+  // NetworkProfile.outboundIdleTimeoutInMinutes, and the Disabled default on tcpReset
+  // intentionally differs from the Enabled default on NetworkProfile.outboundTcpReset.
+  // Both asymmetries were confirmed by the partner - do not normalize them.
+  /**
+   * The duration, in minutes, for which an inbound destination NAT session matching
+   * this frontend setting is permitted to stay inactive prior to termination. If not
+   * specified, a default of 4 is applied.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(4)
+  @maxValue(100)
+  idleTimeoutInMinutes?: int32 = 4;
+
+  /**
+   * Whether a TCP reset is sent when an inactive inbound session matching this
+   * frontend setting is terminated. If not specified, a default of Disabled is applied.
+   */
+  @added(Versions.v2026_08_27_preview)
+  tcpReset?: TcpReset;
+
+  /**
+   * The hash algorithm used to distribute inbound traffic matching this frontend
+   * setting. If not specified, a default of Default (five-tuple hash) is applied.
+   */
+  @added(Versions.v2026_08_27_preview)
+  loadDistribution?: LoadDistribution;
 }
 
 /**
