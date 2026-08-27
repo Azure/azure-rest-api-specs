@@ -134,8 +134,8 @@ model Microsoft365PublishRequest {
 // Response models
 // ---------------------------------------------------------------------------
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Added for back compat."
 /** Response from publishing an agent to Microsoft 365 / Microsoft Teams. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Added for back compat."
 model Microsoft365PublishResponse {
   /** The Microsoft 365 title id of the published app. */
   titleId?: string;
@@ -144,8 +144,8 @@ model Microsoft365PublishResponse {
   teamsAppId?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Added for back compat."
 /** The generated Microsoft 365 app package (Microsoft Teams app zip). */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Added for back compat."
 model Microsoft365AppPackageResponse {
   /** The media type of the returned package content. */
   @header("Content-Type")
