@@ -8289,6 +8289,15 @@ model ContainerAppsFunctionProperties {
    * Indicates whether the function is disabled.
    */
   @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "isDisabled")
+  @visibility(Lifecycle.Read)
+  isDisabledLegacy?: boolean;
+
+  /**
+   * Indicates whether the function is disabled. This property is deprecated; use `state` instead.
+   */
+  #deprecated "Use `state` instead."
+  @added(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
 
