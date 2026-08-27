@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "operationId": "SampleOperationId",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "operationId": "SampleOperationId",
+        "createdDateTime": "2021-09-30T02:23:41.59Z",
+        "lastActionDateTime": "2021-09-30T02:23:41.59Z",
+        "status": "NotStarted",
+        "deviceStatus": [
+          {
+            "deviceId": "DeviceA",
+            "status": "NotStarted",
+            "resultCode": "200",
+            "extendedResultCode": "0",
+            "logLocation": "/storageAccount/deviceUpdateInstanceName/DeviceA/SampleOperationId"
+          },
+          {
+            "deviceId": "DeviceB",
+            "moduleId": "ModuleB",
+            "status": "NotStarted",
+            "resultCode": "200",
+            "extendedResultCode": "0",
+            "logLocation": "/storageAccount/deviceUpdateInstanceName/DeviceB/ModuleB/SampleOperationId"
+          }
+        ],
+        "description": "operation description"
+      }
+    }
+  }
+}

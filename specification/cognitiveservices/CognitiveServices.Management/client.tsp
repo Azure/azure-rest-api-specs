@@ -224,6 +224,11 @@ op regenerateKeyCustom(
 );
 @@clientName(AgentDeployment, "CognitiveServicesAgentDeployment", "csharp");
 @@clientName(
+  ArcDeploymentVllmParameters,
+  "CognitiveServicesArcDeploymentVllmProperties",
+  "csharp"
+);
+@@clientName(
   AgentDeploymentProperties,
   "CognitiveServicesAgentDeploymentProperties",
   "csharp"
@@ -1100,6 +1105,11 @@ op regenerateKeyCustom(
 @@clientName(
   AccountProperties.storedCompletionsDisabled,
   "IsStoredCompletionsDisabled",
+  "csharp"
+);
+@@clientName(
+  AccountProperties.a365LoggingEnabled,
+  "IsA365LoggingEnabled",
   "csharp"
 );
 @@clientName(

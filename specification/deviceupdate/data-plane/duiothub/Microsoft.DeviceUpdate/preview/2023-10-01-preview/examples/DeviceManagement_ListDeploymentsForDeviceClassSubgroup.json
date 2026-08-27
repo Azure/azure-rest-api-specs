@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "groupId": "TestGroup",
+    "deviceClassId": "deviceClassId1",
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "deploymentId": "deploymentId1",
+            "groupId": "TestGroup",
+            "startDateTime": "2020-07-01T12:13:14Z",
+            "update": {
+              "updateId": {
+                "provider": "provider1",
+                "name": "name1",
+                "version": "1.0.0.0"
+              }
+            },
+            "rollbackPolicy": {
+              "update": {
+                "updateId": {
+                  "provider": "provider1",
+                  "name": "name1",
+                  "version": "0.9.0"
+                }
+              },
+              "failure": {
+                "devicesFailedPercentage": 50,
+                "devicesFailedCount": 100
+              }
+            },
+            "isCanceled": false,
+            "isRetried": false,
+            "isCloudInitiatedRollback": false
+          },
+          {
+            "deploymentId": "deploymentId2",
+            "groupId": "TestGroup",
+            "startDateTime": "2020-08-01T12:13:14Z",
+            "update": {
+              "updateId": {
+                "provider": "provider2",
+                "name": "name2",
+                "version": "2.0.0.0"
+              }
+            },
+            "rollbackPolicy": {
+              "update": {
+                "updateId": {
+                  "provider": "provider2",
+                  "name": "name2",
+                  "version": "1.0.0.0"
+                }
+              },
+              "failure": {
+                "devicesFailedPercentage": 20,
+                "devicesFailedCount": 150
+              }
+            },
+            "isCanceled": false,
+            "isRetried": false,
+            "isCloudInitiatedRollback": false
+          }
+        ]
+      }
+    }
+  }
+}
