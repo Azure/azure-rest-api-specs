@@ -82596,7 +82596,7 @@
           "turn_detection": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/VoiceAgentTurnDetection"
+                "$ref": "#/components/schemas/VoiceAgentTurnDetectionConfig"
               },
               {
                 "type": "null"
@@ -84280,26 +84280,6 @@
           ]
         }
       },
-      "VoiceAgentTurnDetection": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentServerVadTurnDetection"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentSemanticVadTurnDetection"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentAzureSemanticVadTurnDetection"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentAzureSemanticVadEnTurnDetection"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentAzureSemanticVadMultilingualTurnDetection"
-          }
-        ],
-        "description": "Turn-detection settings accepted by a stable voice-agent session."
-      },
       "VoiceAgentTurnDetectionConfig": {
         "type": "object",
         "required": [
@@ -84319,11 +84299,11 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "semantic_vad": "#/components/schemas/VoiceAgentSemanticVadTurnDetection",
+            "server_vad": "#/components/schemas/VoiceAgentServerVadTurnDetection",
             "azure_semantic_vad": "#/components/schemas/VoiceAgentAzureSemanticVadTurnDetection",
             "azure_semantic_vad_en": "#/components/schemas/VoiceAgentAzureSemanticVadEnTurnDetection",
             "azure_semantic_vad_multilingual": "#/components/schemas/VoiceAgentAzureSemanticVadMultilingualTurnDetection",
-            "server_vad": "#/components/schemas/VoiceAgentServerVadTurnDetection"
+            "semantic_vad": "#/components/schemas/VoiceAgentSemanticVadTurnDetection"
           }
         },
         "description": "Turn-detection configuration for a voice agent.",

@@ -333,7 +333,7 @@ model VoiceAgentAudioInputConfig {
   noise_reduction?: VoiceAgentNoiseReduction | null;
 
   @doc("Turn (end-of-speech) detection. Server-side turn detection is enabled by default; set to null to disable it, in which case the client must trigger responses manually.")
-  turn_detection?: VoiceAgentTurnDetection | null;
+  turn_detection?: VoiceAgentTurnDetectionConfig | null;
 
   @doc("Optional server-side echo cancellation settings.")
   echo_cancellation?: VoiceAgentEchoCancellation | null;
@@ -615,21 +615,6 @@ model VoiceAgentAzureSemanticVadMultilingualTurnDetection
 model VoiceAgentSemanticVadTurnDetection extends VoiceAgentTurnDetectionConfig {
   ...OmitProperties<OpenAI.RealtimeTurnDetectionSemanticVad, "type">;
   type: VoiceAgentTurnDetectionType.semantic_vad;
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Turn-detection settings are selected by their `type` property."
-@doc("Turn-detection settings accepted by a stable voice-agent session.")
-@oneOf
-@Azure.ClientGenerator.Core.alternateType(
-  VoiceAgentTurnDetectionConfig,
-  "csharp"
-)
-union VoiceAgentTurnDetection {
-  server_vad: VoiceAgentServerVadTurnDetection,
-  semantic_vad: VoiceAgentSemanticVadTurnDetection,
-  azure_semantic_vad: VoiceAgentAzureSemanticVadTurnDetection,
-  azure_semantic_vad_en: VoiceAgentAzureSemanticVadEnTurnDetection,
-  azure_semantic_vad_multilingual: VoiceAgentAzureSemanticVadMultilingualTurnDetection,
 }
 
 @doc("The source of reference audio used for echo cancellation.")
