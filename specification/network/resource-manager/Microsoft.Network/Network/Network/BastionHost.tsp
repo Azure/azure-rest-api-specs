@@ -72,31 +72,29 @@ interface BastionHosts {
   >;
 
   /**
-   * Updates Tags or identity for BastionHost resource
+   * Updates Tags for BastionHost resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_01_01)
   @sharedRoute
   @patch(#{ implicitOptionality: false })
-  @renamedFrom(Versions.v2026_01_01, "updateTags")
-  update is ArmCustomPatchAsync<
+  updateTags is ArmCustomPatchAsync<
     BastionHost,
-    PatchModel = BastionHostUpdate,
+    PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BastionHost> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
   /**
-   * Updates Tags for BastionHost resource
+   * Updates Tags or identity for BastionHost resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @removed(Versions.v2026_01_01)
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This is a copy of the updateTags patch operation"
+  @added(Versions.v2026_01_01)
   @sharedRoute
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<
+  update is ArmCustomPatchAsync<
     BastionHost,
-    PatchModel = TagsObject,
+    PatchModel = BastionHostUpdate,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BastionHost> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
