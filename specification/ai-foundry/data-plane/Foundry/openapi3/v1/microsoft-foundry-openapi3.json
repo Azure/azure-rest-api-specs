@@ -12404,6 +12404,12 @@
                 "model": {
                   "contentType": "text/plain"
                 },
+                "languages": {
+                  "contentType": "application/json"
+                },
+                "keywords": {
+                  "contentType": "application/json"
+                },
                 "response_format": {
                   "contentType": "application/json"
                 },
@@ -19111,16 +19117,24 @@
                       "deprecated": true
                     },
                     "safety_identifier": {
-                      "type": "string",
-                      "maxLength": 64,
-                      "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers)."
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     },
                     "prompt_cache_key": {
-                      "type": "string",
-                      "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching)."
-                    },
-                    "service_tier": {
-                      "$ref": "#/components/schemas/OpenAI.ServiceTier"
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     },
                     "prompt_cache_retention": {
                       "anyOf": [
@@ -19189,6 +19203,9 @@
                     },
                     "prompt": {
                       "$ref": "#/components/schemas/OpenAI.Prompt"
+                    },
+                    "service_tier": {
+                      "$ref": "#/components/schemas/OpenAI.ServiceTierResponses"
                     },
                     "truncation": {
                       "anyOf": [
@@ -19334,7 +19351,7 @@
                     "conversation": {
                       "anyOf": [
                         {
-                          "$ref": "#/components/schemas/OpenAI.ConversationReference"
+                          "$ref": "#/components/schemas/OpenAI.ResponseConversation"
                         },
                         {
                           "type": "null"
@@ -19478,16 +19495,24 @@
                     "deprecated": true
                   },
                   "safety_identifier": {
-                    "type": "string",
-                    "maxLength": 64,
-                    "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers)."
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
                   },
                   "prompt_cache_key": {
-                    "type": "string",
-                    "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching)."
-                  },
-                  "service_tier": {
-                    "$ref": "#/components/schemas/OpenAI.ServiceTier"
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
                   },
                   "prompt_cache_retention": {
                     "anyOf": [
@@ -19559,6 +19584,9 @@
                   },
                   "prompt": {
                     "$ref": "#/components/schemas/OpenAI.Prompt"
+                  },
+                  "service_tier": {
+                    "$ref": "#/components/schemas/OpenAI.ServiceTierResponses"
                   },
                   "truncation": {
                     "anyOf": [
@@ -41104,6 +41132,8 @@
                 "type": "string",
                 "enum": [
                   "whisper-1",
+                  "gpt-transcribe",
+                  "gpt-live-transcribe",
                   "gpt-4o-mini-transcribe",
                   "gpt-4o-mini-transcribe-2025-12-15",
                   "gpt-4o-transcribe",
@@ -41112,11 +41142,26 @@
                 ]
               }
             ],
-            "description": "The model to use for transcription. Current options are `whisper-1`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`. Use `gpt-4o-transcribe-diarize` when you need diarization with speaker labels."
+            "description": "The model to use for transcription. Current options are `whisper-1`, `gpt-transcribe`, `gpt-live-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`. Use `gpt-4o-transcribe-diarize` when you need diarization with speaker labels."
           },
           "language": {
             "type": "string",
             "description": "The language of the input audio. Supplying the input language in\n  [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\n  will improve accuracy and latency."
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
           },
           "prompt": {
             "type": "string",
@@ -41147,6 +41192,8 @@
                 "type": "string",
                 "enum": [
                   "whisper-1",
+                  "gpt-transcribe",
+                  "gpt-live-transcribe",
                   "gpt-4o-mini-transcribe",
                   "gpt-4o-mini-transcribe-2025-12-15",
                   "gpt-4o-transcribe",
@@ -41155,11 +41202,19 @@
                 ]
               }
             ],
-            "description": "The model used for transcription. Current options are `whisper-1`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`."
+            "description": "The model used for transcription. Current options are `whisper-1`, `gpt-transcribe`, `gpt-live-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`."
           },
           "language": {
             "type": "string",
             "description": "The language of the input audio."
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "The possible input audio languages configured for transcription, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format."
           },
           "prompt": {
             "type": "string",
@@ -43553,6 +43608,9 @@
           "reasoning_tokens": {
             "$ref": "#/components/schemas/OpenAI.integer"
           },
+          "text_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
           "rejected_prediction_tokens": {
             "$ref": "#/components/schemas/OpenAI.integer"
           }
@@ -43565,6 +43623,12 @@
             "$ref": "#/components/schemas/OpenAI.integer"
           },
           "cached_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "text_tokens": {
+            "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "image_tokens": {
             "$ref": "#/components/schemas/OpenAI.integer"
           },
           "cache_write_tokens": {
@@ -45161,7 +45225,6 @@
         "required": [
           "id",
           "type",
-          "call_id",
           "output"
         ],
         "properties": {
@@ -45181,6 +45244,14 @@
           "call_id": {
             "type": "string",
             "description": "The unique ID of the function tool call generated by the model."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tool that produced the output."
+          },
+          "namespace": {
+            "type": "string",
+            "description": "The namespace of the tool that produced the output."
           },
           "caller": {
             "anyOf": [
@@ -45597,7 +45668,8 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "unevaluatedProperties": {},
+            "description": "The error from the tool call, if any."
           },
           "status": {
             "$ref": "#/components/schemas/OpenAI.MCPToolCallStatus",
@@ -46061,20 +46133,6 @@
         "description": "The conversation that this response belongs to.",
         "title": "Conversation object"
       },
-      "OpenAI.ConversationReference": {
-        "type": "object",
-        "required": [
-          "id"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the conversation that this response was associated with."
-          }
-        },
-        "description": "The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.",
-        "title": "Conversation"
-      },
       "OpenAI.ConversationResource": {
         "type": "object",
         "required": [
@@ -46476,16 +46534,24 @@
             "deprecated": true
           },
           "safety_identifier": {
-            "type": "string",
-            "maxLength": 64,
-            "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers)."
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "prompt_cache_key": {
-            "type": "string",
-            "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching)."
-          },
-          "service_tier": {
-            "$ref": "#/components/schemas/OpenAI.ServiceTier"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "prompt_cache_retention": {
             "anyOf": [
@@ -46516,6 +46582,9 @@
           "model": {
             "type": "string",
             "description": "The model deployment to use for this chat completion."
+          },
+          "service_tier": {
+            "$ref": "#/components/schemas/OpenAI.ServiceTier"
           },
           "modalities": {
             "$ref": "#/components/schemas/OpenAI.ResponseModalities"
@@ -46945,6 +47014,16 @@
           "model": {
             "type": "string",
             "description": "The model deployment used for the creation of this chat completion."
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "service_tier": {
             "$ref": "#/components/schemas/OpenAI.ServiceTier"
@@ -48355,7 +48434,7 @@
                 }
               }
             ],
-            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
+            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
           },
           "prompt": {
             "type": "string",
@@ -48378,7 +48457,7 @@
                 "type": "null"
               }
             ],
-            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`."
+            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`."
           },
           "model": {
             "anyOf": [
@@ -48389,6 +48468,8 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "gpt-image-1",
                   "gpt-image-1-mini",
@@ -48399,7 +48480,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. Defaults to `gpt-image-1.5`.",
+            "description": "The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.",
             "x-oaiTypeLabel": "string"
           },
           "n": {
@@ -48548,6 +48629,8 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "dall-e-3",
                   "gpt-image-1",
@@ -48558,7 +48641,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
+            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
             "x-oaiTypeLabel": "string",
             "default": "dall-e-2"
           },
@@ -48710,7 +48793,7 @@
                 "type": "null"
               }
             ],
-            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`.",
+            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`.",
             "default": "auto"
           },
           "style": {
@@ -50064,7 +50147,7 @@
         "type": "object",
         "properties": {
           "file": {
-            "description": "The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.",
+            "description": "The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.\n  The request must include enough format metadata for the file to be identified. We recommend an extension-bearing filename and an appropriate content type.",
             "x-oaiTypeLabel": "file"
           },
           "model": {
@@ -50076,6 +50159,7 @@
                 "type": "string",
                 "enum": [
                   "whisper-1",
+                  "gpt-transcribe",
                   "gpt-4o-transcribe",
                   "gpt-4o-mini-transcribe",
                   "gpt-4o-mini-transcribe-2025-12-15",
@@ -50083,12 +50167,26 @@
                 ]
               }
             ],
-            "description": "ID of the model to use. The options are `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `whisper-1` (which is powered by our open source Whisper V2 model), and `gpt-4o-transcribe-diarize`.",
+            "description": "ID of the model to use. The options are `gpt-transcribe`, `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `whisper-1` (which is powered by our open source Whisper V2 model), and `gpt-4o-transcribe-diarize`.",
             "x-oaiTypeLabel": "string"
           },
           "language": {
             "type": "string",
             "description": "The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency."
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe`."
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe`."
           },
           "prompt": {
             "type": "string",
@@ -50216,6 +50314,13 @@
             "type": "string",
             "description": "The transcribed text."
           },
+          "languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.TranscriptionLanguage"
+            },
+            "description": "The languages detected in the audio. Returned by `gpt-transcribe`. An empty array indicates that no language could be reliably detected."
+          },
           "logprobs": {
             "type": "array",
             "items": {
@@ -50335,7 +50440,7 @@
         "type": "object",
         "properties": {
           "file": {
-            "description": "The audio file object (not file name) translate, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.",
+            "description": "The audio file object (not file name) translate, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. The request must include enough format metadata for the file to be identified. We recommend an extension-bearing filename and an appropriate content type.",
             "x-oaiTypeLabel": "file"
           },
           "model": {
@@ -51444,6 +51549,8 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21",
                   "gpt-image-1",
                   "gpt-image-1-mini",
                   "chatgpt-image-latest"
@@ -51453,7 +51560,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image editing.",
+            "description": "The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.",
             "x-oaiTypeLabel": "string",
             "default": "gpt-image-1.5"
           },
@@ -51600,7 +51707,7 @@
                 "type": "null"
               }
             ],
-            "description": "Background behavior for generated image output.",
+            "description": "Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.",
             "default": "auto"
           },
           "stream": {
@@ -55142,7 +55249,9 @@
                 "enum": [
                   "gpt-image-1",
                   "gpt-image-1-mini",
-                  "gpt-image-1.5"
+                  "gpt-image-1.5",
+                  "gpt-image-2",
+                  "gpt-image-2-2026-04-21"
                 ]
               }
             ],
@@ -55210,7 +55319,7 @@
               "opaque",
               "auto"
             ],
-            "description": "Background type for the generated image. One of `transparent`,\n  `opaque`, or `auto`. Default: `auto`.",
+            "description": "Set the background of the generated image. One of `transparent`,\n  `opaque`, or `auto`. Transparent backgrounds are available for\n  supported GPT Image models. For `gpt-image-2` and\n  `gpt-image-2-2026-04-21`, this support is in preview. When using\n  `transparent`, set the output format to `png` or `webp`. Default: `auto`.",
             "default": "auto"
           },
           "input_fidelity": {
@@ -56280,7 +56389,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 10485760,
+            "maxLength": 20971520,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -56594,7 +56703,6 @@
       "OpenAI.InputItemFunctionCallOutputItemParam": {
         "type": "object",
         "required": [
-          "call_id",
           "type",
           "output"
         ],
@@ -56610,10 +56718,14 @@
             ]
           },
           "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the function tool call generated by the model."
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "type": {
             "type": "string",
@@ -56647,6 +56759,26 @@
               }
             ],
             "description": "Text, image, or file output of the function tool call."
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "namespace": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "caller": {
             "anyOf": [
@@ -57230,7 +57362,8 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "unevaluatedProperties": {},
+            "description": "The error from the tool call, if any."
           },
           "status": {
             "$ref": "#/components/schemas/OpenAI.MCPToolCallStatus",
@@ -58013,7 +58146,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 10485760,
+            "maxLength": 20971520,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -59085,7 +59218,6 @@
         "required": [
           "id",
           "type",
-          "call_id",
           "output"
         ],
         "properties": {
@@ -59105,6 +59237,14 @@
           "call_id": {
             "type": "string",
             "description": "The unique ID of the function tool call generated by the model."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tool that produced the output."
+          },
+          "namespace": {
+            "type": "string",
+            "description": "The namespace of the tool that produced the output."
           },
           "caller": {
             "anyOf": [
@@ -59474,7 +59614,8 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "unevaluatedProperties": {},
+            "description": "The error from the tool call, if any."
           },
           "status": {
             "$ref": "#/components/schemas/OpenAI.MCPToolCallStatus",
@@ -59977,7 +60118,6 @@
       "OpenAI.ItemFunctionCallOutputItemParam": {
         "type": "object",
         "required": [
-          "call_id",
           "type",
           "output"
         ],
@@ -59993,10 +60133,14 @@
             ]
           },
           "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the function tool call generated by the model."
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "type": {
             "type": "string",
@@ -60030,6 +60174,26 @@
               }
             ],
             "description": "Text, image, or file output of the function tool call."
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "namespace": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "caller": {
             "anyOf": [
@@ -60666,7 +60830,8 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "unevaluatedProperties": {},
+            "description": "The error from the tool call, if any."
           },
           "status": {
             "$ref": "#/components/schemas/OpenAI.MCPToolCallStatus",
@@ -61685,7 +61850,6 @@
         "required": [
           "id",
           "type",
-          "call_id",
           "output"
         ],
         "properties": {
@@ -61705,6 +61869,14 @@
           "call_id": {
             "type": "string",
             "description": "The unique ID of the function tool call generated by the model."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tool that produced the output."
+          },
+          "namespace": {
+            "type": "string",
+            "description": "The namespace of the tool that produced the output."
           },
           "caller": {
             "anyOf": [
@@ -62127,7 +62299,8 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "unevaluatedProperties": {},
+            "description": "The error from the tool call, if any."
           },
           "status": {
             "$ref": "#/components/schemas/OpenAI.MCPToolCallStatus",
@@ -64002,9 +64175,7 @@
         "type": "object",
         "required": [
           "type",
-          "text",
-          "annotations",
-          "logprobs"
+          "text"
         ],
         "properties": {
           "type": {
@@ -64615,13 +64786,25 @@
           "owned_by": {
             "type": "string",
             "description": "The organization that owns the model."
+          },
+          "shutdown_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The date when the model will shut down, or null if not announced."
           }
         },
         "description": "Describes an OpenAI model offering that can be used with the API.",
         "title": "Model",
         "x-oaiMeta": {
           "name": "The model object",
-          "example": "{\n  \"id\": \"VAR_chat_model_id\",\n  \"object\": \"model\",\n  \"created\": 1686935002,\n  \"owned_by\": \"openai\"\n}\n"
+          "example": "{\n  \"id\": \"VAR_chat_model_id\",\n  \"object\": \"model\",\n  \"created\": 1686935002,\n  \"owned_by\": \"openai\",\n  \"shutdown_date\": \"2026-10-23\"\n}\n"
         }
       },
       "OpenAI.Moderation": {
@@ -65233,7 +65416,6 @@
           },
           "description": {
             "type": "string",
-            "minLength": 1,
             "description": "A description of the namespace shown to the model."
           },
           "tools": {
@@ -65400,9 +65582,7 @@
         "type": "object",
         "required": [
           "type",
-          "text",
-          "annotations",
-          "logprobs"
+          "text"
         ],
         "properties": {
           "type": {
@@ -66382,7 +66562,6 @@
         "required": [
           "id",
           "type",
-          "call_id",
           "output"
         ],
         "properties": {
@@ -66402,6 +66581,14 @@
           "call_id": {
             "type": "string",
             "description": "The unique ID of the function tool call generated by the model."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tool that produced the output."
+          },
+          "namespace": {
+            "type": "string",
+            "description": "The namespace of the tool that produced the output."
           },
           "caller": {
             "anyOf": [
@@ -66771,7 +66958,8 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "unevaluatedProperties": {},
+            "description": "The error from the tool call, if any."
           },
           "status": {
             "$ref": "#/components/schemas/OpenAI.MCPToolCallStatus",
@@ -67264,9 +67452,7 @@
         "type": "object",
         "required": [
           "type",
-          "text",
-          "annotations",
-          "logprobs"
+          "text"
         ],
         "properties": {
           "type": {
@@ -67778,6 +67964,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "message": "#/components/schemas/OpenAI.RealtimeConversationItemMessage",
             "function_call": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall",
             "function_call_output": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput",
             "mcp_approval_response": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse",
@@ -67939,6 +68126,351 @@
           ]
         }
       },
+      "OpenAI.RealtimeConversationItemMessage": {
+        "type": "object",
+        "required": [
+          "role",
+          "type"
+        ],
+        "properties": {
+          "role": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageType"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ]
+          }
+        },
+        "discriminator": {
+          "propertyName": "role",
+          "mapping": {
+            "system": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem",
+            "user": "#/components/schemas/OpenAI.RealtimeConversationItemMessageUser",
+            "assistant": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          }
+        ]
+      },
+      "OpenAI.RealtimeConversationItemMessageAssistant": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ],
+            "description": "The type of the item. Always `message`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "assistant"
+            ],
+            "description": "The role of the message sender. Always `assistant`.",
+            "x-stainless-const": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistantContent"
+            },
+            "description": "The content of the message."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessage"
+          }
+        ],
+        "description": "An assistant message item in a Realtime conversation.",
+        "title": "Realtime assistant message item",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.RealtimeConversationItemMessageAssistantContent": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "output_text",
+              "output_audio"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "audio": {
+            "type": "string"
+          },
+          "transcript": {
+            "type": "string"
+          }
+        }
+      },
+      "OpenAI.RealtimeConversationItemMessageSystem": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ],
+            "description": "The type of the item. Always `message`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "system"
+            ],
+            "description": "The role of the message sender. Always `system`.",
+            "x-stainless-const": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystemContent"
+            },
+            "description": "The content of the message."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessage"
+          }
+        ],
+        "description": "A system message in a Realtime conversation can be used to provide additional context or instructions to the model. This is similar but distinct from the instruction prompt provided at the start of a conversation, as system messages can be added at any point in the conversation. For major changes to the conversation's behavior, use instructions, but for smaller updates (e.g. \"the user is now asking about a different topic\"), use system messages.",
+        "title": "Realtime system message item",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.RealtimeConversationItemMessageSystemContent": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_text"
+            ],
+            "x-stainless-const": true
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      },
+      "OpenAI.RealtimeConversationItemMessageType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "system",
+              "user",
+              "assistant"
+            ]
+          }
+        ]
+      },
+      "OpenAI.RealtimeConversationItemMessageUser": {
+        "type": "object",
+        "required": [
+          "type",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
+            "x-stainless-const": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ],
+            "description": "The type of the item. Always `message`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The status of the item. Has no effect on the conversation."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user"
+            ],
+            "description": "The role of the message sender. Always `user`.",
+            "x-stainless-const": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageUserContent"
+            },
+            "description": "The content of the message."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessage"
+          }
+        ],
+        "description": "A user message item in a Realtime conversation.",
+        "title": "Realtime user message item",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "OpenAI.RealtimeConversationItemMessageUserContent": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_text",
+              "input_audio",
+              "input_image"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "audio": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "detail": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "low",
+              "high"
+            ],
+            "default": "auto"
+          },
+          "transcript": {
+            "type": "string"
+          }
+        }
+      },
       "OpenAI.RealtimeConversationItemType": {
         "anyOf": [
           {
@@ -67952,7 +68484,8 @@
               "mcp_approval_response",
               "mcp_list_tools",
               "mcp_call",
-              "mcp_approval_request"
+              "mcp_approval_request",
+              "message"
             ]
           }
         ]
@@ -70076,16 +70609,24 @@
             "deprecated": true
           },
           "safety_identifier": {
-            "type": "string",
-            "maxLength": 64,
-            "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers)."
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "prompt_cache_key": {
-            "type": "string",
-            "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching)."
-          },
-          "service_tier": {
-            "$ref": "#/components/schemas/OpenAI.ServiceTier"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "prompt_cache_retention": {
             "anyOf": [
@@ -70154,6 +70695,9 @@
           },
           "prompt": {
             "$ref": "#/components/schemas/OpenAI.Prompt"
+          },
+          "service_tier": {
+            "$ref": "#/components/schemas/OpenAI.ServiceTierResponses"
           },
           "truncation": {
             "anyOf": [
@@ -70299,7 +70843,7 @@
           "conversation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/OpenAI.ConversationReference"
+                "$ref": "#/components/schemas/OpenAI.ResponseConversation"
               },
               {
                 "type": "null"
@@ -70846,6 +71390,20 @@
           "example": "{\n  \"type\": \"response.content_part.done\",\n  \"item_id\": \"msg_123\",\n  \"output_index\": 0,\n  \"content_index\": 0,\n  \"sequence_number\": 1,\n  \"part\": {\n    \"type\": \"output_text\",\n    \"text\": \"In a shimmering forest under a sky full of stars, a lonely unicorn named Lila discovered a hidden pond that glowed with moonlight. Every night, she would leave sparkling, magical flowers by the water's edge, hoping to share her beauty with others. One enchanting evening, she woke to find a group of friendly animals gathered around, eager to be friends and share in her magic.\",\n    \"annotations\": []\n  }\n}\n"
         }
       },
+      "OpenAI.ResponseConversation": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the conversation that this response was associated with."
+          }
+        },
+        "description": "The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.",
+        "title": "Conversation"
+      },
       "OpenAI.ResponseCreatedEvent": {
         "type": "object",
         "required": [
@@ -71002,6 +71560,7 @@
           "server_error",
           "rate_limit_exceeded",
           "invalid_prompt",
+          "data_residency_mismatch",
           "bio_policy",
           "vector_store_timeout",
           "invalid_image",
@@ -71606,6 +72165,22 @@
           "partial_image_b64": {
             "type": "string",
             "description": "Base64-encoded partial image data, suitable for rendering as an image."
+          },
+          "size": {
+            "type": "string",
+            "description": "The image size that was used."
+          },
+          "quality": {
+            "type": "string",
+            "description": "The image quality that was used."
+          },
+          "background": {
+            "type": "string",
+            "description": "The background setting that was used."
+          },
+          "output_format": {
+            "type": "string",
+            "description": "The output format that was used."
           }
         },
         "allOf": [
@@ -72142,7 +72717,7 @@
           },
           "item": {
             "$ref": "#/components/schemas/OpenAI.OutputItem",
-            "description": "The output item that was added."
+            "description": "The output item that was added. For reasoning items, `encrypted_content`\n  may be incomplete while the item is in progress. Use the reasoning item\n  from the corresponding `response.output_item.done` event when passing it\n  as input to a subsequent request."
           }
         },
         "allOf": [
@@ -72254,7 +72829,7 @@
         "x-oaiMeta": {
           "name": "response.output_text.annotation.added",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.output_text.annotation.added\",\n  \"item_id\": \"item-abc\",\n  \"output_index\": 0,\n  \"content_index\": 0,\n  \"annotation_index\": 0,\n  \"annotation\": {\n    \"type\": \"text_annotation\",\n    \"text\": \"This is a test annotation\",\n    \"start\": 0,\n    \"end\": 10\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.output_text.annotation.added\",\n  \"item_id\": \"item-abc\",\n  \"output_index\": 0,\n  \"content_index\": 0,\n  \"annotation_index\": 0,\n  \"annotation\": {\n    \"type\": \"file_citation\",\n    \"file_id\": \"file-abc\",\n    \"index\": 0,\n    \"filename\": \"example.txt\"\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponsePromptVariables": {
@@ -72779,6 +73354,238 @@
           "example": "{\n  \"type\": \"response.refusal.done\",\n  \"item_id\": \"item-abc\",\n  \"output_index\": 1,\n  \"content_index\": 2,\n  \"refusal\": \"final refusal text\",\n  \"sequence_number\": 1\n}\n"
         }
       },
+      "OpenAI.ResponseShellCallCommandAddedStreamingEvent": {
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "output_index",
+          "command_index",
+          "command"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.shell_call_command.added"
+            ],
+            "description": "The type of the event, always `response.shell_call_command.added`.",
+            "x-stainless-const": true
+          },
+          "sequence_number": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the output item that was updated."
+          },
+          "command_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the shell command that was added."
+          },
+          "command": {
+            "type": "string",
+            "description": "The shell command that was added."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
+        "description": "A streaming event that indicated a shell command was added to a tool call.",
+        "title": "Response shell command added event"
+      },
+      "OpenAI.ResponseShellCallCommandDeltaStreamingEvent": {
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "output_index",
+          "command_index",
+          "delta"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.shell_call_command.delta"
+            ],
+            "description": "The type of the event, always `response.shell_call_command.delta`.",
+            "x-stainless-const": true
+          },
+          "sequence_number": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the output item that was updated."
+          },
+          "command_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the shell command that was updated."
+          },
+          "delta": {
+            "type": "string",
+            "description": "The shell command delta that was appended."
+          },
+          "obfuscation": {
+            "type": "string",
+            "description": "An obfuscation string that was added to pad the event payload."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
+        "description": "A streaming event that indicated a shell command was incrementally updated.",
+        "title": "Response shell command delta event"
+      },
+      "OpenAI.ResponseShellCallCommandDoneStreamingEvent": {
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "output_index",
+          "command_index",
+          "command"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.shell_call_command.done"
+            ],
+            "description": "The type of the event, always `response.shell_call_command.done`.",
+            "x-stainless-const": true
+          },
+          "sequence_number": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the output item that was updated."
+          },
+          "command_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the shell command that was completed."
+          },
+          "command": {
+            "type": "string",
+            "description": "The final shell command that was emitted."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
+        "description": "A streaming event that indicated a shell command was completed.",
+        "title": "Response shell command done event"
+      },
+      "OpenAI.ResponseShellCallOutputContentDeltaStreamingEvent": {
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "item_id",
+          "output_index",
+          "command_index",
+          "delta"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.shell_call_output_content.delta"
+            ],
+            "description": "The type of the event, always `response.shell_call_output_content.delta`.",
+            "x-stainless-const": true
+          },
+          "sequence_number": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the output item that was updated."
+          },
+          "output_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the output item that was updated."
+          },
+          "command_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the shell command that produced output."
+          },
+          "delta": {
+            "$ref": "#/components/schemas/OpenAI.ShellCallOutputDelta",
+            "description": "The stdout/stderr delta that was emitted."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
+        "description": "A streaming event that indicated shell call output was incrementally added.",
+        "title": "Response shell call output content delta event"
+      },
+      "OpenAI.ResponseShellCallOutputContentDoneStreamingEvent": {
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "item_id",
+          "output_index",
+          "command_index",
+          "output"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "response.shell_call_output_content.done"
+            ],
+            "description": "The type of the event, always `response.shell_call_output_content.done`.",
+            "x-stainless-const": true
+          },
+          "sequence_number": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the output item that was updated."
+          },
+          "output_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the output item that was updated."
+          },
+          "command_index": {
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The index of the shell command that produced output."
+          },
+          "output": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.FunctionShellCallOutputContent"
+            },
+            "description": "The output contents emitted for the shell command."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
+        "description": "A streaming event that indicated shell call output was completed.",
+        "title": "Response shell call output content done event"
+      },
       "OpenAI.ResponseStreamEvent": {
         "type": "object",
         "required": [
@@ -72839,6 +73646,11 @@
             "response.reasoning_text.done": "#/components/schemas/OpenAI.ResponseReasoningTextDoneEvent",
             "response.refusal.delta": "#/components/schemas/OpenAI.ResponseRefusalDeltaEvent",
             "response.refusal.done": "#/components/schemas/OpenAI.ResponseRefusalDoneEvent",
+            "response.shell_call_command.added": "#/components/schemas/OpenAI.ResponseShellCallCommandAddedStreamingEvent",
+            "response.shell_call_command.delta": "#/components/schemas/OpenAI.ResponseShellCallCommandDeltaStreamingEvent",
+            "response.shell_call_command.done": "#/components/schemas/OpenAI.ResponseShellCallCommandDoneStreamingEvent",
+            "response.shell_call_output_content.delta": "#/components/schemas/OpenAI.ResponseShellCallOutputContentDeltaStreamingEvent",
+            "response.shell_call_output_content.done": "#/components/schemas/OpenAI.ResponseShellCallOutputContentDoneStreamingEvent",
             "response.output_text.delta": "#/components/schemas/OpenAI.ResponseTextDeltaEvent",
             "response.output_text.done": "#/components/schemas/OpenAI.ResponseTextDoneEvent",
             "response.web_search_call.completed": "#/components/schemas/OpenAI.ResponseWebSearchCallCompletedEvent",
@@ -72846,7 +73658,8 @@
             "response.web_search_call.searching": "#/components/schemas/OpenAI.ResponseWebSearchCallSearchingEvent",
             "response.audio.delta": "#/components/schemas/OpenAI.ResponseAudioDeltaEvent"
           }
-        }
+        },
+        "description": "Event emitted while a response is streamed."
       },
       "OpenAI.ResponseStreamEventType": {
         "anyOf": [
@@ -72875,6 +73688,11 @@
               "response.file_search_call.searching",
               "response.function_call_arguments.delta",
               "response.function_call_arguments.done",
+              "response.shell_call_command.added",
+              "response.shell_call_command.delta",
+              "response.shell_call_command.done",
+              "response.shell_call_output_content.delta",
+              "response.shell_call_output_content.done",
               "response.in_progress",
               "response.failed",
               "response.incomplete",
@@ -74542,23 +75360,60 @@
               "default",
               "flex",
               "scale",
-              "priority"
+              "priority",
+              "fast"
             ]
           },
           {
             "type": "null"
           }
         ],
-        "description": "Specifies the processing type used for serving the request.\n- If set to 'auto', then the request will be processed with the service tier configured in the Project settings. Unless otherwise configured, the Project will use 'default'.\n- If set to 'default', then the request will be processed with the standard pricing and performance for the selected model.\n- If set to '[flex](/docs/guides/flex-processing)' or '[priority](https://openai.com/api-priority-processing/)', then the request will be processed with the corresponding service tier.\n- When not set, the default behavior is 'auto'.\nWhen the `service_tier` parameter is set, the response body will include the `service_tier` value based on the processing mode actually used to serve the request. This response value may be different from the value set in the parameter."
+        "description": "Specifies the processing type used for serving the request.\n- If set to 'auto', then the request will be processed with the service tier configured in the Project settings. Unless otherwise configured, the Project will use 'default'.\n- If set to 'default', then the request will be processed with the standard pricing and performance for the selected model.\n- If set to '[flex](/docs/guides/flex-processing)', then the request will be processed with the Flex Processing service tier.\n- To opt-in to [Fast mode](/api/docs/guides/fast-mode) at the request level, include the `service_tier=fast` or `service_tier=priority` parameter for Responses or Chat Completions. The response will show `service_tier=priority` regardless of if you specify `service_tier=fast` or `priority` in your request.\n- When not set, the default behavior is 'auto'.\nWhen the `service_tier` parameter is set, the response body will include the `service_tier` value based on the processing mode actually used to serve the request. This response value may be different from the value set in the parameter."
       },
       "OpenAI.ServiceTierEnum": {
         "type": "string",
         "enum": [
           "auto",
           "default",
+          "fast",
           "flex",
           "priority"
         ]
+      },
+      "OpenAI.ServiceTierResponses": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "auto",
+              "default",
+              "flex",
+              "scale",
+              "priority",
+              "fast",
+              "ultrafast"
+            ]
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Specifies the processing type used for serving the request.\n- If set to 'auto', then the request will be processed with the service tier configured in the Project settings. Unless otherwise configured, the Project will use 'default'.\n- If set to 'default', then the request will be processed with the standard pricing and performance for the selected model.\n- If set to '[flex](/docs/guides/flex-processing)', then the request will be processed with the Flex Processing service tier.\n- To opt-in to [Fast mode](/api/docs/guides/fast-mode) at the request level, include the `service_tier=fast` or `service_tier=priority` parameter for Responses or Chat Completions. The response will show `service_tier=priority` regardless of if you specify `service_tier=fast` or `priority` in your request.\n- If set to 'ultrafast', then the request will be processed with the access-controlled Ultrafast Processing service tier. This tier is currently available for `gpt-5.6-sol`; a response served through it will show `service_tier=ultrafast`.\n- When not set, the default behavior is 'auto'.\nWhen the `service_tier` parameter is set, the response body will include the `service_tier` value based on the processing mode actually used to serve the request. This response value may be different from the value set in the parameter."
+      },
+      "OpenAI.ShellCallOutputDelta": {
+        "type": "object",
+        "properties": {
+          "stdout": {
+            "type": "string",
+            "description": "The stdout delta that was emitted."
+          },
+          "stderr": {
+            "type": "string",
+            "description": "The stderr delta that was emitted."
+          }
+        },
+        "description": "A delta of stdout/stderr emitted while a shell call was running.",
+        "title": "Shell call output delta"
       },
       "OpenAI.SkillReferenceParam": {
         "type": "object",
@@ -75836,6 +76691,19 @@
           "logprobs"
         ]
       },
+      "OpenAI.TranscriptionLanguage": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The code of a language detected in the audio."
+          }
+        },
+        "description": "A language detected in transcribed audio."
+      },
       "OpenAI.TranscriptionSegment": {
         "type": "object",
         "required": [
@@ -76910,7 +77778,7 @@
             "type": "null"
           }
         ],
-        "description": "Constrains the verbosity of the model's response. Lower values will result in\nmore concise responses, while higher values will result in more verbose responses.\nCurrently supported values are `low`, `medium`, and `high`."
+        "description": "Constrains the verbosity of the model's response. Lower values will result in\nmore concise responses, while higher values will result in more verbose responses.\nCurrently supported values are `low`, `medium`, and `high`. The default is\n`medium`."
       },
       "OpenAI.VideoCharacterResource": {
         "type": "object",
@@ -77517,6 +78385,11 @@
               "web_search"
             ],
             "description": "The type of the web search tool. One of `web_search` or `web_search_2025_08_26`."
+          },
+          "external_web_access": {
+            "type": "boolean",
+            "description": "Allow live internet access for web search. Defaults to true when omitted. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content.",
+            "default": true
           },
           "filters": {
             "anyOf": [
@@ -83243,6 +84116,21 @@
             "type": "string",
             "description": "The language of the input audio. Supplying the input language in\n  [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\n  will improve accuracy and latency."
           },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
+          },
           "prompt": {
             "type": "string",
             "description": "An optional text to guide the model's style or continue a previous audio\n  segment.\n  For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).\n  For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example \"expect words related to technology\".\n  Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions."
@@ -84679,6 +85567,11 @@
             "enum": [
               "web_search"
             ]
+          },
+          "external_web_access": {
+            "type": "boolean",
+            "description": "Allow live internet access for web search. Defaults to true when omitted. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content.",
+            "default": true
           },
           "filters": {
             "anyOf": [
