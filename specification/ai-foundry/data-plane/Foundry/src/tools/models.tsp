@@ -21,8 +21,6 @@ namespace Azure.AI.Projects {
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
-
-    @removed(Versions.v1)
     web_iq_preview: "web_iq_preview",
   }
 
@@ -430,6 +428,7 @@ namespace Azure.AI.Projects {
     /**
      * The definition of azure function and its parameters.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     function: {
       /**
        * The name of the function to be called.
@@ -891,14 +890,13 @@ namespace Azure.AI.Projects {
      * (Optional) Whether the agent requires approval before executing actions. Default is always.
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
   /**
    * A WebIQ server-side tool.
    */
-  @removed(Versions.v1)
   @extension("x-ms-foundry-meta", PreviewTool)
   model WebIQPreviewTool extends OpenAI.Tool {
     /**
@@ -912,15 +910,15 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
 
     /**
-     * The label of the WebIQ MCP server to connect to.
+     * The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
      */
     server_label?: string;
 
     /**
-     * Whether the agent requires approval before executing actions. Default is always.
+     * Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
@@ -1006,7 +1004,7 @@ namespace Azure.AI.Projects {
   // Tool Call Output Content Type
   // ==============================================================================
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")
@@ -1262,7 +1260,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("An Azure Function tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model AzureFunctionToolCall extends OpenAI.OutputItem {
     type: "azure_function_call";
 

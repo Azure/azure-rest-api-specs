@@ -5,6 +5,7 @@
 
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "../agents/routes.tsp";
+import "../voice-agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
@@ -114,6 +115,7 @@ using Azure.AI.Projects;
 @@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
 @@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
+@@clientName(A2ATool.a2a_version, exact("a2a_version"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 

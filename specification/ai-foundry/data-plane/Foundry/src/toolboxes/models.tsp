@@ -72,6 +72,7 @@ alias ToolFields<Source> = {
 alias ToolboxCodeInterpreterToolType = "code_interpreter";
 alias ToolboxFileSearchToolType = "file_search";
 alias ToolboxWebSearchToolType = "web_search";
+alias ToolboxShellToolType = "shell";
 alias ToolboxMCPToolType = "mcp";
 alias ToolboxAzureAISearchToolType = "azure_ai_search";
 alias ToolboxOpenApiToolType = "openapi";
@@ -95,7 +96,6 @@ union ToolboxToolType {
   mcp: ToolboxMCPToolType,
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
-  a2a: ToolboxA2AToolType,
   a2a_preview: ToolboxA2APreviewToolType,
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
@@ -103,8 +103,8 @@ union ToolboxToolType {
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
   toolbox_search: ToolboxSearchToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
-
-  @removed(Versions.v1)
+  a2a: ToolboxA2AToolType,
+  shell: ToolboxShellToolType,
   web_iq_preview: ToolboxWebIQPreviewToolType,
 }
 
@@ -144,6 +144,88 @@ model FileSearchToolboxTool extends ToolboxTool {
 model WebSearchToolboxTool extends ToolboxTool {
   type: ToolboxWebSearchToolType;
   ...ToolFields<OpenAI.WebSearchTool>;
+}
+
+/**
+ * An execution environment for a shell tool stored in a toolbox. This environment model is scoped to toolbox configuration and does not modify the OpenAI shell environment contract.
+ */
+@discriminator("type")
+model ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment.
+   */
+  type: string;
+}
+
+/**
+ * Network access policy for an automatically provisioned toolbox shell container.
+ */
+@discriminator("type")
+model ToolboxShellNetworkPolicy {
+  /**
+   * The type of network access policy.
+   */
+  type: string;
+}
+
+/**
+ * A network policy that disables outbound access from a toolbox shell container.
+ */
+model ToolboxShellNetworkPolicyDisabled extends ToolboxShellNetworkPolicy {
+  /**
+   * The type of network access policy. Always `disabled`.
+   */
+  type: "disabled";
+}
+
+/**
+ * An automatically provisioned container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerAutoEnvironment extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_auto`.
+   */
+  type: "container_auto";
+
+  ...OmitProperties<OpenAI.ContainerAutoParam, "type" | "network_policy">;
+
+  /**
+   * The network access policy for the container. When omitted, the service defaults to disabled outbound network access.
+   */
+  network_policy?: ToolboxShellNetworkPolicy;
+}
+
+/**
+ * An existing container environment for a shell tool stored in a toolbox.
+ */
+model ToolboxShellContainerReferenceEnvironment
+  extends ToolboxShellEnvironment {
+  /**
+   * The type of the shell execution environment. Always `container_reference`.
+   */
+  type: "container_reference";
+
+  ...OmitProperties<
+    OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+    "type"
+  >;
+}
+
+/**
+ * A shell tool stored in a toolbox. This model is additive to toolbox configuration and does not modify the OpenAI tool contract or existing toolbox tool definitions.
+ */
+model ShellToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `shell`.
+   */
+  type: ToolboxShellToolType;
+
+  ...OmitProperties<ToolFields<OpenAI.FunctionShellToolParam>, "environment">;
+
+  /**
+   * The environment in which shell commands are executed. Specify an automatically provisioned container or an existing container.
+   */
+  environment: ToolboxShellEnvironment;
 }
 
 /**
@@ -225,7 +307,6 @@ model FabricIQPreviewToolboxTool extends ToolboxTool {
 /**
  * A WebIQ tool stored in a toolbox.
  */
-@removed(Versions.v1)
 @extension("x-ms-foundry-meta", PreviewTool)
 model WebIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxWebIQPreviewToolType;
