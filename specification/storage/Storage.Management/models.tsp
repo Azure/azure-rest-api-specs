@@ -6001,6 +6001,12 @@ model NspAccessRuleProperties {
    */
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainNames?: string[];
+
+  /**
+   * Service Tags for inbound rules
+   */
+  @added(Versions.v2026_09_01)
+  serviceTags?: string[];
 }
 
 /**
