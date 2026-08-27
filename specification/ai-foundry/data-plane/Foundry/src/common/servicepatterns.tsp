@@ -111,6 +111,7 @@ union FoundryFeaturesOptInKeys {
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
   agents_optimization_v2_preview: "AgentsOptimization=V2Preview",
+  model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
@@ -572,3 +573,8 @@ op deleteJobPreview<AreaPreviewLabel extends
 
 @encode(DateTimeKnownEncoding.unixTimestamp, int32)
 scalar FoundryTimestamp extends utcDateTime;
+
+#suppress "@azure-tools/typespec-azure-core/known-encoding" "Foundry wire contracts encode duration values as integer milliseconds."
+@doc("A duration encoded as an integer number of milliseconds.")
+@encode(DurationKnownEncoding.milliseconds, int32)
+scalar FoundryDurationMilliseconds extends duration;

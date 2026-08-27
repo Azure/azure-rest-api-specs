@@ -7238,6 +7238,10 @@
           "$ref": "#/definitions/GoalAssignmentType",
           "description": "The type of goal assignment."
         },
+        "requireZonalResiliency": {
+          "type": "boolean",
+          "description": "Whether zonal resiliency is required for this goal assignment."
+        },
         "serviceLevelResources": {
           "type": "array",
           "description": "List of service level resources.",
@@ -7255,33 +7259,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
           "description": "Details of any errors encountered during the operation.",
           "readOnly": true
-        }
-      },
-      "required": [
-        "goalTemplateId",
-        "goalAssignmentType"
-      ]
-    },
-    "GoalAssignmentPropertiesUpdate": {
-      "type": "object",
-      "description": "Definition of goal assignment property.",
-      "properties": {
-        "goalTemplateId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Arm id of the goal template."
-        },
-        "goalAssignmentType": {
-          "$ref": "#/definitions/GoalAssignmentType",
-          "description": "The type of goal assignment."
-        },
-        "serviceLevelResources": {
-          "type": "array",
-          "description": "List of service level resources.",
-          "items": {
-            "$ref": "#/definitions/ServiceLevelResource"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -7308,7 +7285,7 @@
       "description": "Goal assignment a AzureResilienceProviderHub resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/GoalAssignmentPropertiesUpdate",
+          "$ref": "#/definitions/GoalAssignmentProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -7371,6 +7348,10 @@
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for high availability recommendation."
         },
+        "zonalResiliency": {
+          "$ref": "#/definitions/ResiliencyProperties",
+          "description": "Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource."
+        },
         "disasterRecoveryGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
           "description": "Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation."
@@ -7393,7 +7374,7 @@
           "type": "array",
           "description": "List of user confirmations for high availability solutions.",
           "items": {
-            "$ref": "#/definitions/UserConfirmationForHighAvailabilityItem"
+            "$ref": "#/definitions/UserConfirmationItem"
           },
           "x-ms-identifiers": [
             "solutionDisplayName"
@@ -7417,9 +7398,7 @@
         }
       },
       "required": [
-        "resourceArmId",
-        "highAvailabilityGoalParticipation",
-        "highAvailabilityAttestationStatus"
+        "resourceArmId"
       ]
     },
     "GoalTemplate": {
@@ -10024,6 +10003,35 @@
         ]
       }
     },
+    "ResiliencyProperties": {
+      "type": "object",
+      "description": "Resiliency posture for a goal resource.",
+      "properties": {
+        "goalParticipation": {
+          "$ref": "#/definitions/ExclusionState",
+          "description": "Flag which depicts whether the Arm resource is excluded for resiliency recommendation."
+        },
+        "attestationStatus": {
+          "$ref": "#/definitions/AttestationState",
+          "description": "Flag which depicts whether the Arm resource is manually attested for resiliency recommendation."
+        },
+        "exclusionReason": {
+          "$ref": "#/definitions/ExclusionReason",
+          "description": "Reason for exclusion from resiliency goals.",
+          "readOnly": true
+        },
+        "userConfirmation": {
+          "type": "array",
+          "description": "List of user confirmations for resiliency solutions.",
+          "items": {
+            "$ref": "#/definitions/UserConfirmationItem"
+          },
+          "x-ms-identifiers": [
+            "solutionDisplayName"
+          ]
+        }
+      }
+    },
     "ResourceBaseProtectionSolutionSetting": {
       "type": "object",
       "description": "Definition of recovery orchestration resource protection solution setting with recovery orchestration plan.",
@@ -10584,8 +10592,7 @@
         }
       },
       "required": [
-        "serviceLevelIndicatorResourceId",
-        "serviceLevelObjectiveResourceId"
+        "serviceLevelIndicatorResourceId"
       ]
     },
     "SolutionDisplayName": {
@@ -10953,7 +10960,7 @@
         ]
       }
     },
-    "UserConfirmationForHighAvailabilityItem": {
+    "UserConfirmationItem": {
       "type": "object",
       "description": "Represents a user confirmation for a high availability solution.",
       "properties": {
