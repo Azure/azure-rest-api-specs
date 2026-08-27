@@ -127,6 +127,7 @@ using Microsoft.Workloads;
 
 @@clientName(Alert, "SapMonitorAlert", "csharp");
 @@clientName(AlertProperties, "SapMonitorAlertProperties", "csharp");
+@@clientName(AlertTemplate, "SapMonitorAlertTemplate", "csharp");
 @@clientName(
   AlertTemplateProperties,
   "SapMonitorAlertTemplateProperties",
@@ -151,3 +152,8 @@ using Microsoft.Workloads;
   "csharp"
 );
 @@clientName(AppServicePlanTier, "SapMonitorAppServicePlanTier", "csharp");
+@@clientName(
+  WorkloadMonitorProvisioningState,
+  "WorkloadsSapMonitorProvisioningState",
+  "csharp"
+);
