@@ -233,7 +233,8 @@ model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   redact_private_content?: boolean = true;
 }
 
-@doc("The options for a simulation seed data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model SimulationSeedDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is SimulationSeed for this model.")

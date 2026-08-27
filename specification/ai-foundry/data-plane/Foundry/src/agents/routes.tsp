@@ -56,7 +56,10 @@ interface Agents {
   @tag("Agents")
   generateAgent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    GenerateAgentRequest,
+    {
+      /** The kind-specific inputs for generating and creating an agent. */
+      @body body: GenerateAgentRequest;
+    },
     AgentObject
   >;
 
@@ -356,7 +359,7 @@ interface Agents {
   /**
    * Applies a merge-patch update to the specified agent endpoint configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @summary("Update an agent endpoint")
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")
