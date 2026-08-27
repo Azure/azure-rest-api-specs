@@ -42,9 +42,6 @@ title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
 tag: package-2026-01-01
-directive:
-  - suppress: MULTIPLE_API_VERSION
-    reason: The combined Network package intentionally includes the frozen VMSS 2018-10-01 captured-schema surface for backward compatibility.
 ```
 
 ### Tag: package-2026-01-01
