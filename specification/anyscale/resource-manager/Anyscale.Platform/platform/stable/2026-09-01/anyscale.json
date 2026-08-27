@@ -194,7 +194,7 @@
         "tags": [
           "Agreements"
         ],
-        "description": "Sign the agreement via PUT. The request body is intentionally empty -- send `{\"properties\": {}}`. Every agreement property is RP-managed and read-only, so any value supplied in the body is ignored; the accepting identity is taken from the ARM caller token, not the payload. Idempotent -- PUT-ting an already-Active agreement is a no-op. Resource-oriented equivalent of `accept`, usable as an ordered step in an ARM template.",
+        "description": "Sign the agreement via PUT. The request body is intentionally empty -- send `{\"properties\": {}}`. Every agreement property is RP-managed and read-only, so any value supplied in the body is ignored; the accepting identity is taken from the ARM caller token, not the payload. Idempotent -- PUT-ting an already-Active agreement is a no-op.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -285,50 +285,6 @@
         "x-ms-examples": {
           "Revoke acceptance of an agreement": {
             "$ref": "./examples/Agreements_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Anyscale.Platform/agreements/{agreementName}/accept": {
-      "post": {
-        "operationId": "Agreements_Accept",
-        "tags": [
-          "Agreements"
-        ],
-        "description": "Accept (sign) the agreement. The accepting identity is taken from the ARM caller token. Idempotent.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "agreementName",
-            "in": "path",
-            "description": "The name that uniquely identifies the agreement (e.g. \"default\" for the primary terms).",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_-]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Agreement"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Accept (sign) an agreement": {
-            "$ref": "./examples/Agreements_Accept.json"
           }
         }
       }
