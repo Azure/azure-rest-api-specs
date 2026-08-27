@@ -468,7 +468,7 @@ model VoiceAgentServerEventRtcCallSdpCreated {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @usage(VoiceAgentServerEventUsage)
 model VoiceAgentRtcCallErrorDetails {
-  @doc("The error type.")
+  @doc("The error category, following the VoiceLive wire contract: `invalid_request_error` for a client-side signaling fault (for example, a malformed SDP offer) or `server_error` for a service-side failure. Additional categories may be added over time.")
   type: string;
 
   @doc("A machine-readable error code, when available.")
