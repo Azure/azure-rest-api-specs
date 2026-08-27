@@ -14,6 +14,12 @@ export function createMockGithub() {
   return /** @type {GitHub & ReturnType<typeof createMockGithubImpl>} */ (createMockGithubImpl());
 }
 
+/**
+ * `github` mock as returned by {@link createMockGithub}, including vitest `Mock`
+ * helpers (e.g. `.mockResolvedValue`) on the `rest.*` methods.
+ * @typedef {ReturnType<typeof createMockGithub>} MockGithub
+ */
+
 // Partial mock of `github` parameter passed into github-script actions
 function createMockGithubImpl() {
   return {
@@ -43,8 +49,12 @@ function createMockGithubImpl() {
       },
       issues: {
         addLabels: vi.fn(),
+        createComment: vi.fn(),
+        deleteComment: vi.fn(),
+        listComments: vi.fn().mockResolvedValue({ data: [] }),
         listLabelsOnIssue: vi.fn().mockResolvedValue({ data: [] }),
         removeLabel: vi.fn(),
+        updateComment: vi.fn(),
       },
       pulls: {
         get: vi.fn(),

@@ -74,18 +74,9 @@ union SkuMixPlacementZonalDistributionStrategy {
 
   /** Zones filled based on zone preferences/rank. Higher priority zones filled first. */
   Prioritized: "Prioritized",
-}
 
-/** The type of instance description provided in the request. */
-@added(Versions.v2026_05_05_preview)
-union SkuMixPlacementInstanceDescriptionType {
-  string,
-
-  /** Instance description is a list of explicit VM sizes. */
-  VMSizes: "VMSizes",
-
-  /** Instance description is a set of VM attribute constraints. */
-  VMAttributes: "VMAttributes",
+  /** Capacity allocated within a single zone on a best-effort basis; may spill across zones if single-zone capacity is insufficient. */
+  BestEffortSingleZone: "BestEffortSingleZone",
 }
 
 /** Reason for partial fulfillment of the requested capacity. */
@@ -101,6 +92,24 @@ union SkuMixPlacementPartialFulfillmentReason {
 
   /** Not enough quota was available. */
   InsufficientQuota: "InsufficientQuota",
+}
+
+/** Reason the capacity limit for a (VM size, zone) is below the requested capacity. */
+@added(Versions.v2026_09_05_preview)
+union SkuMixPlacementCapacityLimitReason {
+  string,
+
+  /** The full requested capacity is available for this (VM size, zone). */
+  None: "None",
+
+  /** Allocable capacity bounded the limit below the requested capacity. */
+  InsufficientCapacity: "InsufficientCapacity",
+
+  /** Quota bounded the limit below the requested capacity. Takes precedence when both capacity and quota are insufficient. */
+  InsufficientQuota: "InsufficientQuota",
+
+  /** This VM size is not available in this zone for the subscription. */
+  SkuNotAvailable: "SkuNotAvailable",
 }
 
 // ===================== Request Models =====================
@@ -134,9 +143,10 @@ model SkuMixPlacementCapacityProfile {
   spotPriorityProfile?: SkuMixPlacementSpotPriorityProfile;
 
   /** The allocation strategy for determining the optimal SKU split. */
-  allocationStrategy: SkuMixPlacementAllocationStrategy;
+  allocationStrategy?: SkuMixPlacementAllocationStrategy;
 
   /** The OS type. Required when allocationStrategy is LowestPrice because pricing varies by OS. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: SkuMixPlacementOSType;
 
   /** Zone allocation policy. Default: BestEffortBalanced. */
@@ -169,20 +179,17 @@ model SkuMixPlacementZonePreference {
 
   /** Rank of the zone. Lower values = higher priority (0 is highest). */
   rank?: int32;
+
+  /** Best-effort limit to avoid allocating more than this count within the zone. Used with the Prioritized strategy. */
+  targetMaxCapacity?: int32;
 }
 
-/** Describes which VM sizes (or VM attributes) to consider. */
+/** Describes which VM sizes to consider. */
 @added(Versions.v2026_05_05_preview)
 model SkuMixPlacementInstanceDescription {
-  /** The type of instance description. */
-  type: SkuMixPlacementInstanceDescriptionType;
-
-  /** The list of VM sizes. Required when type is VMSizes. */
+  /** The list of VM sizes to consider for placement. */
   @identifiers(#["name"])
-  vmSizes?: SkuMixPlacementVMSize[];
-
-  /** VM attribute constraints. Required when type is VMAttributes. */
-  vmAttributes?: VmAttributes;
+  vmSizes: SkuMixPlacementVMSize[];
 }
 
 /** A VM size with optional rank for prioritization. */
@@ -200,24 +207,46 @@ model SkuMixPlacementVMSize {
 /** Sku Mix Placement API response. */
 @added(Versions.v2026_05_05_preview)
 model SkuMixPlacementResponse {
+  /**
+   * Unique identifier for this placement response, including responses that contain no placement choices.
+   * Replaces the per-choice id that was present on placementChoices in earlier API versions.
+   */
+  @added(Versions.v2026_09_05_preview)
+  id: string;
+
   /** List of placement choice recommendations. */
-  @identifiers(#["id"])
+  @identifiers(#[])
   placementChoices: SkuMixPlacementDeploymentChoice[];
+
+  /** Date/time until which the recommendations are valid. Callers should request fresh recommendations after this time. */
+  validUntil?: utcDateTime;
 
   /** Indicates whether the response is a complete or partial fulfillment. */
   partialFulfillmentReason: SkuMixPlacementPartialFulfillmentReason;
+
+  /**
+   * Capacity availability for each requested (VM size, zone) combination, independent of the recommended
+   * placement. An entry is present for every requested combination, including those excluded by capacity
+   * or quota. Only returned for requests that describe instances by VM sizes.
+   */
+  @added(Versions.v2026_09_05_preview)
+  @identifiers(#["name", "zone"])
+  capacityLimits?: SkuMixPlacementCapacityLimit[];
 }
 
 /** A single deployment choice recommendation. */
 @added(Versions.v2026_05_05_preview)
 model SkuMixPlacementDeploymentChoice {
-  /** Unique identifier for this deployment choice. */
+  /**
+   * Unique identifier for this deployment choice.
+   */
+  @removed(Versions.v2026_09_05_preview)
   id: string;
 
-  /** Placement score from 1 to 10 (inclusive). Higher is better. */
-  @minValue(1)
-  @maxValue(10)
-  score: float64;
+  /** Placement score from 0 to 9 (inclusive). Higher is better. */
+  @minValue(0)
+  @maxValue(9)
+  score: int32;
 
   /** The list of VM size / zone allocations that make up this deployment choice. */
   @identifiers(#["name", "zone"])
@@ -233,11 +262,42 @@ model SkuMixPlacementItem {
   /** Priority of this allocation (Regular or Spot). */
   priority: SkuMixPlacementPriority;
 
-  /** Recommended allocation capacity. */
+  /** Lower range of recommended allocation capacity. */
   capacity: int32;
+
+  /** Upper range of recommended allocation capacity. */
+  @removed(Versions.v2026_09_05_preview)
+  capacityMax?: int32;
 
   /** Logical zone (e.g. "1", "2", "3"). Omitted or empty for regional deployments. */
   zone?: string;
+}
+
+/**
+ * Capacity availability for a single requested (VM size, zone) combination, independent of the
+ * recommended placement.
+ */
+@added(Versions.v2026_09_05_preview)
+model SkuMixPlacementCapacityLimit {
+  /** VM size name (e.g. Standard_D2s_v3). */
+  name: string;
+
+  /** Priority of this entry (Regular or Spot). */
+  priority: SkuMixPlacementPriority;
+
+  /** Logical zone (e.g. "1", "2", "3"). Omitted or empty for regional requests. */
+  zone?: string;
+
+  /**
+   * Upper bound, in VMs, on how much capacity can be allocated for this (VM size, zone): the smallest of
+   * the requested capacity, the available capacity, and the available quota, but never below the capacity
+   * already recommended for the slot. 0 when nothing is available.
+   */
+  @minValue(0)
+  limit: int32;
+
+  /** Why the limit is below the requested capacity, or None when the request is fully available. */
+  reason: SkuMixPlacementCapacityLimitReason;
 }
 
 // ===================== Resource Properties =====================

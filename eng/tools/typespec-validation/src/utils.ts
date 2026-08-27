@@ -6,7 +6,7 @@ import {
 } from "@azure-tools/suppressions";
 import debug from "debug";
 import { access, readdir, readFile } from "fs/promises";
-import defaultPath, { basename, dirname, join, type PlatformPath } from "path";
+import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "path";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
 
@@ -67,6 +67,23 @@ export function normalizePathImpl(folder: string, path: PlatformPath = defaultPa
     .split(path.sep)
     .join("/")
     .replace(/^([a-z]):/, (_match, driveLetter: string) => driveLetter.toUpperCase() + ":");
+}
+
+export async function readFileAtCommit(
+  folder: string,
+  commitish: string,
+  file: string,
+): Promise<string | undefined> {
+  const git = simpleGit(folder);
+  await git.revparse(["--verify", `${commitish}^{commit}`]);
+  const repositoryRoot = (await git.revparse(["--show-toplevel"])).trim();
+  const repositoryPath = relative(repositoryRoot, file).split(defaultPath.sep).join("/");
+
+  try {
+    return await git.show([`${commitish}:${repositoryPath}`]);
+  } catch {
+    return undefined;
+  }
 }
 
 export async function gitDiffTopSpecFolder(folder: string) {

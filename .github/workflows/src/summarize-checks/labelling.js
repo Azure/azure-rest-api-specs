@@ -1159,7 +1159,7 @@ const rulesPri3Blockers = [
 /** @type {RequiredLabelRule[]} */
 const rulesPri1Namespace = [
   // When package-name-review-required is present, require package-name-approved before merge.
-  // See .github/workflows/src/namespace-approval/PACKAGE-NAME-REVIEW-PROCESS.md for details.
+  // See .github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md for details.
   {
     precedence: 1,
     anyPrerequisiteLabels: ["package-name-review-required"],

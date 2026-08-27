@@ -8,24 +8,30 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
+    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
     "test": "vitest --run",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "dependencies": {
     "@typespec/compiler": "1.14.0",
-    "simple-git": "^3.36.0",
+    "simple-git": "catalog:",
     "yaml": "^2.4.2"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@vitest/coverage-v8": "^4.1.0",
-    "prettier": "3.8.3",
-    "prettier-plugin-organize-imports": "^4.2.0",
-    "typescript": "~6.0.2",
-    "vitest": "^4.1.0"
+    "@eslint/js": "catalog:",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "cross-env": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "prettier-plugin-organize-imports": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vitest": "catalog:"
   },
   "engines": {
     "node": ">=24.14.1"

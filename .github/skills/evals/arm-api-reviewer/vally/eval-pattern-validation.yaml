@@ -6,6 +6,14 @@ description: |
   @pattern decorators. Verifies correct severity assignment: Blocking for
   new properties/parameters, Warning for existing ones (OAPI-PATTERN-ALLOWLIST).
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -18,6 +26,7 @@ defaults:
 scoring:
   threshold: 0.7
 
+# Quote rubric entries containing `: `; YAML otherwise parses them as mappings, but Vally requires strings.
 stimuli:
   # 170001 — New spec with denylist patterns on path parameter and body properties (blocking)
   - name: detect-denylist-pattern-new-spec
@@ -94,7 +103,7 @@ stimuli:
       - Flagged the description property pattern `^[^\\x00-\\x1F\\x7F]+$` as a new denylist violation (only in 2025-01-01)
       - Assigned Blocking severity to the new description property violation
       - Differentiated between blocking (new) and warning (existing) severity for the two violations
-      - Noted the regression risk for existing properties: changing to an allowlist may reject values created under the denylist
+      - "Noted the regression risk for existing properties: changing to an allowlist may reject values created under the denylist"
 
   # 170003 — TypeSpec fixture with denylist @pattern on resource key and body property (blocking)
   - name: detect-denylist-pattern-typespec

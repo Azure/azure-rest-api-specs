@@ -49,8 +49,12 @@ if ($typespecFolders) {
       }
     }
 
-    # Example: '{"checkingAllSpecs":true}'
-    $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
+    # Example: '{"checkingAllSpecs":true,"baseCommitish":"HEAD^","headCommitish":"HEAD"}'
+    $context = @{
+      checkingAllSpecs = $checkingAllSpecs
+      baseCommitish = $BaseCommitish
+      headCommitish = $HeadCommitish
+    } | ConvertTo-Json -Compress
 
     # Invoke the tsv entrypoint with node directly instead of through the pnpm
     # shim. On Windows the pnpm shim re-quotes arguments and strips the double
