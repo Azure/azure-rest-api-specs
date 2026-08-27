@@ -10914,7 +10914,7 @@ model AuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pre-existing GA property; changing its schema (e.g. adding format: password / x-ms-secret) would be a breaking change. Whether GET/LIST returns this authorization key unmasked or masked is enforced at runtime by the backend based on the caller's privileges, not by the API schema, so @secret is intentionally not applied. The dedicated listKeys POST action returns the unmasked key via the @secret ExpressRouteAuthorizationKey response model."
   authorizationKey?: string;
 
   /**
@@ -12178,7 +12178,7 @@ model ExpressRoutePortAuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pre-existing GA property; changing its schema (e.g. adding format: password / x-ms-secret) would be a breaking change. Whether GET/LIST returns this authorization key unmasked or masked is enforced at runtime by the backend based on the caller's privileges, not by the API schema, so @secret is intentionally not applied. The dedicated listKeys POST action returns the unmasked key via the @secret ExpressRouteAuthorizationKey response model."
   @visibility(Lifecycle.Read)
   authorizationKey?: string;
 
