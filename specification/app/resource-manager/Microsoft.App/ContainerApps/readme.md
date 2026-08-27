@@ -57,6 +57,39 @@ These settings apply only when `--tag=package-preview-2026-03-02-preview` is spe
 ```yaml $(tag) == 'package-preview-2026-03-02-preview'
 input-file:
   - preview/2026-03-02-preview/openapi.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: openapi.json
+    reason: |
+      Pre-existing preview contract. Patch models retain required and defaulted properties for compatibility.
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    reason: |
+      Pre-existing preview contract. Metadata and customized key dictionaries use additionalProperties.
+  - suppress: PutResponseCodes
+    from: openapi.json
+    reason: |
+      Pre-existing preview contract. Do not change response codes while restoring the preview surface.
+  - suppress: PostResponseCodes
+    from: openapi.json
+    reason: |
+      Pre-existing preview contract. Do not change response codes while restoring the preview surface.
+  - suppress: LroErrorContent
+    from: openapi.json
+    reason: |
+      Pre-existing preview contract. These operations use the service's existing error response shape.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    reason: |
+      Pre-existing preview contract. Restored resource models preserve their original provisioningState behavior.
+  - suppress: UnSupportedPatchProperties
+    from: openapi.json
+    reason: |
+      Pre-existing preview contract. Patch request shapes are preserved for compatibility.
+  - suppress: DescriptionMustNotBeNodeName
+    from: openapi.json
+    reason: |
+      Pre-existing preview contract. Existing wire-value descriptions are preserved without changing generated clients.
 ```
 
 ### Tag: package-preview-2025-10-02-preview
