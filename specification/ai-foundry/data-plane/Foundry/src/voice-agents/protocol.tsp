@@ -390,7 +390,7 @@ model VoiceAgentClientEventSessionUpdate {
 @@copyProperties(
   OpenAI.RealtimeServerEventSessionCreated,
   {
-    @doc("The session-scoped conversation id. When present, the same value appears in `session.created`, `response.created`, and `response.done`.")
+    @doc("The session-scoped conversation id. When present, responses attached to the session conversation use the same value in `response.created` and `response.done`.")
     conversation_id?: string,
   }
 );

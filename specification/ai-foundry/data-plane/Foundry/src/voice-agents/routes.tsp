@@ -13,6 +13,21 @@ const VoiceAgentConversationRequiredPreviews = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
+@doc("""
+  Metadata for a conversation item's generated audio. For bring-your-own-storage (BYOS), the response includes
+  `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
+  credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
+  `/audio/generated/content` route.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceItemAudioResponse."
+model VoiceGeneratedItemAudioResponse {
+  ...OmitProperties<VoiceItemAudioResponse, "blob_uri">;
+
+  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the generated audio in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/generated/content` route instead.")
+  blob_uri?: url;
+}
+
 /**
  * Establishes a service-terminated WebSocket for a voice-agent session. The service applies the persisted
  * agent definition, resolves configured tools, sends the initial session configuration, and then exchanges
@@ -341,7 +356,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose generated audio metadata is retrieved. */
       @path item_id: string;
     },
-    VoiceItemAudioResponse
+    VoiceGeneratedItemAudioResponse
   >;
 
   /**

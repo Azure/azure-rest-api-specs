@@ -2927,7 +2927,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VoiceItemAudioResponse"
+                  "$ref": "#/components/schemas/VoiceGeneratedItemAudioResponse"
                 }
               }
             }
@@ -89324,6 +89324,64 @@
           }
         ],
         "description": "The lifecycle status of a persisted voice conversation:\n- `in_progress`: the live session is active, or post-session persistence finalization is pending.\n- `completed`: finalization succeeded after normal or client close, `end_conversation`, a max-duration `1001`\n  close, or a client or network disconnect that the service can still finalize.\n- `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceGeneratedItemAudioResponse": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "item_id"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The id of the conversation the item belongs to."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The id of the item this audio belongs to."
+          },
+          "role": {
+            "$ref": "#/components/schemas/VoiceAudioRole",
+            "description": "The role the audio belongs to."
+          },
+          "format": {
+            "$ref": "#/components/schemas/VoiceAudioContainerFormat",
+            "description": "The container format of the audio."
+          },
+          "codec": {
+            "$ref": "#/components/schemas/VoiceAudioCodec",
+            "description": "The audio codec."
+          },
+          "sample_rate": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The sample rate in Hz."
+          },
+          "channels": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of audio channels."
+          },
+          "start_offset_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The offset from the session start at which this segment begins."
+          },
+          "duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The duration of the audio segment."
+          },
+          "blob_uri": {
+            "type": "string",
+            "format": "uri",
+            "description": "For bring-your-own-storage (BYOS) recordings only: the URI of the generated audio in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/generated/content` route instead."
+          }
+        },
+        "description": "Metadata for a conversation item's generated audio. For bring-your-own-storage (BYOS), the response includes\n`blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own\ncredentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's\n`/audio/generated/content` route.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
