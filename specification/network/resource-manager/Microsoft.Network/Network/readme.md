@@ -51,6 +51,7 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
   - stable/2026-01-01/applicationGateway.json
+  - stable/2026-01-01/authenticationPolicy.json
   - stable/2026-01-01/azureWebCategory.json
   - stable/2026-01-01/common.json
   - stable/2026-01-01/expressRoute.json
@@ -258,6 +259,39 @@ suppressions:
     reason: LRO POST operation returns 200 with no schema for completion status and 202 for async acceptance. This is the standard TypeSpec ArmResourceActionAsync pattern for void LRO operations.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"].post
+  # --- stable/2026-01-01/authenticationPolicy.json ---
+  # New TypeSpec-generated resource that follows the established Network RP legacy Resource
+  # pattern (the same shared base type used by every existing Network resource). The findings
+  # below are inherent to that shared pattern and are handled consistently with sibling resources.
+  - code: ProvisioningStateMustBeReadOnly
+    from: authenticationPolicy.json
+    reason: >-
+      provisioningState is marked readOnly in TypeSpec (@visibility(Lifecycle.Read)) but is emitted
+      as a $ref to the shared ProvisioningState enum. The linter does not recognize readOnly next to
+      $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
+  - code: RequiredPropertiesMissingInResourceModel
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy extends the local Network RP Resource base type (common.json#/definitions/Resource), the established envelope for all Network RP resources. Its id/name/type read-only properties are defined on the shared base and referenced via allOf, consistent with every other Network RP resource.
+  - code: DeleteResponseCodes
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy DELETE is synchronous and the service returns only 204 with no response body; advertising a 200 response would not match the implemented service contract.
+  - code: DeleteOperationResponses
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy DELETE is synchronous and the service returns only 204 with no response body; the generic rule's required 200 response is not implemented by the service.
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy uses the Network RP shared Resource and SubResource definitions from common.json, consistent with all resources in this API package.
+  - code: RequiredReadOnlySystemData
+    from: authenticationPolicy.json
+    reason: Network RP resources in this package intentionally use the legacy shared Resource envelope, which does not expose systemData.
+  - code: SchemaDescriptionOrTitle
+    from: common.json
+    where: $.definitions.UserTrustProviderType
+    reason: The TypeSpec union is documented, but the Swagger 2.0 emitter does not carry that documentation to this closed single-value union in the shared common.json file.
+  - code: XMSSecretInResponse
+    from: authenticationPolicy.json
+    reason: clientSecret holds a Key Vault secret URL reference (e.g. https://myvault.vault.azure.net/secrets/mysecret), not the secret value itself, so it is safe to return in responses and is not marked x-ms-secret.
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
@@ -274,7 +308,6 @@ directive:
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
-
 
 ### Tag: package-2025-09-01
 
