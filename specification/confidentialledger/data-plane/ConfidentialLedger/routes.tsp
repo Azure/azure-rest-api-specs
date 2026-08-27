@@ -125,11 +125,12 @@ op listLedgerEntries is ConfidentialLedgerCommon.LedgerOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @removed(Versions.v2026_07_31_preview)
+@renamedFrom(Versions.v2026_07_31_preview, "createLedgerEntry")
 @summary("Writes a ledger entry.")
 @sharedRoute
 @route("/app/transactions")
 @post
-op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
+op createLedgerEntryBeforeV20260731Preview is ConfidentialLedgerCommon.LedgerOperation<
   {
     /**
      * The collection id.
@@ -149,21 +150,19 @@ op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
     @bodyRoot
     entry: LedgerEntry;
   },
-  LedgerWriteResult
+  LedgerWriteResultBeforeV20260731Preview
 >;
 
 /**
  * A collection id may optionally be specified.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing operationId"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The versioned ledger write route requires both the service default error and a 503 TransactionRolledBack response."
 @added(Versions.v2026_07_31_preview)
-@operationId("CreateLedgerEntry")
 @summary("Writes a ledger entry.")
 @sharedRoute
 @route("/app/transactions")
 @post
-op createLedgerEntryWithWaitForCommit is ConfidentialLedgerCommon.LedgerOperation<
+op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
   {
     /**
      * The collection id.
