@@ -1,7 +1,8 @@
 {
   "parameters": {
-    "api-version": "2025-05-31-preview",
-    "subscriptionId": "12345678-1234-5678-9012-123456789012"
+    "api-version": "2026-05-31",
+    "subscriptionId": "12345678-1234-5678-9012-123456789012",
+    "resourceGroupName": "rgName"
   },
   "responses": {
     "200": {
@@ -15,11 +16,9 @@
               "clientId": "4024ab25-56a8-4370-aea6-6389221caf29",
               "principalId": "25cc773c-7f05-40fc-a104-32d2300754ad",
               "tenantId": "b6c948ef-f6b5-4384-8354-da3a15eca969",
-              "isolationScope": "Regional",
+              "isolationScope": "None",
               "assignmentRestrictions": {
-                "providers": [
-                  "Microsoft.Compute"
-                ]
+                "providers": []
               }
             },
             "tags": {
@@ -29,10 +28,10 @@
             "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
           }
         ],
-        "nextLink": "https://serviceRoot/subscriptions/subId/providers/Microsoft.ManagedIdentity/userAssignedIdentities?api-version=2025-05-31-preview&$skiptoken=X'12345'"
+        "nextLink": "https://serviceRoot/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.ManagedIdentity/userAssignedIdentities?api-version=2026-05-31&$skiptoken=X'12345'"
       }
     }
   },
-  "operationId": "UserAssignedIdentities_ListBySubscription",
-  "title": "IdentityListBySubscription"
+  "operationId": "UserAssignedIdentities_ListByResourceGroup",
+  "title": "IdentityListByResourceGroup"
 }

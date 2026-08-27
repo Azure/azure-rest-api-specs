@@ -27,11 +27,6 @@ using Microsoft.ManagedIdentity;
   "IssuerUri",
   "csharp"
 );
-@@clientName(
-  ClaimsMatchingExpression,
-  "FederatedIdentityClaimsMatchingExpression",
-  "csharp"
-);
 @@alternateType(
   SystemAssignedIdentityProperties.tenantId,
   Azure.Core.uuid,
