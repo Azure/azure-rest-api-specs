@@ -199,7 +199,7 @@ model Microsoft365PublishDefaults {
 
   /** Developer / publisher website URL. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Wire field name uses the 'Url' suffix; renaming would break the documented contract."
-  developerWebsiteUrl?: string;
+  developerWebsiteUrl?: url;
 
   /** Privacy policy URL. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Wire field name uses the 'Url' suffix; renaming would break the documented contract."
