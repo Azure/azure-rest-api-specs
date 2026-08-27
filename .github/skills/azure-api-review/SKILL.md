@@ -38,7 +38,7 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 | [example-quality.md](references/example-quality.md)               | Example file quality: orphan detection, coverage, descriptive values               | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES |
 | [enum-best-practices.md](references/enum-best-practices.md)       | Enum extensibility and boolean alternatives                                        | --                                            |
 | [downstream-ci-impact.md](references/downstream-ci-impact.md)     | Do not recommend a fix that trips a required CI check                              | --                                            |
-| [reviewer-posted-parity.md](references/reviewer-posted-parity.md) | Presented-vs-posted parity (interactive chat reviewers only)                       | --                                            |
+| [reviewer-posted-parity.md](references/reviewer-posted-parity.md) | Presented-vs-posted parity and cross-session reconciliation for ARM reviewers      | --                                            |
 
 ### ARM control-plane only
 
@@ -88,9 +88,55 @@ Two ARM references give **actively wrong** advice if applied to the data plane:
 One cross-cutting reference is scoped by consumer rather than by plane:
 
 - [`reviewer-posted-parity.md`](references/reviewer-posted-parity.md) applies
-  only to reviewers that post their own comments from an interactive session.
-  Agents whose only write channel is gh-aw `safe-outputs` never own the post and
-  must not implement its parity machinery.
+  to ARM reviewers in both interactive and autonomous modes. Direct interactive
+  posting and deferred gh-aw `safe-outputs` have different post-post
+  verification mechanics, but they share the same canonical finding,
+  cross-session deduplication, and contradiction-clarification contract. The
+  data-plane reviewer uses its own report and reconciliation contracts.
+
+## ARM cross-session reconciliation
+
+Every ARM review entry point uses the same reconciliation actions: a human-run
+Copilot Chat review, the ready-for-ARM GitHub Actions workflow, and an authorized
+`/arm-review` request. Before an ARM reviewer posts, it inventories all
+paginated inline review threads, top-level PR conversation comments, and pull
+request review bodies. Human-authored and agent-authored feedback both count,
+including resolved, outdated, and marker-free items. The agent marker controls
+thread ownership and resolution only; it never controls whether prior feedback
+counts as coverage.
+
+Match by semantic finding identity: the same rule or review topic, affected API
+element, and corrective outcome. Exact wording, author, entry point, comment
+surface, line movement, severity wording, and marker presence do not make a
+finding new. In every structured reconciliation plan, the action cell MUST use
+one of the literal uppercase tokens below. Do not substitute synonyms such as
+"suppress duplicate", "defer to existing comment", or "add a clarification
+reply"; downstream Critic and execution steps parse these exact tokens. The
+rationale records material non-identity differences (for example, shifted line
+number, top-level versus inline surface, human origin, or missing marker) and
+states why they do not make the finding new. Use these canonical actions:
+
+- `SKIP-COVERED`: actionable prior feedback already covers the same finding.
+  Do not post another standalone finding. Use the literal `SKIP-COVERED` token
+  even for human-authored top-level comments, review bodies, resolved threads,
+  shifted lines, or marker-free feedback.
+- `REPLY-LINE-SHIFT`: a human-origin inline finding still applies at a moved
+  line. Reply in that thread and leave it unresolved.
+- `RESOLVE-AND-REPOST`: an agent-origin inline finding still applies at a moved
+  line. Resolve the stale thread and post one replacement at the current line.
+- `CLARIFY-CONFLICT`: prior feedback for the same semantic finding gives
+  materially incompatible guidance. Do not post a competing finding. Reply in
+  the existing inline thread, or post one consolidated top-level clarification
+  for conflicts in top-level comments/review bodies. State the prior position,
+  current evidence, current guidance, and why it changed. Never auto-resolve a
+  human-origin thread. The plan action remains the literal
+  `CLARIFY-CONFLICT`, not a prose synonym.
+- `POST-NEW`: no actionable prior coverage or contradiction exists on any
+  discussion surface.
+
+If any discussion surface cannot be fetched completely, reconciliation is
+incomplete. Follow the Reviewer's explicit failure path; do not silently treat
+all candidates as `POST-NEW`.
 
 ## Authoritative External Sources
 

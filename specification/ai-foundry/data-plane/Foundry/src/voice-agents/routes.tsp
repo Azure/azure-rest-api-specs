@@ -23,7 +23,9 @@ const VoiceAgentConversationRequiredPreviews = #{
 interface VoiceAgentWebSocket {
   /**
    * Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
-   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value.
+   * headers. The optional `realtime` subprotocol is the only accepted subprotocol value. Supply the
+   * `VoiceAgents=V1Preview` opt-in through either the `Foundry-Features` header or the `foundry_features`
+   * query parameter.
    *
    * If the target agent is disabled, the HTTP WebSocket handshake fails before the `101 Switching Protocols`
    * upgrade. The service returns `409 Conflict` using the shared Foundry `ApiErrorResponse` shape with
@@ -32,15 +34,21 @@ interface VoiceAgentWebSocket {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 protocol switch has no HTTP entity body; messages begin as WebSocket frames after the upgrade."
   @summary("Connect to a voice agent")
   @get
+  @sharedRoute
   @route("/agents/{agent_name}/endpoint/protocols/voice")
-  connectVoiceAgent is FoundryDataPlaneRequiredPreviewOperation<
+  connectVoiceAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the voice agent. */
       @path agent_name: string;
 
-      /** An optional identifier used to correlate the voice session. */
-      @query agent_session_id?: string;
+      /**
+       * A query alternative to the `Foundry-Features` header for clients that cannot set headers during a
+       * WebSocket handshake. Set this to `VoiceAgents=V1Preview`. Either this query parameter or the header is
+       * required.
+       */
+      @query("foundry_features")
+      foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
 
       /**
        * Whether to persist the conversation created by this WebSocket session. If omitted, the service honors the
@@ -55,9 +63,6 @@ interface VoiceAgentWebSocket {
       /** The requested WebSocket subprotocol. Omit this header or request exactly `realtime`. */
       @header("Sec-WebSocket-Protocol")
       websocket_subprotocol?: VoiceAgentWebSocketSubprotocol;
-
-      /** A JSON object that maps structured-input names to their values for this session. */
-      @header("x-ms-voice-structured-inputs") structured_inputs?: string;
     },
     VoiceAgentWebSocketUpgradeResponse
   >;
@@ -77,7 +82,8 @@ interface VoiceAgentWebSocket {
 interface AgentEndpointConversations {
   /**
    * Returns the conversations persisted for the specified voice agent endpoint.
-   * Conversations are present only when the agent definition has `store = true`.
+   * Conversations are present when the session's effective `store` setting is `true`, whether inherited from the
+   * agent definition or enabled by the WebSocket session override.
    */
   @summary("List voice agent conversations")
   @get
@@ -207,7 +213,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<VoiceConversationItem>
+    AgentsPagedResult<OpenAI.RealtimeConversationItem>
   >;
 
   /**
@@ -231,7 +237,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<VoiceConversationItem>
+    AgentsPagedResult<OpenAI.RealtimeConversationItem>
   >;
 
   /**
@@ -257,7 +263,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
     },
-    VoiceConversationItem
+    OpenAI.RealtimeConversationItem
   >;
 
   /**
