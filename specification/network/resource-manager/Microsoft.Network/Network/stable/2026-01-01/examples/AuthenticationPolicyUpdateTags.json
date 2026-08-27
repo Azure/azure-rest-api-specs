@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "authenticationPolicyName": "myAuthenticationPolicy",
+    "properties": {
+      "tags": {
+        "environment": "production"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/authenticationPolicies/myAuthenticationPolicy",
+        "location": "westus",
+        "name": "myAuthenticationPolicy",
+        "properties": {
+          "authenticationProperties": {
+            "audience": "api://my-application",
+            "clientId": "00000000-0000-0000-0000-000000000000",
+            "issuer": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0",
+            "jwksUri": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys"
+          },
+          "provisioningState": "Succeeded",
+          "userTrustProviderType": "entra"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "type": "Microsoft.Network/authenticationPolicies"
+      }
+    }
+  },
+  "operationId": "AuthenticationPolicies_UpdateTags",
+  "title": "Update authentication policy tags"
+}
