@@ -7784,6 +7784,14 @@ model ApplicationGatewayUrlPathMapPropertiesFormat {
   defaultLoadDistributionPolicy?: SubResource;
 
   /**
+   * Default authentication configuration bindings of the routing map. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+  @maxItems(1)
+  defaultAuthConfigs?: ApplicationGatewayAuthConfig[];
+
+  /**
    * Path rule of URL path map resource.
    */
   pathRules?: ApplicationGatewayPathRule[];
@@ -7963,6 +7971,14 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
   entraJWTValidationConfig?: SubResource;
 
   /**
+   * Authentication configuration bindings of the request routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+  @maxItems(1)
+  authConfigs?: ApplicationGatewayAuthConfig[];
+
+  /**
    * The provisioning state of the request routing rule resource.
    */
   @visibility(Lifecycle.Read)
@@ -8031,6 +8047,14 @@ model ApplicationGatewayRoutingRulePropertiesFormat {
    * Listener resource of the application gateway.
    */
   listener?: SubResource;
+
+  /**
+   * Authentication configuration bindings of the routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+  @maxItems(1)
+  authConfigs?: ApplicationGatewayAuthConfig[];
 
   /**
    * The provisioning state of the request routing rule resource.
@@ -8727,6 +8751,24 @@ model ApplicationGatewayEntraJWTValidationConfigPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * An authentication configuration binding for an Application Gateway routing rule or routing map.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other application gateway models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+model ApplicationGatewayAuthConfig {
+  /**
+   * The name of the auth configuration.
+   */
+  name: string;
+
+  /**
+   * Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource.
+   */
+  authenticationPolicy: SubResource;
 }
 
 /**

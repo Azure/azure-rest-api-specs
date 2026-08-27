@@ -6371,6 +6371,36 @@
         ]
       }
     },
+    "OnUnauthenticatedRequest": {
+      "type": "string",
+      "description": "Action to take when a request is unauthenticated.",
+      "enum": [
+        "allow",
+        "authenticate",
+        "deny"
+      ],
+      "x-ms-enum": {
+        "name": "OnUnauthenticatedRequest",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "allow",
+            "description": "Allow the request to pass through without authentication."
+          },
+          {
+            "name": "Authenticate",
+            "value": "authenticate",
+            "description": "Redirect the request to the authentication provider. Only valid for the user authentication capability."
+          },
+          {
+            "name": "Deny",
+            "value": "deny",
+            "description": "Deny the request when no credential is presented."
+          }
+        ]
+      }
+    },
     "Origin": {
       "type": "string",
       "description": "The origin of the issue.",
@@ -8673,6 +8703,16 @@
           }
         ]
       }
+    },
+    "UserTrustProviderType": {
+      "type": "string",
+      "enum": [
+        "entra"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-nullable": false
     },
     "VerbosityLevel": {
       "type": "string",

@@ -1601,6 +1601,24 @@
         }
       ]
     },
+    "ApplicationGatewayAuthConfig": {
+      "type": "object",
+      "description": "An authentication configuration binding for an Application Gateway routing rule or routing map.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the auth configuration."
+        },
+        "authenticationPolicy": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource."
+        }
+      },
+      "required": [
+        "name",
+        "authenticationPolicy"
+      ]
+    },
     "ApplicationGatewayAuthenticationCertificate": {
       "type": "object",
       "description": "Authentication certificates of an application gateway.",
@@ -3778,6 +3796,17 @@
           "$ref": "./common.json#/definitions/SubResource",
           "description": "Entra JWT validation configuration resource of the application gateway."
         },
+        "authConfigs": {
+          "type": "array",
+          "description": "Authentication configuration bindings of the request routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAuthConfig"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the request routing rule resource.",
@@ -3956,6 +3985,17 @@
         "listener": {
           "$ref": "./common.json#/definitions/SubResource",
           "description": "Listener resource of the application gateway."
+        },
+        "authConfigs": {
+          "type": "array",
+          "description": "Authentication configuration bindings of the routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAuthConfig"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
@@ -4352,6 +4392,17 @@
         "defaultLoadDistributionPolicy": {
           "$ref": "./common.json#/definitions/SubResource",
           "description": "Default Load Distribution Policy resource of URL path map."
+        },
+        "defaultAuthConfigs": {
+          "type": "array",
+          "description": "Default authentication configuration bindings of the routing map. Authentication policies can only be bound to Application Gateways using a v2 SKU.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAuthConfig"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "pathRules": {
           "type": "array",
