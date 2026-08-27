@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -147,6 +149,12 @@ union ResourceProviderType {
   TenantOnly: "TenantOnly",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AuthorizationFree: "AuthorizationFree",
+
+  /**
+   * The resource provider has been decommissioned.
+   */
+  @added(Versions.v2025_10_01)
+  Decommissioned: "Decommissioned",
 }
 
 /**
@@ -580,6 +588,12 @@ union ExtensionCategory {
   BestMatchOperationBegin: "BestMatchOperationBegin",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SubscriptionLifecycleNotificationDeletion: "SubscriptionLifecycleNotificationDeletion",
+
+  /**
+   * Resource billing notification extension category.
+   */
+  @added(Versions.v2025_10_01)
+  ResourceBillingNotification: "ResourceBillingNotification",
 }
 
 /**
@@ -762,7 +776,8 @@ union ResourceTypeExtendedLocationPolicy {
 /**
  * The resource deletion policy.
  */
-union ResourceDeletionPolicy {
+@renamedFrom(Versions.v2025_10_01, "ResourceDeletionPolicy")
+union RPaaSResourceDeletionPolicy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotSpecified: "NotSpecified",
@@ -770,6 +785,18 @@ union ResourceDeletionPolicy {
   CascadeDeleteAll: "CascadeDeleteAll",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CascadeDeleteProxyOnlyChildren: "CascadeDeleteProxyOnlyChildren",
+
+  /**
+   * Cascade deletion policy.
+   */
+  @added(Versions.v2025_10_01)
+  Cascade: "Cascade",
+
+  /**
+   * Force deletion policy.
+   */
+  @added(Versions.v2025_10_01)
+  Force: "Force",
 }
 
 /**
@@ -1082,7 +1109,8 @@ union AdditionalOptions {
 /**
  * The resource deletion policy.
  */
-union ManifestResourceDeletionPolicy {
+@renamedFrom(Versions.v2025_10_01, "ManifestResourceDeletionPolicy")
+union ResourceDeletionPolicy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotSpecified: "NotSpecified",
@@ -1090,6 +1118,12 @@ union ManifestResourceDeletionPolicy {
   Cascade: "Cascade",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Force: "Force",
+
+  /**
+   * Soft delete deletion policy.
+   */
+  @added(Versions.v2025_10_01)
+  SoftDelete: "SoftDelete",
 }
 
 /**
@@ -1189,6 +1223,9 @@ enum MarketplaceType {
   AddOn,
   Bypass,
   Store,
+
+  @added(Versions.v2025_10_01)
+  ProviderHub,
 }
 
 /**
@@ -1272,6 +1309,18 @@ model CustomRolloutSpecification {
    * The resource type registrations.
    */
   resourceTypeRegistrations?: ResourceTypeRegistration[];
+
+  /**
+   * The rollout id.
+   */
+  @added(Versions.v2025_10_01)
+  rolloutId?: string;
+
+  /**
+   * The manifest checkin specification.
+   */
+  @added(Versions.v2025_10_01)
+  manifestCheckinSpecification?: ManifestCheckinSpecification;
 }
 
 /**
@@ -1334,6 +1383,24 @@ model ProviderRegistrationProperties
    * The token auth configuration.
    */
   tokenAuthConfiguration?: TokenAuthConfiguration;
+
+  /**
+   * The on behalf of subscription id for the resource provider.
+   */
+  @added(Versions.v2025_10_01)
+  oboSubscriptionId?: string;
+
+  /**
+   * Indicates whether automatic registration for the preset resource types is enabled or disabled.
+   */
+  @added(Versions.v2025_10_01)
+  enablePresetResourceTypes?: boolean;
+
+  /**
+   * The resource provider lifecycle information.
+   */
+  @added(Versions.v2026_02_01_preview)
+  lifecycleInfo?: ResourceProviderLifecycleInfo;
 }
 
 /**
@@ -1883,6 +1950,18 @@ model ResourceProviderManagement {
    * The profit center program id for the subscription.
    */
   profitCenterProgramId?: string;
+
+  /**
+   * List of feature management owners.
+   */
+  @added(Versions.v2025_10_01)
+  featureManagementOwners?: string[];
+
+  /**
+   * List of claims to approve or reject feature registration.
+   */
+  @added(Versions.v2026_02_01_preview)
+  featureApprovalClaims?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2388,7 +2467,44 @@ model ResourceTypeRegistrationProperties {
   /**
    * The resource deletion policy.
    */
-  resourceDeletionPolicy?: ResourceDeletionPolicy;
+  resourceDeletionPolicy?: RPaaSResourceDeletionPolicy;
+
+  /**
+   * List of resource deletion policies added.
+   */
+  @added(Versions.v2025_10_01)
+  @identifiers(#[])
+  resourceDeletionPolicies?: ResourceDeletionPolicyAndProperties[];
+
+  /**
+   * The managed resource group configuration.
+   */
+  @added(Versions.v2025_10_01)
+  managedResourceGroupConfiguration?: ResourceTypeManagedResourceGroupConfiguration;
+
+  /**
+   * The private endpoint configuration.
+   */
+  @added(Versions.v2025_10_01)
+  privateEndpointConfiguration?: PrivateEndpointConfiguration;
+
+  /**
+   * The write lock configuration.
+   */
+  @added(Versions.v2025_10_01)
+  writeLock?: WriteLockConfiguration;
+
+  /**
+   * Indicates whether super scale is enabled.
+   */
+  @added(Versions.v2025_10_01)
+  superScaleEnabled?: boolean;
+
+  /**
+   * The resource type lifecycle information.
+   */
+  @added(Versions.v2026_02_01_preview)
+  lifecycleInfo?: ResourceTypeLifecycleInfo;
 
   /**
    * The resource concurrency control options.
@@ -2781,6 +2897,12 @@ model SwaggerSpecification {
    * The swagger spec folder uri.
    */
   swaggerSpecFolderUri?: string;
+
+  /**
+   * The swagger specification lifecycle information.
+   */
+  @added(Versions.v2026_02_01_preview)
+  lifecycleInfo?: SwaggerSpecificationLifecycleInfo;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2835,6 +2957,13 @@ model LinkedAccessCheck {
    * The linked type.
    */
   linkedType?: string;
+
+  /**
+   * The options for the linked access check.
+   */
+  @added(Versions.v2025_10_01)
+  @visibility(Lifecycle.Read)
+  options?: LinkedAccessCheckOptions;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2920,6 +3049,12 @@ model ThrottlingMetric {
    * The interval.
    */
   interval?: duration;
+
+  /**
+   * The bucket size.
+   */
+  @added(Versions.v2025_10_01)
+  bucketSize?: string;
 }
 
 /**
@@ -3392,6 +3527,37 @@ model ResourceTypeRegistrationPropertiesResourceManagementOptionsBatchProvisioni
    * Supported operations.
    */
   supportedOperations?: SupportedOperations;
+
+  /**
+   * The maximum batch size.
+   */
+  @added(Versions.v2025_10_01)
+  maxBatchSize?: int64;
+
+  /**
+   * Batch contract version.
+   */
+  @added(Versions.v2025_10_01)
+  batchContractVersion?: string;
+
+  /**
+   * The maximum nested batch size.
+   */
+  @added(Versions.v2025_10_01)
+  maxNestedBatchSize?: int64;
+
+  /**
+   * The required features.
+   */
+  @added(Versions.v2025_10_01)
+  requiredFeatures?: string[];
+
+  /**
+   * Action Configurations.
+   */
+  @added(Versions.v2025_10_01)
+  @identifiers(#[])
+  actionConfigurations?: ActionConfiguration[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3466,6 +3632,13 @@ model CustomRolloutStatus {
    * The manifest checkin status.
    */
   manifestCheckinStatus?: CustomRolloutStatusManifestCheckinStatus;
+
+  /**
+   * Information about the manifests applied to the completed regions.
+   */
+  @added(Versions.v2025_10_01)
+  @identifiers(#[])
+  completedRegionsInfo?: AppliedManifestInfo[];
 }
 
 /**
@@ -3629,6 +3802,12 @@ model DefaultRolloutSpecification {
    * The auto provisioning config.
    */
   autoProvisionConfig?: DefaultRolloutSpecificationAutoProvisionConfig;
+
+  /**
+   * The manifest checkin specification.
+   */
+  @added(Versions.v2025_10_01)
+  manifestCheckinSpecification?: ManifestCheckinSpecification;
 }
 
 /**
@@ -3912,6 +4091,13 @@ model ResourceProviderManifest {
    * The resource provider authorization rules.
    */
   resourceProviderAuthorizationRules?: ResourceProviderAuthorizationRules;
+
+  /**
+   * The token auth configuration.
+   */
+  @added(Versions.v2025_10_01)
+  @removed(Versions.v2026_02_01_preview)
+  tokenAuthConfiguration?: TokenAuthConfiguration;
 }
 
 /**
@@ -4084,7 +4270,14 @@ model ResourceType {
   /**
    * The resource deletion policy.
    */
-  resourceDeletionPolicy?: ManifestResourceDeletionPolicy;
+  resourceDeletionPolicy?: ResourceDeletionPolicy;
+
+  /**
+   * List of resource deletion policies added.
+   */
+  @added(Versions.v2025_10_01)
+  @identifiers(#[])
+  resourceDeletionPolicies?: ResourceDeletionPolicyAndProperties[];
 
   /**
    * The quota rule.
@@ -4266,7 +4459,7 @@ model OperationsDefinition {
   /**
    * Anything
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The service models this as a free-form JToken, so it has no fixed schema."
   properties?: unknown;
 }
 
@@ -4342,6 +4535,13 @@ model LocalizedOperationDefinition {
    * The action type.
    */
   actionType?: OperationActionType;
+
+  /**
+   * Anything
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The service models this as a free-form JToken, so it has no fixed schema."
+  @added(Versions.v2025_10_01)
+  properties?: unknown;
 }
 
 /**
@@ -4445,6 +4645,12 @@ model LocalizedOperationDisplayDefinition {
    * Display information of the operation for zh-Hant locale.
    */
   zhHant?: LocalizedOperationDisplayDefinitionZhHant;
+
+  /**
+   * Display information of the operation for qps-Ploc pseudo locale.
+   */
+  @added(Versions.v2025_10_01)
+  qpsPloc?: LocalizedOperationDisplayDefinitionQpsPloc;
 }
 
 /**
@@ -4591,6 +4797,15 @@ model LocalizedOperationDisplayDefinitionZhHans
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocalizedOperationDisplayDefinitionZhHant
+  extends OperationsDisplayDefinition {}
+
+/**
+ * Display information of the operation for qps-Ploc pseudo locale.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Matches the shape of the sibling locale models on LocalizedOperationDisplayDefinition."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Matches the shape of the sibling locale models on LocalizedOperationDisplayDefinition."
+@added(Versions.v2025_10_01)
+model LocalizedOperationDisplayDefinitionQpsPloc
   extends OperationsDisplayDefinition {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4870,6 +5085,12 @@ model ApplicationDataAuthorization {
    * The resource types from the defined resource types in the provider namespace that the application can access. If no resource types are specified and the role is service owner, the default is * which is all resource types
    */
   resourceTypes?: string[];
+
+  /**
+   * Exclude application id from 'providerAuthorizations' section of manifest?
+   */
+  @added(Versions.v2025_10_01)
+  excludeApplicationIdFromManifest?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5063,7 +5284,15 @@ model OperationsContent extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Operations content.
    */
-  properties?: OperationsDefinition;
+  @typeChangedFrom(Versions.v2025_10_01, OperationsDefinition)
+  properties?: OperationsContentProperties;
+
+  /**
+   * Operations content.
+   */
+  @added(Versions.v2025_10_01)
+  @identifiers(#[])
+  contents?: OperationsDefinition[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5103,4 +5332,359 @@ model OperationsDefinitionArrayResponseWithContinuation {
    */
   @nextLink
   nextLink?: string;
+}
+
+/**
+ * The options for the linked access check.
+ */
+@added(Versions.v2025_10_01)
+union LinkedAccessCheckOptions {
+  string,
+
+  /**
+   * Default value.
+   */
+  NotSpecified: "NotSpecified",
+
+  /**
+   * Ignore the linked access check when the linked type is an empty string.
+   */
+  IgnoreEmptyStringLinkedType: "IgnoreEmptyStringLinkedType",
+}
+
+/**
+ * The manifest checkin option.
+ */
+@added(Versions.v2025_10_01)
+union ManifestCheckinOption {
+  string,
+
+  /**
+   * Attempt an automatic manifest checkin as part of the rollout.
+   */
+  AttemptAutomaticManifestCheckin: "AttemptAutomaticManifestCheckin",
+
+  /**
+   * Do not attempt an automatic manifest checkin as part of the rollout.
+   */
+  DoNotAttemptAutomaticManifestCheckin: "DoNotAttemptAutomaticManifestCheckin",
+}
+
+/**
+ * The state of the write lock feature.
+ */
+@added(Versions.v2025_10_01)
+union WriteLockState {
+  string,
+
+  /**
+   * The write lock feature is disabled. The write-operations on the resource will follow the last-write-wins semantics when the write lock feature is disabled.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * The write lock feature is enabled. Ensures that only one write-operation i.e., PUT, PATCH and DELETE, is allowed on a resource at any given time. Other concurrent write-operations, if any, will be rejected until the lock on the resource is released by the ongoing write-operation. The feature overrides the 'resourceConcurrencyControlOptions'.
+   */
+  Enabled: "Enabled",
+}
+
+/**
+ * The manifest checkin specification.
+ */
+@added(Versions.v2025_10_01)
+model ManifestCheckinSpecification {
+  /**
+   * The manifest checkin option.
+   */
+  manifestCheckinOption?: ManifestCheckinOption = ManifestCheckinOption.DoNotAttemptAutomaticManifestCheckin;
+
+  /**
+   * The manifest checkin params.
+   */
+  manifestCheckinParams?: CheckinManifestParams;
+}
+
+/**
+ * Information about a manifest applied to a region.
+ */
+@added(Versions.v2025_10_01)
+model AppliedManifestInfo {
+  /**
+   * Region to which the manifest was applied.
+   */
+  region?: string;
+
+  /**
+   * Time at which the manifest was applied.
+   */
+  manifestAppliedAt?: utcDateTime;
+
+  /**
+   * Commit id of previous manifest.
+   */
+  previousCommitId?: string;
+
+  /**
+   * Commit id of manifest being applied.
+   */
+  appliedCommitId?: string;
+}
+
+/**
+ * The private endpoint configuration.
+ */
+@added(Versions.v2025_10_01)
+model PrivateEndpointConfiguration {
+  /**
+   * The first api version that support private endpoint.
+   */
+  minApiVersion: string;
+
+  /**
+   * The list of group connectivity information.
+   */
+  @identifiers(#[])
+  groupConnectivityInformation: GroupConnectivityInformation[];
+}
+
+/**
+ * The individual resource deletion policy.
+ */
+@added(Versions.v2025_10_01)
+model ResourceDeletionPolicyAndProperties {
+  /**
+   * The resource deletion policy name.
+   */
+  policyName?: ResourceDeletionPolicy;
+
+  /**
+   * The resource deletion policy properties.
+   */
+  properties?: ResourceDeletionPolicyProperties;
+}
+
+/**
+ * The resource deletion policy properties.
+ */
+@added(Versions.v2025_10_01)
+model ResourceDeletionPolicyProperties {
+  /**
+   * The minimum retention time.
+   */
+  minimumRetentionTime?: duration;
+
+  /**
+   * The maximum retention time.
+   */
+  maximumRetentionTime?: duration;
+}
+
+/**
+ * The managed resource group configuration for the resource type.
+ */
+@added(Versions.v2025_10_01)
+model ResourceTypeManagedResourceGroupConfiguration {
+  /**
+   * Indicates whether the managed resource group configuration is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The resource group location override.
+   */
+  resourceGroupLocationOverride?: string;
+
+  /**
+   * The application ids.
+   */
+  applicationIds?: string[];
+
+  /**
+   * The deny assignment configuration.
+   */
+  denyAssignmentConfiguration?: ManagedResourceGroupDenyAssignmentConfiguration;
+}
+
+/**
+ * The deny assignment configuration for the managed resource group.
+ */
+@added(Versions.v2025_10_01)
+model ManagedResourceGroupDenyAssignmentConfiguration {
+  /**
+   * Indicates whether the deny assignment configuration is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The actions excluded from the deny assignment.
+   */
+  notActions?: string[];
+}
+
+/**
+ * Batch action configuration.
+ */
+@added(Versions.v2025_10_01)
+model ActionConfiguration {
+  /**
+   * Authorization action.
+   */
+  authorizationAction?: string;
+
+  /**
+   * The maximum batch size.
+   */
+  maxBatchSize?: int64;
+}
+
+/**
+ * The write lock configuration.
+ */
+@added(Versions.v2025_10_01)
+model WriteLockConfiguration {
+  /**
+   * The state of write lock feature. The feature will ensure a deterministic sequence of write-operation within and across the verbs. Also the feature will ensure that the semantics of synchronous and long-running operations are honored.
+   */
+  state?: WriteLockState = WriteLockState.Disabled;
+}
+
+/**
+ * The manifest properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The manifest is read from the manifest repository and has no provisioning state; adding one would change the existing service contract."
+@added(Versions.v2025_10_01)
+model ManifestInfoProperties {
+  /**
+   * The manifest.
+   */
+  manifest?: string;
+
+  /**
+   * The URI the manifest content is read from when the manifest is not supplied inline.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  manifestUri?: string;
+
+  /**
+   * The manifest commit identifier.
+   */
+  @visibility(Lifecycle.Read)
+  commitId?: string;
+}
+
+/**
+ * The isolation type.
+ */
+@added(Versions.v2026_02_01_preview)
+union IsolationType {
+  string,
+
+  /**
+   * Private isolation type.
+   */
+  Private: "Private",
+
+  /**
+   * Public isolation type.
+   */
+  Public: "Public",
+}
+
+/**
+ * The partner category.
+ */
+@added(Versions.v2026_02_01_preview)
+union PartnerCategory {
+  string,
+
+  /**
+   * First party partner category.
+   */
+  FirstParty: "FirstParty",
+
+  /**
+   * Third party partner category.
+   */
+  ThirdParty: "ThirdParty",
+}
+
+/**
+ * The lifecycle stage.
+ */
+@added(Versions.v2026_02_01_preview)
+union LifecycleStage {
+  string,
+
+  /**
+   * In Development lifecycle stage.
+   */
+  InDevelopment: "InDevelopment",
+
+  /**
+   * Private Preview lifecycle stage.
+   */
+  PrivatePreview: "PrivatePreview",
+
+  /**
+   * Public Preview lifecycle stage.
+   */
+  PublicPreview: "PublicPreview",
+
+  /**
+   * General Availability lifecycle stage.
+   */
+  GA: "GA",
+
+  /**
+   * Retired lifecycle stage.
+   */
+  Retired: "Retired",
+}
+
+/**
+ * Resource provider lifecycle information.
+ */
+@added(Versions.v2026_02_01_preview)
+model ResourceProviderLifecycleInfo {
+  /**
+   * The isolation type.
+   */
+  isolationType?: IsolationType;
+
+  /**
+   * The partner category.
+   */
+  partnerCategory?: PartnerCategory;
+
+  /**
+   * The lifecycle stage.
+   */
+  lifecycleStage?: LifecycleStage;
+
+  /**
+   * The list of allowed subscriptions for this resource provider.
+   */
+  allowedSubscriptions?: string[];
+}
+
+/**
+ * Resource type lifecycle information.
+ */
+@added(Versions.v2026_02_01_preview)
+model ResourceTypeLifecycleInfo {
+  /**
+   * The lifecycle stage.
+   */
+  lifecycleStage?: LifecycleStage;
+}
+
+/**
+ * Swagger specification lifecycle information.
+ */
+@added(Versions.v2026_02_01_preview)
+model SwaggerSpecificationLifecycleInfo {
+  /**
+   * The lifecycle stage.
+   */
+  lifecycleStage?: LifecycleStage;
 }
