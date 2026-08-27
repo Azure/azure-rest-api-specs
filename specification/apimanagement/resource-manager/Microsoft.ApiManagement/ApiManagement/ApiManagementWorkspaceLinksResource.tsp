@@ -15,11 +15,10 @@ namespace Microsoft.ApiManagement;
  * A single API Management WorkspaceLinks in List or Get response.
  */
 @parentResource(ApiManagementServiceResource)
-model ApiManagementWorkspaceLinksResource
-  is Azure.ResourceManager.ProxyResource<
-    ApiManagementWorkspaceLinksProperties,
-    false
-  > {
+model ApiManagementWorkspaceLinksResource is Azure.ResourceManager.ProxyResource<
+  ApiManagementWorkspaceLinksProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ApiManagementWorkspaceLinksResource,
     KeyName = "workspaceId",

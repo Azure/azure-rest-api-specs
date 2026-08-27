@@ -22,7 +22,25 @@ These are the global settings for the Microsoft.Discovery.Bookshelf API.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2026-02-01-preview
+tag: package-2026-06-01
+```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - stable/2026-06-01/discovery-bookshelf.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    reason: LRO status response uses inline OperationStatus model from Azure.Core templates
+    from: discovery-bookshelf.json
+    where:
+      - $.paths["/knowledgeBases/{knowledgeBaseName}"].delete.responses["202"].schema
+      - $.paths["/knowledgeBases/{knowledgeBaseName}:startIndexing"].post.responses["202"].schema
+      - $.paths["/knowledgeBases/{knowledgeBaseName}:cancelIndexing"].post.responses["202"].schema
+      - $.paths["/knowledgeBases/{knowledgeBaseName}:search"].post.responses["202"].schema
 ```
 
 ### Tag: package-2026-02-01-preview
@@ -42,3 +60,4 @@ suppressions:
       - $.paths["/knowledgeBases/{knowledgeBaseName}/versions/{versionName}:startIndexing"].post.responses["202"].schema
       - $.paths["/knowledgeBases/{knowledgeBaseName}/versions/{versionName}:cancelIndexing"].post.responses["202"].schema
 ```
+

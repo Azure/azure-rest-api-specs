@@ -188,28 +188,15 @@ directive:
       - DefinitionsPropertiesNamesCamelCase
   - where:
       - $.definitions.DiskProperties.properties.diskIOPSReadWrite
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
       - $.definitions.DiskUpdateProperties.properties.diskIOPSReadWrite
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
       - $.definitions.DiskProperties.properties.diskIOPSReadOnly
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
       - $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
+      - $.definitions.ManagedDiskProperties.properties.diskIOPSReadOnly
       - $.definitions.DataDisk.properties.diskIOPSReadWrite
-    suppress:
-      - DefinitionsPropertiesNamesCamelCase
-  - where:
       - $.definitions.VirtualMachineScaleSetDataDisk.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
+    reason: Property name uses 'IOPS' acronym in all-caps following the established Azure Disk API naming convention used across all disk-related properties
   - where:
       - $.definitions.ContainerService
     suppress:
@@ -342,16 +329,29 @@ suppressions:
   - code: PatchResponseCodes
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
+  - code: PatchResponseCodes
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: ComputeRP.json
   - code: PatchBodyParametersSchema
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
   - code: LroPatch202
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
+  - code: LroPatch202
+    from: ComputeRP.json
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+  - code: DeleteResponseCodes
+    from: ComputeRP.json
+    reason: Behavior is align with other existing API for this RP
   - code: AvoidAdditionalProperties
     reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
     from: GalleryRP.json
     where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
+  - code: AvoidAdditionalProperties
+    reason: usedReservedCountBySubscription is a read-only response projection of the RP's internal map of used reserved capacity count keyed by the consuming subscription id (GUID). The map shape reflects an established contract between CRP and its downstream consumers, which key directly on the subscription id; converting it to an array would break those existing contracts and require coordinated breaking changes across all consumers. Narrow exception for this single read-only property, approved by the ARM team and owned by the Compute service team.
+    from: ComputeRP.json
+    where: $.definitions.CapacityReservationUtilization.properties.usedReservedCountBySubscription
   - code: GetCollectionOnlyHasValueAndNextLink
     from: GalleryRP.json
     reason: Existing issue from last version.
@@ -384,10 +384,6 @@ suppressions:
   - code: XMSSecretInResponse
     reason: Existing secret fields maintained for backward compatibility.
     from: ComputeRP.json
-  - code: XMSSecretInResponse
-    reason: metadataKey is a metadata field name, not a cryptographic key. Wire-format name is fixed by existing CAPS backend serialization.
-    from: GalleryRP.json
-    where: $.definitions.MetadataKeyValue.properties.metadataKey
   - code: LroLocationHeader
     reason: Existing LRO operation does not include Location header for backward compatibility.
     from: ComputeRP.json
@@ -563,6 +559,323 @@ suppressions:
     reason: Existing query parameter kept for backwards compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate"].post.parameters
+
+  - code: AllTrackedResourcesMustHaveDelete
+    reason: Read-only tracked resource that does not support delete operations.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineExtensionImage
+  - code: AllTrackedResourcesMustHaveDelete
+    reason: Read-only tracked resource that does not support delete operations.
+    from: ComputeRP.json
+    where: $.definitions.RollingUpgradeStatusInfo
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.VmImagesInEdgeZoneListResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.RunCommandListResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.RunCommandDocument
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.ListUsagesResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineSizeListResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.DedicatedHostSizeListResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetExtensionListResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetInstanceView
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetListOSUpgradeHistory
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetListSkusResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetVMInstanceView
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: List response or view model, not a standard ARM resource.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineInstanceView
+  - code: ArmResourcePropertiesBag
+    reason: Existing definition maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineExtension
+  - code: ArmResourcePropertiesBag
+    reason: Existing definition maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetExtension
+  - code: BodyTopLevelProperties
+    reason: Existing top-level properties for backward compatibility.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetVM
+  - code: BodyTopLevelProperties
+    reason: Not a standard ARM resource, extra top-level properties by design.
+    from: ComputeRP.json
+    where: $.definitions.RunCommandDocument
+  - code: TrackedResourceBeyondsThirdLevel
+    reason: Read-only resource beyond third level of nesting by design.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineExtensionImage
+  - code: TrackedResourcesMustHavePut
+    reason: Read-only tracked resource that does not support PUT operations.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineExtensionImage
+  - code: TrackedResourcesMustHavePut
+    reason: Read-only tracked resource that does not support PUT operations.
+    from: ComputeRP.json
+    where: $.definitions.RollingUpgradeStatusInfo
+  - code: PathForTrackedResourceTypes
+    reason: Existing API path for tracked resource type for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}"]
+  - code: PathForTrackedResourceTypes
+    reason: Existing API path for tracked resource type for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}"]
+  - code: PathForTrackedResourceTypes
+    reason: Existing API path for tracked resource type for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}"]
+  - code: PathForTrackedResourceTypes
+    reason: Existing API path for tracked resource type for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest"]
+  - code: PathForResourceAction
+    reason: Existing action path maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval"]
+  - code: PathForResourceAction
+    reason: Existing action path maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests"]
+  - code: PathForResourceAction
+    reason: Existing action path maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel"]
+  - code: PutResponseCodes
+    reason: Existing PUT response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"].put
+  - code: PutResponseCodes
+    reason: Existing PUT response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}"].put
+  - code: PutResponseCodes
+    reason: Existing PUT response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}"].put
+
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/convertToVirtualMachineScaleSet"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/redeploy"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/restart"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/approveRollingUpgrade"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reapply"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/approveRollingUpgrade"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/deallocate"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/performMaintenance"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/powerOff"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/redeploy"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/reimage"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/reimageall"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/restart"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/start"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/convertToManagedDisks"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/generalize"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/migrateToVirtualMachineScaleSet"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/performMaintenance"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/powerOff"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reapply"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reimage"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart"].post
+  - code: PostResponseCodes
+    reason: Existing POST response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/start"].post
+  - code: PatchResponseCodes
+    reason: PATCH and PUT follow the same behavior and response codes in Compute.
+    from: ComputeRP.json
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Existing LRO PUT operation maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Existing LRO PUT operation maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}"].put
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    reason: Existing tracked resource request schema for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}"].put
+  - code: PathForNestedResource
+    reason: Existing nested resource path maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest"]
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: Existing property name maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.definitions.DedicatedHostGroupPropertiesAdditionalCapabilities.properties.ultraSSDEnabled
+  - code: ParametersInPointGet
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/diagnosticRunCommands/{runCommandName}"].get.parameters
+    reason: Required query parameter for GET
+  - code: ParametersInPointGet
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/diagnosticRunCommands/{runCommandName}"].get.parameters
+    reason: Required query parameter for GET
 ```
 
 ### Tag: package-2026-03-03
@@ -585,6 +898,28 @@ These settings apply only when `--tag=package-2026-03-03-only` is specified on t
 input-file:
   - stable/2026-03-03/GalleryRP.json
 ```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-04-01'
+input-file:
+  - stable/2026-04-01/ComputeRP.json
+  - stable/2026-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2025-12-03/GalleryRP.json
+```
+
+### Tag: package-2026-04-01-only
+
+These settings apply only when `--tag=package-2026-04-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-01-only'
+input-file:
+  - stable/2026-04-01/ComputeRP.json
+```
+
 ### Tag: package-2025-12-03
 
 These settings apply only when `--tag=package-2025-12-03` is specified on the command line.

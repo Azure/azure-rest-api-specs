@@ -13,8 +13,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MachineLearningServices;
 
 @parentResource(Workspace)
-model BatchEndpoint
-  is Azure.ResourceManager.TrackedResource<BatchEndpointProperties, false> {
+model BatchEndpoint is Azure.ResourceManager.TrackedResource<
+  BatchEndpointProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = BatchEndpoint,
     KeyName = "endpointName",

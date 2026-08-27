@@ -84,8 +84,11 @@ interface ProfilesOverrides {
     ...Azure.ResourceManager.ProviderNamespace<Profile>,
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
     profileName: string,
+
     ...ResourceGroupParameter,
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     parameters: Microsoft.Network.Profile,
@@ -255,6 +258,16 @@ interface ProfilesOverrides {
 @@clientName(Transform.UrlEncode, "UriEncode", "csharp");
 @@clientName(ResourceType, "FrontDoorResourceType", "csharp");
 @@clientName(MinimumTLSVersion, "FrontDoorRequiredMinimumTlsVersion", "csharp");
+@@clientName(
+  MinimumTLSVersion.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  MinimumTLSVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
 @@clientName(
   ManagedRuleSetException,
   "FrontDoorManagedRuleSetException",

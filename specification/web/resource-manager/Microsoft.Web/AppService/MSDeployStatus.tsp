@@ -67,7 +67,6 @@ interface MSDeployStatuses {
    * Description for Get the status of the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get the status of the last MSDeploy operation.")
   getMSDeployStatus is MSDeployStatusOps.Read<
     MSDeployStatus,
