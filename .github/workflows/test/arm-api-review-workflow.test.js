@@ -1116,8 +1116,8 @@ describe("API version lifecycle rules", () => {
       readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
     ]);
 
-    const declared = reference.match(/`([a-z-]+)` category/);
-    expect(declared, "reference must name its category").not.toBeNull();
-    expect(protocol).toContain(`\`${declared[1]}\``);
+    const declared = reference.match(/`([a-z-]+)` category/)?.[1];
+    expect(declared, "reference must name its category").toBeDefined();
+    expect(protocol).toContain(`\`${declared}\``);
   });
 });
