@@ -3794,6 +3794,27 @@ model PrivateLinkServiceConnectionProperties {
    * A collection of read-only information about the state of the connection to the remote resource.
    */
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+
+  /**
+   * A reference to an existing approved private endpoint whose connection approval state should be inherited by this connection at creation time.
+   */
+  @added(Versions.v2026_01_01)
+  approvalReference?: ApprovalReference;
+}
+
+/**
+ * Reference to an existing approved private endpoint used to inherit its connection approval state.
+ */
+@added(Versions.v2026_01_01)
+model ApprovalReference {
+  /**
+   * The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection.
+   */
+  privateEndpointId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/privateEndpoints";
+    }
+  ]>;
 }
 
 /**

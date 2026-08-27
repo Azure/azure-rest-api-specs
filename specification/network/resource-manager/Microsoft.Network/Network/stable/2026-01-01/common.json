@@ -1456,6 +1456,24 @@
         ]
       }
     },
+    "ApprovalReference": {
+      "type": "object",
+      "description": "Reference to an existing approved private endpoint used to inherit its connection approval state.",
+      "properties": {
+        "privateEndpointId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateEndpoints"
+              }
+            ]
+          }
+        }
+      }
+    },
     "AssociationAccessMode": {
       "type": "string",
       "description": "Access mode on the association.",
