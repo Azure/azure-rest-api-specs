@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ComputeRecommenderResourceProviderClient",
-    "version": "2026-05-05-preview",
+    "version": "2026-09-05-preview",
     "description": "The Compute Recommender Resource Provider Client",
     "x-typespec-generated": [
       {
@@ -374,6 +374,76 @@
         }
       ]
     },
+    "SkuMixPlacementCapacityLimit": {
+      "type": "object",
+      "description": "Capacity availability for a single requested (VM size, zone) combination, independent of the\nrecommended placement.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "VM size name (e.g. Standard_D2s_v3)."
+        },
+        "priority": {
+          "$ref": "#/definitions/SkuMixPlacementPriority",
+          "description": "Priority of this entry (Regular or Spot)."
+        },
+        "zone": {
+          "type": "string",
+          "description": "Logical zone (e.g. \"1\", \"2\", \"3\"). Omitted or empty for regional requests."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Upper bound, in VMs, on how much capacity can be allocated for this (VM size, zone): the smallest of\nthe requested capacity, the available capacity, and the available quota, but never below the capacity\nalready recommended for the slot. 0 when nothing is available.",
+          "minimum": 0
+        },
+        "reason": {
+          "$ref": "#/definitions/SkuMixPlacementCapacityLimitReason",
+          "description": "Why the limit is below the requested capacity, or None when the request is fully available."
+        }
+      },
+      "required": [
+        "name",
+        "priority",
+        "limit",
+        "reason"
+      ]
+    },
+    "SkuMixPlacementCapacityLimitReason": {
+      "type": "string",
+      "description": "Reason the capacity limit for a (VM size, zone) is below the requested capacity.",
+      "enum": [
+        "None",
+        "InsufficientCapacity",
+        "InsufficientQuota",
+        "SkuNotAvailable"
+      ],
+      "x-ms-enum": {
+        "name": "SkuMixPlacementCapacityLimitReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The full requested capacity is available for this (VM size, zone)."
+          },
+          {
+            "name": "InsufficientCapacity",
+            "value": "InsufficientCapacity",
+            "description": "Allocable capacity bounded the limit below the requested capacity."
+          },
+          {
+            "name": "InsufficientQuota",
+            "value": "InsufficientQuota",
+            "description": "Quota bounded the limit below the requested capacity. Takes precedence when both capacity and quota are insufficient."
+          },
+          {
+            "name": "SkuNotAvailable",
+            "value": "SkuNotAvailable",
+            "description": "This VM size is not available in this zone for the subscription."
+          }
+        ]
+      }
+    },
     "SkuMixPlacementCapacityProfile": {
       "type": "object",
       "description": "Capacity-related properties for the placement request.",
@@ -442,10 +512,6 @@
       "type": "object",
       "description": "A single deployment choice recommendation.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for this deployment choice."
-        },
         "score": {
           "type": "integer",
           "format": "int32",
@@ -466,7 +532,6 @@
         }
       },
       "required": [
-        "id",
         "score",
         "skuSplit"
       ]
@@ -506,11 +571,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Lower range of recommended allocation capacity."
-        },
-        "capacityMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Upper range of recommended allocation capacity."
         },
         "zone": {
           "type": "string",
@@ -643,6 +703,10 @@
       "type": "object",
       "description": "Sku Mix Placement API response.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this placement response, including responses that contain no placement choices.\nReplaces the per-choice id that was present on placementChoices in earlier API versions."
+        },
         "placementChoices": {
           "type": "array",
           "description": "List of placement choice recommendations.",
@@ -659,9 +723,21 @@
         "partialFulfillmentReason": {
           "$ref": "#/definitions/SkuMixPlacementPartialFulfillmentReason",
           "description": "Indicates whether the response is a complete or partial fulfillment."
+        },
+        "capacityLimits": {
+          "type": "array",
+          "description": "Capacity availability for each requested (VM size, zone) combination, independent of the recommended\nplacement. An entry is present for every requested combination, including those excluded by capacity\nor quota. Only returned for requests that describe instances by VM sizes.",
+          "items": {
+            "$ref": "#/definitions/SkuMixPlacementCapacityLimit"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "zone"
+          ]
         }
       },
       "required": [
+        "id",
         "placementChoices",
         "partialFulfillmentReason"
       ]
