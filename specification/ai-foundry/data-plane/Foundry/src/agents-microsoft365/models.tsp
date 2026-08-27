@@ -42,6 +42,7 @@ model Microsoft365PermissionScopes {
  * identified by the `agent_name` in the route and resolved server-side, so the agent id, bot id, and
  * app-registration id are not supplied in the body.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Added for back compat."
 model Microsoft365PublishRequest {
   /**
    * Display name used as the published Teams app name. When omitted, the agent name from the route is
@@ -133,6 +134,7 @@ model Microsoft365PublishRequest {
 // Response models
 // ---------------------------------------------------------------------------
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Added for back compat."
 /** Response from publishing an agent to Microsoft 365 / Microsoft Teams. */
 model Microsoft365PublishResponse {
   /** The Microsoft 365 title id of the published app. */
@@ -142,6 +144,7 @@ model Microsoft365PublishResponse {
   teamsAppId?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Added for back compat."
 /** The generated Microsoft 365 app package (Microsoft Teams app zip). */
 model Microsoft365AppPackageResponse {
   /** The media type of the returned package content. */
