@@ -101,8 +101,8 @@ namespace Azure.AI.Projects {
     /** The agent used for this response */
     agent_reference: AgentReference | null;
 
-    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
     /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
     model_selection_details?: ModelSelectionDetails;
   }
 

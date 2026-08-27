@@ -192,7 +192,11 @@ using Azure.AI.Projects;
 );
 @@clientName(OpenAI.LocalSkillParam, "LocalSkillParameter", "java");
 @@clientName(OpenAI.SkillReferenceParam, "SkillReferenceParameter", "java");
-@@clientName(OpenAI.ProgrammaticToolCallingParam, "ProgrammaticToolCallingParameter", "java");
+@@clientName(
+  OpenAI.ProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParameter",
+  "java"
+);
 
 @@clientName(ToolboxVersionObject, "ToolboxVersionDetails", "java");
 @@clientName(ToolboxObject, "ToolboxDetails", "java");
