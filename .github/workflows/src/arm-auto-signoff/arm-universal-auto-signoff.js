@@ -20,7 +20,6 @@ function createNoneLabelActions() {
   };
 }
 
-// TODO: Add tests
 /* v8 ignore start */
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
