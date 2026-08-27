@@ -1,0 +1,59 @@
+{
+  "operationId": "DiskimagesOperations_GetDiskimages",
+  "title": "DiskimagesOperations_GetDiskimages - Gets a specific disk image by ID.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "example-disk-image",
+        "name": "example-resource",
+        "labels": {
+          "exampleKey": "example-value"
+        },
+        "image": {
+          "base": "example-value",
+          "entrypoint": [
+            "example-value"
+          ],
+          "cmd": [
+            "example-value"
+          ]
+        },
+        "status": {
+          "state": "example-value",
+          "errorMessage": "example-value",
+          "createdAt": "2026-08-24T12:00:00Z",
+          "updatedAt": "2026-08-24T12:00:00Z"
+        },
+        "sizeInMB": "example-value",
+        "dockerfileContent": "example content"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

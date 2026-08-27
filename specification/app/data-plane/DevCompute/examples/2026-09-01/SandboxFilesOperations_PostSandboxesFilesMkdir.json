@@ -1,0 +1,53 @@
+{
+  "operationId": "SandboxFilesOperations_PostSandboxesFilesMkdir",
+  "title": "SandboxFilesOperations_PostSandboxesFilesMkdir - Creates a directory in a running sandbox. If the `createParents` property is set to true,\nany missing parent directories will also be created.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource",
+    "body": {
+      "path": "/workspace/example.txt",
+      "createParents": true,
+      "mode": 1
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "success": true,
+        "error": "example-value",
+        "message": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    }
+  }
+}

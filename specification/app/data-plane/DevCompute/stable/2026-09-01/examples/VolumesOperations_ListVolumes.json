@@ -1,0 +1,41 @@
+{
+  "operationId": "VolumesOperations_ListVolumes",
+  "title": "VolumesOperations_ListVolumes - Lists volumes with pagination support.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "type": "AzureBlobByo",
+          "volumeName": "example-volume",
+          "labels": {
+            "exampleKey": "example-value"
+          },
+          "storageContainerResourceId": "example-armstoragecontainer",
+          "auth": {
+            "kind": "ManagedIdentity",
+            "identity": {
+              "kind": "SystemAssigned"
+            }
+          }
+        }
+      ]
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

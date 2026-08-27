@@ -1,0 +1,52 @@
+{
+  "operationId": "ContentpackagesOperations_PostContentpackagesUpload",
+  "title": "Uploads a content package.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "example-content-package",
+        "size": "ZXhhbXBsZSBjb250ZW50",
+        "labels": {
+          "exampleKey": "example-value"
+        },
+        "contentType": "example content",
+        "createdOn": "2026-08-24T12:00:00Z"
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "503": {}
+  }
+}

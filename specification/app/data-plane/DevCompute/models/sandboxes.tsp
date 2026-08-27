@@ -99,9 +99,6 @@ model SandboxFields {
   @removed(ApiVersions.v2026_09_01)
   customerVnetConnectionName?: string;
 
-  /** The name of the system vnet connection used when creating this sandbox, if any. */
-  systemVnetConnectionName?: string;
-
   /** Optional identity settings that control which managed identities from the group are available to this sandbox and in which lifecycle phases. */
   identitySettings?: IdentitySetting[];
 

@@ -1,0 +1,71 @@
+{
+  "operationId": "VolumesOperations_PutVolumes",
+  "title": "VolumesOperations_PutVolumes - Creates a new volume.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "volumeName": "example-volume",
+    "body": {
+      "type": "AzureBlobByo",
+      "labels": {
+        "exampleKey": "example-value"
+      },
+      "storageContainerResourceId": "example-armstoragecontainer",
+      "auth": {
+        "kind": "ManagedIdentity",
+        "identity": {
+          "kind": "SystemAssigned"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "type": "AzureBlobByo",
+        "volumeName": "example-volume",
+        "labels": {
+          "exampleKey": "example-value"
+        },
+        "storageContainerResourceId": "example-armstoragecontainer",
+        "auth": {
+          "kind": "ManagedIdentity",
+          "identity": {
+            "kind": "SystemAssigned"
+          }
+        }
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

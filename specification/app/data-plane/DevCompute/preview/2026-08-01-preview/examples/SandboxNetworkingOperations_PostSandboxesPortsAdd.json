@@ -1,0 +1,106 @@
+{
+  "operationId": "SandboxNetworkingOperations_PostSandboxesPortsAdd",
+  "title": "SandboxNetworkingOperations_PostSandboxesPortsAdd - Adds a port to a sandbox.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource",
+    "body": {
+      "name": "example-resource",
+      "port": 8080,
+      "auth": {
+        "anonymous": true,
+        "github": {},
+        "entraId": {}
+      },
+      "activationMode": "Manual",
+      "protocol": "Http",
+      "ipAccessControl": {
+        "defaultAction": "Allow",
+        "rules": [
+          {
+            "name": "example-resource",
+            "action": "Allow",
+            "priority": 1,
+            "sourceCidrs": [
+              "example-value"
+            ]
+          }
+        ]
+      },
+      "cors": {
+        "allowOrigins": [
+          "example-value"
+        ],
+        "allowMethods": [
+          "example-value"
+        ],
+        "allowHeaders": [
+          "example-value"
+        ],
+        "allowCredentials": true,
+        "maxAge": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ports": [
+          {
+            "name": "example-resource",
+            "port": 8080,
+            "url": "https://example.com/resource",
+            "auth": {},
+            "activationMode": "Manual",
+            "protocol": "Http",
+            "ipAccessControl": {
+              "defaultAction": "Allow"
+            },
+            "cors": {}
+          }
+        ]
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "operationId": "ContentpackagesOperations_ListContentpackages",
+  "title": "ContentpackagesOperations_ListContentpackages - Lists content packages for the sandbox group.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "example-content-package",
+            "size": "ZXhhbXBsZSBjb250ZW50",
+            "labels": {
+              "exampleKey": "example-value"
+            },
+            "contentType": "example content",
+            "createdOn": "2026-08-24T12:00:00Z"
+          }
+        ]
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

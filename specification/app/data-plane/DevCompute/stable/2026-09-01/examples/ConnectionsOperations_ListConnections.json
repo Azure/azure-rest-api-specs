@@ -1,0 +1,52 @@
+{
+  "operationId": "ConnectionsOperations_ListConnections",
+  "title": "ConnectionsOperations_ListConnections - Lists connections in a sandbox group.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "id": "example-connection",
+          "name": "example-resource",
+          "type": "example",
+          "state": "example-value",
+          "labels": {
+            "exampleKey": "example-value"
+          },
+          "createdAt": "2026-08-24T12:00:00Z",
+          "deletable": true,
+          "usedBySandboxIds": [
+            "example-usedbysandbox"
+          ],
+          "policyRules": [
+            {
+              "hookId": "example-hook",
+              "patterns": [
+                "example-value"
+              ]
+            }
+          ],
+          "enabledToolGroups": [
+            "example-value"
+          ]
+        }
+      ]
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

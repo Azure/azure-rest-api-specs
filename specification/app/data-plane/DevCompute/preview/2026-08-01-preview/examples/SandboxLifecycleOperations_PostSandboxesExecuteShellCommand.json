@@ -1,0 +1,60 @@
+{
+  "operationId": "SandboxLifecycleOperations_PostSandboxesExecuteShellCommand",
+  "title": "SandboxLifecycleOperations_PostSandboxesExecuteShellCommand - Executes a shell command in a sandbox.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource",
+    "body": {
+      "command": "echo hello",
+      "shell": "example-value",
+      "environment": {
+        "exampleKey": "example-value"
+      },
+      "workingDirectory": "example-value",
+      "user": "example-value",
+      "activationMode": "Manual"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "exitCode": 1,
+        "stdout": "example-value",
+        "stderr": "example-value",
+        "executionTimeMs": 1
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "409": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

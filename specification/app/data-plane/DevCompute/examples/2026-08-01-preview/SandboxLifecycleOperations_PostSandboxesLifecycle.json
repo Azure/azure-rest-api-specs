@@ -1,0 +1,269 @@
+{
+  "operationId": "SandboxLifecycleOperations_PostSandboxesLifecycle",
+  "title": "SandboxLifecycleOperations_PostSandboxesLifecycle - Sets the lifecycle policy for a sandbox.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource",
+    "body": {
+      "autoSuspendPolicy": {
+        "enabled": true,
+        "interval": 1,
+        "mode": "Memory"
+      },
+      "autoDeletePolicy": {
+        "enabled": true,
+        "deleteIntervalInDays": 1,
+        "deleteIntervalInSeconds": 1,
+        "trigger": "AfterSuspend"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "example-resource",
+        "labels": {
+          "exampleKey": "example-value"
+        },
+        "vmmType": "cloudhypervisor",
+        "entrypoint": [
+          "example-value"
+        ],
+        "cmd": [
+          "example-value"
+        ],
+        "sourcesRef": {
+          "diskImage": {},
+          "snapshot": {
+            "id": "example-resource"
+          },
+          "pod": {
+            "containers": [
+              {
+                "name": "example-podcontainer",
+                "diskImage": {}
+              }
+            ]
+          },
+          "artifactVersion": {
+            "id": "example-resource",
+            "auth": {
+              "identity": "example-value"
+            }
+          }
+        },
+        "resources": {
+          "cpu": "example-value",
+          "memory": "example-value",
+          "disk": "example-value",
+          "gpu": {
+            "sku": "example-value",
+            "quantity": "example-value"
+          }
+        },
+        "createdAt": "2026-08-24T12:00:00Z",
+        "state": "Running",
+        "stateDetails": {
+          "stoppedReason": "Idle",
+          "stoppedAt": "2026-08-24T12:00:00Z"
+        },
+        "snapshotId": "example-snapshot",
+        "coldStorageSizeInMB": "example-value",
+        "ports": [
+          {
+            "name": "example-resource",
+            "port": 8080,
+            "url": "https://example.com/resource",
+            "auth": {},
+            "activationMode": "Manual",
+            "protocol": "Http",
+            "ipAccessControl": {
+              "defaultAction": "Allow"
+            },
+            "cors": {}
+          }
+        ],
+        "connections": [
+          "example-value"
+        ],
+        "gatewayConnections": [
+          {
+            "resourceId": "example-resource",
+            "name": "example-resource",
+            "mcpRuntimeUrl": "https://example.com/resource",
+            "connectionRuntimeUrl": "https://example.com/resource",
+            "authentication": {
+              "type": "SystemAssignedManagedIdentity"
+            }
+          }
+        ],
+        "credentialRefs": [
+          "example-value"
+        ],
+        "egressPolicy": {
+          "http": {
+            "defaultAction": "Allow"
+          },
+          "defaultAction": "Allow",
+          "hostRules": [
+            {
+              "pattern": "example-value"
+            }
+          ],
+          "rules": [
+            {
+              "name": "example-resource",
+              "match": {
+                "host": "example.com"
+              }
+            }
+          ],
+          "tds": {
+            "defaultAction": "Allow",
+            "credentials": [
+              {
+                "name": "example-resource",
+                "kind": "SqlPassword"
+              }
+            ],
+            "rules": [
+              {
+                "name": "example-resource",
+                "match": {
+                  "host": "example.com"
+                }
+              }
+            ]
+          },
+          "transportRules": {
+            "defaultAction": "Allow",
+            "rules": [
+              {
+                "action": "Allow",
+                "protocol": "Tcp",
+                "destination": "example-value",
+                "port": 8080
+              }
+            ]
+          },
+          "trafficInspection": "Legacy",
+          "enforcementMode": "Enforced",
+          "validationWarnings": [
+            {
+              "code": "example-value",
+              "message": "example-value"
+            }
+          ]
+        },
+        "sandboxGroupId": "example-sandboxgroup",
+        "region": "example-value",
+        "lifecycle": {
+          "autoSuspendPolicy": {
+            "enabled": true
+          },
+          "autoDeletePolicy": {
+            "enabled": true
+          }
+        },
+        "debug": {
+          "traceId": "example-trace",
+          "traces": [
+            {
+              "id": "example-value",
+              "parentId": "example-value",
+              "startMs": 1,
+              "durationMs": 1,
+              "name": "example-resource"
+            }
+          ]
+        },
+        "appUrl": "https://example.com/resource",
+        "managementUrl": "https://example.com/resource",
+        "tokens": {
+          "exampleKey": {
+            "token": "example-token",
+            "expiresAt": "2026-08-24T12:00:00Z"
+          }
+        },
+        "agentIdentity": {
+          "tenantId": "example-tenant",
+          "agentId": "example-agent"
+        },
+        "volumes": [
+          {
+            "volumeName": "example-volume",
+            "mountpoint": "example-value",
+            "readOnly": true
+          }
+        ],
+        "contentPackageDownloads": [
+          {
+            "contentPackageId": "example-content-package",
+            "targetPath": "/workspace/example.txt",
+            "action": "Download"
+          }
+        ],
+        "vnetConnectionName": "example-vnetconnection",
+        "customerVnetConnectionName": "example-customervnetconnection",
+        "identitySettings": [
+          {
+            "identity": "example-value",
+            "lifecycle": "None"
+          }
+        ],
+        "outboundIpAddresses": [
+          "192.0.2.10"
+        ],
+        "containerStatuses": [
+          {
+            "name": "example-podcontainer",
+            "state": "Unknown",
+            "ready": true,
+            "started": true,
+            "restartCount": 1,
+            "reason": "Completed",
+            "message": "example-value",
+            "lastExitCode": 1,
+            "lastStartedAt": "2026-08-24T12:00:00Z",
+            "lastFinishedAt": "2026-08-24T12:00:00Z",
+            "probes": {
+              "exampleKey": {}
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

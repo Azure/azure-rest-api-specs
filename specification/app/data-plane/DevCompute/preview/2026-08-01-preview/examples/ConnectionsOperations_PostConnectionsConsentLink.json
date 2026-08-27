@@ -1,0 +1,41 @@
+{
+  "operationId": "ConnectionsOperations_PostConnectionsConsentLink",
+  "title": "ConnectionsOperations_PostConnectionsConsentLink - Generates a consent link for a connection.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "id": "example-resource",
+    "body": {
+      "redirectUrl": "https://example.com/resource"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "consentLink": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}

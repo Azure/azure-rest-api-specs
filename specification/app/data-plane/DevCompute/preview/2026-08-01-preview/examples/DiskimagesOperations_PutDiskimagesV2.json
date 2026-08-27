@@ -1,0 +1,80 @@
+{
+  "operationId": "DiskimagesOperations_PutDiskimagesV2",
+  "title": "DiskimagesOperations_PutDiskimagesV2 - Creates a new disk image using the V2 discriminated source model.",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "body": {
+      "source": {
+        "kind": "blob",
+        "blobSourceUri": "https://example.com/resource"
+      },
+      "name": "example-resource",
+      "vmmType": "cloudhypervisor",
+      "labels": {
+        "exampleKey": "example-value"
+      },
+      "vnetConnectionName": "example-vnetconnection",
+      "customerVnetConnectionName": "example-customervnetconnection"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "example-disk-image",
+        "name": "example-resource",
+        "labels": {
+          "exampleKey": "example-value"
+        },
+        "image": {
+          "base": "example-value",
+          "entrypoint": [
+            "example-value"
+          ],
+          "cmd": [
+            "example-value"
+          ]
+        },
+        "status": {
+          "state": "example-value",
+          "errorMessage": "example-value",
+          "createdAt": "2026-08-24T12:00:00Z",
+          "updatedAt": "2026-08-24T12:00:00Z"
+        },
+        "sizeInMB": "example-value",
+        "dockerfileContent": "example content"
+      }
+    },
+    "400": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "401": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "429": {
+      "body": {
+        "type": "example",
+        "title": "example-value",
+        "status": 1,
+        "detail": "example-value",
+        "instance": "example-value"
+      }
+    },
+    "500": {}
+  }
+}
