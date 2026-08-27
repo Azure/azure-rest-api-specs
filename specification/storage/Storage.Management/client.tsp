@@ -1443,5 +1443,11 @@ enum ProvisioningStateEnum {
 @@clientName(
   Azure.ResourceManager.CommonTypes.Encryption,
   "StorageAccountEncryption",
-  "python,java,go,javscript"
+  "python,java"
+);
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Encryption,
+  "ContextCacheEncryption",
+  "go,javascript"
 );
