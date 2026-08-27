@@ -4978,14 +4978,6 @@ paths:
         Creates an evaluator generation job. The service generates rubric-based evaluator
         definitions from the provided source materials asynchronously.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: Operation-Id
           in: header
           required: false
@@ -5038,9 +5030,6 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluatorGenerationJobCreate'
         description: The job to create.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     get:
       operationId: EvaluatorGenerationJobs_list
       summary: List evaluator generation jobs
@@ -5050,14 +5039,6 @@ paths:
         immediately; use the Get evaluator generation job API with the job ID to
         retrieve a specific job without delay.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: limit
           in: query
           required: false
@@ -5145,23 +5126,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - EvaluatorGenerationJobs
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluator_generation_jobs/{jobId}:
     get:
       operationId: EvaluatorGenerationJobs_get
       summary: Get an evaluator generation job
       description: Gets the details of an evaluator generation job by its ID.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: jobId
           in: path
           required: true
@@ -5203,9 +5173,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - EvaluatorGenerationJobs
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     delete:
       operationId: EvaluatorGenerationJobs_delete
       summary: Delete an evaluator generation job
@@ -5213,14 +5180,6 @@ paths:
         Deletes an evaluator generation job by its ID. Deletes the job record only;
         the generated evaluator (if any) is preserved.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: jobId
           in: path
           required: true
@@ -5251,23 +5210,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - EvaluatorGenerationJobs
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluator_generation_jobs/{jobId}:cancel:
     post:
       operationId: EvaluatorGenerationJobs_cancel
       summary: Cancel an evaluator generation job
       description: Cancels an evaluator generation job by its ID.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: jobId
           in: path
           required: true
@@ -5302,9 +5250,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - EvaluatorGenerationJobs
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluators:
     get:
       operationId: Evaluators_listLatestVersions
@@ -5332,14 +5277,6 @@ paths:
             format: int32
             default: 20
           explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -5406,14 +5343,6 @@ paths:
             format: int32
             default: 20
           explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -5459,14 +5388,6 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
       responses:
         '201':
           description: The request has succeeded and a new resource has been created as a result.
@@ -5519,14 +5440,6 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: version
           in: path
           required: true
@@ -5578,14 +5491,6 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: version
           in: path
           required: true
@@ -5633,14 +5538,6 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: version
           in: path
           required: true
@@ -5693,14 +5590,6 @@ paths:
       summary: Get evaluator credentials
       description: Retrieves SAS credentials for accessing the storage account associated with the specified evaluator version.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -5748,23 +5637,12 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluatorCredentialRequest'
         description: The credential request parameters
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluators/{name}/versions/{version}/startPendingUpload:
     post:
       operationId: Evaluators_startPendingUpload
       summary: Start a pending upload
       description: Initiates a new pending upload or retrieves an existing one for the specified evaluator version.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -5812,9 +5690,6 @@ paths:
             schema:
               $ref: '#/components/schemas/PendingUploadRequest'
         description: The pending upload request parameters
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /indexes:
     get:
       operationId: Indexes_listLatest
@@ -39912,9 +39787,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     AgentFilterTraceSource:
       type: object
       required:
@@ -41188,8 +41060,8 @@ components:
           enum:
             - red_team
             - responses
-            - traces_preview
-            - synthetic_data_gen_preview
+            - traces
+            - synthetic_data_gen
             - benchmark_preview
           description: Data schema scenario.
       discriminator:
@@ -41406,7 +41278,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An Azure AI Search tool stored in a toolbox.
-    AzureAITraceDataSourcePreviewEvalRunDataSource:
+    AzureAITraceDataSourceEvalRunDataSource:
       type: object
       required:
         - type
@@ -41414,8 +41286,8 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_trace_data_source_preview
-          description: The type of data source, always `azure_ai_trace_data_source_preview`.
+            - azure_ai_trace_data_source
+          description: The type of data source, always `azure_ai_trace_data_source`.
         trace_source:
           $ref: '#/components/schemas/TraceSource'
           description: The trace source that defines how traces are selected for evaluation.
@@ -42414,28 +42286,16 @@ components:
         entry_point:
           type: string
           description: The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')
-          x-ms-foundry-meta:
-            required_previews:
-              - Evaluations=V1Preview
         image_tag:
           type: string
           description: The container image tag to use for evaluator code execution
-          x-ms-foundry-meta:
-            required_previews:
-              - Evaluations=V1Preview
         blob_uri:
           type: string
           format: uri
           description: The blob URI for the evaluator storage
-          x-ms-foundry-meta:
-            required_previews:
-              - Evaluations=V1Preview
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     CodeConfiguration:
       type: object
       required:
@@ -42643,7 +42503,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Evaluation rule action for continuous evaluation.
-    ConversationGenPreviewItemGenerationParams:
+    ConversationGenItemGenerationParams:
       type: object
       required:
         - type
@@ -42652,8 +42512,8 @@ components:
         type:
           type: string
           enum:
-            - conversation_gen_preview
-          description: The type of item generation parameters, always `conversation_gen_preview`.
+            - conversation_gen
+          description: The type of item generation parameters, always `conversation_gen`.
         model:
           type: string
           description: The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'.
@@ -43513,9 +43373,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Dataset source for evaluator generation jobs — reference to a dataset.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DatasetReference:
       type: object
       required:
@@ -43529,9 +43386,6 @@ components:
           type: string
           description: Dataset version.
       description: Reference to a versioned Foundry Dataset.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DatasetType:
       anyOf:
         - type: string
@@ -43858,9 +43712,6 @@ components:
           description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
           default: false
       description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DispatchRoutineRequest:
       type: object
       properties:
@@ -44399,13 +44250,13 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          azure_ai_traces_preview: '#/components/schemas/TracesPreviewEvalRunDataSource'
-          azure_ai_synthetic_data_gen_preview: '#/components/schemas/SyntheticDataGenerationPreviewEvalRunDataSource'
+          azure_ai_traces: '#/components/schemas/TracesEvalRunDataSource'
+          azure_ai_synthetic_data_gen: '#/components/schemas/SyntheticDataGenerationEvalRunDataSource'
           azure_ai_responses: '#/components/schemas/AzureAIResponsesEvalRunDataSource'
           azure_ai_target_completions: '#/components/schemas/TargetCompletionEvalRunDataSource'
           csv: '#/components/schemas/EvalCsvRunDataSource'
           azure_ai_red_team: '#/components/schemas/RedTeamEvalRunDataSource'
-          azure_ai_trace_data_source_preview: '#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource'
+          azure_ai_trace_data_source: '#/components/schemas/AzureAITraceDataSourceEvalRunDataSource'
           azure_ai_benchmark_preview: '#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
     EvalRunOutputItem:
@@ -45077,9 +44928,6 @@ components:
             - safety
             - agents
       description: The category of the evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorCredentialRequest:
       type: object
       required:
@@ -45090,9 +44938,6 @@ components:
           format: uri
           description: 'The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`'
       description: Request body for getting evaluator credentials
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDefinition:
       type: object
       required:
@@ -45122,9 +44967,6 @@ components:
           rubric: '#/components/schemas/RubricBasedEvaluatorDefinition'
           endpoint: '#/components/schemas/EndpointBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDefinitionType:
       anyOf:
         - type: string
@@ -45138,9 +44980,6 @@ components:
             - rubric
             - endpoint
       description: The type of evaluator definition
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationArtifacts:
       type: object
       required:
@@ -45156,9 +44995,6 @@ components:
             type: string
           description: The kinds of rows present in `dataset`. Always contains `"spec"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `"tools"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `"context"` (when supplementary materials such as file uploads or trace samples were used during generation).
       description: Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationInputs:
       type: object
       required:
@@ -45187,9 +45023,6 @@ components:
           type: string
           description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
       description: Caller-supplied inputs for an evaluator generation job.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationJob:
       type: object
       required:
@@ -45235,9 +45068,6 @@ components:
           description: Non-fatal input-quality advisories produced by the generation pipeline. Read-only; service-generated; populated only on terminal jobs when advisories fired. Omitted when generation was clean. Cleared when a subsequent `PATCH` to the paired `EvaluatorVersion.definition` invalidates the advisories.
           readOnly: true
       description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationJobCreate:
       type: object
       properties:
@@ -45245,9 +45075,6 @@ components:
           $ref: '#/components/schemas/EvaluatorGenerationInputs'
           description: Caller-supplied inputs.
       description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationJobSource:
       type: object
       required:
@@ -45264,9 +45091,6 @@ components:
           traces: '#/components/schemas/TracesEvaluatorGenerationJobSource'
           dataset: '#/components/schemas/DatasetEvaluatorGenerationJobSource'
       description: The base source model for evaluator generation jobs. Polymorphic over `type`.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationJobSourceType:
       anyOf:
         - type: string
@@ -45277,9 +45101,6 @@ components:
             - traces
             - dataset
       description: The supported source types for evaluator generation jobs.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationTokenUsage:
       type: object
       required:
@@ -45300,9 +45121,6 @@ components:
           format: int64
           description: Total tokens consumed (input + output).
       description: Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetric:
       type: object
       properties:
@@ -45328,9 +45146,6 @@ components:
           type: boolean
           description: Indicates if this metric is primary when there are multiple metrics.
       description: Evaluator Metric
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetricDirection:
       anyOf:
         - type: string
@@ -45340,9 +45155,6 @@ components:
             - decrease
             - neutral
       description: The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetricType:
       anyOf:
         - type: string
@@ -45352,9 +45164,6 @@ components:
             - continuous
             - boolean
       description: The type of the evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorType:
       anyOf:
         - type: string
@@ -45363,9 +45172,6 @@ components:
             - builtin
             - custom
       description: The type of the evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorVersion:
       type: object
       required:
@@ -45443,9 +45249,6 @@ components:
           description: The version of the resource
           readOnly: true
       description: Evaluator Definition
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorVersionCreate:
       type: object
       required:
@@ -45488,9 +45291,6 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorVersionUpdate:
       type: object
       properties:
@@ -45523,9 +45323,6 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     ExternalAgentDefinition:
       type: object
       required:
@@ -45996,9 +45793,6 @@ components:
           enum:
             - input_quality
       description: Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     GitHubIssueEvent:
       anyOf:
         - type: string
@@ -46580,9 +46374,9 @@ components:
           red_team_seed_prompts: '#/components/schemas/RedTeamSeedPromptsItemGenerationParams'
           red_team_taxonomy: '#/components/schemas/RedTeamTaxonomyItemGenerationParams'
           response_retrieval: '#/components/schemas/ResponseRetrievalItemGenerationParams'
-          conversation_gen_preview: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
+          conversation_gen: '#/components/schemas/ConversationGenItemGenerationParams'
           target_completion: '#/components/schemas/TargetCompletionItemGenerationParams'
-          synthetic_data_gen_preview: '#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams'
+          synthetic_data_gen: '#/components/schemas/SyntheticDataGenerationItemGenerationParams'
       description: Represents the set of parameters used to control item generation operations.
     ItemGenerationParamsType:
       anyOf:
@@ -46593,8 +46387,8 @@ components:
             - response_retrieval
             - red_team_seed_prompts
             - red_team_taxonomy
-            - synthetic_data_gen_preview
-            - conversation_gen_preview
+            - synthetic_data_gen
+            - conversation_gen
             - target_completion
       description: The types of parameters for red team item generation.
     JobStatus:
@@ -76038,9 +75832,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     PromptDataGenerationJobSource:
       type: object
       required:
@@ -76084,9 +75875,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Prompt source for evaluator generation jobs — inline text provided by the user.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     ProtocolConfiguration:
       type: object
       properties:
@@ -76757,9 +76545,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     RubricGenerationInputQualityWarning:
       type: object
       required:
@@ -76786,9 +76571,6 @@ components:
           minimum: 0
           description: Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.
       description: A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     RubricGenerationInputQualityWarningCode:
       anyOf:
         - type: string
@@ -76803,9 +76585,6 @@ components:
             - low_trace_count
             - insufficient_total_input
       description: Stable searchable machine-readable warning code for a rubric-generation input-quality warning. Values are `snake_case`; clients must tolerate additional service-defined identifiers.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     RubricGenerationInputQualityWarningSeverity:
       anyOf:
         - type: string
@@ -76813,9 +76592,6 @@ components:
           enum:
             - warning
       description: 'Advisory severity for a rubric-generation input-quality warning. Initial value set: `warning`.'
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     RubricGenerationInputQualityWarningSource:
       anyOf:
         - type: string
@@ -76826,9 +76602,6 @@ components:
             - dataset
             - aggregate
       description: Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     SASCredentials:
       type: object
       required:
@@ -77501,7 +77274,7 @@ components:
           description: The structured output captured during the response.
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
-    SyntheticDataGenerationPreviewEvalRunDataSource:
+    SyntheticDataGenerationEvalRunDataSource:
       type: object
       required:
         - type
@@ -77511,10 +77284,10 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_synthetic_data_gen_preview
-          description: The type of data source, always `azure_ai_synthetic_data_gen_preview`.
+            - azure_ai_synthetic_data_gen
+          description: The type of data source, always `azure_ai_synthetic_data_gen`.
         item_generation_params:
-          $ref: '#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams'
+          $ref: '#/components/schemas/SyntheticDataGenerationItemGenerationParams'
           description: The parameters for item generation.
         target:
           $ref: '#/components/schemas/Target'
@@ -77525,7 +77298,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a data source for evaluation runs that evaluates based on generated synthetic data for testing purposes.
-    SyntheticDataGenerationPreviewItemGenerationParams:
+    SyntheticDataGenerationItemGenerationParams:
       type: object
       required:
         - type
@@ -77536,7 +77309,7 @@ components:
         type:
           type: string
           enum:
-            - synthetic_data_gen_preview
+            - synthetic_data_gen
           description: The type of item generation parameters.
         samples_count:
           type: integer
@@ -77602,7 +77375,7 @@ components:
           description: The target configuration for the evaluation.
         item_generation_params:
           $ref: '#/components/schemas/ItemGenerationParams'
-          description: The parameters for item generation. ConversationGenPreviewItemGenerationParams enables conversation simulation previews.
+          description: The parameters for item generation. ConversationGenItemGenerationParams enables conversation simulation.
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a data source for target-based completion evaluation configuration.
@@ -78228,7 +78001,7 @@ components:
           trace_id_source: '#/components/schemas/TraceIdTraceSource'
           conversation_id_source: '#/components/schemas/ConversationIdTraceSource'
           agent_filter: '#/components/schemas/AgentFilterTraceSource'
-      description: Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource.
+      description: Base class for polymorphic trace sources nested within an AzureAITraceDataSourceEvalRunDataSource.
     TraceSourceType:
       anyOf:
         - type: string
@@ -78293,42 +78066,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
-    TracesEvaluatorGenerationJobSource:
-      type: object
-      required:
-        - type
-        - start_time
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - traces
-          description: The source type for this source, which is Traces.
-        agent_id:
-          type: string
-          description: The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.
-        agent_name:
-          type: string
-          description: The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.
-        agent_version:
-          type: string
-          description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
-        start_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: Start of the time window (Unix timestamp in seconds) for fetching traces.
-        end_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: End of the time window (Unix timestamp in seconds). Defaults to current time.
-      allOf:
-        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
-      description: Traces source for evaluator generation jobs — conversation traces from Application Insights.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    TracesPreviewEvalRunDataSource:
+    TracesEvalRunDataSource:
       type: object
       required:
         - type
@@ -78336,8 +78074,8 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_traces_preview
-          description: The type of data source, always `azure_ai_traces_preview`.
+            - azure_ai_traces
+          description: The type of data source, always `azure_ai_traces`.
         trace_ids:
           type: array
           items:
@@ -78377,6 +78115,38 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a data source for evaluation runs that operate over Agent traces stored in Application Insights.
+    TracesEvaluatorGenerationJobSource:
+      type: object
+      required:
+        - type
+        - start_time
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - traces
+          description: The source type for this source, which is Traces.
+        agent_id:
+          type: string
+          description: The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.
+        agent_name:
+          type: string
+          description: The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.
+        agent_version:
+          type: string
+          description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
+        start_time:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Start of the time window (Unix timestamp in seconds) for fetching traces.
+        end_time:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: End of the time window (Unix timestamp in seconds). Defaults to current time.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
+      description: Traces source for evaluator generation jobs — conversation traces from Application Insights.
     TreatmentEffectType:
       anyOf:
         - type: string

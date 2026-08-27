@@ -43,16 +43,16 @@
           }
         ],
         "data_source": {
-          "type": "azure_ai_conversation_simulation_preview",
+          "type": "azure_ai_target_completions",
+          "source": {
+            "type": "file_id",
+            "id": "azureai://accounts/my-account/projects/my-project/data/conversation-eval-test-scenarios"
+          },
           "item_generation_params": {
-            "type": "conversation_gen_preview",
+            "type": "conversation_gen",
             "model": "connection-name/gpt-4o",
             "max_turns": 5,
-            "num_conversations": 3,
-            "source": {
-              "type": "file_id",
-              "id": "azureai://accounts/my-account/projects/my-project/data/conversation-eval-test-scenarios"
-            }
+            "num_conversations": 3
           },
           "target": {
             "type": "azure_ai_agent",
