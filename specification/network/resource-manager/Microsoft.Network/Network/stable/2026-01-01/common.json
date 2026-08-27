@@ -8777,13 +8777,21 @@
     },
     "UserTrustProviderType": {
       "type": "string",
+      "description": "Type of the user trust provider.",
       "enum": [
         "entra"
       ],
       "x-ms-enum": {
-        "modelAsString": false
-      },
-      "x-nullable": false
+        "name": "UserTrustProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Entra",
+            "value": "entra",
+            "description": "Microsoft Entra trust provider type."
+          }
+        ]
+      }
     },
     "VerbosityLevel": {
       "type": "string",

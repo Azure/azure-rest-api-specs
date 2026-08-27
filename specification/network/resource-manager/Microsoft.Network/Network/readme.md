@@ -288,10 +288,6 @@ suppressions:
   - code: RequiredReadOnlySystemData
     from: authenticationPolicy.json
     reason: Network RP resources in this package intentionally use the legacy shared Resource envelope, which does not expose systemData.
-  - code: SchemaDescriptionOrTitle
-    from: common.json
-    where: $.definitions.UserTrustProviderType
-    reason: The TypeSpec union is documented, but the Swagger 2.0 emitter does not carry that documentation to this closed single-value union in the shared common.json file.
   - code: XMSSecretInResponse
     from: authenticationPolicy.json
     reason: clientSecret holds a Key Vault secret URL reference (e.g. https://myvault.vault.azure.net/secrets/mysecret), not the secret value itself, so it is safe to return in responses and is not marked x-ms-secret.

@@ -115,11 +115,12 @@ model AuthenticationProviderProperties {
 scalar AuthenticationScope extends string;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP enums"
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service accepts only the Microsoft Entra provider in this API version, so the union is intentionally closed."
 @doc("Type of the user trust provider.")
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 union UserTrustProviderType {
+  string,
+
   /** Microsoft Entra trust provider type. */
   Entra: "entra",
 }
