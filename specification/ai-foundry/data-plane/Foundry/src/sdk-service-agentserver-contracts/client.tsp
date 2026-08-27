@@ -77,6 +77,24 @@ namespace Azure.AI.Projects {
   @@withoutOmittedProperties(OpenAI.ItemMessage, "content");
   @@copyProperties(OpenAI.ItemMessage, { content: string | OpenAI.MessageContent[] });
 
+  // Match the Responses API behavior, which accepts assistant output text
+  // without token log probabilities.
+  @@withoutOmittedProperties(OpenAI.OutputContentOutputTextContent, "logprobs");
+  @@copyProperties(
+    OpenAI.OutputContentOutputTextContent,
+    { logprobs?: OpenAI.LogProb[] }
+  );
+  @@withoutOmittedProperties(OpenAI.MessageContentOutputTextContent, "logprobs");
+  @@copyProperties(
+    OpenAI.MessageContentOutputTextContent,
+    { logprobs?: OpenAI.LogProb[] }
+  );
+  @@withoutOmittedProperties(OpenAI.OutputMessageContentOutputTextContent, "logprobs");
+  @@copyProperties(
+    OpenAI.OutputMessageContentOutputTextContent,
+    { logprobs?: OpenAI.LogProb[] }
+  );
+
   // Rename "Response" to "ResponseObject" to avoid conflict with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
 
