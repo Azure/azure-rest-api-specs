@@ -862,7 +862,9 @@
         "WAF_Large",
         "Standard_v2",
         "WAF_v2",
-        "Basic"
+        "Basic",
+        "Basic_v2",
+        "Basic_WAF_v2"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewaySkuName",
@@ -907,6 +909,16 @@
             "name": "Basic",
             "value": "Basic",
             "description": "Basic"
+          },
+          {
+            "name": "Basic_v2",
+            "value": "Basic_v2",
+            "description": "Basic tier Application Gateway."
+          },
+          {
+            "name": "Basic_WAF_v2",
+            "value": "Basic_WAF_v2",
+            "description": "Basic tier Application Gateway with WAF enabled."
           }
         ]
       }
@@ -1207,7 +1219,9 @@
         "WAF",
         "Standard_v2",
         "WAF_v2",
-        "Basic"
+        "Basic",
+        "Basic_v2",
+        "Basic_WAF_v2"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewayTier",
@@ -1237,6 +1251,16 @@
             "name": "Basic",
             "value": "Basic",
             "description": "Basic"
+          },
+          {
+            "name": "Basic_v2",
+            "value": "Basic_v2",
+            "description": "Basic tier Application Gateway."
+          },
+          {
+            "name": "Basic_WAF_v2",
+            "value": "Basic_WAF_v2",
+            "description": "Basic tier Application Gateway with WAF enabled."
           }
         ]
       }
@@ -9930,6 +9954,30 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deleting"
+          }
+        ]
+      }
+    },
+    "WebApplicationFirewallPolicyTier": {
+      "type": "string",
+      "description": "Tier of a web application firewall policy.",
+      "enum": [
+        "Standard",
+        "Basic"
+      ],
+      "x-ms-enum": {
+        "name": "WebApplicationFirewallPolicyTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier web application firewall policy."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic tier web application firewall policy."
           }
         ]
       }

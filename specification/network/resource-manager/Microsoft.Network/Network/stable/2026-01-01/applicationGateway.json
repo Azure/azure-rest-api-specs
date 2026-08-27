@@ -568,6 +568,9 @@
           }
         },
         "x-ms-examples": {
+          "Gets a Basic tier WAF policy within a resource group": {
+            "$ref": "./examples/WafPolicyGetBasic.json"
+          },
           "Gets a WAF policy within a resource group": {
             "$ref": "./examples/WafPolicyGet.json"
           }
@@ -628,6 +631,9 @@
           }
         },
         "x-ms-examples": {
+          "Creates or updates a Basic tier WAF policy within a resource group": {
+            "$ref": "./examples/WafPolicyCreateOrUpdateBasic.json"
+          },
           "Creates or updates a WAF policy within a resource group": {
             "$ref": "./examples/WafPolicyCreateOrUpdate.json"
           }
@@ -781,6 +787,12 @@
         "x-ms-examples": {
           "Get ApplicationGateway": {
             "$ref": "./examples/ApplicationGatewayGet.json"
+          },
+          "Get Basic_WAF_v2 Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayGetBasicWafV2.json"
+          },
+          "Get Basic_v2 Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayGetBasicV2.json"
           }
         }
       },
@@ -851,6 +863,12 @@
         "x-ms-examples": {
           "Create Application Gateway": {
             "$ref": "./examples/ApplicationGatewayCreate.json"
+          },
+          "Create Basic_WAF_v2 Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayCreateBasicWafV2.json"
+          },
+          "Create Basic_v2 Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayCreateBasicV2.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3540,6 +3558,11 @@
           "$ref": "#/definitions/ApplicationGatewayAutoscaleConfiguration",
           "description": "Autoscale Configuration."
         },
+        "reservedCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The reserved capacity of the application gateway resource. Applicable to the Basic_v2 and Basic_WAF_v2 SKU tiers."
+        },
         "privateLinkConfigurations": {
           "type": "array",
           "description": "PrivateLink configurations on application gateway.",
@@ -5107,6 +5130,10 @@
             "$ref": "#/definitions/ApplicationGatewayForContainersReferenceDefinition"
           },
           "readOnly": true
+        },
+        "tier": {
+          "$ref": "./common.json#/definitions/WebApplicationFirewallPolicyTier",
+          "description": "Tier of a web application firewall policy."
         }
       },
       "required": [
