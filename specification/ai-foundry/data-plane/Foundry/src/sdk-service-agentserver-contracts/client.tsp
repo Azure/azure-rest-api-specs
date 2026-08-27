@@ -9,6 +9,16 @@ namespace OpenAI {
   // The responses view does not export ItemResourceType (only the full src does).
   // Bridge the gap with an alias so the Azure augmentations can reference it.
   alias ItemResourceType = OutputItemType;
+
+  // Program items must be accepted as response input so their replay
+  // fingerprint can be round-tripped on subsequent requests.
+  model ItemProgram extends Item {
+    ...Program;
+  }
+
+  model ItemProgramOutput extends Item {
+    ...ProgramOutput;
+  }
 }
 
 
