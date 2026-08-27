@@ -11,6 +11,7 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview,
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
     AgentDefinitionOptInKeys.draft_agents_v1_preview
   ],
 };
@@ -23,7 +24,7 @@ model CreateAgentVersionRequest {
   @maxLength(512)
   description?: string;
 
-  @doc("The agent definition. This can be a workflow, hosted agent, or a simple agent definition.")
+  @doc("The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   definition: AgentDefinition;
 
@@ -269,6 +270,7 @@ union AgentEndpointProtocol {
   a2a: "a2a",
   mcp: "mcp",
   invocations: "invocations",
+  voice: "voice",
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
@@ -280,6 +282,7 @@ union AgentKind {
   hosted: "hosted",
   workflow: "workflow",
   external: "external",
+  voice: "voice",
 
   @removed(Versions.v1)
   container_app: "container_app",
@@ -790,6 +793,30 @@ model AgentEndpointConfig {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
+
+  @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")
+  @visibility(Lifecycle.Read)
+  publish_approval_status?: PublishApprovalStatus;
+}
+
+@doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent.")
+union PublishApprovalStatus {
+  string,
+
+  @doc("The agent has never been published to the Microsoft 365 store, so there is nothing to review.")
+  not_published: "not_published",
+
+  @doc("The published title is awaiting a review decision.")
+  pending: "pending",
+
+  @doc("The title passed review, as of this read.")
+  approved: "approved",
+
+  @doc("The title was rejected in review, as of this read.")
+  rejected: "rejected",
+
+  @doc("The agent is published at a scope that does not go through Microsoft Agent Certification. Only tenant-scoped titles are reviewed.")
+  no_approval_needed: "no_approval_needed",
 }
 
 model AgentIdentity {
