@@ -2532,25 +2532,6 @@
         }
       }
     },
-    "SandboxExecutionTokenResponse": {
-      "type": "object",
-      "description": "Sandbox execution token response wire model.",
-      "properties": {
-        "token": {
-          "type": "string",
-          "description": "token value."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "expiresAt value."
-        }
-      },
-      "required": [
-        "token",
-        "expiresAt"
-      ]
-    },
     "SandboxExecutionTokensRequest": {
       "type": "object",
       "description": "Sandbox execution tokens request wire model.",
@@ -2683,13 +2664,6 @@
         "managementUrl": {
           "type": "string",
           "description": "The base URL for data plane operations (exec, files, ports, etc.). Client SDKs should use this URL for all data plane calls. Currently points to the Global API, but may be redirected to cluster-direct URLs in the future."
-        },
-        "tokens": {
-          "type": "object",
-          "description": "Sandbox execution tokens issued as part of the create or resume request, keyed by account.",
-          "additionalProperties": {
-            "$ref": "#/definitions/SandboxExecutionTokenResponse"
-          }
         },
         "agentIdentity": {
           "$ref": "#/definitions/SandboxAgentIdentityRef",
@@ -2951,7 +2925,9 @@
         },
         "anthropicApiKey": {
           "type": "string",
-          "description": "Optional Anthropic API key for Claude preset. Only used when presetSandboxType is Claude."
+          "format": "password",
+          "description": "Optional Anthropic API key for Claude preset. Only used when presetSandboxType is Claude.",
+          "x-ms-secret": true
         },
         "presetProperties": {
           "$ref": "#/definitions/SandboxPresetProperties",
@@ -3414,7 +3390,12 @@
         },
         "secret": {
           "type": "string",
-          "description": "secret value."
+          "format": "password",
+          "description": "secret value.",
+          "x-ms-mutability": [
+            "update"
+          ],
+          "x-ms-secret": true
         }
       },
       "required": [

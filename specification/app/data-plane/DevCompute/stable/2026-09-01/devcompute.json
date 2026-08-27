@@ -2529,25 +2529,6 @@
         }
       }
     },
-    "SandboxExecutionTokenResponse": {
-      "type": "object",
-      "description": "Sandbox execution token response wire model.",
-      "properties": {
-        "token": {
-          "type": "string",
-          "description": "token value."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "expiresAt value."
-        }
-      },
-      "required": [
-        "token",
-        "expiresAt"
-      ]
-    },
     "SandboxExecutionTokensRequest": {
       "type": "object",
       "description": "Sandbox execution tokens request wire model.",
@@ -2911,7 +2892,9 @@
         },
         "anthropicApiKey": {
           "type": "string",
-          "description": "Optional Anthropic API key for Claude preset. Only used when presetSandboxType is Claude."
+          "format": "password",
+          "description": "Optional Anthropic API key for Claude preset. Only used when presetSandboxType is Claude.",
+          "x-ms-secret": true
         },
         "presetProperties": {
           "$ref": "#/definitions/SandboxPresetProperties",
@@ -3362,7 +3345,12 @@
         },
         "secret": {
           "type": "string",
-          "description": "secret value."
+          "format": "password",
+          "description": "secret value.",
+          "x-ms-mutability": [
+            "update"
+          ],
+          "x-ms-secret": true
         }
       },
       "required": [

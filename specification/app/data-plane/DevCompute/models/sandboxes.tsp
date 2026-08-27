@@ -79,10 +79,6 @@ model SandboxFields {
   /** The base URL for data plane operations (exec, files, ports, etc.). Client SDKs should use this URL for all data plane calls. Currently points to the Global API, but may be redirected to cluster-direct URLs in the future. */
   managementUrl?: string;
 
-  /** Sandbox execution tokens issued as part of the create or resume request, keyed by account. */
-  @removed(ApiVersions.v2026_09_01)
-  tokens?: Record<SandboxExecutionTokenResponse>;
-
   /** agentIdentity value. */
   agentIdentity?: SandboxAgentIdentityRef;
 
@@ -975,15 +971,6 @@ model SandboxEgressPolicy {
   validationWarnings?: ValidationWarning[];
 }
 
-/** Sandbox execution token response wire model. */
-model SandboxExecutionTokenResponse {
-  /** token value. */
-  token: string;
-
-  /** expiresAt value. */
-  expiresAt: utcDateTime;
-}
-
 /** Sandbox execution tokens request wire model. */
 model SandboxExecutionTokensRequest {
   /** accounts value. */
@@ -1082,6 +1069,7 @@ model SandboxRequest {
   presetSandboxType?: PresetSandboxType;
 
   /** Optional Anthropic API key for Claude preset. Only used when presetSandboxType is Claude. */
+  @secret
   anthropicApiKey?: string;
 
   /** presetProperties value. */
@@ -1606,6 +1594,8 @@ model TdsCredential {
   secretRef?: EgressPolicySecretRef;
 
   /** secret value. */
+  @secret
+  @visibility(Lifecycle.Update)
   secret?: string;
 }
 

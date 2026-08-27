@@ -9,42 +9,31 @@ namespace AzureDevCompute;
 @@clientName(SandboxFields.appUrl, "appUri", "csharp");
 @@clientName(SandboxFields.managementUrl, "managementUri", "csharp");
 @@clientName(GatewayConnection.mcpRuntimeUrl, "mcpRuntimeUri", "csharp");
-@@clientName(
-  GatewayConnection.connectionRuntimeUrl,
+@@clientName(GatewayConnection.connectionRuntimeUrl,
   "connectionRuntimeUri",
   "csharp"
 );
 @@clientName(ErrorResponse, "ErrorResult", "csharp");
 @@clientName(AddPortRequest, "AddPortContent", "csharp");
-@@clientName(
-  SandboxExecutionTokenResponse,
-  "SandboxExecutionTokenResult",
-  "csharp"
-);
-@@clientName(
-  SandboxExecutionTokensRequest,
+@@clientName(SandboxExecutionTokensRequest,
   "SandboxExecutionTokensContent",
   "csharp"
 );
 @@clientName(SandboxRequest, "SandboxContent", "csharp");
-@@clientName(
-  AzureDevCompute.SandboxListResponse,
+@@clientName(AzureDevCompute.SandboxListResponse,
   "SandboxListResult",
   "csharp"
 );
-@@clientName(
-  AzureDevCompute.SandboxCreatedResponse,
+@@clientName(AzureDevCompute.SandboxCreatedResponse,
   "SandboxCreatedResult",
   "csharp"
 );
 @@clientName(AzureDevCompute.SandboxResponse, "SandboxResult", "csharp");
-@@clientName(
-  AzureDevCompute.SandboxDeletedResponse,
+@@clientName(AzureDevCompute.SandboxDeletedResponse,
   "SandboxDeletedResult",
   "csharp"
 );
-@@clientName(
-  AzureDevCompute.SandboxDeletedNoContentResponse,
+@@clientName(AzureDevCompute.SandboxDeletedNoContentResponse,
   "SandboxDeletedNoContentResult",
   "csharp"
 );
