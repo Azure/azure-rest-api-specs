@@ -1,0 +1,24 @@
+{
+  "swagger": "2.0",
+  "info": {"title": "SecurityTestClient", "description": "SecurityTest resource provider", "version": "2026-01-01"},
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityTest/operations": {
+      "get": {
+        "tags": ["Operations"],
+        "operationId": "Operations_List",
+        "description": "Lists all available operations.",
+        "parameters": [{"$ref": "#/parameters/ApiVersionParameter"}, {"$ref": "#/parameters/SubscriptionIdParameter"}],
+        "responses": {"200": {"description": "OK"}}
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {"name": "subscriptionId", "in": "path", "required": true, "type": "string"},
+    "ApiVersionParameter": {"name": "api-version", "in": "query", "required": true, "type": "string"}
+  },
+  "definitions": {}
+}
