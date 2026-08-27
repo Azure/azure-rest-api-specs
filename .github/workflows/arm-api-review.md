@@ -158,10 +158,12 @@ safe-outputs:
     max: 4
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   # Per-category inline caps in the agent body:
-  #   property/naming: 17, ARM contract: 15, doc gaps: 6,
-  #   breaking changes: 5, security: 2  → worst case exactly 45 inline comments.
-  # Set max to 50 so the cap is above the bounded worst case; findings that
-  # exceed any per-category cap are collected into the summary add-comment.
+  # The agent self-limits to 20 inline comments per session, just above the
+  # observed maximum of 18 (267 pull requests, grouped into sessions by marker
+  # head-sha; median 2, p90 8). There are no per-category caps: sized by how
+  # often a category occurs they would give the smallest allowance to the
+  # rarest categories, and security is the rarest. Keep max at 50 as platform
+  # headroom so a slight overshoot is never truncated silently.
   create-pull-request-review-comment:
     max: 50
     side: "RIGHT"
@@ -698,65 +700,56 @@ If any individual placeholder above cannot be resolved, still submit a non-empty
 body: substitute `unknown` for that one value and keep every other line intact.
 Dropping the body is never an acceptable fallback for a missing field.
 
-**Hard limits per category:**
+**Inline comment limit: 20 per session.**
 
-- Property design / naming: cap at 17
-- ARM contract violations: cap at 15
-- Documentation gaps: cap at 6
-- Breaking changes: cap at 5
-- Security issues: cap at 2
+There are no per-category caps. A single limit is enough, and per-category caps
+actively cause harm: sized by how often a category occurs, they give the
+smallest allowance to the rarest categories, and security is the rarest of all.
+A cap that binds on a three-finding review withholds a real finding while
+nothing is under pressure.
 
-**The caps always apply.** They are not a fallback that engages only on large
-reviews, and they are not gated on the 50-comment budget. A category cap binds as
-soon as that category exceeds it, however small the review is overall. Nine
-documentation findings on a pull request whose only findings are those nine
-still posts six inline and discloses three as overflow.
+Below 20, post every finding. Do not trim a small review.
 
-Because every category is capped, the per-category limits bound the total at
-**45**, which is below the 50-comment inline budget. That budget is therefore a
-backstop that should not be reachable, not the thing that switches the caps on.
+Above 20, trim to fit and disclose. The publisher accepts at most 50 inline
+comments (`create-pull-request-review-comment: max: 50`) and drops the excess
+silently, so trimming must be a deliberate, disclosed act rather than something
+the platform does invisibly. Drop in this order, by the category recorded on
+each finding:
 
-Security and breaking-change findings are still posted **first** when selecting
-what goes inline, and an over-cap finding in either category is never silently
-dropped: disclose it in the summary like any other overflow.
+1. `documentation-and-examples`
+2. `schema-and-property-design`, `naming-enums-and-identifiers`, `sdk-and-client-impact`
+3. `resource-modeling`, `operations-and-http-semantics`, `long-running-operations`, `suppressions-and-tooling`, `review-readiness-and-ci`
+4. `versioning-and-compatibility`
+5. `security-and-secrets`
 
-**Where these numbers come from.** They are derived from the findings recorded
-in `documentation/arm-api-reviewer-insights.md` (412 pull requests, 343 with at
-least one finding, no sampling). Observed findings per pull request are:
-property design / naming 1.70, ARM contract 1.49, documentation 0.64, breaking
-changes 0.45, security 0.20, totalling 4.48. A total inline allowance of **45**
-is divided across the buckets in proportion to those averages (a factor of
-45 / 4.48 = 10.04), then rounded to integers by largest remainder so the parts
-sum to exactly 45. Each cap therefore ranks in the same order as its category's
-observed volume, and each sits at roughly ten times the typical per-pull-request
-count, so a cap binds only on an outlier change. When the telemetry is
-refreshed, recompute the whole split from that page rather than adjusting a
-single value by feel; changing one cap in isolation breaks both the ordering and
-the 45 total.
+Security and versioning findings are trimmed **last**, and only if dropping
+everything else still leaves the set over 20. Frequency is not importance.
+Everything removed is disclosed in the summary as overflow with its themes;
+nothing is dropped silently.
 
-**Which cap applies to a finding.** Every standalone finding carries a
+**Where the limit comes from.** It is the observed maximum, plus headroom.
+Across 267 pull requests carrying agent review comments, grouped into sessions
+by the `head-sha` on each marker, inline comments per session ran: median 2,
+mean 3.72, 90th percentile 8, maximum **18** (pull request 43894). Twenty sits
+just above that observed maximum, so trimming should effectively never fire on
+review volumes seen to date; the limit exists to bound a pathological run, not
+to shape a normal one. Re-measure the per-session maximum when the telemetry is
+refreshed and move the limit to sit just above it. Note that per-pull-request
+totals run higher than per-session totals, because a pull request reviewed more
+than once accumulates comments across sessions; pull request 43894 totals 22
+across two sessions. The limit is per session.
+
+**Which drop group a finding belongs to.** Every standalone finding carries a
 `category` field drawn from the closed vocabulary defined in
 [Finding categories](../agents/protocols/arm-api-review-critic.protocol.md#finding-categories).
-That table is canonical and maps each of the eleven categories to exactly one of
-the five cap buckets above. Count a finding against the bucket its category maps
-to; never decide a bucket by re-reading the rule ID, and never treat a finding as
-uncapped because its wording does not match a bucket name.
+That table is canonical. Use the recorded category to place a finding in the drop
+order above; never decide it by re-reading the rule ID. Categories are also the
+unit of **measurement**, recorded on every finding so this limit can be
+re-derived from telemetry rather than estimated.
 
-Categories are the unit of **measurement**, recorded on every finding so the caps
-can be re-derived from telemetry later. Cap buckets are the coarser unit of
-**enforcement**.
-
-**Inline comment budget:** The workflow allows up to 50 inline review comments
-(`create-pull-request-review-comment`). This is a **second, independent** ceiling
-on top of the per-category caps, not the trigger for them. Because every category
-is capped the total is bounded at 45, so this budget should not be reachable;
-keep the rule as a safety net. If the total across all categories would still
-exceed 50, post the highest-severity findings inline (security and breaking
-changes first) and collect overflow findings into the summary `add-comment`
-with the note: _"N additional findings were identified but not posted inline.
-Key themes: [list]."_ Replies (`reply-to-pull-request-review-comment`) and
-thread resolutions (`resolve-pull-request-review-thread`) from Step 5.5 have
-their own budgets and do **not** consume this 50-inline budget.
+Replies (`reply-to-pull-request-review-comment`) and thread resolutions
+(`resolve-pull-request-review-thread`) from Step 5.5 have their own budgets and
+do **not** count toward the 20.
 
 **Inline comments must target a file in the PR diff.** The publisher can only
 attach an inline comment to a file that the PR actually changed; a comment whose

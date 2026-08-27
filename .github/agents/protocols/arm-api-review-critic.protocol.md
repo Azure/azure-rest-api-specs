@@ -234,19 +234,19 @@ workflow, the per-category output caps, and
 invent a slug, and do not re-derive categories by reading rule IDs after the
 fact.
 
-| Category slug                   | Covers                                                                                              | Cap bucket               |
-| ------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------ |
-| `schema-and-property-design`    | Property shape, types, formats, required/optional, nullability, constraints, response payload shape | Property design / naming |
-| `naming-enums-and-identifiers`  | Naming conventions, enum modelling and extensibility, identifier and resource-name patterns         | Property design / naming |
-| `sdk-and-client-impact`         | Consequences for generated clients: client name collisions, awkward or breaking generated surface   | Property design / naming |
-| `resource-modeling`             | Resource type shape, tracked vs proxy, parent/child structure, provisioning state, ARM envelope     | ARM contract             |
-| `operations-and-http-semantics` | Verb choice, status codes, headers, idempotency, collection vs point operations, query parameters   | ARM contract             |
-| `long-running-operations`       | LRO patterns, `x-ms-long-running-operation`, final-state-via, polling and operation-status contract | ARM contract             |
-| `suppressions-and-tooling`      | `suppressions.yaml` and readme suppressions, AutoRest and emitter configuration, tspconfig          | ARM contract             |
-| `review-readiness-and-ci`       | Missing or failing prerequisites for review: absent TypeSpec, unwired tags, CI blockers             | ARM contract             |
-| `documentation-and-examples`    | Descriptions, doc comments, example payloads and their correctness                                  | Documentation gaps       |
-| `versioning-and-compatibility`  | API version placement, breaking changes against a prior version, compatibility of changed contracts | Breaking changes         |
-| `security-and-secrets`          | Credential-bearing properties, secret exposure in responses or examples, auth surface               | Security                 |
+| Category slug                   | Covers                                                                                              | Drop group              |
+| ------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------- |
+| `schema-and-property-design`    | Property shape, types, formats, required/optional, nullability, constraints, response payload shape | 2 (property and naming) |
+| `naming-enums-and-identifiers`  | Naming conventions, enum modelling and extensibility, identifier and resource-name patterns         | 2 (property and naming) |
+| `sdk-and-client-impact`         | Consequences for generated clients: client name collisions, awkward or breaking generated surface   | 2 (property and naming) |
+| `resource-modeling`             | Resource type shape, tracked vs proxy, parent/child structure, provisioning state, ARM envelope     | 3 (ARM contract)        |
+| `operations-and-http-semantics` | Verb choice, status codes, headers, idempotency, collection vs point operations, query parameters   | 3 (ARM contract)        |
+| `long-running-operations`       | LRO patterns, `x-ms-long-running-operation`, final-state-via, polling and operation-status contract | 3 (ARM contract)        |
+| `suppressions-and-tooling`      | `suppressions.yaml` and readme suppressions, AutoRest and emitter configuration, tspconfig          | 3 (ARM contract)        |
+| `review-readiness-and-ci`       | Missing or failing prerequisites for review: absent TypeSpec, unwired tags, CI blockers             | 3 (ARM contract)        |
+| `documentation-and-examples`    | Descriptions, doc comments, example payloads and their correctness                                  | 1 (dropped first)       |
+| `versioning-and-compatibility`  | API version placement, breaking changes against a prior version, compatibility of changed contracts | 4 (versioning)          |
+| `security-and-secrets`          | Credential-bearing properties, secret exposure in responses or examples, auth surface               | 5 (dropped last)        |
 
 Choosing a category:
 
@@ -262,9 +262,12 @@ Choosing a category:
   an absent category makes the finding invisible to both the caps and the
   telemetry.
 
-The **Cap bucket** column is the authoritative mapping used by the per-category
-output caps in `.github/workflows/arm-api-review.md`. Categories are the unit of
-measurement; cap buckets are the coarser unit of enforcement.
+The **Drop group** column is the authoritative mapping used when a review must
+be trimmed to the inline comment limit in `.github/workflows/arm-api-review.md`.
+Groups are dropped in ascending order, so group 1 goes first and group 5 last.
+There are no per-category caps: a category never limits a finding on its own,
+and the group matters only once the overall limit is exceeded. Categories are
+the unit of measurement; drop groups are the coarser unit used when trimming.
 
 ### Top-level reconciliation clarification marker
 

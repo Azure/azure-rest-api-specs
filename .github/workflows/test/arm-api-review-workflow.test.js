@@ -588,29 +588,22 @@ describe("ARM API review consistency and hardening", () => {
     expect(workflow).toContain("Treat any divergence between the two copies as a defect.");
   });
 
-  it("gives the reviewer agent the same output budgets as the workflow", async () => {
+  it("gives the reviewer agent the same output budget as the workflow", async () => {
     const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
     const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
 
-    expect(workflow).toContain("Security issues: cap at 2");
-    expect(workflow).toContain("Breaking changes: cap at 5");
-    expect(agent).toContain("**Output budgets (identical to the automated workflow).**");
-    // Caps are allocated proportionally to observed per-PR volume and must sum
-    // to 45, so they rank in the same order as the telemetry.
-    expect(agent).toContain("| Property design / naming | 17 |");
-    expect(agent).toContain("| ARM contract violations | 15 |");
-    expect(agent).toContain("| Documentation gaps | 6 |");
-    expect(agent).toContain("| Breaking changes | 5 |");
-    expect(agent).toContain("| Security issues | 2 |");
-    expect(agent).toContain("These per-category caps total **45** inline comments.");
-    expect(agent).toContain("The overall inline budget is **50** posted comments");
-    // Caps govern posting, not analysis, but over-cap candidates are never
-    // rendered as verified findings: only a count and themes are disclosed.
-    expect(agent).toContain("The caps govern what is **posted**, not what is analysed");
+    // One session-scoped limit, set just above the observed maximum of 18.
+    for (const source of [workflow, agent]) {
+      expect(source).toContain("Inline comment limit: 20 per session");
+      expect(source).toContain("There are no per-category caps");
+      // Per-category caps gave the smallest allowance to the rarest category,
+      // which is security, and bound on reviews far below any real limit.
+      expect(source).toContain("security is the rarest");
+      expect(source).toContain("requency is not importance");
+    }
+
+    expect(agent).toContain("**Output budget (identical to the automated workflow).**");
     expect(agent).toContain("disclosed **only as a count and themes**");
-    expect(agent).toContain(
-      "N additional findings were identified but not posted inline. Key themes: [list].",
-    );
   });
 
   it("requires a non-empty review body and a visible attribution preamble in the agent", async () => {
@@ -764,71 +757,59 @@ describe("ARM API review consistency and hardening", () => {
       expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
     }
   });
-  it("maps every tracked issue type to a cap bucket and records cap provenance", async () => {
+  it("routes findings to a drop group by recorded category, not by rule ID", async () => {
     const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
     const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
 
-    // The cap buckets are coarser than the tracked categories. The mapping is
+    // The drop groups are coarser than the tracked categories. The mapping is
     // canonical in the protocol, and the workflow defers to it rather than
     // keeping a second copy that could drift.
-    expect(workflow).toContain("Which cap applies to a finding");
+    expect(workflow).toContain("Which drop group a finding belongs to");
     expect(workflow).toContain("Finding categories");
-    expect(workflow).toContain("never treat a finding as uncapped");
-    expect(workflow).toContain("Categories are the unit of **measurement**");
+    expect(workflow).toContain("never decide it by re-reading the rule ID");
+    expect(workflow).toContain("unit of **measurement**");
 
-    // The caps are derived from observed per-PR volume, so record the
-    // derivation rather than presenting the numbers as arbitrary.
-    expect(workflow).toContain("They are derived from the findings recorded");
-    expect(workflow).toContain(
-      "rounded to integers by largest remainder so the parts sum to exactly 45",
-    );
-    expect(agent).toContain("derived from the observed findings per pull request");
+    // The limit is the observed maximum plus headroom, so record the
+    // measurement rather than presenting the number as arbitrary.
+    expect(workflow).toContain("**Where the limit comes from.** It is the observed maximum");
+    expect(workflow).toContain("maximum **18**");
+    expect(agent).toContain("the observed maximum plus headroom");
   });
 
-  it("keeps the caps summing to 45 and ranked by observed volume", async () => {
-    const agent = await readFile(join(ROOT, AGENT_FILE), "utf8");
+  it("sets the limit just above the observed per-session maximum", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    // Parse the output-budgets table rather than hard-coding the values, so
-    // this fails if any single cap is edited in isolation.
-    const rows = [...agent.matchAll(/^\|\s*([A-Za-z][^|]*?)\s*\|\s*(\d+)\s*\|$/gm)]
-      .map(([, name, cap]) => ({ name: name.trim(), cap: Number(cap) }))
-      .filter((r) =>
-        [
-          "Property design / naming",
-          "ARM contract violations",
-          "Documentation gaps",
-          "Breaking changes",
-          "Security issues",
-        ].includes(r.name),
-      );
+    // 18 was the busiest session across 267 pull requests; 20 leaves headroom
+    // without inviting a flood.
+    expect(workflow).toContain("Inline comment limit: 20 per session");
+    expect(workflow).toContain("median 2, mean 3.72, 90th percentile 8, maximum **18**");
 
-    expect(rows).toHaveLength(5);
-
-    // Must total exactly 45, and stay under the 50-comment inline budget.
-    const total = rows.reduce((sum, r) => sum + r.cap, 0);
-    expect(total).toBe(45);
-    expect(total).toBeLessThan(50);
-
-    // Ranked by observed findings per PR: property design 1.70 > ARM contract
-    // 1.49 > documentation 0.64 > breaking 0.45 > security 0.20.
-    const caps = rows.map((r) => r.cap);
-    expect(caps).toEqual([...caps].sort((a, b) => b - a));
+    // The limit is per session, not per pull request: a pull request reviewed
+    // more than once accumulates comments across sessions.
+    expect(workflow).toContain("The limit is per session");
+    expect(workflow).toContain("43894 totals 22 across two sessions");
   });
 
-  it("states that per-category caps apply independently of the 50-comment budget", async () => {
+  it("trims only above the limit, and trims security last", async () => {
     const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
     const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
 
-    // A reader concluded the caps only engage once a review exceeds 50 comments.
-    // The opposite is true: caps bind per category on any size of review, and
-    // the 50 budget is an independent ceiling that 43 keeps out of reach.
+    // Per-category caps bound on tiny reviews: three security findings and
+    // nothing else posted two and buried one, with nothing under pressure.
     for (const source of [workflow, agent]) {
-      expect(source).toContain("**The caps always apply.**");
-      expect(source).toContain("not gated on the 50-comment budget");
-      // A worked example, because the abstract rule is what was misread.
-      expect(source).toContain("still posts six inline and discloses three as overflow");
+      expect(source).toContain("There are no per-category caps");
+      expect(source).toContain("requency is not importance");
     }
-    expect(workflow).toContain("a **second, independent** ceiling");
+    expect(workflow).toContain("Below 20, post every finding");
+    expect(workflow).toContain("Do not trim a small review");
+
+    // Drop order must put the rarest, highest-consequence category last.
+    const dropOrder = workflow.indexOf("dropping in this order");
+    const docsPos = workflow.indexOf("documentation-and-examples", dropOrder);
+    const secPos = workflow.indexOf("security-and-secrets", dropOrder);
+    expect(docsPos).toBeGreaterThan(-1);
+    expect(secPos).toBeGreaterThan(docsPos);
+    expect(workflow).toContain("trimmed **last**");
   });
   it("defines a closed category vocabulary and records it on every finding", async () => {
     const protocol = await readFile(
@@ -866,7 +847,7 @@ describe("ARM API review consistency and hardening", () => {
     expect(agent).toContain("| category: <category-slug> |");
 
     // Bucketing is driven by the category, not by re-reading the rule ID.
-    expect(workflow).toContain("never decide a bucket by re-reading the rule ID");
+    expect(workflow).toContain("never decide it by re-reading the rule ID");
   });
 });
 

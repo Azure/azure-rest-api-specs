@@ -233,21 +233,27 @@ Use for design trade-offs and best-practice recommendations:
 
 ## Comment Volume Control
 
-Do not flood a PR with comments. Prioritize and cap:
+Do not flood a PR with comments. **Limit: 20 inline comments per session.**
 
-1. **Property design / naming** -- post up to 17
-2. **ARM contract violations** -- post up to 15
-3. **Documentation gaps** -- post up to 6
-4. **Breaking changes** -- post up to 5
-5. **Security issues** -- post up to 2
+Below 20, post every finding. Do not trim a small review. There are no
+per-category caps: sized by how often a category occurs they would give the
+smallest allowance to the rarest categories, and security is the rarest.
 
-These per-category caps total **45** inline comments, below the overall inline
-budget of **50**.
+Above 20, trim to fit and disclose, dropping in this order:
 
-Security and breaking-change findings are still selected first when deciding
-what goes inline.
+1. Documentation and examples
+2. Schema and property design, naming, SDK impact
+3. Resource modeling, operations and HTTP semantics, LRO, suppressions, review readiness
+4. Versioning and compatibility
+5. Security and secrets
 
-If more findings exist beyond the cap, summarize them in a single comment:
+Security and versioning are trimmed **last**. Frequency is not importance.
+
+The limit is the observed maximum plus headroom: across 267 pull requests,
+grouped into sessions, inline comments per session ran median 2, p90 8,
+maximum 18.
+
+If findings are withheld, summarize them in a single comment:
 "_N additional warning/suggestion candidates were identified but not
 individually verified or posted. Key themes: [list]. Review the full checklist in
 `arm-api-review.instructions.md`._"
