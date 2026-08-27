@@ -51,7 +51,7 @@ model AuthenticationPolicy extends Common.Resource {
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 model AuthenticationPolicyPropertiesFormat {
-  /** The type of the user trust provider. Only Microsoft Entra is supported. */
+  /** The type of the user trust provider. Only Microsoft Entra is supported, using the serialized value `entra`. */
   userTrustProviderType: UserTrustProviderType;
 
   /** The action to take when a request is unauthenticated. When omitted, user sign-in policies default to `authenticate` and JWT validation policies default to `deny`. */
@@ -81,6 +81,7 @@ model AuthenticationPolicyPropertiesFormat {
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 model AuthenticationProviderProperties {
   /** The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/ */
+  @maxLength(2048)
   issuer: string;
 
   /** The JSON Web Key Set (JWKS) URI used to retrieve the public keys for JWT validation. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/discovery/v2.0/keys */
@@ -89,23 +90,29 @@ model AuthenticationProviderProperties {
   /** The intended audience for the JWT. Only a single audience value is supported in this API version. Example: https://audience.com/{application-id} */
   audience?: string;
 
-  /** The Application (client) ID for the related application registered in Microsoft Entra ID. */
+  /** The Application (client) ID for the related application registered in Microsoft Entra ID, formatted as a GUID. */
   clientId: string;
 
   /** The Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. Example: https://myvault.vault.azure.net/secrets/mysecret */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This property holds a Key Vault secret URL reference (not the secret value itself), so it is not sensitive data."
+  @maxLength(4096)
   clientSecret?: string;
 
-  /** The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported. */
+  /** The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported, and each scope can contain up to 128 characters. */
   @maxItems(10)
-  scope?: string[];
+  scope?: AuthenticationScope[];
 
-  /** The timeout of the session cookie used for user authentication, in seconds. Applicable to the Application Gateway post-OIDC workflow. */
+  /** The timeout of the session cookie used for user authentication, in seconds. The supported range is 1 to 604800 seconds, and the default is 86400 seconds. Applicable to the Application Gateway post-OIDC workflow. */
   sessionTimeout?: string;
 
   /** The name of the session cookie used for user authentication. Applicable to the Application Gateway post-OIDC workflow. */
+  @maxLength(256)
   sessionCookieName?: string;
 }
+
+/** An authentication scope value. */
+@maxLength(128)
+scalar AuthenticationScope extends string;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP enums"
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service accepts only the Microsoft Entra provider in this API version, so the union is intentionally closed."
@@ -153,18 +160,6 @@ interface AuthenticationPolicies {
   @tag("AuthenticationPolicies")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AuthenticationPolicy,
-    Error = CloudError
-  >;
-
-  /**
-   * Updates an authentication policy's tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "AuthenticationPolicy supports the established Network RP tags-only PATCH operation."
-  @tag("AuthenticationPolicies")
-  @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    AuthenticationPolicy,
-    PatchModel = TagsObject,
     Error = CloudError
   >;
 

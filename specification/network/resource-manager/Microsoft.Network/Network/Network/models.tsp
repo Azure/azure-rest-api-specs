@@ -7835,14 +7835,6 @@ model ApplicationGatewayUrlPathMapPropertiesFormat {
   defaultLoadDistributionPolicy?: SubResource;
 
   /**
-   * Default authentication configuration bindings of the routing map. Authentication policies can only be bound to Application Gateways using a v2 SKU.
-   */
-  @added(Versions.v2026_01_01)
-  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
-  @maxItems(1)
-  defaultAuthConfigs?: ApplicationGatewayAuthConfig[];
-
-  /**
    * Path rule of URL path map resource.
    */
   pathRules?: ApplicationGatewayPathRule[];
@@ -8277,7 +8269,7 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
   entraJWTValidationConfig?: SubResource;
 
   /**
-   * Authentication configuration bindings of the request routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   * Authentication configuration bindings of the request routing rule. Only one authentication configuration is supported. Authentication policies can only be bound to Application Gateways using a v2 SKU.
    */
   @added(Versions.v2026_01_01)
   @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
@@ -8353,14 +8345,6 @@ model ApplicationGatewayRoutingRulePropertiesFormat {
    * Listener resource of the application gateway.
    */
   listener?: SubResource;
-
-  /**
-   * Authentication configuration bindings of the routing rule. Authentication policies can only be bound to Application Gateways using a v2 SKU.
-   */
-  @added(Versions.v2026_01_01)
-  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
-  @maxItems(1)
-  authConfigs?: ApplicationGatewayAuthConfig[];
 
   /**
    * The provisioning state of the request routing rule resource.

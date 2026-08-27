@@ -273,6 +273,9 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: authenticationPolicy.json
     reason: AuthenticationPolicy extends the local Network RP Resource base type (common.json#/definitions/Resource), the established envelope for all Network RP resources. Its id/name/type read-only properties are defined on the shared base and referenced via allOf, consistent with every other Network RP resource.
+  - code: TrackedResourcePatchOperation
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy intentionally does not expose a PATCH operation because the service supports only GET, PUT, and DELETE for this resource.
   - code: DeleteResponseCodes
     from: authenticationPolicy.json
     reason: AuthenticationPolicy DELETE is synchronous and the service returns only 204 with no response body; advertising a 200 response would not match the implemented service contract.

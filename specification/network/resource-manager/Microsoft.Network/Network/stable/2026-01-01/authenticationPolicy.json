@@ -249,61 +249,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "AuthenticationPolicies_UpdateTags",
-        "tags": [
-          "AuthenticationPolicies"
-        ],
-        "description": "Updates an authentication policy's tags.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "authenticationPolicyName",
-            "in": "path",
-            "description": "The name of the authentication policy.",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "^[A-Za-z0-9_-]{1,80}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "./common.json#/definitions/TagsObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AuthenticationPolicy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update authentication policy tags": {
-            "$ref": "./examples/AuthenticationPolicyUpdateTags.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "AuthenticationPolicies_Delete",
         "tags": [
@@ -397,7 +342,7 @@
       "properties": {
         "userTrustProviderType": {
           "$ref": "./common.json#/definitions/UserTrustProviderType",
-          "description": "The type of the user trust provider. Only Microsoft Entra is supported."
+          "description": "The type of the user trust provider. Only Microsoft Entra is supported, using the serialized value `entra`."
         },
         "onUnauthenticatedRequest": {
           "$ref": "./common.json#/definitions/OnUnauthenticatedRequest",
@@ -437,7 +382,8 @@
       "properties": {
         "issuer": {
           "type": "string",
-          "description": "The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/"
+          "description": "The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/",
+          "maxLength": 2048
         },
         "jwksUri": {
           "type": "string",
@@ -449,27 +395,29 @@
         },
         "clientId": {
           "type": "string",
-          "description": "The Application (client) ID for the related application registered in Microsoft Entra ID."
+          "description": "The Application (client) ID for the related application registered in Microsoft Entra ID, formatted as a GUID."
         },
         "clientSecret": {
           "type": "string",
-          "description": "The Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. Example: https://myvault.vault.azure.net/secrets/mysecret"
+          "description": "The Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. Example: https://myvault.vault.azure.net/secrets/mysecret",
+          "maxLength": 4096
         },
         "scope": {
           "type": "array",
-          "description": "The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported.",
+          "description": "The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported, and each scope can contain up to 128 characters.",
           "maxItems": 10,
           "items": {
-            "type": "string"
+            "$ref": "./common.json#/definitions/AuthenticationScope"
           }
         },
         "sessionTimeout": {
           "type": "string",
-          "description": "The timeout of the session cookie used for user authentication, in seconds. Applicable to the Application Gateway post-OIDC workflow."
+          "description": "The timeout of the session cookie used for user authentication, in seconds. The supported range is 1 to 604800 seconds, and the default is 86400 seconds. Applicable to the Application Gateway post-OIDC workflow."
         },
         "sessionCookieName": {
           "type": "string",
-          "description": "The name of the session cookie used for user authentication. Applicable to the Application Gateway post-OIDC workflow."
+          "description": "The name of the session cookie used for user authentication. Applicable to the Application Gateway post-OIDC workflow.",
+          "maxLength": 256
         }
       },
       "required": [
