@@ -102,10 +102,7 @@ directive:
     reason: MSDeploy is the intentional name matching the existing service API.
   - suppress: LroErrorContent
     from: openapi.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"]
-    reason: The silo long-running PUT and DELETE operations on these two paths intentionally return the App Service error schema (DefaultErrorResponse) that every other Microsoft.Web operation in this specification uses, rather than the common-types ARM error schema. Keeping a single consistent error contract across the entire App Service surface is required for compatibility with existing App Service clients that parse the service's native error format. These two silo resource paths are the only long-running operations introduced by API version 2026-08-01; the suppression is scoped to them so it cannot mask this rule for any other operation.
+    reason: Every Microsoft.Web operation in this specification returns the App Service error schema (DefaultErrorResponse) rather than the common-types ARM ErrorResponse, including the long-running silo PUT and DELETE operations introduced by API version 2026-08-01. A single consistent error contract across the whole App Service surface is required for compatibility with existing clients that parse the service native error format, and changing the already published legacy operations would be a breaking change. This suppression cannot be narrowed with a where clause because LroErrorContent reports on the schema.$ref node inside each error response rather than on the path or the operation, and autorest suppression selectors must match the reported json path exactly, so a path scoped or operation scoped where clause never matches. The only long-running operations added in 2026-08-01 are the PUT and DELETE on sites/{name}/silos/{siloName} and on serverfarms/{name}/silos/{siloName}.
   - suppress: EvenSegmentedPathForPutOperation
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork"]
