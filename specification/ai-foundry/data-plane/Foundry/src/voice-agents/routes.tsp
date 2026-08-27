@@ -13,6 +13,7 @@ const VoiceAgentConversationRequiredPreviews = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceItemAudioResponse."
 @doc("""
   Metadata for a conversation item's generated audio. For bring-your-own-storage (BYOS), the response includes
   `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
@@ -20,7 +21,6 @@ const VoiceAgentConversationRequiredPreviews = #{
   `/audio/generated/content` route.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceItemAudioResponse."
 model VoiceGeneratedItemAudioResponse {
   ...OmitProperties<VoiceItemAudioResponse, "blob_uri">;
 
