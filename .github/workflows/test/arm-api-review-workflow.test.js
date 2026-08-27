@@ -1052,3 +1052,55 @@ describe("ARM API review live-run regressions", () => {
     expect(stripXmlComments(once)).toBe(once);
   });
 });
+
+describe("API version lifecycle rules", () => {
+  const REFERENCE_FILE =
+    ".github/skills/azure-api-review/references/api-version-lifecycle-and-branches.md";
+
+  it("wires the reference into the ARM instructions both paths load", async () => {
+    // The workflow and the interactive agent never read this reference
+    // directly; they reach it through arm-api-review.instructions.md, which
+    // both of them load. If the pointer is dropped, the rules become
+    // unreachable on every path while the file still sits in the repo.
+    const instructions = collapseWhitespace(
+      await readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+    );
+
+    expect(instructions).toContain("api-version-lifecycle-and-branches.md");
+
+    const [workflow, agent] = await Promise.all([
+      readFile(join(ROOT, SOURCE_FILE), "utf8"),
+      readFile(join(ROOT, AGENT_FILE), "utf8"),
+    ]);
+    expect(workflow).toContain("arm-api-review.instructions.md");
+    expect(agent).toContain("arm-api-review.instructions.md");
+  });
+
+  it("keeps the branch-keyed rules fail-safe when the base ref is unknown", async () => {
+    // A release-* branch is a legitimate home for work that would be a
+    // violation on main, and the workflow prompt never names base.ref. Without
+    // an explicit skip, an unknown branch defaults to the worst reading and
+    // the agent posts a Blocking finding against a perfectly valid PR.
+    const reference = collapseWhitespace(await readFile(join(ROOT, REFERENCE_FILE), "utf8"));
+
+    expect(reference).toContain("base.ref");
+    expect(reference).toMatch(/skip those two rules rather than assuming/i);
+    expect(reference).toContain("APIVER-DEV-IN-MAIN");
+    expect(reference).toContain("APIVER-PRIVATE-IN-PUBLIC");
+  });
+
+  it("uses a category slug the Critic marker vocabulary accepts", async () => {
+    // Findings carry a category into the telemetry marker, and the Critic
+    // rejects any value outside its closed vocabulary. A reference that names
+    // a slug the protocol does not define produces findings that fail
+    // verification for a reason unrelated to their substance.
+    const [reference, protocol] = await Promise.all([
+      readFile(join(ROOT, REFERENCE_FILE), "utf8"),
+      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+    ]);
+
+    const declared = reference.match(/`([a-z-]+)` category/);
+    expect(declared, "reference must name its category").not.toBeNull();
+    expect(protocol).toContain(`\`${declared[1]}\``);
+  });
+});

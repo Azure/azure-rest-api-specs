@@ -30,15 +30,16 @@ must not load the other plane's files** -- see "Anti-inheritance" below.
 
 ### Cross-cutting (both planes)
 
-| Reference                                                         | Rule Area                                                                          | Key Rule IDs                                  |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------- |
-| [secret-detection.md](references/secret-detection.md)             | Proactive secret detection in API properties                                       | SEC-SECRET-DETECT                             |
-| [pattern-validation.md](references/pattern-validation.md)         | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix | OAPI-PATTERN-ALLOWLIST                        |
-| [think-in-graphs.md](references/think-in-graphs.md)               | Whole-graph review method: orphans, asymmetry, cross-model reachability            | --                                            |
-| [example-quality.md](references/example-quality.md)               | Example file quality: orphan detection, coverage, descriptive values               | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES |
-| [enum-best-practices.md](references/enum-best-practices.md)       | Enum extensibility and boolean alternatives                                        | --                                            |
-| [downstream-ci-impact.md](references/downstream-ci-impact.md)     | Do not recommend a fix that trips a required CI check                              | --                                            |
-| [reviewer-posted-parity.md](references/reviewer-posted-parity.md) | Presented-vs-posted parity and cross-session reconciliation for ARM reviewers      | --                                            |
+| Reference                                                                                 | Rule Area                                                                          | Key Rule IDs                                  |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------- |
+| [secret-detection.md](references/secret-detection.md)                                     | Proactive secret detection in API properties                                       | SEC-SECRET-DETECT                             |
+| [pattern-validation.md](references/pattern-validation.md)                                 | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix | OAPI-PATTERN-ALLOWLIST                        |
+| [think-in-graphs.md](references/think-in-graphs.md)                                       | Whole-graph review method: orphans, asymmetry, cross-model reachability            | --                                            |
+| [example-quality.md](references/example-quality.md)                                       | Example file quality: orphan detection, coverage, descriptive values               | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES |
+| [enum-best-practices.md](references/enum-best-practices.md)                               | Enum extensibility and boolean alternatives                                        | --                                            |
+| [downstream-ci-impact.md](references/downstream-ci-impact.md)                             | Do not recommend a fix that trips a required CI check                              | --                                            |
+| [reviewer-posted-parity.md](references/reviewer-posted-parity.md)                         | Presented-vs-posted parity and cross-session reconciliation for ARM reviewers      | --                                            |
+| [api-version-lifecycle-and-branches.md](references/api-version-lifecycle-and-branches.md) | Which repo, branch, and folder each API version lifecycle stage may live in        | APIVER-\*                                     |
 
 ### ARM control-plane only
 

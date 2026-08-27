@@ -772,6 +772,20 @@ Apply the decision framework from the reference file when evaluating suppression
 - For each API version, the service **SHOULD** expose the same functionality across every cloud where it is available (e.g., Public, Mooncake, Fairfax). An API version in one cloud should not correspond to different functionality than the same API version in another cloud.
 - If a resource type is available in multiple clouds, the latest stable (non-preview) API version **SHOULD** be available in each cloud.
 
+### 11.4 Lifecycle Stage Determines Repo, Branch, and Folder (APIVER-\*)
+
+An API version's lifecycle stage governs where it is allowed to live. Check the
+target repository and branch alongside the version's folder, because a version
+can be schema-correct and still be in the wrong place.
+
+- A `private preview` version **MUST NOT** appear in the public specs repo, on `main` or any other branch. ARM private previews belong on `RPSaaSMaster` in the private specs repo, gated by Azure Feature Exposure Control flags (APIVER-PRIVATE-IN-PUBLIC).
+- An `in development` version **MUST NOT** appear in public `main`. A public `release-*` branch is its correct home (APIVER-DEV-IN-MAIN).
+- A GA version **MUST** sit under a `stable` folder with no `-preview` suffix, and **MUST NOT** be feature-flag gated (APIVER-GA-FOLDER).
+- A public preview version **MUST** sit under a `preview` folder **and** carry a `-preview` suffix, and **MUST NOT** be feature-flag gated (APIVER-PREVIEW-FOLDER).
+- A version with no customers is `in development`, not `private preview`. Do not infer the stage from the version date alone.
+
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/api-version-lifecycle-and-branches.md`](../skills/azure-api-review/references/api-version-lifecycle-and-branches.md) for the stage table, severities, and how to handle a stage-versus-placement mismatch.
+
 ---
 
 ## 12. POST Actions (ARM-Specific)
@@ -1268,6 +1282,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ API version parity across clouds — same functionality per API version in Public, Mooncake, Fairfax (RPC-BestPractice-15)
 - ✅ GA APIs: 36 months notice before retirement; Preview: 12 months max lifespan, 90 days notice
 - ✅ Deprecated versions/operations/properties marked with `"deprecated": true`; Azure Policy team consulted
+- ✅ Lifecycle stage matches placement: no private preview or in-development version in public `main`; GA under `stable` with no `-preview` suffix; public preview under `preview` with a `-preview` suffix; neither feature-flag gated (APIVER-\*)
 
 ### Schema Evolution
 
