@@ -109,7 +109,7 @@ model Microsoft365PublishRequest {
 
   /** Privacy policy URL shown in the Teams app listing. Must be an http or https URL. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Wire field name uses the 'Url' suffix; renaming would break the documented contract."
-  privacyUrl?: string;
+  privacyUrl?: url;
 
   /** Terms-of-use URL shown in the Teams app listing. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Wire field name uses the 'Url' suffix; renaming would break the documented contract."
