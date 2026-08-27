@@ -280,16 +280,16 @@ model TextProtectedMaterialAnalysisResult {
 union UnifiedModerateSource {
   string,
 
-  @doc("Input submitted to a model or agent.")
+  @doc("Input submitted to a model or agent. The content field must contain nonempty plain text. Tool fields do not apply.")
   Input: "input",
 
-  @doc("Output produced by a model or agent.")
+  @doc("Output produced by a model or agent. The content field must contain nonempty plain text. Tool fields do not apply.")
   Output: "output",
 
-  @doc("A proposed tool invocation before it is executed.")
+  @doc("A proposed tool invocation before it is executed. The content field must be a string containing a JSON-encoded object with the proposed tool arguments. toolName is required; toolCallId is optional; post-call fields do not apply.")
   PreToolCall: "pre_tool_call",
 
-  @doc("A tool result after the invocation completes.")
+  @doc("A tool result after the invocation completes. The content field must be a string containing the JSON-encoded tool result. toolName is required; toolCallId, toolArguments, toolResultIsError, and toolDurationMs are optional.")
   PostToolCall: "post_tool_call",
 }
 
@@ -315,24 +315,23 @@ model UnifiedModerateContext {
   @doc("Caller-provided workload tenant identifier.")
   tenantId?: string;
 
-  @doc("A JSON-encoded string containing validated host-specific context extensions.")
+  @doc("A string containing a JSON-encoded object with validated host-specific context extensions.")
   extensions?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name follows existing Content Safety request model conventions."
 @added(ContentSafety.Versions.v2026_09_01_preview)
-@doc("A request to evaluate and enforce an applicable policy for one workload event.")
+@doc("A request to evaluate and enforce an applicable policy for one workload event. The service uses the first policy it can resolve from policyId and then from the policy binding for targetResourceId, in that order. The request fails if neither selector resolves a policy.")
 model UnifiedModerateOptions {
-  @doc("An optional built-in or account-scoped policy identifier. Omit this property to resolve the policy bound to targetResourceId.")
+  @doc("The identifier of a policy available to the Content Safety resource. When provided, the service attempts to resolve this policy before using the policy bound to targetResourceId.")
   policyId?: string;
 
-  @doc("The Azure resource identifier whose policy binding is resolved. Required when policyId is omitted. The target resource must already be bound under the Content Safety account serving the request.")
+  @doc("The Azure resource identifier whose policy binding is resolved if no policy is resolved from policyId. The target resource must already have a policy binding available to the Content Safety resource.")
   targetResourceId?: string;
 
   @doc("The workload event source. The source selects the policy intervention point.")
   source: UnifiedModerateSource;
 
-  @doc("The content to evaluate. Plain text is provided directly. Structured content is serialized as a JSON-encoded string and is deserialized and validated by the service.")
+  @doc("The content to evaluate. For input and output sources, provide nonempty plain text. For pre_tool_call, provide a string containing a JSON-encoded object with the proposed tool arguments. For post_tool_call, provide a string containing the JSON-encoded tool result.")
   content: string;
 
   @doc("The tool name. Required and nonempty for tool-call sources and not allowed for input or output sources.")
@@ -342,13 +341,13 @@ model UnifiedModerateOptions {
   @doc("An optional caller-provided tool-call identifier. The service generates one when omitted for a tool-call source.")
   toolCallId?: string;
 
-  @doc("A JSON-encoded string containing the original arguments for a completed tool call. The service uses an empty object when omitted.")
+  @doc("A string containing a JSON-encoded object with the original arguments for a completed tool call. This property applies only to post_tool_call. The service uses an empty object when omitted.")
   toolArguments?: string;
 
-  @doc("Whether the completed tool call returned an error.")
+  @doc("Whether the completed tool call returned an error. This property applies only to post_tool_call.")
   toolResultIsError?: boolean;
 
-  @doc("The non-negative duration of the completed tool call, in milliseconds.")
+  @doc("The non-negative duration of the completed tool call, in milliseconds. This property applies only to post_tool_call.")
   @minValue(0)
   toolDurationMs?: float64;
 
@@ -425,10 +424,10 @@ model AcsApproval {
 @added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("A canonical ACS transform applied by Unified Moderate.")
 model AcsTransform {
-  @doc("The canonical path of the value to replace.")
+  @doc("The transformation target path. For input and output sources, the allowed path is `$target.content`. For tool sources, `$target` replaces the complete value and a path rooted at `$target` replaces an individual member.")
   path: string;
 
-  @doc("A JSON-encoded string containing the replacement value.")
+  @doc("A string containing the JSON-encoded replacement value applied at the target path.")
   value: string;
 }
 
@@ -485,7 +484,7 @@ model UnifiedModerateResult {
   @doc("An optional machine-readable policy reason.")
   reason?: string;
 
-  @doc("The original or transformed content when allowed. Structured content is returned as a JSON-encoded string. This property is omitted when blocked.")
+  @doc("The original or transformed content when allowed, using the same source-specific representation as the request content. Structured content is returned as a string containing the JSON-encoded value. This property is omitted when blocked.")
   content?: string;
 
   @doc("The complete Agent Control Specification policy verdict.")

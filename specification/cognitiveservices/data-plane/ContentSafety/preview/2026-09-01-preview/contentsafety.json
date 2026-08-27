@@ -960,11 +960,11 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "The canonical path of the value to replace."
+          "description": "The transformation target path. For input and output sources, the allowed path is `$target.content`. For tool sources, `$target` replaces the complete value and a path rooted at `$target` replaces an individual member."
         },
         "value": {
           "type": "string",
-          "description": "A JSON-encoded string containing the replacement value."
+          "description": "A string containing the JSON-encoded replacement value applied at the target path."
         }
       },
       "required": [
@@ -1872,21 +1872,21 @@
         },
         "extensions": {
           "type": "string",
-          "description": "A JSON-encoded string containing validated host-specific context extensions."
+          "description": "A string containing a JSON-encoded object with validated host-specific context extensions."
         }
       }
     },
     "UnifiedModerateOptions": {
       "type": "object",
-      "description": "A request to evaluate and enforce an applicable policy for one workload event.",
+      "description": "A request to evaluate and enforce an applicable policy for one workload event. The service uses the first policy it can resolve from policyId and then from the policy binding for targetResourceId, in that order. The request fails if neither selector resolves a policy.",
       "properties": {
         "policyId": {
           "type": "string",
-          "description": "An optional built-in or account-scoped policy identifier. Omit this property to resolve the policy bound to targetResourceId."
+          "description": "The identifier of a policy available to the Content Safety resource. When provided, the service attempts to resolve this policy before using the policy bound to targetResourceId."
         },
         "targetResourceId": {
           "type": "string",
-          "description": "The Azure resource identifier whose policy binding is resolved. Required when policyId is omitted. The target resource must already be bound under the Content Safety account serving the request."
+          "description": "The Azure resource identifier whose policy binding is resolved if no policy is resolved from policyId. The target resource must already have a policy binding available to the Content Safety resource."
         },
         "source": {
           "$ref": "#/definitions/UnifiedModerateSource",
@@ -1894,7 +1894,7 @@
         },
         "content": {
           "type": "string",
-          "description": "The content to evaluate. Plain text is provided directly. Structured content is serialized as a JSON-encoded string and is deserialized and validated by the service."
+          "description": "The content to evaluate. For input and output sources, provide nonempty plain text. For pre_tool_call, provide a string containing a JSON-encoded object with the proposed tool arguments. For post_tool_call, provide a string containing the JSON-encoded tool result."
         },
         "toolName": {
           "type": "string",
@@ -1907,16 +1907,16 @@
         },
         "toolArguments": {
           "type": "string",
-          "description": "A JSON-encoded string containing the original arguments for a completed tool call. The service uses an empty object when omitted."
+          "description": "A string containing a JSON-encoded object with the original arguments for a completed tool call. This property applies only to post_tool_call. The service uses an empty object when omitted."
         },
         "toolResultIsError": {
           "type": "boolean",
-          "description": "Whether the completed tool call returned an error."
+          "description": "Whether the completed tool call returned an error. This property applies only to post_tool_call."
         },
         "toolDurationMs": {
           "type": "number",
           "format": "double",
-          "description": "The non-negative duration of the completed tool call, in milliseconds.",
+          "description": "The non-negative duration of the completed tool call, in milliseconds. This property applies only to post_tool_call.",
           "minimum": 0
         },
         "context": {
@@ -1943,7 +1943,7 @@
         },
         "content": {
           "type": "string",
-          "description": "The original or transformed content when allowed. Structured content is returned as a JSON-encoded string. This property is omitted when blocked."
+          "description": "The original or transformed content when allowed, using the same source-specific representation as the request content. Structured content is returned as a string containing the JSON-encoded value. This property is omitted when blocked."
         },
         "acsVerdict": {
           "$ref": "#/definitions/AcsVerdict",
@@ -1971,22 +1971,22 @@
           {
             "name": "Input",
             "value": "input",
-            "description": "Input submitted to a model or agent."
+            "description": "Input submitted to a model or agent. The content field must contain nonempty plain text. Tool fields do not apply."
           },
           {
             "name": "Output",
             "value": "output",
-            "description": "Output produced by a model or agent."
+            "description": "Output produced by a model or agent. The content field must contain nonempty plain text. Tool fields do not apply."
           },
           {
             "name": "PreToolCall",
             "value": "pre_tool_call",
-            "description": "A proposed tool invocation before it is executed."
+            "description": "A proposed tool invocation before it is executed. The content field must be a string containing a JSON-encoded object with the proposed tool arguments. toolName is required; toolCallId is optional; post-call fields do not apply."
           },
           {
             "name": "PostToolCall",
             "value": "post_tool_call",
-            "description": "A tool result after the invocation completes."
+            "description": "A tool result after the invocation completes. The content field must be a string containing the JSON-encoded tool result. toolName is required; toolCallId, toolArguments, toolResultIsError, and toolDurationMs are optional."
           }
         ]
       }

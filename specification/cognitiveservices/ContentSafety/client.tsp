@@ -44,6 +44,11 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(
+  ContentSafety.UnifiedModerateOptions,
+  "UnifiedModerateConfig",
+  "csharp"
+);
+@@clientName(
   Azure.Core.Foundations.ResourceBody.resource,
   "options",
   "!autorest"
