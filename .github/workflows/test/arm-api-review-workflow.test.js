@@ -592,10 +592,13 @@ describe("ARM API review consistency and hardening", () => {
     const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
     const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
 
-    expect(workflow).toContain("Security issues: no cap (always post)");
+    expect(workflow).toContain("Security issues: cap at 10");
+    expect(workflow).toContain("Breaking changes: cap at 10");
     expect(agent).toContain("**Output budgets (identical to the automated workflow).**");
     // Same per-category caps in both contexts, or identical APIs get different
     // feedback depending on how the review was started.
+    expect(agent).toContain("| Security issues | 10 |");
+    expect(agent).toContain("| Breaking changes | 10 |");
     expect(agent).toContain("| ARM contract violations | 15 |");
     expect(agent).toContain("| Property design / naming | 5 |");
     expect(agent).toContain("| Documentation gaps | 3 |");

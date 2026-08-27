@@ -890,13 +890,13 @@ A generic summary theme without an affected element and actionable guidance does
 
 **Output budgets (identical to the automated workflow).** Apply these caps to the candidate findings **before** invoking the Critic in Step 7, so the Critic verifies the same agreed posting set the automated run would. These are the budgets defined in `.github/workflows/arm-api-review.md`; the two contexts MUST NOT diverge (see [Review context parity](#review-context-parity)).
 
-| Category                 | Inline cap           |
-| ------------------------ | -------------------- |
-| Security issues          | no cap (always post) |
-| Breaking changes         | no cap (always post) |
-| ARM contract violations  | 15                   |
-| Property design / naming | 5                    |
-| Documentation gaps       | 3                    |
+| Category                 | Inline cap |
+| ------------------------ | ---------- |
+| Security issues          | 10         |
+| Breaking changes         | 10         |
+| ARM contract violations  | 15         |
+| Property design / naming | 5          |
+| Documentation gaps       | 3          |
 
 Overall inline budget is **50** posted comments. If the total across categories would exceed 50, post the highest-severity findings inline (security and breaking changes first). Replies and thread resolutions from Step 5.5 have their own budgets and do **not** consume the 50.
 

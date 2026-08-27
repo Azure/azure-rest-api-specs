@@ -235,11 +235,14 @@ Use for design trade-offs and best-practice recommendations:
 
 Do not flood a PR with comments. Prioritize and cap:
 
-1. **Security issues** -- always post (no cap)
-2. **Breaking changes** -- always post (no cap)
+1. **Security issues** -- post up to 10
+2. **Breaking changes** -- post up to 10
 3. **ARM contract violations** -- post up to 15
 4. **Property design / naming** -- post up to 5
 5. **Documentation gaps** -- post up to 3
+
+Security and breaking-change findings are still selected first when deciding
+what goes inline.
 
 If more findings exist beyond the cap, summarize them in a single comment:
 "_N additional warnings/suggestions were identified but not posted individually.

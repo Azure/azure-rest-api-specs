@@ -151,9 +151,9 @@ safe-outputs:
     max: 4
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   # Per-category inline caps in the agent body:
-  #   security: no cap, breaking changes: no cap, ARM contract: 15,
-  #   property/naming: 5, doc gaps: 3  → worst-case ≈ 23+ inline comments.
-  # Set max to 50 so the cap is above the worst plausible case; findings that
+  #   security: 10, breaking changes: 10, ARM contract: 15,
+  #   property/naming: 5, doc gaps: 3  → worst case exactly 43 inline comments.
+  # Set max to 50 so the cap is above the bounded worst case; findings that
   # exceed any per-category cap are collected into the summary add-comment.
   create-pull-request-review-comment:
     max: 50
@@ -684,14 +684,22 @@ Dropping the body is never an acceptable fallback for a missing field.
 
 **Hard limits per category:**
 
-- Security issues: no cap (always post)
-- Breaking changes: no cap (always post)
+- Security issues: cap at 10
+- Breaking changes: cap at 10
 - ARM contract violations: cap at 15
 - Property design / naming: cap at 5
 - Documentation gaps: cap at 3
 
+Every category is capped, so the per-category limits bound the total at **43**,
+below the 50-comment inline budget. Security and breaking-change findings are
+still posted **first** when selecting what goes inline, and an over-cap finding
+in either category is never silently dropped: disclose it in the summary like
+any other overflow.
+
 **Inline comment budget:** The workflow allows up to 50 inline review comments
-(`create-pull-request-review-comment`). If the total across all categories would
+(`create-pull-request-review-comment`). With every category now capped, the
+per-category limits bound the total at 43, so this budget should not be reached;
+keep the rule as a safety net. If the total across all categories would still
 exceed 50, post the highest-severity findings inline (security and breaking
 changes first) and collect overflow findings into the summary `add-comment`
 with the note: _"N additional findings were identified but not posted inline.
