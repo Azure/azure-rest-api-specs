@@ -289,15 +289,12 @@ model VoiceAgentResponseCreateParams {
 );
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the upstream live response contract while requiring conversation_id and replacing audio and output."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the upstream live response contract, including conversation_id, while replacing audio and output."
 @doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
 model VoiceAgentRealtimeResponse extends OmitProperties<
   OpenAI.RealtimeResponse,
-  "audio" | "output" | "conversation_id"
+  "audio" | "output"
 > {
-  @doc("The session-scoped conversation id. The same value appears in `session.created`, `response.created`, and `response.done`.")
-  conversation_id: string;
-
   @doc("The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`.")
   audio?: VoiceResponseAudio;
 
@@ -393,8 +390,8 @@ model VoiceAgentClientEventSessionUpdate {
 @@copyProperties(
   OpenAI.RealtimeServerEventSessionCreated,
   {
-    @doc("The session-scoped conversation id. The same value appears in `session.created`, `response.created`, and `response.done`, including when conversation persistence is disabled.")
-    conversation_id: string,
+    @doc("The session-scoped conversation id. When present, the same value appears in `session.created`, `response.created`, and `response.done`.")
+    conversation_id?: string,
   }
 );
 
