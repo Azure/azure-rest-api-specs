@@ -5,9 +5,16 @@ import "../../common/models.tsp";
 using Azure.Core.Experimental;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Experimental features applied to augment inherited OpenAI models"
 namespace Azure.AI.Projects {
+  const ModelRoutersRequiredPreviews = #{
+    conditional_previews: #[
+      FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+    ],
+  };
+
   @@changePropertyType(OpenAI.CreateResponse.`model`, string);
   @@changePropertyType(OpenAI.Response.`model`, string);
   @@changePropertyType(OpenAI.CompactResponseMethodPublicBody.`model`, string);
@@ -95,10 +102,12 @@ namespace Azure.AI.Projects {
     agent_reference: AgentReference | null;
 
     /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
     model_selection_details?: ModelSelectionDetails;
   }
 
   /** The routing mode used by Model Router for the request. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   union ModelRouterMode {
     string,
 
@@ -113,12 +122,14 @@ namespace Azure.AI.Projects {
   }
 
   /** A value returned in a response header from a model routing attempt. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   union ModelRouterResponseHeaderValue {
     string,
     int32,
   }
 
   /** Error details returned by a model routing attempt. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   model ModelRouterAttemptError {
     /** A service-defined error code. */
     code?: string;
@@ -128,6 +139,7 @@ namespace Azure.AI.Projects {
   }
 
   /** The HTTP-style result returned by a model routing attempt. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   model ModelRouterAttemptResult {
     /** The HTTP status code returned by the model. */
     @minValue(100)
@@ -142,6 +154,7 @@ namespace Azure.AI.Projects {
   }
 
   /** A single routing attempt targeting a specific model. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   model ModelRouterAttempt {
     /** The model targeted in this attempt. */
     `model`: string;
@@ -151,6 +164,7 @@ namespace Azure.AI.Projects {
   }
 
   /** A single entry in the routing trace representing one inference turn. Each entry contains the latency and the ordered list of attempts for that turn. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   model RoutingTraceEntry {
     /** Identifier of the output item/turn this routing decision is associated with. This is omitted for Chat Completions. */
     output_id?: string;
@@ -166,6 +180,7 @@ namespace Azure.AI.Projects {
   }
 
   /** Routing decision metadata from Model Router. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   model ModelRouterDetails {
     /** The routing mode for the request. */
     mode: ModelRouterMode;
@@ -175,6 +190,7 @@ namespace Azure.AI.Projects {
   }
 
   /** Model selection metadata providing visibility into routing decisions. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   model ModelSelectionDetails {
     /** Routing decision metadata from Model Router. Present when the request was handled by Model Router. */
     model_router_details: ModelRouterDetails;
