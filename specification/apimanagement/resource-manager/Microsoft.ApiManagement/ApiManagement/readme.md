@@ -22,20 +22,11 @@ To see additional help and options, run:
 
 ### Basic Information
 
-```yaml
+``` yaml
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2026-09-01-preview
-```
-
-### Tag: package-preview-2026-09-01-preview
-
-These settings apply only when `--tag=package-preview-2026-09-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2026-09-01-preview'
-input-file:
-  - preview/2026-09-01-preview/openapi.json
+tag: package-preview-2025-09-01-preview
 ```
 
 ### Tag: package-preview-2025-09-01-preview
@@ -190,7 +181,6 @@ input-file:
   - preview/2024-06-01-preview/definitions.json
   - preview/2024-06-01-preview/operationStatuses.json
 ```
-
 ### Tag: package-2024-05
 
 These settings apply only when `--tag=package-2024-05` is specified on the command line.
@@ -257,7 +247,6 @@ input-file:
   - stable/2024-05-01/definitions.json
   - stable/2024-05-01/operationStatuses.json
 ```
-
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
@@ -324,12 +313,11 @@ input-file:
   - preview/2023-09-01-preview/definitions.json
   - preview/2023-09-01-preview/operationStatuses.json
 ```
-
 ### Tag: package-preview-2023-05
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-05'
+``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
   - preview/2023-05-01-preview/apimanagement.json
   - preview/2023-05-01-preview/apimallpolicies.json
@@ -388,7 +376,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-03'
+``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - preview/2023-03-01-preview/apimanagement.json
   - preview/2023-03-01-preview/apimapis.json
@@ -444,7 +432,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - preview/2022-09-01-preview/apimanagement.json
   - preview/2022-09-01-preview/apimapis.json
@@ -500,7 +488,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-08'
+``` yaml $(tag) == 'package-2022-08'
 input-file:
   - stable/2022-08-01/apimanagement.json
   - stable/2022-08-01/apimapis.json
@@ -555,7 +543,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-04'
+``` yaml $(tag) == 'package-preview-2022-04'
 input-file:
   - preview/2022-04-01-preview/apimanagement.json
   - preview/2022-04-01-preview/apimapis.json
@@ -609,7 +597,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-12'
+``` yaml $(tag) == 'package-preview-2021-12'
 input-file:
   - preview/2021-12-01-preview/apimanagement.json
   - preview/2021-12-01-preview/apimapis.json
@@ -662,7 +650,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08'
+``` yaml $(tag) == 'package-2021-08'
 input-file:
   - stable/2021-08-01/apimanagement.json
   - stable/2021-08-01/apimapis.json
@@ -713,7 +701,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-04'
+``` yaml $(tag) == 'package-preview-2021-04'
 input-file:
   - preview/2021-04-01-preview/apimanagement.json
   - preview/2021-04-01-preview/apimapis.json
@@ -764,7 +752,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-01'
+``` yaml $(tag) == 'package-preview-2021-01'
 input-file:
   - preview/2021-01-01-preview/apimanagement.json
   - preview/2021-01-01-preview/apimapis.json
@@ -811,7 +799,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-12'
+``` yaml $(tag) == 'package-2020-12'
 input-file:
   - stable/2020-12-01/apimanagement.json
   - stable/2020-12-01/apimapis.json
@@ -858,7 +846,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-06'
+``` yaml $(tag) == 'package-preview-2020-06'
 input-file:
   - preview/2020-06-01-preview/apimanagement.json
   - preview/2020-06-01-preview/apimapis.json
@@ -905,7 +893,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-12'
+``` yaml $(tag) == 'package-2019-12'
 input-file:
   - stable/2019-12-01/apimanagement.json
   - stable/2019-12-01/apimapis.json
@@ -948,7 +936,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2019-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-12'
+``` yaml $(tag) == 'package-preview-2019-12'
 input-file:
   - preview/2019-12-01-preview/apimanagement.json
   - preview/2019-12-01-preview/apimapis.json
@@ -990,7 +978,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-01'
+``` yaml $(tag) == 'package-2019-01'
 input-file:
   - stable/2019-01-01/apimanagement.json
   - stable/2019-01-01/apimapis.json
@@ -1031,165 +1019,167 @@ input-file:
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-06-preview'
+``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-  - preview/2018-06-01-preview/apimanagement.json
-  - preview/2018-06-01-preview/apimapis.json
-  - preview/2018-06-01-preview/apimapisByTags.json
-  - preview/2018-06-01-preview/apimauthorizationservers.json
-  - preview/2018-06-01-preview/apimbackends.json
-  - preview/2018-06-01-preview/apimcaches.json
-  - preview/2018-06-01-preview/apimcertificates.json
-  - preview/2018-06-01-preview/apimdeployment.json
-  - preview/2018-06-01-preview/apimdiagnostics.json
-  - preview/2018-06-01-preview/apimemailtemplates.json
-  - preview/2018-06-01-preview/apimgroups.json
-  - preview/2018-06-01-preview/apimidentityprovider.json
-  - preview/2018-06-01-preview/apimissues.json
-  - preview/2018-06-01-preview/apimloggers.json
-  - preview/2018-06-01-preview/apimnotifications.json
-  - preview/2018-06-01-preview/apimnetworkstatus.json
-  - preview/2018-06-01-preview/apimopenidconnectproviders.json
-  - preview/2018-06-01-preview/apimpolicies.json
-  - preview/2018-06-01-preview/apimpolicysnippets.json
-  - preview/2018-06-01-preview/apimportalsettings.json
-  - preview/2018-06-01-preview/apimproducts.json
-  - preview/2018-06-01-preview/apimproductsByTags.json
-  - preview/2018-06-01-preview/apimproperties.json
-  - preview/2018-06-01-preview/apimquotas.json
-  - preview/2018-06-01-preview/apimregions.json
-  - preview/2018-06-01-preview/apimreports.json
-  - preview/2018-06-01-preview/apimsubscriptions.json
-  - preview/2018-06-01-preview/apimtagresources.json
-  - preview/2018-06-01-preview/apimtags.json
-  - preview/2018-06-01-preview/apimtenant.json
-  - preview/2018-06-01-preview/apimusers.json
-  - preview/2018-06-01-preview/apimapiversionsets.json
-  - preview/2018-06-01-preview/definitions.json
+- preview/2018-06-01-preview/apimanagement.json
+- preview/2018-06-01-preview/apimapis.json
+- preview/2018-06-01-preview/apimapisByTags.json
+- preview/2018-06-01-preview/apimauthorizationservers.json
+- preview/2018-06-01-preview/apimbackends.json
+- preview/2018-06-01-preview/apimcaches.json
+- preview/2018-06-01-preview/apimcertificates.json
+- preview/2018-06-01-preview/apimdeployment.json
+- preview/2018-06-01-preview/apimdiagnostics.json
+- preview/2018-06-01-preview/apimemailtemplates.json
+- preview/2018-06-01-preview/apimgroups.json
+- preview/2018-06-01-preview/apimidentityprovider.json
+- preview/2018-06-01-preview/apimissues.json
+- preview/2018-06-01-preview/apimloggers.json
+- preview/2018-06-01-preview/apimnotifications.json
+- preview/2018-06-01-preview/apimnetworkstatus.json
+- preview/2018-06-01-preview/apimopenidconnectproviders.json
+- preview/2018-06-01-preview/apimpolicies.json
+- preview/2018-06-01-preview/apimpolicysnippets.json
+- preview/2018-06-01-preview/apimportalsettings.json
+- preview/2018-06-01-preview/apimproducts.json
+- preview/2018-06-01-preview/apimproductsByTags.json
+- preview/2018-06-01-preview/apimproperties.json
+- preview/2018-06-01-preview/apimquotas.json
+- preview/2018-06-01-preview/apimregions.json
+- preview/2018-06-01-preview/apimreports.json
+- preview/2018-06-01-preview/apimsubscriptions.json
+- preview/2018-06-01-preview/apimtagresources.json
+- preview/2018-06-01-preview/apimtags.json
+- preview/2018-06-01-preview/apimtenant.json
+- preview/2018-06-01-preview/apimusers.json
+- preview/2018-06-01-preview/apimapiversionsets.json
+- preview/2018-06-01-preview/definitions.json
 ```
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: R3016
     reason: existing properties, can't be changed without breaking API.
     #where:
     #  - $.definitions.ApiManagementServiceUploadCertificateParameters.properties.certificate_password
     #  - $.definitions.QuotaCounterContract.properties.Value
+
 ```
 
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-01'
+``` yaml $(tag) == 'package-2018-01'
 input-file:
-  - stable/2018-01-01/apimanagement.json
-  - stable/2018-01-01/apimapis.json
-  - stable/2018-01-01/apimauthorizationservers.json
-  - stable/2018-01-01/apimbackends.json
-  - stable/2018-01-01/apimcertificates.json
-  - stable/2018-01-01/apimdeployment.json
-  - stable/2018-01-01/apimdiagnostics.json
-  - stable/2018-01-01/apimemailtemplate.json
-  - stable/2018-01-01/apimgroups.json
-  - stable/2018-01-01/apimidentityprovider.json
-  - stable/2018-01-01/apimloggers.json
-  - stable/2018-01-01/apimnotifications.json
-  - stable/2018-01-01/apimnetworkstatus.json
-  - stable/2018-01-01/apimopenidconnectproviders.json
-  - stable/2018-01-01/apimportalsettings.json
-  - stable/2018-01-01/apimproducts.json
-  - stable/2018-01-01/apimproperties.json
-  - stable/2018-01-01/apimquotas.json
-  - stable/2018-01-01/apimreports.json
-  - stable/2018-01-01/apimsubscriptions.json
-  - stable/2018-01-01/apimtagresources.json
-  - stable/2018-01-01/apimtags.json
-  - stable/2018-01-01/apimtenant.json
-  - stable/2018-01-01/apimusers.json
-  - stable/2018-01-01/apimversionsets.json
+- stable/2018-01-01/apimanagement.json
+- stable/2018-01-01/apimapis.json
+- stable/2018-01-01/apimauthorizationservers.json
+- stable/2018-01-01/apimbackends.json
+- stable/2018-01-01/apimcertificates.json
+- stable/2018-01-01/apimdeployment.json
+- stable/2018-01-01/apimdiagnostics.json
+- stable/2018-01-01/apimemailtemplate.json
+- stable/2018-01-01/apimgroups.json
+- stable/2018-01-01/apimidentityprovider.json
+- stable/2018-01-01/apimloggers.json
+- stable/2018-01-01/apimnotifications.json
+- stable/2018-01-01/apimnetworkstatus.json
+- stable/2018-01-01/apimopenidconnectproviders.json
+- stable/2018-01-01/apimportalsettings.json
+- stable/2018-01-01/apimproducts.json
+- stable/2018-01-01/apimproperties.json
+- stable/2018-01-01/apimquotas.json
+- stable/2018-01-01/apimreports.json
+- stable/2018-01-01/apimsubscriptions.json
+- stable/2018-01-01/apimtagresources.json
+- stable/2018-01-01/apimtags.json
+- stable/2018-01-01/apimtenant.json
+- stable/2018-01-01/apimusers.json
+- stable/2018-01-01/apimversionsets.json
 ```
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: R3016
     reason: existing properties, can't be changed without breaking API.
     #where:
     #  - $.definitions.ApiManagementServiceUploadCertificateParameters.properties.certificate_password
     #  - $.definitions.QuotaCounterContract.properties.Value
+
 ```
 
 ### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-03'
+``` yaml $(tag) == 'package-2017-03'
 input-file:
-  - stable/2017-03-01/apimanagement.json
-  - stable/2017-03-01/apimapis.json
-  - stable/2017-03-01/apimauthorizationservers.json
-  - stable/2017-03-01/apimbackends.json
-  - stable/2017-03-01/apimcertificates.json
-  - stable/2017-03-01/apimdeployment.json
-  - stable/2017-03-01/apimdiagnostics.json
-  - stable/2017-03-01/apimemailtemplate.json
-  - stable/2017-03-01/apimgroups.json
-  - stable/2017-03-01/apimidentityprovider.json
-  - stable/2017-03-01/apimloggers.json
-  - stable/2017-03-01/apimnotifications.json
-  - stable/2017-03-01/apimnetworkstatus.json
-  - stable/2017-03-01/apimopenidconnectproviders.json
-  - stable/2017-03-01/apimportalsettings.json
-  - stable/2017-03-01/apimproducts.json
-  - stable/2017-03-01/apimproperties.json
-  - stable/2017-03-01/apimquotas.json
-  - stable/2017-03-01/apimreports.json
-  - stable/2017-03-01/apimsubscriptions.json
-  - stable/2017-03-01/apimtagresources.json
-  - stable/2017-03-01/apimtags.json
-  - stable/2017-03-01/apimtenant.json
-  - stable/2017-03-01/apimusers.json
-  - stable/2017-03-01/apimversionsets.json
+- stable/2017-03-01/apimanagement.json
+- stable/2017-03-01/apimapis.json
+- stable/2017-03-01/apimauthorizationservers.json
+- stable/2017-03-01/apimbackends.json
+- stable/2017-03-01/apimcertificates.json
+- stable/2017-03-01/apimdeployment.json
+- stable/2017-03-01/apimdiagnostics.json
+- stable/2017-03-01/apimemailtemplate.json
+- stable/2017-03-01/apimgroups.json
+- stable/2017-03-01/apimidentityprovider.json
+- stable/2017-03-01/apimloggers.json
+- stable/2017-03-01/apimnotifications.json
+- stable/2017-03-01/apimnetworkstatus.json
+- stable/2017-03-01/apimopenidconnectproviders.json
+- stable/2017-03-01/apimportalsettings.json
+- stable/2017-03-01/apimproducts.json
+- stable/2017-03-01/apimproperties.json
+- stable/2017-03-01/apimquotas.json
+- stable/2017-03-01/apimreports.json
+- stable/2017-03-01/apimsubscriptions.json
+- stable/2017-03-01/apimtagresources.json
+- stable/2017-03-01/apimtags.json
+- stable/2017-03-01/apimtenant.json
+- stable/2017-03-01/apimusers.json
+- stable/2017-03-01/apimversionsets.json
 ```
 
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-10'
+``` yaml $(tag) == 'package-2016-10'
 input-file:
-  - stable/2016-10-10/apimanagement.json
-  - stable/2016-10-10/apimapis.json
-  - stable/2016-10-10/apimauthorizationservers.json
-  - stable/2016-10-10/apimbackends.json
-  - stable/2016-10-10/apimcertificates.json
-  - stable/2016-10-10/apimdeployment.json
-  - stable/2016-10-10/apimgroups.json
-  - stable/2016-10-10/apimidentityprovider.json
-  - stable/2016-10-10/apimloggers.json
-  - stable/2016-10-10/apimnetworkstatus.json
-  - stable/2016-10-10/apimopenidconnectproviders.json
-  - stable/2016-10-10/apimproducts.json
-  - stable/2016-10-10/apimproperties.json
-  - stable/2016-10-10/apimquotas.json
-  - stable/2016-10-10/apimreports.json
-  - stable/2016-10-10/apimsubscriptions.json
-  - stable/2016-10-10/apimtenant.json
-  - stable/2016-10-10/apimusers.json
+- stable/2016-10-10/apimanagement.json
+- stable/2016-10-10/apimapis.json
+- stable/2016-10-10/apimauthorizationservers.json
+- stable/2016-10-10/apimbackends.json
+- stable/2016-10-10/apimcertificates.json
+- stable/2016-10-10/apimdeployment.json
+- stable/2016-10-10/apimgroups.json
+- stable/2016-10-10/apimidentityprovider.json
+- stable/2016-10-10/apimloggers.json
+- stable/2016-10-10/apimnetworkstatus.json
+- stable/2016-10-10/apimopenidconnectproviders.json
+- stable/2016-10-10/apimproducts.json
+- stable/2016-10-10/apimproperties.json
+- stable/2016-10-10/apimquotas.json
+- stable/2016-10-10/apimreports.json
+- stable/2016-10-10/apimsubscriptions.json
+- stable/2016-10-10/apimtenant.json
+- stable/2016-10-10/apimusers.json
 ```
 
 ### Tag: package-2016-07
 
 These settings apply only when `--tag=package-2016-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-07'
+``` yaml $(tag) == 'package-2016-07'
 input-file:
-  - stable/2016-07-07/apimanagement.json
-  - stable/2016-07-07/apimdeployment.json
+- stable/2016-07-07/apimanagement.json
+- stable/2016-07-07/apimdeployment.json
 ```
 
 ---
@@ -1201,7 +1191,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
@@ -1231,7 +1221,7 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: R4009
     from: apimapis.json
@@ -1322,70 +1312,32 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4037
     from: definitions.json
-    reason: We want customers to be able to supply any valid JSON token, object or otherwise
+    reason: We want customers to be able to supply any valid JSON token, object or otherwise    
   - suppress: R4009
     from: apimprivatelink.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
   - suppress: R4009
     from: apimprivatelink.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
   - suppress: R4009
     from: apimportalsettings.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
   - suppress: R4009
     from: apimportalconfigs.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
   - suppress: R4009
     from: apimpolicyfragments.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: LroErrorContent
     from: apimapis.json
-    reason: Error Schema not referencing Common Schema V2. Will fix in the future.
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
   - suppress: LroErrorContent
     from: apimusers.json
-    reason: Error Schema not referencing Common Schema V2. Will fix in the future.
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
   - suppress: LroErrorContent
     from: apimpolicyrestrictionsvalidation.json
-    reason: Error Schema not referencing Common Schema V2. Will fix in the future.
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
 suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    from: openapi.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}"].patch.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}"].patch.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}"].patch.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}"].patch.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}/models/{modelName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}/models/{modelName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}/models/{modelName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}/models/{modelName}"].patch.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}"].patch.responses["200"].schema
-    reason: The referenced AI Gateway response schemas mark provisioningState readOnly, but the validator does not preserve the sibling readOnly annotation when resolving the enum reference.
-  - code: XMSSecretInResponse
-    from: openapi.json
-    where:
-      - $.definitions.AiGatewayPolicy.properties.counterKey
-      - $.definitions.AiGatewayPolicyUpdate.properties.counterKey
-    reason: counterKey selects the public request attribute used to partition a rate limit counter; it is not a credential or secret value.
-  - code: EnumInsteadOfBoolean
-    from: openapi.json
-    where: $.definitions.AiGatewayCredentialMetadata.properties.configured
-    reason: configured reports whether credentials exist and is intentionally a boolean state.
   - code: PropertiesTypeObjectNoDefinition
     from: definitions.json
     reason: Invalid error
@@ -1403,7 +1355,7 @@ suppressions:
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspacediagnostics.json
-    where:
+    where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/diagnostics"].get.responses["200"].schema.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}/diagnostics"].get.responses.["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
@@ -1414,4 +1366,4 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: apimworkspacebackends.json
     reasons: This are the object fields which when updated require some data to be present.
-```
+

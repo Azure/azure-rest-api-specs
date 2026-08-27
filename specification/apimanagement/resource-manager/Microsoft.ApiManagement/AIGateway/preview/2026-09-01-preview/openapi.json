@@ -1,0 +1,4870 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AIGatewayClient",
+    "version": "2026-09-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AIGatewayOperations"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AiGatewayResources"
+    },
+    {
+      "name": "AiGatewayWorkspaceResources"
+    },
+    {
+      "name": "AiGatewayModelProviderResources"
+    },
+    {
+      "name": "AiGatewayModelResources"
+    },
+    {
+      "name": "AiGatewayToolServerResources"
+    },
+    {
+      "name": "AiGatewayApiKeyResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ApiManagement/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "AIGatewayOperations",
+          "Operations"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.ApiManagement provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateway operations": {
+            "$ref": "./examples/AIGatewayListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/aigateways": {
+      "get": {
+        "operationId": "AiGatewayResources_ListBySubscription",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "List AiGatewayResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateways by subscription": {
+            "$ref": "./examples/AiGatewayListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways": {
+      "get": {
+        "operationId": "AiGatewayResources_ListByResourceGroup",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "List AiGatewayResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateways by resource group": {
+            "$ref": "./examples/AiGatewayListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}": {
+      "get": {
+        "operationId": "AiGatewayResources_Get",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "Get a AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an AI Gateway": {
+            "$ref": "./examples/AiGatewayGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayResources_CreateOrUpdate",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "Create a AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the resource. Required for an update.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an AI Gateway": {
+            "$ref": "./examples/AiGatewayCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AiGatewayResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AiGatewayResources_Update",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "Update a AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an AI Gateway": {
+            "$ref": "./examples/AiGatewayUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AiGatewayResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AiGatewayResources_Delete",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "Delete a AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an AI Gateway": {
+            "$ref": "./examples/AiGatewayDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys": {
+      "get": {
+        "operationId": "AiGatewayApiKeyResources_ListByAiGateway",
+        "tags": [
+          "AiGatewayApiKeyResources"
+        ],
+        "description": "List AiGatewayApiKeyResource resources by AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayApiKeyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateway API keys": {
+            "$ref": "./examples/AiGatewayApiKeyList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}": {
+      "get": {
+        "operationId": "AiGatewayApiKeyResources_Get",
+        "tags": [
+          "AiGatewayApiKeyResources"
+        ],
+        "description": "Get a AiGatewayApiKeyResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "apiKeyName",
+            "in": "path",
+            "description": "The name of the AiGatewayApiKeyResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayApiKeyResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an AI Gateway API key": {
+            "$ref": "./examples/AiGatewayApiKeyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayApiKeyResources_CreateOrUpdate",
+        "tags": [
+          "AiGatewayApiKeyResources"
+        ],
+        "description": "Create a AiGatewayApiKeyResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "apiKeyName",
+            "in": "path",
+            "description": "The name of the AiGatewayApiKeyResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the resource. Required for an update.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayApiKeyResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayApiKeyResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayApiKeyResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayApiKeyResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayApiKeyResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an AI Gateway API key": {
+            "$ref": "./examples/AiGatewayApiKeyCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AiGatewayApiKeyResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AiGatewayApiKeyResources_Update",
+        "tags": [
+          "AiGatewayApiKeyResources"
+        ],
+        "description": "Update a AiGatewayApiKeyResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "apiKeyName",
+            "in": "path",
+            "description": "The name of the AiGatewayApiKeyResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayApiKeyUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayApiKeyResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an AI Gateway API key": {
+            "$ref": "./examples/AiGatewayApiKeyUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AiGatewayApiKeyResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AiGatewayApiKeyResources_Delete",
+        "tags": [
+          "AiGatewayApiKeyResources"
+        ],
+        "description": "Delete a AiGatewayApiKeyResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "apiKeyName",
+            "in": "path",
+            "description": "The name of the AiGatewayApiKeyResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an AI Gateway API key": {
+            "$ref": "./examples/AiGatewayApiKeyDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}/listSecrets": {
+      "post": {
+        "operationId": "AiGatewayApiKeyResources_ListSecrets",
+        "tags": [
+          "AiGatewayApiKeyResources"
+        ],
+        "description": "Returns primary and secondary key values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "apiKeyName",
+            "in": "path",
+            "description": "The name of the AiGatewayApiKeyResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayApiKeyValues"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateway API key secrets": {
+            "$ref": "./examples/AiGatewayApiKeyListSecrets.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}/regeneratePrimaryKey": {
+      "post": {
+        "operationId": "AiGatewayApiKeyResources_RegeneratePrimaryKey",
+        "tags": [
+          "AiGatewayApiKeyResources"
+        ],
+        "description": "Regenerates the primary API key value.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "apiKeyName",
+            "in": "path",
+            "description": "The name of the AiGatewayApiKeyResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regenerate the primary AI Gateway API key": {
+            "$ref": "./examples/AiGatewayApiKeyRegeneratePrimaryKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/apiKeys/{apiKeyName}/regenerateSecondaryKey": {
+      "post": {
+        "operationId": "AiGatewayApiKeyResources_RegenerateSecondaryKey",
+        "tags": [
+          "AiGatewayApiKeyResources"
+        ],
+        "description": "Regenerates the secondary API key value.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "apiKeyName",
+            "in": "path",
+            "description": "The name of the AiGatewayApiKeyResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regenerate the secondary AI Gateway API key": {
+            "$ref": "./examples/AiGatewayApiKeyRegenerateSecondaryKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces": {
+      "get": {
+        "operationId": "AiGatewayWorkspaceResources_ListByAiGateway",
+        "tags": [
+          "AiGatewayWorkspaceResources"
+        ],
+        "description": "List AiGatewayWorkspaceResource resources by AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayWorkspaceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateway workspaces": {
+            "$ref": "./examples/AiGatewayWorkspaceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}": {
+      "get": {
+        "operationId": "AiGatewayWorkspaceResources_Get",
+        "tags": [
+          "AiGatewayWorkspaceResources"
+        ],
+        "description": "Get a AiGatewayWorkspaceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayWorkspaceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an AI Gateway workspace": {
+            "$ref": "./examples/AiGatewayWorkspaceGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayWorkspaceResources_CreateOrUpdate",
+        "tags": [
+          "AiGatewayWorkspaceResources"
+        ],
+        "description": "Create a AiGatewayWorkspaceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the resource. Required for an update.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayWorkspaceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayWorkspaceResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayWorkspaceResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayWorkspaceResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayWorkspaceResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an AI Gateway workspace": {
+            "$ref": "./examples/AiGatewayWorkspaceCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AiGatewayWorkspaceResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AiGatewayWorkspaceResources_Update",
+        "tags": [
+          "AiGatewayWorkspaceResources"
+        ],
+        "description": "Update a AiGatewayWorkspaceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayWorkspaceUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayWorkspaceResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an AI Gateway workspace": {
+            "$ref": "./examples/AiGatewayWorkspaceUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AiGatewayWorkspaceResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AiGatewayWorkspaceResources_Delete",
+        "tags": [
+          "AiGatewayWorkspaceResources"
+        ],
+        "description": "Delete a AiGatewayWorkspaceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an AI Gateway workspace": {
+            "$ref": "./examples/AiGatewayWorkspaceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders": {
+      "get": {
+        "operationId": "AiGatewayModelProviderResources_ListByWorkspace",
+        "tags": [
+          "AiGatewayModelProviderResources"
+        ],
+        "description": "List AiGatewayModelProviderResource resources by AiGatewayWorkspaceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelProviderResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List model providers": {
+            "$ref": "./examples/AiGatewayModelProviderList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}": {
+      "get": {
+        "operationId": "AiGatewayModelProviderResources_Get",
+        "tags": [
+          "AiGatewayModelProviderResources"
+        ],
+        "description": "Get a AiGatewayModelProviderResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelProviderResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a model provider": {
+            "$ref": "./examples/AiGatewayModelProviderGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayModelProviderResources_CreateOrUpdate",
+        "tags": [
+          "AiGatewayModelProviderResources"
+        ],
+        "description": "Create a AiGatewayModelProviderResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the resource. Required for an update.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelProviderResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayModelProviderResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelProviderResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayModelProviderResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelProviderResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Foundry model provider": {
+            "$ref": "./examples/AiGatewayModelProviderCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AiGatewayModelProviderResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AiGatewayModelProviderResources_Update",
+        "tags": [
+          "AiGatewayModelProviderResources"
+        ],
+        "description": "Update a AiGatewayModelProviderResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelProviderUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelProviderResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a model provider": {
+            "$ref": "./examples/AiGatewayModelProviderUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AiGatewayModelProviderResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AiGatewayModelProviderResources_Delete",
+        "tags": [
+          "AiGatewayModelProviderResources"
+        ],
+        "description": "Delete a AiGatewayModelProviderResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a model provider": {
+            "$ref": "./examples/AiGatewayModelProviderDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}/listCredentials": {
+      "post": {
+        "operationId": "AiGatewayModelProviderResources_ListCredentials",
+        "tags": [
+          "AiGatewayModelProviderResources"
+        ],
+        "description": "Gets credential metadata for a model provider. Secret values are not returned.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayCredentialValue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List model provider credentials": {
+            "$ref": "./examples/AiGatewayModelProviderListCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}/models": {
+      "get": {
+        "operationId": "AiGatewayModelResources_ListByModelProvider",
+        "tags": [
+          "AiGatewayModelResources"
+        ],
+        "description": "List AiGatewayModelResource resources by AiGatewayModelProviderResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List models by provider": {
+            "$ref": "./examples/AiGatewayModelList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}/models/{modelName}": {
+      "get": {
+        "operationId": "AiGatewayModelResources_Get",
+        "tags": [
+          "AiGatewayModelResources"
+        ],
+        "description": "Get a AiGatewayModelResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an AI Gateway model": {
+            "$ref": "./examples/AiGatewayModelGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayModelResources_CreateOrUpdate",
+        "tags": [
+          "AiGatewayModelResources"
+        ],
+        "description": "Create a AiGatewayModelResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the resource. Required for an update.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayModelResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayModelResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an AI Gateway model": {
+            "$ref": "./examples/AiGatewayModelCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AiGatewayModelResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AiGatewayModelResources_Update",
+        "tags": [
+          "AiGatewayModelResources"
+        ],
+        "description": "Update a AiGatewayModelResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an AI Gateway model": {
+            "$ref": "./examples/AiGatewayModelUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AiGatewayModelResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AiGatewayModelResources_Delete",
+        "tags": [
+          "AiGatewayModelResources"
+        ],
+        "description": "Delete a AiGatewayModelResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelProviderName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelProviderResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "modelName",
+            "in": "path",
+            "description": "The name of the AiGatewayModelResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an AI Gateway model": {
+            "$ref": "./examples/AiGatewayModelDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/models": {
+      "get": {
+        "operationId": "AiGatewayWorkspaceModelOperations_ListByWorkspace",
+        "description": "Lists models from every model provider in an AI Gateway workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "AI Gateway resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayModelResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all models in a workspace": {
+            "$ref": "./examples/AiGatewayWorkspaceModelsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers": {
+      "get": {
+        "operationId": "AiGatewayToolServerResources_ListByWorkspace",
+        "tags": [
+          "AiGatewayToolServerResources"
+        ],
+        "description": "List AiGatewayToolServerResource resources by AiGatewayWorkspaceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List tool servers": {
+            "$ref": "./examples/AiGatewayToolServerList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}": {
+      "get": {
+        "operationId": "AiGatewayToolServerResources_Get",
+        "tags": [
+          "AiGatewayToolServerResources"
+        ],
+        "description": "Get a AiGatewayToolServerResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "toolServerName",
+            "in": "path",
+            "description": "The name of the AiGatewayToolServerResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a tool server": {
+            "$ref": "./examples/AiGatewayToolServerGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayToolServerResources_CreateOrUpdate",
+        "tags": [
+          "AiGatewayToolServerResources"
+        ],
+        "description": "Create a AiGatewayToolServerResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "toolServerName",
+            "in": "path",
+            "description": "The name of the AiGatewayToolServerResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the resource. Required for an update.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayToolServerResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayToolServerResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an MCP tool server": {
+            "$ref": "./examples/AiGatewayToolServerCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AiGatewayToolServerResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AiGatewayToolServerResources_Update",
+        "tags": [
+          "AiGatewayToolServerResources"
+        ],
+        "description": "Update a AiGatewayToolServerResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "toolServerName",
+            "in": "path",
+            "description": "The name of the AiGatewayToolServerResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a tool server": {
+            "$ref": "./examples/AiGatewayToolServerUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AiGatewayToolServerResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AiGatewayToolServerResources_Delete",
+        "tags": [
+          "AiGatewayToolServerResources"
+        ],
+        "description": "Delete a AiGatewayToolServerResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "toolServerName",
+            "in": "path",
+            "description": "The name of the AiGatewayToolServerResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a tool server": {
+            "$ref": "./examples/AiGatewayToolServerDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/listSecrets": {
+      "post": {
+        "operationId": "AiGatewayToolServerResources_ListSecrets",
+        "tags": [
+          "AiGatewayToolServerResources"
+        ],
+        "description": "Lists secret values configured on tool server endpoints.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AiGatewayWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "toolServerName",
+            "in": "path",
+            "description": "The name of the AiGatewayToolServerResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerSecrets"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List tool server secrets": {
+            "$ref": "./examples/AiGatewayToolServerListSecrets.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AiGatewayApiKeyCredential": {
+      "type": "object",
+      "description": "API key credentials for an upstream service.",
+      "properties": {
+        "headerName": {
+          "type": "string",
+          "description": "Name of the HTTP header that carries the API key."
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret API key value. This value is not returned by read operations.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "headerName"
+      ]
+    },
+    "AiGatewayApiKeyCredentialUpdate": {
+      "type": "object",
+      "description": "API key credentials for updating an upstream service.",
+      "properties": {
+        "headerName": {
+          "type": "string",
+          "description": "Name of the HTTP header that carries the API key."
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret API key value.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "AiGatewayApiKeyProperties": {
+      "type": "object",
+      "description": "Properties of an AI Gateway API key.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the key."
+        },
+        "state": {
+          "type": "string",
+          "description": "Subscription state."
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time.",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional expiration time."
+        },
+        "primaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Primary key value. Omitted from ordinary read responses.",
+          "x-ms-secret": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Secondary key value. Omitted from ordinary read responses.",
+          "x-ms-secret": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AiGatewayProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AiGatewayApiKeyResource": {
+      "type": "object",
+      "description": "An AI Gateway API key resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayApiKeyProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AiGatewayApiKeyResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayApiKeyResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayApiKeyResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AiGatewayApiKeyResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewayApiKeyTarget": {
+      "type": "string",
+      "description": "API key slot to regenerate.",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayApiKeyTarget",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary",
+            "description": "The primary key."
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary",
+            "description": "The secondary key."
+          }
+        ]
+      }
+    },
+    "AiGatewayApiKeyUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating an AI Gateway API key.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayApiKeyUpdateProperties",
+          "description": "API key properties to update."
+        }
+      }
+    },
+    "AiGatewayApiKeyUpdateProperties": {
+      "type": "object",
+      "description": "Properties for updating an AI Gateway API key.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the key."
+        },
+        "state": {
+          "type": "string",
+          "description": "Subscription state."
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional expiration time."
+        }
+      }
+    },
+    "AiGatewayApiKeyValues": {
+      "type": "object",
+      "description": "Primary and secondary API key values.",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Primary API key value.",
+          "x-ms-secret": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Secondary API key value.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "primaryKey",
+        "secondaryKey"
+      ]
+    },
+    "AiGatewayContentSafetySeverity": {
+      "type": "string",
+      "description": "Severity threshold used by a content safety policy.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayContentSafetySeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low severity."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium severity."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High severity."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Do not filter this category."
+          }
+        ]
+      }
+    },
+    "AiGatewayCredentialValue": {
+      "type": "object",
+      "description": "Credential returned for a model provider.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Stored credential value.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "AiGatewayCustomAuthentication": {
+      "type": "object",
+      "description": "Authentication configuration for a custom model provider.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Authentication type.",
+          "enum": [
+            "ApiKey"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "apiKey": {
+          "$ref": "#/definitions/AiGatewayApiKeyCredential",
+          "description": "API key configuration."
+        }
+      },
+      "required": [
+        "kind",
+        "apiKey"
+      ]
+    },
+    "AiGatewayCustomAuthenticationUpdate": {
+      "type": "object",
+      "description": "Custom model provider authentication settings to update.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Authentication type.",
+          "enum": [
+            "ApiKey"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "apiKey": {
+          "$ref": "#/definitions/AiGatewayApiKeyCredentialUpdate",
+          "description": "API key configuration."
+        }
+      }
+    },
+    "AiGatewayCustomProviderConfiguration": {
+      "type": "object",
+      "description": "Custom model provider configuration.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Provider base endpoint."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayCustomAuthentication",
+          "description": "Authentication configuration."
+        }
+      },
+      "required": [
+        "endpoint",
+        "authentication"
+      ]
+    },
+    "AiGatewayCustomProviderConfigurationUpdate": {
+      "type": "object",
+      "description": "Custom model provider settings to update.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Provider base endpoint."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayCustomAuthenticationUpdate",
+          "description": "Authentication configuration."
+        }
+      }
+    },
+    "AiGatewayFallbackTarget": {
+      "type": "object",
+      "description": "A fallback target for a model policy.",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "Resource identifier of a model in the same workspace."
+        }
+      },
+      "required": [
+        "modelId"
+      ]
+    },
+    "AiGatewayFallbackTargetUpdate": {
+      "type": "object",
+      "description": "A fallback target to update on a model policy.",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "Resource identifier of a model in the same workspace."
+        }
+      }
+    },
+    "AiGatewayFoundryAuthentication": {
+      "type": "object",
+      "description": "Authentication configuration for a Foundry model provider.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AiGatewayModelProviderAuthenticationKind",
+          "description": "Authentication type."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
+          "description": "Managed identity settings. Applicable when kind is ManagedIdentity."
+        },
+        "apiKey": {
+          "$ref": "#/definitions/AiGatewayApiKeyCredential",
+          "description": "API key configuration. Required when kind is ApiKey."
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AiGatewayFoundryAuthenticationUpdate": {
+      "type": "object",
+      "description": "Foundry authentication settings to update.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AiGatewayModelProviderAuthenticationKind",
+          "description": "Authentication type."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
+          "description": "Managed identity settings."
+        },
+        "apiKey": {
+          "$ref": "#/definitions/AiGatewayApiKeyCredentialUpdate",
+          "description": "API key configuration."
+        }
+      }
+    },
+    "AiGatewayFoundryProviderConfiguration": {
+      "type": "object",
+      "description": "Foundry model provider configuration.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Foundry endpoint."
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "Cognitive Services account resource identifiers available to this provider.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayFoundryAuthentication",
+          "description": "Authentication configuration."
+        }
+      },
+      "required": [
+        "resourceIds",
+        "authentication"
+      ]
+    },
+    "AiGatewayFoundryProviderConfigurationUpdate": {
+      "type": "object",
+      "description": "Foundry model provider settings to update.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Foundry endpoint."
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "Cognitive Services account resource identifiers available to this provider.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayFoundryAuthenticationUpdate",
+          "description": "Authentication configuration."
+        }
+      }
+    },
+    "AiGatewayIpFilterAction": {
+      "type": "string",
+      "description": "Action performed by an IP filtering policy.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayIpFilterAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow matching addresses."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny matching addresses."
+          }
+        ]
+      }
+    },
+    "AiGatewayManagedIdentityAuthentication": {
+      "type": "object",
+      "description": "Managed identity settings for a model provider.",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "Token audience requested for managed identity authentication."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of a user-assigned managed identity."
+        }
+      }
+    },
+    "AiGatewayMcpTransport": {
+      "type": "string",
+      "description": "Transport used to connect to an MCP server.",
+      "enum": [
+        "StreamableHttp"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayMcpTransport",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StreamableHttp",
+            "value": "StreamableHttp",
+            "description": "Streamable HTTP transport."
+          }
+        ]
+      }
+    },
+    "AiGatewayMcpUrlConfiguration": {
+      "type": "object",
+      "description": "MCP URL endpoint configuration.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Backend MCP server endpoint."
+        },
+        "transport": {
+          "$ref": "#/definitions/AiGatewayToolServerMcpTransport",
+          "description": "MCP transport."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "AiGatewayMcpUrlConfigurationUpdate": {
+      "type": "object",
+      "description": "MCP URL endpoint settings to update.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Backend MCP server endpoint."
+        },
+        "transport": {
+          "$ref": "#/definitions/AiGatewayToolServerMcpTransport",
+          "description": "MCP transport."
+        }
+      }
+    },
+    "AiGatewayModelDeployment": {
+      "type": "object",
+      "description": "Deployment details for an AI Gateway model.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "ARM resource identifier of the provider deployment."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "Provider-side model name."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "Provider-side model version."
+        }
+      },
+      "required": [
+        "modelName"
+      ]
+    },
+    "AiGatewayModelDeploymentUpdate": {
+      "type": "object",
+      "description": "Deployment details to update on an AI Gateway model.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "ARM resource identifier of the provider deployment."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "Provider-side model name."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "Provider-side model version."
+        }
+      }
+    },
+    "AiGatewayModelProperties": {
+      "type": "object",
+      "description": "Properties of an AI Gateway model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the model.",
+          "x-ms-client-name": "displayName"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the model."
+        },
+        "providerKind": {
+          "$ref": "#/definitions/AiGatewayModelProviderKind",
+          "description": "Parent model provider type.",
+          "readOnly": true
+        },
+        "deployment": {
+          "$ref": "#/definitions/AiGatewayModelDeployment",
+          "description": "Provider deployment details."
+        },
+        "supportedEndpoints": {
+          "type": "array",
+          "description": "Runtime endpoints supported by this model.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "policies": {
+          "type": "array",
+          "description": "Inline policies applied to this model.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayPolicy"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AiGatewayProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "deployment",
+        "supportedEndpoints"
+      ]
+    },
+    "AiGatewayModelProviderAuthenticationKind": {
+      "type": "string",
+      "description": "Authentication type used by an AI model provider.",
+      "enum": [
+        "ManagedIdentity",
+        "ApiKey"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayModelProviderAuthenticationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "Authenticate using a managed identity."
+          },
+          {
+            "name": "ApiKey",
+            "value": "ApiKey",
+            "description": "Authenticate using an API key."
+          }
+        ]
+      }
+    },
+    "AiGatewayModelProviderKind": {
+      "type": "string",
+      "description": "The type of an AI model provider.",
+      "enum": [
+        "Foundry",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayModelProviderKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Foundry",
+            "value": "Foundry",
+            "description": "Azure AI Foundry provider."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom model provider."
+          }
+        ]
+      }
+    },
+    "AiGatewayModelProviderProperties": {
+      "type": "object",
+      "description": "Properties of an AI Gateway model provider.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AiGatewayModelProviderKind",
+          "description": "Model provider type. This value cannot be changed after creation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the model provider.",
+          "x-ms-client-name": "displayName"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the model provider."
+        },
+        "foundry": {
+          "$ref": "#/definitions/AiGatewayFoundryProviderConfiguration",
+          "description": "Foundry configuration. Required when kind is Foundry."
+        },
+        "custom": {
+          "$ref": "#/definitions/AiGatewayCustomProviderConfiguration",
+          "description": "Custom provider configuration. Required when kind is Custom."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AiGatewayProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ]
+    },
+    "AiGatewayModelProviderResource": {
+      "type": "object",
+      "description": "An AI Gateway model provider resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayModelProviderProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AiGatewayModelProviderResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayModelProviderResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayModelProviderResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AiGatewayModelProviderResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewayModelProviderUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating an AI Gateway model provider.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayModelProviderUpdateProperties",
+          "description": "Model provider properties to update."
+        }
+      }
+    },
+    "AiGatewayModelProviderUpdateProperties": {
+      "type": "object",
+      "description": "Properties for updating an AI Gateway model provider.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AiGatewayModelProviderKind",
+          "description": "Model provider type."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the model provider.",
+          "x-ms-client-name": "displayName"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the model provider."
+        },
+        "foundry": {
+          "$ref": "#/definitions/AiGatewayFoundryProviderConfigurationUpdate",
+          "description": "Foundry configuration."
+        },
+        "custom": {
+          "$ref": "#/definitions/AiGatewayCustomProviderConfigurationUpdate",
+          "description": "Custom provider configuration."
+        }
+      }
+    },
+    "AiGatewayModelResource": {
+      "type": "object",
+      "description": "An AI Gateway model resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayModelProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AiGatewayModelResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayModelResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayModelResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AiGatewayModelResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewayModelUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating an AI Gateway model.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayModelUpdateProperties",
+          "description": "Model properties to update."
+        }
+      }
+    },
+    "AiGatewayModelUpdateProperties": {
+      "type": "object",
+      "description": "Properties for updating an AI Gateway model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the model.",
+          "x-ms-client-name": "displayName"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the model."
+        },
+        "deployment": {
+          "$ref": "#/definitions/AiGatewayModelDeploymentUpdate",
+          "description": "Provider deployment details."
+        },
+        "policies": {
+          "type": "array",
+          "description": "Inline policies applied to this model.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayPolicyUpdate"
+          },
+          "x-ms-identifiers": []
+        },
+        "supportedEndpoints": {
+          "type": "array",
+          "description": "Runtime endpoints supported by this model.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AiGatewayOpenApiConfiguration": {
+      "type": "object",
+      "description": "OpenAPI-backed MCP endpoint configuration.",
+      "properties": {
+        "specSource": {
+          "$ref": "#/definitions/AiGatewayOpenApiSpecSource",
+          "description": "OpenAPI document source."
+        }
+      },
+      "required": [
+        "specSource"
+      ]
+    },
+    "AiGatewayOpenApiConfigurationUpdate": {
+      "type": "object",
+      "description": "OpenAPI-backed MCP endpoint settings to update.",
+      "properties": {
+        "specSource": {
+          "$ref": "#/definitions/AiGatewayOpenApiSpecSourceUpdate",
+          "description": "OpenAPI document source."
+        }
+      }
+    },
+    "AiGatewayOpenApiSpecSource": {
+      "type": "object",
+      "description": "Source of an OpenAPI document.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerOpenApiSourceType",
+          "description": "Source type."
+        },
+        "contentBase64": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64-encoded OpenAPI document. Required when kind is Inline."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the OpenAPI document. Required when kind is Url."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AiGatewayOpenApiSpecSourceKind": {
+      "type": "string",
+      "description": "Source type for an OpenAPI document.",
+      "enum": [
+        "Inline",
+        "Url"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayOpenApiSpecSourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inline",
+            "value": "Inline",
+            "description": "The OpenAPI document is supplied inline."
+          },
+          {
+            "name": "Url",
+            "value": "Url",
+            "description": "The OpenAPI document is loaded from a URL."
+          }
+        ]
+      }
+    },
+    "AiGatewayOpenApiSpecSourceUpdate": {
+      "type": "object",
+      "description": "OpenAPI document source settings to update.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerOpenApiSourceType",
+          "description": "Source type."
+        },
+        "contentBase64": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64-encoded OpenAPI document."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the OpenAPI document."
+        }
+      }
+    },
+    "AiGatewayPolicy": {
+      "type": "object",
+      "description": "An inline policy attached to an AI Gateway model or tool server.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayPolicyType",
+          "description": "Policy type."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Token count allowed during a token limit period."
+        },
+        "period": {
+          "$ref": "#/definitions/AiGatewayTokenLimitPeriod",
+          "description": "Token limit period."
+        },
+        "counterKey": {
+          "type": "string",
+          "description": "Key used to partition a token or request rate limit counter."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Content safety service endpoint."
+        },
+        "key": {
+          "type": "string",
+          "format": "password",
+          "description": "Content safety service key.",
+          "x-ms-secret": true
+        },
+        "hateSeverity": {
+          "$ref": "#/definitions/AiGatewayContentSafetySeverity",
+          "description": "Hate-content severity threshold."
+        },
+        "violenceSeverity": {
+          "$ref": "#/definitions/AiGatewayContentSafetySeverity",
+          "description": "Violence-content severity threshold."
+        },
+        "sexualSeverity": {
+          "$ref": "#/definitions/AiGatewayContentSafetySeverity",
+          "description": "Sexual-content severity threshold."
+        },
+        "selfHarmSeverity": {
+          "$ref": "#/definitions/AiGatewayContentSafetySeverity",
+          "description": "Self-harm-content severity threshold."
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Consecutive failure count that opens a fallback circuit."
+        },
+        "tripDurationSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration for which the fallback circuit remains open."
+        },
+        "fallbackTargets": {
+          "type": "array",
+          "description": "Ordered fallback model targets.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayFallbackTarget"
+          },
+          "x-ms-identifiers": [
+            "modelId"
+          ]
+        },
+        "action": {
+          "$ref": "#/definitions/AiGatewayIpFilterAction",
+          "description": "IP filtering action."
+        },
+        "cidrRanges": {
+          "type": "array",
+          "description": "CIDR ranges to allow or deny.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "callsPerPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Request count allowed during the configured period."
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Request rate limit period in seconds."
+        },
+        "allowedOrigins": {
+          "type": "array",
+          "description": "Origins allowed by a CORS policy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedMethods": {
+          "type": "array",
+          "description": "HTTP methods allowed by a CORS policy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedHeaders": {
+          "type": "array",
+          "description": "HTTP headers allowed by a CORS policy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxAgeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Browser preflight cache duration in seconds."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AiGatewayPolicyType": {
+      "type": "string",
+      "description": "The type of an inline AI Gateway policy.",
+      "enum": [
+        "tokenLimit",
+        "contentSafety",
+        "fallback",
+        "ipFilter",
+        "requestRateLimit",
+        "cors"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TokenLimit",
+            "value": "tokenLimit",
+            "description": "Limit consumed tokens."
+          },
+          {
+            "name": "ContentSafety",
+            "value": "contentSafety",
+            "description": "Filter unsafe content."
+          },
+          {
+            "name": "Fallback",
+            "value": "fallback",
+            "description": "Route to fallback models after failures."
+          },
+          {
+            "name": "IpFilter",
+            "value": "ipFilter",
+            "description": "Filter clients by IP address."
+          },
+          {
+            "name": "RequestRateLimit",
+            "value": "requestRateLimit",
+            "description": "Limit requests over time."
+          },
+          {
+            "name": "Cors",
+            "value": "cors",
+            "description": "Configure cross-origin resource sharing."
+          }
+        ]
+      }
+    },
+    "AiGatewayPolicyUpdate": {
+      "type": "object",
+      "description": "An inline policy to update on an AI Gateway model or tool server.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayPolicyType",
+          "description": "Policy type."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Token count allowed during a token limit period."
+        },
+        "period": {
+          "$ref": "#/definitions/AiGatewayTokenLimitPeriod",
+          "description": "Token limit period."
+        },
+        "counterKey": {
+          "type": "string",
+          "description": "Key used to partition a token or request rate limit counter."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Content safety service endpoint."
+        },
+        "key": {
+          "type": "string",
+          "format": "password",
+          "description": "Content safety service key.",
+          "x-ms-secret": true
+        },
+        "hateSeverity": {
+          "$ref": "#/definitions/AiGatewayContentSafetySeverity",
+          "description": "Hate-content severity threshold."
+        },
+        "violenceSeverity": {
+          "$ref": "#/definitions/AiGatewayContentSafetySeverity",
+          "description": "Violence-content severity threshold."
+        },
+        "sexualSeverity": {
+          "$ref": "#/definitions/AiGatewayContentSafetySeverity",
+          "description": "Sexual-content severity threshold."
+        },
+        "selfHarmSeverity": {
+          "$ref": "#/definitions/AiGatewayContentSafetySeverity",
+          "description": "Self-harm-content severity threshold."
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Consecutive failure count that opens a fallback circuit."
+        },
+        "tripDurationSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration for which the fallback circuit remains open."
+        },
+        "fallbackTargets": {
+          "type": "array",
+          "description": "Ordered fallback model targets.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayFallbackTargetUpdate"
+          },
+          "x-ms-identifiers": []
+        },
+        "action": {
+          "$ref": "#/definitions/AiGatewayIpFilterAction",
+          "description": "IP filtering action."
+        },
+        "cidrRanges": {
+          "type": "array",
+          "description": "CIDR ranges to allow or deny.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "callsPerPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Request count allowed during the configured period."
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Request rate limit period in seconds."
+        },
+        "allowedOrigins": {
+          "type": "array",
+          "description": "Origins allowed by a CORS policy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedMethods": {
+          "type": "array",
+          "description": "HTTP methods allowed by a CORS policy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedHeaders": {
+          "type": "array",
+          "description": "HTTP headers allowed by a CORS policy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxAgeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Browser preflight cache duration in seconds."
+        }
+      }
+    },
+    "AiGatewayProperties": {
+      "type": "object",
+      "description": "Properties of an AI Gateway.",
+      "properties": {
+        "runtimeHostname": {
+          "type": "string",
+          "description": "Runtime hostname used to invoke this AI Gateway.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AiGatewayProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AiGatewayProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of an AI Gateway resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource is ready."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource operation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource operation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          }
+        ]
+      }
+    },
+    "AiGatewayResource": {
+      "type": "object",
+      "description": "An AI Gateway resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AiGatewayResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AiGatewayResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewayTokenLimitPeriod": {
+      "type": "string",
+      "description": "Time period used by a token limit policy.",
+      "enum": [
+        "minute",
+        "hour",
+        "day",
+        "month"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayTokenLimitPeriod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Minute",
+            "value": "minute",
+            "description": "One minute."
+          },
+          {
+            "name": "Hour",
+            "value": "hour",
+            "description": "One hour."
+          },
+          {
+            "name": "Day",
+            "value": "day",
+            "description": "One day."
+          },
+          {
+            "name": "Month",
+            "value": "month",
+            "description": "One month."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerAccessState": {
+      "type": "string",
+      "description": "Tool server access state.",
+      "enum": [
+        "active",
+        "blocked"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "Tool server is available."
+          },
+          {
+            "name": "Blocked",
+            "value": "blocked",
+            "description": "Tool server is blocked."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerAuthenticationType": {
+      "type": "string",
+      "description": "Endpoint authentication type.",
+      "enum": [
+        "none",
+        "header",
+        "oauth2",
+        "managedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "No authentication."
+          },
+          {
+            "name": "Header",
+            "value": "header",
+            "description": "Static HTTP header authentication."
+          },
+          {
+            "name": "OAuth2",
+            "value": "oauth2",
+            "description": "OAuth 2.0 authentication."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "managedIdentity",
+            "description": "Managed identity authentication."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerCredentialKind": {
+      "type": "string",
+      "description": "Authentication type used by a tool server endpoint.",
+      "enum": [
+        "None",
+        "ApiKey"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerCredentialKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No credentials."
+          },
+          {
+            "name": "ApiKey",
+            "value": "ApiKey",
+            "description": "Authenticate using an API key."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerCredentials": {
+      "type": "object",
+      "description": "Credentials for a tool server endpoint.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerAuthenticationType",
+          "description": "Authentication type."
+        },
+        "headers": {
+          "type": "object",
+          "format": "password",
+          "description": "Static headers injected when calling the endpoint.",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "x-ms-secret": true
+        },
+        "oauth2": {
+          "$ref": "#/definitions/AiGatewayToolServerOauth2Authentication",
+          "description": "OAuth 2.0 configuration."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayToolServerManagedIdentityAuthentication",
+          "description": "Managed identity configuration."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AiGatewayToolServerCredentialsUpdate": {
+      "type": "object",
+      "description": "Tool server credentials to update.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerAuthenticationType",
+          "description": "Authentication type."
+        },
+        "headers": {
+          "type": "object",
+          "format": "password",
+          "description": "Static headers injected when calling the endpoint.",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "x-ms-secret": true
+        },
+        "oauth2": {
+          "$ref": "#/definitions/AiGatewayToolServerOauth2Authentication",
+          "description": "OAuth 2.0 configuration."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayToolServerManagedIdentityAuthentication",
+          "description": "Managed identity configuration."
+        }
+      }
+    },
+    "AiGatewayToolServerEndpoint": {
+      "type": "object",
+      "description": "A tool server endpoint.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable endpoint identifier. Generated when omitted."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Optional namespace used to prefix tool names."
+        },
+        "kind": {
+          "$ref": "#/definitions/AiGatewayToolServerEndpointSourceKind",
+          "description": "Endpoint type."
+        },
+        "mcp": {
+          "$ref": "#/definitions/AiGatewayMcpUrlConfiguration",
+          "description": "Backend MCP configuration. Required when kind is mcp."
+        },
+        "openApi": {
+          "$ref": "#/definitions/AiGatewayOpenApiConfiguration",
+          "description": "OpenAPI configuration. Required when kind is McpFromOpenApi."
+        },
+        "credentials": {
+          "$ref": "#/definitions/AiGatewayToolServerCredentials",
+          "description": "Backend credentials."
+        },
+        "tools": {
+          "type": "array",
+          "description": "Upstream tool names or glob patterns to expose.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether endpoint failure fails the whole federation."
+        }
+      },
+      "required": [
+        "kind",
+        "required"
+      ]
+    },
+    "AiGatewayToolServerEndpointKind": {
+      "type": "string",
+      "description": "The type of a tool server endpoint.",
+      "enum": [
+        "McpUrl",
+        "McpFromOpenApi"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerEndpointKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "McpUrl",
+            "value": "McpUrl",
+            "description": "Connect to an MCP server URL."
+          },
+          {
+            "name": "McpFromOpenApi",
+            "value": "McpFromOpenApi",
+            "description": "Create an MCP endpoint from an OpenAPI document."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerEndpointSourceKind": {
+      "type": "string",
+      "description": "Endpoint source kind.",
+      "enum": [
+        "mcp",
+        "openApi"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerEndpointSourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mcp",
+            "value": "mcp",
+            "description": "MCP server endpoint."
+          },
+          {
+            "name": "OpenApi",
+            "value": "openApi",
+            "description": "OpenAPI document endpoint."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerEndpointUpdate": {
+      "type": "object",
+      "description": "A tool server endpoint to update.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable endpoint identifier."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Optional namespace used to prefix tool names."
+        },
+        "kind": {
+          "$ref": "#/definitions/AiGatewayToolServerEndpointSourceKind",
+          "description": "Endpoint type."
+        },
+        "mcp": {
+          "$ref": "#/definitions/AiGatewayMcpUrlConfigurationUpdate",
+          "description": "Backend MCP configuration."
+        },
+        "openApi": {
+          "$ref": "#/definitions/AiGatewayOpenApiConfigurationUpdate",
+          "description": "OpenAPI configuration."
+        },
+        "credentials": {
+          "$ref": "#/definitions/AiGatewayToolServerCredentialsUpdate",
+          "description": "Backend credentials."
+        },
+        "tools": {
+          "type": "array",
+          "description": "Upstream tool names or glob patterns to expose.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether endpoint failure fails the whole federation."
+        }
+      }
+    },
+    "AiGatewayToolServerManagedIdentityAuthentication": {
+      "type": "object",
+      "description": "Managed identity authentication for a tool server endpoint.",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "Token audience for managed identity authentication."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of a user-assigned managed identity."
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
+    "AiGatewayToolServerMcpTransport": {
+      "type": "string",
+      "description": "MCP transport protocol.",
+      "enum": [
+        "streamableHttp"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerMcpTransport",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StreamableHttp",
+            "value": "streamableHttp",
+            "description": "Streamable HTTP transport."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerOauth2Authentication": {
+      "type": "object",
+      "description": "OAuth 2.0 authentication for a tool server endpoint.",
+      "properties": {
+        "authorizationUrl": {
+          "type": "string",
+          "description": "OAuth authorization endpoint."
+        },
+        "tokenUrl": {
+          "type": "string",
+          "description": "OAuth token endpoint."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "OAuth client identifier."
+        },
+        "clientSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "OAuth client secret.",
+          "x-ms-secret": true
+        },
+        "scopes": {
+          "type": "array",
+          "description": "OAuth scopes to request.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "grantType": {
+          "$ref": "#/definitions/AiGatewayToolServerOauth2GrantType",
+          "description": "OAuth grant type."
+        },
+        "authorizationParameters": {
+          "type": "object",
+          "description": "Additional authorization endpoint parameters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tokenParameters": {
+          "type": "object",
+          "description": "Additional token endpoint parameters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Current OAuth connection status.",
+          "readOnly": true
+        },
+        "loginLink": {
+          "type": "string",
+          "description": "Login link used to complete interactive authorization.",
+          "readOnly": true
+        }
+      }
+    },
+    "AiGatewayToolServerOauth2GrantType": {
+      "type": "string",
+      "description": "OAuth 2.0 grant type.",
+      "enum": [
+        "clientCredentials",
+        "authorizationCode"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerOauth2GrantType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClientCredentials",
+            "value": "clientCredentials",
+            "description": "Client credentials grant."
+          },
+          {
+            "name": "AuthorizationCode",
+            "value": "authorizationCode",
+            "description": "Authorization code grant."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerOpenApiSourceType": {
+      "type": "string",
+      "description": "OpenAPI document source type.",
+      "enum": [
+        "inline",
+        "url"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerOpenApiSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inline",
+            "value": "inline",
+            "description": "Inline OpenAPI document."
+          },
+          {
+            "name": "Url",
+            "value": "url",
+            "description": "OpenAPI document fetched from a URL."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerProperties": {
+      "type": "object",
+      "description": "Properties of an AI Gateway tool server.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the tool server.",
+          "x-ms-client-name": "displayName"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the tool server."
+        },
+        "accessState": {
+          "$ref": "#/definitions/AiGatewayToolServerAccessState",
+          "description": "Whether the tool server is available to callers."
+        },
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerType",
+          "description": "Tool server type.",
+          "x-ms-client-name": "toolServerType"
+        },
+        "allowList": {
+          "type": "array",
+          "description": "Tool names or patterns explicitly allowed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blocked": {
+          "type": "array",
+          "description": "Tool names or patterns explicitly blocked.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Endpoint configurations exposed by this tool server.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerEndpoint"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "policies": {
+          "type": "array",
+          "description": "Inline policies applied to this tool server.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayPolicy"
+          },
+          "x-ms-identifiers": []
+        },
+        "path": {
+          "type": "string",
+          "description": "Runtime path for the tool server."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Whether a subscription is required to invoke the tool server."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AiGatewayProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AiGatewayToolServerResource": {
+      "type": "object",
+      "description": "An AI Gateway tool server resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayToolServerProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AiGatewayToolServerResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayToolServerResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayToolServerResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewayToolServerSecret": {
+      "type": "object",
+      "description": "Secret value configured on one tool server endpoint.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable endpoint identifier."
+        },
+        "credentials": {
+          "$ref": "#/definitions/AiGatewayToolServerCredentials",
+          "description": "Endpoint authentication including secret values."
+        },
+        "openApi": {
+          "$ref": "#/definitions/AiGatewayOpenApiConfiguration",
+          "description": "OpenAPI configuration including inline content."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "AiGatewayToolServerSecrets": {
+      "type": "object",
+      "description": "Secret values configured on tool server endpoints.",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "description": "Endpoint secret values.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerSecret"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "endpoints"
+      ]
+    },
+    "AiGatewayToolServerType": {
+      "type": "string",
+      "description": "How a tool server is exposed.",
+      "enum": [
+        "mcp",
+        "openApi",
+        "connector"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mcp",
+            "value": "mcp",
+            "description": "Federates one or more MCP servers."
+          },
+          {
+            "name": "OpenApi",
+            "value": "openApi",
+            "description": "Exposes tools generated from OpenAPI documents."
+          },
+          {
+            "name": "Connector",
+            "value": "connector",
+            "description": "Exposes a connector-backed tool server."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating an AI Gateway tool server.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayToolServerUpdateProperties",
+          "description": "Tool server properties to update."
+        }
+      }
+    },
+    "AiGatewayToolServerUpdateProperties": {
+      "type": "object",
+      "description": "Properties for updating an AI Gateway tool server.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the tool server.",
+          "x-ms-client-name": "displayName"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the tool server."
+        },
+        "accessState": {
+          "$ref": "#/definitions/AiGatewayToolServerAccessState",
+          "description": "Whether the tool server is available to callers."
+        },
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerType",
+          "description": "Tool server type.",
+          "x-ms-client-name": "toolServerType"
+        },
+        "allowList": {
+          "type": "array",
+          "description": "Tool names or patterns explicitly allowed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blocked": {
+          "type": "array",
+          "description": "Tool names or patterns explicitly blocked.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Endpoint configurations exposed by this tool server.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerEndpointUpdate"
+          },
+          "x-ms-identifiers": []
+        },
+        "policies": {
+          "type": "array",
+          "description": "Inline policies applied to this tool server.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayPolicyUpdate"
+          },
+          "x-ms-identifiers": []
+        },
+        "path": {
+          "type": "string",
+          "description": "Runtime path for the tool server."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Whether a subscription is required to invoke the tool server."
+        }
+      }
+    },
+    "AiGatewayUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating an AI Gateway.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AiGatewayWorkspaceProperties": {
+      "type": "object",
+      "description": "Properties of an AI Gateway workspace.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the workspace.",
+          "x-ms-client-name": "displayName"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the workspace."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AiGatewayProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "description"
+      ]
+    },
+    "AiGatewayWorkspaceResource": {
+      "type": "object",
+      "description": "An AI Gateway workspace resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayWorkspaceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AiGatewayWorkspaceResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayWorkspaceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayWorkspaceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AiGatewayWorkspaceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewayWorkspaceUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating an AI Gateway workspace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayWorkspaceUpdateProperties",
+          "description": "Workspace properties to update."
+        }
+      }
+    },
+    "AiGatewayWorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "Properties for updating an AI Gateway workspace.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the workspace.",
+          "x-ms-client-name": "displayName"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the workspace."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "If-Match": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The If-Match header that makes a request conditional.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    }
+  }
+}
