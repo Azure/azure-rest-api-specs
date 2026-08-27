@@ -74,7 +74,7 @@ model AuthenticationPolicyPropertiesFormat {
 }
 
 /**
- * Properties for authentication provider configuration.
+ * Properties for authentication provider configuration. A policy must configure either JWT validation fields or user sign-in fields; the two configurations are mutually exclusive and cannot be combined.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP property models"
 @added(Versions.v2026_01_01)
