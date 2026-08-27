@@ -64,6 +64,11 @@ namespace Azure.AI.Projects {
   @@withoutOmittedProperties(OpenAI.ItemMessage, "id");
   @@withoutOmittedProperties(OpenAI.ItemMessage, "status");
 
+  // Remove output-assigned "id" from ItemFunctionToolCall in input context.
+  // Function call input items require type/call_id/name/arguments; the server
+  // assigns id later when the item is persisted or returned as output.
+  @@withoutOmittedProperties(OpenAI.ItemFunctionToolCall, "id");
+
   // Fix ItemMessage.content to match the upstream EasyInputMessage format.
   // The Responses-only view inherits content: MessageContent[] from the output-
   // oriented Message model. The upstream EasyInputMessage accepts either a plain
@@ -160,9 +165,6 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.OutputItemCodeInterpreterToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemCompactionBody, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemComputerToolCall, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemComputerToolCallOutput, Usage.input | Usage.output);
-  @@usage(OpenAI.CustomToolCallResource, Usage.input | Usage.output);
-  @@usage(OpenAI.CustomToolCallOutputResource, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemFileSearchToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemFunctionShellCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemFunctionShellCallOutput, Usage.input | Usage.output);
@@ -179,7 +181,7 @@ namespace Azure.AI.Projects {
   @@access(OpenAI.OutputItemOutputMessage, Access.internal);
   @@usage(OpenAI.OutputItemReasoningItem, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemWebSearchToolCall, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemFunctionToolCallOutput, Usage.input | Usage.output);
+  @@usage(OpenAI.FunctionAndCustomToolCallOutput, Usage.input | Usage.output);
 
   // --- OutputContent subtypes (3 concrete types) ---
   @@usage(OpenAI.OutputContentOutputTextContent, Usage.input | Usage.output);
