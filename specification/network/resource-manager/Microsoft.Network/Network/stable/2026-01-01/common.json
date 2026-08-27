@@ -359,6 +359,48 @@
         ]
       }
     },
+    "ApplicationGatewayAdvancedRoutingConditionType": {
+      "type": "string",
+      "description": "The type of request property that an advanced routing condition is evaluated against.",
+      "enum": [
+        "Header",
+        "QueryString",
+        "Path",
+        "ClientIP",
+        "Method"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewayAdvancedRoutingConditionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Header",
+            "value": "Header",
+            "description": "The condition is evaluated against an HTTP request header identified by propertyName."
+          },
+          {
+            "name": "QueryString",
+            "value": "QueryString",
+            "description": "The condition is evaluated against a query string argument identified by propertyName."
+          },
+          {
+            "name": "Path",
+            "value": "Path",
+            "description": "The condition is evaluated against the request path. propertyName is not applicable."
+          },
+          {
+            "name": "ClientIP",
+            "value": "ClientIP",
+            "description": "The condition is evaluated against the client IP address. propertyName and propertyValueMatcher are not applicable."
+          },
+          {
+            "name": "Method",
+            "value": "Method",
+            "description": "The condition is evaluated against the HTTP method. propertyName and propertyValueMatcher are not applicable."
+          }
+        ]
+      }
+    },
     "ApplicationGatewayBackendHealthServerHealth": {
       "type": "string",
       "description": "Health of backend server.",
@@ -772,7 +814,8 @@
       "description": "Rule type.",
       "enum": [
         "Basic",
-        "PathBasedRouting"
+        "PathBasedRouting",
+        "AdvancedRouting"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewayRequestRoutingRuleType",
@@ -787,6 +830,11 @@
             "name": "PathBasedRouting",
             "value": "PathBasedRouting",
             "description": "PathBasedRouting"
+          },
+          {
+            "name": "AdvancedRouting",
+            "value": "AdvancedRouting",
+            "description": "AdvancedRouting"
           }
         ]
       }
@@ -862,7 +910,9 @@
         "WAF_Large",
         "Standard_v2",
         "WAF_v2",
-        "Basic"
+        "Basic",
+        "Basic_v2",
+        "Basic_WAF_v2"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewaySkuName",
@@ -907,6 +957,16 @@
             "name": "Basic",
             "value": "Basic",
             "description": "Basic"
+          },
+          {
+            "name": "Basic_v2",
+            "value": "Basic_v2",
+            "description": "Basic tier Application Gateway."
+          },
+          {
+            "name": "Basic_WAF_v2",
+            "value": "Basic_WAF_v2",
+            "description": "Basic tier Application Gateway with WAF enabled."
           }
         ]
       }
@@ -1207,7 +1267,9 @@
         "WAF",
         "Standard_v2",
         "WAF_v2",
-        "Basic"
+        "Basic",
+        "Basic_v2",
+        "Basic_WAF_v2"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewayTier",
@@ -1237,6 +1299,16 @@
             "name": "Basic",
             "value": "Basic",
             "description": "Basic"
+          },
+          {
+            "name": "Basic_v2",
+            "value": "Basic_v2",
+            "description": "Basic tier Application Gateway."
+          },
+          {
+            "name": "Basic_WAF_v2",
+            "value": "Basic_WAF_v2",
+            "description": "Basic tier Application Gateway with WAF enabled."
           }
         ]
       }
@@ -1430,6 +1502,24 @@
             "description": "Disabled"
           }
         ]
+      }
+    },
+    "ApprovalReference": {
+      "type": "object",
+      "description": "Reference to an existing approved private endpoint used to inherit its connection approval state.",
+      "properties": {
+        "privateEndpointId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateEndpoints"
+              }
+            ]
+          }
+        }
       }
     },
     "AssociationAccessMode": {
@@ -6848,6 +6938,36 @@
         ]
       }
     },
+    "OnUnauthenticatedRequest": {
+      "type": "string",
+      "description": "Action to take when a request is unauthenticated.",
+      "enum": [
+        "allow",
+        "authenticate",
+        "deny"
+      ],
+      "x-ms-enum": {
+        "name": "OnUnauthenticatedRequest",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "allow",
+            "description": "Allow the request to pass through without authentication."
+          },
+          {
+            "name": "Authenticate",
+            "value": "authenticate",
+            "description": "Redirect the request to the authentication provider. Only valid for the user authentication capability."
+          },
+          {
+            "name": "Deny",
+            "value": "deny",
+            "description": "Deny the request when no credential is presented."
+          }
+        ]
+      }
+    },
     "Origin": {
       "type": "string",
       "description": "The origin of the issue.",
@@ -9199,6 +9319,16 @@
         ]
       }
     },
+    "UserTrustProviderType": {
+      "type": "string",
+      "enum": [
+        "entra"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },
     "VerbosityLevel": {
       "type": "string",
       "description": "Verbosity level.",
@@ -10479,6 +10609,30 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deleting"
+          }
+        ]
+      }
+    },
+    "WebApplicationFirewallPolicyTier": {
+      "type": "string",
+      "description": "Tier of a web application firewall policy.",
+      "enum": [
+        "Standard",
+        "Basic"
+      ],
+      "x-ms-enum": {
+        "name": "WebApplicationFirewallPolicyTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier web application firewall policy."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic tier web application firewall policy."
           }
         ]
       }
