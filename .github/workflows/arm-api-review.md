@@ -125,12 +125,26 @@ checkout: false
 # different model per run, so identical specs could get different feedback. ARM
 # review is judgement-heavy, so it gets a high-end model at high reasoning
 # effort. `effort` accepts only low/medium/high; `xhigh` is a compile-time error.
+#
+# There is deliberately no automatic fallback to `auto` here. gh-aw v0.86.2
+# accepts only `allowed`, `blocked`, `default-ai-credits-pricing` and `providers`
+# under `models:`; the ordered-alias fallback list is a later draft of the Model
+# Alias Format and is not available at this compiler version. Even where it is
+# available it resolves against the engine catalog only, so it would not catch
+# the failure mode actually seen here: `claude-opus-5` was pinned and was
+# rejected at runtime with a 400 for having no AI-credits pricing, on every run.
+# A pricing rejection cannot fall back at all, by design, since gh-aw ADR-48107
+# rejected default-pricing fallback to keep credit accounting honest. The safety
+# net is therefore procedural: confirm a model completes a real run before
+# pinning it here. `gpt-5.6-sol` is already proven, as the data-plane reviewer
+# runs it in production.
+#
 # Keep this in step with the ARM eval suite under
 # .github/skills/evals/arm-api-reviewer/, which pins the same model, and with
 # the copy of this file in Azure/azure-rest-api-specs-pr.
 engine:
   id: copilot
-model: claude-sonnet-4.6
+model: gpt-5.6-sol?effort=high
 tools:
   github:
     # Read-only toolsets only; `safe-outputs` below is the ONLY write channel.

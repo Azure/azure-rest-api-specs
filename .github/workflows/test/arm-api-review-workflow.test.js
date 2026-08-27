@@ -736,10 +736,10 @@ describe("ARM API review consistency and hardening", () => {
     // The value has to be one the AWF api-proxy prices: an unpriced model is
     // rejected with a 400 before the agent runs at all, which took down every
     // run when this was briefly pinned to claude-opus-5.
-    expect(source).toMatch(/^model: claude-sonnet-4\.6$/m);
+    expect(source).toMatch(/^model: gpt-5\.6-sol\?effort=high$/m);
 
     // The compiled lock must carry literals, not a `vars.` fallback expression.
-    expect(compiled).toContain("COPILOT_MODEL: claude-sonnet-4.6");
+    expect(compiled).toContain("COPILOT_MODEL: gpt-5.6-sol?effort=high");
     expect(compiled).not.toContain("COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT");
   });
 
@@ -753,8 +753,8 @@ describe("ARM API review consistency and hardening", () => {
       // The agent under test must match the production model, or eval results
       // describe a model that never reviews a real PR. Anchored to the line
       // start because plain `model:` also matches `judge_model:`.
-      expect(text, `${file} agent model`).toMatch(/^\s*model: claude-sonnet-4\.6$/m);
-      // The judge is a separate role and is pinned explicitly.
+      expect(text, `${file} agent model`).toMatch(/^\s*model: gpt-5\.6-sol\?effort=high$/m);
+      // The judge is a separate role and deliberately stays cheaper.
       expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
     }
   });
