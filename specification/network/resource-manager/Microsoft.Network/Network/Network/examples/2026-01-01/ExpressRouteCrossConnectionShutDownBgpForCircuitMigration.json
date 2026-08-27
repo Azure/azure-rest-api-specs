@@ -1,0 +1,164 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "CrossConnection-SiliconValley",
+    "crossConnectionName": "<circuitServiceKey>",
+    "parameters": {
+      "targetPeeringLocation": "SiliconValley",
+      "targetPortMapping": [
+        {
+          "sourcePortId": "sourcePort1",
+          "targetPortId": "targetPort1"
+        },
+        {
+          "sourcePortId": "sourcePort2",
+          "targetPortId": "targetPort2"
+        }
+      ],
+      "portId": "sourcePort1"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Network/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-01-01"
+      }
+    },
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "phase": "BgpShutDown",
+        "failureReason": "",
+        "newSTag": "12345",
+        "preparedAt": "2026-08-05T11:30:00Z",
+        "prepareExpiryTime": "2026-08-05T12:30:00Z",
+        "newCrossConnectionUrl": "https://management.azure.com/subscriptions/subid/resourceGroups/CrossConnection-SiliconValley/providers/Microsoft.Network/expressRouteCrossConnections/newCircuitServiceKey?api-version=2026-01-01",
+        "shouldRollback": false,
+        "details": {
+          "portMigrationInfos": [
+            {
+              "portId": "targetPort1",
+              "status": "Succeeded",
+              "phase": "BgpShutDown",
+              "failureReason": "",
+              "peerings": [
+                {
+                  "type": "Private",
+                  "statsCurrent": {
+                    "timestamp": "2026-08-05T11:40:00Z",
+                    "metrics": [
+                      {
+                        "name": "PacketsIn",
+                        "value": 150,
+                        "unit": "count"
+                      }
+                    ]
+                  },
+                  "statsAtPrepare": {
+                    "timestamp": "2026-08-05T11:30:00Z",
+                    "metrics": [
+                      {
+                        "name": "PacketsIn",
+                        "value": 98,
+                        "unit": "count"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "sourcePortId": "sourcePort1",
+              "sourcePortStats": {
+                "peerings": [
+                  {
+                    "type": "Private",
+                    "statsCurrent": {
+                      "timestamp": "2026-08-05T11:40:00Z",
+                      "metrics": [
+                        {
+                          "name": "PacketsIn",
+                          "value": 150,
+                          "unit": "count"
+                        }
+                      ]
+                    },
+                    "statsAtPrepare": {
+                      "timestamp": "2026-08-05T11:30:00Z",
+                      "metrics": [
+                        {
+                          "name": "PacketsIn",
+                          "value": 98,
+                          "unit": "count"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "portId": "targetPort2",
+              "status": "Succeeded",
+              "phase": "BgpShutDown",
+              "failureReason": "",
+              "peerings": [
+                {
+                  "type": "Private",
+                  "statsCurrent": {
+                    "timestamp": "2026-08-05T11:40:00Z",
+                    "metrics": [
+                      {
+                        "name": "PacketsIn",
+                        "value": 145,
+                        "unit": "count"
+                      }
+                    ]
+                  },
+                  "statsAtPrepare": {
+                    "timestamp": "2026-08-05T11:30:00Z",
+                    "metrics": [
+                      {
+                        "name": "PacketsIn",
+                        "value": 95,
+                        "unit": "count"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "sourcePortId": "sourcePort2",
+              "sourcePortStats": {
+                "peerings": [
+                  {
+                    "type": "Private",
+                    "statsCurrent": {
+                      "timestamp": "2026-08-05T11:40:00Z",
+                      "metrics": [
+                        {
+                          "name": "PacketsIn",
+                          "value": 145,
+                          "unit": "count"
+                        }
+                      ]
+                    },
+                    "statsAtPrepare": {
+                      "timestamp": "2026-08-05T11:30:00Z",
+                      "metrics": [
+                        {
+                          "name": "PacketsIn",
+                          "value": 95,
+                          "unit": "count"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

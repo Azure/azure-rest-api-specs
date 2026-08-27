@@ -250,6 +250,11 @@ suppressions:
       - $.definitions.ExpressRouteCircuit.properties.properties.properties.activationKey
       - $.definitions.ExpressRouteCircuitPropertiesFormat.properties.activationKey
   - code: ResourceNameRestriction
+    from: expressRoute.json
+    reason: The crossConnectionName parameter is used consistently across all ExpressRoute operations for backward compatibility. Adding a pattern constraint to a brownfield resource parameter would break existing API clients that rely on the current parameter definition.
+    where:
+      - $.paths[*].*.parameters[?(@.name == 'crossConnectionName')]
+  - code: ResourceNameRestriction
     from: virtualNetwork.json
     reason: The resource name parameter 'virtualNetworkName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network APIs.
     where:
