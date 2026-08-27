@@ -60,6 +60,7 @@ model PineconeChatExtensionParameters {
   embeddingDependency: OnYourDataVectorizationSource;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Optional settings to control how fields are processed when using a configured Pinecone resource.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model PineconeFieldMappingOptions {

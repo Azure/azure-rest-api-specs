@@ -12,7 +12,9 @@ using Azure.ResourceManager;
 namespace Microsoft.DataReplication;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Cannot use @armResourceOperations decorator here, the auto-generated routes do not match feature requirements"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Cannot use  @armResourceOperations decorator here, the auto-generated routes do not match feature requirements"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Cannot use  @armResourceOperations decorator here, the auto-generated routes do not match feature requirements"
 interface CheckNameAvailability {
   /**
    * Checks the resource name availability.

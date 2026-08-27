@@ -87,7 +87,9 @@ using Microsoft.CostManagement;
 @@clientName(Term.P3Y, "P3_Y", "python");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op GetGenerateDetailedCostReportOperationResultCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -108,7 +110,9 @@ op GetGenerateDetailedCostReportOperationResultCustomized(
 ): GenerateDetailedCostReportOperationResult;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op GetGenerateDetailedCostReportOperationStatusCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -202,6 +206,11 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
   "csharp"
 );
 @@alternateType(KpiProperties.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  ManagementGroupScopeBenefitRecommendationProperties.managementGroupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
@@ -547,3 +556,31 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 // to free the original names for non-nullable [Obsolete] backward-compat shims.
 @@clientName(BudgetProperties.category, "BudgetCategory", "csharp");
 @@clientName(BudgetProperties.timeGrain, "BudgetTimeGrain", "csharp");
+
+// Preserve Java enum constant names from the previous SDK.
+@@clientName(
+  CostDetailsMetricType.ActualCostCostDetailsMetricType,
+  "ACTUAL_COST",
+  "java"
+);
+@@clientName(
+  CostDetailsMetricType.AmortizedCostCostDetailsMetricType,
+  "AMORTIZED_COST",
+  "java"
+);
+@@clientName(
+  CostDetailsStatusType.CompletedCostDetailsStatusType,
+  "COMPLETED",
+  "java"
+);
+@@clientName(
+  CostDetailsStatusType.NoDataFoundCostDetailsStatusType,
+  "NO_DATA_FOUND",
+  "java"
+);
+@@clientName(
+  CostDetailsStatusType.FailedCostDetailsStatusType,
+  "FAILED",
+  "java"
+);
+@@clientName(CostDetailsDataFormat.CsvCostDetailsDataFormat, "CSV", "java");
