@@ -3,6 +3,7 @@ import "../../common/models.tsp";
 using Azure.Core.Experimental;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Experimental features applied to augment inherited OpenAI models"
 namespace Azure.AI.Projects {
@@ -32,6 +33,14 @@ namespace Azure.AI.Projects {
     OpenAI.CreateChatCompletionResponse,
     {
       /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
+      @extension(
+        "x-ms-foundry-meta",
+        #{
+          conditional_previews: #[
+            FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+          ],
+        }
+      )
       model_selection_details?: ModelSelectionDetails,
     }
   );
