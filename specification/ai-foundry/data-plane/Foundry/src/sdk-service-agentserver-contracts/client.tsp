@@ -104,6 +104,9 @@ namespace Azure.AI.Projects {
   // Rename "Response" to "ResponseObject" to avoid conflict with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
 
+  // Preserve the established Python SDK model name.
+  @@clientName(OpenAI.ResponseConversation, "ConversationReference");
+
   // Rename "ResponseError" to "ResponseErrorInfo" to avoid conflict with Azure.ResponseError
   @@clientName(OpenAI.ResponseError, "ResponseErrorInfo");
 
