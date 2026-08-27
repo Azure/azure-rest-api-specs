@@ -13,6 +13,66 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw",
         "location": "southcentralus",
         "properties": {
+          "advancedRoutingConditionSets": [
+            {
+              "name": "advancedRoutingConditionSet1",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/advancedRoutingConditionSets/advancedRoutingConditionSet1",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "routingConditions": [
+                  {
+                    "conditionType": "Header",
+                    "propertyName": "X-Client-Tier",
+                    "propertyValues": [
+                      "premium"
+                    ]
+                  },
+                  {
+                    "conditionType": "Path",
+                    "propertyValueMatcher": {
+                      "ignoreCase": true,
+                      "negate": false,
+                      "pattern": "^/api/v2/.*"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "advancedRoutingMaps": [
+            {
+              "name": "advancedRoutingMap1",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/advancedRoutingMaps/advancedRoutingMap1",
+              "properties": {
+                "advancedRoutingRules": [
+                  {
+                    "name": "advancedRoutingRule1",
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/advancedRoutingMaps/advancedRoutingMap1/advancedRoutingRules/advancedRoutingRule1",
+                    "properties": {
+                      "advancedRoutingConditionSet": {
+                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/advancedRoutingConditionSets/advancedRoutingConditionSet1"
+                      },
+                      "backendAddressPool": {
+                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool1"
+                      },
+                      "backendHttpSettings": {
+                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                      },
+                      "priority": 1,
+                      "provisioningState": "Succeeded"
+                    }
+                  }
+                ],
+                "defaultBackendAddressPool": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
+                },
+                "defaultBackendHttpSettings": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                },
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
           "authenticationCertificates": [],
           "backendAddressPools": [
             {
@@ -146,6 +206,23 @@
                 "provisioningState": "Succeeded",
                 "protocol": "Http"
               }
+            },
+            {
+              "name": "appgwadvroutinglistener",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwadvroutinglistener",
+              "properties": {
+                "frontendIPConfiguration": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip"
+                },
+                "frontendPort": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80"
+                },
+                "hostNames": [
+                  "advanced.contoso.com"
+                ],
+                "provisioningState": "Succeeded",
+                "protocol": "Http"
+              }
             }
           ],
           "loadDistributionPolicies": [
@@ -258,6 +335,21 @@
                 "urlPathMap": {
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1"
                 }
+              }
+            },
+            {
+              "name": "appgwadvancedroutingrule",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwadvancedroutingrule",
+              "properties": {
+                "advancedRoutingMap": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/advancedRoutingMaps/advancedRoutingMap1"
+                },
+                "httpListener": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwadvroutinglistener"
+                },
+                "priority": 30,
+                "provisioningState": "Succeeded",
+                "ruleType": "AdvancedRouting"
               }
             }
           ],

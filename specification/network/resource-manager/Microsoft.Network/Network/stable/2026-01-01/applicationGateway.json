@@ -1601,6 +1601,243 @@
         }
       ]
     },
+    "ApplicationGatewayAdvancedRoutingCondition": {
+      "type": "object",
+      "description": "A condition evaluated as part of an advanced routing condition set.",
+      "properties": {
+        "conditionType": {
+          "$ref": "./common.json#/definitions/ApplicationGatewayAdvancedRoutingConditionType",
+          "description": "The type of request property the condition is evaluated against."
+        },
+        "propertyName": {
+          "type": "string",
+          "description": "Name of the request property the condition is evaluated against. Required when conditionType is Header or QueryString, and not applicable when conditionType is Path, ClientIP or Method."
+        },
+        "propertyValues": {
+          "type": "array",
+          "description": "Values the request property is matched against. Exactly one of propertyValues or propertyValueMatcher must be specified.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "propertyValueMatcher": {
+          "$ref": "#/definitions/ApplicationGatewayAdvancedRoutingPropertyValueMatcher",
+          "description": "Pattern the request property is matched against. Exactly one of propertyValues or propertyValueMatcher must be specified. Not applicable when conditionType is ClientIP or Method."
+        }
+      },
+      "required": [
+        "conditionType"
+      ]
+    },
+    "ApplicationGatewayAdvancedRoutingConditionSet": {
+      "type": "object",
+      "description": "Advanced routing condition set of an application gateway. Referenced by advanced routing rules to determine whether a request matches.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayAdvancedRoutingConditionSetPropertiesFormat",
+          "description": "Properties of the application gateway advanced routing condition set."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the advanced routing condition set that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayAdvancedRoutingConditionSetPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of advanced routing condition set of the application gateway.",
+      "properties": {
+        "routingConditions": {
+          "type": "array",
+          "description": "Routing conditions of the condition set. All conditions must be satisfied for the referencing advanced routing rule to match.",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAdvancedRoutingCondition"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the advanced routing condition set resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "routingConditions"
+      ]
+    },
+    "ApplicationGatewayAdvancedRoutingMap": {
+      "type": "object",
+      "description": "Advanced routing map of an application gateway. Holds the advanced routing rules evaluated for requests handled by an AdvancedRouting request routing rule, along with the configuration applied when no rule matches.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayAdvancedRoutingMapPropertiesFormat",
+          "description": "Properties of the application gateway advanced routing map."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the advanced routing map that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayAdvancedRoutingMapPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of advanced routing map of the application gateway.",
+      "properties": {
+        "defaultBackendAddressPool": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Default backend address pool resource of the advanced routing map. Required unless defaultRedirectConfiguration is specified."
+        },
+        "defaultBackendHttpSettings": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Default backend http settings resource of the advanced routing map. Required unless defaultRedirectConfiguration is specified."
+        },
+        "defaultRedirectConfiguration": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Default redirect configuration resource of the advanced routing map. Cannot be combined with defaultBackendAddressPool or defaultBackendHttpSettings."
+        },
+        "defaultRewriteRuleSet": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Default rewrite rule set resource of the advanced routing map."
+        },
+        "advancedRoutingRules": {
+          "type": "array",
+          "description": "Advanced routing rules of the advanced routing map. Each rule must specify a priority that is unique within the map.",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAdvancedRoutingRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the advanced routing map resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "advancedRoutingRules"
+      ]
+    },
+    "ApplicationGatewayAdvancedRoutingPropertyValueMatcher": {
+      "type": "object",
+      "description": "Matches the value of a request property against a fixed string or regular expression.",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "The pattern, either fixed string or regular expression, that the request property value is evaluated against."
+        },
+        "ignoreCase": {
+          "type": "boolean",
+          "description": "Setting this parameter to truth value with force the pattern to do a case in-sensitive comparison.",
+          "default": true
+        },
+        "negate": {
+          "type": "boolean",
+          "description": "Setting this value as truth will force to check the negation of the condition given by the user in the pattern field."
+        }
+      },
+      "required": [
+        "pattern"
+      ]
+    },
+    "ApplicationGatewayAdvancedRoutingRule": {
+      "type": "object",
+      "description": "Advanced routing rule of an application gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayAdvancedRoutingRulePropertiesFormat",
+          "description": "Properties of the application gateway advanced routing rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the advanced routing rule that is unique within an advanced routing map."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayAdvancedRoutingRulePropertiesFormat": {
+      "type": "object",
+      "description": "Properties of advanced routing rule of the application gateway.",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority of the advanced routing rule. Must be unique within the containing advanced routing map. Rules are evaluated in ascending priority order.",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "advancedRoutingConditionSet": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Advanced routing condition set resource evaluated by this rule."
+        },
+        "backendAddressPool": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Backend address pool resource of the advanced routing rule. Required unless redirectConfiguration is specified."
+        },
+        "backendHttpSettings": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Backend http settings resource of the advanced routing rule. Required unless redirectConfiguration is specified."
+        },
+        "redirectConfiguration": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Redirect configuration resource of the advanced routing rule. Cannot be combined with backendAddressPool or backendHttpSettings."
+        },
+        "rewriteRuleSet": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Rewrite rule set resource of the advanced routing rule."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the advanced routing rule resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "priority"
+      ]
+    },
     "ApplicationGatewayAuthConfig": {
       "type": "object",
       "description": "An authentication configuration binding for an Application Gateway routing rule or routing map.",
@@ -3528,6 +3765,13 @@
             "$ref": "#/definitions/ApplicationGatewayUrlPathMap"
           }
         },
+        "advancedRoutingMaps": {
+          "type": "array",
+          "description": "Advanced routing maps of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAdvancedRoutingMap"
+          }
+        },
         "requestRoutingRules": {
           "type": "array",
           "description": "Request routing rules of the application gateway resource.",
@@ -3547,6 +3791,13 @@
           "description": "Rewrite rules for the application gateway resource.",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayRewriteRuleSet"
+          }
+        },
+        "advancedRoutingConditionSets": {
+          "type": "array",
+          "description": "Advanced routing condition sets of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAdvancedRoutingConditionSet"
           }
         },
         "redirectConfigurations": {
@@ -3779,6 +4030,10 @@
         "urlPathMap": {
           "$ref": "./common.json#/definitions/SubResource",
           "description": "URL path map resource of the application gateway."
+        },
+        "advancedRoutingMap": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Advanced routing map resource of the application gateway."
         },
         "rewriteRuleSet": {
           "$ref": "./common.json#/definitions/SubResource",
