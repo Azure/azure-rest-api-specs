@@ -26,7 +26,7 @@ These are the global settings for the Content Safety.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2024-02-15-preview
+tag: package-2026-07-01-preview
 ```
 
 ### Tag: package-2023-04-30-preview
@@ -72,6 +72,24 @@ These settings apply only when `--tag=package-2024-09-01` is specified on the co
 ```yaml $(tag) == 'package-2024-09-01'
 input-file:
   - stable/2024-09-01/contentsafety.json
+```
+
+### Tag: package-2026-07-01-preview
+
+These settings apply only when `--tag=package-2026-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01-preview'
+input-file:
+  - preview/2026-07-01-preview/contentsafety.json
+```
+
+# Suppressions
+
+```yaml
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: contentsafety.json
+    reason: TypeSpec creates anonymous operation status monitors inline
 ```
 
 # Code Generation

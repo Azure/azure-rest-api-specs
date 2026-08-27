@@ -9,6 +9,15 @@ import type {
   TypeSpecProjectInfo,
 } from "./types.ts";
 
+/** Label indicating that a spec PR introduces a new API version. */
+export const NEW_API_VERSION_LABEL = "new-api-version";
+
+/**
+ * Label indicating that a spec PR only migrates/renames folders. Release plan
+ * processing must be skipped entirely for PRs carrying this label.
+ */
+export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
+
 /**
  * Identifies one TypeSpec project path and selected API version from a pull request.
  * Returns null when no specification files were modified, or when zero/multiple projects found.
@@ -18,8 +27,7 @@ import type {
  * @param params.repo Repository name
  * @param params.workspace Absolute path to workspace root
  * @param params.octokit Octokit instance for GitHub API calls
- * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, or multiple projects found
- * @throws Error if no API version detected in project
+ * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or no API version detected
  */
 export async function getTypeSpecProjectInfoFromPr(params: {
   prNumber: number;
@@ -57,13 +65,16 @@ export async function getTypeSpecProjectInfoFromPr(params: {
 
   const tspProjectPath = tspProjectPaths[0];
   const versionResult = detectApiVersions(
-    specFiles.map((f) => f.filename),
+    specFiles.filter((f) => f.status !== "renamed").map((f) => f.filename),
     tspProjectPath,
     workspace,
   );
 
   if (versionResult.apiVersions.length === 0) {
-    throw new Error("No API version found in modified files or TypeSpec project path/content.");
+    console.log(
+      "No API version detected in modified files or TypeSpec project. Skipping release plan creation.",
+    );
+    return null;
   }
 
   return {
@@ -95,12 +106,26 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
   });
   console.log(`Associated PR number for commit ${commitSha}: ${associatedPrNumber ?? "none"}`);
   if (associatedPrNumber) {
-    const hasNewApiVersionLabel = await checkNewApiVersionLabel({
+    const labels = await getPullRequestLabels({
       octokit,
       owner,
       repo,
       prNumber: associatedPrNumber,
     });
+
+    if (labels.includes(FOLDER_MIGRATION_LABEL)) {
+      console.log(
+        `PR #${associatedPrNumber} has the '${FOLDER_MIGRATION_LABEL}' label. Skipping release plan processing.`,
+      );
+      return {
+        projectInfo: null,
+        prNumber: associatedPrNumber,
+        hasNewApiVersionLabel: false,
+        isFolderMigration: true,
+      };
+    }
+
+    const hasNewApiVersionLabel = labels.includes(NEW_API_VERSION_LABEL);
 
     const projectInfo = await getTypeSpecProjectInfoFromPr({
       prNumber: associatedPrNumber,
@@ -143,13 +168,16 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
 
   const tspProjectPath = tspProjectPaths[0];
   const versionResult = detectApiVersions(
-    specFiles.map((f) => f.filename),
+    specFiles.filter((f) => f.status !== "renamed").map((f) => f.filename),
     tspProjectPath,
     workspace,
   );
 
   if (versionResult.apiVersions.length === 0) {
-    throw new Error("No API version found in modified files or TypeSpec project path/content.");
+    console.log(
+      "No API version detected in modified files or TypeSpec project. Skipping release plan creation.",
+    );
+    return { projectInfo: null, hasNewApiVersionLabel: false };
   }
 
   return {
@@ -162,12 +190,16 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
   };
 }
 
-export async function checkNewApiVersionLabel(params: {
+/**
+ * Fetches the label names applied to a pull request.
+ * @returns Array of label names (empty when the PR has no labels)
+ */
+export async function getPullRequestLabels(params: {
   octokit: OctokitLike;
   owner: string;
   repo: string;
   prNumber: number;
-}): Promise<boolean> {
+}): Promise<string[]> {
   const { octokit, owner, repo, prNumber } = params;
 
   const pullRequest = await octokit.rest.pulls.get({
@@ -176,7 +208,7 @@ export async function checkNewApiVersionLabel(params: {
     pull_number: prNumber,
   });
 
-  return pullRequest.data.labels?.some((label) => label.name === "new-api-version") ?? false;
+  return pullRequest.data.labels?.map((label) => label.name) ?? [];
 }
 
 /**
@@ -341,7 +373,7 @@ export function findTspConfigDir(relativeFilePath: string, workspace: string): s
  * @param changedFiles Array of changed file paths
  * @param tspProjectPath Relative path to TypeSpec project
  * @param workspace Absolute path to workspace root
- * @returns Object containing sorted API versions (latest first) and preview flag
+ * @returns Object containing sorted API versions (latest first) and a preview flag derived from the final (latest) API version
  */
 export function detectApiVersions(
   changedFiles: string[],
@@ -350,16 +382,12 @@ export function detectApiVersions(
 ): { apiVersions: string[]; isPreview: boolean } {
   const apiVersionPattern = /(\d{4}-\d{2}-\d{2}(?:-preview)?)/g;
   const versions = new Set<string>();
-  let isPreview = false;
 
   for (const file of changedFiles) {
     const matches = file.match(apiVersionPattern);
     if (matches) {
       for (const version of matches) {
         versions.add(version);
-        if (version.endsWith("-preview")) {
-          isPreview = true;
-        }
       }
     }
   }
@@ -367,13 +395,17 @@ export function detectApiVersions(
   if (versions.size === 0) {
     for (const version of collectApiVersionsFromMainTsp(tspProjectPath, workspace)) {
       versions.add(version);
-      if (version.endsWith("-preview")) {
-        isPreview = true;
-      }
     }
   }
 
   const apiVersions = [...versions].sort(compareApiVersionsDesc);
+
+  // The release type (Public Preview vs GA) is decided solely by the final
+  // (latest) API version detected, not by whether any version in the change
+  // set happens to be a preview. apiVersions[0] is the latest version because
+  // the list is sorted in descending order.
+  const isPreview = apiVersions.length > 0 && apiVersions[0].endsWith("-preview");
+
   return { apiVersions, isPreview };
 }
 

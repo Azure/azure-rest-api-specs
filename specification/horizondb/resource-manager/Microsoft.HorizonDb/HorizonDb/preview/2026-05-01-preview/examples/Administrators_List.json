@@ -1,0 +1,40 @@
+{
+  "operationId": "HorizonDbAdministrators_List",
+  "title": "List HorizonDB administrators in a cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "api-version": "2026-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/administrators/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "name": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "type": "Microsoft.HorizonDb/clusters/administrators",
+            "properties": {
+              "principalName": "admin@contoso.com",
+              "principalType": "User",
+              "objectId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+              "tenantId": "11111111-2222-3333-4444-555555555555"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/administrators/99999999-8888-7777-6666-555555555555",
+            "name": "99999999-8888-7777-6666-555555555555",
+            "type": "Microsoft.HorizonDb/clusters/administrators",
+            "properties": {
+              "principalName": "DBA Team",
+              "principalType": "Group",
+              "objectId": "99999999-8888-7777-6666-555555555555",
+              "tenantId": "11111111-2222-3333-4444-555555555555"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
