@@ -16,19 +16,19 @@ import validateApproval from "../../src/namespace-approval/validate-approval.js"
 const protectedLabelsYaml = {
   "global-approvers": ["global-admin1", "global-admin2"],
   "BreakingChange-Approved-Benign": ["someone"],
-  "namespace-dotnet-approved": {
+  "package-name-dotnet-approved": {
     "management-plane": ["approver3", "approver4"],
     "data-plane": ["approver2", "approver4"],
   },
-  "namespace-java-approved": {
+  "package-name-java-approved": {
     "management-plane": ["approver3", "approver4"],
     "data-plane": ["approver1"],
   },
-  "namespace-python-approved": {
+  "package-name-python-approved": {
     "management-plane": ["approver3", "approver4"],
     "data-plane": ["approver3"],
   },
-  "namespace-approved-all": {
+  "package-name-approved-all": {
     "management-plane": ["approver3", "approver4"],
     "data-plane": ["global-admin1", "global-admin2"],
   },
@@ -94,12 +94,12 @@ describe("validate-approval", () => {
   });
 
   describe("labeled - per-language approval", () => {
-    it("should skip when namespace-review-required label is absent", async () => {
+    it("should skip when package-name-review-required label is absent", async () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
-        labelName: "namespace-java-approved",
+        labelName: "package-name-java-approved",
         actor: "approver1",
-        labels: ["namespace-java-pending"],
+        labels: ["package-name-java-pending"],
       });
 
       await validateApproval(args());
@@ -113,7 +113,7 @@ describe("validate-approval", () => {
         action: "labeled",
         labelName: "some-other-label",
         actor: "anyone",
-        labels: ["namespace-review-required"],
+        labels: ["package-name-review-required"],
       });
 
       await validateApproval(args());
@@ -126,13 +126,13 @@ describe("validate-approval", () => {
     it("should allow authorized approver to approve their language", async () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
-        labelName: "namespace-java-approved",
+        labelName: "package-name-java-approved",
         actor: "approver1",
-        labels: ["namespace-review-required", "namespace-java-pending"],
+        labels: ["package-name-review-required", "package-name-java-pending"],
       });
 
       github.rest.pulls.get.mockResolvedValue({
-        data: { labels: [{ name: "namespace-review-required" }] },
+        data: { labels: [{ name: "package-name-review-required" }] },
       });
       /** @type {any} */ (github.rest.issues).listComments = vi
         .fn()
@@ -141,20 +141,20 @@ describe("validate-approval", () => {
       await validateApproval(args());
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-java-pending" }),
+        expect.objectContaining({ name: "package-name-java-pending" }),
       );
     });
 
     it("should allow global approver to approve any language", async () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
-        labelName: "namespace-java-approved",
+        labelName: "package-name-java-approved",
         actor: "global-admin1",
-        labels: ["namespace-review-required", "namespace-java-pending"],
+        labels: ["package-name-review-required", "package-name-java-pending"],
       });
 
       github.rest.pulls.get.mockResolvedValue({
-        data: { labels: [{ name: "namespace-review-required" }] },
+        data: { labels: [{ name: "package-name-review-required" }] },
       });
       /** @type {any} */ (github.rest.issues).listComments = vi
         .fn()
@@ -163,21 +163,21 @@ describe("validate-approval", () => {
       await validateApproval(args());
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-java-pending" }),
+        expect.objectContaining({ name: "package-name-java-pending" }),
       );
     });
 
     it("should allow mgmt-plane approver for mgmt PR", async () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
-        labelName: "namespace-dotnet-approved",
+        labelName: "package-name-dotnet-approved",
         actor: "approver3",
-        labels: ["namespace-review-required", "namespace-dotnet-pending"],
+        labels: ["package-name-review-required", "package-name-dotnet-pending"],
         isMgmt: true,
       });
 
       github.rest.pulls.get.mockResolvedValue({
-        data: { labels: [{ name: "namespace-review-required" }] },
+        data: { labels: [{ name: "package-name-review-required" }] },
       });
       /** @type {any} */ (github.rest.issues).listComments = vi
         .fn()
@@ -186,18 +186,22 @@ describe("validate-approval", () => {
       await validateApproval(args());
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-dotnet-pending" }),
+        expect.objectContaining({ name: "package-name-dotnet-pending" }),
       );
     });
   });
 
-  describe("labeled - namespace-approved-all shortcut", () => {
+  describe("labeled - package-name-approved-all shortcut", () => {
     it("should approve all pending languages for authorized user", async () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
-        labelName: "namespace-approved-all",
+        labelName: "package-name-approved-all",
         actor: "approver3",
-        labels: ["namespace-review-required", "namespace-dotnet-pending", "namespace-java-pending"],
+        labels: [
+          "package-name-review-required",
+          "package-name-dotnet-pending",
+          "package-name-java-pending",
+        ],
         isMgmt: true,
       });
 
@@ -211,25 +215,25 @@ describe("validate-approval", () => {
       await validateApproval(args());
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-dotnet-pending" }),
+        expect.objectContaining({ name: "package-name-dotnet-pending" }),
       );
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-java-pending" }),
+        expect.objectContaining({ name: "package-name-java-pending" }),
       );
     });
 
-    it("should reject namespace-approved-all on data-plane PR", async () => {
+    it("should reject package-name-approved-all on data-plane PR", async () => {
       context.payload = createPRLabeledPayload({
         action: "labeled",
-        labelName: "namespace-approved-all",
+        labelName: "package-name-approved-all",
         actor: "approver3",
-        labels: ["namespace-review-required", "namespace-dotnet-pending"],
+        labels: ["package-name-review-required", "package-name-dotnet-pending"],
       });
 
       await validateApproval(args());
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
-        expect.objectContaining({ name: "namespace-approved-all" }),
+        expect.objectContaining({ name: "package-name-approved-all" }),
       );
       expect(github.rest.issues.createComment).toHaveBeenCalled();
       const calls = vi.mocked(github.rest.issues.createComment).mock.calls;
@@ -242,16 +246,16 @@ describe("validate-approval", () => {
     it("should re-apply pending label when removed by unauthorized user", async () => {
       context.payload = createPRLabeledPayload({
         action: "unlabeled",
-        labelName: "namespace-java-pending",
+        labelName: "package-name-java-pending",
         actor: "random-user",
-        labels: ["namespace-review-required"],
+        labels: ["package-name-review-required"],
       });
 
       await validateApproval(args());
 
       expect(github.rest.issues.addLabels).toHaveBeenCalledWith(
         expect.objectContaining({
-          labels: ["namespace-java-pending"],
+          labels: ["package-name-java-pending"],
         }),
       );
       expect(github.rest.issues.createComment).toHaveBeenCalled();
@@ -263,9 +267,9 @@ describe("validate-approval", () => {
     it("should allow trusted bot to remove pending label", async () => {
       context.payload = createPRLabeledPayload({
         action: "unlabeled",
-        labelName: "namespace-java-pending",
+        labelName: "package-name-java-pending",
         actor: "github-actions[bot]",
-        labels: ["namespace-review-required"],
+        labels: ["package-name-review-required"],
       });
 
       await validateApproval(args());
@@ -280,9 +284,9 @@ describe("validate-approval", () => {
     it("should allow authorized approver to remove pending label", async () => {
       context.payload = createPRLabeledPayload({
         action: "unlabeled",
-        labelName: "namespace-dotnet-pending",
+        labelName: "package-name-dotnet-pending",
         actor: "approver2",
-        labels: ["namespace-review-required"],
+        labels: ["package-name-review-required"],
       });
 
       await validateApproval(args());
@@ -299,7 +303,7 @@ describe("validate-approval", () => {
         action: "unlabeled",
         labelName: "some-other-label",
         actor: "random-user",
-        labels: ["namespace-review-required"],
+        labels: ["package-name-review-required"],
       });
 
       await validateApproval(args());
@@ -311,10 +315,10 @@ describe("validate-approval", () => {
       ).toBe(true);
     });
 
-    it("should guard namespace-review-required label too", async () => {
+    it("should guard package-name-review-required label too", async () => {
       context.payload = createPRLabeledPayload({
         action: "unlabeled",
-        labelName: "namespace-review-required",
+        labelName: "package-name-review-required",
         actor: "random-user",
         labels: [],
       });
@@ -323,7 +327,7 @@ describe("validate-approval", () => {
 
       expect(github.rest.issues.addLabels).toHaveBeenCalledWith(
         expect.objectContaining({
-          labels: ["namespace-review-required"],
+          labels: ["package-name-review-required"],
         }),
       );
     });

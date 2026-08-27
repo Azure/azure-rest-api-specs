@@ -431,22 +431,6 @@ export function generateArtifact(
 }
 
 /**
- * Get the service folder path from the spec config path.
- * @param specConfigPath
- * @returns The service folder path.
- */
-export function getServiceFolderPath(specConfigPath: string): string {
-  if (!specConfigPath || specConfigPath.length === 0) {
-    return "";
-  }
-  const segments = specConfigPath.split("/");
-  if (segments.length > 2) {
-    return `${segments[0]}/${segments[1]}`;
-  }
-  return specConfigPath;
-}
-
-/**
  * Get the required setting value for the SDK check based on the spec PR types.
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
  * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.

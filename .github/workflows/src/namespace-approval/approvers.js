@@ -38,12 +38,12 @@ export async function loadApproversConfig(path = PROTECTED_LABELS_PATH) {
   for (const [label, entry] of Object.entries(config)) {
     if (label === "global-approvers") continue;
 
-    // Match namespace-<lang>-approved or namespace-approved-all
+    // Match package-name-<lang>-approved or package-name-approved-all
     let lang;
-    if (label === "namespace-approved-all") {
+    if (label === "package-name-approved-all") {
       lang = "all";
     } else {
-      const match = label.match(/^namespace-(\w+)-approved$/);
+      const match = label.match(/^package-name-(\w+)-approved$/);
       if (!match) continue;
       lang = match[1];
     }

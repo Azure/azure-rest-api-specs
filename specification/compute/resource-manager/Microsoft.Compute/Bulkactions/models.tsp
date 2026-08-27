@@ -346,6 +346,10 @@ model RetryPolicy {
 
 @doc("Extra details needed to run the user's request")
 model ExecutionParameters {
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Details that could optimize the user's request")
+  optimizationPreference?: OptimizationPreference;
+
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
 

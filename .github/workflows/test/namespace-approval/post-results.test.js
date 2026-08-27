@@ -32,23 +32,23 @@ vi.mock("../../src/context.js", () => ({
 
 describe("post-results", () => {
   describe("parseCommentTable", () => {
-    it("should extract language, namespace, and pending status from table rows", () => {
+    it("should extract language, package name, and pending status from table rows", () => {
       const body = [
-        "## Namespace Review Required",
+        "## Package Name Review Required",
         "",
-        "| Language | Proposed Namespace | Format | Status | Approvers |",
-        "|----------|-------------------|--------|--------|----------|",
-        "| java | `com.azure.resourcemanager.compute` | ✅ | ⏳ Pending | approver1 |",
-        "| dotnet | `Azure.ResourceManager.Compute` | ✅ | ⏳ Pending | approver-a |",
+        "| Language | Package Name | Namespace | Format | Status | Approvers |",
+        "|----------|--------------|-----------|--------|--------|----------|",
+        "| java | `azure-resourcemanager-compute` | `com.azure.resourcemanager.compute` | ✅ | ⏳ Pending | approver1 |",
+        "| dotnet | `Azure.ResourceManager.Compute` | `Azure.ResourceManager.Compute` | ✅ | ⏳ Pending | approver-a |",
         "",
-        "<!-- namespace-review-bot -->",
+        "<!-- package-name-review-bot -->",
       ].join("\n");
 
       const result = parseCommentTable(body);
 
       expect(result.size).toBe(2);
       expect(result.get("java")).toEqual({
-        namespace: "com.azure.resourcemanager.compute",
+        namespace: "azure-resourcemanager-compute",
         status: "⏳ Pending",
       });
       expect(result.get("dotnet")).toEqual({
@@ -59,10 +59,10 @@ describe("post-results", () => {
 
     it("should extract approved status from table rows", () => {
       const body = [
-        "| Language | Proposed Namespace | Format | Status | Approvers |",
-        "|----------|-------------------|--------|--------|----------|",
-        "| java | `com.azure.resourcemanager.compute` | ✅ | ✅ Approved by @approver1 | approver1 |",
-        "| dotnet | `Azure.ResourceManager.Compute` | ✅ | ⏳ Pending | approver-a |",
+        "| Language | Package Name | Namespace | Format | Status | Approvers |",
+        "|----------|--------------|-----------|--------|--------|----------|",
+        "| java | `azure-resourcemanager-compute` | `com.azure.resourcemanager.compute` | ✅ | ✅ Approved by @approver1 | approver1 |",
+        "| dotnet | `Azure.ResourceManager.Compute` | `Azure.ResourceManager.Compute` | ✅ | ⏳ Pending | approver-a |",
       ].join("\n");
 
       const result = parseCommentTable(body);
@@ -77,7 +77,8 @@ describe("post-results", () => {
     });
 
     it("should handle format warning column values", () => {
-      const body = "| dotnet | `Azure.Compute` | ⚠️ Invalid | ⏳ Pending | approver3, approver4 |";
+      const body =
+        "| dotnet | `Azure.Compute` | `Azure.Compute` | ⚠️ Invalid | ⏳ Pending | approver3, approver4 |";
 
       const result = parseCommentTable(body);
 
@@ -87,17 +88,17 @@ describe("post-results", () => {
       });
     });
 
-    it("should keep primary namespace when artifact row follows", () => {
+    it("should keep first match per language when duplicate rows exist", () => {
       const body = [
-        "| java _(package)_ | `com.azure.resourcemanager.compute` | ✅ | ⏳ Pending | approver-b |",
-        "| java _(artifact)_ | `azure-resourcemanager-compute` | ✅ | ⏳ Pending | approver-b |",
+        "| java | `azure-resourcemanager-compute` | `com.azure.resourcemanager.compute` | ✅ | ⏳ Pending | approver-b |",
+        "| java | `azure-resourcemanager-compute-v2` | `com.azure.resourcemanager.compute.v2` | ✅ | ⏳ Pending | approver-b |",
       ].join("\n");
 
       const result = parseCommentTable(body);
 
-      // First match (package) is kept, artifact row is skipped
+      // First match is kept
       expect(result.get("java")).toEqual({
-        namespace: "com.azure.resourcemanager.compute",
+        namespace: "azure-resourcemanager-compute",
         status: "⏳ Pending",
       });
       expect(result.size).toBe(1);
@@ -128,7 +129,7 @@ describe("post-results", () => {
       for (const [language, newNs] of Object.entries(newNamespaces)) {
         const prev = previousTable.get(language);
         if (prev && prev.namespace !== newNs) {
-          const approvedLabel = `namespace-${language}-approved`;
+          const approvedLabel = `package-name-${language}-approved`;
           if (labels.includes(approvedLabel)) {
             resetLanguages.push(language);
           }
@@ -139,7 +140,7 @@ describe("post-results", () => {
       return { resetLanguages, preservedApprovals };
     }
 
-    it("should reset only the language whose namespace changed and was approved", () => {
+    it("should reset only the language whose Package name changed and was approved", () => {
       const previousTable = new Map([
         [
           "java",
@@ -156,7 +157,7 @@ describe("post-results", () => {
         dotnet: "Azure.ResourceManager.Compute", // unchanged
       };
 
-      const existingLabels = ["namespace-java-approved", "namespace-dotnet-approved"];
+      const existingLabels = ["package-name-java-approved", "package-name-dotnet-approved"];
       const { resetLanguages, preservedApprovals } = computeResets(
         previousTable,
         newNamespaces,
@@ -182,7 +183,7 @@ describe("post-results", () => {
         dotnet: "Azure.ResourceManager.Compute", // unchanged
       };
 
-      const existingLabels = ["namespace-dotnet-approved"]; // java has no approved label
+      const existingLabels = ["package-name-dotnet-approved"]; // java has no approved label
       const { resetLanguages, preservedApprovals } = computeResets(
         previousTable,
         newNamespaces,
@@ -207,7 +208,7 @@ describe("post-results", () => {
         python: "azure-mgmt-compute", // new language, no previous entry
       };
 
-      const existingLabels = ["namespace-java-approved"];
+      const existingLabels = ["package-name-java-approved"];
       const { resetLanguages, preservedApprovals } = computeResets(
         previousTable,
         newNamespaces,
@@ -251,7 +252,7 @@ describe("post-results", () => {
         dotnet: "Azure.ResourceManager.Compute",
       };
 
-      const existingLabels = ["namespace-java-approved", "namespace-dotnet-approved"];
+      const existingLabels = ["package-name-java-approved", "package-name-dotnet-approved"];
       const { resetLanguages, preservedApprovals } = computeResets(
         previousTable,
         newNamespaces,
@@ -284,10 +285,10 @@ describe("post-results", () => {
       };
 
       const existingLabels = [
-        "namespace-java-approved",
-        "namespace-dotnet-approved",
-        "namespace-python-approved",
-        "namespace-typescript-approved",
+        "package-name-java-approved",
+        "package-name-dotnet-approved",
+        "package-name-python-approved",
+        "package-name-typescript-approved",
       ];
       const { resetLanguages, preservedApprovals } = computeResets(
         previousTable,
@@ -301,37 +302,44 @@ describe("post-results", () => {
   });
 
   describe("comment body generation", () => {
-    it("should generate a 5-column table that matches validate-approval regex", () => {
+    it("should generate a 6-column table that matches validate-approval regex", () => {
       const body = [
-        "## Namespace Review Required",
+        "## Package Name Review Required",
         "",
         "**Plane:** Data Plane",
         "",
-        "| Language | Proposed Namespace | Format | Status | Approvers |",
-        "|----------|-------------------|--------|--------|----------|",
-        "| java | `com.azure.messaging.eventgrid` | — | ⏳ Pending | approver1 |",
+        "| Language | Package Name | Namespace | Format | Status | Approvers |",
+        "|----------|--------------|-----------|--------|--------|----------|",
+        "| java | `azure-messaging-eventgrid` | `com.azure.messaging.eventgrid` | — | ⏳ Pending | approver1 |",
       ].join("\n");
 
-      const rowRegex = new RegExp(`(\\| java[^|]*\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`, "gi");
+      const rowRegex = new RegExp(
+        `(\\| java[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`,
+        "gi",
+      );
       expect(rowRegex.test(body)).toBe(true);
     });
 
-    it("should approve both package and artifact rows with g flag regex", () => {
+    it("should approve rows with the validate-approval regex pattern", () => {
       const body = [
-        "| java _(package)_ | `com.azure.resourcemanager.compute` | ✅ | ⏳ Pending | approver-b |",
-        "| java _(artifact)_ | `azure-resourcemanager-compute` | ✅ | ⏳ Pending | approver-b |",
+        "| java | `azure-resourcemanager-compute` | `com.azure.resourcemanager.compute` | ✅ | ⏳ Pending | approver-b |",
+        "| dotnet | `Azure.ResourceManager.Compute` | `Azure.ResourceManager.Compute` | ✅ | ⏳ Pending | approver-a |",
       ].join("\n");
 
-      const rowRegex = new RegExp(`(\\| java[^|]*\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`, "gi");
+      const rowRegex = new RegExp(
+        `(\\| java[^|]*\\|[^|]+\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`,
+        "gi",
+      );
       const replaced = body.replace(rowRegex, "$1 ✅ Approved by @approver-b $2");
 
-      expect(replaced).not.toContain("⏳ Pending");
-      expect(replaced.match(/Approved by/g)).toHaveLength(2);
+      expect(replaced).toContain("Approved by @approver-b");
+      // dotnet row should not be affected
+      expect(replaced).toContain("| dotnet | `Azure.ResourceManager.Compute`");
     });
 
     it("should include specific language names in reset warning", () => {
       const resetLanguages = ["java", "python"];
-      const warning = `> ⚠️ **Namespace changed** — approvals for ${resetLanguages.join(", ")} have been reset.\n`;
+      const warning = `> ⚠️ **Package name changed** -- approvals for ${resetLanguages.join(", ")} have been reset.\n`;
 
       expect(warning).toContain("java, python");
       expect(warning).not.toContain("affected languages");
@@ -354,58 +362,58 @@ describe("post-results", () => {
 
   describe("label skip logic", () => {
     it("should not add pending when language already approved", () => {
-      const existingLabels = ["namespace-java-approved", "namespace-review-required"];
+      const existingLabels = ["package-name-java-approved", "package-name-review-required"];
       const languages = ["java", "dotnet"];
-      const labelsToAdd = new Set(["namespace-review-required"]);
+      const labelsToAdd = new Set(["package-name-review-required"]);
 
       for (const language of languages) {
-        const approvedLabel = `namespace-${language}-approved`;
+        const approvedLabel = `package-name-${language}-approved`;
         if (!existingLabels.includes(approvedLabel)) {
-          labelsToAdd.add(`namespace-${language}-pending`);
+          labelsToAdd.add(`package-name-${language}-pending`);
         }
       }
 
-      expect(labelsToAdd.has("namespace-java-pending")).toBe(false);
-      expect(labelsToAdd.has("namespace-dotnet-pending")).toBe(true);
+      expect(labelsToAdd.has("package-name-java-pending")).toBe(false);
+      expect(labelsToAdd.has("package-name-dotnet-pending")).toBe(true);
     });
 
-    it("should remove namespace-review-required when all approved", () => {
+    it("should remove package-name-review-required when all approved", () => {
       const existingLabels = [
-        "namespace-java-approved",
-        "namespace-dotnet-approved",
-        "namespace-review-required",
+        "package-name-java-approved",
+        "package-name-dotnet-approved",
+        "package-name-review-required",
       ];
       const languages = ["java", "dotnet"];
-      const labelsToAdd = new Set(["namespace-review-required"]);
+      const labelsToAdd = new Set(["package-name-review-required"]);
 
       for (const language of languages) {
-        const approvedLabel = `namespace-${language}-approved`;
+        const approvedLabel = `package-name-${language}-approved`;
         if (!existingLabels.includes(approvedLabel)) {
-          labelsToAdd.add(`namespace-${language}-pending`);
+          labelsToAdd.add(`package-name-${language}-pending`);
         }
       }
 
       const allApproved = languages.every((lang) =>
-        existingLabels.includes(`namespace-${lang}-approved`),
+        existingLabels.includes(`package-name-${lang}-approved`),
       );
       if (allApproved && languages.length > 0) {
-        labelsToAdd.delete("namespace-review-required");
+        labelsToAdd.delete("package-name-review-required");
       }
 
-      expect(labelsToAdd.has("namespace-review-required")).toBe(false);
+      expect(labelsToAdd.has("package-name-review-required")).toBe(false);
     });
 
-    it("should keep namespace-review-required for empty languages (vacuous every)", () => {
+    it("should keep package-name-review-required for empty languages (vacuous every)", () => {
       /** @type {string[]} */
       const languages = [];
-      const labelsToAdd = new Set(["namespace-review-required"]);
+      const labelsToAdd = new Set(["package-name-review-required"]);
 
       const allApproved = languages.every(() => false);
       if (allApproved && languages.length > 0) {
-        labelsToAdd.delete("namespace-review-required");
+        labelsToAdd.delete("package-name-review-required");
       }
 
-      expect(labelsToAdd.has("namespace-review-required")).toBe(true);
+      expect(labelsToAdd.has("package-name-review-required")).toBe(true);
     });
   });
 });
