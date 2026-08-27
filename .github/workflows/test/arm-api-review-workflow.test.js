@@ -4,7 +4,7 @@ import { join } from "path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { runInNewContext } from "vm";
 
-// cspell:ignore REPOST
+// cspell:ignore REPOST vally
 
 /** Repo root, from .github/workflows/test. */
 const ROOT = join(import.meta.dirname, "..", "..", "..");
@@ -599,7 +599,7 @@ describe("ARM API review consistency and hardening", () => {
       // Per-category caps gave the smallest allowance to the rarest category,
       // which is security, and bound on reviews far below any real limit.
       expect(source).toContain("security is the rarest");
-      expect(source).toContain("requency is not importance");
+      expect(source).toContain("Frequency is not importance");
     }
 
     expect(agent).toContain("**Output budget (identical to the automated workflow).**");
@@ -798,7 +798,7 @@ describe("ARM API review consistency and hardening", () => {
     // nothing else posted two and buried one, with nothing under pressure.
     for (const source of [workflow, agent]) {
       expect(source).toContain("There are no per-category caps");
-      expect(source).toContain("requency is not importance");
+      expect(source).toContain("Frequency is not importance");
     }
     expect(workflow).toContain("Below 20, post every finding");
     expect(workflow).toContain("Do not trim a small review");
