@@ -602,7 +602,7 @@ describe("ARM API review consistency and hardening", () => {
     expect(agent).toContain("| ARM contract violations | 15 |");
     expect(agent).toContain("| Property design / naming | 5 |");
     expect(agent).toContain("| Documentation gaps | 3 |");
-    expect(agent).toContain("Overall inline budget is **50** posted comments.");
+    expect(agent).toContain("The overall inline budget is **50** posted comments");
     // Caps govern posting, not analysis, but over-cap candidates are never
     // rendered as verified findings: only a count and themes are disclosed.
     expect(agent).toContain("The caps govern what is **posted**, not what is analysed");
@@ -792,6 +792,22 @@ describe("ARM API review consistency and hardening", () => {
     // next person does not assume the numbers were measured.
     expect(workflow).toContain("not values derived from telemetry");
     expect(agent).toContain("operational safety limits, not telemetry-derived values");
+  });
+
+  it("states that per-category caps apply independently of the 50-comment budget", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // A reader concluded the caps only engage once a review exceeds 50 comments.
+    // The opposite is true: caps bind per category on any size of review, and
+    // the 50 budget is an independent ceiling that 43 keeps out of reach.
+    for (const source of [workflow, agent]) {
+      expect(source).toContain("**The caps always apply.**");
+      expect(source).toContain("not gated on the 50-comment budget");
+      // A worked example, because the abstract rule is what was misread.
+      expect(source).toContain("still posts three inline and discloses four as overflow");
+    }
+    expect(workflow).toContain("a **second, independent** ceiling");
   });
 });
 

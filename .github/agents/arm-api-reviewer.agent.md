@@ -900,7 +900,7 @@ A generic summary theme without an affected element and actionable guidance does
 
 These per-category caps total **43** inline comments.
 
-Overall inline budget is **50** posted comments. If the total across categories would exceed 50, post the highest-severity findings inline (security and breaking changes first). Replies and thread resolutions from Step 5.5 have their own budgets and do **not** consume the 50.
+**The caps always apply.** They are not a fallback that engages only on large reviews, and they are not gated on the 50-comment budget. A category cap binds as soon as that category exceeds it, however small the review is overall: seven documentation findings on a PR whose only findings are those seven still posts three inline and discloses four as overflow. The overall inline budget is **50** posted comments, a second and independent ceiling; because every category is capped the total is bounded at 43, so the 50 should not be reachable. If it somehow would be exceeded, post the highest-severity findings inline (security and breaking changes first). Replies and thread resolutions from Step 5.5 have their own budgets and do **not** consume the 50.
 
 These are operational safety limits, not telemetry-derived values, and every one sits well above the observed per-pull-request average recorded in `documentation/arm-api-reviewer-insights.md`, so a cap binds only on an outlier change. The cap buckets are coarser than the issue types tracked on that page: map each finding to a bucket using the **"Which cap applies to a finding"** table in `.github/workflows/arm-api-review.md`, which is canonical. Every tracked issue type maps to exactly one bucket; a finding is never treated as uncapped because it does not fit a bucket name.
 

@@ -706,11 +706,19 @@ Dropping the body is never an acceptable fallback for a missing field.
 - Property design / naming: cap at 5
 - Documentation gaps: cap at 3
 
-Every category is capped, so the per-category limits bound the total at **43**,
-below the 50-comment inline budget. Security and breaking-change findings are
-still posted **first** when selecting what goes inline, and an over-cap finding
-in either category is never silently dropped: disclose it in the summary like
-any other overflow.
+**The caps always apply.** They are not a fallback that engages only on large
+reviews, and they are not gated on the 50-comment budget. A category cap binds as
+soon as that category exceeds it, however small the review is overall. Seven
+documentation findings on a pull request whose only findings are those seven
+still posts three inline and discloses four as overflow.
+
+Because every category is capped, the per-category limits bound the total at
+**43**, which is below the 50-comment inline budget. That budget is therefore a
+backstop that should not be reachable, not the thing that switches the caps on.
+
+Security and breaking-change findings are still posted **first** when selecting
+what goes inline, and an over-cap finding in either category is never silently
+dropped: disclose it in the summary like any other overflow.
 
 **Where these numbers come from.** They are operational safety limits, not
 values derived from telemetry. The 15 / 5 / 3 limits predate the current
@@ -746,8 +754,9 @@ A finding that fits no row maps to the bucket of its nearest listed type; never
 treat it as uncapped.
 
 **Inline comment budget:** The workflow allows up to 50 inline review comments
-(`create-pull-request-review-comment`). With every category now capped, the
-per-category limits bound the total at 43, so this budget should not be reached;
+(`create-pull-request-review-comment`). This is a **second, independent** ceiling
+on top of the per-category caps, not the trigger for them. Because every category
+is capped the total is bounded at 43, so this budget should not be reachable;
 keep the rule as a safety net. If the total across all categories would still
 exceed 50, post the highest-severity findings inline (security and breaking
 changes first) and collect overflow findings into the summary `add-comment`
