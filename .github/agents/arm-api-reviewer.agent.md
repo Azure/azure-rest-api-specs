@@ -336,21 +336,29 @@ cover the two repositories above. Identical API changes MUST receive identical
 feedback in every context. These are the same everywhere and must not drift:
 
 - **Rule sources** -- the same instruction files and `azure-api-review` skill references.
-- **Output budgets** -- the per-category caps and 50-comment inline budget defined in [Step 6](#step-6-assemble-findings-report-internal-draft), with the same overflow-to-summary disclosure.
+- **Output budgets** -- the same 20-comment per-session limit and the same drop order when a review has to be trimmed.
 - **Severity policy** -- the same severity for the same finding, including when the Critic is unavailable: severity is **preserved**, never downgraded to compensate for missing verification.
 - **Default finding set** -- a finding that still FAILs after the third Critic iteration is dropped.
 - **Label policy** -- `ARMChangesRequested` only when a Blocking finding is published **and** the Critic verified it.
 
-Exactly one thing differs, by design: **the human approval gate**. This agent
-presents findings in chat and posts only after the reviewer approves. That
+Two things differ, by design. The first is **the human approval gate**: this
+agent presents findings in chat and posts only after the reviewer approves. That
 reviewer may record an explicit override (`critic: override` plus a validated
 `override-reason`), or escalate to `MANUAL DECISION REQUIRED` and approve
 posting per row. Both are explicit, recorded human actions. The unattended
 workflow has neither path. Absent either action, a run MUST produce the same
-posted finding set as an automated run. Both repositories run the automated
-workflow (`arm-api-review.md` exists in each and the two copies MUST stay
-identical), so a pull request in either repository can receive both an automated
-and an interactive review. These rules are what keep those outcomes consistent.
+posted finding set as an automated run.
+
+The second is **the model**. The unattended workflow pins one so its runs are
+reproducible. This agent does not: it runs on whatever model you have selected
+in VS Code, and pinning one would simply fail for anyone without access to it.
+Expect wording and emphasis to vary from an automated review. The rules above
+are what keep the substance the same.
+
+Both repositories run the automated workflow (`arm-api-review.md` exists in each
+and the two copies MUST stay identical), so a pull request in either repository
+can receive both an automated and an interactive review. These rules are what
+keep those outcomes consistent.
 
 ## Operating Mode
 

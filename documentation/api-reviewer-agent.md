@@ -153,10 +153,16 @@ identical, so a pull request in either one can receive an automated review as
 well as an interactive one. The shared rules above are what keep the outcomes
 consistent.
 
-The automated review also runs on a **pinned model**, so every run reviews with
-the same model and the behavior changes only in a reviewed commit rather than
-drifting from run to run. The ARM eval suite pins the same model, so eval results
-reflect what production actually does.
+The automated review runs on a **pinned model**, so every automated run reviews
+with the same model and its behavior changes only in a reviewed commit rather
+than drifting from run to run. The ARM eval suite pins the same model, so eval
+results reflect what production actually does.
+
+Interactive reviews in VS Code are **not** pinned to a model. They run on
+whatever model you have selected, so that the agent works for everyone
+regardless of which models their subscription includes. Wording and emphasis can
+therefore vary between an interactive review and an automated one; the shared
+rules above are what keep the substance the same.
 
 ### Bot identity and comment deduplication
 

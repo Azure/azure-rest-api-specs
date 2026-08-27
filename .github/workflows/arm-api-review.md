@@ -157,7 +157,6 @@ safe-outputs:
   add-comment:
     max: 4
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
-  # Per-category inline caps in the agent body:
   # The agent self-limits to 20 inline comments per session, just above the
   # observed maximum of 18 (267 pull requests, grouped into sessions by marker
   # head-sha; median 2, p90 8). There are no per-category caps: sized by how
@@ -249,8 +248,8 @@ following are the **same in every context** and must not be allowed to drift:
 
 - **Rule sources** — the same instruction files and the same `azure-api-review`
   skill references.
-- **Output budgets** — the same per-category inline caps and the same 50-comment
-  overall budget, with the same overflow-to-summary disclosure.
+- **Output budgets** — the same 20-comment per-session limit and the same drop
+  order when a review has to be trimmed.
 - **Severity policy** — the same severity for the same finding, including when
   the Critic is unavailable: severity is **preserved**, never downgraded to
   compensate for missing verification.
@@ -259,7 +258,7 @@ following are the **same in every context** and must not be allowed to drift:
 - **Label policy** — `ARMChangesRequested` is applied only when a Blocking
   finding is published **and** the Critic verified it.
 
-Exactly **one** thing differs, by design:
+Exactly **two** things differ, by design:
 
 - **The human approval gate.** The interactive agent presents findings in chat
   and posts only after the reviewer approves. That reviewer may record an
@@ -268,6 +267,11 @@ Exactly **one** thing differs, by design:
   explicit, recorded human actions. This workflow has no human in the loop and
   therefore has neither path. Absent either action, an interactive run produces
   the same posted finding set as an automated run.
+- **The model.** This workflow pins one, so its runs are reproducible. The
+  interactive agent deliberately does not: it runs on whatever model the
+  reviewer has selected in VS Code, and pinning one would simply fail for
+  anyone without access to it. Expect wording and emphasis to vary between the
+  two paths. The rules above are what keep the substance the same.
 
 **Repository coverage.** This workflow exists in **both** repositories,
 `Azure/azure-rest-api-specs` and `Azure/azure-rest-api-specs-pr`, and the two

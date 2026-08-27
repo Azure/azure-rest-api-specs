@@ -849,6 +849,34 @@ describe("ARM API review consistency and hardening", () => {
     // Bucketing is driven by the category, not by re-reading the rule ID.
     expect(workflow).toContain("never decide it by re-reading the rule ID");
   });
+  it("documents that the model is pinned only on the unattended path", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // The interactive agent has no `model:` frontmatter field on purpose: it
+    // runs on whatever the reviewer has in VS Code, so pinning would fail for
+    // anyone without access to that model. Parity must not claim otherwise.
+    expect(agent).not.toMatch(/^model:/m);
+    for (const source of [workflow, agent]) {
+      expect(source).toContain("would simply fail for anyone without access to it");
+      expect(source).toContain("runs on whatever model");
+    }
+    // The workflow states its own side of the difference explicitly.
+    expect(workflow).toContain("This workflow pins one, so its runs are reproducible");
+  });
+
+  it("keeps the parity budget bullet in step with the actual limit", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // The bullet described per-category caps and a 50-comment budget after both
+    // had been replaced by a single 20-per-session limit.
+    for (const source of [workflow, agent]) {
+      expect(source).toContain("the same 20-comment per-session limit");
+    }
+    expect(workflow).not.toContain("the same per-category inline caps");
+    expect(agent).not.toContain("per-category caps and 50-comment inline budget");
+  });
 });
 
 describe("ARM API review live-run regressions", () => {
