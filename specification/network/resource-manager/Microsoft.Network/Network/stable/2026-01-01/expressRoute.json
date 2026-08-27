@@ -1216,6 +1216,9 @@
           "Create ExpressRouteCircuit": {
             "$ref": "./examples/ExpressRouteCircuitCreate.json"
           },
+          "Create ExpressRouteCircuit on ExpressRouteLag": {
+            "$ref": "./examples/ExpressRouteCircuitCreateOnExpressRouteLag.json"
+          },
           "Create ExpressRouteCircuit on ExpressRoutePort": {
             "$ref": "./examples/ExpressRouteCircuitCreateOnExpressRoutePort.json"
           },
@@ -6214,6 +6217,10 @@
           "$ref": "./common.json#/definitions/SubResource",
           "description": "The reference to the ExpressRoutePort resource when the circuit is provisioned on an ExpressRoutePort resource."
         },
+        "expressRouteLag": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The reference to the ExpressRouteLag resource when the circuit is provisioned on an ExpressRouteLag resource."
+        },
         "bandwidthInGbps": {
           "type": "number",
           "format": "float",
@@ -7026,6 +7033,14 @@
           "items": {
             "$ref": "#/definitions/ExpressRouteLagLink"
           }
+        },
+        "circuits": {
+          "type": "array",
+          "description": "Reference the ExpressRoute circuit(s) that are provisioned on this ExpressRouteLag resource.",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
         },
         "allocationDate": {
           "type": "string",
