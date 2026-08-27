@@ -1,6 +1,6 @@
 # OpenAPI Specifications Authoring - Automated Guidelines #
 
-This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools][azure-openapi-validator-how-to-run-locally]. Please visit [here for Manual guidelines](openapi-authoring-manual-guidelines.md).
+This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools][azure-openapi-validator-how-to-run-locally].
 
 It is a requirement to conform to all manual and automated rules with severity "Error" before sending a pull request for review.
 
@@ -1674,7 +1674,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true. This will indicate that the model is an Azure resource.
 
-**Why the rule is important**: This will ensure that the 'Resource' definition is designed correctly in code generation.Please refer [here](./swagger-extensions.md#x-ms-azure-resource) for further details.
+**Why the rule is important**: This will ensure that the 'Resource' definition is designed correctly in code generation.Please refer [here](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-azure-resource) for further details.
 
 **How to fix the violation**: Ensure that the 'Resource' definition has x-ms-azure-resource extension enabled and set to true.
 
@@ -1709,7 +1709,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Description**: For ARM spec, the allowed response status codes for a long DELETE operation are "200" & "204"; the allowed response status codes for a POST operation are "200", "201" ,"202", & "204"; the allowed response status codes for a PUT/PATCH operation are  "200" & "201".
                  For Data plane spec, the allowed response status codes for a long DELETE operation are "200","202", & "204"; the allowed response status codes for a POST operation are "200", "201" ,"202", & "204"; the allowed response status codes for a PUT/PATCH operation are  "200","201", & "202".
 
-**Why the rule is important**: This will ensure that the DELETE/POST/PUT operations are designed correctly.Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for further details.
+**Why the rule is important**: This will ensure that the DELETE/POST/PUT operations are designed correctly.Please refer [here](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation) for further details.
 
 **How to fix the violation**: Ensure that the DELETE/POST/PUT operations have the allowed response codes.
 
@@ -1777,7 +1777,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'.
 
-**Why the rule is important**: This will ensure that the PUT operation actually returns a resource model.Please refer [here](./swagger-extensions.md#x-ms-azure-resource) for details on x-ms-azure-resource extension.
+**Why the rule is important**: This will ensure that the PUT operation actually returns a resource model.Please refer [here](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-azure-resource) for details on x-ms-azure-resource extension.
 
 **How to fix the violation**: Ensure that the 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy.
 
@@ -1794,7 +1794,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: When a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values must be same for both operations. A tracked resource is a resource with a 'location' property as required. If this rule flags a resource which does not have a 'location' property, then it might be a false positive.
 
-**Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could expect the same behavior for both list by subscription and resource group. Please refer [here](./swagger-extensions.md#x-ms-pageable) for details on the x-ms-pageable extension.
+**Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could expect the same behavior for both list by subscription and resource group. Please refer [here](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-pageable) for details on the x-ms-pageable extension.
 
 **How to fix the violation**: Ensure that when a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values are same for both operations. This might involve a service side change which will result in a breaking change in the generated SDK.
 
@@ -1811,7 +1811,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: The '200'/'201' responses of the long running operation must have a schema definition. 
 
-**Why the rule is important**: Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for details on the x-ms-long-running-operation. The '201' response code indicates 'Created' & '200' response code indicates 'Success'. In either case, it is logical for the response to be the same.
+**Why the rule is important**: Please refer [here](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation) for details on the x-ms-long-running-operation. The '201' response code indicates 'Created' & '200' response code indicates 'Success'. In either case, it is logical for the response to be the same.
 
 **How to fix the violation**: Ensure that the '200'/'201' responses of the long running operation has a schema definition. This might involve a service side change which will result in a breaking change in the generated SDK.
 
@@ -2085,7 +2085,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt** : February 18, 2020
 
-**Why this rule is important**: Per [creating-swagger](creating-swagger.md#Paths),The operationId is used to determine the generated method name.
+**Why this rule is important**: The operationId is used to determine the generated method name.
 
 **How to fix the violation**: Add the right operationId for each operation
 
@@ -2362,7 +2362,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The operation '{0}' returns 202 status code, which indicates a long running operation, please enable 'x-ms-long-running-operation'.  
 
-**Description** : Per [x-ms-long-running-operation](./swagger-extensions.md#x-ms-long-running-operation) ,The operation which returns 202 status code indicates a long running operation. Every long running operation must have the x-ms-long-running-operation enabled.
+**Description** : Per [x-ms-long-running-operation](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation), the operation which returns 202 status code indicates a long running operation. Every long running operation must have the x-ms-long-running-operation enabled.
 
 **How to fix the violation**: 
 Having the "x-ms-long-running-operation" enabled.
@@ -3885,15 +3885,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 [common-api-details-md-client-request-headers]: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-details.md#client-request-headers
 [configuration-md]: https://github.com/Azure/autorest/blob/185e337137c990b9cc1b8ebbb272e76eeeef43a1/docs/user/literate-file-formats/configuration.md
 [en]: https://unicode-table.com/en/
-[swagger-extensions-md-x-ms-paths]: https://github.com/Azure/azure-rest-api-specs/blob/dce4da0d748565efd2ab97a43d0683c2979a974a/documentation/swagger-extensions.md#x-ms-paths
-[swagger-extensions-md-x-ms-client-flatten]: https://github.com/Azure/azure-rest-api-specs/blob/dce4da0d748565efd2ab97a43d0683c2979a974a/documentation/swagger-extensions.md#x-ms-client-flatten
-[swagger-extensions-md-x-ms-pageable]: https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-pageable
+[swagger-extensions-md-x-ms-paths]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-paths
+[swagger-extensions-md-x-ms-client-flatten]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-client-flatten
+[swagger-extensions-md-x-ms-pageable]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-pageable
 [types-json-l9]: https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v1/types.json#L9
 [valid-formats-md]: https://github.com/Azure/autorest/blob/81d4d31d06637f4f9ef042d7f2ec64cfea29892f/docs/developer/validation-rules/valid-formats.md
 [x-ms-examples-md-why-x-ms-examples]: https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md#why-x-ms-examples
 [x-ms-examples-md-benefits-of-x-ms-examples-extension]: https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md#benefits-of-x-ms-examples-extension
 [readme-md-x-ms-pageable]: https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable
-[x-ms-pageable]: https://github.com/Azure/azure-rest-api-specs/tree/master/documentation/x-ms-pageable
+[x-ms-pageable]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-pageable
 [security-definitions-structure-validation-md]: https://github.com/Azure/azure-openapi-validator/blob/master/docs/security-definitions-structure-validation.md
 [readme-md-x-ms-long-running-operation]: https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation
 [common-api-details-md-error-response-content]: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-details.md#error-response-content

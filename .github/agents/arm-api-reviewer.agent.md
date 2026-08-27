@@ -386,12 +386,12 @@ Use these to verify claims, check the latest guidelines, or investigate edge cas
 - [ARM wiki / RP guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/rpguidelines.html) - supplementary ARM guidance
 - [Repository documentation](https://github.com/Azure/azure-rest-api-specs/tree/main/documentation)
 - [OpenAPI authoring automated guidelines](../../documentation/openapi-authoring-automated-guidelines.md) - automated validation rule IDs and descriptions
-- [Breaking changes guidelines](../../documentation/Breaking%20changes%20guidelines.md) - what constitutes a breaking change
-- [Uniform versioning](../../documentation/uniform-versioning.md) - API version immutability and folder structure
-- [Directory structure](../../documentation/directory-structure.md) - specification folder layout conventions
+- [Breaking changes policy](https://aka.ms/AzBreakingChangesPolicy) - what constitutes a breaking change
+- [Uniform versioning](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-Service-Versioning-Guideline) - API version immutability and folder structure
+- [Directory structure](https://aka.ms/azsdk/spec-dirs) - specification folder layout conventions
 - [CI fix guide](../../documentation/ci-fix.md) - troubleshooting PR validation failures
-- [Swagger extensions](../../documentation/swagger-extensions.md) - x-ms extension documentation
-- [TypeSpec dev process](../../documentation/typespec-rest-api-dev-process.md) - end-to-end TypeSpec workflow
+- [Swagger extensions](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md) - x-ms extension documentation
+- [TypeSpec dev process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec) - end-to-end TypeSpec workflow
 - [Getting started with TypeSpec](../../documentation/Getting-started-with-TypeSpec-specifications.md) - TypeSpec project checklist
 - [TypeSpec Azure docs](https://azure.github.io/typespec-azure/docs/intro/) - Azure TypeSpec library reference
 - [TypeSpec language docs](https://typespec.io/docs/) - TypeSpec language reference

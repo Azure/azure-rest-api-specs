@@ -6,7 +6,7 @@ The generated specs and examples are located under `resource-manager/Microsoft.D
 
 # Setup local environment
 
-See instructions [here](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-rest-api-dev-process.md#21-with-local-machine-development)
+See the [TypeSpec development process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec).
 
 # Folder layout
 

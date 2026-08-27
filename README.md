@@ -6,6 +6,8 @@ This repository is the canonical source for REST API specifications for Microsof
 
 ## Getting started
 
+See the [specification documentation index](./documentation/README.md) for repository-specific guides and references.
+
 If you're a Microsoft employee looking for information about all of the repositories and steps for Azure SDK Libraries Releases, go to the [aka.ms/azsdk/join](https://aka.ms/azsdk/join).
 
 External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md).
@@ -37,4 +39,3 @@ External Contributors can read [Getting Started with OpenAPI Specifications](htt
 
 ---
 _This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._
-

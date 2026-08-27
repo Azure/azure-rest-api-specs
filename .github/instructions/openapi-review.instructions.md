@@ -108,7 +108,7 @@ If **none** of these signals are present, the new API version is being authored 
 
 A finding "passes" the rule means the rule does not appear in the findings list at any severity. Listing it in a "Compliant Areas" or "N/A" table is acceptable.
 
-**Fix.** Author the new API version in TypeSpec using the Azure TypeSpec libraries. See [Getting Started with TypeSpec specifications](../../documentation/Getting-started-with-TypeSpec-specifications.md) and the [TypeSpec dev process](../../documentation/typespec-rest-api-dev-process.md) for end-to-end guidance. Generated OpenAPI from `tsp compile .` is then checked in alongside the TypeSpec source.
+**Fix.** Author the new API version in TypeSpec using the Azure TypeSpec libraries. See [Getting Started with TypeSpec specifications](../../documentation/Getting-started-with-TypeSpec-specifications.md) and the [TypeSpec dev process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec) for end-to-end guidance. Generated OpenAPI from `tsp compile .` is then checked in alongside the TypeSpec source.
 
 **Enforcement.** A deterministic CI check is in development to block such PRs automatically (tracked in [PR #42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, this agent rule surfaces the same policy at review time.
 
