@@ -189,6 +189,9 @@ model SubAgent {
   @doc("A description of the subagent's capabilities, used by the voice agent to decide whether to forward a query.")
   agent_capabilities: string;
 
+  @doc("Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.")
+  enable_delta_progress?: boolean = false;
+
   @doc("The wall-clock timeout, in seconds, for each invocation of this subagent. When omitted, the service timeout is used.")
   @encode(DurationKnownEncoding.seconds, int32)
   @minValue(duration.fromISO("PT5S"))

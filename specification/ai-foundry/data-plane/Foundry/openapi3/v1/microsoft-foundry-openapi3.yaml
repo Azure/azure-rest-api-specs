@@ -77030,6 +77030,10 @@ components:
         agent_capabilities:
           type: string
           description: A description of the subagent's capabilities, used by the voice agent to decide whether to forward a query.
+        enable_delta_progress:
+          type: boolean
+          description: Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.
+          default: false
         invoke_timeout_seconds:
           type: integer
           format: int32
