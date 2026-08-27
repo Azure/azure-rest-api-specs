@@ -93,13 +93,6 @@ model FrontendAssociation {
   id: string;
 }
 
-/** Reference to an Association resource. */
-@added(Versions.v2026_03_01)
-model FrontendAssociationUpdate {
-  /** Resource ID of the Association. */
-  id?: string;
-}
-
 //----------------------- Associations -----------------------
 /** Association Subresource of Traffic Controller */
 @parentResource(TrafficController)

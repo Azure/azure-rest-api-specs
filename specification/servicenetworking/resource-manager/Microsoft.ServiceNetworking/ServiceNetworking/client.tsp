@@ -148,11 +148,6 @@ using Microsoft.ServiceNetworking;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  FrontendAssociationUpdate.id,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
