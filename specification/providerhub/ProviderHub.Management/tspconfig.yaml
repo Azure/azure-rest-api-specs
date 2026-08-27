@@ -11,12 +11,14 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
+    api-version: "2025-10-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-providerhub"
     namespace: "azure.mgmt.providerhub"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    api-version: "2025-10-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-providerhub"
     namespace: "com.azure.resourcemanager.providerhub"
     service-name: "ProviderHub" # human-readable service name, whitespace allowed
@@ -35,6 +37,7 @@ options:
       - resource: DefaultRollout
         collection: DefaultRollouts
   "@azure-tools/typespec-ts":
+    api-version: "2025-10-01"
     service-dir: "sdk/providerhub"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-providerhub"
     is-modular-library: true
@@ -43,6 +46,7 @@ options:
     package-details:
       name: "@azure/arm-providerhub"
   "@azure-tools/typespec-go":
+    api-version: "2025-10-01"
     service-dir: "sdk/resourcemanager/providerhub"
     emitter-output-dir: "{output-dir}/{service-dir}/armproviderhub"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armproviderhub"
@@ -53,6 +57,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-typespec/http-client-csharp-mgmt":
+    api-version: "2025-10-01"
     namespace: "Azure.ResourceManager.ProviderHub"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 
