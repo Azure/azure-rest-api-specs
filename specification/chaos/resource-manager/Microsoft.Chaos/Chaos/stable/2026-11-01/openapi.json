@@ -5291,6 +5291,10 @@
           "format": "arm-id",
           "description": "The fully qualified Azure resource ID of the target resource this connection is established with."
         },
+        "region": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure region of the target resource. Chaos Studio assigns this connection's\nregional data-plane endpoint from this value, so it must name a region in which\nChaos Studio operates a data plane; the service rejects the request otherwise.\n\nThis is supplied by the client because an Azure Resource Manager resource ID does\nnot encode the location of the resource it names, and resolving it service-side\nwould require a read against the target resource that the caller may not have\ngranted. This mirrors the established pattern for resources whose DNS or endpoint\nconfiguration is regional — for example\n`Microsoft.Search/searchServices/sharedPrivateLinkResources.resourceRegion`, whose\nown documentation calls it out as required specifically for targets such as Azure\nKubernetes Service."
+        },
         "principalId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Microsoft Entra principal (object) ID of the identity used by the connection."
@@ -5330,7 +5334,8 @@
       },
       "required": [
         "kind",
-        "targetResourceId"
+        "targetResourceId",
+        "region"
       ]
     },
     "ConnectionStatus": {

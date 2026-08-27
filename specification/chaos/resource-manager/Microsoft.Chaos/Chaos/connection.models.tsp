@@ -48,6 +48,23 @@ model ConnectionProperties {
   targetResourceId: Azure.Core.armResourceIdentifier;
 
   /**
+   * The Azure region of the target resource. Chaos Studio assigns this connection's
+   * regional data-plane endpoint from this value, so it must name a region in which
+   * Chaos Studio operates a data plane; the service rejects the request otherwise.
+   *
+   * This is supplied by the client because an Azure Resource Manager resource ID does
+   * not encode the location of the resource it names, and resolving it service-side
+   * would require a read against the target resource that the caller may not have
+   * granted. This mirrors the established pattern for resources whose DNS or endpoint
+   * configuration is regional — for example
+   * `Microsoft.Search/searchServices/sharedPrivateLinkResources.resourceRegion`, whose
+   * own documentation calls it out as required specifically for targets such as Azure
+   * Kubernetes Service.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  region: Azure.Core.azureLocation;
+
+  /**
    * The Microsoft Entra principal (object) ID of the identity used by the connection.
    */
   principalId?: Azure.Core.uuid;
