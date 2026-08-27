@@ -272,7 +272,98 @@ model Widget {
     expect(changedReport.newSuppressions.map((suppression) => suppression.ruleName)).toEqual([
       "@azure-tools/rule-new",
     ]);
-  }, 30_000);
+  }, 60_000);
+
+  it("preserves unscoped suppressions when a TypeSpec file is renamed", async () => {
+    const repoRoot = await initTempRepo();
+    tempRepos.push(repoRoot);
+
+    const specPath = "specification/demo/Demo";
+    const specFolder = path.join(repoRoot, specPath);
+    const baseFilePath = path.join(specFolder, "back-compatible.tsp");
+    const headFilePath = path.join(specFolder, "compatibility.tsp");
+    await mkdir(specFolder, { recursive: true });
+    await writeFile(path.join(specFolder, "tspconfig.yaml"), "linter:\n  disable: {}\n");
+    await writeFile(
+      baseFilePath,
+      `model Widget {
+  name: string;
+  description: string;
+}
+
+#suppress "@azure-tools/rule-existing" "existing compatibility suppression"
+@@Legacy.flattenProperty(Widget.name);
+`,
+    );
+
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "base"]);
+    const baseRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    git(repoRoot, ["mv", baseFilePath, headFilePath]);
+    git(repoRoot, ["commit", "-m", "rename compatibility file"]);
+    const renamedRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    const renamedReport = await analyzeTypeSpecSuppressions({
+      cwd: repoRoot,
+      baseRevision,
+      headRevision: renamedRevision,
+      specPaths: [specPath],
+    });
+
+    expect(renamedReport.requiresApproval).toBe(false);
+    expect(renamedReport.counts).toEqual({
+      specs: 1,
+      base: 1,
+      head: 1,
+      new: 0,
+      removed: 0,
+      changed: 0,
+      unchanged: 1,
+    });
+    expect(renamedReport.specs[0].baseSuppressions[0].sourceFile).toBe(
+      `${specPath}/compatibility.tsp`,
+    );
+
+    await writeFile(
+      headFilePath,
+      `model Widget {
+  name: string;
+  description: string;
+}
+
+#suppress "@azure-tools/rule-existing" "existing compatibility suppression"
+@@Legacy.flattenProperty(Widget.name);
+
+#suppress "@azure-tools/rule-new" "new compatibility suppression"
+@@Legacy.flattenProperty(Widget.description);
+`,
+    );
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "add suppression after file rename"]);
+    const suppressionHeadRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    const changedReport = await analyzeTypeSpecSuppressions({
+      cwd: repoRoot,
+      baseRevision,
+      headRevision: suppressionHeadRevision,
+      specPaths: [specPath],
+    });
+
+    expect(changedReport.requiresApproval).toBe(true);
+    expect(changedReport.counts).toEqual({
+      specs: 1,
+      base: 1,
+      head: 2,
+      new: 1,
+      removed: 0,
+      changed: 0,
+      unchanged: 1,
+    });
+    expect(changedReport.newSuppressions.map((suppression) => suppression.ruleName)).toEqual([
+      "@azure-tools/rule-new",
+    ]);
+  }, 60_000);
 
   it("omits checkedSuppressions in legacy mode (no checkRules)", async () => {
     const repoRoot = await initTempRepo();
