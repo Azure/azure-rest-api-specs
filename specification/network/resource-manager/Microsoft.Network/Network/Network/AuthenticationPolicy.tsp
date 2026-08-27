@@ -12,6 +12,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Common;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
 
@@ -102,7 +103,7 @@ model AuthenticationProviderProperties {
   @maxLength(4096)
   clientSecret?: string;
 
-  /** The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported, and each scope can contain up to 128 characters. */
+  /** The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported, each scope can contain up to 128 characters, and all scopes can contain up to 256 characters combined. */
   @maxItems(10)
   scope?: AuthenticationScope[];
 
@@ -169,6 +170,18 @@ interface AuthenticationPolicies {
   >;
 
   /**
+   * Updates an authentication policy's tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "AuthenticationPolicy supports a tags-only PATCH through the generic Network RP controller."
+  @tag("AuthenticationPolicies")
+  @patch(#{ implicitOptionality: false })
+  updateTags is ArmCustomPatchSync<
+    AuthenticationPolicy,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
+
+  /**
    * Deletes the specified authentication policy.
    */
   @tag("AuthenticationPolicies")
@@ -199,4 +212,12 @@ interface AuthenticationPolicies {
 @@doc(
   AuthenticationPolicies.createOrUpdate::parameters.resource,
   "Authentication policy to be created or updated."
+);
+@@doc(
+  AuthenticationPolicies.updateTags::parameters.properties,
+  "Parameters supplied to update authentication policy tags."
+);
+@@clientName(
+  AuthenticationPolicies.updateTags::parameters.properties,
+  "parameters"
 );
