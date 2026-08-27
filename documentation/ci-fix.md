@@ -258,16 +258,11 @@ https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
 
 ## `TypeSpec Suppressions`
 
-> [!NOTE]
->
-> This check is currently in **testing mode and is non-blocking** — it surfaces
-> information and inline warnings but does not currently prevent your PR from
-> merging. It is distinct from the AutoRest/`suppressions.yaml` flow described in
-> [Suppression Process](#suppression-process) below.
-
 This check detects **new or changed TypeSpec lint suppressions** introduced by
-your PR and surfaces them for review. It analyzes two kinds of suppressions in
-the TypeSpec projects impacted by your changes:
+your PR and requires them to be removed or approved before the PR can merge. It
+is distinct from the AutoRest/`suppressions.yaml` flow described in
+[Suppression Process](#suppression-process) below. It analyzes two kinds of
+suppressions in the TypeSpec projects impacted by your changes:
 
 - **Inline suppressions**: `#suppress` directives in `.tsp` files.
 - **Config suppressions**: `linter.disable` entries in `tspconfig.yaml`.
@@ -307,7 +302,9 @@ suppression, prefer fixing the underlying issue:
    string explaining why the rule cannot be satisfied; suppressions with no
    justification are flagged.
 3. **If the suppression is legitimate and requires approval**, ask the
-   appropriate reviewer to apply the `Approved-TypeSpecSuppression` label.
+   appropriate reviewer to apply the `Approved-TypeSpecSuppression` label. The
+   `TypeSpec Suppressions` check remains blocking until the suppression is
+   resolved or the label is applied.
 
 ### Reproduce locally
 
@@ -316,7 +313,7 @@ The check is powered by the `@azure-tools/typespec-suppressions` CLI. See
 for usage. For example, to compare your branch against `main`:
 
 ``` powershell
-npx typespec-suppressions --base origin/main <path-to-typespec-project-folder>
+npx typespec-suppressions --base origin/main --fail-on-approval <path-to-typespec-project-folder>
 ```
 
 ## `license/cla`

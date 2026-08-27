@@ -98,6 +98,7 @@ jobs:
             --json-output "typespec-suppressions-report.json" \
             --markdown-output "$GITHUB_STEP_SUMMARY" \
             --check-rules-file "eng/tools/typespec-suppressions/check-rules.json" \
+            --fail-on-approval \
             "${annotations_flag[@]}" \
             "${spec_folders[@]}"
 

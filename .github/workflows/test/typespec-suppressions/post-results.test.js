@@ -13,8 +13,7 @@ vi.mock("../../src/comment.js", () => ({
 vi.mock("../../src/typespec-suppressions/suppressions-comment.js", () => ({
   buildSuppressionsComment: vi.fn(),
   TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER: "TypeSpecSuppressionsReview",
-  TYPESPEC_SUPPRESSIONS_SECTION_TITLE:
-    "TypeSpec suppressions requiring review (testing, non-blocking)",
+  TYPESPEC_SUPPRESSIONS_SECTION_TITLE: "TypeSpec suppressions requiring review",
 }));
 
 const { extractInputs } = await import("../../src/context.js");

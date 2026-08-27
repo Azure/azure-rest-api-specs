@@ -82,7 +82,7 @@ describe("renderSuppressionsCommentBody", () => {
     expect(body).toContain("## TypeSpec suppressions requiring review");
     expect(body).toContain("Suppressions are strongly discouraged");
     expect(body).toContain(
-      "❌ Approval required (currently under testing, review NOT enforced) — 1 suppression",
+      "❌ Approval required — 1 suppression",
     );
     // Source link text is the file name + line only (full path stays in the href).
     expect(body).toContain(
@@ -113,7 +113,7 @@ describe("renderSuppressionsCommentBody", () => {
       isApproved: false,
     });
     expect(pending).toContain(
-      "❌ Approval required (currently under testing, review NOT enforced)",
+      "❌ Approval required",
     );
     expect(pending).toContain('<td align="center">❌</td>');
 
@@ -211,7 +211,7 @@ describe("buildSuppressionsComment", async () => {
       expect(body).toContain("Suppressions are strongly discouraged");
       expect(body).toContain("https://aka.ms/tsp-suppress/feedback");
       expect(body).toContain(
-        "❌ Approval required (currently under testing, review NOT enforced) — 2 suppressions",
+        "❌ Approval required — 2 suppressions",
       );
     },
   );
@@ -289,7 +289,7 @@ describe("buildSuppressionsComment", async () => {
         [],
       );
       expect(pending).toContain(
-        "❌ Approval required (currently under testing, review NOT enforced)",
+        "❌ Approval required",
       );
       expect(pending).toContain('<td align="center">❌</td>');
 

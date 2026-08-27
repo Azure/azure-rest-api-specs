@@ -132,6 +132,12 @@ const CHECK_METADATA = [
   },
   {
     precedence: 0,
+    name: "TypeSpec Suppressions",
+    suppressionLabels: ["Approved-TypeSpecSuppression"],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 0,
     name: "license/cla",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
