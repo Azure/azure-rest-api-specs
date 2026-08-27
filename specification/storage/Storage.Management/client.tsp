@@ -1448,6 +1448,6 @@ enum ProvisioningStateEnum {
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.Encryption,
-  "ContextCacheEncryption",
+  "ArmEncryption",
   "go,javascript"
 );
