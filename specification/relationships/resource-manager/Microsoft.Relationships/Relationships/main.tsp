@@ -334,6 +334,7 @@ alias ServiceGroup = Extension.ExternalResource<
 
 @armResourceOperations
 @added(Versions.`2026-03-01-preview`)
+@removed(Versions.`2026-08-01`)
 interface DependencyOfRelationshipsByServiceGroup {
   get is Extension.Read<ServiceGroup, DependencyOfRelationship>;
   createOrUpdate is Extension.CreateOrReplaceAsync<
