@@ -2631,6 +2631,9 @@
         "x-ms-examples": {
           "CosmosDBDatabaseAccountPatch": {
             "$ref": "./examples/CosmosDBDatabaseAccountPatch.json"
+          },
+          "Enable Integrated Embeddings on an existing account": {
+            "$ref": "./examples/CosmosDBDatabaseAccountEnableEmbeddingGenerator.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -24984,6 +24987,10 @@
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
+        "enableEmbeddingGenerator": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB\naccount. This property is supported only for API for NoSQL accounts and cannot\nbe enabled during account creation. Enable it by updating an existing account\nthat has continuous backup and all versions and deletes change feed enabled.\nIntegrated Embeddings cannot be disabled after it is enabled."
+        },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
           "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
@@ -25258,6 +25265,10 @@
         "enableMaterializedViews": {
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
+        },
+        "enableEmbeddingGenerator": {
+          "type": "boolean",
+          "description": "Flag to indicate whether Integrated Embeddings is enabled on the Cosmos DB\naccount. This property is supported only for API for NoSQL accounts."
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -25637,6 +25648,10 @@
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
+        "enableEmbeddingGenerator": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB\naccount. This property is supported only for existing API for NoSQL accounts\nwith continuous backup and all versions and deletes change feed enabled.\nIntegrated Embeddings cannot be disabled after it is enabled."
+        },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
           "description": "This property is ignored during the update operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
@@ -25810,6 +25825,61 @@
           {
             "name": "Dotproduct",
             "value": "dotproduct"
+          }
+        ]
+      }
+    },
+    "EmbeddingSource": {
+      "type": "object",
+      "description": "Represents the embedding source configuration for Integrated Embeddings.\nWhen specified on a vector embedding, the service will automatically generate embeddings from source document fields.",
+      "properties": {
+        "sourcePaths": {
+          "type": "array",
+          "description": "The non-empty list of top-level source paths in the document to generate\nembeddings from. A source path cannot be the same as the destination vector\nembedding path.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint URL of the AI model provider resource."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The model deployment name used for generating embeddings."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "The name of the embedding model."
+        },
+        "authType": {
+          "$ref": "#/definitions/EmbeddingSourceAuthenticationType",
+          "description": "The authentication type Azure Cosmos DB uses when calling the embedding model endpoint."
+        }
+      },
+      "required": [
+        "sourcePaths",
+        "endpoint",
+        "deploymentName",
+        "modelName",
+        "authType"
+      ]
+    },
+    "EmbeddingSourceAuthenticationType": {
+      "type": "string",
+      "description": "The type of authentication to use when calling the embedding provider API.",
+      "enum": [
+        "Entra"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingSourceAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Entra",
+            "value": "Entra",
+            "description": "Microsoft Entra ID based authentication."
           }
         ]
       }
@@ -33873,6 +33943,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of dimensions in the vector."
+        },
+        "embeddingSource": {
+          "$ref": "#/definitions/EmbeddingSource",
+          "description": "The embedding source configuration to automatically generate embeddings at the configured paths."
         }
       },
       "required": [
