@@ -401,10 +401,10 @@ model ContainerConfiguration {
 model SessionConfiguration {
   @doc("""
     The idle duration, in seconds, before a session's sandbox is suspended. Optional — when
-    unset, the server default of 900 seconds is used. Must be between 300 and 3600 seconds
+    unset, the server default of 900 seconds is used. Must be between 120 and 3600 seconds
     (inclusive).
     """)
-  @minValue(duration.fromISO("PT300S"))
+  @minValue(duration.fromISO("PT120S"))
   @maxValue(duration.fromISO("PT3600S"))
   @example(duration.fromISO("PT300S"))
   @encode(DurationKnownEncoding.seconds, int32)
