@@ -46,7 +46,6 @@ interface ContainerAppsSourceControls {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @removed(Versions.v2026_01_01)
-      @added(Versions.v2026_03_02_preview)
       @removed(Versions.v2026_07_01)
       @header
       `x-ms-github-auxiliary`?: string;
@@ -69,7 +68,6 @@ interface ContainerAppsSourceControls {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @removed(Versions.v2026_01_01)
-      @added(Versions.v2026_03_02_preview)
       @removed(Versions.v2026_07_01)
       @header
       `x-ms-github-auxiliary`?: string;
@@ -78,7 +76,6 @@ interface ContainerAppsSourceControls {
        * Ignore Workflow Deletion Failure.
        */
       @removed(Versions.v2026_01_01)
-      @added(Versions.v2026_03_02_preview)
       @removed(Versions.v2026_07_01)
       @query("ignoreWorkflowDeletionFailure")
       ignoreWorkflowDeletionFailure?: boolean;
@@ -87,7 +84,6 @@ interface ContainerAppsSourceControls {
        * Delete workflow.
        */
       @removed(Versions.v2026_01_01)
-      @added(Versions.v2026_03_02_preview)
       @removed(Versions.v2026_07_01)
       @query("deleteWorkflow")
       deleteWorkflow?: boolean;
