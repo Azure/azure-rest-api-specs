@@ -733,12 +733,12 @@ describe("ARM API review consistency and hardening", () => {
 
     // Left unpinned the model resolves to `... || 'auto'`, which can pick a
     // different model per run, so identical specs could get different feedback.
-    expect(source).toContain("model: claude-opus-5?effort=high");
-    // Threat detection is pinned too, so no phase is left resolving at runtime.
-    expect(source).toContain("model: claude-sonnet-4.6");
+    // The value has to be one the AWF api-proxy prices: an unpriced model is
+    // rejected with a 400 before the agent runs at all, which took down every
+    // run when this was briefly pinned to claude-opus-5.
+    expect(source).toMatch(/^model: claude-sonnet-4\.6$/m);
 
     // The compiled lock must carry literals, not a `vars.` fallback expression.
-    expect(compiled).toContain("COPILOT_MODEL: claude-opus-5?effort=high");
     expect(compiled).toContain("COPILOT_MODEL: claude-sonnet-4.6");
     expect(compiled).not.toContain("COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT");
   });
@@ -751,9 +751,10 @@ describe("ARM API review consistency and hardening", () => {
     for (const file of files) {
       const text = await readFile(join(dir, file), "utf8");
       // The agent under test must match the production model, or eval results
-      // describe a model that never reviews a real PR.
-      expect(text, `${file} agent model`).toContain("model: claude-opus-5");
-      // The judge is a separate role and deliberately stays cheaper.
+      // describe a model that never reviews a real PR. Anchored to the line
+      // start because plain `model:` also matches `judge_model:`.
+      expect(text, `${file} agent model`).toMatch(/^\s*model: claude-sonnet-4\.6$/m);
+      // The judge is a separate role and is pinned explicitly.
       expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
     }
   });

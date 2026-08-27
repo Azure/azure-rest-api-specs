@@ -130,7 +130,7 @@ checkout: false
 # the copy of this file in Azure/azure-rest-api-specs-pr.
 engine:
   id: copilot
-model: claude-opus-5?effort=high
+model: claude-sonnet-4.6
 tools:
   github:
     # Read-only toolsets only; `safe-outputs` below is the ONLY write channel.
