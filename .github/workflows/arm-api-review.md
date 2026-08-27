@@ -158,8 +158,8 @@ safe-outputs:
     max: 4
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   # Per-category inline caps in the agent body:
-  #   security: 10, breaking changes: 10, ARM contract: 15,
-  #   property/naming: 5, doc gaps: 3  → worst case exactly 43 inline comments.
+  #   property/naming: 17, ARM contract: 15, doc gaps: 6,
+  #   breaking changes: 5, security: 2  → worst case exactly 45 inline comments.
   # Set max to 50 so the cap is above the bounded worst case; findings that
   # exceed any per-category cap are collected into the summary add-comment.
   create-pull-request-review-comment:
@@ -700,36 +700,39 @@ Dropping the body is never an acceptable fallback for a missing field.
 
 **Hard limits per category:**
 
-- Security issues: cap at 10
-- Breaking changes: cap at 10
+- Property design / naming: cap at 17
 - ARM contract violations: cap at 15
-- Property design / naming: cap at 5
-- Documentation gaps: cap at 3
+- Documentation gaps: cap at 6
+- Breaking changes: cap at 5
+- Security issues: cap at 2
 
 **The caps always apply.** They are not a fallback that engages only on large
 reviews, and they are not gated on the 50-comment budget. A category cap binds as
-soon as that category exceeds it, however small the review is overall. Seven
-documentation findings on a pull request whose only findings are those seven
-still posts three inline and discloses four as overflow.
+soon as that category exceeds it, however small the review is overall. Nine
+documentation findings on a pull request whose only findings are those nine
+still posts six inline and discloses three as overflow.
 
 Because every category is capped, the per-category limits bound the total at
-**43**, which is below the 50-comment inline budget. That budget is therefore a
+**45**, which is below the 50-comment inline budget. That budget is therefore a
 backstop that should not be reachable, not the thing that switches the caps on.
 
 Security and breaking-change findings are still posted **first** when selecting
 what goes inline, and an over-cap finding in either category is never silently
 dropped: disclose it in the summary like any other overflow.
 
-**Where these numbers come from.** They are operational safety limits, not
-values derived from telemetry. The 15 / 5 / 3 limits predate the current
-telemetry; the 10 / 10 limits were added to bound a previously unbounded worst
-case. Measured against the findings recorded in
-`documentation/arm-api-reviewer-insights.md` (412 pull requests, 343 with at
-least one finding), every cap sits well above the observed per-pull-request
-average, so caps bind only on outlier changes: security averages 0.20 findings
-per pull request, breaking changes 0.45, ARM contract 1.49, property design /
-naming 1.70, documentation 0.64. Revisit these numbers against that page rather
-than adjusting them by feel.
+**Where these numbers come from.** They are derived from the findings recorded
+in `documentation/arm-api-reviewer-insights.md` (412 pull requests, 343 with at
+least one finding, no sampling). Observed findings per pull request are:
+property design / naming 1.70, ARM contract 1.49, documentation 0.64, breaking
+changes 0.45, security 0.20, totalling 4.48. A total inline allowance of **45**
+is divided across the buckets in proportion to those averages (a factor of
+45 / 4.48 = 10.04), then rounded to integers by largest remainder so the parts
+sum to exactly 45. Each cap therefore ranks in the same order as its category's
+observed volume, and each sits at roughly ten times the typical per-pull-request
+count, so a cap binds only on an outlier change. When the telemetry is
+refreshed, recompute the whole split from that page rather than adjusting a
+single value by feel; changing one cap in isolation breaks both the ordering and
+the 45 total.
 
 **Which cap applies to a finding.** The cap buckets above are coarser than the
 issue types tracked in the insights page, so map each finding as follows before
@@ -756,7 +759,7 @@ treat it as uncapped.
 **Inline comment budget:** The workflow allows up to 50 inline review comments
 (`create-pull-request-review-comment`). This is a **second, independent** ceiling
 on top of the per-category caps, not the trigger for them. Because every category
-is capped the total is bounded at 43, so this budget should not be reachable;
+is capped the total is bounded at 45, so this budget should not be reachable;
 keep the rule as a safety net. If the total across all categories would still
 exceed 50, post the highest-severity findings inline (security and breaking
 changes first) and collect overflow findings into the summary `add-comment`

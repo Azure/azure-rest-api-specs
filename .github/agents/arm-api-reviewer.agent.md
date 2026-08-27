@@ -892,17 +892,17 @@ A generic summary theme without an affected element and actionable guidance does
 
 | Category                 | Inline cap |
 | ------------------------ | ---------- |
-| Security issues          | 10         |
-| Breaking changes         | 10         |
+| Property design / naming | 17         |
 | ARM contract violations  | 15         |
-| Property design / naming | 5          |
-| Documentation gaps       | 3          |
+| Documentation gaps       | 6          |
+| Breaking changes         | 5          |
+| Security issues          | 2          |
 
-These per-category caps total **43** inline comments.
+These per-category caps total **45** inline comments.
 
-**The caps always apply.** They are not a fallback that engages only on large reviews, and they are not gated on the 50-comment budget. A category cap binds as soon as that category exceeds it, however small the review is overall: seven documentation findings on a PR whose only findings are those seven still posts three inline and discloses four as overflow. The overall inline budget is **50** posted comments, a second and independent ceiling; because every category is capped the total is bounded at 43, so the 50 should not be reachable. If it somehow would be exceeded, post the highest-severity findings inline (security and breaking changes first). Replies and thread resolutions from Step 5.5 have their own budgets and do **not** consume the 50.
+**The caps always apply.** They are not a fallback that engages only on large reviews, and they are not gated on the 50-comment budget. A category cap binds as soon as that category exceeds it, however small the review is overall: nine documentation findings on a PR whose only findings are those nine still posts six inline and discloses three as overflow. The overall inline budget is **50** posted comments, a second and independent ceiling; because every category is capped the total is bounded at 45, so the 50 should not be reachable. If it somehow would be exceeded, post the highest-severity findings inline (security and breaking changes first). Replies and thread resolutions from Step 5.5 have their own budgets and do **not** consume the 50.
 
-These are operational safety limits, not telemetry-derived values, and every one sits well above the observed per-pull-request average recorded in `documentation/arm-api-reviewer-insights.md`, so a cap binds only on an outlier change. The cap buckets are coarser than the issue types tracked on that page: map each finding to a bucket using the **"Which cap applies to a finding"** table in `.github/workflows/arm-api-review.md`, which is canonical. Every tracked issue type maps to exactly one bucket; a finding is never treated as uncapped because it does not fit a bucket name.
+The caps are derived from the observed findings per pull request recorded in `documentation/arm-api-reviewer-insights.md`: a total allowance of 45 split in proportion to each category's average, so the caps rank in the same order as observed volume and each sits at roughly ten times the typical count. A cap therefore binds only on an outlier change. The cap buckets are coarser than the issue types tracked on that page: map each finding to a bucket using the **"Which cap applies to a finding"** table in `.github/workflows/arm-api-review.md`, which is canonical. Every tracked issue type maps to exactly one bucket; a finding is never treated as uncapped because it does not fit a bucket name.
 
 The caps govern what is **posted**, not what is analysed, but an over-cap candidate is **not** a verified finding. The agreed posting set is selected after these limits are applied, and only that set goes to the Critic. Excluded candidates are therefore disclosed **only as a count and themes**, never rendered as canonical finding bodies and never described in a way that implies the Critic verified them. In the Step 6 report, give each excluded candidate the action `OVERFLOW-NOT-POSTED` in the per-finding action table rather than a posting action, so it is visible to the human without being mistaken for something that will be posted. In Step 8, disclose the aggregate in the **review-body preamble** as an extra sentence (this agent does not post a summary comment by default, so the preamble is the surface that always exists): use _"N additional findings were identified but not posted inline. Key themes: [list]."_ when the overall 50-comment budget is the binding limit, and _"N additional warning/suggestion candidates were identified but not individually verified or posted. Key themes: [list]. Review the full checklist in `arm-api-review.instructions.md`."_ when a category cap is. Never silently drop an over-cap candidate: an undisclosed cap is indistinguishable from a missed violation.
 

@@ -235,13 +235,13 @@ Use for design trade-offs and best-practice recommendations:
 
 Do not flood a PR with comments. Prioritize and cap:
 
-1. **Security issues** -- post up to 10
-2. **Breaking changes** -- post up to 10
-3. **ARM contract violations** -- post up to 15
-4. **Property design / naming** -- post up to 5
-5. **Documentation gaps** -- post up to 3
+1. **Property design / naming** -- post up to 17
+2. **ARM contract violations** -- post up to 15
+3. **Documentation gaps** -- post up to 6
+4. **Breaking changes** -- post up to 5
+5. **Security issues** -- post up to 2
 
-These per-category caps total **43** inline comments, below the overall inline
+These per-category caps total **45** inline comments, below the overall inline
 budget of **50**.
 
 Security and breaking-change findings are still selected first when deciding

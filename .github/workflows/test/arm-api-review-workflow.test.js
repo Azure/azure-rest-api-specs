@@ -592,16 +592,17 @@ describe("ARM API review consistency and hardening", () => {
     const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
     const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
 
-    expect(workflow).toContain("Security issues: cap at 10");
-    expect(workflow).toContain("Breaking changes: cap at 10");
+    expect(workflow).toContain("Security issues: cap at 2");
+    expect(workflow).toContain("Breaking changes: cap at 5");
     expect(agent).toContain("**Output budgets (identical to the automated workflow).**");
-    // Same per-category caps in both contexts, or identical APIs get different
-    // feedback depending on how the review was started.
-    expect(agent).toContain("| Security issues | 10 |");
-    expect(agent).toContain("| Breaking changes | 10 |");
+    // Caps are allocated proportionally to observed per-PR volume and must sum
+    // to 45, so they rank in the same order as the telemetry.
+    expect(agent).toContain("| Property design / naming | 17 |");
     expect(agent).toContain("| ARM contract violations | 15 |");
-    expect(agent).toContain("| Property design / naming | 5 |");
-    expect(agent).toContain("| Documentation gaps | 3 |");
+    expect(agent).toContain("| Documentation gaps | 6 |");
+    expect(agent).toContain("| Breaking changes | 5 |");
+    expect(agent).toContain("| Security issues | 2 |");
+    expect(agent).toContain("These per-category caps total **45** inline comments.");
     expect(agent).toContain("The overall inline budget is **50** posted comments");
     // Caps govern posting, not analysis, but over-cap candidates are never
     // rendered as verified findings: only a count and themes are disclosed.
@@ -788,10 +789,43 @@ describe("ARM API review consistency and hardening", () => {
     }
     expect(workflow).toContain("never treat it as uncapped");
 
-    // The caps are safety limits, not telemetry-derived values. Say so, so the
-    // next person does not assume the numbers were measured.
-    expect(workflow).toContain("not values derived from telemetry");
-    expect(agent).toContain("operational safety limits, not telemetry-derived values");
+    // The caps are derived from observed per-PR volume, so record the
+    // derivation rather than presenting the numbers as arbitrary.
+    expect(workflow).toContain("They are derived from the findings recorded");
+    expect(workflow).toContain(
+      "rounded to integers by largest remainder so the parts sum to exactly 45",
+    );
+    expect(agent).toContain("derived from the observed findings per pull request");
+  });
+
+  it("keeps the caps summing to 45 and ranked by observed volume", async () => {
+    const agent = await readFile(join(ROOT, AGENT_FILE), "utf8");
+
+    // Parse the output-budgets table rather than hard-coding the values, so
+    // this fails if any single cap is edited in isolation.
+    const rows = [...agent.matchAll(/^\|\s*([A-Za-z][^|]*?)\s*\|\s*(\d+)\s*\|$/gm)]
+      .map(([, name, cap]) => ({ name: name.trim(), cap: Number(cap) }))
+      .filter((r) =>
+        [
+          "Property design / naming",
+          "ARM contract violations",
+          "Documentation gaps",
+          "Breaking changes",
+          "Security issues",
+        ].includes(r.name),
+      );
+
+    expect(rows).toHaveLength(5);
+
+    // Must total exactly 45, and stay under the 50-comment inline budget.
+    const total = rows.reduce((sum, r) => sum + r.cap, 0);
+    expect(total).toBe(45);
+    expect(total).toBeLessThan(50);
+
+    // Ranked by observed findings per PR: property design 1.70 > ARM contract
+    // 1.49 > documentation 0.64 > breaking 0.45 > security 0.20.
+    const caps = rows.map((r) => r.cap);
+    expect(caps).toEqual([...caps].sort((a, b) => b - a));
   });
 
   it("states that per-category caps apply independently of the 50-comment budget", async () => {
@@ -805,7 +839,7 @@ describe("ARM API review consistency and hardening", () => {
       expect(source).toContain("**The caps always apply.**");
       expect(source).toContain("not gated on the 50-comment budget");
       // A worked example, because the abstract rule is what was misread.
-      expect(source).toContain("still posts three inline and discloses four as overflow");
+      expect(source).toContain("still posts six inline and discloses three as overflow");
     }
     expect(workflow).toContain("a **second, independent** ceiling");
   });
