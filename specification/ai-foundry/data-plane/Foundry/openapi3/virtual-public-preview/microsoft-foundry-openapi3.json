@@ -2865,6 +2865,202 @@
         }
       }
     },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationItemGeneratedAudio",
+        "summary": "Get a voice agent conversation item's generated audio metadata",
+        "description": "Returns metadata for a conversation item's generated audio. This subordinate artifact is separate from the\ncanonical heard-audio segment and exists only when playback was interrupted and the service rendered more audio\nthan the listener heard, including when the response ends as cancelled. Returns `404` when the conversation or\nitem was not persisted, or when no generated audio exists beyond the heard segment.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation item whose generated audio metadata is retrieved.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceGeneratedItemAudioResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationItemGeneratedAudioContent",
+        "summary": "Stream a voice agent conversation item's generated audio",
+        "description": "Streams a conversation item's generated audio as a WAV (`audio/wav`) byte stream through the service. This\nsubordinate artifact exists only when playback was interrupted and the service rendered more audio than the\nlistener heard, including when the response ends as cancelled. This route serves Foundry-managed storage only.\nFor bring-your-own-storage (BYOS) recordings the bytes are not proxied, so this route returns `409 Conflict`.\nReturns `404` when the conversation or item was not persisted, or when no generated audio exists beyond the\nheard segment.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation item whose generated audio is streamed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.",
+            "content": {
+              "audio/wav": {
+                "schema": {
+                  "contentMediaType": "audio/wav"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
     "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses": {
       "get": {
         "operationId": "AgentEndpointConversations_listAgentConversationResponses",
@@ -89128,6 +89324,64 @@
           }
         ],
         "description": "The lifecycle status of a persisted voice conversation:\n- `in_progress`: the live session is active, or post-session persistence finalization is pending.\n- `completed`: finalization succeeded after normal or client close, `end_conversation`, a max-duration `1001`\n  close, or a client or network disconnect that the service can still finalize.\n- `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceGeneratedItemAudioResponse": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "item_id"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The id of the conversation the item belongs to."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The id of the item this audio belongs to."
+          },
+          "role": {
+            "$ref": "#/components/schemas/VoiceAudioRole",
+            "description": "The role the audio belongs to."
+          },
+          "format": {
+            "$ref": "#/components/schemas/VoiceAudioContainerFormat",
+            "description": "The container format of the audio."
+          },
+          "codec": {
+            "$ref": "#/components/schemas/VoiceAudioCodec",
+            "description": "The audio codec."
+          },
+          "sample_rate": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The sample rate in Hz."
+          },
+          "channels": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of audio channels."
+          },
+          "start_offset_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The offset from the session start at which this segment begins."
+          },
+          "duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The duration of the audio segment."
+          },
+          "blob_uri": {
+            "type": "string",
+            "format": "uri",
+            "description": "For bring-your-own-storage (BYOS) recordings only: the URI of the generated audio in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/generated/content` route instead."
+          }
+        },
+        "description": "Metadata for a conversation item's generated audio. For bring-your-own-storage (BYOS), the response includes\n`blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own\ncredentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's\n`/audio/generated/content` route.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

@@ -13,6 +13,21 @@ const VoiceAgentConversationRequiredPreviews = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceItemAudioResponse."
+@doc("""
+  Metadata for a conversation item's generated audio. For bring-your-own-storage (BYOS), the response includes
+  `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
+  credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
+  `/audio/generated/content` route.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceGeneratedItemAudioResponse {
+  ...OmitProperties<VoiceItemAudioResponse, "blob_uri">;
+
+  @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the generated audio in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/generated/content` route instead.")
+  blob_uri?: url;
+}
+
 /**
  * Establishes a service-terminated WebSocket for a voice-agent session. The service applies the persisted
  * agent definition, resolves configured tools, sends the initial session configuration, and then exchanges
@@ -314,6 +329,58 @@ interface AgentEndpointConversations {
       @path conversation_id: string;
 
       /** The id of the conversation item whose audio is streamed. */
+      @path item_id: string;
+    },
+    VoiceAudioStreamResponse
+  >;
+
+  /**
+   * Returns metadata for a conversation item's generated audio. This subordinate artifact is separate from the
+   * canonical heard-audio segment and exists only when playback was interrupted and the service rendered more audio
+   * than the listener heard, including when the response ends as cancelled. Returns `404` when the conversation or
+   * item was not persisted, or when no generated audio exists beyond the heard segment.
+   */
+  @summary("Get a voice agent conversation item's generated audio metadata")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationItemGeneratedAudio is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item whose generated audio metadata is retrieved. */
+      @path item_id: string;
+    },
+    VoiceGeneratedItemAudioResponse
+  >;
+
+  /**
+   * Streams a conversation item's generated audio as a WAV (`audio/wav`) byte stream through the service. This
+   * subordinate artifact exists only when playback was interrupted and the service rendered more audio than the
+   * listener heard, including when the response ends as cancelled. This route serves Foundry-managed storage only.
+   * For bring-your-own-storage (BYOS) recordings the bytes are not proxied, so this route returns `409 Conflict`.
+   * Returns `404` when the conversation or item was not persisted, or when no generated audio exists beyond the
+   * heard segment.
+   */
+  @summary("Stream a voice agent conversation item's generated audio")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getAgentConversationItemGeneratedAudioContent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item whose generated audio is streamed. */
       @path item_id: string;
     },
     VoiceAudioStreamResponse
