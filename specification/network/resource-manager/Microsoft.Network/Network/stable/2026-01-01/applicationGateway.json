@@ -1601,24 +1601,6 @@
         }
       ]
     },
-    "ApplicationGatewayAuthConfig": {
-      "type": "object",
-      "description": "An authentication configuration binding for an Application Gateway routing rule or routing map.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the auth configuration."
-        },
-        "authenticationPolicy": {
-          "$ref": "./common.json#/definitions/SubResource",
-          "description": "Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource."
-        }
-      },
-      "required": [
-        "name",
-        "authenticationPolicy"
-      ]
-    },
     "ApplicationGatewayAdvancedRoutingCondition": {
       "type": "object",
       "description": "A condition evaluated as part of an advanced routing condition set.",
@@ -1854,6 +1836,24 @@
       },
       "required": [
         "priority"
+      ]
+    },
+    "ApplicationGatewayAuthConfig": {
+      "type": "object",
+      "description": "An authentication configuration binding for an Application Gateway routing rule or routing map.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the auth configuration."
+        },
+        "authenticationPolicy": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource."
+        }
+      },
+      "required": [
+        "name",
+        "authenticationPolicy"
       ]
     },
     "ApplicationGatewayAuthenticationCertificate": {
