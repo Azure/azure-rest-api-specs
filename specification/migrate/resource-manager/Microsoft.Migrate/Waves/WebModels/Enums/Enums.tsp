@@ -1,4 +1,6 @@
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
+using Microsoft.Migrate;
 
 @doc("Strategy for migration to Azure")
 union Strategy {
@@ -60,5 +62,89 @@ union TaskType {
 @doc("Migration Specific Properties Instance Types.")
 union MigrationSpecificPropertiesInstanceType {
   ServerMigration: "ServerMigration",
+  string,
+}
+
+@doc("Execution mode for the migration process.")
+@added(ApiVersions.v2026_08_01_preview)
+union ExecutionMode {
+  @doc("Task-based execution mode, where tasks are executed in a predefined sequence.")
+  TaskBased: "TaskBased",
+
+  @doc("Runbook-based execution mode, where runbooks perform the migration process.")
+  RunbookBased: "RunbookBased",
+
+  string,
+}
+
+@doc("Runbook scope type.")
+@added(ApiVersions.v2026_08_01_preview)
+union RunbookScopeType {
+  @doc("Wave-scoped runbook.")
+  Wave: "Wave",
+
+  string,
+}
+
+@doc("Runbook step reference discriminator.")
+@added(ApiVersions.v2026_08_01_preview)
+union RunbookStepRef {
+  @doc("Manual runbook step.")
+  Manual: "common.manual",
+
+  @doc("Approval runbook step.")
+  Approval: "common.approval",
+
+  string,
+}
+
+@doc("Runbook execution action.")
+@added(ApiVersions.v2026_08_01_preview)
+union RunbookExecutionAction {
+  @doc("Start runbook execution.")
+  Start: "Start",
+
+  @doc("Pause runbook execution.")
+  Pause: "Pause",
+
+  @doc("Resume runbook execution.")
+  Resume: "Resume",
+
+  @doc("Cancel runbook execution.")
+  Cancel: "Cancel",
+
+  @doc("Retry runbook execution.")
+  Retry: "Retry",
+
+  @doc("Complete runbook execution step.")
+  Complete: "Complete",
+
+  @doc("Fail runbook execution step.")
+  Fail: "Fail",
+
+  @doc("Skip runbook execution step.")
+  Skip: "Skip",
+
+  @doc("Approve runbook execution step.")
+  Approve: "Approve",
+
+  @doc("Reject runbook execution step.")
+  Reject: "Reject",
+
+  string,
+}
+
+@doc("What must complete in a target step before the dependent step can run.")
+@added(ApiVersions.v2026_08_01_preview)
+union RunbookStepDependencyWaitFor {
+  @doc("Waits for the entire target step to complete.")
+  Step: "Step",
+
+  @doc("Waits for the same entity in the target step.")
+  Entity: "Entity",
+
+  @doc("Waits according to explicit entity pairs.")
+  MappedEntities: "MappedEntities",
+
   string,
 }

@@ -1,0 +1,50 @@
+{
+  "title": "MigrationEntities_Update_MaximumSet",
+  "operationId": "MigrationEntities_Update",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "migrationEntityName": "entity1",
+    "properties": {
+      "properties": {
+        "executionStage": "Migration",
+        "executionStatus": "InProgress",
+        "toolReportedMigrationStatus": "ReplicationCompleted",
+        "error": {
+          "code": "MigrationWarning",
+          "message": "Migration completed with warnings."
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "executionStage": "Migration",
+          "executionStatus": "InProgress",
+          "toolReportedMigrationStatus": "ReplicationCompleted",
+          "error": {
+            "code": "MigrationWarning",
+            "message": "Migration completed with warnings."
+          },
+          "migrationToolId": "AzureMigrateServerMigration",
+          "executionMode": "RunbookBased"
+        },
+        "eTag": "W/\"2026-08-01T12:00:00Z\"",
+        "id": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/migrationEntities/entity1",
+        "name": "entity1",
+        "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.Migrate/locations/eastus/operationStatuses/update-entity1",
+        "Retry-After": 30
+      }
+    }
+  }
+}
