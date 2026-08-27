@@ -266,10 +266,7 @@ interface RunbookExecutions {
 
   @added(ApiVersions.v2026_08_01_preview)
   @doc("Updates a runbook execution.")
-  update is ArmCustomPatchAsync<
-    RunbookExecution,
-    RunbookExecutionPatch
-  >;
+  update is ArmCustomPatchAsync<RunbookExecution, RunbookExecutionPatch>;
 
   @added(ApiVersions.v2026_08_01_preview)
   @doc("Generates a download URL for runbook execution artifact content.")
