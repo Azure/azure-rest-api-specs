@@ -239,6 +239,9 @@
           }
         },
         "x-ms-examples": {
+          "Creates or updates a JWT validation authentication policy within a resource group": {
+            "$ref": "./examples/AuthenticationPolicyCreateOrUpdateJwtValidation.json"
+          },
           "Creates or updates a user sign-in authentication policy within a resource group": {
             "$ref": "./examples/AuthenticationPolicyCreateOrUpdate.json"
           }
@@ -307,6 +310,10 @@
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The user-assigned identity used by a user sign-in policy to access its Key Vault client secret."
         }
       },
       "allOf": [

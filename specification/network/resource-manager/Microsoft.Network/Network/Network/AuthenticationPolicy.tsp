@@ -42,6 +42,10 @@ model AuthenticationPolicy extends Common.Resource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is an established read-only envelope property across Network RP resources"
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  /** The user-assigned identity used by a user sign-in policy to access its Key Vault client secret. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AuthenticationPolicy uses the established Network RP identity envelope property pattern."
+  identity?: Common.ManagedServiceIdentity;
 }
 
 /**
