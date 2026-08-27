@@ -19,6 +19,12 @@ namespace OpenAI {
   model ItemProgramOutput extends Item {
     ...ProgramOutput;
   }
+
+  @@withoutOmittedProperties(Item, "type");
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "The AgentServer input contract includes program replay items."
+  @@copyProperties(Item, {
+    type: ItemType | "program" | "program_output"
+  });
 }
 
 
