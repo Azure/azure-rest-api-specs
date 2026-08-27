@@ -9,6 +9,7 @@ import "../voice-agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
+import "../agents-microsoft365/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
@@ -77,6 +78,29 @@ using Azure.AI.Projects;
 @@clientName(
   Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
+  "python"
+);
+
+@@clientName(
+  Microsoft365Publishing.publishAgentToMicrosoft365,
+  "publish_to_microsoft365"
+);
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365AppPackage,
+  "get_microsoft365_package"
+);
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365PublishDefaults,
+  "get_microsoft365_publish_defaults"
+);
+@@clientName(
+  Microsoft365PublishResponse,
+  "Microsoft365PublishResult",
+  "python"
+);
+@@clientName(
+  Microsoft365AppPackageResponse,
+  "Microsoft365AppPackageResult",
   "python"
 );
 
