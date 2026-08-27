@@ -571,8 +571,8 @@ These settings apply only when `--tag=package-2026-03-03` is specified on the co
 
 ``` yaml $(tag) == 'package-2026-03-03'
 input-file:
-  - stable/2025-11-01/ComputeRP.json
-  - stable/2025-01-02/DiskRP.json
+  - stable/2026-03-01/ComputeRP.json
+  - stable/2026-03-02/DiskRP.json
   - stable/2021-07-01/skus.json
   - stable/2026-03-03/GalleryRP.json
 ```
