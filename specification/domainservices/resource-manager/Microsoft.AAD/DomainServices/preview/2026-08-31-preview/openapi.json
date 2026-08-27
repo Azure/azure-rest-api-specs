@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Domain Services Resource Provider",
-    "version": "2025-10-01-preview",
+    "version": "2026-08-31-preview",
     "description": "The AAD Domain Services API.",
     "x-typespec-generated": [
       {
@@ -1377,6 +1377,22 @@
           "description": "The unique sync application id of the Azure AD Domain Services deployment.",
           "readOnly": true
         },
+        "entitlementSourceMode": {
+          "$ref": "#/definitions/EntitlementSourceMode",
+          "description": "The source used for filtered synchronization group entitlements.",
+          "readOnly": true
+        },
+        "initialFilteredSyncGroupIds": {
+          "type": "array",
+          "description": "The group IDs used to initialize the filtered synchronization application app roles.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "replicaSets": {
           "type": "array",
           "description": "List of ReplicaSets",
@@ -1451,6 +1467,30 @@
           "$ref": "#/definitions/ConfigDiagnostics",
           "description": "Configuration diagnostics data containing latest execution from client."
         }
+      }
+    },
+    "EntitlementSourceMode": {
+      "type": "string",
+      "description": "The source used for filtered synchronization group entitlements.",
+      "enum": [
+        "LegacyFirstParty",
+        "CurrentThirdParty"
+      ],
+      "x-ms-enum": {
+        "name": "EntitlementSourceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LegacyFirstParty",
+            "value": "LegacyFirstParty",
+            "description": "Group entitlements are read from and written to the legacy first-party synchronization application."
+          },
+          {
+            "name": "CurrentThirdParty",
+            "value": "CurrentThirdParty",
+            "description": "Group entitlements are read from and written to the current third-party synchronization application."
+          }
+        ]
       }
     },
     "FilteredSync": {
