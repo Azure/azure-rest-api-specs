@@ -27,4 +27,12 @@ namespace Azure.AI.Projects {
       user_security_context?: AzureUserSecurityContext,
     }
   );
+
+  @@copyProperties(
+    OpenAI.CreateChatCompletionResponse,
+    {
+      /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
+      model_selection_details?: ModelSelectionDetails,
+    }
+  );
 }

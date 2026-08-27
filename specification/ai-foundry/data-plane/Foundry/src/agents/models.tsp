@@ -11,6 +11,7 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview,
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
     AgentDefinitionOptInKeys.draft_agents_v1_preview
   ],
 };
@@ -23,7 +24,7 @@ model CreateAgentVersionRequest {
   @maxLength(512)
   description?: string;
 
-  @doc("The agent definition. This can be a workflow, hosted agent, or a simple agent definition.")
+  @doc("The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   definition: AgentDefinition;
 
@@ -269,6 +270,7 @@ union AgentEndpointProtocol {
   a2a: "a2a",
   mcp: "mcp",
   invocations: "invocations",
+  voice: "voice",
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
@@ -280,6 +282,7 @@ union AgentKind {
   hosted: "hosted",
   workflow: "workflow",
   external: "external",
+  voice: "voice",
 
   @removed(Versions.v1)
   container_app: "container_app",
@@ -693,10 +696,73 @@ model ProtocolConfiguration {
   invocations_ws?: InvocationsWsProtocolConfiguration;
 }
 
+@doc("An access boundary for the activity protocol.")
+union ActivityProtocolAccessBoundary {
+  string,
+
+  @doc("Allows read access to one-on-one developer conversations.")
+  read_1on1_developers: "read.1on1.developers",
+
+  @doc("Allows read access to one-on-one manager conversations.")
+  read_1on1_manager: "read.1on1.manager",
+
+  @doc("Allows read access to allowlisted one-on-one conversations.")
+  read_1on1_allowlisted: "read.1on1.allowlisted",
+
+  @doc("Allows read access to tenant-wide one-on-one conversations.")
+  read_1on1_tenant: "read.1on1.tenant",
+
+  @doc("Allows write access to one-on-one developer conversations.")
+  write_1on1_developers: "write.1on1.developers",
+
+  @doc("Allows write access to one-on-one manager conversations.")
+  write_1on1_manager: "write.1on1.manager",
+
+  @doc("Allows write access to allowlisted one-on-one conversations.")
+  write_1on1_allowlisted: "write.1on1.allowlisted",
+
+  @doc("Allows write access to tenant-wide one-on-one conversations.")
+  write_1on1_tenant: "write.1on1.tenant",
+
+  @doc("Allows read access to developer group conversations.")
+  read_group_developers: "read.group.developers",
+
+  @doc("Allows read access to allowlisted group conversations.")
+  read_group_allowlisted: "read.group.allowlisted",
+
+  @doc("Allows read access to group conversations where a manager is invited.")
+  read_group_manager_invited: "read.group.manager-invited",
+
+  @doc("Allows read access to group conversations where a manager is present.")
+  read_group_manager_present: "read.group.manager-present",
+
+  @doc("Allows read access to tenant-wide group conversations.")
+  read_group_tenant: "read.group.tenant",
+
+  @doc("Allows write access to developer group conversations.")
+  write_group_developers: "write.group.developers",
+
+  @doc("Allows write access to allowlisted group conversations.")
+  write_group_allowlisted: "write.group.allowlisted",
+
+  @doc("Allows write access to group conversations where a manager is invited.")
+  write_group_manager_invited: "write.group.manager-invited",
+
+  @doc("Allows write access to group conversations where a manager is present.")
+  write_group_manager_present: "write.group.manager-present",
+
+  @doc("Allows write access to tenant-wide group conversations.")
+  write_group_tenant: "write.group.tenant",
+}
+
 @doc("Configuration specific to the activity protocol.")
 model ActivityProtocolConfiguration {
   @doc("Whether to enable the M365 public endpoint for the activity protocol.")
   enable_m365_public_endpoint?: boolean;
+
+  @doc("The access boundaries for the activity protocol.")
+  @visibility(Lifecycle.Read)
+  access_boundaries?: ActivityProtocolAccessBoundary[];
 }
 
 @doc("Configuration specific to the responses protocol.")
@@ -727,6 +793,30 @@ model AgentEndpointConfig {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
+
+  @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")
+  @visibility(Lifecycle.Read)
+  publish_approval_status?: PublishApprovalStatus;
+}
+
+@doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent.")
+union PublishApprovalStatus {
+  string,
+
+  @doc("The agent has never been published to the Microsoft 365 store, so there is nothing to review.")
+  not_published: "not_published",
+
+  @doc("The published title is awaiting a review decision.")
+  pending: "pending",
+
+  @doc("The title passed review, as of this read.")
+  approved: "approved",
+
+  @doc("The title was rejected in review, as of this read.")
+  rejected: "rejected",
+
+  @doc("The agent is published at a scope that does not go through Microsoft Agent Certification. Only tenant-scoped titles are reviewed.")
+  no_approval_needed: "no_approval_needed",
 }
 
 model AgentIdentity {
