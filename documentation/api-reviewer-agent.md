@@ -386,7 +386,7 @@ HTML comments before they reach GitHub. Either form is a valid marker.
 <!-- markdownlint-disable MD013 -->
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | category: <category-slug> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -394,6 +394,13 @@ HTML comments before they reach GitHub. Either form is a valid marker.
 **Fields:**
 
 - `rule` -- the rule ID of the finding (e.g., `RPC-Put-V1-11`, `SEC-SECRET-DETECT`).
+- `category` -- the finding's issue type, from a closed vocabulary of eleven
+  values such as `schema-and-property-design`, `security-and-secrets`, or
+  `long-running-operations`. This is what makes findings countable by category
+  without re-reading rule IDs, and it decides which output cap the finding
+  counts against. The canonical list, and the mapping from each category to its
+  cap bucket, is
+  [Finding categories](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/agents/protocols/arm-api-review-critic.protocol.md#finding-categories).
   Use `summary` for comments that don't flag a single rule.
 - `severity` -- one of `blocking`, `warning`, or `suggestion`.
 - `classification` -- `new` (introduced in this PR) or `existing` (pre-existing technical debt).

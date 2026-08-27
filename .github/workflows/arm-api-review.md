@@ -734,27 +734,17 @@ refreshed, recompute the whole split from that page rather than adjusting a
 single value by feel; changing one cap in isolation breaks both the ordering and
 the 45 total.
 
-**Which cap applies to a finding.** The cap buckets above are coarser than the
-issue types tracked in the insights page, so map each finding as follows before
-counting it against a cap. Every tracked issue type maps to exactly one bucket;
-none is exempt.
+**Which cap applies to a finding.** Every standalone finding carries a
+`category` field drawn from the closed vocabulary defined in
+[Finding categories](../agents/protocols/arm-api-review-critic.protocol.md#finding-categories).
+That table is canonical and maps each of the eleven categories to exactly one of
+the five cap buckets above. Count a finding against the bucket its category maps
+to; never decide a bucket by re-reading the rule ID, and never treat a finding as
+uncapped because its wording does not match a bucket name.
 
-| Issue type (insights page)     | Cap bucket               |
-| ------------------------------ | ------------------------ |
-| Security and secrets           | Security                 |
-| Versioning and compatibility   | Breaking changes         |
-| Resource modeling              | ARM contract             |
-| Operations and HTTP semantics  | ARM contract             |
-| Long-running operations        | ARM contract             |
-| Suppressions and tooling       | ARM contract             |
-| Review readiness and CI        | ARM contract             |
-| Schema and property design     | Property design / naming |
-| Naming, enums, and identifiers | Property design / naming |
-| SDK and client impact          | Property design / naming |
-| Documentation and examples     | Documentation gaps       |
-
-A finding that fits no row maps to the bucket of its nearest listed type; never
-treat it as uncapped.
+Categories are the unit of **measurement**, recorded on every finding so the caps
+can be re-derived from telemetry later. Cap buckets are the coarser unit of
+**enforcement**.
 
 **Inline comment budget:** The workflow allows up to 50 inline review comments
 (`create-pull-request-review-comment`). This is a **second, independent** ceiling
@@ -815,7 +805,7 @@ JSON path: `$.path.to.element` (for OpenAPI files)
 
 **Suggested fix:** Concrete code, JSON, or TypeSpec change.
 
-_posted-by: arm-api-reviewer-agent | rule: RULE-ID | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
+_posted-by: arm-api-reviewer-agent | rule: RULE-ID | category: <category-slug> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -894,7 +884,7 @@ is the intended trade-off; an invisible one does not exist.
 Correct (one italic line, pipe-separated, no HTML comment delimiters):
 
 ```text
-_posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000_
+_posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | category: resource-modeling | severity: blocking | classification: new | critic: pass | head-sha: 0000000000000000000000000000000000000000_
 ```
 
 Incorrect (HTML comment -- deleted by the sanitizer before publication):
@@ -913,7 +903,7 @@ posted-by: arm-api-reviewer-agent
 
 <!-- markdownlint-enable MD013 -->
 
-All six fields are **required on every posted body**, including the Step 8
+All seven fields are **required on every posted body**, including the Step 8
 summary: `posted-by`, `rule`, `severity`, `classification`, `critic`, and
 `head-sha`. The summary's marker is not a reduced form -- it carries
 `rule: summary` and the run's own severity, classification, critic verdict and
@@ -1063,7 +1053,7 @@ plain-text line, never an HTML comment:
 <!-- markdownlint-disable MD013 -->
 
 ```text
-_posted-by: arm-api-reviewer-agent | rule: summary | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
+_posted-by: arm-api-reviewer-agent | rule: summary | category: summary | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
 ```
 
 <!-- markdownlint-enable MD013 -->

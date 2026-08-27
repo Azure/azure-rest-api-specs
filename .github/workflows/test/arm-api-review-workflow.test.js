@@ -768,26 +768,13 @@ describe("ARM API review consistency and hardening", () => {
     const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
     const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
 
-    // The cap buckets are coarser than the tracked issue types, so ~10% of
-    // findings previously mapped to no bucket and the agent had to guess which
-    // limit applied.
+    // The cap buckets are coarser than the tracked categories. The mapping is
+    // canonical in the protocol, and the workflow defers to it rather than
+    // keeping a second copy that could drift.
     expect(workflow).toContain("Which cap applies to a finding");
-    for (const issueType of [
-      "Security and secrets",
-      "Versioning and compatibility",
-      "Resource modeling",
-      "Operations and HTTP semantics",
-      "Long-running operations",
-      "Suppressions and tooling",
-      "Review readiness and CI",
-      "Schema and property design",
-      "Naming, enums, and identifiers",
-      "SDK and client impact",
-      "Documentation and examples",
-    ]) {
-      expect(workflow, `unmapped issue type: ${issueType}`).toContain(issueType);
-    }
-    expect(workflow).toContain("never treat it as uncapped");
+    expect(workflow).toContain("Finding categories");
+    expect(workflow).toContain("never treat a finding as uncapped");
+    expect(workflow).toContain("Categories are the unit of **measurement**");
 
     // The caps are derived from observed per-PR volume, so record the
     // derivation rather than presenting the numbers as arbitrary.
@@ -843,6 +830,44 @@ describe("ARM API review consistency and hardening", () => {
     }
     expect(workflow).toContain("a **second, independent** ceiling");
   });
+  it("defines a closed category vocabulary and records it on every finding", async () => {
+    const protocol = await readFile(
+      join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"),
+      "utf8",
+    );
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
+    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+
+    // Categories must be recorded at emit time. Without this field, per-category
+    // volume can only be re-derived by hand-classifying rule IDs, which is what
+    // made the caps unverifiable in the first place.
+    expect(protocol).toContain("### Finding categories");
+    for (const slug of [
+      "schema-and-property-design",
+      "naming-enums-and-identifiers",
+      "sdk-and-client-impact",
+      "resource-modeling",
+      "operations-and-http-semantics",
+      "long-running-operations",
+      "suppressions-and-tooling",
+      "review-readiness-and-ci",
+      "documentation-and-examples",
+      "versioning-and-compatibility",
+      "security-and-secrets",
+    ]) {
+      expect(protocol, `missing category: ${slug}`).toContain(slug);
+    }
+    // Closed vocabulary: no escape hatch that would reintroduce uncategorized
+    // findings invisible to both the caps and the telemetry.
+    expect(protocol).toContain("There is no `other` value");
+
+    // The marker carries it, on both surfaces.
+    expect(workflow).toContain("| category: <category-slug> |");
+    expect(agent).toContain("| category: <category-slug> |");
+
+    // Bucketing is driven by the category, not by re-reading the rule ID.
+    expect(workflow).toContain("never decide a bucket by re-reading the rule ID");
+  });
 });
 
 describe("ARM API review live-run regressions", () => {
@@ -872,13 +897,13 @@ describe("ARM API review live-run regressions", () => {
     expect(collapsed).toContain("Incorrect (fields split across lines -- cannot be parsed)");
   });
 
-  it("requires all six marker fields on the summary, not a reduced form", async () => {
+  it("requires all seven marker fields on the summary, not a reduced form", async () => {
     const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
     const collapsed = collapseWhitespace(source);
 
     // The run's summary marker carried only `rule:` and `posted-by:`.
     expect(collapsed).toContain(
-      "All six fields are **required on every posted body**, including the Step 8 summary",
+      "All seven fields are **required on every posted body**, including the Step 8 summary",
     );
     expect(collapsed).toContain("The summary's marker is not a reduced form");
   });

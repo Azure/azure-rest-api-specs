@@ -204,7 +204,7 @@ which of these two delimiters the surface requires.
 <!-- markdownlint-disable MD013 -->
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID-or-summary> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <full-40-char-sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID-or-summary> | category: <category-slug> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <full-40-char-sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -213,6 +213,7 @@ which of these two delimiters the surface requires.
 | ----------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `posted-by`       | `arm-api-reviewer-agent`                    | Used by Step 5.5 to identify agent-origin comments via substring match. **Do not rename** without a backward-compat plan.                                                                                                                                                                   |
 | `rule`            | Rule ID from instruction files or `summary` | e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`; use `summary` only for the review summary.                                                                                                                                                                                           |
+| `category`        | One of the 11 slugs below                   | The finding's issue type. Closed vocabulary; see [Finding categories](#finding-categories). Required on every standalone finding. Use `summary` on the review summary marker.                                                                                                               |
 | `severity`        | `blocking` / `warning` / `suggestion`       | Lowercase.                                                                                                                                                                                                                                                                                  |
 | `classification`  | `new` / `existing`                          | From Step 4a.                                                                                                                                                                                                                                                                               |
 | `critic`          | `pass`                                      | Default -- Critic returned PASS at High confidence.                                                                                                                                                                                                                                         |
@@ -222,6 +223,48 @@ which of these two delimiters the surface requires.
 | `head-sha`        | Full 40-char session SHA                    | Short SHAs forbidden in this marker.                                                                                                                                                                                                                                                        |
 | `downstream-rule` | Linter rule ID                              | REQUIRED when a finding's fix adds or tightens a type, format, decorator, `x-ms-*` extension, or schema constraint in a conflict-aware area from `linter-rule-coverage.md` (for example, `R3017`). Optional otherwise.                                                                      |
 | `override-reason` | Structured justification                    | REQUIRED iff `critic: override`. Must satisfy the canonical Override-reason validator defined below.                                                                                                                                                                                        |
+
+### Finding categories
+
+Canonical, closed vocabulary for the `category` field. Every standalone finding
+carries exactly one of these slugs, chosen at emit time. This is the **single
+definition** of the category set: the reviewer, the Critic, the automated
+workflow, the per-category output caps, and
+`documentation/arm-api-reviewer-insights.md` all refer to this list. Do not
+invent a slug, and do not re-derive categories by reading rule IDs after the
+fact.
+
+| Category slug                   | Covers                                                                                              | Cap bucket               |
+| ------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------ |
+| `schema-and-property-design`    | Property shape, types, formats, required/optional, nullability, constraints, response payload shape | Property design / naming |
+| `naming-enums-and-identifiers`  | Naming conventions, enum modelling and extensibility, identifier and resource-name patterns         | Property design / naming |
+| `sdk-and-client-impact`         | Consequences for generated clients: client name collisions, awkward or breaking generated surface   | Property design / naming |
+| `resource-modeling`             | Resource type shape, tracked vs proxy, parent/child structure, provisioning state, ARM envelope     | ARM contract             |
+| `operations-and-http-semantics` | Verb choice, status codes, headers, idempotency, collection vs point operations, query parameters   | ARM contract             |
+| `long-running-operations`       | LRO patterns, `x-ms-long-running-operation`, final-state-via, polling and operation-status contract | ARM contract             |
+| `suppressions-and-tooling`      | `suppressions.yaml` and readme suppressions, AutoRest and emitter configuration, tspconfig          | ARM contract             |
+| `review-readiness-and-ci`       | Missing or failing prerequisites for review: absent TypeSpec, unwired tags, CI blockers             | ARM contract             |
+| `documentation-and-examples`    | Descriptions, doc comments, example payloads and their correctness                                  | Documentation gaps       |
+| `versioning-and-compatibility`  | API version placement, breaking changes against a prior version, compatibility of changed contracts | Breaking changes         |
+| `security-and-secrets`          | Credential-bearing properties, secret exposure in responses or examples, auth surface               | Security                 |
+
+Choosing a category:
+
+- Pick the category matching the **defect**, not the file it was found in. A
+  secret in an example file is `security-and-secrets`, not
+  `documentation-and-examples`.
+- When a finding could fit two categories, pick the one whose corrective action
+  the author must take. A property renamed for SDK reasons is
+  `naming-enums-and-identifiers` if the fix is the name, `sdk-and-client-impact`
+  if the fix is a client directive.
+- There is no `other` value. If nothing fits cleanly, pick the nearest slug
+  rather than omitting the field, and never treat the finding as uncategorized:
+  an absent category makes the finding invisible to both the caps and the
+  telemetry.
+
+The **Cap bucket** column is the authoritative mapping used by the per-category
+output caps in `.github/workflows/arm-api-review.md`. Categories are the unit of
+measurement; cap buckets are the coarser unit of enforcement.
 
 ### Top-level reconciliation clarification marker
 

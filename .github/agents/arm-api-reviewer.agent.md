@@ -902,7 +902,7 @@ These per-category caps total **45** inline comments.
 
 **The caps always apply.** They are not a fallback that engages only on large reviews, and they are not gated on the 50-comment budget. A category cap binds as soon as that category exceeds it, however small the review is overall: nine documentation findings on a PR whose only findings are those nine still posts six inline and discloses three as overflow. The overall inline budget is **50** posted comments, a second and independent ceiling; because every category is capped the total is bounded at 45, so the 50 should not be reachable. If it somehow would be exceeded, post the highest-severity findings inline (security and breaking changes first). Replies and thread resolutions from Step 5.5 have their own budgets and do **not** consume the 50.
 
-The caps are derived from the observed findings per pull request recorded in `documentation/arm-api-reviewer-insights.md`: a total allowance of 45 split in proportion to each category's average, so the caps rank in the same order as observed volume and each sits at roughly ten times the typical count. A cap therefore binds only on an outlier change. The cap buckets are coarser than the issue types tracked on that page: map each finding to a bucket using the **"Which cap applies to a finding"** table in `.github/workflows/arm-api-review.md`, which is canonical. Every tracked issue type maps to exactly one bucket; a finding is never treated as uncapped because it does not fit a bucket name.
+The caps are derived from the observed findings per pull request recorded in `documentation/arm-api-reviewer-insights.md`: a total allowance of 45 split in proportion to each category's average, so the caps rank in the same order as observed volume and each sits at roughly ten times the typical count. A cap therefore binds only on an outlier change. Every standalone finding carries a `category` field from the closed vocabulary in [Finding categories](./protocols/arm-api-review-critic.protocol.md#finding-categories); that table maps each category to exactly one cap bucket. Count a finding against the bucket its category maps to. Never decide a bucket by re-reading the rule ID, and never treat a finding as uncapped because its wording does not match a bucket name.
 
 The caps govern what is **posted**, not what is analysed, but an over-cap candidate is **not** a verified finding. The agreed posting set is selected after these limits are applied, and only that set goes to the Critic. Excluded candidates are therefore disclosed **only as a count and themes**, never rendered as canonical finding bodies and never described in a way that implies the Critic verified them. In the Step 6 report, give each excluded candidate the action `OVERFLOW-NOT-POSTED` in the per-finding action table rather than a posting action, so it is visible to the human without being mistaken for something that will be posted. In Step 8, disclose the aggregate in the **review-body preamble** as an extra sentence (this agent does not post a summary comment by default, so the preamble is the surface that always exists): use _"N additional findings were identified but not posted inline. Key themes: [list]."_ when the overall 50-comment budget is the binding limit, and _"N additional warning/suggestion candidates were identified but not individually verified or posted. Key themes: [list]. Review the full checklist in `arm-api-review.instructions.md`."_ when a category cap is. Never silently drop an over-cap candidate: an undisclosed cap is indistinguishable from a missed violation.
 
@@ -1218,7 +1218,7 @@ Reply `(a)` or `(b)`. I will not present findings, post comments, or iterate fur
 <code or JSON snippet>
 ```
 
-<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | category: <category-slug> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
 ````
 
 **Template B variants -- additional required fields:**
@@ -1226,7 +1226,7 @@ Reply `(a)` or `(b)`. I will not present findings, post comments, or iterate fur
 - **Downstream-CI-conflict finding** (Step 4.5 / R3017-class case where a Reviewer suggestion would collide with a required LintDiff/SDK-Breaking rule). Append the `downstream-rule:` field to the marker, and render the finding body as a **three-option recommendation, not a directive** -- the reviewer cannot tell the author to violate a required CI rule. Example marker:
 
   ```html
-  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: warning | classification: new | critic: pass | head-sha: <full-40-char-sha> | downstream-rule: R3017 -->
+  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | category: <category-slug> | severity: warning | classification: new | critic: pass | head-sha: <full-40-char-sha> | downstream-rule: R3017 -->
   ```
 
   The body MUST present the three options (e.g., "accept the downstream rule and keep the current shape", "change shape and suppress the downstream rule with justification", "raise to API board") rather than a single corrective fix.
@@ -1234,7 +1234,7 @@ Reply `(a)` or `(b)`. I will not present findings, post comments, or iterate fur
 - **Human override of Critic FAIL** (Step 7 item 13). Append `override-reason:` to the marker, value supplied by the human and validated by the Override-reason validator before folding. Example marker:
 
   ```html
-  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: override | head-sha: <full-40-char-sha> | override-reason: <validator-approved reason that quotes the rule text or cites the anchor that contradicts the Critic's FAIL> -->
+  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | category: <category-slug> | severity: blocking | classification: new | critic: override | head-sha: <full-40-char-sha> | override-reason: <validator-approved reason that quotes the rule text or cites the anchor that contradicts the Critic's FAIL> -->
   ```
 
 - **Telemetry-degraded fallback** (when one or more required per-comment fields cannot be assembled -- see the protocol's [Telemetry fallback policy](./protocols/arm-api-review-critic.protocol.md#telemetry-fallback-policy-load-bearing)). Emit the minimal marker below in place of the full 6-field form; the comment itself still posts. The `reason:` value SHOULD be a short machine-friendly identifier (`head-sha-unavailable`, `rule-id-missing`, `override-reason-truncated`, `assembly-error`). Example marker:
@@ -1351,7 +1351,7 @@ Substitution rules:
 - Every posted comment **MUST** end with a hidden HTML telemetry marker as the very last line of the comment body. The marker format is:
 
   ```html
-  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] [| telemetry: degraded | reason: <one-line>] -->
+  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | category: <category-slug> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] [| telemetry: degraded | reason: <one-line>] -->
   ```
 
   Field-by-field semantics (allowed values, defaults, when each optional
@@ -1367,9 +1367,9 @@ Substitution rules:
   - The `head-sha` field MUST be the **full 40-character commit SHA**, not the abbreviated 7-char form. Short SHAs are only acceptable in conversational chat text.
   - Use `rule: summary` on summary comments, accompanied by `severity: suggestion` and `classification: new`. In **this interactive agent** a summary comment is posted only when the human approves one, so `rule: summary` is rare here. The autonomous `arm-api-review` workflow is different: its Step 8 posts a summary comment on **every** run, and that comment carries this same `rule: summary` marker. Do not read "not posted by default" as permission to omit the summary comment, or its marker, when running under that workflow.
 
-  Example (normal post): `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new | critic: pass | head-sha: a1b2c3d4e5f60718293a4b5c6d7e8f9012345678 -->`
+  Example (normal post): `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | category: resource-modeling | severity: blocking | classification: new | critic: pass | head-sha: a1b2c3d4e5f60718293a4b5c6d7e8f9012345678 -->`
 
-  Example (human override of critic FAIL): `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new | critic: override | head-sha: a1b2c3d4e5f60718293a4b5c6d7e8f9012345678 | override-reason: arm-api-review.instructions.md:L482-L489 says "PUT MUST return 200 or 201 for create-or-update"; critic cited the wrong response-code clause -->`
+  Example (human override of critic FAIL): `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | category: resource-modeling | severity: blocking | classification: new | critic: override | head-sha: a1b2c3d4e5f60718293a4b5c6d7e8f9012345678 | override-reason: arm-api-review.instructions.md:L482-L489 says "PUT MUST return 200 or 201 for create-or-update"; critic cited the wrong response-code clause -->`
 
   This marker is invisible in rendered markdown but enables querying agent-posted comments via the GitHub API, computing telemetry (comments per day, top rule violations, new-vs-existing ratio, override rate), and distinguishing agent comments from human comments during the next review's Step 5.5 reconciliation. Do not omit this marker.
 
