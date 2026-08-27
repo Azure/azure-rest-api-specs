@@ -224,6 +224,11 @@ op regenerateKeyCustom(
 );
 @@clientName(AgentDeployment, "CognitiveServicesAgentDeployment", "csharp");
 @@clientName(
+  ArcDeploymentVllmParameters,
+  "CognitiveServicesArcDeploymentVllmProperties",
+  "csharp"
+);
+@@clientName(
   AgentDeploymentProperties,
   "CognitiveServicesAgentDeploymentProperties",
   "csharp"
