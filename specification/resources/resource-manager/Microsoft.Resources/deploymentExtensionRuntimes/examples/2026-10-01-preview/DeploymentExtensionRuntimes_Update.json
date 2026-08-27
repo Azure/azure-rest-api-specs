@@ -1,6 +1,6 @@
 {
-  "operationId": "DeploymentExtensionRuntimes_UpdateTags",
-  "title": "Update the tags of a deployment extension runtime",
+  "operationId": "DeploymentExtensionRuntimes_Update",
+  "title": "Update the tags and managed identity of a deployment extension runtime",
   "parameters": {
     "api-version": "2026-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -10,6 +10,12 @@
       "tags": {
         "team": "platform",
         "environment": "staging"
+      },
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ext-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/runtime-identity": {}
+        }
       }
     }
   },
@@ -25,9 +31,15 @@
           "environment": "staging"
         },
         "identity": {
-          "type": "SystemAssigned",
+          "type": "SystemAssigned, UserAssigned",
           "principalId": "abc12345-6789-0abc-def0-123456789abc",
-          "tenantId": "def12345-6789-0abc-def0-123456789abc"
+          "tenantId": "def12345-6789-0abc-def0-123456789abc",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ext-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/runtime-identity": {
+              "principalId": "11111111-2222-3333-4444-555555555555",
+              "clientId": "66666666-7777-8888-9999-000000000000"
+            }
+          }
         },
         "systemData": {
           "createdBy": "user@contoso.com",

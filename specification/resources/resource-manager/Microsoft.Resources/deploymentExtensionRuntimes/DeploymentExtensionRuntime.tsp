@@ -24,14 +24,25 @@ model DeploymentExtensionRuntime
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-// The runtime's managed identity is immutable after creation: it is set at
-// create time and cannot be changed by a subsequent update. Marking it
-// create + read emits `x-ms-mutability: ["create", "read"]`.
+// The runtime's managed identity is patchable: it is set at create time and can
+// be changed by a subsequent PATCH. Marking it create + read + update emits
+// `x-ms-mutability: ["create", "read", "update"]`.
 @@visibility(
   DeploymentExtensionRuntime.identity,
   Lifecycle.Create,
-  Lifecycle.Read
+  Lifecycle.Read,
+  Lifecycle.Update
 );
+
+/**
+ * The updatable envelope of a deployment extension runtime. PATCH accepts only
+ * the resource tags and the managed identity; all runtime configuration is
+ * replaced via PUT.
+ */
+model DeploymentExtensionRuntimeUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
 
 @armResourceOperations
 interface DeploymentExtensionRuntimes {
@@ -46,9 +57,12 @@ interface DeploymentExtensionRuntimes {
   createOrReplace is ArmResourceCreateOrReplaceAsync<DeploymentExtensionRuntime>;
 
   /**
-   * Updates the tags of a deployment extension runtime.
+   * Updates the tags and managed identity of a deployment extension runtime.
    */
-  updateTags is ArmTagsPatchAsync<DeploymentExtensionRuntime>;
+  update is ArmCustomPatchAsync<
+    DeploymentExtensionRuntime,
+    DeploymentExtensionRuntimeUpdate
+  >;
 
   /**
    * Deletes a deployment extension runtime.

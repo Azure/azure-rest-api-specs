@@ -250,11 +250,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "DeploymentExtensionRuntimes_UpdateTags",
+        "operationId": "DeploymentExtensionRuntimes_Update",
         "tags": [
           "DeploymentExtensionRuntimes"
         ],
-        "description": "Updates the tags of a deployment extension runtime.",
+        "description": "Updates the tags and managed identity of a deployment extension runtime.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -279,7 +279,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeploymentExtensionRuntimeTagsUpdate"
+              "$ref": "#/definitions/DeploymentExtensionRuntimeUpdate"
             }
           }
         ],
@@ -312,8 +312,8 @@
           }
         },
         "x-ms-examples": {
-          "Update the tags of a deployment extension runtime": {
-            "$ref": "./examples/DeploymentExtensionRuntimes_UpdateTags.json"
+          "Update the tags and managed identity of a deployment extension runtime": {
+            "$ref": "./examples/DeploymentExtensionRuntimes_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -491,6 +491,7 @@
           "description": "The managed service identities assigned to this resource.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
@@ -540,9 +541,9 @@
         "hosting"
       ]
     },
-    "DeploymentExtensionRuntimeTagsUpdate": {
+    "DeploymentExtensionRuntimeUpdate": {
       "type": "object",
-      "description": "The type used for updating tags in DeploymentExtensionRuntime resources.",
+      "description": "The updatable envelope of a deployment extension runtime. PATCH accepts only\nthe resource tags and the managed identity; all runtime configuration is\nreplaced via PUT.",
       "properties": {
         "tags": {
           "type": "object",
@@ -550,6 +551,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     },
