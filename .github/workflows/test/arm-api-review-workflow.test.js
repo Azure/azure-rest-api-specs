@@ -1121,3 +1121,28 @@ describe("API version lifecycle rules", () => {
     expect(protocol).toContain(`\`${declared}\``);
   });
 });
+
+describe("TypeSpec requirement and version ordering guidance", () => {
+  const INSTRUCTIONS = ".github/instructions/arm-api-review.instructions.md";
+
+  it("gives TSP-REQUIRED-V1 a fix path and forecloses the legacy exemption", async () => {
+    // TSP-REQUIRED-V1 is Blocking and is resolved by an out-of-band conversion
+    // that is invisible in the diff, so a finding without the conversion link
+    // leaves the author with no route to comply. The exemption clause exists
+    // because "our service is old" is the predictable pushback, and it is not
+    // a valid one.
+    const instructions = collapseWhitespace(await readFile(join(ROOT, INSTRUCTIONS), "utf8"));
+
+    expect(instructions).toContain("aka.ms/convert-to-typespec");
+    expect(instructions).toMatch(/no legacy exemption/i);
+  });
+
+  it("requires a new version to post-date every existing version", async () => {
+    // The adjacent rules only cover preview-to-GA promotion and edits to a
+    // published version, so without this a back-dated brand-new preview passes
+    // every date check the reviewer applies.
+    const instructions = collapseWhitespace(await readFile(join(ROOT, INSTRUCTIONS), "utf8"));
+
+    expect(instructions).toMatch(/later date than every API version the service already has/i);
+  });
+});

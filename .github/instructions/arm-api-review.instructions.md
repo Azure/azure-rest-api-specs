@@ -147,6 +147,10 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 "PASSES" means the rule does not appear in the findings list at any severity. Listing it as `N/A` or `Compliant` in an acknowledgments or compliant-areas table is acceptable.
 
+**Fix path.** A Blocking finding here must tell the author how to comply, not only that they are non-compliant. Point them at the conversion tooling at [aka.ms/convert-to-typespec](https://aka.ms/convert-to-typespec). Conversion is expected to be horizontal, so it neither changes the API nor revs the version; the rules for reviewing a conversion PR are in [`typespec-review.instructions.md` §8.1](./typespec-review.instructions.md).
+
+**There is no legacy exemption.** The requirement covers all active services, and a service that has not shipped a new API version in two years must still complete the conversion before releasing its next one. Age alone is not grounds to waive the rule, so do not withdraw the finding on that basis.
+
 ---
 
 ## 1. ARM Resource Path Structure
@@ -764,6 +768,7 @@ Apply the decision framework from the reference file when evaluating suppression
 ### 11.2 Incremental Version Progression
 
 - Copy the entire API surface when creating a new version. New preview versions should include all existing GA functionality plus new changes.
+- Each new API version **MUST** carry a later date than every API version the service already has, preview or GA. The date part carries no meaning beyond ordering, so a back-dated version is invalid even when it is a preview and even when no published version is being modified.
 - When promoting from preview to GA, the GA version **MUST** have a later date than the preview version.
 - The `default` API version tag in `readme.md` **MUST** point to the latest **stable** version. Do not change the default tag from a stable version to a preview version — the default tag is what SDK consumers get by default and must be a GA release.
 

@@ -22,7 +22,7 @@ in, so they apply even when the spec content itself is correct.
 
 - [API versions and branches][api-versions-and-branches] (Azure Developer
   Experience docs). Read this for branch protection details, mirroring
-  behaviour, and internal-only services.
+  behavior, and internal-only services.
 
 [api-versions-and-branches]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-versions-and-branches
 
