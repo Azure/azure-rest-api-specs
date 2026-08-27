@@ -36,7 +36,9 @@ model CreateAgentVersionRequest {
   @extension(
     "x-ms-foundry-meta",
     #{
-      conditional_previews: #[AgentDefinitionOptInKeys.digital_worker_v1_preview],
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
     }
   )
   digital_worker_type?: DigitalWorkerType;
@@ -186,7 +188,9 @@ model AgentObject {
   @extension(
     "x-ms-foundry-meta",
     #{
-      conditional_previews: #[AgentDefinitionOptInKeys.digital_worker_v1_preview],
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
     }
   )
   digital_worker_type?: DigitalWorkerType;
