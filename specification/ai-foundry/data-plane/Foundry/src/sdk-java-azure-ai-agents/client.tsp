@@ -8,6 +8,7 @@ import "../voice-agents/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../agents-session-files/routes.tsp";
+import "../agents-microsoft365/routes.tsp";
 import "../agents-optimization/routes.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
@@ -192,6 +193,11 @@ using Azure.AI.Projects;
 );
 @@clientName(OpenAI.LocalSkillParam, "LocalSkillParameter", "java");
 @@clientName(OpenAI.SkillReferenceParam, "SkillReferenceParameter", "java");
+@@clientName(
+  OpenAI.ProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParameter",
+  "java"
+);
 
 @@clientName(ToolboxVersionObject, "ToolboxVersionDetails", "java");
 @@clientName(ToolboxObject, "ToolboxDetails", "java");

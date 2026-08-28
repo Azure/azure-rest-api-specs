@@ -26,6 +26,18 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
     Agents
   );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.publishAgentToMicrosoft365,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365AppPackage,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365PublishDefaults,
+    Agents
+  );
 }
 
 namespace Azure.AI.Projects.Beta {
