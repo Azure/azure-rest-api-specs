@@ -163,6 +163,7 @@ model TenantNotificationRequestBody {
 /**
  * The details of the test notification results.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TestNotificationDetailsResponse {
   /**
    * The context info

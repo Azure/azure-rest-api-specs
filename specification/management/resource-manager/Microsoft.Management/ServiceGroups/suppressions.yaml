@@ -1,3 +1,7 @@
 - tool: TypeSpecRequirement
   path: ./preview/2024-02-01-preview/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  rules: [ProvisioningStateMustBeReadOnly]
+  path: ./stable/2026-08-01/serviceGroups.json
+  reason: Adding `use-read-only-status-schema` to the tspconfig.yaml file resulted in a breaking `VersioningReviewRequired` in the existing preview API version. Recommended workaround is to suppress 'ProvisioningStateMustBeReadOnly'.
