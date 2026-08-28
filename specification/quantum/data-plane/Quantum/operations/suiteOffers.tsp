@@ -13,9 +13,6 @@ using TypeSpec.Versioning;
 
 using Quantum.Workspace;
 
-/** A paged list of quota usage data. */
-alias PagedQuotaUsageData = Azure.Core.Page<QuotaUsageData>;
-
 namespace Quantum.Workspace.Services {
   interface SuiteOffers {
     /** List quota usages for the given suite offer provider in the subscription. */
@@ -38,21 +35,6 @@ namespace Quantum.Workspace.Services {
         /** The unique identifier for the provider. */
         @path
         @segment("suiteOffers")
-        providerId: string;
-      }
-    >;
-
-    /** List quota usages for the given workspace. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Workspace-scoped custom route not covered by the standard workspace resource operations."
-    @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
-    listWorkspaceQuotaUsages is CustomListOperation<
-      Resource = QuotaUsageData,
-      Response = PagedQuotaUsageData,
-      Parameters = {
-        ...CommonParams;
-
-        /** The unique identifier for the provider to get quota usages for. */
-        @query
         providerId: string;
       }
     >;

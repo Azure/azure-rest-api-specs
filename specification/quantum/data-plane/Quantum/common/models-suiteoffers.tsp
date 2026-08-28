@@ -11,6 +11,9 @@ using TypeSpec.Versioning;
 
 namespace Quantum.Workspace;
 
+/** A paged list of quota usage data. */
+alias PagedQuotaUsageData = Azure.Core.Page<QuotaUsageData>;
+
 /** The scope at which the suite offer quota usage is applied. */
 @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
 union SuiteOfferScope {
