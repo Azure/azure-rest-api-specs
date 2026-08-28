@@ -49,8 +49,10 @@ model QuotaUsage {
 
 /** Quota usage data for a suite offer provider. */
 @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
+@resource("quotaUsages")
 model QuotaUsageData {
   /** The unique identifier for the quota usage record. */
+  @key
   @visibility(Lifecycle.Read)
   id: string;
 

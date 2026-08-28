@@ -13,52 +13,48 @@ using TypeSpec.Versioning;
 
 using Quantum.Workspace;
 
+/** A paged list of quota usage data. */
+alias PagedQuotaUsageData = Azure.Core.Page<QuotaUsageData>;
+
 namespace Quantum.Workspace.Services {
   interface SuiteOffers {
     /** List quota usages for the given suite offer provider in the subscription. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Subscription-scoped custom route not covered by the standard workspace resource operations."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation returns a paged list of quota usages, so the 'list' prefix is correct."
     @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
-    @get
-    @route("subscriptions/{subscriptionId}/providers/Microsoft.Quantum/suiteOffers/{providerId}/quotaUsages")
-    listQuotaUsages is Azure.Core.Foundations.Operation<
-      {
+    listQuotaUsages is CustomListOperation<
+      Resource = QuotaUsageData,
+      Response = PagedQuotaUsageData,
+      Parameters = {
         /** The Azure subscription ID. */
         @path
+        @segment("subscriptions")
         subscriptionId: SubscriptionId;
+
+        /** The Azure Quantum resource provider. */
+        @path
+        @segment("providers")
+        provider: ResourceProviderName;
 
         /** The unique identifier for the provider. */
         @path
+        @segment("suiteOffers")
         providerId: string;
-      },
-      Azure.Core.Page<QuotaUsageData>
+      }
     >;
 
     /** List quota usages for the given workspace. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Workspace-scoped custom route not covered by the standard workspace resource operations."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation returns a paged list of quota usages, so the 'list' prefix is correct."
     @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
-    @get
-    @route("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/quotaUsages")
-    listWorkspaceQuotaUsages is Azure.Core.Foundations.Operation<
-      {
-        /** The Azure subscription ID. */
-        @path
-        subscriptionId: SubscriptionId;
-
-        /** Name of the Azure resource group. */
-        @path
-        resourceGroupName: ResourceGroupName;
-
-        /** Name of the Azure Quantum workspace. */
-        @path
-        workspaceName: WorkspaceName;
+    listWorkspaceQuotaUsages is CustomListOperation<
+      Resource = QuotaUsageData,
+      Response = PagedQuotaUsageData,
+      Parameters = {
+        ...CommonParams;
 
         /** The unique identifier for the provider to get quota usages for. */
         @query
         providerId: string;
-      },
-      Azure.Core.Page<QuotaUsageData>
+      }
     >;
 
     /** Get the provider status, including target statuses, for the given suite offer provider in the subscription. */
