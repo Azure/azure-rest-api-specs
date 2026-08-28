@@ -5,7 +5,6 @@ import "./protocol.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -80,6 +79,25 @@ interface VoiceAgentWebSocket {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The endpoint-scoped, read-only voice conversation projection and its nested response, item, and audio routes do not match a standard resource operation template."
 @tag("Agent Conversations")
 interface AgentEndpointConversations {
+
+  /**
+   * Generates and creates an agent from kind-specific high-level inputs.
+   * The generated definition remains fully editable through the standard agent versioning operations.
+   */
+  @summary("Generate an agent")
+  @post
+  @route("/agents:generate")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @tag("Agents")
+  generateAgent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The kind-specific inputs for generating and creating an agent. */
+      @body body: GenerateAgentRequest;
+    },
+    AgentObject
+  >;
+
   /**
    * Returns the conversations persisted for the specified voice agent endpoint.
    * Conversations are present when the session's effective `store` setting is `true`, whether inherited from the
