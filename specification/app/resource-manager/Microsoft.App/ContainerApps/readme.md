@@ -60,13 +60,23 @@ directive:
   - suppress: PatchBodyParametersSchema
     from: openapi.json
     where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"].patch.parameters[4].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"].patch.parameters[4].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}"].patch.parameters[4].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch.parameters[4].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/javaComponents/{name}"].patch.parameters[5].schema.properties.properties
     reason: |
-      The established Container App and Job PATCH schemas retain nested required fields and
-      defaults, and Java Component PATCH retains the required componentType discriminator.
-      Changing those published request schemas would break the existing stable wire contract.
+      The established Container App and Managed Environment PATCH schemas retain required
+      location, Container App and Job PATCH retain nested required fields and defaults, and Java
+      Component PATCH retains the required componentType discriminator. Changing those published
+      request schemas would break the existing stable wire contract.
+  - suppress: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.ContainerAppsFunctionProperties.properties.isDisabled
+    reason: |
+      isDisabled is an established boolean retained as deprecated read-only for wire compatibility;
+      state is its string-enum replacement. Removing or changing isDisabled would break existing
+      stable clients.
   - suppress: AvoidAdditionalProperties
     from: openapi.json
     where:
