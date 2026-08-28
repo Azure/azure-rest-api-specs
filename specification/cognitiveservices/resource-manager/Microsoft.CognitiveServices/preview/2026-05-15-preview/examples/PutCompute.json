@@ -1,0 +1,36 @@
+{
+  "operationId": "Computes_CreateOrUpdate",
+  "title": "PutCompute",
+  "parameters": {
+    "api-version": "2026-05-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "computeName": "myCompute",
+    "resource": {
+      "properties": {
+        "computeType": "Cluster",
+        "location": "eastus",
+        "pools": [
+          {
+            "name": "default",
+            "vmPriority": "Regular",
+            "instanceType": "Standard_DS3_v2",
+            "nodeCount": 2
+          }
+        ]
+      },
+      "identity": {
+        "type": "None"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/eastus/computeOperations/00000000-0000-0000-0000-000000000000?api-version=2026-05-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/eastus/computeOperations/00000000-0000-0000-0000-000000000000?api-version=2026-05-15-preview"
+      }
+    }
+  }
+}

@@ -19,6 +19,7 @@ import "./AdminRequestApprovalsResource.tsp";
 import "./Collection.tsp";
 import "./Offer.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -52,6 +53,7 @@ interface Operations
       ErrorResponse
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Microsoft.Marketplace REST API operations."
 );

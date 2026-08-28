@@ -61,7 +61,8 @@ interface TagOperationLinkContractOps
         @minLength(1)
         @maxLength(80)
         operationLinkId: string,
-      }
+      },
+      ResourceName = "ServiceTagOperationLink"
     > {}
 
 @armResourceOperations
@@ -76,7 +77,7 @@ interface TagOperationLinkContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -164,7 +165,8 @@ interface WorkspaceTagOperationLinkOps
         @minLength(1)
         @maxLength(80)
         operationLinkId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceTagOperationLink"
     > {}
 
 @armResourceOperations
@@ -179,7 +181,7 @@ interface WorkspaceTagOperationLink {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -225,15 +227,19 @@ interface WorkspaceTagOperationLink {
 
 @@maxLength(TagOperationLinkContract.name, 80);
 @@minLength(TagOperationLinkContract.name, 1);
-@@doc(TagOperationLinkContract.name,
+@@doc(
+  TagOperationLinkContract.name,
   "Tag-operation link identifier. Must be unique in the current API Management service instance."
 );
-@@doc(TagOperationLinkContract.properties,
+@@doc(
+  TagOperationLinkContract.properties,
   "Tag-API link entity contract properties."
 );
-@@doc(TagOperationLinkContracts.createOrUpdate::parameters.resource,
+@@doc(
+  TagOperationLinkContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(WorkspaceTagOperationLink.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceTagOperationLink.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

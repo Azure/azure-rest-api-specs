@@ -1,10 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -138,6 +142,23 @@ union AllowedEndpointRecordType {
   IPv6Address: "IPv6Address",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Any: "Any",
+}
+
+/**
+ * When record type is set, a traffic manager profile will allow only endpoints that match this type.
+ */
+@added(Versions.v2024_04_01_preview)
+union RecordType {
+  string,
+
+  /** A record type. */
+  A: "A",
+
+  /** AAAA record type. */
+  AAAA: "AAAA",
+
+  /** CNAME record type. */
+  CNAME: "CNAME",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -282,7 +303,7 @@ model ProxyResource extends Resource {}
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
@@ -457,6 +478,12 @@ model ProfileProperties {
    * Maximum number of endpoints to be returned for MultiValue routing type.
    */
   maxReturn?: int64;
+
+  /**
+   * When record type is set, a traffic manager profile will allow only endpoints that match this type.
+   */
+  @added(Versions.v2024_04_01_preview)
+  recordType?: RecordType;
 }
 
 /**

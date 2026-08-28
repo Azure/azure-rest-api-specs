@@ -22,10 +22,12 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(BackendPool.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(CustomHttpsConfiguration.keyVaultCertificateSourceParameters
+@@Legacy.flattenProperty(
+  CustomHttpsConfiguration.keyVaultCertificateSourceParameters
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(CustomHttpsConfiguration.frontDoorCertificateSourceParameters
+@@Legacy.flattenProperty(
+  CustomHttpsConfiguration.frontDoorCertificateSourceParameters
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -45,11 +47,13 @@ using Microsoft.Network;
 
 @@clientLocation(WebApplicationFirewallPolicies.get, "Policies");
 @@clientLocation(WebApplicationFirewallPolicies.createOrUpdate, "Policies");
-@@clientName(WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(WebApplicationFirewallPolicies.update, "Policies");
-@@clientName(WebApplicationFirewallPolicies.update::parameters.properties,
+@@clientName(
+  WebApplicationFirewallPolicies.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(WebApplicationFirewallPolicies.delete, "Policies");
@@ -58,10 +62,12 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebApplicationFirewallPolicy.properties);
 
-@@clientName(FrontDoors.createOrUpdate::parameters.resource,
+@@clientName(
+  FrontDoors.createOrUpdate::parameters.resource,
   "frontDoorParameters"
 );
-@@clientName(FrontDoors.validateCustomDomain::parameters.body,
+@@clientName(
+  FrontDoors.validateCustomDomain::parameters.body,
   "customDomainProperties"
 );
 @@clientLocation(FrontDoors.purgeContent, "Endpoints");
@@ -69,13 +75,15 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FrontDoor.properties);
 
-@@clientName(RulesEngines.createOrUpdate::parameters.resource,
+@@clientName(
+  RulesEngines.createOrUpdate::parameters.resource,
   "rulesEngineParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RulesEngine.properties);
 
-@@clientName(FrontendEndpoints.enableHttps::parameters.body,
+@@clientName(
+  FrontendEndpoints.enableHttps::parameters.body,
   "customHttpsConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -103,10 +111,12 @@ using Microsoft.Network;
 
 @@clientLocation(ManagedRuleSetsOperationGroup.list, "ManagedRuleSets");
 
-@@clientLocation(FrontDoorNameAvailabilityOperationGroup.check,
+@@clientLocation(
+  FrontDoorNameAvailabilityOperationGroup.check,
   "FrontDoorNameAvailability"
 );
 
-@@clientLocation(FrontDoorNameAvailabilityWithSubscriptionOperationGroup.check,
+@@clientLocation(
+  FrontDoorNameAvailabilityWithSubscriptionOperationGroup.check,
   "FrontDoorNameAvailabilityWithSubscription"
 );

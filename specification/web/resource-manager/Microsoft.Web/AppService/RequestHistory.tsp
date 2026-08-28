@@ -89,10 +89,12 @@ interface RequestHistoryOps
         @segment("requestHistories")
         @key
         requestHistoryName: string,
-      }
+      },
+      ResourceName = "WebAppRequestHistory"
     > {}
 
-@armResourceOperations
+@tag("WorkflowRunActions")
+@armResourceOperations(#{ omitTags: true })
 interface RequestHistories {
   /**
    * Gets a workflow run repetition request history.

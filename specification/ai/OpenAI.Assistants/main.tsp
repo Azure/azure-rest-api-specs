@@ -10,6 +10,7 @@ import "./run_steps/main.tsp";
 import "./files/main.tsp";
 import "./streaming/events.tsp";
 import "./vector_stores/main.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -27,13 +28,15 @@ namespace Azure.AI.OpenAI {
 }
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "api-key">
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.implicit,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+          scopes: ["https://cognitiveservices.azure.com/.default"],
+        }
+      ]>
 )
 @service(#{ title: "Azure OpenAI" })
 @server(

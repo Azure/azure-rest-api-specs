@@ -1,0 +1,88 @@
+{
+  "title": "ClusterJobs_Get_GpuSwitchModeJob",
+  "operationId": "ClusterJobs_Get",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "jobsName": "gpuSwitchMode"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "GpuSwitchMode",
+          "deploymentMode": "Deploy",
+          "mode": "GPUP",
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "GPU Mode Switch Validation",
+                  "description": "Validate GPU mode switch requirements.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T00:10:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "GPU Compatibility Check",
+                      "description": "Check GPU compatibility with target mode",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T00:09:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "GPU Mode Switch Deployment",
+                  "description": "Switch GPU mode to GPUP.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T00:15:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Mode Configuration",
+                      "description": "Configure GPU for GPUP mode",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T00:15:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Succeeded",
+          "jobId": "job-12345-gpu-switch",
+          "startTimeUtc": "2023-06-09T00:08:19Z",
+          "endTimeUtc": "2023-06-09T00:15:47Z"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/gpuSwitchMode",
+        "name": "gpuSwitchMode",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-07-01T17:02:21.168Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-07-01T17:02:21.168Z"
+        }
+      }
+    }
+  }
+}

@@ -6,33 +6,39 @@ using Azure.ResourceManager.CommonTypes;
 using Microsoft.DocumentDB;
 
 @@clientName(Microsoft.DocumentDB, "MongoClusterMgmtClient", "python");
-@@clientName(Microsoft.DocumentDB,
+@@clientName(
+  Microsoft.DocumentDB,
   "MongoClusterManagementClient",
   "javascript,java"
 );
-@@access(Operations.list, Access.internal, "csharp");
-@@clientName(CheckNameAvailabilityResponse,
+@@clientName(
+  CheckNameAvailabilityResponse,
   "MongoClusterNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResponse.nameAvailable,
   "isNameAvailable",
   "csharp"
 );
-@@clientName(MongoClusterRestoreParameters,
+@@clientName(
+  MongoClusterRestoreParameters,
   "MongoClusterRestoreContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityRequest,
+@@clientName(
+  CheckNameAvailabilityRequest,
   "MongoClusterNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
-@@clientName(MongoClusters.checkNameAvailability,
+@@clientName(
+  MongoClusters.checkNameAvailability,
   "CheckMongoClusterNameAvailability",
   "csharp"
 );
-@@clientName(MongoClusterReplicaParameters,
+@@clientName(
+  MongoClusterReplicaParameters,
   "MongoClusterReplicaContent",
   "csharp"
 );
@@ -45,73 +51,92 @@ using Microsoft.DocumentDB;
 @@clientName(PromoteReplicaRequest, "PromoteReplicaContent", "csharp");
 @@clientName(ProvisioningState, "MongoClusterProvisioningState", "csharp");
 @@clientName(Replica, "MongoClusterReplica", "csharp");
-@@clientName(ReplicationProperties,
+@@clientName(
+  ReplicationProperties,
   "MongoClusterReplicationProperties",
   "csharp"
 );
 @@clientName(ReplicationRole, "MongoClusterReplicationRole", "csharp");
 @@clientName(ReplicationState, "MongoClusterReplicationState", "csharp");
-@@clientName(AdministratorProperties,
+@@clientName(
+  AdministratorProperties,
   "MongoClusterAdministratorProperties",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityReason,
+@@clientName(
+  CheckNameAvailabilityReason,
   "MongoClusterNameUnavailableReason",
   "csharp"
 );
-@@clientName(Microsoft.DocumentDB.PublicNetworkAccess,
+@@clientName(
+  Microsoft.DocumentDB.PublicNetworkAccess,
   "MongoClusterPublicNetworkAccess",
   "csharp"
 );
 @@clientName(FirewallRule, "MongoClusterFirewallRule", "csharp");
-@@clientName(FirewallRuleProperties,
+@@clientName(
+  FirewallRuleProperties,
   "MongoClusterFirewallRuleProperties",
   "csharp"
 );
-@@clientName(FirewallRuleProperties.startIpAddress, "startIPAddress");
-@@clientName(FirewallRuleProperties.endIpAddress, "endIPAddress");
-@@clientName(PrivateEndpointConnectionResource,
+@@clientName(FirewallRuleProperties.startIpAddress, "startIPAddress", "csharp");
+@@clientName(FirewallRuleProperties.endIpAddress, "endIPAddress", "csharp");
+@@clientName(
+  PrivateEndpointConnectionResource,
   "MongoClusterPrivateEndpointConnectionResource",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties,
+@@clientName(
+  PrivateEndpointConnectionProperties,
   "MongoClusterPrivateEndpointConnectionProperties",
   "csharp"
 );
-@@clientName(Microsoft.DocumentDB.PrivateLinkResource,
+@@clientName(
+  Microsoft.DocumentDB.PrivateLinkResource,
   "MongoClusterPrivateLinkResourceData",
   "csharp"
 );
 @@clientName(PrivateLinks.listByMongoCluster, "GetPrivateLinks", "csharp");
 @@clientName(Replicas.listByParent, "GetReplicasByParent", "csharp");
-@@clientName(ListConnectionStringsResult,
+@@clientName(
+  ListConnectionStringsResult,
   "MongoClusterConnectionStringsResult",
   "csharp"
 );
 @@clientName(User, "MongoClusterUser", "csharp");
 @@clientName(UserProperties, "MongoClusterUserProperties", "csharp");
 @@clientName(AuthenticationMode, "MongoClusterAuthenticationMode", "csharp");
-@@clientName(CustomerManagedKeyEncryptionProperties,
+@@clientName(
+  CustomerManagedKeyEncryptionProperties,
   "MongoClusterCmkEncryptionProperties",
   "csharp"
 );
 @@clientName(DataApiMode, "MongoClusterDataApiMode", "csharp");
 @@clientName(DatabaseRole, "MongoClusterDatabaseRole", "csharp");
-@@clientName(EntraIdentityProvider,
+@@clientName(NetworkBypassMode, "MongoClusterNetworkBypassMode", "csharp");
+@@clientName(
+  EntraIdentityProvider,
   "MongoClusterEntraIdentityProvider",
   "csharp"
 );
-@@clientName(EntraIdentityProviderProperties,
+@@clientName(
+  EntraIdentityProviderProperties,
   "MongoClusterEntraIdentityProviderProperties",
   "csharp"
 );
+// Note: the flattened `principalType` property is renamed to `PrincipalType` in csharp
+// via [CodeGenMember("PrincipalKindFlattened")] in custom code (since the flatten produces
+// a `PrincipalKind`-like name from the inner property), and an [Obsolete] non-nullable
+// `PrincipalType` shim is added to preserve the previous API surface.
 @@clientName(EntraPrincipalType, "MongoClusterEntraPrincipalType", "csharp");
 @@clientName(IdentityProvider, "MongoClusterIdentityProvider", "csharp");
-@@clientName(Microsoft.DocumentDB.KeyEncryptionKeyIdentity,
+@@clientName(
+  Microsoft.DocumentDB.KeyEncryptionKeyIdentity,
   "MongoClusterKeyEncryptionKeyIdentity",
   "csharp"
 );
-@@clientName(Microsoft.DocumentDB.KeyEncryptionKeyIdentityType,
+@@clientName(
+  Microsoft.DocumentDB.KeyEncryptionKeyIdentityType,
   "MongoClusterKeyEncryptionKeyIdentityType",
   "csharp"
 );
@@ -128,7 +153,19 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-@@alternateType(PrivateEndpointConnectionProperties.privateEndpoint,
+@@alternateType(
+  PrivateEndpointConnectionProperties.privateEndpoint,
   Azure.ResourceManager.Models.SubResource,
   "csharp"
+);
+
+@@clientName(
+  FirewallRuleProperties.startIpAddress,
+  "$DO_NOT_NORMALIZE$startIpAddress",
+  "javascript"
+);
+@@clientName(
+  FirewallRuleProperties.endIpAddress,
+  "$DO_NOT_NORMALIZE$endIpAddress",
+  "javascript"
 );

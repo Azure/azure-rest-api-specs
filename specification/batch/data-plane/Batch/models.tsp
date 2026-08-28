@@ -8,6 +8,7 @@ using Azure.Core.Foundations;
 namespace Azure.Batch;
 
 @doc("OSType enums")
+@clientName("OsType", "java")
 union OSType {
   string,
 
@@ -143,6 +144,7 @@ union IPFamily {
 }
 
 @doc("CachingType enums")
+@clientName("BatchCachingType", "java")
 union CachingType {
   string,
 
@@ -290,14 +292,6 @@ union ContainerType {
 
   @doc("A CRI based technology will be used to launch the containers.")
   CriCompatible: "criCompatible",
-}
-
-@doc("BatchAccessScope enums")
-union BatchAccessScope {
-  string,
-
-  @doc("Grants access to perform all operations on the Job containing the Task.")
-  Job: "job",
 }
 
 @doc("LoginMode enums")
@@ -847,6 +841,7 @@ model BatchSupportedImage {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference: BatchVmImageReference;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The type of operating system (e.g. Windows or Linux) of the Image.")
   osType: OSType;
 
@@ -975,7 +970,6 @@ model BatchNodeCounts {
 @doc("Contains utilization and resource usage statistics for the lifetime of a Pool.")
 model BatchPoolStatistics {
   @doc("The URL for the statistics.")
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -1001,7 +995,7 @@ model BatchPoolUsageStatistics {
   @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("The aggregated wall-clock time of the dedicated Compute Node cores being part of the Pool.")
+  @doc("The aggregated wall-clock time of the dedicated Compute Node cores being part of the Pool. The time duration is specified in ISO 8601 format.")
   dedicatedCoreTime: duration;
 }
 
@@ -1057,7 +1051,6 @@ model BatchPoolResourceStatistics {
 @doc("Resource usage statistics for a Job.")
 model BatchJobStatistics {
   @doc("The URL of the statistics.")
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -1066,15 +1059,15 @@ model BatchJobStatistics {
   @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
+  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job. The time duration is specified in ISO 8601 format.")
   @clientName("userCpuTime")
   userCPUTime: duration;
 
-  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
+  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job. The time duration is specified in ISO 8601 format.")
   @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
-  @doc("The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
+  @doc("The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries. The time duration is specified in ISO 8601 format.")
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in the Job.")
@@ -1112,7 +1105,7 @@ model BatchJobStatistics {
   @clientName("taskRetriesCount")
   numTaskRetries: int64;
 
-  @doc("The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
+  @doc("The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics. The time duration is specified in ISO 8601 format.")
   waitTime: duration;
 }
 
@@ -1146,7 +1139,6 @@ model BatchNodeFile {
   name?: string;
 
   @doc("The URL of the file.")
-  @clientName("uri", "csharp")
   url?: url;
 
   @doc("Whether the object represents a directory.")
@@ -1190,7 +1182,6 @@ model BatchJobSchedule {
 
   @doc("The URL of the Job Schedule.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The ETag of the Job Schedule. This is an opaque string. You can use it to detect whether the Job Schedule has changed between requests. In particular, you can be pass the ETag with an Update Job Schedule request to specify that your changes should take effect only if nobody else has modified the schedule in the meantime.")
@@ -1228,6 +1219,7 @@ model BatchJobSchedule {
   jobSpecification: BatchJobSpecification;
 
   @doc("Information about Jobs that have been and will be run under this schedule.")
+  @clientName("executionDetails", "java")
   @visibility(Lifecycle.Read)
   executionInfo: BatchJobScheduleExecutionInfo;
 
@@ -1240,6 +1232,7 @@ model BatchJobSchedule {
   stats?: BatchJobScheduleStatistics;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for updating an Azure Batch Job Schedule.
   """)
@@ -1254,6 +1247,7 @@ model BatchJobScheduleUpdateOptions {
   metadata?: BatchMetadataItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for creating an Azure Batch Job Schedule
   """)
@@ -1285,10 +1279,10 @@ model BatchJobScheduleConfiguration {
   @doc("A time after which no Job will be created under this Job Schedule. The schedule will move to the completed state as soon as this deadline is past and there is no active Job under this Job Schedule. If you do not specify a doNotRunAfter time, and you are creating a recurring Job Schedule, the Job Schedule will remain active until you explicitly terminate it.")
   doNotRunAfter?: utcDateTime;
 
-  @doc("The time interval, starting from the time at which the schedule indicates a Job should be created, within which a Job must be created. If a Job is not created within the startWindow interval, then the 'opportunity' is lost; no Job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the Job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The time interval, starting from the time at which the schedule indicates a Job should be created, within which a Job must be created. If a Job is not created within the startWindow interval, then the 'opportunity' is lost; no Job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the Job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   startWindow?: duration;
 
-  @doc("The time interval between the start times of two successive Jobs under the Job Schedule. A Job Schedule can have at most one active Job under it at any given time. Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The time interval between the start times of two successive Jobs under the Job Schedule. A Job Schedule can have at most one active Job under it at any given time. Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   recurrenceInterval?: duration;
 }
 
@@ -1383,6 +1377,7 @@ model BatchJobSpecification {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool on which the Batch service runs the Tasks of Jobs created under this schedule.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
@@ -1402,7 +1397,7 @@ model BatchJobNetworkConfiguration {
 
 @doc("The execution constraints for a Job.")
 model BatchJobConstraints {
-  @doc("The maximum elapsed time that the Job may run, measured from the time the Job is created. If the Job does not complete within the time limit, the Batch service terminates it and any Tasks that are still running. In this case, the termination reason will be MaxWallClockTimeExpiry. If this property is not specified, there is no time limit on how long the Job may run.")
+  @doc("The maximum elapsed time that the Job may run, measured from the time the Job is created. If the Job does not complete within the time limit, the Batch service terminates it and any Tasks that are still running. In this case, the termination reason will be MaxWallClockTimeExpiry. If this property is not specified, there is no time limit on how long the Job may run. The time duration is specified in ISO 8601 format.")
   maxWallClockTime?: duration;
 
   @doc("The maximum number of times each Task may be retried. The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try each Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry Tasks. If the maximum retry count is -1, the Batch service retries Tasks without limit. The default value is 0 (no retries).")
@@ -1483,9 +1478,6 @@ model BatchJobManagerTask {
     """)
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
-  @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
-  authenticationTokenSettings?: AuthenticationTokenSettings;
-
   @doc("Whether the Job Manager Task may run on a Spot/Low-priority Compute Node. The default value is true.")
   allowLowPriorityNode?: boolean;
 }
@@ -1527,7 +1519,6 @@ model ContainerRegistryReference {
   password?: string;
 
   @doc("The registry URL. If omitted, the default is \"docker.io\".")
-  @clientName("registryServerUri", "csharp")
   registryServer?: url;
 
   @doc("The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.")
@@ -1549,11 +1540,9 @@ model ResourceFile {
   autoStorageContainerName?: string;
 
   @doc("The URL of the blob container within Azure Blob Storage. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access.")
-  @clientName("storageContainerUri", "csharp")
   storageContainerUrl?: url;
 
   @doc("The URL of the file to download. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access.")
-  @clientName("httpUri", "csharp")
   httpUrl?: url;
 
   @doc("The blob prefix to use when downloading blobs from an Azure Storage container. Only the blobs whose names begin with the specified prefix will be downloaded. The property is valid only when autoStorageContainerName or storageContainerUrl is used. This prefix can be a partial filename or a subdirectory. If a prefix is not specified, all the files in the container will be downloaded.")
@@ -1595,7 +1584,6 @@ model OutputFileBlobContainerDestination {
   path?: string;
 
   @doc("The URL of the container within Azure Blob Storage to which to upload the file(s). If not using a managed identity, the URL must include a Shared Access Signature (SAS) granting write permissions to the container.")
-  @clientName("containerUri", "csharp")
   containerUrl: url;
 
   @doc("The reference to the user assigned identity to use to access Azure Blob Storage specified by containerUrl. The identity must have write access to the Azure Blob Storage container.")
@@ -1634,10 +1622,10 @@ model EnvironmentSetting {
 
 @doc("Execution constraints to apply to a Task.")
 model BatchTaskConstraints {
-  @doc("The maximum elapsed time that the Task may run, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. If this is not specified, there is no time limit on how long the Task may run.")
+  @doc("The maximum elapsed time that the Task may run, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. If this is not specified, there is no time limit on how long the Task may run. The time duration is specified in ISO 8601 format.")
   maxWallClockTime?: duration;
 
-  @doc("The minimum time to retain the Task directory on the Compute Node where it ran, from the time it completes execution. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted.")
+  @doc("The minimum time to retain the Task directory on the Compute Node where it ran, from the time it completes execution. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted. The time duration is specified in ISO 8601 format.")
   retentionTime?: duration;
 
   @doc("The maximum number of times the Task may be retried. The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries).")
@@ -1681,15 +1669,6 @@ model BatchApplicationPackageReference {
 
   @doc("The version of the application to deploy. If omitted, the default version is deployed. If this is omitted on a Pool, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences and HTTP status code 409. If this is omitted on a Task, and no default version is specified for this application, the Task fails with a pre-processing error.")
   version?: string;
-}
-
-@doc("""
-  The settings for an authentication token that the Task can use to perform Batch
-  service operations.
-  """)
-model AuthenticationTokenSettings {
-  @doc("The Batch resources to which the token grants access. The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task.")
-  access?: BatchAccessScope[];
 }
 
 @doc("""
@@ -1783,10 +1762,10 @@ model BatchJobReleaseTask {
   @doc("A list of environment variable settings for the Job Release Task.")
   environmentSettings?: EnvironmentSetting[];
 
-  @doc("The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   maxWallClockTime?: duration;
 
-  @doc("The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted.")
+  @doc("The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted. The time duration is specified in ISO 8601 format.")
   retentionTime?: duration;
 
   @doc("The user identity under which the Job Release Task runs. If omitted, the Task runs as a non-administrative user unique to the Task.")
@@ -1794,6 +1773,7 @@ model BatchJobReleaseTask {
 }
 
 @doc("Specifies how a Job should be assigned to a Pool.")
+@clientName("BatchPoolDetails", "java")
 model BatchPoolInfo {
   @doc("The ID of an existing Pool. All the Tasks of the Job will run on the specified Pool. You must ensure that the Pool referenced by this property exists. If the Pool does not exist at the time the Batch service tries to schedule a Job, no Tasks for the Job will run until you create a Pool with that id. Note that the Batch service will not reject the Job request; it will simply not run Tasks until the Pool exists. You must specify either the Pool ID or the auto Pool specification, but not both.")
   poolId?: string;
@@ -1837,7 +1817,7 @@ model BatchPoolSpecification {
   @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.")
   taskSchedulingPolicy?: BatchTaskSchedulingPolicy;
 
-  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
@@ -1852,7 +1832,7 @@ model BatchPoolSpecification {
   @doc("The formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information.")
   autoScaleFormula?: string;
 
-  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   autoScaleEvaluationInterval?: duration;
 
   @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
@@ -1924,6 +1904,7 @@ model VirtualMachineConfiguration {
   @doc("The virtual machine extension for the pool. If specified, the extensions mentioned in this configuration will be installed on each node.")
   extensions?: VMExtension[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Settings for the operating system disk of the Virtual Machine.")
   @clientName("OsDisk")
   osDisk?: BatchOsDisk;
@@ -2048,6 +2029,7 @@ model VMExtension {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Settings for the operating system disk of the compute node (VM).")
 model BatchOsDisk {
   @doc("Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM).")
@@ -2097,6 +2079,7 @@ model NetworkConfiguration {
   @doc("The configuration for endpoints on Compute Nodes in the Batch Pool.")
   endpointConfiguration?: BatchPoolEndpointConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The Public IPAddress configuration for Compute Nodes in the Batch Pool.")
   @clientName("publicIpAddressConfiguration", "!go")
   publicIPAddressConfiguration?: BatchPublicIpAddressConfiguration;
@@ -2154,24 +2137,30 @@ model NetworkSecurityGroupRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
 model BatchPublicIpAddressConfiguration {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.")
   @clientName("IpAddressProvisioningType")
   provision?: IpAddressProvisioningType;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IP families used to specify IP versions available to the pool. IP families are used to determine single-stack or dual-stack pools. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6.")
   ipFamilies?: IPFamily[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
   ipAddressIds?: Azure.Core.armResourceIdentifier[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("A list of IP tags associated with the public IP addresses of the Pool. IP tags are used to categorize and filter public IP addresses for billing and management purposes.")
   ipTags?: IPTag[];
 }
 
 @doc("Contains the IP tag associated with the public IP address.")
 model IPTag {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IP Tag type. Example: FirstPartyUsage.")
   ipTagType?: string;
 
@@ -2371,7 +2360,6 @@ model AzureFileShareConfiguration {
   accountKey: string;
 
   @doc("The Azure Files URL. This is of the form 'https://{account}.file.core.windows.net/'.")
-  @clientName("azureFileUri", "csharp")
   azureFileUrl: url;
 
   @doc("The relative path on the compute node where the file system will be mounted. All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.")
@@ -2385,6 +2373,7 @@ model AzureFileShareConfiguration {
   Contains information about Jobs that have been and will be run under a Job
   Schedule.
   """)
+@clientName("BatchJobScheduleExecutionDetails", "java")
 model BatchJobScheduleExecutionInfo {
   @doc("The next time at which a Job will be created under this schedule. This property is meaningful only if the schedule is in the active state when the time comes around. For example, if the schedule is disabled, no Job will be created at nextRunTime unless the Job is enabled before then.")
   nextRunTime?: utcDateTime;
@@ -2402,7 +2391,6 @@ model RecentBatchJob {
   id?: string;
 
   @doc("The URL of the Job.")
-  @clientName("uri", "csharp")
   url?: url;
 }
 
@@ -2410,7 +2398,6 @@ model RecentBatchJob {
 @doc("Resource usage statistics for a Job Schedule.")
 model BatchJobScheduleStatistics {
   @doc("The URL of the statistics.")
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -2419,15 +2406,15 @@ model BatchJobScheduleStatistics {
   @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
+  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule. The time duration is specified in ISO 8601 format.")
   @clientName("userCpuTime", "!go")
   userCPUTime: duration;
 
-  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
+  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule. The time duration is specified in ISO 8601 format.")
   @clientName("kernelCpuTime", "!go")
   kernelCPUTime: duration;
 
-  @doc("The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
+  @doc("The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries. The time duration is specified in ISO 8601 format.")
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in all Jobs created under the schedule.")
@@ -2465,7 +2452,7 @@ model BatchJobScheduleStatistics {
   @clientName("taskRetriesCount")
   numTaskRetries: int64;
 
-  @doc("The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
+  @doc("The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics. The time duration is specified in ISO 8601 format.")
   waitTime: duration;
 }
 
@@ -2497,7 +2484,6 @@ model BatchJob {
 
   @doc("The URL of the Job.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The ETag of the Job. This is an opaque string. You can use it to detect whether the Job has changed between requests. In particular, you can be pass the ETag when updating a Job to specify that your changes should take effect only if nobody else has modified the Job in the meantime.")
@@ -2557,6 +2543,7 @@ model BatchJob {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool settings associated with the Job.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. The default is noaction.")
@@ -2585,6 +2572,7 @@ model BatchJob {
   stats?: BatchJobStatistics;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for creating an Azure Batch Job.")
 model BatchJobCreateOptions {
   @doc("A string that uniquely identifies the Job within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
@@ -2621,6 +2609,7 @@ model BatchJobCreateOptions {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool on which the Batch service runs the Job's Tasks.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. Note that if a Job contains no Tasks, then all Tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic Job termination without a Job Manager, you should initially set onAllTasksComplete to noaction and update the Job properties to set onAllTasksComplete to terminatejob once you have finished adding Tasks. The default is noaction.")
@@ -2638,6 +2627,7 @@ model BatchJobCreateOptions {
   metadata?: BatchMetadataItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for updating an Azure Batch Job.")
 model BatchJobUpdateOptions {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
@@ -2667,6 +2657,7 @@ model BatchJobUpdateOptions {
 }
 
 @doc("Contains information about the execution of a Job in the Azure Batch service.")
+@clientName("BatchJobExecutionDetails", "java")
 model BatchJobExecutionInfo {
   @doc("The start time of the Job. This is the time at which the Job was created.")
   startTime: utcDateTime;
@@ -2700,12 +2691,14 @@ model BatchJobSchedulingError {
   details?: NameValuePair[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for disabling an Azure Batch Job.")
 model BatchJobDisableOptions {
   @doc("What to do with active Tasks associated with the Job.")
   disableTasks: DisableBatchJobOption;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for terminating an Azure Batch Job.")
 model BatchJobTerminateOptions {
   @doc("The text you want to appear as the Job's TerminationReason. The default is 'UserTerminate'.")
@@ -2749,7 +2742,6 @@ model BatchJobPreparationAndReleaseTaskStatus {
   nodeId?: string;
 
   @doc("The URL of the Compute Node to which this entry refers.")
-  @clientName("nodeUri", "csharp")
   nodeUrl?: url;
 
   @doc("Information about the execution status of the Job Preparation Task on this Compute Node.")
@@ -2763,6 +2755,7 @@ model BatchJobPreparationAndReleaseTaskStatus {
   Contains information about the execution of a Job Preparation Task on a Compute
   Node.
   """)
+@clientName("BatchJobPreparationTaskExecutionDetails", "java")
 model BatchJobPreparationTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -2777,7 +2770,6 @@ model BatchJobPreparationTaskExecutionInfo {
   taskRootDirectory?: string;
 
   @doc("The URL to the root directory of the Job Preparation Task on the Compute Node.")
-  @clientName("taskRootDirectoryUri", "csharp")
   taskRootDirectoryUrl?: url;
 
   @doc("The exit code of the program specified on the Task command line. This parameter is returned only if the Task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the Compute Node operating system, such as when a process is forcibly terminated.")
@@ -2800,6 +2792,7 @@ model BatchJobPreparationTaskExecutionInfo {
 }
 
 @doc("Contains information about the container which a Task is executing.")
+@clientName("BatchTaskContainerExecutionDetails", "java")
 model BatchTaskContainerExecutionInfo {
   @doc("The ID of the container.")
   containerId?: string;
@@ -2812,6 +2805,7 @@ model BatchTaskContainerExecutionInfo {
 }
 
 @doc("Information about a Task failure.")
+@clientName("BatchTaskFailureDetails", "java")
 model BatchTaskFailureInfo {
   @doc("The category of the Task error.")
   category: BatchErrorSourceCategory;
@@ -2830,6 +2824,7 @@ model BatchTaskFailureInfo {
   Contains information about the execution of a Job Release Task on a Compute
   Node.
   """)
+@clientName("BatchJobReleaseTaskExecutionDetails", "java")
 model BatchJobReleaseTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -2844,7 +2839,6 @@ model BatchJobReleaseTaskExecutionInfo {
   taskRootDirectory?: string;
 
   @doc("The URL to the root directory of the Job Release Task on the Compute Node.")
-  @clientName("taskRootDirectoryUri", "csharp")
   taskRootDirectoryUrl?: url;
 
   @doc("The exit code of the program specified on the Task command line. This parameter is returned only if the Task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the Compute Node operating system, such as when a process is forcibly terminated.")
@@ -2917,7 +2911,6 @@ model BatchPool {
 
   @doc("The URL of the Pool.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The ETag of the Pool. This is an opaque string. You can use it to detect whether the Pool has changed between requests. In particular, you can be pass the ETag when updating a Pool to specify that your changes should take effect only if nobody else has modified the Pool in the meantime.")
@@ -2956,7 +2949,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
-  @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes.")
+  @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes. The time duration is specified in ISO 8601 format.")
   @visibility(Lifecycle.Read)
   resizeTimeout?: duration;
 
@@ -2988,7 +2981,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   autoScaleFormula?: string;
 
-  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. This property is set only if the Pool automatically scales, i.e. enableAutoScale is true.")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. This property is set only if the Pool automatically scales, i.e. enableAutoScale is true. The time duration is specified in ISO 8601 format.")
   @visibility(Lifecycle.Read)
   autoScaleEvaluationInterval?: duration;
 
@@ -3044,6 +3037,7 @@ model BatchPool {
   upgradePolicy?: UpgradePolicy;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for creating an Azure Batch Pool.")
 model BatchPoolCreateOptions {
   @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two Pool IDs within an Account that differ only by case).")
@@ -3058,7 +3052,7 @@ model BatchPoolCreateOptions {
   @doc("The virtual machine configuration for the Pool. This property must be specified.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
-  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
@@ -3073,7 +3067,7 @@ model BatchPoolCreateOptions {
   @doc("A formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://learn.microsoft.com/azure/batch/batch-automatic-scaling).")
   autoScaleFormula?: string;
 
-  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   autoScaleEvaluationInterval?: duration;
 
   @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
@@ -3107,6 +3101,7 @@ model BatchPoolCreateOptions {
   upgradePolicy?: UpgradePolicy;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for replacing properties on an Azure Batch Pool.")
 model BatchPoolReplaceOptions {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
@@ -3119,6 +3114,7 @@ model BatchPoolReplaceOptions {
   metadata: BatchMetadataItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for updating an Azure Batch Pool.")
 model BatchPoolUpdateOptions {
   @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024. This field can be updated only when the pool is empty.")
@@ -3232,21 +3228,24 @@ model BatchPoolListResult {
   `odata.nextLink`?: url;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for enabling automatic scaling on an Azure Batch Pool.")
 model BatchPoolEnableAutoScaleOptions {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued.")
   autoScaleFormula?: string;
 
-  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued.")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued. The time duration is specified in ISO 8601 format.")
   autoScaleEvaluationInterval?: duration;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.")
 model BatchPoolEvaluateAutoScaleOptions {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-automatic-scaling).")
   autoScaleFormula: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for changing the size of an Azure Batch Pool.")
 model BatchPoolResizeOptions {
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
@@ -3255,26 +3254,28 @@ model BatchPoolResizeOptions {
   @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool.")
   targetLowPriorityNodes?: int32;
 
-  @doc("The timeout for allocation of Nodes to the Pool or removal of Compute Nodes from the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The timeout for allocation of Nodes to the Pool or removal of Compute Nodes from the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
   @doc("Determines what to do with a Compute Node and its running task(s) if the Pool size is decreasing. The default value is requeue.")
   nodeDeallocationOption?: BatchNodeDeallocationOption;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for removing nodes from an Azure Batch Pool.")
 model BatchNodeRemoveOptions {
   @doc("A list containing the IDs of the Compute Nodes to be removed from the specified Pool. A maximum of 100 nodes may be removed per request.")
   @clientName("nodeIds")
   nodeList: string[];
 
-  @doc("The timeout for removal of Compute Nodes to the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The timeout for removal of Compute Nodes to the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
   @doc("Determines what to do with a Compute Node and its running task(s) after it has been selected for deallocation. The default value is requeue.")
   nodeDeallocationOption?: BatchNodeDeallocationOption;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Options for deallocating a Compute Node.")
 model BatchNodeDeallocateOptions {
   @doc("When to deallocate the Compute Node and what to do with currently running Tasks. The default value is requeue.")
@@ -3303,7 +3304,6 @@ model BatchTask {
 
   @doc("The URL of the Task.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The ETag of the Task. This is an opaque string. You can use it to detect whether the Task has changed between requests. In particular, you can be pass the ETag when updating a Task to specify that your changes should take effect only if nobody else has modified the Task in the meantime.")
@@ -3397,12 +3397,9 @@ model BatchTask {
   @doc("A list of Packages that the Batch service will deploy to the Compute Node before running the command line. Application packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced package is already on the Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Node is used. If a referenced Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails.")
   @visibility(Lifecycle.Read)
   applicationPackageReferences?: BatchApplicationPackageReference[];
-
-  @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
-  @visibility(Lifecycle.Read)
-  authenticationTokenSettings?: AuthenticationTokenSettings;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Parameters for creating an Azure Batch Task.
   """)
@@ -3451,9 +3448,6 @@ model BatchTaskCreateOptions {
 
   @doc("A list of Packages that the Batch service will deploy to the Compute Node before running the command line. Application packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced package is already on the Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Node is used. If a referenced Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
-
-  @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
-  authenticationTokenSettings?: AuthenticationTokenSettings;
 }
 
 @doc("Specifies how the Batch service should respond when the Task completes.")
@@ -3486,6 +3480,7 @@ model ExitCodeMapping {
   exitOptions: ExitOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Specifies how the Batch service responds to a particular exit condition.")
 model ExitOptions {
   @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
@@ -3521,12 +3516,14 @@ model ExitCodeRangeMapping {
   A locality hint that can be used by the Batch service to select a Compute Node
   on which to start a Task.
   """)
+@clientName("BatchAffinityDetails", "java")
 model BatchAffinityInfo {
   @doc("An opaque string representing the location of a Compute Node or a Task that has run previously. You can pass the affinityId of a Node to indicate that this Task needs to run on that Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId: string;
 }
 
 @doc("Information about the execution of a Task.")
+@clientName("BatchTaskExecutionDetails", "java")
 model BatchTaskExecutionInfo {
   @doc("The time at which the Task started running. 'Running' corresponds to the running state, so if the Task specifies resource files or Packages, then the start time reflects the time at which the Task started downloading or deploying these. If the Task has been restarted or retried, this is the most recent time at which the Task started running. This property is present only for Tasks that are in the running or completed state.")
   startTime?: utcDateTime;
@@ -3560,12 +3557,12 @@ model BatchTaskExecutionInfo {
 }
 
 @doc("Information about the Compute Node on which a Task ran.")
+@clientName("BatchNodeDetails", "java")
 model BatchNodeInfo {
   @doc("An identifier for the Node on which the Task ran, which can be passed when adding a Task to request that the Task be scheduled on this Compute Node.")
   affinityId?: string;
 
   @doc("The URL of the Compute Node on which the Task ran.")
-  @clientName("nodeUri", "csharp")
   nodeUrl?: url;
 
   @doc("The ID of the Pool on which the Task ran.")
@@ -3578,7 +3575,6 @@ model BatchNodeInfo {
   taskRootDirectory?: string;
 
   @doc("The URL to the root directory of the Task on the Compute Node.")
-  @clientName("taskRootDirectoryUri", "csharp")
   taskRootDirectoryUrl?: url;
 }
 
@@ -3603,7 +3599,6 @@ model MultiInstanceSettings {
 @doc("Resource usage statistics for a Task.")
 model BatchTaskStatistics {
   @doc("The URL of the statistics.")
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -3612,15 +3607,15 @@ model BatchTaskStatistics {
   @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
+  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task. The time duration is specified in ISO 8601 format.")
   @clientName("userCpuTime")
   userCPUTime: duration;
 
-  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
+  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task. The time duration is specified in ISO 8601 format.")
   @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
-  @doc("The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries.")
+  @doc("The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries. The time duration is specified in ISO 8601 format.")
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by the Task.")
@@ -3643,7 +3638,7 @@ model BatchTaskStatistics {
   @clientName("writeIoGib", "python")
   writeIOGiB: float32;
 
-  @doc("The total wait time of the Task. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.).")
+  @doc("The total wait time of the Task. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). The time duration is specified in ISO 8601 format.")
   waitTime: duration;
 }
 
@@ -3776,6 +3771,7 @@ model UpgradePolicy {
   mode: UpgradeMode;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Configuration parameters used for performing automatic OS Upgrade. The configuration parameters used for performing automatic OS upgrade.")
   @clientName("automaticOsUpgradePolicy")
   automaticOSUpgradePolicy?: AutomaticOsUpgradePolicy;
@@ -3784,12 +3780,14 @@ model UpgradePolicy {
   rollingUpgradePolicy?: RollingUpgradePolicy;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The configuration parameters used for performing automatic OS upgrade.")
 model AutomaticOsUpgradePolicy {
   @doc("Whether OS image rollback feature should be disabled.")
   disableAutomaticRollback?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchservice/pools/create-pool#windowsconfiguration) cannot be set to true.")
   @clientName("enableAutomaticOsUpgrade")
   enableAutomaticOSUpgrade?: boolean;
@@ -3797,6 +3795,7 @@ model AutomaticOsUpgradePolicy {
   @doc("Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS.")
   useRollingUpgradePolicy?: boolean;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Defer OS upgrades on the TVMs if they are running tasks.")
   osRollingUpgradeDeferral?: boolean;
 }
@@ -3815,7 +3814,7 @@ model RollingUpgradePolicy {
   @doc("The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts. The value of this field should be between 0 and 100, inclusive.")
   maxUnhealthyUpgradedInstancePercent?: int32;
 
-  @doc("The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format..")
+  @doc("The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration is specified in ISO 8601 format.")
   pauseTimeBetweenBatches?: duration;
 
   @doc("Upgrade all unhealthy instances in a scale set before any healthy instances.")
@@ -3825,6 +3824,7 @@ model RollingUpgradePolicy {
   rollbackFailedInstancesOnPolicyBreach?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for creating a user account for RDP or SSH access on an Azure Batch Compute Node.")
 model BatchNodeUserCreateOptions {
   @doc("The user name of the Account.")
@@ -3844,6 +3844,7 @@ model BatchNodeUserCreateOptions {
   sshPublicKey?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.")
 model BatchNodeUserUpdateOptions {
   @secret
@@ -3865,7 +3866,6 @@ model BatchNode {
 
   @doc("The URL of the Compute Node.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The current state of the Compute Node.")
@@ -3888,6 +3888,7 @@ model BatchNode {
   @visibility(Lifecycle.Read)
   allocationTime: utcDateTime;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IP address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes.")
   @visibility(Lifecycle.Read)
   ipAddress: ipV4Address;
@@ -3949,14 +3950,15 @@ model BatchNode {
   nodeAgentInfo?: BatchNodeAgentInfo;
 
   @doc("Info about the current state of the virtual machine.")
+  @clientName("virtualMachineDetails", "java")
   @visibility(Lifecycle.Read)
   virtualMachineInfo: VirtualMachineInfo;
 }
 
 @doc("Information about a Task running on a Compute Node.")
+@clientName("BatchTaskDetails", "java")
 model BatchTaskInfo {
   @doc("The URL of the Task.")
-  @clientName("taskUri", "csharp")
   taskUrl?: url;
 
   @doc("The ID of the Job to which the Task belongs.")
@@ -3976,6 +3978,7 @@ model BatchTaskInfo {
 }
 
 @doc("Information about a StartTask running on a Compute Node.")
+@clientName("BatchStartTaskDetails", "java")
 model BatchStartTaskInfo {
   @doc("The state of the StartTask on the Compute Node.")
   state: BatchStartTaskState;
@@ -4032,6 +4035,7 @@ model InboundEndpoint {
   @doc("The protocol of the endpoint.")
   protocol: InboundEndpointProtocol;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The public IP address of the Compute Node.")
   @clientName("publicIpAddress")
   publicIPAddress: ipV4Address;
@@ -4050,6 +4054,7 @@ model InboundEndpoint {
   The Batch Compute Node agent is a program that runs on each Compute Node in the
   Pool and provides Batch capability on the Compute Node.
   """)
+@clientName("BatchNodeAgentDetails", "java")
 model BatchNodeAgentInfo {
   @doc("The version of the Batch Compute Node agent running on the Compute Node. This version number can be checked against the Compute Node agent release notes located at https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.")
   version: string;
@@ -4059,6 +4064,7 @@ model BatchNodeAgentInfo {
 }
 
 @doc("Info about the current state of the virtual machine.")
+@clientName("VirtualMachineDetails", "java")
 model VirtualMachineInfo {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference?: BatchVmImageReference;
@@ -4067,6 +4073,7 @@ model VirtualMachineInfo {
   scaleSetVmResourceId?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for rebooting an Azure Batch Compute Node.")
 model BatchNodeRebootOptions {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
@@ -4074,12 +4081,14 @@ model BatchNodeRebootOptions {
   nodeRebootOption?: BatchNodeRebootKind;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for reimaging an Azure Batch Compute Node.")
 model BatchNodeReimageOptions {
   @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeReimageOption?: BatchNodeReimageOption;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters for disabling scheduling on an Azure Batch Compute Node.")
 model BatchNodeDisableSchedulingOptions {
   @doc("What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue.")
@@ -4089,6 +4098,7 @@ model BatchNodeDisableSchedulingOptions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
 model BatchNodeRemoteLoginSettings {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IPv6 address used for remote login to the Compute Node.")
   @clientName("ipv6RemoteLoginIpAddress")
   ipv6RemoteLoginIPAddress?: ipV6Address;
@@ -4096,6 +4106,7 @@ model BatchNodeRemoteLoginSettings {
   @doc("The port used for remote login to the Compute Node.")
   ipv6RemoteLoginPort?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The IP address used for remote login to the Compute Node.")
   @clientName("remoteLoginIpAddress")
   remoteLoginIPAddress: ipV4Address;
@@ -4104,10 +4115,10 @@ model BatchNodeRemoteLoginSettings {
   remoteLoginPort: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The Azure Batch service log files upload parameters for a Compute Node.")
 model UploadBatchServiceLogsOptions {
   @doc("The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s). If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified.")
-  @clientName("containerUri", "csharp")
   containerUrl: url;
 
   @doc("The start of the time range from which to upload Batch Service log file(s). Any log file containing a log message in the time range will be uploaded. This means that the operation might retrieve more logs than have been requested since the entire log file is always uploaded, but the operation should not retrieve fewer logs than have been requested.")
@@ -4156,6 +4167,7 @@ model BatchNodeVMExtension {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The vm extension instance view.")
+@clientName("VirtualMachineExtensionInstanceView", "java")
 model VMExtensionInstanceView {
   @doc("The name of the vm extension instance view.")
   name?: string;

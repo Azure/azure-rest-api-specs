@@ -14,14 +14,23 @@ namespace Microsoft.Purview;
  * Account resource
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Account
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AccountProperties> {
+model Account is Azure.ResourceManager.ProxyResource<AccountProperties> {
   ...ResourceNameParameter<
     Resource = Account,
     KeyName = "accountName",
     SegmentName = "accounts",
     NamePattern = "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * The Managed Identity of the resource
@@ -64,11 +73,13 @@ interface Accounts {
   update is ArmCustomPatchAsync<
     Account,
     PatchModel = AccountUpdateParameters,
-    Response = ArmResponse<Account> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Account;
-    }),
+    Response =
+      | ArmResponse<Account>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Account;
+        }),
     Error = ErrorResponseModel
   >;
 
@@ -79,7 +90,10 @@ interface Accounts {
   @summary("Deletes the account resource.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Account,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponseModel
   >;
 
@@ -191,10 +205,12 @@ interface Accounts {
 @@doc(Account.properties, "The account properties");
 @@doc(Accounts.createOrUpdate::parameters.resource, "The account.");
 @@doc(Accounts.update::parameters.properties, "The account update parameters.");
-@@doc(Accounts.addRootCollectionAdmin::parameters.body,
+@@doc(
+  Accounts.addRootCollectionAdmin::parameters.body,
   "The collection admin update payload."
 );
 @@doc(Accounts.accountGet::parameters.body, "Request body with feature names.");
-@@doc(Accounts.updateStatus::parameters.body,
+@@doc(
+  Accounts.updateStatus::parameters.body,
   "The ingestion private endpoint connection status update request."
 );

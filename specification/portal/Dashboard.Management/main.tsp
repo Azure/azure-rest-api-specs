@@ -10,6 +10,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Dashboard.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -44,4 +45,9 @@ enum Versions {
    * The 2025-04-01-preview API version.
    */
   v2025_04_01_preview: "2025-04-01-preview",
+
+  /**
+   * The 2026-04-01 API version.
+   */
+  v2026_04_01: "2026-04-01",
 }

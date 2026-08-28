@@ -7,16 +7,20 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Compute;
 @doc("Describes the properties of a Virtual Machine for bulk create.")
-model BulkactionVMProfile {
+model BulkactionVMProperties {
   @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.")
   scheduledEventsPolicy?: ScheduledEventsPolicy;
 
   @doc("Specifies the storage settings for the virtual machine disks.")
   storageProfile?: StorageProfile;
 
+  @doc("Specifies the hardware profile for the virtual machine.")
+  hardwareProfile?: HardwareProfile;
+
   @doc("Specifies additional capabilities enabled or disabled on the virtual machine.")
   additionalCapabilities?: AdditionalCapabilities;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.")
   osProfile?: OSProfile;
 
@@ -46,6 +50,9 @@ model BulkactionVMProfile {
 
   @doc("Specifies the gallery applications that should be made available to the VM.")
   applicationProfile?: ApplicationProfile;
+
+  @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
+  vmExtensions?: BulkactionVMExtension[];
 }
 
 @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations.")
@@ -101,6 +108,7 @@ model StorageProfile {
   @doc("Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations.")
   imageReference?: ImageReference;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
   osDisk?: OSDisk;
 
@@ -110,6 +118,28 @@ model StorageProfile {
 
   @doc("Specifies the disk controller type configured for the VM. **Note:** This property will be set to the default disk controller type if not specified provided virtual machine is being created with 'hyperVGeneration' set to V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. Minimum api-version: 2022-08-01.")
   diskControllerType?: DiskControllerTypes;
+}
+
+@doc("Specifies the hardware profile for the virtual machine.")
+model HardwareProfile {
+  /**
+   * Specifies the size of the virtual machine. The enum data type is currently deprecated and will be removed by December 23rd 2023. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region]( https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/sizes). The available VM sizes depend on region and availability set.
+   */
+  vmSize?: string;
+
+  /**
+   * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
+   */
+  vmSizeProperties?: VmSizeProperties;
+}
+
+@doc("Specifies VM Size Property settings on the virtual machine.")
+model VmSizeProperties {
+  @doc("Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list).")
+  vCpusAvailable?: int32;
+
+  @doc("Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list). **Setting this property to 1 also means that hyper-threading is disabled.**")
+  vCpusPerCore?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -136,6 +166,7 @@ model ImageReference extends SubResource {
 
 @doc("Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
 model OSDisk {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
@@ -315,6 +346,7 @@ model DiskEncryptionSettings {
  * Describes a reference to Key Vault Key
  */
 model KeyVaultKeyReference {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL referencing a key encryption key in Key Vault.")
   keyUrl: string;
 
@@ -629,6 +661,7 @@ model WinRMListener {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 }
 
@@ -847,6 +880,7 @@ model VaultSecretGroup {
 
 @doc("Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM.")
 model VaultCertificate {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  'data':'<Base64-encoded-certificate>',<br>  'dataType':'pfx',<br>  'password':'<pfx-file-password>'<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).")
   certificateUrl?: string;
 
@@ -923,6 +957,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   @doc("The dns settings to be applied on the network interfaces.")
   dnsSettings?: VirtualMachineNetworkInterfaceDnsSettingsConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies the IP configurations of the network interface.")
   @identifiers(#["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
@@ -1009,6 +1044,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
   @doc("The dns settings to be applied on the publicIP addresses .")
   dnsSettings?: VirtualMachinePublicIPAddressDnsSettingsConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The list of IP tags associated with the public IP address.")
   @identifiers(#[])
   ipTags?: VirtualMachineIpTag[];
@@ -1036,8 +1072,10 @@ model VirtualMachinePublicIPAddressDnsSettingsConfiguration {
   domainNameLabelScope?: DomainNameLabelScopeTypes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Contains the IP tag associated with the public IP address.")
 model VirtualMachineIpTag {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP tag type. Example: FirstPartyUsage.")
   ipTagType?: string;
 
@@ -1222,6 +1260,7 @@ model ScheduledEventsProfile {
   @doc("Specifies Terminate Scheduled Event related configurations.")
   terminateNotificationProfile?: TerminateNotificationProfile;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies OS Image Scheduled Event related configurations.")
   osImageNotificationProfile?: OSImageNotificationProfile;
 }

@@ -5,14 +5,31 @@ using Microsoft.Management;
 
 @@clientName(Microsoft.Management, "ServiceGroupsMgmtClient", "python");
 
-@@clientLocation(ServiceGroups.createOrUpdateServiceGroup,
+@@clientLocation(
+  ServiceGroups.createOrUpdateServiceGroup,
   Microsoft.Management
 );
-@@clientName(ServiceGroups.createOrUpdateServiceGroup::parameters.resource,
+@@clientLocation(
+  ServiceGroups.createOrUpdateServiceGroupV1,
+  Microsoft.Management
+);
+@@clientName(
+  ServiceGroups.createOrUpdateServiceGroup::parameters.resource,
+  "createServiceGroupRequest"
+);
+@@clientName(
+  ServiceGroups.createOrUpdateServiceGroupV1::parameters.resource,
   "createServiceGroupRequest"
 );
 @@clientLocation(ServiceGroups.updateServiceGroup, Microsoft.Management);
-@@clientName(ServiceGroups.updateServiceGroup::parameters.properties,
+@@clientLocation(ServiceGroups.updateServiceGroupV1, Microsoft.Management);
+@@clientName(
+  ServiceGroups.updateServiceGroup::parameters.properties,
+  "updateServiceGroupRequest"
+);
+@@clientName(
+  ServiceGroups.updateServiceGroupV1::parameters.properties,
   "updateServiceGroupRequest"
 );
 @@clientLocation(ServiceGroups.deleteServiceGroup, Microsoft.Management);
+@@clientLocation(ServiceGroups.deleteServiceGroupV1, Microsoft.Management);

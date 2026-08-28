@@ -124,7 +124,10 @@ interface Pools {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy design"
   delete is ArmResourceDeleteWithoutOkAsync<
     Pool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -205,10 +208,12 @@ interface Pools {
 @@minLength(Pool.name, 1);
 @@doc(Pool.name, "The pool name. This must be unique within the account.");
 @@doc(Pool.properties, "The properties associated with the pool.");
-@@doc(Pools.create::parameters.resource,
+@@doc(
+  Pools.create::parameters.resource,
   "Additional parameters for pool creation."
 );
-@@doc(Pools.update::parameters.properties,
+@@doc(
+  Pools.update::parameters.properties,
   "Pool properties that should be updated. Properties that are supplied will be updated, any property not supplied will be unchanged."
 );
 @@summary(Pools.stopResize, "Stops an ongoing resize operation on the pool.");

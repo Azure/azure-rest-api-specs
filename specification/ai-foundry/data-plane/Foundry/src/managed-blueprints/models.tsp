@@ -8,11 +8,7 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
-)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateOrUpdateManagedAgentIdentityBlueprintRequest {
   @doc("""
     The unique name that identifies the managed agent identity blueprint.
@@ -26,7 +22,6 @@ model CreateOrUpdateManagedAgentIdentityBlueprintRequest {
   name: string;
 }
 
-@removed(Versions.v1)
 model ManagedAgentIdentityBlueprint {
   @visibility(Lifecycle.Read)
   name: string;

@@ -58,10 +58,12 @@ interface AnalysisDefinitionOps
         @segment("analyses")
         @key
         analysisName: string,
-      }
+      },
+      ResourceName = "SiteDiagnosticAnalysis"
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface AnalysisDefinitions {
   /**
    * Description for Get Site Analysis
@@ -147,10 +149,12 @@ interface AnalysisDefinitionOperationGroupOps
         @segment("analyses")
         @key
         analysisName: string,
-      }
+      },
+      ResourceName = "SiteSlotDiagnosticAnalysis"
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Get Site Analysis
@@ -205,6 +209,7 @@ interface AnalysisDefinitionOperationGroup {
 }
 
 @@doc(AnalysisDefinition.name, "Analysis Name");
-@@doc(AnalysisDefinition.properties,
+@@doc(
+  AnalysisDefinition.properties,
   "AnalysisDefinition resource specific properties"
 );

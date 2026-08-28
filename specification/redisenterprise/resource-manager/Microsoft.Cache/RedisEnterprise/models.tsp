@@ -1094,6 +1094,7 @@ model ClusterPropertiesEncryptionCustomerManagedKeyEncryption {
   /**
    * Key encryption key Url, versioned only. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyEncryptionKeyUrl?: string;
 }
 
@@ -1129,7 +1130,8 @@ model ClusterUpdate {
   /**
    * The identity of the resource.
    */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 
   /**
    * Resource tags.
@@ -1244,6 +1246,12 @@ model DatabaseProperties {
    * This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created.
    */
   accessKeysAuthentication?: AccessKeysAuthentication;
+
+  /**
+   * Specifies which keyspace events should trigger notifications. Default is an empty string, meaning this feature is disabled. When enabled, at least 'K' (keyspace events) or 'E' (keyevent events) must be present. For example, 'AKE' enables all standard events. See https://redis.io/docs/latest/develop/use/keyspace-notifications/ for the complete list of event types.
+   */
+  @added(Versions.v2026_02_01_preview)
+  notifyKeyspaceEvents?: string;
 }
 
 /**
@@ -1445,10 +1453,25 @@ model AccessPolicyAssignmentProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * Name of access policy under specific access policy assignment. Only "default" policy is supported for now.
+   * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
    */
+  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
   @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
-  accessPolicyName: string;
+  @madeOptional(Versions.v2026_05_01_preview)
+  accessPolicyName?: string;
+
+  /**
+   * The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified.
+   */
+  @added(Versions.v2026_05_01_preview)
+  accessString?: string;
+
+  /**
+   * Provisioning error details when the access string failed to apply (e.g., invalid ACL syntax). Null when provisioning succeeded.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_05_01_preview)
+  provisioningError?: AccessPolicyAssignmentProvisioningError;
 
   /**
    * The user associated with the access policy.
@@ -1464,6 +1487,27 @@ model AccessPolicyAssignmentPropertiesUser {
    * The object ID of the user.
    */
   objectId?: string;
+}
+
+/**
+ * Error details for access policy assignment provisioning failures.
+ */
+@added(Versions.v2026_05_01_preview)
+model AccessPolicyAssignmentProvisioningError {
+  /**
+   * Machine-readable error code (e.g., "InvalidAccessString").
+   */
+  code: string;
+
+  /**
+   * Human-readable error message describing the failure.
+   */
+  message: string;
+
+  /**
+   * The property that caused the error (e.g., "properties.accessString").
+   */
+  target?: string;
 }
 
 /**

@@ -6,9 +6,13 @@ on:
       - main
     paths:
       - .github/**
+      # Root package.json pins TypeSpec Azure packages verified by .github alignment tests.
+      - package.json
   pull_request:
     paths:
       - .github/**
+      # Root package.json pins TypeSpec Azure packages verified by .github alignment tests.
+      - package.json
   workflow_dispatch:
 
 permissions:
@@ -29,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           sparse-checkout: |
             .github
@@ -69,6 +73,6 @@ jobs:
 
       - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
         name: Lint workflows
-        uses: docker://rhysd/actionlint:1.7.11
+        uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
         with:
           args: -color -verbose

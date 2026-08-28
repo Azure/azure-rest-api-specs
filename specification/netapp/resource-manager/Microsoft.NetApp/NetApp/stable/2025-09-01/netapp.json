@@ -135,7 +135,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -181,7 +181,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -227,7 +227,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -273,7 +273,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -408,7 +408,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -526,7 +526,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -591,7 +591,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -3000,6 +3000,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3024,7 +3029,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/SvmPeerCommandResponse"
         },
         "x-ms-long-running-operation": true
@@ -4012,6 +4017,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4036,7 +4046,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ClusterPeerCommandResponse"
         },
         "x-ms-long-running-operation": true
@@ -5649,6 +5659,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_List": {
             "$ref": "./examples/Subvolumes_List.json"
@@ -5729,6 +5740,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Get": {
             "$ref": "./examples/Subvolumes_Get.json"
@@ -5740,7 +5752,7 @@
         "tags": [
           "SubvolumeInfos"
         ],
-        "description": "Creates a subvolume in the path or clones the subvolume mentioned in the parentPath",
+        "description": "Creates a subvolume in the path or clones the subvolume mentioned in the parentPath\nDeprecated. This operation will be removed in a future API version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -5844,6 +5856,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Create": {
             "$ref": "./examples/Subvolumes_Create.json"
@@ -5947,6 +5960,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Update": {
             "$ref": "./examples/Subvolumes_Update.json"
@@ -6041,6 +6055,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Delete": {
             "$ref": "./examples/Subvolumes_Delete.json"
@@ -6136,6 +6151,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Metadata": {
             "$ref": "./examples/Subvolumes_Metadata.json"
@@ -8738,9 +8754,25 @@
       "type": "object",
       "description": "Information about cluster peering process",
       "properties": {
-        "peerAcceptCommand": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPeerCommandResponseProperties",
+          "description": "Represents the properties of the cluster peer command response."
+        }
+      }
+    },
+    "ClusterPeerCommandResponseProperties": {
+      "type": "object",
+      "description": "Properties of the cluster peer command response.",
+      "properties": {
+        "clusterPeeringCommand": {
           "type": "string",
-          "description": "A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>"
+          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>.",
+          "example": "cluster peer create -peer-addresses 10.0.0.1,10.0.0.2"
+        },
+        "passphrase": {
+          "type": "string",
+          "description": "Passphrase for use with cluster peer command",
+          "example": "SecurePassphrase123"
         }
       }
     },
@@ -11153,7 +11185,7 @@
     },
     "SubvolumeInfo": {
       "type": "object",
-      "description": "Subvolume Information properties",
+      "description": "Subvolume Information properties\nDeprecated. This resource type will be removed in a future API version.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubvolumeProperties",
@@ -11322,6 +11354,16 @@
     "SvmPeerCommandResponse": {
       "type": "object",
       "description": "Information about svm peering process",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SvmPeerCommandResponseProperties",
+          "description": "Represents the properties of the SVM peer command response."
+        }
+      }
+    },
+    "SvmPeerCommandResponseProperties": {
+      "type": "object",
+      "description": "Properties of the SVM peer command response.",
       "properties": {
         "svmPeeringCommand": {
           "type": "string",
@@ -11906,7 +11948,7 @@
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.\nThe value SMB isn't supported in the protocolTypes property. Default: NFSv3",
           "items": {
             "type": "string"
           }
@@ -12020,7 +12062,7 @@
           "description": "A unique file path for the volume. Used when creating mount targets",
           "minLength": 1,
           "maxLength": 80,
-          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,79}$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -12083,7 +12125,7 @@
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.\nThe value SMB isn't supported in the protocolTypes property. Default: NFSv3",
           "items": {
             "type": "string"
           }
@@ -12535,7 +12577,7 @@
         },
         "enableSubvolumes": {
           "type": "string",
-          "description": "Flag indicating whether subvolume operations are enabled on the volume",
+          "description": "Flag indicating whether subvolume operations are enabled on the volume\nDeprecated. Subvolume operations and this flag will be removed in a future API version.",
           "default": "Disabled",
           "enum": [
             "Enabled",

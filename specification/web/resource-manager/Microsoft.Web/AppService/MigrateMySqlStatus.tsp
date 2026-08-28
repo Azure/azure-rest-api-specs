@@ -53,10 +53,12 @@ interface MigrateMySqlStatusOps
         @segment("migratemysql")
         @key
         status: "status",
-      }
+      },
+      ResourceName = "SiteMigrateMySqlStatus"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface MigrateMySqlStatuses {
   /**
    * Description for Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled
@@ -94,10 +96,12 @@ interface MigrateMySqlStatusOperationGroupOps
         @segment("migratemysql")
         @key
         status: "status",
-      }
+      },
+      ResourceName = "MigrateMySqlStatus"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface MigrateMySqlStatusOperationGroup {
   /**
    * Description for Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled
@@ -110,6 +114,7 @@ interface MigrateMySqlStatusOperationGroup {
 }
 
 @@doc(MigrateMySqlStatus.name, "");
-@@doc(MigrateMySqlStatus.properties,
+@@doc(
+  MigrateMySqlStatus.properties,
   "MigrateMySqlStatus resource specific properties"
 );

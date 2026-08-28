@@ -29,15 +29,18 @@ interface BackupRestoreClient {
 using KeyVault;
 
 @@clientName(SASTokenParameter, "SASTokenParameters", "go");
-@@clientName(RestoreOperationParameters.sasTokenParameters,
+@@clientName(
+  RestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );
-@@clientName(SelectiveKeyRestoreOperationParameters.sasTokenParameters,
+@@clientName(
+  SelectiveKeyRestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );
-@@clientName(PreRestoreOperationParameters.sasTokenParameters,
+@@clientName(
+  PreRestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );

@@ -1,17 +1,26 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/events";
+import "@typespec/sse";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models-service.tsp";
 import "./models-shared.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using TypeSpec.Events;
+using TypeSpec.SSE;
 
 namespace Search;
 
 /** The input contract for the retrieval request. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalRequest {
   /** A list of chat message style input. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   messages?: KnowledgeBaseMessage[];
 
   /** A list of intended queries to execute without model query planning. */
@@ -21,15 +30,29 @@ model KnowledgeBaseRetrievalRequest {
   maxRuntimeInSeconds?: int32;
 
   /** Limits the maximum size of the content in the output. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   maxOutputSize?: int32;
 
+  /** Limits the maximum number of documents in the output. */
+  @added(Versions.v2026_05_01_preview)
+  maxOutputDocuments?: int32;
+
+  /** Limits the maximum size of the content in the output. */
+  @added(Versions.v2026_04_01)
+  maxOutputSizeInTokens?: int32;
+
   /** The retrieval reasoning effort configuration. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
   /** Indicates retrieval results should include activity information. */
   includeActivity?: boolean;
 
   /** The output configuration for this retrieval. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   outputMode?: KnowledgeRetrievalOutputMode;
 
   /** A list of runtime parameters for the knowledge sources. */
@@ -37,6 +60,7 @@ model KnowledgeBaseRetrievalRequest {
 }
 
 /** The output contract for the retrieval response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalResponse {
   /** The response messages. */
   response?: KnowledgeBaseMessage[];
@@ -46,6 +70,10 @@ model KnowledgeBaseRetrievalResponse {
 
   /** The references for the retrieval data used in the response. */
   references?: KnowledgeBaseReference[];
+
+  /** The sensitivity label information for the overall response. */
+  @added(Versions.v2026_05_01_preview)
+  responseSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Base type for reasoning effort. */
@@ -63,6 +91,8 @@ model KnowledgeRetrievalMinimalReasoningEffort
 }
 
 /** Run knowledge retrieval with low reasoning effort. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeRetrievalLowReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
   /** The discriminator value. */
@@ -70,10 +100,20 @@ model KnowledgeRetrievalLowReasoningEffort
 }
 
 /** Run knowledge retrieval with medium reasoning effort. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeRetrievalMediumReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
   /** The discriminator value. */
   kind: KnowledgeRetrievalReasoningEffortKind.medium;
+}
+
+/** Automatically select the reasoning effort during retrieval. The service seeds every request at the cheapest tier and escalates only as far as needed, up to the service's maximum available tier. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeRetrievalAutoReasoningEffort
+  extends KnowledgeRetrievalReasoningEffort {
+  /** The discriminator value. */
+  kind: KnowledgeRetrievalReasoningEffortKind.auto;
 }
 
 /** The amount of effort to use during retrieval. */
@@ -84,13 +124,23 @@ union KnowledgeRetrievalReasoningEffortKind {
   minimal: "minimal",
 
   /** Use low reasoning during retrieval. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   low: "low",
 
   /** Use a moderate amount of reasoning during retrieval. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   medium: "medium",
+
+  /** Automatically select the reasoning effort during retrieval, escalating from the cheapest tier only as far as needed. */
+  @added(Versions.v2026_08_01_preview)
+  auto: "auto",
 }
 
 /** The output configuration for this retrieval. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 union KnowledgeRetrievalOutputMode {
   string,
 
@@ -114,13 +164,35 @@ model KnowledgeSourceParams {
   includeReferenceSourceData?: boolean;
 
   /** Indicates that this knowledge source should bypass source selection and always be queried at retrieval time. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   alwaysQuerySource?: boolean;
+
+  /** Indicates that this knowledge source should be excluded from the request's candidate set and never queried at retrieval time. The exclusion is request-local and does not modify knowledge base membership. Cannot be combined with alwaysQuerySource on the same knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  neverQuerySource?: boolean;
+
+  /** Indicates that the entire retrieval request should fail if retrieval from this knowledge source encounters an error. Defaults to false. */
+  @added(Versions.v2026_05_01_preview)
+  failOnError?: boolean;
 
   /** The reranker threshold all retrieved documents must meet to be included in the response. */
   rerankerThreshold?: float32;
 
+  /** Overrides the knowledge source's stored resultsProcessing for this retrieve call only. When omitted, the stored knowledge source value applies. */
+  @added(Versions.v2026_08_01_preview)
+  resultsProcessing?: KnowledgeSourceResultsProcessing;
+
+  /** Limits the maximum number of documents returned from this knowledge source. */
+  @added(Versions.v2026_05_01_preview)
+  maxOutputDocuments?: int32;
+
   /** The type of the knowledge source. */
   kind: KnowledgeSourceKind;
+
+  /** Indicates whether image serving should be enabled for this knowledge source at retrieval time. When true, images extracted during ingestion are delivered to downstream models. */
+  @added(Versions.v2026_05_01_preview)
+  enableImageServing?: boolean;
 }
 
 /** Specifies runtime parameters for a search index knowledge source */
@@ -130,12 +202,20 @@ model SearchIndexKnowledgeSourceParams extends KnowledgeSourceParams {
 
   /** A filter condition applied to the index (e.g., 'State eq VA'). */
   filterAddOn?: string;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Specifies runtime parameters for a azure blob knowledge source */
 model AzureBlobKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.AzureBlob;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Specifies which SharePoint libraries to access. */
@@ -153,15 +233,25 @@ union IndexedSharePointContainerName {
 }
 
 /** Specifies runtime parameters for a indexed SharePoint knowledge source */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.IndexedSharePoint;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Specifies runtime parameters for a indexed OneLake knowledge source */
 model IndexedOneLakeKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.IndexedOneLake;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** Specifies runtime parameters for a web knowledge source */
@@ -183,12 +273,65 @@ model WebKnowledgeSourceParams extends KnowledgeSourceParams {
 }
 
 /** Specifies runtime parameters for a remote SharePoint knowledge source */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.RemoteSharePoint;
 
   /** A filter condition applied to the SharePoint data source. It must be specified in the Keyword Query Language syntax. It will be combined as a conjunction with the filter expression specified in the knowledge source definition. */
   filterExpressionAddOn?: string;
+}
+
+/** Specifies runtime parameters for a WorkIQ knowledge source */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model WorkIQKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.WorkIQ;
+}
+
+/** Specifies runtime parameters for a Fabric Data Agent knowledge source */
+@added(Versions.v2026_05_01_preview)
+model FabricDataAgentKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricDataAgent;
+}
+
+/** Specifies runtime parameters for a Fabric Ontology knowledge source */
+@added(Versions.v2026_05_01_preview)
+model FabricOntologyKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricOntology;
+}
+
+/** Specifies runtime parameters for an MCP server knowledge source */
+@added(Versions.v2026_05_01_preview)
+model McpServerKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.McpServer;
+}
+
+/** Specifies runtime parameters for a File knowledge source */
+@added(Versions.v2026_05_01_preview)
+model FileKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.File;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
+}
+
+/** Specifies runtime parameters for an indexed SQL knowledge source */
+@added(Versions.v2026_05_01_preview)
+model IndexedSqlKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.IndexedSql;
+
+  /** Hints that guide query planning toward useful filters and boosts. If specified, this object replaces the complete set of query hints configured on the knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 }
 
 /** An intended query to execute without model query planning. */
@@ -277,6 +420,8 @@ union KnowledgeBaseActivityRecordType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
 
   /** Indexed OneLake retrieval activity. */
@@ -286,13 +431,47 @@ union KnowledgeBaseActivityRecordType {
   web: "web",
 
   /** Remote SharePoint retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
 
+  /** WorkIQ retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  workIQ: "workIQ",
+
+  /** Fabric Data Agent retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  fabricDataAgent: "fabricDataAgent",
+
+  /** Fabric Ontology retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  fabricOntology: "fabricOntology",
+
+  /** MCP server retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  mcpServer: "mcpServer",
+
+  /** File retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  file: "file",
+
+  /** Indexed SQL retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  indexedSql: "indexedSql",
+
   /** LLM query planning activity. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   modelQueryPlanning: "modelQueryPlanning",
 
   /** LLM answer synthesis activity. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   modelAnswerSynthesis: "modelAnswerSynthesis",
+
+  /** LLM web summarization activity. */
+  @added(Versions.v2026_04_01)
+  modelWebSummarization: "modelWebSummarization",
 
   /** Agentic reasoning activity. */
   agenticReasoning: "agenticReasoning",
@@ -307,18 +486,27 @@ model KnowledgeBaseActivityRecord {
   /** The type of the activity record. */
   type: KnowledgeBaseActivityRecordType;
 
+  /** The time at which the activity started. */
+  @added(Versions.v2026_08_01_preview)
+  startedAt?: utcDateTime;
+
+  /** The time at which the activity completed. */
+  @added(Versions.v2026_08_01_preview)
+  completedAt?: utcDateTime;
+
   /** The elapsed time in milliseconds for the retrieval activity. */
   elapsedMs?: int32;
 
   /** The error detail explaining why the operation failed. This property is only included when the activity does not succeed. */
   error?: KnowledgeBaseErrorDetail;
+
+  /** A warning message surfacing potential configuration issues observed during the activity, such as documents dropped due to score thresholding, token limit truncation, or timeout conditions. */
+  @added(Versions.v2026_05_01_preview)
+  warning?: string;
 }
 
-/** Represents a retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Inherits typed discriminator from base"
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-@discriminator("type")
-model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
+/** Common fields for retrieval activity records. Used via spread in concrete retrieval models. */
+model KnowledgeBaseRetrievalActivityRecord {
   /** The knowledge source for the retrieval activity. */
   knowledgeSourceName?: string;
 
@@ -327,18 +515,26 @@ model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
 
   /** The count of documents retrieved that were sufficiently relevant to pass the reranker threshold. */
   count?: int32;
+
+  /** Statistics about image serving for this retrieval activity */
+  @added(Versions.v2026_05_01_preview)
+  imageServing?: ImageServingStatistics;
 }
 
 /** Represents a search index retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 model KnowledgeBaseSearchIndexActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.searchIndex;
 
   /** The search index arguments for the retrieval activity. */
   searchIndexArguments?: KnowledgeBaseSearchIndexActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the search index retrieval activity was run with. */
@@ -357,18 +553,35 @@ model KnowledgeBaseSearchIndexActivityArguments {
 
   /** What semantic configuration was used from the search index. */
   semanticConfigurationName?: string;
+
+  /** The query syntax used to execute the search. Query hints can cause semantic queries to use full query syntax. */
+  @added(Versions.v2026_08_01_preview)
+  queryType?: QueryType;
+}
+
+/** Details about the expressions generated from query hints for a retrieval activity. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseQueryHintProcessing {
+  /** The search clause generated from boost hints for this activity. */
+  generatedBoost?: string;
+
+  /** The filter expression generated from filter hints for this activity. */
+  generatedFilter?: string;
 }
 
 /** Represents a azure blob retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-model KnowledgeBaseAzureBlobActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+model KnowledgeBaseAzureBlobActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.azureBlob;
 
   /** The azure blob arguments for the retrieval activity. */
   azureBlobArguments?: KnowledgeBaseAzureBlobActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the azure blob retrieval activity was run with. */
@@ -378,33 +591,45 @@ model KnowledgeBaseAzureBlobActivityArguments {
 }
 
 /** Represents a indexed SharePoint retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.indexedSharePoint;
 
   /** The indexed SharePoint arguments for the retrieval activity. */
   indexedSharePointArguments?: KnowledgeBaseIndexedSharePointActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the indexed SharePoint retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityArguments {
   /** The search string used to query indexed SharePoint contents. */
   search?: string;
 }
 
 /** Represents a indexed OneLake retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 model KnowledgeBaseIndexedOneLakeActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.indexedOneLake;
 
   /** The indexed OneLake arguments for the retrieval activity. */
   indexedOneLakeArguments?: KnowledgeBaseIndexedOneLakeActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
 }
 
 /** Represents the arguments the indexed OneLake retrieval activity was run with. */
@@ -414,10 +639,9 @@ model KnowledgeBaseIndexedOneLakeActivityArguments {
 }
 
 /** Represents a web retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-model KnowledgeBaseWebActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+model KnowledgeBaseWebActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.web;
 
@@ -444,10 +668,12 @@ model KnowledgeBaseWebActivityArguments {
 }
 
 /** Represents a remote SharePoint retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.remoteSharePoint;
 
@@ -456,6 +682,8 @@ model KnowledgeBaseRemoteSharePointActivityRecord
 }
 
 /** Represents the arguments the remote SharePoint retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityArguments {
   /** The search string used to query the remote SharePoint knowledge source. */
   search?: string;
@@ -464,8 +692,152 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
   filterExpressionAddOn?: string;
 }
 
+/** Represents a WorkIQ retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseWorkIQActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.workIQ;
+
+  /** The WorkIQ arguments for the retrieval activity. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  workIQArguments?: KnowledgeBaseWorkIQActivityArguments;
+}
+
+/** Represents the arguments the WorkIQ retrieval activity was run with. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseWorkIQActivityArguments {
+  /** The search string used to query the WorkIQ knowledge source. */
+  search?: string;
+}
+
+/** Represents a Fabric Data Agent retrieval activity record. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricDataAgentActivityRecord
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.fabricDataAgent;
+
+  /** The Fabric Data Agent arguments for the retrieval activity. */
+  fabricDataAgentArguments?: KnowledgeBaseFabricDataAgentActivityArguments;
+}
+
+/** Represents the arguments the Fabric Data Agent retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricDataAgentActivityArguments {
+  /** The search string used to query the Fabric Data Agent knowledge source. */
+  search?: string;
+}
+
+/** Represents a Fabric Ontology retrieval activity record. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricOntologyActivityRecord
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.fabricOntology;
+
+  /** The Fabric Ontology arguments for the retrieval activity. */
+  fabricOntologyArguments?: KnowledgeBaseFabricOntologyActivityArguments;
+}
+
+/** Represents the arguments the Fabric Ontology retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricOntologyActivityArguments {
+  /** The search string used to query the Fabric Ontology knowledge source. */
+  search?: string;
+}
+
+/** Represents an MCP server retrieval activity record. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseMcpServerActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.mcpServer;
+
+  /** The MCP server arguments for the retrieval activity. */
+  mcpServerArguments?: KnowledgeBaseMcpServerActivityArguments;
+}
+
+/** Represents the arguments the MCP server retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseMcpServerActivityArguments {
+  /** The name of the MCP server tool used for the retrieval activity. */
+  toolName?: string;
+
+  /** The arguments passed to the MCP server tool. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Allows arbitrary JSON via additionalProperties: true."
+  toolArguments?: Record<unknown>;
+}
+
+/** Represents a File retrieval activity record. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFileActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.file;
+
+  /** The File arguments for the retrieval activity. */
+  fileArguments?: KnowledgeBaseFileActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
+}
+
+/** Represents the arguments the File retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFileActivityArguments {
+  /** The search string used to query file contents. */
+  search?: string;
+}
+
+/** Represents an indexed SQL retrieval activity record. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseIndexedSqlActivityRecord
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.indexedSql;
+
+  /** The indexed SQL arguments for the retrieval activity. */
+  indexedSqlArguments?: KnowledgeBaseIndexedSqlActivityArguments;
+
+  /** Details about the expressions generated from query hints for this activity. */
+  @added(Versions.v2026_08_01_preview)
+  queryHintProcessing?: KnowledgeBaseQueryHintProcessing;
+}
+
+/** Represents the arguments the indexed SQL retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseIndexedSqlActivityArguments {
+  /** The search string used to query indexed SQL contents. */
+  search?: string;
+}
+
+/** Represents the model used for a knowledge base LLM activity, including its model name and deployment identifier. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseActivityRecordModel {
+  /** The name of the model used for the activity. */
+  modelName: string;
+
+  /** The deployment identifier of the model used for the activity. */
+  deploymentId?: string;
+}
+
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseModelQueryPlanningActivityRecord
   extends KnowledgeBaseActivityRecord {
   /** The discriminator value. */
@@ -476,10 +848,21 @@ model KnowledgeBaseModelQueryPlanningActivityRecord
 
   /** The number of output tokens for the LLM query planning activity. */
   outputTokens?: int32;
+
+  /** The name of the model used for the LLM query planning activity. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_08_01_preview)
+  modelName?: string;
+
+  /** The model used for the LLM query planning activity. */
+  @added(Versions.v2026_08_01_preview)
+  `model`?: KnowledgeBaseActivityRecordModel;
 }
 
 /** Represents an LLM answer synthesis activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseModelAnswerSynthesisActivityRecord
   extends KnowledgeBaseActivityRecord {
   /** The discriminator value. */
@@ -490,6 +873,39 @@ model KnowledgeBaseModelAnswerSynthesisActivityRecord
 
   /** The number of output tokens for the LLM answer synthesis activity. */
   outputTokens?: int32;
+
+  /** The name of the model used for the LLM answer synthesis activity. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_08_01_preview)
+  modelName?: string;
+
+  /** The model used for the LLM answer synthesis activity. */
+  @added(Versions.v2026_08_01_preview)
+  `model`?: KnowledgeBaseActivityRecordModel;
+}
+
+/** Represents an LLM web summarization activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_04_01)
+model KnowledgeBaseModelWebSummarizationActivityRecord
+  extends KnowledgeBaseActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.modelWebSummarization;
+
+  /** The number of input tokens for the LLM web summarization activity. */
+  inputTokens?: int32;
+
+  /** The number of output tokens for the LLM web summarization activity. */
+  outputTokens?: int32;
+
+  /** The name of the model used for the LLM web summarization activity. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_08_01_preview)
+  modelName?: string;
+
+  /** The model used for the LLM web summarization activity. */
+  @added(Versions.v2026_08_01_preview)
+  `model`?: KnowledgeBaseActivityRecordModel;
 }
 
 /** Represents an agentic reasoning activity record. */
@@ -504,6 +920,10 @@ model KnowledgeBaseAgenticReasoningActivityRecord
 
   /** The retrieval reasoning effort configuration. */
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
+
+  /** The logical reasoning effort requested by the customer. This is distinct from `retrievalReasoningEffort`, which reports the reasoning effort used for billing. */
+  @added(Versions.v2026_08_01_preview)
+  logicalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 }
 
 /** The type of reference. */
@@ -517,6 +937,8 @@ union KnowledgeBaseReferenceType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint document reference. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
 
   /** Indexed OneLake document reference. */
@@ -526,7 +948,33 @@ union KnowledgeBaseReferenceType {
   web: "web",
 
   /** Remote SharePoint document reference. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
+
+  /** Work IQ document reference. */
+  @added(Versions.v2026_05_01_preview)
+  workIQ: "workIQ",
+
+  /** Fabric Data Agent document reference. */
+  @added(Versions.v2026_05_01_preview)
+  fabricDataAgent: "fabricDataAgent",
+
+  /** Fabric Ontology document reference. */
+  @added(Versions.v2026_05_01_preview)
+  fabricOntology: "fabricOntology",
+
+  /** MCP server document reference. */
+  @added(Versions.v2026_05_01_preview)
+  mcpServer: "mcpServer",
+
+  /** File document reference. */
+  @added(Versions.v2026_05_01_preview)
+  file: "file",
+
+  /** Indexed SQL document reference. */
+  @added(Versions.v2026_05_01_preview)
+  indexedSql: "indexedSql",
 }
 
 /** Base type for references. */
@@ -557,6 +1005,15 @@ model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
 
   /** The document key for the reference. */
   docKey?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Represents an Azure Blob Storage document reference. */
@@ -566,17 +1023,39 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.azureBlob;
 
   /** The blob URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   blobUrl?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API naming pattern with url"
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Represents an indexed SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.indexedSharePoint;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   docUrl?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Represents an indexed OneLake document reference. */
@@ -586,7 +1065,17 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   type: KnowledgeBaseReferenceType.indexedOneLake;
 
   /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   docUrl?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Represents a web document reference. */
@@ -604,18 +1093,131 @@ model KnowledgeBaseWebReference extends KnowledgeBaseReference {
 
 /** Represents a remote SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.remoteSharePoint;
 
   /** The url the reference data originated from. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   webUrl?: url;
 
   /** Information about the sensitivity label applied to the SharePoint document. */
-  searchSensitivityLabelInfo?: SharePointSensitivityLabelInfo;
+  @renamedFrom(Versions.v2026_04_01, "searchSensitivityLabelInfo")
+  @removed(Versions.v2026_04_01)
+  searchSensitivityLabelInfoRemoved?: SharePointSensitivityLabelInfo;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+}
+
+/** Represents a WorkIQ document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.workIQ;
+
+  /** The attributions for the reference. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @removed(Versions.v2026_08_01_preview)
+  attributions?: WorkIQAttribution[];
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_08_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+}
+
+/** Attribution information for a WorkIQ reference. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_08_01_preview)
+model WorkIQAttribution {
+  /** The URL for the attribution. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
+  seeMoreWebUrl?: url;
+}
+
+/** Represents a Fabric Data Agent document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricDataAgentReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.fabricDataAgent;
+
+  /** The Fabric workspace ID. */
+  workspaceId?: string;
+
+  /** The Fabric Data Agent ID. */
+  dataAgentId?: string;
+}
+
+/** Represents a Fabric Ontology document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricOntologyReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.fabricOntology;
+
+  /** The Fabric workspace ID. */
+  workspaceId?: string;
+
+  /** The ontology ID within the workspace. */
+  ontologyId?: string;
+}
+
+/** Represents an MCP server document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseMcpServerReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.mcpServer;
+
+  /** The name of the MCP server tool that produced the reference. */
+  toolName?: string;
+
+  /** The title of the MCP server tool result. */
+  title?: string;
+}
+
+/** Represents a file document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFileReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.file;
+
+  /** The document name for the reference. */
+  docName?: string;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
+}
+
+/** Represents an Azure SQL document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.indexedSql;
+
+  /** The document URL for the reference. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
+  docUrl?: string;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */
+@removed(Versions.v2026_04_01)
 model SharePointSensitivityLabelInfo {
   /** The display name for the sensitivity label. */
   displayName?: string;
@@ -634,6 +1236,61 @@ model SharePointSensitivityLabelInfo {
 
   /** Indicates whether the sensitivity label enforces encryption. */
   isEncrypted?: boolean;
+}
+
+/** Information about the sensitivity label applied to a document */
+@added(Versions.v2026_05_01_preview)
+model PurviewSensitivityLabelInfo {
+  /** The display name for the sensitivity label. */
+  displayName?: string;
+
+  /** The ID of the sensitivity label. */
+  sensitivityLabelId?: string;
+
+  /** The tooltip that should be displayed for the label in a UI. */
+  toolTip?: string;
+
+  /** The priority in which the sensitivity label is applied. */
+  priority?: int32;
+
+  /** The color that the UI should display for the label, if configured. */
+  color?: string;
+
+  /** Indicates whether the sensitivity label enforces encryption. */
+  isEncrypted?: boolean;
+}
+
+/** Statistics about image serving during a retrieval activity. */
+@added(Versions.v2026_05_01_preview)
+model ImageServingStatistics {
+  /** The number of images retrieved from the asset store. */
+  imagesRetrieved?: int32;
+
+  /** The number of images sent to the downstream model. */
+  imagesSentToModel?: int32;
+
+  /** The total size in bytes of images sent to the model. */
+  totalImageSizeBytes?: int64;
+
+  /** Indicates whether image verbalization was used instead of direct image serving. */
+  verbalizationUsed?: boolean;
+
+  /** The set of images the model selected to be served to the downstream model for this retrieval activity. */
+  @added(Versions.v2026_08_01_preview)
+  servedImages?: ServedImage[];
+}
+
+/** Describes a single image that the model selected to be served during a retrieval activity. */
+@added(Versions.v2026_08_01_preview)
+model ServedImage {
+  /** The image label extracted from the source document by Content Understanding enrichment. Corresponds to the figure numbering in the original document. */
+  imageId?: string;
+
+  /** The relative path to the image within the asset store. */
+  imagePath: string;
+
+  /** The size in bytes of this image as sent to the model. */
+  sizeBytes: int64;
 }
 
 /** The error details. */
@@ -674,6 +1331,7 @@ model KnowledgeBaseErrorAdditionalInfo {
 }
 
 /** Successful retrieval response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalSuccessResponse {
   /** The retrieval response is successfully returned. */
   @statusCode
@@ -685,6 +1343,7 @@ model KnowledgeBaseRetrievalSuccessResponse {
 }
 
 /** Partial retrieval response. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model KnowledgeBaseRetrievalPartialResponse {
   /** A partial retrieval response is returned. */
   @statusCode
@@ -695,6 +1354,114 @@ model KnowledgeBaseRetrievalPartialResponse {
   body: KnowledgeBaseRetrievalResponse;
 }
 
+/**
+ * The set of server-sent events emitted while streaming a knowledge base retrieval, added in
+ * version 2026-08-01-preview. Each event's `data:` payload is JSON-encoded using the type
+ * associated with its event name below. The stream ends after the terminal `response.completed`
+ * event (or an `error` event, if the retrieval fails before completing).
+ */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "@events SSE union is delivered as a server-sent event stream and cannot be represented as an OpenAPI v2 union."
+@added(Versions.v2026_08_01_preview)
+@events
+union KnowledgeBaseRetrievalStreamEvents {
+  /** The retrieval stream has started; no activity or answer content has been produced yet. */
+  `retrieval.started`: KnowledgeBaseRetrievalStartedEvent,
+
+  /** An individual activity (e.g. a search index or web retrieval step) has started executing. */
+  `activity.started`: KnowledgeBaseActivityStartedEvent,
+
+  /** An individual activity has finished executing, successfully or not. */
+  `activity.completed`: KnowledgeBaseActivityRecord,
+
+  /** The answer message has finished streaming and is now complete. */
+  `answer.completed`: KnowledgeBaseAnswerCompletedEvent,
+
+  /** The references used to produce the response are available. */
+  `references.completed`: KnowledgeBaseReference[],
+
+  /** The retrieval failed before the stream could complete normally. */
+  @terminalEvent
+  error: KnowledgeBaseStreamErrorEvent,
+
+  /** The retrieval has completed successfully; this is the final event of the stream. */
+  @terminalEvent
+  `response.completed`: KnowledgeBaseResponseCompletedEvent,
+}
+
+/** Emitted once retrieval preflight validation completes, before any activity begins. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseRetrievalStartedEvent {
+  /** A service-generated identifier that correlates all events in this retrieval stream. */
+  requestId: string;
+
+  /** The name of the knowledge base being queried. */
+  knowledgeBaseName: string;
+
+  /** The effective output mode for this retrieval. */
+  outputMode: KnowledgeRetrievalOutputMode;
+
+  /** The effective reasoning effort for this retrieval. */
+  reasoningEffort: KnowledgeRetrievalReasoningEffort;
+}
+
+/** Emitted immediately before an individual retrieval activity begins executing. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseActivityStartedEvent {
+  /** The ID of the activity record, matching the `id` on the corresponding `activity.completed` event. */
+  id: int32;
+
+  /** The type of the activity that has started. */
+  type: KnowledgeBaseActivityRecordType;
+
+  /** The time at which the activity started. */
+  startedAt: utcDateTime;
+
+  /** The knowledge source used by the activity, when the activity targets a knowledge source. */
+  knowledgeSourceName?: string;
+}
+
+/** Emitted when a fully validated and post-processed synthesized answer is available. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseAnswerCompletedEvent {
+  /** The zero-based index of the completed message in the final response array. */
+  messageIndex: int32;
+
+  /** The completed answer message. */
+  message: KnowledgeBaseMessage;
+}
+
+/** Emitted in place of `response.completed` if retrieval fails after the stream starts. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseStreamErrorEvent {
+  /** The error detail explaining why the retrieval stream failed. */
+  error: KnowledgeBaseErrorDetail;
+
+  /** Activity records that completed before the retrieval failed. */
+  activity?: KnowledgeBaseActivityRecord[];
+}
+
+/** The semantic HTTP status of a completed streaming retrieval. */
+@added(Versions.v2026_08_01_preview)
+union KnowledgeBaseRetrievalStatusCode {
+  int32,
+
+  /** The retrieval completed successfully. */
+  OK: 200,
+
+  /** The retrieval completed with partial results. */
+  PartialContent: 206,
+}
+
+/** Emitted after retrieval completes successfully. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseResponseCompletedEvent {
+  /** The semantic HTTP status of the completed retrieval. */
+  statusCode: KnowledgeBaseRetrievalStatusCode;
+
+  /** The authoritative completed retrieval response. */
+  response: KnowledgeBaseRetrievalResponse;
+}
+
 /** Parameters for AI Services. */
 model AIServices {
   /** The URI of the AI Services endpoint. */
@@ -702,6 +1469,23 @@ model AIServices {
 
   /** The API key for accessing AI Services. */
   apiKey?: string;
+}
+
+/** Configuration for an asset store used to store extracted assets such as images. */
+@added(Versions.v2026_05_01_preview)
+model AssetStore {
+  /** The connection string for the asset store. */
+  connectionString: string;
+
+  /** The name of the blob container within the asset store where extracted assets (for example, images) are stored. */
+  containerName: string;
+}
+
+/** Configuration for freshness-aware retrieval. When set, newer documents receive a ranking boost during retrieval. */
+@added(Versions.v2026_05_01_preview)
+model FreshnessPolicy {
+  /** ISO 8601 duration for the freshness boosting window (e.g. 'P90D' for 90 days). Documents newer than this duration receive a ranking boost during retrieval. */
+  boostingDuration?: string;
 }
 
 /** Optional content extraction mode. Default is 'minimal'. */
@@ -716,6 +1500,8 @@ union KnowledgeSourceContentExtractionMode {
 }
 
 /** Permission types to ingest together with document content. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 union KnowledgeSourceIngestionPermissionOption {
   string,
 
@@ -727,6 +1513,22 @@ union KnowledgeSourceIngestionPermissionOption {
 
   /** Ingest RBAC scope information alongside document content. */
   RbacScope: "rbacScope",
+
+  /** Ingest Microsoft Purview sensitivity labels alongside document content. */
+  @added(Versions.v2026_05_01_preview)
+  SensitivityLabels: "sensitivityLabels",
+}
+
+/** Specifies the network access mode for knowledge source ingestion. Default is 'public'. */
+@added(Versions.v2026_08_01_preview)
+union KnowledgeSourceNetworkAccessMode {
+  string,
+
+  /** Ingestion runs in the standard, publicly reachable execution environment. This is the default. */
+  Public: "public",
+
+  /** Ingestion runs in a private execution environment so it can reach data sources and dependencies over a private network (private endpoint / shared private link). */
+  Private: "private",
 }
 
 /** Consolidates all general ingestion settings for knowledge sources. */
@@ -752,15 +1554,33 @@ model KnowledgeSourceIngestionParameters {
 
   /** Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  ingestionPermissionOptions?: KnowledgeSourceIngestionPermissionOption[] | null;
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
+  ingestionPermissionOptions?:
+    | KnowledgeSourceIngestionPermissionOption[]
+    | null;
 
   /** Optional content extraction mode. Default is 'minimal'. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  contentExtractionMode?: KnowledgeSourceContentExtractionMode | null = KnowledgeSourceContentExtractionMode.Minimal;
+  contentExtractionMode?:
+    | KnowledgeSourceContentExtractionMode
+    | null = KnowledgeSourceContentExtractionMode.Minimal;
 
   /** Optional AI Services configuration for content processing. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   aiServices?: AIServices | null;
+
+  /** Optional asset store configuration for storing extracted assets such as images. */
+  @added(Versions.v2026_05_01_preview)
+  assetStore?: AssetStore;
+
+  /** Optional freshness policy for biasing retrieval toward newer documents. */
+  @added(Versions.v2026_05_01_preview)
+  freshnessPolicy?: FreshnessPolicy;
+
+  /** Optional network access mode for ingestion. Set to 'private' to run ingestion in a private execution environment that can reach data sources and dependencies over a private network. Default is 'public'. This is a create-time setting and cannot be changed after the knowledge source is created. */
+  @added(Versions.v2026_08_01_preview)
+  networkAccessMode?: KnowledgeSourceNetworkAccessMode = KnowledgeSourceNetworkAccessMode.Public;
 }
 
 /** Specifies the vectorization method to be used for knowledge source embedding model. */
@@ -796,6 +1616,10 @@ union KnowledgeSourceSynchronizationStatus {
 
 /** Represents the status and synchronization history of a knowledge source. */
 model KnowledgeSourceStatus {
+  /** Identifies the Knowledge Source kind directly from the Status response. */
+  @added(Versions.v2026_04_01)
+  kind?: KnowledgeSourceKind;
+
   /** The current synchronization status. */
   synchronizationStatus: KnowledgeSourceSynchronizationStatus;
 
@@ -828,6 +1652,28 @@ model KnowledgeSourceStatistics {
   averageItemsProcessedPerSynchronization: int32;
 }
 
+/** Represents a document-level indexing error encountered during a knowledge source synchronization run. */
+@added(Versions.v2026_04_01)
+model KnowledgeSourceSynchronizationError {
+  /** The unique identifier for the failed document or item within the synchronization run. */
+  docId?: string;
+
+  /** HTTP-like status code representing the failure category (e.g., 400). */
+  statusCode?: int32;
+
+  /** Name of the ingestion or processing component reporting the error. */
+  name?: string;
+
+  /** Human-readable, customer-visible error message. */
+  errorMessage: string;
+
+  /** Additional contextual information about the failure. */
+  details?: string;
+
+  /** A link to relevant troubleshooting documentation. */
+  documentationLink?: string;
+}
+
 /** Represents the current state of an ongoing synchronization that spans multiple indexer runs. */
 model SynchronizationState {
   /** The start time of the current synchronization. */
@@ -841,6 +1687,10 @@ model SynchronizationState {
 
   /** The number of items skipped in the current synchronization. */
   itemsSkipped: int32;
+
+  /** Collection of document-level indexing errors encountered during the current synchronization run. Returned only when errors are present. */
+  @added(Versions.v2026_04_01)
+  errors?: KnowledgeSourceSynchronizationError[];
 }
 
 /** Represents the completed state of the last synchronization. */

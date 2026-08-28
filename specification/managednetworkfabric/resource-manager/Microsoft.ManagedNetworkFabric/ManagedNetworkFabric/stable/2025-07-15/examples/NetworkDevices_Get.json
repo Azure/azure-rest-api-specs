@@ -1,0 +1,98 @@
+{
+  "title": "NetworkDevices_Get_MaximumSet_Gen",
+  "operationId": "NetworkDevices_Get",
+  "parameters": {
+    "api-version": "2025-07-15",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkDeviceName": "example-device"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "hostName": "NFA-Device",
+          "serialNumber": "Vendor;DCS-7280XXX-24;12.05;JPE2111XXXX",
+          "version": "1.0",
+          "networkDeviceSku": "DeviceSku",
+          "networkDeviceRole": "CE",
+          "networkRackId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkRacks/example-rack",
+          "managementIpv4Address": "10.10.10.10",
+          "managementIpv6Address": "2F::1/100",
+          "rwDeviceConfig": "hostname access-switch1\n enable secret somestrongpass",
+          "networkFabricId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+          "lastOperation": {
+            "details": "Succeeded"
+          },
+          "secretRotationStatus": [
+            {
+              "lastRotationTime": "2025-08-09T04:51:41.251Z",
+              "synchronizationStatus": "InSync",
+              "secretArchiveReference": {
+                "keyVaultUri": "https://example-kv.vault.azure.net/secrets/example-secret-1/7e61b8efbcdd4e28963560dba3021df7",
+                "keyVaultId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.KeyVault/vaults/example-kv",
+                "secretName": "example-secret-1",
+                "secretVersion": "7e61b8efbcdd4e28963560dba3021df7"
+              },
+              "secretType": "Admin user password"
+            },
+            {
+              "lastRotationTime": "2025-08-09T02:32:12.904Z",
+              "synchronizationStatus": "OutOfSync",
+              "secretArchiveReference": {
+                "keyVaultUri": "https://example-kv.vault.azure.net/secrets/example-secret-2/11a536561da34d6b8b452d880df58f3a",
+                "keyVaultId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.KeyVault/vaults/example-kv",
+                "secretName": "example-secret-2",
+                "secretVersion": "11a536561da34d6b8b452d880df58f3a"
+              },
+              "secretType": "AzureOperatorRW user password"
+            },
+            {
+              "lastRotationTime": "2025-08-09T02:32:12.904Z",
+              "synchronizationStatus": "Synchronizing",
+              "secretArchiveReference": {
+                "keyVaultUri": "https://example-kv.vault.azure.net/secrets/example-secret-3/22b646561da34d6b8b452d880df69a4b",
+                "keyVaultId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.KeyVault/vaults/example-kv",
+                "secretName": "example-secret-3",
+                "secretVersion": "22b646561da34d6b8b452d880df69a4b"
+              },
+              "secretType": "AzureOperatorRO user password"
+            }
+          ],
+          "certificateRotationStatus": [
+            {
+              "lastRotationTime": "2025-08-09T04:51:41.251Z",
+              "synchronizationStatus": "InSync",
+              "certificateArchiveReference": {
+                "keyVaultUri": "https://example-kv.vault.azure.net/certificates/example-certificate-1/9f3c2a7d4e8b4c1a9a7f2e6d5c3b1a2f",
+                "keyVaultId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.KeyVault/vaults/example-kv",
+                "certificateName": "example-certificate-1",
+                "certificateVersion": "9f3c2a7d4e8b4c1a9a7f2e6d5c3b1a2f"
+              },
+              "certificateType": "gNMI server certificate"
+            }
+          ],
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled"
+        },
+        "tags": {
+          "KeyId": "KeyValue"
+        },
+        "location": "eastuseuap",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device",
+        "name": "example-device",
+        "type": "microsoft.managednetworkfabric/networkdevices",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    }
+  }
+}

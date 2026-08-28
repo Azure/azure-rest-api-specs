@@ -315,6 +315,20 @@ union NetworkInterfaceAuxiliarySku {
 }
 
 /**
+ * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD.
+ */
+@added(Versions.v2026_04_01)
+union DiskApiVersion {
+  string,
+
+  /** The 2025-01-02 Disk RP API version. */
+  `2025-01-02`: "2025-01-02",
+
+  /** The 2026-03-02 Disk RP API version. */
+  `2026-03-02`: "2026-03-02",
+}
+
+/**
  * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations
  */
 union NetworkApiVersion {
@@ -326,10 +340,17 @@ union NetworkApiVersion {
 }
 
 /**
- * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
+ * Specifies the VM securityType; UefiSettings are enabled only when set to TrustedLaunch or ConfidentialVM, and returns a Standard value starting API version 2025-11-01.
  */
 union SecurityTypes {
   string,
+
+  /**
+   * Indicates a VM without UEFI features such as SecureBoot or vTPM; returned as the default value when securityType is not specified.
+   */
+  @added(Versions.v2025_11_01)
+  Standard: "Standard",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TrustedLaunch: "TrustedLaunch",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -361,16 +382,30 @@ union Modes {
 }
 
 /**
- * Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.
+ * Specifies the priority for a standalone virtual machine or the virtual machines in the scale set.
  */
 union VirtualMachinePriorityTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("""
+    Regular Priority for a standalone virtual machine or the virtual machines in the scale set.
+    This is the default priority and it will be used to deploy regular VM/VMSS.
+    """)
   Regular: "Regular",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("Low priority for a standalone virtual machine or the virtual machines in the scale set. Will be Deprecated, use Spot instead.")
   Low: "Low",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("Spot priority for a standalone virtual machine or the virtual machines in the scale set.")
   Spot: "Spot",
+
+  @doc("""
+    SpotPlus priority for a standalone virtual machine or the virtual machines in the scale set.
+    This is an enum value that will be used to deploy Azure Spot Plus VM/VMSS, which is the next
+    generation of Azure Spot VM/VMSS with more reliability and longer running time.
+    """)
+  @added(Versions.v2026_04_01)
+  SpotPlus: "SpotPlus",
 }
 
 /**
@@ -433,6 +468,10 @@ union ZonalPlatformFaultDomainAlignMode {
   Aligned: "Aligned",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unaligned: "Unaligned",
+
+  /** Offload Alignment to VMSS. VMSS aligns disks that support enough Storage Fault Domains, while keeping others unaligned. */
+  @added(Versions.v2025_11_01)
+  BestEffortAligned: "BestEffortAligned",
 }
 
 /**
@@ -887,6 +926,48 @@ union DiskControllerTypes {
 }
 
 /**
+ * Specifies the storage fault domain alignment type for the disk.
+ */
+@added(Versions.v2025_11_01)
+union StorageFaultDomainAlignmentType {
+  string,
+
+  /** Disk Storage Fault Domains are mapped to Compute Fault Domains. Deployment fails if disk does not support enough Fault Domains. */
+  Aligned: "Aligned",
+
+  /** Attempt to map Storage Fault Domains to Compute Fault Domains. Disks are unaligned if disk does not support enough Fault Domains. */
+  BestEffortAligned: "BestEffortAligned",
+}
+
+/**
+ * Specifies the storage alignment status for the disk.
+ */
+@added(Versions.v2025_11_01)
+union StorageAlignmentStatus {
+  string,
+
+  /** Disk does not have Storage Fault Domain to Compute Fault Domain mapping. A single Storage Fault Domain failure may impact all VMs that reference this disk profile. */
+  Unaligned: "Unaligned",
+
+  /** Disk has Storage Fault Domain to Compute Fault Domain mapping. Storage Fault Domain failure is contained to VMs in a single Compute Fault Domain. */
+  Aligned: "Aligned",
+}
+
+/**
+ * Specifies the processor frequency behavior for the virtual machine. See each member for the behavior it controls.
+ */
+@added(Versions.v2026_04_01)
+union ProcessorMode {
+  string,
+
+  /** Ensures predictable and consistent processor frequency at the base/nominal level. Turbo/Boost is disabled. */
+  Deterministic: "Deterministic",
+
+  /** Allows higher frequency bursts when thermal and power headroom permits. */
+  Opportunistic: "Opportunistic",
+}
+
+/**
  * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
  */
 union IPVersions {
@@ -1097,6 +1178,199 @@ union HighSpeedInterconnectPlacement {
 
   /** Trunk high speed interconnect placement */
   Trunk: "Trunk",
+}
+
+/**
+ * The action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil.
+ */
+@added(Versions.v2025_11_01)
+union LifecycleHookAction {
+  string,
+
+  /** The lifecycle hook of a target resource in a lifecycle hook event will be approved. */
+  Approve: "Approve",
+
+  /** The lifecycle hook of a target resource in a lifecycle hook event will be rejected. */
+  Reject: "Reject",
+}
+
+/**
+ * Describes a lifecycle hook.
+ */
+@added(Versions.v2025_11_01)
+model LifecycleHook {
+  /**
+   * Specifies the type of the lifecycle hook.
+   */
+  type?: VMScaleSetLifecycleHookEventType;
+
+  /**
+   * Specifies the time duration a virtual machine scale set lifecycle hook event sent to the customer waits for a response from the customer. It should be in ISO 8601 format.
+   */
+  waitDuration?: duration;
+
+  /**
+   * Specifies the action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil.
+   */
+  defaultAction?: LifecycleHookAction;
+}
+
+/**
+ * Specifies the lifecycle hooks profile for the virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model LifecycleHooksProfile {
+  /**
+   * Specifies the lifecycle hooks configured for the virtual machine scale set.
+   */
+  @identifiers(#["type"])
+  lifecycleHooks?: LifecycleHook[];
+}
+
+/**
+ * Approval status of a target resource in a virtual machine scale set lifecycle hook event.
+ */
+@added(Versions.v2025_11_01)
+union LifecycleHookActionState {
+  string,
+
+  /** The lifecycle hook for the target resource is waiting for approval. */
+  Waiting: "Waiting",
+
+  /** The lifecycle hook for the target resource is approved. */
+  Approved: "Approved",
+
+  /** The lifecycle hook for the target resource is rejected. */
+  Rejected: "Rejected",
+}
+
+/**
+ * The states that a virtual machine scale set lifecycle hook event can be in. This is not settable by the customer. It is set only by the platform.
+ */
+@added(Versions.v2025_11_01)
+union VMScaleSetLifecycleHookEventState {
+  string,
+
+  /** The lifecycle hook event is active. E.g., waiting on a response from the customer. */
+  Active: "Active",
+
+  /** The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state. */
+  Completed: "Completed",
+}
+
+/**
+ * Define a single target ARM resource in a virtual machine scale set lifecycle hook event. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.
+ */
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventTargetResource {
+  /**
+   * Specifies the target ARM resource. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.
+   */
+  resource?: ApiEntityReference;
+
+  /**
+   * State of the lifecycle hook for the target resource. The customer can patch this property to move the lifecycle hook to a terminal state.
+   */
+  actionState?: LifecycleHookActionState;
+}
+
+/**
+ * Defines the virtual machine scale set lifecycle hook event properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventProperties {
+  /**
+   * Defines the type or scenario for sending a virtual machine scale set lifecycle hook event to the customer.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
+  type?: VMScaleSetLifecycleHookEventType;
+
+  /**
+   * Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the defaultAction for the event.
+   */
+  waitUntil?: string;
+
+  /**
+   * Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this.
+   */
+  @visibility(Lifecycle.Read)
+  maxWaitUntil?: string;
+
+  /**
+   * The UTC timestamp in ISO 8601 format at which the platform creates the virtual machine scale set lifecycle hook event entity.
+   */
+  @visibility(Lifecycle.Read)
+  timeCreated?: string;
+
+  /**
+   * Specify the action that will be applied on the a target resource in the virtual machine scale set lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil.
+   */
+  @visibility(Lifecycle.Read)
+  defaultAction?: LifecycleHookAction;
+
+  /**
+   * List of target resources which are getting processed in the virtual machine scale set lifecycle hook event.
+   */
+  @identifiers(#["resource"])
+  targetResources?: VMScaleSetLifecycleHookEventTargetResource[];
+
+  /**
+   * Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.
+   * The keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.
+   * For example, for a lifecycle hook event with UpgradeAutoOSScheduling type,
+   * the additional context can contain the key "priority" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  additionalContext?: VMScaleSetLifecycleHookEventAdditionalContext;
+
+  /**
+   * Specifies the state of the virtual machine scale set lifecycle hook event.
+   */
+  @visibility(Lifecycle.Read)
+  state?: VMScaleSetLifecycleHookEventState;
+}
+
+/**
+ * Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.
+ * The keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.
+ * For example, for a lifecycle hook event with UpgradeAutoOSScheduling type,
+ * the additional context can contain the key "priority" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventAdditionalContext {
+  /**
+   * Can only be present for a lifecycle hook event of type "UpgradeAutoOSScheduling".
+   * Denotes the priority of the virtual machine scale set lifecycle hook event for the Auto OS Upgrade scheduled on the virtual machine scale set.
+   */
+  priority?: string;
+}
+
+/**
+ * Specifies the scenario for which the customer is interested in receiving virtual machine scale set lifecycle hook events.
+ */
+@added(Versions.v2025_11_01)
+union VMScaleSetLifecycleHookEventType {
+  string,
+
+  /** Lifecycle hook event sent to the customer before an Auto OS Upgrade operation starts on the virtual machine scale set. */
+  UpgradeAutoOSScheduling: "UpgradeAutoOSScheduling",
+
+  /** Lifecycle hook event sent to the customer before upgrade starts on a batch of virtual machines belonging to a virtual machine scale set during an Auto OS Upgrade operation. */
+  UpgradeAutoOSRollingBatchStarting: "UpgradeAutoOSRollingBatchStarting",
+}
+
+/**
+ * Specifies information about the virtual machine scale set lifecycle hook event.
+ */
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventUpdate {
+  /**
+   * virtual machine scale set lifecycle hook event properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: VMScaleSetLifecycleHookEventProperties;
 }
 
 /**
@@ -1367,6 +1641,7 @@ enum StatusLevelTypes {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum UpgradeState {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
@@ -1388,6 +1663,7 @@ enum UpgradeOperationInvoker {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RollingUpgradeStatusCode {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
@@ -1457,7 +1733,8 @@ model ListUsagesResult is Azure.Core.Page<Usage>;
 
 @@identifiers(ListUsagesResult.value, #[]);
 @@doc(ListUsagesResult.value, "The list of compute resource usages.");
-@@doc(ListUsagesResult.nextLink,
+@@doc(
+  ListUsagesResult.nextLink,
   "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
 );
 
@@ -1560,10 +1837,12 @@ model VirtualMachineSize {
 model VirtualMachineScaleSetListResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
 
-@@doc(VirtualMachineScaleSetListResult.value,
+@@doc(
+  VirtualMachineScaleSetListResult.value,
   "The list of virtual machine scale sets."
 );
-@@doc(VirtualMachineScaleSetListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
 );
 
@@ -1594,7 +1873,7 @@ model VirtualMachineScaleSetProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1695,6 +1974,18 @@ model VirtualMachineScaleSetProperties {
    */
   @added(Versions.v2025_04_01)
   highSpeedInterconnectPlacement?: HighSpeedInterconnectPlacement;
+
+  /**
+   * Specifies the lifecycle hooks profile for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  lifecycleHooksProfile?: LifecycleHooksProfile;
+
+  /**
+   * Specifies the external health policy for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  externalHealthPolicy?: ExternalHealthPolicy;
 }
 
 /**
@@ -1896,6 +2187,27 @@ model AutomaticRepairsPolicy {
 }
 
 /**
+ * Specifies the external health policy for the virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model ExternalHealthPolicy {
+  /**
+   * If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB). Defaults to false.
+   */
+  enabled?: boolean;
+
+  /**
+   * Defines how long the health status set by External Health API will last on the VM. If a signal is not received/updated within this time, the VM Health will be marked as "unknown". Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 3 hours (PT3H).
+   */
+  expiryDuration?: duration;
+
+  /**
+   * Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H).
+   */
+  gracePeriod?: duration;
+}
+
+/**
  * Describes a virtual machine scale set virtual machine profile.
  */
 model VirtualMachineScaleSetVMProfile {
@@ -1963,6 +2275,12 @@ model VirtualMachineScaleSetVMProfile {
    * Specifies the capacity reservation related details of a scale set. Minimum api-version: 2021-04-01.
    */
   capacityReservation?: CapacityReservationProfile;
+
+  /**
+   * Specifies the Interconnect Block related details of a Scale Set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 
   /**
    * Specifies the gallery applications that should be made available to the VM/VMSS
@@ -2187,6 +2505,7 @@ model WinRMListener {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 }
 
@@ -2304,6 +2623,7 @@ model VaultCertificate {
   /**
    * This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 
   /**
@@ -2337,6 +2657,12 @@ model VirtualMachineScaleSetStorageProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: DiskControllerTypes;
+
+  /**
+   * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
+   */
+  @added(Versions.v2026_04_01)
+  diskApiVersion?: DiskApiVersion;
 }
 
 /**
@@ -2416,6 +2742,12 @@ model VirtualMachineScaleSetOSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**
    */
   osType?: OperatingSystemTypes;
@@ -2454,6 +2786,12 @@ model DiffDiskSettings {
    * Specifies the ephemeral disk placement for operating system disk. Possible values are: **CacheDisk,** **ResourceDisk,** **NvmeDisk.** The defaulting behavior is: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** or **NvmeDisk** is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Minimum api-version for NvmeDisk: 2024-03-01.
    */
   placement?: DiffDiskPlacement;
+
+  /**
+   * Specifies whether or not to enable full caching for this VM which will cache the OS disk locally on the host and make this VM more resilient to storage outages
+   */
+  @added(Versions.v2025_11_01)
+  enableFullCaching?: boolean;
 }
 
 /**
@@ -2484,6 +2822,12 @@ model VirtualMachineScaleSetManagedDiskParameters {
    * Specifies the security profile for the managed disk.
    */
   securityProfile?: VMDiskSecurityProfile;
+
+  /**
+   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk. This property is not captured for Restore Points.
+   */
+  @added(Versions.v2026_04_01)
+  additionalDiskProperties?: AdditionalDiskProperties;
 }
 
 /**
@@ -2543,6 +2887,12 @@ model VirtualMachineScaleSetDataDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * The managed disk parameters.
    */
   managedDisk?: VirtualMachineScaleSetManagedDiskParameters;
@@ -2582,6 +2932,12 @@ model VirtualMachineScaleSetNetworkProfile {
    * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'
    */
   networkApiVersion?: NetworkApiVersion;
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -2844,6 +3200,16 @@ model VirtualMachineScaleSetIpTag {
    * IP tag associated with the public IP. Example: SQL, Storage etc.
    */
   tag?: string;
+
+  /**
+   * The first party service tag resource identifier associated with the public IP address.
+   */
+  @added(Versions.v2026_04_01)
+  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firstPartyServiceTags";
+    }
+  ]>;
 }
 
 /**
@@ -2876,7 +3242,7 @@ model SecurityProfile {
   encryptionAtHost?: boolean;
 
   /**
-   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
+   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. If not specified, Standard will be returned starting api version 2025-11-01.
    */
   securityType?: SecurityTypes;
 
@@ -2965,6 +3331,12 @@ model HostEndpointSettings {
    * Specifies the InVMAccessControlProfileVersion resource id in the format of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}
    */
   inVMAccessControlProfileReferenceId?: string;
+
+  /**
+   * When set to true, instructs the GuestProxyAgent inside the VM to load additional access control rules defined in a local file on the VM.
+   */
+  @added(Versions.v2026_04_01)
+  useLocalFileRules?: boolean;
 }
 
 /**
@@ -3029,7 +3401,7 @@ model VirtualMachineScaleSetExtensionProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -3085,6 +3457,7 @@ model KeyVaultSecretReference {
   /**
    * The URL referencing a secret in a Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl: string;
 
   /**
@@ -3150,6 +3523,12 @@ model CapacityReservationProfile {
    * Specifies the capacity reservation group resource id that should be used for allocating the virtual machine or scaleset vm instances provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details.
    */
   capacityReservationGroup?: SubResource;
+
+  /**
+   * Specifies whether the virtual machine is explicitly opted out from being associated with any capacity reservation. When set to true, the virtual machine will not be allowed to implicitly or explicitly associate with any type of capacity reservation and will consume capacity from the publicly available capacity. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  disableCapacityReservationAssignment?: boolean;
 }
 
 /**
@@ -3206,6 +3585,12 @@ model VirtualMachineScaleSetHardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-11-01. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the processor mode for the virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  processorMode?: ProcessorMode;
 }
 
 /**
@@ -3326,7 +3711,7 @@ model PriorityMixPolicy {
 }
 
 /**
- * Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy.
+ * Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy, ResilientVMDeletionPolicy and OperationRecoverySettings (version > 2025-11-01).
  */
 model ResiliencyPolicy {
   /**
@@ -3349,6 +3734,12 @@ model ResiliencyPolicy {
    */
   @added(Versions.v2025_04_01)
   zoneAllocationPolicy?: ZoneAllocationPolicy;
+
+  /**
+   * The configuration parameters used for operation recovery settings.
+   */
+  @added(Versions.v2025_11_01)
+  operationRecoverySettings?: OperationRecoverySettings;
 }
 
 /**
@@ -3367,6 +3758,60 @@ model ResilientVMCreationPolicy {
 model ResilientVMDeletionPolicy {
   /**
    * Specifies whether resilient VM deletion should be enabled on the virtual machine scale set. The default value is false.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * The configuration parameters used for operation recovery settings on a virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model OperationRecoverySettings {
+  /**
+   * The configuration parameters used for restart recovery policy.
+   */
+  restartRecoveryPolicy?: RestartRecoveryPolicy;
+
+  /**
+   * The configuration parameters used for start recovery policy.
+   */
+  startRecoveryPolicy?: StartRecoveryPolicy;
+
+  /**
+   * The configuration parameters used for reimage recovery policy.
+   */
+  reimageRecoveryPolicy?: ReimageRecoveryPolicy;
+}
+
+/**
+ * The configuration parameters used while performing restart recovery.
+ */
+@added(Versions.v2025_11_01)
+model RestartRecoveryPolicy {
+  /**
+   * Specifies whether restart recovery should be enabled. The default value is false.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * The configuration parameters used while performing start recovery.
+ */
+@added(Versions.v2025_11_01)
+model StartRecoveryPolicy {
+  /**
+   * Specifies whether start recovery should be enabled. The default value is false.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * The configuration parameters used while performing reimage recovery.
+ */
+@added(Versions.v2025_11_01)
+model ReimageRecoveryPolicy {
+  /**
+   * Specifies whether reimage recovery should be enabled. The default value is false.
    */
   enabled?: boolean;
 }
@@ -3438,6 +3883,12 @@ model SkuProfile {
    * Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.
    */
   allocationStrategy?: AllocationStrategy;
+
+  /**
+   * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
+   */
+  @added(Versions.v2026_03_01)
+  automaticSkuMigrationPolicy?: AutomaticSkuMigrationPolicy;
 }
 
 /**
@@ -3453,6 +3904,17 @@ model SkuProfileVMSize {
    * Specifies the rank (a.k.a priority) associated with the VM Size.
    */
   rank?: int32;
+}
+
+/**
+ * Specifies the configuration parameters used to control automatic SKU migration for the virtual machine scale set. When enabled, the platform may migrate instances to a different VM size from the SKU profile depending on platform demands.
+ */
+@added(Versions.v2026_03_01)
+model AutomaticSkuMigrationPolicy {
+  /**
+   * Specifies whether automatic SKU migration should be enabled on the virtual machine scale set. The default value is false.
+   */
+  enabled?: boolean;
 }
 
 /**
@@ -3489,10 +3951,12 @@ model VirtualMachineScaleSetIdentity {
 model VirtualMachineScaleSetListWithLinkResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
 
-@@doc(VirtualMachineScaleSetListWithLinkResult.value,
+@@doc(
+  VirtualMachineScaleSetListWithLinkResult.value,
   "The list of virtual machine scale sets."
 );
-@@doc(VirtualMachineScaleSetListWithLinkResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListWithLinkResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
 );
 /**
@@ -3526,6 +3990,12 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
    * The virtual machine scale set zones.
    */
   zones?: string[];
+
+  /**
+   * User-defined constraints for virtual machine scale set hardware placement.
+   */
+  @added(Versions.v2025_11_01)
+  placement?: Placement;
 }
 
 /**
@@ -3601,6 +4071,12 @@ model VirtualMachineScaleSetUpdateProperties {
    * Specifies the sku profile for the virtual machine scale set.
    */
   skuProfile?: SkuProfile;
+
+  /**
+   * Specifies the lifecycle hooks profile for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  lifecycleHooksProfile?: LifecycleHooksProfile;
 }
 
 /**
@@ -3666,6 +4142,12 @@ model VirtualMachineScaleSetUpdateVMProfile {
    * Specifies the hardware profile related details of a scale set. Minimum api-version: 2021-11-01.
    */
   hardwareProfile?: VirtualMachineScaleSetHardwareProfile;
+
+  /**
+   * Specifies the Interconnect Block related details of a scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 }
 
 /**
@@ -3719,6 +4201,12 @@ model VirtualMachineScaleSetUpdateStorageProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: DiskControllerTypes;
+
+  /**
+   * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
+   */
+  @added(Versions.v2026_04_01)
+  diskApiVersion?: DiskApiVersion;
 }
 
 /**
@@ -3744,6 +4232,12 @@ model VirtualMachineScaleSetUpdateOSDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.
@@ -3785,6 +4279,12 @@ model VirtualMachineScaleSetUpdateNetworkProfile {
    * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'
    */
   networkApiVersion?: NetworkApiVersion;
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -4050,10 +4550,12 @@ model VirtualMachineScaleSetExtensionListResult
 
 @@identifiers(VirtualMachineScaleSetExtensionListResult.value, #["name", "id"]);
 
-@@doc(VirtualMachineScaleSetExtensionListResult.value,
+@@doc(
+  VirtualMachineScaleSetExtensionListResult.value,
   "The list of VM scale set extensions."
 );
-@@doc(VirtualMachineScaleSetExtensionListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetExtensionListResult.nextLink,
   "The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions."
 );
 
@@ -4085,6 +4587,7 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
 /**
  * Response after calling a manual recovery walk
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RecoveryWalkResponse {
   /**
    * Whether the recovery walk was performed
@@ -4238,7 +4741,8 @@ model OrchestrationServiceSummary {
   lastStatusChangeTime?: utcDateTime;
 }
 
-@@identifiers(VirtualMachineScaleSetListOSUpgradeHistory.value,
+@@identifiers(
+  VirtualMachineScaleSetListOSUpgradeHistory.value,
   #["location", "type"]
 );
 
@@ -4248,10 +4752,12 @@ model OrchestrationServiceSummary {
 model VirtualMachineScaleSetListOSUpgradeHistory
   is Azure.Core.Page<UpgradeOperationHistoricalStatusInfo>;
 
-@@doc(VirtualMachineScaleSetListOSUpgradeHistory.value,
+@@doc(
+  VirtualMachineScaleSetListOSUpgradeHistory.value,
   "The list of OS upgrades performed on the virtual machine scale set."
 );
-@@doc(VirtualMachineScaleSetListOSUpgradeHistory.nextLink,
+@@doc(
+  VirtualMachineScaleSetListOSUpgradeHistory.nextLink,
   "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
 );
 
@@ -4526,7 +5032,8 @@ model OrchestrationServiceStateInput {
   action: OrchestrationServiceStateAction;
 }
 
-@@identifiers(VirtualMachineScaleSetListSkusResult.value,
+@@identifiers(
+  VirtualMachineScaleSetListSkusResult.value,
   #["resourceType", "sku/name"]
 );
 /**
@@ -4535,10 +5042,12 @@ model OrchestrationServiceStateInput {
 model VirtualMachineScaleSetListSkusResult
   is Azure.Core.Page<VirtualMachineScaleSetSku>;
 
-@@doc(VirtualMachineScaleSetListSkusResult.value,
+@@doc(
+  VirtualMachineScaleSetListSkusResult.value,
   "The list of skus available for the virtual machine scale set."
 );
-@@doc(VirtualMachineScaleSetListSkusResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListSkusResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
 );
 
@@ -4600,10 +5109,12 @@ model VirtualMachineScaleSetSkuCapacity {
 model VirtualMachineScaleSetVMListResult
   is Azure.Core.Page<VirtualMachineScaleSetVM>;
 
-@@doc(VirtualMachineScaleSetVMListResult.value,
+@@doc(
+  VirtualMachineScaleSetVMListResult.value,
   "The list of virtual machine scale sets VMs."
 );
-@@doc(VirtualMachineScaleSetVMListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetVMListResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs."
 );
 
@@ -4712,6 +5223,29 @@ model VirtualMachineScaleSetVMProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Specifies the ARM resource ID of the standalone virtual machine associated with this VMSS VM. This property is only applicable to Virtual Machine Scale Sets with Flexible orchestration mode. Minimum api-version: 2025-11-01.
+   */
+  @added(Versions.v2025_11_01)
+  @visibility(Lifecycle.Read)
+  virtualMachineResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
+
+  /**
+   * Specifies the Interconnect Block related details of a Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
+   * Specifies information about the capacity reservation that is used to allocate the virtual machine scale set VM instance. The capacity reservation group is inherited from the parent virtual machine scale set and cannot be changed on the individual scale set VM instance. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  capacityReservation?: CapacityReservationProfile;
 }
 
 /**
@@ -4802,6 +5336,20 @@ model VirtualMachineScaleSetVMInstanceView {
    * The hypervisor generation of the Virtual Machine [V1, V2]
    */
   hyperVGeneration?: HyperVGeneration;
+
+  /**
+   * The Interconnect runtime view of the Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
+
+  /**
+   * Specifies which type of capacity reservation the virtual machine scale set VM instance will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  capacityReservationType?: CapacityReservationType;
 }
 
 /**
@@ -4836,7 +5384,7 @@ model VirtualMachineExtensionHandlerInstanceView {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -4906,6 +5454,12 @@ model DiskInstanceView {
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
+
+  /**
+   * Specifies the storage alignment status for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageAlignmentStatus?: StorageAlignmentStatus;
 }
 
 /**
@@ -4935,6 +5489,7 @@ model KeyVaultKeyReference {
   /**
    * The URL referencing a key encryption key in Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl: string;
 
   /**
@@ -4958,7 +5513,7 @@ model VirtualMachineExtensionInstanceView {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -5022,6 +5577,12 @@ model HardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the processor mode for the virtual machine or virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VM or VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  processorMode?: ProcessorMode;
 }
 
 /**
@@ -5053,6 +5614,34 @@ model StorageProfile {
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
   alignRegionalDisksToVMZone?: boolean;
+
+  /**
+   * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
+   */
+  @added(Versions.v2026_04_01)
+  diskApiVersion?: DiskApiVersion;
+}
+
+/**
+ * Describes zone movement configuration. This allows VM to be moved across availability zones during an outage.
+ */
+@added(Versions.v2025_11_01)
+model ZoneMovement {
+  /**
+   * Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another.
+   */
+  isEnabled?: boolean;
+}
+
+/**
+ * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.
+ */
+@added(Versions.v2025_11_01)
+model ResiliencyProfile {
+  /**
+   * Zone movement configuration.
+   */
+  zoneMovement?: ZoneMovement;
 }
 
 /**
@@ -5110,6 +5699,12 @@ model OSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * The managed disk parameters.
    */
   managedDisk?: ManagedDiskParameters;
@@ -5139,6 +5734,139 @@ model ManagedDiskParameters extends SubResource {
    * Specifies the security profile for the managed disk.
    */
   securityProfile?: VMDiskSecurityProfile;
+
+  /**
+   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk. This property is not captured for Restore Points.
+   */
+  @added(Versions.v2026_04_01)
+  additionalDiskProperties?: AdditionalDiskProperties;
+}
+
+/**
+ * Specifies additional properties for a managed disk that can be set at the time of implicit creation of the disk.
+ */
+@added(Versions.v2026_04_01)
+// AdditionalDiskProperties is intentionally structured as a wrapper to allow future
+// sibling property categories alongside managedDiskProperties without a breaking API change.
+model AdditionalDiskProperties {
+  /**
+   * Specifies the managed disk properties that can be set at the time of implicit creation of the disk.
+   */
+  managedDiskProperties?: ManagedDiskProperties;
+}
+
+/**
+ * Specifies the properties of a managed disk that can be set at the time of implicit creation of the disk.
+ */
+@added(Versions.v2026_04_01)
+model ManagedDiskProperties {
+  /**
+   * Performance tier of the disk (e.g., P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks.
+   */
+  tier?: string;
+
+  /**
+   * Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks.
+   */
+  burstingEnabled?: boolean;
+
+  /**
+   * Set this flag to true to get a boost on the performance target of the disk deployed. This flag can only be set on disk creation time and cannot be disabled after enabled.
+   */
+  performancePlus?: boolean;
+
+  /**
+   * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
+   */
+  optimizedForFrequentAttach?: boolean;
+
+  /**
+   * In the case of an availability or connectivity issue with the disk, specify the behavior of your VM.
+   */
+  availabilityPolicy?: DiskAvailabilityPolicy;
+
+  /**
+   * The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time. Applies to data disks only.
+   */
+  @minValue(1)
+  maxShares?: int32;
+
+  /**
+   * Policy for accessing the disk via network.
+   */
+  networkAccessPolicy?: NetworkAccessPolicy;
+
+  /**
+   * Azure resource Id of the DiskAccess resource for using private endpoints on disks.
+   */
+  diskAccessId?: string;
+
+  /**
+   * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
+   */
+  diskIOPSReadOnly?: int64;
+
+  /**
+   * The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
+   */
+  diskMBpsReadOnly?: int64;
+
+  /**
+   * Logical sector size in bytes for Ultra Disks. Supported values are 512 and 4096. 4096 is the default.
+   */
+  logicalSectorSize?: int32;
+}
+
+/**
+ * In the case of an availability or connectivity issue with the disk, specify the behavior of your VM.
+ */
+@added(Versions.v2026_04_01)
+model DiskAvailabilityPolicy {
+  /**
+   * Determines how to handle disks with slow I/O.
+   */
+  actionOnDiskDelay?: AvailabilityPolicyDiskDelay;
+}
+
+/**
+ * Determines how to handle disks with slow I/O.
+ */
+@added(Versions.v2026_04_01)
+union AvailabilityPolicyDiskDelay {
+  string,
+
+  /**
+   * Defaults to behavior without availability policy specified, which is VM restart upon slow disk I/O.
+   */
+  None: "None",
+
+  /**
+   * Upon a disk I/O failure or slow response, try detaching then reattaching the disk.
+   */
+  AutomaticReattach: "AutomaticReattach",
+}
+
+/**
+ * Policy for accessing the disk via network.
+ */
+@added(Versions.v2026_04_01)
+union NetworkAccessPolicy {
+  string,
+
+  /**
+   * The disk can be exported or uploaded from any network.
+   */
+  AllowAll: "AllowAll",
+
+  /**
+   * The disk can be exported or uploaded using a DiskAccess resource's private endpoints.
+   */
+  AllowPrivate: "AllowPrivate",
+
+  /**
+   * The disk cannot be exported.
+   */
+  DenyAll: "DenyAll",
 }
 
 /**
@@ -5184,6 +5912,12 @@ model DataDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -5308,6 +6042,12 @@ model NetworkProfile {
    */
   @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineNetworkInterfaceConfiguration[];
+
+  /**
+   * Specifies the interconnect group profile to associate with the virtual machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -5591,6 +6331,16 @@ model VirtualMachineIpTag {
    * IP tag associated with the public IP. Example: SQL, Storage etc.
    */
   tag?: string;
+
+  /**
+   * The first party service tag resource identifier associated with the public IP address.
+   */
+  @added(Versions.v2026_04_01)
+  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firstPartyServiceTags";
+    }
+  ]>;
 }
 
 /**
@@ -5602,6 +6352,12 @@ model VirtualMachineScaleSetVMNetworkProfileConfiguration {
    */
   @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set vm instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -5640,7 +6396,7 @@ model VirtualMachineExtensionProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -5779,7 +6535,7 @@ model VirtualMachineExtensionUpdateProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -5819,6 +6575,7 @@ model VirtualMachineExtensionUpdateProperties {
 /**
  * Specifies the input for attaching and detaching a list of managed data disks.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttachDetachDataDisksRequest {
   /**
    * The list of managed data disks to be attached.
@@ -5908,7 +6665,8 @@ model RetrieveBootDiagnosticsDataResult {
 model VirtualMachineListResult is Azure.Core.Page<VirtualMachine>;
 
 @@doc(VirtualMachineListResult.value, "The list of virtual machines.");
-@@doc(VirtualMachineListResult.nextLink,
+@@doc(
+  VirtualMachineListResult.nextLink,
   "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
 );
 /**
@@ -6045,6 +6803,12 @@ model VirtualMachineProperties {
   capacityReservation?: CapacityReservationProfile;
 
   /**
+   * Specifies information about the Interconnect Block that is used to allocate the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
    * Specifies the gallery applications that should be made available to the VM/VMSS.
    */
   applicationProfile?: ApplicationProfile;
@@ -6054,6 +6818,12 @@ model VirtualMachineProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Resiliency profile for the virtual machine.
+   */
+  @added(Versions.v2025_11_01)
+  resiliencyProfile?: ResiliencyProfile;
 }
 
 /**
@@ -6150,6 +6920,20 @@ model VirtualMachineInstanceView {
    */
   @visibility(Lifecycle.Read)
   isVMInStandbyPool?: boolean;
+
+  /**
+   * The Interconnect runtime view of the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
+
+  /**
+   * Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  capacityReservationType?: CapacityReservationType;
 }
 
 /**
@@ -7018,6 +7802,166 @@ model VirtualMachineExtensionImageProperties {
    * Whether the handler can support multiple extensions.
    */
   supportsMultipleExtensions?: boolean;
+
+  /**
+   * Summary of changes or updates in this extension version.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  releaseNotes?: string;
+
+  /**
+   * Categorizes the type of change introduced (e.g., BugFix, SecurityFix, CompatibilityUpdate, NewFeature, Other).
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  releaseCategory?: ReleaseCategory;
+
+  /**
+   * Indicates the urgency level for applying this extension update.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  urgencyLevel?: UrgencyLevel;
+
+  /**
+   * Specifies when and how the extension should be executed.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  runProfile?: RunProfile;
+
+  /**
+   * Additional metadata about extension features, including compliance and capability tags.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  extensionFeatureMetadata?: ExtensionFeatureMetadata;
+}
+
+/**
+ * Enumerates the type of change introduced in the extension version.
+ */
+@added(Versions.v2026_04_01)
+union ReleaseCategory {
+  string,
+
+  /**
+   * Other type of change.
+   */
+  Other: "Other",
+
+  /**
+   * Bug fix change.
+   */
+  BugFix: "BugFix",
+
+  /**
+   * Security fix change.
+   */
+  SecurityFix: "SecurityFix",
+
+  /**
+   * Compatibility update change.
+   */
+  CompatibilityUpdate: "CompatibilityUpdate",
+
+  /**
+   * New feature change.
+   */
+  NewFeature: "NewFeature",
+}
+
+/**
+ * Defines urgency levels for extension updates.
+ */
+@added(Versions.v2026_04_01)
+union UrgencyLevel {
+  string,
+
+  /**
+   * Regular urgency level.
+   */
+  Regular: "Regular",
+
+  /**
+   * Expedited urgency level.
+   */
+  Expedited: "Expedited",
+
+  /**
+   * Emergency urgency level.
+   */
+  Emergency: "Emergency",
+}
+
+/**
+ * Specifies the execution profile for the extension.
+ */
+@added(Versions.v2026_04_01)
+union RunProfile {
+  string,
+
+  /**
+   * Other execution profile.
+   */
+  Other: "Other",
+
+  /**
+   * Run once execution profile.
+   */
+  RunOnce: "RunOnce",
+
+  /**
+   * Long running execution profile.
+   */
+  LongRunning: "LongRunning",
+
+  /**
+   * Hybrid execution profile.
+   */
+  Hybrid: "Hybrid",
+}
+
+/**
+ * Defines the allowed values for the $expand query parameter on the ListVersions operation.
+ */
+@added(Versions.v2026_04_01)
+union ListVersionsExpandOptions {
+  string,
+
+  /**
+   * Expand to include all properties in the response.
+   */
+  Properties: "properties",
+}
+
+/**
+ * Additional metadata about extension features, including compliance and capability tags.
+ */
+@added(Versions.v2026_04_01)
+model ExtensionFeatureMetadata {
+  /**
+   * List of additional metadata properties (e.g., compliance flags, supported features).
+   */
+  @identifiers(#["key"])
+  extensionFeatureTags?: ExtensionFeatureTag[];
+}
+
+/**
+ * Represents a key-value pair for extension feature metadata.
+ */
+@added(Versions.v2026_04_01)
+model ExtensionFeatureTag {
+  /**
+   * The key of the feature tag.
+   */
+  key: string;
+
+  /**
+   * The value of the feature tag.
+   */
+  value?: string;
 }
 
 /**
@@ -7026,7 +7970,8 @@ model VirtualMachineExtensionImageProperties {
 model AvailabilitySetListResult is Azure.Core.Page<AvailabilitySet>;
 
 @@doc(AvailabilitySetListResult.value, "The list of availability sets.");
-@@doc(AvailabilitySetListResult.nextLink,
+@@doc(
+  AvailabilitySetListResult.nextLink,
   "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
 );
 
@@ -7151,10 +8096,12 @@ model AvailabilitySetUpdate extends UpdateResource {
 model ProximityPlacementGroupListResult
   is Azure.Core.Page<ProximityPlacementGroup>;
 
-@@doc(ProximityPlacementGroupListResult.value,
+@@doc(
+  ProximityPlacementGroupListResult.value,
   "The list of proximity placement groups."
 );
-@@doc(ProximityPlacementGroupListResult.nextLink,
+@@doc(
+  ProximityPlacementGroupListResult.nextLink,
   "The URI to fetch the next page of proximity placement groups."
 );
 
@@ -7229,7 +8176,8 @@ model ProximityPlacementGroupUpdate extends UpdateResource {}
 model DedicatedHostGroupListResult is Azure.Core.Page<DedicatedHostGroup>;
 
 @@doc(DedicatedHostGroupListResult.value, "The list of dedicated host groups.");
-@@doc(DedicatedHostGroupListResult.nextLink,
+@@doc(
+  DedicatedHostGroupListResult.nextLink,
   "The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups."
 );
 
@@ -7371,7 +8319,8 @@ model DedicatedHostGroupUpdate extends UpdateResource {
 model DedicatedHostListResult is Azure.Core.Page<DedicatedHost>;
 
 @@doc(DedicatedHostListResult.value, "The list of dedicated hosts.");
-@@doc(DedicatedHostListResult.nextLink,
+@@doc(
+  DedicatedHostListResult.nextLink,
   "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
 );
 
@@ -7473,7 +8422,8 @@ model DedicatedHostSizeListResult {
 model SshPublicKeysGroupListResult is Azure.Core.Page<SshPublicKeyResource>;
 
 @@doc(SshPublicKeysGroupListResult.value, "The list of SSH public keys.");
-@@doc(SshPublicKeysGroupListResult.nextLink,
+@@doc(
+  SshPublicKeysGroupListResult.nextLink,
   "The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys."
 );
 
@@ -7486,6 +8436,151 @@ model SshPublicKeyResourceProperties {
    * SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format.
    */
   publicKey?: string;
+}
+
+/**
+ * The list Interconnect Block operation response.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockListResult is Azure.Core.Page<InterconnectBlock>;
+
+@@doc(InterconnectBlockListResult.value, "The list of Interconnect Blocks.");
+@@doc(
+  InterconnectBlockListResult.nextLink,
+  "The URI to fetch the next page of Interconnect Blocks. Call ListNext() with this URI to fetch the next page of Interconnect Blocks."
+);
+
+/**
+ * Properties of the Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockProperties {
+  /**
+   * A list of all virtual machine resource ids that are associated with the Interconnect Block.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  virtualMachinesAssociated?: SubResourceReadOnly[];
+
+  /**
+   * The Microsoft.Network/interconnectGroups resource that this Interconnect Block is associated with. Required at create and immutable thereafter.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  interconnectGroup: ApiEntityReference;
+
+  /**
+   * A unique id (GUID) generated and assigned to the Interconnect Block by the platform which does not change throughout the lifetime of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  interconnectBlockId?: string;
+
+  /**
+   * The date time when the Interconnect Block was last updated.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningTime?: utcDateTime;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The Interconnect Block instance view.
+   */
+  @visibility(Lifecycle.Read)
+  instanceView?: InterconnectBlockInstanceView;
+
+  /**
+   * Specifies the time at which the Interconnect Block resource was created.
+   */
+  @visibility(Lifecycle.Read)
+  timeCreated?: utcDateTime;
+}
+
+/**
+ * The instance view of an Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockInstanceView {
+  /**
+   * The current capacity allocated for this Interconnect Block.
+   */
+  @visibility(Lifecycle.Read)
+  currentCapacity?: int32;
+
+  /**
+   * The resource status information.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  statuses?: InstanceViewStatus[];
+}
+
+/**
+ * Specifies information about the Interconnect Block. Only tags and sku.capacity can be updated.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
+@added(Versions.v2026_03_01)
+model InterconnectBlockUpdate extends UpdateResource {
+  /**
+   * SKU of the resource for which capacity needs to be pre-allocated. Only `sku.capacity` is mutable; `sku.name` is immutable.
+   */
+  sku?: Sku;
+}
+
+/**
+ * The expand expression to apply on the operation for an Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+union InterconnectBlockExpandTypes {
+  string,
+
+  /**
+   * Retrieve the runtime instance view of the Interconnect Block.
+   */
+  instanceView: "instanceView",
+}
+
+/**
+ * The parameters of an Interconnect Block Profile.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockProfile {
+  /**
+   * Specifies the Interconnect Block resource ID that should be used for allocating the Virtual Machine or Scale Set VM instances provided enough capacity has been reserved.
+   */
+  interconnectBlock?: ApiEntityReference;
+}
+
+/**
+ * The Interconnect Block instance view details for a Virtual Machine or Scale Set VM instance.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectInstanceView {
+  /**
+   * The ID (GUID) of the Interconnect subgroup in which the Virtual Machine was placed.
+   */
+  @visibility(Lifecycle.Read)
+  interconnectSubgroupId?: string;
+}
+
+/**
+ * Specifies the interconnect group profile for a virtual machine, used to associate the VM with an interconnect group and subgroups.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectGroupProfile {
+  /**
+   * Reference to the interconnect group resource.
+   */
+  interconnectGroup?: SubResource;
+
+  /**
+   * The list of subgroup references within the interconnect group.
+   */
+  subgroups?: SubResource[];
 }
 
 /**
@@ -7538,7 +8633,8 @@ model SshPublicKeyGenerateKeyPairResult {
 model ImageListResult is Azure.Core.Page<Image>;
 
 @@doc(ImageListResult.value, "The list of Images");
-@@doc(ImageListResult.nextLink,
+@@doc(
+  ImageListResult.nextLink,
   "The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images."
 );
 
@@ -7676,10 +8772,12 @@ model ImageUpdate extends UpdateResource {
 model RestorePointCollectionListResult
   is Azure.Core.Page<RestorePointCollection>;
 
-@@doc(RestorePointCollectionListResult.value,
+@@doc(
+  RestorePointCollectionListResult.value,
   "Gets the list of restore point collections."
 );
-@@doc(RestorePointCollectionListResult.nextLink,
+@@doc(
+  RestorePointCollectionListResult.nextLink,
   "The uri to fetch the next page of RestorePointCollections. Call ListNext() with this to fetch the next page of RestorePointCollections."
 );
 
@@ -8067,10 +9165,12 @@ model RestorePointCollectionUpdate extends UpdateResource {
 model CapacityReservationGroupListResult
   is Azure.Core.Page<CapacityReservationGroup>;
 
-@@doc(CapacityReservationGroupListResult.value,
+@@doc(
+  CapacityReservationGroupListResult.value,
   "The list of capacity reservation groups."
 );
-@@doc(CapacityReservationGroupListResult.nextLink,
+@@doc(
+  CapacityReservationGroupListResult.nextLink,
   "The URI to fetch the next page of capacity reservation groups. Call ListNext() with this URI to fetch the next page of capacity reservation groups."
 );
 /**
@@ -8102,7 +9202,7 @@ model CapacityReservationGroupProperties {
   sharingProfile?: ResourceSharingProfile;
 
   /**
-   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created.
    */
   @added(Versions.v2025_04_01)
   reservationType?: ReservationType;
@@ -8152,22 +9252,41 @@ model CapacityReservationInstanceView {
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
+
+  /**
+   * The reservation state information for a capacity reservation, this detail is primarily provided for Future capacity reservations. Minimum API version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  reservationStateInfo?: CapacityReservationStateInfo;
 }
 
 /**
- * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+ * Defines the schedule for Block and Future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01. Future capacity reservations must use this property with only a start time, which can be changed until the ‘modifiableUntil’ time. Please refer to https://aka.ms/futurecapacityreservation for more details. Minimum API version for Future capacity reservations: 2026-04-01.
  */
 @added(Versions.v2025_04_01)
 model ScheduleProfile {
   /**
-   * The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27.
+   * The required start date for Block or Future capacity reservations. Block capacity reservations: Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Future capacity reservations: Must be at least 7 days in the future, and maximum 6 months in the future. Minimum API version for Future capacity reservations: 2026-04-01. Example: 2025-06-27, applicable for both Block and Future capacity reservations.
    */
   start?: string;
 
   /**
-   * The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28.
+   * The required end date for Block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28.
    */
   end?: string;
+
+  /**
+   * The minimum number of days that must pass after the start date before a Future capacity reservation can be updated or deleted once it has been committed. Will be populated with a default value if not provided.
+   */
+  @added(Versions.v2026_04_01)
+  minimumCommitmentDays?: int32;
+
+  /**
+   * The date/time until which a Future capacity reservation can be updated or deleted. Read-only.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  modifiableUntil?: utcDateTime;
 }
 
 /**
@@ -8185,6 +9304,14 @@ model CapacityReservationUtilization {
    */
   @visibility(Lifecycle.Read)
   virtualMachinesAllocated?: SubResourceReadOnly[];
+
+  /**
+   * For open capacity reservations, this provides a map of the used reserved capacity count keyed by the subscription id (a GUID) that is consuming the capacity, i.e. each entry maps a consuming subscription id to the count of reserved capacity it is currently using. This is populated only for open capacity reservations and is not reported for targeted and block capacity reservations, which instead report allocation through virtualMachinesAllocated. Minimum api-version: 2026-04-01.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Open capacity reservation usage is inherently a map keyed by the consuming subscription id (GUID) to its used reserved capacity count."
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  usedReservedCountBySubscription?: Record<int32>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -8196,7 +9323,7 @@ model ResourceSharingProfile {
 }
 
 /**
- * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+ * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. Future capacity reservations can be created in 'Targeted' or 'Open' capacity reservation groups. The reservation type is immutable and cannot be changed after the capacity reservation group is created.
  */
 @added(Versions.v2025_04_01)
 union ReservationType {
@@ -8206,14 +9333,113 @@ union ReservationType {
   string,
 
   /**
-   * To consume on demand allocated capacity reservation when a capacity reservation group is provided.
+   * Reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full.
    */
   Targeted: "Targeted",
 
   /**
-   * To consume scheduled allocated block capacity reservation when a capacity reservation group is provided.
+   * Block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group.
    */
   Block: "Block",
+
+  /**
+   * Reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group, and fall back to the publicly available capacity if the reservation is full. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  Open: "Open",
+}
+
+/**
+ * Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.
+ */
+@added(Versions.v2026_04_01)
+union CapacityReservationType {
+  /**
+   * Custom capacity reservation type value.
+   */
+  string,
+
+  /**
+   * The virtual machine is not eligible to be implicitly associated with an open capacity reservation and is not explicitly associated with any capacity reservation group, so it will consume capacity from the publicly available capacity.
+   */
+  NotEligible: "NotEligible",
+
+  /**
+   * The virtual machine will consume capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type targeted, but can fall back to consume capacity from the publicly available capacity if there is no capacity available in the targeted reservation.
+   */
+  Targeted: "Targeted",
+
+  /**
+   * The virtual machine if eligible will implicitly associate and consume any available capacity from a matching open capacity reservation created or shared in the subscription. **Note:** The VM should not be explicitly associated with the open capacity reservation group resource containing the matching reservation.
+   */
+  Open: "Open",
+
+  /**
+   * The virtual machine has capacity reservation assignment disabled and will not be allowed to implicitly or explicitly associate with any type of capacity reservation.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * The virtual machine consumes capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type block, and will hit capacity failures if there is no available capacity in the block reservation.
+   */
+  Block: "Block",
+}
+
+/**
+ * The current state of a Future capacity reservation.
+ */
+@added(Versions.v2026_04_01)
+union ReservationState {
+  /**
+   * Custom reservation state value.
+   */
+  string,
+
+  /**
+   * The capacity reservation request has been submitted and is awaiting evaluation.
+   */
+  Pending: "Pending",
+
+  /**
+   * The capacity reservation request was rejected, and will not change again without user action.
+   */
+  Declined: "Declined",
+
+  /**
+   * The capacity reservation request has been approved by Azure and is awaiting fulfillment.
+   */
+  Approved: "Approved",
+
+  /**
+   * A failure occurred while attempting to fulfill the capacity reservation request.
+   */
+  FulfillmentFailed: "FulfillmentFailed",
+
+  /**
+   * The capacity reservation is locked and cannot be updated or deleted prior to going live.
+   */
+  Committed: "Committed",
+
+  /**
+   * The capacity reservation is active and available for use, and cannot be modified or deleted until the minimum commitment period has elapsed.
+   */
+  Live: "Live",
+
+  /**
+   * Azure was only able to deliver a portion of the requested capacity. The capacity reservation cannot be modified or deleted until the minimum commitment period has elapsed. The portion of fulfilled capacity can be viewed by inspecting the capacity reservation's instance view, displayed as currentCapacity within the utilizationInfo.
+   */
+  PartiallyFulfilled: "PartiallyFulfilled",
+}
+
+/**
+ * Details related to the current state for a Future capacity reservation.
+ */
+@added(Versions.v2026_04_01)
+model CapacityReservationStateInfo {
+  /**
+   * The current state of the capacity reservation.
+   */
+  reservationState?: ReservationState;
 }
 
 /**
@@ -8234,10 +9460,12 @@ model CapacityReservationGroupUpdate extends UpdateResource {
  */
 model CapacityReservationListResult is Azure.Core.Page<CapacityReservation>;
 
-@@doc(CapacityReservationListResult.value,
+@@doc(
+  CapacityReservationListResult.value,
   "The list of capacity reservations."
 );
-@@doc(CapacityReservationListResult.nextLink,
+@@doc(
+  CapacityReservationListResult.nextLink,
   "The URI to fetch the next page of capacity reservations. Call ListNext() with this URI to fetch the next page of capacity reservations."
 );
 
@@ -8289,7 +9517,7 @@ model CapacityReservationProperties {
   timeCreated?: utcDateTime;
 
   /**
-   * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+   * Defines the schedule for Block and Future capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. For Block capacity reservations, the scheduleProfile, start, and end fields are immutable after creation. Please refer to https://aka.ms/blockcapacityreservation for more details. Minimum API version for Block capacity reservations: 2025-04-01. Future capacity reservations must use this property with only a start time, which can be changed until the ‘modifiableUntil’ time. Please refer to https://aka.ms/futurecapacityreservation for more details. Minimum API version for Future capacity reservations: 2026-04-01.
    */
   @added(Versions.v2025_04_01)
   scheduleProfile?: ScheduleProfile;
@@ -8404,7 +9632,8 @@ model ThrottledRequestsInput extends LogAnalyticsInputBase {}
 model RunCommandListResult is Azure.Core.Page<RunCommandDocumentBase>;
 
 @@doc(RunCommandListResult.value, "The list of virtual machine run commands.");
-@@doc(RunCommandListResult.nextLink,
+@@doc(
+  RunCommandListResult.nextLink,
   "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
 );
 
@@ -8488,8 +9717,25 @@ model VirtualMachineRunCommandsListResult
   is Azure.Core.Page<VirtualMachineRunCommand>;
 
 @@doc(VirtualMachineRunCommandsListResult.value, "The list of run commands.");
-@@doc(VirtualMachineRunCommandsListResult.nextLink,
+@@doc(
+  VirtualMachineRunCommandsListResult.nextLink,
   "The uri to fetch the next page of run commands."
+);
+
+/**
+ * The List diagnostic run command operation response
+ */
+@added(Versions.v2026_04_01)
+model VirtualMachineDiagnosticRunCommandsListResult
+  is Azure.Core.Page<VirtualMachineDiagnosticRunCommand>;
+
+@@doc(
+  VirtualMachineDiagnosticRunCommandsListResult.value,
+  "The list of diagnostic run commands."
+);
+@@doc(
+  VirtualMachineDiagnosticRunCommandsListResult.nextLink,
+  "The uri to fetch the next page of diagnostic run commands."
 );
 
 /**
@@ -8526,7 +9772,7 @@ model VirtualMachineRunCommandProperties {
   /**
    * Specifies the user account password on the VM when executing the run command.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Backward compatibility: keeping wire format unchanged for existing API versions"
   runAsPassword?: string;
 
   /**
@@ -8754,4 +10000,20 @@ model VMScaleSetScaleOutInputProperties {
    * The zone in which the scale out is requested for the virtual machine scale set.
    */
   zone?: string;
+}
+
+/**
+ * The input for MigrateVMAvailabilityZone.
+ */
+@added(Versions.v2026_04_01)
+model MigrateVMAvailabilityZoneInput {
+  /**
+   * The virtual machine scale set instance ids to be migrated to the target availability zone.
+   */
+  instanceIds: string[];
+
+  /**
+   * The target logical availability zone ("1", "2" or "3") to migrate the virtual machine scale set instances to. If omitted, the platform selects the target zone.
+   */
+  targetZone?: string;
 }

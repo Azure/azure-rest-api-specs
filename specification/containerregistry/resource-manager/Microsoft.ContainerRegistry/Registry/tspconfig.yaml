@@ -6,16 +6,21 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
+    azure-resource-provider-folder: "Microsoft.ContainerRegistry"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/containerregistry.json"
     examples-dir: "{project-root}/examples"
-
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
   "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     package-name: "Azure.ResourceManager.ContainerRegistry"
     namespace: "Azure.ResourceManager.ContainerRegistry"
+    enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.ContainerRegistry"
+    emitter-output-dir: "{project-root}/Azure.Provisioning.ContainerRegistry"
+    api-version: "2025-11-01"
   "@azure-tools/typespec-python":
     service-dir: "sdk/containerregistry"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerregistry"
@@ -43,7 +48,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerregistry"
     emitter-output-dir: "{output-dir}/{service-dir}/armcontainerregistry"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerregistry/v3"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerregistry"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -53,3 +58,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

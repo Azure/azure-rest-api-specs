@@ -52,10 +52,12 @@ interface DetectorResponseOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "HostingEnvironmentDetector"
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DetectorResponses {
   /**
    * Description for Get Hosting Environment Detector Response
@@ -117,7 +119,8 @@ interface DiagnosticOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "SiteDetector"
     > {}
 
 @armResourceOperations
@@ -188,10 +191,12 @@ interface DetectorResponseOperationGroupOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "SiteSlotDetector"
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DetectorResponseOperationGroup {
   /**
    * Description for Get site detector response
@@ -234,6 +239,7 @@ interface DetectorResponseOperationGroup {
 }
 
 @@doc(DetectorResponse.name, "Detector Resource Name");
-@@doc(DetectorResponse.properties,
+@@doc(
+  DetectorResponse.properties,
   "DetectorResponse resource specific properties"
 );

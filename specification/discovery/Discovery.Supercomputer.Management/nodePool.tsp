@@ -109,6 +109,28 @@ model NodePoolProperties {
   @added(Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   scaleSetPriority?: ScaleSetPriority = ScaleSetPriority.Regular;
+
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  @doc("The size of the OS disk in GB. If not specified, the default is 120 GB.")
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minValue(30)
+  @maxValue(2048)
+  osDiskSizeGb?: int32 = 120;
+
+  @doc("The percent of disk usage before which image garbage collection is never run. This cannot be set higher than imageCacheUpperThreshold. The default is 40%")
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minValue(0)
+  @maxValue(100)
+  imageCacheLowerThreshold?: int32 = 40;
+
+  @doc("The percent of disk usage after which image garbage collection is guaranteed to run. The default is 60%")
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minValue(0)
+  @maxValue(100)
+  imageCacheUpperThreshold?: int32 = 60;
 }
 
 @armResourceOperations

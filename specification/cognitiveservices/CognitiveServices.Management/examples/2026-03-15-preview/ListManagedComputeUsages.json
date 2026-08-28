@@ -1,0 +1,38 @@
+{
+  "operationId": "ManagedComputeUsagesOperationGroup_List",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "location": "eastus",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "List Managed Compute Usages",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/managedComputeUsages/ManagedCompute.Global.H100_80GB",
+            "name": {
+              "value": "ManagedCompute.Global.H100_80GB",
+              "localizedValue": "H100_80GB Managed Compute Quota"
+            },
+            "type": "Microsoft.CognitiveServices/locations/managedComputeUsages",
+            "offerScope": "Global",
+            "currentValue": 8,
+            "limit": 300,
+            "unit": "AcceleratorCount",
+            "deployments": [
+              {
+                "deploymentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.CognitiveServices/accounts/myAccount/deployments/gpt4-deploy",
+                "projectId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.CognitiveServices/accounts/myAccount",
+                "modelId": "azureml://registries//models//versions/gpt-4o",
+                "acceleratorCount": 8,
+                "instanceCount": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

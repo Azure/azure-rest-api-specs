@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "configStoreName": "contoso",
+    "resourceGroupName": "myResourceGroup",
+    "snapshotName": "mySnapshot",
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySnapshot",
+        "type": "Microsoft.AppConfiguration/configurationStores/snapshots",
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso/snapshots/mySnapshot",
+        "properties": {
+          "compositionType": "All",
+          "created": "2022-08-01T22:19:40+00:00",
+          "etag": "4f6dd610dd5e4deebc7fbaef685fb903",
+          "filters": [
+            {
+              "key": "app1/*",
+              "label": "Production"
+            }
+          ],
+          "itemsCount": 71,
+          "provisioningState": "Succeeded",
+          "retentionPeriod": 3600,
+          "size": 100000,
+          "tags": {}
+        }
+      }
+    }
+  },
+  "operationId": "Snapshots_Get",
+  "title": "Snapshots_Get"
+}

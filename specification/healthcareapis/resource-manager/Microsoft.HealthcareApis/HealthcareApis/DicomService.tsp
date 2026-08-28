@@ -14,16 +14,25 @@ namespace Microsoft.HealthcareApis;
 /**
  * The description of Dicom Service
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
 model DicomService
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<DicomServiceProperties> {
+  is Azure.ResourceManager.ProxyResource<DicomServiceProperties> {
   ...ResourceNameParameter<
     Resource = DicomService,
     KeyName = "dicomServiceName",
     SegmentName = "dicomservices",
     NamePattern = ""
   >;
+
+  /** The common properties of tracked resources in the service. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /** The common properties for any location based resource, tracked or proxy. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
 
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
@@ -49,14 +58,17 @@ interface DicomServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DicomService,
-    Response = ArmResourceUpdatedResponse<DicomService> | ArmResourceCreatedResponse<
-      DicomService,
-      ArmLroLocationHeader<FinalResult = DicomService> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: DicomService;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<DicomService>
+      | ArmResourceCreatedResponse<
+          DicomService,
+          ArmLroLocationHeader<FinalResult = DicomService> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: DicomService;
+        }),
     Error = ErrorDetails
   >;
 
@@ -99,14 +111,17 @@ interface DicomServiceOperationGroup {
     /** The parameters for updating a Dicom Service. */
     @body
     dicomservicePatchResource: DicomServicePatchResource,
-  ): ArmResponse<DicomService> | (ArmAcceptedLroResponse<
-    "Resource update request accepted.",
-    LroHeaders = ArmLroLocationHeader<FinalResult = DicomService> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > & {
-    @bodyRoot
-    _: DicomService;
-  }) | ErrorDetails;
+  ):
+    | ArmResponse<DicomService>
+    | (ArmAcceptedLroResponse<
+        "Resource update request accepted.",
+        LroHeaders = ArmLroLocationHeader<FinalResult = DicomService> &
+          Azure.Core.Foundations.RetryAfterHeader
+      > & {
+        @bodyRoot
+        _: DicomService;
+      })
+    | ErrorDetails;
 
   /**
    * Deletes a DICOM Service.
@@ -142,6 +157,7 @@ interface DicomServiceOperationGroup {
 @@minLength(DicomService.name, 3);
 @@doc(DicomService.name, "The name of DICOM Service resource.");
 @@doc(DicomService.properties, "Dicom Service configuration.");
-@@doc(DicomServices.createOrUpdate::parameters.resource,
+@@doc(
+  DicomServices.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a Dicom Service resource."
 );

@@ -1,13 +1,13 @@
-import { mockAll, mockFolder } from "./mocks.js";
+import { mockAll, mockFolder } from "./mocks.ts";
 mockAll();
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import * as globby from "globby";
 import { strict as assert } from "node:assert";
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
-import { FolderStructureRule } from "../src/rules/folder-structure.js";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
+import { FolderStructureRule } from "../src/rules/folder-structure.ts";
 
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 describe("folder-structure", function () {
   let fileExistsSpy: MockInstance;
@@ -37,27 +37,8 @@ describe("folder-structure", function () {
       ]);
     });
 
-    it("should succeed with first suppression reason when rule is suppressed", async function () {
-      vi.spyOn(utils, "getSuppressions").mockResolvedValue([
-        {
-          tool: "TypeSpecValidation",
-          paths: ["."],
-          reason: "test suppression reason",
-          rules: ["FolderStructure"],
-        },
-        {
-          tool: "TypeSpecValidation",
-          paths: ["."],
-          reason: "foo",
-          rules: ["FolderStructure"],
-        },
-      ]);
-
-      const result = await new FolderStructureRule().execute(mockFolder);
-      assert(result.success);
-      assert(result.stdOutput?.includes("suppressed"));
-      assert(result.stdOutput?.includes("test suppression reason"));
-      assert(!result.stdOutput?.includes("foo"));
+    it("should have suppressable flag set to true", function () {
+      assert.equal(new FolderStructureRule().suppressable, true);
     });
 
     it("should not suppress when suppression targets a different rule", async function () {

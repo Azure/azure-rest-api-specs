@@ -54,6 +54,7 @@ import "./OutboundRuleBasicResource.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -75,6 +76,11 @@ namespace Microsoft.MachineLearningServices;
  */
 enum Versions {
   /**
+   * The 2024-10-01-preview API version.
+   */
+  v2024_10_01_preview: "2024-10-01-preview",
+
+  /**
    * The 2025-10-01-preview API version.
    */
   v2025_10_01_preview: "2025-10-01-preview",
@@ -88,10 +94,36 @@ enum Versions {
    * The 2026-01-15-preview API version.
    */
   v2026_01_15_preview: "2026-01-15-preview",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  v2026_03_01: "2026-03-01",
+
+  /**
+   * The 2026-03-15-preview API version.
+   */
+  v2026_03_15_preview: "2026-03-15-preview",
+
+  /**
+   * The 2026-05-01 API version.
+   */
+  v2026_05_01: "2026-05-01",
+
+  /**
+   * The 2026-05-15-preview API version.
+   */
+  v2026_05_15_preview: "2026-05-15-preview",
+
+  /**
+   * The 2026-07-01 API version.
+   */
+  v2026_07_01: "2026-07-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@summary(Operations.list,
+@@summary(
+  Operations.list,
   "Lists all of the available Azure Machine Learning Workspaces REST API operations"
 );

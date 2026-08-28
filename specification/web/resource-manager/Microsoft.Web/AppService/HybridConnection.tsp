@@ -58,10 +58,12 @@ interface HybridConnectionOps
         @segment("relays")
         @key
         relayName: string,
-      }
+      },
+      ResourceName = "AppServicePlanHybridConnectionNamespaceRelay"
     > {}
 
-@armResourceOperations
+@tag("AppServicePlans")
+@armResourceOperations(#{ omitTags: true })
 interface HybridConnections {
   /**
    * Description for Retrieve a Hybrid Connection in use in an App Service plan.
@@ -134,10 +136,12 @@ interface HybridConnectionOperationGroupOps
         @segment("relays")
         @key
         relayName: string,
-      }
+      },
+      ResourceName = "SiteHybridConnectionNamespaceRelay"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface HybridConnectionOperationGroup {
   /**
    * Description for Retrieves a specific Service Bus Hybrid Connection used by this Web App.
@@ -215,10 +219,12 @@ interface HybridConnectionSlotOps
         @segment("relays")
         @key
         relayName: string,
-      }
+      },
+      ResourceName = "SiteSlotHybridConnectionNamespaceRelay"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface HybridConnectionSlotOperationGroup {
   /**
    * Description for Retrieves a specific Service Bus Hybrid Connection used by this Web App.
@@ -264,18 +270,23 @@ interface HybridConnectionSlotOperationGroup {
 }
 
 @@doc(HybridConnection.name, "Name of the Service Bus relay.");
-@@doc(HybridConnection.properties,
+@@doc(
+  HybridConnection.properties,
   "HybridConnection resource specific properties"
 );
-@@doc(HybridConnectionOperationGroup.createOrUpdateHybridConnection::parameters.resource,
+@@doc(
+  HybridConnectionOperationGroup.createOrUpdateHybridConnection::parameters.resource,
   "The details of the hybrid connection."
 );
-@@doc(HybridConnectionOperationGroup.updateHybridConnection::parameters.properties,
+@@doc(
+  HybridConnectionOperationGroup.updateHybridConnection::parameters.properties,
   "The details of the hybrid connection."
 );
-@@doc(HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot::parameters.resource,
+@@doc(
+  HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot::parameters.resource,
   "The details of the hybrid connection."
 );
-@@doc(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot::parameters.properties,
+@@doc(
+  HybridConnectionSlotOperationGroup.updateHybridConnectionSlot::parameters.properties,
   "The details of the hybrid connection."
 );

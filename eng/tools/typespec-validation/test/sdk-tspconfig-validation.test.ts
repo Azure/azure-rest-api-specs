@@ -1,7 +1,7 @@
 /* eslint-disable */
 // TODO: Enable eslint, fix errors
 
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strictEqual } from "node:assert";
@@ -29,6 +29,7 @@ import {
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
+  TspConfigLegacyCsharpEmitterForbiddenSubRule,
   TspConfigPythonDpEmitterOutputDirSubRule,
   TspConfigPythonMgmtEmitterOutputDirSubRule,
   TspConfigPythonMgmtNamespaceSubRule,
@@ -42,9 +43,9 @@ import {
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsMlcDpPackageNameMatchPatternSubRule,
   TspConfigTsRlcDpPackageNameMatchPatternSubRule,
-} from "../src/rules/sdk-tspconfig-validation.js";
+} from "../src/rules/sdk-tspconfig-validation.ts";
 
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 export function createParameterExample(...pairs: { key: string; value: string | boolean | {} }[]) {
   const obj: Record<string, any> = { parameters: {} };
@@ -612,6 +613,118 @@ const csharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
 );
 
+// Test cases for the legacy CSharp emitter rule
+const legacyCsharpEmitterForbiddenTestCases: Case[] = [
+  {
+    description: "Legacy CSharp emitter forbidden: pass with management-plane replacement in emit",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-typespec/http-client-csharp-mgmt"
+`,
+    success: true,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description:
+      "Legacy CSharp emitter forbidden: pass with management-plane replacement in options",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Compute"
+`,
+    success: true,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description: "Legacy CSharp emitter forbidden: fail in management-plane emit",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-csharp"
+`,
+    success: false,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description: "Legacy CSharp emitter forbidden: fail in management-plane options",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.ResourceManager.Compute"
+`,
+    success: false,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description: "Legacy CSharp emitter forbidden: fail when both management emitters coexist",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-csharp"
+  - "@azure-typespec/http-client-csharp-mgmt"
+`,
+    success: false,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description: "Legacy CSharp emitter forbidden: pass when no .NET emitter is configured",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+`,
+    success: true,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description: "Legacy CSharp emitter forbidden: fail in data-plane emit",
+    folder: "contosowidgetmanager/Contoso.WidgetManager/",
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-csharp"
+`,
+    success: false,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description: "Legacy CSharp emitter forbidden: fail in data-plane options",
+    folder: "contosowidgetmanager/Contoso.WidgetManager/",
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.Contoso.WidgetManager"
+`,
+    success: false,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+  {
+    description: "Legacy CSharp emitter forbidden: pass with data-plane replacement",
+    folder: "contosowidgetmanager/Contoso.WidgetManager/",
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.Contoso.WidgetManager"
+`,
+    success: true,
+    subRules: [new TspConfigLegacyCsharpEmitterForbiddenSubRule()],
+  },
+];
+
 // Test cases for emitter-output-dir with namespace variable resolution
 const emitterOutputDirWithNamespaceVariableTestCases: Case[] = [
   {
@@ -725,6 +838,33 @@ options:
 `,
     success: false,
     subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate http-client-csharp-mgmt emitter-output-dir succeeds with inline sdk/<service-name> path (no {service-dir} variable)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.RecoveryServicesBackup"
+    emitter-output-dir: "{output-dir}/sdk/recoveryservicesbackup/Azure.ResourceManager.RecoveryServicesBackup"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate Go DP emitter-output-dir succeeds with multi-segment package path (e.g. azadmin/backup)",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azadmin"
+    service-dir: "sdk/security/keyvault"
+    emitter-output-dir: "{output-dir}/{service-dir}/azadmin/backup"
+`,
+    success: true,
+    subRules: [new TspConfigGoDpEmitterOutputDirMatchPatternSubRule()],
   },
 ];
 
@@ -896,6 +1036,8 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpEmitterOutputTestCases,
+    // legacy csharp emitter
+    ...legacyCsharpEmitterForbiddenTestCases,
     // variable resolution in emitter-output-dir
     ...emitterOutputDirWithNamespaceVariableTestCases,
   ];

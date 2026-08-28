@@ -47,9 +47,12 @@ interface ClusterPrincipalAssignments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ClusterPrincipalAssignment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -61,10 +64,12 @@ interface ClusterPrincipalAssignments {
   >;
 }
 
-@@doc(ClusterPrincipalAssignment.name,
+@@doc(
+  ClusterPrincipalAssignment.name,
   "The name of the Kusto principalAssignment."
 );
 @@doc(ClusterPrincipalAssignment.properties, "The cluster principal.");
-@@doc(ClusterPrincipalAssignments.createOrUpdate::parameters.resource,
+@@doc(
+  ClusterPrincipalAssignments.createOrUpdate::parameters.resource,
   "The Kusto cluster principalAssignment's parameters supplied for the operation."
 );

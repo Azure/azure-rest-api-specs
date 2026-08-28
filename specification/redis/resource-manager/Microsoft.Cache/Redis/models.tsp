@@ -354,6 +354,7 @@ model CheckNameAvailabilityParameters {
 /**
  * The response of listUpgradeNotifications.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model NotificationListResponse is Azure.Core.Page<UpgradeNotification>;
 
 /**
@@ -528,12 +529,7 @@ model RedisCommonProperties {
   zonalAllocationPolicy?: ZonalAllocationPolicy;
 }
 
-/**
- * All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta, maxmemory-policy,notify-keyspace-events, aof-backup-enabled, aof-storage-connection-string-0, aof-storage-connection-string-1 etc.
- */
-model RedisCommonPropertiesRedisConfiguration {
-  ...Record<unknown>;
-
+alias RedisCommonPropertiesRedisConfigurationProperties = {
   /**
    * Specifies whether the RDB backup is enabled
    */
@@ -650,6 +646,14 @@ model RedisCommonPropertiesRedisConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `aad-enabled`?: string;
+};
+
+/**
+ * All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta, maxmemory-policy,notify-keyspace-events, aof-backup-enabled, aof-storage-connection-string-0, aof-storage-connection-string-1 etc.
+ */
+model RedisCommonPropertiesRedisConfiguration {
+  ...Record<unknown>;
+  ...RedisCommonPropertiesRedisConfigurationProperties;
 }
 
 /**

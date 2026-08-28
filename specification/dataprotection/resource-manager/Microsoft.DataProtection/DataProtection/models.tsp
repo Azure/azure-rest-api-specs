@@ -19,6 +19,17 @@ union AlertsState {
   Disabled: "Disabled",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union GranularityLevel {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  VaultLevel: "VaultLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemLevel: "ProtectedItemLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemWithParentTag: "ProtectedItemWithParentTag",
+}
+
 /**
  * Provisioning state of the BackupVault resource
  */
@@ -407,6 +418,21 @@ union AKSVolumeTypes {
 }
 
 /**
+ * Backup solution types for PostgreSQL Flexible Server.
+ */
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+union BackupSolutionType {
+  string,
+
+  /** Logical backup type */
+  LogicalBackup: "LogicalBackup",
+
+  /** Physical backup type */
+  PhysicalBackup: "PhysicalBackup",
+}
+
+/**
  * backup support feature type.
  */
 union FeatureType {
@@ -583,6 +609,12 @@ model BackupVault {
   monitoringSettings?: MonitoringSettings;
 
   /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_06_01)
+  costManagementSettings?: CostManagementSettings;
+
+  /**
    * Provisioning state of the BackupVault resource
    */
   @visibility(Lifecycle.Read)
@@ -662,6 +694,17 @@ model MonitoringSettings {
 model AzureMonitorAlertSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   alertsForAllJobFailures?: AlertsState;
+}
+
+/**
+ * Cost Management Settings of the vault
+ */
+@added(Versions.v2026_06_01)
+model CostManagementSettings {
+  /**
+   * Settings for granularity level
+   */
+  granularityLevel?: GranularityLevel;
 }
 
 /**
@@ -1137,6 +1180,12 @@ model PatchBackupVaultInput {
    * Feature Settings
    */
   featureSettings?: FeatureSettings;
+
+  /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_06_01)
+  costManagementSettings?: CostManagementSettings;
 
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed
@@ -1716,6 +1765,7 @@ model IdentityDetails {
   /**
    * ARM URL for User Assigned Identity.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   userAssignedIdentityArmUrl?: string;
 }
 
@@ -2061,6 +2111,7 @@ model AzureBackupJob {
   /**
    * Url which contains job's progress
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   progressUrl?: string;
 
@@ -2277,6 +2328,36 @@ model AzureBackupRehydrationRequest {
 }
 
 /**
+ * Type of Datasource object, used to initialize the right inherited type
+ */
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+union ResumeProtectionRequestObjectType {
+  string,
+
+  @doc("Resume Protection Request Type.")
+  ResumeProtectionRequest: "ResumeProtectionRequest",
+}
+
+/**
+ * Request body of Resume protection when MSI is to be changed
+ */
+@discriminator("objectType")
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+model ResumeProtectionRequest {
+  /**
+   * Type of Datasource object, used to initialize the right inherited type
+   */
+  objectType: ResumeProtectionRequestObjectType;
+
+  /**
+   * identity details of the MSI
+   */
+  identityDetails?: IdentityDetails;
+}
+
+/**
  * Request body of Stop protection when MUA is Enabled
  */
 model StopProtectionRequest {
@@ -2384,6 +2465,7 @@ model ExportJobsResult {
   /**
    * URL of the blob into which the serialized string of list of jobs is exported.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   blobUrl?: string;
 
@@ -2397,6 +2479,7 @@ model ExportJobsResult {
   /**
    * URL of the blob into which the ExcelFile is uploaded.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   excelFileBlobUrl?: string;
 
@@ -2800,6 +2883,7 @@ model AzureBackupFindRestorableTimeRangesRequestResource
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DppWorkerRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subscriptionId?: string;
@@ -3197,6 +3281,37 @@ model AdlsBlobBackupDatasourceParametersForAutoProtection
 }
 
 /**
+ * Parameters to be used during configuration of backup of PostgreSQL Flexible Servers
+ */
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+model PostgreSqlFlexibleServerBackupDatasourceParameters
+  extends BackupDatasourceParameters {
+  /**
+   * Type of backup taken, Logical/Physical
+   */
+  backupSolutionType?: BackupSolutionType;
+
+  objectType: "PostgreSqlFlexibleServerBackupDatasourceParameters";
+}
+
+/**
+ * Generic parameters to be used during configuration of backup
+ */
+@added(Versions.v2026_06_01)
+model GenericBackupDatasourceParameters extends BackupDatasourceParameters {
+  /**
+   * List of resource selectors to be backed up during configuration of backup
+   */
+  resourceSelectors: string[];
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: "GenericBackupDatasourceParameters";
+}
+
+/**
  * Azure retention rule
  */
 model AzureRetentionRule extends BasePolicyRule {
@@ -3537,6 +3652,44 @@ model RangeBasedItemLevelRestoreCriteria extends ItemLevelRestoreCriteria {
    * Type of the specific object - used for deserializing
    */
   objectType: "RangeBasedItemLevelRestoreCriteria";
+}
+
+/**
+ * Generic criteria to be used during restore
+ */
+@added(Versions.v2026_06_01)
+model GenericRestoreDatasourceCriteria extends ItemLevelRestoreCriteria {
+  /**
+   * List of resource identifiers that need to be restored
+   */
+  resourceSelectors: ResourceListSelectionCriteria;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: "GenericRestoreDatasourceCriteria";
+}
+
+/**
+ * Specifies the list of resources to be restored
+ */
+@added(Versions.v2026_06_01)
+model ResourceListSelectionCriteria {
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: string;
+
+  /**
+   * List of resource identifiers to restore from
+   */
+  resourceIdentifiers: string[];
+
+  /**
+   * This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Backward-compatible source-to-target name override map for generic restore"
+  resourceNameOverrides?: Record<string>;
 }
 
 /**

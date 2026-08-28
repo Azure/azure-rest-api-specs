@@ -22,53 +22,179 @@ namespace OpenAI {
 
   @@withoutOmittedProperties(Item, "type");
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "The AgentServer input contract includes program replay items."
-  @@copyProperties(Item, {
-    type: ItemType | "program" | "program_output"
-  });
+  @@copyProperties(
+    Item,
+    {
+      type: ItemType | "program" | "program_output",
+    }
+  );
 }
-
 
 // Map Azure.AI.Projects augmentation types into our SDK namespace
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" ""
 @clientNamespace("Azure.AI.AgentServer.Responses.Models")
 namespace Azure.AI.Projects {
   // Propagate "sequence_number" to base of stream events
-  @@copyProperties(OpenAI.ResponseStreamEvent,
+  @@copyProperties(
+    OpenAI.ResponseStreamEvent,
     {
-      sequence_number: integer,
+      sequence_number: OpenAI.integer,
     }
   );
 
   // Propagate "id" to Azure.AI.Projects OutputItem types that lack it.
   // The OpenAI base types already have id; these are Azure-specific extensions.
-  @@copyProperties(Azure.AI.Projects.A2AToolCall, { id: string });
-  @@copyProperties(Azure.AI.Projects.A2AToolCallOutput, { id: string });
-  @@copyProperties(Azure.AI.Projects.AzureAISearchToolCall, { id: string });
-  @@copyProperties(Azure.AI.Projects.AzureAISearchToolCallOutput, { id: string });
-  @@copyProperties(Azure.AI.Projects.AzureFunctionToolCall, { id: string });
-  @@copyProperties(Azure.AI.Projects.AzureFunctionToolCallOutput, { id: string });
-  @@copyProperties(Azure.AI.Projects.BingCustomSearchToolCall, { id: string });
-  @@copyProperties(Azure.AI.Projects.BingCustomSearchToolCallOutput, { id: string });
-  @@copyProperties(Azure.AI.Projects.BingGroundingToolCall, { id: string });
-  @@copyProperties(Azure.AI.Projects.BingGroundingToolCallOutput, { id: string });
-  @@copyProperties(Azure.AI.Projects.BrowserAutomationToolCall, { id: string });
-  @@copyProperties(Azure.AI.Projects.BrowserAutomationToolCallOutput, { id: string });
-  @@copyProperties(Azure.AI.Projects.FabricDataAgentToolCall, { id: string });
-  @@copyProperties(Azure.AI.Projects.FabricDataAgentToolCallOutput, { id: string });
-  @@copyProperties(Azure.AI.Projects.MemorySearchToolCallItemResource, { id: string });
-  @@copyProperties(Azure.AI.Projects.OpenApiToolCall, { id: string });
-  @@copyProperties(Azure.AI.Projects.OpenApiToolCallOutput, { id: string });
-  @@copyProperties(Azure.AI.Projects.SharepointGroundingToolCall, { id: string });
-  @@copyProperties(Azure.AI.Projects.SharepointGroundingToolCallOutput, { id: string });
-  @@copyProperties(Azure.AI.Projects.StructuredOutputsOutputItem, { id: string });
-  @@copyProperties(Azure.AI.Projects.WorkflowActionOutputItem, { id: string });
+  @@copyProperties(
+    Azure.AI.Projects.A2AToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.A2AToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.AzureAISearchToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.AzureAISearchToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.AzureFunctionToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.AzureFunctionToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.BingCustomSearchToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.BingCustomSearchToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.BingGroundingToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.BingGroundingToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.BrowserAutomationToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.BrowserAutomationToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.FabricDataAgentToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.FabricDataAgentToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.MemoryCommandToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.MemoryCommandToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.MemorySearchToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.OpenApiToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.OpenApiToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.SharepointGroundingToolCall,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.SharepointGroundingToolCallOutput,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.StructuredOutputsOutputItem,
+    {
+      id: string,
+    }
+  );
+  @@copyProperties(
+    Azure.AI.Projects.WorkflowActionOutputItem,
+    {
+      id: string,
+    }
+  );
 
   // Remove created_by from specific models to avoid BinaryData/string mismatch
   // with the base OutputItem.CreatedBy (BinaryData) type
-  @@withoutOmittedProperties(OpenAI.OutputItemFunctionShellCallOutput, "created_by");
+  @@withoutOmittedProperties(
+    OpenAI.OutputItemFunctionShellCallOutput,
+    "created_by"
+  );
   @@withoutOmittedProperties(OpenAI.OutputItemFunctionShellCall, "created_by");
   @@withoutOmittedProperties(OpenAI.OutputItemCompactionBody, "created_by");
-  @@withoutOmittedProperties(OpenAI.OutputItemApplyPatchToolCallOutput, "created_by");
+  @@withoutOmittedProperties(
+    OpenAI.OutputItemApplyPatchToolCallOutput,
+    "created_by"
+  );
   @@withoutOmittedProperties(OpenAI.OutputItemApplyPatchToolCall, "created_by");
 
   // Remove "id" and "status" from ItemMessage (input-only model).
@@ -91,24 +217,41 @@ namespace Azure.AI.Projects {
   // string or an array of content parts (string | InputMessageContentList).
   // Remove the array-only content and replace with the union type.
   @@withoutOmittedProperties(OpenAI.ItemMessage, "content");
-  @@copyProperties(OpenAI.ItemMessage, { content: string | OpenAI.MessageContent[] });
+  @@copyProperties(
+    OpenAI.ItemMessage,
+    {
+      content: string | OpenAI.MessageContent[],
+    }
+  );
 
   // Match the Responses API behavior, which accepts assistant output text
   // without token log probabilities.
   @@withoutOmittedProperties(OpenAI.OutputContentOutputTextContent, "logprobs");
   @@copyProperties(
     OpenAI.OutputContentOutputTextContent,
-    { logprobs?: OpenAI.LogProb[] }
+    {
+      logprobs?: OpenAI.LogProb[],
+    }
   );
-  @@withoutOmittedProperties(OpenAI.MessageContentOutputTextContent, "logprobs");
+  @@withoutOmittedProperties(
+    OpenAI.MessageContentOutputTextContent,
+    "logprobs"
+  );
   @@copyProperties(
     OpenAI.MessageContentOutputTextContent,
-    { logprobs?: OpenAI.LogProb[] }
+    {
+      logprobs?: OpenAI.LogProb[],
+    }
   );
-  @@withoutOmittedProperties(OpenAI.OutputMessageContentOutputTextContent, "logprobs");
+  @@withoutOmittedProperties(
+    OpenAI.OutputMessageContentOutputTextContent,
+    "logprobs"
+  );
   @@copyProperties(
     OpenAI.OutputMessageContentOutputTextContent,
-    { logprobs?: OpenAI.LogProb[] }
+    {
+      logprobs?: OpenAI.LogProb[],
+    }
   );
 
   // Avoid Markdown list formatting that produces an invalid Python docstring.
@@ -129,7 +272,12 @@ namespace Azure.AI.Projects {
   // Remove "object" from DeleteResponseResult to work around codegen bug
   // (TypeSpec emitter generates `= "response"` string default for ResponseObjectType enum)
   @@withoutOmittedProperties(Azure.AI.Projects.DeleteResponseResult, "object");
-  @@copyProperties(Azure.AI.Projects.DeleteResponseResult, { object: "response" });
+  @@copyProperties(
+    Azure.AI.Projects.DeleteResponseResult,
+    {
+      object: "response",
+    }
+  );
 
   // ============================================================================
   // Public constructors: mark models as input+output so the C# emitter generates
@@ -137,60 +285,161 @@ namespace Azure.AI.Projects {
   // ResponseHandler implementations.
   // ============================================================================
 
-  // --- ResponseStreamEvent subtypes (53 concrete types) ---
+  // --- ResponseStreamEvent subtypes (58 concrete types) ---
   @@usage(OpenAI.ResponseAudioDeltaEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseAudioDoneEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseAudioTranscriptDeltaEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseAudioTranscriptDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseCodeInterpreterCallCodeDeltaEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseCodeInterpreterCallCodeDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseCodeInterpreterCallCompletedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseCodeInterpreterCallInProgressEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseCodeInterpreterCallInterpretingEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseCodeInterpreterCallCodeDeltaEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseCodeInterpreterCallCodeDoneEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseCodeInterpreterCallCompletedEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseCodeInterpreterCallInProgressEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseCodeInterpreterCallInterpretingEvent,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.ResponseCompletedEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseContentPartAddedEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseContentPartDoneEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseCreatedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseCustomToolCallInputDeltaEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseCustomToolCallInputDoneEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseCustomToolCallInputDeltaEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseCustomToolCallInputDoneEvent,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.ResponseErrorEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseFailedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseFileSearchCallCompletedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseFileSearchCallInProgressEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseFileSearchCallSearchingEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseFunctionCallArgumentsDeltaEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseFunctionCallArgumentsDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseImageGenCallCompletedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseImageGenCallGeneratingEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseImageGenCallInProgressEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseImageGenCallPartialImageEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseFileSearchCallCompletedEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseFileSearchCallInProgressEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseFileSearchCallSearchingEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseFunctionCallArgumentsDeltaEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseFunctionCallArgumentsDoneEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseImageGenCallCompletedEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseImageGenCallGeneratingEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseImageGenCallInProgressEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseImageGenCallPartialImageEvent,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.ResponseIncompleteEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseInProgressEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseMCPCallArgumentsDeltaEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseMCPCallArgumentsDeltaEvent,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.ResponseMCPCallArgumentsDoneEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseMCPCallCompletedEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseMCPCallFailedEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseMCPCallInProgressEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseMCPListToolsCompletedEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseMCPListToolsCompletedEvent,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.ResponseMCPListToolsFailedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseMCPListToolsInProgressEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseMCPListToolsInProgressEvent,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.ResponseOutputItemAddedEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseOutputItemDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseOutputTextAnnotationAddedEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseOutputTextAnnotationAddedEvent,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.ResponseQueuedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseReasoningSummaryPartAddedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseReasoningSummaryPartDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseReasoningSummaryTextDeltaEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseReasoningSummaryTextDoneEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseReasoningSummaryPartAddedEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseReasoningSummaryPartDoneEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseReasoningSummaryTextDeltaEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseReasoningSummaryTextDoneEvent,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.ResponseReasoningTextDeltaEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseReasoningTextDoneEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseRefusalDeltaEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseRefusalDoneEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseShellCallCommandAddedStreamingEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseShellCallCommandDeltaStreamingEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseShellCallCommandDoneStreamingEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseShellCallOutputContentDeltaStreamingEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseShellCallOutputContentDoneStreamingEvent,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.ResponseTextDeltaEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseTextDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseWebSearchCallCompletedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseWebSearchCallInProgressEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseWebSearchCallSearchingEvent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.ResponseWebSearchCallCompletedEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseWebSearchCallInProgressEvent,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    OpenAI.ResponseWebSearchCallSearchingEvent,
+    Usage.input | Usage.output
+  );
 
   // --- Response, ResponseError, Error, and CreateResponse ---
   @@usage(OpenAI.Response, Usage.input | Usage.output);
@@ -204,7 +453,10 @@ namespace Azure.AI.Projects {
 
   // --- OpenAI OutputItem subtypes (24 concrete types) ---
   @@usage(OpenAI.OutputItemApplyPatchToolCall, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemApplyPatchToolCallOutput, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.OutputItemApplyPatchToolCallOutput,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.OutputItemCodeInterpreterToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemCompactionBody, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemComputerToolCall, Usage.input | Usage.output);
@@ -214,9 +466,15 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.OutputItemFunctionToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemImageGenToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemLocalShellToolCall, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemLocalShellToolCallOutput, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.OutputItemLocalShellToolCallOutput,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.OutputItemMcpApprovalRequest, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemMcpApprovalResponseResource, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.OutputItemMcpApprovalResponseResource,
+    Usage.input | Usage.output
+  );
   @@usage(OpenAI.OutputItemMcpListTools, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemMcpToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemMessage, Usage.input | Usage.output);
@@ -232,34 +490,87 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.OutputContentRefusalContent, Usage.input | Usage.output);
 
   // --- OutputMessageContent subtypes (internal — use MessageContent instead) ---
-  @@usage(OpenAI.OutputMessageContentOutputTextContent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.OutputMessageContentOutputTextContent,
+    Usage.input | Usage.output
+  );
   @@access(OpenAI.OutputMessageContentOutputTextContent, Access.internal);
-  @@usage(OpenAI.OutputMessageContentRefusalContent, Usage.input | Usage.output);
+  @@usage(
+    OpenAI.OutputMessageContentRefusalContent,
+    Usage.input | Usage.output
+  );
   @@access(OpenAI.OutputMessageContentRefusalContent, Access.internal);
   @@access(OpenAI.OutputMessageContent, Access.internal);
   @@access(OpenAI.ItemOutputMessage, Access.internal);
 
-  // --- Azure.AI.Projects OutputItem subtypes (22 concrete types) ---
+  // --- Azure.AI.Projects OutputItem subtypes (24 concrete types) ---
   @@usage(Azure.AI.Projects.A2AToolCall, Usage.input | Usage.output);
   @@usage(Azure.AI.Projects.A2AToolCallOutput, Usage.input | Usage.output);
   @@usage(Azure.AI.Projects.AzureAISearchToolCall, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.AzureAISearchToolCallOutput, Usage.input | Usage.output);
+  @@usage(
+    Azure.AI.Projects.AzureAISearchToolCallOutput,
+    Usage.input | Usage.output
+  );
   @@usage(Azure.AI.Projects.AzureFunctionToolCall, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.AzureFunctionToolCallOutput, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.BingCustomSearchToolCall, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.BingCustomSearchToolCallOutput, Usage.input | Usage.output);
+  @@usage(
+    Azure.AI.Projects.AzureFunctionToolCallOutput,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    Azure.AI.Projects.BingCustomSearchToolCall,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    Azure.AI.Projects.BingCustomSearchToolCallOutput,
+    Usage.input | Usage.output
+  );
   @@usage(Azure.AI.Projects.BingGroundingToolCall, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.BingGroundingToolCallOutput, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.BrowserAutomationToolCall, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.BrowserAutomationToolCallOutput, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.FabricDataAgentToolCall, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.FabricDataAgentToolCallOutput, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.MemorySearchToolCallItemResource, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.OAuthConsentRequestOutputItem, Usage.input | Usage.output);
+  @@usage(
+    Azure.AI.Projects.BingGroundingToolCallOutput,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    Azure.AI.Projects.BrowserAutomationToolCall,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    Azure.AI.Projects.BrowserAutomationToolCallOutput,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    Azure.AI.Projects.FabricDataAgentToolCall,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    Azure.AI.Projects.FabricDataAgentToolCallOutput,
+    Usage.input | Usage.output
+  );
+  @@usage(Azure.AI.Projects.MemoryCommandToolCall, Usage.input | Usage.output);
+  @@usage(
+    Azure.AI.Projects.MemoryCommandToolCallOutput,
+    Usage.input | Usage.output
+  );
+  @@usage(Azure.AI.Projects.MemorySearchToolCall, Usage.input | Usage.output);
+  @@usage(
+    Azure.AI.Projects.OAuthConsentRequestOutputItem,
+    Usage.input | Usage.output
+  );
   @@usage(Azure.AI.Projects.OpenApiToolCall, Usage.input | Usage.output);
   @@usage(Azure.AI.Projects.OpenApiToolCallOutput, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.SharepointGroundingToolCall, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.SharepointGroundingToolCallOutput, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.StructuredOutputsOutputItem, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.WorkflowActionOutputItem, Usage.input | Usage.output);
+  @@usage(
+    Azure.AI.Projects.SharepointGroundingToolCall,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    Azure.AI.Projects.SharepointGroundingToolCallOutput,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    Azure.AI.Projects.StructuredOutputsOutputItem,
+    Usage.input | Usage.output
+  );
+  @@usage(
+    Azure.AI.Projects.WorkflowActionOutputItem,
+    Usage.input | Usage.output
+  );
 }

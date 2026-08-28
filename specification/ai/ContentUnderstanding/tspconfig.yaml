@@ -12,6 +12,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -33,6 +34,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/ai-content-understanding"
+    wrap-non-model-return: false
     package-details:
       name: "@azure/ai-content-understanding"
       description: "Azure Content Understanding Rest Client"

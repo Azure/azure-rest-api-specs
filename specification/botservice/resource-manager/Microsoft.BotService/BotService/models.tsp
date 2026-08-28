@@ -286,6 +286,7 @@ model BotProperties {
   /**
    * The Icon Url of the bot
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   iconUrl?: string = "";
 
   /**
@@ -315,6 +316,7 @@ model BotProperties {
   /**
    * The bot's manifest url
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   manifestUrl?: string;
 
   /**
@@ -388,6 +390,7 @@ model BotProperties {
   /**
    * The CMK Url
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   cmekKeyVaultUrl?: string;
 
   /**
@@ -434,7 +437,7 @@ model BotProperties {
    * The channel schema transformation version for the bot
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  schemaTransformationVersion?: string | null = null;
+  schemaTransformationVersion?: string | null;
 
   /**
    * The storage resourceId for the bot
@@ -981,6 +984,7 @@ model ChannelSettings {
   /**
    * The bot icon url
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   botIconUrl?: string;
 
   /**
@@ -1058,7 +1062,7 @@ model Site {
    * Whether this site is enabled for block user upload.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  isBlockUserUploadEnabled?: boolean | null = null;
+  isBlockUserUploadEnabled?: boolean | null;
 
   /**
    * Whether this no-storage site is disabled detailed logging for
@@ -1298,12 +1302,14 @@ model ServiceProviderProperties {
   /**
    * URL of Dev Portal
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   devPortalUrl?: string;
 
   /**
    * The URL of icon
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   iconUrl?: string = "";
 
   /**
@@ -1343,6 +1349,7 @@ model ServiceProviderParameter {
   /**
    * Help Url for the  Service Provider
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   helpUrl?: string;
 
@@ -1513,12 +1520,14 @@ model HostSettingsResponse {
   /**
    * For in-conversation bot user authentication
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OAuthUrl?: string;
 
   /**
    * For verifying incoming tokens from the channels
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ToBotFromChannelOpenIdMetadataUrl?: string;
 
@@ -1531,12 +1540,14 @@ model HostSettingsResponse {
   /**
    * For verifying incoming tokens from bot emulator
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ToBotFromEmulatorOpenIdMetadataUrl?: string;
 
   /**
    * For getting access token to channels from bot host
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ToChannelFromBotLoginUrl?: string;
 
@@ -1743,6 +1754,7 @@ model FacebookChannelProperties {
   /**
    * Callback Url
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   callbackUrl?: string;
 
@@ -1872,7 +1884,7 @@ model MsTeamsChannelProperties {
    * Whether this channel accepted terms
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  acceptedTerms?: boolean | null = null;
+  acceptedTerms?: boolean | null;
 }
 
 /**
@@ -2201,6 +2213,7 @@ model SlackChannelProperties {
   /**
    * The Slack landing page Url
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   landingPageUrl?: string;
 
   /**
@@ -2268,6 +2281,7 @@ model LineChannelProperties {
   /**
    * Callback Url to enter in line registration.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   callbackUrl?: string;
 

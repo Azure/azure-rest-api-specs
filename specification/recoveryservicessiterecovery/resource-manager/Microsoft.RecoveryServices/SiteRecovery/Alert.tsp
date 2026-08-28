@@ -64,6 +64,7 @@ interface Alerts {
 
 @@doc(Alert.name, "The name of the email notification configuration.");
 @@doc(Alert.properties, "Alert related data.");
-@@doc(Alerts.create::parameters.resource,
+@@doc(
+  Alerts.create::parameters.resource,
   "The input to configure the email notification(alert)."
 );

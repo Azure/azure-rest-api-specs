@@ -38,7 +38,7 @@ interface OpenShiftClusters {
   @summary("Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OpenShiftCluster,
-    LroHeaders = ArmLroLocationHeader<FinalResult = OpenShiftCluster> &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = OpenShiftCluster> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
@@ -51,11 +51,13 @@ interface OpenShiftClusters {
   update is ArmCustomPatchAsync<
     OpenShiftCluster,
     PatchModel = OpenShiftClusterUpdate,
-    Response = ArmResponse<OpenShiftCluster> | ArmResourceCreatedResponse<
-      OpenShiftCluster,
-      LroHeaders = ArmLroLocationHeader<FinalResult = OpenShiftCluster> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<OpenShiftCluster>
+      | ArmResourceCreatedResponse<
+          OpenShiftCluster,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = OpenShiftCluster> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Error = CloudError
   >;
 
@@ -113,9 +115,11 @@ interface OpenShiftClusters {
 
 @@doc(OpenShiftCluster.name, "The name of the OpenShift cluster resource.");
 @@doc(OpenShiftCluster.properties, "The cluster properties.");
-@@doc(OpenShiftClusters.createOrUpdate::parameters.resource,
+@@doc(
+  OpenShiftClusters.createOrUpdate::parameters.resource,
   "The OpenShift cluster resource."
 );
-@@doc(OpenShiftClusters.update::parameters.properties,
+@@doc(
+  OpenShiftClusters.update::parameters.properties,
   "The OpenShift cluster resource."
 );

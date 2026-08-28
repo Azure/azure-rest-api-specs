@@ -68,7 +68,8 @@ interface Desktops {
 
 @@maxLength(Desktop.name, 24);
 @@minLength(Desktop.name, 3);
-@@doc(Desktop.name,
+@@doc(
+  Desktop.name,
   "The name of the desktop within the specified desktop group"
 );
 @@doc(Desktop.properties, "Detailed properties for Desktop");

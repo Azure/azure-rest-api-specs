@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(ModelContainer)
-model ModelVersion
-  is Azure.ResourceManager.ProxyResource<ModelVersionProperties, false> {
+model ModelVersion is Azure.ResourceManager.ProxyResource<
+  ModelVersionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ModelVersion,
     KeyName = "version",
@@ -54,7 +56,9 @@ interface ModelVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryModelVersion"
     > {}
 
 @armResourceOperations
@@ -72,16 +76,15 @@ interface ModelVersions {
   @summary("Create or update version.")
   createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<
     ModelVersion,
-    Response = ArmResourceUpdatedResponse<ModelVersion> | (ArmResourceCreatedResponse<
-      ModelVersion,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ModelVersion>
+      | (ArmResourceCreatedResponse<ModelVersion, ArmAsyncOperationHeader> & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -91,13 +94,16 @@ interface ModelVersions {
   @summary("Delete version.")
   delete is ModelVersionOps.DeleteWithoutOkAsync<
     ModelVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -197,7 +203,9 @@ interface ModelVersionOperationGroupOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningModelVersion"
     > {}
 
 @armResourceOperations
@@ -306,18 +314,23 @@ interface ModelVersionOperationGroup {
 }
 
 @@doc(ModelVersion.name, "Version identifier. This is case-sensitive.");
-@@doc(ModelVersion.properties,
+@@doc(
+  ModelVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ModelVersions.createOrUpdate::parameters.resource,
+@@doc(
+  ModelVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ModelVersions.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  ModelVersions.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );
-@@doc(ModelVersionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ModelVersionOperationGroup.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ModelVersionOperationGroup.publish::parameters.body,
+@@doc(
+  ModelVersionOperationGroup.publish::parameters.body,
   "Destination registry info"
 );

@@ -62,9 +62,11 @@ interface SmtpUsernames {
 @@maxLength(SmtpUsernameResource.name, 253);
 @@minLength(SmtpUsernameResource.name, 1);
 @@doc(SmtpUsernameResource.name, "The name of the SmtpUsernameResource.");
-@@doc(SmtpUsernameResource.properties,
+@@doc(
+  SmtpUsernameResource.properties,
   "The properties of a SmtpUsername resource."
 );
-@@doc(SmtpUsernames.createOrUpdate::parameters.resource,
+@@doc(
+  SmtpUsernames.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );

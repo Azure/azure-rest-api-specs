@@ -35,29 +35,27 @@ These settings apply only when `--tag=package-preview-2025-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-03'
 input-file:
-  - preview/2025-03-01-preview/iac.json
-  - preview/2025-03-01-preview/workflow.json
-  - preview/2025-03-01-preview/template.json
+  - preview/2025-03-01-preview/openapi.json
 suppressions:
   - code: XmsPageableForListCalls
     reason: False positive error for singleton resource Get API.
     from: workflow.json
   - code: AvoidAdditionalProperties
     reason: Removing additionalProperties from the models will result in breaking changes.
-    from: workflow.json
+    from: openapi.json
     where:
       - $.definitions.TemplateReference.properties.parameters
       - $.definitions.Deployment.properties.overrides
       - $.definitions.GeneratePreviewArtifactsResponse
   - code: BodyTopLevelProperties
     reason: False positive error for Collection Get API
-    from: workflow.json
+    from: openapi.json
   - code: AvoidAdditionalProperties
     where:
       - $.definitions.GenerateVersionedTemplateResponse.properties.generatedFiles
       - $.definitions.GenerateVersionedTemplateRequest
     reason: Templates need additional properties for input/responses.
-    from: template.json
+    from: openapi.json
 ```
 
 ### Tag: package-preview-2024-08

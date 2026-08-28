@@ -100,6 +100,7 @@ model ScheduleTestsTrigger extends Trigger {
   @doc("Start date time of the trigger in UTC timezone. (RFC 3339 literal format)")
   startDateTime?: utcDateTime;
 
+  @doc("The current recurrence status of the trigger, including remaining occurrences and next scheduled execution times.")
   @visibility(Lifecycle.Read)
   recurrenceStatus?: RecurrenceStatus;
 

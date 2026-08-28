@@ -49,6 +49,10 @@ union ResourceOperationType {
   @doc("Delete operations on the resources")
   Delete: "Delete",
 
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request")
+  GetInstanceView: "GetInstanceView",
+
   string,
 }
 
@@ -95,10 +99,215 @@ model Resources {
   ]>>;
 }
 
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+@doc("The resources needed for the user request with the resourceContext")
+model ResourceWithContext {
+  @doc("The resource ids used for the request")
+  resourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
+
+  @doc("The operational context of the resourceId")
+  resourceContext: string;
+}
+
+@doc("The resources needed for the user request with the context for tracking purposes")
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+model ResourcesWithContext {
+  @identifiers(#["resourceId"])
+  @doc("The resource ids used for the request")
+  resources: Array<ResourceWithContext>;
+}
+
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+@doc("Resource notification details containing notification metadata like the resource context")
+model ResourceNotificationDetails {
+  @doc("Resource context for notification tracking")
+  resourceContext?: string;
+}
+
 /**
- * The virtual machine specification for bulk create.
+ * The flex properties for flexible VM creation.
  */
-model BulkactionVMSpec {
+// ----------- ExecuteCreateFlex ---------
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The supported operating system types for flex VM creation")
+union OsType {
+  @doc("Windows operating system")
+  Windows: "Windows",
+
+  @doc("Linux operating system")
+  Linux: "Linux",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The priority type for VM allocation")
+union PriorityType {
+  @doc("Regular priority VMs")
+  Regular: "Regular",
+
+  @doc("Spot priority VMs")
+  Spot: "Spot",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The allocation strategy for VM size selection")
+union AllocationStrategy {
+  @doc("Platform prioritizes VM sizes with the lowest hourly cost")
+  LowestPrice: "LowestPrice",
+
+  @doc("Customer specifies a rank for each VM size, platform uses VM sizes in rank order")
+  Prioritized: "Prioritized",
+
+  @doc("Platform prioritizes VM sizes with the highest available capacity first")
+  CapacityOptimized: "CapacityOptimized",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The distribution strategy for zone allocation")
+union DistributionStrategy {
+  @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
+  BestEffortSingleZone: "BestEffortSingleZone",
+
+  @doc("Platform uses customer-provided zone rankings to allocate VMs")
+  Prioritized: "Prioritized",
+
+  @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
+  BestEffortBalanced: "BestEffortBalanced",
+
+  @doc("Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved")
+  StrictBalanced: "StrictBalanced",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("Whether the service may launch fewer instances than requested when the full capacity cannot be satisfied.")
+union PartialFulfillmentMode {
+  @doc("Partial fulfillment is allowed.")
+  Enabled: "Enabled",
+
+  @doc("Partial fulfillment is not allowed.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The reason the requested capacity could only be partially fulfilled.")
+union PartialFulfillmentReason {
+  @doc("The requested capacity could not be fully satisfied due to insufficient capacity in the region.")
+  InsufficientCapacity: "InsufficientCapacity",
+
+  @doc("The requested capacity could not be fully satisfied due to insufficient quota in the subscription.")
+  InsufficientQuota: "InsufficientQuota",
+
+  @doc("The requested capacity was successfully satisfied without any partial fulfillment.")
+  None: "None",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
+model PartialFulfillmentPolicy {
+  @visibility(Lifecycle.Read)
+  @doc("The amount of capacity that was actually attempted, expressed in the units specified by capacityType. When partial fulfillment is enabled, this value can be less than the requested capacity.")
+  fulfilledCapacity?: int32;
+
+  @doc("Specifies whether partial fulfillment is allowed. When Enabled, Azure creates as many VMs as it has high confidence can be successfully allocated. When Disabled, Azure attempts to create all requested VMs, which may result into allocation failures.")
+  mode?: PartialFulfillmentMode = PartialFulfillmentMode.Enabled;
+
+  @visibility(Lifecycle.Read)
+  @doc("Indicates why the fulfilled capacity is less than the requested capacity. Possible values include InsufficientCapacity and InsufficientQuota. Returned only in the create response when partial fulfillment is enabled and the request cannot be fully satisfied.")
+  reason?: PartialFulfillmentReason;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("A VM size profile with a name and rank for flex VM creation")
+model VmSizeProfile {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  @minLength(1)
+  name: string;
+
+  @doc("The rank of this VM size in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The priority profile for flex VM creation")
+model PriorityProfile {
+  @doc("The priority type for VM allocation")
+  type?: PriorityType;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
+  @doc("Price per hour of each Spot VM will never exceed this. Available from 2026-04-06-preview.")
+  maxPricePerVM?: float32;
+
+  @doc("Eviction Policy to follow when evicting Spot VMs. Available from 2026-04-06-preview.")
+  evictionPolicy?: EvictionPolicy;
+
+  @doc("The allocation strategy for VM size selection")
+  allocationStrategy?: AllocationStrategy;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("A zone preference with a zone identifier and rank")
+model ZonePreference {
+  @doc("The zone identifier")
+  zone: string;
+
+  @doc("The rank of this zone in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The zone allocation policy for distributing VMs across availability zones")
+model ZoneAllocationPolicy {
+  @doc("The distribution strategy for zone allocation")
+  distributionStrategy?: DistributionStrategy;
+
+  @identifiers(#[])
+  @doc("The zone preferences for allocation priority")
+  zonePreferences?: Array<ZonePreference>;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The flex properties for flexible VM creation")
+model FlexProperties {
+  @identifiers(#[])
+  @doc("The list of VM size profiles to use for flex creation")
+  @minItems(1)
+  @maxItems(5)
+  vmSizeProfiles: Array<VmSizeProfile>;
+
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  @doc("The operating system type for the VMs")
+  osType: OsType;
+
+  @doc("The priority profile for VM allocation")
+  priorityProfile: PriorityProfile;
+
+  @doc("The zone allocation policy for distributing VMs across availability zones")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The minimum number of VMs that must be successfully created for the request to proceed. If fewer than this number can be allocated, the entire request is automatically rejected.")
+  minCapacity?: int32;
+}
+
+/**
+ * Per-VM configuration overrides that can be applied within a bulk virtual machine operation.
+ */
+model BulkVMConfiguration {
   /**
    * The marketplace image plan used for the virtual machine.
    */
@@ -129,158 +338,32 @@ model BulkactionVMSpec {
   tags?: Record<string>;
 
   @doc("Describes the properties of a Virtual Machine.")
-  vmProperties?: BulkactionVMProfile;
-}
-
-/**
- * The flex properties for flexible VM creation.
- */
-// ----------- ExecuteCreateFlex ---------
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The supported operating system types for flex VM creation")
-union OsType {
-  @doc("Windows operating system")
-  Windows: "Windows",
-
-  @doc("Linux operating system")
-  Linux: "Linux",
-
-  string,
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The priority type for VM allocation")
-union PriorityType {
-  @doc("Regular priority VMs")
-  Regular: "Regular",
-
-  @doc("Spot priority VMs")
-  Spot: "Spot",
-
-  string,
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The allocation strategy for VM size selection")
-union AllocationStrategy {
-  @doc("Platform prioritizes VM sizes with the lowest hourly cost")
-  LowestPrice: "LowestPrice",
-
-  @doc("Customer specifies a rank for each VM size, platform uses VM sizes in rank order")
-  Prioritized: "Prioritized",
-
-  @doc("Platform prioritizes VM sizes with the highest available capacity first")
-  CapacityOptimized: "CapacityOptimized",
-
-  string,
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The distribution strategy for zone allocation")
-union DistributionStrategy {
-  @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
-  BestEffortSingleZone: "BestEffortSingleZone",
-
-  @doc("Platform uses customer-provided zone rankings to allocate VMs")
-  Prioritized: "Prioritized",
-
-  @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
-  BestEffortBalanced: "BestEffortBalanced",
-
-  @doc("Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved")
-  StrictBalanced: "StrictBalanced",
-
-  string,
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("A VM size profile with a name and rank for flex VM creation")
-model VmSizeProfile {
-  @doc("The name of the VM size, eg Standard_D2ads_v5")
-  @minLength(1)
-  name: string;
-
-  @doc("The rank of this VM size in the priority order")
-  rank: int32;
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The priority profile for flex VM creation")
-model PriorityProfile {
-  @doc("The priority type for VM allocation")
-  type?: PriorityType;
-
-  @doc("The allocation strategy for VM size selection")
-  allocationStrategy?: AllocationStrategy;
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("A zone preference with a zone identifier and rank")
-model ZonePreference {
-  @doc("The zone identifier")
-  zone: string;
-
-  @doc("The rank of this zone in the priority order")
-  rank: int32;
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The zone allocation policy for distributing VMs across availability zones")
-model ZoneAllocationPolicy {
-  @doc("The distribution strategy for zone allocation")
-  distributionStrategy?: DistributionStrategy;
-
-  @identifiers(#[])
-  @doc("The zone preferences for allocation priority")
-  zonePreferences?: Array<ZonePreference>;
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The flex properties for flexible VM creation")
-model FlexProperties {
-  @identifiers(#[])
-  @doc("The list of VM size profiles to use for flex creation")
-  @minItems(1)
-  @maxItems(5)
-  vmSizeProfiles: Array<VmSizeProfile>;
-
-  @doc("The operating system type for the VMs")
-  osType: OsType;
-
-  @doc("The priority profile for VM allocation")
-  priorityProfile: PriorityProfile;
-
-  @doc("The zone allocation policy for distributing VMs across availability zones")
-  zoneAllocationPolicy?: ZoneAllocationPolicy;
-}
-
-/**
- * Per-VM configuration overrides that can be applied within a bulk virtual machine operation.
- */
-model BulkVMConfiguration {
-  @doc("Bulk Actions Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure")
-  vmProperties?: BulkactionVMSpec;
-
-  @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
-  extensions?: BulkactionVMExtension[];
+  properties?: BulkactionVMProperties;
 
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
   computeApiVersion?: string;
+
+  @doc("Identifier for the created virtual machine. If not provided, a name will be generated based on the resource prefix.")
+  name?: string;
 }
 
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON object to allow loosely-typed VM configuration passthrough"
   @doc("Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch")
-  baseProfile?: BulkVMConfiguration;
+  @typeChangedFrom(Versions.`2026-07-06-preview`, BulkVMConfiguration)
+  baseProfile?: Record<unknown>;
 
-  @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should to be overridden for each VM in the batch")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON objects to allow loosely-typed per-VM overrides"
+  @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch")
   @identifiers(#[])
-  resourceOverrides?: BulkVMConfiguration[];
+  @typeChangedFrom(Versions.`2026-07-06-preview`, BulkVMConfiguration[])
+  resourceOverrides?: Record<unknown>[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
 
-  @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
+  @doc("If resourceOverrides doesn't contain \"name\", the service will create a name based on the prefix and ResourceCount, e.g., resourceprefix-0, resourceprefix-1..")
   resourcePrefix?: string;
 }
 
@@ -306,8 +389,33 @@ model RetryPolicy {
 
 @doc("Extra details needed to run the user's request")
 model ExecutionParameters {
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Details that could optimize the user's request")
+  optimizationPreference?: OptimizationPreference;
+
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("When true on an executeStart request, run a post-Start VM agent health check and engage the fallback chain if the guest agent does not report Ready. Ignored for non-Start operations.")
+  verifyVmAgentHealth?: boolean;
+
+  @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+  @doc("Capacity recommendation parameters for the request. When provided on an executeStart request, the service computes placement recommendations only if the VM fails to start due to an allocation failure; the recommendations for the desired sizes and locations are then surfaced in the operation's capacityRecommendation response.")
+  capacityRecommendationParameters?: CapacityRecommendationParameters;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The parameters used to request capacity/placement recommendations for a start operation. Placement recommendations are only computed if the VM fails to start due to an allocation failure.")
+model CapacityRecommendationParameters {
+  @doc("The list of desired Azure regions to be considered for the capacity recommendation")
+  desiredLocations?: string[];
+
+  @doc("The list of desired VM sizes (SKUs) to be considered for the capacity recommendation")
+  desiredSizes?: string[];
+
+  @doc("Whether the capacity recommendation should be computed per availability zone")
+  availabilityZones?: boolean;
 }
 
 @doc("These describe errors that occur at the resource level")
@@ -317,6 +425,16 @@ model ResourceOperationError {
 
   @doc("Detailed message about the error")
   errorDetails: string;
+}
+
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+@doc("Information about the flexible allocation of a virtual machine.")
+model VmAllocationInfo {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  vmSize?: string;
+
+  @doc("The zone identifier")
+  zone?: string;
 }
 
 @doc("Describes the fallback operation that was performed")
@@ -337,11 +455,7 @@ model ResourceOperationDetails {
   operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
-  resourceId?: Array<armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/virtualMachines";
-    }
-  ]>>;
+  resourceId?: armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
   opType?: ResourceOperationType = ResourceOperationType.Unknown;
@@ -374,16 +488,111 @@ model ResourceOperationDetails {
 
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Resource notification details.")
+  resourceNotificationDetails?: ResourceNotificationDetails;
+
+  @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+  @doc("The capacity/placement recommendation computed for the operation, if requested")
+  capacityRecommendation?: CapacityRecommendation;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The lifecycle status of the capacity recommendation for an operation")
+union CapacityRecommendationStatus {
+  @doc("The capacity recommendation has not been initiated")
+  NotInitiated: "NotInitiated",
+
+  @doc("The capacity recommendation completed successfully")
+  Succeeded: "Succeeded",
+
+  @doc("The capacity recommendation failed")
+  Failed: "Failed",
+
+  @doc("The capacity recommendation was skipped")
+  Skipped: "Skipped",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("A desired VM size (SKU) considered for the capacity recommendation")
+model CapacityRecommendationSize {
+  @doc("The VM size (SKU) name")
+  sku?: string;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The placement score for a given SKU, region and optionally availability zone")
+model CapacityRecommendationPlacementScore {
+  @doc("The VM size (SKU) name")
+  sku?: string;
+
+  @doc("The Azure region")
+  region?: string;
+
+  @doc("The availability zone identifier, present only when availabilityZones was requested")
+  availabilityZone?: string;
+
+  @doc("The placement score, eg High, Medium or Low")
+  score?: string;
+
+  @doc("Whether quota is available for the SKU, region and zone combination")
+  isQuotaAvailable?: boolean;
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The details of a capacity recommendation")
+model CapacityRecommendationDetails {
+  @doc("The list of desired Azure regions from the request")
+  desiredLocations?: string[];
+
+  @doc("The UTC timestamp of when the recommendation was requested")
+  recommendationRequestedAtUtc?: utcDateTime;
+
+  @doc("The list of desired VM sizes from the request")
+  @identifiers(#[])
+  desiredSizes?: CapacityRecommendationSize[];
+
+  @doc("Whether the response is split by availability zone")
+  availabilityZones?: boolean;
+
+  @doc("The array of placement scores per SKU, region and zone")
+  @identifiers(#[])
+  placementScores?: CapacityRecommendationPlacementScore[];
+}
+
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The capacity/placement recommendation computed for a resource operation")
+model CapacityRecommendation {
+  @doc("The lifecycle status of the capacity recommendation")
+  status: CapacityRecommendationStatus;
+
+  @doc("The error message if the capacity recommendation failed")
+  error?: string;
+
+  @doc("The detailed error information if the capacity recommendation failed")
+  errorDetails?: string;
+
+  @doc("The details of the capacity recommendation")
+  details?: CapacityRecommendationDetails;
+}
+
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+@doc("Information about a virtual machine.")
+model VirtualMachineInfo {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  vmSize?: string;
+
+  @doc("The zone identifier")
+  zone?: string;
 }
 
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
-  resourceId?: Array<armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/virtualMachines";
-    }
-  ]>>;
+  resourceId?: armResourceIdentifier;
 
   @doc("Resource level error code if it exists")
   errorCode?: string;
@@ -393,6 +602,10 @@ model ResourceOperation {
 
   @doc("Details of the operation performed on a resource")
   operation?: ResourceOperationDetails;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Information about the virtual machine")
+  virtualMachineInfo?: VirtualMachineInfo;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
@@ -501,7 +714,12 @@ model ExecuteDeallocateRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
@@ -510,7 +728,12 @@ model ExecuteHibernateRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The ExecuteStartRequest request for executeStart operations")
@@ -519,7 +742,12 @@ model ExecuteStartRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The ExecuteCreateRequest request for create operations")
@@ -569,7 +797,12 @@ model ExecuteReimageRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 
   @doc("Reimage parameters including base profile and per-resource overrides")
   reimageParameters?: ReimagePayload;
@@ -632,7 +865,12 @@ model ExecuteDeleteRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
@@ -652,6 +890,35 @@ model GetOperationStatusResponse {
   results: Array<ResourceOperation>;
 }
 
+@added(Microsoft.Compute.Versions.`2026-08-06-preview`)
+@doc("The paged response for virtual machine operation statuses in a BulkCreateCustom operation.")
+model BulkCreateCustomOperationStatusListResult {
+  @pageItems
+  @identifiers(#["resourceId"])
+  @doc("The virtual machine operation statuses on this page.")
+  results: Array<ResourceOperation>;
+
+  @nextLink
+  @doc("The link to the next page of operation statuses.")
+  nextLink?: url;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Static read response for the singleton bulk VM operations proxy endpoint")
+model BulkVmOperationsReadResponse {
+  @doc("Fully qualified resource ID for the singleton bulk VM operations proxy resource")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("Echoes the singleton proxy resource name")
+  @visibility(Lifecycle.Read)
+  name: "bulkVmOperations";
+
+  @doc("Resource type of the singleton bulk VM operations proxy resource")
+  @visibility(Lifecycle.Read)
+  type: "Microsoft.Compute/locations/virtualMachines/bulkVmOperations";
+}
+
 // ----------- CancelOperations ---------
 @doc("This is the request to cancel running operations in scheduled actions using the operation ids")
 model CancelOperationsRequest {
@@ -664,4 +931,33 @@ model CancelOperationsResponse {
   @identifiers(#["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
+}
+
+// ----------- BulkOperationErrors ---------
+@@identifiers(ListBulkOperationErrorsResponse.value, #[]);
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.`2026-07-06-preview`)
+@doc("The response from listing bulk operation errors")
+model ListBulkOperationErrorsResponse is Azure.Core.Page<ResourceOperation>;
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.`2026-07-06-preview`)
+@doc("The response from acknowledging bulk operation errors")
+model AcknowledgeBulkOperationErrorsResponse {
+  @doc("The set of operation ids that were newly acknowledged")
+  acknowledged: Array<string>;
+
+  @doc("The set of operation ids that were not found in the completed operations store")
+  notFound: Array<string>;
+
+  @doc("The set of operation ids that were skipped because they were already acknowledged, not failed, or belong to a different scope")
+  skipped: Array<string>;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.`2026-07-06-preview`)
+@doc("The request to acknowledge bulk operation errors")
+model AcknowledgeBulkOperationErrorsRequest {
+  @doc("The set of operation ids to acknowledge.")
+  operationIds: Array<string>;
 }

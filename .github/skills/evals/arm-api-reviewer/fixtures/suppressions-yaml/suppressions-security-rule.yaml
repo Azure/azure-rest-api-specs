@@ -1,0 +1,26 @@
+# cspell:ignore existingsvc secsupprsvc Suppr
+# Fixture: suppressions.yaml entry that suppresses a security-related rule
+# with an insufficient reason. Used by eval-suppressions-yaml (150002).
+
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: Specs added as folder structure v1, not yet converted to v2
+  paths:
+    - existingsvc/Existing.Management
+
+# New entry added in this PR — suppresses a SECURITY rule (secret-property
+# detection) with a vague, non-actionable reason. Per the agent's suppression
+# guidance, security-rule suppressions must be flagged as Blocking unless the
+# justification is specific and verifiable.
+- tool: Spectral
+  rules: [XmsSecretNotReadBack]
+  reason: will fix later
+  paths:
+    - secsupprsvc/SecSuppr.Management
+
+# New entry added in this PR — suppresses another security rule with no reason.
+- tool: Spectral
+  rules: [SecretPropertyMustBeWriteOnly]
+  paths:
+    - secsupprsvc/SecSuppr.Management

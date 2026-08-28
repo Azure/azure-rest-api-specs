@@ -6,6 +6,19 @@ This is the AutoRest configuration file for Network.
 
 ---
 
+## Note: VMSS `2018-10-01` captured-schema exception
+
+The `stable/2018-10-01/vmssNetwork.json` spec is an **intentional, long-standing exception** to the "same-version stable API surface must not change" (captured-schema) rule. These VMSS network APIs have always pinned the `2018-10-01` api-version while returning the **latest** `NetworkInterface` and `PublicIPAddress` types. Consequently, additive changes to the shared `Common` types (e.g., new properties such as `firstPartyServiceTagId`) ripple into `2018-10-01` **by design**, and BreakingChange/versioning tooling may flag them (e.g., OAD rule [`1041 AddedPropertyInResponse`](https://github.com/Azure/openapi-diff/blob/main/docs/rules/1041.md)). This is expected and has already been signed off for SDKs, PowerShell, CLI, and Terraform. Do not "fix" this by scoping the property out of `2018-10-01`.
+
+Precedent (the latest network types have long been captured under `2018-10-01`):
+
+- [`stable/2025-01-01/vmssNetworkInterface.json` (L6)](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/network/resource-manager/Microsoft.Network/Network/stable/2025-01-01/vmssNetworkInterface.json#L6)
+- [`stable/2024-10-01/vmssNetworkInterface.json` (L6)](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/network/resource-manager/Microsoft.Network/Network/stable/2024-10-01/vmssNetworkInterface.json#L6)
+- The same `2018-10-01` spec was similarly updated during the `2025-07-01` TypeSpec network version update in [PR #42717](https://github.com/Azure/azure-rest-api-specs/pull/42717).
+- Full history of previously checked-in changes to these types: [VMSS network schema changes 2019-07-01 to 2025-01-01](https://github.com/markcowl/azure-rest-api-specs/blob/markcowl/vmss-network-schema-change-report/specification/network/resource-manager/Microsoft.Network/Network/Vmss/vmss-network-api-schema-changes-2019-07-01-to-2025-01-01.md).
+
+---
+
 ## Getting Started
 
 To build the SDK for Network, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
@@ -28,7 +41,380 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2025-05-01
+tag: package-2025-09-01
+```
+
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - stable/2025-09-01/applicationGateway.json
+  - stable/2025-09-01/azureWebCategory.json
+  - stable/2025-09-01/common.json
+  - stable/2025-09-01/expressRoute.json
+  - stable/2025-09-01/firewall.json
+  - stable/2025-09-01/firewallPolicy.json
+  - stable/2025-09-01/firstPartyServiceTag.json
+  - stable/2025-09-01/interconnectGroup.json
+  - stable/2025-09-01/loadBalancer.json
+  - stable/2025-09-01/networkGateway.json
+  - stable/2025-09-01/networkingOperations.json
+  - stable/2025-09-01/networkManager.json
+  - stable/2025-09-01/networkSecurityPerimeter.json
+  - stable/2025-09-01/networkWatcher.json
+  - stable/2025-09-01/serviceGateway.json
+  - stable/2025-09-01/virtualNetwork.json
+  - stable/2025-09-01/virtualNetworkAppliance.json
+  - stable/2025-09-01/virtualWan.json
+  - stable/2018-10-01/vmssNetwork.json
+suppressions:
+  # --- stable/2018-10-01/vmssNetwork.json ---
+  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
+  # exception" at the top of this readme. These are pre-existing traits of the 2018-10-01
+  # contract; every one of them would be a breaking change to "fix".
+  - code: PathResourceProviderMatchNamespace
+    from: vmssNetwork.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+  - code: ResourceNameRestriction
+    from: vmssNetwork.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+  - code: OperationIdNounVerb
+    from: vmssNetwork.json
+    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+  - code: ParametersInPointGet
+    from: vmssNetwork.json
+    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
+  # --- stable/2025-09-01/networkGateway.json ---
+  - code: ResourceNameRestriction
+    from: networkGateway.json
+    reason: virtualNetworkGatewayName is an existing parent resource path parameter, used consistently across all 36 VirtualNetworkGateways operations in this spec - none of which define a pattern (established in 2025-07-01 and earlier). Adding a pattern only on the new VirtualNetworkGateways_GetEffectiveRoutes operation would be inconsistent with the rest of the resource, and adding it across all operations would be a breaking change to prior API versions.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getEffectiveRoutes"]
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: networkVirtualApplianceName is an existing parent resource path parameter established in prior API versions (2025-07-01 and earlier). Adding a pattern constraint would be a breaking change to those versions.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/prepareMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/executeMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/commitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/abortMigration"]
+  - code: ParametersInPointGet
+    from: loadBalancer.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}"].get.parameters
+    reason: '"detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.'
+  - code: ProvisioningStateMustBeReadOnly
+    from: networkManager.json
+    reason: provisioningState is correctly marked readOnly in CommitProperties definition. The linter does not follow $ref chains to verify readOnly in referenced schemas.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["201"].schema
+  - code: PutResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
+  - code: DeleteResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firstPartyServiceTags/{firstPartyServiceTagName}"].delete
+  - code: ProvisioningStateMustBeReadOnly
+    from: interconnectGroup.json
+    reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualNetwork.json
+    reason: >-
+      provisioningState is correctly marked readOnly as a sibling of $ref in the generated swagger.
+      The TypeSpec source uses @visibility(Lifecycle.Read) on provisioningState. The lint rule does
+      not follow $ref chains to verify readOnly. See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["201"].schema
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: >-
+      applicationSecurityGroupName is an existing parent resource path parameter established in prior
+      API versions. Adding a pattern constraint would be a breaking change to existing clients.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
+  - code: ProvisioningStateMustBeReadOnly
+    from: expressRoute.json
+    reason: The emitted {$ref, readOnly true} shape matches all pre-existing peer resources in expressRoute.json (ExpressRouteCircuit, ExpressRoutePort, etc.). A Network-RP-wide TypeSpec correction is tracked separately.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}/members/{memberName}"].get.responses["200"].schema
+  - code: ResourceNameRestriction
+    from: interconnectGroup.json
+    reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: interconnectGroup.json
+    reason: name, id and type properties are inherited from the upper level
+    where:
+      - $.definitions.InterconnectGroup
+      - $.definitions.InterconnectGroupListResult
+      - $.definitions.Subgroup
+      - $.definitions.SubgroupListResult
+  - code: PatchIdentityProperty
+    reason: False alarm.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+  - code: SystemDataDefinitionsCommonTypes
+    from: virtualNetwork.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: common.json
+    reason: False alarm.
+  - code: PutRequestResponseSchemeArm
+    from: common.json
+    reason: API spec code issue in PutRequestResponseSchemeArm validation.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayAddressLocationsResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayServicesResult
+  - code: ProvisioningStateMustBeReadOnly
+    from: firewallPolicy.json
+    reason: The emitted {$ref, readOnly true} shape matches all pre-existing FirewallPolicy child resources (e.g. FirewallPolicyRuleCollectionGroup) which reference Common.ProvisioningState. A Network-RP-wide TypeSpec correction is tracked separately.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["201"].schema
+  - code: AvoidAdditionalProperties
+    from: firewallPolicy.json
+    reason: >-
+      KubeLabelSelector.matchLabels intentionally represents an open-ended Kubernetes label map
+      (string-to-string dictionary) and therefore requires additionalProperties.
+    where:
+      - $.definitions.KubeLabelSelector.properties.matchLabels
+  - code: ResourceNameRestriction
+    from: firewallPolicy.json
+    reason: >-
+      firewallPolicyName is the name parameter of the parent FirewallPolicy resource, inherited by
+      the KubeSelectorGroup child path via @parentResource. The child does not define or own the
+      parent's name parameter, so the naming pattern restriction is governed by the FirewallPolicy
+      resource and is not applicable on the child path.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"]
+  - code: ProvisioningStateMustBeReadOnly
+    from: firstPartyServiceTag.json
+    reason: >-
+      The TypeSpec emitter correctly places readOnly: true as a sibling of $ref, which AutoRest
+      supports (along with description, title, nullable, and x-* extensions). The TypeSpec source
+      correctly marks provisioningState with @visibility(Lifecycle.Read). The lintdiff rule does
+      not recognize readOnly next to $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
+  - code: ProvisioningStateMustBeReadOnly
+    from: networkWatcher.json
+    reason: >-
+      The TypeSpec emitter correctly places readOnly: true as a sibling of $ref, which AutoRest
+      supports (along with description, title, nullable, and x-* extensions). The TypeSpec source
+      correctly marks provisioningState with @visibility(Lifecycle.Read). The lintdiff rule does
+      not recognize readOnly next to $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}"].patch.responses["200"].schema
+  - code: XMSSecretInResponse
+    from: expressRoute.json
+    reason: >-
+      activationKey is not a secret value, it is a base64 encoded string used for multi-cloud circuit provisioning.
+    where:
+      - $.definitions.ExpressRouteCircuit.properties.properties.properties.activationKey
+      - $.definitions.ExpressRouteCircuitPropertiesFormat.properties.activationKey
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: The resource name parameter 'virtualNetworkName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network APIs.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"]
+  - code: PostResponseCodes
+    from: virtualNetwork.json
+    reason: LRO POST operation returns 200 with no schema for completion status and 202 for async acceptance. This is the standard TypeSpec ArmResourceActionAsync pattern for void LRO operations.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"].post
+directive:
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.ProxyResource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.systemData"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterSystemData"
+```
+
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01'
+input-file:
+  - stable/2025-07-01/applicationGateway.json
+  - stable/2025-07-01/azureWebCategory.json
+  - stable/2025-07-01/common.json
+  - stable/2025-07-01/expressRoute.json
+  - stable/2025-07-01/firewall.json
+  - stable/2025-07-01/firewallPolicy.json
+  - stable/2025-07-01/interconnectGroup.json
+  - stable/2025-07-01/loadBalancer.json
+  - stable/2025-07-01/networkGateway.json
+  - stable/2025-07-01/networkingOperations.json
+  - stable/2025-07-01/networkManager.json
+  - stable/2025-07-01/networkSecurityPerimeter.json
+  - stable/2025-07-01/networkWatcher.json
+  - stable/2025-07-01/serviceGateway.json
+  - stable/2025-07-01/virtualNetwork.json
+  - stable/2025-07-01/virtualNetworkAppliance.json
+  - stable/2025-07-01/virtualWan.json
+  - stable/2018-10-01/vmssNetwork.json
+suppressions:
+  # --- stable/2018-10-01/vmssNetwork.json ---
+  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
+  # exception" at the top of this readme.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssNetwork.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+  - code: ResourceNameRestriction
+    from: vmssNetwork.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+  - code: OperationIdNounVerb
+    from: vmssNetwork.json
+    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+  - code: ParametersInPointGet
+    from: vmssNetwork.json
+    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
+  - code: ParametersInPointGet
+    from: loadBalancer.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}"].get.parameters
+    reason: '"detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.'
+  - code: ProvisioningStateMustBeReadOnly
+    from: networkManager.json
+    reason: provisioningState is correctly marked readOnly in CommitProperties definition. The linter does not follow $ref chains to verify readOnly in referenced schemas.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["201"].schema
+  - code: PutResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
+  - code: DeleteResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+  - code: ProvisioningStateMustBeReadOnly
+    from: interconnectGroup.json
+    reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualNetwork.json
+    reason: >-
+      provisioningState is correctly marked readOnly as a sibling of $ref in the generated swagger.
+      The TypeSpec source uses @visibility(Lifecycle.Read) on provisioningState. The lint rule does
+      not follow $ref chains to verify readOnly. See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"].put.responses["201"].schema
+  - code: ResourceNameRestriction
+    from: virtualNetwork.json
+    reason: >-
+      applicationSecurityGroupName is an existing parent resource path parameter established in prior
+      API versions. Adding a pattern constraint would be a breaking change to existing clients.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}"]
+  - code: ResourceNameRestriction
+    from: interconnectGroup.json
+    reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: interconnectGroup.json
+    reason: name, id and type properties are inherited from the upper level
+    where:
+      - $.definitions.InterconnectGroup
+      - $.definitions.InterconnectGroupListResult
+      - $.definitions.Subgroup
+      - $.definitions.SubgroupListResult
+  - code: PatchIdentityProperty
+    reason: False alarm.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+  - code: SystemDataDefinitionsCommonTypes
+    from: virtualNetwork.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: common.json
+    reason: False alarm.
+  - code: PutRequestResponseSchemeArm
+    from: common.json
+    reason: API spec code issue in PutRequestResponseSchemeArm validation.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayAddressLocationsResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayServicesResult
+directive:
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.ProxyResource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.systemData"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
 
 ### Tag: package-2025-05-01
@@ -38,74 +424,38 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
   - stable/2025-05-01/applicationGateway.json
-  - stable/2025-05-01/applicationGatewayWafDynamicManifests.json
-  - stable/2025-05-01/applicationSecurityGroup.json
-  - stable/2025-05-01/availableDelegations.json
-  - stable/2025-05-01/availableServiceAliases.json
-  - stable/2025-05-01/azureFirewall.json
-  - stable/2025-05-01/azureFirewallFqdnTag.json
   - stable/2025-05-01/azureWebCategory.json
-  - stable/2025-05-01/bastionHost.json
-  - stable/2025-05-01/checkDnsAvailability.json
-  - stable/2025-05-01/cloudServiceNetworkInterface.json
-  - stable/2025-05-01/cloudServicePublicIpAddress.json
-  - stable/2025-05-01/cloudServiceSwap.json
-  - stable/2025-05-01/customIpPrefix.json
-  - stable/2025-05-01/ddosCustomPolicy.json
-  - stable/2025-05-01/ddosProtectionPlan.json
-  - stable/2025-05-01/dscpConfiguration.json
-  - stable/2025-05-01/endpointService.json
-  - stable/2025-05-01/expressRouteCircuit.json
-  - stable/2025-05-01/expressRouteCrossConnection.json
-  - stable/2025-05-01/expressRoutePort.json
-  - stable/2025-05-01/expressRouteProviderPort.json
+  - stable/2025-05-01/common.json
+  - stable/2025-05-01/expressRoute.json
+  - stable/2025-05-01/firewall.json
   - stable/2025-05-01/firewallPolicy.json
-  - stable/2025-05-01/ipAddressManager.json
-  - stable/2025-05-01/ipAllocation.json
-  - stable/2025-05-01/ipGroups.json
   - stable/2025-05-01/loadBalancer.json
-  - stable/2025-05-01/natGateway.json
-  - stable/2025-05-01/network.json
-  - stable/2025-05-01/networkInterface.json
+  - stable/2025-05-01/networkGateway.json
+  - stable/2025-05-01/networkingOperations.json
   - stable/2025-05-01/networkManager.json
-  - stable/2025-05-01/networkManagerActiveConfiguration.json
-  - stable/2025-05-01/networkManagerConnection.json
-  - stable/2025-05-01/networkManagerConnectivityConfiguration.json
-  - stable/2025-05-01/networkManagerEffectiveConfiguration.json
-  - stable/2025-05-01/networkManagerGroup.json
-  - stable/2025-05-01/networkManagerRoutingConfiguration.json
-  - stable/2025-05-01/networkManagerScopeConnection.json
-  - stable/2025-05-01/networkManagerSecurityAdminConfiguration.json
-  - stable/2025-05-01/networkManagerSecurityUserConfiguration.json
-  - stable/2025-05-01/networkProfile.json
-  - stable/2025-05-01/networkSecurityGroup.json
   - stable/2025-05-01/networkSecurityPerimeter.json
-  - stable/2025-05-01/networkVerifier.json
-  - stable/2025-05-01/networkVirtualAppliance.json
   - stable/2025-05-01/networkWatcher.json
-  - stable/2025-05-01/operation.json
-  - stable/2025-05-01/privateEndpoint.json
-  - stable/2025-05-01/privateLinkService.json
-  - stable/2025-05-01/publicIpAddress.json
-  - stable/2025-05-01/publicIpPrefix.json
-  - stable/2025-05-01/routeFilter.json
-  - stable/2025-05-01/routeTable.json
-  - stable/2025-05-01/securityPartnerProvider.json
-  - stable/2025-05-01/serviceCommunity.json
-  - stable/2025-05-01/serviceEndpointPolicy.json
   - stable/2025-05-01/serviceGateway.json
-  - stable/2025-05-01/serviceTags.json
-  - stable/2025-05-01/usage.json
   - stable/2025-05-01/virtualNetwork.json
   - stable/2025-05-01/virtualNetworkAppliance.json
-  - stable/2025-05-01/virtualNetworkGateway.json
-  - stable/2025-05-01/virtualNetworkTap.json
-  - stable/2025-05-01/virtualRouter.json
   - stable/2025-05-01/virtualWan.json
-  - stable/2025-05-01/vmssNetworkInterface.json
-  - stable/2025-05-01/vmssPublicIpAddress.json
-  - stable/2025-05-01/webapplicationfirewall.json
+  - stable/2018-10-01/vmssNetwork.json
 suppressions:
+  # --- stable/2018-10-01/vmssNetwork.json ---
+  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
+  # exception" at the top of this readme.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssNetwork.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+  - code: ResourceNameRestriction
+    from: vmssNetwork.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+  - code: OperationIdNounVerb
+    from: vmssNetwork.json
+    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+  - code: ParametersInPointGet
+    from: vmssNetwork.json
+    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
@@ -123,13 +473,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
   - code: SystemDataDefinitionsCommonTypes
-    from: networkVerifier.json
+    from: virtualNetwork.json
     reason: False alarm for common type errors.
   - code: SystemDataDefinitionsCommonTypes
-    from: network.json
+    from: common.json
     reason: False alarm.
   - code: PutRequestResponseSchemeArm
-    from: serviceGateway.json
+    from: common.json
     reason: API spec code issue in PutRequestResponseSchemeArm validation.
   - code: RequiredPropertiesMissingInResourceModel
     reason: Not a standard azure resource.
@@ -4317,6 +4667,12 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: ResourceNameRestriction
+    from: virtualWan.json
+    reason: virtualHubName is an existing parent resource path parameter established in prior API versions. Adding a pattern constraint would be a breaking change to 2025-05-01 and earlier versions.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: virtualWan.json
+    reason: The Common.ProvisioningState type is marked readOnly in TypeSpec via @visibility(Lifecycle.Read), but the autorest emitter places readOnly as a sibling of $ref rather than in the type definition itself. The linter does not follow $ref siblings per OpenAPI 2.0 spec. Known issue https://github.com/Azure/azure-openapi-validator/issues/637
   - suppress: PutRequestResponseSchemeArm
     from: virtualNetworkAppliance.json
     reason: Known issue. Github link https://github.com/Azure/azure-openapi-validator/issues/752
@@ -4582,6 +4938,12 @@ directive:
   - suppress: ParametersInPost
     from: virtualNetworkGateway.json
     reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
+  - suppress: ParametersInPost
+    from: expressRoute.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+  - suppress: ParametersInPost
+    from: virtualWan.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover and insights APIs.
   - suppress: AvoidAdditionalProperties
     from: virtualNetworkGateway.json
     reason: We are using Dictionaries in the NRP APIs which are already rolled out. Suppress it since this is used by the Gateway Resiliency APIs.
@@ -4642,6 +5004,30 @@ directive:
     reason: name, id and type properties are inherited from the upper level
 
 suppressions:
+  - code: ResourceNameRestriction
+    from: expressRoute.json
+    reason: The resource name parameter 'circuitName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute circuit link failover APIs.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getCircuitLinkFailoverAllTestsDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getCircuitLinkFailoverSingleTestDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/startCircuitLinkFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stopCircuitLinkFailoverTest"]
+  - code: ParametersInPost
+    from: expressRoute.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+  - code: ResourceNameRestriction
+    from: virtualWan.json
+    reason: The resource name parameter 'expressRouteGatewayName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute gateway failover and insights APIs.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverAllTestsDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverSingleTestDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/startSiteFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/stopSiteFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getRoutesInformation"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getResiliencyInformation"]
+  - code: ParametersInPost
+    from: virtualWan.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover and insights APIs.
   - code: ResourceNameRestriction
     from: bastionhost.json
     reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs.

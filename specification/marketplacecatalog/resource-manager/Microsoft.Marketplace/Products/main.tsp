@@ -75,7 +75,9 @@ interface ProductList {
     @doc(SearchParameterDescription)
     @query
     $search?: string,
-  ): ArmResponse<ResourceListCustomResult<ProductSummary>> | DiscoveryErrorPayload;
+  ):
+    | ArmResponse<ResourceListCustomResult<ProductSummary>>
+    | DiscoveryErrorPayload;
 
   /** Lists products for subscription. */
   listBySubscription is ArmListBySubscriptionCustom<
@@ -394,15 +396,19 @@ op ArmListByBillingProfile<
  * Parameter model for listing a resource at the billing scope
  * @template Resource The type of the resource.
  */
-model BillingAccountScope<Resource extends Azure.ResourceManager.Foundations.Resource>
-  is ResourceParentParameters<Resource, BillingAccountBaseParameters>;
+model BillingAccountScope<Resource extends Azure.ResourceManager.Foundations.Resource> is ResourceParentParameters<
+  Resource,
+  BillingAccountBaseParameters
+>;
 
 /**
  * Parameter model for listing a resource at the billing scope
  * @template Resource The type of the resource.
  */
-model BillingProfileScope<Resource extends Azure.ResourceManager.Foundations.Resource>
-  is ResourceParentParameters<Resource, BillingProfileBaseParameters>;
+model BillingProfileScope<Resource extends Azure.ResourceManager.Foundations.Resource> is ResourceParentParameters<
+  Resource,
+  BillingProfileBaseParameters
+>;
 
 /**
  * The static parameters for a billing based resource
