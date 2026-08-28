@@ -14,7 +14,7 @@ Currently, we only support `OpenAPI Specification 2.0` or `Swagger V2.0`.
 * **[`Azure REST API guidelines`](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)**
 * **[`Azure OpenAPI Style Guide`](https://github.com/Azure/azure-api-style-guide/blob/main/openapi-style-guide.md)**
 * **[`Resource Provider Guidelines`](https://aka.ms/rpguidelines)**
-* **[`Directory structure`](https://aka.ms/azsdk/spec-dirs)**
+* **[`Directory structure`](https://github.com/Azure/azure-rest-api-specs/wiki/Specification-Folder-Structure-Guide#overview-of-the-folder-structure)**
 * **[`OpenAPI 2.0 specification`](https://spec.openapis.org/oas/v2.0.html)**
 * **[`Sample OpenAPI specification`](./samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/YourServiceName.json)**
 * **[`Sample README.md`](./samplefiles/README.md)**

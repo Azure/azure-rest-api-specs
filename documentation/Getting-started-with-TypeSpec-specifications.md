@@ -23,6 +23,7 @@ Within the azure-rest-api-specs repository, the TypeSpec specification serves as
 
 ### Detailed information
 
-- [TypeSpec development process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec)
+- [Set up the repository and prerequisites](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec#2-repo-setup--prerequisites)
 - [Specification folder structure](https://aka.ms/azsdk/spec-dirs)
-- [Develop client libraries](https://eng.ms/docs/products/azure-developer-experience/develop/sdk-develop) (Microsoft internal)
+- [Create a new TypeSpec project](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec#3-creating-a-new-typespec-project)
+- [Generate SDKs](https://eng.ms/docs/products/azure-developer-experience/develop/sdk-develop#generate-sdk) (Microsoft internal)

@@ -50,4 +50,4 @@ tsp compile .
 
 ### Examples
 
-The examples were generated using [oav](https://github.com/Azure/oav) as described in the [TypeSpec development process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec).
+The examples were generated using [oav](https://github.com/Azure/oav) as described in the [TypeSpec pull request process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec#4-prepare-and-submit-a-pull-request-for-reviewing).

@@ -1,10 +1,6 @@
 # Contributing
 
-<!-- cspell:ignore tocstop azsdk Poli -->
-
 This file provides general guidance for developers that are creating or updating REST API definitions for Azure.
-
-See the [specification documentation index](./documentation/README.md) for repository-specific guides and references.
 
 ## Table of Contents
 <!--
@@ -56,7 +52,7 @@ All new services should use [TypeSpec](https://aka.ms/typespec/azure) to create 
 
 ## Directory Structure
 
-See [aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs) for the directory structure to use when adding files to this repo.
+See the [README.md](./README.md) for a description of the directory structure to use when adding files to this repo.
 
 ## Pull Requests
 

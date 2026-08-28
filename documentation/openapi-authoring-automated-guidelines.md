@@ -2085,7 +2085,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt** : February 18, 2020
 
-**Why this rule is important**: The operationId is used to determine the generated method name.
+**Why this rule is important**: Per the [OpenAPI operation object](https://spec.openapis.org/oas/v2.0.html#operation-object), the operationId is used to determine the generated method name.
 
 **How to fix the violation**: Add the right operationId for each operation
 
