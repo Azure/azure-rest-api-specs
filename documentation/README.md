@@ -15,6 +15,7 @@ This directory contains documentation specific to the Azure REST API specificati
 | --- | --- | --- | --- |
 | [CI fix guide](./ci-fix.md) | Troubleshooting entry point for pull request validation checks. | Pull request authors | TypeSpec and OpenAPI |
 | [OpenAPI authoring automated guidelines](./openapi-authoring-automated-guidelines.md) | Reference for automated OpenAPI validation rules and their TypeSpec mappings. | Specification authors and reviewers | TypeSpec and OpenAPI |
+| [OpenAPI authoring manual guidelines](./openapi-authoring-manual-guidelines.md) | Reference for OpenAPI authoring rules that require manual verification. | Specification authors and reviewers | OpenAPI |
 | [Semantic and model violations reference](./Semantic-and-Model-Violations-Reference.md) | Reference for OAV semantic and model validation errors. | OpenAPI authors | OpenAPI |
 | [Breaking change and OAD rules mapping](./BreakingChange-Oad-Rules-Mapping.md) | Mapping between OAD rule identifiers and breaking change categories. | Specification authors and reviewers | OpenAPI |
 | [x-ms-examples](./x-ms-examples.md) | Repository reference for operation request and response examples in OpenAPI. | OpenAPI authors | OpenAPI |
