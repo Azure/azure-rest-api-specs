@@ -7,6 +7,7 @@ import "./agents.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core.Experimental;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -528,6 +529,7 @@ model TelephonyTransferTarget {
 
 @doc("The request to create a Microsoft Teams Phone Extension binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTeamsPhoneExtensionTelephonyBindingContent", "csharp")
 model CreateTeamsPhoneExtensionTelephonyBindingRequest {
   @doc("The Microsoft Teams Phone Extension provider.")
   provider: "teams_phone_extension";
@@ -551,6 +553,7 @@ model CreateTeamsPhoneExtensionTelephonyBindingRequest {
 
 @doc("The request to create a Twilio binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTwilioTelephonyBindingContent", "csharp")
 model CreateTwilioTelephonyBindingRequest {
   @doc("The Twilio provider.")
   provider: "twilio";
@@ -582,6 +585,7 @@ union CreateTelephonyBindingRequest {
 
 @doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("UpdateTelephonyBindingContent", "csharp")
 model UpdateTelephonyBindingRequest {
   @doc("The new lifecycle status.")
   status?: TelephonyBindingStatus;
@@ -1132,6 +1136,7 @@ model TelephonyCallRecord {
 
 @doc("A request to transfer an active telephony call to a configured target.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("TelephonyCallTransferContent", "csharp")
 model TelephonyCallTransferRequest {
   @doc("The name of a transfer target configured for the voice agent.")
   target: TelephonyTransferTargetName;
