@@ -40891,11 +40891,11 @@ components:
           description: The number of traces that provide evidence for this insight.
           readOnly: true
         created_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this insight was created.
           readOnly: true
         updated_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this insight was last updated.
           readOnly: true
         description:
@@ -40982,7 +40982,7 @@ components:
           format: int32
           description: Aggregate input and output tokens reported across all model inference calls in this trace, including calls to different models. Intended for relative usage comparison, not cost estimation.
         timestamp:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when the trace was recorded.
       description: A highlighted trace that provides evidence for an agent insight.
     AgentInsightLinkedTrace:
@@ -40996,7 +40996,7 @@ components:
           description: The trace identifier.
           readOnly: true
         timestamp:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when the trace was recorded.
           readOnly: true
       description: A lightweight trace reference linked to an agent insight as supporting evidence.
@@ -41036,7 +41036,7 @@ components:
           description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
           readOnly: true
         next_scheduled_run_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled.
           readOnly: true
         estimated_cost:
@@ -41056,7 +41056,7 @@ components:
           description: The effective overview, or null before an overview is available.
           readOnly: true
         updated_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this monitor was last updated.
           readOnly: true
       description: A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights.
@@ -41234,27 +41234,27 @@ components:
           description: The trigger that started the run.
           readOnly: true
         created_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this run was created.
           readOnly: true
         updated_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this run was last updated.
           readOnly: true
         window_start:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The start of the trace window analyzed by this run.
           readOnly: true
         window_end:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The end of the trace window analyzed by this run.
           readOnly: true
         started_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this run started processing.
           readOnly: true
         completed_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this run reached a terminal status.
           readOnly: true
         model_deployment_name:
@@ -41358,7 +41358,7 @@ components:
           type: string
           description: Human-readable description of the suspension.
         occurred_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when the suspension occurred.
         details:
           type: object
@@ -41410,7 +41410,7 @@ components:
           $ref: '#/components/schemas/AgentInsightOverviewSource'
           description: Where the effective overview came from.
         updated_at:
-          $ref: '#/components/schemas/AgentInsightsTimestamp'
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this overview was last updated.
       description: The effective overview for an Agent Insights monitor.
     AgentInsightsOverviewOverride:
@@ -41422,10 +41422,6 @@ components:
           type: string
           description: The nonblank overview content, limited to 64 KiB when encoded as UTF-8.
       description: A user-provided overview that becomes effective immediately and seeds the next generation.
-    AgentInsightsTimestamp:
-      type: string
-      format: date-time
-      description: An ISO 8601 timestamp returned by Agent Insights.
     AgentKind:
       anyOf:
         - type: string

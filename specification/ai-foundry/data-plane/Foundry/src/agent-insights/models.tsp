@@ -6,9 +6,6 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-/** An ISO 8601 timestamp returned by Agent Insights. */
-scalar AgentInsightsTimestamp extends utcDateTime;
-
 /** The lifecycle status of an agent insight. */
 union AgentInsightStatus {
   string,
@@ -65,7 +62,7 @@ model AgentInsightHighlightedTrace {
   total_tokens?: int32;
 
   /** The time when the trace was recorded. */
-  timestamp: AgentInsightsTimestamp;
+  timestamp: FoundryTimestamp;
 }
 
 /** A lightweight trace reference linked to an agent insight as supporting evidence. */
@@ -77,7 +74,7 @@ model AgentInsightLinkedTrace {
 
   /** The time when the trace was recorded. */
   @visibility(Lifecycle.Read)
-  timestamp: AgentInsightsTimestamp;
+  timestamp: FoundryTimestamp;
 }
 
 /** The customer-renderable kind of an agent insight's proposed fix. */
@@ -201,11 +198,11 @@ model AgentInsight {
 
   /** The time when this insight was created. */
   @visibility(Lifecycle.Read)
-  created_at: AgentInsightsTimestamp;
+  created_at: FoundryTimestamp;
 
   /** The time when this insight was last updated. */
   @visibility(Lifecycle.Read)
-  updated_at: AgentInsightsTimestamp;
+  updated_at: FoundryTimestamp;
 
   /** The root-cause diagnosis for the issue. */
   @visibility(Lifecycle.Read)
@@ -240,7 +237,7 @@ model AgentInsightSuspension {
   message: string;
 
   /** The time when the suspension occurred. */
-  occurred_at: AgentInsightsTimestamp;
+  occurred_at: FoundryTimestamp;
 
   /** Additional reason-specific suspension details. */
   details?: Record<unknown>;
@@ -255,7 +252,7 @@ model AgentInsightsOverview {
   source: AgentInsightOverviewSource;
 
   /** The time when this overview was last updated. */
-  updated_at: AgentInsightsTimestamp;
+  updated_at: FoundryTimestamp;
 }
 
 /** A user-provided overview that becomes effective immediately and seeds the next generation. */
@@ -300,7 +297,7 @@ model AgentInsightMonitor {
 
   /** The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled. */
   @visibility(Lifecycle.Read)
-  next_scheduled_run_at?: AgentInsightsTimestamp;
+  next_scheduled_run_at?: FoundryTimestamp;
 
   /** Estimated cost accumulated by Agent Insights for this monitor. */
   @visibility(Lifecycle.Read)
@@ -316,7 +313,7 @@ model AgentInsightMonitor {
 
   /** The time when this monitor was last updated. */
   @visibility(Lifecycle.Read)
-  updated_at: AgentInsightsTimestamp;
+  updated_at: FoundryTimestamp;
 }
 
 /** Fields accepted when creating an Agent Insights monitor for an agent. */
@@ -470,27 +467,27 @@ model AgentInsightRun {
 
   /** The time when this run was created. */
   @visibility(Lifecycle.Read)
-  created_at: AgentInsightsTimestamp;
+  created_at: FoundryTimestamp;
 
   /** The time when this run was last updated. */
   @visibility(Lifecycle.Read)
-  updated_at: AgentInsightsTimestamp;
+  updated_at: FoundryTimestamp;
 
   /** The start of the trace window analyzed by this run. */
   @visibility(Lifecycle.Read)
-  window_start: AgentInsightsTimestamp;
+  window_start: FoundryTimestamp;
 
   /** The end of the trace window analyzed by this run. */
   @visibility(Lifecycle.Read)
-  window_end: AgentInsightsTimestamp;
+  window_end: FoundryTimestamp;
 
   /** The time when this run started processing. */
   @visibility(Lifecycle.Read)
-  started_at?: AgentInsightsTimestamp;
+  started_at?: FoundryTimestamp;
 
   /** The time when this run reached a terminal status. */
   @visibility(Lifecycle.Read)
-  completed_at?: AgentInsightsTimestamp;
+  completed_at?: FoundryTimestamp;
 
   /** The model deployment used to analyze traces for this run. */
   @visibility(Lifecycle.Read)

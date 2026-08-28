@@ -33795,12 +33795,12 @@
             "readOnly": true
           },
           "created_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when this insight was created.",
             "readOnly": true
           },
           "updated_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when this insight was last updated.",
             "readOnly": true
           },
@@ -33916,7 +33916,7 @@
             "description": "Aggregate input and output tokens reported across all model inference calls in this trace, including calls to different models. Intended for relative usage comparison, not cost estimation."
           },
           "timestamp": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when the trace was recorded."
           }
         },
@@ -33935,7 +33935,7 @@
             "readOnly": true
           },
           "timestamp": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when the trace was recorded.",
             "readOnly": true
           }
@@ -33984,7 +33984,7 @@
             "readOnly": true
           },
           "next_scheduled_run_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled.",
             "readOnly": true
           },
@@ -34018,7 +34018,7 @@
             "readOnly": true
           },
           "updated_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when this monitor was last updated.",
             "readOnly": true
           }
@@ -34271,32 +34271,32 @@
             "readOnly": true
           },
           "created_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when this run was created.",
             "readOnly": true
           },
           "updated_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when this run was last updated.",
             "readOnly": true
           },
           "window_start": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The start of the trace window analyzed by this run.",
             "readOnly": true
           },
           "window_end": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The end of the trace window analyzed by this run.",
             "readOnly": true
           },
           "started_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when this run started processing.",
             "readOnly": true
           },
           "completed_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when this run reached a terminal status.",
             "readOnly": true
           },
@@ -34447,7 +34447,7 @@
             "description": "Human-readable description of the suspension."
           },
           "occurred_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when the suspension occurred."
           },
           "details": {
@@ -34516,7 +34516,7 @@
             "description": "Where the effective overview came from."
           },
           "updated_at": {
-            "$ref": "#/components/schemas/AgentInsightsTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when this overview was last updated."
           }
         },
@@ -34534,11 +34534,6 @@
           }
         },
         "description": "A user-provided overview that becomes effective immediately and seeds the next generation."
-      },
-      "AgentInsightsTimestamp": {
-        "type": "string",
-        "format": "date-time",
-        "description": "An ISO 8601 timestamp returned by Agent Insights."
       },
       "AgentKind": {
         "anyOf": [
