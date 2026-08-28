@@ -473,6 +473,8 @@ interface AgentTelephony {
       /** The name of the voice agent that owns the binding. */
       @path agent_name: string;
 
+      ...Azure.Core.RepeatabilityRequestHeaders;
+
       /** The provider-specific binding to create. */
       @body body: CreateTelephonyBindingRequest;
     },
