@@ -82816,7 +82816,6 @@ components:
       required:
         - kind
         - model_type
-        - model
       properties:
         kind:
           type: string
@@ -82825,10 +82824,13 @@ components:
           description: The kind discriminator for a voice agent definition. Always `voice`.
         model_type:
           $ref: '#/components/schemas/VoiceModelType'
-          description: How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` uses a service-managed model; `self_deployed` uses the customer's own Foundry deployment. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.
+          description: How the voice agent obtains its conversational backend. `managed` uses the service-managed model named by `model`; `self_deployed` uses the customer's Foundry deployment named by `model`; `hosted_agent` fronts the hosted text agent referenced by `target_agent`. This is independent of the architecture (realtime or cascaded), which the service derives from the selected backend.
         model:
           type: string
-          description: "The model to use for this agent, paired with `model_type`: the service-managed model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. The model must support realtime or cascaded voice. The service derives the architecture from the selected model."
+          description: The model to use for this agent. Required when `model_type` is `managed` (the service-managed model name) or `self_deployed` (the customer's Foundry deployment name). Omit this property when `model_type` is `hosted_agent`; `target_agent` identifies the conversational backend. The model must support realtime or cascaded voice.
+        target_agent:
+          $ref: '#/components/schemas/VoiceAgentTargetAgent'
+          description: The hosted text agent that this voice agent fronts. Required when `model_type` is `hosted_agent` and not applicable otherwise. In this mode, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the target agent owns the conversation logic. The target must be in the same project and support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.
         instructions:
           type: string
           description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
@@ -83513,6 +83515,28 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAgentTargetAgent:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 63
+          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$
+          description: The non-empty DNS-like name of the target hosted text agent in the same project.
+        version:
+          type: string
+          maxLength: 25
+          pattern: ^(?:[1-9][0-9]{0,18}|draft-[1-9][0-9]{0,18})$
+          description: The target agent version. Omit this property to select the latest version when the voice session starts. When supplied, use a positive integer or `draft-{positive-unix-timestamp}` whose numeric component fits in a signed 64-bit integer.
+      unevaluatedProperties:
+        not: {}
+      description: A closed reference to the hosted text agent that a `hosted_agent` voice agent fronts, containing only its name and optional version. The target is resolved within the same project.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentTemplateGreetingConfig:
       type: object
       required:
@@ -83855,6 +83879,7 @@ components:
           enum:
             - managed
             - self_deployed
+            - hosted_agent
       description: |-
         How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),
         which the service derives from the selected model.
