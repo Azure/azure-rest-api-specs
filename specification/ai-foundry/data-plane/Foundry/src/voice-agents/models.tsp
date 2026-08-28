@@ -104,10 +104,7 @@ model VoiceResponseAudio {
 
 @doc("Properties shared by persisted voice responses.")
 model VoiceResponseBase {
-  ...OmitProperties<
-    OpenAI.RealtimeResponse,
-    "audio" | "output" | "metadata"
-  >;
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio" | "output" | "metadata">;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the persisted projection replaces audio, output, and metadata."
