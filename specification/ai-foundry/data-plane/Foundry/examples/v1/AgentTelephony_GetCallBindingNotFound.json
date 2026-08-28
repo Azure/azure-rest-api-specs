@@ -1,0 +1,65 @@
+{
+  "title": "Get a call rejected because no binding exists",
+  "operationId": "AgentTelephony_getTelephonyCall",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "support-agent",
+    "call_id": "call_01J6NOBINDING"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "call_01J6NOBINDING",
+        "provider": "teams_phone_extension",
+        "provider_call_id": "provider-call-6f3eab91",
+        "caller_number": "+14255550199",
+        "provider_number": "+14255550123",
+        "status": "failed",
+        "phase": "rejected",
+        "started_at": 1787500200,
+        "ended_at": 1787500200,
+        "duration_seconds": 0,
+        "end_reason": "binding_not_found",
+        "timing": {
+          "received_at_ms": 1787500200123,
+          "validated_at_ms": 1787500200150,
+          "ended_at_ms": 1787500200175,
+          "duration_basis": "received",
+          "timestamp_source": "gateway"
+        },
+        "trace": {
+          "status": "not_applicable"
+        },
+        "events": [
+          {
+            "sequence": 1,
+            "name": "telephony.webhook.received",
+            "source": "gateway",
+            "outcome": "observed",
+            "observed_at_ms": 1787500200123,
+            "timestamp_source": "gateway"
+          },
+          {
+            "sequence": 2,
+            "name": "telephony.webhook.validation",
+            "source": "teams_phone_extension",
+            "outcome": "succeeded",
+            "observed_at_ms": 1787500200150,
+            "timestamp_source": "gateway"
+          },
+          {
+            "sequence": 3,
+            "name": "telephony.binding.resolve",
+            "source": "gateway",
+            "outcome": "rejected",
+            "observed_at_ms": 1787500200175,
+            "timestamp_source": "gateway",
+            "reason": "binding_not_found"
+          }
+        ],
+        "events_truncated": false
+      }
+    }
+  }
+}

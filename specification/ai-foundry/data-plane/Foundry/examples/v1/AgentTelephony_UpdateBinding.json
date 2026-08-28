@@ -1,0 +1,31 @@
+{
+  "title": "Update a telephony binding",
+  "operationId": "AgentTelephony_updateTelephonyBinding",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "support-agent",
+    "binding_id": "binding_support_twilio",
+    "If-Match": "\"binding-etag-2\"",
+    "body": {
+      "status": "suspended",
+      "label": "Customer support maintenance"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"binding-etag-3\""
+      },
+      "body": {
+        "id": "binding_support_twilio",
+        "provider": "twilio",
+        "connection": "twilio-support-connection",
+        "phone_number": "+14255550123",
+        "label": "Customer support maintenance",
+        "status": "suspended",
+        "incoming_call_url": "https://contoso.services.ai.azure.com/agents/support-agent/endpoint/protocols/voice/telephony/twilio/callbacks/incoming_call"
+      }
+    }
+  }
+}
