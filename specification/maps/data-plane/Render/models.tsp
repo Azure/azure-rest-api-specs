@@ -100,8 +100,7 @@ union TilesetID {
   `microsoft.base.hybrid.darkgrey`: "microsoft.base.hybrid.darkgrey",
 
   /**
-   * A combination of satellite or aerial imagery. Only available in S1 and G2
-   * pricing SKU.<br>
+   * A combination of satellite or aerial imagery.<br>
    *
    * Supports zoom levels 1 through 19. Format: raster (png).
    */
