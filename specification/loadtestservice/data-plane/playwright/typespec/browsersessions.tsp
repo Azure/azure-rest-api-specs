@@ -7,10 +7,7 @@ using TypeSpec.Rest;
 
 namespace Playwright;
 
-@doc("Model of a browser session used for tracking purposes.")
-@resource("browser-sessions")
-@parentResource(Workspace)
-model BrowserSession {
+alias BrowserSessionRequiredProperties = {
   @key("sessionId")
   @doc("The browser session ID in GUID format.")
   @minLength(3)
@@ -19,20 +16,35 @@ model BrowserSession {
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("The protocol for the browser session.")
-  @added(Versions.v2026_06_01_preview)
-  protocol: BrowserSessionProtocol;
-
   @doc("The browser session display name.")
   @minLength(1)
   @maxLength(200)
   displayName: string;
 
+  @doc("The protocol for the browser session.")
+  @added(Versions.v2026_06_01_preview)
+  protocol: BrowserSessionProtocol;
+};
+alias BrowserSessionReadRequiredProperties = {
   @doc("The browser session creator's ID.")
   @visibility(Lifecycle.Read)
-  @madeOptional(Versions.v2026_06_01_preview)
-  creatorId?: string;
+  creatorId: string;
 
+  @doc("The browser session status.")
+  @visibility(Lifecycle.Read)
+  status: BrowserSessionStatus;
+
+  @doc("The browser session source details.")
+  @visibility(Lifecycle.Read)
+  source: BrowserSessionSource;
+
+  @doc("The browser session browser type.")
+  browserType: BrowserType;
+
+  @doc("The browser session operating system.")
+  operatingSystem: OS;
+};
+alias BrowserSessionOptionalProperties = {
   @doc("The browser session start time in UTC.")
   @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
@@ -45,31 +57,12 @@ model BrowserSession {
   @visibility(Lifecycle.Read)
   durationInMilliseconds?: int64;
 
-  @doc("The browser session status.")
-  @visibility(Lifecycle.Read)
-  @madeOptional(Versions.v2026_06_01_preview)
-  status?: BrowserSessionStatus;
-
-  @doc("The browser session source details.")
-  @visibility(Lifecycle.Read)
-  @madeOptional(Versions.v2026_06_01_preview)
-  source?: BrowserSessionSource;
-
-  @doc("The browser session browser type.")
-  @visibility(Lifecycle.Read)
-  @madeOptional(Versions.v2026_06_01_preview)
-  browserType?: BrowserType;
-
-  @doc("The browser session operating system.")
-  @madeOptional(Versions.v2026_06_01_preview)
-  operatingSystem?: OS;
-
   @doc("The region where the provisioned browser container is located.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
   browserRegion?: string;
 
-  @doc("The websocket endpoint that can be used to connect to the browser session. This is only returned when the session is created.")
+  @doc("The websocket endpoint that can be used to connect to the browser session.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
   browserEndpoint?: string;
@@ -78,6 +71,24 @@ model BrowserSession {
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
   liveViewUrl?: string;
+};
+
+@doc("Model of a browser session used for tracking purposes.")
+@resource("browser-sessions")
+@parentResource(Workspace)
+model BrowserSession {
+  ...BrowserSessionRequiredProperties;
+  ...BrowserSessionReadRequiredProperties;
+  ...BrowserSessionOptionalProperties;
+}
+
+@doc("Model of a browser session used for tracking purposes.")
+@resource("browser-sessions")
+@parentResource(Workspace)
+model PatchRequestBrowserSession {
+  ...BrowserSessionRequiredProperties;
+  ...OptionalProperties<BrowserSessionReadRequiredProperties>;
+  ...BrowserSessionOptionalProperties;
 }
 
 @doc("The browser session source details.")

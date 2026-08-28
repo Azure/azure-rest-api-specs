@@ -611,7 +611,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BrowserSessionCreateOrUpdate"
+              "$ref": "#/definitions/PatchRequestBrowserSessionCreateOrUpdate"
             }
           }
         ],
@@ -619,7 +619,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BrowserSession"
+              "$ref": "#/definitions/PatchRequestBrowserSession"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -632,7 +632,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/BrowserSession"
+              "$ref": "#/definitions/PatchRequestBrowserSession"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -1153,20 +1153,38 @@
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
-        "protocol": {
-          "$ref": "#/definitions/BrowserSessionProtocol",
-          "description": "The protocol for the browser session."
-        },
         "displayName": {
           "type": "string",
           "description": "The browser session display name.",
           "minLength": 1,
           "maxLength": 200
         },
+        "protocol": {
+          "$ref": "#/definitions/BrowserSessionProtocol",
+          "description": "The protocol for the browser session."
+        },
         "creatorId": {
           "type": "string",
           "description": "The browser session creator's ID.",
           "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/BrowserSessionStatus",
+          "description": "The browser session status.",
+          "readOnly": true
+        },
+        "source": {
+          "$ref": "#/definitions/BrowserSessionSource",
+          "description": "The browser session source details.",
+          "readOnly": true
+        },
+        "browserType": {
+          "$ref": "#/definitions/BrowserType",
+          "description": "The browser session browser type."
+        },
+        "operatingSystem": {
+          "$ref": "#/definitions/OS",
+          "description": "The browser session operating system."
         },
         "startTime": {
           "type": "string",
@@ -1186,25 +1204,6 @@
           "description": "The browser session duration in milliseconds.",
           "readOnly": true
         },
-        "status": {
-          "$ref": "#/definitions/BrowserSessionStatus",
-          "description": "The browser session status.",
-          "readOnly": true
-        },
-        "source": {
-          "$ref": "#/definitions/BrowserSessionSource",
-          "description": "The browser session source details.",
-          "readOnly": true
-        },
-        "browserType": {
-          "$ref": "#/definitions/BrowserType",
-          "description": "The browser session browser type.",
-          "readOnly": true
-        },
-        "operatingSystem": {
-          "$ref": "#/definitions/OS",
-          "description": "The browser session operating system."
-        },
         "browserRegion": {
           "type": "string",
           "description": "The region where the provisioned browser container is located.",
@@ -1223,29 +1222,14 @@
       },
       "required": [
         "id",
+        "displayName",
         "protocol",
-        "displayName"
+        "creatorId",
+        "status",
+        "source",
+        "browserType",
+        "operatingSystem"
       ]
-    },
-    "BrowserSessionCreateOrUpdate": {
-      "type": "object",
-      "description": "Model of a browser session used for tracking purposes.",
-      "properties": {
-        "protocol": {
-          "$ref": "#/definitions/BrowserSessionProtocol",
-          "description": "The protocol for the browser session."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The browser session display name.",
-          "minLength": 1,
-          "maxLength": 200
-        },
-        "operatingSystem": {
-          "$ref": "#/definitions/OS",
-          "description": "The browser session operating system."
-        }
-      }
     },
     "BrowserSessionProtocol": {
       "type": "string",
@@ -1510,6 +1494,115 @@
       "required": [
         "value"
       ]
+    },
+    "PatchRequestBrowserSession": {
+      "type": "object",
+      "description": "Model of a browser session used for tracking purposes.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The browser session ID in GUID format.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The browser session display name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "protocol": {
+          "$ref": "#/definitions/BrowserSessionProtocol",
+          "description": "The protocol for the browser session."
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "The browser session creator's ID.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/BrowserSessionStatus",
+          "description": "The browser session status.",
+          "readOnly": true
+        },
+        "source": {
+          "$ref": "#/definitions/BrowserSessionSource",
+          "description": "The browser session source details.",
+          "readOnly": true
+        },
+        "browserType": {
+          "$ref": "#/definitions/BrowserType",
+          "description": "The browser session browser type."
+        },
+        "operatingSystem": {
+          "$ref": "#/definitions/OS",
+          "description": "The browser session operating system."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The browser session start time in UTC.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The browser session end time in UTC.",
+          "readOnly": true
+        },
+        "durationInMilliseconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The browser session duration in milliseconds.",
+          "readOnly": true
+        },
+        "browserRegion": {
+          "type": "string",
+          "description": "The region where the provisioned browser container is located.",
+          "readOnly": true
+        },
+        "browserEndpoint": {
+          "type": "string",
+          "description": "The websocket endpoint that can be used to connect to the browser session.",
+          "readOnly": true
+        },
+        "liveViewUrl": {
+          "type": "string",
+          "description": "The URL to view the live browser session.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "protocol"
+      ]
+    },
+    "PatchRequestBrowserSessionCreateOrUpdate": {
+      "type": "object",
+      "description": "Model of a browser session used for tracking purposes.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The browser session display name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "protocol": {
+          "$ref": "#/definitions/BrowserSessionProtocol",
+          "description": "The protocol for the browser session."
+        },
+        "browserType": {
+          "$ref": "#/definitions/BrowserType",
+          "description": "The browser session browser type."
+        },
+        "operatingSystem": {
+          "$ref": "#/definitions/OS",
+          "description": "The browser session operating system."
+        }
+      }
     },
     "RunConfig": {
       "type": "object",

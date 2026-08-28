@@ -1068,6 +1068,24 @@
           "description": "The browser session creator's ID.",
           "readOnly": true
         },
+        "status": {
+          "$ref": "#/definitions/BrowserSessionStatus",
+          "description": "The browser session status.",
+          "readOnly": true
+        },
+        "source": {
+          "$ref": "#/definitions/BrowserSessionSource",
+          "description": "The browser session source details.",
+          "readOnly": true
+        },
+        "browserType": {
+          "$ref": "#/definitions/BrowserType",
+          "description": "The browser session browser type."
+        },
+        "operatingSystem": {
+          "$ref": "#/definitions/OS",
+          "description": "The browser session operating system."
+        },
         "startTime": {
           "type": "string",
           "format": "date-time",
@@ -1085,25 +1103,6 @@
           "format": "int64",
           "description": "The browser session duration in milliseconds.",
           "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/BrowserSessionStatus",
-          "description": "The browser session status.",
-          "readOnly": true
-        },
-        "source": {
-          "$ref": "#/definitions/BrowserSessionSource",
-          "description": "The browser session source details.",
-          "readOnly": true
-        },
-        "browserType": {
-          "$ref": "#/definitions/BrowserType",
-          "description": "The browser session browser type.",
-          "readOnly": true
-        },
-        "operatingSystem": {
-          "$ref": "#/definitions/OS",
-          "description": "The browser session operating system."
         }
       },
       "required": [
