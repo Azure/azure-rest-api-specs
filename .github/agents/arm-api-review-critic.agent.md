@@ -679,7 +679,7 @@ guidance do not count as coverage. Then apply the verdict rules below:
   POST-NEW.
 - **RESOLVE-AND-REPOST (Scenario B)**: confirm (a) the existing comment is
   agent-origin (body contains the substring `posted-by:
-arm-api-reviewer-agent`, which matches both the full 6-field per-comment
+arm-api-reviewer-agent`, which matches both the full 7-field per-comment
   marker and the `telemetry: degraded` fallback marker; either form counts
   as agent-origin); (b)
   the violation is still present at the new line (steps 1-2 above

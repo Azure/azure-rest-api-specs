@@ -257,8 +257,8 @@ The ARM API Reviewer runs in two contexts: this unattended GitHub Actions
 workflow, and the interactive **ARM API Reviewer** agent in VS Code
 (`.github/agents/arm-api-reviewer.agent.md`). It reviews two repositories:
 public `Azure/azure-rest-api-specs` and private `Azure/azure-rest-api-specs-pr`.
-Identical API changes must receive identical feedback in all of them. The
-following are the **same in every context** and must not be allowed to drift:
+Every context must apply the same review and posting policies. The following
+are the **same in every context** and must not be allowed to drift:
 
 - **Rule sources** — the same instruction files and the same `azure-api-review`
   skill references.
@@ -279,8 +279,8 @@ Exactly **two** things differ, by design:
   explicit override (`critic: override` plus a validated `override-reason`), or
   escalate to `MANUAL DECISION REQUIRED` and approve posting per row. Both are
   explicit, recorded human actions. This workflow has no human in the loop and
-  therefore has neither path. Absent either action, an interactive run produces
-  the same posted finding set as an automated run.
+  therefore has neither path. Absent either action, an interactive run applies
+  the same default posting policy to the findings it produces.
 - **The model.** This workflow pins one, so its runs are reproducible. The
   interactive agent deliberately does not: it runs on whatever model the
   reviewer has selected in VS Code, and pinning one would simply fail for
@@ -795,9 +795,9 @@ one-to-one parity applies to every individually posted entry in that set.
 Excluded candidates are disclosed only as an overflow count and themes; do not
 render them as canonical finding bodies or imply that the Critic verified them.
 
-If more candidates exist beyond a per-category cap, include that count in the
-summary comment: _"N additional warning/suggestion candidates were identified
-but not individually verified or posted. Key themes: [list]. Review the full checklist in
+If more than 20 candidates exist, include the overflow count in the summary:
+_"N additional findings were identified but not individually verified or
+posted. Key themes: [list]. Review the full checklist in
 `arm-api-review.instructions.md`."_
 
 **Comment format** (every comment MUST use the canonical text validated by the
@@ -915,10 +915,10 @@ posted-by: arm-api-reviewer-agent
 <!-- markdownlint-enable MD013 -->
 
 All seven fields are **required on every posted body**, including the Step 8
-summary: `posted-by`, `rule`, `severity`, `classification`, `critic`, and
-`head-sha`. The summary's marker is not a reduced form -- it carries
-`rule: summary` and the run's own severity, classification, critic verdict and
-head SHA like any other body.
+summary: `posted-by`, `rule`, `category`, `severity`, `classification`,
+`critic`, and `head-sha`. The summary's marker is not a reduced form -- it
+carries `rule: summary`, `category: summary`, and the run's own severity,
+classification, critic verdict, and head SHA like any other body.
 
 `critic:` accepts exactly one of `pass`, `warn`, or `unknown`. Confidence
 wording from the Critic's verdict (for example `verified-high`) is not a legal

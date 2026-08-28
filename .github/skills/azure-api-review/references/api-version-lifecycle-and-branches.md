@@ -136,11 +136,12 @@ Determine three things before flagging:
 
 Findings from this file belong to the `versioning-and-compatibility` category.
 
-**Only flag a branch-keyed rule when the branch is actually known.**
-APIVER-DEV-IN-MAIN and APIVER-PRIVATE-IN-PUBLIC both turn on which branch is
-being targeted, and a `release-*` branch is a legitimate home for work that
-would be a violation on `main`. If `base.ref` could not be read, skip those two
-rules rather than assuming `main`. The folder rules, APIVER-GA-FOLDER and
+**Only flag APIVER-DEV-IN-MAIN when the branch is actually known.** A
+`release-*` branch is a legitimate home for in-development work that would be a
+violation on `main`, so skip that rule rather than assuming `main` when
+`base.ref` could not be read. APIVER-PRIVATE-IN-PUBLIC depends on the repository,
+not the branch: a version that is still private preview is prohibited from
+every branch in the public repository. The folder rules, APIVER-GA-FOLDER and
 APIVER-PREVIEW-FOLDER, need no branch and still apply.
 
 Do not infer a lifecycle stage from the API version date alone. A date-stamped

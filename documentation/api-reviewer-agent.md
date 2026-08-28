@@ -128,30 +128,31 @@ Files outside `specification/**` are skipped.
 
 ### Consistency across review contexts
 
-The reviewer runs in two contexts — the unattended GitHub Actions workflow and
-the interactive **ARM API Reviewer** agent in VS Code — across two repositories,
+The reviewer runs in two contexts: the unattended GitHub Actions workflow and
+the interactive **ARM API Reviewer** agent in VS Code, across two repositories,
 public `Azure/azure-rest-api-specs` and private `Azure/azure-rest-api-specs-pr`.
-Identical API changes receive identical feedback in all of them. The rule
-sources, the per-category output budgets, the severity policy, the default
-finding set, and the `ARMChangesRequested` label policy are all shared.
+Both paths apply the same rule sources, overall output limit, severity policy,
+default finding set, and `ARMChangesRequested` label policy.
 
-Two consequences worth knowing as an author or reviewer:
+Three consequences worth knowing as an author or reviewer:
 
-- **The only intentional difference is the human approval gate.** The
+- **The interactive path has a human approval gate.** The
   interactive agent shows findings in chat and posts only after a reviewer
   approves, and that reviewer can record an explicit, justified override of a
   Critic decision. The automated workflow has no human in the loop and no
-  override path. Absent an override, both produce the same posted findings.
+  override path. Absent an override, both apply the same default posting policy.
+- **Only the automated path pins a model.** The workflow and eval suite use the
+  same reviewed model. The VS Code agent uses the model selected by the user, so
+  it remains available to users whose subscriptions expose different models.
 - **When independent verification is unavailable, severity is preserved, not
   softened.** If the review Critic cannot run, findings keep their original
   severity and the summary says so plainly. Because nothing verified them, that
   run does **not** apply `ARMChangesRequested`; a human decides whether the
   finding should move the ARM review queue.
 
-The automated workflow exists in both repositories and the two copies are kept
-identical, so a pull request in either one can receive an automated review as
-well as an interactive one. The shared rules above are what keep the outcomes
-consistent.
+The automated workflow is maintained in both repositories. Changes must be
+mirrored so a pull request in either one receives the same automated review.
+The shared rules above are what keep the outcomes consistent.
 
 The automated review runs on a **pinned model**, so every automated run reviews
 with the same model and its behavior changes only in a reviewed commit rather
@@ -163,6 +164,11 @@ whatever model you have selected, so that the agent works for everyone
 regardless of which models their subscription includes. Wording and emphasis can
 therefore vary between an interactive review and an automated one; the shared
 rules above are what keep the substance the same.
+
+The current interactive agent profile targets VS Code only. Making it available
+in the GitHub.com agent picker requires reducing its prompt below GitHub's
+30,000-character limit; that work is tracked separately in
+[issue 45843](https://github.com/Azure/azure-rest-api-specs/issues/45843).
 
 ### Bot identity and comment deduplication
 
@@ -403,9 +409,9 @@ HTML comments before they reach GitHub. Either form is a valid marker.
 - `category` -- the finding's issue type, from a closed vocabulary of eleven
   values such as `schema-and-property-design`, `security-and-secrets`, or
   `long-running-operations`. This is what makes findings countable by category
-  without re-reading rule IDs, and it decides which output cap the finding
-  counts against. The canonical list, and the mapping from each category to its
-  cap bucket, is
+  without re-reading rule IDs, and it decides the finding's drop group when the
+  overall 20-comment limit is exceeded. The canonical list and drop-group
+  mapping are in
   [Finding categories](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/agents/protocols/arm-api-review-critic.protocol.md#finding-categories).
   Use `summary` for comments that don't flag a single rule.
 - `severity` -- one of `blocking`, `warning`, or `suggestion`.

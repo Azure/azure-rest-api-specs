@@ -695,15 +695,44 @@ describe("ARM API review consistency and hardening", () => {
   });
 
   it("keeps the agent's overflow disclosure on a surface that actually exists", async () => {
-    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+    const [workflow, agent, protocol, docs] = await Promise.all([
+      readFile(join(ROOT, SOURCE_FILE), "utf8"),
+      readFile(join(ROOT, AGENT_FILE), "utf8"),
+      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+      readFile(join(ROOT, "documentation/api-reviewer-agent.md"), "utf8"),
+    ]);
+    const collapsedAgent = collapseWhitespace(agent);
 
     // The interactive agent posts no summary comment by default, so the
     // review-body preamble is the only always-present surface. Over-cap
     // candidates also need a legal action token, or they get posted (breaking
     // the cap) or dropped (breaking the disclosure).
-    expect(agent).toContain("OVERFLOW-NOT-POSTED");
-    expect(agent).toContain("this agent does not post a summary comment by default");
-    expect(agent).toContain("never rendered as canonical finding bodies");
+    expect(collapsedAgent).toContain("OVERFLOW-NOT-POSTED");
+    expect(collapsedAgent).toContain("this agent does not post a summary comment by default");
+    expect(collapsedAgent).toContain("never rendered as canonical finding bodies");
+
+    // There is one 20-comment limit. These phrases belonged to the discarded
+    // 50-comment/per-category design and would create a second overflow path.
+    const allSurfaces = [workflow, agent, protocol, docs].join("\n");
+    expect(allSurfaces).not.toContain("50-comment budget");
+    expect(allSurfaces).not.toContain("excluded by a category cap");
+    expect(allSurfaces).not.toContain("beyond a per-category cap");
+    expect(allSurfaces).not.toContain("per-category output budgets");
+    expect(allSurfaces).not.toContain("cap bucket");
+  });
+
+  it("limits the oversized interactive agent to its supported host", async () => {
+    const agent = await readFile(join(ROOT, AGENT_FILE), "utf8");
+    const frontmatterEnd = agent.indexOf("\n---\n", 4);
+    expect(frontmatterEnd).toBeGreaterThan(4);
+    const frontmatter = agent.slice(4, frontmatterEnd);
+    const body = agent.slice(frontmatterEnd + 5);
+
+    // GitHub.com rejects custom-agent bodies over 30,000 characters. Until
+    // #45843 extracts this workflow into referenced files, declaring both
+    // targets would advertise a profile that the browser cannot load.
+    expect(body.length).toBeGreaterThan(30_000);
+    expect(frontmatter).toMatch(/^target: vscode$/m);
   });
 
   it("carves the post-condition out of the Step 8 no-re-fetch rule", async () => {
@@ -915,7 +944,26 @@ describe("ARM API review live-run regressions", () => {
     expect(collapsed).toContain(
       "All seven fields are **required on every posted body**, including the Step 8 summary",
     );
+    expect(collapsed).toContain(
+      "`posted-by`, `rule`, `category`, `severity`, `classification`, `critic`, and `head-sha`",
+    );
     expect(collapsed).toContain("The summary's marker is not a reduced form");
+  });
+
+  it("uses the minimal marker when the full head SHA is unavailable", async () => {
+    const protocol = collapseWhitespace(
+      await readFile(
+        join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"),
+        "utf8",
+      ),
+    );
+
+    // A full marker without head-sha contradicts the seven-field schema. The
+    // agent and protocol eval already use the degraded form for this case.
+    expect(protocol).toContain(
+      "fall back to the minimal marker with `reason: head-sha-unavailable`",
+    );
+    expect(protocol).not.toContain("omit `head-sha` rather than violate");
   });
 
   it("constrains the critic field to pass, warn, or unknown", async () => {
@@ -1011,13 +1059,20 @@ describe("ARM API review live-run regressions", () => {
     expect(collapsedStripped).toContain("silently discarded");
 
     // Every marker template must survive prompt stripping intact and carry all
-    // six fields, and none may be wrapped in HTML-comment delimiters.
+    // seven fields, and none may be wrapped in HTML-comment delimiters.
     const templates = [
       ...collapsedStripped.matchAll(/_posted-by: arm-api-reviewer-agent[^`\n]*?_/g),
     ];
     expect(templates.length).toBeGreaterThanOrEqual(3);
     for (const [template] of templates) {
-      for (const field of ["rule:", "severity:", "classification:", "critic:", "head-sha:"]) {
+      for (const field of [
+        "rule:",
+        "category:",
+        "severity:",
+        "classification:",
+        "critic:",
+        "head-sha:",
+      ]) {
         expect(template).toContain(field);
       }
       expect(template).not.toContain("<!--");
@@ -1052,6 +1107,31 @@ describe("ARM API review live-run regressions", () => {
     const once = stripXmlComments("<!-- <!-- --> PAYLOAD --> visible");
     expect(stripXmlComments(once)).toBe(once);
   });
+
+  it("keeps protocol evals connected to the agent and current marker schema", async () => {
+    const evalSpec = await readFile(
+      join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-protocol-safety.yaml"),
+      "utf8",
+    );
+
+    // The protocol-only scenarios used to restate the expected answer without
+    // exposing the changed agent files, so they could pass while the agent
+    // regressed. The files are now available in each eval workspace.
+    expect(evalSpec).toContain('src: "../../../../agents/arm-api-reviewer.agent.md"');
+    expect(evalSpec).toContain(
+      'src: "../../../../agents/protocols/arm-api-review-critic.protocol.md"',
+    );
+
+    // `category` became required after these fixtures were first written. Any
+    // literal full-marker example without it teaches and accepts stale output.
+    const fullMarkers = [
+      ...evalSpec.matchAll(/<!-- posted-by: arm-api-reviewer-agent \| rule:[\s\S]*?-->/g),
+    ];
+    expect(fullMarkers.length).toBeGreaterThanOrEqual(5);
+    for (const [marker] of fullMarkers) {
+      expect(marker).toMatch(/\|\s*category:/);
+    }
+  });
 });
 
 describe("API version lifecycle rules", () => {
@@ -1077,7 +1157,7 @@ describe("API version lifecycle rules", () => {
     expect(agent).toContain("arm-api-review.instructions.md");
   });
 
-  it("keeps the branch-keyed rules fail-safe when the base ref is unknown", async () => {
+  it("keeps only the in-development rule branch-dependent", async () => {
     // A release-* branch is a legitimate home for work that would be a
     // violation on main, and the workflow prompt never names base.ref. Without
     // an explicit skip, an unknown branch defaults to the worst reading and
@@ -1085,9 +1165,10 @@ describe("API version lifecycle rules", () => {
     const reference = collapseWhitespace(await readFile(join(ROOT, REFERENCE_FILE), "utf8"));
 
     expect(reference).toContain("base.ref");
-    expect(reference).toMatch(/skip those two rules rather than assuming/i);
+    expect(reference).toMatch(/skip that rule rather than assuming/i);
     expect(reference).toContain("APIVER-DEV-IN-MAIN");
     expect(reference).toContain("APIVER-PRIVATE-IN-PUBLIC");
+    expect(reference).toMatch(/private preview is prohibited from every branch/i);
   });
 
   it("does not treat a private-to-public promotion as a leak", async () => {
