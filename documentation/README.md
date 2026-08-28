@@ -18,6 +18,7 @@ This directory contains documentation specific to the Azure REST API specificati
 | [OpenAPI authoring manual guidelines](./openapi-authoring-manual-guidelines.md) | Reference for OpenAPI authoring rules that require manual verification. | Specification authors and reviewers | OpenAPI |
 | [Semantic and model violations reference](./Semantic-and-Model-Violations-Reference.md) | Reference for OAV semantic and model validation errors. | OpenAPI authors | OpenAPI |
 | [Breaking change and OAD rules mapping](./BreakingChange-Oad-Rules-Mapping.md) | Mapping between OAD rule identifiers and breaking change categories. | Specification authors and reviewers | OpenAPI |
+| [Uniform versioning](./uniform-versioning.md) | Repository requirements for versioning a service, its specifications, documentation, and SDKs together. | Specification authors and reviewers | TypeSpec and OpenAPI |
 | [x-ms-examples](./x-ms-examples.md) | Repository reference for operation request and response examples in OpenAPI. | OpenAPI authors | OpenAPI |
 
 ## Review tooling

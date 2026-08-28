@@ -387,7 +387,7 @@ Use these to verify claims, check the latest guidelines, or investigate edge cas
 - [Repository documentation](https://github.com/Azure/azure-rest-api-specs/tree/main/documentation)
 - [OpenAPI authoring automated guidelines](../../documentation/openapi-authoring-automated-guidelines.md) - automated validation rule IDs and descriptions
 - [Breaking changes policy](https://aka.ms/AzBreakingChangesPolicy) - what constitutes a breaking change
-- [Uniform versioning](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-Service-Versioning-Guideline) - API version immutability and folder structure
+- [Uniform versioning](../../documentation/uniform-versioning.md) - API version immutability and folder structure
 - [Directory structure](https://aka.ms/azsdk/spec-dirs) - specification folder layout conventions
 - [CI fix guide](../../documentation/ci-fix.md) - troubleshooting PR validation failures
 - [Swagger extensions](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md) - x-ms extension documentation

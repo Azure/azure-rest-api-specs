@@ -366,7 +366,7 @@ consumption.
 These documents in this repo provide additional context:
 
 - [Breaking changes policy](https://aka.ms/AzBreakingChangesPolicy)
-- [Uniform versioning](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-Service-Versioning-Guideline)
+- [Uniform versioning](../../../documentation/uniform-versioning.md)
 - [Directory structure](https://aka.ms/azsdk/spec-dirs)
 - [OpenAPI authoring automated guidelines](../../../documentation/openapi-authoring-automated-guidelines.md)
 - [Swagger extensions](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md)
