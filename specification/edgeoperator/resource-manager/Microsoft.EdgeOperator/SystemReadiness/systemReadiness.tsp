@@ -37,7 +37,7 @@ model SystemReadinessProperties {
 
 /** The readiness percentage reported for a single readiness category. */
 model ReadinessStatusDetail {
-  /** The name of the readiness category (for example, `services`, `diagnostics`, `identity`, `networking`). */
+  /** The provider-defined name of the readiness category (for example, `services`, `diagnostics`, `identity`, `networking`). Categories may be added, renamed, or removed without an API-version change and must be treated as an open string. */
   categoryName: string;
 
   /** The readiness percentage reported by the category, from 0 (not ready) to 100 (fully ready). */
@@ -48,7 +48,7 @@ model ReadinessStatusDetail {
 
 /** The error messages reported for a single readiness category. Messages are present when the category is not ready and a specific error is available. */
 model ErrorMessageDetail {
-  /** The name of the readiness category (for example, `services`, `diagnostics`, `identity`, `networking`). */
+  /** The provider-defined name of the readiness category (for example, `services`, `diagnostics`, `identity`, `networking`). Categories may be added, renamed, or removed without an API-version change and must be treated as an open string. */
   categoryName: string;
 
   /** The list of error messages reported for the category. Present when the category is not ready and a specific error is available; otherwise empty. */
