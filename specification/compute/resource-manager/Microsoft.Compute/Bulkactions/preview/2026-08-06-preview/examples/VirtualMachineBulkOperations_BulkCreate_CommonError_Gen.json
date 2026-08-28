@@ -1,0 +1,33 @@
+{
+  "title": "Invalid VM size",
+  "operationId": "VirtualMachineBulkOperations_BulkCreate",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "resourceConfigParameters": {
+        "baseProfile": {
+          "properties": {
+            "hardwareProfile": {
+              "vmSize": "Standard_Z999_v5"
+            }
+          }
+        },
+        "resourceCount": 2
+      },
+      "executionParameters": {}
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadRequestException",
+          "message": "VM size validation failed: 'Standard_Z999_v5' is not a valid VM size."
+        }
+      }
+    }
+  }
+}

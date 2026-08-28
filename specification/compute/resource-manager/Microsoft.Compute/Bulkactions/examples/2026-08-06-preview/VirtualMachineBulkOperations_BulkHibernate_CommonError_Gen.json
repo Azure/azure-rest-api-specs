@@ -1,0 +1,44 @@
+{
+  "title": "Hibernate VM in wrong region",
+  "operationId": "VirtualMachineBulkOperations_BulkHibernate",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "executionParameters": {},
+      "resources": {
+        "ids": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "description": "Hibernate Resource request",
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "operation": {
+              "operationId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Hibernate",
+              "state": "PendingScheduling"
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "errorCode": "ResourceNotInLocation",
+            "errorDetails": "The virtual machine 'bulk-vm-02' is not in the eastus region. All virtual machines in this request must be in the eastus region."
+          }
+        ]
+      }
+    }
+  }
+}

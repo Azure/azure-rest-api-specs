@@ -1,5 +1,5 @@
 {
-  "title": "Deallocate multiple virtual machines with retry settings",
+  "title": "Deallocation with retries",
   "operationId": "VirtualMachineBulkOperations_BulkDeallocate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -10,8 +10,7 @@
       "executionParameters": {
         "retryPolicy": {
           "retryCount": 3,
-          "retryWindowInMinutes": 30,
-          "onFailureAction": "Deallocate"
+          "retryWindowInMinutes": 30
         },
         "optimizationPreference": "CostAvailabilityBalanced"
       },
@@ -47,8 +46,7 @@
               "timezone": "UTC",
               "retryPolicy": {
                 "retryCount": 3,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Deallocate"
+                "retryWindowInMinutes": 30
               }
             }
           },
@@ -69,8 +67,7 @@
               "timezone": "UTC",
               "retryPolicy": {
                 "retryCount": 3,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Deallocate"
+                "retryWindowInMinutes": 30
               }
             }
           }

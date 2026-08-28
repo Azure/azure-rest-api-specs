@@ -1,5 +1,5 @@
 {
-  "title": "Hibernate multiple virtual machines with retry settings",
+  "title": "Hibernate with deallocation fallback",
   "operationId": "VirtualMachineBulkOperations_BulkHibernate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -9,9 +9,9 @@
     "requestBody": {
       "executionParameters": {
         "retryPolicy": {
-          "retryCount": 3,
+          "retryCount": 2,
           "retryWindowInMinutes": 30,
-          "onFailureAction": "Hibernate"
+          "onFailureAction": "Deallocate"
         },
         "optimizationPreference": "CostAvailabilityBalanced"
       },
@@ -52,9 +52,9 @@
               "state": "PendingScheduling",
               "timezone": "UTC",
               "retryPolicy": {
-                "retryCount": 3,
+                "retryCount": 2,
                 "retryWindowInMinutes": 30,
-                "onFailureAction": "Hibernate"
+                "onFailureAction": "Deallocate"
               },
               "resourceNotificationDetails": {
                 "resourceContext": "maintenance-window-01"
@@ -77,9 +77,9 @@
               "state": "PendingScheduling",
               "timezone": "UTC",
               "retryPolicy": {
-                "retryCount": 3,
+                "retryCount": 2,
                 "retryWindowInMinutes": 30,
-                "onFailureAction": "Hibernate"
+                "onFailureAction": "Deallocate"
               },
               "resourceNotificationDetails": {
                 "resourceContext": "maintenance-window-01"

@@ -1,5 +1,5 @@
 {
-  "title": "Create one virtual desktop infrastructure virtual machine",
+  "title": "Basic VDI creation",
   "operationId": "VirtualMachineBulkOperations_BulkVdiFlexCreate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -8,7 +8,7 @@
     "location": "eastus",
     "requestBody": {
       "resourceConfigParameters": {
-        "resourceCount": 1,
+        "resourceCount": 2,
         "flexProperties": {
           "vmSizeProfiles": [
             {
@@ -39,6 +39,15 @@
             "operation": {
               "operationId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Create",
+              "state": "PendingScheduling"
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "operation": {
+              "operationId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
               "opType": "Create",
               "state": "PendingScheduling"
             }

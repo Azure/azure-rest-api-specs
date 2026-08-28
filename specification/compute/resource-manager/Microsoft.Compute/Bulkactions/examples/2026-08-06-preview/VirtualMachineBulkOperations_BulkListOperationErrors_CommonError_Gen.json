@@ -1,0 +1,21 @@
+{
+  "title": "Invalid lookback window",
+  "operationId": "VirtualMachineBulkOperations_BulkListOperationErrors",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "lookbackInMinutes": 0
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadRequestException",
+          "message": "lookbackInMinutes must be between 1 and 10080."
+        }
+      }
+    }
+  }
+}
