@@ -296,16 +296,8 @@ using Azure.AI.Projects;
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
 
-@@clientName(
-  OpenAI.RealtimeMcpErrorType,
-  "RealtimeMCPErrorType",
-  "javascript"
-);
-@@clientName(
-  OpenAI.RealtimeMCPHTTPError,
-  "RealtimeMCPHttpError",
-  "javascript"
-);
+@@clientName(OpenAI.RealtimeMcpErrorType, "RealtimeMCPErrorType", "javascript");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "javascript");
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
