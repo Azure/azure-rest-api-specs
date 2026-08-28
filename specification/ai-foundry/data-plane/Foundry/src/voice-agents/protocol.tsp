@@ -535,8 +535,8 @@ model VoiceAgentServerEventRtcCallSdpCreated {
   @doc("The event type. Always `rtc.call.sdp.created`.")
   type: "rtc.call.sdp.created";
 
-  @doc("An optional server-generated event identifier.")
-  event_id?: string;
+  @doc("The server-generated event identifier.")
+  event_id: string;
 
   @doc("The identifier of the established WebRTC call.")
   rtc_call_id: string;
