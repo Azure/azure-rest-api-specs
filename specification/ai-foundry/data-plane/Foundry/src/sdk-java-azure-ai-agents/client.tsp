@@ -328,7 +328,7 @@ using Azure.AI.Projects;
 @@usage(FoundryFeaturesOptInKeys, Usage.input);
 @@access(FoundryFeaturesOptInKeys, Access.internal, "java");
 @@usage(AgentDefinitionOptInKeys, Usage.input);
-@@access(AgentDefinitionOptInKeys, Access.public, "java");
+@@access(AgentDefinitionOptInKeys, Access.internal, "java");
 
 // TODO: Re-enable once we are ready to support voice-agents
 // @@clientName(
