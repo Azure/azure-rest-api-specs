@@ -1,66 +1,29 @@
-import type { SpawnSyncReturns } from "node:child_process";
-import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import type { TypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
+import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-// Mock child_process BEFORE importing the module that uses it
-const mockMetadataMap = new Map<string, { apiVersion: string; sdkType: "stable" | "preview" }>();
+const { mockMetadataMap } = vi.hoisted(() => ({
+  mockMetadataMap: new Map<string, { apiVersion: string; sdkType: "stable" | "preview" }>(),
+}));
 
-vi.mock("node:child_process", () => {
-  return {
-    spawnSync: (
-      cmd: string,
-      args: string[] | undefined = [],
-      options: { cwd?: string; encoding?: string } = {},
-    ): SpawnSyncReturns<string> => {
-      if ((cmd === "tsp.cmd" || cmd === "tsp") && args?.[0] === "compile") {
-        const projectDir = options.cwd || process.cwd();
-        const mockData = mockMetadataMap.get(projectDir);
-        if (mockData) {
-          const metadataDir = join(projectDir, "tsp-output", "@azure-tools", "typespec-metadata");
-          mkdirSync(metadataDir, { recursive: true });
-          const metadata = {
-            languages: {
-              csharp: [
-                {
-                  packageName: "Azure.Sample",
-                  apiVersion: mockData.apiVersion,
-                  sdkType: mockData.sdkType,
-                },
-              ],
-              java: [
-                {
-                  packageName: "com.azure.sample",
-                  apiVersion: mockData.apiVersion,
-                  sdkType: mockData.sdkType,
-                },
-              ],
-              python: [
-                {
-                  packageName: "azure-sample",
-                  apiVersion: mockData.apiVersion,
-                  sdkType: mockData.sdkType,
-                },
-              ],
-            },
-          };
-          writeFileSync(join(metadataDir, "typespec-metadata.json"), JSON.stringify(metadata));
-        }
-        return { status: 0, stdout: "", stderr: "", pid: 0, signal: null, output: [] };
-      }
-      return {
-        status: 1,
-        stdout: "",
-        stderr: "Command not mocked",
-        pid: 0,
-        signal: null,
-        output: [],
-      };
-    },
-  };
-});
+vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
+  generateTypeSpecMetadata: vi.fn((projectDir: string) => {
+    const mockData = mockMetadataMap.get(projectDir);
+    if (!mockData) {
+      return Promise.reject(new Error(`Metadata not mocked for ${projectDir}`));
+    }
 
-// NOW import the modules that depend on child_process
+    return Promise.resolve(
+      createMetadata({
+        csharp: [{ emitterName: "csharp", ...mockData }],
+        java: [{ emitterName: "java", ...mockData }],
+        python: [{ emitterName: "python", ...mockData }],
+      }),
+    );
+  }),
+}));
+
 import {
   compareApiVersionsDesc,
   createOctokit,
@@ -73,8 +36,17 @@ import {
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
   parseApiVersion,
-  parseTypeSpecMetadata,
+  resolveTypeSpecMetadata,
 } from "../src/typespec-project.ts";
+
+function createMetadata(languages: TypeSpecMetadata["languages"]): TypeSpecMetadata {
+  return {
+    emitterVersion: "0.3.0",
+    generatedAt: "2026-08-28T00:00:00.000Z",
+    typespec: { namespace: "Sample", type: "management" },
+    languages,
+  };
+}
 
 // Helper function to setup mock metadata for a test
 function setupMockMetadata(projectPath: string, apiVersion: string, sdkType: "stable" | "preview") {
@@ -195,7 +167,6 @@ describe("GitHub PR file listing", () => {
 
 describe("TypeSpec project detection edge cases", () => {
   it("still detects project when PR lacks new-api-version label", async () => {
-    // Create main.tsp file so runTypeSpecMetadataEmitter doesn't fail early
     const projectPath = join(process.cwd(), "specification/foo");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
@@ -392,7 +363,6 @@ describe("TypeSpec project detection edge cases", () => {
   });
 
   it("uses associated PR path when commit maps to a PR", async () => {
-    // Create main.tsp file so runTypeSpecMetadataEmitter doesn't fail early
     const projectPath = join(process.cwd(), "specification/foo");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
@@ -443,7 +413,6 @@ describe("TypeSpec project detection edge cases", () => {
   });
 
   it("falls back to commit file analysis when no PR is associated", async () => {
-    // Create main.tsp file so runTypeSpecMetadataEmitter doesn't fail early
     const projectPath = join(process.cwd(), "specification/bar");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
@@ -526,7 +495,6 @@ describe("TypeSpec project detection edge cases", () => {
   });
 
   it("ignores renamed files when detecting the API version", async () => {
-    // Create main.tsp file so runTypeSpecMetadataEmitter doesn't fail early
     const projectPath = join(process.cwd(), "specification/bar");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
@@ -596,240 +564,191 @@ describe("pull request label helpers", () => {
   });
 });
 
-describe("TypeSpec metadata parsing", () => {
-  let tempDir: string;
-
-  beforeEach(() => {
-    // Create temporary directory for test metadata files
-    tempDir = join(process.cwd(), "test-metadata-temp");
-    mkdirSync(tempDir, { recursive: true });
-  });
-
-  afterEach(() => {
-    // Cleanup test directory
-    if (existsSync(tempDir)) {
-      rmSync(tempDir, { recursive: true, force: true });
-    }
-  });
-
+describe("TypeSpec metadata resolution", () => {
   it("parses valid TypeSpec metadata with multiple languages", () => {
-    const metadataDir = join(tempDir, "tsp-output", "@azure-tools", "typespec-metadata");
-    mkdirSync(metadataDir, { recursive: true });
-    const metadataFile = join(metadataDir, "typespec-metadata.json");
-    const metadata = {
-      languages: {
-        csharp: [
-          {
-            packageName: "Azure.ResourceManager.Sample",
-            apiVersion: "2025-08-01",
-            sdkType: "stable",
-          },
-        ],
-        java: [
-          {
-            packageName: "com.azure.resourcemanager.sample",
-            apiVersion: "2025-08-01",
-            sdkType: "stable",
-          },
-        ],
-        python: [
-          {
-            packageName: "azure-mgmt-sample",
-            apiVersion: "2025-08-01",
-            sdkType: "stable",
-          },
-        ],
-      },
-    };
-    writeFileSync(metadataFile, JSON.stringify(metadata));
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      python: [
+        {
+          emitterName: "python",
+          packageName: "azure-mgmt-sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+    });
 
-    const result = parseTypeSpecMetadata(tempDir);
+    const result = resolveTypeSpecMetadata(metadata);
     expect(result.apiVersion).toBe("2025-08-01");
     expect(result.sdkType).toBe("stable");
   });
 
-  it("throws error when metadata file contains malformed JSON", () => {
-    const metadataDir = join(tempDir, "tsp-output", "@azure-tools", "typespec-metadata");
-    mkdirSync(metadataDir, { recursive: true });
-    const metadataFile = join(metadataDir, "typespec-metadata.json");
-    writeFileSync(metadataFile, "{invalid json}");
+  it("uses the first API version when metadata contains multiple versions", () => {
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          apiVersion: "2026-01-01-preview",
+          sdkType: "preview",
+        },
+      ],
+    });
 
-    expect(() => {
-      parseTypeSpecMetadata(tempDir);
-    }).toThrow("Failed to parse TypeSpec metadata JSON");
-  });
-
-  it("throws error when metadata file is missing", () => {
-    expect(() => {
-      parseTypeSpecMetadata(tempDir);
-    }).toThrow("TypeSpec metadata file not found");
-  });
-
-  it("throws error when metadata lacks languages object", () => {
-    const metadataDir = join(tempDir, "tsp-output", "@azure-tools", "typespec-metadata");
-    mkdirSync(metadataDir, { recursive: true });
-    const metadataFile = join(metadataDir, "typespec-metadata.json");
-    const metadata = {
-      version: "1.0.0",
-      // Missing languages object
-    };
-    writeFileSync(metadataFile, JSON.stringify(metadata));
-
-    expect(() => {
-      parseTypeSpecMetadata(tempDir);
-    }).toThrow("TypeSpec metadata does not contain 'languages' object");
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({
+      apiVersion: "2025-08-01",
+      sdkType: "stable",
+    });
   });
 
   it("throws error when languages have different sdkTypes (conflicting)", () => {
-    const metadataDir = join(tempDir, "tsp-output", "@azure-tools", "typespec-metadata");
-    mkdirSync(metadataDir, { recursive: true });
-    const metadataFile = join(metadataDir, "typespec-metadata.json");
-    const metadata = {
-      languages: {
-        csharp: [
-          {
-            packageName: "Azure.ResourceManager.Sample",
-            apiVersion: "2025-08-01",
-            sdkType: "stable",
-          },
-        ],
-        java: [
-          {
-            packageName: "com.azure.resourcemanager.sample",
-            apiVersion: "2025-08-01",
-            sdkType: "preview",
-          },
-        ],
-      },
-    };
-    writeFileSync(metadataFile, JSON.stringify(metadata));
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          apiVersion: "2025-08-01",
+          sdkType: "preview",
+        },
+      ],
+    });
 
     expect(() => {
-      parseTypeSpecMetadata(tempDir);
+      resolveTypeSpecMetadata(metadata);
     }).toThrow(
       "TypeSpec code generator output suggests that this project contains conflicting SDK release type",
     );
   });
 
   it("skips language configs with missing apiVersion and logs warning", () => {
-    const metadataDir = join(tempDir, "tsp-output", "@azure-tools", "typespec-metadata");
-    mkdirSync(metadataDir, { recursive: true });
-    const metadataFile = join(metadataDir, "typespec-metadata.json");
-    const metadata = {
-      languages: {
-        csharp: [
-          {
-            packageName: "Azure.ResourceManager.Sample",
-            apiVersion: "2025-08-01",
-            sdkType: "stable",
-          },
-        ],
-        java: [
-          {
-            packageName: "com.azure.resourcemanager.sample",
-            // Missing apiVersion
-            sdkType: "stable",
-          },
-        ],
-        python: [
-          {
-            packageName: "azure-mgmt-sample",
-            apiVersion: "2025-08-01",
-            sdkType: "stable",
-          },
-        ],
-      },
-    };
-    writeFileSync(metadataFile, JSON.stringify(metadata));
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          sdkType: "stable",
+        },
+      ],
+      python: [
+        {
+          emitterName: "python",
+          packageName: "azure-mgmt-sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+    });
 
-    const result = parseTypeSpecMetadata(tempDir);
+    const result = resolveTypeSpecMetadata(metadata);
     expect(result.apiVersion).toBe("2025-08-01");
     expect(result.sdkType).toBe("stable");
-    // Should have logged a warning about missing apiVersion in java config
   });
 
   it("skips language configs with missing sdkType", () => {
-    const metadataDir = join(tempDir, "tsp-output", "@azure-tools", "typespec-metadata");
-    mkdirSync(metadataDir, { recursive: true });
-    const metadataFile = join(metadataDir, "typespec-metadata.json");
-    const metadata = {
-      languages: {
-        csharp: [
-          {
-            packageName: "Azure.ResourceManager.Sample",
-            apiVersion: "2025-08-01",
-            sdkType: "stable",
-          },
-        ],
-        java: [
-          {
-            packageName: "com.azure.resourcemanager.sample",
-            apiVersion: "2025-08-01",
-            // Missing sdkType
-          },
-        ],
-        python: [
-          {
-            packageName: "azure-mgmt-sample",
-            apiVersion: "2025-08-01",
-            sdkType: "stable",
-          },
-        ],
-      },
-    };
-    writeFileSync(metadataFile, JSON.stringify(metadata));
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          apiVersion: "2025-08-01",
+        },
+      ],
+      python: [
+        {
+          emitterName: "python",
+          packageName: "azure-mgmt-sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+    });
 
-    const result = parseTypeSpecMetadata(tempDir);
+    const result = resolveTypeSpecMetadata(metadata);
     expect(result.apiVersion).toBe("2025-08-01");
     expect(result.sdkType).toBe("stable");
   });
 
   it("throws error when no valid language configurations found", () => {
-    const metadataDir = join(tempDir, "tsp-output", "@azure-tools", "typespec-metadata");
-    mkdirSync(metadataDir, { recursive: true });
-    const metadataFile = join(metadataDir, "typespec-metadata.json");
-    const metadata = {
-      languages: {
-        csharp: [
-          {
-            packageName: "Azure.ResourceManager.Sample",
-            // Missing both apiVersion and sdkType
-          },
-        ],
-      },
-    };
-    writeFileSync(metadataFile, JSON.stringify(metadata));
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+        },
+      ],
+    });
 
     expect(() => {
-      parseTypeSpecMetadata(tempDir);
+      resolveTypeSpecMetadata(metadata);
     }).toThrow("No valid language configurations found in TypeSpec metadata");
   });
 
   it("handles preview API versions correctly", () => {
-    const metadataDir = join(tempDir, "tsp-output", "@azure-tools", "typespec-metadata");
-    mkdirSync(metadataDir, { recursive: true });
-    const metadataFile = join(metadataDir, "typespec-metadata.json");
-    const metadata = {
-      languages: {
-        csharp: [
-          {
-            packageName: "Azure.ResourceManager.Sample",
-            apiVersion: "2025-08-01-preview",
-            sdkType: "preview",
-          },
-        ],
-        java: [
-          {
-            packageName: "com.azure.resourcemanager.sample",
-            apiVersion: "2025-08-01-preview",
-            sdkType: "preview",
-          },
-        ],
-      },
-    };
-    writeFileSync(metadataFile, JSON.stringify(metadata));
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01-preview",
+          sdkType: "preview",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          apiVersion: "2025-08-01-preview",
+          sdkType: "preview",
+        },
+      ],
+    });
 
-    const result = parseTypeSpecMetadata(tempDir);
+    const result = resolveTypeSpecMetadata(metadata);
     expect(result.apiVersion).toBe("2025-08-01-preview");
     expect(result.sdkType).toBe("preview");
   });

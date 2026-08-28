@@ -253,7 +253,6 @@ export type {
   OctokitLike,
   PullRequestChangedFile,
   ReleasePlanCommandContext,
-  TypeSpecMetadataResult,
   TypeSpecProjectInfo,
 } from "./types.ts";
 export {
@@ -272,6 +271,5 @@ export {
   getTypeSpecProjectVersionFromMetadata,
   NEW_API_VERSION_LABEL,
   parseApiVersion,
-  parseTypeSpecMetadata,
-  runTypeSpecMetadataEmitter,
+  resolveTypeSpecMetadata,
 } from "./typespec-project.ts";
