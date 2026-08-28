@@ -737,35 +737,41 @@
         "AzureMonitorWorkspaceResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource Id of the Azure Monitor workspace which the OpenTelemetry data will be ingested to."
+          "description": "Resource Id of the Azure Monitor workspace which the OpenTelemetry data will be ingested to.",
+          "x-ms-client-name": "azureMonitorWorkspaceResourceId"
         },
         "AzureMonitorWorkspaceIngestionMode": {
           "$ref": "#/definitions/AzureMonitorWorkspaceIngestionMode",
-          "description": "Indicates the state of the OpenTelemetry ingestion into the linked Azure Monitor workspace."
+          "description": "Indicates the state of the OpenTelemetry ingestion into the linked Azure Monitor workspace. Clients may set this to `NotOptedIn` or `Enabled`; `Disabled` is set only by the service when the link to the Azure Monitor workspace is broken.",
+          "x-ms-client-name": "azureMonitorWorkspaceIngestionMode"
         },
         "DataCollectionRuleResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "Resource Id of the data collection rule that routes the OpenTelemetry data ingested through the OTLP endpoints of this component.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "dataCollectionRuleResourceId"
         },
         "OTLPMetricsEndpoint": {
           "type": "string",
           "format": "uri",
           "description": "The OTLP endpoint to which OpenTelemetry metrics for this component are sent.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "otlpMetricsEndpoint"
         },
         "OTLPLogsEndpoint": {
           "type": "string",
           "format": "uri",
           "description": "The OTLP endpoint to which OpenTelemetry logs for this component are sent.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "otlpLogsEndpoint"
         },
         "OTLPTracesEndpoint": {
           "type": "string",
           "format": "uri",
           "description": "The OTLP endpoint to which OpenTelemetry traces for this component are sent.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "otlpTracesEndpoint"
         }
       },
       "required": [
@@ -787,17 +793,17 @@
           {
             "name": "NotOptedIn",
             "value": "NotOptedIn",
-            "description": "The component has not been opted in to Azure Monitor workspace ingestion."
+            "description": "The component has not been opted in to Azure Monitor workspace ingestion. Clients may specify this value on create to decline Azure Monitor workspace ingestion."
           },
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "Azure Monitor workspace ingestion is enabled for the component."
+            "description": "Azure Monitor workspace ingestion is enabled for the component. Clients may specify this value to opt in. Opting back out after ingestion has been enabled is not supported."
           },
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "Azure Monitor workspace ingestion is disabled for the component. This value is only set by the resource provider when the link to the Azure Monitor workspace is broken."
+            "description": "Azure Monitor workspace ingestion is disabled for the component because the link to the Azure Monitor workspace is broken. This value is set only by the service and is rejected if specified by a client."
           }
         ]
       }

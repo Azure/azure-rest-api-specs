@@ -118,17 +118,17 @@ union AzureMonitorWorkspaceIngestionMode {
   string,
 
   /**
-   * The component has not been opted in to Azure Monitor workspace ingestion.
+   * The component has not been opted in to Azure Monitor workspace ingestion. Clients may specify this value on create to decline Azure Monitor workspace ingestion.
    */
   NotOptedIn: "NotOptedIn",
 
   /**
-   * Azure Monitor workspace ingestion is enabled for the component.
+   * Azure Monitor workspace ingestion is enabled for the component. Clients may specify this value to opt in. Opting back out after ingestion has been enabled is not supported.
    */
   Enabled: "Enabled",
 
   /**
-   * Azure Monitor workspace ingestion is disabled for the component. This value is only set by the resource provider when the link to the Azure Monitor workspace is broken.
+   * Azure Monitor workspace ingestion is disabled for the component because the link to the Azure Monitor workspace is broken. This value is set only by the service and is rejected if specified by a client.
    */
   Disabled: "Disabled",
 }
@@ -312,48 +312,48 @@ model ApplicationInsightsComponentProperties {
   /**
    * Resource Id of the Azure Monitor workspace which the OpenTelemetry data will be ingested to.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
   @added(Versions.v2025_01_23_preview)
-  AzureMonitorWorkspaceResourceId?: Azure.Core.armResourceIdentifier;
+  @encodedName("application/json", "AzureMonitorWorkspaceResourceId")
+  azureMonitorWorkspaceResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
-   * Indicates the state of the OpenTelemetry ingestion into the linked Azure Monitor workspace.
+   * Indicates the state of the OpenTelemetry ingestion into the linked Azure Monitor workspace. Clients may set this to `NotOptedIn` or `Enabled`; `Disabled` is set only by the service when the link to the Azure Monitor workspace is broken.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
   @added(Versions.v2025_01_23_preview)
-  AzureMonitorWorkspaceIngestionMode?: AzureMonitorWorkspaceIngestionMode;
+  @encodedName("application/json", "AzureMonitorWorkspaceIngestionMode")
+  azureMonitorWorkspaceIngestionMode?: AzureMonitorWorkspaceIngestionMode;
 
   /**
    * Resource Id of the data collection rule that routes the OpenTelemetry data ingested through the OTLP endpoints of this component.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
   @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "DataCollectionRuleResourceId")
   @visibility(Lifecycle.Read)
-  DataCollectionRuleResourceId?: Azure.Core.armResourceIdentifier;
+  dataCollectionRuleResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * The OTLP endpoint to which OpenTelemetry metrics for this component are sent.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
   @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "OTLPMetricsEndpoint")
   @visibility(Lifecycle.Read)
-  OTLPMetricsEndpoint?: url;
+  otlpMetricsEndpoint?: url;
 
   /**
    * The OTLP endpoint to which OpenTelemetry logs for this component are sent.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
   @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "OTLPLogsEndpoint")
   @visibility(Lifecycle.Read)
-  OTLPLogsEndpoint?: url;
+  otlpLogsEndpoint?: url;
 
   /**
    * The OTLP endpoint to which OpenTelemetry traces for this component are sent.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is consistent with the existing wire contract of this API."
   @added(Versions.v2025_01_23_preview)
+  @encodedName("application/json", "OTLPTracesEndpoint")
   @visibility(Lifecycle.Read)
-  OTLPTracesEndpoint?: url;
+  otlpTracesEndpoint?: url;
 }
 
 /**
