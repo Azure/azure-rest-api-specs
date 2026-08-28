@@ -42,9 +42,18 @@ interface VoiceAgentWebSocket {
    * `VoiceAgents=V1Preview` opt-in through either the `Foundry-Features` header or the `foundry_features`
    * query parameter.
    *
-   * If the target agent is disabled, the HTTP WebSocket handshake fails before the `101 Switching Protocols`
-   * upgrade. The service returns `409 Conflict` using the shared Foundry `ApiErrorResponse` shape with
-   * `error.code = agent_disabled`. This failure is terminal until the caller enables the agent.
+   * Handshake failures are evaluated in the following order, independent of the requested `transport`:
+   *
+   * 1. Agent enablement (any transport): if the target agent is disabled, the handshake fails before the
+   *    `101 Switching Protocols` upgrade with `409 Conflict`, using the shared Foundry `ApiErrorResponse` shape
+   *    with `error.code = agent_disabled`. This failure is terminal until the caller enables the agent, and it
+   *    takes precedence over the WebRTC-specific checks below.
+   * 2. WebRTC availability (only when `transport=webrtc`, and only once the agent itself is enabled): the agent
+   *    must have the WebRTC transport capability configured. If the agent is enabled but WebRTC is not available
+   *    for it, the handshake fails with `404 Not Found`. This is distinct from the `409 agent_disabled` case
+   *    above, which concerns the agent itself rather than its WebRTC capability.
+   * 3. WebRTC compatibility (only when `transport=webrtc`): WebRTC does not support bring-your-own-model (BYOM)
+   *    or hosted-agent voice agents; those requests fail with `400 Bad Request`.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 protocol switch has no HTTP entity body; messages begin as WebSocket frames after the upgrade."
   @summary("Connect to a voice agent")
@@ -64,6 +73,14 @@ interface VoiceAgentWebSocket {
        */
       @query("foundry_features")
       foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
+
+      /**
+       * Selects the connection transport. Omit or send `websocket` for the default, where signaling and audio are
+       * exchanged as JSON events over this WebSocket. Send `webrtc` to negotiate a WebRTC connection: the WebSocket
+       * then carries only SDP signaling (`rtc.call.sdp.create` / `rtc.call.sdp.created`) while media and the data
+       * channel are peer-to-peer.
+       */
+      @query transport?: VoiceAgentTransport;
 
       /**
        * Whether to persist the conversation created by this WebSocket session. If omitted, the service honors the

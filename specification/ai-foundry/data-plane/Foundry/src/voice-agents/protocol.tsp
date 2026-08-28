@@ -54,6 +54,18 @@ union VoiceAgentWebSocketSubprotocol {
   realtime: "realtime",
 }
 
+@doc("The transport used for a voice-agent connection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentTransport {
+  string,
+
+  @doc("Signaling and audio are exchanged as JSON events over the WebSocket. This is the default.")
+  websocket: "websocket",
+
+  @doc("WebRTC: the WebSocket carries only SDP signaling; media and the data channel are peer-to-peer.")
+  webrtc: "webrtc",
+}
+
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "A WebSocket message may be sent by either the client or the server."
 @doc("A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are base64-encoded in JSON event fields.")
 @usage(VoiceAgentWebSocketMessageUsage)
@@ -80,6 +92,7 @@ union VoiceAgentClientEvent {
   response_create: OpenAI.RealtimeClientEventResponseCreate,
   session_update: VoiceAgentClientEventSessionUpdate,
   session_avatar_connect: VoiceAgentClientEventSessionAvatarConnect,
+  rtc_call_sdp_create: VoiceAgentClientEventRtcCallSdpCreate,
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Server WebSocket messages are selected by their `type` property."
@@ -136,6 +149,8 @@ union VoiceAgentServerEvent {
   error: OpenAI.RealtimeServerEventError,
   warning: VoiceAgentServerEventWarning,
   session_avatar_connecting: VoiceAgentServerEventSessionAvatarConnecting,
+  rtc_call_sdp_created: VoiceAgentServerEventRtcCallSdpCreated,
+  rtc_call_error: VoiceAgentServerEventRtcCallError,
   session_avatar_switch_to_speaking: VoiceAgentServerEventSessionAvatarSwitchToSpeaking,
   session_avatar_switch_to_idle: VoiceAgentServerEventSessionAvatarSwitchToIdle,
   response_audio_timestamp_delta: VoiceAgentServerEventResponseAudioTimestampDelta,
@@ -494,6 +509,74 @@ model VoiceAgentClientEventSessionAvatarConnect
 
   @doc("The client's SDP offer for avatar media negotiation.")
   client_sdp: string;
+}
+
+@doc("The `rtc.call.sdp.create` client event: begins WebRTC signaling with an SDP offer.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@usage(VoiceAgentClientEventUsage)
+model VoiceAgentClientEventRtcCallSdpCreate {
+  @doc("The event type. Always `rtc.call.sdp.create`.")
+  type: "rtc.call.sdp.create";
+
+  @doc("An optional client-generated event identifier.")
+  event_id?: string;
+
+  @doc("The client's SDP offer for the WebRTC connection.")
+  sdp_offer: string;
+
+  @doc("Optional session configuration. For an `/agents` endpoint the service rebuilds it authoritatively from the persisted agent definition.")
+  session?: VoiceAgentSessionUpdateConfig;
+}
+
+@doc("The `rtc.call.sdp.created` server event: the SDP answer that completes WebRTC negotiation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@usage(VoiceAgentServerEventUsage)
+model VoiceAgentServerEventRtcCallSdpCreated {
+  @doc("The event type. Always `rtc.call.sdp.created`.")
+  type: "rtc.call.sdp.created";
+
+  @doc("An optional server-generated event identifier.")
+  event_id?: string;
+
+  @doc("The identifier of the established WebRTC call.")
+  rtc_call_id: string;
+
+  @doc("The server's SDP answer for the WebRTC connection.")
+  sdp_answer: string;
+}
+
+@doc("Details of a WebRTC signaling error.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@usage(VoiceAgentServerEventUsage)
+model VoiceAgentRtcCallErrorDetails {
+  @doc("The error category, following the VoiceLive wire contract: `invalid_request_error` for a client-side signaling fault (for example, a malformed SDP offer) or `server_error` for a service-side failure. Additional categories may be added over time.")
+  type: string;
+
+  @doc("A machine-readable error code, when available.")
+  code?: string;
+
+  @doc("A human-readable error message.")
+  message: string;
+}
+
+@doc("The `rtc.call.error` server event: a WebRTC signaling failure.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@usage(VoiceAgentServerEventUsage)
+model VoiceAgentServerEventRtcCallError {
+  @doc("The event type. Always `rtc.call.error`.")
+  type: "rtc.call.error";
+
+  @doc("An optional server-generated event identifier.")
+  event_id?: string;
+
+  @doc("The signaling operation that failed, when known.")
+  operation?: string;
+
+  @doc("The identifier of the WebRTC call, when known.")
+  rtc_call_id?: string;
+
+  @doc("The error detail.")
+  error: VoiceAgentRtcCallErrorDetails;
 }
 
 @doc("Details of a non-fatal warning.")
