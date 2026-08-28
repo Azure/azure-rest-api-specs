@@ -63,6 +63,15 @@ namespace ApplicationInsightsManagementClient;
   "csharp"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  Components.ApplicationInsightsComponent,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 260, pattern: "^[a-zA-Z0-9_.()-]+$" },
+  "csharp"
+);
+
 @@clientName(
   ComponentAPIs.ApplicationInsightsComponentAPIKey,
   "ApplicationInsightsComponentApiKey",
