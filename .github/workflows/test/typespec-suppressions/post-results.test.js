@@ -80,6 +80,7 @@ describe("post-results", () => {
       "test-owner",
       "test-repo",
       "abc123",
+      42,
       [],
     );
     expect(commentOrUpdate).toHaveBeenCalledWith(
@@ -105,6 +106,7 @@ describe("post-results", () => {
       "test-owner",
       "test-repo",
       "abc123",
+      42,
       ["Approved-TypeSpecSuppression", "other"],
     );
   });
