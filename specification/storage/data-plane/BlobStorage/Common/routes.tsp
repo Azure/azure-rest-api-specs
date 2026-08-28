@@ -1660,7 +1660,7 @@ interface Blob {
         blobLayout: BlobLayout;
       }
     | {
-        #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"Expand annotationCheck warning on line R1663
+        #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern" Expand annotationCheck warning on line R1663
         @statusCode statusCode: 204;
 
         /** Content-type. */

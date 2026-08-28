@@ -494,7 +494,7 @@ model CreateSessionResponse {
   @Xml.name("Id") id?: string;
 
   /** The time when the session will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"Expand annotationCheck warning on line R497
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API" Expand annotationCheck warning on line R497
   @encode("rfc7231")
   @Xml.name("Expiration")
   expiration?: utcDateTime;
@@ -1576,7 +1576,7 @@ alias BlobLayoutResponseHeaders = {
   archiveStatus?: ArchiveStatus;
 
   /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"Expand annotationCheck warning on line R1579
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API" Expand annotationCheck warning on line R1579
   @encode("rfc7231")
   @header("x-ms-access-tier-change-time")
   accessTierChangeTime?: utcDateTime;
@@ -2302,7 +2302,7 @@ alias CreationTimeResponseHeader = {
 /** The blob creation time response header. */
 alias BlobCreationTimeResponseHeader = {
   /** The date-time the blob was created. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"Expand annotationCheck warning on line R2305
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API" Expand annotationCheck warning on line R2305
   @encode("rfc7231")
   @header("x-ms-blob-creation-time")
   blobCreationTime?: utcDateTime;
