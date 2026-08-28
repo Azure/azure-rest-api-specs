@@ -27139,6 +27139,18 @@ model NetworkRule extends FirewallPolicyRule {
   sourceKubeSelectorGroups?: string[];
 
   /**
+   * List of source geographic location filters (ISO 3166-1 alpha-2 country codes, e.g. "US", "CA") for this rule.
+   */
+  @added(Versions.v2026_01_01)
+  sourceGeoLocations?: string[];
+
+  /**
+   * List of destination geographic location filters (ISO 3166-1 alpha-2 country codes, e.g. "US", "CA") for this rule.
+   */
+  @added(Versions.v2026_01_01)
+  destinationGeoLocations?: string[];
+
+  /**
    * Rule Type.
    */
   ruleType: "NetworkRule";
