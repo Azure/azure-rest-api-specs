@@ -565,11 +565,6 @@ namespace ApplicationInsightsManagementClient;
   "WorkbookType",
   "csharp"
 );
-@@clientName(
-  WorkbookTemplatesApi.WorkbookTemplateProperties.localized,
-  "LocalizedGalleries",
-  "csharp"
-);
 @@clientName(Components.ApplicationInsightsComponent.etag, "ETag", "csharp");
 @@clientName(WorkbooksApi.Workbook.etag, "ETag", "csharp");
 @@clientName(
