@@ -3251,7 +3251,7 @@ paths:
               $ref: '#/components/schemas/CreateTelephonyBindingRequest'
         description: The provider-specific binding to create.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     get:
       operationId: AgentTelephony_listTelephonyBindings
@@ -3374,7 +3374,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_bindings/{binding_id}:
     get:
@@ -3437,7 +3437,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     patch:
       operationId: AgentTelephony_updateTelephonyBinding
@@ -3512,7 +3512,7 @@ paths:
               $ref: '#/components/schemas/UpdateTelephonyBindingRequest'
         description: The binding properties to update.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     delete:
       operationId: AgentTelephony_deleteTelephonyBinding
@@ -3570,7 +3570,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_calls:
     get:
@@ -3708,7 +3708,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_calls/{call_id}:
     get:
@@ -3765,7 +3765,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_calls/{call_id}:end:
     post:
@@ -3822,7 +3822,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_calls/{call_id}:transfer:
     post:
@@ -3885,7 +3885,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TelephonyCallTransferRequest'
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/telephony_transfer_targets:
     get:
@@ -3942,7 +3942,7 @@ paths:
       tags:
         - Agent Telephony
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     put:
       operationId: AgentTelephony_replaceTelephonyTransferTargets
@@ -4010,7 +4010,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TelephonyTransferTargets'
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
   /agents/{agent_name}/versions:
     post:
@@ -44225,7 +44225,7 @@ components:
           description: The Microsoft Teams resource-account object identifier as a GUID.
       description: The request to create a Microsoft Teams Phone Extension binding.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     CreateTelephonyBindingRequest:
       type: object
@@ -44239,7 +44239,7 @@ components:
           twilio: '#/components/schemas/CreateTwilioTelephonyBindingRequest'
       description: The request to create a telephony binding.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     CreateTwilioTelephonyBindingRequest:
       type: object
@@ -44268,7 +44268,7 @@ components:
           description: An optional display label for the binding.
       description: The request to create a Twilio binding.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     CredentialType:
       anyOf:
@@ -77529,7 +77529,7 @@ components:
           description: The E.164 phone number to call.
       description: A PSTN destination for a telephony transfer target.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     PublishApprovalStatus:
       anyOf:
@@ -78766,7 +78766,7 @@ components:
           description: The SIP or SIPS URI to call.
       description: A SIP destination for a telephony transfer target.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     Skill:
       type: object
@@ -79197,7 +79197,7 @@ components:
           description: The service-generated webhook URL to configure with the telephony provider.
       description: A Microsoft Teams Phone Extension binding owned by a voice agent.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TeamsPhoneExtensionTelephonyBindingListItem:
       type: object
@@ -79247,7 +79247,7 @@ components:
           readOnly: true
       description: A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TeamsTelephonyTransferDestination:
       type: object
@@ -79267,7 +79267,7 @@ components:
           description: The Microsoft Teams user or resource-account identifier.
       description: A Microsoft Teams destination for a telephony transfer target.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelemetryConfig:
       type: object
@@ -79364,7 +79364,7 @@ components:
           twilio: '#/components/schemas/TwilioTelephonyBinding'
       description: A telephony binding owned by a voice agent.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyBindingId:
       type: string
@@ -79383,7 +79383,7 @@ components:
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyBindingStatus:
       anyOf:
@@ -79394,7 +79394,7 @@ components:
             - suspended
       description: The lifecycle status of a telephony binding.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallDurationBasis:
       anyOf:
@@ -79405,7 +79405,7 @@ components:
             - received
       description: The timestamp used as the basis for call duration.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallId:
       type: string
@@ -79475,7 +79475,7 @@ components:
           description: The provider subcode associated with the event.
       description: A bounded durable observation in the lifecycle of one telephony call.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallLifecycleEventName:
       anyOf:
@@ -79495,7 +79495,7 @@ components:
             - telephony.call.disconnect
       description: A provider-neutral lifecycle event name. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallLifecycleEventOutcome:
       anyOf:
@@ -79510,7 +79510,7 @@ components:
             - cancelled
       description: The outcome of one telephony lifecycle observation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallLifecycleEventSource:
       anyOf:
@@ -79523,7 +79523,7 @@ components:
             - voice_agent
       description: The component that supplied a telephony lifecycle observation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallPhase:
       anyOf:
@@ -79544,7 +79544,7 @@ components:
             - failed
       description: The provider-neutral phase reached by an inbound telephony call.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallRecord:
       type: object
@@ -79637,7 +79637,7 @@ components:
           description: Whether older lifecycle events were omitted because the bounded event limit was reached.
       description: Detailed diagnostics for a durable inbound call to a voice agent.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallStatus:
       anyOf:
@@ -79649,7 +79649,7 @@ components:
             - failed
       description: The lifecycle status of an inbound telephony call.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallSummary:
       type: object
@@ -79724,7 +79724,7 @@ components:
           description: The provider message associated with the terminal result.
       description: A summary of a durable inbound call to a voice agent.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallTimestampSource:
       anyOf:
@@ -79736,7 +79736,7 @@ components:
             - derived
       description: The source of a telephony lifecycle timestamp.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallTiming:
       type: object
@@ -79801,7 +79801,7 @@ components:
           description: The primary source of the timing milestones. Individual lifecycle events identify their own timestamp source separately.
       description: Detailed provider-neutral timing for an inbound telephony call. Millisecond values are Unix timestamps.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallTrace:
       type: object
@@ -79828,7 +79828,7 @@ components:
           description: Whether the trace was emitted live or after the call ended.
       description: Correlation from a durable telephony call record to its customer-facing Foundry trace.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallTraceMode:
       anyOf:
@@ -79839,7 +79839,7 @@ components:
             - post_call
       description: The mode used to expose a telephony call as a customer-facing Foundry trace.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallTraceStatus:
       anyOf:
@@ -79854,7 +79854,7 @@ components:
             - failed
       description: The availability status of a customer-facing telephony call trace.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyCallTransferRequest:
       type: object
@@ -79866,7 +79866,7 @@ components:
           description: The name of a transfer target configured for the voice agent.
       description: A request to transfer an active telephony call to a configured target.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyProvider:
       anyOf:
@@ -79877,7 +79877,7 @@ components:
             - twilio
       description: A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyTimestamp:
       type: integer
@@ -79897,7 +79897,7 @@ components:
           sip: '#/components/schemas/SipTelephonyTransferDestination'
       description: A destination for a telephony transfer target.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyTransferTarget:
       type: object
@@ -79919,7 +79919,7 @@ components:
           description: The provider-specific transfer destination.
       description: A named destination to which the voice agent may transfer a call.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TelephonyTransferTargetName:
       type: string
@@ -79939,7 +79939,7 @@ components:
           description: The complete set of destinations to which the voice agent may transfer calls. An empty array clears all targets when replacing the configuration.
       description: The telephony transfer targets configured for one voice agent.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TestingCriterionAzureAIEvaluator:
       type: object
@@ -80618,7 +80618,7 @@ components:
           description: The service-generated webhook URL to configure with Twilio.
       description: A Twilio binding owned by a voice agent.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     TwilioTelephonyBindingListItem:
       type: object
@@ -80665,7 +80665,7 @@ components:
           readOnly: true
       description: A Twilio binding returned in a list, including its entity tag.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     UpdateAgentFromManifestRequest:
       type: object
@@ -80793,7 +80793,7 @@ components:
           description: The replacement Teams Phone Extension display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone Extension binding.
       description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - VoiceAgents=V1Preview
     UpdateToolboxRequest:
       type: object

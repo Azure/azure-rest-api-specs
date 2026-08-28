@@ -466,7 +466,7 @@ interface AgentTelephony {
   @summary("Create an agent telephony binding")
   @post
   @route("/agents/{agent_name}/telephony_bindings")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   createTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -484,7 +484,7 @@ interface AgentTelephony {
   @get
   @list
   @route("/agents/{agent_name}/telephony_bindings")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   listTelephonyBindings is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -506,7 +506,7 @@ interface AgentTelephony {
   @summary("Get an agent telephony binding")
   @get
   @route("/agents/{agent_name}/telephony_bindings/{binding_id}")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -523,7 +523,7 @@ interface AgentTelephony {
   @summary("Update an agent telephony binding")
   @patch
   @route("/agents/{agent_name}/telephony_bindings/{binding_id}")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   updateTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -548,7 +548,7 @@ interface AgentTelephony {
   @summary("Delete an agent telephony binding")
   @delete
   @route("/agents/{agent_name}/telephony_bindings/{binding_id}")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   deleteTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -568,7 +568,7 @@ interface AgentTelephony {
   @get
   @list
   @route("/agents/{agent_name}/telephony_calls")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   listTelephonyCalls is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -596,7 +596,7 @@ interface AgentTelephony {
   @summary("Get an agent telephony call")
   @get
   @route("/agents/{agent_name}/telephony_calls/{call_id}")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -613,7 +613,7 @@ interface AgentTelephony {
   @summary("Transfer an active agent telephony call")
   @post
   @route("/agents/{agent_name}/telephony_calls/{call_id}:transfer")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   transferTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -632,7 +632,7 @@ interface AgentTelephony {
   @summary("End an active agent telephony call")
   @post
   @route("/agents/{agent_name}/telephony_calls/{call_id}:end")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   endTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -649,7 +649,7 @@ interface AgentTelephony {
   @summary("Get agent telephony transfer targets")
   @get
   @route("/agents/{agent_name}/telephony_transfer_targets")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -663,7 +663,7 @@ interface AgentTelephony {
   @summary("Replace agent telephony transfer targets")
   @put
   @route("/agents/{agent_name}/telephony_transfer_targets")
-  @extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   replaceTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {

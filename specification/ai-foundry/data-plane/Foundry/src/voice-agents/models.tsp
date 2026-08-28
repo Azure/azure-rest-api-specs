@@ -422,10 +422,6 @@ model VoiceRecordingResponse {
 // Agent telephony bindings
 // ---------------------------------------------------------------------------
 
-const AgentTelephonyConditionalPreviews = #{
-  conditional_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
-};
-
 @doc("A Unix timestamp in seconds encoded as int64 so telephony dates remain representable beyond 2038.")
 @encode(DateTimeKnownEncoding.unixTimestamp, int64)
 scalar TelephonyTimestamp extends utcDateTime;
@@ -447,7 +443,7 @@ scalar TelephonyCallId extends string;
 scalar TelephonyTransferTargetName extends string;
 
 @doc("A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyProvider {
   string,
 
@@ -459,7 +455,7 @@ union TelephonyProvider {
 }
 
 @doc("The lifecycle status of a telephony binding.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyBindingStatus {
   string,
 
@@ -471,7 +467,7 @@ union TelephonyBindingStatus {
 }
 
 @doc("A PSTN destination for a telephony transfer target.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model PstnTelephonyTransferDestination {
   @doc("The PSTN destination type.")
   kind: "pstn";
@@ -482,7 +478,7 @@ model PstnTelephonyTransferDestination {
 }
 
 @doc("A Microsoft Teams destination for a telephony transfer target.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsTelephonyTransferDestination {
   @doc("The Microsoft Teams destination type.")
   kind: "teams";
@@ -494,7 +490,7 @@ model TeamsTelephonyTransferDestination {
 }
 
 @doc("A SIP destination for a telephony transfer target.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model SipTelephonyTransferDestination {
   @doc("The SIP destination type.")
   kind: "sip";
@@ -505,7 +501,7 @@ model SipTelephonyTransferDestination {
 
 @doc("A destination for a telephony transfer target.")
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyTransferDestination {
   @doc("A public switched telephone network destination.")
   pstn: PstnTelephonyTransferDestination,
@@ -518,7 +514,7 @@ union TelephonyTransferDestination {
 }
 
 @doc("A named destination to which the voice agent may transfer a call.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyTransferTarget {
   @doc("The unique name exposed to the voice agent for this transfer target.")
   @key
@@ -535,7 +531,7 @@ model TelephonyTransferTarget {
 }
 
 @doc("The request to create a Microsoft Teams Phone Extension binding.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model CreateTeamsPhoneExtensionTelephonyBindingRequest {
   @doc("The Microsoft Teams Phone Extension provider.")
   provider: "teams_phone_extension";
@@ -558,7 +554,7 @@ model CreateTeamsPhoneExtensionTelephonyBindingRequest {
 }
 
 @doc("The request to create a Twilio binding.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model CreateTwilioTelephonyBindingRequest {
   @doc("The Twilio provider.")
   provider: "twilio";
@@ -579,7 +575,7 @@ model CreateTwilioTelephonyBindingRequest {
 
 @doc("The request to create a telephony binding.")
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "provider" })
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union CreateTelephonyBindingRequest {
   @doc("A Microsoft Teams Phone Extension binding request.")
   teams_phone_extension: CreateTeamsPhoneExtensionTelephonyBindingRequest,
@@ -589,7 +585,7 @@ union CreateTelephonyBindingRequest {
 }
 
 @doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model UpdateTelephonyBindingRequest {
   @doc("The new lifecycle status.")
   status?: TelephonyBindingStatus;
@@ -609,7 +605,7 @@ model UpdateTelephonyBindingRequest {
 }
 
 @doc("A Microsoft Teams Phone Extension binding owned by a voice agent.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensionTelephonyBinding {
   @doc("The service-generated binding identifier.")
   id: TelephonyBindingId;
@@ -641,7 +637,7 @@ model TeamsPhoneExtensionTelephonyBinding {
 }
 
 @doc("A Twilio binding owned by a voice agent.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBinding {
   @doc("The service-generated binding identifier.")
   id: TelephonyBindingId;
@@ -671,7 +667,7 @@ model TwilioTelephonyBinding {
 
 @doc("A telephony binding owned by a voice agent.")
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "provider" })
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyBinding {
   @doc("A Microsoft Teams Phone Extension binding.")
   teams_phone_extension: TeamsPhoneExtensionTelephonyBinding,
@@ -681,7 +677,7 @@ union TelephonyBinding {
 }
 
 @doc("A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensionTelephonyBindingListItem {
   ...TeamsPhoneExtensionTelephonyBinding;
 
@@ -691,7 +687,7 @@ model TeamsPhoneExtensionTelephonyBindingListItem {
 }
 
 @doc("A Twilio binding returned in a list, including its entity tag.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBindingListItem {
   ...TwilioTelephonyBinding;
 
@@ -702,7 +698,7 @@ model TwilioTelephonyBindingListItem {
 
 @doc("A telephony binding returned in a list, including its entity tag.")
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "provider" })
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyBindingListItem {
   @doc("A Microsoft Teams Phone Extension binding list item.")
   teams_phone_extension: TeamsPhoneExtensionTelephonyBindingListItem,
@@ -734,7 +730,7 @@ alias TelephonyIfMatchHeader = {
 };
 
 @doc("The lifecycle status of an inbound telephony call.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallStatus {
   string,
 
@@ -749,7 +745,7 @@ union TelephonyCallStatus {
 }
 
 @doc("The provider-neutral phase reached by an inbound telephony call.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallPhase {
   string,
 
@@ -791,7 +787,7 @@ union TelephonyCallPhase {
 }
 
 @doc("The source of a telephony lifecycle timestamp.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallTimestampSource {
   string,
 
@@ -806,7 +802,7 @@ union TelephonyCallTimestampSource {
 }
 
 @doc("The timestamp used as the basis for call duration.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallDurationBasis {
   string,
 
@@ -818,7 +814,7 @@ union TelephonyCallDurationBasis {
 }
 
 @doc("Detailed provider-neutral timing for an inbound telephony call. Millisecond values are Unix timestamps.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallTiming {
   @doc("When the provider webhook was received, as Unix time in milliseconds.")
   @minValue(0)
@@ -868,7 +864,7 @@ model TelephonyCallTiming {
 }
 
 @doc("The mode used to expose a telephony call as a customer-facing Foundry trace.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallTraceMode {
   string,
 
@@ -880,7 +876,7 @@ union TelephonyCallTraceMode {
 }
 
 @doc("The availability status of a customer-facing telephony call trace.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallTraceStatus {
   string,
 
@@ -904,7 +900,7 @@ union TelephonyCallTraceStatus {
 }
 
 @doc("Correlation from a durable telephony call record to its customer-facing Foundry trace.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallTrace {
   @doc("The trace availability status.")
   status: TelephonyCallTraceStatus;
@@ -926,7 +922,7 @@ model TelephonyCallTrace {
 }
 
 @doc("The outcome of one telephony lifecycle observation.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallLifecycleEventOutcome {
   string,
 
@@ -950,7 +946,7 @@ union TelephonyCallLifecycleEventOutcome {
 }
 
 @doc("The component that supplied a telephony lifecycle observation.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallLifecycleEventSource {
   string,
 
@@ -968,7 +964,7 @@ union TelephonyCallLifecycleEventSource {
 }
 
 @doc("A provider-neutral lifecycle event name. Known values are stable; additional values may be added over time.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallLifecycleEventName {
   string,
 
@@ -1007,7 +1003,7 @@ union TelephonyCallLifecycleEventName {
 }
 
 @doc("A bounded durable observation in the lifecycle of one telephony call.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallLifecycleEvent {
   @doc("The service-assigned order of the event within the call record.")
   @key
@@ -1057,7 +1053,7 @@ model TelephonyCallLifecycleEvent {
 }
 
 @doc("A summary of a durable inbound call to a voice agent.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallSummary {
   @doc("The service-generated call identifier.")
   id: TelephonyCallId;
@@ -1120,7 +1116,7 @@ model TelephonyCallSummary {
 }
 
 @doc("Detailed diagnostics for a durable inbound call to a voice agent.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallRecord {
   ...TelephonyCallSummary;
 
@@ -1139,14 +1135,14 @@ model TelephonyCallRecord {
 }
 
 @doc("A request to transfer an active telephony call to a configured target.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallTransferRequest {
   @doc("The name of a transfer target configured for the voice agent.")
   target: TelephonyTransferTargetName;
 }
 
 @doc("The telephony transfer targets configured for one voice agent.")
-@extension("x-ms-foundry-meta", AgentTelephonyConditionalPreviews)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyTransferTargets {
   @doc("The complete set of destinations to which the voice agent may transfer calls. An empty array clears all targets when replacing the configuration.")
   transfer_targets: TelephonyTransferTarget[];
