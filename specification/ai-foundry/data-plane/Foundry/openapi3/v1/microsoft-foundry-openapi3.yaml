@@ -780,7 +780,7 @@ paths:
           required: false
           description: Filter runs by status.
           schema:
-            $ref: '#/components/schemas/AgentInsightRunStatus'
+            $ref: '#/components/schemas/JobStatus'
           explode: false
         - name: trigger
           in: query
@@ -40930,19 +40930,6 @@ components:
           $ref: '#/components/schemas/AgentInsightRecommendedAction'
           description: The recommended remediation for this insight.
       description: Additional insight details. Omitted unless details are requested.
-    AgentInsightError:
-      type: object
-      required:
-        - code
-        - message
-      properties:
-        code:
-          type: string
-          description: Stable, machine-readable error category.
-        message:
-          type: string
-          description: Human-readable description of the error.
-      description: Structured error information for an Agent Insights run failure.
     AgentInsightEstimatedCost:
       type: object
       required:
@@ -41192,9 +41179,9 @@ components:
       type: object
       required:
         - id
+        - status
         - monitor_id
         - agent_name
-        - status
         - trigger
         - created_at
         - updated_at
@@ -41206,14 +41193,6 @@ components:
           type: string
           description: Server-assigned unique identifier.
           readOnly: true
-        monitor_id:
-          type: string
-          description: The Agent Insights monitor this run belongs to.
-          readOnly: true
-        agent_name:
-          type: string
-          description: The agent whose traces are analyzed by this run.
-          readOnly: true
         inputs:
           $ref: '#/components/schemas/AgentInsightRunCreate'
           description: Caller-supplied inputs.
@@ -41222,12 +41201,20 @@ components:
           description: Result produced on success.
           readOnly: true
         status:
-          $ref: '#/components/schemas/AgentInsightRunStatus'
+          $ref: '#/components/schemas/JobStatus'
           description: Current lifecycle status.
           readOnly: true
         error:
-          $ref: '#/components/schemas/AgentInsightError'
+          $ref: '#/components/schemas/OpenAI.Error'
           description: Error details — populated only on failure.
+          readOnly: true
+        monitor_id:
+          type: string
+          description: The Agent Insights monitor this run belongs to.
+          readOnly: true
+        agent_name:
+          type: string
+          description: The agent whose traces are analyzed by this run.
           readOnly: true
         trigger:
           $ref: '#/components/schemas/AgentInsightRunTrigger'
@@ -41307,17 +41294,6 @@ components:
           $ref: '#/components/schemas/AgentInsightTokenUsage'
           description: Token usage for the run's insight-generation analysis.
       description: Result statistics produced when an agent insight run succeeds.
-    AgentInsightRunStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - queued
-            - in_progress
-            - succeeded
-            - failed
-            - canceled
-      description: The public lifecycle status of an Agent Insights run.
     AgentInsightRunTrigger:
       anyOf:
         - type: string

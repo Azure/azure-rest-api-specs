@@ -219,15 +219,6 @@ model AgentInsightUpdate {
   status?: AgentInsightStatus;
 }
 
-/** Structured error information for an Agent Insights run failure. */
-model AgentInsightError {
-  /** Stable, machine-readable error category. */
-  code: string;
-
-  /** Human-readable description of the error. */
-  message: string;
-}
-
 /** Structured reason why scheduled generation is suspended for a monitor. */
 model AgentInsightSuspension {
   /** Stable, machine-readable suspension category. */
@@ -364,29 +355,6 @@ union AgentInsightRunTrigger {
   scheduled: "scheduled",
 }
 
-/** The public lifecycle status of an Agent Insights run. */
-union AgentInsightRunStatus {
-  string,
-
-  /** The run is waiting to start. */
-  queued: "queued",
-
-  /** The run is actively processing. */
-  in_progress: "in_progress",
-
-  /** The run completed successfully. */
-  @lroSucceeded
-  succeeded: "succeeded",
-
-  /** The run failed. */
-  @lroFailed
-  failed: "failed",
-
-  /** The run was canceled by the caller. */
-  @lroCanceled
-  canceled: "canceled",
-}
-
 /** Inputs used when creating an agent insight run. */
 model AgentInsightRunCreate {
   /** Optional finite positive number of hours of trace history to analyze, up to 2,160. Defaults to 168. */
@@ -432,11 +400,7 @@ model AgentInsightTokenUsage {
 }
 
 /** A long-running run that analyzes one agent's traces and updates that agent's insights. */
-model AgentInsightRun {
-  /** Server-assigned unique identifier. */
-  @visibility(Lifecycle.Read)
-  id: string;
-
+model AgentInsightRun is JobLike<AgentInsightRunResult, AgentInsightRunCreate> {
   /** The Agent Insights monitor this run belongs to. */
   @visibility(Lifecycle.Read)
   monitor_id: string;
@@ -444,22 +408,6 @@ model AgentInsightRun {
   /** The agent whose traces are analyzed by this run. */
   @visibility(Lifecycle.Read)
   agent_name: string;
-
-  /** Caller-supplied inputs. */
-  inputs?: AgentInsightRunCreate;
-
-  /** Result produced on success. */
-  @visibility(Lifecycle.Read)
-  result?: AgentInsightRunResult;
-
-  /** Current lifecycle status. */
-  @visibility(Lifecycle.Read)
-  @lroStatus
-  status: AgentInsightRunStatus;
-
-  /** Error details — populated only on failure. */
-  @visibility(Lifecycle.Read)
-  error?: AgentInsightError;
 
   /** The trigger that started the run. */
   @visibility(Lifecycle.Read)

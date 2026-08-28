@@ -49,7 +49,7 @@ alias AgentInsightMonitorFilters = {
 
 alias AgentInsightRunFilters = {
   /** Filter runs by status. */
-  @query status?: AgentInsightRunStatus;
+  @query status?: JobStatus;
 
   /** Filter runs by trigger. */
   @query trigger?: AgentInsightRunTrigger;
