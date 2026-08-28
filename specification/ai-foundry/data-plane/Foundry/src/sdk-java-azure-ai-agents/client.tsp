@@ -4,7 +4,7 @@ import "../sdk-common/error.default.tsp";
 import "../sdk-common/ops-relocation-agents.tsp";
 
 import "../agents/routes.tsp";
-import "../voice-agents/routes.tsp";
+// import "../voice-agents/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../agents-session-files/routes.tsp";
@@ -328,7 +328,14 @@ using Azure.AI.Projects;
 @@usage(FoundryFeaturesOptInKeys, Usage.input);
 @@access(FoundryFeaturesOptInKeys, Access.internal, "java");
 @@usage(AgentDefinitionOptInKeys, Usage.input);
-@@access(AgentDefinitionOptInKeys, Access.internal, "java");
+@@access(AgentDefinitionOptInKeys, Access.public, "java");
+
+// TODO: Re-enable once we are ready to support voice-agents
+// @@clientName(
+//   OpenAI.RealtimeMCPHTTPError,
+//   "RealtimeMcpHttpError",
+//   "java"
+// );
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
@@ -372,7 +379,8 @@ using Azure.AI.Projects;
 // Keep persisted voice-item Unix timestamps as Java longs. Treating the encoded
 // utcDateTime as OffsetDateTime conflicts with the generated integer JSON reader
 // across the polymorphic item hierarchy.
-@@alternateType(VoiceConversationItemPersistence.created_at, int64, "java");
+// TODO: Re-enable once we are ready to support voice-agents
+// @@alternateType(VoiceConversationItemPersistence.created_at, int64, "java");
 
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
@@ -385,6 +393,7 @@ using Azure.AI.Projects;
 // Map them to their openai-java equivalents so the codegen does not emit its own versions.
 //   ComparisonFilter + ComparisonFilterType  → com.openai.models.ComparisonFilter
 //   CompoundFilter + CompoundFilterType      → com.openai.models.CompoundFilter
+//   Reasoning + ReasoningSummary/GenerateSummary/Effort → com.openai.models.Reasoning
 @@alternateType(
   OpenAI.ComparisonFilter,
   {
@@ -399,12 +408,44 @@ using Azure.AI.Projects;
   },
   "java"
 );
+@@alternateType(
+  OpenAI.Reasoning,
+  {
+    identity: "com.openai.models.Reasoning",
+  },
+  "java"
+);
+//   ConversationResource → com.openai.models.conversations.Conversation
+@@alternateType(
+  OpenAI.ConversationResource,
+  {
+    identity: "com.openai.models.conversations.Conversation",
+  },
+  "java"
+);
+
 @@alternateType(OpenAI.OutputItem, unknown, "java");
 @@alternateType(OpenAI.InputItem, unknown, "java");
 
 // Erase strongly-typed payloads on the namespace / tool_search Tool variants.
 @@alternateType(OpenAI.NamespaceToolParam.tools, unknown, "java");
 @@alternateType(OpenAI.ToolSearchToolParam.parameters, unknown, "java");
+
+// TimeZone property override via model indirection
+@alternateType(
+  {
+    identity: "java.util.TimeZone",
+  },
+  "java"
+)
+model TimeZoneType {}
+
+@@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(
+  OpenAI.WebSearchApproximateLocation.timezone,
+  TimeZoneType,
+  "java"
+);
 
 // ---- Expandable enum overrides ------------------------------------------------
 // Convert fixed OpenAI enums / inline literal unions to expandable string enums
