@@ -154,8 +154,8 @@ interface AgentInsightMonitors {
       /** The identifier of the monitor. */
       @path monitor_id: string;
 
-      /** Optional run inputs. */
-      @body run?: AgentInsightRunCreate;
+      /** Run inputs. Send an empty object to use the default 168-hour lookback window. */
+      @body run: AgentInsightRunCreate;
     },
     JobCreatedResponse<AgentInsightRun>
   >;

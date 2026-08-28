@@ -718,12 +718,12 @@ paths:
       tags:
         - Agent Insight Monitors
       requestBody:
-        required: false
+        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AgentInsightRunCreate'
-        description: Optional run inputs.
+        description: Run inputs. Send an empty object to use the default 168-hour lookback window.
     get:
       operationId: AgentInsightMonitors_listRuns
       description: List Agent Insights runs for a monitor.
