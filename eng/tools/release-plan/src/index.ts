@@ -29,6 +29,7 @@ export async function main(): Promise<void> {
   let projectInfo: TypeSpecProjectInfo | null = null;
   let resolvedPrNumber: number | undefined;
   let hasNewApiVersionLabel = false;
+  let isTspConfigChanged = false;
   let args: CliArguments;
   let octokit: OctokitLike;
 
@@ -66,12 +67,11 @@ export async function main(): Promise<void> {
       });
 
       const specFiles = allFiles.filter((f) => f.filename.startsWith("specification/"));
-      const hasTspFiles = specFiles.some(
-        (f) => f.filename.endsWith(".tsp") || f.filename.endsWith("tspconfig.yaml"),
-      );
+      isTspConfigChanged = specFiles.some((f) => f.filename.endsWith("tspconfig.yaml"));
+      const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
 
       // Skip only if both conditions are true: no label AND no TypeSpec files
-      if (!hasNewApiVersionLabel && !hasTspFiles) {
+      if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {
         console.log(
           `PR #${args.prNumber} does not have the '${NEW_API_VERSION_LABEL}' label and does not contain TypeSpec files. Skipping release plan processing.`,
         );
@@ -117,12 +117,11 @@ export async function main(): Promise<void> {
       });
 
       const specFiles = commitFiles.filter((f) => f.filename.startsWith("specification/"));
-      const hasTspFiles = specFiles.some(
-        (f) => f.filename.endsWith(".tsp") || f.filename.endsWith("tspconfig.yaml"),
-      );
+      const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
+      isTspConfigChanged = specFiles.some((f) => f.filename.endsWith("tspconfig.yaml"));
 
       // Skip only if both conditions are true: no label AND no TypeSpec files
-      if (!hasNewApiVersionLabel && !hasTspFiles) {
+      if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {
         console.log(
           `Commit ${commitSha} is not associated with a PR that has the '${NEW_API_VERSION_LABEL}' label and does not contain TypeSpec files. Skipping release plan processing.`,
         );
@@ -160,7 +159,7 @@ export async function main(): Promise<void> {
         testReleasePlan: args.testReleasePlan,
       },
       createAzdskRunner(),
-      hasNewApiVersionLabel,
+      hasNewApiVersionLabel || isTspConfigChanged,
     );
 
     console.log(JSON.stringify(result, null, 2));
@@ -207,7 +206,7 @@ export async function main(): Promise<void> {
     console.error(`release-plan tool failed: ${message}`);
 
     // Try to post error comment on PR if available and PR has new-api-version label
-    if (resolvedPrNumber && projectInfo && hasNewApiVersionLabel) {
+    if (resolvedPrNumber && projectInfo && (hasNewApiVersionLabel || isTspConfigChanged)) {
       try {
         await postReleasePlanErrorComment({
           octokit: octokit!,
