@@ -1,0 +1,403 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2026-02-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "AgentComputeNameParameter": {
+      "name": "agentComputeName",
+      "in": "path",
+      "description": "Name of the agent compute.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/agentComputes": {
+      "get": {
+        "tags": [
+          "AgentComputes"
+        ],
+        "summary": "Get the agent computes in a given subscription.",
+        "operationId": "AgentComputes_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentComputeCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Agent Computes by subscription": {
+            "$ref": "./examples/AgentComputes_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agentComputes": {
+      "get": {
+        "tags": [
+          "AgentComputes"
+        ],
+        "summary": "Get the agent computes in a given resource group of a subscription.",
+        "operationId": "AgentComputes_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentComputeCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Agent Computes by resource group": {
+            "$ref": "./examples/AgentComputes_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agentComputes/{agentComputeName}": {
+      "get": {
+        "tags": [
+          "AgentComputes"
+        ],
+        "summary": "Get the properties of an agent compute.",
+        "operationId": "AgentComputes_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AgentCompute"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Agent Compute": {
+            "$ref": "./examples/AgentComputes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AgentComputes"
+        ],
+        "summary": "Create or update an agent compute.",
+        "description": "Create or update an agent compute with the given properties.",
+        "operationId": "AgentComputes_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentComputeNameParameter"
+          },
+          {
+            "name": "agentComputeEnvelope",
+            "in": "body",
+            "description": "Properties used to create an agent compute.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentCompute"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgentCompute"
+            }
+          },
+          "201": {
+            "description": "Agent compute creation has started.",
+            "schema": {
+              "$ref": "#/definitions/AgentCompute"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or Update Agent Compute": {
+            "$ref": "./examples/AgentComputes_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AgentComputes"
+        ],
+        "summary": "Update properties of an agent compute.",
+        "description": "Patches an agent compute using JSON merge patch.",
+        "operationId": "AgentComputes_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentComputeNameParameter"
+          },
+          {
+            "name": "agentComputeEnvelope",
+            "in": "body",
+            "description": "Properties used to update an agent compute.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentComputeUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgentCompute"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Agent Compute": {
+            "$ref": "./examples/AgentComputes_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AgentComputes"
+        ],
+        "summary": "Delete an agent compute.",
+        "description": "Delete the agent compute with the given name.",
+        "operationId": "AgentComputes_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Agent compute delete has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Agent compute does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Agent Compute": {
+            "$ref": "./examples/AgentComputes_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgentComputeCollection": {
+      "description": "Collection of agent computes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentCompute"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgentCompute": {
+      "description": "An agent compute resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Agent compute resource specific properties.",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the agent compute.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "AgentComputeProvisioningState",
+                "modelAsString": true
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AgentComputeUpdate": {
+      "description": "Properties used to update an agent compute.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
