@@ -85,7 +85,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkCancel",
-        "description": "BulkCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request",
+        "description": "Cancels eligible start, deallocate, or hibernate operations identified by their Bulk Action Operation Ids. Work that has already completed is not reversed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -107,7 +107,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The Bulk Action Operation Ids that identify the operations to cancel.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CancelOperationsRequest"
@@ -141,7 +141,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDeallocate": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkDeallocate",
-        "description": "BulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Deallocates one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -163,7 +163,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machines to deallocate and the execution settings for the bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteDeallocateRequest"
@@ -197,7 +197,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDelete": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkDelete",
-        "description": "BulkDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Deletes one or more virtual machines. This operation is destructive. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -219,7 +219,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machines to delete and the execution settings for the bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteDeleteRequest"
@@ -253,7 +253,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkGetOperationStatus": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkGetOperationsStatus",
-        "description": "BulkGetOperationsStatus: Polling endpoint to read status of operations performed on virtual machines",
+        "description": "Gets the current status of operations identified by their Bulk Action Operation Ids.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -275,7 +275,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The Bulk Action Operation Ids that identify the operations for which current status should be returned.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/GetOperationStatusRequest"
@@ -309,7 +309,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkHibernate": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkHibernate",
-        "description": "BulkHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Hibernates one or more virtual machines that support hibernation. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -331,7 +331,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machines to hibernate and the execution settings for the bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteHibernateRequest"
@@ -365,7 +365,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkStart": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkStart",
-        "description": "BulkStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Starts one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -387,7 +387,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machines to start and the execution settings for the bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteStartRequest"
@@ -426,11 +426,11 @@
     },
     "CancelOperationsRequest": {
       "type": "object",
-      "description": "This is the request to cancel running operations in scheduled actions using the operation ids",
+      "description": "The eligible operations to cancel.",
       "properties": {
         "operationIds": {
           "type": "array",
-          "description": "The list of operation ids to cancel operations on",
+          "description": "The Bulk Action Operation Ids that identify the operations to cancel.",
           "items": {
             "type": "string"
           }
@@ -442,11 +442,11 @@
     },
     "CancelOperationsResponse": {
       "type": "object",
-      "description": "This is the response from a cancel operations request",
+      "description": "The results of the cancellation requests.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "An array of resource operations that were successfully cancelled",
+          "description": "The current result for each operation submitted for cancellation.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -461,19 +461,19 @@
     },
     "DeallocateResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a deallocate request",
+      "description": "The result of a bulk deallocate action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the deallocate request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the deallocate request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -481,7 +481,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the deallocate request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -498,19 +498,19 @@
     },
     "DeleteResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a delete request",
+      "description": "The result of a bulk delete action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the delete request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the delete request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -518,7 +518,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the delete request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -535,15 +535,15 @@
     },
     "ExecuteDeallocateRequest": {
       "type": "object",
-      "description": "The ExecuteDeallocateRequest request for executeDeallocate operations",
+      "description": "The virtual machines and execution settings for a bulk deallocate action.",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
+          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
         }
       },
       "required": [
@@ -553,19 +553,19 @@
     },
     "ExecuteDeleteRequest": {
       "type": "object",
-      "description": "The ExecuteDeleteRequest for delete VM operation",
+      "description": "The virtual machines and execution settings for a bulk delete action.",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
+          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
         },
         "forceDeletion": {
           "type": "boolean",
-          "description": "Forced delete resource item"
+          "description": "Indicates whether Bulk Actions uses forced deletion for the target virtual machines."
         }
       },
       "required": [
@@ -575,15 +575,15 @@
     },
     "ExecuteHibernateRequest": {
       "type": "object",
-      "description": "The ExecuteHibernateRequest request for executeHibernate operations",
+      "description": "The virtual machines and execution settings for a bulk hibernate action.",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
+          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
         }
       },
       "required": [
@@ -593,15 +593,15 @@
     },
     "ExecuteStartRequest": {
       "type": "object",
-      "description": "The ExecuteStartRequest request for executeStart operations",
+      "description": "The virtual machines and execution settings for a bulk start action.",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
+          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
         }
       },
       "required": [
@@ -611,29 +611,29 @@
     },
     "ExecutionParameters": {
       "type": "object",
-      "description": "Extra details needed to run the user's request",
+      "description": "The execution settings for a bulk action.",
       "properties": {
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
-          "description": "Retry policy the user can pass"
+          "description": "The retry settings for the bulk action."
         }
       }
     },
     "FallbackOperationInfo": {
       "type": "object",
-      "description": "Describes the fallback operation that was performed",
+      "description": "Information about an additional operation attempted after the requested operation did not succeed.",
       "properties": {
         "lastOpType": {
           "$ref": "#/definitions/ResourceOperationType",
-          "description": "The last operation type that was performed as a fallback"
+          "description": "The type of the additional operation."
         },
         "status": {
           "type": "string",
-          "description": "The status of the fallback operation"
+          "description": "The status of the additional operation."
         },
         "error": {
           "$ref": "#/definitions/ResourceOperationError",
-          "description": "The error code if the fallback operation failed"
+          "description": "The error returned when the additional operation did not succeed."
         }
       },
       "required": [
@@ -643,11 +643,11 @@
     },
     "GetOperationStatusRequest": {
       "type": "object",
-      "description": "This is the request to get operation status using operationids",
+      "description": "The operation for which current status should be returned.",
       "properties": {
         "operationIds": {
           "type": "array",
-          "description": "The list of operation ids to get the status of",
+          "description": "The Bulk Action Operation Ids that identify the operations for which current status should be returned.",
           "items": {
             "type": "string"
           }
@@ -659,11 +659,11 @@
     },
     "GetOperationStatusResponse": {
       "type": "object",
-      "description": "This is the response from a get operations status request",
+      "description": "The current results for the requested operations.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "An array of resource operations based on their operation ids",
+          "description": "The current result for each requested operation.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -678,19 +678,19 @@
     },
     "HibernateResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a Hibernate request",
+      "description": "The result of a bulk hibernate action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the Hibernate request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the Hibernate request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -698,7 +698,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the Hibernate request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -715,43 +715,43 @@
     },
     "ResourceOperation": {
       "type": "object",
-      "description": "High level response from an operation on a resource",
+      "description": "The result of a bulk action for one virtual machine.",
       "properties": {
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Unique identifier for the resource involved in the operation, for example Azure resource ID"
+          "description": "The Azure resource ID of the virtual machine."
         },
         "errorCode": {
           "type": "string",
-          "description": "Resource level error code if it exists"
+          "description": "A code that identifies the error for the virtual machine."
         },
         "errorDetails": {
           "type": "string",
-          "description": "Resource level error details if they exist"
+          "description": "A message that describes the error for the virtual machine."
         },
         "operation": {
           "$ref": "#/definitions/ResourceOperationDetails",
-          "description": "Details of the operation performed on a resource"
+          "description": "The status and settings for the operation on the virtual machine."
         }
       }
     },
     "ResourceOperationDetails": {
       "type": "object",
-      "description": "The details of a response from an operation on a resource",
+      "description": "The status and settings for an operation on one virtual machine.",
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "Operation identifier for the unique operation"
+          "description": "The operation ID used to track the action for this virtual machine."
         },
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Unique identifier for the resource involved in the operation, for example Azure resource ID"
+          "description": "The Azure resource ID of the virtual machine."
         },
         "opType": {
           "type": "string",
-          "description": "Type of operation performed on the resources",
+          "description": "The type of operation performed on the virtual machine.",
           "default": "Unknown",
           "enum": [
             "Unknown",
@@ -768,48 +768,48 @@
               {
                 "name": "Unknown",
                 "value": "Unknown",
-                "description": "The default value for this enum type"
+                "description": "The operation type is not known."
               },
               {
                 "name": "Start",
                 "value": "Start",
-                "description": "Start operations on the resources"
+                "description": "Starts the specified virtual machines."
               },
               {
                 "name": "Deallocate",
                 "value": "Deallocate",
-                "description": "Deallocate operations on the resources"
+                "description": "Deallocates the specified virtual machines."
               },
               {
                 "name": "Hibernate",
                 "value": "Hibernate",
-                "description": "Hibernate operations on the resources"
+                "description": "Hibernates the specified virtual machines."
               },
               {
                 "name": "Create",
                 "value": "Create",
-                "description": "Create operations on the resources"
+                "description": "Creates the specified virtual machines."
               },
               {
                 "name": "Delete",
                 "value": "Delete",
-                "description": "Delete operations on the resources"
+                "description": "Deletes the specified virtual machines."
               }
             ]
           }
         },
         "subscriptionId": {
           "type": "string",
-          "description": "Subscription id attached to the request"
+          "description": "The subscription ID associated with the bulk action."
         },
         "deadline": {
           "type": "string",
           "format": "date-time",
-          "description": "Deadline for the operation"
+          "description": "The requested deadline for the operation."
         },
         "deadlineType": {
           "type": "string",
-          "description": "Type of deadline of the operation",
+          "description": "The behavior associated with the operation deadline.",
           "default": "Unknown",
           "enum": [
             "Unknown",
@@ -823,24 +823,24 @@
               {
                 "name": "Unknown",
                 "value": "Unknown",
-                "description": "Default value of Unknown."
+                "description": "The deadline behavior is not known."
               },
               {
                 "name": "InitiateAt",
                 "value": "InitiateAt",
-                "description": "Initiate the operation at the given deadline."
+                "description": "Bulk Actions attempts to start the operation at the specified deadline."
               },
               {
                 "name": "CompleteBy",
                 "value": "CompleteBy",
-                "description": "Complete the operation by the given deadline."
+                "description": "Bulk Actions attempts to complete the operation by the specified deadline."
               }
             ]
           }
         },
         "state": {
           "type": "string",
-          "description": "Current state of the operation",
+          "description": "The current state of the operation.",
           "default": "Unknown",
           "enum": [
             "Unknown",
@@ -860,47 +860,47 @@
               {
                 "name": "Unknown",
                 "value": "Unknown",
-                "description": "The default value for the operation state enum"
+                "description": "The operation state is not known."
               },
               {
                 "name": "PendingScheduling",
                 "value": "PendingScheduling",
-                "description": "Operations that are pending scheduling"
+                "description": "The operation is waiting to be scheduled."
               },
               {
                 "name": "Scheduled",
                 "value": "Scheduled",
-                "description": "Operations that have been scheduled"
+                "description": "The operation has been scheduled."
               },
               {
                 "name": "PendingExecution",
                 "value": "PendingExecution",
-                "description": "Operations that are waiting to be executed"
+                "description": "The operation is waiting to begin."
               },
               {
                 "name": "Executing",
                 "value": "Executing",
-                "description": "Operations that are in the process of being executed"
+                "description": "The operation is in progress."
               },
               {
                 "name": "Succeeded",
                 "value": "Succeeded",
-                "description": "Operations that succeeded"
+                "description": "The operation completed successfully."
               },
               {
                 "name": "Failed",
                 "value": "Failed",
-                "description": "Operations that have failed"
+                "description": "The operation failed."
               },
               {
                 "name": "Cancelled",
                 "value": "Cancelled",
-                "description": "Operations that have been Cancelled by the user"
+                "description": "The operation was canceled by the customer."
               },
               {
                 "name": "Blocked",
                 "value": "Blocked",
-                "description": "Operations that are blocked"
+                "description": "The operation cannot currently make progress."
               }
             ]
           },
@@ -908,24 +908,24 @@
         },
         "timezone": {
           "type": "string",
-          "description": "Timezone for the operation"
+          "description": "The time zone used to interpret the operation deadline."
         },
         "resourceOperationError": {
           "$ref": "#/definitions/ResourceOperationError",
-          "description": "Operation level errors if they exist"
+          "description": "The error returned for the virtual machine, if the operation did not succeed."
         },
         "fallbackOperationInfo": {
           "$ref": "#/definitions/FallbackOperationInfo",
-          "description": "Fallback operation details if a fallback was performed"
+          "description": "Information about an additional operation attempted after the requested operation did not succeed."
         },
         "completedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Time the operation was complete if errors are null"
+          "description": "The date and time when the operation completed."
         },
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
-          "description": "Retry policy the user can pass"
+          "description": "The retry settings for the bulk action."
         }
       },
       "required": [
@@ -934,15 +934,15 @@
     },
     "ResourceOperationError": {
       "type": "object",
-      "description": "These describe errors that occur at the resource level",
+      "description": "An error that occurred while processing one virtual machine.",
       "properties": {
         "errorCode": {
           "type": "string",
-          "description": "Code for the error eg 404, 500"
+          "description": "A code that identifies the error."
         },
         "errorDetails": {
           "type": "string",
-          "description": "Detailed message about the error"
+          "description": "A message that describes the error."
         }
       },
       "required": [
@@ -952,7 +952,7 @@
     },
     "ResourceOperationType": {
       "type": "string",
-      "description": "The kind of bulk operation that can be performed on resources using Bulkactions API",
+      "description": "The type of operation performed by Bulk Actions.",
       "enum": [
         "Unknown",
         "Start",
@@ -968,43 +968,43 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "The default value for this enum type"
+            "description": "The operation type is not known."
           },
           {
             "name": "Start",
             "value": "Start",
-            "description": "Start operations on the resources"
+            "description": "Starts the specified virtual machines."
           },
           {
             "name": "Deallocate",
             "value": "Deallocate",
-            "description": "Deallocate operations on the resources"
+            "description": "Deallocates the specified virtual machines."
           },
           {
             "name": "Hibernate",
             "value": "Hibernate",
-            "description": "Hibernate operations on the resources"
+            "description": "Hibernates the specified virtual machines."
           },
           {
             "name": "Create",
             "value": "Create",
-            "description": "Create operations on the resources"
+            "description": "Creates the specified virtual machines."
           },
           {
             "name": "Delete",
             "value": "Delete",
-            "description": "Delete operations on the resources"
+            "description": "Deletes the specified virtual machines."
           }
         ]
       }
     },
     "Resources": {
       "type": "object",
-      "description": "The resources needed for the user request",
+      "description": "The virtual machines targeted by a bulk action.",
       "properties": {
         "ids": {
           "type": "array",
-          "description": "The resource ids used for the request",
+          "description": "The Azure resource IDs of the target virtual machines.",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -1025,39 +1025,39 @@
     },
     "RetryPolicy": {
       "type": "object",
-      "description": "The retry policy for the user request",
+      "description": "The retry settings for a bulk action.",
       "properties": {
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Retry count for user request"
+          "description": "The maximum number of retry attempts."
         },
         "retryWindowInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Retry window in minutes for user request"
+          "description": "The period, in minutes, during which Bulk Actions can retry the operation."
         },
         "onFailureAction": {
           "$ref": "#/definitions/ResourceOperationType",
-          "description": "Action to take on failure"
+          "description": "The operation that Bulk Actions attempts when the requested operation fails."
         }
       }
     },
     "StartResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a start request",
+      "description": "The result of a bulk start action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the start request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the start request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1065,7 +1065,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the start request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },

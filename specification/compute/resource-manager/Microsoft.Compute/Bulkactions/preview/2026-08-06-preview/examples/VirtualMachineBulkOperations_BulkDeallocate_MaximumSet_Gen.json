@@ -1,22 +1,24 @@
 {
-  "title": "VirtualMachineBulkOperations_BulkDeallocate_Example",
+  "title": "Deallocate multiple virtual machines with retry settings",
   "operationId": "VirtualMachineBulkOperations_BulkDeallocate",
   "parameters": {
     "api-version": "2026-08-06-preview",
-    "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
-    "resourceGroupName": "rgBulkactions",
-    "location": "useast2euap",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
     "requestBody": {
       "executionParameters": {
         "retryPolicy": {
-          "retryCount": 2,
-          "retryWindowInMinutes": 19,
-          "onFailureAction": "Unknown"
-        }
+          "retryCount": 3,
+          "retryWindowInMinutes": 30,
+          "onFailureAction": "Deallocate"
+        },
+        "optimizationPreference": "CostAvailabilityBalanced"
       },
       "resources": {
         "ids": [
-          "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02"
         ]
       }
     }
@@ -26,41 +28,49 @@
       "body": {
         "description": "Deallocate Resource request",
         "type": "VirtualMachines",
-        "location": "useast2euap",
+        "location": "eastus",
         "results": [
           {
-            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-            "errorCode": "TestErrorCode",
-            "errorDetails": "Test error details",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "virtualMachineInfo": {
+              "vmSize": "Standard_D4s_v5",
+              "zone": "1"
+            },
             "operation": {
-              "operationId": "9ba180c5-57d1-4afd-b569-5709d43aa1fa",
-              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-              "opType": "Unknown",
-              "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
-              "deadline": "2026-06-11T19:35:45.098Z",
+              "operationId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Deallocate",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deadline": "2026-07-10T18:00:00Z",
               "deadlineType": "InitiateAt",
               "state": "PendingScheduling",
               "timezone": "UTC",
-              "resourceOperationError": {
-                "errorCode": "TestErrorCode",
-                "errorDetails": "Test error details"
-              },
-              "fallbackOperationInfo": {
-                "lastOpType": "Deallocate",
-                "status": "succeeded",
-                "error": {
-                  "errorCode": "TestErrorCode",
-                  "errorDetails": "Test error details"
-                }
-              },
-              "completedAt": "2026-06-11T19:35:45.098Z",
               "retryPolicy": {
-                "retryCount": 2,
-                "retryWindowInMinutes": 19,
-                "onFailureAction": "Unknown"
-              },
-              "resourceNotificationDetails": {
-                "resourceContext": ""
+                "retryCount": 3,
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Deallocate"
+              }
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "virtualMachineInfo": {
+              "vmSize": "Standard_D8s_v5",
+              "zone": "2"
+            },
+            "operation": {
+              "operationId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+              "opType": "Deallocate",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deadline": "2026-07-10T18:00:00Z",
+              "deadlineType": "InitiateAt",
+              "state": "PendingScheduling",
+              "timezone": "UTC",
+              "retryPolicy": {
+                "retryCount": 3,
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Deallocate"
               }
             }
           }
