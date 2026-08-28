@@ -492,10 +492,8 @@ interface Render {
        * parameter since it will contain reserved characters such as pipes and
        * punctuation.)
        *
-       * The Azure Maps account S0 SKU only supports a single instance of the pins
-       * parameter and the number of locations is limited to 5 per pin. Other SKUs
-       * allow up to 25 instances of the pins parameter to specify multiple pin styles,
-       * and the number of locations is limited to 50 per pin.
+       * You can specify up to 25 instances of the pins parameter to use multiple pin
+       * styles. Each instance supports up to 50 locations.
        *
        * To render a pushpin at latitude 45°N and longitude 122°W using the default
        * built-in pushpin style, add the
@@ -515,9 +513,6 @@ interface Render {
        * character. For example, use
        *
        * `pins=default||-122 45|-119.5 43.2|-121.67 47.12`
-       *
-       * The S0 Azure Maps account SKU only allows five pushpins. Other account SKUs do
-       * not have this limitation.
        *
        * ### Style Modifiers
        *
@@ -667,11 +662,9 @@ interface Render {
        * parameter since it will contain reserved characters such as pipes and
        * punctuation.)
        *
-       * Path parameter is supported in Azure Maps account SKU starting with S1.
-       * Multiple instances of the path parameter
-       * allow to specify multiple geometries with their styles. Number of parameters
-       * per request is limited to 10 and
-       * number of locations is limited to 100 per path.
+       * You can specify multiple instances of the path parameter to render multiple
+       * geometries with different styles. A request supports up to 10 path parameters
+       * and up to 100 locations per path.
        *
        * To render a circle with radius 100 meters and center point at latitude 45°N and
        * longitude 122°W using the default style, add the
