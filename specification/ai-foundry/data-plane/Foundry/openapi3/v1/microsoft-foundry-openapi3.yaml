@@ -80243,21 +80243,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - openai
-            - azure-standard
-            - azure-custom
-            - azure-personal
-            - avatar-voice-sync
-            - azure-realtime-native
-      description: The voice implementation. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceTargetAgent:
       type: object
       required:
@@ -80275,6 +80260,21 @@ components:
       unevaluatedProperties:
         not: {}
       description: A closed reference to the hosted text agent that a `hosted_agent` voice agent fronts, containing only its name and optional version. The target is resolved within the same project.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - openai
+            - azure-standard
+            - azure-custom
+            - azure-personal
+            - avatar-voice-sync
+            - azure-realtime-native
+      description: The voice implementation. Additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

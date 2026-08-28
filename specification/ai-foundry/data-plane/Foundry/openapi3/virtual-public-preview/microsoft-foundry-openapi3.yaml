@@ -82207,7 +82207,6 @@ components:
       required:
         - kind
         - model_type
-        - model
       properties:
         kind:
           type: string
@@ -82220,6 +82219,9 @@ components:
         model:
           type: string
           description: "The model to use for this agent, paired with `model_type`: the service-managed model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. The model must support realtime or cascaded voice. The service derives the architecture from the selected model."
+        target_agent:
+          $ref: '#/components/schemas/VoiceTargetAgent'
+          description: The hosted text agent that this voice agent fronts. Required when `model_type` is `hosted_agent` and not applicable otherwise. In this mode, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the target agent owns the conversation logic. The target must be in the same project and support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.
         instructions:
           type: string
           description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
@@ -83224,6 +83226,7 @@ components:
           enum:
             - managed
             - self_deployed
+            - hosted_agent
       description: |-
         How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),
         which the service derives from the selected model.
@@ -83441,6 +83444,26 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
           description: The audio format used for the response's audio output.
       description: The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceTargetAgent:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 63
+          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$
+          description: The non-empty DNS-like name of the target hosted text agent in the same project.
+        version:
+          type: string
+          description: The target agent version. Omit this property to select the latest version when the voice session starts. When supplied, use a positive integer or `draft-{positive-unix-timestamp}`.
+      unevaluatedProperties:
+        not: {}
+      description: A closed reference to the hosted text agent that a `hosted_agent` voice agent fronts, containing only its name and optional version. The target is resolved within the same project.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
