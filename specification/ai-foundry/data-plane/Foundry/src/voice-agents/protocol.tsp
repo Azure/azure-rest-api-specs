@@ -231,7 +231,7 @@ model VoiceAgentSessionUpdateConfig {
   tool_choice?: VoiceAgentToolChoice;
 
   @doc("Reasoning settings for compatible realtime models.")
-  reasoning?: VoiceAgentReasoning;
+  reasoning?: OpenAI.RealtimeReasoning;
 
   @doc("Whether the model may call multiple tools in parallel.")
   parallel_tool_calls?: boolean;

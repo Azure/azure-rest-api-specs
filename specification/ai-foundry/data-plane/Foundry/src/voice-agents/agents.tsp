@@ -37,31 +37,6 @@ union VoiceAgentMaxOutputTokens {
   unlimited: "inf",
 }
 
-@doc("The reasoning-effort level applied by compatible reasoning-capable realtime models.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentReasoningEffort {
-  string,
-
-  @doc("Minimal reasoning effort for the fastest responses.")
-  minimal: "minimal",
-
-  @doc("Low reasoning effort.")
-  low: "low",
-
-  @doc("Medium reasoning effort.")
-  medium: "medium",
-
-  @doc("High reasoning effort for the most thorough responses.")
-  high: "high",
-}
-
-@doc("Reasoning settings for compatible realtime models.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentReasoning {
-  @doc("Constrains the reasoning effort applied by reasoning-capable models.")
-  effort?: VoiceAgentReasoningEffort | null;
-}
-
 @doc("A condition that may trigger an interim response.")
 union VoiceAgentInterimResponseTrigger {
   string,
