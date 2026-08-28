@@ -45,14 +45,13 @@ input-file:
 ```yaml
 suppressions:
   - code: AllProxyResourcesShouldHaveDelete
+    from: systemReadiness.json
     where: $.definitions.SystemReadiness
     reason: SystemReadiness is a read-only, provider-computed singleton resource that intentionally supports GET only and does not support DELETE.
   - code: TopLevelResourcesListBySubscription
+    from: systemReadiness.json
     where: $.definitions.SystemReadiness
     reason: SystemReadiness is a read-only, provider-computed singleton whose only accepted resource name is 'default'. A list-by-subscription operation would always return the single 'default' instance and carries no additional meaning, so it is intentionally not implemented.
-  - code: OperationsAPIImplementation
-    from: systemReadiness.json
-    reason: Microsoft.EdgeOperator is a shared RP namespace split across multiple TypeSpec projects owned by the ALDO team (BillingConfigurations, SystemReadiness, ObservabilityConfiguration). The /providers/Microsoft.EdgeOperator/operations API is published once from the BillingConfigurations project, so sibling projects intentionally do not redeclare it.
 ```
 
 ---
