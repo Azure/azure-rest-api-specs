@@ -153,7 +153,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   structured_inputs?: Record<StructuredInputDefinition>;
 
   @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
-  subagent_config?: SubAgentConfig;
+  subagent_config?: VoiceAgentSubAgentConfig;
 
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
@@ -168,18 +168,18 @@ model VoiceAgentDefinition extends AgentDefinition {
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult, and for delivery of their responses.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SubAgentConfig {
+model VoiceAgentSubAgentConfig {
   @doc("The sibling Foundry text agents, in the same project, that this voice agent may consult.")
   @minItems(1)
-  subagents: SubAgent[];
+  subagents: VoiceAgentSubAgent[];
 
   @doc("Policy for acknowledging forwarded requests and filling gaps while waiting for a subagent response.")
-  response_policy?: ResponsePolicy;
+  response_policy?: VoiceAgentSubagentResponsePolicy;
 }
 
 @doc("A sibling Foundry text agent that a voice agent may consult as a background specialist.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SubAgent {
+model VoiceAgentSubAgent {
   @doc("The name of the subagent. The subagent must be in the same project as the voice agent.")
   agent_name: string;
 
@@ -201,7 +201,7 @@ model SubAgent {
 
 @doc("Policy for delivering responses while a voice agent waits for a subagent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model ResponsePolicy {
+model VoiceAgentSubagentResponsePolicy {
   @doc("Whether the voice agent provides an immediate acknowledgement before forwarding a request to a subagent.")
   immediate_ack?: boolean;
 

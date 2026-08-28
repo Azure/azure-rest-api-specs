@@ -23,6 +23,9 @@ union VoiceAgentClientEventTypeExtension {
 
 union VoiceAgentServerEventTypeExtension {
   warning: "warning",
+  session_subagent_started: "session.subagent.started",
+  session_subagent_completed: "session.subagent.completed",
+  session_subagent_aborted: "session.subagent.aborted",
   session_avatar_connecting: "session.avatar.connecting",
   session_avatar_switch_to_speaking: "session.avatar.switch_to_speaking",
   session_avatar_switch_to_idle: "session.avatar.switch_to_idle",
@@ -446,7 +449,8 @@ union VoiceAgentSubagentAbortReason {
 @doc("The `session.subagent.started` server event.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentServerEventSessionSubagentStarted {
+model VoiceAgentServerEventSessionSubagentStarted
+  extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `session.subagent.started`.")
   type: "session.subagent.started";
 
@@ -456,7 +460,8 @@ model VoiceAgentServerEventSessionSubagentStarted {
 @doc("The `session.subagent.completed` server event.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentServerEventSessionSubagentCompleted {
+model VoiceAgentServerEventSessionSubagentCompleted
+  extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `session.subagent.completed`.")
   type: "session.subagent.completed";
 
@@ -466,7 +471,8 @@ model VoiceAgentServerEventSessionSubagentCompleted {
 @doc("The `session.subagent.aborted` server event.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentServerEventSessionSubagentAborted {
+model VoiceAgentServerEventSessionSubagentAborted
+  extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `session.subagent.aborted`.")
   type: "session.subagent.aborted";
 
