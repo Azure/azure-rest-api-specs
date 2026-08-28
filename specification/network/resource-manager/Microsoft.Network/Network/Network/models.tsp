@@ -7983,7 +7983,7 @@ model ApplicationGatewayAdvancedRoutingMapPropertiesFormat {
   defaultRewriteRuleSet?: SubResource;
 
   /**
-   * Default authentication configuration bindings of the advanced routing map. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   * Default authentication configuration bindings of the advanced routing map. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using the Standard_v2 or WAF_v2 SKU.
    */
   @added(Versions.v2026_01_01)
   @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
@@ -8073,7 +8073,7 @@ model ApplicationGatewayAdvancedRoutingRulePropertiesFormat {
   rewriteRuleSet?: SubResource;
 
   /**
-   * Authentication configuration bindings of the advanced routing rule. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   * Authentication configuration bindings of the advanced routing rule. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using the Standard_v2 or WAF_v2 SKU.
    */
   @added(Versions.v2026_01_01)
   @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
@@ -8285,7 +8285,7 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
   entraJWTValidationConfig?: SubResource;
 
   /**
-   * Authentication configuration bindings of the request routing rule. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   * Authentication configuration bindings of the request routing rule. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using the Standard_v2 or WAF_v2 SKU.
    */
   @added(Versions.v2026_01_01)
   @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
