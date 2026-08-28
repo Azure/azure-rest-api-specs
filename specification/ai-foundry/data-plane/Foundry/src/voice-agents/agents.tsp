@@ -152,6 +152,9 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
+  @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
+  subagent_config?: VoiceAgentSubAgentConfig;
+
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
@@ -161,6 +164,67 @@ model VoiceAgentDefinition extends AgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
+
+@doc("Configuration for sibling Foundry text agents that a voice agent may consult, and for delivery of their responses.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSubAgentConfig {
+  @doc("The sibling Foundry text agents, in the same project, that this voice agent may consult.")
+  @minItems(1)
+  subagents: VoiceAgentSubAgent[];
+
+  @doc("Policy for acknowledging forwarded requests and filling gaps while waiting for a subagent response.")
+  response_policy?: VoiceAgentSubagentResponsePolicy;
+}
+
+@doc("A sibling Foundry text agent that a voice agent may consult as a background specialist.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSubAgent {
+  @doc("The name of the subagent. The subagent must be in the same project as the voice agent.")
+  agent_name: string;
+
+  @doc("The version of the subagent. When omitted, the active version is used.")
+  agent_version?: string;
+
+  @doc("A description of the subagent's capabilities, used by the voice agent to decide whether to forward a query.")
+  agent_capabilities: string;
+
+  @doc("Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.")
+  enable_delta_progress?: boolean = false;
+
+  @doc("The wall-clock timeout, in seconds, for each invocation of this subagent. When omitted, the service timeout is used.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  @minValue(duration.fromISO("PT5S"))
+  @maxValue(duration.fromISO("PT20M"))
+  invoke_timeout_seconds?: duration;
+}
+
+@doc("Policy for delivering responses while a voice agent waits for a subagent.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSubagentResponsePolicy {
+  @doc("Whether the voice agent provides an immediate acknowledgement before forwarding a request to a subagent.")
+  immediate_ack?: boolean;
+
+  @doc("The number of seconds without subagent content or user input before the voice agent provides a gap-filling response.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  @minValue(duration.fromISO("PT5S"))
+  @maxValue(duration.fromISO("PT2M"))
+  gap_filling_interval?: duration;
+
+  @doc("Instructions used to generate the immediate acknowledgement.")
+  ack_instructions?: string;
+
+  @doc("Instructions used to generate gap-filling speech while waiting for progress.")
+  gap_filling_instructions?: string;
+
+  @doc("Instructions used to summarize streamed subagent progress for speech.")
+  progress_instructions?: string;
+
+  @doc("The minimum number of seconds between spoken progress updates.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  @minValue(duration.fromISO("PT5S"))
+  @maxValue(duration.fromISO("PT5M"))
+  progress_update_interval?: duration;
 }
 
 @doc("Session-start greeting configuration for a voice agent.")
