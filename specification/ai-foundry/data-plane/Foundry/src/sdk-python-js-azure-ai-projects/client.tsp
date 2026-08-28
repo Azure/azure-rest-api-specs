@@ -5,7 +5,6 @@
 
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "../agents/routes.tsp";
-import "../voice-agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
@@ -16,6 +15,7 @@ import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
+import "../voice-agents/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
