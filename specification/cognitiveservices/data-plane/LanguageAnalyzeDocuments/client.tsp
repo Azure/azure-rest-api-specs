@@ -6,9 +6,13 @@ using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;
 
-@@clientName(Tasks, "DocumentActions", "csharp");
-@@clientName(State, "DocumentActionState", "csharp");
+@@clientName(AnalyzeDocuments, "DocumentsServiceClient", "csharp");
+@@clientName(Tasks, "DocumentTasksState", "csharp");
+@@clientName(Tasks.items, "Results", "csharp");
+@@clientName(State, "DocumentActionStatus", "csharp");
+@@clientName(State.cancelled, "Canceled", "csharp");
 @@clientName(Error, "AnalyzeDocumentsError", "csharp");
+@@clientName(Error.innererror, "InnerError", "csharp");
 
 @@clientName(Entity, "NamedEntity", "csharp");
 
@@ -60,14 +64,12 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AtValueAddedTaxNumber",
   "csharp"
 );
-@@clientName(
-  PiiCategories.AzureDocumentDBAuthKey,
-  "AzureDocumentDbauthKey",
+@@clientName(PiiCategories.AzureDocumentDBAuthKey,
+  "AzureDocumentDBAuthKey",
   "csharp"
 );
-@@clientName(
-  PiiCategories.AzureIAASDatabaseConnectionAndSQLString,
-  "AzureIaasDatabaseConnectionAndSqlString",
+@@clientName(PiiCategories.AzureIAASDatabaseConnectionAndSQLString,
+  "AzureIaasDBConnectionAndSqlString",
   "csharp"
 );
 @@clientName(PiiCategories.AzureSAS, "AzureSas", "csharp");
@@ -586,9 +588,8 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 
-@@clientName(
-  MultiLanguageAnalysisInput,
-  "MultiLanguageDocumentInput",
+@@clientName(MultiLanguageAnalysisInput,
+  "MultiLanguageDocumentCollection",
   "csharp"
 );
 
@@ -599,6 +600,19 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AnalyzeDocumentsOperationAction",
   "csharp"
 );
+@@clientName(AnalyzeDocumentsLROTask,
+  "AnalyzeDocumentsOperationAction",
+  "python"
+);
+@@clientName(PiiLROTask,
+  "PiiEntityRecognitionAction",
+  "csharp"
+);
+@@clientName(PiiLROTask,
+  "PiiEntityRecognitionAction",
+  "python"
+);
+
 @@clientName(AnalyzeDocumentsLROTask.taskName, "Name", "csharp");
 
 @@clientName(
@@ -606,20 +620,30 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AnalyzeDocumentsOperationActionKind",
   "csharp"
 );
+@@clientName(AnalyzeDocumentsLROTaskKind,
+  "AnalyzeDocumentsOperationActionKind",
+  "python"
+);
 
 @@clientName(
   AbstractiveSummarizationLROTask,
   "AbstractiveSummarizationOperationAction",
   "csharp"
 );
-@@clientName(
-  AbstractiveSummarizationLROTask.parameters,
+@@clientName(AbstractiveSummarizationLROTask,
+  "AbstractiveSummarizationOperationAction",
+  "python"
+);
+@@clientName(AbstractiveSummarizationLROTask.parameters,
   "ActionContent",
   "csharp"
 );
-@@clientName(
-  AbstractiveSummarizationTaskParameters,
-  "AbstractiveSummarizationActionContent",
+@@clientName(AbstractiveSummarizationTaskParameters,
+  "AbstractiveSummarizationOptions",
+  "csharp"
+);
+@@clientName(AbstractiveSummarizationTaskParameters.loggingOptOut,
+  "ShouldLog",
   "csharp"
 );
 
@@ -628,14 +652,20 @@ namespace Language.AnalyzeTextClientCustomizations;
   "ExtractiveSummarizationOperationAction",
   "csharp"
 );
-@@clientName(
-  ExtractiveSummarizationLROTask.parameters,
+@@clientName(ExtractiveSummarizationLROTask,
+  "ExtractiveSummarizationOperationAction",
+  "python"
+);
+@@clientName(ExtractiveSummarizationLROTask.parameters,
   "ActionContent",
   "csharp"
 );
-@@clientName(
-  ExtractiveSummarizationTaskParameters,
-  "ExtractiveSummarizationActionContent",
+@@clientName(ExtractiveSummarizationTaskParameters,
+  "ExtractiveSummarizationOptions",
+  "csharp"
+);
+@@clientName(ExtractiveSummarizationTaskParameters.sortBy,
+  "OrderBy",
   "csharp"
 );
 
@@ -644,9 +674,12 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AnalyzeDocumentsOperationInput",
   "csharp"
 );
-@@clientName(
-  AnalyzeDocumentJobsInput.analysisInput,
-  "DocumentsInput",
+@@clientName(AnalyzeDocumentJobsInput,
+  "AnalyzeDocumentsJob",
+  "python"
+);
+@@clientName(AnalyzeDocumentJobsInput.analysisInput,
+  "DocumentInput",
   "csharp"
 );
 @@clientName(AnalyzeDocumentJobsInput.tasks, "Actions", "csharp");
@@ -656,8 +689,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AnalyzeDocumentsOperationResultsKind",
   "csharp"
 );
-@@clientName(
-  AnalyzeDocumentsLROResultsKind.AbstractiveSummarizationLROResults,
+@@clientName(AnalyzeDocumentsLROResultsKind,
+  "AnalyzeDocumentsOperationResultsKind",
+  "python"
+);
+@@clientName(AnalyzeDocumentsLROResultsKind.AbstractiveSummarizationLROResults,
   "AbstractiveSummarizationOperationResults",
   "csharp"
 );
@@ -671,21 +707,39 @@ namespace Language.AnalyzeTextClientCustomizations;
   "PiiEntityRecognitionOperationResults",
   "csharp"
 );
+@@clientName(AnalyzeDocumentsLROResult,
+  "AnalyzeDocumentsOperationResult",
+  "csharp"
+);
+@@clientName(AnalyzeDocumentsLROResult,
+  "AnalyzeDocumentsOperationResult",
+  "python"
+);
 
 @@clientName(
   PiiEntityRecognitionLROResult,
   "PiiEntityRecognitionOperationResult",
   "csharp"
 );
-@@clientName(
-  AbstractiveSummarizationLROResult,
+@@clientName(PiiEntityRecognitionLROResult,
+  "PiiEntityRecognitionOperationResult",
+  "python"
+);
+@@clientName(AbstractiveSummarizationLROResult,
   "AbstractiveSummarizationOperationResult",
   "csharp"
 );
-@@clientName(
-  ExtractiveSummarizationLROResult,
+@@clientName(AbstractiveSummarizationLROResult,
+  "AbstractiveSummarizationOperationResult",
+  "python"
+);
+@@clientName(ExtractiveSummarizationLROResult,
   "ExtractiveSummarizationOperationResult",
   "csharp"
+);
+@@clientName(ExtractiveSummarizationLROResult,
+  "ExtractiveSummarizationOperationResult",
+  "python"
 );
 
 @@clientName(
@@ -694,14 +748,64 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 
-@@clientName(
-  analyzeDocumentsJobStatus,
-  "GetAnalyzeDocumentsJobStatus",
+@@clientName(analyzeDocumentsSubmitJob,
+  "SubmitJob",
+  "python"
+);
+
+@@clientName(analyzeDocumentsJobStatus,
+  "GetAnalyzeDocumentsJobState",
   "csharp"
 );
-@@clientName(
-  analyzeDocumentsCancelJob,
+@@clientName(analyzeDocumentsJobStatus,
+  "GetJobState",
+  "python"
+);
+
+@@clientName(analyzeDocumentsCancelJob,
   "AnalyzeDocumentsCancelOperation",
   "csharp"
 );
-@@clientName(redactionCharacter.equals, "EqualSign", "csharp");
+@@clientName(analyzeDocumentsCancelJob,
+  "CancelJob",
+  "python"
+);
+
+@@clientName(SummaryLengthBucket,
+  "SummarySize",
+  "csharp"
+);
+@@clientName(redactionCharacter.equals, "EqualsSign", "csharp");
+@@clientName(EntityMaskPolicy, "EntityMaskRedactionPolicy", "csharp");
+
+@@clientName(DocumentWarning.targetRef, "TargetReference", "csharp");
+
+@@clientName(PiiDomain.phi, "Health", "csharp");
+
+@@clientName(PiiCategories.URL, "Url", "csharp");
+
+@@clientName(RequestStatistics, "DocumentRequestStatistics", "csharp");
+
+@@clientName(RequestStatistics, "OperationStatistics", "python");
+
+@@clientName(ScriptKind, "DocumentScriptKind", "csharp");
+
+@@clientName(ScriptCode, "DocumentScriptCode", "csharp");
+
+@@clientName(NoMaskPolicy, "NoMaskRedactionPolicy", "csharp");
+
+@@clientName(BaseRedactionPolicy, "RedactionPolicy", "csharp");
+
+@@clientName(TaskState.lastUpdateDateTime, "LastUpdatedAt", "csharp");
+
+@@clientName(DocumentAnalysisDocumentResult.target, "Targets", "csharp");
+
+@@clientName(DocumentAnalysisDocumentResult, "DocumentAnalysisResult", "python");
+
+@@clientName(ExtractiveSummarizationSortingCriteria, "ExtractiveSummarizationOrder", "csharp");
+
+@@clientName(AbstractiveSummary, "DocumentAbstractiveSummary", "csharp");
+
+@@clientName(PiiCategories.AzureIoTConnectionString, "AzureIOTConnectionString", "python");
+
+@@clientName(AnalyzeDocumentsDocumentError, "AnalyzeDocumentsError", "python");
