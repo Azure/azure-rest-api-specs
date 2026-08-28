@@ -190,7 +190,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/AgentInsightMonitor'
+                      $ref: '#/components/schemas/AgentInsightMonitorListItem'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -41071,6 +41071,59 @@ components:
           type: string
           description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
       description: Fields accepted when creating an Agent Insights monitor for an agent.
+    AgentInsightMonitorListItem:
+      type: object
+      required:
+        - id
+        - agent_name
+        - enabled
+        - run_interval_hours
+        - model_deployment_name
+        - suspension
+        - updated_at
+      properties:
+        id:
+          type: string
+          description: The monitor identifier.
+          readOnly: true
+        agent_name:
+          type: string
+          description: The agent this monitor analyzes. There can be only one monitor per agent.
+          readOnly: true
+        enabled:
+          type: boolean
+          description: Whether scheduled insight generation is armed for the monitor.
+          readOnly: true
+        run_interval_hours:
+          type: number
+          format: double
+          minimum: 3
+          maximum: 2160
+          description: Interval between scheduled insight runs, in hours.
+          readOnly: true
+        model_deployment_name:
+          type: string
+          description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+          readOnly: true
+        next_scheduled_run_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled.
+          readOnly: true
+        estimated_cost:
+          $ref: '#/components/schemas/AgentInsightEstimatedCost'
+          description: Estimated cost accumulated by Agent Insights for this monitor.
+          readOnly: true
+        suspension:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightSuspension'
+            - type: 'null'
+          description: Why the system suspended scheduled generation. Null when the monitor is not suspended.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when this monitor was last updated.
+          readOnly: true
+      description: An Agent Insights monitor summary returned by list operations.
     AgentInsightMonitorUpdate:
       type: object
       properties:

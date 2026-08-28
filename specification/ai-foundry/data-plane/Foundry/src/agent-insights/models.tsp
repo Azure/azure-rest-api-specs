@@ -307,6 +307,12 @@ model AgentInsightMonitor {
   updated_at: FoundryTimestamp;
 }
 
+/** An Agent Insights monitor summary returned by list operations. */
+model AgentInsightMonitorListItem is OmitProperties<
+  AgentInsightMonitor,
+  "overview"
+>;
+
 /** Fields accepted when creating an Agent Insights monitor for an agent. */
 model AgentInsightMonitorCreate {
   /** The agent this monitor should analyze. */

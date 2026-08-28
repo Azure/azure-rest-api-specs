@@ -74,7 +74,7 @@ interface AgentInsightMonitors {
       ...AgentInsightsPageQueryParameters;
       ...AgentInsightMonitorFilters;
     },
-    AgentsPagedResult<AgentInsightMonitor>
+    AgentsPagedResult<AgentInsightMonitorListItem>
   >;
 
   /** Create an Agent Insights monitor for an agent. */
