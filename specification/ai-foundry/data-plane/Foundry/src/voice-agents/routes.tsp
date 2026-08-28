@@ -582,10 +582,10 @@ interface AgentTelephony {
       @query status?: TelephonyCallStatus;
 
       /** Includes calls that started at or after this Unix timestamp in seconds. */
-      @query started_after?: TelephonyTimestamp;
+      @query started_after?: FoundryTimestamp;
 
       /** Includes calls that started at or before this Unix timestamp in seconds. */
-      @query started_before?: TelephonyTimestamp;
+      @query started_before?: FoundryTimestamp;
 
       ...CommonPageQueryParameters;
     },

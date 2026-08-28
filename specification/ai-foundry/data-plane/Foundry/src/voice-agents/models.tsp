@@ -422,10 +422,6 @@ model VoiceRecordingResponse {
 // Agent telephony bindings
 // ---------------------------------------------------------------------------
 
-@doc("A Unix timestamp in seconds encoded as int64 so telephony dates remain representable beyond 2038.")
-@encode(DateTimeKnownEncoding.unixTimestamp, int64)
-scalar TelephonyTimestamp extends utcDateTime;
-
 @doc("A service-generated telephony binding identifier.")
 @minLength(1)
 @maxLength(128)
@@ -1080,19 +1076,19 @@ model TelephonyCallSummary {
   phase: TelephonyCallPhase;
 
   @doc("The Unix timestamp (in seconds) for when the inbound webhook was received.")
-  started_at: TelephonyTimestamp;
+  started_at: FoundryTimestamp;
 
   @doc("The Unix timestamp (in seconds) for when the provider reported the call as answered.")
-  answered_at?: TelephonyTimestamp;
+  answered_at?: FoundryTimestamp;
 
   @doc("The Unix timestamp (in seconds) for when the provider media channel connected.")
-  media_connected_at?: TelephonyTimestamp;
+  media_connected_at?: FoundryTimestamp;
 
   @doc("The Unix timestamp (in seconds) for when the voice-agent session became ready.")
-  agent_session_ready_at?: TelephonyTimestamp;
+  agent_session_ready_at?: FoundryTimestamp;
 
   @doc("The Unix timestamp (in seconds) for when the call ended.")
-  ended_at?: TelephonyTimestamp;
+  ended_at?: FoundryTimestamp;
 
   @doc("The call duration in seconds.")
   @minValue(0)

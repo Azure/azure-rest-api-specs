@@ -5434,7 +5434,7 @@
             "required": false,
             "description": "Includes calls that started at or after this Unix timestamp in seconds.",
             "schema": {
-              "$ref": "#/components/schemas/TelephonyTimestamp"
+              "$ref": "#/components/schemas/FoundryTimestamp"
             },
             "explode": false
           },
@@ -5444,7 +5444,7 @@
             "required": false,
             "description": "Includes calls that started at or before this Unix timestamp in seconds.",
             "schema": {
-              "$ref": "#/components/schemas/TelephonyTimestamp"
+              "$ref": "#/components/schemas/FoundryTimestamp"
             },
             "explode": false
           },
@@ -88623,23 +88623,23 @@
             "description": "The provider-neutral lifecycle phase reached by the call."
           },
           "started_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the inbound webhook was received."
           },
           "answered_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the provider reported the call as answered."
           },
           "media_connected_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the provider media channel connected."
           },
           "agent_session_ready_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the voice-agent session became ready."
           },
           "ended_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the call ended."
           },
           "duration_seconds": {
@@ -88761,23 +88761,23 @@
             "description": "The provider-neutral lifecycle phase reached by the call."
           },
           "started_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the inbound webhook was received."
           },
           "answered_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the provider reported the call as answered."
           },
           "media_connected_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the provider media channel connected."
           },
           "agent_session_ready_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the voice-agent session became ready."
           },
           "ended_at": {
-            "$ref": "#/components/schemas/TelephonyTimestamp",
+            "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the call ended."
           },
           "duration_seconds": {
@@ -89037,11 +89037,6 @@
             "VoiceAgents=V1Preview"
           ]
         }
-      },
-      "TelephonyTimestamp": {
-        "type": "integer",
-        "format": "unixtime",
-        "description": "A Unix timestamp in seconds encoded as int64 so telephony dates remain representable beyond 2038."
       },
       "TelephonyTransferDestination": {
         "type": "object",
