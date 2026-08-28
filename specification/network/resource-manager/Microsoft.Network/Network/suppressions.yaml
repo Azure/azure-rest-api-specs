@@ -27,3 +27,8 @@
     The package-2026-01-01 tag intentionally retains the frozen 2018-10-01 VMSS
     network contract. These Microsoft.Compute child-resource APIs have always
     used that API version while sharing the latest Microsoft.Network models.
+    - Vmss/tspconfig.yaml   
+
+- tool: SwaggerAvocado
+  path: readme.md
+  reason: The package-2026-01-01 default tag intentionally retains the frozen stable/2018-10-01/vmssNetwork.json surface for backward compatibility; moving it to 2026-01-01 would break existing clients.

@@ -12294,6 +12294,203 @@ model ExpressRouteCrossConnectionsRoutesTableSummaryListResult
 );
 
 /**
+ * Request model used by validate and health check circuit migration operations.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitValidateAndHealthCheckRequest {
+  /** The target peering location for circuit migration. */
+  targetPeeringLocation: string;
+
+  /** The source-to-target port mappings for circuit migration. */
+  @identifiers(#["sourcePortId"])
+  targetPortMapping: PortMapping[];
+}
+
+/**
+ * Response for express route circuit migration validation operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitValidateResponse {
+  /** The validation status. */
+  status?: string;
+}
+
+/**
+ * Request model for express route circuit migration operations.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitRequest {
+  /** The target peering location for circuit migration. */
+  targetPeeringLocation?: string;
+
+  /** The source-to-target port mappings for circuit migration. */
+  @identifiers(#["sourcePortId"])
+  targetPortMapping?: PortMapping[];
+
+  /** The port identifier used for shutDownBgp, migrate, restoreBgp, and rollback operations. */
+  portId?: string;
+}
+
+/**
+ * Response for express route circuit migration health check and migration operations.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitHealthCheckResponse {
+  /** The overall status of the migration operation. */
+  status?: string;
+
+  /** The current phase of the migration operation. */
+  phase?: string;
+
+  /** The failure reason if the migration operation failed. */
+  failureReason?: string;
+
+  /** The new service tag assigned after migration. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The wire property name newSTag is required to match the approved provider-led circuit migration contract."
+  newSTag?: string;
+
+  /** The timestamp when the migration was prepared. */
+  preparedAt?: utcDateTime;
+
+  /** The expiry time for the prepare phase. */
+  prepareExpiryTime?: utcDateTime;
+
+  /** The URL of the new cross connection after migration. */
+  newCrossConnectionUrl?: url;
+
+  /** Indicates whether rollback should be performed. */
+  shouldRollback?: boolean;
+
+  /** Detailed health check information for migration. */
+  details?: MigrateExpressRouteCircuitHealthCheckDetails;
+}
+
+/**
+ * Detailed migration health information.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitHealthCheckDetails {
+  /** Per-port migration details. */
+  @identifiers(#["portId"])
+  portMigrationInfos?: PortMigrationInfo[];
+}
+
+/**
+ * A mapping between source and target ports for migration.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model PortMapping {
+  /** The source port identifier. */
+  sourcePortId: string;
+
+  /** The target port identifier. */
+  targetPortId: string;
+}
+
+/**
+ * Information about a port migration status.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model PortMigrationInfo {
+  /** The identifier of the port being migrated. */
+  portId?: string;
+
+  /** The migration status for the port. */
+  status?: string;
+
+  /** The current migration phase for the port. */
+  phase?: string;
+
+  /** The reason for failure if migration failed for the port. */
+  failureReason?: string;
+
+  /** The peering health details for the port. */
+  @identifiers(#["type"])
+  peerings?: PeeringHealth[];
+
+  /** The source port identifier before migration. */
+  sourcePortId?: string;
+
+  /** The source port statistics before migration. */
+  sourcePortStats?: SourcePortStats;
+}
+
+/**
+ * Statistics from the source port before migration.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model SourcePortStats {
+  /** The peering health information from the source port. */
+  @identifiers(#["type"])
+  peerings?: PeeringHealth[];
+}
+
+/**
+ * Health information for a peering connection.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model PeeringHealth {
+  /** The type of peering (for example, Private, Microsoft, Public). */
+  type?: string;
+
+  /** The current peering statistics. */
+  statsCurrent?: PeeringStats;
+
+  /** The peering statistics captured at prepare phase. */
+  statsAtPrepare?: PeeringStats;
+}
+
+/**
+ * Statistical information for a peering connection.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model PeeringStats {
+  /** The timestamp when these statistics were captured. */
+  timestamp?: utcDateTime;
+
+  /** The collection of peering metrics. */
+  @identifiers(#["name"])
+  metrics?: Metric[];
+}
+
+/**
+ * Metric entry for migration peering statistics.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model Metric {
+  /** The metric name. */
+  name?: string;
+
+  /** The metric value. */
+  value?: float64;
+
+  /** The metric unit. */
+  unit?: string;
+}
+
+/**
  * Response for ListExpressRouteProviderPort API service call.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -26940,6 +27137,18 @@ model NetworkRule extends FirewallPolicyRule {
    */
   @added(Versions.v2025_09_01)
   sourceKubeSelectorGroups?: string[];
+
+  /**
+   * List of source geographic location filters (ISO 3166-1 alpha-2 country codes, e.g. "US", "CA") for this rule.
+   */
+  @added(Versions.v2026_01_01)
+  sourceGeoLocations?: string[];
+
+  /**
+   * List of destination geographic location filters (ISO 3166-1 alpha-2 country codes, e.g. "US", "CA") for this rule.
+   */
+  @added(Versions.v2026_01_01)
+  destinationGeoLocations?: string[];
 
   /**
    * Rule Type.
