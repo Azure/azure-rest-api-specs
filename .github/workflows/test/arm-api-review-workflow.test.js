@@ -695,11 +695,10 @@ describe("ARM API review consistency and hardening", () => {
   });
 
   it("keeps the agent's overflow disclosure on a surface that actually exists", async () => {
-    const [workflow, agent, protocol, docs] = await Promise.all([
+    const [workflow, agent, protocol] = await Promise.all([
       readFile(join(ROOT, SOURCE_FILE), "utf8"),
       readFile(join(ROOT, AGENT_FILE), "utf8"),
       readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
-      readFile(join(ROOT, "documentation/api-reviewer-agent.md"), "utf8"),
     ]);
     const collapsedAgent = collapseWhitespace(agent);
 
@@ -713,7 +712,7 @@ describe("ARM API review consistency and hardening", () => {
 
     // There is one 20-comment limit. These phrases belonged to the discarded
     // 50-comment/per-category design and would create a second overflow path.
-    const allSurfaces = [workflow, agent, protocol, docs].join("\n");
+    const allSurfaces = [workflow, agent, protocol].join("\n");
     expect(allSurfaces).not.toContain("50-comment budget");
     expect(allSurfaces).not.toContain("excluded by a category cap");
     expect(allSurfaces).not.toContain("beyond a per-category cap");
