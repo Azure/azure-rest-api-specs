@@ -7,15 +7,13 @@ description: Reviews Azure data-plane TypeSpec specifications for conformance to
 #
 # NO MUTATING GITHUB TOOLS. The write channel is gh-aw `safe-outputs`
 # (unattended) or the human (interactive); the agent never posts. Do not add
-# `add_labels`, `create_pull_request_review`, `remove_labels`,
-# `update_review_comment`, or any other mutating GitHub tool.
+# `issue_write`, `pull_request_review_write`,
+# `add_comment_to_pending_review`, or any other mutating GitHub tool.
 tools:
   - agent
   # GitHub read-only:
   - github/get_file_contents
-  - github/get_pull_request
-  - github/get_review_comments
-  - github/list_pull_request_files
+  - github/pull_request_read
   - github/search_code
   - search
   - search/codebase

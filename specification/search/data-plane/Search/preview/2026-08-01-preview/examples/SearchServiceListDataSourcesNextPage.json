@@ -1,0 +1,45 @@
+{
+  "operationId": "DataSources_List",
+  "title": "SearchServiceListDataSourcesNextPage",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "api-version": "2026-08-01-preview",
+    "$select": null,
+    "search": null,
+    "pageSize": null,
+    "searchType": null,
+    "Accept": "application/json",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "mydocdbdatasource-2",
+            "description": "My Azure Blob data source.",
+            "type": "azureblob",
+            "indexerPermissionOptions": [],
+            "credentials": {
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
+            },
+            "container": {
+              "name": "doc-extraction-skillset",
+              "query": "E2E_Dsat"
+            },
+            "dataChangeDetectionPolicy": {
+              "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
+              "highWaterMarkColumnName": "metadata_storage_last_modified"
+            },
+            "dataDeletionDetectionPolicy": {
+              "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
+              "softDeleteColumnName": "isDeleted",
+              "softDeleteMarkerValue": "true"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
