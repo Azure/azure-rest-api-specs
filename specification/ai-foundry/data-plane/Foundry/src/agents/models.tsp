@@ -126,6 +126,19 @@ model PatchAgentRequest {
   agent_card?: AgentCard;
 }
 
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+)
+model PatchAgentRequest {
+  @doc("The endpoint configuration for the agent")
+  agent_endpoint?: AgentEndpoint;
+
+  @doc("Optional agent card for the agent")
+  agent_card?: AgentCard;
+}
+
 union AgentObjectType {
   agent: "agent",
   agentVersion: "agent.version",
@@ -297,6 +310,15 @@ union AgentEndpointProtocol {
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
+}
+
+@removed(Versions.v1)
+union AgentEndpointProtocol {
+  string,
+  activity: "activity",
+  responses: "responses",
+  a2a: "a2a",
+  invocations: "invocations",
 }
 
 union AgentKind {

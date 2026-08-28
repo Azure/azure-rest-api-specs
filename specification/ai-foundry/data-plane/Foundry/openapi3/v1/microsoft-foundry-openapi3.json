@@ -28390,6 +28390,9 @@
   },
   "security": [
     {
+      "ApiKeyAuth": []
+    },
+    {
       "OAuth2Auth": [
         "https://ai.azure.com/.default"
       ]
@@ -28562,6 +28565,14 @@
               "a2a_preview"
             ],
             "description": "The type of the tool. Always `\"a2a_preview`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "base_url": {
             "type": "string",
@@ -28841,6 +28852,14 @@
           "index_name": {
             "type": "string",
             "description": "The name of an index in an IndexResource attached to this agent."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "query_type": {
             "$ref": "#/components/schemas/AzureAISearchQueryType",
@@ -29184,7 +29203,7 @@
           "VoiceAgents=V1Preview",
           "DigitalWorker=V1Preview"
         ],
-        "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
+        "description": "Opt-in keys for defining preview Hosted or Workflow Agents."
       },
       "AgentEndpointAuthorizationScheme": {
         "type": "object",
@@ -31425,6 +31444,14 @@
           "indexes"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "indexes": {
             "type": "array",
             "items": {
@@ -32113,6 +32140,14 @@
           "instance_name"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -32159,6 +32194,14 @@
               "bing_custom_search_preview"
             ],
             "description": "The object type, which is always 'bing_custom_search_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_custom_search_preview": {
             "$ref": "#/components/schemas/BingCustomSearchToolParameters",
@@ -32262,6 +32305,14 @@
           "search_configurations"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -32284,6 +32335,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -32314,6 +32373,14 @@
           "search_configurations"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -32533,6 +32600,14 @@
             ],
             "description": "The object type, which is always 'browser_automation_preview'."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "browser_automation_preview": {
             "$ref": "#/components/schemas/BrowserAutomationToolParameters",
             "description": "The Browser Automation Tool parameters."
@@ -32665,6 +32740,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "The ID of the project connection to your Azure Playwright resource."
@@ -32683,6 +32766,14 @@
           "connection"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "connection": {
             "$ref": "#/components/schemas/BrowserAutomationToolConnectionParameters",
             "description": "The project connection parameters associated with the Browser Automation Tool."
@@ -36323,6 +36414,20 @@
           ]
         }
       },
+      "EvaluatorCredentialRequest": {
+        "type": "object",
+        "required": [
+          "blobUri"
+        ],
+        "properties": {
+          "blobUri": {
+            "type": "string",
+            "format": "uri",
+            "description": "The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`"
+          }
+        },
+        "description": "Request body for getting evaluator credentials"
+      },
       "EvaluatorDefinition": {
         "type": "object",
         "required": [
@@ -37047,6 +37152,14 @@
       "FabricDataAgentToolParameters": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -39011,6 +39124,14 @@
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "memory_store_name": {
             "type": "string",
             "description": "The name of the memory store to use."
@@ -39678,6 +39799,14 @@
               "fabric_dataagent_preview"
             ],
             "description": "The object type, which is always 'fabric_dataagent_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "fabric_dataagent_preview": {
             "$ref": "#/components/schemas/FabricDataAgentToolParameters",
@@ -81114,6 +81243,14 @@
       "SharepointGroundingToolParameters": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -81143,6 +81280,14 @@
               "sharepoint_grounding_preview"
             ],
             "description": "The object type, which is always 'sharepoint_grounding_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "sharepoint_grounding_preview": {
             "$ref": "#/components/schemas/SharepointGroundingToolParameters",
@@ -82092,6 +82237,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "A project connection in a ToolProjectConnectionList attached to this tool."
@@ -85545,6 +85698,14 @@
           "instance_name"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing custom search"
@@ -85710,6 +85871,49 @@
           ]
         }
       },
+      "WorkIQPreviewTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "work_iq_preview"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "work_iq_preview"
+            ],
+            "description": "The object type, which is always 'work_iq_preview'."
+          },
+          "work_iq_preview": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WorkIQPreviewToolParameters"
+              }
+            ],
+            "description": "The WorkIQ tool parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A WorkIQ server-side tool."
+      },
+      "WorkIQPreviewToolParameters": {
+        "type": "object",
+        "required": [
+          "project_connection_id"
+        ],
+        "properties": {
+          "project_connection_id": {
+            "type": "string",
+            "description": "The ID of the WorkIQ project connection."
+          }
+        },
+        "description": "The WorkIQ tool parameters."
+      },
       "WorkflowActionOutputItem": {
         "type": "object",
         "required": [
@@ -85794,6 +85998,11 @@
       }
     },
     "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api-key"
+      },
       "OAuth2Auth": {
         "type": "oauth2",
         "flows": {

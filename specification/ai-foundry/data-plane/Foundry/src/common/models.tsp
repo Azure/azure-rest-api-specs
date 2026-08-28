@@ -45,6 +45,22 @@ alias UserDelegationHeader = {
 // are NOT part of the public API spec. They are injected by the platform and resolved
 // server-side. If needed for contracts, they should be added in the contracts entry point.
 
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+op FoundryDataPlaneRequiredPreviewOperation<
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
+  Params extends Reflection.Model,
+  Response,
+  ErrorResponse = ApiErrorResponse
+> is FoundryDataPlaneOperation<
+  {
+    ...WithRequiredFoundryPreviewHeader<AreaPreviewLabel>;
+    ...Params;
+  },
+  Response,
+  ErrorResponse
+>;
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "OpenAI Response schemas can be intentionally combined for documentation clarity"

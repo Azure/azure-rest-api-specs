@@ -35,6 +35,8 @@ in order to successfully complete operations using these routes.
 | Evaluators | Get Version | GET | `/evaluators/{name}/versions/{version}` | Required: `Evaluations=V1Preview` |
 | Evaluators | Delete Version | DELETE | `/evaluators/{name}/versions/{version}` | Required: `Evaluations=V1Preview` |
 | Evaluators | Update Version | PATCH | `/evaluators/{name}/versions/{version}` | Required: `Evaluations=V1Preview` |
+| Evaluators | Start Pending Upload | POST | `/evaluators/{name}/versions/{version}/startPendingUpload` | Required: `Evaluations=V1Preview` |
+| Evaluators | Get Credentials | POST | `/evaluators/{name}/versions/{version}/credentials` | Required: `Evaluations=V1Preview` |
 | Insights | Generate | POST | `/insights` | Required: `Insights=V1Preview` |
 | Insights | List | GET | `/insights` |  Required: `Insights=V1Preview` |
 | Insights | Get | GET | `/insights/{id}` |  Required: `Insights=V1Preview` |
