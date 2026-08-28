@@ -1256,6 +1256,10 @@ union LifecycleHookActionState {
 
   /** The lifecycle hook for the target resource is rejected. */
   Rejected: "Rejected",
+
+  /** A terminal state that indicates the lifecycle hook for the target resource is no longer relevant & was abandoned by the platform. No further action on the target is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
@@ -1270,6 +1274,10 @@ union VMScaleSetLifecycleHookEventState {
 
   /** The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state. */
   Completed: "Completed",
+
+  /** A terminal state that indicates the lifecycle hook event is no longer relevant & was abandoned by the platform. No further action on the event is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
