@@ -11,7 +11,9 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview,
-    AgentDefinitionOptInKeys.draft_agents_v1_preview
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    AgentDefinitionOptInKeys.draft_agents_v1_preview,
+    AgentDefinitionOptInKeys.digital_worker_v1_preview
   ],
 };
 
@@ -23,12 +25,23 @@ model CreateAgentVersionRequest {
   @maxLength(512)
   description?: string;
 
-  @doc("The agent definition. This can be a workflow, hosted agent, or a simple agent definition.")
+  @doc("The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   definition: AgentDefinition;
 
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
+
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
+  )
+  digital_worker_type?: DigitalWorkerType;
 
   @doc("(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.")
   @extension(
@@ -101,7 +114,7 @@ model CreateAgentRequest {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
-  ...OmitProperties<CreateAgentVersionRequest, "draft">;
+  ...OmitProperties<CreateAgentVersionRequest, "draft" | "digital_worker_type">;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -170,6 +183,17 @@ model AgentObject {
 
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
+
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
+  )
+  digital_worker_type?: DigitalWorkerType;
 
   @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
@@ -269,6 +293,7 @@ union AgentEndpointProtocol {
   a2a: "a2a",
   mcp: "mcp",
   invocations: "invocations",
+  voice: "voice",
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
@@ -280,9 +305,18 @@ union AgentKind {
   hosted: "hosted",
   workflow: "workflow",
   external: "external",
+  voice: "voice",
 
   @removed(Versions.v1)
   container_app: "container_app",
+}
+
+@doc("The type of digital worker.")
+union DigitalWorkerType {
+  string,
+
+  @doc("A Microsoft 365 digital worker.")
+  m365: "m365",
 }
 
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
@@ -398,10 +432,10 @@ model ContainerConfiguration {
 model SessionConfiguration {
   @doc("""
     The idle duration, in seconds, before a session's sandbox is suspended. Optional — when
-    unset, the server default of 900 seconds is used. Must be between 300 and 3600 seconds
+    unset, the server default of 900 seconds is used. Must be between 120 and 3600 seconds
     (inclusive).
     """)
-  @minValue(duration.fromISO("PT300S"))
+  @minValue(duration.fromISO("PT120S"))
   @maxValue(duration.fromISO("PT3600S"))
   @example(duration.fromISO("PT300S"))
   @encode(DurationKnownEncoding.seconds, int32)
@@ -790,6 +824,30 @@ model AgentEndpointConfig {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
+
+  @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")
+  @visibility(Lifecycle.Read)
+  publish_approval_status?: PublishApprovalStatus;
+}
+
+@doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent.")
+union PublishApprovalStatus {
+  string,
+
+  @doc("The agent has never been published to the Microsoft 365 store, so there is nothing to review.")
+  not_published: "not_published",
+
+  @doc("The published title is awaiting a review decision.")
+  pending: "pending",
+
+  @doc("The title passed review, as of this read.")
+  approved: "approved",
+
+  @doc("The title was rejected in review, as of this read.")
+  rejected: "rejected",
+
+  @doc("The agent is published at a scope that does not go through Microsoft Agent Certification. Only tenant-scoped titles are reviewed.")
+  no_approval_needed: "no_approval_needed",
 }
 
 model AgentIdentity {

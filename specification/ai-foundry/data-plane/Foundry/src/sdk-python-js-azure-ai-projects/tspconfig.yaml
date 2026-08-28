@@ -29,6 +29,7 @@ options:
       - specification/ai-foundry/data-plane/Foundry/src/agents
       - specification/ai-foundry/data-plane/Foundry/src/agents-optimization
       - specification/ai-foundry/data-plane/Foundry/src/agents-session-files
+      - specification/ai-foundry/data-plane/Foundry/src/agents-microsoft365
       - specification/ai-foundry/data-plane/Foundry/src/common
       - specification/ai-foundry/data-plane/Foundry/src/connections
       - specification/ai-foundry/data-plane/Foundry/src/data_generation_jobs
@@ -50,6 +51,7 @@ options:
       - specification/ai-foundry/data-plane/Foundry/src/skills
       - specification/ai-foundry/data-plane/Foundry/src/toolboxes
       - specification/ai-foundry/data-plane/Foundry/src/tools
+      - specification/ai-foundry/data-plane/Foundry/src/voice-agents
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
@@ -57,6 +59,7 @@ imports:
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
   - "@azure-tools/openai-typespec/models/evals"
   - "@azure-tools/openai-typespec/models/fine-tuning"
+  - "@azure-tools/openai-typespec/models/realtime"
   - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:
