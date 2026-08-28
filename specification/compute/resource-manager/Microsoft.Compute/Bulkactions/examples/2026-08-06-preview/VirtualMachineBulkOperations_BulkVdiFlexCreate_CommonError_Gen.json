@@ -1,0 +1,49 @@
+{
+  "title": "No compatible VM sizes",
+  "operationId": "VirtualMachineBulkOperations_BulkVdiFlexCreate",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "resourceConfigParameters": {
+        "resourceCount": 2,
+        "flexProperties": {
+          "vmSizeProfiles": [
+            {
+              "name": "Standard_D4s_v5",
+              "rank": 1
+            },
+            {
+              "name": "Standard_D8s_v5",
+              "rank": 2
+            }
+          ],
+          "osType": "Windows",
+          "priorityProfile": {},
+          "zoneAllocationPolicy": {
+            "distributionStrategy": "Prioritized",
+            "zonePreferences": [
+              {
+                "zone": "9",
+                "rank": 1
+              }
+            ]
+          }
+        }
+      },
+      "executionParameters": {}
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "NoAvailableVMSizes",
+          "message": "No requested VM size and availability zone combination is available in the eastus region. Change the requested VM sizes, zones, or allocation settings and try again."
+        }
+      }
+    }
+  }
+}

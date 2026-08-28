@@ -523,11 +523,14 @@
           }
         },
         "x-ms-examples": {
-          "Acknowledge Bulk Action operation errors": {
+          "Basic error acknowledgment": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MinimumSet_Gen.json"
           },
-          "Acknowledge Bulk Action operation errors with mixed results": {
+          "Mixed acknowledgment results": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MaximumSet_Gen.json"
+          },
+          "Unknown operation acknowledgment": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_CommonError_Gen.json"
           }
         }
       }
@@ -1382,11 +1385,14 @@
           }
         },
         "x-ms-examples": {
-          "List recent Bulk Action operation errors": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen.json"
+          "Invalid lookback window": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_CommonError_Gen.json"
           },
-          "List recent Bulk Action operation errors with paging": {
+          "Paged canceled operation errors": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MaximumSet_Gen.json"
+          },
+          "Recent operation errors": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1441,11 +1447,14 @@
           }
         },
         "x-ms-examples": {
-          "Cancel an eligible Bulk Action start operation": {
+          "Basic cancellation": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MinimumSet_Gen.json"
+          },
+          "Detailed start cancellation": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MaximumSet_Gen.json"
           },
-          "Cancel eligible Bulk Action operations": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MinimumSet_Gen.json"
+          "Unknown operation cancellation": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_CommonError_Gen.json"
           }
         }
       }
@@ -1497,11 +1506,14 @@
           }
         },
         "x-ms-examples": {
-          "Create multiple virtual machines with per-virtual-machine overrides": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MaximumSet_Gen.json"
-          },
-          "Create one virtual machine": {
+          "Basic VM creation": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MinimumSet_Gen.json"
+          },
+          "Invalid VM size": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_CommonError_Gen.json"
+          },
+          "Linux worker creation": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MaximumSet_Gen.json"
           }
         }
       }
@@ -1553,11 +1565,14 @@
           }
         },
         "x-ms-examples": {
-          "Deallocate multiple virtual machines with retry settings": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MaximumSet_Gen.json"
-          },
-          "Deallocate one virtual machine": {
+          "Basic deallocation": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MinimumSet_Gen.json"
+          },
+          "Deallocate VM in wrong region": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_CommonError_Gen.json"
+          },
+          "Deallocation with retries": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MaximumSet_Gen.json"
           }
         }
       }
@@ -1609,11 +1624,14 @@
           }
         },
         "x-ms-examples": {
-          "Delete multiple virtual machines by using forced deletion": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MaximumSet_Gen.json"
-          },
-          "Delete one virtual machine": {
+          "Basic deletion": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MinimumSet_Gen.json"
+          },
+          "Delete VM in wrong region": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_CommonError_Gen.json"
+          },
+          "Forced worker deletion": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MaximumSet_Gen.json"
           }
         }
       }
@@ -1665,11 +1683,17 @@
           }
         },
         "x-ms-examples": {
-          "Get Bulk Action operation statuses": {
+          "Basic operation status": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_MinimumSet_Gen.json"
           },
-          "Get the status of an in-progress Bulk Action operation": {
+          "Hibernate fallback status": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_HibernateFallback_Gen.json"
+          },
+          "In-progress start status": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_MaximumSet_Gen.json"
+          },
+          "Unknown operation status": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_CommonError_Gen.json"
           }
         }
       }
@@ -1721,11 +1745,14 @@
           }
         },
         "x-ms-examples": {
-          "Hibernate multiple virtual machines with retry settings": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MaximumSet_Gen.json"
-          },
-          "Hibernate one virtual machine": {
+          "Basic hibernation": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MinimumSet_Gen.json"
+          },
+          "Hibernate VM in wrong region": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_CommonError_Gen.json"
+          },
+          "Hibernate with deallocation fallback": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MaximumSet_Gen.json"
           }
         }
       }
@@ -1777,11 +1804,14 @@
           }
         },
         "x-ms-examples": {
-          "Reimage multiple virtual machines with a per-virtual-machine override": {
+          "Basic reimage": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_MinimumSet_Gen.json"
+          },
+          "Reimage with override": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_MaximumSet_Gen.json"
           },
-          "Reimage one virtual machine": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_MinimumSet_Gen.json"
+          "VM in wrong resource group": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_CommonError_Gen.json"
           }
         }
       }
@@ -1833,11 +1863,14 @@
           }
         },
         "x-ms-examples": {
-          "Start multiple virtual machines with retry settings": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MaximumSet_Gen.json"
-          },
-          "Start one virtual machine": {
+          "Basic start": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MinimumSet_Gen.json"
+          },
+          "Start VM in wrong region": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_CommonError_Gen.json"
+          },
+          "Start VMs with retries, health verification, and capacity recommendations": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MaximumSet_Gen.json"
           }
         }
       }
@@ -1889,10 +1922,13 @@
           }
         },
         "x-ms-examples": {
-          "Create one virtual desktop infrastructure virtual machine": {
+          "Basic VDI creation": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MinimumSet_Gen.json"
           },
-          "Create virtual desktop infrastructure virtual machines with allocation preferences": {
+          "No compatible VM sizes": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_CommonError_Gen.json"
+          },
+          "Ranked VDI allocation": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MaximumSet_Gen.json"
           }
         }

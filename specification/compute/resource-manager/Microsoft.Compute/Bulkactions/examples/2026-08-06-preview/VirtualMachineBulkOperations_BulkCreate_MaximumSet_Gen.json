@@ -1,5 +1,5 @@
 {
-  "title": "Create multiple virtual machines with per-virtual-machine overrides",
+  "title": "Linux worker creation",
   "operationId": "VirtualMachineBulkOperations_BulkCreate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -209,7 +209,7 @@
         "retryPolicy": {
           "retryCount": 3,
           "retryWindowInMinutes": 30,
-          "onFailureAction": "Create"
+          "onFailureAction": "Delete"
         },
         "optimizationPreference": "CostAvailabilityBalanced"
       }
@@ -240,7 +240,7 @@
               "retryPolicy": {
                 "retryCount": 3,
                 "retryWindowInMinutes": 30,
-                "onFailureAction": "Create"
+                "onFailureAction": "Delete"
               }
             }
           },
@@ -262,7 +262,7 @@
               "retryPolicy": {
                 "retryCount": 3,
                 "retryWindowInMinutes": 30,
-                "onFailureAction": "Create"
+                "onFailureAction": "Delete"
               }
             }
           }

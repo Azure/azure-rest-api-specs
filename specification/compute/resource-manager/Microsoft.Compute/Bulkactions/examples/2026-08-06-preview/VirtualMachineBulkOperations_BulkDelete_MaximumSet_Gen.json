@@ -1,5 +1,5 @@
 {
-  "title": "Delete multiple virtual machines by using forced deletion",
+  "title": "Forced worker deletion",
   "operationId": "VirtualMachineBulkOperations_BulkDelete",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -10,8 +10,7 @@
       "executionParameters": {
         "retryPolicy": {
           "retryCount": 3,
-          "retryWindowInMinutes": 30,
-          "onFailureAction": "Delete"
+          "retryWindowInMinutes": 30
         },
         "optimizationPreference": "CostAvailabilityBalanced"
       },
@@ -48,8 +47,7 @@
               "timezone": "UTC",
               "retryPolicy": {
                 "retryCount": 3,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Delete"
+                "retryWindowInMinutes": 30
               }
             }
           },
@@ -70,8 +68,7 @@
               "timezone": "UTC",
               "retryPolicy": {
                 "retryCount": 3,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Delete"
+                "retryWindowInMinutes": 30
               }
             }
           }

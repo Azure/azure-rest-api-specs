@@ -1,0 +1,44 @@
+{
+  "title": "VM in wrong resource group",
+  "operationId": "VirtualMachineBulkOperations_BulkReimage",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "executionParameters": {},
+      "resources": {
+        "ids": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/other-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "description": "Reimage Resource request",
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "operation": {
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Unknown",
+              "state": "PendingScheduling"
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/other-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "errorCode": "InvalidResourceGroupInResource",
+            "errorDetails": "The virtual machine 'bulk-vm-02' does not belong to the resource group 'example-rg'. All virtual machines in this request must belong to 'example-rg'."
+          }
+        ]
+      }
+    }
+  }
+}

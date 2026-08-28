@@ -1,5 +1,5 @@
 {
-  "title": "Acknowledge Bulk Action operation errors",
+  "title": "Basic error acknowledgment",
   "operationId": "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -8,7 +8,8 @@
     "location": "eastus",
     "body": {
       "operationIds": [
-        "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
       ]
     }
   },
@@ -16,7 +17,8 @@
     "200": {
       "body": {
         "acknowledged": [
-          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
         ],
         "notFound": [],
         "skipped": []

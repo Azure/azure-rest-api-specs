@@ -1,5 +1,5 @@
 {
-  "title": "Start multiple virtual machines with retry settings",
+  "title": "Start VMs with retries, health verification, and capacity recommendations",
   "operationId": "VirtualMachineBulkOperations_BulkStart",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -70,41 +70,6 @@
               },
               "resourceNotificationDetails": {
                 "resourceContext": "maintenance-window-01"
-              },
-              "capacityRecommendation": {
-                "status": "Succeeded",
-                "details": {
-                  "desiredLocations": [
-                    "eastus",
-                    "westus2"
-                  ],
-                  "recommendationRequestedAtUtc": "2026-06-11T19:35:45.098Z",
-                  "desiredSizes": [
-                    {
-                      "sku": "Standard_D2s_v5"
-                    },
-                    {
-                      "sku": "Standard_D4s_v5"
-                    }
-                  ],
-                  "availabilityZones": true,
-                  "placementScores": [
-                    {
-                      "sku": "Standard_D2s_v5",
-                      "region": "eastus",
-                      "availabilityZone": "1",
-                      "score": "High",
-                      "isQuotaAvailable": true
-                    },
-                    {
-                      "sku": "Standard_D4s_v5",
-                      "region": "westus2",
-                      "availabilityZone": "2",
-                      "score": "Medium",
-                      "isQuotaAvailable": true
-                    }
-                  ]
-                }
               }
             }
           },
@@ -130,41 +95,6 @@
               },
               "resourceNotificationDetails": {
                 "resourceContext": "maintenance-window-01"
-              },
-              "capacityRecommendation": {
-                "status": "Succeeded",
-                "details": {
-                  "desiredLocations": [
-                    "eastus",
-                    "westus2"
-                  ],
-                  "recommendationRequestedAtUtc": "2026-06-11T19:35:45.098Z",
-                  "desiredSizes": [
-                    {
-                      "sku": "Standard_D2s_v5"
-                    },
-                    {
-                      "sku": "Standard_D4s_v5"
-                    }
-                  ],
-                  "availabilityZones": true,
-                  "placementScores": [
-                    {
-                      "sku": "Standard_D2s_v5",
-                      "region": "eastus",
-                      "availabilityZone": "1",
-                      "score": "High",
-                      "isQuotaAvailable": true
-                    },
-                    {
-                      "sku": "Standard_D4s_v5",
-                      "region": "westus2",
-                      "availabilityZone": "2",
-                      "score": "Medium",
-                      "isQuotaAvailable": true
-                    }
-                  ]
-                }
               }
             }
           }

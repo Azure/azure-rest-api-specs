@@ -1,5 +1,5 @@
 {
-  "title": "Create virtual desktop infrastructure virtual machines with allocation preferences",
+  "title": "Ranked VDI allocation",
   "operationId": "VirtualMachineBulkOperations_BulkVdiFlexCreate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -60,7 +60,7 @@
         "retryPolicy": {
           "retryCount": 3,
           "retryWindowInMinutes": 30,
-          "onFailureAction": "Create"
+          "onFailureAction": "Delete"
         },
         "optimizationPreference": "CostAvailabilityBalanced"
       }
@@ -91,7 +91,7 @@
               "retryPolicy": {
                 "retryCount": 3,
                 "retryWindowInMinutes": 30,
-                "onFailureAction": "Create"
+                "onFailureAction": "Delete"
               }
             }
           },
@@ -113,7 +113,7 @@
               "retryPolicy": {
                 "retryCount": 3,
                 "retryWindowInMinutes": 30,
-                "onFailureAction": "Create"
+                "onFailureAction": "Delete"
               }
             }
           }
