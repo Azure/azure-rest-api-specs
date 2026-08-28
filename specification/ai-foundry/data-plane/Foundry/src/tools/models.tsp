@@ -154,8 +154,6 @@ namespace Azure.AI.Projects {
    * A web search configuration for bing custom search
    */
   model WebSearchConfiguration {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * Project connection id for grounding with bing custom search
      */
@@ -166,21 +164,6 @@ namespace Azure.AI.Projects {
      */
     instance_name: string;
   }
-
-  /**
-   * Optional name and description fields for tool definitions and nested tool configurations.
-   */
-  alias ToolNameAndDescriptionExtension = {
-    /**
-     * Optional user-defined name for this tool or configuration.
-     */
-    name?: string;
-
-    /**
-     * Optional user-defined description for this tool or configuration.
-     */
-    description?: string;
-  };
 
   /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
@@ -205,8 +188,6 @@ namespace Azure.AI.Projects {
    */
   @extension("x-ms-foundry-meta", PreviewTool)
   model FabricDataAgentToolParameters {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
      * resource attached to the tool.
@@ -225,8 +206,6 @@ namespace Azure.AI.Projects {
      */
     type: "fabric_dataagent_preview";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The fabric data agent tool parameters.
      */
@@ -238,8 +217,6 @@ namespace Azure.AI.Projects {
    */
   @extension("x-ms-foundry-meta", PreviewTool)
   model SharepointGroundingToolParameters {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
      * resource attached to the tool.
@@ -257,8 +234,6 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'sharepoint_grounding_preview'.
      */
     type: "sharepoint_grounding_preview";
-
-    ...ToolNameAndDescriptionExtension;
 
     /**
      * The sharepoint grounding tool parameters.
@@ -288,8 +263,6 @@ namespace Azure.AI.Projects {
    * A set of index resources used by the `azure_ai_search` tool.
    */
   model AzureAISearchToolResource {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The indices attached to this agent. There can be a maximum of 1 index
      * resource attached to the agent.
@@ -318,7 +291,6 @@ namespace Azure.AI.Projects {
    */
   model AISearchIndexResource {
     ...IndexResource;
-    ...ToolNameAndDescriptionExtension;
 
     /**
      *  Type of query in an AIIndexResource attached to this agent.
@@ -388,8 +360,6 @@ namespace Azure.AI.Projects {
      */
     type: "bing_custom_search_preview";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The bing custom search tool parameters.
      */
@@ -406,8 +376,6 @@ namespace Azure.AI.Projects {
      */
     type: "browser_automation_preview";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The Browser Automation Tool parameters.
      */
@@ -419,8 +387,6 @@ namespace Azure.AI.Projects {
    */
   @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolParameters {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The project connection parameters associated with the Browser Automation Tool.
      */
@@ -432,8 +398,6 @@ namespace Azure.AI.Projects {
    */
   @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolConnectionParameters {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The ID of the project connection to your Azure Playwright resource.
      */
@@ -634,8 +598,6 @@ namespace Azure.AI.Projects {
    * A project connection resource.
    */
   model ToolProjectConnection {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * A project connection in a ToolProjectConnectionList attached to this tool.
      */
@@ -658,8 +620,6 @@ namespace Azure.AI.Projects {
    * Search configuration for Bing Grounding
    */
   model BingGroundingSearchConfiguration {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * Project connection id for grounding with bing search
      */
@@ -690,8 +650,6 @@ namespace Azure.AI.Projects {
    * The bing grounding search tool parameters.
    */
   model BingGroundingSearchToolParameters {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The search configurations attached to this tool. There can be a maximum of 1
      * search configuration resource attached to the tool.
@@ -705,8 +663,6 @@ namespace Azure.AI.Projects {
    */
   @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchToolParameters {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
      * resource attached to the tool.
@@ -720,8 +676,6 @@ namespace Azure.AI.Projects {
    */
   @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchConfiguration {
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * Project connection id for grounding with bing search
      */
@@ -969,31 +923,6 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * The WorkIQ tool parameters.
-   */
-  model WorkIQPreviewToolParameters {
-    /**
-     * The ID of the WorkIQ project connection.
-     */
-    project_connection_id: string;
-  }
-
-  /**
-   * A WorkIQ server-side tool.
-   */
-  model WorkIQPreviewTool extends OpenAI.Tool {
-    /**
-     * The object type, which is always 'work_iq_preview'.
-     */
-    type: "work_iq_preview";
-
-    /**
-     * The WorkIQ tool parameters.
-     */
-    work_iq_preview: WorkIQPreviewToolParameters;
-  }
-
-  /**
    * A tool for integrating memories into the agent.
    */
   @extension("x-ms-foundry-meta", PreviewTool)
@@ -1002,8 +931,6 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `memory_search_preview`.
      */
     type: "memory_search_preview";
-
-    ...ToolNameAndDescriptionExtension;
 
     /**
      * The name of the memory store to use.
@@ -1037,8 +964,6 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `memory_search_preview`.
      */
     type: "memory_search";
-
-    ...ToolNameAndDescriptionExtension;
 
     /**
      * The name of the memory store to use.

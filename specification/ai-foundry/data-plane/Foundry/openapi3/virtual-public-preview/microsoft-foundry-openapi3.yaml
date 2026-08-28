@@ -468,11 +468,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - $ref: '#/components/schemas/AgentDefinitionOptInKeys'
-              - type: string
-                enum:
-                  - AgentEndpoints=V1Preview
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: api-version
           in: query
           required: true
@@ -3213,11 +3209,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - $ref: '#/components/schemas/AgentDefinitionOptInKeys'
-              - type: string
-                enum:
-                  - AgentEndpoints=V1Preview
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: agent_name
           in: path
           required: true
@@ -41239,7 +41231,6 @@ paths:
       tags:
         - Toolboxes
 security:
-  - ApiKeyAuth: []
   - OAuth2Auth:
       - https://ai.azure.com/.default
 components:
@@ -41376,12 +41367,6 @@ components:
           enum:
             - a2a_preview
           description: The type of the tool. Always `"a2a_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         base_url:
           type: string
           format: uri
@@ -41600,12 +41585,6 @@ components:
         index_name:
           type: string
           description: The name of an index in an IndexResource attached to this agent.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         query_type:
           $ref: '#/components/schemas/AzureAISearchQueryType'
           description: Type of query in an AIIndexResource attached to this agent.
@@ -43738,12 +43717,6 @@ components:
       required:
         - indexes
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         indexes:
           type: array
           items:
@@ -44234,12 +44207,6 @@ components:
         - project_connection_id
         - instance_name
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: Project connection id for grounding with bing search
@@ -44274,12 +44241,6 @@ components:
           enum:
             - bing_custom_search_preview
           description: The object type, which is always 'bing_custom_search_preview'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         bing_custom_search_preview:
           $ref: '#/components/schemas/BingCustomSearchToolParameters'
           description: The bing custom search tool parameters.
@@ -44347,12 +44308,6 @@ components:
       required:
         - search_configurations
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         search_configurations:
           type: array
           items:
@@ -44370,12 +44325,6 @@ components:
       required:
         - project_connection_id
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: Project connection id for grounding with bing search
@@ -44398,12 +44347,6 @@ components:
       required:
         - search_configurations
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         search_configurations:
           type: array
           items:
@@ -44553,12 +44496,6 @@ components:
           enum:
             - browser_automation_preview
           description: The object type, which is always 'browser_automation_preview'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         browser_automation_preview:
           $ref: '#/components/schemas/BrowserAutomationToolParameters'
           description: The Browser Automation Tool parameters.
@@ -44645,12 +44582,6 @@ components:
       required:
         - project_connection_id
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: The ID of the project connection to your Azure Playwright resource.
@@ -44663,12 +44594,6 @@ components:
       required:
         - connection
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         connection:
           $ref: '#/components/schemas/BrowserAutomationToolConnectionParameters'
           description: The project connection parameters associated with the Browser Automation Tool.
@@ -46507,20 +46432,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Entra ID credential definition
-    EntraIsolationKeySource:
-      type: object
-      required:
-        - kind
-      properties:
-        kind:
-          type: string
-          enum:
-            - Entra
-      allOf:
-        - $ref: '#/components/schemas/IsolationKeySource'
-      x-ms-foundry-meta:
-        required_previews:
-          - AgentEndpoints=V1Preview
     Eval:
       type: object
       required:
@@ -48785,12 +48696,6 @@ components:
     FabricDataAgentToolParameters:
       type: object
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         project_connections:
           type: array
           items:
@@ -50166,12 +50071,6 @@ components:
           enum:
             - memory_search_preview
           description: The type of the tool. Always `memory_search_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -50207,12 +50106,6 @@ components:
           enum:
             - memory_search
           description: The type of the tool. Always `memory_search_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -50737,12 +50630,6 @@ components:
           enum:
             - fabric_dataagent_preview
           description: The object type, which is always 'fabric_dataagent_preview'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         fabric_dataagent_preview:
           $ref: '#/components/schemas/FabricDataAgentToolParameters'
           description: The fabric data agent tool parameters.
@@ -80812,12 +80699,6 @@ components:
     SharepointGroundingToolParameters:
       type: object
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         project_connections:
           type: array
           items:
@@ -80841,12 +80722,6 @@ components:
           enum:
             - sharepoint_grounding_preview
           description: The object type, which is always 'sharepoint_grounding_preview'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         sharepoint_grounding_preview:
           $ref: '#/components/schemas/SharepointGroundingToolParameters'
           description: The sharepoint grounding tool parameters.
@@ -81510,12 +81385,6 @@ components:
       required:
         - project_connection_id
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: A project connection in a ToolProjectConnectionList attached to this tool.
@@ -83991,12 +83860,6 @@ components:
         - project_connection_id
         - instance_name
       properties:
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: Project connection id for grounding with bing custom search
@@ -84190,10 +84053,6 @@ components:
         - $ref: '#/components/schemas/EvaluationTarget'
       description: Evaluation target for generating responses using a given model and dataset.
   securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: api-key
     OAuth2Auth:
       type: oauth2
       flows:

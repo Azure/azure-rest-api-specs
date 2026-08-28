@@ -40,7 +40,7 @@ interface Agents {
     "Creates a new agent or a new version of an existing agent."
   )
   createAgent is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys | FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
+    AgentDefinitionOptInKeys,
     CreateAgentRequest,
     AgentObject
   >;
@@ -237,7 +237,7 @@ interface Agents {
     "Creates a new version for the specified agent and returns the created version resource."
   )
   createAgentVersion is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys | FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
+    AgentDefinitionOptInKeys,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
