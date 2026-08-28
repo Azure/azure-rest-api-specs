@@ -67,6 +67,11 @@ namespace Microsoft.Compute;
 );
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
+@@clientName(
+  CapacityRecommendationParameters,
+  "BulkActionsCapacityRecommendationParametersContent",
+  "csharp"
+);
 @@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
 @@clientName(
   DeallocateResourceOperationResponse,
@@ -207,6 +212,26 @@ namespace Microsoft.Compute;
 // =====================================================================
 // .NET naming convention fixes (C# only)
 // =====================================================================
+@@clientName(
+  BulkCreateCustomResource,
+  "BulkCreateCustomResolvedItem",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationParameters.availabilityZones,
+  "isAvailabilityZoneEnabled",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.availabilityZones,
+  "isSplitByAvailabilityZone",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.recommendationRequestedAtUtc,
+  "recommendationRequestedAt",
+  "csharp"
+);
 // Expand "Op" abbreviation to "Operation".
 @@clientName(ResourceOperationDetails.opType, "operationKind", "csharp");
 @@clientName(FallbackOperationInfo.lastOpType, "lastOperationKind", "csharp");
@@ -452,8 +477,8 @@ namespace Microsoft.Compute;
 );
 @@clientName(DelayRequest, "DelayRequestContent", "csharp");
 @@clientName(
-  RecurringScheduledActionsExecutionParameters,
-  "RecurringScheduledActionsExecutionParametersContent",
+  ScheduledActionsExecutionParameters,
+  "ScheduledActionsExecutionParametersContent",
   "csharp"
 );
 @@clientName(ResourceAttachRequest, "ResourceAttachRequestContent", "csharp");
@@ -474,3 +499,10 @@ namespace Microsoft.Compute;
 );
 @@clientName(OccurrenceResource, "OccurrenceResourceMetadata", "csharp");
 @@clientName(OccurrenceExtensionResource, "OccurrenceExtension", "csharp");
+
+// APIView naming feedback: give the generic single-word resource/model/enum
+// names an RP/domain prefix so they are self-descriptive in .NET IntelliSense.
+@@clientName(Occurrence, "ScheduledActionOccurrence", "csharp");
+@@clientName(DelayRequest.delay, "scheduleAt", "csharp");
+@@clientName(Mode, "ProxyAgentMode", "csharp");
+@@clientName(Modes, "ImdsAccessControlMode", "csharp");
