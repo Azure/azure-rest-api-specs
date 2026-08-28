@@ -103,7 +103,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   `model`?: string;
 
   @doc("The hosted text agent that this voice agent fronts. Required when `model_type` is `hosted_agent` and not applicable otherwise. In this mode, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the target agent owns the conversation logic. The target must be in the same project and support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
-  target_agent?: VoiceTargetAgent;
+  target_agent?: VoiceAgentTargetAgent;
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string;
@@ -281,7 +281,7 @@ union VoiceModelType {
 
 @doc("A closed reference to the hosted text agent that a `hosted_agent` voice agent fronts, containing only its name and optional version. The target is resolved within the same project.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceTargetAgent {
+model VoiceAgentTargetAgent {
   ...Record<never>;
 
   @doc("The non-empty DNS-like name of the target hosted text agent in the same project.")
