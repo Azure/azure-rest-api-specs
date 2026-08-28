@@ -1,0 +1,22 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Validation",
+    "description": "Validation Resource Provider client library.",
+    "version": "2024-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Validation/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "List operations.",
+        "parameters": [{"name": "subscriptionId","in": "path","required": true,"type": "string"},{"name": "api-version","in": "query","required": true,"type": "string"}],
+        "responses": {"200": {"description": "Success"}}
+      }
+    }
+  }
+}
