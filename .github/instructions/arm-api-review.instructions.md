@@ -237,9 +237,10 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 - A **tracked resource** (has `location` as required property) **MUST** implement GET, PUT, PATCH, DELETE, List by Resource Group, and List by Subscription. If any are missing, flag it as an ARM Error.
 - Point GET operations **MUST NOT** have query parameters other than `api-version` (RPC-Get-V1-08).
-- Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties; `nextLink` **MUST** use `"format": "uri"` (RPC-Get-V1-09, RPC-Get-V1-13).
-- Collection GET operations **MUST NOT** have query parameters other than `api-version` and OData `$filter` (RPC-Get-V1-15). Custom query parameters on collection GETs are not supported by ARM.
-  (Also enforced by: `QueryParametersInCollectionGet` linter rule — staging only)
+- Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties; `nextLink` **MUST** use `"format": "uri"` (RPC-Get-V1-06, RPC-Get-V1-09). Collection GET operations **MUST** specify `x-ms-pageable` (RPC-Get-V1-13).
+- Collection GET operations may use `api-version`, `$filter`, `$top`, and `$skipToken`. **Do not flag the presence of a correctly defined parameter.** `$top` and `$skipToken` are part of the RPC pagination contract; malformed definitions and non-opaque or cross-scope `$skipToken` behavior remain valid findings.
+- Any other custom collection GET query parameter is at most a **Warning** under Recommended rule RPC-Uri-V1-09. Suggest `$filter` when it can express the same operation. Do not claim the parameter is unsupported by ARM; RPC031 says ARM forwards non-reserved query parameters unchanged.
+- The `QueryParametersInCollectionGet` linter is staging-only and currently omits `$top` and `$skipToken` from its hard-coded allowlist. Treat findings against those two parameters as linter false positives, not evidence of an API defect.
 - The model in the `value` array of a collection GET **MUST** be the same model as the point GET response (RPC-Get-V1-10).
 
 ### 2.3 Nested Resources
@@ -1146,8 +1147,8 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Tracked resources have all required operations (GET, PUT, PATCH, DELETE, ListByRG, ListBySub)
 - ✅ GET operations return only `200` and are not LROs (RPC-Get-V1-01, RPC-Get-V1-14)
 - ✅ Point GET has no query params other than `api-version` (RPC-Get-V1-08)
-- ✅ Collection GET has only `value` and `nextLink` at top level with `x-ms-pageable`; `nextLink` has `format: uri` (RPC-Get-V1-09, RPC-Get-V1-13)
-- ✅ Collection GET has no query parameters other than `api-version` and OData `$filter` (RPC-Get-V1-15)
+- ✅ Collection GET has only `value` and `nextLink` at top level; `nextLink` has `format: uri` (RPC-Get-V1-06, RPC-Get-V1-09); operation has `x-ms-pageable` (RPC-Get-V1-13)
+- ✅ Collection GET query parameters are limited to `api-version`, `$filter`, `$top`, and `$skipToken`; other custom parameters are Warning-level under RPC-Uri-V1-09
 - ✅ `provisioningState` includes `Succeeded`, `Failed`, `Canceled` (single 'l') terminal states; no operational states like `Stopped` (RPC-Async-V1-02, RPC-Async-V1-03)
 
 ### PATCH Operations

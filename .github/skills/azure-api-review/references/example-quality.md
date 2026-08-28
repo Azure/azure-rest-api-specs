@@ -22,6 +22,33 @@ ensure example files are accurate, complete, and professional.
 
 ---
 
+## EX-PAYLOAD -- Example Payload Correctness
+
+- **Rule ID:** `EX-PAYLOAD`
+- **Severity:** Blocking or Warning according to the matrix below
+
+An example payload must match the operation contract. For an unknown enum
+literal, first determine where the value appears and whether the enum is
+extensible:
+
+| Example value location             | Enum shape             | Severity |
+| ---------------------------------- | ---------------------- | -------- |
+| Response body, ordinary property   | `modelAsString: true`  | Warning  |
+| Response body, ordinary property   | `modelAsString: false` | Blocking |
+| Required polymorphic discriminator | Either                 | Blocking |
+| Request path or query parameter    | Either                 | Blocking |
+
+An extensible response-body enum accepts arbitrary strings during validation,
+but an undeclared value still misleads customers in documentation and generated
+SDK samples. Do not raise that case above Warning. Discriminator and request-URL
+values remain Blocking because they affect subtype selection and request
+routing, respectively.
+
+The authoritative detection details and rationale are in
+[`openapi-review.instructions.md` section 22.7](../../../instructions/openapi-review.instructions.md#227-example-payload-correctness-ex-payload).
+
+---
+
 ## EX-ORPHAN — Orphan Detection
 
 - **Rule ID:** `EX-ORPHAN`

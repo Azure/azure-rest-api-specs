@@ -46,16 +46,19 @@ rule category without interference from other issues.
 
 ## Fixture Catalog
 
-### `arm-openapi/` -- ARM OpenAPI Specifications (16 files)
+### `arm-openapi/` -- ARM OpenAPI Specifications (20 files)
 
 | File                              | Violations                    | Description                                                                                                                                                                                  |
 | --------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `clean-spec.json`                 | None (true negative)          | Fully compliant ARM spec with all CRUD operations, provisioningState, systemData, x-ms-enum, descriptions, x-ms-pageable, and x-ms-mutability. Use as a baseline for false-positive testing. |
 | `clean-proxy-resource.json`       | None (true negative)          | Fully compliant proxy (extension) resource spec. Uses ProxyResource from common-types — no location, tags, or resource move. Tests false-positive resistance for tracked-resource rules.     |
+| `collection-paging-parameters.json` | None (true negative)        | Collection GET with RPC-defined `$top` and `$skipToken` paging parameters.                                                    |
+| `collection-custom-query-parameter.json` | Custom query parameter | Collection GET with a non-standard `region` query parameter, which is Warning-level under RPC-Uri-V1-09.                     |
 | `cna-violations.json`             | CNA model issues              | Custom inline CheckNameAvailabilityRequest/Response instead of common-types `$ref`; name field has no pattern or maxLength constraint.                                                       |
 | `delete-violations.json`          | DELETE response issues        | 404 on DELETE instead of 204; non-empty response body on 200 DELETE; missing 204 response code.                                                                                              |
 | `denylist-pattern-new.json`       | Denylist pattern violations   | policyName path parameter, displayName, and description body properties use denylist `[^...]` patterns (OAPI-PATTERN-ALLOWLIST). All are new (no previous version) — Blocking severity. The category property uses a correct allowlist pattern as a positive control. |
 | `enum-violations.json`            | Enum best-practice issues     | Missing x-ms-enum decorator; modelAsString false; non-PascalCase values; empty string enum value.                                                                                            |
+| `ex-payload-enum-cases.json`      | EX-PAYLOAD enum cases         | Shared schema for extensible, closed, discriminator, and request-path unknown enum example values.                            |
 | `inline-common-types.json`        | Inline common-types           | Defines ErrorResponse, ErrorDetail, SubscriptionIdParameter, ResourceGroupNameParameter, and ApiVersionParameter inline instead of using common-types $ref.                                  |
 | `lro-violations.json`             | Long-running operation issues | Async PUT returning 202 instead of 200/201 with provisioningState; DELETE returning resource body.                                                                                           |
 | `missing-crud-ops.json`           | Missing lifecycle operations  | PUT, GET, and PATCH exist but DELETE, ListByResourceGroup, ListBySubscription, and Operations API are missing.                                                                               |
@@ -64,15 +67,20 @@ rule category without interference from other issues.
 | `naming-violations.json`          | Naming convention issues      | PascalCase (DisplayName), uppercase acronyms (IPAddress), underscores (HTTP_Endpoint, resource_group_id).                                                                                    |
 | `patch-violations.json`           | PATCH body issues             | Required properties in PATCH body; default values; create-only mutability on PATCH fields.                                                                                                   |
 | `put-response-mismatch.json`      | PUT response mismatch         | 200 and 201 responses use different schemas; request body differs from 201 response.                                                                                                         |
+| `point-custom-query-parameter.json` | Point GET query parameter   | Point GET with a custom `expandDetails` query parameter, which remains Blocking under RPC-Get-V1-08.                         |
 | `secret-property.json`            | Secret property issues        | connectionString, adminPassword, and primaryKey without x-ms-secret annotation.                                                                                                              |
 | `typespec-generated-spec.json`    | None (true negative)          | Compliant ARM spec carrying the `x-typespec-generated` extension at the top level. Used by the TSP-REQUIRED-V1 eval to verify TypeSpec-generated swagger is not flagged.                     |
 
-### `examples/` -- Example JSON Files (3 files)
+### `examples/` -- Example JSON Files (7 files)
 
 | File                            | Violations           | Description                                                                                          |
 | ------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------- |
 | `example-clean.json`            | None (true negative) | Properly formed example with fully qualified ARM resource ID, no secrets, correct provisioningState. |
 | `example-bad-resource-id.json`  | Empty resource ID    | Response body has an empty string for the `id` field.                                                |
+| `example-ex-payload-extensible-enum.json` | Extensible enum response | Undeclared ordinary response value; Warning because `modelAsString` is true. |
+| `example-ex-payload-closed-enum.json` | Closed enum response | Undeclared ordinary response value; Blocking because `modelAsString` is false. |
+| `example-ex-payload-discriminator.json` | Unknown discriminator | Undeclared required discriminator value; Blocking despite extensibility. |
+| `example-ex-payload-path-param.json` | Unknown request path value | Undeclared enum value in a request path; Blocking despite extensibility. |
 | `example-realistic-secret.json` | Realistic secrets    | Contains realistic connection string, password, and Base64-encoded key values.                       |
 
 ### `readme/` -- Suppression Configuration (2 files)

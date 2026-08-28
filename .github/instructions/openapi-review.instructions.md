@@ -284,7 +284,12 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 - Each item in the collection **MUST** include its `id` and `etag` (if ETags are supported).
 - Pageable operations **MUST** define a `200` response.
 - **SHOULD** support paging from the start if the collection could grow large. Adding paging later is a breaking change.
-- Query parameters for filtering/sorting (`filter`, `orderby`, `skip`, `top`, `maxpagesize`, `select`, `expand`) **MUST NOT** be prefixed with `$`.
+- For **data-plane** operations, query parameters for filtering and sorting
+  (`filter`, `orderby`, `skip`, `top`, `maxpagesize`, `select`, `expand`)
+  **MUST NOT** be prefixed with `$`.
+- The no-`$` rule does **not** apply to ARM resource-manager collection GET
+  operations. ARM uses the RPC-defined `$filter`, `$top`, and `$skipToken`
+  names; see `arm-api-review.instructions.md` section 2.2.
 - Query parameter names **MUST** be camelCase and treated as case-sensitive.
 
 ## 10. Long-Running Operations (LRO)
@@ -505,6 +510,21 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 ### 22.7 Example Payload Correctness (EX-PAYLOAD)
 
 - Example response bodies **MUST** validate against the operation's response schema. A list operation returning `OperationListResult` must include at least `"value": []`, not just `{}`.
+- Before assigning severity to an example string that is not a declared enum
+  member, inspect the value's location, discriminator role, and the enum's
+  `x-ms-enum.modelAsString` value:
+
+  | Example value location | Enum shape | Severity | Reason |
+  | --- | --- | --- | --- |
+  | Response body, ordinary property | `modelAsString: true` | **Warning** | Extensible enums accept unknown strings; documentation and generated samples are misleading, but schema validation accepts the payload. |
+  | Response body, ordinary property | `modelAsString: false` | **Blocking** | Closed-enum validation rejects the payload. |
+  | Required polymorphic discriminator | Either | **Blocking** | The literal selects the response subtype; an unknown value breaks deserialization. |
+  | Request path or query parameter | Either | **Blocking** | The value is sent in the request URL and must match the operation contract. |
+
+  Do not claim that validators reject an ordinary response-body literal when
+  its enum is `modelAsString: true`. The complete example-quality guidance is
+  in
+  [`.github/skills/azure-api-review/references/example-quality.md`](../skills/azure-api-review/references/example-quality.md#ex-payload--example-payload-correctness).
 - The `id` field in examples **MUST NOT** be an empty string (`"id": ""`). Empty resource IDs crash ModelValidation tooling and are never valid ARM resource identifiers.
 - String values **MUST NOT** have malformed content (e.g., extra closing braces `"{value}}"`, duplicate prefixes like `"$filter=$filter=..."`, stray trailing quotes or garbled characters).
 - The example response key **MUST** be `"headers"` (plural) — not `"header"` (singular).

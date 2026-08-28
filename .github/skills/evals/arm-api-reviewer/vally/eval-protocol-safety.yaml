@@ -14,8 +14,14 @@ environment:
   files:
     - src: "../../../../agents/arm-api-reviewer.agent.md"
       dest: ".github/agents/arm-api-reviewer.agent.md"
+    - src: "../../../../agents/arm-api-review-critic.agent.md"
+      dest: ".github/agents/arm-api-review-critic.agent.md"
     - src: "../../../../agents/protocols/arm-api-review-critic.protocol.md"
       dest: ".github/agents/protocols/arm-api-review-critic.protocol.md"
+    - src: "../../../../instructions/arm-api-review.instructions.md"
+      dest: ".github/instructions/arm-api-review.instructions.md"
+    - src: "../../../../instructions/openapi-review.instructions.md"
+      dest: ".github/instructions/openapi-review.instructions.md"
 
 tags:
   area: arm-api-reviewer
@@ -1024,3 +1030,147 @@ stimuli:
       - The response discloses that the Critic was unavailable and the finding is unverified
       - The bundled label proposal does not propose adding `ARMChangesRequested`
       - The reason given is that nothing independently verified the finding, so the human ARM review queue must not move
+
+  # 160018 -- Critic drops a false finding against RPC paging parameters
+  - name: critic-drops-collection-paging-parameter-finding
+    tags:
+      issue: "45675"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/arm-api-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      finding against `$top` on a collection GET, claiming that collection GET
+      allows only `api-version` and `$filter`. The operation also declares
+      `$skipToken`, uses `x-ms-pageable`, and returns `value` plus `nextLink`.
+      The session SHA and cited line are valid.
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "false paging finding rejected"
+        config:
+          pattern: "(?i)FAIL: rule-misapplied"
+      - type: output-matches
+        name: "RPC paging parameter named"
+        config:
+          pattern: '(?i)\$(?:top|skipToken)'
+      - type: output-matches
+        name: "finding is dropped rather than downgraded"
+        config:
+          pattern: "(?i)DROP"
+      - type: output-not-matches
+        name: "no Warning finding retained"
+        config:
+          pattern: "(?is)DOWNGRADE.{0,100}Warning"
+      - type: prompt
+    rubric:
+      - The Critic rejects the finding because `$top` and `$skipToken` are allowed RPC paging parameters
+      - The correction is DROP, not a retained Warning finding
+      - The response does not cite `RPC-Get-V1-15`
+
+  # 160019 -- Critic downgrades extensible response enum EX-PAYLOAD
+  - name: critic-downgrades-extensible-response-enum-finding
+    tags:
+      issue: "43747"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/openapi-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      EX-PAYLOAD finding for an ordinary response-body property whose example
+      value is not a declared enum member. The enum is a string with
+      `x-ms-enum.modelAsString: true`. The property is not a discriminator and
+      does not appear in a request path or query. The session SHA and cited line
+      are valid.
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "Blocking downgraded to Warning"
+        config:
+          pattern: "(?is)DOWNGRADE.{0,100}(?:Blocking.{0,30}Warning|Warning)"
+      - type: output-matches
+        name: "extensibility rationale stated"
+        config:
+          pattern: "(?is)modelAsString.{0,160}(?:accept|extensib|unknown|arbitrary)"
+      - type: prompt
+    rubric:
+      - The Critic downgrades the finding from Blocking to Warning in the first iteration
+      - "The response explains that `modelAsString: true` accepts unknown ordinary response values"
+      - The discriminator and request-URL exceptions are not applied to this scenario
+
+  # 160020 -- Critic retains a valid malformed paging-token finding
+  - name: critic-retains-malformed-paging-token-finding
+    tags:
+      issue: "45675"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/arm-api-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      security finding on a collection GET `$skipToken`. The finding does not
+      claim that `$skipToken` is forbidden. It states that the service accepts a
+      token issued for another tenant and returns data from that original
+      tenant. The session SHA, cited line, and behavioral evidence are valid.
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "valid token-scope finding is not dropped"
+        config:
+          pattern: "(?is)(?:DROP|false positive).{0,200}(?:finding|\\$skipToken)"
+      - type: output-matches
+        name: "scope security requirement retained"
+        config:
+          pattern: "(?is)(?:tenant|subscription|scope).{0,200}(?:MUST|Blocking|security|data)"
+      - type: prompt
+    rubric:
+      - The Critic retains the finding because the allowance does not excuse cross-scope token replay
+      - The finding is not dropped merely because its parameter is named `$skipToken`
+      - The response distinguishes parameter presence from invalid security behavior
+
+  # 160021 -- Critic retains Blocking severity for unknown discriminator
+  - name: critic-retains-unknown-discriminator-blocking
+    tags:
+      issue: "43747"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/openapi-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      EX-PAYLOAD finding because an example response uses an unknown value for a
+      required polymorphic discriminator. The discriminator property's enum has
+      `x-ms-enum.modelAsString: true`. The session SHA and cited line are valid.
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "discriminator finding is not downgraded"
+        config:
+          pattern: "(?is)(?:Required action|Recommended action|Critic verdict:).{0,100}DOWNGRADE.{0,100}Warning"
+      - type: output-matches
+        name: "Blocking discriminator exception applied"
+        config:
+          pattern: "(?is)(?:discriminator).{0,200}(?:Blocking|deserial|subtype)"
+      - type: prompt
+    rubric:
+      - The Critic retains Blocking severity because required discriminators are an explicit exception
+      - "`modelAsString: true` does not downgrade the discriminator case"
+      - The response explains the subtype or deserialization impact

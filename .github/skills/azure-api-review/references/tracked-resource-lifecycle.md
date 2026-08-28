@@ -2,6 +2,8 @@
      Upstream alignment: 2026-04-15
      Derived from:
        - Azure Resource Provider Contract (RPC) v1.0 — Resource API Reference, PUT Resource
+       - Azure Resource Provider Contract (RPC) v1.0 — Pagination
+       - Azure Resource Provider Contract (RPC) v1.0 — URI Format and Arguments
        - ARM Wiki: api_contracts/guidelines/rpc.md (RPC003, RPC006)
        - ARM Wiki: rp_onboarding/tracked_vs_proxy_resources.md
      The upstream documents always take precedence if there is a conflict. -->
@@ -17,11 +19,19 @@ operation is a blocking ARM review error.
 - [Azure Resource Provider Contract -- Resource API Reference][rpc-resource]
   (RPC-Put-V1-22, RPC-Get-V1-05, RPC-Patch-V1-03, RPC-Delete-V1-03)
 - [Azure Resource Provider Contract -- PUT Resource][rpc-put]
+- [Azure Resource Provider Contract -- Pagination][rpc-pagination]
+- [Azure Resource Provider Contract -- Get Resource][rpc-get]
+- [Azure Resource Provider Contract -- URI Format and Arguments][rpc-uri]
+- [ARM Guidelines -- Query Parameter Pass-through][rpc031] (RPC031)
 - [TypeSpec Azure -- ARM Resource Operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations)
 - [TypeSpec Azure -- Common Types](https://azure.github.io/typespec-azure/docs/howtos/arm/add-common-types/)
 
 [rpc-resource]: https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md
 [rpc-put]: https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/put-resource.md
+[rpc-pagination]: https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/pagination
+[rpc-get]: https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/get-resource
+[rpc-uri]: https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/uri-format-and-arguments-for-crud-apis-on-resources
+[rpc031]: https://eng.ms/docs/products/arm/api_contracts/guidelines/rpc
 
 ---
 
@@ -47,7 +57,42 @@ If **any** of these operations are missing for a tracked resource, flag it as an
 - Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties (RPC-Get-V1-09).
 - The model in the `value` array **MUST** be the same model as the point GET response (RPC-Get-V1-10).
 - Collection GET **MUST** specify `x-ms-pageable` (RPC-Get-V1-13).
-- The `nextLink` property **MUST** use URI format (`"format": "uri"` in JSON, `url` type in TypeSpec).
+- The `nextLink` property **MUST** use URI format (`"format": "uri"` in JSON, `url` type in TypeSpec) (RPC-Get-V1-06).
+
+### Collection GET Query Parameters
+
+Collection GET operations may use the following query parameters. **Do not flag
+the presence of a correctly defined parameter:**
+
+| Parameter     | Purpose                                                     |
+| ------------- | ----------------------------------------------------------- |
+| `api-version` | Required ARM API version                                    |
+| `$filter`     | OData server-side filtering                                 |
+| `$top`        | Optional client-supplied page size                          |
+| `$skipToken`  | Opaque continuation token returned by the resource provider |
+
+`$skipToken` **MUST** be opaque to clients and scoped to the tenant,
+subscription, and collection that issued it. Replaying a token from another
+scope must not expose that scope's data.
+
+The allowance does not excuse a malformed definition. A finding about the
+parameter's type, optionality, description, or `$skipToken` opacity and scope is
+still valid; only the claim that the parameter itself is forbidden is a false
+positive.
+
+Other custom query parameters on collection GET operations are a **Warning**,
+not Blocking. RPC-Uri-V1-09 says they **SHOULD NOT** be used, so the normative
+strength policy caps the finding at Warning. Suggest an OData `$filter`
+alternative when it can express the same operation.
+
+ARM proxies non-reserved query parameters to the resource provider unchanged
+(RPC031); do not claim that ARM cannot carry them. The
+`QueryParametersInCollectionGet` linter is staging-only and currently has a
+hard-coded allowlist that omits `$top` and `$skipToken`, so its output is not
+evidence that these two RPC-defined paging parameters are invalid.
+
+Point GET is unchanged: a query parameter other than `api-version` is a
+**Blocking** RPC-Get-V1-08 violation.
 
 ## Nested Resource Rules
 

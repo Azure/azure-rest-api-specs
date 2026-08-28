@@ -911,6 +911,19 @@ auto-invalidates if the underlying rule moves.
   Anchor: `arm-api-review.instructions.md`, provisioning-state section.
 - **Enum value additions inside `x-ms-enum.modelAsString: true`.** Not a
   breaking change. Anchor: `documentation/Breaking changes guidelines.md`.
+- **Collection GET paging parameters `$top` and `$skipToken`.** These are
+  RPC-defined paging parameters and are allowed alongside `api-version` and
+  `$filter`. Drop a finding whose only claim is that either parameter is
+  forbidden. Do not drop a finding about malformed type, optionality,
+  description, or `$skipToken` opacity and scope. A different custom collection
+  parameter is at most Warning under Recommended rule RPC-Uri-V1-09; downgrade
+  any Blocking finding. Point GET remains Blocking under RPC-Get-V1-08. Anchor:
+  `arm-api-review.instructions.md`, section 2.2.
+- **Blocking severity for an unknown ordinary response-body enum literal when
+  the enum is `modelAsString: true`.** Extensible enums accept unknown strings;
+  downgrade to Warning unless the value is a required discriminator or appears
+  in a request path or query parameter. Anchor:
+  `openapi-review.instructions.md`, section 22.7.
 - **Suppressions carried forward from a prior version.** Only newly added
   suppressions require fresh justification. Anchor: reviewer Step 4 Section3
   ("Carried-over suppressions (OK)").

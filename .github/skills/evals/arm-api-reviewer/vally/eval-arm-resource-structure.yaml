@@ -10,6 +10,11 @@ description: |
 environment:
   skills:
     - "../../../azure-api-review"
+  files:
+    - src: "../../../../instructions/arm-api-review.instructions.md"
+      dest: ".github/instructions/arm-api-review.instructions.md"
+    - src: "../../../azure-api-review/references/tracked-resource-lifecycle.md"
+      dest: ".github/skills/azure-api-review/references/tracked-resource-lifecycle.md"
 
 tags:
   area: arm-api-reviewer
@@ -111,3 +116,77 @@ stimuli:
       - Flagged the inline Widget definition (id, name, type, location, tags) — should use allOf with common-types TrackedResource $ref instead of redefining envelope properties
       - Flagged the custom ErrorResponse/ErrorDetail — should reference common-types ErrorResponse
       - Flagged the inline SubscriptionIdParameter, ResourceGroupNameParameter, and ApiVersionParameter — should reference common-types parameters
+
+  # 010004 — Custom collection GET parameter is Warning, not Blocking
+  - name: collection-custom-query-parameter-warning
+    tags:
+      issue: "45675"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/collection-custom-query-parameter.json"
+          dest: "specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json"
+    prompt: >
+      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and
+      `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`.
+      Do not edit any file. Review only the `Widgets_List` collection GET query
+      parameters in this ARM OpenAPI file. Classify the custom `region` query
+      parameter under the applicable ARM RPC rule. Return the standard review
+      finding with its rule ID and severity.
+
+      File: specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "custom collection parameter is Warning"
+        config:
+          pattern: '(?is)(?:🟠\s*Warning|\bWarning\b).{0,500}(?:region|RPC-Uri-V1-09)|(?:region|RPC-Uri-V1-09).{0,500}(?:🟠\s*Warning|\bWarning\b)'
+      - type: output-not-matches
+        name: "custom collection parameter is not a Blocking finding"
+        config:
+          pattern: '(?is)\*\*\[(?:NEW|EXISTING)\]\s*🔴\s*Blocking.{0,500}(?:region|RPC-Uri-V1-09)'
+      - type: output-contains
+        name: "suggests standard filter"
+        config:
+          substring: "$filter"
+      - type: prompt
+    rubric:
+      - The custom `region` collection GET parameter is reported as Warning, never Blocking
+      - The finding cites Recommended rule `RPC-Uri-V1-09`
+      - The suggested fix uses `$filter` when it can express the same filtering operation
+
+  # 010005 — Point GET custom parameter remains Blocking
+  - name: point-get-custom-query-parameter-blocking
+    tags:
+      issue: "45675"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/point-custom-query-parameter.json"
+          dest: "specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json"
+    prompt: >
+      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and
+      `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`.
+      Do not edit any file. Review only the `Widgets_Get` point GET query
+      parameters in this ARM OpenAPI file. Classify the custom `expandDetails`
+      query parameter under the applicable ARM RPC rule. Return the standard
+      review finding with its rule ID and severity.
+
+      File: specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "point GET parameter is Blocking"
+        config:
+          pattern: '(?is)(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:expandDetails|RPC-Get-V1-08)|(?:expandDetails|RPC-Get-V1-08).{0,500}(?:🔴\s*Blocking|\bBlocking\b)'
+      - type: output-contains
+        name: "point GET rule cited"
+        config:
+          substring: "RPC-Get-V1-08"
+      - type: prompt
+    rubric:
+      - The `expandDetails` parameter is a Blocking point GET violation
+      - The finding cites `RPC-Get-V1-08`
+      - The allowance for collection paging parameters is not applied to point GET

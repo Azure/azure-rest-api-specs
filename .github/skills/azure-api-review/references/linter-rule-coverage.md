@@ -147,16 +147,16 @@ instruction files.
 
 ## Pagination Rules
 
-| Linter Rule ID | Name                                     | Instruction Coverage                | Status       |
-| -------------- | ---------------------------------------- | ----------------------------------- | ------------ |
-| R2025          | NextLinkPropertyMustExist                | arm-api-review §13.1                | ✅ Covered   |
-| R2029          | PageableOperation                        | arm-api-review §13.1                | ✅ Covered   |
-| R2060          | PageableRequires200Response              | arm-api-review §13.1                | ✅ Covered   |
-| R4012          | XmsPageableMustHaveCorrespondingResponse | arm-api-review §13.1                | ✅ Covered   |
-| R4019          | GetCollectionResponseSchema              | arm-api-review §13.1                | ✅ Covered   |
-| R3060          | XmsPageableListByRGAndSubscriptions      | arm-api-review §2.2                 | ✅ Covered   |
-| R3008          | CollectionObjectPropertiesNaming         | arm-api-review §13.1                | ✅ Covered   |
-| --             | QueryParametersInCollectionGet           | arm-api-review §2.2 (RPC-Get-V1-15) | ✅ Annotated |
+| Linter Rule ID | Name                                     | Instruction Coverage                | Status                                                                  |
+| -------------- | ---------------------------------------- | ----------------------------------- | ----------------------------------------------------------------------- |
+| R2025          | NextLinkPropertyMustExist                | arm-api-review §13.1                | ✅ Covered                                                              |
+| R2029          | PageableOperation                        | arm-api-review §13.1                | ✅ Covered                                                              |
+| R2060          | PageableRequires200Response              | arm-api-review §13.1                | ✅ Covered                                                              |
+| R4012          | XmsPageableMustHaveCorrespondingResponse | arm-api-review §13.1                | ✅ Covered                                                              |
+| R4019          | GetCollectionResponseSchema              | arm-api-review §13.1                | ✅ Covered                                                              |
+| R3060          | XmsPageableListByRGAndSubscriptions      | arm-api-review §2.2                 | ✅ Covered                                                              |
+| R3008          | CollectionObjectPropertiesNaming         | arm-api-review §13.1                | ✅ Covered                                                              |
+| --             | QueryParametersInCollectionGet           | arm-api-review §2.2 (RPC-Uri-V1-09) | ⚠️ Staging-only; false-positives on RPC-defined `$top` and `$skipToken` |
 
 ## Operations API Rules
 

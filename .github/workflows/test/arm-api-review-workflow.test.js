@@ -1227,3 +1227,133 @@ describe("TypeSpec requirement and version ordering guidance", () => {
     expect(instructions).toMatch(/later date than every API version the service already has/i);
   });
 });
+
+describe("ARM paging and example enum calibration", () => {
+  it("allows RPC paging parameters while preserving point GET strictness", async () => {
+    const [instructions, reference, critic, linterCoverage] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/tracked-resource-lifecycle.md"),
+        "utf8",
+      ),
+      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/linter-rule-coverage.md"),
+        "utf8",
+      ),
+    ]);
+    const combined = [instructions, reference, critic, linterCoverage].join("\n");
+
+    expect(combined).not.toContain("RPC-Get-V1-15");
+    expect(reference).toContain("`$top`");
+    expect(reference).toContain("`$skipToken`");
+    expect(reference).toMatch(/Other custom query parameters.*\*\*Warning\*\*/s);
+    expect(reference).toMatch(/Point GET is unchanged.*\*\*Blocking\*\* RPC-Get-V1-08/s);
+    expect(critic).toMatch(/only claim is that either parameter is\s+forbidden/);
+    expect(critic).toMatch(/Do not drop a finding about malformed type/);
+    expect(linterCoverage).toContain("false-positives on RPC-defined `$top` and `$skipToken`");
+  });
+
+  it("uses the four-case EX-PAYLOAD enum severity matrix everywhere", async () => {
+    const [instructions, reference, critic] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/openapi-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/skills/azure-api-review/references/example-quality.md"), "utf8"),
+      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+    ]);
+
+    for (const source of [instructions, reference]) {
+      const collapsed = collapseWhitespace(source);
+      expect(collapsed).toMatch(
+        /Response body, ordinary property \| `modelAsString: true` \| (?:\*\*)?Warning(?:\*\*)?/,
+      );
+      expect(collapsed).toMatch(
+        /Response body, ordinary property \| `modelAsString: false` \| (?:\*\*)?Blocking(?:\*\*)?/,
+      );
+      expect(collapsed).toMatch(
+        /Required polymorphic discriminator \| Either \| (?:\*\*)?Blocking(?:\*\*)?/,
+      );
+      expect(collapsed).toMatch(
+        /Request path or query parameter \| Either \| (?:\*\*)?Blocking(?:\*\*)?/,
+      );
+    }
+    expect(critic).toMatch(/downgrade to Warning unless the value is a required discriminator/);
+  });
+
+  it("keeps all new JSON fixtures parseable", async () => {
+    const fixtures = [
+      ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/collection-paging-parameters.json",
+      ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/collection-custom-query-parameter.json",
+      ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/point-custom-query-parameter.json",
+      ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/ex-payload-enum-cases.json",
+      ".github/skills/evals/arm-api-reviewer/fixtures/examples/example-ex-payload-extensible-enum.json",
+      ".github/skills/evals/arm-api-reviewer/fixtures/examples/example-ex-payload-closed-enum.json",
+      ".github/skills/evals/arm-api-reviewer/fixtures/examples/example-ex-payload-discriminator.json",
+      ".github/skills/evals/arm-api-reviewer/fixtures/examples/example-ex-payload-path-param.json",
+    ];
+
+    for (const fixture of fixtures) {
+      const content = await readFile(join(ROOT, fixture), "utf8");
+      expect(() => {
+        JSON.parse(content);
+      }, fixture).not.toThrow();
+    }
+  });
+
+  it("keeps the eval catalog counts aligned with 72 scenarios and 48 fixtures", async () => {
+    const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
+    const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
+    let stimulusCount = 0;
+
+    for (const file of evalFiles) {
+      const parsed = /** @type {{ stimuli?: unknown[] }} */ (
+        load(await readFile(join(evalDir, file), "utf8"))
+      );
+      stimulusCount += parsed.stimuli?.length ?? 0;
+    }
+
+    const readme = await readFile(
+      join(ROOT, ".github/skills/evals/arm-api-reviewer/README.md"),
+      "utf8",
+    );
+    const fixtureEntries = await readdir(
+      join(ROOT, ".github/skills/evals/arm-api-reviewer/fixtures"),
+      { recursive: true, withFileTypes: true },
+    );
+    expect(evalFiles).toHaveLength(17);
+    expect(stimulusCount).toBe(72);
+    expect(
+      fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
+    ).toHaveLength(48);
+    expect(readme).toContain("Total: 72 stimuli across 17 eval files.");
+    expect(readme).toContain("All 48 fixture data files");
+  });
+
+  it("maps every EX-PAYLOAD example reference into each enum eval workspace", async () => {
+    const evalSpec =
+      /** @type {{ stimuli?: Array<{ tags?: Record<string, string>; environment?: { files?: Array<{ dest: string }> } }> }} */ (
+        load(
+          await readFile(
+            join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-examples.yaml"),
+            "utf8",
+          ),
+        )
+      );
+    const expectedExamples = [
+      "ExtensibleEnum_Get.json",
+      "ClosedEnum_Get.json",
+      "Discriminator_Get.json",
+      "PathParameter_Get.json",
+    ];
+    const issueStimuli = evalSpec.stimuli?.filter((stimulus) => stimulus.tags?.issue === "43747");
+
+    expect(issueStimuli).toHaveLength(4);
+    for (const stimulus of issueStimuli ?? []) {
+      const destinations = stimulus.environment?.files?.map((file) => file.dest) ?? [];
+      for (const example of expectedExamples) {
+        expect(
+          destinations.some((destination) => destination.endsWith(`/examples/${example}`)),
+        ).toBe(true);
+      }
+    }
+  });
+});
