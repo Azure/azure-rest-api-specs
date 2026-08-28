@@ -317,6 +317,14 @@ suppressions:
   - code: XMSSecretInResponse
     from: authenticationPolicy.json
     reason: clientSecret holds a Key Vault secret URL reference (e.g. https://myvault.vault.azure.net/secrets/mysecret), not the secret value itself, so it is safe to return in responses and is not marked x-ms-secret.
+  - code: PatchIdentityProperty
+    from: authenticationPolicy.json
+    reason: >-
+      AuthenticationPolicies_UpdateTags is a tags-only PATCH that takes the shared Network RP
+      TagsObject body, the established pattern across this RP (for example
+      ApplicationGateways_UpdateTags, which has the same identity envelope property). The service
+      only updates tags on this operation, so adding identity to the request body would advertise a
+      capability the service does not implement. Identity is set through PUT.
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
