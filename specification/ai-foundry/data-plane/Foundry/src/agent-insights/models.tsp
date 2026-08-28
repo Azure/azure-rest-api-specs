@@ -59,7 +59,7 @@ model AgentInsightHighlightedTrace {
   summary: string;
 
   /** The end-to-end duration of the trace in milliseconds. */
-  duration_ms: int32;
+  duration_ms: FoundryDurationMilliseconds;
 
   /** Aggregate input and output tokens reported across all model inference calls in this trace, including calls to different models. Intended for relative usage comparison, not cost estimation. */
   total_tokens?: int32;
