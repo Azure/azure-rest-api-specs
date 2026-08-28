@@ -37,6 +37,15 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/authenticationPolicies/authPolicy1",
         "location": "eastus",
         "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/authPolicyUami": {
+              "principalId": "33333333-3333-3333-3333-333333333333",
+              "clientId": "44444444-4444-4444-4444-444444444444"
+            }
+          }
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "resourceGuid": "22222222-2222-2222-2222-222222222222",
@@ -58,7 +67,7 @@
     },
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
         "Retry-After": 10
       },
       "body": {
@@ -67,6 +76,15 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/authenticationPolicies/authPolicy1",
         "location": "eastus",
         "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/authPolicyUami": {
+              "principalId": "33333333-3333-3333-3333-333333333333",
+              "clientId": "44444444-4444-4444-4444-444444444444"
+            }
+          }
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "resourceGuid": "22222222-2222-2222-2222-222222222222",

@@ -7983,6 +7983,14 @@ model ApplicationGatewayAdvancedRoutingMapPropertiesFormat {
   defaultRewriteRuleSet?: SubResource;
 
   /**
+   * Default authentication configuration bindings of the advanced routing map. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+  @maxItems(1)
+  defaultAuthConfigs?: ApplicationGatewayAuthConfig[];
+
+  /**
    * Advanced routing rules of the advanced routing map. Each rule must specify a priority that is unique within the map.
    */
   advancedRoutingRules: ApplicationGatewayAdvancedRoutingRule[];
@@ -8063,6 +8071,14 @@ model ApplicationGatewayAdvancedRoutingRulePropertiesFormat {
    * Rewrite rule set resource of the advanced routing rule.
    */
   rewriteRuleSet?: SubResource;
+
+  /**
+   * Authentication configuration bindings of the advanced routing rule. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using a v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+  @maxItems(1)
+  authConfigs?: ApplicationGatewayAuthConfig[];
 
   /**
    * The provisioning state of the advanced routing rule resource.

@@ -90,18 +90,22 @@ model AuthenticationProviderProperties {
   issuer: string;
 
   /** The JSON Web Key Set (JWKS) URI used to retrieve the public keys for JWT validation. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/discovery/v2.0/keys */
-  jwksUri?: string;
+  @maxLength(2048)
+  @pattern("^https://")
+  jwksUri?: url;
 
   /** The intended audience for the JWT. Only a single audience value is supported in this API version. Example: https://audience.com/{application-id} */
+  @maxLength(2048)
   audience?: string;
 
   /** The Application (client) ID for the related application registered in Microsoft Entra ID, formatted as a GUID. */
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   clientId: string;
 
-  /** The Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. Example: https://myvault.vault.azure.net/secrets/mysecret */
+  /** The absolute HTTPS Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. The secret value retrieved from Key Vault can contain up to 4096 characters. Example: https://myvault.vault.azure.net/secrets/mysecret */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This property holds a Key Vault secret URL reference (not the secret value itself), so it is not sensitive data."
-  @maxLength(4096)
-  clientSecret?: string;
+  @pattern("^https://")
+  clientSecret?: url;
 
   /** The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported, each scope can contain up to 128 characters, and all scopes can contain up to 256 characters combined. */
   @maxItems(10)
@@ -112,11 +116,14 @@ model AuthenticationProviderProperties {
 
   /** The name of the session cookie used for user authentication. Applicable to the Application Gateway post-OIDC workflow. */
   @maxLength(256)
+  @pattern("^[A-Za-z0-9_-]+$")
   sessionCookieName?: string;
 }
 
 /** An authentication scope value. */
 @maxLength(128)
+@minLength(1)
+@pattern("^[A-Za-z0-9_.:/-]+$")
 scalar AuthenticationScope extends string;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP enums"

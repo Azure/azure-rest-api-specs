@@ -1729,6 +1729,17 @@
           "$ref": "./common.json#/definitions/SubResource",
           "description": "Default rewrite rule set resource of the advanced routing map."
         },
+        "defaultAuthConfigs": {
+          "type": "array",
+          "description": "Default authentication configuration bindings of the advanced routing map. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using a v2 SKU.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAuthConfig"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "advancedRoutingRules": {
           "type": "array",
           "description": "Advanced routing rules of the advanced routing map. Each rule must specify a priority that is unique within the map.",
@@ -1827,6 +1838,17 @@
         "rewriteRuleSet": {
           "$ref": "./common.json#/definitions/SubResource",
           "description": "Rewrite rule set resource of the advanced routing rule."
+        },
+        "authConfigs": {
+          "type": "array",
+          "description": "Authentication configuration bindings of the advanced routing rule. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using a v2 SKU.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAuthConfig"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
