@@ -1153,19 +1153,45 @@
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol for the browser session.",
+          "default": "CDP",
+          "enum": [
+            "CDP",
+            "Playwright"
+          ],
+          "x-ms-enum": {
+            "name": "BrowserSessionProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CDP",
+                "value": "CDP",
+                "description": "Chrome DevTools Protocol."
+              },
+              {
+                "name": "Playwright",
+                "value": "Playwright",
+                "description": "Playwright protocol."
+              }
+            ]
+          }
+        },
         "displayName": {
           "type": "string",
           "description": "The browser session display name.",
           "minLength": 1,
           "maxLength": 200
         },
-        "protocol": {
-          "$ref": "#/definitions/BrowserSessionProtocol",
-          "description": "The protocol for the browser session."
-        },
         "creatorId": {
           "type": "string",
           "description": "The browser session creator's ID.",
+          "readOnly": true
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "The browser session creator's name.",
           "readOnly": true
         },
         "status": {
@@ -1222,32 +1248,15 @@
       },
       "required": [
         "id",
-        "displayName",
         "protocol",
+        "displayName",
         "creatorId",
+        "creatorName",
         "status",
         "source",
         "browserType",
         "operatingSystem"
       ]
-    },
-    "BrowserSessionProtocol": {
-      "type": "string",
-      "description": "The protocol for the browser session.",
-      "enum": [
-        "cdp"
-      ],
-      "x-ms-enum": {
-        "name": "BrowserSessionProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CDP",
-            "value": "cdp",
-            "description": "Chrome DevTools Protocol."
-          }
-        ]
-      }
     },
     "BrowserSessionSource": {
       "type": "object",
@@ -1507,19 +1516,45 @@
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol for the browser session.",
+          "default": "CDP",
+          "enum": [
+            "CDP",
+            "Playwright"
+          ],
+          "x-ms-enum": {
+            "name": "BrowserSessionProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CDP",
+                "value": "CDP",
+                "description": "Chrome DevTools Protocol."
+              },
+              {
+                "name": "Playwright",
+                "value": "Playwright",
+                "description": "Playwright protocol."
+              }
+            ]
+          }
+        },
         "displayName": {
           "type": "string",
           "description": "The browser session display name.",
           "minLength": 1,
           "maxLength": 200
         },
-        "protocol": {
-          "$ref": "#/definitions/BrowserSessionProtocol",
-          "description": "The protocol for the browser session."
-        },
         "creatorId": {
           "type": "string",
           "description": "The browser session creator's ID.",
+          "readOnly": true
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "The browser session creator's name.",
           "readOnly": true
         },
         "status": {
@@ -1576,7 +1611,6 @@
       },
       "required": [
         "id",
-        "displayName",
         "protocol"
       ]
     },
@@ -1584,15 +1618,36 @@
       "type": "object",
       "description": "Model of a browser session used for tracking purposes.",
       "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "The protocol for the browser session.",
+          "default": "CDP",
+          "enum": [
+            "CDP",
+            "Playwright"
+          ],
+          "x-ms-enum": {
+            "name": "BrowserSessionProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CDP",
+                "value": "CDP",
+                "description": "Chrome DevTools Protocol."
+              },
+              {
+                "name": "Playwright",
+                "value": "Playwright",
+                "description": "Playwright protocol."
+              }
+            ]
+          }
+        },
         "displayName": {
           "type": "string",
           "description": "The browser session display name.",
           "minLength": 1,
           "maxLength": 200
-        },
-        "protocol": {
-          "$ref": "#/definitions/BrowserSessionProtocol",
-          "description": "The protocol for the browser session."
         },
         "browserType": {
           "$ref": "#/definitions/BrowserType",

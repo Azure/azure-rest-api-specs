@@ -16,19 +16,24 @@ alias BrowserSessionRequiredProperties = {
   @visibility(Lifecycle.Read)
   id: string;
 
+  @doc("The protocol for the browser session.")
+  @added(Versions.v2026_06_01_preview)
+  protocol: BrowserSessionProtocol = BrowserSessionProtocol.CDP;
+};
+alias BrowserSessionReadRequiredProperties = {
   @doc("The browser session display name.")
   @minLength(1)
   @maxLength(200)
   displayName: string;
 
-  @doc("The protocol for the browser session.")
-  @added(Versions.v2026_06_01_preview)
-  protocol: BrowserSessionProtocol;
-};
-alias BrowserSessionReadRequiredProperties = {
   @doc("The browser session creator's ID.")
   @visibility(Lifecycle.Read)
   creatorId: string;
+
+  @doc("The browser session creator's name.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  creatorName: string;
 
   @doc("The browser session status.")
   @visibility(Lifecycle.Read)
@@ -125,7 +130,10 @@ union BrowserSessionProtocol {
   string,
 
   @doc("Chrome DevTools Protocol.")
-  CDP: "cdp",
+  CDP: "CDP",
+
+  @doc("Playwright protocol.")
+  Playwright: "Playwright",
 }
 
 @doc("The browser session source type.")
