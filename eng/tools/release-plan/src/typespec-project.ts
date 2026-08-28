@@ -362,21 +362,13 @@ export function runTypeSpecMetadataEmitter(tspProjectPath: string): TypeSpecMeta
   const mainTspPath = join(tspProjectPath, "main.tsp");
   const clientTspPath = join(tspProjectPath, "client.tsp");
 
-  let compileCommand: string;
-  if (existsSync(mainTspPath)) {
-    compileCommand =
-      'npm exec -- tsp compile . --emit @azure-tools/typespec-metadata --output-dir "./tsp-output" --option @azure-tools/typespec-metadata.format="json"';
-  } else if (existsSync(clientTspPath)) {
-    compileCommand =
-      'npm exec -- tsp compile ./client.tsp --emit @azure-tools/typespec-metadata --output-dir "./tsp-output" --option @azure-tools/typespec-metadata.format="json"';
-  } else {
+  if (!existsSync(mainTspPath) && !existsSync(clientTspPath)) {
     throw new Error(
       `Neither main.tsp nor client.tsp found in ${tspProjectPath}. Cannot generate TypeSpec metadata.`,
     );
   }
 
   console.log(`Running TypeSpec metadata emitter in ${tspProjectPath}`);
-  console.log(`Command: ${compileCommand}`);
   const tspCommand = process.platform === "win32" ? "tsp.cmd" : "tsp";
   const result = spawnSync(
     tspCommand,
