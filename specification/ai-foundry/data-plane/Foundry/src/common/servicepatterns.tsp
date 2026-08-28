@@ -1,7 +1,6 @@
 import "@typespec/http";
 
 import "@azure-tools/typespec-azure-core";
-import "./foundry-metadata.mjs";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
@@ -86,12 +85,6 @@ op FoundryDataPlaneOperation<
   | AzureRangeErrorResponse<ErrorResponse>;
 
 // ---- Feature opt-in keys & preview headers ----
-
-/** Adds required Foundry preview labels to a model's generated OpenAPI metadata. */
-extern dec foundryRequiredPreviews(
-  target: Reflection.Model,
-  ...previews: valueof string[]
-);
 
 /** Feature opt-in keys for agent definition operations supporting hosted or workflow agents. */
 union AgentDefinitionOptInKeys {

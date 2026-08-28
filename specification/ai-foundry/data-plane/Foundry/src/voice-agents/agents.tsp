@@ -280,7 +280,7 @@ union VoiceModelType {
 }
 
 @doc("A closed reference to the hosted text agent that a `hosted_agent` voice agent fronts, containing only its name and optional version. The target is resolved within the same project.")
-@foundryRequiredPreviews(AgentDefinitionOptInKeys.voice_agents_v1_preview)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceTargetAgent {
   ...Record<never>;
 
