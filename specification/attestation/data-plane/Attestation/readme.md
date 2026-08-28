@@ -136,6 +136,10 @@ uncomment the  `exclude-file` section below and add the file paths.
 ### Suppression
 ``` yaml
 directive:
+  - suppress: IntegerTypeMustHaveFormat
+    from: attestation.json
+    where: $.definitions.UnixTimestamp
+    reason: iat/exp/nbf are modeled as a unixTimestamp scalar (utcDateTime encoded as int64 unixtime) so SDKs surface them as an idiomatic date/time type; "unixtime" is the intended format and is not one of the int32/int64 values this rule checks.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: attestation.json
     where: $.definitions.StoredAttestationPolicy.properties.AttestationPolicy
