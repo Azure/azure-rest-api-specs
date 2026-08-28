@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "clusterName": "contoso-cluster",
+    "resource": {
+      "properties": {
+        "exceptionWindows": [
+          {
+            "action": "Allow",
+            "date": "2026-08-22",
+            "durationMinutes": 480,
+            "startTimeOfDay": "PT4H"
+          }
+        ],
+        "maintenanceWindows": [
+          {
+            "dayOfWeek": "Saturday",
+            "durationMinutes": 480,
+            "startTimeOfDay": "PT2H"
+          },
+          {
+            "dayOfWeek": "Sunday",
+            "durationMinutes": 480,
+            "startTimeOfDay": "PT2H"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "contoso-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.EventHub/clusters/contoso-cluster/upgradePreferences/default",
+        "name": "default",
+        "properties": {
+          "exceptionWindows": [
+            {
+              "action": "Allow",
+              "date": "2026-08-22",
+              "durationMinutes": 480,
+              "startTimeOfDay": "PT4H"
+            }
+          ],
+          "maintenanceWindows": [
+            {
+              "dayOfWeek": "Saturday",
+              "durationMinutes": 480,
+              "startTimeOfDay": "PT2H"
+            },
+            {
+              "dayOfWeek": "Sunday",
+              "durationMinutes": 480,
+              "startTimeOfDay": "PT2H"
+            }
+          ],
+          "upgradeStatus": {
+            "inProgress": false,
+            "pendingUpgrade": false
+          }
+        },
+        "type": "Microsoft.EventHub/clusters/upgradePreferences"
+      }
+    }
+  },
+  "operationId": "UpgradePreferencesOperations_CreateOrUpdate",
+  "title": "Create or update cluster upgrade preferences"
+}

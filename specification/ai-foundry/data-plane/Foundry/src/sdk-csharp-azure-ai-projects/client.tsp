@@ -177,6 +177,7 @@ namespace Azure.AI.Projects;
 // Insights stores sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(InsightSummary.method, "MethodName", "csharp");
+@@clientName(Insight, "ProjectsInsight");
 
 // --------------------------------------------------------------------------------
 // Memory stores sub‐client
@@ -207,6 +208,7 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
+@@clientName(Schedule, "ProjectsSchedule");
 
 @@alternateType(RecurrenceTrigger.startTime, utcDateTime, "csharp");
 @@alternateType(RecurrenceTrigger.endTime, utcDateTime, "csharp");
@@ -279,6 +281,8 @@ namespace Azure.AI.Projects;
 @@clientName(Routines.deleteRoutine, "Delete");
 @@clientName(Routines.dispatchRoutineAsync, "Dispatch", "csharp");
 @@access(Routines.dispatchRoutineAsync, Access.internal);
+@@access(Routines.listRoutines, Access.internal);
+@@access(Routines.listRoutineRuns, Access.internal);
 
 @@clientName(Routine, "ProjectsRoutine");
 @@clientName(Routine.enabled, "IsEnabled");

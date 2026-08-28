@@ -122,6 +122,22 @@ interface ContentAnalyzers {
     ServiceTraits
   >;
 
+  @added(Versions.v2026_06_01_preview)
+  @doc("Extract content and fields from input. The analysis result is embedded inline in the JSON response body (HTTP 200) without creating a long-running operation — no polling or separate result retrieval is needed. Intended for lightweight analysis scenarios (e.g., document analyzers without field extraction, small page counts). The result is not persisted on the server. See service documentation for current constraints.")
+  analyzeInline is Operations.ResourceAction<
+    ContentAnalyzer,
+    AnalyzeRequest,
+    ContentAnalyzerInlineResponse
+  >;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Extract content and fields from binary input. The analysis result is embedded inline in the JSON response body (HTTP 200) without creating a long-running operation — no polling or separate result retrieval is needed. Intended for lightweight analysis scenarios (e.g., document analyzers without field extraction, small page counts). The result is not persisted on the server. See service documentation for current constraints.")
+  analyzeBinaryInline is Operations.ResourceAction<
+    ContentAnalyzer,
+    AnalyzeBinaryRequest,
+    ContentAnalyzerInlineResponse
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @doc("Get the result of an analysis operation.")
   @route("/analyzerResults/{operationId}")

@@ -4,6 +4,14 @@ description: |
   is not exercised by local spec fixtures: subagent auto-unavailable fallback,
   session invalidation, and downstream-CI telemetry markers.
 
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
 tags:
   area: arm-api-reviewer
 
@@ -16,6 +24,7 @@ defaults:
 scoring:
   threshold: 0.7
 
+# Quote rubric entries containing `: `; YAML otherwise parses them as mappings, but Vally requires strings.
 stimuli:
   # 160001 -- Subagent dispatch failure must produce auto-unavailable banner and no session-handoff prompt
   - name: critic-subagent-failure-auto-unavailable
@@ -200,7 +209,7 @@ stimuli:
       - type: prompt
     rubric:
       - The recommendation is phrased as options, not a directive to use UUID
-      - The comment includes `downstream-rule: R3017` in the telemetry marker
+      - "The comment includes `downstream-rule: R3017` in the telemetry marker"
       - The severity is Suggestion unless the prompt supplies unambiguous acceptable criteria
 
   # 160004 -- Happy-path: Critic PASS, READY TO POST report rendered with subagent marker
@@ -279,7 +288,7 @@ stimuli:
     rubric:
       - The first line is the review-state marker with `critic-mode=subagent`
       - The `Next-step recommendation` at the top of the report is `READY TO POST`
-      - Each finding body uses the canonical Template B shape with the full 6-field telemetry marker (`critic: pass`)
+      - "Each finding body uses the canonical Template B shape with the full 6-field telemetry marker (`critic: pass`)"
       - No CAUTION banner, no SESSION INVALIDATED heading, no session-handoff prompt is rendered
       - The plan-approval menu is offered with `Execute plan` recommended as the default
 
@@ -488,9 +497,9 @@ stimuli:
           pattern: '(?<!`)<!--\s*posted-by:\s*arm-api-reviewer-agent\s*-->(?!`)'
       - type: prompt
     rubric:
-      - The trailing telemetry marker contains `critic: override` and a non-empty `override-reason:` field that quotes the rule text or cites the anchor
+      - "The trailing telemetry marker contains `critic: override` and a non-empty `override-reason:` field that quotes the rule text or cites the anchor"
       - The body contains the `**Note:** Critic FAILed this finding ...` reviewer-override line per Step 7 item 13.4
-      - The abbreviated marker form `<!-- posted-by: arm-api-reviewer-agent -->` is NOT used; the full 7-field form is required when `critic=override`
+      - "The abbreviated marker form `<!-- posted-by: arm-api-reviewer-agent -->` is NOT used; the full 7-field form is required when `critic=override`"
       - The rule ID `RPC-Put-V1-22` is rendered as a markdown hyperlink to the authoritative instruction or reference file
 
   # 160008 -- Telemetry-degraded fallback marker when a required field cannot be assembled
@@ -550,7 +559,7 @@ stimuli:
           pattern: 'head-sha:\s*[0-9a-fA-F]'
       - type: prompt
     rubric:
-      - The trailing telemetry marker uses the minimal `telemetry: degraded` form, not the full 6-field form
+      - "The trailing telemetry marker uses the minimal `telemetry: degraded` form, not the full 6-field form"
       - The `reason:` field is populated with `head-sha-unavailable`
       - No `head-sha:` value is fabricated to satisfy the full marker shape
       - The comment body still renders (the post itself is not skipped)
@@ -602,7 +611,7 @@ stimuli:
     rubric:
       - The `critic:` field in the marker is the literal `unknown`, not `pass` or `na`
       - No fabricated Critic verdict is implied in the body text either (no "Critic verified" or similar wording)
-      - The marker is otherwise the full 6-field form, not the minimal `telemetry: degraded` fallback
+      - "The marker is otherwise the full 6-field form, not the minimal `telemetry: degraded` fallback"
 
   # 160010 -- ARMChangesRequested label is NOT proposed when zero comments will post
   - name: armchanges-label-skipped-on-clean-plan
@@ -695,3 +704,165 @@ stimuli:
       - The response describes the retry protocol (up to 3 total attempts)
       - The response explains that after all retries fail, the Reviewer falls to `critic-mode=unavailable` automatically
       - No suggestion that the Reviewer would ask the user to manually paste a Critic verdict
+
+  # 160012 -- issue_comment uses issue-shaped context for pull request comments
+  - name: issue-comment-uses-authoritative-pr-target
+    environment:
+      files:
+        - src: "../../../../workflows/arm-api-review.md"
+          dest: ".github/workflows/arm-api-review.md"
+    prompt: |
+      Read `.github/workflows/arm-api-review.md` and begin Trigger Validation
+      for this unattended workflow run. Emit only a concise statement of the
+      target pull request and the first GitHub read you must perform; do not
+      continue into the API review.
+
+      Runtime context:
+
+      - Trigger event: `issue_comment`
+      - Built-in issue-number: `#44499`
+      - Built-in pull-request-number: `#false`
+      - Pre-activation authoritative target pull request: `#44499`
+      - The triggering issue payload contains `issue.pull_request`, confirming
+        that this is a pull request comment.
+
+      Apply the workflow's Run Context and Trigger Validation step 1 exactly.
+      Do not reinterpret the validated target as an issue, and do not emit a
+      `noop`.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "validated PR target retained"
+        config:
+          substring: "44499"
+      - type: output-matches
+        name: "first GitHub read fetches PR metadata"
+        config:
+          pattern: "(?i)get_pull_request|get pull request|fetch pull request"
+      - type: output-not-matches
+        name: "false built-in field does not cause noop"
+        config:
+          pattern: "(?i)noop|no pull request|not a pull request|context is issue|unresolvable|cannot resolve"
+      - type: prompt
+    rubric:
+      - The authoritative target remains pull request 44499
+      - The first GitHub read is `get_pull_request` for PR 44499 so its current head SHA can be pinned
+      - "The issue-shaped `issue_comment` payload and `pull-request-number: false` convenience field do not cause a no-op"
+      - The response does not begin reviewing files or rendering findings
+
+  # 160013 -- An actionable top-level comment suppresses a duplicate inline finding
+  - name: top-level-comment-suppresses-duplicate
+    environment:
+      files:
+        - src: "../../../../agents/arm-api-reviewer.agent.md"
+          dest: ".github/agents/arm-api-reviewer.agent.md"
+        - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
+          dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
+    prompt: |
+      You are building the Step 5.5 Reconciliation Plan for an ARM API
+      review. The complete paginated discussion inventory succeeded:
+
+      - inline review threads: 0
+      - top-level PR conversation comments: 1
+      - pull request review bodies: 0
+
+      Your current candidate cites rule `OAPI027` on
+      `Widget.properties.secretValue` in `widget.json` line 180 and says the
+      response-only secret must be read-only.
+
+      A human-authored top-level PR comment already says:
+
+      > OAPI027 applies to `Widget.properties.secretValue` in widget.json.
+      > This response-only secret needs `readOnly: true`; please update the
+      > schema before merge.
+
+      The top-level comment has no agent marker and mentions the model element
+      rather than the current line number. It is actionable and has the same
+      rule, affected API element, and corrective outcome.
+
+      Apply the loaded skill's machine-readable reconciliation vocabulary.
+      Emit only one concise reconciliation row. Its action cell must use the
+      literal canonical action token (prose synonyms are invalid), and its
+      rationale must explicitly state whether the line-number difference and
+      missing agent marker make the finding new. Do not render the finding
+      body, post a comment, or discuss unrelated steps.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "duplicate is covered"
+        config:
+          substring: "SKIP-COVERED"
+      - type: output-not-matches
+        name: "duplicate is not posted"
+        config:
+          pattern: "(?i)POST-NEW|post (?:a )?(?:new|duplicate)|CLARIFY-CONFLICT"
+      - type: output-matches
+        name: "top-level semantic coverage recognized"
+        config:
+          pattern: "(?i)top-level|semantic|same (?:rule|finding|API element)|already cover"
+      - type: prompt
+    rubric:
+      - The only action is `SKIP-COVERED`; no new inline or top-level finding is proposed
+      - The rationale recognizes the human-authored top-level comment as actionable prior coverage
+      - Line-number differences and the missing agent marker do not make the finding new
+
+  # 160014 -- Contradictory guidance receives a clarification, not another finding
+  - name: contradictory-thread-requires-clarification
+    environment:
+      files:
+        - src: "../../../../agents/arm-api-reviewer.agent.md"
+          dest: ".github/agents/arm-api-reviewer.agent.md"
+        - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
+          dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
+    prompt: |
+      You are building the Step 5.5 Reconciliation Plan for an ARM API
+      review at pinned session SHA
+      `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`. The complete discussion
+      inventory contains one unresolved human-authored inline thread on
+      `Widget.properties.status`.
+
+      Prior thread position:
+
+      > `status` must be required because every resource response includes it.
+
+      Current evidence at the pinned SHA shows that `status` is
+      service-populated and has `readOnly: true`. The applicable mutability
+      rule means it must not be required in request bodies. Your new review
+      conclusion would therefore tell the author to keep it optional, which is
+      materially incompatible with the existing thread.
+
+      Emit only the reconciliation action and the exact clarification reply
+      you would plan. The reply must state the prior position, current
+      evidence, current guidance, and why the conclusion changed. The thread
+      is human-origin, so it must remain unresolved. Do not render or propose a
+      separate standalone finding.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "conflict action selected"
+        config:
+          substring: "CLARIFY-CONFLICT"
+      - type: output-not-matches
+        name: "no competing finding or resolution"
+        config:
+          pattern: "(?i)POST-NEW|new standalone finding|(?:will|should|plan to) resolve|RESOLVE-AND-REPOST"
+      - type: output-matches
+        name: "prior and current positions stated"
+        config:
+          pattern: "(?is)(?:prior|previous).*required.*(?:readOnly|read-only).*(?:optional|must not be required)"
+      - type: output-matches
+        name: "reason for changed guidance stated"
+        config:
+          pattern: "(?i)because|therefore|changed|supersed"
+      - type: prompt
+    rubric:
+      - The action is `CLARIFY-CONFLICT`, not POST-NEW or SKIP-COVERED
+      - The planned reply states the prior required-property position and the current read-only/optional guidance
+      - The reply anchors the changed conclusion to evidence at the pinned SHA and explains why guidance changed
+      - The human-origin thread remains unresolved and no duplicate standalone finding is proposed
