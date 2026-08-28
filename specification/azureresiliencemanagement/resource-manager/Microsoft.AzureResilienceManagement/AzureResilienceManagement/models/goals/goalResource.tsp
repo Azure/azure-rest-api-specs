@@ -82,6 +82,7 @@ model GoalResourceProperties {
   @doc("List of service groups of which this resource is memberof.")
   @visibility(Lifecycle.Read)
   @identifiers(#["serviceGroupId"])
+  @removed(Versions.v2026_09_01_preview)
   serviceGroupMemberships?: ServiceGroupMembership[];
 
   @doc("Provisioning state")

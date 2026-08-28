@@ -21,6 +21,7 @@ model ServiceLevelResource {
 
   @doc("The arm id of the service level object resource")
   @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   serviceLevelObjectiveResourceId?: armResourceIdentifier;
 }
 
