@@ -1,14 +1,14 @@
 {
-  "title": "VirtualMachineBulkOperations_BulkCancel_Example",
+  "title": "Cancel an eligible Bulk Action start operation",
   "operationId": "VirtualMachineBulkOperations_BulkCancel",
   "parameters": {
     "api-version": "2026-08-06-preview",
-    "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
-    "resourceGroupName": "rgBulkactions",
-    "location": "useast2euap",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
     "requestBody": {
       "operationIds": [
-        "af449548-8e1a-4079-874e-2caa4ff783cc"
+        "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
       ]
     }
   },
@@ -17,39 +17,26 @@
       "body": {
         "results": [
           {
-            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-            "errorCode": "TestErrorCode",
-            "errorDetails": "Test error details",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "virtualMachineInfo": {
+              "vmSize": "Standard_D4s_v5",
+              "zone": "1"
+            },
             "operation": {
-              "operationId": "af449548-8e1a-4079-874e-2caa4ff783cc",
-              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
               "opType": "Start",
-              "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
-              "deadline": "2026-06-11T19:35:45.098Z",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deadline": "2026-07-10T18:00:00Z",
               "deadlineType": "InitiateAt",
-              "state": "PendingScheduling",
+              "state": "Cancelled",
               "timezone": "UTC",
-              "resourceOperationError": {
-                "errorCode": "OperationCancelledByUser",
-                "errorDetails": "Operation was cancelled by the user."
-              },
-              "fallbackOperationInfo": {
-                "lastOpType": "Start",
-                "status": "succeeded",
-                "error": {
-                  "errorCode": "TestErrorCode",
-                  "errorDetails": "Test error details"
-                }
-              },
-              "completedAt": "2026-06-11T19:35:45.098Z",
               "retryPolicy": {
-                "retryCount": 2,
-                "retryWindowInMinutes": 19,
-                "onFailureAction": "Unknown"
+                "retryCount": 3,
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Start"
               },
-              "resourceNotificationDetails": {
-                "resourceContext": ""
-              }
+              "completedAt": "2026-07-10T17:35:00Z"
             }
           }
         ]

@@ -1,28 +1,34 @@
 {
-  "title": "Get Bulk Action operation statuses",
-  "operationId": "VirtualMachineBulkOperations_BulkGetOperationsStatus",
+  "title": "Reimage one virtual machine",
+  "operationId": "VirtualMachineBulkOperations_BulkReimage",
   "parameters": {
     "api-version": "2026-08-06-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-rg",
     "location": "eastus",
     "requestBody": {
-      "operationIds": [
-        "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-      ]
+      "executionParameters": {},
+      "resources": {
+        "ids": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01"
+        ]
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "description": "Reimage Resource request",
         "results": [
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
             "operation": {
               "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-              "opType": "Start",
-              "state": "Executing"
+              "opType": "Unknown",
+              "state": "PendingScheduling"
             }
           }
         ]

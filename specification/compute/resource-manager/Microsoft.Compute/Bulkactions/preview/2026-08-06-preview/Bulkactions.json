@@ -479,7 +479,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/acknowledgeBulkOperationErrors": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors",
-        "description": "BulkAcknowledgeOperationErrors: Acknowledge bulk operation errors for a resource group",
+        "description": "Acknowledges errors for specified operations in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -501,7 +501,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The list of operation ids to acknowledge",
+            "description": "The Bulk Action Operation Ids that identify operations for which errors should be acknowledged.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AcknowledgeBulkOperationErrorsRequest"
@@ -523,11 +523,11 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_Example": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MinimumSet_Gen": {
+          "Acknowledge Bulk Action operation errors": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MinimumSet_Gen.json"
+          },
+          "Acknowledge Bulk Action operation errors with mixed results": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MaximumSet_Gen.json"
           }
         }
       }
@@ -1339,7 +1339,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/listBulkOperationErrors": {
       "get": {
         "operationId": "VirtualMachineBulkOperations_BulkListOperationErrors",
-        "description": "BulkListOperationErrors: List bulk operation errors for a resource group",
+        "description": "Lists recent errors for operations in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1361,7 +1361,7 @@
           {
             "name": "lookbackInMinutes",
             "in": "query",
-            "description": "The number of minutes to look back for errors.",
+            "description": "The number of minutes before the current time to include when listing bulk action errors.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -1382,11 +1382,11 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkListOperationErrors_Example": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen": {
+          "List recent Bulk Action operation errors": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen.json"
+          },
+          "List recent Bulk Action operation errors with paging": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1397,7 +1397,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkCancel",
-        "description": "BulkCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request",
+        "description": "Cancels eligible start, deallocate, or hibernate operations identified by their Bulk Action Operation Ids. Work that has already completed is not reversed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1419,7 +1419,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The Bulk Action Operation Ids that identify the operations to cancel.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CancelOperationsRequest"
@@ -1441,10 +1441,10 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkCancel_Example": {
+          "Cancel an eligible Bulk Action start operation": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MaximumSet_Gen.json"
           },
-          "VirtualMachineBulkOperations_BulkCancel_Example - generated by [MinimumSet] rule": {
+          "Cancel eligible Bulk Action operations": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MinimumSet_Gen.json"
           }
         }
@@ -1453,7 +1453,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCreate": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkCreate",
-        "description": "BulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Creates one or more virtual machines from a common configuration and optional per-virtual-machine overrides. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1475,7 +1475,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machine configuration and execution settings for the bulk create action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteCreateRequest"
@@ -1497,10 +1497,10 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkCreate_Example": {
+          "Create multiple virtual machines with per-virtual-machine overrides": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MaximumSet_Gen.json"
           },
-          "VirtualMachineBulkOperations_BulkCreate_Example - generated by [MinimumSet] rule": {
+          "Create one virtual machine": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MinimumSet_Gen.json"
           }
         }
@@ -1509,7 +1509,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDeallocate": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkDeallocate",
-        "description": "BulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Deallocates one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1531,7 +1531,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machines to deallocate and the execution settings for the bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteDeallocateRequest"
@@ -1553,11 +1553,11 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkDeallocate - generated by [MinimumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MinimumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkDeallocate_Example": {
+          "Deallocate multiple virtual machines with retry settings": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MaximumSet_Gen.json"
+          },
+          "Deallocate one virtual machine": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MinimumSet_Gen.json"
           }
         }
       }
@@ -1565,7 +1565,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDelete": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkDelete",
-        "description": "BulkDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Deletes one or more virtual machines. This operation is destructive. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1587,7 +1587,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machines to delete and the execution settings for the bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteDeleteRequest"
@@ -1609,11 +1609,11 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkDelete - generated by [MinimumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MinimumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkDelete_Example": {
+          "Delete multiple virtual machines by using forced deletion": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MaximumSet_Gen.json"
+          },
+          "Delete one virtual machine": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MinimumSet_Gen.json"
           }
         }
       }
@@ -1621,7 +1621,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkGetOperationStatus": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkGetOperationsStatus",
-        "description": "BulkGetOperationsStatus: Polling endpoint to read status of operations performed on virtual machines",
+        "description": "Gets the current status of operations identified by their Bulk Action Operation Ids.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1643,7 +1643,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The Bulk Action Operation Ids that identify the operations for which current status should be returned.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/GetOperationStatusRequest"
@@ -1665,11 +1665,11 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkGetOperationsStatus_Example": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkGetOperationsStatus_Example - generated by [MinimumSet] rule": {
+          "Get Bulk Action operation statuses": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_MinimumSet_Gen.json"
+          },
+          "Get the status of an in-progress Bulk Action operation": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -1677,7 +1677,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkHibernate": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkHibernate",
-        "description": "BulkHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Hibernates one or more virtual machines that support hibernation. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1699,7 +1699,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machines to hibernate and the execution settings for the bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteHibernateRequest"
@@ -1721,11 +1721,11 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkHibernate - generated by [MinimumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MinimumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkHibernate_Example": {
+          "Hibernate multiple virtual machines with retry settings": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MaximumSet_Gen.json"
+          },
+          "Hibernate one virtual machine": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MinimumSet_Gen.json"
           }
         }
       }
@@ -1733,7 +1733,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkReimage": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkReimage",
-        "description": "BulkReimage: Execute reimage operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Reimages one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1755,7 +1755,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machines to reimage and the execution settings for the bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteReimageRequest"
@@ -1777,8 +1777,11 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkReimage_Example": {
+          "Reimage multiple virtual machines with a per-virtual-machine override": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_MaximumSet_Gen.json"
+          },
+          "Reimage one virtual machine": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_MinimumSet_Gen.json"
           }
         }
       }
@@ -1786,7 +1789,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkStart": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkStart",
-        "description": "BulkStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "description": "Starts one or more virtual machines. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1808,7 +1811,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual machines to start and the execution settings for the bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteStartRequest"
@@ -1830,11 +1833,11 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkStart - generated by [MinimumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MinimumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkStart_Example": {
+          "Start multiple virtual machines with retry settings": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MaximumSet_Gen.json"
+          },
+          "Start one virtual machine": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MinimumSet_Gen.json"
           }
         }
       }
@@ -1842,7 +1845,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkVdiFlexCreate": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkVdiFlexCreate",
-        "description": "BulkVdiFlexCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection.",
+        "description": "Creates one or more virtual machines for a virtual desktop infrastructure workload by using flexible SKU and availability zone preferences. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1864,7 +1867,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "The request body",
+            "description": "The virtual desktop infrastructure configuration and allocation preferences for the bulk create action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExecuteVdiCreateRequest"
@@ -1886,11 +1889,11 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkVdiFlexCreate_Example": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkVdiFlexCreate_Example - generated by [MinimumSet] rule": {
+          "Create one virtual desktop infrastructure virtual machine": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MinimumSet_Gen.json"
+          },
+          "Create virtual desktop infrastructure virtual machines with allocation preferences": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MaximumSet_Gen.json"
           }
         }
       }
@@ -3137,11 +3140,11 @@
     },
     "AcknowledgeBulkOperationErrorsRequest": {
       "type": "object",
-      "description": "The request to acknowledge bulk operation errors",
+      "description": "The operations for which errors should be acknowledged.",
       "properties": {
         "operationIds": {
           "type": "array",
-          "description": "The set of operation ids to acknowledge.",
+          "description": "The Bulk Action Operation Ids that identify operations for which errors should be acknowledged.",
           "items": {
             "type": "string"
           }
@@ -3153,25 +3156,25 @@
     },
     "AcknowledgeBulkOperationErrorsResponse": {
       "type": "object",
-      "description": "The response from acknowledging bulk operation errors",
+      "description": "The result of acknowledging errors for specified operations.",
       "properties": {
         "acknowledged": {
           "type": "array",
-          "description": "The set of operation ids that were newly acknowledged",
+          "description": "The Bulk Action Operation Ids that identify operations with acknowledged errors.",
           "items": {
             "type": "string"
           }
         },
         "notFound": {
           "type": "array",
-          "description": "The set of operation ids that were not found in the completed operations store",
+          "description": "The Bulk Action Operation Ids that were not found or are no longer available.",
           "items": {
             "type": "string"
           }
         },
         "skipped": {
           "type": "array",
-          "description": "The set of operation ids that were skipped because they were already acknowledged, not failed, or belong to a different scope",
+          "description": "The Bulk Action Operation Ids that identify operations with errors that could not be acknowledged.",
           "items": {
             "type": "string"
           }
@@ -3243,7 +3246,7 @@
     },
     "AllocationStrategy": {
       "type": "string",
-      "description": "The allocation strategy for VM size selection",
+      "description": "The strategy Bulk Actions uses to select a virtual machine size.",
       "enum": [
         "LowestPrice",
         "Prioritized",
@@ -3256,17 +3259,17 @@
           {
             "name": "LowestPrice",
             "value": "LowestPrice",
-            "description": "Platform prioritizes VM sizes with the lowest hourly cost"
+            "description": "Bulk Actions prioritizes virtual machine sizes with the lowest hourly cost."
           },
           {
             "name": "Prioritized",
             "value": "Prioritized",
-            "description": "Customer specifies a rank for each VM size, platform uses VM sizes in rank order"
+            "description": "Bulk Actions considers virtual machine sizes in the customer-specified rank order."
           },
           {
             "name": "CapacityOptimized",
             "value": "CapacityOptimized",
-            "description": "Platform prioritizes VM sizes with the highest available capacity first"
+            "description": "Bulk Actions prioritizes virtual machine sizes with the highest available capacity."
           }
         ]
       }
@@ -3801,13 +3804,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the VM size, eg Standard_D2ads_v5",
+          "description": "The virtual machine SKU, for example `Standard_D2ads_v5`.",
           "minLength": 1
         },
         "rank": {
           "type": "integer",
           "format": "int32",
-          "description": "The rank of this VM size in the priority order"
+          "description": "The customer-defined priority rank for this virtual machine size."
         },
         "override": {
           "$ref": "#/definitions/BulkCreateCustomOverrideBase",
@@ -3999,11 +4002,11 @@
     },
     "CancelOperationsRequest": {
       "type": "object",
-      "description": "This is the request to cancel running operations in scheduled actions using the operation ids",
+      "description": "The eligible operations to cancel.",
       "properties": {
         "operationIds": {
           "type": "array",
-          "description": "The list of operation ids to cancel operations on",
+          "description": "The Bulk Action Operation Ids that identify the operations to cancel.",
           "items": {
             "type": "string"
           }
@@ -4015,11 +4018,11 @@
     },
     "CancelOperationsResponse": {
       "type": "object",
-      "description": "This is the response from a cancel operations request",
+      "description": "The results of the cancellation requests.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "An array of resource operations that were successfully cancelled",
+          "description": "The current result for each operation submitted for cancellation.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -4291,19 +4294,19 @@
     },
     "CreateResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a create request",
+      "description": "The result of a bulk create action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the create request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the create request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4311,7 +4314,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the create request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -4399,19 +4402,19 @@
     },
     "DeallocateResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a deallocate request",
+      "description": "The result of a bulk deallocate action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the deallocate request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the deallocate request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4419,7 +4422,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the deallocate request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -4482,19 +4485,19 @@
     },
     "DeleteResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a delete request",
+      "description": "The result of a bulk delete action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the delete request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the delete request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4502,7 +4505,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the delete request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -4726,7 +4729,7 @@
     },
     "DistributionStrategy": {
       "type": "string",
-      "description": "The distribution strategy for zone allocation",
+      "description": "The strategy Bulk Actions uses to distribute virtual machines across availability zones.",
       "enum": [
         "BestEffortSingleZone",
         "Prioritized",
@@ -4740,22 +4743,22 @@
           {
             "name": "BestEffortSingleZone",
             "value": "BestEffortSingleZone",
-            "description": "Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed"
+            "description": "Bulk Actions attempts to place as many virtual machines as possible in one availability zone and uses additional zones when needed."
           },
           {
             "name": "Prioritized",
             "value": "Prioritized",
-            "description": "Platform uses customer-provided zone rankings to allocate VMs"
+            "description": "Bulk Actions considers availability zones in the customer-specified rank order."
           },
           {
             "name": "BestEffortBalanced",
             "value": "BestEffortBalanced",
-            "description": "Platform attempts to evenly distribute VMs across all available zones with best effort"
+            "description": "Bulk Actions attempts to distribute virtual machines evenly across the available zones."
           },
           {
             "name": "StrictBalanced",
             "value": "StrictBalanced",
-            "description": "Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved"
+            "description": "Bulk Actions distributes virtual machines evenly across zones and rejects the request when an even distribution cannot be achieved."
           }
         ]
       }
@@ -4846,15 +4849,15 @@
     },
     "ExecuteCreateRequest": {
       "type": "object",
-      "description": "The ExecuteCreateRequest request for create operations",
+      "description": "The virtual machine configuration and execution settings for a bulk create action.",
       "properties": {
         "resourceConfigParameters": {
           "$ref": "#/definitions/ResourceProvisionPayload",
-          "description": "resource creation payload"
+          "description": "The shared and per-virtual-machine creation configuration."
         },
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         }
       },
       "required": [
@@ -4864,19 +4867,19 @@
     },
     "ExecuteDeallocateRequest": {
       "type": "object",
-      "description": "The ExecuteDeallocateRequest request for executeDeallocate operations",
+      "description": "The virtual machines and execution settings for a bulk deallocate action.",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
+          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
         },
         "resourcesWithContext": {
           "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified."
+          "description": "The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`."
         }
       },
       "required": [
@@ -4885,23 +4888,23 @@
     },
     "ExecuteDeleteRequest": {
       "type": "object",
-      "description": "The ExecuteDeleteRequest for delete VM operation",
+      "description": "The virtual machines and execution settings for a bulk delete action.",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
+          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
         },
         "resourcesWithContext": {
           "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified."
+          "description": "The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`."
         },
         "forceDeletion": {
           "type": "boolean",
-          "description": "Forced delete resource item"
+          "description": "Indicates whether Bulk Actions uses forced deletion for the target virtual machines."
         }
       },
       "required": [
@@ -4910,19 +4913,19 @@
     },
     "ExecuteHibernateRequest": {
       "type": "object",
-      "description": "The ExecuteHibernateRequest request for executeHibernate operations",
+      "description": "The virtual machines and execution settings for a bulk hibernate action.",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
+          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
         },
         "resourcesWithContext": {
           "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified."
+          "description": "The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`."
         }
       },
       "required": [
@@ -4931,23 +4934,23 @@
     },
     "ExecuteReimageRequest": {
       "type": "object",
-      "description": "The ExecuteReimageRequest request for reimage operations",
+      "description": "The virtual machines and configuration for a bulk reimage action.",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
+          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
         },
         "resourcesWithContext": {
           "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified."
+          "description": "The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`."
         },
         "reimageParameters": {
           "$ref": "#/definitions/ReimagePayload",
-          "description": "Reimage parameters including base profile and per-resource overrides"
+          "description": "The shared and per-virtual-machine reimage configuration."
         }
       },
       "required": [
@@ -4956,19 +4959,19 @@
     },
     "ExecuteStartRequest": {
       "type": "object",
-      "description": "The ExecuteStartRequest request for executeStart operations",
+      "description": "The virtual machines and execution settings for a bulk start action.",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         },
         "resources": {
           "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
+          "description": "The target virtual machines. Do not specify this property together with `resourcesWithContext`."
         },
         "resourcesWithContext": {
           "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified."
+          "description": "The target virtual machines with customer-provided tracking context. Do not specify this property together with `resources`."
         }
       },
       "required": [
@@ -4977,15 +4980,15 @@
     },
     "ExecuteVdiCreateRequest": {
       "type": "object",
-      "description": "The VdiCreateRequest request for create operations",
+      "description": "The virtual machine configuration and flexible allocation preferences for a virtual desktop infrastructure workload.",
       "properties": {
         "resourceConfigParameters": {
           "$ref": "#/definitions/ResourceProvisionVdiPayload",
-          "description": "resource creation payload"
+          "description": "The creation configuration and flexible allocation preferences."
         },
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
+          "description": "The execution settings for the bulk action."
         }
       },
       "required": [
@@ -4995,19 +4998,19 @@
     },
     "ExecutionParameters": {
       "type": "object",
-      "description": "Extra details needed to run the user's request",
+      "description": "The execution settings for a bulk action.",
       "properties": {
         "optimizationPreference": {
           "$ref": "#/definitions/OptimizationPreference",
-          "description": "Details that could optimize the user's request"
+          "description": "The preference used to optimize execution of the bulk action."
         },
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
-          "description": "Retry policy the user can pass"
+          "description": "The retry settings for the bulk action."
         },
         "verifyVmAgentHealth": {
           "type": "boolean",
-          "description": "When true on an executeStart request, run a post-Start VM agent health check and engage the fallback chain if the guest agent does not report Ready. Ignored for non-Start operations."
+          "description": "Indicates whether Bulk Actions verifies the virtual machine guest agent health after a start operation. This setting has no effect on other operation types."
         },
         "capacityRecommendationParameters": {
           "$ref": "#/definitions/CapacityRecommendationParameters",
@@ -5017,19 +5020,19 @@
     },
     "FallbackOperationInfo": {
       "type": "object",
-      "description": "Describes the fallback operation that was performed",
+      "description": "Information about an additional operation attempted after the requested operation did not succeed.",
       "properties": {
         "lastOpType": {
           "$ref": "#/definitions/ResourceOperationType",
-          "description": "The last operation type that was performed as a fallback"
+          "description": "The type of the additional operation."
         },
         "status": {
           "type": "string",
-          "description": "The status of the fallback operation"
+          "description": "The status of the additional operation."
         },
         "error": {
           "$ref": "#/definitions/ResourceOperationError",
-          "description": "The error code if the fallback operation failed"
+          "description": "The error returned when the additional operation did not succeed."
         }
       },
       "required": [
@@ -5039,11 +5042,11 @@
     },
     "FlexProperties": {
       "type": "object",
-      "description": "The flex properties for flexible VM creation",
+      "description": "The allocation preferences for creating virtual machines for a virtual desktop infrastructure workload.",
       "properties": {
         "vmSizeProfiles": {
           "type": "array",
-          "description": "The list of VM size profiles to use for flex creation",
+          "description": "The virtual machine sizes that Bulk Actions can use, in customer-defined priority order.",
           "minItems": 1,
           "maxItems": 5,
           "items": {
@@ -5053,20 +5056,20 @@
         },
         "osType": {
           "$ref": "#/definitions/OsType",
-          "description": "The operating system type for the VMs"
+          "description": "The operating system type for the virtual machines."
         },
         "priorityProfile": {
           "$ref": "#/definitions/PriorityProfile",
-          "description": "The priority profile for VM allocation"
+          "description": "The priority and allocation preferences for the virtual machines."
         },
         "zoneAllocationPolicy": {
           "$ref": "#/definitions/ZoneAllocationPolicy",
-          "description": "The zone allocation policy for distributing VMs across availability zones"
+          "description": "The preferences for distributing virtual machines across availability zones."
         },
         "minCapacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of VMs that must be successfully created for the request to proceed. If fewer than this number can be allocated, the entire request is automatically rejected."
+          "description": "The minimum number of virtual machines that must be created. Bulk Actions rejects the request when it cannot allocate this number."
         }
       },
       "required": [
@@ -5077,11 +5080,11 @@
     },
     "GetOperationStatusRequest": {
       "type": "object",
-      "description": "This is the request to get operation status using operationids",
+      "description": "The operation for which current status should be returned.",
       "properties": {
         "operationIds": {
           "type": "array",
-          "description": "The list of operation ids to get the status of",
+          "description": "The Bulk Action Operation Ids that identify the operations for which current status should be returned.",
           "items": {
             "type": "string"
           }
@@ -5093,11 +5096,11 @@
     },
     "GetOperationStatusResponse": {
       "type": "object",
-      "description": "This is the response from a get operations status request",
+      "description": "The current results for the requested operations.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "An array of resource operations based on their operation ids",
+          "description": "The current result for each requested operation.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -5126,19 +5129,19 @@
     },
     "HibernateResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a Hibernate request",
+      "description": "The result of a bulk hibernate action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the Hibernate request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the Hibernate request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5146,7 +5149,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the Hibernate request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -5292,15 +5295,15 @@
     },
     "KeyVaultSecretReference": {
       "type": "object",
-      "description": "Describes a reference to Key Vault Secret",
+      "description": "A reference to a secret stored in Azure Key Vault.",
       "properties": {
         "secretUrl": {
           "type": "string",
-          "description": "The URL referencing a secret in a Key Vault."
+          "description": "The URL of the secret in Azure Key Vault."
         },
         "sourceVault": {
           "$ref": "#/definitions/SubResource",
-          "description": "The relative URL of the Key Vault containing the secret."
+          "description": "The Azure resource ID of the Key Vault that contains the secret."
         }
       },
       "required": [
@@ -5553,7 +5556,7 @@
     },
     "ListBulkOperationErrorsResponse": {
       "type": "object",
-      "description": "The response from listing bulk operation errors",
+      "description": "A paged list of recent bulk action errors.",
       "properties": {
         "value": {
           "type": "array",
@@ -6159,17 +6162,17 @@
     },
     "OSProfileProvisioningData": {
       "type": "object",
-      "description": "Additional parameters for Reimaging Non-Ephemeral Virtual Machine.",
+      "description": "Additional parameters for reimaging a virtual machine that does not use an ephemeral operating system disk.",
       "properties": {
         "adminPassword": {
           "type": "string",
           "format": "password",
-          "description": "Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)",
+          "description": "The password for the virtual machine administrator account. The password must be 8 to 123 characters long for Windows virtual machines or 6 to 72 characters long for Linux virtual machines. It must contain characters from at least three of these categories: lowercase letters, uppercase letters, digits, and special characters. The following values are not allowed: `abc@123`, `P@$$w0rd`, `P@ssw0rd`, `P@ssword123`, `Pa$$word`, `pass@word1`, `Password!`, `Password1`, `Password22`, and `iloveyou!`. This secret is accepted only in the request and is not returned in responses.",
           "x-ms-secret": true
         },
         "customData": {
           "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. **Note: Do not pass any secrets or passwords in customData property.** This property cannot be updated after the VM is created. The property customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/blog/custom-data-and-cloud-init-on-windows-azure/). If using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)."
+          "description": "Base64-encoded custom data provided to the virtual machine. The decoded data can contain up to 65,535 bytes. Do not include secrets or passwords."
         }
       }
     },
@@ -6593,7 +6596,7 @@
     },
     "OsType": {
       "type": "string",
-      "description": "The supported operating system types for flex VM creation",
+      "description": "The operating system type for virtual machines created with flexible allocation preferences.",
       "enum": [
         "Windows",
         "Linux"
@@ -6605,12 +6608,12 @@
           {
             "name": "Windows",
             "value": "Windows",
-            "description": "Windows operating system"
+            "description": "Windows operating system."
           },
           {
             "name": "Linux",
             "value": "Linux",
-            "description": "Linux operating system"
+            "description": "Linux operating system."
           }
         ]
       }
@@ -6711,30 +6714,30 @@
     },
     "PriorityProfile": {
       "type": "object",
-      "description": "The priority profile for flex VM creation",
+      "description": "The priority and allocation preferences for virtual machines.",
       "properties": {
         "type": {
           "$ref": "#/definitions/PriorityType",
-          "description": "The priority type for VM allocation"
+          "description": "The priority type for virtual machine allocation."
         },
         "maxPricePerVM": {
           "type": "number",
           "format": "float",
-          "description": "Price per hour of each Spot VM will never exceed this. Available from 2026-04-06-preview."
+          "description": "The maximum hourly price, in US dollars, for each Spot virtual machine."
         },
         "evictionPolicy": {
           "$ref": "#/definitions/EvictionPolicy",
-          "description": "Eviction Policy to follow when evicting Spot VMs. Available from 2026-04-06-preview."
+          "description": "The action applied to a Spot virtual machine when Azure evicts it."
         },
         "allocationStrategy": {
           "$ref": "#/definitions/AllocationStrategy",
-          "description": "The allocation strategy for VM size selection"
+          "description": "The strategy used to select a virtual machine size."
         }
       }
     },
     "PriorityType": {
       "type": "string",
-      "description": "The priority type for VM allocation",
+      "description": "The priority type for virtual machine allocation.",
       "enum": [
         "Regular",
         "Spot"
@@ -6746,12 +6749,12 @@
           {
             "name": "Regular",
             "value": "Regular",
-            "description": "Regular priority VMs"
+            "description": "Regular, non-Spot virtual machines."
           },
           {
             "name": "Spot",
             "value": "Spot",
-            "description": "Spot priority VMs"
+            "description": "Azure Spot Virtual Machines."
           }
         ]
       }
@@ -6942,15 +6945,15 @@
     },
     "ReimagePayload": {
       "type": "object",
-      "description": "Reimage payload with common profile and per-resource overrides",
+      "description": "The shared and per-virtual-machine configuration for a bulk reimage action.",
       "properties": {
         "baseProfile": {
           "$ref": "#/definitions/VirtualMachineReimageParameters",
-          "description": "Common reimage profile applied to all resources unless overridden"
+          "description": "The reimage configuration applied to every virtual machine unless a per-virtual-machine override is provided."
         },
         "resourceOverrides": {
           "type": "array",
-          "description": "Per-resource reimage overrides",
+          "description": "The reimage configuration overrides for individual virtual machines.",
           "items": {
             "$ref": "#/definitions/ReimageResourceOverride"
           },
@@ -6960,19 +6963,19 @@
     },
     "ReimageResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a reimage request",
+      "description": "The result of a bulk reimage action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the reimage request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the reimage request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6980,7 +6983,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the reimage request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -6997,12 +7000,12 @@
     },
     "ReimageResourceOverride": {
       "type": "object",
-      "description": "Per-resource override entry for reimage requests",
+      "description": "A reimage configuration override for one virtual machine.",
       "properties": {
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the virtual machine for this override",
+          "description": "The Azure resource ID of the virtual machine to which the override applies.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -7013,7 +7016,7 @@
         },
         "profile": {
           "$ref": "#/definitions/VirtualMachineReimageParameters",
-          "description": "Per-resource reimage profile override"
+          "description": "The reimage configuration for this virtual machine."
         }
       },
       "required": [
@@ -7094,57 +7097,57 @@
     },
     "ResourceNotificationDetails": {
       "type": "object",
-      "description": "Resource notification details containing notification metadata like the resource context",
+      "description": "Customer-provided context associated with a virtual machine result.",
       "properties": {
         "resourceContext": {
           "type": "string",
-          "description": "Resource context for notification tracking"
+          "description": "Opaque customer-provided context returned with the virtual machine result."
         }
       }
     },
     "ResourceOperation": {
       "type": "object",
-      "description": "High level response from an operation on a resource",
+      "description": "The result of a bulk action for one virtual machine.",
       "properties": {
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Unique identifier for the resource involved in the operation, for example Azure resource ID"
+          "description": "The Azure resource ID of the virtual machine."
         },
         "errorCode": {
           "type": "string",
-          "description": "Resource level error code if it exists"
+          "description": "A code that identifies the error for the virtual machine."
         },
         "errorDetails": {
           "type": "string",
-          "description": "Resource level error details if they exist"
+          "description": "A message that describes the error for the virtual machine."
         },
         "operation": {
           "$ref": "#/definitions/ResourceOperationDetails",
-          "description": "Details of the operation performed on a resource"
+          "description": "The status and settings for the operation on the virtual machine."
         },
         "virtualMachineInfo": {
           "$ref": "#/definitions/VirtualMachineInfo",
-          "description": "Information about the virtual machine"
+          "description": "Information about the virtual machine selected for the operation."
         }
       }
     },
     "ResourceOperationDetails": {
       "type": "object",
-      "description": "The details of a response from an operation on a resource",
+      "description": "The status and settings for an operation on one virtual machine.",
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "Operation identifier for the unique operation"
+          "description": "The operation ID used to track the action for this virtual machine."
         },
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Unique identifier for the resource involved in the operation, for example Azure resource ID"
+          "description": "The Azure resource ID of the virtual machine."
         },
         "opType": {
           "type": "string",
-          "description": "Type of operation performed on the resources",
+          "description": "The type of operation performed on the virtual machine.",
           "default": "Unknown",
           "enum": [
             "Unknown",
@@ -7162,53 +7165,53 @@
               {
                 "name": "Unknown",
                 "value": "Unknown",
-                "description": "The default value for this enum type"
+                "description": "The operation type is not known."
               },
               {
                 "name": "Start",
                 "value": "Start",
-                "description": "Start operations on the resources"
+                "description": "Starts the specified virtual machines."
               },
               {
                 "name": "Deallocate",
                 "value": "Deallocate",
-                "description": "Deallocate operations on the resources"
+                "description": "Deallocates the specified virtual machines."
               },
               {
                 "name": "Hibernate",
                 "value": "Hibernate",
-                "description": "Hibernate operations on the resources"
+                "description": "Hibernates the specified virtual machines."
               },
               {
                 "name": "Create",
                 "value": "Create",
-                "description": "Create operations on the resources"
+                "description": "Creates the specified virtual machines."
               },
               {
                 "name": "Delete",
                 "value": "Delete",
-                "description": "Delete operations on the resources"
+                "description": "Deletes the specified virtual machines."
               },
               {
                 "name": "GetInstanceView",
                 "value": "GetInstanceView",
-                "description": "Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request"
+                "description": "Retrieves virtual machine instance information to verify guest agent health after a start operation."
               }
             ]
           }
         },
         "subscriptionId": {
           "type": "string",
-          "description": "Subscription id attached to the request"
+          "description": "The subscription ID associated with the bulk action."
         },
         "deadline": {
           "type": "string",
           "format": "date-time",
-          "description": "Deadline for the operation"
+          "description": "The requested deadline for the operation."
         },
         "deadlineType": {
           "type": "string",
-          "description": "Type of deadline of the operation",
+          "description": "The behavior associated with the operation deadline.",
           "default": "Unknown",
           "enum": [
             "Unknown",
@@ -7222,24 +7225,24 @@
               {
                 "name": "Unknown",
                 "value": "Unknown",
-                "description": "Default value of Unknown."
+                "description": "The deadline behavior is not known."
               },
               {
                 "name": "InitiateAt",
                 "value": "InitiateAt",
-                "description": "Initiate the operation at the given deadline."
+                "description": "Bulk Actions attempts to start the operation at the specified deadline."
               },
               {
                 "name": "CompleteBy",
                 "value": "CompleteBy",
-                "description": "Complete the operation by the given deadline."
+                "description": "Bulk Actions attempts to complete the operation by the specified deadline."
               }
             ]
           }
         },
         "state": {
           "type": "string",
-          "description": "Current state of the operation",
+          "description": "The current state of the operation.",
           "default": "Unknown",
           "enum": [
             "Unknown",
@@ -7259,47 +7262,47 @@
               {
                 "name": "Unknown",
                 "value": "Unknown",
-                "description": "The default value for the operation state enum"
+                "description": "The operation state is not known."
               },
               {
                 "name": "PendingScheduling",
                 "value": "PendingScheduling",
-                "description": "Operations that are pending scheduling"
+                "description": "The operation is waiting to be scheduled."
               },
               {
                 "name": "Scheduled",
                 "value": "Scheduled",
-                "description": "Operations that have been scheduled"
+                "description": "The operation has been scheduled."
               },
               {
                 "name": "PendingExecution",
                 "value": "PendingExecution",
-                "description": "Operations that are waiting to be executed"
+                "description": "The operation is waiting to begin."
               },
               {
                 "name": "Executing",
                 "value": "Executing",
-                "description": "Operations that are in the process of being executed"
+                "description": "The operation is in progress."
               },
               {
                 "name": "Succeeded",
                 "value": "Succeeded",
-                "description": "Operations that succeeded"
+                "description": "The operation completed successfully."
               },
               {
                 "name": "Failed",
                 "value": "Failed",
-                "description": "Operations that have failed"
+                "description": "The operation failed."
               },
               {
                 "name": "Cancelled",
                 "value": "Cancelled",
-                "description": "Operations that have been Cancelled by the user"
+                "description": "The operation was canceled by the customer."
               },
               {
                 "name": "Blocked",
                 "value": "Blocked",
-                "description": "Operations that are blocked"
+                "description": "The operation cannot currently make progress."
               }
             ]
           },
@@ -7307,28 +7310,28 @@
         },
         "timezone": {
           "type": "string",
-          "description": "Timezone for the operation"
+          "description": "The time zone used to interpret the operation deadline."
         },
         "resourceOperationError": {
           "$ref": "#/definitions/ResourceOperationError",
-          "description": "Operation level errors if they exist"
+          "description": "The error returned for the virtual machine, if the operation did not succeed."
         },
         "fallbackOperationInfo": {
           "$ref": "#/definitions/FallbackOperationInfo",
-          "description": "Fallback operation details if a fallback was performed"
+          "description": "Information about an additional operation attempted after the requested operation did not succeed."
         },
         "completedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Time the operation was complete if errors are null"
+          "description": "The date and time when the operation completed."
         },
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
-          "description": "Retry policy the user can pass"
+          "description": "The retry settings for the bulk action."
         },
         "resourceNotificationDetails": {
           "$ref": "#/definitions/ResourceNotificationDetails",
-          "description": "Resource notification details."
+          "description": "The customer-provided context associated with the virtual machine result."
         },
         "capacityRecommendation": {
           "$ref": "#/definitions/CapacityRecommendation",
@@ -7341,15 +7344,15 @@
     },
     "ResourceOperationError": {
       "type": "object",
-      "description": "These describe errors that occur at the resource level",
+      "description": "An error that occurred while processing one virtual machine.",
       "properties": {
         "errorCode": {
           "type": "string",
-          "description": "Code for the error eg 404, 500"
+          "description": "A code that identifies the error."
         },
         "errorDetails": {
           "type": "string",
-          "description": "Detailed message about the error"
+          "description": "A message that describes the error."
         }
       },
       "required": [
@@ -7409,7 +7412,7 @@
     },
     "ResourceOperationType": {
       "type": "string",
-      "description": "The kind of bulk operation that can be performed on resources using Bulkactions API",
+      "description": "The type of operation performed by Bulk Actions.",
       "enum": [
         "Unknown",
         "Start",
@@ -7426,37 +7429,37 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "The default value for this enum type"
+            "description": "The operation type is not known."
           },
           {
             "name": "Start",
             "value": "Start",
-            "description": "Start operations on the resources"
+            "description": "Starts the specified virtual machines."
           },
           {
             "name": "Deallocate",
             "value": "Deallocate",
-            "description": "Deallocate operations on the resources"
+            "description": "Deallocates the specified virtual machines."
           },
           {
             "name": "Hibernate",
             "value": "Hibernate",
-            "description": "Hibernate operations on the resources"
+            "description": "Hibernates the specified virtual machines."
           },
           {
             "name": "Create",
             "value": "Create",
-            "description": "Create operations on the resources"
+            "description": "Creates the specified virtual machines."
           },
           {
             "name": "Delete",
             "value": "Delete",
-            "description": "Delete operations on the resources"
+            "description": "Deletes the specified virtual machines."
           },
           {
             "name": "GetInstanceView",
             "value": "GetInstanceView",
-            "description": "Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request"
+            "description": "Retrieves virtual machine instance information to verify guest agent health after a start operation."
           }
         ]
       }
@@ -7482,16 +7485,16 @@
     },
     "ResourceProvisionPayload": {
       "type": "object",
-      "description": "Resource creation data model",
+      "description": "The shared and per-virtual-machine configuration for a bulk create action.",
       "properties": {
         "baseProfile": {
           "type": "object",
-          "description": "Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch",
+          "description": "The virtual machine configuration applied to every virtual machine in the bulk create action.",
           "additionalProperties": {}
         },
         "resourceOverrides": {
           "type": "array",
-          "description": "Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch",
+          "description": "The per-virtual-machine configuration overrides for the bulk create action.",
           "items": {
             "type": "object",
             "additionalProperties": {}
@@ -7501,11 +7504,11 @@
         "resourceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of VMs to be created"
+          "description": "The number of virtual machines to create."
         },
         "resourcePrefix": {
           "type": "string",
-          "description": "If resourceOverrides doesn't contain \"name\", the service will create a name based on the prefix and ResourceCount, e.g., resourceprefix-0, resourceprefix-1.."
+          "description": "The prefix used by Bulk Actions to generate virtual machine names when a per-virtual-machine override does not specify `name`."
         }
       },
       "required": [
@@ -7514,16 +7517,16 @@
     },
     "ResourceProvisionVdiPayload": {
       "type": "object",
-      "description": "Resource creation data model with Flex properties for VDI scenarios",
+      "description": "The virtual machine configuration and flexible allocation preferences for a virtual desktop infrastructure workload.",
       "properties": {
         "baseProfile": {
           "type": "object",
-          "description": "Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch",
+          "description": "The virtual machine configuration applied to every virtual machine in the bulk create action.",
           "additionalProperties": {}
         },
         "resourceOverrides": {
           "type": "array",
-          "description": "Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch",
+          "description": "The per-virtual-machine configuration overrides for the bulk create action.",
           "items": {
             "type": "object",
             "additionalProperties": {}
@@ -7533,15 +7536,15 @@
         "resourceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of VMs to be created"
+          "description": "The number of virtual machines to create."
         },
         "resourcePrefix": {
           "type": "string",
-          "description": "If resourceOverrides doesn't contain \"name\", the service will create a name based on the prefix and ResourceCount, e.g., resourceprefix-0, resourceprefix-1.."
+          "description": "The prefix used by Bulk Actions to generate virtual machine names when a per-virtual-machine override does not specify `name`."
         },
         "flexProperties": {
           "$ref": "#/definitions/FlexProperties",
-          "description": "Flex properties used for VDI resource creation scenarios"
+          "description": "The flexible allocation preferences for the virtual desktop infrastructure workload."
         }
       },
       "required": [
@@ -7620,12 +7623,12 @@
     },
     "ResourceWithContext": {
       "type": "object",
-      "description": "The resources needed for the user request with the resourceContext",
+      "description": "A virtual machine and optional customer-provided context for tracking its result.",
       "properties": {
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ids used for the request",
+          "description": "The Azure resource ID of the target virtual machine.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -7636,7 +7639,7 @@
         },
         "resourceContext": {
           "type": "string",
-          "description": "The operational context of the resourceId"
+          "description": "Opaque customer-provided context returned with the result for this virtual machine. Do not include secrets or personal data."
         }
       },
       "required": [
@@ -7646,11 +7649,11 @@
     },
     "Resources": {
       "type": "object",
-      "description": "The resources needed for the user request",
+      "description": "The virtual machines targeted by a bulk action.",
       "properties": {
         "ids": {
           "type": "array",
-          "description": "The resource ids used for the request",
+          "description": "The Azure resource IDs of the target virtual machines.",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -7671,11 +7674,11 @@
     },
     "ResourcesWithContext": {
       "type": "object",
-      "description": "The resources needed for the user request with the context for tracking purposes",
+      "description": "The virtual machines targeted by a bulk action, with customer-provided tracking context.",
       "properties": {
         "resources": {
           "type": "array",
-          "description": "The resource ids used for the request",
+          "description": "The target virtual machines and their customer-provided tracking context.",
           "items": {
             "$ref": "#/definitions/ResourceWithContext"
           },
@@ -7690,21 +7693,21 @@
     },
     "RetryPolicy": {
       "type": "object",
-      "description": "The retry policy for the user request",
+      "description": "The retry settings for a bulk action.",
       "properties": {
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Retry count for user request"
+          "description": "The maximum number of retry attempts."
         },
         "retryWindowInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Retry window in minutes for user request"
+          "description": "The period, in minutes, during which Bulk Actions can retry the operation."
         },
         "onFailureAction": {
           "$ref": "#/definitions/ResourceOperationType",
-          "description": "Action to take on failure"
+          "description": "The operation that Bulk Actions attempts when the requested operation fails."
         }
       }
     },
@@ -8487,19 +8490,19 @@
     },
     "StartResourceOperationResponse": {
       "type": "object",
-      "description": "The response from a start request",
+      "description": "The result of a bulk start action.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the operation response"
+          "description": "A description of the bulk action result."
         },
         "type": {
           "type": "string",
-          "description": "The type of resources used in the start request eg virtual machines"
+          "description": "The type of resources targeted by the bulk action."
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the start request eg westus",
+          "description": "The Azure region where Bulk Actions processes the request.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8507,7 +8510,7 @@
         },
         "results": {
           "type": "array",
-          "description": "The results from the start request if no errors exist",
+          "description": "The result for each virtual machine.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
@@ -8606,11 +8609,11 @@
     },
     "SubResource": {
       "type": "object",
-      "description": "Describes a reference to a sub-resource.",
+      "description": "A reference to an Azure resource.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the sub-resource."
+          "description": "The Azure resource ID."
         }
       }
     },
@@ -9157,11 +9160,11 @@
       "properties": {
         "vmSize": {
           "type": "string",
-          "description": "The name of the VM size, eg Standard_D2ads_v5"
+          "description": "The virtual machine SKU, for example `Standard_D2ads_v5`."
         },
         "zone": {
           "type": "string",
-          "description": "The zone identifier"
+          "description": "The availability zone identifier."
         }
       }
     },
@@ -9446,35 +9449,35 @@
     },
     "VirtualMachineReimageParameters": {
       "type": "object",
-      "description": "Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged",
+      "description": "The parameters for reimaging a virtual machine. The operating system disk is always reimaged.",
       "properties": {
         "tempDisk": {
           "type": "boolean",
-          "description": "Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk."
+          "description": "Indicates whether to reimage the temporary disk. The default value is `false`. This option is supported only for virtual machines or virtual machine scale sets that use an ephemeral operating system disk."
         },
         "exactVersion": {
           "type": "string",
-          "description": "Specifies in decimal number, the version the OS disk should be reimaged to. If exact version is not provided, the OS disk is reimaged to the existing version of OS Disk."
+          "description": "The exact image version to use when reimaging the operating system disk. When omitted, the disk is reimaged to its current image version."
         },
         "osProfile": {
           "$ref": "#/definitions/OSProfileProvisioningData",
-          "description": "Specifies information required for reimaging the non-ephemeral OS disk."
+          "description": "The operating system profile used when reimaging a non-ephemeral operating system disk."
         }
       }
     },
     "VmSizeProfile": {
       "type": "object",
-      "description": "A VM size profile with a name and rank for flex VM creation",
+      "description": "A virtual machine size and its selection priority.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the VM size, eg Standard_D2ads_v5",
+          "description": "The virtual machine SKU, for example `Standard_D2ads_v5`.",
           "minLength": 1
         },
         "rank": {
           "type": "integer",
           "format": "int32",
-          "description": "The rank of this VM size in the priority order"
+          "description": "The customer-defined priority rank for this virtual machine size."
         }
       },
       "required": [
@@ -9726,15 +9729,15 @@
     },
     "ZoneAllocationPolicy": {
       "type": "object",
-      "description": "The zone allocation policy for distributing VMs across availability zones",
+      "description": "The preferences for distributing virtual machines across availability zones.",
       "properties": {
         "distributionStrategy": {
           "$ref": "#/definitions/DistributionStrategy",
-          "description": "The distribution strategy for zone allocation"
+          "description": "The strategy used to distribute virtual machines across availability zones."
         },
         "zonePreferences": {
           "type": "array",
-          "description": "The zone preferences for allocation priority",
+          "description": "The availability zones and their allocation priorities.",
           "items": {
             "$ref": "#/definitions/ZonePreference"
           },
@@ -9744,16 +9747,16 @@
     },
     "ZonePreference": {
       "type": "object",
-      "description": "A zone preference with a zone identifier and rank",
+      "description": "An availability zone and its allocation priority.",
       "properties": {
         "zone": {
           "type": "string",
-          "description": "The zone identifier"
+          "description": "The availability zone identifier."
         },
         "rank": {
           "type": "integer",
           "format": "int32",
-          "description": "The rank of this zone in the priority order"
+          "description": "The customer-defined priority rank for this availability zone."
         }
       },
       "required": [

@@ -1,43 +1,37 @@
 {
-  "title": "VirtualMachineBulkOperations_BulkReimage_Example",
+  "title": "Reimage multiple virtual machines with a per-virtual-machine override",
   "operationId": "VirtualMachineBulkOperations_BulkReimage",
   "parameters": {
     "api-version": "2026-08-06-preview",
-    "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
-    "resourceGroupName": "rgBulkactions",
-    "location": "useast2euap",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
     "requestBody": {
       "executionParameters": {
         "retryPolicy": {
-          "retryCount": 2,
-          "retryWindowInMinutes": 19,
+          "retryCount": 3,
+          "retryWindowInMinutes": 30,
           "onFailureAction": "Unknown"
-        }
+        },
+        "optimizationPreference": "CostAvailabilityBalanced"
       },
       "resources": {
         "ids": [
-          "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02"
         ]
       },
       "reimageParameters": {
         "baseProfile": {
-          "tempDisk": true,
-          "exactVersion": "zjmkrnqjmzs",
-          "osProfile": {
-            "adminPassword": "<a-password-goes-here>",
-            "customData": "teyngslcznlxihiitqbul"
-          }
+          "tempDisk": false,
+          "exactVersion": "1.0.20260701"
         },
         "resourceOverrides": [
           {
-            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
             "profile": {
               "tempDisk": true,
-              "exactVersion": "zjmkrnqjmzs",
-              "osProfile": {
-                "adminPassword": "<a-password-goes-here>",
-                "customData": "teyngslcznlxihiitqbul"
-              }
+              "exactVersion": "1.0.20260702"
             }
           }
         ]
@@ -47,43 +41,51 @@
   "responses": {
     "200": {
       "body": {
-        "description": "Reimage Resource request",
         "type": "VirtualMachines",
-        "location": "useast2euap",
+        "location": "eastus",
+        "description": "Reimage Resource request",
         "results": [
           {
-            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-            "errorCode": "TestErrorCode",
-            "errorDetails": "Test error details",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "virtualMachineInfo": {
+              "vmSize": "Standard_D4s_v5",
+              "zone": "1"
+            },
             "operation": {
-              "operationId": "0437c0c9-328e-4585-9808-31ee9460b19f",
-              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
               "opType": "Unknown",
-              "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
-              "deadline": "2026-06-11T19:35:45.098Z",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deadline": "2026-07-10T18:00:00Z",
               "deadlineType": "InitiateAt",
               "state": "PendingScheduling",
               "timezone": "UTC",
-              "resourceOperationError": {
-                "errorCode": "TestErrorCode",
-                "errorDetails": "Test error details"
-              },
-              "fallbackOperationInfo": {
-                "lastOpType": "Reimage",
-                "status": "succeeded",
-                "error": {
-                  "errorCode": "TestErrorCode",
-                  "errorDetails": "Test error details"
-                }
-              },
-              "completedAt": "2026-06-11T19:35:45.098Z",
               "retryPolicy": {
-                "retryCount": 2,
-                "retryWindowInMinutes": 19,
+                "retryCount": 3,
+                "retryWindowInMinutes": 30,
                 "onFailureAction": "Unknown"
-              },
-              "resourceNotificationDetails": {
-                "resourceContext": ""
+              }
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "virtualMachineInfo": {
+              "vmSize": "Standard_D8s_v5",
+              "zone": "2"
+            },
+            "operation": {
+              "operationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+              "opType": "Unknown",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deadline": "2026-07-10T18:00:00Z",
+              "deadlineType": "InitiateAt",
+              "state": "PendingScheduling",
+              "timezone": "UTC",
+              "retryPolicy": {
+                "retryCount": 3,
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Unknown"
               }
             }
           }
