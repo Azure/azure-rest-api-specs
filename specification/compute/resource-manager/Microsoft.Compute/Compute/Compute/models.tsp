@@ -487,6 +487,20 @@ union AllocationStrategy {
   Prioritized: "Prioritized",
 }
 
+/**
+ * Specifies how VM SKUs are distributed across instances in the virtual machine scale set.
+ */
+@added(Versions.v2026_09_01)
+union SkuDistributionMode {
+  string,
+
+  /** VMs may use different SKUs from the SkuProfile list (multi-SKU). This is the default behavior. */
+  Heterogeneous: "Heterogeneous",
+
+  /** All VMs use a single SKU selected from the SkuProfile list. */
+  Homogeneous: "Homogeneous",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetVMScaleSets {
   string,
@@ -3891,6 +3905,12 @@ model SkuProfile {
    * Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.
    */
   allocationStrategy?: AllocationStrategy;
+
+  /**
+   * Specifies how VM SKUs are distributed across instances. Heterogeneous (default) allows multiple SKUs; Homogeneous pins all VMs to a single selected SKU from the SkuProfile list.
+   */
+  @added(Versions.v2026_09_01)
+  skuDistributionMode?: SkuDistributionMode;
 
   /**
    * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
