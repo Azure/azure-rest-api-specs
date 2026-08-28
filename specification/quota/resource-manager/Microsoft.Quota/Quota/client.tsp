@@ -71,6 +71,23 @@ using Microsoft.Quota;
 @@clientName(GroupQuotaLimitLists.list, "get", "csharp");
 @@clientName(SubscriptionQuotaAllocationsLists.list, "get", "csharp");
 
+// Avoids .NET analyzer AZC0030, which rejects model names ending in "Request".
+@@clientName(
+  QuotaTransferCancelRequest,
+  "QuotaTransferCancelContent",
+  "csharp"
+);
+@@clientName(
+  IncomingQuotaTransferApproveRequest,
+  "IncomingQuotaTransferApproveContent",
+  "csharp"
+);
+@@clientName(
+  IncomingQuotaTransferRejectRequest,
+  "IncomingQuotaTransferRejectContent",
+  "csharp"
+);
+
 @@usage(QuotaAllocationRequestStatus, Usage.input, "csharp");
 @@usage(QuotaAllocationRequestBase, Usage.input, "csharp");
 @@usage(GroupQuotaSubscriptionRequestStatusProperties, Usage.input, "csharp");
