@@ -4258,7 +4258,7 @@ paths:
         - Agents
   /agents:generate:
     post:
-      operationId: Agents_generateAgent
+      operationId: AgentEndpointConversations_generateAgent
       summary: Generate an agent
       description: |-
         Generates and creates an agent from kind-specific high-level inputs.
@@ -4299,6 +4299,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
+        - Agent Conversations
         - Agents
       requestBody:
         required: true

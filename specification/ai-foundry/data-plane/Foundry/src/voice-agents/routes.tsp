@@ -79,7 +79,6 @@ interface VoiceAgentWebSocket {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The endpoint-scoped, read-only voice conversation projection and its nested response, item, and audio routes do not match a standard resource operation template."
 @tag("Agent Conversations")
 interface AgentEndpointConversations {
-
   /**
    * Generates and creates an agent from kind-specific high-level inputs.
    * The generated definition remains fully editable through the standard agent versioning operations.
