@@ -23,7 +23,7 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-12-01'
 input-file:
-  - stable/2022-12-01/widgetanalytics.json
+  - stable/2022-12-01/widgetanalytics2.json
 ```
 
 ### Suppress non-TypeSpec SDK related linting rules
