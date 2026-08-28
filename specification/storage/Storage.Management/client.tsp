@@ -1087,9 +1087,22 @@ namespace Azure.ResourceManager.Models {
 );
 
 // Property renames for DateTimeOffset On-suffix
+@@clientName(FileShareProperties.accessTierChangeTime, "AccessTierChangeOn", "csharp");
+@@clientName(AccessPolicy.startTime, "StartOn", "csharp");
+@@clientName(TableAccessPolicy.startTime, "StartOn", "csharp");
+@@clientName(
+  AccountSasParameters.signedStart,
+  "SharedAccessStartOn",
+  "csharp"
+);
 @@clientName(
   AccountSasParameters.signedExpiry,
   "SharedAccessExpireOn",
+  "csharp"
+);
+@@clientName(
+  ServiceSasParameters.signedStart,
+  "SharedAccessStartOn",
   "csharp"
 );
 @@clientName(StorageTaskReportProperties.startTime, "StartedOn", "csharp");
