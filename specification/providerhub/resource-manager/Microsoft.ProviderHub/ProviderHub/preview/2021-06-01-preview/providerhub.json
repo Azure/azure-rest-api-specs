@@ -3032,17 +3032,6 @@
         }
       }
     },
-    "ServiceTreeInfo": {
-      "type": "object",
-      "properties": {
-        "serviceId": {
-          "type": "string"
-        },
-        "componentId": {
-          "type": "string"
-        }
-      }
-    },
     "TemplateDeploymentPolicy": {
       "required": [
         "capabilities",
@@ -3233,12 +3222,6 @@
             "$ref": "#/definitions/SubscriptionStateRule"
           }
         },
-        "serviceTreeInfos": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceTreeInfo"
-          }
-        },
         "requestHeaderOptions": {
           "allOf": [
             {
@@ -3312,17 +3295,9 @@
         "incidentContactEmail": {
           "type": "string"
         },
-        "serviceTreeInfos": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceTreeInfo"
-          }
-        },
         "resourceAccessPolicy": {
           "enum": [
-            "NotSpecified",
-            "AcisReadAllowed",
-            "AcisActionAllowed"
+            "NotSpecified"
           ],
           "type": "string"
         },
@@ -4551,12 +4526,6 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
-        },
-        "serviceTreeInfos": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceTreeInfo"
           }
         },
         "requestHeaderOptions": {

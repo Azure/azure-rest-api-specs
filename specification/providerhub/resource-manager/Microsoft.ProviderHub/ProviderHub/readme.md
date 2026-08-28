@@ -234,12 +234,6 @@ directive:
       - $.definitions.OperationsDefinitionArrayResponseWithContinuation
     reason: Historically the operations definition response doesn't include ID property. This is a pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
 
-  - suppress: PutRequestResponseSchemeArm
-    from: providerhub.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}"].put
-    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
-
   - suppress: RepeatedPathInfo
     from: providerhub.json
     reason: Pre-existing lint error not introduced in this version which required the provider namespace to be in the body.
