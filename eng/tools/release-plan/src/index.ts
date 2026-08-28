@@ -30,6 +30,7 @@ export async function main(): Promise<void> {
   let resolvedPrNumber: number | undefined;
   let hasNewApiVersionLabel = false;
   let isTspConfigChanged = false;
+  let releasePlanEnsured = false;
   let args: CliArguments;
   let octokit: OctokitLike;
 
@@ -109,12 +110,19 @@ export async function main(): Promise<void> {
       hasNewApiVersionLabel = commitResult.hasNewApiVersionLabel;
 
       // Check if commit contains TypeSpec files (.tsp or tspconfig.yaml)
-      const commitFiles = await getCommitChangedFiles({
-        octokit,
-        owner: args.owner,
-        repo: args.repo,
-        commitSha,
-      });
+      const commitFiles = commitResult.prNumber
+        ? await getPrChangedFiles({
+            octokit,
+            owner: args.owner,
+            repo: args.repo,
+            prNumber: commitResult.prNumber,
+          })
+        : await getCommitChangedFiles({
+            octokit,
+            owner: args.owner,
+            repo: args.repo,
+            commitSha,
+          });
 
       const specFiles = commitFiles.filter((f) => f.filename.startsWith("specification/"));
       const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
@@ -161,6 +169,7 @@ export async function main(): Promise<void> {
       createAzdskRunner(),
       hasNewApiVersionLabel || isTspConfigChanged,
     );
+    releasePlanEnsured = true;
 
     console.log(JSON.stringify(result, null, 2));
 
@@ -206,7 +215,12 @@ export async function main(): Promise<void> {
     console.error(`release-plan tool failed: ${message}`);
 
     // Try to post error comment on PR if available and PR has new-api-version label
-    if (resolvedPrNumber && projectInfo && (hasNewApiVersionLabel || isTspConfigChanged)) {
+    if (
+      !releasePlanEnsured &&
+      resolvedPrNumber &&
+      projectInfo &&
+      (hasNewApiVersionLabel || isTspConfigChanged)
+    ) {
       try {
         await postReleasePlanErrorComment({
           octokit: octokit!,
