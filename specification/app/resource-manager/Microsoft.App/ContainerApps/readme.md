@@ -59,25 +59,53 @@ input-file:
 directive:
   - suppress: PatchBodyParametersSchema
     from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"].patch.parameters[4].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}"].patch.parameters[4].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/javaComponents/{name}"].patch.parameters[5].schema.properties.properties
     reason: |
-      Pre-existing. Java Component and Session Pool use discriminator/identity type as required property.
-      Managed Service Identity requires type for patching.
+      The established Container App and Job PATCH schemas retain nested required fields and
+      defaults, and Java Component PATCH retains the required componentType discriminator.
+      Changing those published request schemas would break the existing stable wire contract.
   - suppress: AvoidAdditionalProperties
     from: openapi.json
+    where:
+      - $.definitions.CustomScaleRule.properties.metadata
+      - $.definitions.HttpScaleRule.properties.metadata
+      - $.definitions.IdentityProviders.properties.customOpenIdConnectProviders
+      - $.definitions.TcpScaleRule.properties.metadata
     reason: |
-      Pre-existing. Scale rule metadata and service bind customized keys use additionalProperties.
+      Scale rule metadata accepts scaler-specific keys, and customOpenIdConnectProviders is keyed
+      by provider name. Replacing these established open maps with closed models would break
+      existing payloads.
   - suppress: PutResponseCodes
     from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/managedCertificates/{managedCertificateName}"].put
     reason: |
-      Pre-existing. Do not introduce breaking changes in GA services.
-  - suppress: TrackedExtensionResourcesAreNotAllowed
-    from: openapi.json
-    reason: |
-      Pre-existing. Do not introduce breaking changes in GA services.
+      These established PUT operations do not all expose exactly 200, 201, and default responses;
+      managedCertificates also exposes 400. Changing their published response-code sets would
+      break the existing stable wire contract.
   - suppress: LroErrorContent
     from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"].put.responses.default.schema['$ref']
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"].delete.responses.default.schema['$ref']
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/sourcecontrols/{sourceControlName}"].put.responses.default.schema['$ref']
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/sourcecontrols/{sourceControlName}"].delete.responses.default.schema['$ref']
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}"].put.responses.default.schema['$ref']
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}"].patch.responses.default.schema['$ref']
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}"].delete.responses.default.schema['$ref']
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/executions/{jobExecutionName}/stop"].post.responses.default.schema['$ref']
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/start"].post.responses.default.schema['$ref']
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/stop"].post.responses.default.schema['$ref']
     reason: |
-      Pre-existing. Using the same error response as other APIs.
+      These established long-running operations use the service-defined DefaultErrorResponse.
+      Replacing it with the ARM common-types error schema would change the published stable error
+      contract.
   - suppress: ProvisioningStateMustBeReadOnly
     from: openapi.json
     where:
