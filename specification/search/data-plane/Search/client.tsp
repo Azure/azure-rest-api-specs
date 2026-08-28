@@ -1555,7 +1555,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@access(Search.ListDataSourcesResult, Access.public, "java");
+@@access(Search.ListDataSourcesResult, Access.internal, "java");
 @@clientNamespace(Search.DocumentKeysOrIds, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.DocumentKeysOrIds,
@@ -1616,7 +1616,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@access(Search.ListIndexersResult, Access.public, "java");
+@@access(Search.ListIndexersResult, Access.internal, "java");
 @@clientNamespace(Search.SearchIndexerStatus, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.SearchIndexerStatus,
@@ -1797,7 +1797,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@access(Search.ListSkillsetsResult, Access.public, "java");
+@@access(Search.ListSkillsetsResult, Access.internal, "java");
 @@clientNamespace(Search.SkillNames, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.SkillNames,
@@ -1819,7 +1819,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@access(Search.ListSynonymMapsResult, Access.public, "java");
+@@access(Search.ListSynonymMapsResult, Access.internal, "java");
 @@clientNamespace(Search.SearchIndex, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.SearchIndex,
