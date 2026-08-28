@@ -26,7 +26,6 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
     Agents
   );
-
   // Keep Voice Agent telephony management on the existing Agents sub-client.
   @@clientLocation(AgentTelephony.createTelephonyBinding, Agents);
   @@clientLocation(AgentTelephony.listTelephonyBindings, Agents);
@@ -39,6 +38,18 @@ namespace Azure.AI.Projects {
   @@clientLocation(AgentTelephony.endTelephonyCall, Agents);
   @@clientLocation(AgentTelephony.getTelephonyTransferTargets, Agents);
   @@clientLocation(AgentTelephony.replaceTelephonyTransferTargets, Agents);
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.publishAgentToMicrosoft365,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365AppPackage,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365PublishDefaults,
+    Agents
+  );
 }
 
 namespace Azure.AI.Projects.Beta {

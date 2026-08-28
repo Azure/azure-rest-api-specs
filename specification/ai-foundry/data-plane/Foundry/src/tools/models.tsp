@@ -21,13 +21,12 @@ namespace Azure.AI.Projects {
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
-
-    @removed(Versions.v1)
     web_iq_preview: "web_iq_preview",
   }
 
   // General availability tools:
   union _AgentToolType {
+    a2a: "a2a",
     azure_ai_search: "azure_ai_search",
     azure_function: "azure_function",
     bing_grounding: "bing_grounding",
@@ -429,6 +428,7 @@ namespace Azure.AI.Projects {
     /**
      * The definition of azure function and its parameters.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     function: {
       /**
        * The name of the function to be called.
@@ -780,16 +780,16 @@ namespace Azure.AI.Projects {
     outputs: StructuredOutputDefinition;
   }
 
-  /**
-   * An agent implementing the A2A protocol.
-   */
-  @extension("x-ms-foundry-meta", PreviewTool)
-  model A2APreviewTool extends OpenAI.Tool {
-    /**
-     * The type of the tool. Always `"a2a_preview`.
-     */
-    type: "a2a_preview";
+  /** Supported A2A protocol versions. */
+  union A2AProtocolVersion {
+    string,
 
+    /** A2A protocol version 1.0. */
+    v1_0: "1.0",
+  }
+
+  /** Common configuration for an agent implementing the A2A protocol. */
+  model A2AToolBase {
     /**
      * Base URL of the agent.
      */
@@ -813,6 +813,36 @@ namespace Azure.AI.Projects {
      * specified by the caller (anonymous fetch).
      */
     send_credentials_for_agent_card?: boolean = false;
+  }
+
+  /**
+   * An agent implementing the A2A protocol.
+   */
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model A2APreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `"a2a_preview`.
+     */
+    type: "a2a_preview";
+
+    ...A2AToolBase;
+  }
+
+  /**
+   * An agent implementing the A2A protocol.
+   */
+  model A2ATool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `"a2a"`.
+     */
+    type: "a2a";
+
+    ...A2AToolBase;
+
+    /**
+     * The A2A protocol version supported by the agent.
+     */
+    a2a_version: A2AProtocolVersion;
   }
 
   /**
@@ -860,14 +890,13 @@ namespace Azure.AI.Projects {
      * (Optional) Whether the agent requires approval before executing actions. Default is always.
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
   /**
    * A WebIQ server-side tool.
    */
-  @removed(Versions.v1)
   @extension("x-ms-foundry-meta", PreviewTool)
   model WebIQPreviewTool extends OpenAI.Tool {
     /**
@@ -881,15 +910,15 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
 
     /**
-     * The label of the WebIQ MCP server to connect to.
+     * The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
      */
     server_label?: string;
 
     /**
-     * Whether the agent requires approval before executing actions. Default is always.
+     * Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
@@ -975,7 +1004,7 @@ namespace Azure.AI.Projects {
   // Tool Call Output Content Type
   // ==============================================================================
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")
@@ -1231,7 +1260,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("An Azure Function tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model AzureFunctionToolCall extends OpenAI.OutputItem {
     type: "azure_function_call";
 
