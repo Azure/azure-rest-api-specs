@@ -1,4 +1,7 @@
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Oracle.Database;
@@ -102,6 +105,11 @@ model NetworkAnchorProperties {
   @doc("Deep link to OCI console DNS Forwarding endpoint NSG rules")
   @visibility(Lifecycle.Read)
   dnsForwardingEndpointNsgRulesUrl?: string;
+
+  @added(Versions.v20260501_preview)
+  @doc("Proximity placement group settings")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  proximityPlacementGroup?: ProximityPlacementGroup;
 }
 
 @added(Versions.v20250701_preview)
@@ -114,4 +122,32 @@ model DnsForwardingRule {
   @doc("Forwarding ip address")
   @visibility(Lifecycle.Create)
   forwardingIpAddress: string;
+}
+
+@added(Versions.v20260501_preview)
+@doc("Proximity placement group properties")
+model ProximityPlacementGroup {
+  @doc("Proximity placement group ID")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  proximityPlacementGroupId: string;
+
+  @doc("Proximity Anchor ID")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  proximityAnchorId?: string;
+
+  @doc("Entity type intended to use the proximity placement group")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  entityTypeIntendedToUse: ProximityPlacementGroupEntityType;
+}
+
+@added(Versions.v20260501_preview)
+@doc("Entity types for proximity placement group usage")
+union ProximityPlacementGroupEntityType {
+  @doc("Cloud Exadata Infrastructure")
+  CloudExadataInfrastructure: "CloudExadataInfrastructure",
+
+  @doc("Other products")
+  OtherProducts: "OtherProducts",
+
+  string,
 }
