@@ -1,5 +1,7 @@
 # Contributing
 
+<!-- cspell:ignore tocstop azsdk Poli -->
+
 This file provides general guidance for developers that are creating or updating REST API definitions for Azure.
 
 See the [specification documentation index](./documentation/README.md) for repository-specific guides and references.
