@@ -19,6 +19,7 @@ alias VoiceAgentWebSocketMessageUsage = Usage.input | Usage.output | Usage.json;
 
 union VoiceAgentClientEventTypeExtension {
   session_avatar_connect: "session.avatar.connect",
+  rtc_call_sdp_create: "rtc.call.sdp.create",
 }
 
 union VoiceAgentServerEventTypeExtension {
@@ -29,6 +30,8 @@ union VoiceAgentServerEventTypeExtension {
   session_avatar_connecting: "session.avatar.connecting",
   session_avatar_switch_to_speaking: "session.avatar.switch_to_speaking",
   session_avatar_switch_to_idle: "session.avatar.switch_to_idle",
+  rtc_call_sdp_created: "rtc.call.sdp.created",
+  rtc_call_error: "rtc.call.error",
   response_audio_timestamp_delta: "response.audio_timestamp.delta",
   response_audio_timestamp_done: "response.audio_timestamp.done",
   response_animation_blendshapes_delta: "response.animation_blendshapes.delta",
@@ -514,7 +517,7 @@ model VoiceAgentClientEventSessionAvatarConnect
 @doc("The `rtc.call.sdp.create` client event: begins WebRTC signaling with an SDP offer.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @usage(VoiceAgentClientEventUsage)
-model VoiceAgentClientEventRtcCallSdpCreate {
+model VoiceAgentClientEventRtcCallSdpCreate extends OpenAI.RealtimeClientEvent {
   @doc("The event type. Always `rtc.call.sdp.create`.")
   type: "rtc.call.sdp.create";
 
@@ -531,7 +534,8 @@ model VoiceAgentClientEventRtcCallSdpCreate {
 @doc("The `rtc.call.sdp.created` server event: the SDP answer that completes WebRTC negotiation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventRtcCallSdpCreated {
+model VoiceAgentServerEventRtcCallSdpCreated
+  extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `rtc.call.sdp.created`.")
   type: "rtc.call.sdp.created";
 
@@ -562,7 +566,7 @@ model VoiceAgentRtcCallErrorDetails {
 @doc("The `rtc.call.error` server event: a WebRTC signaling failure.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @usage(VoiceAgentServerEventUsage)
-model VoiceAgentServerEventRtcCallError {
+model VoiceAgentServerEventRtcCallError extends OpenAI.RealtimeServerEvent {
   @doc("The event type. Always `rtc.call.error`.")
   type: "rtc.call.error";
 
