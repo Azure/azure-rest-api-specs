@@ -216,6 +216,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create deployment at a given scope.": {
+            "$ref": "./examples/PutDeploymentAtScope.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/DeploymentExtended"
@@ -600,6 +605,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validates a template at scope": {
+            "$ref": "./examples/PostDeploymentValidateOnScope.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/DeploymentValidateResult"
@@ -777,6 +787,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create deployment at management group scope.": {
+            "$ref": "./examples/PutDeploymentAtManagementGroup.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1170,6 +1185,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validates a template at management group scope": {
+            "$ref": "./examples/PostDeploymentValidateOnManagementGroup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/DeploymentValidateResult"
@@ -1245,6 +1265,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Predict template changes at management group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnManagementGroup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/WhatIfOperationResult"
@@ -1283,6 +1308,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Calculate template hash": {
+            "$ref": "./examples/CalculateTemplateHash.json"
           }
         }
       }
@@ -1430,6 +1460,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create deployment at tenant scope.": {
+            "$ref": "./examples/PutDeploymentAtTenant.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1760,6 +1795,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validates a template at tenant scope": {
+            "$ref": "./examples/PostDeploymentValidateOnTenant.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/DeploymentValidateResult"
@@ -1824,6 +1864,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at management group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnTenant.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1985,6 +2030,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a deployment that will deploy a templateSpec with the given resourceId": {
+            "$ref": "./examples/PutDeploymentSubscriptionTemplateSpecsWithId.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2336,6 +2386,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validates a template at subscription scope": {
+            "$ref": "./examples/PostDeploymentValidateOnSubscription.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/DeploymentValidateResult"
@@ -2403,6 +2458,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at subscription scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnSubscription.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2693,6 +2753,23 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a deployment that will deploy a template with a uri and queryString": {
+            "$ref": "./examples/PutDeploymentResourceGroup.json"
+          },
+          "Create a deployment that will deploy a templateSpec with the given resourceId": {
+            "$ref": "./examples/PutDeploymentResourceGroupTemplateSpecsWithId.json"
+          },
+          "Create a deployment that will redeploy another deployment on failure": {
+            "$ref": "./examples/PutDeploymentWithOnErrorDeploymentSpecificDeployment.json"
+          },
+          "Create a deployment that will redeploy the last successful deployment on failure": {
+            "$ref": "./examples/PutDeploymentWithOnErrorDeploymentLastSuccessful.json"
+          },
+          "Create deployment using external inputs": {
+            "$ref": "./examples/PutDeploymentWithExternalInputs.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/DeploymentExtended"
@@ -2977,6 +3054,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Validates a template at resource group scope": {
+            "$ref": "./examples/PostDeploymentValidateOnResourceGroup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/DeploymentValidateResult"
@@ -3051,6 +3133,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at resource group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnResourceGroup.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4379,8 +4466,7 @@
         "Delete",
         "Modify",
         "Array",
-        "NoEffect",
-        "ArrayItemMove"
+        "NoEffect"
       ],
       "x-ms-enum": {
         "name": "PropertyChangeType",
@@ -4410,11 +4496,6 @@
             "name": "NoEffect",
             "value": "NoEffect",
             "description": "The property will not be set or updated."
-          },
-          {
-            "name": "ArrayItemMove",
-            "value": "ArrayItemMove",
-            "description": "The resource is an array item that has been moved within the array."
           }
         ]
       }
@@ -5074,12 +5155,12 @@
         "beforeIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "The index of the property before the deployment is executed.\nWill only be present in `ArrayItemMove` changes."
+          "description": "The index of the property before the deployment is executed."
         },
         "afterIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "The index of the property after the deployment is executed.\nWill only be present in `ArrayItemMove` changes."
+          "description": "The index of the property after the deployment is executed."
         }
       },
       "required": [

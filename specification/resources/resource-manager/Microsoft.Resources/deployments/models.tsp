@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -475,12 +477,7 @@ enum PropertyChangeType {
   /**
    * The property will not be set or updated.
    */
-  NoEffect,
-
-  /**
-   * The resource is an array item that has been moved within the array.
-   */
-  ArrayItemMove
+  NoEffect
 }
 
 /**
@@ -1627,14 +1624,14 @@ model WhatIfPropertyChange {
 
   /**
    * The index of the property before the deployment is executed.
-   * Will only be present in `ArrayItemMove` changes.
    */
+  @added(Versions.v2026_09_01)
   beforeIndex?: int32;
 
   /**
    * The index of the property after the deployment is executed.
-   * Will only be present in `ArrayItemMove` changes.
    */
+  @added(Versions.v2026_09_01)
   afterIndex?: int32;
 }
 

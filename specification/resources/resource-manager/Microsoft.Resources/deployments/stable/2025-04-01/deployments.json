@@ -4466,8 +4466,7 @@
         "Delete",
         "Modify",
         "Array",
-        "NoEffect",
-        "ArrayItemMove"
+        "NoEffect"
       ],
       "x-ms-enum": {
         "name": "PropertyChangeType",
@@ -4497,11 +4496,6 @@
             "name": "NoEffect",
             "value": "NoEffect",
             "description": "The property will not be set or updated."
-          },
-          {
-            "name": "ArrayItemMove",
-            "value": "ArrayItemMove",
-            "description": "The resource is an array item that has been moved within the array."
           }
         ]
       }
@@ -5157,16 +5151,6 @@
           "x-ms-identifiers": [
             "path"
           ]
-        },
-        "beforeIndex": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The index of the property before the deployment is executed.\nWill only be present in `ArrayItemMove` changes."
-        },
-        "afterIndex": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The index of the property after the deployment is executed.\nWill only be present in `ArrayItemMove` changes."
         }
       },
       "required": [
