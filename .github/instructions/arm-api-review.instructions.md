@@ -3,7 +3,7 @@ applyTo: "specification/**/resource-manager/**/*.json"
 ---
 
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      All rules derived from or aligned with:
        - Azure Resource Provider Contract (RPC) v1.0
          https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
@@ -133,17 +133,16 @@ label is present. The author must confirm that the approval covers that finding.
 
 The TypeSpec-required rule applies to all new ARM API versions. The full rule definition, detection signals, allowed cases, and false-positive guidance are in [`openapi-review.instructions.md` §2A](./openapi-review.instructions.md). Summary for ARM PRs:
 
-- New API version directories under `specification/**/resource-manager/**/{stable|preview}/<version>/` that contain only handwritten swagger (no sibling TypeSpec source, no `x-typespec-generated` marker, no `.tsp` files added in the PR) are **Blocking** with rule ID `TSP-REQUIRED-V1`.
+- New API version directories under `specification/**/resource-manager/**/{stable|preview}/<version>/` that contain only handwritten swagger (no `x-typespec-generated` marker and no sibling TypeSpec project proven to emit that version) are **Blocking** with rule ID `TSP-REQUIRED-V1`.
 - Updates to handwritten swagger inside **pre-existing** API version directories remain permitted and **MUST NOT** be flagged.
 - A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, surface this rule at review time.
 
 **Hard short-circuits.** Apply in order and stop at the first match. The full procedure is defined in [openapi-review.instructions.md §2A "Decision procedure"](./openapi-review.instructions.md#2a-typespec-required-for-new-api-versions-tsp-required-v1).
 
 1. API version directory exists on the base branch: rule **PASSES**, emit **no finding** at any severity.
-2. PR adds or modifies any `.tsp` file under the same service folder: rule **PASSES**, emit **no finding**.
-3. Sibling TypeSpec project with `main.tsp` and `tspconfig.yaml` is present anywhere under the service folder: rule **PASSES**, emit **no finding**.
-4. Swagger document has `x-typespec-generated` at the top level: rule **PASSES**, emit **no finding**. This marker is **dispositive on its own**. Do **not** emit a Warning, Suggestion, or "informational" TSP-REQUIRED-V1 finding when it is present.
-5. Otherwise: emit a single **Blocking** finding.
+2. Swagger document has `x-typespec-generated` at the top level: rule **PASSES**, emit **no finding**. This marker is **dispositive on its own**. Do **not** emit a Warning, Suggestion, or "informational" TSP-REQUIRED-V1 finding when it is present.
+3. Sibling TypeSpec project both declares the new API version and is configured to emit this OpenAPI directory: rule **PASSES**, emit **no finding**. A `.tsp` edit or unrelated sibling project is not sufficient without emission linkage.
+4. Otherwise: emit a single **Blocking** finding.
 
 "PASSES" means the rule does not appear in the findings list at any severity. Listing it as `N/A` or `Compliant` in an acknowledgments or compliant-areas table is acceptable.
 
@@ -1192,7 +1191,7 @@ When reviewing ARM resource-manager swagger files, verify:
 
 - ✅ All server-computed properties marked `readOnly` — missing annotation causes What-If false deletes (WHATIF-001)
 - ✅ String properties actively reviewed — enums used for finite/limited value sets
-- ✅ String properties actively reviewed — specific formats used (`date-time`, `uri`, `uuid`, `duration`, etc.)
+- ✅ String properties actively reviewed — `date-time`, `uri`, and duration formats used where applicable; GUID-like ARM strings follow the R3017 allow-list and suppression decision tree rather than receiving `format: uuid` automatically
 - ✅ No freeform `type: object` with no schema; no plain untyped string for structured values
 - ✅ Booleans reviewed — extensible enums preferred
 - ✅ Nullable properties annotated with `"x-ms-nullable": true`

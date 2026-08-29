@@ -326,10 +326,10 @@ describe("ARM API review workflow", () => {
     expect(critic).toContain("the canonical protocol permits a validated override");
     expect(protocol).toContain("`downstream-ci-conflict`");
     expect(protocol).toMatch(/`downstream-ci-conflict`[^\n]+Override allowed/);
-    expect(protocol).toContain("**10 non-overridable reasons**");
-    expect(protocol).toContain("PR URL, Session SHA, or Step 6 findings report");
+    expect(protocol).toContain("**11 non-overridable reasons**");
+    expect(protocol).toContain("PR URL, Session SHA, Step 6 findings report, or Step 5.5");
     expect(inputTemplate).toContain(
-      "Only PR URL, Session SHA, and the\nStep 6 findings report are required",
+      "PR URL, Session SHA, the Step 6 findings\nreport, and the Step 5.5 reconciliation plan or explicit sentinel are required",
     );
     expect(inputTemplate).toMatch(/\| Iteration\s+\| No\s+\| `1`/);
     expect(protocol).toContain("critic: pass|warn|override|unknown");
@@ -422,20 +422,22 @@ describe("ARM API review posting reliability", () => {
     );
   });
 
-  it("requires a telemetry marker on every posted body and bans the one-field form", async () => {
+  it("requires telemetry on standalone outputs and bans the one-field form", async () => {
     const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
     const collapsed = collapseWhitespace(source);
 
-    expect(source).toContain("### Telemetry Marker: Required on Every Posted Body");
-    // Each posting surface must be named, so the summary comment cannot be
-    // treated as exempt the way it was on earlier runs.
-    for (const surface of [
-      "create-pull-request-review-comment",
-      "reply-to-pull-request-review-comment",
-      "add-comment",
-    ]) {
+    expect(source).toContain(
+      "### Telemetry Marker: Required on Findings, Summaries, and Clarifications",
+    );
+    // Every standalone output surface must be named; reply-only reconciliation
+    // messages remain inside an existing marked thread.
+    for (const surface of ["create-pull-request-review-comment", "add-comment"]) {
       expect(source).toContain(surface);
     }
+    expect(source).not.toContain("| Reconciliation reply |");
+    expect(collapsed).toContain(
+      "Reply-only reconciliation messages stay inside an existing thread and do not need a finding marker.",
+    );
     expect(collapsed).toContain(
       "A marker that carries only `posted-by: arm-api-reviewer-agent` and no other field is **not** a valid marker on a posted body.",
     );
@@ -563,8 +565,10 @@ describe("ARM API review consistency and hardening", () => {
   it("reports the authoritative total in the scoped-review disclosure", async () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    expect(source).toContain("**`N` is the authoritative total, never the truncated count.**");
-    expect(source).toContain('write "an undetermined number of" in place of `N`');
+    expect(source).toContain(
+      "**`N` is the authoritative total PR file count, never a specification-file count and never the truncated count.**",
+    );
+    expect(source).toContain('write "an undetermined number of total PR files."');
     // The disclosure must name where coverage actually stopped.
     expect(source).toContain("coverage stops at <last-covered-path> in path order");
   });
@@ -941,7 +945,7 @@ describe("ARM API review live-run regressions", () => {
 
     // The run's summary marker carried only `rule:` and `posted-by:`.
     expect(collapsed).toContain(
-      "All seven fields are **required on every posted body**, including the Step 8 summary",
+      "All seven fields are **required on every finding and summary marker**",
     );
     expect(collapsed).toContain(
       "`posted-by`, `rule`, `category`, `severity`, `classification`, `critic`, and `head-sha`",
@@ -976,10 +980,25 @@ describe("ARM API review live-run regressions", () => {
 
   it("declares a marker surface for the review body", async () => {
     const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
+    const bodyTemplate = source.match(
+      /Use this body for `submit-pull-request-review`:[\s\S]*?```text([\s\S]*?)```/,
+    )?.[1];
 
-    // The section claims "every posted body" but the surface table omitted the
-    // review body, and the live run posted a review body with no marker.
-    expect(source).toContain("| Review body          | `submit-pull-request-review`");
+    expect(collapseWhitespace(source)).toContain(
+      "| Review body | `submit-pull-request-review` | `summary` |",
+    );
+    expect(bodyTemplate).toContain(
+      "_posted-by: arm-api-reviewer-agent | rule: summary | category: summary",
+    );
+  });
+
+  it("puts the summary marker inside the interactive review-body template", async () => {
+    const agent = await readFile(join(ROOT, AGENT_FILE), "utf8");
+    const template = agent.match(/\*\*Review-body preamble[\s\S]*?```markdown([\s\S]*?)```/)?.[1];
+
+    expect(template).toContain(
+      "<!-- posted-by: arm-api-reviewer-agent | rule: summary | category: summary",
+    );
   });
 
   it("puts the scoped-review disclosure slot inside the summary template", async () => {
@@ -1299,7 +1318,7 @@ describe("ARM paging and example enum calibration", () => {
     }
   });
 
-  it("keeps the eval catalog counts aligned with 72 scenarios and 48 fixtures", async () => {
+  it("keeps the eval catalog counts aligned with 76 scenarios and 57 fixtures", async () => {
     const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
     let stimulusCount = 0;
@@ -1320,13 +1339,13 @@ describe("ARM paging and example enum calibration", () => {
       { recursive: true, withFileTypes: true },
     );
     expect(evalFiles).toHaveLength(17);
-    expect(stimulusCount).toBe(72);
+    expect(stimulusCount).toBe(76);
     expect(
       fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
-    ).toHaveLength(48);
-    expect(readme).toContain("Total: 72 stimuli across 17 eval files.");
-    expect(readme).toContain("All 48 fixture data files");
-  });
+    ).toHaveLength(57);
+    expect(readme).toContain("Total: 76 stimuli across 17 eval files.");
+    expect(readme).toContain("All 57 fixture data files");
+  }, 15_000);
 
   it("maps every EX-PAYLOAD example reference into each enum eval workspace", async () => {
     const evalSpec =
@@ -1354,6 +1373,240 @@ describe("ARM paging and example enum calibration", () => {
           destinations.some((destination) => destination.endsWith(`/examples/${example}`)),
         ).toBe(true);
       }
+    }
+  });
+});
+
+describe("ARM Reviewer alignment and dependency consistency", () => {
+  const ALIGNED_RULE_FILES = [
+    ".github/instructions/arm-api-review.instructions.md",
+    ".github/instructions/openapi-review.instructions.md",
+    ".github/instructions/typespec-project.instructions.md",
+    ".github/instructions/typespec-review.instructions.md",
+    ".github/skills/azure-api-review/SKILL.md",
+    ".github/skills/azure-api-review/references/api-version-lifecycle-and-branches.md",
+    ".github/skills/azure-api-review/references/availability-zones.md",
+    ".github/skills/azure-api-review/references/design-decisions.md",
+    ".github/skills/azure-api-review/references/downstream-ci-impact.md",
+    ".github/skills/azure-api-review/references/enum-best-practices.md",
+    ".github/skills/azure-api-review/references/example-quality.md",
+    ".github/skills/azure-api-review/references/field-ownership.md",
+    ".github/skills/azure-api-review/references/guid-and-uuid-on-arm.md",
+    ".github/skills/azure-api-review/references/linter-rule-coverage.md",
+    ".github/skills/azure-api-review/references/lro-final-state-via.md",
+    ".github/skills/azure-api-review/references/naming-conventions.md",
+    ".github/skills/azure-api-review/references/pattern-validation.md",
+    ".github/skills/azure-api-review/references/policy-compatibility.md",
+    ".github/skills/azure-api-review/references/property-mutability.md",
+    ".github/skills/azure-api-review/references/provisioning-state.md",
+    ".github/skills/azure-api-review/references/reviewer-posted-parity.md",
+    ".github/skills/azure-api-review/references/secret-detection.md",
+    ".github/skills/azure-api-review/references/suppression-review-criteria.md",
+    ".github/skills/azure-api-review/references/template-deployment.md",
+    ".github/skills/azure-api-review/references/think-in-graphs.md",
+    ".github/skills/azure-api-review/references/tracked-resource-lifecycle.md",
+    ".github/skills/azure-api-review/references/what-if-preflight-compliance.md",
+  ];
+
+  it("pins every ARM and cross-cutting rule document to the requested alignment date", async () => {
+    for (const file of ALIGNED_RULE_FILES) {
+      const content = await readFile(join(ROOT, file), "utf8");
+      expect(content, file).toContain("Upstream alignment: 2026-08-15");
+    }
+  });
+
+  it("keeps graph handling explicit for every no-Mermaid path", async () => {
+    const [workflow, reviewer, critic, protocol, template] = await Promise.all([
+      readFile(join(ROOT, SOURCE_FILE), "utf8"),
+      readFile(join(ROOT, AGENT_FILE), "utf8"),
+      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/agents/protocols/arm-api-review-critic-inputs.template.md"),
+        "utf8",
+      ),
+    ]);
+    const combined = [workflow, reviewer, critic, protocol, template].join("\n");
+
+    for (const mode of ["fast-path", "size-downgrade", "derivation-failed"]) {
+      expect(combined).toContain(`graph-mode: ${mode}`);
+    }
+    expect(protocol).toContain("`size-downgrade` re-derives sensitive data flow");
+    expect(critic).toContain("Do not require a failure banner");
+  });
+
+  it("requires an explicit reconciliation plan or sentinel", async () => {
+    const [reviewer, critic, protocol, template] = await Promise.all([
+      readFile(join(ROOT, AGENT_FILE), "utf8"),
+      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/agents/protocols/arm-api-review-critic-inputs.template.md"),
+        "utf8",
+      ),
+    ]);
+    const combined = [reviewer, critic, protocol, template].join("\n");
+
+    expect(combined).toContain("Omission, an empty heading, or an empty string is malformed");
+    expect(combined).not.toContain("defaults to the literal sentinel `reconciliation skipped`");
+    expect(template).toMatch(/Step 5\.5 reconciliation plan \| \*\*Yes\*\*/);
+  });
+
+  it("keeps runtime scope, telemetry, labels, and truncation wording honest", async () => {
+    const [workflow, reviewer, protocol] = await Promise.all([
+      readFile(join(ROOT, SOURCE_FILE), "utf8"),
+      readFile(join(ROOT, AGENT_FILE), "utf8"),
+      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+    ]);
+    const collapsedWorkflow = collapseWhitespace(workflow);
+    const collapsedReviewer = collapseWhitespace(reviewer);
+
+    expect(workflow).toContain("`Azure/azure-rest-api-specs-pr`");
+    expect(workflow).not.toContain("| Reconciliation reply |");
+    expect(workflow).not.toContain("rule: review-body");
+    expect(protocol).toContain("Not on reply-only comments");
+    expect(protocol).toContain(
+      "_posted-by: arm-api-reviewer-agent | reconciliation: clarification",
+    );
+    expect(collapsedWorkflow).toContain("Exactly **three** things differ, by design");
+    expect(collapsedReviewer).toContain("Three things differ, by design");
+    expect(collapsedWorkflow).toContain(
+      "M in-scope `specification/` files reviewed from N total PR files",
+    );
+    expect(collapsedWorkflow).toContain(
+      "N` is the authoritative total PR file count, never a specification-file count",
+    );
+    expect(collapsedReviewer).toContain(
+      "After all retries fail, enter auto-unavailable and require explicit per-row human approval",
+    );
+    expect(protocol).toContain("four marker schemas");
+    expect(protocol).toContain("State B: all dispatch attempts failed");
+    expect(protocol).toContain("State C: Critic returned");
+  });
+
+  it("keeps downstream conflicts overridable and overflow rows non-overridable", async () => {
+    const [workflow, reviewer, critic, protocol] = await Promise.all([
+      readFile(join(ROOT, SOURCE_FILE), "utf8"),
+      readFile(join(ROOT, AGENT_FILE), "utf8"),
+      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+    ]);
+
+    expect(reviewer).not.toMatch(
+      /non-overridable[\s\S]{0,80}(?:downstream-ci-conflict|suppression-path-mismatch)/,
+    );
+    expect(critic).toContain("Both `downstream-ci-conflict` and `suppression-path-mismatch` are");
+    expect(protocol).toMatch(/`overflow-posted`[\s\S]{0,120}\*\*Yes\*\*/);
+    expect(critic).toContain("**OVERFLOW-NOT-POSTED**");
+    expect(workflow).toContain("| `OVERFLOW-NOT-POSTED`");
+    expect(workflow).toContain("Append every excluded candidate to the reconciliation plan as an");
+  });
+
+  it("keeps generic OpenAPI guidance subordinate to ARM-specific rules", async () => {
+    const openapi = collapseWhitespace(
+      await readFile(join(ROOT, ".github/instructions/openapi-review.instructions.md"), "utf8"),
+    );
+
+    expect(openapi).toContain("`arm-api-review.instructions.md` sections 3-6 are authoritative");
+    expect(openapi).toContain("ARM supports `If-Match`");
+    expect(openapi).toContain("does not support conditional GET");
+    expect(openapi).toContain("A closed enum with a documented fixed-set rationale");
+    expect(openapi).not.toContain(
+      'Every enum **MUST** have the `x-ms-enum` extension with a `name` property and `"modelAsString": true`',
+    );
+    expect(openapi).toContain("On ARM specs, do **not** suggest `format: uuid`");
+    expect(openapi).toContain(
+      "**Exception:** `systemData` on an ARM resource MUST use the canonical common-types definition",
+    );
+    expect(openapi).not.toContain("no ProvisioningState + 202 mixing");
+  });
+
+  it("requires TypeSpec emission linkage rather than an unrelated sibling project", async () => {
+    const [openapi, arm] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/openapi-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+    ]);
+    const combined = collapseWhitespace(`${openapi}\n${arm}`);
+
+    expect(combined).toContain("both declares the new API version and is configured to emit");
+    expect(combined).toContain("unrelated sibling project is not sufficient");
+    expect(combined).not.toContain(
+      "PR adds or modifies any `.tsp` file under the same service folder? Then **Rule PASSES",
+    );
+  });
+
+  it("keeps TypeSpec project organization rules compatible with imported files", async () => {
+    const instructions = collapseWhitespace(
+      await readFile(join(ROOT, ".github/instructions/typespec-project.instructions.md"), "utf8"),
+    );
+
+    expect(instructions).toContain("Its order relative to `@server` is not significant.");
+    expect(instructions).toContain(
+      "They may live in `main.tsp` or files such as `models.tsp` and `operations.tsp`",
+    );
+    expect(instructions).not.toContain(
+      "`@useAuth` decorator **MUST** be defined exactly ONCE, above",
+    );
+  });
+
+  it("keeps rule mappings and preservation examples accurate", async () => {
+    const [coverage, whatIf, ownership] = await Promise.all([
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/linter-rule-coverage.md"),
+        "utf8",
+      ),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/what-if-preflight-compliance.md"),
+        "utf8",
+      ),
+      readFile(join(ROOT, ".github/skills/azure-api-review/references/field-ownership.md"), "utf8"),
+    ]);
+
+    expect(coverage).toMatch(/R2063[\s\S]{0,120}openapi-review §14[\s\S]{0,40}Covered/);
+    expect(coverage).toMatch(/R2001[\s\S]{0,120}arm-api-review §8\.2[\s\S]{0,40}Covered/);
+    expect(coverage).toContain("| ✅ Covered   | 107");
+    expect(coverage).toContain("| ❌ GAP       | 4");
+    for (const rule of ["R4006", "R2023", "R1010", "R2006"]) {
+      expect(coverage).toContain(rule);
+    }
+    expect(whatIf).toContain("OAPI018** in\n> `arm-api-review.instructions.md` §8.17");
+    expect(whatIf).toContain("| OAPI026 | arm-api-review §8.16");
+    expect(whatIf).toContain("| OAPI024 | arm-api-review §8.15");
+    expect(whatIf).toContain("| OAPI022 | arm-api-review §8.14");
+    expect(ownership).toContain('| `"Test Value"` | `"test value"`          | `"Test Value"`');
+  });
+
+  it("keeps clean example references resolvable in every clean-spec eval", async () => {
+    const cleanSpec = await readFile(
+      join(ROOT, ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/clean-spec.json"),
+      "utf8",
+    );
+    const referencedExamples = [...cleanSpec.matchAll(/"\$ref": "\.\/examples\/([^"]+)"/g)].map(
+      (match) => match[1],
+    );
+    expect(referencedExamples).toHaveLength(7);
+
+    for (const evalFile of ["eval-true-negatives.yaml", "eval-report-format.yaml"]) {
+      const evalText = await readFile(
+        join(ROOT, ".github/skills/evals/arm-api-reviewer/vally", evalFile),
+        "utf8",
+      );
+      for (const example of referencedExamples) {
+        expect(evalText, `${evalFile}: ${example}`).toContain(`/examples/${example}`);
+      }
+    }
+  });
+
+  it("keeps EX-PAYLOAD fixtures isolated from title violations", async () => {
+    const exampleDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/fixtures/examples");
+    for (const file of [
+      "example-ex-payload-extensible-enum.json",
+      "example-ex-payload-closed-enum.json",
+      "example-ex-payload-discriminator.json",
+      "example-ex-payload-path-param.json",
+    ]) {
+      const example = await readFile(join(exampleDir, file), "utf8");
+      expect(example, file).toMatch(/"title":\s*"[^"]+"/);
     }
   });
 });

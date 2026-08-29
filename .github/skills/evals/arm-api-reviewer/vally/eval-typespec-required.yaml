@@ -2,8 +2,8 @@ name: arm-api-reviewer-eval-typespec-required
 description: |
   TypeSpec-required-for-new-API-versions tests (12xxxx).
   Validates rule TSP-REQUIRED-V1: new API version directories that contain
-  only handwritten OpenAPI swagger (no sibling TypeSpec source, no
-  x-typespec-generated marker, no .tsp files added in the PR) MUST be flagged
+  only handwritten OpenAPI swagger (no TypeSpec project proven to emit the new
+  version and no x-typespec-generated marker) MUST be flagged
   as Blocking. Updates to handwritten swagger inside pre-existing API version
   directories MUST NOT be flagged.
 
@@ -14,6 +14,11 @@ description: |
 environment:
   skills:
     - "../../../azure-api-review"
+  files:
+    - src: "../../../../instructions/openapi-review.instructions.md"
+      dest: ".github/instructions/openapi-review.instructions.md"
+    - src: "../../../../instructions/arm-api-review.instructions.md"
+      dest: ".github/instructions/arm-api-review.instructions.md"
 
 tags:
   area: arm-api-reviewer
@@ -41,9 +46,8 @@ stimuli:
         - The directory `specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/`
           is a NEW API version directory introduced by this PR. It does not exist on the base branch.
         - There are NO previous API versions for this service.
-        - The PR does NOT add or modify any `.tsp` files.
-        - There is NO sibling TypeSpec project (no `main.tsp`, no `tspconfig.yaml`) anywhere under
-          `specification/handwrittensvc/`.
+        - There is NO sibling TypeSpec project that declares this API version
+          and is configured to emit this OpenAPI directory.
         - The swagger file does NOT contain the `x-typespec-generated` extension.
 
       Apply all applicable review rules from the loaded instruction files,
@@ -66,7 +70,7 @@ stimuli:
           pattern: "(?is)TSP-REQUIRED-V1.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}TSP-REQUIRED-V1"
       - type: prompt
     rubric:
-      - The agent MUST flag rule `TSP-REQUIRED-V1` as a Blocking finding because the PR introduces a new API version directory that contains only handwritten OpenAPI swagger and none of the compliance signals (sibling TypeSpec project, `x-typespec-generated` marker, or added `.tsp` files) are present
+      - The agent MUST flag rule `TSP-REQUIRED-V1` as a Blocking finding because the PR introduces a new API version directory that contains only handwritten OpenAPI swagger and neither compliance signal (linked TypeSpec emitter or `x-typespec-generated` marker) is present
       - The finding must clearly identify the file path and explain that new API versions must be authored in TypeSpec with the Azure TypeSpec libraries
       - The fix suggestion must point the author to authoring the new API version in TypeSpec (e.g., creating a `main.tsp` and `tspconfig.yaml`, then generating swagger via `tsp compile .`)
 
@@ -151,3 +155,48 @@ stimuli:
       - Flagging `TSP-REQUIRED-V1` on this fixture is a false positive and constitutes a test failure
       - Listing `TSP-REQUIRED-V1` as N/A or compliant in an acknowledgments / compliant-areas table is acceptable and does NOT count as flagging
       - Other unrelated minor findings or suggestions are acceptable and do not affect the grade
+
+  # 120004 — Unrelated TypeSpec project does not prove emission linkage
+  - name: unrelated-typespec-project-does-not-pass-new-version
+    tags:
+      audit: "2026-08-15"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/clean-spec.json"
+          dest: "specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/handwrittensvc.json"
+        - src: "../fixtures/typespec/unrelated-version-main.tsp"
+          dest: "specification/handwrittensvc/Microsoft.HandwrittenService/main.tsp"
+        - src: "../fixtures/typespec/unrelated-version-tspconfig.yaml"
+          dest: "specification/handwrittensvc/Microsoft.HandwrittenService/tspconfig.yaml"
+    prompt: >
+      Review the new handwritten OpenAPI version for TSP-REQUIRED-V1. Read the
+      supplied instruction files and TypeSpec project before deciding. The
+      OpenAPI directory `stable/2026-05-01` is new and has no
+      `x-typespec-generated` marker. The sibling TypeSpec project declares only
+      `2025-01-01` and its emitter outputs only the `stable/2025-01-01`
+      directory. Do not edit files; return the review finding.
+
+      OpenAPI: specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/handwrittensvc.json
+      TypeSpec: specification/handwrittensvc/Microsoft.HandwrittenService/main.tsp
+      Config: specification/handwrittensvc/Microsoft.HandwrittenService/tspconfig.yaml
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "rule TSP-REQUIRED-V1 cited"
+        config:
+          substring: "TSP-REQUIRED-V1"
+      - type: output-matches
+        name: "unlinked handwritten version is Blocking"
+        config:
+          pattern: "(?is)TSP-REQUIRED-V1.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}TSP-REQUIRED-V1"
+      - type: output-matches
+        name: "emission linkage mismatch explained"
+        config:
+          pattern: "(?is)(?:2025-01-01|2026-05-01).{0,300}(?:emit|output|link|version)"
+      - type: prompt
+    rubric:
+      - The unrelated sibling TypeSpec project does not make the new handwritten version compliant
+      - The finding is Blocking and cites TSP-REQUIRED-V1
+      - The response explains that the project neither declares nor emits `2026-05-01`

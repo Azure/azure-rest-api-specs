@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-05-31
+     Upstream alignment: 2026-08-15
      Source of truth for the Reviewer-Posted Parity contract referenced by
      `arm-api-review.instructions.md`, `openapi-review.instructions.md`, and
      `typespec-review.instructions.md`. Prior to consolidation the same

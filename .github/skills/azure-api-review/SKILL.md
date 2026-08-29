@@ -6,6 +6,8 @@ metadata:
 description: "Shared Azure REST API review rules for OpenAPI (Swagger) and TypeSpec specifications. Contains cross-cutting review guidelines plus plane-specific references used by the ARM and data-plane API reviewers, code review agents, and CI workflows. USE FOR: reviewing API specs for naming, security, property design, resource lifecycle, error design, and versioning compliance. DO NOT USE FOR: authoring TypeSpec files (use azure-typespec-author), SDK generation, or releasing packages."
 ---
 
+<!-- Upstream alignment: 2026-08-15 -->
+
 # Azure API Review -- Shared Rules
 
 This skill contains **cross-cutting API review rules** that apply regardless of whether the specification is authored in OpenAPI v2 (Swagger) JSON or TypeSpec. These rules are the single source of truth -- referenced by the format-specific instruction files and review agents.

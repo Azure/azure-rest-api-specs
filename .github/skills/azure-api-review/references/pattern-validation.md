@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-06-05
+     Upstream alignment: 2026-08-15
      Derived from:
        - Azure REST API Guidelines (vNext) — URLs
        - ARM Wiki: api_contracts/guidelines/api_best_practices_and_design_choices.md (RPC-BestPractice-03)

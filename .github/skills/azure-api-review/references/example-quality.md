@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-22
+     Upstream alignment: 2026-08-15
      Derived from:
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
@@ -22,7 +22,7 @@ ensure example files are accurate, complete, and professional.
 
 ---
 
-## EX-PAYLOAD -- Example Payload Correctness
+## EX-PAYLOAD: Example Payload Correctness
 
 - **Rule ID:** `EX-PAYLOAD`
 - **Severity:** Blocking or Warning according to the matrix below

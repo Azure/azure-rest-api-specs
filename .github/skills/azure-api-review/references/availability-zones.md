@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - ARM Wiki: AvailabilityZones.md
        - ARM Wiki: AvailabilityZoneCustomerExperience.md

@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - ARM Wiki: api_contracts/guidelines/openapi.md (OAPI024, OAPI025, OAPI026)
        - ARM Wiki: api_contracts/guidelines/property_design_best_practices.md
@@ -63,7 +63,7 @@ match the corresponding value in the response and subsequent GETs. Do
 | `"westus"`     | `"West US"`             | `"westus"`       |
 | `"West US"`    | `"westus"`              | `"West US"`      |
 | `"::1"` (IPv6) | `"0:0:0:0:0:0:0:1"`     | `"::1"`          |
-| `"Test Value"` | `"test value"`          | `"TestValue"`    |
+| `"Test Value"` | `"test value"`          | `"Test Value"`   |
 
 **Why:** Normalization causes the GET response to differ from the PUT
 request, which generates noise in What-If, Change Analysis, Terraform

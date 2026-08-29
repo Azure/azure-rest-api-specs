@@ -134,7 +134,7 @@ public `Azure/azure-rest-api-specs` and private `Azure/azure-rest-api-specs-pr`.
 Both paths apply the same rule sources, overall output limit, severity policy,
 default finding set, and `ARMChangesRequested` label policy.
 
-Three consequences worth knowing as an author or reviewer:
+Four consequences worth knowing as an author or reviewer:
 
 - **The interactive path has a human approval gate.** The
   interactive agent shows findings in chat and posts only after a reviewer
@@ -149,6 +149,11 @@ Three consequences worth knowing as an author or reviewer:
   severity and the summary says so plainly. Because nothing verified them, that
   run does **not** apply `ARMChangesRequested`; a human decides whether the
   finding should move the ARM review queue.
+- **Clean reviews handle the human queue differently.** A clean unattended
+  review leaves `WaitForARMFeedback` unchanged because automation is advisory.
+  A human-approved interactive review removes it because feedback was
+  explicitly delivered. Both paths remove it when they add
+  `ARMChangesRequested`.
 
 The automated workflow is maintained in both repositories. Changes must be
 mirrored so a pull request in either one receives the same automated review.
@@ -174,10 +179,13 @@ in the GitHub.com agent picker requires reducing its prompt below GitHub's
 
 The automated workflow posts review comments under a stable bot identity.
 Every standalone finding, review summary, and consolidated top-level
-clarification carries a hidden `posted-by: arm-api-reviewer-agent` marker, so the
+clarification carries a machine-readable `posted-by: arm-api-reviewer-agent`
+marker, so the
 [Comment Reconciliation](#comment-reconciliation-on-repeat-reviews) logic
 (Scenarios A–F plus conflict clarification) works end-to-end for all three entry
-points. Reply-only reconciliation messages stay inside their existing thread
+points. The marker is hidden in interactive VS Code comments and visible as
+italic text in unattended workflow comments because the publisher strips HTML
+comments. Reply-only reconciliation messages stay inside their existing thread
 and do not need a finding marker. Repeat runs do not duplicate comments.
 
 ### Cross-session reconciliation
@@ -330,8 +338,10 @@ follows a three-step fallback:
    review is **not** mistaken for complete -- the banner makes the
    gap explicit so you can decide whether to merge as-is, ask for a
    human structural spot-check, or hold the PR. The Critic input uses
-   `Graphs: false`; the caution banner distinguishes "attempted and failed"
-   from a fast path where graph derivation was skipped by design.
+   `Graphs: false; graph-mode: derivation-failed`. Fast-path reviews use
+   `graph-mode: fast-path`, and size-based rendering downgrades use
+   `graph-mode: size-downgrade`, so the Critic never has to infer the mode from
+   banner presence.
 3. **Abort** only if you explicitly direct the agent to stop, usually
    when the PR touches secret-bearing properties or LIST operations
    where Step 3.5 is the primary detection mechanism.
@@ -438,10 +448,18 @@ Consolidated top-level conflict clarifications end with:
 <!-- posted-by: arm-api-reviewer-agent | reconciliation: clarification | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->
 ```
 
+The unattended workflow uses the same fields as visible italic text:
+
+```text
+_posted-by: arm-api-reviewer-agent | reconciliation: clarification | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
+```
+
 <!-- markdownlint-enable MD013 -->
 
-The marker is invisible in the rendered PR view but is present in the raw
-comment body returned by the GitHub API. It serves two purposes:
+The interactive VS Code marker is invisible in the rendered PR view but is
+present in the raw comment body returned by the GitHub API. The unattended
+workflow marker is visible italic text because its publisher strips HTML
+comments. Both forms serve two purposes:
 
 1. **Reconciliation** -- on repeat reviews, the agent uses the marker to
    distinguish its own prior comments from those posted by human reviewers.

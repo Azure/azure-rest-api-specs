@@ -190,3 +190,35 @@ stimuli:
       - The `expandDetails` parameter is a Blocking point GET violation
       - The finding cites `RPC-Get-V1-08`
       - The allowance for collection paging parameters is not applied to point GET
+
+  # 010006 — Inline systemData remains Blocking
+  - name: inline-systemdata-blocking
+    tags:
+      audit: "2026-08-15"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/inline-systemdata.json"
+          dest: "specification/systemdatasvc/resource-manager/Microsoft.SystemDataTest/stable/2025-01-01/systemdata.json"
+    prompt: >
+      Review only the `systemData` property and `InlineSystemData` definition in
+      this ARM tracked-resource OpenAPI file. Determine whether the inline shape
+      is acceptable or must reference ARM common types. Do not edit the file;
+      return the standard finding with severity and fix.
+
+      File: specification/systemdatasvc/resource-manager/Microsoft.SystemDataTest/stable/2025-01-01/systemdata.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "inline systemData is Blocking"
+        config:
+          pattern: '(?is)(?:systemData|InlineSystemData).{0,500}(?:🔴\s*Blocking|\bBlocking\b)|(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:systemData|InlineSystemData)'
+      - type: output-matches
+        name: "common-types fix required"
+        config:
+          pattern: "(?is)(?:systemData).{0,300}(?:common.?types|\\$ref)|(?:common.?types|\\$ref).{0,300}(?:systemData)"
+      - type: prompt
+    rubric:
+      - Inline `systemData` on an ARM tracked resource is a Blocking violation
+      - The fix references the canonical ARM common-types `systemData` definition

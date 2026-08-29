@@ -112,7 +112,7 @@ stimuli:
           #     renders findings as a table when there are >5 findings).
           # Catches the regression where the agent sends only a back-reference
           # ("see above") as its final user-visible message with no findings.
-          pattern: "(?ms)\\*\\*\\[(?:NEW|EXISTING)\\]\\*?\\*?\\s*(?:🔴|🟡|🔵|⚪|Blocking|Warning|Suggestion)|^#{2,4}\\s+\\d+\\.\\s+\\S|^#{2,4}\\s+(?:Blocking|Warning|Suggestion|Finding)\\b|^\\|[^|\\n]*\\[(?:NEW|EXISTING)\\][^|\\n]*\\||^\\|[^|\\n]*(?:🔴|🟡|🔵|⚪|Blocking|Warning|Suggestion)[^|\\n]*\\|"
+          pattern: "(?ms)\\*\\*\\[(?:NEW|EXISTING)\\]\\*?\\*?\\s*(?:🔴|🟠|🔵|Blocking|Warning|Suggestion)|^#{2,4}\\s+\\d+\\.\\s+\\S|^#{2,4}\\s+(?:Blocking|Warning|Suggestion|Finding)\\b|^\\|[^|\\n]*\\[(?:NEW|EXISTING)\\][^|\\n]*\\||^\\|[^|\\n]*(?:🔴|🟠|🔵|Blocking|Warning|Suggestion)[^|\\n]*\\|"
       - type: output-not-matches
         name: "no see-above placeholder response"
         config:
@@ -160,8 +160,10 @@ stimuli:
         - rule ID(s) as markdown hyperlinks,
         - file path, exact line number(s), and JSON path,
         - a concrete Fix section (with code-block examples when applicable),
-        - the trailing HTML comment marker as its literal last line, in the
-          full 7-field form. Because this is a fixture with no PR metadata,
+        - the trailing interactive-agent HTML comment marker as its literal last
+          line, in the full 7-field form. The unattended workflow uses a visible
+          italic marker because its publisher strips HTML comments. Because this
+          is a fixture with no PR metadata,
           use the placeholder head SHA
           `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` (40 characters) and
           `critic: pass` for every finding. Do NOT emit the abbreviated

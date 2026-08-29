@@ -18,6 +18,8 @@ environment:
       dest: ".github/agents/arm-api-review-critic.agent.md"
     - src: "../../../../agents/protocols/arm-api-review-critic.protocol.md"
       dest: ".github/agents/protocols/arm-api-review-critic.protocol.md"
+    - src: "../../../../agents/protocols/arm-api-review-critic-inputs.template.md"
+      dest: ".github/agents/protocols/arm-api-review-critic-inputs.template.md"
     - src: "../../../../instructions/arm-api-review.instructions.md"
       dest: ".github/instructions/arm-api-review.instructions.md"
     - src: "../../../../instructions/openapi-review.instructions.md"
@@ -68,7 +70,7 @@ stimuli:
       - type: output-not-matches
         name: "no finding bodies rendered"
         config:
-          pattern: '(?i)\*\*\[(?:NEW|EXISTING)\]\s*(?:🔴|🟠|🟡)'
+          pattern: '(?i)\*\*\[(?:NEW|EXISTING)\]\s*(?:🔴|🟠|🔵)'
       - type: output-contains
         name: "manual decision recommendation present"
         config:
@@ -182,12 +184,14 @@ stimuli:
       comment body that would later be posted verbatim per the Reviewer-
       Posted Parity rule.
 
-      Template B (canonical posted-comment body) is defined in agent.md as
-      follows. The trailing telemetry marker is an HTML comment, pipe-
-      separated, with `:` between field name and value, in fixed field order:
+      Template B (the interactive VS Code agent's canonical posted-comment
+      body) is defined in agent.md as follows. Its telemetry marker is an HTML
+      comment; the unattended workflow uses a visible italic marker because its
+      publisher strips HTML comments. The fields use `:` between name and value
+      in fixed order:
 
       ````markdown
-      **[NEW] 🟡 Suggestion** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+      **[NEW] 🔵 Suggestion** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
 
       **Classification reasoning:** <why this is NEW vs EXISTING>.
 
@@ -1046,6 +1050,13 @@ stimuli:
       `$skipToken`, uses `x-ms-pageable`, and returns `value` plus `nextLink`.
       The session SHA and cited line are valid.
 
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/45675
+      Session SHA: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      ## Step 6 findings report
+      The Blocking `$top` finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
       Return the Critic verdict and per-finding correction.
     constraints:
       expect_skills:
@@ -1089,6 +1100,13 @@ stimuli:
       does not appear in a request path or query. The session SHA and cited line
       are valid.
 
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/43747
+      Session SHA: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      ## Step 6 findings report
+      The Blocking EX-PAYLOAD finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
       Return the Critic verdict and per-finding correction.
     constraints:
       expect_skills:
@@ -1123,6 +1141,13 @@ stimuli:
       token issued for another tenant and returns data from that original
       tenant. The session SHA, cited line, and behavioral evidence are valid.
 
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/45675
+      Session SHA: cccccccccccccccccccccccccccccccccccccccc
+      ## Step 6 findings report
+      The Blocking `$skipToken` security finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
       Return the Critic verdict and per-finding correction.
     constraints:
       expect_skills:
@@ -1156,6 +1181,13 @@ stimuli:
       required polymorphic discriminator. The discriminator property's enum has
       `x-ms-enum.modelAsString: true`. The session SHA and cited line are valid.
 
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/43747
+      Session SHA: dddddddddddddddddddddddddddddddddddddddd
+      ## Step 6 findings report
+      The Blocking discriminator EX-PAYLOAD finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
       Return the Critic verdict and per-finding correction.
     constraints:
       expect_skills:
@@ -1174,3 +1206,83 @@ stimuli:
       - The Critic retains Blocking severity because required discriminators are an explicit exception
       - "`modelAsString: true` does not downgrade the discriminator case"
       - The response explains the subtype or deserialization impact
+
+  # 160022 -- Critic retains Blocking severity for request URL enum value
+  - name: critic-retains-unknown-request-url-value-blocking
+    tags:
+      issue: "43747"
+      audit: "2026-08-15"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/openapi-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      EX-PAYLOAD finding because an example request uses an unknown enum value
+      in a path parameter. The path parameter enum has
+      `x-ms-enum.modelAsString: true`. The session SHA and cited line are valid.
+
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/43747
+      Session SHA: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+      ## Step 6 findings report
+      The Blocking request-path EX-PAYLOAD finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "request URL finding is not downgraded"
+        config:
+          pattern: "(?is)(?:Required action|Recommended action|Critic verdict:).{0,100}DOWNGRADE.{0,100}Warning"
+      - type: output-matches
+        name: "Blocking request URL exception applied"
+        config:
+          pattern: "(?is)(?:path|request URL).{0,200}(?:Blocking|routing|operation contract)"
+      - type: prompt
+    rubric:
+      - The Critic retains Blocking severity because request path and query values are explicit exceptions
+      - "`modelAsString: true` does not downgrade the request URL case"
+      - The response distinguishes request routing from ordinary response-body extensibility
+
+  # 160023 -- Omitted reconciliation input is malformed
+  - name: critic-rejects-omitted-reconciliation-input
+    tags:
+      audit: "2026-08-15"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/agents/protocols/arm-api-review-critic-inputs.template.md`.
+
+      Act as the ARM API Review Critic. The dispatch contains:
+
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/45841
+      Session SHA: ffffffffffffffffffffffffffffffffffffffff
+      ## Step 6 findings report
+      No findings.
+
+      The dispatch omits the entire `## Step 5.5 reconciliation plan` input.
+      Return the Critic verdict without inventing a default sentinel.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "missing reconciliation input fails validation"
+        config:
+          pattern: "(?is)Finding accuracy.{0,100}FAIL"
+      - type: output-contains
+        name: "missing-inputs reason returned"
+        config:
+          substring: "missing-inputs"
+      - type: output-matches
+        name: "reconciliation accuracy fails rather than becoming N/A"
+        config:
+          pattern: "(?is)Reconciliation accuracy.{0,100}FAIL"
+      - type: prompt
+    rubric:
+      - The Critic returns Finding accuracy FAIL with reason `missing-inputs`
+      - The omitted reconciliation input is not silently defaulted to `reconciliation skipped`

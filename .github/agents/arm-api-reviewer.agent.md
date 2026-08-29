@@ -41,10 +41,10 @@ tools:
   - search/codebase
   - web/fetch
   # `web/githubRepo` is included only as a public-repo read fallback when the
-  # GitHub MCP server is unavailable for a `Azure/azure-rest-api-specs` PR. It
+  # GitHub MCP server is unavailable for an `Azure/azure-rest-api-specs` PR. It
   # does NOT resolve refs in `Azure/azure-rest-api-specs-pr` (private); for
-  # that repo the MCP `github/get_file_contents` tool is required, with the
-  # `gh api` CLI through `execute/runInTerminal` as the only fallback.
+  # that repo use authenticated MCP first, then authenticated `gh api` through
+  # `execute/runInTerminal`.
   - web/githubRepo
 ---
 
@@ -195,7 +195,7 @@ rule. Step 7 implements the mechanics; this list catalogues the failures.
 - Folding "corrections" into the Step 6 report after the Critic returned
   `Finding accuracy = INVALIDATED`. INVALIDATED means the session SHA no
   longer matches the PR; the only permitted output is the SHA-drift
-  report per state D and Step 7 item 11.
+  report per state C and Step 7 item 11.
 - Substituting an inline self-review ("the findings look correct to me",
   "self-check: pass", a "Critic:" annotation written by this same agent) for
   the subagent call. Self-critique by the same agent has none of the
@@ -299,7 +299,7 @@ specification.
 
 Supporting sections referenced throughout:
 
-- [Pre-Presentation Invariant](#pre-presentation-invariant-read-this-first-every-time) -- the four states (A/B/C/D) that gate any user-visible findings.
+- [Pre-Presentation Invariant](#pre-presentation-invariant-read-this-first-every-time) -- the three states (A/B/C) that gate any user-visible findings.
 - [Failure Modes & Recovery](#failure-modes--recovery) -- deterministic recovery table for fetch failures, auth lapses, Critic errors.
 - [Constraints](#constraints) -- hard rules (read-only, PR-only, no hallucinated rules, etc.).
 - [Reviewer<->Critic protocol](./protocols/arm-api-review-critic.protocol.md) -- the wire contract for Critic inputs, verdict tracks, sentinel strings, and both telemetry markers. **This is the source of truth when this file disagrees with it.**
@@ -345,7 +345,7 @@ posting policies. These are the same everywhere and must not drift:
 - **Default finding set** -- a finding that still FAILs after the third Critic iteration is dropped.
 - **Label policy** -- `ARMChangesRequested` only when a Blocking finding is published **and** the Critic verified it.
 
-Two things differ, by design. The first is **the human approval gate**: this
+Three things differ, by design. The first is **the human approval gate**: this
 agent presents findings in chat and posts only after the reviewer approves. That
 reviewer may record an explicit override (`critic: override` plus a validated
 `override-reason`), or escalate to `MANUAL DECISION REQUIRED` and approve
@@ -358,6 +358,12 @@ reproducible. This agent does not: it runs on whatever model you have selected
 in VS Code, and pinning one would simply fail for anyone without access to it.
 Expect wording and emphasis to vary from an automated review. The rules above
 are what keep the substance the same.
+
+The third is **human queue advancement after a clean review**. After a human
+approves and posts an interactive review, this agent removes
+`WaitForARMFeedback` because feedback was delivered. A clean unattended review
+leaves that label unchanged because automation must not advance the human ARM
+review queue. Both paths remove it when they add `ARMChangesRequested`.
 
 Both repositories run the automated workflow (`arm-api-review.md` exists in each
 and the two copies MUST stay identical), so a pull request in either repository
@@ -450,10 +456,12 @@ All specification files **MUST** be fetched directly from GitHub. Do **not** ass
 ### Authentication
 
 - Use the GitHub MCP server tools (for example, `pull_request_read(method: "get")`, `pull_request_read(method: "get_files")`, and `get_file_contents`) when available. These tools handle authentication automatically via OAuth.
-- If GitHub MCP tools are not available, fetch raw file content via URLs:
+- If GitHub MCP tools are not available, use these fallbacks:
   - **PR branch files:** `https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{path}`
   - **Main branch files (previous versions):** `https://raw.githubusercontent.com/{owner}/{repo}/main/{path}`
-  - For `azure-rest-api-specs-pr` (private repo), GitHub MCP tools are **required** - raw URLs will not work without authentication.
+  - For `azure-rest-api-specs-pr` (private repo), raw URLs will not work without
+    authentication. Use authenticated `gh api
+repos/<owner>/<repo>/contents/<path>?ref=<sha>` when MCP is unavailable.
 - If authentication fails or the user has not authorized GitHub access, **ask the user to authorize** the GitHub MCP server connection in VS Code (the OAuth consent prompt should appear automatically) or provide a GitHub Personal Access Token.
 
 ### Shell fallback discipline
@@ -506,10 +514,10 @@ Use GitHub tools to fetch the PR details and list all changed files. Classify ea
 
 **Choose review depth.** Based on the changed-file inventory, classify the PR into one of two tracks:
 
-| Track           | When it applies                                                                                                                                                                                                                           | Workflow                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Fast path**   | The PR modifies **only** files from the allowlist below, AND total additions + deletions across spec files is < 200 lines.                                                                                                                | Run Step 2 (load minimal rule set), Step 4 (systematic review of changed files only), **Step 4.5 (downstream-CI impact check) whenever a fast-path finding would add or tighten a type, format, decorator, `x-ms-*` extension, or schema constraint**, Step 5.5 (existing-comment reconciliation plan), Step 6 (report), Step 7 (critic), Step 8-10. **Skip Steps 3, 3.5, 4a, and 5.** If any finding is produced, perform the minimal previous-version check needed to tag it `[NEW]` / `[EXISTING]`; if that check is not trivial, escalate to full review before rendering. Because Step 3.5 is skipped, no Mermaid graphs are produced; the Reviewer MUST tell the Critic this in Step 7 Input #9 (`Graphs: false`) so the Critic records `Graph integrity = N/A` instead of attempting a diff against absent graphs. |
-| **Full review** | Anything else - any change to a `.json` spec under `stable/` or `preview/`, any `.tsp` source change, any new API version directory, any `readme.md` AutoRest tag/input-file change, any `suppressions.yaml` change, any PR >= 200 lines. | Run all steps 2-10 (Step 5.5 included).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Track           | When it applies                                                                                                                                                                                                                           | Workflow                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Fast path**   | The PR modifies **only** files from the allowlist below, AND total additions + deletions across spec files is < 200 lines.                                                                                                                | Run Step 2 (load minimal rule set), Step 4 (systematic review of changed files only), **Step 4.5 (downstream-CI impact check) whenever a fast-path finding would add or tighten a type, format, decorator, `x-ms-*` extension, or schema constraint**, Step 5.5 (existing-comment reconciliation plan), Step 6 (report), Step 7 (critic), Step 8-10. **Skip Steps 3, 3.5, 4a, and 5.** If any finding is produced, perform the minimal previous-version check needed to tag it `[NEW]` / `[EXISTING]`; if that check is not trivial, escalate to full review before rendering. Because Step 3.5 is skipped, no Mermaid graphs are produced; the Reviewer MUST pass `Graphs: false; graph-mode: fast-path` in Step 7 Input #9 so the Critic records `Graph integrity = N/A` instead of attempting a diff against absent graphs. |
+| **Full review** | Anything else - any change to a `.json` spec under `stable/` or `preview/`, any `.tsp` source change, any new API version directory, any `readme.md` AutoRest tag/input-file change, any `suppressions.yaml` change, any PR >= 200 lines. | Run all steps 2-10 (Step 5.5 included).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 
 **Fast-path allowlist** (a PR qualifies only if _every_ changed file matches one of these):
 
@@ -574,21 +582,35 @@ To discover which prior version folders exist, prefer this order to minimize API
 2. **Fall back to directory enumeration** only if the `readme.md` is missing, is clearly stale (does not include the version directly preceding the new one), or the service uses an unconventional layout. Then use `get_file_contents` to list `specification/<service>/resource-manager/<ResourceProviderNamespace>/stable/` (or `preview/`).
 3. **Cross-check** the chosen prior version directory exists on the base branch before fetching files from it. If neither approach yields a previous version, treat it as a new service per Step 4a and the Failure Modes table.
 
-**TypeSpec-required check (TSP-REQUIRED-V1).** While locating the previous version folder, also determine whether the PR is introducing a **new API version directory** (a directory under `specification/**/{resource-manager,data-plane}/**/{stable|preview}/<version>/` that does **not** exist on the base branch). If a new API version directory contains handwritten OpenAPI (`.json`) and **none** of the following compliance signals is present, record a **Blocking** finding for rule `TSP-REQUIRED-V1`:
+**TypeSpec-required check (TSP-REQUIRED-V1).** While locating the previous
+version folder, also determine whether the PR is introducing a **new API version
+directory** (a directory under
+`specification/**/{resource-manager,data-plane}/**/{stable|preview}/<version>/`
+that does **not** exist on the base branch). If a new API version directory
+contains handwritten OpenAPI (`.json`) and **neither** compliance signal below
+is present, record a **Blocking** finding for rule `TSP-REQUIRED-V1`:
 
-- A sibling TypeSpec project (a directory containing `main.tsp` and `tspconfig.yaml`) is present in the same service folder.
-- The new swagger file contains the `x-typespec-generated` extension at the top level.
-- The PR also adds or updates `.tsp` source files under the same service folder.
+- The new swagger file contains the `x-typespec-generated` extension at the top
+  level.
+- A sibling TypeSpec project both declares the new API version and is configured
+  to emit this OpenAPI directory. Verify the linkage through version
+  declarations and emitter/output configuration; an unrelated `.tsp` edit or
+  merely finding `main.tsp` and `tspconfig.yaml` is not sufficient.
 
 Do **not** flag updates to files inside pre-existing API version directories, even when those files are handwritten OpenAPI. Do **not** flag PRs that only modify example files, `readme.md`, `tspconfig.yaml`, or `.tsp` files. The full rule definition is in [`openapi-review.instructions.md` Section 2A](../instructions/openapi-review.instructions.md#2a-typespec-required-for-new-api-versions-tsp-required-v1). A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)); until it ships, this agent rule is the primary enforcement point.
 
 **Hard short-circuit.** This check is REQUIRED. Before emitting any TSP-REQUIRED-V1 finding, walk this checklist top-to-bottom and stop at the first match. The matching branch is dispositive: when the rule passes, the agent MUST NOT emit any finding for TSP-REQUIRED-V1 at any severity, including Warning, Suggestion, and informational. Listing the rule as `N/A` in a compliant-areas table is acceptable.
 
 1. Does the API version directory already exist on the base branch? If yes, the rule passes.
-2. Does the PR add or modify any `.tsp` file under the same service folder? If yes, the rule passes.
-3. Is there a sibling TypeSpec project containing `main.tsp` and `tspconfig.yaml` anywhere under the service folder? If yes, the rule passes.
-4. Does the new swagger document have `x-typespec-generated` at the top level, meaning as a direct child of the document root, alongside `swagger`, `info`, `paths`? If yes, the rule passes. This marker is dispositive on its own; do not flag because the TypeSpec source is not visible in the PR, not co-located, or not freshly modified.
-5. Otherwise, emit a single **Blocking** finding citing `TSP-REQUIRED-V1`.
+2. Does the new swagger document have `x-typespec-generated` at the top level,
+   meaning as a direct child of the document root, alongside `swagger`, `info`,
+   `paths`? If yes, the rule passes. This marker is dispositive on its own; do
+   not flag because the TypeSpec source is not visible in the PR, not co-located,
+   or not freshly modified.
+3. Does a sibling TypeSpec project both declare the new API version and emit
+   this OpenAPI directory? If yes, the rule passes. Verify both facts; project
+   presence alone does not pass.
+4. Otherwise, emit a single **Blocking** finding citing `TSP-REQUIRED-V1`.
 
 ### Step 3.5: API Graph & Data-Flow Analysis (think in graphs before lists)
 
@@ -627,7 +649,7 @@ In summary-text mode the Reviewer:
 - Still produces all structural findings derived from the in-memory
   graph; tag each as `Source: structural-analysis (graph downgraded)`
   in the finding body so the human sees the analysis happened.
-- Sets `Graphs: false` in Critic Input #9 (the four-value `downgraded`/`degraded` distinction is deprecated). The Critic records `Graph integrity = N/A` for
+- Sets `Graphs: false; graph-mode: size-downgrade` in Critic Input #9. The Critic records `Graph integrity = N/A` for
   rendered-diff purposes but is **still required** to independently
   re-derive the **sensitive-data-flow** view in summary form -- it is
   the highest-value missed-violation signal and rendering cost is
@@ -650,19 +672,19 @@ findings the step exists to catch.
 
 If graph derivation fails (a spec file cannot be parsed, the in-memory
 graph cannot be built within the available context budget, a `$ref`
-resolver throws, etc.), apply this fallback ladder in order. **Do not**
-set `Graphs: false` without the caution banner when graph derivation was
-attempted -- `Graphs: false` without a banner is reserved for the
-fast-path-by-design case. The full-review failure mode always requires
-the caution banner alongside `Graphs: false`.
+resolver throws, etc.), apply this fallback ladder in order. **Do not** use
+`graph-mode: derivation-failed` without the caution banner. `graph-mode:
+fast-path` and `graph-mode: size-downgrade` do not use the banner because
+derivation did not fail. The full-review failure mode always requires the
+caution banner alongside `Graphs: false; graph-mode: derivation-failed`.
 
 1. **Retry with smaller scope.** Re-attempt graph derivation on a
    trimmed file set (e.g., one namespace at a time, then merge the
    per-namespace graphs). Most failures are context-budget issues that
    retry-on-subset resolves. This is the default; try it before
    escalating.
-2. **Continue with `Graphs: false` + banner.** If retry fails, set
-   Input #9 to `Graphs: false`, render the `[!CAUTION]` banner below at the
+2. **Continue with failed graph derivation + banner.** If retry fails, set
+   Input #9 to `Graphs: false; graph-mode: derivation-failed`, render the `[!CAUTION]` banner below at the
    top of the Step 6 report, and proceed with the remaining steps.
    The Critic records `Graph integrity = N/A` (same gating effect as
    fast-path), but the banner ensures the human cannot mistake the
@@ -687,9 +709,9 @@ The required banner for option 2:
 > spot-check before merging high-risk changes.
 ```
 
-`Graphs: false` with the caution banner is a first-class signal: telemetry, evals,
-and the Critic can distinguish "intentionally skipped on fast path"
-(no banner) from "attempted and failed on full review" (banner present).
+The explicit `graph-mode` is a first-class signal: telemetry, evals, and the
+Critic can distinguish `fast-path`, `size-downgrade`, and
+`derivation-failed` without inferring state from banner presence.
 
 **Read [`.github/skills/azure-api-review/references/think-in-graphs.md`](../skills/azure-api-review/references/think-in-graphs.md) before producing the graphs.** That reference is the canonical specification for:
 
@@ -797,10 +819,12 @@ Edit there only; do not duplicate the procedure in this file.
    [`linter-rule-coverage.md`](../skills/azure-api-review/references/linter-rule-coverage.md)
    has no entry for the affected rule -- do not invent coverage.
 
-A finding that violates any of the above is a **non-overridable**
-Critic FAIL (`downstream-ci-conflict` or `suppression-path-mismatch`);
-self-checks do not substitute. Recovery is in the reference file's
-"Failure modes" table.
+A finding that violates any of the above is a Critic FAIL
+(`downstream-ci-conflict` or `suppression-path-mismatch`). Correct it first.
+If a genuine rule-application disagreement remains, either reason may be
+overridden only through the structured override workflow in Step 7 item 13;
+self-checks do not substitute. Recovery is in the reference file's "Failure
+modes" table.
 
 ### Step 4a: New vs. Existing Issue Classification
 
@@ -1063,7 +1087,7 @@ After producing the Step 6 report and **before** presenting findings to the huma
 
 **Posting tool preference.** For mutating actions (Step 8 posting and Step 9 label changes), prefer the GitHub MCP tool when available; fall back to the `gh` CLI through `execute/runInTerminal` only when the MCP tool is missing or errors. This mirrors the read-side preference rule above and keeps audit/permission semantics consistent across the review.
 
-**Why this gate exists.** This agent operates on a public repository used by thousands of engineers, including senior service-team architects and external partners. Every posted comment is durable, citable, and indexed by search. A wrong finding becomes precedent. The critic is an independent verifier whose job is to catch errors in _your_ findings before they reach a public PR. Precision dominates recall: dropping a borderline finding is far cheaper than posting a wrong one.
+**Why this gate exists.** This agent operates on public and private specification repositories used by thousands of engineers, including senior service-team architects and external partners. Every posted comment is durable and citable. A wrong finding becomes precedent. The critic is an independent verifier whose job is to catch errors in _your_ findings before they reach a specification PR. Precision dominates recall: dropping a borderline finding is far cheaper than posting a wrong one.
 
 #### Anti-patterns that constitute a Step 7 violation
 
@@ -1078,7 +1102,8 @@ read the anti-patterns list there.
 [`./protocols/arm-api-review-critic-inputs.template.md`](./protocols/arm-api-review-critic-inputs.template.md)
 as the base for every dispatch prompt. The Critic accepts tolerant prose
 input -- labeled fields in any order with sensible defaults for optional
-fields absent. The required fields (PR URL, Session SHA, findings report)
+fields absent. The required fields (PR URL, Session SHA, findings report, and reconciliation
+plan or sentinel)
 must always be present; missing required fields return
 `Finding accuracy = FAIL` reason `missing-inputs`. Field meanings:
 
@@ -1087,10 +1112,16 @@ must always be present; missing required fields return
 3. The full Step 6 findings report (verbatim) under `## Step 6 findings report`.
 4. The list of files you reviewed (workspace-relative paths; if omitted, the Critic infers from findings).
 5. The previous-version path and base SHA/ref from Step 4a, or `None - new service` (default when absent).
-6. **The Step 5.5 reconciliation plan** (verbatim) under `## Step 5.5 reconciliation plan`, or `reconciliation skipped`. Defaults to `reconciliation skipped` when absent.
+6. **The Step 5.5 reconciliation plan** (verbatim) under `## Step 5.5 reconciliation plan`, or the explicit sentinel `reconciliation skipped`. This input is required; omission, an empty heading, or an empty string is malformed.
 7. **Prior iterations' FAIL set summary** -- rule-ID + file/line tuples from prior iterations. Defaults to empty.
 8. **Considered-and-declined list** -- prior-iteration advisory candidates the Reviewer evaluated and chose not to promote. Defaults to empty.
-9. **Graphs flag** -- `Graphs: true` when Mermaid graphs appear in the Step 6 report; `Graphs: false` (default) otherwise. On full-review PRs where the Step 3.5 size guardrail tripped, pass `Graphs: false`; the Critic still re-derives the sensitive-data-flow view in summary form.
+9. **Graphs status** -- pass exactly one of: `Graphs: true`;
+   `Graphs: false; graph-mode: fast-path`; `Graphs: false; graph-mode:
+size-downgrade`; or `Graphs: false; graph-mode: derivation-failed`. The mode
+   is required whenever graphs are false. `size-downgrade` and
+   `derivation-failed` both require the Critic to re-derive the
+   sensitive-data-flow view in summary form; only `derivation-failed` requires
+   the Step 3.5 caution banner.
 10. **Current iteration number** (`1` through `3`). Defaults to `1`.
 
 **Compact-mode dispatch (iterations 2 and 3).** When re-invoking the Critic
@@ -1127,7 +1158,7 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
 7. **Iteration with convergence detection.** Re-invoke the Critic after revisions. Stop iterating when one of these conditions is met:
    - **Convergence**: the Critic returns zero `FAIL`s **and** no new candidate missed violations (i.e., its `Likely missed violations` section is empty or every item was already considered in the prior iteration). At that point the report is stable.
    - **Hard cap**: iteration 3. If any `FAIL` is outstanding at iteration 3, set the (internally tracked) `Next-step recommendation` to `MANUAL DECISION REQUIRED`, render the corresponding exception banner at the top of the Step 6 report, and escalate both the report and the Critic's last output to the human. The cap is the single exit condition; there is no separate wave-thrash branch. (Reduced from 5 to keep the Reviewer<->Critic loop tight; extra iterations rarely converged and the interactive checkpoint at iteration 3 already routes hard cases to the human.)
-8. **Consensus rule for `Blocking` severity.** This rule applies **only when the Critic returned a verdict**. In that case a finding may only be posted at `Blocking` severity when **both** the Reviewer's Step 6 assigned severity is `Blocking` **and** the Critic returns High or Medium confidence on that finding (Re-validation Procedure step 5). If the Critic returned Low confidence on a Blocking finding or recommended DOWNGRADE, the finding is automatically capped at `Warning` for posting. The human can upgrade back to Blocking via the override mechanism (with the standard `critic: override` telemetry marker plus a valid `override-reason` per the [protocol's Override-reason validator](./protocols/arm-api-review-critic.protocol.md#override-reason-validator)). This prevents the most damaging failure mode -- a public PR comment marked Blocking that turns out to be wrong. When `critic-mode` is `unavailable` no confidence is ever returned, so this consensus rule does **not** apply and severity is **preserved unchanged** rather than capped (see [Review context parity](#review-context-parity)); the compensating control is that Step 9 withholds `ARMChangesRequested` for that run.
+8. **Consensus rule for `Blocking` severity.** This rule applies **only when the Critic returned a verdict**. In that case a finding may only be posted at `Blocking` severity when **both** the Reviewer's Step 6 assigned severity is `Blocking` **and** the Critic returns High or Medium confidence on that finding (Re-validation Procedure step 5). If the Critic returned Low confidence on a Blocking finding or recommended DOWNGRADE, the finding is automatically capped at `Warning` for posting. The human can upgrade back to Blocking via the override mechanism (with the standard `critic: override` telemetry marker plus a valid `override-reason` per the [protocol's Override-reason validator](./protocols/arm-api-review-critic.protocol.md#override-reason-validator)). This prevents the most damaging failure mode -- a specification PR comment marked Blocking that turns out to be wrong. When `critic-mode` is `unavailable` no confidence is ever returned, so this consensus rule does **not** apply and severity is **preserved unchanged** rather than capped (see [Review context parity](#review-context-parity)); the compensating control is that Step 9 withholds `ARMChangesRequested` for that run.
 9. **Reconciliation `FAIL`s.** If the Critic returns `FAIL` on any **reconciliation** entry (Critic verdict track `Reconciliation accuracy`), these resolutions are available in priority order:
 
 - **Retry incomplete inventory**: for `inventory-incomplete`, fetch and paginate all three discussion surfaces again. If that remains impossible, use the explicit `reconciliation skipped` path or stop. This failure cannot be overridden.
@@ -1148,7 +1179,7 @@ If you believe the Critic is wrong about a reconciliation entry but no clean cor
     2. **Interactive checkpoint at iteration 3 (the cap).** If a finding-level FAIL persists into iteration 3 and you believe the Critic is wrong, **stop the auto-loop** and present the persistent FAIL(s) to the human verbatim: the Critic's reason, the cited rule's verbatim quote, and your counter-argument. Offer three choices: (a) drop the finding (default), (b) supply an override with structured justification (see below), (c) escalate to MANUAL DECISION REQUIRED. Note: with the hard cap at 3, an override chosen here is the final word -- the Critic's `override-reason` validator (Re-validation Procedure step 5) is re-run by the Reviewer locally rather than via a fourth Critic invocation. The validator logic is the same; only the runner changes.
     3. **Structured override justification (required for choice b).** The `override-reason` MUST satisfy the three-check validator defined in the shared protocol (length, denylist, and structured-anchor-or-quote requirement). See [protocol -> Override-reason validator](./protocols/arm-api-review-critic.protocol.md#override-reason-validator) for the canonical specification and denylist. Length-only or paraphrase-only justifications fail the validator.
     4. **Fold the override and re-invoke (when iterations remain).** Add the `**Note:** Critic FAILed this finding (<reason>); reviewer overrode with justification: <reason>.` line to the finding. If the override was chosen at iteration 1 or 2, re-invoke the Critic; the Critic's `override-reason` validation (Re-validation Procedure step 5) will re-check the structured-anchor requirement, and an `override-reason-invalid` FAIL from the Critic is **non-overridable** -- the only legal responses are to supply a better justification and re-invoke, or to drop the finding. If the override was chosen at iteration 3 (the cap), the Reviewer re-runs the same validator locally; an `override-reason-invalid` failure is likewise non-overridable.
-    5. **The 10 non-overridable FAIL reasons** (per the [protocol's Non-overridable FAIL catalog](./protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog)) are: `override-reason-invalid`, `unescaped-mention`, `hash-number-autolink`, `inventory-incomplete`, `duplicate-missed`, `conflict-unclarified`, `clarification-unsupported`, `Graph integrity: fabrication`, `session-sha-moved`, and `session-sha-unreachable`. Other reconciliation FAILs (`skip-not-justified`, `shift-misclassified`, `fix-not-verified`, `fix-anchor-wrong`, `fix-anchor-unreachable`) and finding-level reasons such as `downstream-ci-conflict` remain overridable with a valid `override-reason`. The validator runs against every eligible justification, and the finding or plan entry is annotated with `critic: override` plus the validated reason.
+    5. **The 11 non-overridable FAIL reasons** (per the [protocol's Non-overridable FAIL catalog](./protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog)) are: `override-reason-invalid`, `unescaped-mention`, `hash-number-autolink`, `inventory-incomplete`, `duplicate-missed`, `conflict-unclarified`, `clarification-unsupported`, `overflow-posted`, `Graph integrity: fabrication`, `session-sha-moved`, and `session-sha-unreachable`. Other reconciliation FAILs (`skip-not-justified`, `shift-misclassified`, `fix-not-verified`, `fix-anchor-wrong`, `fix-anchor-unreachable`) and finding-level reasons such as `downstream-ci-conflict` remain overridable with a valid `override-reason`. The validator runs against every eligible justification, and the finding or plan entry is annotated with `critic: override` plus the validated reason.
 
 **Setting the `Next-step recommendation` (top of report):**
 
@@ -1310,6 +1341,8 @@ After the human chooses, execute the approved subset of the plan:
 Posting findings from the [ARM API Reviewer agent](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/api-reviewer-agent.md) (<verification-status>, <N> iteration(s), <outcome>) against commit [`<short-sha>`](https://github.com/<owner>/<repo>/pull/<pr-number>/commits/<full-sha>). See inline comments for findings <range-or-list>.<optional sentence describing any findings posted as top-level comments because they concern files outside the PR diff>
 
 Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
+
+<!-- posted-by: arm-api-reviewer-agent | rule: summary | category: summary | severity: <highest-posted-severity-or-suggestion> | classification: <new-if-any-new-finding-else-existing> | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->
 ```
 
 Substitution rules:
@@ -1473,7 +1506,7 @@ When a step in the workflow fails, recover deterministically using the table bel
 - **Human-gated PR posting.** Always present findings in chat first. Only post to the PR after the human reviewer explicitly approves.
 - **No hallucinated rules.** Only enforce rules documented in the instruction files or the Azure REST API Guidelines. If you are unsure whether something is a violation, say so explicitly and cite why you suspect it.
 - **No false positives.** Verify your findings against the actual file content. Read the JSON or TypeSpec carefully before flagging. A wrong flag wastes reviewer time and erodes trust. Before reporting a blocking issue, re-read the spec element in question and confirm the violation is real -- not an artifact of incomplete context or a misapplied rule. If a spec is fully compliant, say so: do not manufacture findings to fill an empty report.
-- **Critic-gated posting.** Findings cannot be presented for human posting approval until the ARM API Review Critic sub-agent (Step 7) has returned a passing verdict, or a finding-level `FAIL` has been explicitly overridden by the human with the override recorded in the per-comment telemetry marker (`critic: override` plus a non-empty `override-reason`). Several Critic `FAIL` reasons are **non-overridable** and must instead be corrected, dropped, demoted, or escalated; the authoritative list (and the recovery path for each) is the [Non-overridable FAIL catalog](./protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog) in the protocol file. Skipping the critic is not a permitted default path even when it errors. Surface the failure to the human and ask.
+- **Critic-gated posting.** Findings cannot be presented for human posting approval until the ARM API Review Critic sub-agent (Step 7) has returned a passing verdict, a finding-level `FAIL` has been explicitly overridden by the human with the override recorded in the per-comment telemetry marker (`critic: override` plus a non-empty `override-reason`), or all bounded Critic dispatch attempts failed and the auto-unavailable flow presents the findings as unverified under `MANUAL DECISION REQUIRED`. Several Critic `FAIL` reasons are **non-overridable** and must instead be corrected, dropped, demoted, or escalated; the authoritative list (and the recovery path for each) is the [Non-overridable FAIL catalog](./protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog) in the protocol file. Skipping the critic is not a permitted default path even when it errors. After all retries fail, enter auto-unavailable and require explicit per-row human approval; do not ask for a manual Critic paste.
 - **No inline self-critique as a critic substitute.** When the critic cannot be invoked, follow the fallback ladder in Step 7 (subagent dispatch with retries, then auto-unavailable). You **MUST NOT** perform a self-review and present it under a `Critic:` annotation, a `Critic verdict:` line, or any wording that implies independent verification. Self-critique by this same agent has no incentive structure and is exactly the failure mode the critic was added to prevent. If you self-checked anything, label it `Reviewer self-check` and state explicitly that no critic was run.
 - **Severity is downgrade-only via the critic.** The critic may recommend lowering a finding's severity or dropping it. Severity upgrades require explicit human approval and may not be applied automatically based on critic spot-check advisories.
 - **Noise-safety reconciliation, graph-fabrication, and posting-hygiene FAILs cannot be human-overridden via telemetry markers.** The full list of non-overridable FAIL reasons (with the recovery action for each) is the [Non-overridable FAIL catalog](./protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog) in the protocol file. The general principle: the `critic: override` marker is for eligible disagreements about rule application; it is **not** a mechanism for skipping discussion inventory, knowingly posting duplicates or contradictions, silently auto-resolving prior threads, or posting findings derived from fabricated graph nodes. Valid responses to a non-overridable FAIL are: correct and re-invoke the Critic; use the explicit reconciliation-skipped path where permitted; drop the affected finding or plan entry; or escalate without executing the unsafe entry.

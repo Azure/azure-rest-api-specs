@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-08-27
+     Upstream alignment: 2026-08-15
      Derived from:
        - Azure Developer Experience docs: design/api-specs-pr/api-versions-and-branches
          (https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-versions-and-branches)

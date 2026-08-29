@@ -2,7 +2,7 @@
 applyTo: "specification/**/*.json"
 ---
 
-<!-- Upstream alignment: 2026-04-15
+<!-- Upstream alignment: 2026-08-15
      This date is for maintainers of this file only -- it records when
      rules were last verified against upstream docs. No action is needed
      by spec authors or PR reviewers. The upstream documents always take
@@ -88,11 +88,14 @@ See the canonical contract in [`.github/skills/azure-api-review/references/revie
 
 **Allowed.** In-place edits to handwritten OpenAPI inside an **existing** API version directory remain permitted. Do **not** flag PRs that only modify files in directories that already exist on the base branch.
 
-**Detection signals.** A new API version directory is compliant if **any** of the following is true:
+**Detection signals.** A new API version directory is compliant if **either** of the following is true:
 
-- A sibling TypeSpec project (a directory containing `main.tsp` and `tspconfig.yaml`) is present in the same service folder and emits OpenAPI to the new version directory.
 - The new swagger file contains the `x-typespec-generated` extension at the top level (added by the `@azure-tools/typespec-autorest` emitter).
-- The PR also adds or updates `.tsp` source files under the same service folder.
+- A sibling TypeSpec project (a directory containing `main.tsp` and
+  `tspconfig.yaml`) both declares the new API version and is configured to emit
+  the OpenAPI in that directory. A `.tsp` edit or an unrelated sibling project
+  is not sufficient by itself; establish the emission linkage from version
+  declarations and emitter configuration.
 
 If **none** of these signals are present, the new API version is being authored in handwritten OpenAPI — flag as **Blocking** with rule ID `TSP-REQUIRED-V1`.
 
@@ -101,10 +104,9 @@ If **none** of these signals are present, the new API version is being authored 
 **Decision procedure.** This procedure is REQUIRED. Before emitting any TSP-REQUIRED-V1 finding the agent MUST walk this checklist top-to-bottom and stop at the first condition that holds:
 
 1. **API version directory already exists on the base branch?** Then **Rule PASSES. Emit NO finding at any severity, including Warning and Suggestion.** May be listed as `N/A` or compliant in an acknowledgments table, but MUST NOT appear in the findings list.
-2. **PR adds or modifies any `.tsp` file under the same service folder?** Then **Rule PASSES. Emit NO finding.**
-3. **A sibling TypeSpec project containing `main.tsp` and `tspconfig.yaml` is present anywhere under the service folder?** Then **Rule PASSES. Emit NO finding.**
-4. **The new swagger document has `x-typespec-generated` at the top level, meaning as a direct child of the document root, alongside `swagger`, `info`, `paths`?** Then **Rule PASSES. Emit NO finding.** This signal is dispositive on its own. Its presence is sufficient compliance evidence regardless of any other context. The agent MUST NOT downgrade the finding to Warning or Suggestion as a reminder, and MUST NOT raise it because of unrelated concerns about TypeSpec source-of-truth, sibling project hygiene, or repository layout. The marker is the contract.
-5. **Otherwise**, when the new API version directory has no `.tsp` files in the PR, no sibling TypeSpec project, and no `x-typespec-generated` marker, emit a single **Blocking** finding citing rule `TSP-REQUIRED-V1`.
+2. **The new swagger document has `x-typespec-generated` at the top level, meaning as a direct child of the document root, alongside `swagger`, `info`, `paths`?** Then **Rule PASSES. Emit NO finding.** This signal is dispositive on its own. Its presence is sufficient compliance evidence regardless of any other context. The agent MUST NOT downgrade the finding to Warning or Suggestion as a reminder, and MUST NOT raise it because of unrelated concerns about TypeSpec source-of-truth, sibling project hygiene, or repository layout. The marker is the contract.
+3. **A sibling TypeSpec project both declares this API version and is configured to emit this OpenAPI directory?** Then **Rule PASSES. Emit NO finding.** Verify linkage through the project's version declarations and emitter/output configuration. The mere presence of `main.tsp`, `tspconfig.yaml`, or an unrelated `.tsp` change elsewhere in the service does not pass the rule.
+4. **Otherwise**, emit a single **Blocking** finding citing rule `TSP-REQUIRED-V1`.
 
 A finding "passes" the rule means the rule does not appear in the findings list at any severity. Listing it in a "Compliant Areas" or "N/A" table is acceptable.
 
@@ -166,22 +168,38 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 
 **Reference: [Azure Guidelines — HTTP Return Codes](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#http-return-codes)**
 
+The table below provides general defaults. For ARM resource-manager APIs,
+`arm-api-review.instructions.md` sections 3-6 are authoritative whenever their
+verb-specific response codes or async patterns differ. Do not raise a generic
+HTTP finding against an ARM operation that follows the ARM rule.
+
 - Verify each operation uses the correct HTTP method and defines the correct success response codes:
 
   | Method | Purpose                                      | Success Status Code |
   | ------ | -------------------------------------------- | ------------------- |
   | GET    | Read resource / list collection              | `200`               |
   | PUT    | Create or replace resource                   | `200`, `201`        |
-  | PATCH  | Create or update resource (JSON Merge Patch) | `200`, `201`        |
+  | PATCH  | Update resource (JSON Merge Patch)           | `200`; data-plane create-via-PATCH may use `201` |
   | POST   | Create (service-assigned ID)                 | `201`               |
   | POST   | Action                                       | `200`               |
   | DELETE | Remove resource                              | `204` (avoid `404`) |
 
-- Long-running operations **MUST** return `202-Accepted` and include `x-ms-long-running-operation: true`.
+- Data-plane long-running operations normally return `202-Accepted`. ARM uses
+  verb-specific patterns: async PUT returns `200`/`201`, async PATCH may return
+  `200`/`202`, and async DELETE/POST may return `202`. Apply the ARM instruction
+  file rather than this generic default.
 - **DO** return the resource body on PUT, PATCH, POST, and GET operations with `200` or `201`.
-- The `ProvisioningState` async pattern (returning 200/201 with a `provisioningState` field that transitions from `Creating`/`Updating` to `Succeeded`/`Failed`) **MUST NOT** be combined with `202` responses. If the operation returns `202`, it **MUST** use `Location` or `Azure-AsyncOperation` header-based polling -- not `ProvisioningState`. Mixing `202` with `ProvisioningState` is an incorrect async pattern. See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState rules.
-- DELETE operations **MUST** return `204-No Content` with no response body. Do not return `404` for missing resources on DELETE.
-- POST action operations **MUST** return `200` with a response body (even if empty, to allow future extension).
+- On data-plane APIs, do not combine a resource-body `provisioningState` polling
+  pattern with a `202` status-monitor pattern. ARM resource responses may still
+  carry and transition `provisioningState` during async PATCH or DELETE while
+  the operation uses the verb-specific polling headers and status codes. Apply
+  `arm-api-review.instructions.md` sections 5-6 and
+  [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md).
+- For data-plane DELETE operations, use `204-No Content` with no response body.
+  ARM DELETE also permits its documented `200`/`202` patterns and never returns
+  `404` for a missing resource.
+- Synchronous POST action operations normally return `200` with a response body.
+  Long-running ARM POST actions may return `202` per the ARM async contract.
 - POST actions that intentionally return no content **SHOULD** use `204 No Content` instead of `200` with an empty body. An empty `200` response is ambiguous — `204` explicitly signals no content.
 - POST action responses that return the full parent resource body should be reviewed carefully — this can inadvertently expose resource state to callers who only have permission to invoke the action, not read the resource.
 - All operations **MUST** include a `"default"` error response.
@@ -249,14 +267,19 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 
 > **Full rule definitions:** See [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for comprehensive enum and boolean-to-enum guidance.
 
-- Every enum **MUST** have the `x-ms-enum` extension with a `name` property and `"modelAsString": true` (extensible enum).
+- Every enum **MUST** have the `x-ms-enum` extension with a unique `name`.
+- Enums **SHOULD** set `"modelAsString": true` unless the symbol set is
+  provably fixed. A closed enum with a documented fixed-set rationale is the
+  Azure Guidelines' explicit exception and is not a violation; without a
+  rationale, report at Warning at most. See `enum-best-practices.md`.
 - Enum `name` values **MUST** be unique across the entire specification.
 - Enum values **MUST NOT** be empty strings; **SHOULD** use PascalCase.
 - Enum values **MUST** be semantically distinct (no overlapping synonyms like `InProgress` and `Running`).
 - Enum values replacing booleans **MUST** carry semantic meaning beyond `True`/`False`.
 - `default` values for enum properties **MUST** be one of the defined enum values.
 - **DO NOT** remove existing enum values -- this is a breaking change.
-- Document that customers should expect new enum values may appear in the future.
+- For extensible enums, document that customers should expect new values in the
+  future. For a closed enum, document why the symbol set cannot grow.
 
 ## 8. Polymorphic Types
 
@@ -346,7 +369,7 @@ A finding "passes" the rule means the rule does not appear in the findings list 
   - Error types: `ErrorResponse`, `ErrorDetail`
   - Standard parameters: `SubscriptionIdParameter`, `ResourceGroupNameParameter`, `ApiVersionParameter`
   - System metadata: `systemData`
-- Use `$ref` to common-types instead of redefining standard ARM structures inline. This is a **recommended practice**, not a blocking requirement -- a spec that correctly defines these shapes inline (with all required fields, readOnly annotations, and descriptions) is functionally compliant. Flag inline redefinition as a non-blocking suggestion, not a blocking violation.
+- Use `$ref` to common-types instead of redefining standard ARM structures inline. This is normally a **recommended practice**, not a blocking requirement -- a spec that correctly defines most standard shapes inline can receive a non-blocking suggestion. **Exception:** `systemData` on an ARM resource MUST use the canonical common-types definition; `arm-api-review.instructions.md` section 20.1 makes an inline `systemData` definition Blocking.
 - Verify the `$ref` path is valid and points to the correct common-types version file.
 - Definition names **MUST** be unique across all swagger files included in the same package tag. Duplicate definitions (e.g., `ErrorResponse` defined in both `foo.json` and `bar.json`) cause SDK generation conflicts. Use `$ref` to a single shared definition or common-types instead.
 - All tracked ARM resources **MUST** include `systemData` as a read-only top-level property. Proxy resources are not required to carry `systemData` unless the service contract explicitly includes it.
@@ -421,6 +444,12 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 ## 18. Conditional Requests & Optimistic Concurrency
 
 **Reference: [Azure Guidelines — Conditional Requests](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#conditional-requests)**
+
+The general guidance below is for data-plane APIs. ARM supports `If-Match` for
+write and delete concurrency control, does not support `If-None-Match` or
+wildcards, and does not support conditional GET. For ARM, apply
+`arm-api-review.instructions.md` section 19 and do not request the unsupported
+headers below.
 
 - Operations **SHOULD** support `If-Match`, `If-None-Match`, `If-Modified-Since`, and `If-Unmodified-Since` request headers.
 - Operations **SHOULD** return `ETag` and `last-modified` response headers.
@@ -524,7 +553,7 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
   Do not claim that validators reject an ordinary response-body literal when
   its enum is `modelAsString: true`. The complete example-quality guidance is
   in
-  [`.github/skills/azure-api-review/references/example-quality.md`](../skills/azure-api-review/references/example-quality.md#ex-payload--example-payload-correctness).
+  [`.github/skills/azure-api-review/references/example-quality.md`](../skills/azure-api-review/references/example-quality.md#ex-payload-example-payload-correctness).
 - The `id` field in examples **MUST NOT** be an empty string (`"id": ""`). Empty resource IDs crash ModelValidation tooling and are never valid ARM resource identifiers.
 - String values **MUST NOT** have malformed content (e.g., extra closing braces `"{value}}"`, duplicate prefixes like `"$filter=$filter=..."`, stray trailing quotes or garbled characters).
 - The example response key **MUST** be `"headers"` (plural) — not `"header"` (singular).
@@ -610,7 +639,10 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 ### 24.3 Proactive Format Detection (SCHEMA-FORMAT-DETECT)
 
 - If a string property's description mentions ISO-8601, datetime, or timestamp concepts but the schema lacks `"format": "date-time"`, flag it.
-- If a string property's name or examples suggest GUID/UUID values (e.g., `tenantId`, `objectId`, `clientId`) but the schema lacks `"format": "uuid"`, flag it.
+- On data-plane specs, if a string property's name or examples suggest GUID/UUID
+  values but the schema lacks `"format": "uuid"`, flag it. On ARM specs, do
+  **not** suggest `format: uuid` from the name or example alone; apply the
+  `guid-and-uuid-on-arm.md` allow-list and suppression decision tree.
 - If a string property contains what appears to be an ARM resource ID (from name or description), recommend using a `$ref` to a common resource ID type or adding appropriate `format`/`pattern` annotations.
 
 ### 24.4 `nextLink` Should Be Read-Only (SCHEMA-NEXTLINK-READONLY)
@@ -639,8 +671,8 @@ When reviewing, systematically check:
 - ✅ Common-types referenced (not redefined) for ARM standard types; no duplicate definitions across files in same tag
 - ✅ All CRUD operations and List operations present for ARM resources
 - ✅ `x-ms-pageable` on list operations with correct `nextLinkName`
-- ✅ `x-ms-long-running-operation` on async operations with polling config; no ProvisioningState + 202 mixing
-- ✅ `x-ms-enum` with `modelAsString: true` on all enums
+- ✅ `x-ms-long-running-operation` on async operations with polling config; ARM uses the verb-specific async and provisioningState rules in `arm-api-review.instructions.md`
+- ✅ Every enum has `x-ms-enum` with a unique name; `modelAsString: true` unless a documented fixed-set rationale justifies a closed enum
 - ✅ `x-ms-examples` on every operation with valid example files
 - ✅ `operationId` follows `{Resource}_{Verb}` pattern with exactly one underscore
 - ✅ Path parameter names are descriptive (`{syncSetName}` not `{childResourceName}`)
@@ -659,7 +691,7 @@ When reviewing, systematically check:
 - ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-\*)
 - ✅ No `$ref` with sibling keywords (SCHEMA-REF-SIBLINGS)
 - ✅ Single common-types version per file; no outdated v2 in new specs (SCHEMA-COMMON-TYPES-VERSION)
-- ✅ String properties with datetime/UUID descriptions have matching `format` (SCHEMA-FORMAT-DETECT)
+- ✅ Data-plane string properties with datetime/UUID descriptions have matching formats; ARM GUID-like strings follow the R3017 allow-list and suppression decision tree (SCHEMA-FORMAT-DETECT)
 - ✅ `nextLink` properties marked `readOnly: true` (SCHEMA-NEXTLINK-READONLY)
 - ✅ Numeric properties use integer/number types, not string (SCHEMA-SEMANTIC-TYPE)
 - ✅ No unused/orphaned definitions in `definitions` section (SCHEMA-UNUSED-DEF)
@@ -675,5 +707,5 @@ Flag all violations clearly with JSON path references, the specific rule, and a 
 
 - ✅ Every finding includes an **exact line number** (`line 42`, not "around line 42" or "near end of file")
 - ✅ If the spec is fully compliant, state that no blocking issues were found -- do not fabricate findings
-- ✅ Do NOT elevate process recommendations (e.g., "use common-types $ref") to blocking violations. A spec that defines ARM-standard shapes correctly inline is compliant.
+- ✅ Do NOT elevate process recommendations (e.g., most common-types `$ref` guidance) to blocking violations. Exception: ARM `systemData` must use the canonical common-types definition.
 - ✅ Only flag blocking findings for actual RPC contract violations, security issues, or breaking changes

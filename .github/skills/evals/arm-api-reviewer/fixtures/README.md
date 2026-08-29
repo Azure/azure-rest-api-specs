@@ -46,7 +46,7 @@ rule category without interference from other issues.
 
 ## Fixture Catalog
 
-### `arm-openapi/` -- ARM OpenAPI Specifications (20 files)
+### `arm-openapi/` -- ARM OpenAPI Specifications (21 files)
 
 | File                              | Violations                    | Description                                                                                                                                                                                  |
 | --------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -60,6 +60,7 @@ rule category without interference from other issues.
 | `enum-violations.json`            | Enum best-practice issues     | Missing x-ms-enum decorator; modelAsString false; non-PascalCase values; empty string enum value.                                                                                            |
 | `ex-payload-enum-cases.json`      | EX-PAYLOAD enum cases         | Shared schema for extensible, closed, discriminator, and request-path unknown enum example values.                            |
 | `inline-common-types.json`        | Inline common-types           | Defines ErrorResponse, ErrorDetail, SubscriptionIdParameter, ResourceGroupNameParameter, and ApiVersionParameter inline instead of using common-types $ref.                                  |
+| `inline-systemdata.json`                 | Inline systemData             | Tracked resource defines `systemData` inline instead of referencing the canonical ARM common-types definition.                                                                                                                                                                                                                                     |
 | `lro-violations.json`             | Long-running operation issues | Async PUT returning 202 instead of 200/201 with provisioningState; DELETE returning resource body.                                                                                           |
 | `missing-crud-ops.json`           | Missing lifecycle operations  | PUT, GET, and PATCH exist but DELETE, ListByResourceGroup, ListBySubscription, and Operations API are missing.                                                                               |
 | `missing-descriptions.json`       | Missing descriptions          | Operations, models, and properties lack description fields.                                                                                                                                  |
@@ -71,11 +72,17 @@ rule category without interference from other issues.
 | `secret-property.json`            | Secret property issues        | connectionString, adminPassword, and primaryKey without x-ms-secret annotation.                                                                                                              |
 | `typespec-generated-spec.json`    | None (true negative)          | Compliant ARM spec carrying the `x-typespec-generated` extension at the top level. Used by the TSP-REQUIRED-V1 eval to verify TypeSpec-generated swagger is not flagged.                     |
 
-### `examples/` -- Example JSON Files (7 files)
+### `examples/` -- Example JSON Files (13 files)
 
 | File                            | Violations           | Description                                                                                          |
 | ------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------- |
 | `example-clean.json`            | None (true negative) | Properly formed example with fully qualified ARM resource ID, no secrets, correct provisioningState. |
+| `example-clean-create-or-update.json`        | None (true negative)        | Complete PUT request and response for the clean golden specification.                                 |
+| `example-clean-update.json`                  | None (true negative)        | Complete PATCH request and response for the clean golden specification.                               |
+| `example-clean-delete.json`                  | None (true negative)        | DELETE example with an empty successful response.                                                     |
+| `example-clean-list-by-resource-group.json`  | None (true negative)        | Empty collection response for resource-group list.                                                    |
+| `example-clean-list-by-subscription.json`    | None (true negative)        | Empty collection response for subscription list.                                                      |
+| `example-clean-operations-list.json`         | None (true negative)        | Empty Operations API collection response.                                                             |
 | `example-bad-resource-id.json`  | Empty resource ID    | Response body has an empty string for the `id` field.                                                |
 | `example-ex-payload-extensible-enum.json` | Extensible enum response | Undeclared ordinary response value; Warning because `modelAsString` is true. |
 | `example-ex-payload-closed-enum.json` | Closed enum response | Undeclared ordinary response value; Blocking because `modelAsString` is false. |
@@ -104,7 +111,7 @@ Each subdirectory contains a `stable-2024-01-01.json` (previous) and
 | `added-required-property/` | Optional becomes required | `sku` property changes from optional to required in WidgetProperties between versions.                |
 | `denylist-pattern/`        | Denylist pattern severity | The `policyName` path parameter and `displayName` body property use denylist patterns in both versions (pre-existing — Warning). A new `description` body property adds a denylist pattern only in 2025-01-01 (new — Blocking). Tests severity differentiation for OAPI-PATTERN-ALLOWLIST. |
 
-### `typespec/` -- TypeSpec Specification Files (5 files)
+### `typespec/` -- TypeSpec Project Files (7 files)
 
 | File                             | Violations                    | Description                                                                                                                                                                                                                                                                   |
 | -------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -113,3 +120,5 @@ Each subdirectory contains a `stable-2024-01-01.json` (previous) and
 | `anti-patterns.tsp`              | Common TypeSpec anti-patterns | Empty model `{}` instead of void for POST action; #suppress for no-empty-model; @flattenProperty on new API; default value flowing into PATCH; `\| null` on new property; underscore and ALL_CAPS enum values.                                                                |
 | `x-ms-identifiers-violations.tsp` | x-ms-identifiers / @extension | `@extension("x-ms-identifiers", ...)` on array properties (forbidden -- use `@identifiers` or `@key`); `#suppress` of `missing-x-ms-identifiers` with FIXME placeholder text (TSP-4.1); vague "matching another resource" suppression (TSP-ARRAY-IDENTIFIERS). Also contains positive controls: `@identifiers(#["..."])`, `@identifiers(#[])`, and `@key` on item type. |
 | `denylist-pattern-violations.tsp` | Denylist @pattern violations  | Policy resource key `@pattern` and displayName body property `@pattern` use denylist `[^...]` syntax (OAPI-PATTERN-ALLOWLIST) — Blocking for new spec. Positive controls: category property with correct allowlist; slug property with negative lookahead alongside allowlist (both should NOT be flagged). |
+| `unrelated-version-main.tsp`      | Emission-linkage mismatch     | Declares only API version `2025-01-01`; paired with a new handwritten `2026-05-01` OpenAPI directory to test TSP-REQUIRED-V1.                                                                                                                                                |
+| `unrelated-version-tspconfig.yaml` | Emission-linkage mismatch    | Emits only the `stable/2025-01-01` directory, proving the sibling TypeSpec project does not produce the new handwritten version.                                                                                                                                             |
