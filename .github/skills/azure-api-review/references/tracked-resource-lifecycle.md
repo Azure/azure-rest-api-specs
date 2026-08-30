@@ -48,10 +48,9 @@ Every tracked resource, whether top-level or nested, **MUST** implement:
 
 Collection scope depends on the resource hierarchy:
 
-- A resource-group-scoped top-level type **MUST** implement List by Resource
-  Group and List by Subscription (RPC-Get-V1-05).
-- A subscription-scoped top-level type **MUST** implement List by Subscription
-  (RPC-Get-V1-05).
+- A top-level tracked type **MUST** implement List by Resource Group and List by
+  Subscription (RPC-Get-V1-05). RPC-Put-V1-01 requires tracked resources
+  themselves to be resource-group scoped.
 - A nested type **MUST** implement collection GET under its immediate parent
   (PLCY008 / RPC006). Do not require additional resource-group or subscription
   list operations for the nested type.
@@ -218,7 +217,7 @@ interface MyResources {
   get is ArmResourceRead<MyResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MyResource>;
   update is ArmResourcePatchAsync<MyResource, MyResourceProperties>;
-  delete is ArmResourceDeleteAsync<MyResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<MyResource>;
   listByResourceGroup is ArmResourceListByParent<MyResource>;
   listBySubscription is ArmListBySubscription<MyResource>;
 }

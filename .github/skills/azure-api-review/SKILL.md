@@ -100,9 +100,10 @@ Copilot Chat review, the ready-for-ARM GitHub Actions workflow, and an authorize
 `/arm-review` request. Before an ARM reviewer posts, it inventories all
 paginated inline review threads, top-level PR conversation comments, and pull
 request review bodies. Human-authored and agent-authored feedback both count,
-including resolved, outdated, and marker-free items. The agent marker controls
-thread ownership and resolution only; it never controls whether prior feedback
-counts as coverage.
+including resolved, outdated, and marker-free items. Marker text is attribution,
+not authentication. Trusted ownership for autonomous resolution requires both a
+valid marker and author `github-actions[bot]`; all prior feedback counts as
+coverage regardless.
 
 Match by semantic finding identity: the same rule or review topic, affected API
 element, and corrective outcome. Exact wording, author, entry point, comment
@@ -121,8 +122,8 @@ states why they do not make the finding new. Use these canonical actions:
   shifted lines, or marker-free feedback.
 - `REPLY-LINE-SHIFT`: a human-origin inline finding still applies at a moved
   line. Reply in that thread and leave it unresolved.
-- `RESOLVE-AND-REPOST`: an agent-origin inline finding still applies at a moved
-  line. Resolve the stale thread and post one replacement at the current line.
+- `RESOLVE-AND-REPOST`: a trusted workflow-owned inline finding still applies
+  at a moved line. Resolve the stale thread and post one replacement.
 - `CLARIFY-CONFLICT`: prior feedback for the same semantic finding gives
   materially incompatible guidance. Do not post a competing finding. Reply in
   the existing inline thread, or post one consolidated top-level clarification

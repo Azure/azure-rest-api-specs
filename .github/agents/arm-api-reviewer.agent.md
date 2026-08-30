@@ -255,7 +255,10 @@ The marker format is:
   item 11).
 - For local reviews, `pr=local:<64-lowercase-hex>` uses the SHA-256 hash of the
   normalized absolute target path. It is stable when file content changes.
-  Content drift is tracked separately by the `local-sha256:` Session SHA.
+  Content drift is tracked separately by the `local-sha256:` Session SHA, which
+  **MUST change** when any source content, path/role set, previous-version
+  selection, or recorded `HEAD` changes. Only the target-path identity is
+  stable across content edits.
 - **Mapping rule:** after all retries exhausted -> `unavailable`. Never
   `skipped`. If you find yourself about to emit `critic-mode=skipped`, you
   are in violation; apply the bounded-retry / auto-unavailable policy instead.
@@ -558,27 +561,54 @@ The **azure-api-review** skill (`.github/skills/azure-api-review/`) contains cro
 
 ## Fetching Files from GitHub
 
-All specification files **MUST** be fetched directly from GitHub. Do **not** assume files are available in the local workspace - the PR branch and the target repository may differ from the local checkout.
+For a PR review, every specification file **MUST** be fetched directly from
+GitHub at the pinned session SHA. Do **not** substitute a local workspace file:
+the PR head and target repository may differ from the checkout. Local reviews
+instead read only the content-bound workspace sources defined in Local workspace
+review mode.
 
 ### Authentication
 
 - Use the GitHub MCP server tools (for example, `pull_request_read(method: "get")`, `pull_request_read(method: "get_files")`, and `get_file_contents`) when available. These tools handle authentication automatically via OAuth.
 - If GitHub MCP tools are not available, use these fallbacks:
-  - **PR branch files:** `https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{path}`
-  - **Main branch files (previous versions):** `https://raw.githubusercontent.com/{owner}/{repo}/main/{path}`
-  - For `azure-rest-api-specs-pr` (private repo), raw URLs will not work without
-    authentication. Use authenticated `gh api
-repos/<owner>/<repo>/contents/<path>?ref=<sha>` when MCP is unavailable.
-- If authentication fails or the user has not authorized GitHub access, **ask the user to authorize** the GitHub MCP server connection in VS Code (the OAuth consent prompt should appear automatically) or provide a GitHub Personal Access Token.
+- **PR files:** `https://raw.githubusercontent.com/{owner}/{repo}/{session-sha}/{percent-encoded-path}`
+- **Previous-version files:** `https://raw.githubusercontent.com/{owner}/{repo}/{full-40-char-base-sha}/{percent-encoded-path}`
+- For `azure-rest-api-specs-pr` (private repo), raw URLs will not work without
+  authentication. Use the structured, percent-encoded `gh api` form below
+  when MCP is unavailable.
+- If authentication fails or the user has not authorized GitHub access, ask the
+  user to authorize the GitHub MCP connection or authenticate the `gh` CLI.
+  Never ask the user to paste a personal access token into chat.
 
 ### Shell fallback discipline
 
 Prefer the GitHub MCP tools. Shell out to `gh` through `execute/runInTerminal` only when the MCP tool is missing or returns an error, and follow these rules -- the terminal is **PowerShell**, which parses the command line before `gh` ever sees it.
 
-- **Never inline a `jq` filter or a GraphQL query.** Write it to a temp file and reference the file: `gh api <endpoint> --jq (Get-Content -Raw filter.jq)`, or `gh api graphql -F query=@query.graphql`. Inlining is what breaks -- a single-quoted filter containing spaces is word-split before `gh` receives it, and `gh` reports `accepts 1 arg(s), received 3`.
+- **Never interpolate a PR path into command text.** Validate `owner` and `repo`
+  against the supported repository set, require a full hexadecimal SHA, encode
+  each path segment with `[uri]::EscapeDataString`, join the segments with `/`,
+  construct the endpoint in a variable, and pass that variable as one quoted
+  argument to `gh api`. PowerShell does not recursively evaluate metacharacters
+  stored inside a variable.
+
+  ```powershell
+  $encodedPath = (($path -split "/") | ForEach-Object { [uri]::EscapeDataString($_) }) -join "/"
+  $endpoint = "repos/$owner/$repo/contents/$encodedPath`?ref=$sha"
+  gh api "$endpoint"
+  ```
+
+- **Never inline a `jq` filter or a GraphQL query.** Prefer dropping `--jq` and
+  parsing raw JSON with `ConvertFrom-Json`. When GraphQL requires a query file,
+  create a GUID-named file under `[IO.Path]::GetTempPath()`, track its exact
+  resolved path, pass it with `-F query=@<absolute-temp-path>`, and remove that
+  exact file in a `finally` block. Never create fixed names such as `filter.jq`
+  or `query.graphql` in the workspace.
 - **Never build a `jq` or GraphQL expression inside a double-quoted PowerShell string.** A bare `|` inside double quotes is a **pipeline operator**, so PowerShell tries to run the right-hand side as a command and the call fails with `CommandNotFoundException`. Escaping the quotes does not help; the pipe is the problem.
 - **Or drop `--jq` entirely** and pipe the raw JSON through `ConvertFrom-Json`, which needs no quoting gymnastics.
-- **`gh pr diff` has no `-- <pathspec>` filter.** Unlike `git diff`, a trailing path becomes an illegal second positional argument (`accepts at most 1 arg(s), received 2`). To inspect a single file use `get_file_contents`, or `gh api repos/<owner>/<repo>/contents/<path>?ref=<sha>`.
+- **`gh pr diff` has no `-- <pathspec>` filter.** Unlike `git diff`, a
+  trailing path becomes an illegal second positional argument. To inspect one
+  file, use `get_file_contents` or the structured, percent-encoded `gh api`
+  procedure above.
 
 A shell parse error is a **client-side** failure, not a GitHub failure -- the request never left the machine. Do not brute-force quoting variants; see the **Shell parse error** row in [Failure Modes & Recovery](#failure-modes--recovery) for the retry cap and the required tool switch.
 
@@ -588,7 +618,7 @@ For each PR review, you must fetch:
 
 1. **PR metadata** - title, description, and changed file list (via GitHub MCP `pull_request_read(method: "get")` and `pull_request_read(method: "get_files")`, or the PR API).
 2. **Changed files from the PR branch** - the full content of each changed specification file (`.tsp`, `.json`, `.yaml`, `readme.md`) from the PR's head branch.
-3. **Previous version files from the base source** - for new-vs-existing classification and breaking change comparison, fetch the corresponding files from the base SHA/ref recorded in Step 1. For example, if the PR adds `stable/2025-07-15/`, fetch the prior version folder contents (e.g., `stable/2024-02-01/` or `preview/2024-06-15-preview/`) from the base source.
+3. **Previous version files from the base source** - for new-vs-existing classification and breaking change comparison, fetch the corresponding files from the full base commit SHA recorded in Step 1. For example, if the PR adds `stable/2025-07-15/`, fetch the prior version folder contents (e.g., `stable/2024-02-01/` or `preview/2024-06-15-preview/`) from the base source.
 4. **Rule set instruction files** - load from the local workspace (`.github/instructions/*.instructions.md`), as these are part of this repository.
 5. **Complete PR discussion inventory** - all inline review threads in every state (active, resolved, outdated, collapsed), all top-level PR conversation comments, and all pull request review bodies. Use GitHub MCP `pull_request_read(method: "get_review_comments")` for the inline threads, plus the paginated issue-comments and pull-request-reviews APIs, as described in Step 5.5. This inventory covers feedback from humans, interactive agent sessions, automated runs, and `/arm-review` runs; it is used to suppress duplicates, clarify contradictions, and verify whether prior violations have been fixed.
 
@@ -616,14 +646,21 @@ files under that directory, whether tracked, untracked, committed, or modified.
 - **`draft == true`**: proceed, but record `Draft PR: yes` in the Step 6 Summary. Findings on draft PRs are advisory; the author may still be iterating.
 - **`mergeable == 'CONFLICTING'`**: proceed, but record `Mergeable: CONFLICTING` in the Summary and warn that line numbers in conflict-marker regions may be unreliable -- re-verify any finding whose line falls inside `<<<<<<<` / `=======` / `>>>>>>>` blocks before posting.
 
-**Pin the session SHA and base source (binding for the entire review).** As the very first action in Step 1, record the PR's current head commit SHA (`pull_request_read(method: "get")` -> `head.sha`) and base commit SHA or immutable base ref (`base.sha`, `baseRefOid`, or equivalent). The head commit is the **session SHA** and is binding for every PR-head file fetch. The base SHA/ref is binding for every previous-version file fetch used in breaking-change comparison and `[NEW]`/`[EXISTING]` classification.
+**Pin the session SHA and base source (binding for the entire review).** As the
+very first action in Step 1, record the PR's full current head commit SHA and
+full base commit SHA (`head.sha` and `base.sha`, `headRefOid` and `baseRefOid`,
+or equivalent). Branch names are mutable and are not valid bindings. If the
+initial PR response omits the base commit SHA, retrieve it through another
+read-only PR API; if it still cannot be obtained, stop rather than compare
+against a branch name. The head SHA binds every PR-head fetch and the base SHA
+binds every previous-version fetch.
 
 - From the same PR metadata response, capture the exact label names matching
   `BreakingChange-Approved-*`, `Versioning-Approved-*`,
   `Approved-Suppression`, or `Approved-TypeSpecSuppression`. Record
   `Approval labels observed: none` when there are no matches. Do not include
   SDK-language, package-name, or namespace approval labels in this inventory.
-- Every PR-head file fetch (changed files in Step 1, re-fetches inside Step 5, Critic re-fetches in Step 7) MUST pin to the session SHA - never to a branch name, never to `HEAD`, never to a freshly re-resolved `head.sha`. Previous-version files MUST pin to the recorded base SHA/ref, not the session SHA.
+- Every PR-head file fetch (changed files in Step 1, re-fetches inside Step 5, Critic re-fetches in Step 7) MUST pin to the session SHA - never to a branch name, never to `HEAD`, never to a freshly re-resolved `head.sha`. Previous-version files MUST pin to the recorded full base commit SHA, not a branch or the session SHA.
 - Surface the session SHA in chat as soon as it is captured (e.g., "Reviewing PR #<n> at head SHA `<sha>`").
 - Pass the session SHA and previous-version base source verbatim to the Critic in Step 7, and pass the session SHA to every per-comment telemetry marker (`head-sha:` field) in Step 8.
 - Record the session SHA and base source in the final Step 6 Summary on their own lines so the human reviewer can audit what was actually reviewed.
@@ -689,9 +726,11 @@ Load the shared `azure-api-review` skill references only when a cross-cutting ru
 - For TypeSpec: Check the `Versions` enum for prior versions and review uses of `@added`, `@removed`, `@typeChangedFrom`.
 - Flag: removed properties, removed operations, type changes, narrowed enums, optional-to-required transitions, renamed paths.
 - If no previous version exists (new service), note this and skip the comparison.
-- **Record the previous version path and base SHA/ref** - both will be needed in Step 4a and by the Critic to classify issues as new vs. existing.
+- **Record the previous version path and full base commit SHA** - both will be needed in Step 4a and by the Critic to classify issues as new vs. existing.
 
-**How to fetch previous versions:** Use GitHub MCP `get_file_contents` with the base SHA/ref recorded in Step 1 (or the PR's immutable base branch ref when the API does not expose a SHA) to fetch files from the previous API version folder. Do not use the PR head SHA for previous-version files.
+**How to fetch previous versions:** Use GitHub MCP `get_file_contents` with the
+full base commit SHA recorded in Step 1. Do not use the PR head SHA or a mutable
+base branch name for previous-version files.
 
 To discover which prior version folders exist, prefer this order to minimize API calls:
 
@@ -714,7 +753,12 @@ is present, record a **Blocking** finding for rule `TSP-REQUIRED-V1`:
   declarations and emitter/output configuration; an unrelated `.tsp` edit or
   merely finding `main.tsp` and `tspconfig.yaml` is not sufficient.
 
-Do **not** flag updates to files inside pre-existing API version directories, even when those files are handwritten OpenAPI. Do **not** flag PRs that only modify example files, `readme.md`, `tspconfig.yaml`, or `.tsp` files. The full rule definition is in [`openapi-review.instructions.md` Section 2A](../instructions/openapi-review.instructions.md#2a-typespec-required-for-new-api-versions-tsp-required-v1). A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)); until it ships, this agent rule is the primary enforcement point.
+Do **not** flag updates to files inside pre-existing API version directories
+under TSP-REQUIRED-V1, even when those files are handwritten OpenAPI; continue
+applying all other immutability and compatibility rules. Do **not** apply this
+rule to PRs that only modify example files, `readme.md`, `tspconfig.yaml`, or
+`.tsp` files. The full rule definition is in
+[`openapi-review.instructions.md` Section 2A](../instructions/openapi-review.instructions.md#2a-typespec-required-for-new-api-versions-tsp-required-v1).
 
 **Hard short-circuit.** This check is REQUIRED. Before emitting any TSP-REQUIRED-V1 finding, walk this checklist top-to-bottom and stop at the first match. The matching branch is dispositive: when the rule passes, the agent MUST NOT emit any finding for TSP-REQUIRED-V1 at any severity, including Warning, Suggestion, and informational. Listing the rule as `N/A` in a compliant-areas table is acceptable.
 
@@ -984,7 +1028,7 @@ Build the posting plan **before** writing the Step 6 report. Two reasons: (a) th
 sentinel `reconciliation skipped` to the Critic, record reconciliation as
 `N/A`, and omit all posting and existing-thread disposition tables.
 
-**1. Fetch the complete existing discussion inventory.** Fetch all inline review threads via GitHub MCP `pull_request_read(method: "get_review_comments")`. The `get_review_comments` string is a current operation value, not a standalone tool name. This method returns logically grouped threads, including resolution, outdated, and collapsed state plus the thread node ID needed by `pull_request_review_write(method: "resolve_thread")`. Use read-only GraphQL `reviewThreads` through `gh api graphql` (via `execute/runInTerminal`, passing the query as a file with `-F query=@query.graphql` per [Shell fallback discipline](#shell-fallback-discipline) -- never inline the query) only if the MCP call errors or is unavailable; the REST `/pulls/<n>/comments` API is acceptable only as a partial fallback for inline bodies and line anchors, because it does not reliably expose thread resolution state and does not return thread node IDs. Also paginate through `/repos/<owner>/<repo>/issues/<n>/comments` for top-level PR conversation comments and `/repos/<owner>/<repo>/pulls/<n>/reviews` for pull request review bodies. Include every inline thread state - active, resolved, outdated, collapsed - and every review state. Record page completion and item counts for all three surfaces, and record for each thread: the thread node ID (for Scenarios E and F), the numeric review-comment ID (for `add_reply_to_pull_request_comment`), and the comment URL. Pin file re-reads to the **session SHA** captured in Step 1.
+**1. Fetch the complete existing discussion inventory.** Fetch all inline review threads via GitHub MCP `pull_request_read(method: "get_review_comments")`. The `get_review_comments` string is a current operation value, not a standalone tool name. This method returns logically grouped threads, including resolution, outdated, and collapsed state plus the thread node ID needed by `pull_request_review_write(method: "resolve_thread")`. Use read-only GraphQL `reviewThreads` through `gh api graphql` only if the MCP call errors or is unavailable, passing the query through the GUID-named OS-temp-file procedure in [Shell fallback discipline](#shell-fallback-discipline). The REST `/pulls/<n>/comments` API is acceptable only as a partial fallback for inline bodies and line anchors, because it does not reliably expose thread resolution state and does not return thread node IDs. Also paginate through `/repos/<owner>/<repo>/issues/<n>/comments` for top-level PR conversation comments and `/repos/<owner>/<repo>/pulls/<n>/reviews` for pull request review bodies. Include every inline thread state - active, resolved, outdated, collapsed - and every review state. Record page completion and item counts for all three surfaces, and record for each thread: the thread node ID (for Scenarios E and F), the numeric review-comment ID (for `add_reply_to_pull_request_comment`), and the comment URL. Pin file re-reads to the **session SHA** captured in Step 1.
 
 For each inline thread, record the **GraphQL thread node ID** (required for the Step 8 `resolveReviewThread` mutation on Scenarios E and F), the REST comment ID (for replies), and the comment URL. For each top-level comment or review body, record its comment/review ID, state when applicable, and URL.
 
@@ -992,7 +1036,13 @@ For each inline thread, record the **GraphQL thread node ID** (required for the 
 
 - Surface - inline thread, top-level PR conversation comment, or pull request review body.
 - Author handle.
-- **Origin** - `agent` if the body contains the substring `posted-by: arm-api-reviewer-agent` (matches all marker versions); `human` otherwise. **Origin is determined by the marker, NOT by the GitHub author handle.** Prior agent runs are typically posted under a human user's handle (the human who invoked the agent), so an author-only classification will silently misclassify every agent-origin thread as human-origin and skip all Scenario E (THANK-AND-RESOLVE) auto-resolutions. You MUST scan each comment body for the literal substring `posted-by: arm-api-reviewer-agent` before assigning origin; do not skip the scan even when every thread on the PR appears to come from the same author.
+- **Origin and trusted ownership** - scan every body for a structurally valid
+  `posted-by: arm-api-reviewer-agent` marker, but do not treat marker text as
+  authentication. Classify a thread as trusted agent-owned only when the marker
+  is valid and the author login is exactly `github-actions[bot]`. A
+  marker-bearing comment from any other author remains useful for attribution,
+  telemetry, duplicate matching, and contradiction detection, but is
+  human-owned for mutation purposes. Never auto-resolve it.
 - Semantic finding identity - rule ID or review topic, affected API element (JSON path, TypeSpec model/property/operation, or equivalent file construct), and underlying corrective outcome. Parse the marker when present, otherwise infer from the body. Author, entry point, comment surface, line movement, wording, and marker presence are not part of identity.
 - File path and line number when the item has an inline anchor.
 - Thread ID, comment ID, resolution state, and outdated state.
@@ -1000,13 +1050,19 @@ For each inline thread, record the **GraphQL thread node ID** (required for the 
 
 A generic summary theme without an affected element and actionable guidance does not count as coverage. Apply the complete cross-session matching and contradiction rules from the [Reviewer-Posted Parity contract](../skills/azure-api-review/references/reviewer-posted-parity.md#cross-session-reconciliation).
 
-**Per-existing-thread fix-verification is MANDATORY for every agent-origin thread**, not only when a new finding would otherwise duplicate it. Step 5.5 step 4 must be executed for every unresolved (or unresolved-but-outdated) agent-origin thread on the PR -- including threads whose finding does not appear in the current review's Step 4/4a candidate set (e.g., they were already classified `[EXISTING]` in a prior session, or the file region they cited is now outside the diff). If the violation the agent previously flagged is no longer present at the session SHA, the thread is a Scenario E (THANK-AND-RESOLVE) candidate and MUST be added to the per-existing-thread disposition table with a proof-of-fix anchor. Failing to verify these threads leaves agent-posted comments stale on the PR after the author has fixed the underlying issues, which is one of the highest-frequency human-reported failure modes of this agent.
+**Per-existing-thread fix-verification is MANDATORY for every marker-attributed
+thread**, not only when a new finding would otherwise duplicate it. For a fixed
+violation, a trusted workflow-owned thread is Scenario E
+(THANK-AND-RESOLVE); every other thread is Scenario F
+(PROPOSE-HUMAN-RESOLVE) and requires explicit per-thread consent.
 
 **3. Per-finding action.** For each finding produced in Steps 4 / 4a (and amended in Step 5), apply the scenarios below. Each finding ends up labelled with **exactly one** action:
 
-- **CLARIFY-CONFLICT.** An actionable existing item on any discussion surface has the same semantic finding identity but gives materially incompatible guidance. Do not plan a new standalone finding. For an inline thread, plan a reply that states the prior position, current evidence at the session SHA, current guidance, and why the conclusion changed. Resolve after the clarification only when the thread is agent-origin and the old guidance is no longer valid; never auto-resolve a human-origin thread. For top-level comments or review bodies, plan one consolidated top-level clarification that links each contradicted item and states which guidance supersedes which. If the evidence is inconclusive, say so and leave the thread unresolved.
+- **CLARIFY-CONFLICT.** An actionable existing item on any discussion surface has the same semantic finding identity but gives materially incompatible guidance. Do not plan a new standalone finding. For an inline thread, plan a reply that states the prior position, current evidence at the session SHA, current guidance, and why the conclusion changed. Resolve after clarification only when trusted workflow ownership is proven and the old guidance is no longer valid; otherwise leave the thread unresolved. For top-level comments or review bodies, plan one consolidated top-level clarification that links each contradicted item and states which guidance supersedes which. If the evidence is inconclusive, say so and leave the thread unresolved.
 - **Scenario A -> SKIP-COVERED.** An actionable existing item (any author, entry point, surface, or state) already covers the same semantic finding. Do not plan a new post. Record the existing item URL as the anchor. A top-level item or review body remains coverage even though it has no inline line anchor.
-- **Scenario B -> RESOLVE-AND-REPOST.** Same finding, line shifted, prior comment is **agent-origin**. The code shifted but the violation still exists at a new line. Plan to resolve the agent's outdated thread **and** post a new comment at the corrected line with cross-reference text: "_(Updated from previous comment at \<url\> - line shifted due to code changes.)_"
+- **Scenario B -> RESOLVE-AND-REPOST.** Same finding, line shifted, prior
+  comment is trusted workflow-owned. Plan to resolve the stale thread and post a
+  replacement at the corrected line.
 - **Scenario C -> REPLY-LINE-SHIFT.** Same finding, line shifted, prior comment is **human-origin**. Do **not** resolve the human's thread - they may be tracking it. Do **not** post a duplicate top-level comment. Plan to add a reply to that thread: "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._"
 
   _Example:_ A prior human reviewer commented on `Microsoft.Contoso/stable/2025-07-01/contoso.json` line 142, flagging a missing `provisioningState`. The current review re-detects the same missing `provisioningState` at line 158 (the file grew by 16 lines). Action: **REPLY-LINE-SHIFT** on the prior reviewer's thread; do **not** resolve; do **not** post a new top-level comment.
@@ -1017,7 +1073,9 @@ A generic summary theme without an affected element and actionable guidance does
 
 - If the violation is **still present** at the original or shifted line, no additional action is needed beyond what step 3 produced.
 - If the violation is **no longer present** (the PR author fixed it), classify the thread:
-  - **Scenario E -> THANK-AND-RESOLVE.** Agent-origin comment. Because the agent owns its own threads, no **per-thread** human approval is required -- the bulk consent comes from the overall plan approval in Step 8 (see the "Bulk auto-resolve disclosure" block, which surfaces the count of Scenario E rows, the list of thread URLs that will be auto-resolved, and the alternative of **Execute selectively** to opt rows out). Plan to post the reply "_Thanks for addressing this! The violation flagged here is no longer present in the latest changes. Resolving this thread._" and resolve the conversation.
+  - **Scenario E -> THANK-AND-RESOLVE.** Trusted workflow-owned comment with a
+    valid marker and author `github-actions[bot]`. The bulk consent comes from
+    the overall plan approval in Step 8.
   - **Scenario F -> PROPOSE-HUMAN-RESOLVE.** Human-origin comment. The thread belongs to that reviewer. Do **not** resolve and do **not** thank on the human's behalf. Plan to surface the thread to the human in Step 8 with URL, rule, and the line where the agent verified the fix, and ask whether to post the reply "_The violation flagged in this comment appears to have been addressed at `<file>` - line <N>._" and resolve. Resolve only with explicit human consent.
 
 - **Proof-of-fix anchor (mandatory for THANK-AND-RESOLVE and PROPOSE-HUMAN-RESOLVE).** Record: file path, original line number (from the existing comment), line number you re-read at the session SHA, and a one-line description of the spec construct now present there. The Critic re-verifies these anchors **independently** in Step 7 - a missing, vague, or incorrect anchor is a `FAIL` and the entry will be dropped from the plan.
@@ -1047,11 +1105,27 @@ A generic summary theme without an affected element and actionable guidance does
 
 **Output budget (identical to the automated workflow).** Apply this limit to the candidate findings **before** invoking the Critic in Step 7, so the Critic verifies the same agreed posting set the automated run would. This is the budget defined in `.github/workflows/arm-api-review.md`; the two contexts MUST NOT diverge (see [Review context parity](#review-context-parity)).
 
-**Inline comment limit: 20 per session.** There are no per-category caps. Below 20, post every finding -- do not trim a small review. Per-category caps were removed because, sized by how often a category occurs, they give the smallest allowance to the rarest categories, and security is the rarest: a cap that binds on a three-finding review withholds a real finding while nothing is under pressure.
+**Inline comment limit: 20 per session.** There are no per-category caps. At 20
+or fewer, post every finding. Per-category caps were removed because, sized by
+how often a category occurs, they give the smallest allowance to the rarest
+categories, and security is the rarest: a cap that binds on a three-finding
+review withholds a real finding while nothing is under pressure.
 
-Above 20, trim to fit and disclose, dropping in this order by the `category` recorded on each finding: (1) `documentation-and-examples`; (2) `schema-and-property-design`, `naming-enums-and-identifiers`, `sdk-and-client-impact`; (3) `resource-modeling`, `operations-and-http-semantics`, `long-running-operations`, `suppressions-and-tooling`, `review-readiness-and-ci`; (4) `versioning-and-compatibility`; (5) `security-and-secrets`. Security and versioning are trimmed **last**. Frequency is not importance. Replies and thread resolutions from Step 5.5 do **not** count toward the 20.
+With more than 20, trim to fit and disclose, dropping in this order by the
+`category` recorded on each finding: (1) `documentation-and-examples`; (2)
+`schema-and-property-design`, `naming-enums-and-identifiers`,
+`sdk-and-client-impact`; (3) `resource-modeling`,
+`operations-and-http-semantics`, `long-running-operations`,
+`suppressions-and-tooling`, `review-readiness-and-ci`; (4)
+`versioning-and-compatibility`; (5) `security-and-secrets`. Security and
+versioning are trimmed **last**. Frequency is not importance. Replies and thread
+resolutions from Step 5.5 do **not** count toward the 20.
 
-The limit is the observed maximum plus headroom: across 267 pull requests, grouped into sessions by the `head-sha` on each marker, inline comments per session ran median 2, mean 3.72, p90 8, maximum **18**. Trimming should effectively never fire on volumes seen to date. Use the `category` field from [Finding categories](./protocols/arm-api-review-critic.protocol.md#finding-categories) to place a finding in the drop order; never decide it by re-reading the rule ID.
+Twenty is a reviewed per-session policy guardrail against pathological output,
+not a threshold derived automatically from a committed telemetry dataset. Do
+not encode mutable sample statistics as permanent facts. Use the `category`
+field from [Finding categories](./protocols/arm-api-review-critic.protocol.md#finding-categories)
+to place a finding in the drop order; never decide it by re-reading the rule ID.
 
 The limit governs what is **posted**, not what is analyzed, but an overflow candidate is **not** a verified finding. The agreed posting set is selected after the 20-comment limit is applied, and only that set goes to the Critic. Excluded candidates are therefore disclosed **only as a count and themes**, never rendered as canonical finding bodies and never described in a way that implies the Critic verified them. In the Step 6 report, give each excluded candidate the action `OVERFLOW-NOT-POSTED` in the per-finding action table rather than a posting action, so it is visible to the human without being mistaken for something that will be posted. In Step 8, disclose the aggregate in the **review-body preamble** as an extra sentence (this agent does not post a summary comment by default, so the preamble is the surface that always exists): _"N additional findings were identified but not individually verified or posted. Key themes: [list]. Review the full checklist in `arm-api-review.instructions.md`."_ Never silently drop an overflow candidate: an undisclosed limit is indistinguishable from a missed violation.
 
@@ -1142,10 +1216,10 @@ Per-finding posting action and per-existing-thread disposition built in Step 5.5
 
 **Existing-thread dispositions** (include rows only when the action is THANK-AND-RESOLVE or PROPOSE-HUMAN-RESOLVE; omit this entire table when empty):
 
-| No. | Existing thread | Origin              | Original rule | Verified-fixed at                            | Action                |
-| --- | --------------- | ------------------- | ------------- | -------------------------------------------- | --------------------- |
-| 1   | `<url>`         | agent               | `<rule-id>`   | `<file> - line <N>` (re-read at session SHA) | THANK-AND-RESOLVE     |
-| 2   | `<url>`         | human (`@<handle>`) | `<rule-id>`   | `<file> - line <N>` (re-read at session SHA) | PROPOSE-HUMAN-RESOLVE |
+| No. | Existing thread | Origin               | Original rule | Verified-fixed at                            | Action                |
+| --- | --------------- | -------------------- | ------------- | -------------------------------------------- | --------------------- |
+| 1   | `<url>`         | trusted workflow bot | `<rule-id>`   | `<file> - line <N>` (re-read at session SHA) | THANK-AND-RESOLVE     |
+| 2   | `<url>`         | human (`@<handle>`)  | `<rule-id>`   | `<file> - line <N>` (re-read at session SHA) | PROPOSE-HUMAN-RESOLVE |
 
 <!-- Include the next section ONLY when non-empty: -->
 
@@ -1167,7 +1241,7 @@ Findings the critic returned `FAIL` on that were dropped in revision. Listed for
 
 - **PR:** `<PR-URL>` - _<PR-title>_
 - **Session head SHA (pinned for Reviewer + Critic; use the full 40-char SHA, not the abbreviated 7-char form):** `<full-40-char-sha>`
-- **Previous-version base source (pinned for comparison):** `<base-sha-or-ref>` (or "N/A - new service")
+- **Previous-version base source (pinned for comparison):** `<full-40-char-base-sha>` (or "N/A - new service")
 - **Approval labels observed:** `<exact-label-1>`, `<exact-label-2>` (or `none`)
 - Files reviewed: <count>
 - Previous version compared: `<version>` (or "N/A - new service")
@@ -1242,7 +1316,7 @@ read the anti-patterns list there.
 as the base for every dispatch prompt. The Critic accepts tolerant prose
 input -- labeled fields in any order with sensible defaults for optional
 fields absent. The required fields (review target, Session SHA or local snapshot
-ID, findings report, and reconciliation plan or sentinel)
+ID, findings report, previous-version/base source, and reconciliation plan or sentinel)
 must always be present; missing required fields return
 `Finding accuracy = FAIL` reason `missing-inputs`. Field meanings:
 
@@ -1252,8 +1326,9 @@ must always be present; missing required fields return
    every file re-fetch.
 3. The full Step 6 findings report (verbatim) under `## Step 6 findings report`.
 4. The list of files you reviewed (workspace-relative paths; if omitted, the Critic infers from findings).
-5. The previous-version path and base SHA/ref from Step 4a, or the local
-   comparison path plus content hash; `None - new service` when absent.
+5. For a PR, the previous-version path or explicit `None - new service`, always
+   with the full base commit SHA. For local mode, the comparison path plus
+   content hash or `None - new service`, always with repository `HEAD`.
 6. **The Step 5.5 reconciliation plan** (verbatim) under `## Step 5.5 reconciliation plan`, or the explicit sentinel `reconciliation skipped`. This input is required; omission, an empty heading, or an empty string is malformed.
 7. **Prior iterations' FAIL set summary** -- rule-ID + file/line tuples from prior iterations. Defaults to empty.
 8. **Considered-and-declined list** -- prior-iteration advisory candidates the Reviewer evaluated and chose not to promote. Defaults to empty.
@@ -1489,9 +1564,12 @@ emit the local form of SESSION INVALIDATED instead of findings.
 - **Execute selectively** - human picks per row which actions to perform.
 - **Cancel** - do not execute any action; keep the report in chat.
 
-**Bulk auto-resolve disclosure (load-bearing).** "Execute plan" is a **bulk consent**: it auto-resolves **every** agent-origin thread marked THANK-AND-RESOLVE (Scenario E) and posts a reply on each, without a per-thread prompt. This is intentional -- the agent owns its own prior threads and the Critic in Step 7 already independently re-verified each fix-anchor -- but it is also the single highest-blast-radius action this agent takes. The approval prompt MUST therefore make the scope explicit, by including these four elements verbatim:
+**Bulk auto-resolve disclosure (load-bearing).** "Execute plan" is a **bulk
+consent**: it auto-resolves every trusted workflow-bot thread marked
+THANK-AND-RESOLVE and posts a reply on each. Marker-bearing comments from other
+authors never enter this bulk action.
 
-1. **Count the affected threads.** State the number of THANK-AND-RESOLVE rows (Scenario E) and the number of PROPOSE-HUMAN-RESOLVE rows (Scenario F) in the plan, even when zero, e.g. `Scope: 4 agent-origin threads will be auto-resolved (Scenario E); 0 threads require per-thread approval (Scenario F).`
+1. **Count the affected threads.** State the number of THANK-AND-RESOLVE rows (Scenario E) and the number of PROPOSE-HUMAN-RESOLVE rows (Scenario F) in the plan, even when zero, e.g. `Scope: 4 trusted workflow-owned threads will be auto-resolved (Scenario E); 0 threads require per-thread approval (Scenario F).`
 2. **List each auto-resolved thread URL** (Scenario E rows only) so the human can spot-check them before approving. If the list has more than 15 entries, render the first 15 and say `... and N more (see Reconciliation Plan table above for the full list).`
 3. **Name the alternative.** Tell the human that **Execute selectively** lets them keep specific Scenario E rows unresolved (the equivalent of per-thread approval), and that **Cancel** leaves every existing thread untouched.
 4. **Name the rollback cost.** Auto-resolving a thread is reversible (the human can re-open it manually on github.com). Later sessions still treat the resolved thread as prior coverage and will not duplicate it elsewhere, so if a Scenario E row was auto-resolved in error the human should re-open that thread to restore its unresolved state.
@@ -1504,14 +1582,16 @@ After the human chooses, execute the approved subset of the plan:
 
 1. **Wait for explicit confirmation** from the reviewer before any post, reply, or resolution.
 2. **POST-NEW** - create a pending review with `pull_request_review_write(method: "create")`, add one finding at a time with `add_comment_to_pending_review` attached to the specific file and **exact line number** in the plan, then submit **once** with `pull_request_review_write(method: "submit_pending")`, passing the **Review-body preamble** defined below as that call's `body`. **Every inline finding produced by a run goes through this one review.** Do not split findings across multiple reviews, and never submit a review with an empty body -- an empty-body `COMMENTED` review leaves its findings with no visible attribution and is a defect. Format and telemetry rules below apply.
-3. **RESOLVE-AND-REPOST** (Scenario B) - resolve the cited agent-origin thread first, then post a new comment at the corrected line and include the cross-reference text: "_(Updated from previous comment at <url> - line shifted due to code changes.)_" Format and telemetry rules below apply to the new comment.
+3. **RESOLVE-AND-REPOST** (Scenario B) - resolve the cited trusted workflow-owned thread first, then post a new comment at the corrected line and include the cross-reference text: "_(Updated from previous comment at <url> - line shifted due to code changes.)_" Format and telemetry rules below apply to the new comment.
 4. **REPLY-LINE-SHIFT** (Scenario C) - post the following reply to the existing human-origin thread: "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._" Do **not** resolve the thread; do **not** post a duplicate top-level comment. The reply body does **not** require a telemetry marker (it does not flag a new rule and is part of an existing thread).
-5. **THANK-AND-RESOLVE** (Scenario E) - post the reply "_Thanks for addressing this! The violation flagged here is no longer present in the latest changes. Resolving this thread._" to the cited agent-origin thread, then resolve the conversation. The agent owns its own threads, so the bulk plan approval in this step is the consent -- no separate per-thread prompt fires for these rows. The scope of this bulk consent (count + thread URLs) was disclosed to the human in the "Bulk auto-resolve disclosure" block of the approval prompt; if the human chose **Execute selectively** and opted any Scenario E row out, treat that row as a no-op (do not post the reply, do not resolve). The reply body does **not** require a telemetry marker (it does not flag a new rule).
+5. **THANK-AND-RESOLVE** (Scenario E) - only for a valid marker authored by
+   `github-actions[bot]`; post the validated reply, then resolve. Marker-bearing
+   comments from other authors must use Scenario F and per-thread consent.
 6. **PROPOSE-HUMAN-RESOLVE** (Scenario F) - do **not** resolve and do **not** reply automatically. For each row, ask the human (per-thread) whether to post the reply "_The violation flagged in this comment appears to have been addressed at `<file>` - line <N>._" and resolve. Resolve only with explicit human consent on a per-thread basis. If approved, the reply does not require a telemetry marker (same reason as Scenario E).
-7. **CLARIFY-CONFLICT** - for an inline thread, post the validated clarification reply in that thread and do not post the finding elsewhere. Resolve only an agent-origin thread whose old guidance is explicitly superseded; never auto-resolve a human-origin thread. For conflicts anchored in top-level comments or review bodies, post one consolidated top-level clarification linking every contradicted item and end it with the protocol's `reconciliation: clarification` marker. Each clarification states the prior position, current evidence at the session SHA, current guidance, and why it changed. If evidence is inconclusive, state that and leave the conversation unresolved.
+7. **CLARIFY-CONFLICT** - for an inline thread, post the validated clarification reply in that thread and do not post the finding elsewhere. Resolve only a trusted workflow-owned thread whose old guidance is explicitly superseded; never auto-resolve any other thread. For conflicts anchored in top-level comments or review bodies, post one consolidated top-level clarification linking every contradicted item and end it with the protocol's `reconciliation: clarification` marker. Each clarification states the prior position, current evidence at the session SHA, current guidance, and why it changed. If evidence is inconclusive, state that and leave the conversation unresolved.
 8. **SKIP-COVERED** (Scenario A) and **Scenario D** - take no action. The existing discussion item(s) already cover the finding; the row exists in the plan for transparency and Critic audit only.
 
-**Thread reply and resolution mechanism (Scenarios B, C, E, and F).** Post replies with `add_reply_to_pull_request_comment`, using the numeric review-comment ID captured in Step 5.5. Resolve agent-owned or explicitly approved threads with `pull_request_review_write(method: "resolve_thread")`, using the thread node ID captured by `pull_request_read(method: "get_review_comments")`. Fall back to GraphQL `resolveReviewThread` through `gh api graphql` only when the MCP mutation errors or is unavailable, passing the mutation as a file (`-F query=@mutation.graphql`) per [Shell fallback discipline](#shell-fallback-discipline) rather than inlining it. Do **not** re-fetch comments at posting time. If a required comment or thread ID is unavailable, mark that row as failed in the outcome report and surface its URL for manual handling.
+**Thread reply and resolution mechanism (Scenarios B, C, E, and F).** Post replies with `add_reply_to_pull_request_comment`, using the numeric review-comment ID captured in Step 5.5. Resolve only trusted workflow-owned or explicitly consented threads with `pull_request_review_write(method: "resolve_thread")`, using the thread node ID captured by `pull_request_read(method: "get_review_comments")`. Fall back to GraphQL `resolveReviewThread` through `gh api graphql` only when the MCP mutation errors or is unavailable, passing the mutation through the unique OS-temp-file procedure in [Shell fallback discipline](#shell-fallback-discipline). Do **not** re-fetch comments at posting time. If a required comment or thread ID is unavailable, mark that row as failed in the outcome report and surface its URL for manual handling.
 
 **Review-body preamble (the top-level review comment posted alongside the inline findings).** This body is **REQUIRED and MUST be non-empty**, and it is the `body` of the single `submit_pending` call in item 2 above. It is the only surface that renders the agent attribution and the Critic-verification disclosure, so submitting it empty defeats both and leaves the findings looking like unattributed comments posted under the operator's personal handle. Never submit a review whose body is empty, whitespace-only, or a placeholder. Use the following exact template for the review body. Do **not** improvise alternate phrasings such as "automated ARM API review" or "ARM review bot" -- the wording, link, and tone below are the agreed-upon professional preamble:
 
@@ -1522,6 +1602,8 @@ Posting findings from the [ARM API Reviewer agent](https://github.com/Azure/azur
 
 Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
 
+<overflow disclosure -- include only when candidates were excluded by the 20-comment limit; omit otherwise>
+
 <!-- posted-by: arm-api-reviewer-agent | rule: summary | category: summary | severity: <highest-posted-severity-or-suggestion> | classification: <new-if-any-new-finding-else-existing> | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->
 ```
 
@@ -1531,6 +1613,9 @@ Substitution rules:
 - `<verification-status>`: `critic-verified` only when the Critic returned a
   verdict that was folded into the posting set. When all Critic dispatch attempts
   failed, use `Critic unavailable; reviewer self-check only`. Never combine
+- `<overflow disclosure>`: when the 20-comment limit excludes candidates, use
+  `N additional findings were identified but not individually verified or
+posted. Key themes: [list].` Otherwise omit the line. Never combine
   `critic-verified` with an unavailable outcome.
 - `<outcome>`: one of `converged` (Critic returned PASS or WARN with no unresolved corrections), `manual decision` (the report's `Next-step recommendation` was `MANUAL DECISION REQUIRED` and the human approved posting anyway), `override applied` (one or more findings carry a `critic: override` marker), or `unavailable -- reviewer self-check` (all Critic dispatch attempts failed; auto-unavailable fallback fired). Pick the **highest-severity** label that applies; precedence is `unavailable` > `manual decision` > `override applied` > `converged`.
 - `<short-sha>`: the **first 7 characters** of the session SHA pinned in Step 1, used as the link's display text.
@@ -1590,7 +1675,9 @@ Substitution rules:
 
   This marker is invisible in rendered markdown but enables querying agent-posted comments via the GitHub API, computing telemetry (comments per day, top rule violations, new-vs-existing ratio, override rate), and distinguishing agent comments from human comments during the next review's Step 5.5 reconciliation. Do not omit this marker.
 
-  **Backward compatibility:** Step 5.5's reconciliation inventory detects whether an existing comment was posted by this agent by checking if the comment body contains the substring `posted-by: arm-api-reviewer-agent`. This matches earlier marker formats as well as the current extended marker.
+  **Backward compatibility:** Step 5.5 uses the marker substring to attribute
+  and match older comments, but trusted ownership for mutation additionally
+  requires author `github-actions[bot]`.
 
 **Execution priority and approval rules:**
 

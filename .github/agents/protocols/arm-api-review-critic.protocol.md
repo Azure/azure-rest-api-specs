@@ -21,7 +21,7 @@ wins**. File bugs against the agent that drifted.
 | Term                             | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Session SHA**                  | For a PR, the head commit SHA captured at Step 1. For a local review, `local-sha256:<64-lowercase-hex>`, computed from the sorted reviewed/comparison source manifest. Binding for every source-file read by both agents across one review session.                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| **Base SHA / base ref**          | For a PR, the base commit SHA or immutable base ref. For a local review, the recorded previous-version path/content hash and, for in-place edits, repository `HEAD`. Binding for breaking-change and classification checks.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Base SHA / base ref**          | For a PR, the full base commit SHA; mutable branch refs are forbidden. For a local review, the recorded previous-version path/content hash and repository `HEAD`. Binding for breaking-change and classification checks.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | **Review session**               | The arc from Step 1 (source snapshot pinned) through Step 10 (cleanup), within one conversation thread on one PR or local target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **Dispatch**                     | The host's subagent-invocation mechanism: `runSubagent` with `agentName: "ARM API Review Critic"` in VS Code Copilot Chat, the equivalent `agent` tool in other hosts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | **Fast path / Full review**      | Two review-depth tracks selected in Reviewer Step 1. Fast path skips Steps 3, 3.5, 4a, 5; Full review runs all steps.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -64,7 +64,7 @@ restates field meanings for in-file readability.
 | 2   | Session SHA                        | **Required -- no default**             | PR: full 40-char head SHA. Local: `local-sha256:<64-lowercase-hex>` from the complete source manifest. **Binding for every source-file read.**                                                                                                                                                      |
 | 3   | Step 6 findings report             | **Required -- no default**             | Verbatim, under the `## Step 6 findings report` heading.                                                                                                                                                                                                                                            |
 | 4   | Files reviewed / source manifest   | PR: derive from findings               | PR: workspace-relative reviewed paths. Local: **required** `reviewed`, `previous-version`, and applicable `head` source entries with SHA-256 hashes.                                                                                                                                                |
-| 5   | Previous-version source            | PR: `None - new service`               | PR: base-branch path and base SHA/ref. Local: **required** recorded repository `HEAD` plus comparison path/hash or explicit `None - new service`. Used for breaking-change and `[NEW]`/`[EXISTING]` checks.                                                                                         |
+| 5   | Previous-version source            | **Required -- no default**             | PR: previous-version path or `None - new service`, always with the full base commit SHA. Local: recorded repository `HEAD` plus comparison path/hash or explicit `None - new service`. Used for breaking-change and `[NEW]`/`[EXISTING]` checks.                                                    |
 | 6   | Step 5.5 reconciliation plan       | **Required -- no default**             | Verbatim, under the `## Step 5.5 reconciliation plan` heading, including counts and pagination completion for inline threads, top-level PR comments, and review bodies; or the explicit sentinel `reconciliation skipped`. Omission, an empty heading, or an empty string is malformed.             |
 | 7   | Prior iterations' FAIL set summary | Empty (none)                           | The two most recent prior iterations' rule-ID + file/line tuples. Empty on iteration 1. Used to suppress already-considered failures across iterations.                                                                                                                                             |
 | 8   | Considered-and-declined list       | Empty (none)                           | Prior-iteration `Likely missed violations` candidates the Reviewer evaluated and chose not to promote, each with a one-line rationale. The Critic MUST suppress these unless fresh evidence justifies re-surfacing.                                                                                 |
@@ -87,11 +87,13 @@ Use this exact digest algorithm in both agents:
 
 1. Hash each file's raw bytes with SHA-256 and render lowercase hexadecimal.
 2. Normalize each repo-relative path to `/` separators.
-3. Render one line per source as
+3. Add the metadata line
+   `metadata\trepository-head\t<full-40-char-HEAD-sha>`, then render one line
+   per source as
    `<role>\t<repo-relative-path>\t<lowercase-file-sha256>`, where role is
    `reviewed`, `previous-version`, or `head`. For `head`, prefix the normalized
    repo-relative path with `HEAD:`.
-4. Sort the complete lines by ordinal string comparison, join them with LF and
+4. Sort the metadata and source lines together by ordinal string comparison, join them with LF and
    no trailing newline, hash the UTF-8 bytes with SHA-256, and prefix the result
    with `local-sha256:`.
 5. For the stable marker target identity, resolve the real absolute target path,
@@ -239,6 +241,19 @@ PROPOSE-HUMAN-RESOLVE replies).
 Treat a marker as valid when its fields and their order match, regardless of
 which of these two delimiters the surface requires.
 
+**A marker is attribution, not authentication.** Any PR participant can copy
+marker text. A thread is trusted agent-owned for autonomous resolution only
+when both conditions hold:
+
+1. its body contains a structurally valid marker; and
+2. the comment author login is exactly `github-actions[bot]`.
+
+A marker-bearing comment from any other author still participates in semantic
+coverage, deduplication, contradiction detection, and telemetry, but is
+human-owned for mutation purposes. It must never be auto-resolved. Interactive
+reviews route a fixed such thread through `PROPOSE-HUMAN-RESOLVE`; line shifts
+use `REPLY-LINE-SHIFT`.
+
 <!-- markdownlint-disable MD013 -->
 
 ```html
@@ -249,7 +264,7 @@ which of these two delimiters the surface requires.
 
 | Field             | Values                                      | Notes                                                                                                                                                                                                                                                                                       |
 | ----------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `posted-by`       | `arm-api-reviewer-agent`                    | Used by Step 5.5 to identify agent-origin comments via substring match. **Do not rename** without a backward-compat plan.                                                                                                                                                                   |
+| `posted-by`       | `arm-api-reviewer-agent`                    | Attribution and matching signal. Autonomous ownership additionally requires author `github-actions[bot]`; marker text alone never authorizes mutation. **Do not rename** without a backward-compat plan.                                                                                    |
 | `rule`            | Rule ID from instruction files or `summary` | e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`; use `summary` only for the review summary.                                                                                                                                                                                           |
 | `category`        | One of the 11 slugs below                   | The finding's issue type. Closed vocabulary; see [Finding categories](#finding-categories). Required on every standalone finding. Use `summary` on the review summary marker.                                                                                                               |
 | `severity`        | `blocking` / `warning` / `suggestion`       | Lowercase.                                                                                                                                                                                                                                                                                  |
@@ -448,9 +463,16 @@ the comment as if the full marker had been emitted:
 
 <!-- markdownlint-enable MD013 -->
 
-The minimal marker preserves the single contract Step 5.5 depends on
-(`posted-by: arm-api-reviewer-agent` for agent-origin detection) and
-records that the per-finding fields were not captured. The
+The unattended workflow uses the equivalent visible form because its publisher
+strips HTML comments:
+
+```text
+_posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: <one-line-summary-of-what-failed>_
+```
+
+The minimal marker preserves the attribution signal Step 5.5 uses for matching
+and records that the per-finding fields were not captured. It does not prove
+trusted thread ownership; author verification is still required. The
 `reason:` value SHOULD be a short machine-friendly identifier
 (`head-sha-unavailable`, `rule-id-missing`, `override-reason-truncated`,
 `assembly-error`) so the gap is queryable later, but any free-text

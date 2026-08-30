@@ -39,9 +39,9 @@ mode**. Mode is determined by execution context, not inferred ad hoc:
   (under the gh-aw workflow; an Actions context is present). There is
   **no human gate** and the review **MUST NOT** wait for human
   confirmation. The agreed finding set is acted on directly:
-  net-new findings are **posted**, previously agent-posted findings
-  whose violation is now addressed are **resolved**, and duplicates are
-  **skipped**. Parity applies across both the posted set (net-new
+  net-new findings are **posted**, trusted workflow-owned findings whose
+  violation is now addressed are **resolved**, and duplicates are **skipped**.
+  Parity applies across both the posted set (net-new
   findings) and the resolved set (addressed findings). The one-to-one,
   verbatim-reproduction, and post-post verification rules below apply to
   whatever is posted.
@@ -69,11 +69,10 @@ surfaces:
   reviews.
 
 The inventory includes comments from humans, interactive agent sessions,
-automated runs, and `/arm-review` runs. The
-`posted-by: arm-api-reviewer-agent` marker determines whether the agent owns a
-comment for resolution purposes; it MUST NOT determine whether the comment
-counts as prior coverage. A human-authored comment can cover or contradict a
-new candidate just as an agent-authored comment can.
+automated runs, and `/arm-review` runs. A valid marker plus author
+`github-actions[bot]` identifies trusted workflow ownership for autonomous
+resolution. Marker text alone is only attribution and MUST NOT determine
+ownership or prior coverage.
 
 ### Finding identity and duplicate suppression
 
@@ -111,9 +110,9 @@ Contradictions MUST use `CLARIFY-CONFLICT`, never `POST-NEW`:
 - For an inline thread, reply in that thread with the prior position, current
   evidence at the pinned session SHA, the current guidance, and why the
   conclusion changed. Do not create a second finding elsewhere.
-- If the contradicted inline thread is agent-origin and the old guidance is no
-  longer valid, the plan may resolve it after posting the clarification. Never
-  resolve a human-origin thread without explicit human consent.
+- If the contradicted inline thread is trusted workflow-owned and the old
+  guidance is no longer valid, the plan may resolve it after clarification.
+  Never resolve any other thread without explicit human consent.
 - For top-level comments or review bodies, post one consolidated top-level
   clarification that links every contradicted comment/review and gives the same
   evidence and supersession statement. Do not repeat the findings as separate
@@ -191,14 +190,14 @@ be fetched, reconciliation is incomplete and follows the existing
    autonomous mode) rather than silently posting a shortened or altered
    variant.
 7. **Resolving addressed findings (autonomous mode).** When a
-   previously **agent-posted** finding's violation has been fixed in the
+   previously **trusted workflow-owned** finding's violation has been fixed in the
    current head SHA, the agent **MUST** reply to the thread noting the
    fix **and** resolve that review thread, so the PR's unresolved-thread
    count reflects only live issues. Constraints:
-   - Only threads whose comments carry the
-     `posted-by: arm-api-reviewer-agent` marker may be resolved. The
-     agent **MUST NOT** resolve human-authored threads, nor
-     `[EXISTING]` findings it did not originate.
+   - Only threads with a structurally valid marker authored by
+     `github-actions[bot]` may be resolved. The agent **MUST NOT** resolve
+     marker-only or other human-authored threads, nor `[EXISTING]` findings it
+     did not originate.
    - Partial fixes (violation reduced but not eliminated) **MUST** stay
      open -- do not resolve.
    - Resolution is idempotent: if a later push reintroduces the violation, the

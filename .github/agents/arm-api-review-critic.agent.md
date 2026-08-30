@@ -105,10 +105,10 @@ The Critic emits **one** marker on every response and **reads** one
 marker field during reconciliation validation. Both schemas live in the
 shared protocol; do not restate the fields here.
 
-| Direction | Marker                                        | Where                                                                                                                                        | Source of truth                                                                                                                                                 |
-| --------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Emits     | `<!-- critic-verdict: ... -->`                | Literal **first line** of every Critic response. Mirrors the `### Verdict` table that follows so the Reviewer can parse it programmatically. | [protocol -> Critic-verdict marker](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response)                                    |
-| Reads     | `posted-by: arm-api-reviewer-agent` substring | Inside an existing PR comment body during reconciliation validation (step 7). Identifies a comment as agent-origin.                          | [protocol -> Per-comment telemetry marker](./protocols/arm-api-review-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) |
+| Direction | Marker                         | Where                                                                                                                                                       | Source of truth                                                                                                                                                 |
+| --------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Emits     | `<!-- critic-verdict: ... -->` | Literal **first line** of every Critic response. Mirrors the `### Verdict` table that follows so the Reviewer can parse it programmatically.                | [protocol -> Critic-verdict marker](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response)                                    |
+| Reads     | marker plus author login       | Inside an existing PR comment during reconciliation. Trusted ownership requires a valid marker and `github-actions[bot]`; marker alone is attribution only. | [protocol -> Per-comment telemetry marker](./protocols/arm-api-review-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) |
 
 The Critic does **not** emit any other HTML marker. It does **not** read
 or write the Reviewer's per-response `<!-- review-state: ... -->`
@@ -162,10 +162,13 @@ If the GitHub MCP tools are unavailable in this session, fall back to the
 `gh` CLI through `execute/runInTerminal` - the same fallback path the
 ARM API Reviewer uses. Allowed shell commands are strictly **read-only**:
 
-- `gh api repos/<owner>/<repo>/contents/<path>?ref=<sha>` (fetch a file)
+- A `gh api` file fetch using validated owner/repo, a full hexadecimal SHA, a
+  path encoded segment-by-segment with `[uri]::EscapeDataString`, and the
+  endpoint passed as one quoted variable argument
 - `gh api repos/<owner>/<repo>/pulls/<n>` / `.../files` / `.../comments`
-- `gh api graphql -f query='...'` for read-only GraphQL (`reviewThreads`,
-  `pullRequest`, `repository.object`, etc.)
+- `gh api graphql -F query=@<absolute-temp-path>` for read-only GraphQL, where
+  the query uses a GUID-named file under `[IO.Path]::GetTempPath()` that is
+  removed in a `finally` block
 - `gh pr view <n> --repo <owner>/<repo> --json ...` (read-only)
 - `gh pr diff <n> --repo <owner>/<repo>` (read-only)
 - `git show <sha>:<path>`, `git cat-file`, `git log` (read-only on local repo)
@@ -240,7 +243,7 @@ and adds Critic-specific behavioral notes that are not in the protocol.
    values. Do not silently re-pin.
 3. The **full** findings report as produced in Step 6.
 4. The list of files reviewed.
-5. The previous-version path and base SHA/ref used for `[NEW]`/`[EXISTING]`
+5. The previous-version path and full base commit SHA used for `[NEW]`/`[EXISTING]`
 classification. Local mode always includes `Repository HEAD:
 <full-40-char-sha>`, previous-version path/hash or `None - new service`, and
 any `head` manifest entries needed for in-place comparison.
@@ -283,17 +286,17 @@ any `head` manifest entries needed for in-place comparison.
 
 Input parsing is **tolerant prose**: labeled fields are accepted in any order; unrecognized or extra fields are silently ignored. Missing optional fields fall back to documented defaults per the [shared protocol](./protocols/arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic):
 
-- Inputs #1, #2, #3, and #6 (review target, session SHA or local snapshot,
-  Step 6 findings report, and reconciliation plan or explicit sentinel) are
-  **required** on every invocation. A prompt missing any of these returns
+- Inputs #1, #2, #3, #5, and #6 (review target, session SHA or local snapshot,
+  Step 6 findings report, previous-version/base source, and reconciliation plan
+  or explicit sentinel) are **required** on every invocation. A prompt missing any of these returns
   `Finding accuracy = FAIL` reason `missing-inputs`.
 - Input #4 (files reviewed / source manifest): for a PR, defaults to paths
   inferred from findings. For a local review, the complete role/source/SHA-256
   manifest is required; omission is `missing-inputs`.
-- Input #5 (previous-version source): for a PR, defaults to
-  `None - new service`. For a local review, `Repository HEAD` and an explicit
-  previous-version source or `None - new service` are required; omission is
-  `missing-inputs`.
+- Input #5 (previous-version source): for a PR, requires a full base commit SHA
+  plus a previous-version path or explicit `None - new service`. For a local
+  review, `Repository HEAD` and an explicit previous-version source or
+  `None - new service` are required. Omission is `missing-inputs`.
 - Input #6 (reconciliation plan): has no default. Omission, an empty heading, or an empty string is malformed; use the literal sentinel `reconciliation skipped` explicitly when no plan exists.
 - Inputs #7 and #8 (prior FAIL sets, considered-and-declined list): default to empty list when absent.
 - Input #9 (Graphs status): defaults to `Graphs: false; graph-mode: fast-path` when absent.
@@ -498,7 +501,7 @@ or `FAIL: rule-not-found`.
 ### Step 4: Re-verify [NEW] vs [EXISTING] classification
 
 Read the corresponding file from the previous-version source the reviewer
-recorded. For a PR, use `get_file_contents` with the recorded base SHA/ref, not
+recorded. For a PR, use `get_file_contents` with the recorded full base commit SHA, not
 the PR head SHA. For a local review, read the recorded local comparison path,
 verify its content hash, and inspect the in-place `git diff` against the
 recorded repository `HEAD` when supplied. Inspect the same JSON path, model, or
@@ -727,11 +730,9 @@ guidance do not count as coverage. Then apply the verdict rules below:
   a different rule/topic or API element, is only a generic summary theme, or
   the URL does not resolve, mark `FAIL: skip-not-justified` and recommend
   POST-NEW.
-- **RESOLVE-AND-REPOST (Scenario B)**: confirm (a) the existing comment is
-  agent-origin (body contains the substring `posted-by:
-arm-api-reviewer-agent`, which matches both the full 7-field per-comment
-  marker and the `telemetry: degraded` fallback marker; either form counts
-  as agent-origin); (b)
+- **RESOLVE-AND-REPOST (Scenario B)**: confirm (a) the existing comment carries
+  a structurally valid marker and its author login is exactly
+  `github-actions[bot]`; marker text or author alone is insufficient; (b)
   the violation is still present at the new line (steps 1-2 above
   re-verified at session SHA); and (c) the original line in the existing
   comment is genuinely shifted (the violation is **not** at the original
@@ -739,9 +740,9 @@ arm-api-reviewer-agent`, which matches both the full 7-field per-comment
 shift-misclassified` and recommend the correction (e.g., "existing
   comment is human-origin - reclassify as REPLY-LINE-SHIFT" or "violation
   is still at original line - reclassify as SKIP-COVERED").
-- **REPLY-LINE-SHIFT (Scenario C)**: confirm (a) the existing comment is
-  human-origin (body does **not** contain `posted-by:
-arm-api-reviewer-agent`); (b) the violation is still present at the new
+- **REPLY-LINE-SHIFT (Scenario C)**: confirm (a) trusted workflow ownership is
+  not proven; a marker under any author other than `github-actions[bot]`
+  belongs here; (b) the violation is still present at the new
   line; and (c) the original line is genuinely shifted. Same `FAIL:
 shift-misclassified` reasons apply with symmetric corrections.
 - **CLARIFY-CONFLICT**: confirm (a) the cited prior item has the same semantic
@@ -750,8 +751,9 @@ shift-misclassified` reasons apply with symmetric corrections.
   session SHA, current guidance, why it changed, and which guidance is
   superseded or that the evidence is inconclusive; and (d) the plan does not
   also POST-NEW the same finding. For an inline thread, permit resolution only
-  when it is agent-origin and the prior guidance is explicitly superseded.
-  Human-origin threads must remain unresolved. For top-level comments/review
+  when it has a valid marker authored by `github-actions[bot]` and the prior
+  guidance is explicitly superseded. All other threads must remain unresolved.
+  For top-level comments/review
   bodies, require one consolidated top-level clarification with links to every
   contradicted item. Failures are `FAIL: clarification-unsupported` or `FAIL:
 conflict-unclarified` as applicable.
@@ -760,8 +762,8 @@ conflict-unclarified` as applicable.
   the review-body overflow count and themes. Do not re-verify it as a finding
   and do not treat it as a missing post. If it is rendered as a canonical
   finding body or queued for posting, return `FAIL: overflow-posted`.
-- **THANK-AND-RESOLVE (Scenario E)**: confirm the existing comment is
-  agent-origin. Then **independently re-read** the file region the
+- **THANK-AND-RESOLVE (Scenario E)**: confirm the existing comment has a valid
+  marker and author `github-actions[bot]`. Then **independently re-read** the file region the
   existing comment originally cited, at the session SHA, and re-apply the
   original rule. If the violation is genuinely absent at the re-read line
   (and elsewhere within the same construct), mark `PASS`. If the
@@ -780,8 +782,8 @@ conflict-unclarified` as applicable.
   open), but the distinction supports telemetry on Reviewer accuracy.
 
 - **PROPOSE-HUMAN-RESOLVE (Scenario F)**: same independent re-read as
-  Scenario E, with the additional check that the existing comment is
-  **not** agent-origin. Same `FAIL` reasons apply. Although this
+  Scenario E, with the additional check that trusted workflow ownership is
+  **not** proven. Same `FAIL` reasons apply. Although this
   disposition does not mutate anything on its own (only the human can
   resolve), a wrong proof anchor would mislead the human into resolving a
   still-broken thread - so apply the same rigor.
@@ -844,7 +846,7 @@ table body byte-for-byte (see [protocol -> Critic-verdict marker](./protocols/ar
 
 PR: <PR-URL>
 Head SHA: <sha>
-Base SHA/Ref: <sha-or-ref or n/a>
+Base SHA: <full-40-char-base-sha or local-HEAD-sha>
 Iteration: <n> of 3
 
 ### Verdict

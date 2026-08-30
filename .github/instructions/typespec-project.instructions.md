@@ -261,14 +261,24 @@ model Widget {
 - **DO NOT** manually define `id`, `name`, `type`, `location`, `tags`,
   or `systemData` -- these come from the base types.
 - ARM tracked resources **MUST** define all standard CRUD operations
-  using ARM operation templates:
+  using ARM operation templates. Choose synchronous or asynchronous templates
+  to match actual runtime behavior:
   - `get` -- `ArmResourceRead<Resource>`
-  - `createOrUpdate` -- `ArmResourceCreateOrReplaceAsync<Resource>`
-  - `update` -- `ArmResourcePatchAsync<Resource, ResourceProperties>`
-    (or `ArmTagsPatchAsync`)
-  - `delete` -- `ArmResourceDeleteAsync<Resource>`
-  - `listByResourceGroup` -- `ArmResourceListByParent<Resource>`
-  - `listBySubscription` -- `ArmListBySubscription<Resource>`
+  - `createOrUpdate` -- `ArmResourceCreateOrReplaceSync<Resource>` or
+    `ArmResourceCreateOrReplaceAsync<Resource>`
+  - `update` -- preferably `ArmCustomPatchSync<Resource, PatchRequest>` or
+    `ArmCustomPatchAsync<Resource, PatchRequest>`; tags-only PATCH may use the
+    corresponding `ArmTagsPatch*` template
+  - `delete` -- `ArmResourceDeleteSync<Resource>` or
+    `ArmResourceDeleteWithoutOkAsync<Resource>`; do not use deprecated
+    `ArmResourceDeleteAsync`
+  - top-level tracked list by resource group --
+    `ArmResourceListByParent<Resource>`
+  - top-level tracked list by subscription --
+    `ArmListBySubscription<Resource>`
+  - nested resource list -- `ArmResourceListByParent<Resource>` under the
+    immediate parent; do not require additional resource-group/subscription
+    lists for the nested type
 - Every ARM resource provider **MUST** expose an `Operations` interface:
 
 ```tsp

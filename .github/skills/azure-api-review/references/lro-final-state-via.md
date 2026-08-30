@@ -108,5 +108,5 @@ When it is NOT needed (standard ARM resource operations):
 ```tsp
 // ARM operation templates handle LRO correctly by default
 createOrUpdate is ArmResourceCreateOrReplaceAsync<MyResource>;
-delete is ArmResourceDeleteAsync<MyResource>;
+delete is ArmResourceDeleteWithoutOkAsync<MyResource>;
 ```

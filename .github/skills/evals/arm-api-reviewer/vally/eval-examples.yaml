@@ -1,8 +1,8 @@
 name: arm-api-reviewer-eval-examples
 description: |
   Example file validation tests (06xxxx).
-  Validates detection of invalid resource IDs and realistic secrets
-  in example JSON files.
+  Validates invalid resource IDs, realistic secrets, and EX-PAYLOAD severity
+  for extensible enums, closed enums, discriminators, and request URL values.
 
 # The skill under test. Declared once here rather than per stimulus: vally merges the
 # root environment into each stimulus environment, and the path resolves relative to this
@@ -16,6 +16,8 @@ environment:
       dest: ".github/instructions/openapi-review.instructions.md"
     - src: "../../../azure-api-review/references/example-quality.md"
       dest: ".github/skills/azure-api-review/references/example-quality.md"
+    - src: "../../../../../specification/common-types/resource-management/v5/types.json"
+      dest: "specification/common-types/resource-management/v5/types.json"
 
 tags:
   area: arm-api-reviewer

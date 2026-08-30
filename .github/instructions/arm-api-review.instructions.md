@@ -134,8 +134,11 @@ label is present. The author must confirm that the approval covers that finding.
 The TypeSpec-required rule applies to all new ARM API versions. The full rule definition, detection signals, allowed cases, and false-positive guidance are in [`openapi-review.instructions.md` §2A](./openapi-review.instructions.md). Summary for ARM PRs:
 
 - New API version directories under `specification/**/resource-manager/**/{stable|preview}/<version>/` that contain only handwritten swagger (no `x-typespec-generated` marker and no sibling TypeSpec project proven to emit that version) are **Blocking** with rule ID `TSP-REQUIRED-V1`.
-- Updates to handwritten swagger inside **pre-existing** API version directories remain permitted and **MUST NOT** be flagged.
-- A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, surface this rule at review time.
+- Updates to handwritten swagger inside **pre-existing** API version directories
+  are out of scope for `TSP-REQUIRED-V1`; continue applying published-version
+  immutability, breaking-change, and all other review rules.
+- Current CI does not deterministically enforce this exact new-version
+  condition, so the Reviewer must apply it directly.
 
 **Hard short-circuits.** Apply in order and stop at the first match. The full procedure is defined in [openapi-review.instructions.md §2A "Decision procedure"](./openapi-review.instructions.md#2a-typespec-required-for-new-api-versions-tsp-required-v1).
 
@@ -158,15 +161,13 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 ### 1.1 Tracked Resource Paths (RPC-Put-V1-01, RPC-Uri-V1-02, RPC-Uri-V1-03)
 
-- All API paths for **tracked resources** (resources with `location` as a required property) **MUST** be scoped under a subscription. Resource-group-scoped types also include the resource group segment:
+- All API paths for **tracked resources** (resources with `location` as a required property) **MUST** be scoped under a subscription and resource group:
   ```text
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.{Namespace}/{resourceType}/{resourceName}
   ```
-- Subscription-scoped types use:
-  ```text
-  /subscriptions/{subscriptionId}/providers/Microsoft.{Namespace}/{resourceType}/{resourceName}
-  ```
-- If a tracked resource path is missing the `subscriptions` segment, or a resource-group-scoped path is missing `resourceGroups/{resourceGroupName}`, flag it as an error and instruct the author to add the applicable scope segments.
+- If a tracked resource path is missing either scope segment, flag it as an
+  error. RPC-Put-V1-01 states that tracked resources at other scopes do not work
+  at runtime.
 - Tracked resources **MUST NOT** be nested beyond the third level of nesting (RPC-Put-V1-19). ARM only guarantees consistent routing, RBAC, and behavior for tracked resources up to three levels deep.
 - All API paths for PUT operations **MUST** have an even number of segments (alternating resource type and resource name) (RPC-Put-V1-02).
 
@@ -238,7 +239,11 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the complete tracked resource CRUD requirements, required operations matrix with rule IDs, and collection GET contract.
 
-- Every tracked resource **MUST** implement point GET, PUT, PATCH, and DELETE. A resource-group-scoped top-level type also requires List by Resource Group and List by Subscription; a subscription-scoped top-level type requires List by Subscription. A nested type instead requires collection GET under its immediate parent; do not require additional resource-group or subscription list operations for the nested type.
+- Every tracked resource **MUST** implement point GET, PUT, PATCH, and DELETE. A
+  top-level tracked type also requires List by Resource Group and List by
+  Subscription. A nested type instead requires collection GET under its
+  immediate parent; do not require additional resource-group or subscription
+  list operations for the nested type.
 - Point GET operations **MUST NOT** have query parameters other than `api-version` (RPC-Get-V1-08).
 - Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties (RPC-Get-V1-09). When present, `nextLink` **MUST** use `"format": "uri"` under the generic URL-format rule. Collection GET operations **MUST** specify `x-ms-pageable` (RPC-Get-V1-13) and support continuation via `nextLink` when paging (RPC-Get-V1-06).
 - Collection GET operations may use `api-version`, `$filter`, `$top`, and `$skipToken`. **Do not flag the presence of a correctly defined parameter.** `$top` and `$skipToken` are part of the RPC pagination contract; malformed definitions and non-opaque or cross-scope `$skipToken` behavior remain valid findings.
@@ -945,6 +950,12 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 - New API versions for Azure resource types **MUST** define top-level, read-only `systemData` on resource read responses (RPC027). This requires the schema property; it does not mean every response instance must make the JSON member required.
 - The `systemData` shape **MUST** match the canonical ARM contract. Referencing `common-types/resource-management/vX/types.json` is strongly recommended and avoids drift, but a correctly shaped inline definition is not Blocking solely because it is inline.
+- **Repository CI is stricter than the RPC contract:** the required
+  `SystemDataDefinitionsCommonTypes` LintDiff rule rejects a `systemData` `$ref`
+  that points to a local definition instead of common-types. For a spec that
+  must pass this repository's CI, use the current common-types `$ref` or obtain
+  an approved, narrowly scoped suppression. Report this as a CI/readiness
+  conflict, not as a claim that RPC027 forbids a shape-compatible inline model.
 - `systemData` **MUST NOT** be placed inside the `properties` bag — it is a top-level ARM envelope property.
 - `createdByType` and `lastModifiedByType` use the canonical extensible string enum (`User`, `Application`, `ManagedIdentity`, `Key`).
 - For legacy resources where an individual systemData value is unavailable, that member may be omitted or `null`; do not return the entire `systemData` object as `null`.
@@ -979,7 +990,7 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 - The canonical common-types request and response schemas do not encode these runtime requirements in OpenAPI `required` arrays. Do not treat the absence of those arrays as a shape incompatibility.
 - Do not use checkNameAvailability as a gate — implement retry logic in resource creation.
 
-### 21.3 Prefer Common-Types Definitions
+### 21.3 Prefer Common-Types Definitions (CNA-003)
 
 - The request and response **SHOULD** reference common-types `CheckNameAvailabilityRequest` and `CheckNameAvailabilityResponse`.
 - A correctly shaped inline model is valid. Flag incompatible or incomplete shapes at their contract severity; use a Suggestion for a shape-compatible inline model that could reuse common types.
@@ -1112,11 +1123,11 @@ When reviewing ARM resource-manager swagger files, verify:
 
 ### Authoring Format
 
-- ✅ New API versions are authored in TypeSpec (TSP-REQUIRED-V1) — handwritten swagger in new version directories is **Blocking**; updates to handwritten swagger in pre-existing API versions remain permitted
+- ✅ New API versions are authored in TypeSpec (TSP-REQUIRED-V1); pre-existing handwritten directories are out of scope for this rule but still receive normal immutability and compatibility review
 
 ### Resource Structure & Paths
 
-- ✅ Tracked resource paths include `/subscriptions/`; resource-group-scoped paths also include `/resourceGroups/`; resource paths have even type/name segments (RPC-Put-V1-01, RPC-Put-V1-02)
+- ✅ Tracked resource paths include `/subscriptions/` and `/resourceGroups/`; resource paths have even type/name segments (RPC-Put-V1-01, RPC-Put-V1-02)
 - ✅ Tracked resources not nested beyond third level (RPC-Put-V1-19)
 - ✅ Resource type names are camelCase, plural, and specific (not generic)
 - ✅ ARM `type/{instance}/type/{instance}` URL pattern followed
@@ -1147,7 +1158,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ PUT 200 and 201 response schemas are identical (RPC-Put-V1-29)
 - ✅ PUT returns `201` (create) or `200` (replace) — never `202` for async PUT (RPC-Put-V1-11)
 - ✅ PUT does not implicitly create other tracked resources (RPC-Put-V1-16)
-- ✅ Every tracked resource has GET, PUT, PATCH, and DELETE; resource-group-scoped top-level types also have ListByRG and ListBySub; subscription-scoped top-level types have ListBySub; nested types have collection GET under their immediate parent
+- ✅ Every tracked resource has GET, PUT, PATCH, and DELETE; top-level tracked types also have ListByRG and ListBySub; nested types have collection GET under their immediate parent
 - ✅ GET operations return only `200` and are not LROs (RPC-Get-V1-01, RPC-Get-V1-14)
 - ✅ Point GET has no query params other than `api-version` (RPC-Get-V1-08)
 - ✅ Collection GET has only `value` and `nextLink` at top level (RPC-Get-V1-09); `nextLink` has `format: uri`; operation supports paging via `nextLink` (RPC-Get-V1-06) and has `x-ms-pageable` (RPC-Get-V1-13)
@@ -1258,7 +1269,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Minimal read-only properties that only appear post-creation; prefer values settable on PUT (PLCY003)
 - ✅ No free-form `type: object` with dynamic keys for service-owned properties (PLCY005)
 - ✅ PUT accepts all compliance-relevant properties; not implemented as partial update (PLCY006)
-- ✅ Resource-group-scoped top-level tracked types have collection GETs at subscription and RG level; subscription-scoped top-level types have subscription collection GET; nested types list under their immediate parent (PLCY007, PLCY008)
+- ✅ Top-level tracked types have collection GETs at subscription and resource-group level; nested types list under their immediate parent (PLCY007, PLCY008)
 - ✅ Policy-enforced configurations modeled in PUT/GET, not as POST actions (PLCY009)
 
 ### Template Deployment & What-If Compatibility

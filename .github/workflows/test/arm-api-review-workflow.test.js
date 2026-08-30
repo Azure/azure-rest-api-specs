@@ -72,6 +72,26 @@ function collapseWhitespace(text) {
 }
 
 /**
+ * @param {unknown} value
+ * @returns {value is Record<string, unknown>}
+ */
+function isRecord(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+/**
+ * @param {string} content
+ * @returns {Record<string, unknown>}
+ */
+function parseJsonRecord(content) {
+  const parsed = /** @type {unknown} */ (JSON.parse(content));
+  if (!isRecord(parsed)) {
+    throw new Error("Expected a JSON object");
+  }
+  return parsed;
+}
+
+/**
  * Remove XML/HTML comments the same way gh-aw does, so the stripping tests
  * model the real behavior rather than an approximation of it.
  *
@@ -342,7 +362,18 @@ describe("ARM API review workflow", () => {
     expect(source).toContain("`get_review_comments` for inline threads/comments");
     expect(source).toContain("`get_comments` for top-level");
     expect(source).toContain("`get_reviews` for pull request review bodies");
+    const collapsedWorkflow = collapseWhitespace(source);
+    expect(collapsedWorkflow).toContain("Immediately pin both full 40-character commit SHAs");
+    expect(collapsedWorkflow).toContain("Previous version: None - new service; Base SHA:");
+    expect(protocol).toMatch(/Previous-version source\s+\| \*\*Required -- no default\*\*/);
+    expect(critic).toContain("Inputs #1, #2, #3, #5, and #6");
     expect(source).toContain("Match by semantic finding identity");
+    expect(source).toContain("author login is exactly `github-actions[bot]`");
+    expect(protocol).toContain("A marker is attribution, not authentication");
+    expect(collapseWhitespace(protocol)).toContain(
+      "A marker-bearing comment from any other author still participates in semantic coverage",
+    );
+    expect(source).not.toContain("Both are agent-owned");
     expect(source).toContain("call `report_incomplete` and stop");
     for (const action of [
       "SKIP-COVERED",
@@ -446,6 +477,9 @@ describe("ARM API review posting reliability", () => {
     expect(collapsed).toContain("Omit the optional fields");
     expect(collapsed).toContain("Set `critic: unknown`");
     expect(collapsed).toContain("`telemetry: degraded` field and a `reason:` field");
+    expect(source).toContain(
+      "_posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: <one-line-summary-of-what-failed>_",
+    );
   });
 
   it("leaves no metadata-driven exception to the ARMChangesRequested label rule", async () => {
@@ -596,7 +630,7 @@ describe("ARM API review consistency and hardening", () => {
     const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
     const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
 
-    // One session-scoped limit, set just above the observed maximum of 18.
+    // One session-scoped policy guardrail.
     for (const source of [workflow, agent]) {
       expect(source).toContain("Inline comment limit: 20 per session");
       expect(source).toContain("There are no per-category caps");
@@ -631,7 +665,12 @@ describe("ARM API review consistency and hardening", () => {
     const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
 
     expect(agent).toContain("Shell fallback discipline");
+    expect(agent).toContain("**Never interpolate a PR path into command text.**");
+    expect(agent).toContain("[uri]::EscapeDataString");
     expect(agent).toContain("**Never inline a `jq` filter or a GraphQL query.**");
+    expect(agent).toContain("[IO.Path]::GetTempPath()");
+    expect(agent).toContain("remove that exact file in a `finally` block");
+    expect(agent).not.toContain("Get-Content -Raw filter.jq");
     expect(agent).toContain("bare `|` inside double quotes is a **pipeline operator**");
     expect(agent).toContain("**`gh pr diff` has no `-- <pathspec>` filter.**");
 
@@ -713,6 +752,10 @@ describe("ARM API review consistency and hardening", () => {
     expect(collapsedAgent).toContain("OVERFLOW-NOT-POSTED");
     expect(collapsedAgent).toContain("this agent does not post a summary comment by default");
     expect(collapsedAgent).toContain("never rendered as canonical finding bodies");
+    expect(collapsedAgent).toContain(
+      "<overflow disclosure -- include only when candidates were excluded by the 20-comment limit; omit otherwise>",
+    );
+    expect(workflow.match(/<overflow disclosure -- include only/g)).toHaveLength(2);
 
     // There is one 20-comment limit. These phrases belonged to the discarded
     // 50-comment/per-category design and would create a second overflow path.
@@ -776,6 +819,7 @@ describe("ARM API review consistency and hardening", () => {
     expect(normalizedCritic).toContain("approval labels and approval-context paragraphs are");
     expect(protocol).toContain("### Local source binding");
     expect(protocol).toContain("`<role>\\t<repo-relative-path>\\t<lowercase-file-sha256>`");
+    expect(protocol).toContain("`metadata\\trepository-head\\t<full-40-char-HEAD-sha>`");
     expect(protocol).toContain("join them with LF and");
     expect(protocol).toContain("the `pr` field in both markers is `local:<target-path-digest>`");
     expect(protocol).toContain("`local:<64-lowercase-hex>`");
@@ -791,12 +835,22 @@ describe("ARM API review consistency and hardening", () => {
     expect(template).toContain(
       "Source manifest: <reviewed|previous-version|head>:<source>@sha256:<hash>",
     );
+    expect(collapseWhitespace(template)).toContain(
+      "For a local compact dispatch, use `Review target: local workspace: <absolute-target>`",
+    );
+    expect(collapseWhitespace(template)).toContain(
+      "Previous version: <path or None - new service>; Base SHA: <full-40-char-base-sha>",
+    );
+    expect(collapseWhitespace(template)).toContain(
+      "repeat `Previous version: <path/hash or None - new service>; Repository HEAD: <full-40-char-sha>`",
+    );
     expect(normalizedReviewer).toContain(
       "This replacement overrides every mutation instruction in the remainder of Step 10",
     );
     expect(normalizedReviewer).toContain(
       "After a local review, use only Step 10's read-only snapshot verification and never remove branches, worktrees, or files",
     );
+    expect(normalizedReviewer).toContain("Branch names are mutable and are not valid bindings");
     expect(reviewer).toContain("**Template A, local review variant:**");
     expect(reviewer).toContain(
       "re-run from Step 1 against the current on-disk content and pin a fresh local snapshot",
@@ -902,25 +956,19 @@ describe("ARM API review consistency and hardening", () => {
     expect(workflow).toContain("never decide it by re-reading the rule ID");
     expect(workflow).toContain("unit of **measurement**");
 
-    // The limit is the observed maximum plus headroom, so record the
-    // measurement rather than presenting the number as arbitrary.
-    expect(workflow).toContain("**Where the limit comes from.** It is the observed maximum");
-    expect(workflow).toContain("maximum **18**");
-    expect(agent).toContain("the observed maximum plus headroom");
+    expect(workflow).toContain(
+      "**Where the limit comes from.** Twenty is a reviewed policy guardrail",
+    );
+    expect(agent).toContain("reviewed per-session policy guardrail");
   });
 
-  it("sets the limit just above the observed per-session maximum", async () => {
+  it("documents the limit without unverifiable telemetry claims", async () => {
     const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    // 18 was the busiest session across 267 pull requests; 20 leaves headroom
-    // without inviting a flood.
     expect(workflow).toContain("Inline comment limit: 20 per session");
-    expect(workflow).toContain("median 2, mean 3.72, 90th percentile 8, maximum **18**");
-
-    // The limit is per session, not per pull request: a pull request reviewed
-    // more than once accumulates comments across sessions.
+    expect(workflow).not.toContain("median 2, mean 3.72");
+    expect(workflow).not.toContain("pull request 43894");
     expect(workflow).toContain("The limit is per session");
-    expect(workflow).toContain("43894 totals 22 across two sessions");
   });
 
   it("trims only above the limit, and trims security last", async () => {
@@ -933,7 +981,10 @@ describe("ARM API review consistency and hardening", () => {
       expect(source).toContain("There are no per-category caps");
       expect(source).toContain("Frequency is not importance");
     }
-    expect(workflow).toContain("Below 20, post every finding");
+    expect(workflow).toContain("At 20 or fewer, post every finding");
+    expect(workflow).toContain("With more than 20, trim to fit and disclose");
+    expect(workflow).not.toContain("Below 20");
+    expect(workflow).not.toContain("Above 20");
     expect(workflow).toContain("Do not trim a small review");
 
     // Drop order must put the rarest, highest-consequence category last.
@@ -1176,13 +1227,18 @@ describe("ARM API review live-run regressions", () => {
     expect(collapsedStripped).toContain("Never write the marker as an HTML comment.");
     expect(collapsedStripped).toContain("silently discarded");
 
-    // Every marker template must survive prompt stripping intact and carry all
-    // seven fields, and none may be wrapped in HTML-comment delimiters.
+    // Full marker templates must survive prompt stripping intact and carry all
+    // seven fields. The explicit telemetry-degraded fallback has its own
+    // smaller schema.
     const templates = [
       ...collapsedStripped.matchAll(/_posted-by: arm-api-reviewer-agent[^`\n]*?_/g),
     ];
     expect(templates.length).toBeGreaterThanOrEqual(3);
     for (const [template] of templates) {
+      if (template.includes("telemetry: degraded")) {
+        expect(template).toContain("reason:");
+        continue;
+      }
       for (const field of [
         "rule:",
         "category:",
@@ -1195,6 +1251,9 @@ describe("ARM API review live-run regressions", () => {
       }
       expect(template).not.toContain("<!--");
     }
+    expect(collapsedStripped).toContain(
+      "_posted-by: arm-api-reviewer-agent | telemetry: degraded | reason:",
+    );
 
     // No marker template may be written as a literal HTML comment anywhere in
     // the source: it would be erased on the way to the agent, and copying it
@@ -1203,7 +1262,9 @@ describe("ARM API review live-run regressions", () => {
 
     // The reconciliation reader must still recognize the legacy HTML form,
     // because interactive agent sessions bypass the publishing sanitizer.
-    expect(collapseWhitespace(source)).toContain("may still carry it inside an HTML comment");
+    expect(collapseWhitespace(source)).toContain(
+      "accept either the visible workflow form or the interactive HTML-comment form",
+    );
   });
 
   it("strips nested comment tags the way gh-aw actually does", () => {
@@ -1287,6 +1348,13 @@ describe("API version lifecycle rules", () => {
     expect(reference).toContain("APIVER-DEV-IN-MAIN");
     expect(reference).toContain("APIVER-PRIVATE-IN-PUBLIC");
     expect(reference).toMatch(/private preview is prohibited from every branch/i);
+    expect(reference).toContain("APIVER-PRIVATE-FOLDER");
+    expect(reference).toContain(
+      "private-preview version in the private repository **MUST** sit under `preview/` and end in `-preview`",
+    );
+    expect(reference).toMatch(
+      /folder rules, APIVER-PRIVATE-FOLDER, APIVER-GA-FOLDER, and\s+APIVER-PREVIEW-FOLDER, need no branch/,
+    );
   });
 
   it("does not treat a private-to-public promotion as a leak", async () => {
@@ -1399,26 +1467,20 @@ describe("ARM paging and example enum calibration", () => {
   });
 
   it("keeps all new JSON fixtures parseable", async () => {
-    const fixtures = [
-      ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/collection-paging-parameters.json",
-      ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/collection-custom-query-parameter.json",
-      ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/point-custom-query-parameter.json",
-      ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/ex-payload-enum-cases.json",
-      ".github/skills/evals/arm-api-reviewer/fixtures/examples/example-ex-payload-extensible-enum.json",
-      ".github/skills/evals/arm-api-reviewer/fixtures/examples/example-ex-payload-closed-enum.json",
-      ".github/skills/evals/arm-api-reviewer/fixtures/examples/example-ex-payload-discriminator.json",
-      ".github/skills/evals/arm-api-reviewer/fixtures/examples/example-ex-payload-path-param.json",
-    ];
+    const fixtureRoot = join(ROOT, ".github/skills/evals/arm-api-reviewer/fixtures");
+    const fixtures = (await readdir(fixtureRoot, { recursive: true })).filter((file) =>
+      file.endsWith(".json"),
+    );
 
     for (const fixture of fixtures) {
-      const content = await readFile(join(ROOT, fixture), "utf8");
+      const content = await readFile(join(fixtureRoot, fixture), "utf8");
       expect(() => {
         JSON.parse(content);
       }, fixture).not.toThrow();
     }
   });
 
-  it("keeps the eval catalog counts aligned with 76 scenarios and 57 fixtures", async () => {
+  it("keeps the eval catalog counts aligned with 85 scenarios and 57 fixtures", async () => {
     const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
     let stimulusCount = 0;
@@ -1438,13 +1500,24 @@ describe("ARM paging and example enum calibration", () => {
       join(ROOT, ".github/skills/evals/arm-api-reviewer/fixtures"),
       { recursive: true, withFileTypes: true },
     );
-    expect(evalFiles).toHaveLength(17);
-    expect(stimulusCount).toBe(76);
+    expect(evalFiles).toHaveLength(18);
+    expect(stimulusCount).toBe(85);
     expect(
       fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
     ).toHaveLength(57);
-    expect(readme).toContain("Total: 76 stimuli across 17 eval files.");
+    expect(readme).toContain("Total: 85 stimuli across 18 eval files.");
     expect(readme).toContain("All 57 fixture data files");
+    expect(readme).toContain("`--timeout <duration>`");
+    expect(readme).toContain("`defaults.timeout`");
+    expect(readme).not.toContain("`config.timeout`");
+
+    const runner = await readFile(join(ROOT, ".github/skills/evals/run-evals.ps1"), "utf8");
+    expect(collapseWhitespace(runner)).toContain(
+      "this runner is a regression gate: every configured stimulus must pass.",
+    );
+    expect(runner).toMatch(
+      /if \(\$failed -gt 0 -and \$overallExitCode -eq 0\)[\s\S]{0,200}\$overallExitCode = 1/,
+    );
   }, 15_000);
 
   it("maps every EX-PAYLOAD example reference into each enum eval workspace", async () => {
@@ -1665,9 +1738,22 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
     ]);
 
     expect(coverage).toMatch(/R2063[\s\S]{0,120}openapi-review §14[\s\S]{0,40}Covered/);
-    expect(coverage).toMatch(/R2001[\s\S]{0,120}arm-api-review §8\.2[\s\S]{0,40}Covered/);
-    expect(coverage).toContain("| ✅ Covered   | 107");
-    expect(coverage).toContain("| ❌ GAP       | 4");
+    expect(coverage).toContain("It is not an exhaustive substitute for the pinned");
+    expect(coverage).toMatch(/R2001[\s\S]{0,180}Conflict-aware/);
+    expect(coverage).toContain("## Coverage Status Meanings");
+    for (const rule of [
+      "PathForTrackedResourceTypes",
+      "SystemDataDefinitionsCommonTypes",
+      "ValidQueryParametersForPointOperations",
+      "DeleteResponseBodyEmpty",
+      "GetMustNotHaveRequestBody",
+      "ApiHost",
+    ]) {
+      expect(coverage).toContain(rule);
+    }
+    for (const gap of ["GetMustNotHaveRequestBody", "GetResponseCodes", "ApiHost"]) {
+      expect(coverage).toMatch(new RegExp(`${gap}[^\\n]+GAP`));
+    }
     for (const rule of ["R4006", "R2023", "R1010", "R2006"]) {
       expect(coverage).toContain(rule);
     }
@@ -1688,11 +1774,13 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
     );
     expect(referencedExamples).toHaveLength(7);
 
-    for (const evalFile of ["eval-true-negatives.yaml", "eval-report-format.yaml"]) {
-      const evalText = await readFile(
-        join(ROOT, ".github/skills/evals/arm-api-reviewer/vally", evalFile),
-        "utf8",
-      );
+    const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
+    const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
+    for (const evalFile of evalFiles) {
+      const evalText = await readFile(join(evalDir, evalFile), "utf8");
+      if (!evalText.includes("fixtures/arm-openapi/clean-spec.json")) {
+        continue;
+      }
       for (const example of referencedExamples) {
         expect(evalText, `${evalFile}: ${example}`).toContain(`/examples/${example}`);
       }
@@ -1700,15 +1788,70 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
   });
 
   it("keeps EX-PAYLOAD fixtures isolated from title violations", async () => {
+    const evalSpec = /** @type {unknown} */ (
+      load(
+        await readFile(
+          join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-examples.yaml"),
+          "utf8",
+        ),
+      )
+    );
+    if (!isRecord(evalSpec) || !Array.isArray(evalSpec.stimuli)) {
+      throw new Error("Expected eval stimuli");
+    }
+    const specPath = join(
+      ROOT,
+      ".github/skills/evals/arm-api-reviewer/fixtures/arm-openapi/ex-payload-enum-cases.json",
+    );
+    const spec = parseJsonRecord(await readFile(specPath, "utf8"));
+    if (!isRecord(spec.paths)) {
+      throw new Error("Expected OpenAPI paths");
+    }
+    /** @type {Map<string | undefined, string | undefined>} */
+    const operationByExample = new Map();
+    for (const pathItem of Object.values(spec.paths)) {
+      if (!isRecord(pathItem)) continue;
+      for (const operation of Object.values(pathItem)) {
+        if (!isRecord(operation)) continue;
+        const operationId =
+          typeof operation.operationId === "string" ? operation.operationId : undefined;
+        const examples = operation["x-ms-examples"];
+        if (!isRecord(examples)) continue;
+        for (const example of Object.values(examples)) {
+          if (!isRecord(example) || typeof example.$ref !== "string") continue;
+          operationByExample.set(example.$ref.split("/").at(-1), operationId);
+        }
+      }
+    }
+
     const exampleDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/fixtures/examples");
-    for (const file of [
+    const sourceFiles = [
       "example-ex-payload-extensible-enum.json",
       "example-ex-payload-closed-enum.json",
       "example-ex-payload-discriminator.json",
       "example-ex-payload-path-param.json",
-    ]) {
-      const example = await readFile(join(exampleDir, file), "utf8");
-      expect(example, file).toMatch(/"title":\s*"[^"]+"/);
+    ];
+    /** @type {Map<string | undefined, string | undefined>} */
+    const destinationBySource = new Map();
+    for (const stimulus of evalSpec.stimuli) {
+      if (!isRecord(stimulus) || !isRecord(stimulus.environment)) continue;
+      const files = stimulus.environment.files;
+      if (!Array.isArray(files)) continue;
+      for (const file of files) {
+        if (!isRecord(file) || typeof file.src !== "string" || typeof file.dest !== "string") {
+          continue;
+        }
+        destinationBySource.set(file.src.split("/").at(-1), file.dest.split("/").at(-1));
+      }
+    }
+
+    for (const file of sourceFiles) {
+      const example = parseJsonRecord(await readFile(join(exampleDir, file), "utf8"));
+      const destination = destinationBySource.get(file);
+      expect(destination, file).toBeTruthy();
+      expect(typeof example.title === "string" ? example.title : undefined, file).toBe(
+        operationByExample.get(destination),
+      );
     }
   });
 });
@@ -1754,7 +1897,7 @@ describe("Archived RPC contract reconciliation", () => {
     expect(combined).toContain(
       "A nested type **MUST** implement collection GET under its immediate parent",
     );
-    expect(arm).toContain(
+    expect(combined).toContain(
       "A nested type instead requires collection GET under its immediate parent",
     );
     expect(combined).not.toContain("RPC-ConstrainedCollections-V1-04");
@@ -1770,7 +1913,10 @@ describe("Archived RPC contract reconciliation", () => {
     expect(combined).toContain("Custom query parameters **SHOULD NOT** be used");
     expect(combined).toContain("DELETE custom query parameters **SHOULD NOT** be used");
     expect(combined).toContain("On the final page its response value may be omitted or `null`");
-    expect(openapi).toContain("On the final page, `nextLink` may be omitted or `null`");
+    expect(openapi).toContain(
+      "ARM resource-manager responses may omit `nextLink` or return it as `null`",
+    );
+    expect(openapi).toContain("Data-plane responses **MUST** omit `nextLink`");
     expect(arm).toContain("PUT supports `If-None-Match: *`");
     expect(arm).toContain("PUT, PATCH, and DELETE support a specific `If-Match` value");
     expect(arm).not.toContain("wildcard values (`*`) are **NOT** supported");
@@ -1810,8 +1956,11 @@ describe("Archived RPC contract reconciliation", () => {
     expect(combined).toContain("individual canonical member value is unavailable");
     expect(combined).not.toContain("inline redefinition of `systemData` is a Blocking violation");
     expect(combined).not.toContain("systemData` must use the canonical common-types definition");
+    expect(combined).toContain("`SystemDataDefinitionsCommonTypes` LintDiff rule");
+    expect(combined).toContain("repository-CI requirement, not as an RPC rule");
     expect(arm).toContain("When `nameAvailable` is `false`");
     expect(arm).toContain("A correctly shaped inline model is valid");
+    expect(arm).toContain("Prefer Common-Types Definitions (CNA-003)");
     expect(arm).toContain("Do not treat the absence of those arrays as a shape incompatibility");
     expect(arm).not.toContain("response body **MUST** reference the common-types");
   });
@@ -1846,14 +1995,11 @@ describe("Archived RPC contract reconciliation", () => {
       "Every tracked resource **MUST** implement point GET, PUT, PATCH, and DELETE",
     );
     expect(arm).toContain(
-      "All API paths for **tracked resources** (resources with `location` as a required property) **MUST** be scoped under a subscription",
-    );
-    expect(arm).toContain("Subscription-scoped types use:");
-    expect(arm).not.toContain(
       "All API paths for **tracked resources** (resources with `location` as a required property) **MUST** be scoped under a subscription and resource group",
     );
-    expect(combined).toContain("resource-group-scoped top-level types also have ListByRG");
-    expect(combined).toContain("subscription-scoped top-level types have ListBySub");
+    expect(arm).not.toContain("Subscription-scoped types use:");
+    expect(combined).toContain("top-level tracked types also have ListByRG and ListBySub");
+    expect(combined).not.toContain("subscription-scoped top-level types");
     expect(openapi).toContain("nested types have collection GET under their immediate parent");
     expect(openapi).toContain(
       "Every tracked resource **MUST** define GET, PUT, PATCH (update), and DELETE",
@@ -1900,5 +2046,44 @@ describe("Archived RPC contract reconciliation", () => {
     expect(coverage).not.toMatch(/R2062[^\n]+RPC-Put-V1-12/);
     expect(arm).not.toContain("RPC-Operations-V1");
     expect(arm).not.toContain("RPC-LIST-VERSIONS");
+  });
+
+  it("uses current synchronous and asynchronous TypeSpec operation templates", async () => {
+    const instructions = collapseWhitespace(
+      await readFile(join(ROOT, ".github/instructions/typespec-project.instructions.md"), "utf8"),
+    );
+
+    expect(instructions).toContain("ArmResourceCreateOrReplaceSync<Resource>");
+    expect(instructions).toContain("ArmResourceCreateOrReplaceAsync<Resource>");
+    expect(instructions).toContain("ArmCustomPatchSync<Resource, PatchRequest>");
+    expect(instructions).toContain("ArmCustomPatchAsync<Resource, PatchRequest>");
+    expect(instructions).toContain("ArmResourceDeleteWithoutOkAsync<Resource>");
+    expect(instructions).toContain("do not use deprecated `ArmResourceDeleteAsync`");
+  });
+
+  it("keeps TSP-REQUIRED scoped without claiming active CI enforcement", async () => {
+    const [arm, openapi, typespec] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/openapi-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/typespec-review.instructions.md"), "utf8"),
+    ]);
+    const combined = collapseWhitespace(`${arm}\n${openapi}\n${typespec}`);
+
+    expect(combined).toContain("out of scope for `TSP-REQUIRED-V1`");
+    expect(combined).toContain("published-version immutability");
+    expect(combined).not.toContain("A deterministic CI check is in development");
+    expect(combined).not.toContain("/pull/42823");
+  });
+
+  it("maps check-name guidance for OpenAPI and TypeSpec", async () => {
+    const [arm, typespec] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/typespec-review.instructions.md"), "utf8"),
+    ]);
+
+    expect(arm).toContain("Prefer Common-Types Definitions (CNA-003)");
+    expect(typespec).toContain("Check Name Availability (CNA-002, CNA-003, CNA-004)");
+    expect(typespec).toContain("checkGlobalNameAvailability");
+    expect(typespec).toContain("checkLocalNameAvailability");
   });
 });

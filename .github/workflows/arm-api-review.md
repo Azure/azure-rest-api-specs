@@ -171,12 +171,10 @@ safe-outputs:
   add-comment:
     max: 4
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
-  # The agent self-limits to 20 inline comments per session, just above the
-  # observed maximum of 18 (267 pull requests, grouped into sessions by marker
-  # head-sha; median 2, p90 8). There are no per-category caps: sized by how
-  # often a category occurs they would give the smallest allowance to the
-  # rarest categories, and security is the rarest. Keep max at 50 as platform
-  # headroom so a slight overshoot is never truncated silently.
+  # The agent self-limits to 20 inline comments per session. This is a policy
+  # guardrail against pathological output, not a per-category quota or a claim
+  # about a permanently reproducible telemetry sample. Keep max at 50 as
+  # platform headroom so a slight overshoot is never truncated silently.
   create-pull-request-review-comment:
     max: 50
     side: "RIGHT"
@@ -185,7 +183,7 @@ safe-outputs:
     max: 1
     footer: "if-body"
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
-  # Autonomous mode: reply to and resolve threads for agent-posted findings
+  # Autonomous mode: reply to and resolve trusted workflow-owned threads
   # whose violation has been fixed in the current head SHA. Only threads
   # carrying the `posted-by: arm-api-reviewer-agent` marker are eligible;
   # human-authored threads are never resolved. These outputs are attributed
@@ -247,7 +245,7 @@ an issue or that no pull request was resolved.
 Actions, it operates in the **autonomous** review mode defined in the
 [Reviewer-Posted Parity contract](../skills/azure-api-review/references/reviewer-posted-parity.md#review-modes).
 There is no human gate: once findings are reconciled, act on the agreed
-finding set directly -- post net-new findings, resolve agent-posted
+finding set directly -- post net-new findings, resolve trusted workflow-owned
 findings that are now addressed, and skip duplicates. Never wait for human
 confirmation.
 
@@ -461,11 +459,14 @@ Check 4 sets the review scope; it never stops the review.
 
 ### Step 1: Fetch PR Metadata and Changed Files
 
-1. Call `pull_request_read(method: "get")` to fetch PR metadata (title, base, head SHA, labels,
-   draft status). **Pin the session SHA** (`head.sha`) immediately — use it for
-   every subsequent file fetch. Retain the approval-label inventory captured
-   during Trigger Validation. Do not include SDK-language, package-name, or
-   namespace approval labels.
+1. Call `pull_request_read(method: "get")` to fetch PR metadata (title, base,
+   head SHA, labels, draft status). Immediately pin both full 40-character
+   commit SHAs: `head.sha` as the session SHA and `base.sha` as the
+   previous-version source. Branch names are mutable and are not valid
+   substitutes. If either SHA is missing or malformed, call
+   `report_incomplete` and stop. Use the head SHA for every changed-file fetch
+   and the base SHA for every previous-version fetch. Retain the approval-label
+   inventory captured during Trigger Validation.
 2. Call `pull_request_read(method: "get_files")` to list changed files.
 3. Filter to `specification/**` files only. If none remain (e.g., all changes
    are outside the spec folder), call `noop` and stop.
@@ -577,13 +578,13 @@ PR conversation comments, and `get_reviews` for pull request review bodies.
 Include resolved, outdated, and collapsed inline threads and every review
 state. Record item counts and pagination completion for each surface. Comments
 from humans, interactive agent sessions, automated runs, and `/arm-review` runs
-all participate in matching. The `posted-by: arm-api-reviewer-agent` marker
-controls ownership and resolution only; it does not control duplicate or
-contradiction detection. When reading, match the marker as a plain **substring**
-of the body and accept either form: workflow-published comments carry it as
-visible italic text, while comments posted by interactive agent sessions
-(which bypass the publishing sanitizer) may still carry it inside an HTML
-comment. Both are agent-owned.
+all participate in matching. Marker text controls attribution and telemetry,
+not trusted ownership by itself. When reading, accept either the visible
+workflow form or the interactive HTML-comment form. A thread is trusted
+agent-owned for autonomous resolution only when the marker is structurally
+valid **and** its author login is exactly `github-actions[bot]`. Marker-bearing
+comments from every other author still count for duplicate and contradiction
+detection but are human-owned for mutation purposes.
 
 Match by semantic finding identity: same rule or review topic, same affected
 API element, and same underlying corrective outcome. Author, entry point,
@@ -596,24 +597,24 @@ For each finding you are about to post, check the complete inventory. This
 workflow runs in **autonomous mode**, so apply the Action column below (the
 reconciliation acts directly, without human confirmation):
 
-| Scenario                                                     | Action token            | Behavior                                                                                                               |
-| ------------------------------------------------------------ | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Same semantic finding, actionable coverage on any surface    | `SKIP-COVERED`          | Do not post; record the existing URL                                                                                   |
-| Same finding, line shifted, agent-posted inline thread       | `RESOLVE-AND-REPOST`    | Resolve the stale agent thread and post one replacement at the current line                                            |
-| Same finding, line shifted, human-posted inline thread       | `REPLY-LINE-SHIFT`      | Reply with the current line; do not resolve the human thread                                                           |
-| New guidance contradicts an existing inline thread           | `CLARIFY-CONFLICT`      | Reply with the prior position, current evidence/guidance, and why it changed; resolve only superseded agent guidance   |
-| New guidance contradicts top-level comment(s) or review body | `CLARIFY-CONFLICT`      | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings |
-| Violation already fixed, agent-posted inline thread          | `THANK-AND-RESOLVE`     | Queue the fix reply and thread resolution                                                                              |
-| Violation already fixed, human-posted inline thread          | `PROPOSE-HUMAN-RESOLVE` | Reply only when permitted by the mode; never auto-resolve the human thread                                             |
-| Candidate excluded by the 20-comment limit                   | `OVERFLOW-NOT-POSTED`   | Do not post; disclose only the aggregate count and themes                                                              |
-| No actionable prior coverage or contradiction on any surface | `POST-NEW`              | Post one new finding                                                                                                   |
+| Scenario                                                         | Action token            | Behavior                                                                                                               |
+| ---------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Same semantic finding, actionable coverage on any surface        | `SKIP-COVERED`          | Do not post; record the existing URL                                                                                   |
+| Same finding, line shifted, trusted workflow-owned inline thread | `RESOLVE-AND-REPOST`    | Resolve the stale trusted thread and post one replacement at the current line                                          |
+| Same finding, line shifted, any other inline thread              | `REPLY-LINE-SHIFT`      | Reply with the current line; do not resolve the thread                                                                 |
+| New guidance contradicts an existing inline thread               | `CLARIFY-CONFLICT`      | Reply with the prior position, current evidence/guidance, and why it changed; resolve only superseded agent guidance   |
+| New guidance contradicts top-level comment(s) or review body     | `CLARIFY-CONFLICT`      | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings |
+| Violation already fixed, trusted workflow-owned inline thread    | `THANK-AND-RESOLVE`     | Queue the fix reply and thread resolution                                                                              |
+| Violation already fixed, any other inline thread                 | `PROPOSE-HUMAN-RESOLVE` | Never auto-resolve; autonomous mode leaves it untouched                                                                |
+| Candidate excluded by the 20-comment limit                       | `OVERFLOW-NOT-POSTED`   | Do not post; disclose only the aggregate count and themes                                                              |
+| No actionable prior coverage or contradiction on any surface     | `POST-NEW`              | Post one new finding                                                                                                   |
 
 **Resolution rules (autonomous mode):**
 
-- Only resolve threads whose comments carry the
-  `posted-by: arm-api-reviewer-agent` marker. **Never** auto-resolve a
-  human-authored thread, nor an `[EXISTING]` finding the agent did not
-  originate.
+- Only resolve threads whose comments carry a structurally valid marker and
+  whose author login is exactly `github-actions[bot]`. Never auto-resolve a
+  marker-only, human-authored, or otherwise untrusted thread, nor an
+  `[EXISTING]` finding the workflow did not originate.
 - **Partial fixes** (violation reduced but not eliminated) stay open. Do
   not resolve.
 - Contradictions use `CLARIFY-CONFLICT`, never a second standalone finding. If
@@ -650,8 +651,11 @@ selection. Append every excluded candidate to the reconciliation plan as an
 `OVERFLOW-NOT-POSTED` row with no posting action or existing-item anchor. Keep
 the candidate body outside the agreed posting set, and pass its aggregate count
 and themes for disclosure validation. Pass the PR URL, pinned session SHA,
-agreed posting set, reviewed files, previous-version source, complete
-reconciliation plan (including overflow rows), prior failures,
+agreed posting set, reviewed files, and Input #5 in one of these explicit
+forms: `Previous version: <path> at <full-40-char-base-sha>` or
+`Previous version: None - new service; Base SHA:
+<full-40-char-base-sha>`. The base SHA is required even for a new service. Also
+pass the complete reconciliation plan (including overflow rows), prior failures,
 considered-and-declined candidates, graph status, and iteration number.
 
 - Treat an empty response or tool error as a failed dispatch and retry up to
@@ -705,6 +709,8 @@ Posting findings from the ARM API Reviewer agent (<verification-status>, N itera
 
 Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
 
+<overflow disclosure -- include only when candidates were excluded by the 20-comment limit; omit otherwise>
+
 _posted-by: arm-api-reviewer-agent | rule: summary | category: summary | severity: <highest-posted-severity-or-suggestion> | classification: <new-if-any-new-finding-else-existing> | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
 ```
 
@@ -737,9 +743,9 @@ smallest allowance to the rarest categories, and security is the rarest of all.
 A cap that binds on a three-finding review withholds a real finding while
 nothing is under pressure.
 
-Below 20, post every finding. Do not trim a small review.
+At 20 or fewer, post every finding. Do not trim a small review.
 
-Above 20, trim to fit and disclose. The publisher accepts at most 50 inline
+With more than 20, trim to fit and disclose. The publisher accepts at most 50 inline
 comments (`create-pull-request-review-comment: max: 50`) and drops the excess
 silently, so trimming must be a deliberate, disclosed act rather than something
 the platform does invisibly. Drop in this order, by the category recorded on
@@ -756,17 +762,12 @@ everything else still leaves the set over 20. Frequency is not importance.
 Everything removed is disclosed in the summary as overflow with its themes;
 nothing is dropped silently.
 
-**Where the limit comes from.** It is the observed maximum, plus headroom.
-Across 267 pull requests carrying agent review comments, grouped into sessions
-by the `head-sha` on each marker, inline comments per session ran: median 2,
-mean 3.72, 90th percentile 8, maximum **18** (pull request 43894). Twenty sits
-just above that observed maximum, so trimming should effectively never fire on
-review volumes seen to date; the limit exists to bound a pathological run, not
-to shape a normal one. Re-measure the per-session maximum when the telemetry is
-refreshed and move the limit to sit just above it. Note that per-pull-request
-totals run higher than per-session totals, because a pull request reviewed more
-than once accumulates comments across sessions; pull request 43894 totals 22
-across two sessions. The limit is per session.
+**Where the limit comes from.** Twenty is a reviewed policy guardrail intended
+to bound a pathological run without shaping normal reviews. It is not derived
+automatically from a committed telemetry dataset, so do not encode mutable
+sample statistics as permanent facts. Revisit the limit when a reproducible,
+privacy-reviewed telemetry baseline is available. The limit is per session, not
+per pull request or category.
 
 **Which drop group a finding belongs to.** Every standalone finding carries a
 `category` field drawn from the closed vocabulary defined in
@@ -900,9 +901,10 @@ comment reaches GitHub -- it is a security control against payload smuggling, it
 has no exemption for code fences or trailing lines, and it cannot be opted out
 of. A marker written as `<!-- ... -->` is therefore not "hidden": it is
 **silently discarded**, the published comment carries no telemetry at all, and
-the next run's Step 5.5 reconciliation cannot recognize the comment as
-agent-owned -- so it re-posts the finding as a duplicate. A visible marker line
-is the intended trade-off; an invisible one does not exist.
+the next run cannot use marker-based telemetry or trusted-ownership handling.
+Semantic duplicate and contradiction matching still applies to marker-free
+feedback. A visible marker line is the intended trade-off; an invisible one
+does not exist.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -956,7 +958,11 @@ the first step that succeeds:
 2. Set `critic: unknown`.
 3. Emit the explicit degraded marker, which MUST carry both a
    `telemetry: degraded` field and a `reason:` field naming what failed (for
-   example `head-sha-unavailable`).
+   example `head-sha-unavailable`), using this exact visible form:
+
+   ```text
+   _posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: <one-line-summary-of-what-failed>_
+   ```
 
 Never block a comment from posting because its marker could not be assembled,
 and never emit a marker that names neither the finding nor a degradation reason.
@@ -1007,6 +1013,8 @@ Reviewed PR #N at head SHA `<sha>` | Triggered by: <event>
 <critic-unavailable caution block -- include ONLY when critic-mode is unavailable; omit entirely otherwise>
 
 <scoped-review disclosure line -- include when a scoped review ran OR the file list was truncated; omit this line entirely otherwise>
+
+<overflow disclosure -- include only when candidates were excluded by the 20-comment limit; omit otherwise>
 
 Approval labels observed: `<exact-label-1>`, `<exact-label-2>` (or `none`).
 

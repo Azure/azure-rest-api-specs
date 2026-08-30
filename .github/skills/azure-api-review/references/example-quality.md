@@ -24,6 +24,13 @@ ensure example files are accurate, complete, and professional.
 - **Rule ID:** `EX-PAYLOAD`
 - **Severity:** Blocking or Warning according to the matrix below
 
+This severity matrix is repository review synthesis for published examples, not
+a claim that Azure REST API Guidelines prohibit services from returning unknown
+extensible-enum values. The Guidelines explicitly permit that wire behavior.
+The Warning below addresses a sample that advertises a value absent from the
+versioned documentation; it must never claim that the extensible response is
+schema-invalid.
+
 An example payload must match the operation contract. For an unknown enum
 literal, first determine where the value appears and whether the enum is
 extensible:

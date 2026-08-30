@@ -73,6 +73,15 @@ When this rule does fire, the fix is the documented move process at
 disabling feature flags and publishing customer-facing documentation. Point the
 author there rather than asking them to simply delete the files.
 
+## APIVER-PRIVATE-FOLDER -- private preview uses preview folder and suffix
+
+A private-preview version in the private repository **MUST** sit under
+`preview/` and end in `-preview`, for example `2026-01-01-preview`. This applies
+to ARM and data-plane private previews even though their branch and feature-flag
+requirements differ.
+
+**Severity: Blocking.**
+
 ## APIVER-DEV-IN-MAIN -- in-development versions must not reach public `main`
 
 An `in development` API version **MUST NOT** be present in the public specs repo
@@ -141,7 +150,7 @@ Findings from this file belong to the `versioning-and-compatibility` category.
 violation on `main`, so skip that rule rather than assuming `main` when
 `base.ref` could not be read. APIVER-PRIVATE-IN-PUBLIC depends on the repository,
 not the branch: a version that is still private preview is prohibited from
-every branch in the public repository. The folder rules, APIVER-GA-FOLDER and
+every branch in the public repository. The folder rules, APIVER-PRIVATE-FOLDER, APIVER-GA-FOLDER, and
 APIVER-PREVIEW-FOLDER, need no branch and still apply.
 
 Do not infer a lifecycle stage from the API version date alone. A date-stamped

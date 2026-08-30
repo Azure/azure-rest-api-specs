@@ -20,7 +20,7 @@ Session SHA: <full-40-char-sha>
 Iteration: 1
 Graphs: true
 Files reviewed: path/to/file-a.json, path/to/file-b.tsp
-Previous version: specification/<service>/.../stable/<prev-version> at <sha-or-ref>
+Previous version: specification/<service>/.../stable/<prev-version> at <full-40-char-base-sha>
 Prior fail sets: none
 Considered and declined: none
 ```
@@ -53,18 +53,18 @@ Local review always uses the literal `reconciliation skipped` under
 
 ## Field reference
 
-| Field                            | Required?              | Default when absent            | Notes                                                                                                                         |
-| -------------------------------- | ---------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| Review target                    | **Yes**                | —                              | Full PR URL / `owner/repo#number`, or `local workspace: <absolute-target>`.                                                   |
-| Session SHA                      | **Yes**                | —                              | PR: full 40-char head SHA. Local: `local-sha256:<64-lowercase-hex>` manifest digest.                                          |
-| Iteration                        | No                     | `1`                            | `1` through `3`.                                                                                                              |
-| Graphs                           | No                     | `false; graph-mode: fast-path` | `true` = full graph diff. When false, mode is `fast-path`, `size-downgrade`, or `derivation-failed`.                          |
-| Files reviewed / source manifest | PR: No; local: **Yes** | PR: derived from findings      | PR: workspace-relative reviewed paths. Local: complete `reviewed`, `previous-version`, and applicable `head` source manifest. |
-| Previous version                 | PR: No; local: **Yes** | PR: `None - new service`       | PR path/SHA. Local path/hash or `None - new service`, plus mandatory recorded repository `HEAD`.                              |
-| Prior fail sets                  | No                     | Empty (none)                   | Rule-ID + file/line tuples from prior iterations; `none` on iteration 1.                                                      |
-| Considered and declined          | No                     | Empty (none)                   | Candidates the Reviewer chose not to promote, with one-line rationales.                                                       |
-| Step 6 findings report           | **Yes**                | —                              | Verbatim, under the `## Step 6 findings report` heading.                                                                      |
-| Step 5.5 reconciliation plan     | **Yes**                | —                              | Verbatim, including all three discussion-surface counts/pagination status, or the explicit sentinel `reconciliation skipped`. |
+| Field                            | Required?              | Default when absent            | Notes                                                                                                                               |
+| -------------------------------- | ---------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Review target                    | **Yes**                | —                              | Full PR URL / `owner/repo#number`, or `local workspace: <absolute-target>`.                                                         |
+| Session SHA                      | **Yes**                | —                              | PR: full 40-char head SHA. Local: `local-sha256:<64-lowercase-hex>` manifest digest.                                                |
+| Iteration                        | No                     | `1`                            | `1` through `3`.                                                                                                                    |
+| Graphs                           | No                     | `false; graph-mode: fast-path` | `true` = full graph diff. When false, mode is `fast-path`, `size-downgrade`, or `derivation-failed`.                                |
+| Files reviewed / source manifest | PR: No; local: **Yes** | PR: derived from findings      | PR: workspace-relative reviewed paths. Local: complete `reviewed`, `previous-version`, and applicable `head` source manifest.       |
+| Previous version                 | **Yes**                | —                              | PR path or `None - new service`, always with full base commit SHA. Local path/hash or `None - new service`, plus repository `HEAD`. |
+| Prior fail sets                  | No                     | Empty (none)                   | Rule-ID + file/line tuples from prior iterations; `none` on iteration 1.                                                            |
+| Considered and declined          | No                     | Empty (none)                   | Candidates the Reviewer chose not to promote, with one-line rationales.                                                             |
+| Step 6 findings report           | **Yes**                | —                              | Verbatim, under the `## Step 6 findings report` heading.                                                                            |
+| Step 5.5 reconciliation plan     | **Yes**                | —                              | Verbatim, including all three discussion-surface counts/pagination status, or the explicit sentinel `reconciliation skipped`.       |
 
 ## Compact-mode template (iterations 2 and 3)
 
@@ -76,6 +76,7 @@ and run the file-drift check before sending.
 ```text
 Review target: PR https://github.com/<owner>/<repo>/pull/<number>
 Session SHA: <full-40-char-sha>   (re-verified before this dispatch)
+Previous version: <path or None - new service>; Base SHA: <full-40-char-base-sha>
 Iteration: 2
 Graphs: true
 Prior fail sets: <rule-ID + file/line tuples from iteration 1>
@@ -100,4 +101,6 @@ Considered and declined: <candidates declined in iteration 1 with rationales>
 
 For a local compact dispatch, use `Review target: local workspace:
 <absolute-target>`, repeat the complete path/hash manifest, recompute the
-`local-sha256:` value before dispatch, and keep `reconciliation skipped`.
+`local-sha256:` value before dispatch, repeat `Previous version: <path/hash or
+None - new service>; Repository HEAD: <full-40-char-sha>`, and keep
+`reconciliation skipped`.

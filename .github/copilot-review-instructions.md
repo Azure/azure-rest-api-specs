@@ -235,11 +235,11 @@ Use for design trade-offs and best-practice recommendations:
 
 Do not flood a PR with comments. **Limit: 20 inline comments per session.**
 
-Below 20, post every finding. Do not trim a small review. There are no
+At 20 or fewer, post every finding. Do not trim a small review. There are no
 per-category caps: sized by how often a category occurs they would give the
 smallest allowance to the rarest categories, and security is the rarest.
 
-Above 20, trim to fit and disclose, dropping in this order:
+With more than 20, trim to fit and disclose, dropping in this order:
 
 1. Documentation and examples
 2. Schema and property design, naming, SDK impact
@@ -249,14 +249,14 @@ Above 20, trim to fit and disclose, dropping in this order:
 
 Security and versioning are trimmed **last**. Frequency is not importance.
 
-The limit is the observed maximum plus headroom: across 267 pull requests,
-grouped into sessions, inline comments per session ran median 2, p90 8,
-maximum 18.
+The limit is a reviewed per-session guardrail against pathological output. It is
+not a per-category quota or a permanent claim about a mutable telemetry sample.
 
-If findings are withheld, summarize them in a single comment:
-"_N additional warning/suggestion candidates were identified but not
-individually verified or posted. Key themes: [list]. Review the full checklist in
-`arm-api-review.instructions.md`._"
+If findings are withheld, summarize them in a single comment with severity
+counts:
+"_N additional finding candidates were identified but not individually
+verified or posted (Blocking: B, Warning: W, Suggestion: S). Key themes: [list].
+Review the full checklist in `arm-api-review.instructions.md`._"
 
 ---
 

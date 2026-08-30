@@ -128,8 +128,8 @@ All **top-level** tracked resource types **MUST** support:
 - Collection GET at **resource group** level
 - Collection GET at **subscription** level
 
-Subscription-scoped resources require only the subscription-level
-collection GET.
+RPC-Put-V1-01 requires tracked resources themselves to be resource-group
+scoped. Do not use this rule to legitimize a subscription-scoped tracked type.
 
 **Why:** Azure Policy compliance data is populated by enumerating
 resources via collection GET operations. Without these, the Policy

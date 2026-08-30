@@ -214,8 +214,9 @@ The same reconciliation rules apply regardless of how a review starts:
 Before posting, each session inventories inline review threads, top-level PR
 conversation comments, and pull request review bodies. Feedback from humans and
 all prior agent sessions participates in matching, including resolved,
-outdated, and marker-free comments. The agent marker controls whether the agent
-may resolve a thread; it does not determine whether prior feedback counts.
+outdated, and marker-free comments. Marker text alone never authorizes a
+resolution. Autonomous ownership requires a valid marker and the trusted
+`github-actions[bot]` author; prior feedback counts regardless.
 
 Findings are matched by rule or topic, affected API element, and corrective
 outcome rather than exact wording or line number. When an actionable comment
@@ -472,10 +473,10 @@ HTML comments before they reach GitHub. Either form is a valid marker.
   Use `summary` for comments that don't flag a single rule.
 - `severity` -- one of `blocking`, `warning`, or `suggestion`.
 - `classification` -- `new` (introduced in this PR) or `existing` (pre-existing technical debt).
-- `critic` -- the Critic's per-finding verdict (`pass`, `warn`, or `override`).
-  `override` means a Critic `FAIL` was overridden by a human reviewer.
-  `unknown` means the Critic was unavailable and no independent per-finding
-  verdict exists.
+- `critic` -- the Critic's per-finding verdict (`pass`, `warn`, `override`, or
+  `unknown`). `override` means a Critic `FAIL` was overridden by a human
+  reviewer. `unknown` means the Critic was unavailable and no independent
+  per-finding verdict exists.
 - `head-sha` -- the Reviewer-pinned session SHA used for the review. When the
   Critic runs, it independently re-fetches against this same SHA; when
   `critic: unknown`, the value still anchors the Reviewer session.
@@ -507,14 +508,12 @@ present in the raw comment body returned by the GitHub API. The unattended
 workflow marker is visible italic text because its publisher strips HTML
 comments. Both forms serve two purposes:
 
-1. **Reconciliation** -- on repeat reviews, the agent uses the marker to
-   distinguish its own prior comments from those posted by human reviewers.
-   This determines whether the agent can resolve an outdated comment
-   (Scenario B) or must reply instead (Scenario C). See
-   [Comment Reconciliation](#comment-reconciliation-on-repeat-reviews) below.
-   The reconciliation check uses a **substring match on
-   `posted-by: arm-api-reviewer-agent`**, so the queries below work
-   regardless of which marker fields are present.
+1. **Reconciliation attribution** -- on repeat reviews, the marker helps
+   attribute prior comments, but it is not authentication. Trusted ownership
+   for autonomous resolution additionally requires author
+   `github-actions[bot]`. A substring match on
+   `posted-by: arm-api-reviewer-agent` remains useful for backward-compatible
+   attribution and queries, never as the sole authority to mutate a thread.
 
 2. **Telemetry and querying** -- the marker enables querying all
    agent-posted comments across PRs via the GitHub API. This is useful for
@@ -564,28 +563,27 @@ scenarios:
   API element, and corrective outcome) is already actionable on any discussion
   surface. The finding is skipped and no new comment is posted. Exact wording,
   line number, author, or marker presence does not make it new.
-- **B -- Line shifted (agent-origin):** same rule, code moved, and the old
-  comment contains `posted-by: arm-api-reviewer-agent`. The outdated agent
-  comment is resolved and a replacement comment is posted at the correct line,
-  with a link back to the old thread.
-- **C -- Line shifted (human-origin):** same rule, code moved, but the old
-  comment does not contain the agent marker. The agent does not resolve the
-  human reviewer's comment or post a duplicate; it plans a reply to the
-  existing thread noting the new line number.
+- **B -- Line shifted (trusted workflow-owned):** same rule, code moved, and
+  the old comment has a valid marker authored by `github-actions[bot]`. The
+  stale thread is resolved and replaced at the current line.
+- **C -- Line shifted (other origin):** same rule and moved code, but trusted
+  workflow ownership is not proven. The thread stays open and receives only a
+  line-shift reply.
 - **D -- No standalone new findings:** all findings are SKIP-COVERED,
   REPLY-LINE-SHIFT, or CLARIFY-CONFLICT. No duplicate standalone finding is
   posted. The agent lists each matching existing item with its clickable URL
   and executes only the planned replies, consolidated clarifications, or
   fix-verified resolutions.
-- **E -- Agent-origin violation fixed:** an existing unresolved agent comment
-  flags a violation that no longer exists in the latest code. The agent plans
-  to thank the author and resolve its own thread. **Important:** approval of
+- **E -- Trusted workflow-owned violation fixed:** an unresolved comment with a
+  valid marker authored by `github-actions[bot]` flags a violation that is now
+  fixed. The agent plans to thank the author and resolve the thread.
+  **Important:** approval of
   the overall plan is **bulk consent** that auto-resolves every Scenario E
   thread without a separate per-thread prompt. The plan-approval prompt makes
   this scope explicit by stating:
   - the **count** of Scenario E rows (auto-resolved) and Scenario F rows
     (per-thread approval),
-  - the **URLs** of the agent threads that will be auto-resolved (first 15
+  - the **URLs** of the trusted workflow-owned threads that will be auto-resolved (first 15
     inline, rest in the plan table),
   - the **alternative**: choose **Execute selectively** to keep specific
     Scenario E rows unresolved, or **Cancel** to leave every existing
@@ -594,11 +592,10 @@ scenarios:
     manually on github.com. Later sessions treat the resolved thread as prior
     coverage and do not duplicate it elsewhere, so reopen that thread to
     restore its unresolved state.
-- **F -- Human-origin violation fixed:** an existing unresolved human-authored
-  comment flags a violation that is no longer present. The interactive agent
-  surfaces the thread for explicit per-thread consent before replying or
-  resolving; the automated workflow may reply that the fix is present but
-  never resolves a human-owned thread.
+- **F -- Other-origin violation fixed:** an unresolved thread without trusted
+  workflow ownership flags a violation that is no longer present. The
+  interactive agent surfaces it for explicit per-thread consent; the automated
+  workflow leaves it untouched.
 - **Conflict clarification:** when the new session would give materially
   incompatible guidance for the same semantic finding, it does not post a
   competing finding. It replies in the existing inline thread or posts one
@@ -728,17 +725,17 @@ The agent **does not**:
 
 ### Agent Files (under `.github/`)
 
-| File                                            | Purpose                                                                                                                                                                                 |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                            |
-| `instructions/arm-api-review.instructions.md`   | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                        |
-| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                            |
-| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                   |
-| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                               |
-| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                   |
-| `skills/azure-api-review/references/*.md`       | 29 shared references covering cross-cutting, ARM control-plane, and data-plane review areas. The ARM reviewer loads only the cross-cutting and ARM references applicable to its review. |
-| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                          |
-| `.github/workflows/arm-api-review.md`           | GitHub Actions workflow source -- automated trigger on PR open and on-demand via `/arm-review`                                                                                          |
+| File                                            | Purpose                                                                                                                                                        |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                   |
+| `instructions/arm-api-review.instructions.md`   | ARM control-plane review rules covering RPC, policy, template deployment, what-if/preflight, secrets, property design, and more                                |
+| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                   |
+| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                          |
+| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                      |
+| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                          |
+| `skills/azure-api-review/references/*.md`       | Shared references covering cross-cutting, ARM control-plane, and data-plane review areas. The ARM reviewer loads only the references applicable to its review. |
+| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                 |
+| `.github/workflows/arm-api-review.md`           | GitHub Actions workflow source -- automated trigger on PR open and on-demand via `/arm-review`                                                                 |
 
 ### Evaluation Suite
 

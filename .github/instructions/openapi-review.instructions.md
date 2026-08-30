@@ -86,7 +86,10 @@ See the canonical contract in [`.github/skills/azure-api-review/references/revie
 
 **Policy.** TypeSpec with the Azure TypeSpec libraries (`@azure-tools/typespec-azure-core`, `@azure-tools/typespec-azure-resource-manager`, and related packages) is the **required** authoring format for **all new API versions**, both control plane and data plane. This rule applies whenever a PR introduces a new API version directory under `specification/**/{resource-manager,data-plane}/**/{stable|preview}/<version>/` that does not exist on the base branch.
 
-**Allowed.** In-place edits to handwritten OpenAPI inside an **existing** API version directory remain permitted. Do **not** flag PRs that only modify files in directories that already exist on the base branch.
+**Scope boundary.** In-place edits to handwritten OpenAPI inside an **existing**
+API version directory do not violate `TSP-REQUIRED-V1`. They still require the
+normal published-version immutability, breaking-change, and API-version checks;
+passing this rule is not blanket permission to change a published contract.
 
 **Detection signals.** A new API version directory is compliant if **either** of the following is true:
 
@@ -103,7 +106,9 @@ If **none** of these signals are present, the new API version is being authored 
 
 **Decision procedure.** This procedure is REQUIRED. Before emitting any TSP-REQUIRED-V1 finding the agent MUST walk this checklist top-to-bottom and stop at the first condition that holds:
 
-1. **API version directory already exists on the base branch?** Then **Rule PASSES. Emit NO finding at any severity, including Warning and Suggestion.** May be listed as `N/A` or compliant in an acknowledgments table, but MUST NOT appear in the findings list.
+1. **API version directory already exists on the base branch?** Then
+   **TSP-REQUIRED-V1 PASSES. Emit no finding under this rule.** Continue applying
+   all other immutability, compatibility, and versioning rules.
 2. **The new swagger document has `x-typespec-generated` at the top level, meaning as a direct child of the document root, alongside `swagger`, `info`, `paths`?** Then **Rule PASSES. Emit NO finding.** This signal is dispositive on its own. Its presence is sufficient compliance evidence regardless of any other context. The agent MUST NOT downgrade the finding to Warning or Suggestion as a reminder, and MUST NOT raise it because of unrelated concerns about TypeSpec source-of-truth, sibling project hygiene, or repository layout. The marker is the contract.
 3. **A sibling TypeSpec project both declares this API version and is configured to emit this OpenAPI directory?** Then **Rule PASSES. Emit NO finding.** Verify linkage through the project's version declarations and emitter/output configuration. The mere presence of `main.tsp`, `tspconfig.yaml`, or an unrelated `.tsp` change elsewhere in the service does not pass the rule.
 4. **Otherwise**, emit a single **Blocking** finding citing rule `TSP-REQUIRED-V1`.
@@ -112,11 +117,14 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 
 **Fix.** Author the new API version in TypeSpec using the Azure TypeSpec libraries. See [Getting Started with TypeSpec specifications](../../documentation/Getting-started-with-TypeSpec-specifications.md) and the [TypeSpec dev process](../../documentation/typespec-rest-api-dev-process.md) for end-to-end guidance. Generated OpenAPI from `tsp compile .` is then checked in alongside the TypeSpec source.
 
-**Enforcement.** A deterministic CI check is in development to block such PRs automatically (tracked in [PR #42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, this agent rule surfaces the same policy at review time.
+**Enforcement.** Current CI does not deterministically enforce this exact
+new-version condition. The Reviewer must apply it without implying that an
+active enforcement PR exists.
 
 **False-positive avoidance.**
 
-- Do **not** flag updates to files inside pre-existing API version directories, even when those files are handwritten OpenAPI.
+- Do **not** flag updates to files inside pre-existing API version directories
+  under `TSP-REQUIRED-V1`; continue applying all other rules.
 - Do **not** flag PRs that add a new API version whose swagger is generated from sibling TypeSpec source.
 - If unsure whether a swagger file is TypeSpec-generated, look for the `x-typespec-generated` marker in the JSON before flagging.
 - Do **not** flag PRs that only add or modify example files (`examples/*.json`), `readme.md`, `tspconfig.yaml`, or `.tsp` files — the rule applies only when a new API version directory contains handwritten OpenAPI swagger.
@@ -306,7 +314,12 @@ HTTP finding against an ARM operation that follows the ARM rule.
   "x-ms-pageable": { "nextLinkName": "nextLink" }
   ```
 - The response model **MUST** include a `nextLink` property of type `string` for pagination (or set `"nextLinkName": null` only if pagination is guaranteed never needed).
-- On the final page, `nextLink` may be omitted or `null`; it **MUST NOT** be an empty string.
+- On the final page:
+  - ARM resource-manager responses may omit `nextLink` or return it as `null`
+    under the RPC pagination contract.
+  - Data-plane responses **MUST** omit `nextLink`; Azure REST API Guidelines
+    prohibit response fields with null values.
+  - Neither plane may return an empty string.
 - Each item in the collection **MUST** include its `id` and `etag` (if ETags are supported).
 - Pageable operations **MUST** define a `200` response.
 - **SHOULD** support paging from the start if the collection could grow large. Adding paging later is a breaking change.
@@ -376,6 +389,10 @@ HTTP finding against an ARM operation that follows the ARM rule.
 - Verify the `$ref` path is valid and points to the correct common-types version file.
 - Definition names **MUST** be unique across all swagger files included in the same package tag. Duplicate definitions (e.g., `ErrorResponse` defined in both `foo.json` and `bar.json`) cause SDK generation conflicts. Use `$ref` to a single shared definition or common-types instead.
 - New ARM API versions **MUST** define top-level, read-only `systemData` on Azure resource read responses. The schema must match the canonical ARM shape; a common-types `$ref` is strongly recommended but not mandatory when an inline shape is fully compatible.
+- The required `SystemDataDefinitionsCommonTypes` LintDiff rule is stricter than
+  that contract distinction and rejects a `$ref` to a local `systemData`
+  definition. Advise common-types reuse or an approved scoped suppression as a
+  repository-CI requirement, not as an RPC rule.
 
 ## 13. ARM Resource Model Requirements
 
@@ -384,7 +401,9 @@ HTTP finding against an ARM operation that follows the ARM rule.
 
 - Resource model name **MUST** match the singular form of the resource type (e.g. `VirtualMachine` for `virtualMachines`).
 - Model definitions **MUST** use PascalCase.
-- Every tracked resource **MUST** define GET, PUT, PATCH (update), and DELETE. Resource-group-scoped top-level types also require List by Resource Group and List by Subscription; subscription-scoped top-level types require List by Subscription.
+- Every tracked resource **MUST** define GET, PUT, PATCH (update), and DELETE.
+  Top-level tracked types also require List by Resource Group and List by
+  Subscription.
 - Nested resources **MUST** define a List operation under their immediate parent.
 - ARM resources **MUST** have top-level body properties limited to: `id`, `name`, `type`, `kind`, `location`, `extendedLocation`, `tags`, `plan`, `sku`, `etag`, `managedBy`, `managedByExtended`, `identity`, `systemData`, `properties`, and `zones`.
 - The `properties` object should contain service-specific fields — do not put custom fields at the resource top level.
@@ -518,10 +537,10 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 
 ### 22.4 Pagination Examples (EX-PAGINATION)
 
-- On the last page, pageable response examples may omit `nextLink` or set it to
-  `null`; omission is preferred for cleaner examples. An empty string is
-  invalid.
-- If `nextLink` is non-null, it **MUST** be a valid URL string.
+- On the last page, an ARM pageable response example may omit `nextLink` or set
+  it to `null`; a data-plane example must omit it. An empty string is invalid
+  for either plane.
+- If `nextLink` is present and non-null, it **MUST** be a valid URL string.
 - The `nextLink` URL **MUST** be a well-formed URL that includes the `api-version=` query parameter with the correct value (e.g., `?api-version=2025-11-15-preview&...` — not `?2025-11-15-preview&...` with the `api-version=` key omitted).
 - The `nextLink` URL **MUST** point to the same operation endpoint as the operation being demonstrated (e.g., a TagRules list `nextLink` must not point to a monitors collection URL).
 
@@ -544,6 +563,10 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 ### 22.7 Example Payload Correctness (EX-PAYLOAD)
 
 - Example response bodies **MUST** validate against the operation's response schema. A list operation returning `OperationListResult` must include at least `"value": []`, not just `{}`.
+- The enum matrix below is repository review synthesis for the quality of
+  published examples. Azure REST API Guidelines permit an unknown extensible
+  enum value in a response; a Warning in that case concerns documentation and
+  generated-sample clarity, not wire or schema invalidity.
 - Before assigning severity to an example string that is not a declared enum
   member, inspect the value's location, discriminator role, and the enum's
   `x-ms-enum.modelAsString` value:
@@ -668,13 +691,13 @@ When reviewing, systematically check:
 
 - ✅ Valid JSON, correct directory placement, and proper file organization
 - ✅ API version follows `YYYY-MM-DD` format (only `-preview` suffix allowed); no version in URL path
-- ✅ New API versions are authored in TypeSpec (TSP-REQUIRED-V1) — handwritten swagger in new version directories is **Blocking**; updates to handwritten swagger in pre-existing API versions remain permitted
+- ✅ New API versions are authored in TypeSpec (TSP-REQUIRED-V1); pre-existing handwritten directories are out of scope for this rule but still receive normal immutability and compatibility review
 - ✅ No breaking changes vs. previous version of the same API
 - ✅ Security definitions present and applied to all operations
 - ✅ All property names in camelCase, model names in PascalCase
 - ✅ `readOnly`, `required`, and `x-ms-mutability` correctly applied; no write-only properties (OAPI027); no conditional read-only or immutable properties (OAPI020, OAPI029)
 - ✅ Common-types reuse preferred for ARM standard types; compatible inline definitions are allowed; no duplicate definitions across files in the same tag
-- ✅ Every tracked resource has GET, PUT, PATCH, and DELETE; resource-group-scoped top-level types also have ListByResourceGroup and ListBySubscription; subscription-scoped top-level types have ListBySubscription; nested types have collection GET under their immediate parent
+- ✅ Every tracked resource has GET, PUT, PATCH, and DELETE; top-level tracked types also have ListByResourceGroup and ListBySubscription; nested types have collection GET under their immediate parent
 - ✅ `x-ms-pageable` on list operations with correct `nextLinkName`
 - ✅ `x-ms-long-running-operation` on async operations with polling config; ARM uses the verb-specific async and provisioningState rules in `arm-api-review.instructions.md`
 - ✅ Every enum has `x-ms-enum` with a unique name; `modelAsString: true` unless a documented fixed-set rationale justifies a closed enum
@@ -693,7 +716,7 @@ When reviewing, systematically check:
 - ✅ Plural property names are arrays; scalar properties use singular names
 - ✅ Properties with `format` also specify `type`; ARM resource IDs use `format: arm-id`; URLs use `format: uri`
 - ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, description, or examples suggest a secret but `x-ms-secret: true` is missing
-- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, `nextLink` is omitted or null on the last page and never empty, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-\*)
+- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, final-page `nextLink` follows plane-specific omission/null rules and is never empty, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-\*)
 - ✅ No `$ref` with sibling keywords (SCHEMA-REF-SIBLINGS)
 - ✅ Single common-types version per file; no outdated v2 in new specs (SCHEMA-COMMON-TYPES-VERSION)
 - ✅ Data-plane string properties with datetime/UUID descriptions have matching formats; ARM GUID-like strings follow the R3017 allow-list and suppression decision tree (SCHEMA-FORMAT-DETECT)

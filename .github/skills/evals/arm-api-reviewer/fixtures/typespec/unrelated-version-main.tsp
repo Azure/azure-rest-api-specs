@@ -4,10 +4,10 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 @armProviderNamespace
-@service(#{ title: "Handwritten Service" })
+@service(#{ title: "Clean Service" })
 @versioned(Versions)
-namespace Microsoft.HandwrittenService;
+namespace Microsoft.CleanService;
 
 enum Versions {
-  v2025_01_01: "2025-01-01",
+  v2024_01_01: "2024-01-01",
 }
