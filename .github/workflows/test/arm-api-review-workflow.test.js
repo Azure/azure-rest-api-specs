@@ -859,8 +859,16 @@ describe("ARM API review consistency and hardening", () => {
     expect(combined).toContain("session-sha-moved");
   });
 
-  it("documents VS Code and GitHub Copilot app interactive review", async () => {
-    const docs = await readFile(join(ROOT, "documentation/api-reviewer-agent.md"), "utf8");
+  it("documents VS Code and GitHub Copilot app interactive review when docs are checked out", async () => {
+    let docs;
+    try {
+      docs = await readFile(join(ROOT, "documentation/api-reviewer-agent.md"), "utf8");
+    } catch (error) {
+      // The .github CI job uses sparse checkout and intentionally omits
+      // documentation/**. Other repository checks validate the docs.
+      if (isRecord(error) && error.code === "ENOENT") return;
+      throw error;
+    }
 
     expect(docs).toContain(
       "interactive custom agent for Visual Studio Code\nand the GitHub Copilot app",
