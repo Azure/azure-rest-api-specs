@@ -1,32 +1,48 @@
 # Using the ARM API Reviewer Agent
 
-The **ARM API Reviewer** is a Visual Studio Code Copilot agent that reviews Azure REST API
-specification PRs for conformance to the [Azure REST API Guidelines][api-guidelines],
-ARM Resource Provider Contract ([RPC][rpc-contract]) rules, and repository conventions.
-It validates OpenAPI (Swagger), TypeSpec, and example files against 100+ codified rules
-derived from the RPC, Azure REST API Guidelines, and patterns identified by analyzing
-review comments from tens of thousands of PRs across both repos.
+The **ARM API Reviewer** is an interactive custom agent for Visual Studio Code
+and the GitHub Copilot app. It reviews Azure REST API specification pull
+requests and local specifications under development for conformance to the
+[Azure REST API Guidelines][api-guidelines], ARM Resource Provider Contract
+([RPC][rpc-contract]) rules, and repository conventions. It validates OpenAPI
+(Swagger), TypeSpec, and example files against 100+ codified rules derived from
+the RPC, Azure REST API Guidelines, and patterns identified by analyzing review
+comments from tens of thousands of PRs across both repos.
 
 ## Prerequisites
 
-- **VS Code** with [GitHub Copilot][copilot-ext] and
-  [GitHub Copilot Chat][copilot-chat-ext] extensions installed.
 - **The public repository** ([Azure/azure-rest-api-specs][public-repo])
-  cloned and open as a workspace in VS Code. The agent definition,
-  instructions, skills, and prompts all live in this repository.
-  Stay on the **`main` branch** -- you do not need to check out the PR
-  branch. The agent fetches PR files directly from GitHub.
-- **GitHub authentication** -- the agent uses the GitHub MCP
-  server which authenticates via OAuth. If prompted, authorize the GitHub
-  connection when the consent dialog appears. This authentication also
-  enables the agent to review PRs in the private repository
-  (`azure-rest-api-specs-pr`).
+  cloned locally. The agent definition, instructions, skills, and prompts all
+  live in this repository.
+- Use one of these supported interactive hosts:
+  - **Visual Studio Code** with [GitHub Copilot][copilot-ext] and
+    [GitHub Copilot Chat][copilot-chat-ext] installed. Open the clone as the
+    workspace.
+  - **GitHub Copilot app** with the clone configured as a local project. Start
+    an interactive project session for that project.
+- **GitHub authentication** is required for PR reviews. The agent uses the
+  GitHub MCP server, which authenticates through OAuth. If prompted, authorize
+  the connection. Authentication also enables reviews in the private
+  `azure-rest-api-specs-pr` repository. A local-only review does not require
+  GitHub access.
+
+For a PR review, the workspace can remain on `main` because the agent fetches
+the PR files directly from GitHub. For a local review, use the branch and
+working tree that contain the specification under development.
 
 ## How to Open the Agent
 
-1. Open the **Copilot Chat** panel in VS Code (Ctrl+Shift+I or click the Copilot icon).
-2. In the agent picker at the top of the chat, select **ARM API Reviewer**.
+In Visual Studio Code:
+
+1. Open the **Copilot Chat** panel (Ctrl+Shift+I or select the Copilot icon).
+2. In the agent picker, select **ARM API Reviewer**.
 3. Type your request in the chat input.
+
+In the GitHub Copilot app:
+
+1. Open the local `azure-rest-api-specs` project.
+2. Start an interactive session and select **ARM API Reviewer** as the agent.
+3. Type your request in the session input.
 
 ## Automated Review (GitHub Actions)
 
@@ -129,21 +145,21 @@ Files outside `specification/**` are skipped.
 ### Consistency across review contexts
 
 The reviewer runs in two contexts: the unattended GitHub Actions workflow and
-the interactive **ARM API Reviewer** agent in VS Code, across two repositories,
-public `Azure/azure-rest-api-specs` and private `Azure/azure-rest-api-specs-pr`.
-Both paths apply the same rule sources, overall output limit, severity policy,
-default finding set, and `ARMChangesRequested` label policy.
+the interactive **ARM API Reviewer** in Visual Studio Code or the GitHub Copilot
+app. Both contexts apply the same rule sources, overall output limit, severity
+policy, and default finding set. PR reviews also share the same
+`ARMChangesRequested` label policy. Local reviews never post comments or change
+labels.
 
 Four consequences worth knowing as an author or reviewer:
 
-- **The interactive path has a human approval gate.** The
-  interactive agent shows findings in chat and posts only after a reviewer
-  approves, and that reviewer can record an explicit, justified override of a
-  Critic decision. The automated workflow has no human in the loop and no
-  override path. Absent an override, both apply the same default posting policy.
+- **Interactive PR reviews have a human approval gate.** The agent shows
+  findings in chat and posts only after a reviewer approves. A local review
+  stops after presenting its Critic-verified report because there is no PR
+  posting surface.
 - **Only the automated path pins a model.** The workflow and eval suite use the
-  same reviewed model. The VS Code agent uses the model selected by the user, so
-  it remains available to users whose subscriptions expose different models.
+  same reviewed model. The interactive agent uses the model selected by the
+  user in Visual Studio Code or the GitHub Copilot app.
 - **When independent verification is unavailable, severity is preserved, not
   softened.** If the review Critic cannot run, findings keep their original
   severity and the summary says so plainly. Because nothing verified them, that
@@ -164,15 +180,14 @@ with the same model and its behavior changes only in a reviewed commit rather
 than drifting from run to run. The ARM eval suite pins the same model, so eval
 results reflect what production actually does.
 
-Interactive reviews in VS Code are **not** pinned to a model. They run on
-whatever model you have selected, so that the agent works for everyone
-regardless of which models their subscription includes. Wording and emphasis can
-therefore vary between an interactive review and an automated one; the shared
-rules above are what keep the substance the same.
+Interactive reviews are **not** pinned to a model. They run on the model
+selected in the interactive host, so wording and emphasis can vary from an
+automated review. The shared rules keep the substance the same.
 
-The current interactive agent profile targets VS Code only. Making it available
-in the GitHub.com agent picker requires reducing its prompt below GitHub's
-30,000-character limit; that work is tracked separately in
+The current profile is supported by Visual Studio Code and local project
+sessions in the GitHub Copilot app. It is not published in the GitHub.com
+Copilot cloud agent picker because its prompt exceeds that host's
+30,000-character limit. Browser/cloud support is tracked separately in
 [issue 45843](https://github.com/Azure/azure-rest-api-specs/issues/45843).
 
 ### Bot identity and comment deduplication
@@ -225,7 +240,7 @@ approval covers that specific finding. If it does, the only remaining action
 for that comment is to resolve the conversation. Otherwise, the author must
 obtain the appropriate approval or address the finding.
 
-## Reviewing a PR (VS Code, Interactive)
+## Reviewing a PR Interactively
 
 In the agent chat, type your request directly:
 
@@ -259,6 +274,38 @@ If the PR is not found in the resolved repository, the agent will ask you to
 clarify or confirm before trying the other repo. If the PR is not found in
 either repository, the agent reports the error and stops.
 
+## Reviewing a Local Specification
+
+The interactive agent can review a file or directory from the local
+`azure-rest-api-specs` working tree before a PR exists. Provide an absolute path
+or a path relative to the active workspace or Copilot app project:
+
+```text
+Review C:\repos\azure-rest-api-specs\specification\azurearcdata\resource-manager\Microsoft.AzureArcData\AzureArcData\preview\2026-03-01-preview
+```
+
+For a local review, the agent:
+
+1. Confirms that the target is inside the active `azure-rest-api-specs` or
+   `azure-rest-api-specs-pr` repository.
+2. Creates a read-only content snapshot of the supported files under the
+   requested path. Uncommitted files are included.
+3. Runs the full applicable OpenAPI, ARM, TypeSpec, example, suppression, graph,
+   and downstream-CI checks.
+4. Locates the nearest applicable previous API version and performs the same
+   breaking-change and `[NEW]`/`[EXISTING]` analysis used for PR reviews.
+5. Invokes the ARM API Review Critic to independently re-read the same local
+   snapshot before presenting findings.
+
+Local review is read-only. The agent does not modify files, post PR comments, or
+change labels. If a reviewed file changes while the review is running, the
+snapshot is invalidated and the agent asks to restart so findings cannot be
+reported against mixed file versions.
+
+The local repository must be the active workspace or project. If the path is
+outside it, open that clone in Visual Studio Code or add it as a GitHub Copilot
+app project, then start the review there.
+
 ## Agent Topology
 
 The ARM API review workflow uses two agents, but **users only ever invoke
@@ -273,10 +320,9 @@ changed a finding (downgrade, reclassification, drop) or could not run.
 | ARM API Reviewer      | You                                    | Optimized for **recall**: find every spec violation that should be flagged.                                                                                                                                                                                                                                                                                                                                 |
 | ARM API Review Critic | The Reviewer (automatically at Step 7) | Optimized for **precision**: independently re-fetch files, re-quote rule text verbatim, and re-classify `[NEW]`/`[EXISTING]` for every finding before it is posted. A separate agent with a narrower tool surface (read-only) is what makes the verification non-rubber-stamp. When the Critic cannot be reached, the run says so and the findings are reported as unverified rather than silently skipped. |
 
-In VS Code the Critic is hidden from the agents picker via `user-invocable: false`.
-In IDEs that don't honor that flag (Claude Code, github.com Copilot), the
-Critic may appear in pickers but is still not intended for direct invocation;
-if you do invoke it directly, it will tell you to switch to the Reviewer.
+In Visual Studio Code and the GitHub Copilot app, users invoke only the
+Reviewer. The Critic is an internal subagent and is not intended for direct
+invocation.
 
 In GitHub Actions, gh-aw exposes the Critic through the workflow's inline
 `arm-api-review-critic-runtime` subagent. That runtime loads the canonical
@@ -284,7 +330,7 @@ Critic agent and Reviewer-to-Critic protocol from `.github/agents/` before
 verifying findings. Importing the protocol into the Reviewer prompt alone does
 not make the Critic callable.
 
-The agent will:
+For a PR review, the agent will:
 
 1. Fetch the PR metadata and changed files from GitHub.
 2. **Choose a review track** based on the changed files (see [Review Tracks](#review-tracks) below).
@@ -638,7 +684,8 @@ as well as unjustified new suppressions that mask real compliance issues.
 ## Tips
 
 - **Be specific.** Include the PR number or URL in your request. This produces
-  faster, higher-quality results.
+  faster, higher-quality PR results. For a local review, include the exact file
+  or directory path.
 - **Breaking change reviews.** Ask the agent to compare two specific
   versions: `"Compare the 2024-03-01 and 2024-07-01 versions of this
 spec for breaking changes"`.
@@ -654,13 +701,14 @@ The agent **does**:
 - Review TypeSpec (`.tsp`) source files and `tspconfig.yaml`
 - Review `readme.md` suppressions and perform suppression continuity analysis across API versions
 - Detect breaking changes between API versions
+- Review local files and uncommitted changes in the active workspace or project
 - Post review comments on PRs (with your approval)
 - Propose and apply PR label changes (`ARMChangesRequested` / `WaitForARMFeedback`) with your approval
 
 The agent **does not**:
 
 - Modify specification files -- its review of API specs is read-only
-- Review local files or uncommitted changes -- it operates on PRs only
+- Read arbitrary local paths outside the active workspace or Copilot app project
 - Generate SDKs
 - Author new TypeSpec projects from scratch
 - Fix CI pipeline failures -- see the [CI Fix Guide](ci-fix.md)

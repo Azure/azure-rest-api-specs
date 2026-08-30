@@ -327,9 +327,9 @@ describe("ARM API review workflow", () => {
     expect(protocol).toContain("`downstream-ci-conflict`");
     expect(protocol).toMatch(/`downstream-ci-conflict`[^\n]+Override allowed/);
     expect(protocol).toContain("**11 non-overridable reasons**");
-    expect(protocol).toContain("PR URL, Session SHA, Step 6 findings report, or Step 5.5");
+    expect(protocol).toContain("review target, Session SHA, Step 6 findings report, or Step 5.5");
     expect(inputTemplate).toContain(
-      "PR URL, Session SHA, the Step 6 findings\nreport, and the Step 5.5 reconciliation plan or explicit sentinel are required",
+      "Review target, Session SHA, the Step 6 findings\nreport, and the Step 5.5 reconciliation plan or explicit sentinel are required",
     );
     expect(inputTemplate).toMatch(/\| Iteration\s+\| No\s+\| `1`/);
     expect(protocol).toContain("critic: pass|warn|override|unknown");
@@ -724,18 +724,116 @@ describe("ARM API review consistency and hardening", () => {
     expect(allSurfaces).not.toContain("cap bucket");
   });
 
-  it("limits the oversized interactive agent to its supported host", async () => {
+  it("limits the oversized interactive agent to local interactive hosts", async () => {
     const agent = await readFile(join(ROOT, AGENT_FILE), "utf8");
     const frontmatterEnd = agent.indexOf("\n---\n", 4);
     expect(frontmatterEnd).toBeGreaterThan(4);
     const frontmatter = agent.slice(4, frontmatterEnd);
     const body = agent.slice(frontmatterEnd + 5);
 
-    // GitHub.com rejects custom-agent bodies over 30,000 characters. Until
-    // #45843 extracts this workflow into referenced files, declaring both
-    // targets would advertise a profile that the browser cannot load.
+    // GitHub.com rejects custom-agent bodies over 30,000 characters. The
+    // vscode target is used by VS Code and local GitHub Copilot app sessions;
+    // advertising github-copilot would expose a profile the cloud host cannot
+    // load until #45843 extracts this workflow.
     expect(body.length).toBeGreaterThan(30_000);
     expect(frontmatter).toMatch(/^target: vscode$/m);
+    expect(frontmatter).toContain("GitHub Copilot app");
+    expect(frontmatter).toContain("GitHub.com Copilot cloud");
+  });
+
+  it("supports full local specification reviews across Reviewer and Critic", async () => {
+    const [reviewer, critic, protocol, template] = await Promise.all([
+      readFile(join(ROOT, AGENT_FILE), "utf8"),
+      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/agents/protocols/arm-api-review-critic-inputs.template.md"),
+        "utf8",
+      ),
+    ]);
+    const normalizedReviewer = collapseWhitespace(reviewer);
+    const normalizedCritic = collapseWhitespace(critic);
+    const combined = collapseWhitespace(`${reviewer}\n${critic}\n${protocol}\n${template}`);
+
+    expect(reviewer).toContain("### Local workspace review mode");
+    expect(reviewer).toContain("A directory request is a full review");
+    expect(reviewer).toContain("Include untracked and uncommitted files");
+    expect(reviewer).toContain("local-sha256:<64-lowercase-hex>");
+    expect(normalizedReviewer).toContain(
+      "every reviewed file, every previous-version source, and every applicable blob from the recorded Git `HEAD`",
+    );
+    expect(normalizedReviewer).toContain(
+      "When the target modifies an API version already present at Git `HEAD`, also inspect the read-only `git diff` against `HEAD`",
+    );
+    expect(normalizedReviewer).toContain("Step 5.5 input is the literal `reconciliation skipped`");
+    expect(normalizedReviewer).toContain(
+      "Omit approval-context paragraphs, posting actions, reconciliation tables, and per-comment telemetry markers",
+    );
+    expect(reviewer).toContain("Do not show the Step 8 posting menu");
+
+    expect(critic).toContain("For `Review target: local workspace: <absolute-target>`");
+    expect(normalizedCritic).toContain("compute each SHA-256 content hash");
+    expect(normalizedCritic).toContain("approval labels and approval-context paragraphs are");
+    expect(protocol).toContain("### Local source binding");
+    expect(protocol).toContain("`<role>\\t<repo-relative-path>\\t<lowercase-file-sha256>`");
+    expect(protocol).toContain("join them with LF and");
+    expect(protocol).toContain("the `pr` field in both markers is `local:<target-path-digest>`");
+    expect(protocol).toContain("`local:<64-lowercase-hex>`");
+    expect(normalizedReviewer).toContain(
+      "The previous API version is authoritative for `[NEW]` versus `[EXISTING]`",
+    );
+    expect(normalizedCritic).toContain("The previous-version result is authoritative");
+    expect(normalizedCritic).toContain(
+      "require the current path/role set to exactly match the supplied manifest",
+    );
+    expect(normalizedCritic).toContain("current Git `HEAD` equals the recorded Input #5 value");
+    expect(template).toContain("Repository HEAD: <full-40-char-sha>");
+    expect(template).toContain(
+      "Source manifest: <reviewed|previous-version|head>:<source>@sha256:<hash>",
+    );
+    expect(normalizedReviewer).toContain(
+      "This replacement overrides every mutation instruction in the remainder of Step 10",
+    );
+    expect(normalizedReviewer).toContain(
+      "After a local review, use only Step 10's read-only snapshot verification and never remove branches, worktrees, or files",
+    );
+    expect(reviewer).toContain("**Template A, local review variant:**");
+    expect(reviewer).toContain(
+      "re-run from Step 1 against the current on-disk content and pin a fresh local snapshot",
+    );
+    expect(template).toContain("Review target: local workspace: <absolute-file-or-directory>");
+    expect(combined).toContain("session-sha-moved");
+  });
+
+  it("documents VS Code and GitHub Copilot app interactive review", async () => {
+    const docs = await readFile(join(ROOT, "documentation/api-reviewer-agent.md"), "utf8");
+
+    expect(docs).toContain(
+      "interactive custom agent for Visual Studio Code\nand the GitHub Copilot app",
+    );
+    expect(docs).toContain("## Reviewing a Local Specification");
+    expect(docs).toContain(
+      String.raw`Review C:\repos\azure-rest-api-specs\specification\azurearcdata`,
+    );
+    expect(docs).toContain("Uncommitted files are included");
+    expect(docs).toContain(
+      "performs the same\n   breaking-change and `[NEW]`/`[EXISTING]` analysis used for PR reviews",
+    );
+    expect(docs).toContain(
+      "Invokes the ARM API Review Critic to independently re-read the same local",
+    );
+    expect(docs).not.toContain(
+      "Review local files or uncommitted changes -- it operates on PRs only",
+    );
+  });
+
+  it("supports rule guidance without starting a review session", async () => {
+    const reviewer = await readFile(join(ROOT, AGENT_FILE), "utf8");
+
+    expect(reviewer).toContain("**Rule guidance:**");
+    expect(reviewer).toContain(
+      "Do not start the review workflow or invoke the Critic unless the answer",
+    );
   });
 
   it("carves the post-condition out of the Step 8 no-re-fetch rule", async () => {
@@ -1449,7 +1547,7 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
 
     expect(combined).toContain("Omission, an empty heading, or an empty string is malformed");
     expect(combined).not.toContain("defaults to the literal sentinel `reconciliation skipped`");
-    expect(template).toMatch(/Step 5\.5 reconciliation plan \| \*\*Yes\*\*/);
+    expect(template).toMatch(/Step 5\.5 reconciliation plan\s+\| \*\*Yes\*\*/);
   });
 
   it("keeps runtime scope, telemetry, labels, and truncation wording honest", async () => {
