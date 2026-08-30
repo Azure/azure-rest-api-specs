@@ -423,7 +423,7 @@ These files are the single source of truth. Do not invent rules beyond what they
 
 Use these to verify claims, check the latest guidelines, or investigate edge cases:
 
-- **[Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)** - the authoritative contract for ARM control-plane APIs. When the RPC conflicts with the Azure REST API Guidelines or generic OpenAPI rules, the RPC takes precedence for control-plane resources.
+- **[Azure Resource Provider Contract (RPC)](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10)** - the authoritative contract for ARM control-plane APIs. When the RPC conflicts with the Azure REST API Guidelines or generic OpenAPI rules, the RPC takes precedence for control-plane resources.
 - [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) - primarily for data-plane APIs; some patterns also apply to control-plane. When it conflicts with the RPC for control-plane, the RPC takes precedence.
 - [ARM wiki / RP guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/rpguidelines.html) - supplementary ARM guidance
 - [Repository documentation](https://github.com/Azure/azure-rest-api-specs/tree/main/documentation)

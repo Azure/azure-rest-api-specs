@@ -48,27 +48,27 @@ instruction files.
 | R2017          | PutRequestResponseScheme                 | arm-api-review §3.1 (RPC-Put-V1-25)    | ✅ Covered   |
 | R3007          | PutGetPatchResponseSchema                | arm-api-review §3.1 (RPC-Put-V1-12)    | ✅ Covered   |
 | --             | PatchPropertiesCorrespondToPutProperties | arm-api-review §4                      | ✅ Covered   |
-| R2062          | XmsResourceInPutResponse                 | arm-api-review §2.1 (RPC-Put-V1-12)    | ✅ Covered   |
+| R2062          | XmsResourceInPutResponse                 | arm-api-review §2.1                    | ✅ Covered   |
 | --             | ConsistentResponseSchemaForPut           | arm-api-review §3.1 (RPC-Put-V1-29)    | ✅ Annotated |
 | --             | ConsistentPatchProperties                | arm-api-review §4.3a (RPC-Patch-V1-01) | ✅ Annotated |
 
 ## Resource Lifecycle Rules
 
-| Linter Rule ID | Name                                         | Instruction Coverage                                             | Status       |
-| -------------- | -------------------------------------------- | ---------------------------------------------------------------- | ------------ |
-| R3025          | TrackedResourceGetOperation                  | tracked-resource-lifecycle.md                                    | ✅ Covered   |
-| R3026          | TrackedResourcePatchOperation                | tracked-resource-lifecycle.md                                    | ✅ Covered   |
-| R3027          | TrackedResourceListByResourceGroup           | tracked-resource-lifecycle.md                                    | ✅ Covered   |
-| R3028          | TrackedResourceListBySubscription            | tracked-resource-lifecycle.md                                    | ✅ Covered   |
-| R4014          | AllResourcesMustHaveGetOperation             | arm-api-review §2.7                                              | ✅ Covered   |
-| R4015          | NestedResourcesMustHaveListOperation         | arm-api-review §2.3                                              | ✅ Covered   |
-| R4016          | TopLevelResourcesListByResourceGroup         | policy-compatibility.md PLCY007                                  | ✅ Covered   |
-| R4017          | TopLevelResourcesListBySubscription          | policy-compatibility.md PLCY007                                  | ✅ Covered   |
-| R3010          | TrackedResourceListByImmediateParent         | arm-api-review §2.3                                              | ✅ Covered   |
-| --             | MissingSegmentsInNestedResourceListOperation | arm-api-review §2.3                                              | ✅ Covered   |
-| --             | AllProxyResourcesShouldHaveDelete            | arm-api-review §5.1 (RPC-Delete-V1-05)                           | ✅ Covered   |
-| --             | TrackedExtensionResourcesAreNotAllowed       | arm-api-review §1.2 (RPC-Uri-V1-12)                              | ✅ Annotated |
-| --             | ReservedResourceNamesModelAsEnum             | tracked-resource-lifecycle.md (RPC-ConstrainedCollections-V1-04) | ✅ Annotated |
+| Linter Rule ID | Name                                         | Instruction Coverage                                       | Status       |
+| -------------- | -------------------------------------------- | ---------------------------------------------------------- | ------------ |
+| R3025          | TrackedResourceGetOperation                  | tracked-resource-lifecycle.md                              | ✅ Covered   |
+| R3026          | TrackedResourcePatchOperation                | tracked-resource-lifecycle.md                              | ✅ Covered   |
+| R3027          | TrackedResourceListByResourceGroup           | tracked-resource-lifecycle.md                              | ✅ Covered   |
+| R3028          | TrackedResourceListBySubscription            | tracked-resource-lifecycle.md                              | ✅ Covered   |
+| R4014          | AllResourcesMustHaveGetOperation             | arm-api-review §2.7                                        | ✅ Covered   |
+| R4015          | NestedResourcesMustHaveListOperation         | arm-api-review §2.3                                        | ✅ Covered   |
+| R4016          | TopLevelResourcesListByResourceGroup         | policy-compatibility.md PLCY007                            | ✅ Covered   |
+| R4017          | TopLevelResourcesListBySubscription          | policy-compatibility.md PLCY007                            | ✅ Covered   |
+| R3010          | TrackedResourceListByImmediateParent         | arm-api-review §2.3                                        | ✅ Covered   |
+| --             | MissingSegmentsInNestedResourceListOperation | arm-api-review §2.3                                        | ✅ Covered   |
+| --             | AllProxyResourcesShouldHaveDelete            | arm-api-review §5.1 (RPC-Delete-V1-05)                     | ✅ Covered   |
+| --             | TrackedExtensionResourcesAreNotAllowed       | arm-api-review §1.2 (RPC-Uri-V1-12)                        | ✅ Annotated |
+| --             | ReservedResourceNamesModelAsEnum             | tracked-resource-lifecycle.md (optional authoring pattern) | ⚠️ Implicit  |
 
 ## Resource Model & Properties Rules
 
@@ -81,7 +81,7 @@ instruction files.
 | R4034          | AzureResourceTagsSchemaValidation        | arm-api-review §1.2 (proxy no tags) | ✅ Covered   |
 | --             | TagsAreNotAllowedForProxyResources       | arm-api-review §1.2                 | ✅ Covered   |
 | R2057          | InvalidSkuModel                          | arm-api-review §2.6.1               | ✅ Covered   |
-| R2019          | ResourceHasXMsResourceEnabled            | arm-api-review §2.1 (RPC-Put-V1-12) | ✅ Covered   |
+| R2019          | ResourceHasXMsResourceEnabled            | arm-api-review §2.1                 | ✅ Covered   |
 | R4037          | MissingTypeObject                        | openapi-review §6                   | ✅ Covered   |
 | R2056          | RequiredReadOnlyProperties               | property-mutability.md OAPI027      | ✅ Covered   |
 | --             | AvoidAdditionalProperties                | arm-api-review §8.5                 | ✅ Covered   |
@@ -92,7 +92,7 @@ instruction files.
 | -------------- | ------------------------------------ | ----------------------------------- | ----------- |
 | R3020          | PathResourceProviderNamePascalCase   | arm-api-review §1.3                 | ✅ Covered  |
 | R3021          | PathResourceTypeNameCamelCase        | arm-api-review §1.6                 | ✅ Covered  |
-| R3030          | PathResourceProviderMatchNamespace   | arm-api-review §1.3 (RPC-Put-V1-06) | ✅ Covered  |
+| R3030          | PathResourceProviderMatchNamespace   | arm-api-review §1.3 (RPC-Uri-V1-03) | ✅ Covered  |
 | R3014          | BodyPropertiesNamesCamelCase         | naming-conventions.md               | ✅ Covered  |
 | R3016          | DefinitionsPropertiesNamesCamelCase  | naming-conventions.md               | ✅ Covered  |
 | R1001          | OperationIdNounVerb                  | openapi-review §14                  | ✅ Covered  |
@@ -160,12 +160,12 @@ instruction files.
 
 ## Operations API Rules
 
-| Linter Rule ID | Name                               | Instruction Coverage                       | Status       |
-| -------------- | ---------------------------------- | ------------------------------------------ | ------------ |
-| R3023          | OperationsAPIImplementation        | arm-api-review §1.4 (RPC-Operations-V1)    | ✅ Covered   |
-| R4018          | OperationsApiResponseSchema        | arm-api-review §1.4                        | ✅ Covered   |
-| --             | OperationsApiSchemaUsesCommonTypes | arm-api-review §1.4, §2.8                  | ✅ Covered   |
-| --             | OperationsApiTenantLevelOnly       | arm-api-review §1.4 (RPC-Operations-V1-02) | ✅ Annotated |
+| Linter Rule ID | Name                               | Instruction Coverage                 | Status       |
+| -------------- | ---------------------------------- | ------------------------------------ | ------------ |
+| R3023          | OperationsAPIImplementation        | arm-api-review §1.4 (ARM-OPERATIONS) | ✅ Covered   |
+| R4018          | OperationsApiResponseSchema        | arm-api-review §1.4                  | ✅ Covered   |
+| --             | OperationsApiSchemaUsesCommonTypes | arm-api-review §1.4, §2.8            | ✅ Covered   |
+| --             | OperationsApiTenantLevelOnly       | arm-api-review §1.4 (ARM-OPERATIONS) | ✅ Annotated |
 
 ## Description & Documentation Rules
 
@@ -282,8 +282,8 @@ instruction files.
 | Status       | Count | Meaning                                                            |
 | ------------ | ----- | ------------------------------------------------------------------ |
 | ✅ Covered   | 107   | Rule has explicit instruction file section                         |
-| ✅ Annotated | 17    | Rule has `(Also enforced by:)` annotation                          |
-| ⚠️ Implicit  | 20    | Instruction covers the concept but doesn't cite the linter rule ID |
+| ✅ Annotated | 16    | Rule has `(Also enforced by:)` annotation                          |
+| ⚠️ Implicit  | 21    | Instruction covers the concept but doesn't cite the linter rule ID |
 | ❌ GAP       | 4     | No instruction coverage at all                                     |
 
 ### GAP Rules Requiring Coverage

@@ -18,7 +18,7 @@ deployments, noisy "what would change" output, and preflight failures.
 - [ARM Wiki — What-If](https://armwiki.azurewebsites.net/api_contracts/WhatIf.html)
 - [ARM Wiki — What-If Noise](https://armwiki.azurewebsites.net/api_contracts/WhatIfNoise.html)
 - [ARM Wiki — Preflight](https://armwiki.azurewebsites.net/api_contracts/preflight.html)
-- [Azure Resource Provider Contract — PUT Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/put-resource.md)
+- [Azure Resource Provider Contract — PUT Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/put-resource)
 
 ---
 

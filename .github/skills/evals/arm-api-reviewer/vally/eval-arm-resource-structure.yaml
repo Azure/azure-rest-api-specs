@@ -13,6 +13,8 @@ environment:
   files:
     - src: "../../../../instructions/arm-api-review.instructions.md"
       dest: ".github/instructions/arm-api-review.instructions.md"
+    - src: "../../../../instructions/openapi-review.instructions.md"
+      dest: ".github/instructions/openapi-review.instructions.md"
     - src: "../../../azure-api-review/references/tracked-resource-lifecycle.md"
       dest: ".github/skills/azure-api-review/references/tracked-resource-lifecycle.md"
 
@@ -191,8 +193,8 @@ stimuli:
       - The finding cites `RPC-Get-V1-08`
       - The allowance for collection paging parameters is not applied to point GET
 
-  # 010006 — Inline systemData remains Blocking
-  - name: inline-systemdata-blocking
+  # 010006 — Incomplete inline systemData shape is Blocking
+  - name: incomplete-inline-systemdata-blocking
     tags:
       audit: "2026-08-15"
     environment:
@@ -201,9 +203,10 @@ stimuli:
           dest: "specification/systemdatasvc/resource-manager/Microsoft.SystemDataTest/stable/2025-01-01/systemdata.json"
     prompt: >
       Review only the `systemData` property and `InlineSystemData` definition in
-      this ARM tracked-resource OpenAPI file. Determine whether the inline shape
-      is acceptable or must reference ARM common types. Do not edit the file;
-      return the standard finding with severity and fix.
+      this ARM resource OpenAPI file. Determine whether its shape matches the
+      canonical ARM systemData contract. Common-types reuse is recommended but
+      not mandatory when an inline shape is fully compatible. Do not edit the
+      file; return the standard finding with severity and fix.
 
       File: specification/systemdatasvc/resource-manager/Microsoft.SystemDataTest/stable/2025-01-01/systemdata.json
     constraints:
@@ -211,14 +214,15 @@ stimuli:
         - azure-api-review
     graders:
       - type: output-matches
-        name: "inline systemData is Blocking"
+        name: "incomplete systemData shape is Blocking"
         config:
           pattern: '(?is)(?:systemData|InlineSystemData).{0,500}(?:🔴\s*Blocking|\bBlocking\b)|(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:systemData|InlineSystemData)'
       - type: output-matches
-        name: "common-types fix required"
+        name: "canonical systemData shape required"
         config:
-          pattern: "(?is)(?:systemData).{0,300}(?:common.?types|\\$ref)|(?:common.?types|\\$ref).{0,300}(?:systemData)"
+          pattern: "(?is)(?:systemData).{0,400}(?:createdByType|lastModifiedBy|canonical|common.?types)|(?:createdByType|lastModifiedBy|canonical|common.?types).{0,400}(?:systemData)"
       - type: prompt
     rubric:
-      - Inline `systemData` on an ARM tracked resource is a Blocking violation
-      - The fix references the canonical ARM common-types `systemData` definition
+      - The incomplete inline `systemData` shape is Blocking because it does not match the canonical ARM contract
+      - The fix adds the missing canonical fields or uses the recommended common-types definition
+      - The finding does not claim that every compatible inline definition is forbidden

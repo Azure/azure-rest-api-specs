@@ -1508,15 +1508,17 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
     );
 
     expect(openapi).toContain("`arm-api-review.instructions.md` sections 3-6 are authoritative");
-    expect(openapi).toContain("ARM supports `If-Match`");
-    expect(openapi).toContain("does not support conditional GET");
+    expect(openapi).toContain(
+      "ARM supports operation-specific `If-Match` and `If-None-Match` semantics",
+    );
+    expect(openapi).toContain("does not define conditional GET behavior");
     expect(openapi).toContain("A closed enum with a documented fixed-set rationale");
     expect(openapi).not.toContain(
       'Every enum **MUST** have the `x-ms-enum` extension with a `name` property and `"modelAsString": true`',
     );
     expect(openapi).toContain("On ARM specs, do **not** suggest `format: uuid`");
     expect(openapi).toContain(
-      "**Exception:** `systemData` on an ARM resource MUST use the canonical common-types definition",
+      "The schema must match the canonical ARM shape; a common-types `$ref` is strongly recommended",
     );
     expect(openapi).not.toContain("no ProvisioningState + 202 mixing");
   });
@@ -1608,5 +1610,195 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
       const example = await readFile(join(exampleDir, file), "utf8");
       expect(example, file).toMatch(/"title":\s*"[^"]+"/);
     }
+  });
+});
+
+describe("Archived RPC contract reconciliation", () => {
+  it("uses relocated RPC links throughout agent-facing .github docs", async () => {
+    const roots = [".github/agents", ".github/instructions", ".github/skills/azure-api-review"];
+    const markdownFiles = [];
+
+    for (const root of roots) {
+      const entries = await readdir(join(ROOT, root), { recursive: true });
+      for (const entry of entries) {
+        if (entry.endsWith(".md")) {
+          markdownFiles.push(join(ROOT, root, entry));
+        }
+      }
+    }
+
+    for (const file of markdownFiles) {
+      const content = await readFile(file, "utf8");
+      expect(content, file).not.toContain(
+        "github.com/cloud-and-ai-microsoft/resource-provider-contract",
+      );
+    }
+  });
+
+  it("matches the RPC resource envelope, singleton, and nested-list contract", async () => {
+    const [arm, openapi, lifecycle] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/openapi-review.instructions.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/tracked-resource-lifecycle.md"),
+        "utf8",
+      ),
+    ]);
+    const combined = collapseWhitespace(`${arm}\n${openapi}\n${lifecycle}`);
+
+    expect(openapi).toContain("`kind`, `location`, `extendedLocation`");
+    expect(openapi).toContain("`managedBy`, `managedByExtended`, `identity`");
+    expect(arm).toContain('`"EdgeZone"` or `"CustomLocation"`');
+    expect(combined).toContain("`current` is also valid");
+    expect(combined).toContain("A static literal route such as `/default` is allowed");
+    expect(combined).toContain(
+      "A nested type **MUST** implement collection GET under its immediate parent",
+    );
+    expect(arm).toContain(
+      "A nested type instead requires collection GET under its immediate parent",
+    );
+    expect(combined).not.toContain("RPC-ConstrainedCollections-V1-04");
+  });
+
+  it("keeps query, paging, and conditional behavior at RPC strength", async () => {
+    const [arm, openapi] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/openapi-review.instructions.md"), "utf8"),
+    ]);
+    const combined = collapseWhitespace(`${arm}\n${openapi}`);
+
+    expect(combined).toContain("Custom query parameters **SHOULD NOT** be used");
+    expect(combined).toContain("DELETE custom query parameters **SHOULD NOT** be used");
+    expect(combined).toContain("On the final page its response value may be omitted or `null`");
+    expect(openapi).toContain("On the final page, `nextLink` may be omitted or `null`");
+    expect(arm).toContain("PUT supports `If-None-Match: *`");
+    expect(arm).toContain("PUT, PATCH, and DELETE support a specific `If-Match` value");
+    expect(arm).not.toContain("wildcard values (`*`) are **NOT** supported");
+  });
+
+  it("preserves greenfield and brownfield async distinctions", async () => {
+    const arm = collapseWhitespace(
+      await readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+    );
+
+    for (const verb of ["PATCH", "DELETE", "POST"]) {
+      expect(arm).toMatch(
+        new RegExp(
+          `Async ${verb}[\\s\\S]{0,700}greenfield RP namespaces \\*\\*MUST\\*\\*[\\s\\S]{0,200}brownfield namespaces are \\*\\*strongly recommended\\*\\*`,
+        ),
+      );
+    }
+    expect(arm).not.toContain("service **MUST** return `409 Conflict`");
+    expect(arm).toContain("`id` and `name` are optional");
+    expect(arm).toContain("`error.message` is required for `Failed` and optional for `Canceled`");
+    expect(arm).toContain("root-level resource, not a child of the resource");
+    expect(arm).toContain("Operation IDs **MUST** be unique");
+    expect(arm).toContain("RPs **MAY** expose a durable proxy resource");
+  });
+
+  it("keeps systemData and check-name guidance at current contract strength", async () => {
+    const [arm, openapi] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/openapi-review.instructions.md"), "utf8"),
+    ]);
+    const combined = collapseWhitespace(`${arm}\n${openapi}`);
+
+    expect(arm).toContain("The `systemData` shape **MUST** match the canonical ARM contract");
+    expect(arm).toContain("strongly recommended");
+    expect(arm).toContain("a correctly shaped inline definition is not Blocking solely");
+    expect(openapi).toContain("a common-types `$ref` is strongly recommended but not mandatory");
+    expect(combined).toContain("individual canonical member value is unavailable");
+    expect(combined).not.toContain("inline redefinition of `systemData` is a Blocking violation");
+    expect(combined).not.toContain("systemData` must use the canonical common-types definition");
+    expect(arm).toContain("When `nameAvailable` is `false`");
+    expect(arm).toContain("A correctly shaped inline model is valid");
+    expect(arm).toContain("Do not treat the absence of those arrays as a shape incompatibility");
+    expect(arm).not.toContain("response body **MUST** reference the common-types");
+  });
+
+  it("distinguishes operationResults placement from operationStatuses tracking", async () => {
+    const arm = collapseWhitespace(
+      await readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+    );
+
+    expect(arm).toContain("`operationResults` **MUST** be a root-level resource");
+    expect(arm).toContain(
+      "An `operationStatuses` tracking URI may be under the original request or under subscription-level operations",
+    );
+    expect(arm).toContain(
+      "`operationStatuses` may be under the original request or subscription-level operations (RPC028)",
+    );
+    expect(arm).not.toContain(
+      "`operationResults` and `operationStatuses` **MUST** be root-level resources",
+    );
+    expect(arm).not.toContain("Operation results/statuses are root-level resources (RPC021)");
+  });
+
+  it("keeps common-types and nested-resource checklists advisory and scope-aware", async () => {
+    const [arm, openapi] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/instructions/openapi-review.instructions.md"), "utf8"),
+    ]);
+    const combined = collapseWhitespace(`${arm}\n${openapi}`);
+
+    expect(combined).toContain("Every tracked resource has GET, PUT, PATCH, and DELETE");
+    expect(arm).toContain(
+      "Every tracked resource **MUST** implement point GET, PUT, PATCH, and DELETE",
+    );
+    expect(arm).toContain(
+      "All API paths for **tracked resources** (resources with `location` as a required property) **MUST** be scoped under a subscription",
+    );
+    expect(arm).toContain("Subscription-scoped types use:");
+    expect(arm).not.toContain(
+      "All API paths for **tracked resources** (resources with `location` as a required property) **MUST** be scoped under a subscription and resource group",
+    );
+    expect(combined).toContain("resource-group-scoped top-level types also have ListByRG");
+    expect(combined).toContain("subscription-scoped top-level types have ListBySub");
+    expect(openapi).toContain("nested types have collection GET under their immediate parent");
+    expect(openapi).toContain(
+      "Every tracked resource **MUST** define GET, PUT, PATCH (update), and DELETE",
+    );
+    expect(openapi).toContain("compatible inline definitions are allowed");
+    expect(openapi).not.toContain("Common-types referenced (not redefined) for ARM standard types");
+    expect(arm).not.toContain(
+      "Tracked resources have all required operations (GET, PUT, PATCH, DELETE, ListByRG, ListBySub)",
+    );
+    expect(arm).toContain(
+      "Custom PATCH query parameters are avoided; any finding is Warning-level",
+    );
+    expect(arm).not.toContain("No non-`api-version` query parameters on PATCH");
+    expect(arm).not.toContain("Collection GETs at subscription + RG level for tracked resources");
+  });
+
+  it("preserves extended-location type-specific name rules", async () => {
+    const arm = collapseWhitespace(
+      await readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+    );
+
+    expect(arm).toContain("for `EdgeZone`, the extended location name (max 128 characters");
+    expect(arm).toContain("for `CustomLocation`, the fully qualified ARM resource ID");
+  });
+
+  it("keeps RPC rule IDs attached to their actual contract rules", async () => {
+    const [arm, lifecycle, coverage] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/arm-api-review.instructions.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/tracked-resource-lifecycle.md"),
+        "utf8",
+      ),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/linter-rule-coverage.md"),
+        "utf8",
+      ),
+    ]);
+
+    expect(arm).toContain("Resource Provider Namespace Consistency (RPC-Uri-V1-03, R3030)");
+    expect(arm).toContain("PUT Response Must Be an ARM Resource (R2062, R2019)");
+    expect(arm).toContain("RPC-Patch-V1-04; legacy aggregate rule RPC007");
+    expect(lifecycle).toMatch(/GET \(point\)[^\n]+RPC-Get-V1-04/);
+    expect(coverage).toContain("R2062");
+    expect(coverage).not.toMatch(/R2062[^\n]+RPC-Put-V1-12/);
+    expect(arm).not.toContain("RPC-Operations-V1");
+    expect(arm).not.toContain("RPC-LIST-VERSIONS");
   });
 });

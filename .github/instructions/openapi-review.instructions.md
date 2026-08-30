@@ -12,7 +12,7 @@ applyTo: "specification/**/*.json"
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
        - Azure Resource Provider Contract (RPC) v1.0 (for ARM-related rules)
-         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
+         https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10
      If an upstream document changes a rule, update this file to match.
      When in doubt, the upstream document takes precedence over this file. -->
 
@@ -259,6 +259,9 @@ HTTP finding against an ARM operation that follows the ARM rule.
 ### Null Values
 
 - **DO NOT** define response properties that can be `null`. Services should omit fields with null values rather than sending `null`.
+- ARM `systemData` is a narrow legacy exception: when an individual canonical
+  member value is unavailable, that member may be omitted or `null`. The entire
+  `systemData` object must not be `null`.
 - Accept `null` values only in PATCH request bodies with JSON Merge Patch semantics (to delete a field).
 
 ## 7. Enumerations
@@ -303,7 +306,7 @@ HTTP finding against an ARM operation that follows the ARM rule.
   "x-ms-pageable": { "nextLinkName": "nextLink" }
   ```
 - The response model **MUST** include a `nextLink` property of type `string` for pagination (or set `"nextLinkName": null` only if pagination is guaranteed never needed).
-- **DO NOT** return `nextLink` with a value of `null` — omit the field entirely on the last page.
+- On the final page, `nextLink` may be omitted or `null`; it **MUST NOT** be an empty string.
 - Each item in the collection **MUST** include its `id` and `etag` (if ETags are supported).
 - Pageable operations **MUST** define a `200` response.
 - **SHOULD** support paging from the start if the collection could grow large. Adding paging later is a breaking change.
@@ -329,7 +332,7 @@ HTTP finding against an ARM operation that follows the ARM rule.
 > requirements per verb (sync vs async response codes differ). For data-plane,
 > see section 21 -- use `Operation-Location`, not `Azure-AsyncOperation`.
 
-- Status monitor responses **MUST** include `id`, `status` (one of `NotStarted`, `Running`, `Succeeded`, `Failed`, `Canceled`), and `error` (on failure).
+- Data-plane status monitor responses follow the Azure Guidelines shape in section 21. For ARM, `status` is required, `id` and `name` are optional, resource providers may add non-terminal values, and error-field requirements follow `arm-api-review.instructions.md` section 6.7.
 - LRO responses **SHOULD** include a `retry-after` header when the operation is not complete.
 
 ## 11. Error Handling
@@ -362,17 +365,17 @@ HTTP finding against an ARM operation that follows the ARM rule.
 
 ## 12. Common-Types Usage (ARM Specs)
 
-> **Reference:** [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0) -- ARM common-types are defined by the RPC contract.
+> **Reference:** [Azure Resource Provider Contract (RPC)](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10) -- ARM common-types are defined by the RPC contract.
 
 - ARM specs **SHOULD** reference the appropriate `common-types` version (v3, v4, v5, or v6) for standard definitions:
   - Resource types: `Resource`, `TrackedResource`, `ProxyResource`, `ExtensionResource`
   - Error types: `ErrorResponse`, `ErrorDetail`
   - Standard parameters: `SubscriptionIdParameter`, `ResourceGroupNameParameter`, `ApiVersionParameter`
   - System metadata: `systemData`
-- Use `$ref` to common-types instead of redefining standard ARM structures inline. This is normally a **recommended practice**, not a blocking requirement -- a spec that correctly defines most standard shapes inline can receive a non-blocking suggestion. **Exception:** `systemData` on an ARM resource MUST use the canonical common-types definition; `arm-api-review.instructions.md` section 20.1 makes an inline `systemData` definition Blocking.
+- Use `$ref` to common-types instead of redefining standard ARM structures inline. This is a **recommended practice**, not a blocking requirement -- a spec that correctly defines standard shapes inline can receive a non-blocking suggestion. For `systemData`, validate the complete canonical shape and top-level read-only semantics; a compatible inline definition is not Blocking solely because it is inline.
 - Verify the `$ref` path is valid and points to the correct common-types version file.
 - Definition names **MUST** be unique across all swagger files included in the same package tag. Duplicate definitions (e.g., `ErrorResponse` defined in both `foo.json` and `bar.json`) cause SDK generation conflicts. Use `$ref` to a single shared definition or common-types instead.
-- All tracked ARM resources **MUST** include `systemData` as a read-only top-level property. Proxy resources are not required to carry `systemData` unless the service contract explicitly includes it.
+- New ARM API versions **MUST** define top-level, read-only `systemData` on Azure resource read responses. The schema must match the canonical ARM shape; a common-types `$ref` is strongly recommended but not mandatory when an inline shape is fully compatible.
 
 ## 13. ARM Resource Model Requirements
 
@@ -381,9 +384,9 @@ HTTP finding against an ARM operation that follows the ARM rule.
 
 - Resource model name **MUST** match the singular form of the resource type (e.g. `VirtualMachine` for `virtualMachines`).
 - Model definitions **MUST** use PascalCase.
-- Top-level tracked resources **MUST** define all of: GET, PUT, PATCH (update), DELETE, List by Resource Group, List by Subscription.
-- Nested resources **MUST** define a List operation.
-- ARM resources **MUST** have top-level body properties limited to: `id`, `name`, `type`, `location`, `tags`, `plan`, `sku`, `etag`, `managedBy`, `identity`, `systemData`, `properties`, and `zones`.
+- Every tracked resource **MUST** define GET, PUT, PATCH (update), and DELETE. Resource-group-scoped top-level types also require List by Resource Group and List by Subscription; subscription-scoped top-level types require List by Subscription.
+- Nested resources **MUST** define a List operation under their immediate parent.
+- ARM resources **MUST** have top-level body properties limited to: `id`, `name`, `type`, `kind`, `location`, `extendedLocation`, `tags`, `plan`, `sku`, `etag`, `managedBy`, `managedByExtended`, `identity`, `systemData`, `properties`, and `zones`.
 - The `properties` object should contain service-specific fields — do not put custom fields at the resource top level.
 - Properties inside the `properties` bag **MUST NOT** reuse ARM top-level property names (`id`, `name`, `type`, `location`, `tags`). These generic names create ambiguity about whether they refer to the resource itself or a sub-component. Use qualified names instead (e.g., `agentId`, `deploymentType`, `ruleName`).
 - For proxy resources, do **not** recreate ARM `tags` functionality inside `properties`. The `tags` name is reserved for ARM tags (V1 and future V2). If tag-like metadata is needed on a proxy resource, use a different name (e.g., `labels`, `resourceTags`).
@@ -445,11 +448,11 @@ HTTP finding against an ARM operation that follows the ARM rule.
 
 **Reference: [Azure Guidelines — Conditional Requests](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#conditional-requests)**
 
-The general guidance below is for data-plane APIs. ARM supports `If-Match` for
-write and delete concurrency control, does not support `If-None-Match` or
-wildcards, and does not support conditional GET. For ARM, apply
-`arm-api-review.instructions.md` section 19 and do not request the unsupported
-headers below.
+The general guidance below is for data-plane APIs. ARM supports operation-specific
+`If-Match` and `If-None-Match` semantics for PUT/PATCH/DELETE, including
+wildcards, and the RPC does not define conditional GET behavior. For ARM, apply
+`arm-api-review.instructions.md` section 19 rather than the data-plane defaults
+below.
 
 - Operations **SHOULD** support `If-Match`, `If-None-Match`, `If-Modified-Since`, and `If-Unmodified-Since` request headers.
 - Operations **SHOULD** return `ETag` and `last-modified` response headers.
@@ -515,8 +518,10 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 
 ### 22.4 Pagination Examples (EX-PAGINATION)
 
-- Pageable response examples **MUST NOT** set `nextLink` to `null`. On the last page, omit `nextLink` entirely.
-- If `nextLink` is present, it **MUST** be a valid URL string (not `null`, not an empty string).
+- On the last page, pageable response examples may omit `nextLink` or set it to
+  `null`; omission is preferred for cleaner examples. An empty string is
+  invalid.
+- If `nextLink` is non-null, it **MUST** be a valid URL string.
 - The `nextLink` URL **MUST** be a well-formed URL that includes the `api-version=` query parameter with the correct value (e.g., `?api-version=2025-11-15-preview&...` — not `?2025-11-15-preview&...` with the `api-version=` key omitted).
 - The `nextLink` URL **MUST** point to the same operation endpoint as the operation being demonstrated (e.g., a TagRules list `nextLink` must not point to a monitors collection URL).
 
@@ -668,8 +673,8 @@ When reviewing, systematically check:
 - ✅ Security definitions present and applied to all operations
 - ✅ All property names in camelCase, model names in PascalCase
 - ✅ `readOnly`, `required`, and `x-ms-mutability` correctly applied; no write-only properties (OAPI027); no conditional read-only or immutable properties (OAPI020, OAPI029)
-- ✅ Common-types referenced (not redefined) for ARM standard types; no duplicate definitions across files in same tag
-- ✅ All CRUD operations and List operations present for ARM resources
+- ✅ Common-types reuse preferred for ARM standard types; compatible inline definitions are allowed; no duplicate definitions across files in the same tag
+- ✅ Every tracked resource has GET, PUT, PATCH, and DELETE; resource-group-scoped top-level types also have ListByResourceGroup and ListBySubscription; subscription-scoped top-level types have ListBySubscription; nested types have collection GET under their immediate parent
 - ✅ `x-ms-pageable` on list operations with correct `nextLinkName`
 - ✅ `x-ms-long-running-operation` on async operations with polling config; ARM uses the verb-specific async and provisioningState rules in `arm-api-review.instructions.md`
 - ✅ Every enum has `x-ms-enum` with a unique name; `modelAsString: true` unless a documented fixed-set rationale justifies a closed enum
@@ -688,7 +693,7 @@ When reviewing, systematically check:
 - ✅ Plural property names are arrays; scalar properties use singular names
 - ✅ Properties with `format` also specify `type`; ARM resource IDs use `format: arm-id`; URLs use `format: uri`
 - ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, description, or examples suggest a secret but `x-ms-secret: true` is missing
-- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-\*)
+- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, `nextLink` is omitted or null on the last page and never empty, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-\*)
 - ✅ No `$ref` with sibling keywords (SCHEMA-REF-SIBLINGS)
 - ✅ Single common-types version per file; no outdated v2 in new specs (SCHEMA-COMMON-TYPES-VERSION)
 - ✅ Data-plane string properties with datetime/UUID descriptions have matching formats; ARM GUID-like strings follow the R3017 allow-list and suppression decision tree (SCHEMA-FORMAT-DETECT)
@@ -707,5 +712,5 @@ Flag all violations clearly with JSON path references, the specific rule, and a 
 
 - ✅ Every finding includes an **exact line number** (`line 42`, not "around line 42" or "near end of file")
 - ✅ If the spec is fully compliant, state that no blocking issues were found -- do not fabricate findings
-- ✅ Do NOT elevate process recommendations (e.g., most common-types `$ref` guidance) to blocking violations. Exception: ARM `systemData` must use the canonical common-types definition.
+- ✅ Do NOT elevate common-types `$ref` guidance to a blocking violation. An incompatible `systemData` shape is a contract violation, but a compatible inline definition is not.
 - ✅ Only flag blocking findings for actual RPC contract violations, security issues, or breaking changes

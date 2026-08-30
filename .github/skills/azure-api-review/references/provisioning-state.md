@@ -17,7 +17,7 @@ DELETE operation on a resource.
   (RPC-Async-V1-02, RPC-Async-V1-03, RPC-Async-V1-16)
 - [Azure REST API Guidelines -- Long-Running Operations](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#long-running-operations--jobs)
 
-[rpc-async]: https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/async-api-reference.md
+[rpc-async]: https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/async-api-reference
 
 ---
 

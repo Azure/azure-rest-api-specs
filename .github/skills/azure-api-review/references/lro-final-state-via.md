@@ -12,7 +12,7 @@ them.
 **Authoritative references:**
 
 - [Azure REST API Guidelines -- Long-Running Operations](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#long-running-operations--jobs)
-- [Azure Resource Provider Contract -- Async Operations](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/async-api-reference.md)
+- [Azure Resource Provider Contract -- Async Operations](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/async-api-reference)
 - [AutoRest LRO Extension docs](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation)
 
 ---

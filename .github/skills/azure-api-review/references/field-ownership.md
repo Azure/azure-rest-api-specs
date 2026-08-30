@@ -20,7 +20,7 @@ confusion.
 
 - [ARM Wiki — OpenAPI Guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/openapi.html)
 - [ARM Wiki — Property Design Best Practices](https://armwiki.azurewebsites.net/api_contracts/guidelines/property_design_best_practices.html)
-- [Azure Resource Provider Contract — PUT Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/put-resource.md)
+- [Azure Resource Provider Contract — PUT Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/put-resource)
 
 ---
 

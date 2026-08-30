@@ -20,7 +20,6 @@ character-matching construct.
 **Authoritative references:**
 
 - [Azure REST API Guidelines — URLs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#uniform-resource-locators-urls)
-- [Azure Resource Provider Contract — Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
 
 ---
 

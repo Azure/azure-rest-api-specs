@@ -20,7 +20,7 @@ token -- even when the property is not explicitly annotated as a secret.
 
 **Authoritative references:**
 
-- [Azure Resource Provider Contract -- Secret Handling](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
+- [Azure Resource Provider Contract -- PUT Resource, RPC-Put-V1-13](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/put-resource#rules)
 - [Azure REST API Guidelines -- no secrets in GET responses](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-no-secrets-in-get-response)
 - [Azure REST API Guidelines -- retrieving secrets through POST](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-secrets-allowed-in-post-response)
 

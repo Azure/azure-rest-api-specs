@@ -671,7 +671,7 @@ The agent **does not**:
 ### External Guidelines
 
 - [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
-- [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)
+- [Azure Resource Provider Contract (RPC)](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10)
 - [Getting Started with OpenAPI Specifications](Getting%20started%20with%20OpenAPI%20specifications.md)
 - [Getting Started with TypeSpec Specifications](Getting-started-with-TypeSpec-specifications.md)
 - [Breaking Changes Guidelines](Breaking%20changes%20guidelines.md)
@@ -736,10 +736,20 @@ Rules that overlap with existing linter checks are annotated with
 CI linters already caught. See the "Maintenance & Upstream Alignment"
 section in `SKILL.md` for the full maintenance process.
 
+> [!NOTE]
+> The original [`cloud-and-ai-microsoft/resource-provider-contract` GitHub
+> repository][rpc-contract-archive] was archived by its owner on July 28, 2026
+> and is read-only.
+> Maintained RPC documentation is now published in the ARM engineering docs.
+> The archived repository remains a historical snapshot and may require
+> Microsoft GitHub Enterprise access; reviewer rules are encoded locally so the
+> agent does not depend on fetching either source at review time.
+
 <!-- Link references -->
 
 [api-guidelines]: https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
-[rpc-contract]: https://github.com/cloud-and-ai-microsoft/resource-provider-contract
+[rpc-contract]: https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10
+[rpc-contract-archive]: https://github.com/cloud-and-ai-microsoft/resource-provider-contract
 [public-repo]: https://github.com/Azure/azure-rest-api-specs
 [copilot-ext]: https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
 [copilot-chat-ext]: https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat

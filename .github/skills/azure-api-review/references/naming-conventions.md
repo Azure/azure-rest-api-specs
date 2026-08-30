@@ -13,7 +13,8 @@ Consistent naming across Azure APIs ensures a uniform developer experience in SD
 
 - [Azure REST API Guidelines -- JSON](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json)
 - [Azure REST API Guidelines -- URLs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#uniform-resource-locators-urls)
-- [Azure Resource Provider Contract -- Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
+- [Azure Resource Provider Contract -- URI Format and Arguments](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/uri-format-and-arguments-for-crud-apis-on-resources)
+- [Azure Resource Provider Contract -- PUT Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/put-resource)
 
 ---
 

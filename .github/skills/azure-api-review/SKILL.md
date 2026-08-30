@@ -141,7 +141,7 @@ all candidates as `POST-NEW`.
 
 These external documents are the upstream authorities. When they conflict with each other, the precedence order is:
 
-1. **[Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)** -- ARM control-plane contract (highest precedence for ARM resources)
+1. **[Azure Resource Provider Contract (RPC)](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10)** -- ARM control-plane contract (highest precedence for ARM resources)
 2. **[Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)** -- general Azure API design (highest precedence for data-plane)
 3. **[TypeSpec Azure library docs](https://azure.github.io/typespec-azure/docs/intro/)** -- TypeSpec-specific patterns for Azure
 4. **[ARM wiki / RP guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/rpguidelines.html)** -- supplementary ARM guidance

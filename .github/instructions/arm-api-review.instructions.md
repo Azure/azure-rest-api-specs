@@ -6,7 +6,7 @@ applyTo: "specification/**/resource-manager/**/*.json"
      Upstream alignment: 2026-08-15
      All rules derived from or aligned with:
        - Azure Resource Provider Contract (RPC) v1.0
-         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
+         https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
        - ARM API Best Practices
@@ -18,7 +18,7 @@ applyTo: "specification/**/resource-manager/**/*.json"
 
 This file contains **ARM control plane–specific** review rules that supplement the generic OpenAPI review instructions in `openapi-review.instructions.md`. All generic rules (versioning, naming, JSON conventions, enums, error handling, pagination, descriptions, x-ms extensions, etc.) are enforced by that file and are **not repeated here**. When reviewing ARM resource-manager swagger files, apply **both** instruction sets. If the Azure RPC contract conflicts with the generic guidelines, the ARM RPC rules below take precedence.
 
-**Authoritative source for ARM control-plane rules:** [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0). The RPC defines the contract between ARM and resource providers for PUT, PATCH, DELETE, GET, POST, and async operations. All rules in this file are derived from or aligned with the RPC. When in doubt, consult the RPC contract directly.
+**Authoritative source for ARM control-plane rules:** [Azure Resource Provider Contract (RPC)](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10). The RPC defines the contract between ARM and resource providers for PUT, PATCH, DELETE, GET, POST, and async operations. All rules in this file are derived from or aligned with the RPC. When in doubt, consult the RPC contract directly.
 
 **Supplementary references:**
 
@@ -123,7 +123,7 @@ label is present. The author must confirm that the approval covers that finding.
 
 **False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
 
-- **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, Operation, OperationListResult, TrackedResource, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only. **Exception: `systemData` is excluded from this exemption** -- see §20.1; inline redefinition of `systemData` is a Blocking violation (the envelope shape MUST be sourced from `common-types/resource-management/vX/types.json`).
+- **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, Operation, OperationListResult, TrackedResource, `systemData`, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only. For `systemData`, validate the complete canonical shape and top-level read-only semantics; do not flag a compatible inline definition solely because it is inline.
 - **`allOf` + TrackedResource base type:** A resource model that manually declares `id`, `name`, `type`, `location`, `tags`, `systemData` as top-level properties is compliant if the shapes are correct. Using `allOf` with TrackedResource is preferred but NOT required. Flag it as a **suggestion** only.
 - **Non-terminal provisioningState values:** Including only the three terminal states (`Succeeded`, `Failed`, `Canceled`) is compliant. Adding non-terminal states (`Creating`, `Updating`, `Deleting`) is recommended but NOT required for compliance. Flag it as a **suggestion** only.
 
@@ -154,15 +154,19 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 ## 1. ARM Resource Path Structure
 
-**Reference: [RPC — Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)**
+**Reference: [RPC — Resource API Reference](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/resource-api-reference)**
 
-### 1.1 Tracked Resource Paths (RPC-Put-V1-01, RPC-Get-V1-11)
+### 1.1 Tracked Resource Paths (RPC-Put-V1-01, RPC-Uri-V1-02, RPC-Uri-V1-03)
 
-- All API paths for **tracked resources** (resources with `location` as a required property) **MUST** be scoped under a subscription and resource group:
+- All API paths for **tracked resources** (resources with `location` as a required property) **MUST** be scoped under a subscription. Resource-group-scoped types also include the resource group segment:
   ```text
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.{Namespace}/{resourceType}/{resourceName}
   ```
-- If a tracked resource path is missing the `subscriptions` or `resourceGroups` segments, flag it as an error and instruct the author to add them.
+- Subscription-scoped types use:
+  ```text
+  /subscriptions/{subscriptionId}/providers/Microsoft.{Namespace}/{resourceType}/{resourceName}
+  ```
+- If a tracked resource path is missing the `subscriptions` segment, or a resource-group-scoped path is missing `resourceGroups/{resourceGroupName}`, flag it as an error and instruct the author to add the applicable scope segments.
 - Tracked resources **MUST NOT** be nested beyond the third level of nesting (RPC-Put-V1-19). ARM only guarantees consistent routing, RBAC, and behavior for tracked resources up to three levels deep.
 - All API paths for PUT operations **MUST** have an even number of segments (alternating resource type and resource name) (RPC-Put-V1-02).
 
@@ -177,13 +181,13 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 - **No duplicate paths when using `{scope}` parameter (RPC-Uri-V1-10).** If an API uses the `{scope}` path parameter to support multiple scopes (tenant, management group, subscription, resource group), the spec **MUST NOT** also include explicitly-scoped paths for the same resource type (e.g., both `/{scope}/providers/Microsoft.Bakery/breads` and `/subscriptions/{subscriptionId}/providers/Microsoft.Bakery/breads`). Either use `{scope}` or use explicit scope paths, but not both.
   (Also enforced by: `NoDuplicatePathsForScopeParameter` linter rule)
 
-### 1.3 Resource Provider Namespace Consistency (RPC-Put-V1-06)
+### 1.3 Resource Provider Namespace Consistency (RPC-Uri-V1-03, R3030)
 
 - The `Microsoft.{Namespace}` in every path **MUST** match the resource provider namespace declared in the specification.
 - Flag any mismatch between path namespace and the `title` or `host` metadata.
 - The RP namespace **SHOULD NOT** repeat the resource type name (e.g., `Microsoft.CloudPartnerProgramMembership` with resource type `membership` is redundant — prefer `Microsoft.CloudPartnerProgram` with resource type `memberships`).
 
-### 1.4 Operations API (RPC-Operations-V1)
+### 1.4 Operations API (ARM-OPERATIONS; R3023, R4018)
 
 - Every resource provider **MUST** expose an operations API at:
   ```text
@@ -192,7 +196,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 - This GET operation **MUST** return an `OperationListResult` with `x-ms-pageable` and a `nextLinkName`.
 - The operations list **SHOULD** use the common-types `OperationListResult` and `Operation` definitions. If defined inline, they must include the same fields as common-types (`name`, `display`, `isDataAction` for `Operation`; `value` array and `nextLink` for `OperationListResult`).
 - If the operations endpoint is missing from the spec, flag it as an ARM Error.
-- The operations API endpoint **MUST** be scoped at the tenant level only (`/providers/Microsoft.{Namespace}/operations`). Operations **MUST NOT** vary per subscription — do not define the operations API under `/subscriptions/{subscriptionId}/...` (RPC-Operations-V1-02).
+- The operations API endpoint **MUST** be scoped at the tenant level only (`/providers/Microsoft.{Namespace}/operations`). Operations **MUST NOT** vary per subscription — do not define the operations API under `/subscriptions/{subscriptionId}/...`.
   (Also enforced by: `OperationsApiTenantLevelOnly` linter rule)
 - When adding new API versions, the operations list **MUST** include ALL operations across all API versions. Do not remove existing operations from the operations list — only add new ones.
 
@@ -222,9 +226,9 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 ## 2. ARM Resource Model Rules
 
-**Reference: [RPC — Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)**
+**Reference: [RPC — Resource API Reference](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/resource-api-reference)**
 
-### 2.1 PUT Response Must Be an ARM Resource (RPC-Put-V1-12)
+### 2.1 PUT Response Must Be an ARM Resource (R2062, R2019)
 
 - The `200` and `201` response models for a PUT operation **MUST** have `x-ms-azure-resource: true` set somewhere in their schema hierarchy (typically inherited from the common-types `Resource` base).
 - If missing, flag it and instruct the author to ensure the response model extends a common-types resource base.
@@ -234,9 +238,9 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the complete tracked resource CRUD requirements, required operations matrix with rule IDs, and collection GET contract.
 
-- A **tracked resource** (has `location` as required property) **MUST** implement GET, PUT, PATCH, DELETE, List by Resource Group, and List by Subscription. If any are missing, flag it as an ARM Error.
+- Every tracked resource **MUST** implement point GET, PUT, PATCH, and DELETE. A resource-group-scoped top-level type also requires List by Resource Group and List by Subscription; a subscription-scoped top-level type requires List by Subscription. A nested type instead requires collection GET under its immediate parent; do not require additional resource-group or subscription list operations for the nested type.
 - Point GET operations **MUST NOT** have query parameters other than `api-version` (RPC-Get-V1-08).
-- Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties; `nextLink` **MUST** use `"format": "uri"` (RPC-Get-V1-06, RPC-Get-V1-09). Collection GET operations **MUST** specify `x-ms-pageable` (RPC-Get-V1-13).
+- Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties (RPC-Get-V1-09). When present, `nextLink` **MUST** use `"format": "uri"` under the generic URL-format rule. Collection GET operations **MUST** specify `x-ms-pageable` (RPC-Get-V1-13) and support continuation via `nextLink` when paging (RPC-Get-V1-06).
 - Collection GET operations may use `api-version`, `$filter`, `$top`, and `$skipToken`. **Do not flag the presence of a correctly defined parameter.** `$top` and `$skipToken` are part of the RPC pagination contract; malformed definitions and non-opaque or cross-scope `$skipToken` behavior remain valid findings.
 - Any other custom collection GET query parameter is at most a **Warning** under Recommended rule RPC-Uri-V1-09. Suggest `$filter` when it can express the same operation. Do not claim the parameter is unsupported by ARM; RPC031 says ARM forwards non-reserved query parameters unchanged.
 - The `QueryParametersInCollectionGet` linter is staging-only and currently omits `$top` and `$skipToken` from its hard-coded allowlist. Treat findings against those two parameters as linter false positives, not evidence of an API defect.
@@ -269,9 +273,11 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
   - `zones` (Availability Zones)
   - `sku`
   - `kind`
+  - `extendedLocation`
   - `plan`
   - `identity`
   - `tags` (for tracked resources)
+- `kind`, when present, **MUST** be a string.
 - If any of these appear inside `properties`, flag it as an ARM Error and instruct the author to move them to the top level.
 - Conversely, properties that are **not** in this top-level set (e.g. `classification`, domain-specific configuration) **MUST** be inside the `properties` bag and not at the resource root.
 
@@ -290,8 +296,8 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 - Every resource type **MUST** have a corresponding point GET operation that retrieves a single instance by its resource path.
 - If a List operation exists but no corresponding GET for a single instance, flag it as an ARM Error.
-- **Singleton resources MUST be named "default"** (lowercase). Names like "Experimentation", "config", or any other non-"default" value for a singleton are not allowed unless explicitly approved.
-- Singleton and constrained-collection resource names **MUST** be represented as an **enum path parameter** with `x-ms-enum` and `modelAsString: true` -- not as a static literal in the URI path. See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the correct pattern (RPC-ConstrainedCollections-V1-04).
+- Singleton resources use a predefined constant name. Prefer lowercase `default`; lowercase `current` is also valid under the RPC. Other values require explicit design justification.
+- A static literal path such as `/default` is contract-valid. When the name is modeled as an OpenAPI path parameter for SDK ergonomics, use a required one-value enum with `x-ms-enum`; treat that as authoring guidance, not an ARM RPC prohibition on literal routes. See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md).
   (Also enforced by: `ReservedResourceNamesModelAsEnum` linter rule -- warning level)
 
 ### 2.8 Common Type Definitions Should Be Used
@@ -304,11 +310,11 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 ## 3. PUT Operation Rules
 
-**Reference: [RPC — PUT Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/put-resource.md)**
+**Reference: [RPC — PUT Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/put-resource)**
 
 ### 3.1 PUT for Resource Creation
 
-- Resources that are created by end users **MUST** expose a PUT operation (RPC-Put-V1-22).
+- Tracked resources that are created by end users **MUST** expose a PUT operation (RPC-Put-V1-22). For proxy resources, prefer PUT when the client supplies the resource name; POST may create a proxy resource when the service assigns the name.
 - **Exception**: POST may be used to create **proxy resources only** when the business scenario requires the service to generate the resource name. Tracked resources **MUST** always use PUT.
 - PUT **MUST** be idempotent — sending the same PUT request multiple times must produce the same result (RPC-Put-V1-20).
 - A re-PUT (PUT to an existing resource with the same body) **MUST NOT** fail. ARM expects PUT to be idempotent and usable for both create and update.
@@ -338,11 +344,11 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 ## 4. PATCH Operation Rules
 
-**Reference: [RPC — PATCH Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/patch-resource.md)**
+**Reference: [RPC — PATCH Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/patch-resource)**
 
 ### 4.1 PATCH Body Must Not Have Required Properties (RPC-Patch-V1-10)
 
-> **Reference:** [RPC -- PATCH Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/patch-resource.md) for complete PATCH contract details.
+> **Reference:** [RPC -- PATCH Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/patch-resource) for complete PATCH contract details.
 
 - PATCH request body parameters **MUST NOT** have any properties marked as `required`, **MUST NOT** have `default` values, and **MUST NOT** have `x-ms-mutability` set to only `["create"]`.
   (Also enforced by: `PatchBodyParametersSchema` linter rule)
@@ -363,7 +369,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 - For tracked resources, the PATCH operation **MUST** support updating `tags` at minimum.
 - Ideally, all mutable properties should be patchable for a better customer experience.
-- PATCH on `tags` follows **replace-all** semantics: sending `{ "tags": { "tag3": "v3" } }` to a resource with `tag1` and `tag2` replaces the entire tag set — the result has only `tag3`. Tags are not merged additively (RPC007).
+- PATCH on `tags` follows **replace-all** semantics: sending `{ "tags": { "tag3": "v3" } }` to a resource with `tag1` and `tag2` replaces the entire tag set — the result has only `tag3`. Tags are not merged additively (RPC-Patch-V1-04; legacy aggregate rule RPC007).
 
 ### 4.3a PATCH Body Must Mirror Resource Model Layout (RPC-Patch-V1-01)
 
@@ -381,9 +387,9 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 - Same rule as PUT -- PATCH response **MUST NOT** return secret values (see Section 7).
 
-### 4.5 PATCH Request Body and Query Parameters (RPC-Patch-V1-12)
+### 4.5 PATCH Request Body and Query Parameters (RPC-Patch-V1-12, RPC-Uri-V1-09)
 
-- PATCH **MUST** have a request body. PATCH **MUST NOT** have query parameters other than `api-version`.
+- PATCH **MUST** have a request body (RPC-Patch-V1-12). Custom query parameters **SHOULD NOT** be used (RPC-Uri-V1-09); report them as Warning, not Blocking. ARM forwards non-reserved parameters unchanged (RPC031), so do not claim they are unsupported by ARM.
 
 ### 4.6 PATCH Does NOT Need to Be Long-Running (CRITICAL)
 
@@ -395,7 +401,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 ## 5. DELETE Operation Rules
 
-**Reference: [RPC — DELETE Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/delete-resource.md)**
+**Reference: [RPC — DELETE Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/delete-resource)**
 
 ### 5.1 DELETE Response Codes (RPC-Delete-V1-01)
 
@@ -423,41 +429,40 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 - DELETE operations **MUST NOT** accept a request body parameter.
 
-### 5.3 No Query Parameters on DELETE Operations
+### 5.3 Avoid Custom Query Parameters on DELETE Operations
 
-- DELETE operations **MUST NOT** have query parameters other than `api-version`.
+- DELETE custom query parameters **SHOULD NOT** be used (RPC-Uri-V1-09); report them as Warning, not Blocking. ARM forwards non-reserved parameters unchanged (RPC031).
 
 ---
 
 ## 6. Long-Running Operations (ARM-Specific)
 
-**Reference: [RPC — Asynchronous Operations](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/async-api-reference.md)**
+**Reference: [RPC — Asynchronous Operations](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/async-api-reference)**
 
 ### 6.1 Async PUT Model (RPC-Async-V1-01)
 
 - Async PUT **MUST** return `201` (create) or `200` (replace) with a `provisioningState` property set to a non-terminal value. PUT **MUST NOT** return `202` — the `202` model for PUT is deprecated and no longer supported for new resource types.
 - The PUT response body **MUST** contain the resource with properties reflecting the in-progress operation (i.e., the state the resource will be in once the async operation completes).
 - Starting January 2025, new RP namespace implementations **MUST** include the `Azure-AsyncOperation` header in the `201`/`200` response pointing to an operation status resource. Brownfield implementations are **strongly recommended** to add this header.
-- If the resource is already in a **non-terminal `provisioningState`** (i.e., a previous async operation is still in progress), the service **MUST** return `409 Conflict`. A new PUT cannot be accepted while a prior operation is still running.
 - Subsequent GET operations on the resource during provisioning **MUST** return `200` (OK) with a non-terminal `provisioningState` until the operation completes.
 - After the operation completes, `provisioningState` **MUST** transition to a terminal state (`Succeeded`, `Failed`, or `Canceled`).
 
 ### 6.2 Async PATCH Model (RPC-Async-V1-08)
 
-- Async PATCH **MUST** return `202` (Accepted) with both a `Location` header and an `Azure-AsyncOperation` header. The `200` status code **MUST** also be defined in the swagger so SDKs can discover the final response schema (RPC-Patch-V1-06).
+- Async PATCH **MUST** return `202` (Accepted) with an absolute `Location` header. Starting January 2025, greenfield RP namespaces **MUST** also return `Azure-AsyncOperation`; brownfield namespaces are **strongly recommended** to add it. The `200` status code **MUST** also be defined in the swagger so SDKs can discover the final response schema (RPC-Patch-V1-06).
 - If the resource has a `provisioningState` property, it **MUST** transition to a non-terminal state (e.g., `"Updating"`) while the operation is in progress.
 - The `Location` URL **MUST** return `202` (with no body) while the operation is in progress. When the operation completes, it **MUST** return the exact same response that would have been returned had the PATCH been synchronous (i.e., `200` with the updated resource body).
 
 ### 6.3 Async DELETE Model (RPC-Async-V1-09)
 
-- Async DELETE **MUST** return `202` (Accepted) with both a `Location` header and an `Azure-AsyncOperation` header.
+- Async DELETE **MUST** return `202` (Accepted) with an absolute `Location` header. Starting January 2025, greenfield RP namespaces **MUST** also return `Azure-AsyncOperation`; brownfield namespaces are **strongly recommended** to add it.
 - If the resource has a `provisioningState` property, it **MUST** transition to a non-terminal state (e.g., `"Deleting"`).
 - The `Location` URL **MUST** return `202` (with no body) while the operation is in progress. When the operation completes, it **MUST** return `200` (OK) or `204` (NoContent) and the resource **MUST** no longer exist.
 - **Note:** The `200` / `204` here refers to the **polling URL's terminal response**, not the initial DELETE response codes. The initial async DELETE response is `202` + `204` (see section 5.1).
 
 ### 6.4 Async POST Action Model (RPC-Async-V1-11)
 
-- Async POST **MUST** return `202` (Accepted) with both a `Location` header and an `Azure-AsyncOperation` header.
+- Async POST **MUST** return `202` (Accepted) with an absolute `Location` header. Starting January 2025, greenfield RP namespaces **MUST** also return `Azure-AsyncOperation`; brownfield namespaces are **strongly recommended** to add it.
 - The `Location` URL **MUST** return `202` (with no body) while the operation is in progress. When the operation completes, it **MUST** return `200` (OK) with a response body, or `204` (NoContent) if no body is needed (e.g., restarting a VM).
 - POST actions do **NOT** affect the resource's `provisioningState` property. Only PUT, PATCH, and DELETE operations update `provisioningState`.
 
@@ -486,20 +491,20 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 - **`Location` header polling**: The polling URL returns `202` (with no body) while the operation is in progress and returns the **exact same response** as the synchronous completion when the operation finishes. For DELETE, the final response is `200` or `204`. For PATCH, the final response is `200` with the updated resource body. For POST, the final response is `200` or `204`.
 - **`Azure-AsyncOperation` header polling**: The polling URL always returns `200` with a status object in the response body containing `status`, `error` (if failed/canceled), and optional `id`, `name`, `startTime`, `endTime`, `percentComplete`, `properties`. A `4xx`/`5xx` on the polling URL indicates a failure reading the _status_, not a failure of the underlying operation.
-- The `Azure-AsyncOperation` status object **MUST** include `status` (Required) with terminal values `Succeeded`, `Failed`, or `Canceled`. If `status` is `Failed` or `Canceled`, `error.code` and `error.message` are **Required**.
+- The `Azure-AsyncOperation` status object **MUST** include `status`, whose terminal values include `Succeeded`, `Failed`, and `Canceled`; resource providers may define additional non-terminal values. `id` and `name` are optional. `properties` appears only on successful completion. If status is `Failed` or `Canceled`, `error` and `error.code` are required; `error.message` is required for `Failed` and optional for `Canceled`.
 - For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `x-ms-long-running-operation-options` / `final-state-via` -- the default SDK behavior is correct. Only specify `"final-state-via": "location"` for POST LROs with a response schema.
 
 ### 6.8 Operation Results Placement
 
-- For **new service onboardings**, operation statuses **MUST** be at subscription scope (e.g., `/subscriptions/{subscriptionId}/providers/{namespace}/locations/{location}/operationStatuses/{operationId}`). Subscription-level operation statuses provide better security through RBAC.
-- If `operationResults`/`operationStatuses` are exposed under resource scope, long-running DELETE operations will cause them to become inaccessible after the parent resource is deleted, returning `404 Not Found`.
-- The RP **MUST** ensure the operation result API is called in the same tenant and subscription that the operation originated in. The operation ID **MUST NOT** be the same as the correlation ID or request ID.
-- Operation IDs **MUST** be globally unique for each operation instance. **DO NOT** derive operation IDs from a hash of resource properties — sequential operations on the same resource initiated close together can produce identical hashes, causing clients and ARM's template deployment engine to mix up operations. Generate a new GUID for each operation (RPC-BestPractice-08).
+- `operationResults` **MUST** be a root-level resource, not a child of the resource being operated on, so DELETE cannot make the polling result unreachable (RPC021).
+- An `operationStatuses` tracking URI may be under the original request or under subscription-level operations (RPC028). Subscription-level placement is preferred for RBAC and durability. For DELETE, verify that the selected polling URI remains reachable after the parent resource is deleted.
+- The RP **MUST** ensure the operation result API is called in the same tenant and subscription that the operation originated in. If the operation ID does not exist in that scope, return `404`; normally validate the caller identity as well.
+- Operation IDs **MUST** be unique for each operation instance (RPC022). They **SHOULD NOT** reuse the correlation ID or request ID. A fresh GUID is the recommended implementation; do not derive IDs from resource-property hashes that can collide across sequential operations.
 - Operation status `properties` **MUST NOT** contain sensitive information — operation status resources may be accessible through polling endpoints with different RBAC restrictions than the original operation.
 
 ### 6.9 Long-Running Operations Exceeding One Day
 
-- For operations that may take longer than one day, RPs **SHOULD** expose a proxy resource for retrieving the latest operation status via a GET (e.g., `GET .../scenarioTests/{name}/testExecutionResults/latest`). This allows clients to retrieve status even if the original `Location` or `Azure-AsyncOperation` URI is lost (e.g., portal tab closed).
+- For operations that may take longer than one day, RPs **MAY** expose a durable proxy resource for retrieving the latest operation status via GET. This is an optional discoverability aid when the original polling URI is lost, not a review finding when absent.
 
 ---
 
@@ -741,7 +746,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 Apply the decision framework from the reference file when evaluating suppressions. Key points: suppressions from preview are not automatically acceptable in GA; suppressions must have specific `from`/`where` clauses (not blanket); warnings should not be suppressed; lack of time is never valid.
 
-### 10A.3 Operations API Must Be in Package Tag (RPC-Operations-V1-TAG)
+### 10A.3 Operations API Must Be in Package Tag (ARM-OPERATIONS-TAG)
 
 - For ARM RPs, the `operations.json` (or equivalent operations API spec) **MUST** be included in every published package tag's input-file list.
 - If a new tag only includes the service resource swagger but omits the operations API, flag it — the resulting SDK will be missing the operations endpoint.
@@ -756,7 +761,7 @@ Apply the decision framework from the reference file when evaluating suppression
 
 ## 11. API Version Practices (ARM-Specific)
 
-**Reference: [RPC — API Versioning](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)**
+**Reference: [Azure REST API versioning](https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-versioning)**
 
 ### 11.1 Uniform Versioning Within a Service
 
@@ -795,7 +800,7 @@ can be schema-correct and still be in the wrong place.
 
 ## 12. POST Actions (ARM-Specific)
 
-**Reference: [RPC — Resource Actions](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)**
+**Reference: [RPC — Resource Action Requests](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/proxy-api-reference#resource-action-requests)**
 
 ### 12.1 Use POST Actions Sparingly
 
@@ -826,7 +831,7 @@ can be schema-correct and still be in the wrong place.
   (Also enforced by: `ParametersInPost` linter rule)
 - **POST pagination**: SDKs do not natively support POST-based pagination. If a POST returns paginated results, the client must re-POST with the same filter body and the `nextLink` for each page. This must be documented. Prefer GET with OData filters to avoid this limitation.
 
-### 12.4 Version or Catalog Listings as Proxy Resources (RPC-LIST-VERSIONS)
+### 12.4 Version or Catalog Listings as Proxy Resources (ARM-VERSION-CATALOG)
 
 - When a service needs to expose a list of available versions, SKUs, offerings, or other catalog-like data, model them as **proxy resource GET collections** — not as custom action endpoints or ad-hoc GET operations.
 - The pattern is: `GET .../providers/Microsoft.{Namespace}/locations/{location}/{catalogResourceType}` returning a paginated list of proxy resources.
@@ -855,7 +860,7 @@ When a PR introduces APIs at the tenant or provider level (outside subscription 
 - List operations **MUST** return a list wrapper object with a `value` array property and an optional `nextLink` property.
 - The `value` array **MUST** contain the resource objects directly — do not wrap resources in additional envelopes.
 - List operations **MUST** be marked with `"x-ms-pageable"` with `"nextLinkName": "nextLink"` (or `null` if the list is never paginated).
-- The `nextLink` property **MUST** use `"format": "uri"` in its schema definition — do not set it to `null` as a value; use `x-ms-pageable` with `nextLinkName: null` if pagination is not supported.
+- The `nextLink` property **MUST** use `"format": "uri"` in its schema definition. On the final page its response value may be omitted or `null`, but must not be an empty string. Use `x-ms-pageable` with `nextLinkName: null` only when the operation will never paginate.
 - If a list operation violates this contract (e.g. wraps in an extra object, uses a different field name, doesn't include `x-ms-pageable`), flag it as an ARM Error.
 
 ---
@@ -900,8 +905,8 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 - Resources that support extended locations (e.g., Edge Zones) **MUST** use the `extendedLocation` top-level property (not inside `properties`).
 - The property is an object with two required fields:
-  - `type` — the extended location type (currently only `"EdgeZone"` is supported)
-  - `name` — the extended location name (max 128 characters; forbidden characters: `<>%&:\?/` and control characters)
+  - `type` — the extended location type (`"EdgeZone"` or `"CustomLocation"`)
+  - `name` — for `EdgeZone`, the extended location name (max 128 characters; forbidden characters: `<>%&:\?/` and control characters); for `CustomLocation`, the fully qualified ARM resource ID
 
 ### 18.2 Extended Location Immutability
 
@@ -915,13 +920,14 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 ### 19.1 Supported Concurrency Headers
 
-- ARM supports the `If-Match` header for write and delete concurrency control.
-- `If-None-Match` and wildcard values (`*`) are **NOT** supported.
-- Read concurrency (conditional GET) is not supported.
+- ARM passes supported conditional headers to the resource provider for validation.
+- PUT supports `If-None-Match: *` for create-only semantics and `If-Match: *` for update-only semantics.
+- PUT, PATCH, and DELETE support a specific `If-Match` value or wildcard `*`; a specific-value mismatch returns `412 Precondition Failed`.
+- The RPC does not define conditional GET behavior; do not require it.
 
 ### 19.2 ETag in Responses
 
-- Every successful CRUD operation **SHOULD** return an `ETag` header in the response.
+- ETag support is optional. When a resource body includes an `etag` property, return the same value in the HTTP `ETag` header.
 - Clients may use the returned ETag in subsequent `If-Match` headers for optimistic concurrency.
 
 ### 19.3 If-Match Behavior
@@ -937,11 +943,11 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 ### 20.1 systemData Property
 
-- `systemData` is a **required top-level property** on all tracked resources for new API versions. It contains `createdBy`, `createdByType`, `createdAt`, `lastModifiedBy`, `lastModifiedByType`, `lastModifiedAt`.
-- All `systemData` properties **MUST** be `readOnly`.
-- `systemData` **MUST** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). Do not define a custom `systemData` model: inline redefinition of `systemData` (even with all the right fields, `readOnly` annotations, and descriptions) is a Blocking violation because it drifts from the canonical envelope shape and silently breaks tooling that resolves `$ref` to the common-types definition.
+- New API versions for Azure resource types **MUST** define top-level, read-only `systemData` on resource read responses (RPC027). This requires the schema property; it does not mean every response instance must make the JSON member required.
+- The `systemData` shape **MUST** match the canonical ARM contract. Referencing `common-types/resource-management/vX/types.json` is strongly recommended and avoids drift, but a correctly shaped inline definition is not Blocking solely because it is inline.
 - `systemData` **MUST NOT** be placed inside the `properties` bag — it is a top-level ARM envelope property.
-- `*ByType` values (`User`, `Application`, `ManagedIdentity`, `Key`) **MUST** be stored as strings (not enums) to support future identity types without breaking changes.
+- `createdByType` and `lastModifiedByType` use the canonical extensible string enum (`User`, `Application`, `ManagedIdentity`, `Key`).
+- For legacy resources where an individual systemData value is unavailable, that member may be omitted or `null`; do not return the entire `systemData` object as `null`.
 
 ### 20.2 systemData Lifecycle Rules
 
@@ -969,16 +975,14 @@ When reviewing resources that support availability zones, verify: `zones` is a t
   - `type` (string) — the fully qualified resource type (e.g., `Microsoft.Storage/storageAccounts`)
 - The response body **MUST** include:
   - `nameAvailable` (boolean) — whether the name is available
-  - `reason` (enum: `AlreadyExists` | `Invalid`) — why the name is unavailable
-  - `message` (string) — a human-readable explanation
+  - When `nameAvailable` is `false`, `reason` (enum: `AlreadyExists` | `Invalid`) and `message` (human-readable explanation) are also required.
+- The canonical common-types request and response schemas do not encode these runtime requirements in OpenAPI `required` arrays. Do not treat the absence of those arrays as a shape incompatibility.
 - Do not use checkNameAvailability as a gate — implement retry logic in resource creation.
 
-### 21.3 Must Use Common-Types Definitions (CNA-003)
+### 21.3 Prefer Common-Types Definitions
 
-- The `checkNameAvailability` request body **MUST** reference the common-types `CheckNameAvailabilityRequest` definition (`common-types/resource-management/vX/types.json#/definitions/CheckNameAvailabilityRequest`).
-- The response body **MUST** reference the common-types `CheckNameAvailabilityResponse` definition.
-- If the spec defines custom request/response models instead of using common-types, flag it and instruct the author to use the common-types `$ref`.
-- **Why:** Custom definitions may omit the `type` field or diverge from the standard contract, making the endpoint inconsistent across RPs and bypassing any future input validation added to the common-types definition.
+- The request and response **SHOULD** reference common-types `CheckNameAvailabilityRequest` and `CheckNameAvailabilityResponse`.
+- A correctly shaped inline model is valid. Flag incompatible or incomplete shapes at their contract severity; use a Suggestion for a shape-compatible inline model that could reuse common types.
 
 ### 21.4 Name Field Input Validation (CNA-004)
 
@@ -1112,15 +1116,15 @@ When reviewing ARM resource-manager swagger files, verify:
 
 ### Resource Structure & Paths
 
-- ✅ Tracked resource paths include `/subscriptions/` and `/resourceGroups/` segments; even-segmented paths (RPC-Put-V1-01, RPC-Put-V1-02)
+- ✅ Tracked resource paths include `/subscriptions/`; resource-group-scoped paths also include `/resourceGroups/`; resource paths have even type/name segments (RPC-Put-V1-01, RPC-Put-V1-02)
 - ✅ Tracked resources not nested beyond third level (RPC-Put-V1-19)
 - ✅ Resource type names are camelCase, plural, and specific (not generic)
 - ✅ ARM `type/{instance}/type/{instance}` URL pattern followed
 - ✅ Proxy resources use `ProxyResource` base type (not `Resource`); proxy resources do NOT have `tags`
 - ✅ Extension resources use the correct scope pattern; extension resources are always proxy (never tracked) (RPC-Uri-V1-12)
 - ✅ No duplicate paths when using `{scope}` parameter -- no explicitly-scoped duplicates (RPC-Uri-V1-10)
-- ✅ Operations API endpoint exists with `OperationListResult` and `Operation` definitions (preferably from common-types; inline equivalent is acceptable) (RPC-Operations-V1)
-- ✅ Operations API is tenant-scoped only -- not per-subscription (RPC-Operations-V1-02)
+- ✅ Operations API endpoint exists with `OperationListResult` and `Operation` definitions (preferably from common-types; inline equivalent is acceptable) (ARM-OPERATIONS; R3023/R4018)
+- ✅ Operations API is tenant-scoped only -- not per-subscription (ARM-OPERATIONS)
 - ✅ Operations API includes ALL operations across all API versions; no operations removed when versioning
 
 ### Output Formatting
@@ -1137,16 +1141,16 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ `sku` follows standard schema (`name`, `tier`, `size`, `family`, `capacity`); internal SKU link API not in public swagger
 - ✅ Non-ARM-envelope properties are inside the `properties` bag
 - ✅ `Operation`, `ErrorResponse`, `CloudError`, `PrivateEndpointConnection` use common-types definitions (recommended) or correctly-shaped inline equivalents
-- ✅ Every resource type has a point GET; singleton resources named "default" using enum path parameters (RPC-ConstrainedCollections-V1-04)
+- ✅ Every resource type has a point GET; singleton resources use a predefined `default` or `current` name and expose both point and collection GET
 - ✅ `x-ms-azure-resource: true` only on top-level resource models, not nested models
 - ✅ PUT request and response schemas are identical; PUT response matches GET and PATCH (RPC-Put-V1-12, RPC-Put-V1-25)
 - ✅ PUT 200 and 201 response schemas are identical (RPC-Put-V1-29)
 - ✅ PUT returns `201` (create) or `200` (replace) — never `202` for async PUT (RPC-Put-V1-11)
 - ✅ PUT does not implicitly create other tracked resources (RPC-Put-V1-16)
-- ✅ Tracked resources have all required operations (GET, PUT, PATCH, DELETE, ListByRG, ListBySub)
+- ✅ Every tracked resource has GET, PUT, PATCH, and DELETE; resource-group-scoped top-level types also have ListByRG and ListBySub; subscription-scoped top-level types have ListBySub; nested types have collection GET under their immediate parent
 - ✅ GET operations return only `200` and are not LROs (RPC-Get-V1-01, RPC-Get-V1-14)
 - ✅ Point GET has no query params other than `api-version` (RPC-Get-V1-08)
-- ✅ Collection GET has only `value` and `nextLink` at top level; `nextLink` has `format: uri` (RPC-Get-V1-06, RPC-Get-V1-09); operation has `x-ms-pageable` (RPC-Get-V1-13)
+- ✅ Collection GET has only `value` and `nextLink` at top level (RPC-Get-V1-09); `nextLink` has `format: uri`; operation supports paging via `nextLink` (RPC-Get-V1-06) and has `x-ms-pageable` (RPC-Get-V1-13)
 - ✅ Collection GET query parameters are limited to `api-version`, `$filter`, `$top`, and `$skipToken`; other custom parameters are Warning-level under RPC-Uri-V1-09
 - ✅ `provisioningState` includes `Succeeded`, `Failed`, `Canceled` (single 'l') terminal states; no operational states like `Stopped` (RPC-Async-V1-02, RPC-Async-V1-03)
 
@@ -1159,13 +1163,13 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ PATCH body properties match resource model layout (RPC-Patch-V1-01)
 - ✅ PATCH includes `sku` and `identity` if resource supports updating them; otherwise marked immutable (RPC-Patch-V1-09, RPC-Patch-V1-11)
 - ✅ **PATCH is NOT required to be long-running** — do NOT flag synchronous PATCH as a violation
-- ✅ No non-`api-version` query parameters on PATCH
+- ✅ Custom PATCH query parameters are avoided; any finding is Warning-level under RPC-Uri-V1-09
 
 ### DELETE Operations
 
 - ✅ Sync DELETE defines `200` + `204`; async DELETE defines `202` + `204`; DELETE body is empty (RPC-Delete-V1-01, RPC-Delete-V1-04)
 - ✅ No request body on DELETE
-- ✅ No non-`api-version` query parameters on DELETE
+- ✅ Custom DELETE query parameters are avoided; any finding is Warning-level under RPC-Uri-V1-09
 
 ### Security & Secrets
 
@@ -1177,14 +1181,14 @@ When reviewing ARM resource-manager swagger files, verify:
 ### Long-Running Operations
 
 - ✅ Resources with async PUT/PATCH have `provisioningState` (readOnly) with terminal states Succeeded/Failed/Canceled (RPC-Async-V1-02, RPC-Async-V1-03)
-- ✅ Async PUT returns `201`/`200` + provisioningState — never `202`; returns `409` if resource already in non-terminal state (RPC-Async-V1-01)
-- ✅ Async PATCH/DELETE/POST return `202` with both `Location` and `Azure-AsyncOperation` headers; `202` body is empty (RPC-Async-V1-08/09/11/14)
+- ✅ Async PUT returns `201`/`200` + provisioningState — never `202` (RPC-Async-V1-01)
+- ✅ Async PATCH/DELETE/POST return `202` with absolute `Location`; greenfield namespaces also require `Azure-AsyncOperation`, while brownfield support is strongly recommended; `202` body is empty
 - ✅ Greenfield RPs (since Jan 2025) include `Azure-AsyncOperation` header on all async responses including PUT `201` (RPC-Async-V1-06)
 - ✅ Polling URIs have even segments, are absolute, and are not exposed via other means
 - ✅ `Location` polling returns 202 in-progress → sync response on completion; `Azure-AsyncOperation` always returns 200 with status object
 - ✅ POST actions do NOT affect provisioningState; provisioningState transitions only non-terminal → non-terminal or non-terminal → terminal
-- ✅ Operation statuses at subscription scope for new services; no sensitive data in operation status properties
-- ✅ Operation IDs are globally unique GUIDs — not derived from hashes of resource properties (RPC-BestPractice-08)
+- ✅ `operationResults` are root-level resources (RPC021); `operationStatuses` may be under the original request or subscription-level operations (RPC028); subscription scope is preferred; no sensitive data in status properties
+- ✅ Operation IDs are unique (RPC022); fresh GUIDs are recommended and IDs should not reuse correlation/request IDs
 - ✅ `final-state-via` NOT specified on PUT/PATCH/DELETE following standard ARM patterns; only on POST LROs with response schema
 
 ### Property Design (Properties Bag Review)
@@ -1221,11 +1225,11 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ POST actions have action name in URL, params in body, correct response codes (RPC-POST-V1-01, RPC-POST-V1-05)
 - ✅ POST actions used only for non-CRUD operations
 - ✅ POST for data retrieval only when retrieving secrets or P99 latency > 2s; prefer OData filters on GET
-- ✅ Version/catalog listings modeled as proxy resource collections, not ad-hoc endpoints (RPC-LIST-VERSIONS)
+- ✅ Version/catalog listings modeled as proxy resource collections, not ad-hoc endpoints (ARM-VERSION-CATALOG)
 
 ### Check Name Availability
 
-- ✅ `checkNameAvailability` uses common-types `CheckNameAvailabilityRequest` / `CheckNameAvailabilityResponse` — not custom request/response models (CNA-003)
+- ✅ `checkNameAvailability` uses common-types `CheckNameAvailabilityRequest` / `CheckNameAvailabilityResponse`, or compatible custom request/response models; common-types reuse is preferred (CNA-003)
 - ✅ `name` field has `pattern` and `maxLength` constraints — not a bare unconstrained string (CNA-004)
 - ✅ `name` field `pattern` uses allowlist syntax (positive character class) — not denylist (`[^...]`) (OAPI-PATTERN-ALLOWLIST, CNA-004)
 - ✅ All `pattern` constraints across path parameters, query parameters, and body properties use allowlist syntax — no denylist (`[^...]`) as the primary construct (`OAPI-PATTERN-ALLOWLIST`): Blocking for new, Warning for existing
@@ -1254,7 +1258,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Minimal read-only properties that only appear post-creation; prefer values settable on PUT (PLCY003)
 - ✅ No free-form `type: object` with dynamic keys for service-owned properties (PLCY005)
 - ✅ PUT accepts all compliance-relevant properties; not implemented as partial update (PLCY006)
-- ✅ Collection GETs at subscription + RG level for tracked resources (PLCY007)
+- ✅ Resource-group-scoped top-level tracked types have collection GETs at subscription and RG level; subscription-scoped top-level types have subscription collection GET; nested types list under their immediate parent (PLCY007, PLCY008)
 - ✅ Policy-enforced configurations modeled in PUT/GET, not as POST actions (PLCY009)
 
 ### Template Deployment & What-If Compatibility
@@ -1272,8 +1276,8 @@ When reviewing ARM resource-manager swagger files, verify:
 
 - ✅ Top-level tracked resources support resource move across RG/subscription (RPC003)
 - ✅ `managedBy` / `managedByExtended` are immutable top-level properties; not inside `properties` bag
-- ✅ `systemData` is readOnly, added only with new API versions; `*ByType` stored as string not enum
-- ✅ `systemData` referenced from common-types; no custom `systemData` model defined
+- ✅ New API versions define top-level read-only `systemData` with the canonical ARM shape; `*ByType` uses the canonical extensible string enum
+- ✅ Common-types `systemData` is preferred; a fully compatible inline shape is not Blocking solely because it is inline
 - ✅ `systemData` not updated for child resource changes, rejected requests, or internal admin operations
 
 ### Availability Zones & Extended Locations
@@ -1307,7 +1311,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Suppressions for GA versions justified individually — preview back-compat is not sufficient (RPC-SUPPRESS-GA)
 - ✅ Suppressions evaluated per decision framework: approve only for false alarms or pre-existing violations; push to fix for new resources
 - ✅ `suppressions.yaml` entries use narrow, version-scoped globs and clear justifications (same criteria as readme.md)
-- ✅ Every package tag includes the operations API spec (RPC-Operations-V1-TAG)
+- ✅ Every package tag includes the operations API spec (ARM-OPERATIONS-TAG)
 
 ### Naming
 

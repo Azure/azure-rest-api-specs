@@ -3,8 +3,6 @@
      Derived from:
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
-       - Azure Resource Provider Contract (RPC) v1.0
-         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
      The upstream documents always take precedence if there is a conflict. -->
 
 # Example File Quality Rules
@@ -18,7 +16,6 @@ ensure example files are accurate, complete, and professional.
 **Authoritative references:**
 
 - [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
-- [Azure Resource Provider Contract](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)
 
 ---
 
