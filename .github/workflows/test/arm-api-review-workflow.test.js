@@ -813,8 +813,10 @@ describe("ARM API review consistency and hardening", () => {
     );
     expect(docs).toContain("## Reviewing a Local Specification");
     expect(docs).toContain(
-      String.raw`Review C:\repos\azure-rest-api-specs\specification\azurearcdata`,
+      String.raw`Review C:\repos\azure-rest-api-specs\specification\contoso\resource-manager\Microsoft.Contoso`,
     );
+    expect(docs).not.toMatch(/AzureArcData|azurearcdata/);
+    expect(docs).not.toContain("@reviewer");
     expect(docs).toContain("Uncommitted files are included");
     expect(docs).toContain(
       "performs the same\n   breaking-change and `[NEW]`/`[EXISTING]` analysis used for PR reviews",

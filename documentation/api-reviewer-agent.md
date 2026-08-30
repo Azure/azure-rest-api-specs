@@ -247,24 +247,24 @@ In the agent chat, type your request directly:
 Provide a PR number, URL, or shorthand:
 
 ```text
-Review PR #41405
+Review PR #12345
 ```
 
 ```text
-Review https://github.com/Azure/azure-rest-api-specs/pull/41405
+Review https://github.com/Azure/azure-rest-api-specs/pull/12345
 ```
 
 For the private repo, use the full URL or shorthand:
 
 ```text
-Review specs-pr#23440
+Review specs-pr#12345
 ```
 
 **How the agent resolves PR references:**
 
 | Input                      | Resolved repository                                                                                                                                                                                                                                                               |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bare number (e.g. `41405`) | Defaults to `Azure/azure-rest-api-specs`. If not found, asks whether the PR is in the private repo.                                                                                                                                                                               |
+| Bare number (e.g. `12345`) | Defaults to `Azure/azure-rest-api-specs`. If not found, asks whether the PR is in the private repo.                                                                                                                                                                               |
 | `specs#<number>`           | `Azure/azure-rest-api-specs`                                                                                                                                                                                                                                                      |
 | `specs-pr#<number>`        | `Azure/azure-rest-api-specs-pr`                                                                                                                                                                                                                                                   |
 | Full URL                   | Extracted from the URL. Must be `Azure/azure-rest-api-specs`, `Azure/azure-rest-api-specs-pr`, or a fork of either. URLs pointing to other repositories are declined.                                                                                                             |
@@ -281,7 +281,7 @@ The interactive agent can review a file or directory from the local
 or a path relative to the active workspace or Copilot app project:
 
 ```text
-Review C:\repos\azure-rest-api-specs\specification\azurearcdata\resource-manager\Microsoft.AzureArcData\AzureArcData\preview\2026-03-01-preview
+Review C:\repos\azure-rest-api-specs\specification\contoso\resource-manager\Microsoft.Contoso\preview\2026-03-01-preview
 ```
 
 For a local review, the agent:
@@ -432,7 +432,7 @@ Each finding includes:
 After reviewing the report, you can ask the agent to post findings as PR review comments:
 
 ```text
-Post the approved review comments on PR #41405
+Post the approved review comments on PR #12345
 ```
 
 The agent will always present findings in chat first and wait for your
@@ -612,7 +612,7 @@ Before executing any actions, the agent presents a **reconciliation summary**:
 Reconciliation plan:
 - Post 3 new comments (2 blocking, 1 warning)
 - Resolve & re-post 1 comment (line shifted from L42 to L58) [Scenario B]
-- Reply to 1 existing comment from @reviewer (line shifted to L120) [Scenario C]
+- Reply to 1 existing comment from a prior human reviewer (line shifted to L120) [Scenario C]
 - Skip 4 findings -- already covered by existing threads [Scenario A]
 - Propose resolving 2 comments -- violations addressed in latest changes [Scenario E]
 

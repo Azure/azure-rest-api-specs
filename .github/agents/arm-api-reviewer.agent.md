@@ -339,7 +339,7 @@ repositories. They share the same structure, conventions, and review rules:
 
 1. **Full URL** - extract the owner, repo, and PR number from the URL. If the repository is not `Azure/azure-rest-api-specs`, `Azure/azure-rest-api-specs-pr`, or a recognized fork of either, politely decline: _"I can only review PRs in Azure/azure-rest-api-specs or Azure/azure-rest-api-specs-pr (and their forks). The repository in your URL is not supported."_ A "recognized fork" is any repo whose `parent.full_name` (resolvable via `gh repo view <owner>/<repo> --json parent` or the PR payload's `head.repo.parent.full_name` field) equals `Azure/azure-rest-api-specs` or `Azure/azure-rest-api-specs-pr`.
 2. **Shorthand** - `specs-pr#<number>` resolves to `azure-rest-api-specs-pr`; `specs#<number>` resolves to `azure-rest-api-specs`.
-3. **Bare number** (e.g. `41405`) - default to `Azure/azure-rest-api-specs` (public repo).
+3. **Bare number** (e.g. `12345`) - default to `Azure/azure-rest-api-specs` (public repo).
 4. **Validation** - after resolving, fetch the PR with GitHub MCP `pull_request_read(method: "get")`. If the PR is not found:
    - For a bare number: ask the user whether the PR is in the private repo (`azure-rest-api-specs-pr`). If confirmed, retry. If still not found, report that the PR does not exist in either repo.
    - For a shorthand: try the other repo as a fallback and ask the user to confirm.
@@ -1009,7 +1009,7 @@ A generic summary theme without an affected element and actionable guidance does
 - **Scenario B -> RESOLVE-AND-REPOST.** Same finding, line shifted, prior comment is **agent-origin**. The code shifted but the violation still exists at a new line. Plan to resolve the agent's outdated thread **and** post a new comment at the corrected line with cross-reference text: "_(Updated from previous comment at \<url\> - line shifted due to code changes.)_"
 - **Scenario C -> REPLY-LINE-SHIFT.** Same finding, line shifted, prior comment is **human-origin**. Do **not** resolve the human's thread - they may be tracking it. Do **not** post a duplicate top-level comment. Plan to add a reply to that thread: "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._"
 
-  _Example:_ Reviewer `@alice` previously commented on `Microsoft.Foo/stable/2025-07-01/foo.json` line 142 flagging a missing `provisioningState`. The current review re-detects the same missing `provisioningState` at line 158 (the file grew by 16 lines). Action: **REPLY-LINE-SHIFT** on Alice's thread; do **not** resolve; do **not** post a new top-level comment.
+  _Example:_ A prior human reviewer commented on `Microsoft.Contoso/stable/2025-07-01/contoso.json` line 142, flagging a missing `provisioningState`. The current review re-detects the same missing `provisioningState` at line 158 (the file grew by 16 lines). Action: **REPLY-LINE-SHIFT** on the prior reviewer's thread; do **not** resolve; do **not** post a new top-level comment.
 
 - **POST-NEW.** No actionable prior coverage or contradiction was found on any discussion surface. Plan to post a new inline review comment at the cited line.
 
@@ -1535,7 +1535,7 @@ Substitution rules:
 - `<outcome>`: one of `converged` (Critic returned PASS or WARN with no unresolved corrections), `manual decision` (the report's `Next-step recommendation` was `MANUAL DECISION REQUIRED` and the human approved posting anyway), `override applied` (one or more findings carry a `critic: override` marker), or `unavailable -- reviewer self-check` (all Critic dispatch attempts failed; auto-unavailable fallback fired). Pick the **highest-severity** label that applies; precedence is `unavailable` > `manual decision` > `override applied` > `converged`.
 - `<short-sha>`: the **first 7 characters** of the session SHA pinned in Step 1, used as the link's display text.
 - `<full-sha>`: the **full 40-character** session SHA pinned in Step 1, used in the link target. Do not abbreviate the link target -- short SHAs in URLs are acceptable but the full SHA is canonical and matches the `head-sha` field in each comment's telemetry marker, which is what auditors will grep for.
-- `<owner>`, `<repo>`, `<pr-number>`: derived from the PR URL captured in Step 1 (e.g., `Azure`, `azure-rest-api-specs`, `41405`).
+- `<owner>`, `<repo>`, `<pr-number>`: derived from the PR URL captured in Step 1 (e.g., `Azure`, `azure-rest-api-specs`, `12345`).
 - `<range-or-list>`: the inline-finding numbering used in the chat report (e.g., `1-12`, or `3-12` when findings 1-2 were posted as top-level comments). Use a plain space + number; **never** prefix with `#` (see next bullet).
 - Approval labels are the exact names captured from PR metadata in Step 1 that
   match the API-review families defined in
@@ -1647,7 +1647,7 @@ mutation instruction in the remainder of Step 10.
 5. **Verify cleanup succeeded.** Re-run `git worktree list` and `git branch --list "pr-*"`. If anything matching the agent's patterns remains, report it to the user explicitly - do not claim a clean workspace when one is not.
 6. **Report** the cleanup outcome to the user in every case, including "no agent-attributable artifacts found." Silence on cleanup is a constraint violation - the user must be able to verify that no `pr-*` branches or worktrees accumulated across reviews.
 
-**Failure to clean up is a recurring failure mode of this agent.** A `pr-43203` branch and `C:\repos\specs-pr-43203` worktree found weeks after a review is not acceptable. If you cannot complete cleanup (e.g., a worktree has uncommitted work and the user is unreachable), report the leftovers verbatim and ask the user to resolve them - do not silently abandon them.
+**Failure to clean up is a recurring failure mode of this agent.** A `pr-12345` branch and `C:\repos\specs-pr-12345` worktree found weeks after a review is not acceptable. If you cannot complete cleanup (e.g., a worktree has uncommitted work and the user is unreachable), report the leftovers verbatim and ask the user to resolve them - do not silently abandon them.
 
 This keeps the user's workspace tidy and prevents accumulation of stale `pr-*` branches and orphaned worktrees across reviews.
 
@@ -1719,14 +1719,14 @@ When a step in the workflow fails, recover deterministically using the table bel
 
 ## Example Prompts
 
-- "Review PR #41405"
-- "Review https://github.com/Azure/azure-rest-api-specs/pull/41405"
-- "Review https://github.com/Azure/azure-rest-api-specs-pr/pull/23440"
-- "Review specs-pr#23440" (shorthand for azure-rest-api-specs-pr)
+- "Review PR #12345"
+- "Review https://github.com/Azure/azure-rest-api-specs/pull/12345"
+- "Review https://github.com/Azure/azure-rest-api-specs-pr/pull/12345"
+- "Review specs-pr#12345" (shorthand for azure-rest-api-specs-pr)
 - "Review the PR changes for `specification/compute/resource-manager/Microsoft.Compute/stable/2024-07-01/`"
-- "Check this swagger file for ARM compliance in PR #41405"
+- "Check this swagger file for ARM compliance in PR #12345"
 - "Review all changed JSON files in this PR for Azure REST API guideline violations"
 - "Compare the 2024-03-01 and 2024-07-01 versions of this spec for breaking changes"
-- "Review `C:\repos\azure-rest-api-specs\specification\azurearcdata\resource-manager\Microsoft.AzureArcData\AzureArcData\preview\2026-03-01-preview`"
+- "Review `C:\repos\azure-rest-api-specs\specification\contoso\resource-manager\Microsoft.Contoso\preview\2026-03-01-preview`"
 - "What does the RPC say about provisioningState?"
-- "Post the approved review comments on PR #41405"
+- "Post the approved review comments on PR #12345"
