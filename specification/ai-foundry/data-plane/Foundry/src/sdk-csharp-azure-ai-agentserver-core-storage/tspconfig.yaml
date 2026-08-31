@@ -1,0 +1,15 @@
+emit:
+options:
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}"
+    package-name: Azure.AI.AgentServer.Core.Storage
+imports:
+  - "@azure-tools/typespec-azure-core"
+  - "@azure-tools/typespec-client-generator-core"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/bad-record-type": "State-store values are opaque JSON objects."
+    "@azure-tools/typespec-azure-core/no-enum": "The existing .NET API exposes ListRequestOrder as an enum."
+    "@azure-tools/typespec-azure-core/no-nullable": "The wire protocol returns null cursors for empty pages."
