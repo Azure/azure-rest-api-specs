@@ -29,6 +29,9 @@ options:
     service-name: "Recovery Services Backup"
     flavor: azure
     use-object-for-unknown: true
+    remove-inner:
+      - InstantItemRecoveryTarget
+      - OperationStatusProvisionIlrExtendedInfo
   "@azure-tools/typespec-ts":
     compatibility-lro: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-recoveryservicesbackup"
