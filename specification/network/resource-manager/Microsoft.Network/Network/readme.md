@@ -5270,6 +5270,12 @@ directive:
   - suppress: ResourceNameRestriction
     from: virtualNetworkGateway.json
     reason: The resource name parameter 'virtualNetworkGatewayName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
+  - suppress: ResourceNameRestriction
+    from: expressRoute.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}/listKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}/listKeys"]
+    reason: The resource name parameters 'circuitName', 'authorizationName' and 'expressRoutePortName' are existing parent/resource path parameters shipped in prior API versions without a 'pattern' restriction. Adding a pattern constraint now would be a breaking change, and these same parameters are referenced by all existing ExpressRoute circuit/port authorization APIs.
   - suppress: ParametersInPost
     from: virtualNetworkGateway.json
     reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
