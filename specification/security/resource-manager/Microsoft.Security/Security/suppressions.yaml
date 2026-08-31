@@ -194,22 +194,32 @@
   path: ./stable/2026-07-01/pricings.json
   breaking-change: 1011
   reason: >
-    RemovedPath — POST /pricings/default/batch intentionally renamed to
-    PUT /pricings/global per ARM team guidance.
+
+
+
+    RemovedPath — POST /pricings/default/batch intentionally moved to a new
+    pricingBatch resource type (PUT /pricingBatch/{name}) per ARM team guidance.
 
 - tool: BreakingChange
   path: ./stable/2026-07-01/pricings.json
   breaking-change: 1005
   reason: >
-    RemovedDefinition — BatchPricingUpdateRequest/Response renamed to
-    GlobalPricingUpdateRequest/Response as part of batch-to-global rename.
+    RemovedDefinition — BatchPricingUpdateRequest/Response moved to new
+    pricingBatch.json spec as PricingBatch* definitions per ARM resource type restructure.
 
 - tool: BreakingChange
   path: ./stable/2026-07-01/pricings.json
   breaking-change: 1039
   reason: >
     RemovedRequiredParameter — batch parameter removed as part of
-    batch-to-global endpoint rename per ARM guidance.
+    migration to pricingBatch resource type per ARM guidance.
+
+- tool: BreakingChange
+  path: ./stable/2026-07-01/pricings.json
+  breaking-change: 1011
+  reason: >
+    RemovedPath — PUT /pricings/global removed and replaced by new
+    pricingBatch resource type in pricingBatch.json per ARM team guidance.
 
 - tool: BreakingChange
   path: ./stable/2026-07-01/common/v1/types.json
