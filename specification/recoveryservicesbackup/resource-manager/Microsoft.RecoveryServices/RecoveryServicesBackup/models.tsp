@@ -4427,6 +4427,18 @@ model AzureIaaSVMProtectionPolicy extends ProtectionPolicy {
   instantRpRetentionRangeInDays?: int32;
 
   /**
+   * Specifies whether Instant Access snapshot is enabled for the policy.
+   */
+  @added(Versions.v2026_09_30)
+  instantAccessSnapshotEnabled?: boolean;
+
+  /**
+   * Duration in minutes for which the Instant Access snapshot is retained.
+   */
+  @added(Versions.v2026_09_30)
+  instantAccessDurationMinutes?: int32;
+
+  /**
    * TimeZone optional input as string. For example: TimeZone = "Pacific Standard Time".
    */
   timeZone?: string;
