@@ -480,7 +480,7 @@ model ProfileProperties {
   maxReturn?: int64;
 
   /**
-   * When record type is set, a traffic manager profile will allow only endpoints that match this type.
+   * The allowed endpoint DNS record type. This property is omitted when no record type is configured.
    */
   @added(Versions.v2026_09_01)
   recordType?: RecordType;
