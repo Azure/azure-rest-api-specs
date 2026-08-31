@@ -64,6 +64,11 @@ using Azure.ResourceManager;
   "DrillRunTestFailoverContent",
   "csharp"
 );
+@@clientName(
+  ListReportDownloadUrlRequest,
+  "ListReportDownloadUrlContent",
+  "csharp"
+);
 
 // CSharp: AZC0030 — *Response -> *Result
 @@clientName(
@@ -79,6 +84,18 @@ using Azure.ResourceManager;
 @@clientName(
   UpdateRecoveryResourcesResponse,
   "UpdateRecoveryResourcesResult",
+  "csharp"
+);
+@@clientName(
+  ListReportDownloadUrlResponse,
+  "ListReportDownloadUrlResult",
+  "csharp"
+);
+
+// CSharp: AZC0030 — *Url -> *Uri
+@@clientName(
+  ListReportDownloadUrlResponse.downloadUrl,
+  "downloadUri",
   "csharp"
 );
 

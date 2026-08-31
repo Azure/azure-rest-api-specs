@@ -28,7 +28,7 @@ These are the global settings for the Deployments client.
 title: DeploymentsClient
 description: Deployments Client
 openapi-type: arm
-tag: package-2025-04
+tag: package-2026-06
 ```
 
 ---
@@ -256,6 +256,15 @@ These settings apply only when `--tag=package-2025-04` is specified on the comma
 ``` yaml $(tag) == 'package-2025-04'
 input-file:
   - stable/2025-04-01/deployments.json
+```
+
+### Tag: package-2026-06
+
+These settings apply only when `--tag=package-2026-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-06'
+input-file:
+  - stable/2026-06-01/deployments.json
 ```
 
 ## Suppression
