@@ -23,7 +23,7 @@ model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @path
   @minLength(3)
-  @maxLength(63)
+  @maxLength(64)
   name: string;
 
   ...ManagedSystemAssignedIdentityProperty;
