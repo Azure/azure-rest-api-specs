@@ -1,3 +1,30 @@
+# GraphEnum
+
+> see https://aka.ms/autorest
+
+## Configuration
+
+```yaml
+openapi-type: arm
+tag: package-2024-01-01
+```
+
+### Tag: package-2024-01-01
+
+```yaml $(tag) == 'package-2024-01-01'
+input-file:
+  - stable/2024-01-01/graphenum.json
+```
+
+## Python
+
+```yaml $(python)
+package-version: 1.0.0b1
+namespace: azure.mgmt.graphenum
+package-name: azure-mgmt-graphenum
+clear-output-folder: true
+```
+
 ## swagger-to-sdk
 
 ```yaml $(swagger-to-sdk)
