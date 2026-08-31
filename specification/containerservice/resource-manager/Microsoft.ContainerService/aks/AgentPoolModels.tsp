@@ -1103,7 +1103,7 @@ model NvidiaGPUProfile {
   migStrategy?: MigStrategy;
 
   /**
-   * The ordered list of Multi-Instance GPU (MIG) partition profiles to assign to each supported NVIDIA GPU. When `migStrategy` is `Single`, exactly one profile must be specified. When `migStrategy` is `Mixed`, one or more profiles may be specified and the combination is validated against the supported MIG geometry for the agent pool's GPU VM size. The same value may appear more than once to request multiple partitions of that size. This field is mutually exclusive with the top-level `gpuInstanceProfile` property, which is deprecated. For more information, see https://aka.ms/aks/managed-gpu.
+   * The ordered list of Multi-Instance GPU (MIG) partition profiles to assign to each supported NVIDIA GPU. When `migStrategy` is `Single`, exactly one profile must be specified. When `migStrategy` is `Mixed`, one or more profiles may be specified and the combination is validated against the supported MIG geometry for the agent pool's GPU VM size. The same value may appear more than once to request multiple partitions of that size. This field is mutually exclusive with the top-level `gpuInstanceProfile` property. For more information, see https://aka.ms/aks/managed-gpu.
    */
   @added(Versions.v2026_07_02_preview)
   @minItems(1)

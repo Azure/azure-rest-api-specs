@@ -597,7 +597,7 @@ union MigStrategy {
   None: "None",
 
   /**
-   * All MIG partitions on every GPU in the pool are the same size (`nvidia.com/mig.strategy: single`). The uniform partition size is controlled by `nvidia.migProfiles` (exactly one element required). The top-level `gpuInstanceProfile` property is deprecated in favour of `nvidia.migProfiles`.
+   * All MIG partitions on every GPU in the pool are the same size (`nvidia.com/mig.strategy: single`). The uniform partition size is controlled by `nvidia.migProfiles` (exactly one element required).
    */
   Single: "Single",
 
