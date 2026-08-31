@@ -646,44 +646,34 @@ union McpToolConnectorIdExpandable {
 );
 
 // Reuse one expandable type for the repeated `object: "realtime.item"` literal.
-union RealtimeConversationItemObjectExpandable {
+union RealtimeConversationItemObject {
   string,
   realtime_item: "realtime.item",
 }
 
-@@clientName(
-  RealtimeConversationItemObjectExpandable,
-  "RealtimeConversationItemObject",
-  "java"
-);
-@@clientName(
-  RealtimeConversationItemObjectExpandable.realtime_item,
-  "REALTIME_ITEM",
-  "java"
-);
 @@alternateType(
   OpenAI.RealtimeConversationItemMessageSystem.object,
-  RealtimeConversationItemObjectExpandable,
+  RealtimeConversationItemObject,
   "java"
 );
 @@alternateType(
   OpenAI.RealtimeConversationItemMessageUser.object,
-  RealtimeConversationItemObjectExpandable,
+  RealtimeConversationItemObject,
   "java"
 );
 @@alternateType(
   OpenAI.RealtimeConversationItemMessageAssistant.object,
-  RealtimeConversationItemObjectExpandable,
+  RealtimeConversationItemObject,
   "java"
 );
 @@alternateType(
   OpenAI.RealtimeConversationItemFunctionCall.object,
-  RealtimeConversationItemObjectExpandable,
+  RealtimeConversationItemObject,
   "java"
 );
 @@alternateType(
   OpenAI.RealtimeConversationItemFunctionCallOutput.object,
-  RealtimeConversationItemObjectExpandable,
+  RealtimeConversationItemObject,
   "java"
 );
 
