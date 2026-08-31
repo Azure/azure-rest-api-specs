@@ -418,30 +418,15 @@ using Azure.AI.Projects;
   },
   "java"
 );
-//   ToolChoiceFunction → com.openai.models.responses.ToolChoiceFunction
-//   ToolChoiceMCP      → com.openai.models.responses.ToolChoiceMcp
-// Both are field-for-field duplicates of the openai-java classes
-// (`ToolChoiceFunction { type: "function", name }`, `ToolChoiceMCP { type: "mcp", server_label, name? }`).
-// They are only reachable through the realtime `tool_choice` unions
-// (`ToolChoiceOptions | ToolChoiceFunction | ToolChoiceMCP`), which Java already projects as `BinaryData`,
-// so no generated model carries a `ToolChoiceParam`-typed member. Mapping these two leaves also drops their
-// discriminated base `ToolChoiceParam` and its discriminator enum `ToolChoiceParamType` to `External` usage;
-// neither has an openai-java counterpart (openai-java models the choice as a union, not a base class), so
-// they are removed transitively rather than mapped.
-@@alternateType(
-  OpenAI.ToolChoiceFunction,
-  {
-    identity: "com.openai.models.responses.ToolChoiceFunction",
-  },
-  "java"
-);
-@@alternateType(
-  OpenAI.ToolChoiceMCP,
-  {
-    identity: "com.openai.models.responses.ToolChoiceMcp",
-  },
-  "java"
-);
+// Do NOT map OpenAI.ToolChoiceFunction / OpenAI.ToolChoiceMCP to their openai-java equivalents
+// (com.openai.models.responses.ToolChoiceFunction / ToolChoiceMcp). Although both are field-for-field
+// duplicates, they are discriminated subtypes of `ToolChoiceParam` (@discriminator("type")). Substituting a
+// subtype with an external identity type strips the discriminator the Java emitter needs, and generation
+// fails with:
+//   IllegalArgumentException: discriminator not found in type ToolChoiceFunction and its parents
+// This matches the general rule that members of a discriminator hierarchy are structural equivalents, not
+// actionable duplicates. Verified empirically against tsp-client update; do not re-attempt without emitter
+// support for external types in discriminated hierarchies.
 //   ConversationResource → com.openai.models.conversations.Conversation
 @@alternateType(
   OpenAI.ConversationResource,
