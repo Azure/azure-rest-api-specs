@@ -19,7 +19,7 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "chaosFaultResource preserves the prior swagger-defined camelCase resource name for backward compatibility."
 #suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "chaosFaultResource preserves the prior swagger-defined resource name for backward compatibility."
 @parentResource(DatabaseAccountGetResults)
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_09_01_preview)
 model chaosFaultResource
   is Azure.ResourceManager.ProxyResource<chaosFaultProperties> {
   ...ResourceNameParameter<
@@ -31,7 +31,7 @@ model chaosFaultResource
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_09_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ChaosFaultResources {
   /**
