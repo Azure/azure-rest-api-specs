@@ -23,7 +23,6 @@ namespace Microsoft.Network;
  * capability family and its `properties` schema. One capability of a given kind may exist per appliance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Consistent with the parent VirtualNetworkAppliance resource."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "provisioningState is carried on each kind-specific properties bag, not on the discriminated base."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Discriminated resource: kind-specific subtypes extend the base, mirroring BaseAdminRule."
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Consistent with the parent VirtualNetworkAppliance and BaseAdminRule resources."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Child resource extends the shared ChildResource base, consistent with BaseAdminRule and the other Network child resources."
@@ -33,6 +32,11 @@ namespace Microsoft.Network;
 @discriminator("kind")
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model VirtualNetworkApplianceCapability extends ChildResource {
+  /**
+   * The kind-agnostic capability properties. Each `kind` narrows this to its own properties schema.
+   */
+  properties?: VirtualNetworkApplianceCapabilityProperties;
+
   @visibility(Lifecycle.Read)
   @path
   @key("capabilityName")
@@ -64,9 +68,10 @@ model VirtualNetworkApplianceCapability extends ChildResource {
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model PLGatewayFastpathCapability extends VirtualNetworkApplianceCapability {
   /**
-   * The Private Link capability properties.
+   * The Private Link Gateway FastPath capability properties.
    */
-  properties?: PrivateLinkCapabilityProperties;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-override-props" "Intentional narrowing: the discriminated base declares the kind-agnostic properties bag so the async PUT response carries properties.provisioningState (RPC-Async-V1-02 / ProvisioningStateSpecifiedForLROPut); each kind narrows it to its own bag. Swagger 2.0 has no oneOf, so discriminator + property narrowing is the only mechanism."
+  properties?: PLGatewayFastpathCapabilityProperties;
 
   /**
    * The Private Link Gateway FastPath capability kind.
@@ -85,9 +90,10 @@ model PLGatewayFastpathCapability extends VirtualNetworkApplianceCapability {
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model PLGatewayCapability extends VirtualNetworkApplianceCapability {
   /**
-   * The Private Link capability properties.
+   * The Private Link Gateway (slow-path) capability properties.
    */
-  properties?: PrivateLinkCapabilityProperties;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-override-props" "Intentional narrowing: the discriminated base declares the kind-agnostic properties bag so the async PUT response carries properties.provisioningState (RPC-Async-V1-02 / ProvisioningStateSpecifiedForLROPut); each kind narrows it to its own bag. Swagger 2.0 has no oneOf, so discriminator + property narrowing is the only mechanism."
+  properties?: PLGatewayCapabilityProperties;
 
   /**
    * The Private Link Gateway (slow-path) capability kind.
@@ -106,9 +112,10 @@ model PLGatewayCapability extends VirtualNetworkApplianceCapability {
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model PLIPForwardersCapability extends VirtualNetworkApplianceCapability {
   /**
-   * The Private Link capability properties.
+   * The Private Link IP-forwarders (NVA) capability properties.
    */
-  properties?: PrivateLinkCapabilityProperties;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-override-props" "Intentional narrowing: the discriminated base declares the kind-agnostic properties bag so the async PUT response carries properties.provisioningState (RPC-Async-V1-02 / ProvisioningStateSpecifiedForLROPut); each kind narrows it to its own bag. Swagger 2.0 has no oneOf, so discriminator + property narrowing is the only mechanism."
+  properties?: PLIPForwardersCapabilityProperties;
 
   /**
    * The Private Link IP-forwarders (NVA) capability kind.
@@ -141,22 +148,21 @@ union VirtualNetworkApplianceCapabilityKind {
 }
 
 /**
- * Properties common to a Private Link virtual network appliance capability.
+ * Properties common to every virtual network appliance capability, independent of kind.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Consistent with the parent VirtualNetworkAppliance resource; required so the model emits into virtualNetworkAppliance.json rather than the shared common.json."
 @added(Versions.v2026_03_01)
-model PrivateLinkCapabilityProperties {
-  /**
-   * The IP version the Private Link capability applies to. FastPath supports DualStack; the gateway
-   * (slow-path) and IP-forwarders kinds support IPv6.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties."
-  ipVersion?: VirtualNetworkApplianceCapabilityIpVersion;
-
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
+model VirtualNetworkApplianceCapabilityProperties {
   /**
    * The ARM resource id of the owning virtual network. System-derived and read-only.
    */
   @visibility(Lifecycle.Read)
-  linkedResourceId?: string;
+  linkedResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks";
+    }
+  ]>;
 
   /**
    * The provisioning state of the capability resource.
@@ -166,26 +172,97 @@ model PrivateLinkCapabilityProperties {
 }
 
 /**
- * The IP version a virtual network appliance capability applies to.
+ * Properties of the Private Link Gateway FastPath capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Consistent with the parent VirtualNetworkAppliance resource; required so the model emits into virtualNetworkAppliance.json rather than the shared common.json."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Model name mirrors the wire-level capability kind value 'PLGatewayFastpath' (the NRP contract discriminator value)."
 @added(Versions.v2026_03_01)
-union VirtualNetworkApplianceCapabilityIpVersion {
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
+model PLGatewayFastpathCapabilityProperties
+  is VirtualNetworkApplianceCapabilityProperties {
+  /**
+   * The IP version the capability applies to. Private Link Gateway FastPath supports `DualStack` only:
+   * single-stack applies to the Private Endpoint configuration only, while the gateway itself stays dual-stack.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties."
+  ipVersion: PLGatewayFastpathCapabilityIpVersion;
+}
+
+/**
+ * Properties of the Private Link Gateway (slow-path) capability.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Consistent with the parent VirtualNetworkAppliance resource; required so the model emits into virtualNetworkAppliance.json rather than the shared common.json."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Model name mirrors the wire-level capability kind value 'PLGateway' (the NRP contract discriminator value)."
+@added(Versions.v2026_03_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
+model PLGatewayCapabilityProperties
+  is VirtualNetworkApplianceCapabilityProperties {
+  /**
+   * The IP version the capability applies to. Private Link Gateway (slow-path) supports `IPv6` only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties."
+  ipVersion: PLGatewayCapabilityIpVersion;
+}
+
+/**
+ * Properties of the Private Link IP-forwarders (NVA) capability.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Consistent with the parent VirtualNetworkAppliance resource; required so the model emits into virtualNetworkAppliance.json rather than the shared common.json."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Model name mirrors the wire-level capability kind value 'PLIPForwarders' (the NRP contract discriminator value)."
+@added(Versions.v2026_03_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
+model PLIPForwardersCapabilityProperties
+  is VirtualNetworkApplianceCapabilityProperties {
+  /**
+   * The IP version the capability applies to. Private Link IP-forwarders (NVA) supports `IPv6` only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties."
+  ipVersion: PLIPForwardersCapabilityIpVersion;
+}
+
+/**
+ * The IP versions supported by the Private Link Gateway FastPath capability.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Members are documented individually below."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Union name mirrors the wire-level capability kind value 'PLGatewayFastpath' (the NRP contract discriminator value)."
+@added(Versions.v2026_03_01)
+union PLGatewayFastpathCapabilityIpVersion {
   string,
-
-  /**
-   * IPv4.
-   */
-  IPv4: "IPv4",
-
-  /**
-   * IPv6.
-   */
-  IPv6: "IPv6",
 
   /**
    * Dual stack (both IPv4 and IPv6).
    */
   DualStack: "DualStack",
+}
+
+/**
+ * The IP versions supported by the Private Link Gateway (slow-path) capability.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Members are documented individually below."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Union name mirrors the wire-level capability kind value 'PLGateway' (the NRP contract discriminator value)."
+@added(Versions.v2026_03_01)
+union PLGatewayCapabilityIpVersion {
+  string,
+
+  /**
+   * IPv6.
+   */
+  IPv6: "IPv6",
+}
+
+/**
+ * The IP versions supported by the Private Link IP-forwarders (NVA) capability.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Members are documented individually below."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Union name mirrors the wire-level capability kind value 'PLIPForwarders' (the NRP contract discriminator value)."
+@added(Versions.v2026_03_01)
+union PLIPForwardersCapabilityIpVersion {
+  string,
+
+  /**
+   * IPv6.
+   */
+  IPv6: "IPv6",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Consistent with the parent VirtualNetworkAppliance resource."
