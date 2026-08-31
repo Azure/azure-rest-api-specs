@@ -3,7 +3,10 @@
      Derived from:
        - Azure Developer Experience docs: design/api-specs-pr/api-versions-and-branches
          (https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-versions-and-branches)
-     The upstream document always takes precedence if there is a conflict.
+       - ARM Resource Provider docs:
+         rp_onboarding/afec/featureexposurecontrol
+         (https://eng.ms/docs/products/arm/rp_onboarding/afec/featureexposurecontrol)
+     The upstream references take precedence if this file conflicts with them.
      Known upstream typo: the private-preview section says a folder must "have
      `-prefix` in its folder name"; it means `-preview`. Encoded correctly here. -->
 
@@ -18,13 +21,17 @@ These are placement rules, not schema rules. They are checked against the
 pull request's target repository and branch plus the directory the version sits
 in, so they apply even when the spec content itself is correct.
 
-**Authoritative reference:**
+**Authoritative references:**
 
 - [API versions and branches][api-versions-and-branches] (Azure Developer
   Experience docs). Read this for branch protection details, mirroring
   behavior, and internal-only services.
+- [Feature Exposure Control (AFEC)][feature-exposure-control] (ARM Resource
+  Provider docs). Read this for AFEC onboarding and implementation details.
 
 [api-versions-and-branches]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-versions-and-branches
+
+[feature-exposure-control]: https://eng.ms/docs/products/arm/rp_onboarding/afec/featureexposurecontrol
 
 ---
 
@@ -40,6 +47,24 @@ in, so they apply even when the spec content itself is correct.
 
 A version with **no customers** is `in development`, not `private preview`. The
 presence of at least one customer is what distinguishes the two.
+
+---
+
+## Azure Feature Exposure Control (AFEC) for ARM private previews
+
+Azure Feature Exposure Control (AFEC) is ARM's mechanism for limiting access to
+a resource provider feature to approved subscriptions. An API version is
+AFEC-gated when access to it depends on an Azure feature registration, so only
+customers admitted to the private preview can use that version. See [Feature
+Exposure Control (AFEC)][feature-exposure-control] for onboarding and
+implementation details.
+
+Within this lifecycle model, AFEC gating is required for ARM private previews
+and must be removed before public preview or general availability. AFEC does not
+replace repository and branch placement: an ARM private-preview specification
+remains in the private specs repo on `RPSaaSMaster`, while a public preview or
+generally available specification belongs in the public repo without feature
+gating.
 
 ---
 
