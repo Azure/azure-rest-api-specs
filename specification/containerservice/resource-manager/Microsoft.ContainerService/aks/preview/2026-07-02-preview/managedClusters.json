@@ -1316,6 +1316,9 @@
           },
           "Create/Update Managed Cluster with dual-stack networking": {
             "$ref": "./examples/ManagedClustersCreate_DualStackNetworking.json"
+          },
+          "Create/Update Managed Cluster with upgrade gate enabled": {
+            "$ref": "./examples/ManagedClustersCreate_UpgradeGate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1877,6 +1880,9 @@
           },
           "Create Agent Pool with per-NIC public IP configuration": {
             "$ref": "./examples/AgentPoolsCreate_PerNICPublicIP.json"
+          },
+          "Create Agent Pool with upgrade gate enabled": {
+            "$ref": "./examples/AgentPoolsCreate_UpgradeGate.json"
           },
           "Create FlexNode Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_FlexNode.json"
@@ -8182,6 +8188,10 @@
         "undrainableNodeBehavior": {
           "$ref": "#/definitions/UndrainableNodeBehavior",
           "description": "Defines the behavior for undrainable nodes during upgrade. The most common cause of undrainable nodes is Pod Disruption Budgets (PDBs), but other issues, such as pod termination grace period is exceeding the remaining per-node drain timeout or pod is still being in a running state, can also cause undrainable nodes."
+        },
+        "upgradeGateSettings": {
+          "$ref": "#/definitions/UpgradeGateSettings",
+          "description": "Settings for upgrade gating on upgrades of this agent pool. Health signals are `HealthSignal` custom resources published by monitoring components running in the cluster. When the cluster-level `enabled` is unset or `false`, this agent pool can opt in independently. When the cluster-level `enabled` is `true`, gating is inherited and setting this agent pool's `enabled` to `false` is rejected; an omitted value on a newly created agent pool is defaulted to `true`."
         }
       }
     },
@@ -8717,6 +8727,10 @@
         "overrideSettings": {
           "$ref": "#/definitions/UpgradeOverrideSettings",
           "description": "Settings for overrides."
+        },
+        "upgradeGateSettings": {
+          "$ref": "#/definitions/UpgradeGateSettings",
+          "description": "Settings for upgrade gating on upgrades in this managed cluster. Health signals are `HealthSignal` custom resources published by monitoring components running in the cluster. Setting `enabled` to `true` here is a cluster-wide opt-in that applies to all agent pool upgrades in this cluster; an agent pool cannot opt out of it."
         }
       }
     },
@@ -17544,6 +17558,16 @@
             "description": "Disables auto-upgrades and keeps the cluster at its current version of Kubernetes."
           }
         ]
+      }
+    },
+    "UpgradeGateSettings": {
+      "type": "object",
+      "description": "Settings for health-aware upgrade gating.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether upgrade gating is enabled. Defaults to `false` when unset, except on a newly created agent pool in a cluster where upgrade gating is enabled, which defaults to `true`. When `true`, upgrade-gated health checks are enabled for upgrades in the corresponding scope. Setting this to `true` at the cluster scope enables gating for the entire cluster, including all agent pool upgrades. When the cluster scope is unset or `false`, an agent pool can opt in independently by setting this to `true`. When the cluster scope is `true`, an agent pool cannot set this to `false`. Force upgrade (`overrideSettings.forceUpgrade`) overrides the gate: while the override window is active, the upgrade skips health signal validation and proceeds."
+        }
       }
     },
     "UpgradeOverrideSettings": {

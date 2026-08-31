@@ -3030,6 +3030,23 @@ model ClusterUpgradeSettings {
    * Settings for overrides.
    */
   overrideSettings?: UpgradeOverrideSettings;
+
+  /**
+   * Settings for upgrade gating on upgrades in this managed cluster. Health signals are `HealthSignal` custom resources published by monitoring components running in the cluster. Setting `enabled` to `true` here is a cluster-wide opt-in that applies to all agent pool upgrades in this cluster; an agent pool cannot opt out of it.
+   */
+  @added(Versions.v2026_07_02_preview)
+  upgradeGateSettings?: UpgradeGateSettings;
+}
+
+/**
+ * Settings for health-aware upgrade gating.
+ */
+@added(Versions.v2026_07_02_preview)
+model UpgradeGateSettings {
+  /**
+   * Whether upgrade gating is enabled. Defaults to `false` when unset, except on a newly created agent pool in a cluster where upgrade gating is enabled, which defaults to `true`. When `true`, upgrade-gated health checks are enabled for upgrades in the corresponding scope. Setting this to `true` at the cluster scope enables gating for the entire cluster, including all agent pool upgrades. When the cluster scope is unset or `false`, an agent pool can opt in independently by setting this to `true`. When the cluster scope is `true`, an agent pool cannot set this to `false`. Force upgrade (`overrideSettings.forceUpgrade`) overrides the gate: while the override window is active, the upgrade skips health signal validation and proceeds.
+   */
+  enabled?: boolean;
 }
 
 /**
