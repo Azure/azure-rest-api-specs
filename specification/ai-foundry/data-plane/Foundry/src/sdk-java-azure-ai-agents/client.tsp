@@ -17,6 +17,7 @@ import "../openai/conversations/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using TypeSpec.OpenAPI;
 
 using Azure.AI.Projects;
 
@@ -397,15 +398,22 @@ namespace JavaClientCustomizations {
 
 @@access(UpdateToolboxRequest, Access.internal, "java");
 
+// The intermediate message model needs the same preview marker as the persisted voice-item base and leaves.
+@@extension(
+  OpenAI.RealtimeConversationItemMessage,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
+// These leaves redundantly redeclare the inherited `type: "message"` discriminator.
+// Suppress the redeclarations to prevent duplicate Java fields and accessors.
+@@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
-
-// Keep persisted voice-item Unix timestamps as Java longs. Treating the encoded
-// utcDateTime as OffsetDateTime conflicts with the generated integer JSON reader
-// across the polymorphic item hierarchy.
-// TODO: verify that the above comment is in fact true
-// @@alternateType(VoiceConversationItemPersistence.created_at, int64, "java");
 
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
@@ -664,6 +672,48 @@ union McpToolConnectorIdExpandable {
 @@alternateType(
   OpenAI.MCPTool.connector_id,
   McpToolConnectorIdExpandable,
+  "java"
+);
+
+// Reuse one expandable type for the repeated `object: "realtime.item"` literal.
+union RealtimeConversationItemObjectExpandable {
+  string,
+  realtime_item: "realtime.item",
+}
+
+@@clientName(
+  RealtimeConversationItemObjectExpandable,
+  "RealtimeConversationItemObject",
+  "java"
+);
+@@clientName(
+  RealtimeConversationItemObjectExpandable.realtime_item,
+  "REALTIME_ITEM",
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageSystem.object,
+  RealtimeConversationItemObjectExpandable,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageUser.object,
+  RealtimeConversationItemObjectExpandable,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageAssistant.object,
+  RealtimeConversationItemObjectExpandable,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemFunctionCall.object,
+  RealtimeConversationItemObjectExpandable,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemFunctionCallOutput.object,
+  RealtimeConversationItemObjectExpandable,
   "java"
 );
 
