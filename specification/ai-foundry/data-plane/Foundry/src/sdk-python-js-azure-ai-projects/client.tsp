@@ -5,7 +5,6 @@
 
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "../agents/routes.tsp";
-import "../voice-agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
@@ -16,6 +15,8 @@ import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
+import "../voice-agents/routes.tsp";
+import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
@@ -33,6 +34,7 @@ import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
+import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
@@ -293,6 +295,9 @@ using Azure.AI.Projects;
 
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
+
+@@clientName(OpenAI.RealtimeMcpErrorType, "RealtimeMCPErrorType", "javascript");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "javascript");
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
