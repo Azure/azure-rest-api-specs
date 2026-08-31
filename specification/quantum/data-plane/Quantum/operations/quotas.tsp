@@ -15,7 +15,7 @@ namespace Quantum.Workspace.Services {
     /** List quotas for the given workspace. */
     list is ListOperation<Quota>;
 
-    /** List quota usages for the given workspace. */
+    /** List quota usages for the given workspace. This operation is only available for v2 workspaces. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Workspace-scoped custom route not covered by the standard workspace resource operations."
     @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
     listWorkspaceQuotaUsages is CustomListOperation<

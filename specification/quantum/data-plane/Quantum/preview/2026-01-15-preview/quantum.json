@@ -744,7 +744,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/quotaUsages": {
       "get": {
         "operationId": "Quotas_ListWorkspaceQuotaUsages",
-        "description": "List quota usages for the given workspace.",
+        "description": "List quota usages for the given workspace. This operation is only available for v2 workspaces.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2391,11 +2391,6 @@
       "type": "object",
       "description": "Quota usage data for a suite offer provider.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier for the quota usage record.",
-          "readOnly": true
-        },
         "providerId": {
           "type": "string",
           "description": "The unique identifier for the provider.",
@@ -2432,7 +2427,6 @@
         }
       },
       "required": [
-        "id",
         "providerId",
         "scope",
         "usage",
@@ -2563,9 +2557,6 @@
       "type": "string",
       "description": "The scope at which the suite offer quota usage is applied.",
       "enum": [
-        "Job",
-        "Workspace",
-        "Subscription",
         "Target",
         "SubscriptionTarget",
         "WorkspaceTarget"
@@ -2574,21 +2565,6 @@
         "name": "SuiteOfferScope",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Job",
-            "value": "Job",
-            "description": "The usage is applied at the job level."
-          },
-          {
-            "name": "Workspace",
-            "value": "Workspace",
-            "description": "The usage is applied at the Quantum Workspace level."
-          },
-          {
-            "name": "Subscription",
-            "value": "Subscription",
-            "description": "The usage is applied at the Azure Subscription level."
-          },
           {
             "name": "Target",
             "value": "Target",

@@ -19,15 +19,6 @@ alias PagedQuotaUsageData = Azure.Core.Page<QuotaUsageData>;
 union SuiteOfferScope {
   string,
 
-  /** The usage is applied at the job level. */
-  Job: "Job",
-
-  /** The usage is applied at the Quantum Workspace level. */
-  Workspace: "Workspace",
-
-  /** The usage is applied at the Azure Subscription level. */
-  Subscription: "Subscription",
-
   /** The usage is applied at the target level. */
   Target: "Target",
 
@@ -54,10 +45,11 @@ model QuotaUsage {
 @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
 @resource("quotaUsages")
 model QuotaUsageData {
-  /** The unique identifier for the quota usage record. */
+  /** QuotaUsageData faux key. */
   @key
   @visibility(Lifecycle.Read)
-  id: string;
+  // A faux key is needed to tag the QuotaUsageData as a resource.
+  key: never;
 
   /** The unique identifier for the provider. */
   @visibility(Lifecycle.Read)
