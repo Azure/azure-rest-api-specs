@@ -10582,7 +10582,7 @@
       "properties": {
         "privateLinkIdType": {
           "$ref": "#/definitions/BlobAccessPointPrivateLinkIdType",
-          "description": "Whether privateLinkId contains an Azure resource ID or a Private Link alias.",
+          "description": "Indicates that privateLinkId contains an Azure resource ID.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -10590,7 +10590,7 @@
         },
         "privateLinkId": {
           "type": "string",
-          "description": "The Azure resource ID or alias of the backing Private Link resource.",
+          "description": "The Azure resource ID of the backing Private Link resource.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -10672,27 +10672,13 @@
     },
     "BlobAccessPointPrivateLinkIdType": {
       "type": "string",
-      "description": "The format used by a Private Link identifier.",
       "enum": [
-        "ResourceId",
-        "Alias"
+        "ResourceId"
       ],
       "x-ms-enum": {
-        "name": "BlobAccessPointPrivateLinkIdType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ResourceId",
-            "value": "ResourceId",
-            "description": "The identifier is an Azure resource ID."
-          },
-          {
-            "name": "Alias",
-            "value": "Alias",
-            "description": "The identifier is a Private Link alias."
-          }
-        ]
-      }
+        "modelAsString": false
+      },
+      "x-nullable": false
     },
     "BlobAccessPointProposedConnectionTestRequest": {
       "type": "object",
