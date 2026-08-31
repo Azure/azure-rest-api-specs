@@ -372,13 +372,6 @@ using Azure.AI.Projects;
 
 @@access(UpdateToolboxRequest, Access.internal, "java");
 
-// The intermediate message model needs the same preview marker as the persisted voice-item base and leaves.
-@@extension(
-  OpenAI.RealtimeConversationItemMessage,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
-
 // RealtimeConversationItemMessage forms a doubly discriminated hierarchy: the base item dispatches on `type`, then
 // the message branch dispatches on `role`. Each concrete message leaf redundantly redeclares its inherited
 // `type: "message"` property. The Java emitter does not de-duplicate that property across this three-level hierarchy,
