@@ -45,7 +45,7 @@ model AuthenticationPolicy extends Common.Resource {
   etag?: string;
 
   /** The user-assigned identity used by a user sign-in policy to access its Key Vault client secret. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AuthenticationPolicy uses the established Network RP identity envelope property pattern."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AuthenticationPolicy requires this user-assigned identity in the resource envelope so a user sign-in policy can read its client secret from Key Vault; the property uses the standard ManagedServiceIdentity shape and is an envelope-level credential of the resource rather than a routing/authentication setting, so it cannot move under properties."
   identity?: Common.ManagedServiceIdentity;
 }
 
@@ -85,9 +85,10 @@ model AuthenticationPolicyPropertiesFormat {
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 model AuthenticationProviderProperties {
-  /** The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/ */
+  /** The absolute HTTPS URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/ */
   @maxLength(2048)
-  issuer: string;
+  @pattern("^[Hh][Tt][Tt][Pp][Ss]://")
+  issuer: url;
 
   /** The JSON Web Key Set (JWKS) URI used to retrieve the public keys for JWT validation. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/discovery/v2.0/keys */
   @maxLength(2048)
@@ -111,7 +112,9 @@ model AuthenticationProviderProperties {
   @maxItems(10)
   scope?: AuthenticationScope[];
 
-  /** The timeout of the session cookie used for user authentication, in seconds. The supported range is 1 to 604800 seconds, and the default is 86400 seconds. Applicable to the Application Gateway post-OIDC workflow. */
+  /** The timeout of the session cookie used for user authentication. The service accepts and returns this value as a string containing a base-10 unsigned integer number of seconds with no sign, decimal point, unit suffix, or whitespace (for example `86400`). The supported range is 1 to 604800 seconds, and the default is 86400 seconds. Applicable to the Application Gateway post-OIDC workflow. */
+  @maxLength(6)
+  @pattern("^[1-9][0-9]{0,5}$")
   sessionTimeout?: string;
 
   /** The name of the session cookie used for user authentication. Applicable to the Application Gateway post-OIDC workflow. */

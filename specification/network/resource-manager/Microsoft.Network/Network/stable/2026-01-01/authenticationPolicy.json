@@ -444,8 +444,10 @@
       "properties": {
         "issuer": {
           "type": "string",
-          "description": "The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/",
-          "maxLength": 2048
+          "format": "uri",
+          "description": "The absolute HTTPS URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/",
+          "maxLength": 2048,
+          "pattern": "^[Hh][Tt][Tt][Pp][Ss]://"
         },
         "jwksUri": {
           "type": "string",
@@ -480,7 +482,9 @@
         },
         "sessionTimeout": {
           "type": "string",
-          "description": "The timeout of the session cookie used for user authentication, in seconds. The supported range is 1 to 604800 seconds, and the default is 86400 seconds. Applicable to the Application Gateway post-OIDC workflow."
+          "description": "The timeout of the session cookie used for user authentication. The service accepts and returns this value as a string containing a base-10 unsigned integer number of seconds with no sign, decimal point, unit suffix, or whitespace (for example `86400`). The supported range is 1 to 604800 seconds, and the default is 86400 seconds. Applicable to the Application Gateway post-OIDC workflow.",
+          "maxLength": 6,
+          "pattern": "^[1-9][0-9]{0,5}$"
         },
         "sessionCookieName": {
           "type": "string",
