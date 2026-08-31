@@ -383,7 +383,7 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
         continue;
       }
 
-      console.log(`language config with missing apiVersion or sdkType: ${JSON.stringify(config)}`);
+      console.log(`language config: ${JSON.stringify(config)}`);
       if (!versionAndTypeMap.has(apiVersion)) {
         versionAndTypeMap.set(apiVersion, new Set());
       }
