@@ -140,6 +140,14 @@ directive:
       mis-classifies this envelope definition as a resource model. The actual ARM
       resource invariants (id/name/type/readonly) are enforced on the page's
       items (`ResourceProjection`), not on the envelope itself.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: authorization-PrivilegedAccess.json
+    reason: |
+      The optional `count` property is returned only when the caller requests
+      `$count=true`. It reports the complete post-filter cardinality before
+      pagination and is an intentional part of this API contract. Existing
+      Azure Resource Manager APIs, including Microsoft.DataLakeAnalytics
+      `Accounts_List`, use the same `$count` query and response `count` pattern.
   - suppress: RequiredPropertiesMissingInResourceModel
     from: authorization-PrivilegedAccess.json
     where: $.definitions.PagedRelatedResourceProjection
