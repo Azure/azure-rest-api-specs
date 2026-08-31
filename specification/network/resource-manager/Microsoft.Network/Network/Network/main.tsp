@@ -137,6 +137,7 @@ import "./ConnectionPolicy.tsp";
 import "./WebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
+import "./VirtualNetworkApplianceCapability.tsp";
 import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
 import "./FirstPartyServiceTag.tsp";

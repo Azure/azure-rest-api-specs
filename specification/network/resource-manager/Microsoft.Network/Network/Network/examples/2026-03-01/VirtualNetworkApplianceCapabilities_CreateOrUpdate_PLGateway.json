@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "virtualNetworkApplianceName": "test-vna",
+    "capabilityName": "pl-gateway",
+    "parameters": {
+      "kind": "PLGateway",
+      "properties": {
+        "ipVersion": "IPv6"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pl-gateway",
+        "type": "Microsoft.Network/virtualNetworkAppliances/capabilities",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkAppliances/test-vna/capabilities/pl-gateway",
+        "kind": "PLGateway",
+        "properties": {
+          "ipVersion": "IPv6",
+          "linkedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "pl-gateway",
+        "type": "Microsoft.Network/virtualNetworkAppliances/capabilities",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkAppliances/test-vna/capabilities/pl-gateway",
+        "kind": "PLGateway",
+        "properties": {
+          "ipVersion": "IPv6",
+          "linkedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet",
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworkApplianceCapabilities_CreateOrUpdate",
+  "title": "Create virtual network appliance PLGateway capability"
+}
