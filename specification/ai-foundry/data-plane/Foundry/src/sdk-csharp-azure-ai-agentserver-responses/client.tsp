@@ -10,16 +10,6 @@ namespace OpenAI {
   // Bridge the gap with an alias so the Azure augmentations can reference it.
   alias ItemResourceType = OutputItemType;
 
-  // Program items must be accepted as response input so their replay
-  // fingerprint can be round-tripped on subsequent requests.
-  model ItemProgram extends Item {
-    ...Program;
-  }
-
-  model ItemProgramOutput extends Item {
-    ...ProgramOutput;
-  }
-
   @@withoutOmittedProperties(Item, "type");
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "The AgentServer input contract includes program replay items."
   @@copyProperties(
@@ -263,9 +253,6 @@ namespace Azure.AI.Projects {
   // Rename "Response" to "ResponseObject" to avoid conflict with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
 
-  // Preserve the established Python SDK model name.
-  @@clientName(OpenAI.ResponseConversation, "ConversationReference");
-
   // Rename "ResponseError" to "ResponseErrorInfo" to avoid conflict with Azure.ResponseError
   @@clientName(OpenAI.ResponseError, "ResponseErrorInfo");
 
@@ -406,26 +393,6 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.ResponseReasoningTextDoneEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseRefusalDeltaEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseRefusalDoneEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseShellCallCommandAddedStreamingEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseShellCallCommandDeltaStreamingEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseShellCallCommandDoneStreamingEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseShellCallOutputContentDeltaStreamingEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseShellCallOutputContentDoneStreamingEvent,
-    Usage.input | Usage.output
-  );
   @@usage(OpenAI.ResponseTextDeltaEvent, Usage.input | Usage.output);
   @@usage(OpenAI.ResponseTextDoneEvent, Usage.input | Usage.output);
   @@usage(
