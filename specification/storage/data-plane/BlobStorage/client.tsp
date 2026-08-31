@@ -1306,13 +1306,7 @@ scalar HttpRange extends string;
 @@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "java");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "java");
 @@clientName(StorageErrorCode, "BlobErrorCode", "java");
-@@clientName(Blob, "BlobRestClient", "java");
-@@clientName(Container, "ContainerRestClient", "java");
 @@clientName(Container.listBlobs, "ListBlobFlatSegment", "java");
-@@clientName(Service, "ServiceRestClient", "java");
-@@clientName(BlockBlob, "BlockBlobRestClient", "java");
-@@clientName(PageBlob, "PageBlobRestClient", "java");
-@@clientName(AppendBlob, "AppendBlobRestClient", "java");
 @@clientName(BlobProperties, "BlobPropertiesInternal", "java");
 @@clientName(ImmutabilityPolicyMode, "BlobImmutabilityPolicyMode", "java");
 @@clientName(SignedIdentifiers, "BlobSignedIdentifiers", "java");
@@ -1359,3 +1353,5 @@ scalar HttpRange extends string;
 // Emit the error enum + list responses standalone for java (queue lesson).
 @@access(StorageErrorCode, Access.public, "java");
 @@usage(StorageErrorCode, Usage.output, "java");
+
+@@clientName(Storage.Blob, "AzureBlobStorage", "java");
