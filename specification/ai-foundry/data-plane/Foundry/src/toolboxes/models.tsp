@@ -106,6 +106,8 @@ union ToolboxToolType {
   a2a: ToolboxA2AToolType,
   shell: ToolboxShellToolType,
   web_iq_preview: ToolboxWebIQPreviewToolType,
+
+  a2a: ToolboxA2AToolType,
 }
 
 /**
