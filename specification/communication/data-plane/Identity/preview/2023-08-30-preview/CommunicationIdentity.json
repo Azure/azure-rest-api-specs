@@ -1,0 +1,1469 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Identity API",
+    "version": "2023-08-30-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/roles": {
+      "get": {
+        "operationId": "Roles_ListRoles",
+        "description": "List roles.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedRole"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Roles_ListRoles": {
+            "$ref": "./examples/Roles_ListRoles.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Roles_CreateRole",
+        "description": "Create a role.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Role"
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Roles_CreateRole": {
+            "$ref": "./examples/Roles_CreateRole.json"
+          }
+        }
+      }
+    },
+    "/roles/{id}": {
+      "get": {
+        "operationId": "Roles_GetRole",
+        "description": "Get a role.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Role id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Roles_GetRole": {
+            "$ref": "./examples/Roles_GetRole.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Roles_CreateOrUpdateRole",
+        "description": "Create or update a role.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Role id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Roles_CreateOrUpdateRole": {
+            "$ref": "./examples/Roles_CreateOrUpdateRole.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Roles_DeleteRole",
+        "description": "Delete a role.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Role id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Roles_DeleteRole": {
+            "$ref": "./examples/Roles_DeleteRole.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CallingPermissions": {
+      "type": "object",
+      "description": "Calling permissions",
+      "properties": {
+        "addParticipants": {
+          "type": "boolean",
+          "description": "Add participants"
+        },
+        "addPstnParticipants": {
+          "type": "boolean",
+          "description": "Add pstn participants"
+        },
+        "removeSelf": {
+          "type": "boolean",
+          "description": "Leave a call"
+        },
+        "leaveCall": {
+          "type": "boolean",
+          "description": "Leave a call"
+        },
+        "removeParticipants": {
+          "type": "boolean",
+          "description": "Remove any participant"
+        },
+        "removePstnParticipant": {
+          "type": "boolean",
+          "description": "Remove any pstn participant"
+        },
+        "listParticipants": {
+          "type": "boolean",
+          "description": "List participants"
+        },
+        "getOwnData": {
+          "type": "boolean",
+          "description": "Get own data"
+        },
+        "getOthersData": {
+          "type": "boolean",
+          "description": "Get others data"
+        },
+        "updateOwnData": {
+          "type": "boolean",
+          "description": "Update own data"
+        },
+        "updateOthersData": {
+          "type": "boolean",
+          "description": "Update others data"
+        },
+        "getCallProperties": {
+          "type": "boolean",
+          "description": "Get call poperties"
+        },
+        "updateCallProperties": {
+          "type": "boolean",
+          "description": "Update call poperties"
+        },
+        "admitLobbyParticipants": {
+          "type": "boolean",
+          "description": "Admit participants from the lobby"
+        },
+        "denyLobbyParticipants": {
+          "type": "boolean",
+          "description": "Deny participants from the lobby"
+        },
+        "bypassLobby": {
+          "type": "boolean",
+          "description": "Get the call directly without waiting in the lobby"
+        },
+        "deleteCall": {
+          "type": "boolean",
+          "description": "Delete a scheduled call"
+        },
+        "joinMeeting": {
+          "type": "boolean",
+          "description": "Join a meeting"
+        },
+        "turnOnVideo": {
+          "type": "boolean",
+          "description": "Turn on own video"
+        },
+        "shareVideo": {
+          "type": "boolean",
+          "description": "Turn on own video"
+        },
+        "sendVideo": {
+          "type": "boolean",
+          "description": "Turn on own video"
+        },
+        "restrictOthersVideo": {
+          "type": "boolean",
+          "description": "Disable video sharing functionality for other participants"
+        },
+        "unrestrictOthersVideo": {
+          "type": "boolean",
+          "description": "Enable video sharing functionality for other participants"
+        },
+        "turnOnAudio": {
+          "type": "boolean",
+          "description": "Turn on own audio in a call"
+        },
+        "shareAudio": {
+          "type": "boolean",
+          "description": "Turn on own audio in a call"
+        },
+        "sendAudio": {
+          "type": "boolean",
+          "description": "Turn on own audio in a call"
+        },
+        "restrictOthersAudio": {
+          "type": "boolean",
+          "description": "Disable audio sharing functionality for others"
+        },
+        "unrestrictOthersAudio": {
+          "type": "boolean",
+          "description": "Enable audio sharing functionality for others"
+        },
+        "shareScreen": {
+          "type": "boolean",
+          "description": "Share own screen"
+        },
+        "shareContent": {
+          "type": "boolean",
+          "description": "Share own screen"
+        },
+        "muteSelf": {
+          "type": "boolean",
+          "description": "Mute self in a call"
+        },
+        "unmuteSelf": {
+          "type": "boolean",
+          "description": "Unmute self in a call"
+        },
+        "muteOthers": {
+          "type": "boolean",
+          "description": "Mute others in a call"
+        },
+        "spotlightParticipants": {
+          "type": "boolean",
+          "description": "Highlight video feeds for everyone in the call"
+        },
+        "removeSpotlights": {
+          "type": "boolean",
+          "description": "Remove highlighted video feeds for everyone in the call"
+        },
+        "removeParticipantsSpotlight": {
+          "type": "boolean",
+          "description": "Remove highlighted video feeds for everyone in the call"
+        },
+        "startRecording": {
+          "type": "boolean",
+          "description": "Start recording in the call"
+        },
+        "stopRecording": {
+          "type": "boolean",
+          "description": "Stop recording in the call"
+        },
+        "startLiveCaptions": {
+          "type": "boolean",
+          "description": "Start live captions"
+        },
+        "stopLiveCaptions": {
+          "type": "boolean",
+          "description": "Stop live captions"
+        },
+        "raiseHand": {
+          "type": "boolean",
+          "description": "Raise a hand during the call"
+        },
+        "sendReaction": {
+          "type": "boolean",
+          "description": "Send reactions during the call"
+        },
+        "hangUpForEveryOne": {
+          "type": "boolean",
+          "description": "End the call for everyone"
+        },
+        "endCallForAll": {
+          "type": "boolean",
+          "description": "End the call for everyone"
+        }
+      },
+      "required": [
+        "addParticipants",
+        "addPstnParticipants",
+        "removeSelf",
+        "leaveCall",
+        "removeParticipants",
+        "removePstnParticipant",
+        "listParticipants",
+        "getOwnData",
+        "getOthersData",
+        "updateOwnData",
+        "updateOthersData",
+        "getCallProperties",
+        "updateCallProperties",
+        "admitLobbyParticipants",
+        "denyLobbyParticipants",
+        "bypassLobby",
+        "deleteCall",
+        "joinMeeting",
+        "turnOnVideo",
+        "shareVideo",
+        "sendVideo",
+        "restrictOthersVideo",
+        "unrestrictOthersVideo",
+        "turnOnAudio",
+        "shareAudio",
+        "sendAudio",
+        "restrictOthersAudio",
+        "unrestrictOthersAudio",
+        "shareScreen",
+        "shareContent",
+        "muteSelf",
+        "unmuteSelf",
+        "muteOthers",
+        "spotlightParticipants",
+        "removeSpotlights",
+        "removeParticipantsSpotlight",
+        "startRecording",
+        "stopRecording",
+        "startLiveCaptions",
+        "stopLiveCaptions",
+        "raiseHand",
+        "sendReaction",
+        "hangUpForEveryOne",
+        "endCallForAll"
+      ]
+    },
+    "CallingPermissionsCreateOrUpdate": {
+      "type": "object",
+      "description": "Calling permissions",
+      "properties": {
+        "addParticipants": {
+          "type": "boolean",
+          "description": "Add participants"
+        },
+        "addPstnParticipants": {
+          "type": "boolean",
+          "description": "Add pstn participants"
+        },
+        "removeSelf": {
+          "type": "boolean",
+          "description": "Leave a call"
+        },
+        "leaveCall": {
+          "type": "boolean",
+          "description": "Leave a call"
+        },
+        "removeParticipants": {
+          "type": "boolean",
+          "description": "Remove any participant"
+        },
+        "removePstnParticipant": {
+          "type": "boolean",
+          "description": "Remove any pstn participant"
+        },
+        "listParticipants": {
+          "type": "boolean",
+          "description": "List participants"
+        },
+        "getOwnData": {
+          "type": "boolean",
+          "description": "Get own data"
+        },
+        "getOthersData": {
+          "type": "boolean",
+          "description": "Get others data"
+        },
+        "updateOwnData": {
+          "type": "boolean",
+          "description": "Update own data"
+        },
+        "updateOthersData": {
+          "type": "boolean",
+          "description": "Update others data"
+        },
+        "getCallProperties": {
+          "type": "boolean",
+          "description": "Get call poperties"
+        },
+        "updateCallProperties": {
+          "type": "boolean",
+          "description": "Update call poperties"
+        },
+        "admitLobbyParticipants": {
+          "type": "boolean",
+          "description": "Admit participants from the lobby"
+        },
+        "denyLobbyParticipants": {
+          "type": "boolean",
+          "description": "Deny participants from the lobby"
+        },
+        "bypassLobby": {
+          "type": "boolean",
+          "description": "Get the call directly without waiting in the lobby"
+        },
+        "deleteCall": {
+          "type": "boolean",
+          "description": "Delete a scheduled call"
+        },
+        "joinMeeting": {
+          "type": "boolean",
+          "description": "Join a meeting"
+        },
+        "turnOnVideo": {
+          "type": "boolean",
+          "description": "Turn on own video"
+        },
+        "shareVideo": {
+          "type": "boolean",
+          "description": "Turn on own video"
+        },
+        "sendVideo": {
+          "type": "boolean",
+          "description": "Turn on own video"
+        },
+        "restrictOthersVideo": {
+          "type": "boolean",
+          "description": "Disable video sharing functionality for other participants"
+        },
+        "unrestrictOthersVideo": {
+          "type": "boolean",
+          "description": "Enable video sharing functionality for other participants"
+        },
+        "turnOnAudio": {
+          "type": "boolean",
+          "description": "Turn on own audio in a call"
+        },
+        "shareAudio": {
+          "type": "boolean",
+          "description": "Turn on own audio in a call"
+        },
+        "sendAudio": {
+          "type": "boolean",
+          "description": "Turn on own audio in a call"
+        },
+        "restrictOthersAudio": {
+          "type": "boolean",
+          "description": "Disable audio sharing functionality for others"
+        },
+        "unrestrictOthersAudio": {
+          "type": "boolean",
+          "description": "Enable audio sharing functionality for others"
+        },
+        "shareScreen": {
+          "type": "boolean",
+          "description": "Share own screen"
+        },
+        "shareContent": {
+          "type": "boolean",
+          "description": "Share own screen"
+        },
+        "muteSelf": {
+          "type": "boolean",
+          "description": "Mute self in a call"
+        },
+        "unmuteSelf": {
+          "type": "boolean",
+          "description": "Unmute self in a call"
+        },
+        "muteOthers": {
+          "type": "boolean",
+          "description": "Mute others in a call"
+        },
+        "spotlightParticipants": {
+          "type": "boolean",
+          "description": "Highlight video feeds for everyone in the call"
+        },
+        "removeSpotlights": {
+          "type": "boolean",
+          "description": "Remove highlighted video feeds for everyone in the call"
+        },
+        "removeParticipantsSpotlight": {
+          "type": "boolean",
+          "description": "Remove highlighted video feeds for everyone in the call"
+        },
+        "startRecording": {
+          "type": "boolean",
+          "description": "Start recording in the call"
+        },
+        "stopRecording": {
+          "type": "boolean",
+          "description": "Stop recording in the call"
+        },
+        "startLiveCaptions": {
+          "type": "boolean",
+          "description": "Start live captions"
+        },
+        "stopLiveCaptions": {
+          "type": "boolean",
+          "description": "Stop live captions"
+        },
+        "raiseHand": {
+          "type": "boolean",
+          "description": "Raise a hand during the call"
+        },
+        "sendReaction": {
+          "type": "boolean",
+          "description": "Send reactions during the call"
+        },
+        "hangUpForEveryOne": {
+          "type": "boolean",
+          "description": "End the call for everyone"
+        },
+        "endCallForAll": {
+          "type": "boolean",
+          "description": "End the call for everyone"
+        }
+      }
+    },
+    "ChatPermissions": {
+      "type": "object",
+      "description": "Chat permissions",
+      "properties": {
+        "addParticipants": {
+          "type": "boolean",
+          "description": "Add participants"
+        },
+        "removeSelf": {
+          "type": "boolean",
+          "description": "Remove self"
+        },
+        "leaveChatThread": {
+          "type": "boolean",
+          "description": "Leave chat thread"
+        },
+        "removeParticipants": {
+          "type": "boolean",
+          "description": "Remove participants"
+        },
+        "listParticipants": {
+          "type": "boolean",
+          "description": "Get list of participants"
+        },
+        "getOwnData": {
+          "type": "boolean",
+          "description": "Get own data"
+        },
+        "getOthersData": {
+          "type": "boolean",
+          "description": "Get others data"
+        },
+        "updateOwnData": {
+          "type": "boolean",
+          "description": "Update own data"
+        },
+        "updateOthersData": {
+          "type": "boolean",
+          "description": "Update others data"
+        },
+        "shareHistory": {
+          "type": "boolean",
+          "description": "Share history of chat thread with others participants"
+        },
+        "getChatThreadProperties": {
+          "type": "boolean",
+          "description": "Get properties of chat thread"
+        },
+        "updateChatThreadProperties": {
+          "type": "boolean",
+          "description": "Update chat thread properties"
+        },
+        "deleteChatThread": {
+          "type": "boolean",
+          "description": "Delete chat thread"
+        },
+        "sendMessage": {
+          "type": "boolean",
+          "description": "Send message"
+        },
+        "getMessages": {
+          "type": "boolean",
+          "description": "Get messages"
+        },
+        "readMessages": {
+          "type": "boolean",
+          "description": "Get messages"
+        },
+        "editOwnMessage": {
+          "type": "boolean",
+          "description": "Edit own message"
+        },
+        "editOthersMessage": {
+          "type": "boolean",
+          "description": "Edit any message"
+        },
+        "editAnyMessage": {
+          "type": "boolean",
+          "description": "Edit any message"
+        },
+        "annotateOwnMessage": {
+          "type": "boolean",
+          "description": "Reply to own message"
+        },
+        "replyOwnMessage": {
+          "type": "boolean",
+          "description": "Reply to own message"
+        },
+        "annotateOthersMessage": {
+          "type": "boolean",
+          "description": "Reply to others message"
+        },
+        "replyOthersMessage": {
+          "type": "boolean",
+          "description": "Reply to others message"
+        },
+        "deleteOwnMessage": {
+          "type": "boolean",
+          "description": "Delete own message"
+        },
+        "deleteOthersMessage": {
+          "type": "boolean",
+          "description": "Delete others message"
+        },
+        "deleteAnyMessage": {
+          "type": "boolean",
+          "description": "Delete others message"
+        },
+        "recoverOwnMessage": {
+          "type": "boolean",
+          "description": "Recover own message"
+        },
+        "recoverOthersMessage": {
+          "type": "boolean",
+          "description": "Recover others message"
+        },
+        "recoverAnyMessage": {
+          "type": "boolean",
+          "description": "Recover others message"
+        },
+        "getReadReceipts": {
+          "type": "boolean",
+          "description": "Get read recepits"
+        },
+        "sendReadReceipt": {
+          "type": "boolean",
+          "description": "Send read recepits"
+        },
+        "sendTypingNotification": {
+          "type": "boolean",
+          "description": "Send typing notification"
+        }
+      },
+      "required": [
+        "addParticipants",
+        "removeSelf",
+        "leaveChatThread",
+        "removeParticipants",
+        "listParticipants",
+        "getOwnData",
+        "getOthersData",
+        "updateOwnData",
+        "updateOthersData",
+        "shareHistory",
+        "getChatThreadProperties",
+        "updateChatThreadProperties",
+        "deleteChatThread",
+        "sendMessage",
+        "getMessages",
+        "readMessages",
+        "editOwnMessage",
+        "editOthersMessage",
+        "editAnyMessage",
+        "annotateOwnMessage",
+        "replyOwnMessage",
+        "annotateOthersMessage",
+        "replyOthersMessage",
+        "deleteOwnMessage",
+        "deleteOthersMessage",
+        "deleteAnyMessage",
+        "recoverOwnMessage",
+        "recoverOthersMessage",
+        "recoverAnyMessage",
+        "getReadReceipts",
+        "sendReadReceipt",
+        "sendTypingNotification"
+      ]
+    },
+    "ChatPermissionsCreateOrUpdate": {
+      "type": "object",
+      "description": "Chat permissions",
+      "properties": {
+        "addParticipants": {
+          "type": "boolean",
+          "description": "Add participants"
+        },
+        "removeSelf": {
+          "type": "boolean",
+          "description": "Remove self"
+        },
+        "leaveChatThread": {
+          "type": "boolean",
+          "description": "Leave chat thread"
+        },
+        "removeParticipants": {
+          "type": "boolean",
+          "description": "Remove participants"
+        },
+        "listParticipants": {
+          "type": "boolean",
+          "description": "Get list of participants"
+        },
+        "getOwnData": {
+          "type": "boolean",
+          "description": "Get own data"
+        },
+        "getOthersData": {
+          "type": "boolean",
+          "description": "Get others data"
+        },
+        "updateOwnData": {
+          "type": "boolean",
+          "description": "Update own data"
+        },
+        "updateOthersData": {
+          "type": "boolean",
+          "description": "Update others data"
+        },
+        "shareHistory": {
+          "type": "boolean",
+          "description": "Share history of chat thread with others participants"
+        },
+        "getChatThreadProperties": {
+          "type": "boolean",
+          "description": "Get properties of chat thread"
+        },
+        "updateChatThreadProperties": {
+          "type": "boolean",
+          "description": "Update chat thread properties"
+        },
+        "deleteChatThread": {
+          "type": "boolean",
+          "description": "Delete chat thread"
+        },
+        "sendMessage": {
+          "type": "boolean",
+          "description": "Send message"
+        },
+        "getMessages": {
+          "type": "boolean",
+          "description": "Get messages"
+        },
+        "readMessages": {
+          "type": "boolean",
+          "description": "Get messages"
+        },
+        "editOwnMessage": {
+          "type": "boolean",
+          "description": "Edit own message"
+        },
+        "editOthersMessage": {
+          "type": "boolean",
+          "description": "Edit any message"
+        },
+        "editAnyMessage": {
+          "type": "boolean",
+          "description": "Edit any message"
+        },
+        "annotateOwnMessage": {
+          "type": "boolean",
+          "description": "Reply to own message"
+        },
+        "replyOwnMessage": {
+          "type": "boolean",
+          "description": "Reply to own message"
+        },
+        "annotateOthersMessage": {
+          "type": "boolean",
+          "description": "Reply to others message"
+        },
+        "replyOthersMessage": {
+          "type": "boolean",
+          "description": "Reply to others message"
+        },
+        "deleteOwnMessage": {
+          "type": "boolean",
+          "description": "Delete own message"
+        },
+        "deleteOthersMessage": {
+          "type": "boolean",
+          "description": "Delete others message"
+        },
+        "deleteAnyMessage": {
+          "type": "boolean",
+          "description": "Delete others message"
+        },
+        "recoverOwnMessage": {
+          "type": "boolean",
+          "description": "Recover own message"
+        },
+        "recoverOthersMessage": {
+          "type": "boolean",
+          "description": "Recover others message"
+        },
+        "recoverAnyMessage": {
+          "type": "boolean",
+          "description": "Recover others message"
+        },
+        "getReadReceipts": {
+          "type": "boolean",
+          "description": "Get read recepits"
+        },
+        "sendReadReceipt": {
+          "type": "boolean",
+          "description": "Send read recepits"
+        },
+        "sendTypingNotification": {
+          "type": "boolean",
+          "description": "Send typing notification"
+        }
+      }
+    },
+    "PagedRole": {
+      "type": "object",
+      "description": "Paged collection of Role items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Role items on this page",
+          "items": {
+            "$ref": "#/definitions/Role"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Permissions": {
+      "type": "object",
+      "description": "Permissions",
+      "properties": {
+        "chat": {
+          "$ref": "#/definitions/ChatPermissions",
+          "description": "Chat permissions"
+        },
+        "calling": {
+          "$ref": "#/definitions/CallingPermissions",
+          "description": "Calling permissions"
+        }
+      },
+      "required": [
+        "chat",
+        "calling"
+      ]
+    },
+    "PermissionsCreateOrUpdate": {
+      "type": "object",
+      "description": "Permissions",
+      "properties": {
+        "chat": {
+          "$ref": "#/definitions/ChatPermissionsCreateOrUpdate",
+          "description": "Chat permissions"
+        },
+        "calling": {
+          "$ref": "#/definitions/CallingPermissionsCreateOrUpdate",
+          "description": "Calling permissions"
+        }
+      }
+    },
+    "Role": {
+      "type": "object",
+      "description": "A role.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Role id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The role name."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Set to false to prevent new assignments but keep existing assignments intact."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the request was created.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the request was updated.",
+          "readOnly": true
+        },
+        "permissions": {
+          "$ref": "#/definitions/Permissions",
+          "description": "Permissions"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "isEnabled",
+        "createdAt",
+        "updatedAt",
+        "permissions"
+      ]
+    },
+    "RoleCreateOrUpdate": {
+      "type": "object",
+      "description": "A role.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The role name."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Set to false to prevent new assignments but keep existing assignments intact."
+        },
+        "permissions": {
+          "$ref": "#/definitions/PermissionsCreateOrUpdate",
+          "description": "Permissions"
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "ACS Auth versions.",
+      "enum": [
+        "2023-08-30-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2023-08-30-preview",
+            "value": "2023-08-30-preview",
+            "description": "Private preview version for Roles APIs."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The request should only proceed if an entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
+      "name": "If-Modified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifModifiedSince"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "The request should only proceed if no entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
+      "name": "If-Unmodified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was not modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifUnmodifiedSince"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
+      "name": "Repeatability-First-Sent",
+      "in": "header",
+      "description": "Specifies the date and time at which the request was first created.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityFirstSent"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
+      "name": "Repeatability-Request-ID",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityRequestId"
+    }
+  }
+}
