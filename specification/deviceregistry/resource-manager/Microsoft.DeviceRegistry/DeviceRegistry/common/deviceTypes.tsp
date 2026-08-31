@@ -1,3 +1,6 @@
+import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
+
 namespace Microsoft.DeviceRegistry;
 
 /** Represents the enablement state of a device. */
@@ -21,6 +24,7 @@ model RegistryDevicePropertiesBase {
   uuid?: string;
 
   /** A pointer to type metadata about this device (e.g., The WoT Thing Model for the device). */
+  @added(Versions.v2026_11_02_preview)
   deviceTypeRef?: url;
 
   /** A Device ID provided by the customer. */
