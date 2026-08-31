@@ -26,9 +26,10 @@ interface Responses {
   @post
   createResponse is OpenAIOperation<
     OpenAI.CreateResponse & UserDelegationHeader,
-    | (AgentSessionIdResponseHeader & OpenAI.Response)
-    | (AgentSessionIdResponseHeader &
-        SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
+
+      | (AgentSessionIdResponseHeader & OpenAI.Response)
+      | (AgentSessionIdResponseHeader &
+          SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
   >;
 
   /**
@@ -63,12 +64,13 @@ interface Responses {
 
       ...UserDelegationHeader;
     },
-    | (AgentSessionIdResponseHeader & {
-        /** The request body. */
-        @body body: OpenAI.Response;
-      })
-    | (AgentSessionIdResponseHeader &
-        SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
+
+      | (AgentSessionIdResponseHeader & {
+          /** The request body. */
+          @body body: OpenAI.Response;
+        })
+      | (AgentSessionIdResponseHeader &
+          SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
   >;
 
   /**
