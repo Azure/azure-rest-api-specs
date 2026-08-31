@@ -25,7 +25,7 @@ interface Responses {
   @operationId("createResponse")
   @post
   createResponse is OpenAIOperation<
-    OpenAI.CreateResponse & UserDelegationHeader,
+    OpenAI.CreateResponse & UserDelegationHeader & SessionAffinityRequestHeader,
     | (AgentSessionIdResponseHeader & OpenAI.Response)
     | (AgentSessionIdResponseHeader &
         SseResponseOf<OpenAI.CreateResponseStreamingResponse>)

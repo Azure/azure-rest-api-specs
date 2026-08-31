@@ -4,7 +4,7 @@
 // </auto-generated>
 // -----------------------------------------------------------------------------
 
-import "./routes.generated.tsp";
+import "./routes.tsp";
 import "@typespec/openapi";
 using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;

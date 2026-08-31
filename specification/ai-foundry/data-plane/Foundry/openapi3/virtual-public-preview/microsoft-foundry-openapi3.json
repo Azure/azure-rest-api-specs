@@ -17137,7 +17137,22 @@
         "operationId": "Chat_createChatCompletion",
         "summary": "Create a chat completion",
         "description": "Creates a chat completion from the supplied request.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-ms-session-id",
+            "in": "header",
+            "required": false,
+            "description": "An opaque, application-owned conversation identifier. The value is not returned in the response and must not contain secrets or personally identifiable information.",
+            "schema": {
+              "type": "string"
+            },
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "ModelRouterControls=V1Preview"
+              ]
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -23167,6 +23182,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-session-id",
+            "in": "header",
+            "required": false,
+            "description": "An opaque, application-owned conversation identifier. The value is not returned in the response and must not contain secrets or personally identifiable information.",
+            "schema": {
+              "type": "string"
+            },
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "ModelRouterControls=V1Preview"
+              ]
+            }
           }
         ],
         "responses": {
@@ -23871,6 +23900,15 @@
                   "user_security_context": {
                     "$ref": "#/components/schemas/AzureUserSecurityContext",
                     "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
+                  },
+                  "routing_config": {
+                    "$ref": "#/components/schemas/RoutingConfiguration",
+                    "description": "Per-request configuration for Model Router inference calls.\nSupported on Model Router endpoints (deployed or instant if supported).\nReturns a 400 (Bad Request) error when the target is not a Model Router endpoint.",
+                    "x-ms-foundry-meta": {
+                      "conditional_previews": [
+                        "ModelRouterControls=V1Preview"
+                      ]
+                    }
                   }
                 }
               }
@@ -46520,6 +46558,10 @@
             "$ref": "#/components/schemas/ModelRouterMode",
             "description": "The routing mode for the request."
           },
+          "session_affinity": {
+            "$ref": "#/components/schemas/SessionAffinityDetails",
+            "description": "Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled."
+          },
           "routing_trace": {
             "type": "array",
             "items": {
@@ -53435,6 +53477,15 @@
           "user_security_context": {
             "$ref": "#/components/schemas/AzureUserSecurityContext",
             "description": "User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud."
+          },
+          "routing_config": {
+            "$ref": "#/components/schemas/RoutingConfiguration",
+            "description": "Per-request configuration for Model Router inference calls.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "ModelRouterControls=V1Preview"
+              ]
+            }
           }
         }
       },
@@ -87130,6 +87181,21 @@
           ]
         }
       },
+      "RoutingConfiguration": {
+        "type": "object",
+        "properties": {
+          "session_affinity": {
+            "$ref": "#/components/schemas/SessionAffinityConfiguration",
+            "description": "Session affinity configuration for reusing an eligible model across requests in the same conversation.\nIf omitted, sticky affinity is used when a supported conversation identifier is available.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "ModelRouterControls=V1Preview"
+              ]
+            }
+          }
+        },
+        "description": "Per-request configuration for Model Router inference calls.\nSupported on Model Router endpoints (deployed or instant if supported).\nReturns a 400 (Bad Request) error when the target is not a Model Router endpoint."
+      },
       "RoutingTraceEntry": {
         "type": "object",
         "required": [
@@ -87604,6 +87670,128 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "Schedules=V1Preview"
+          ]
+        }
+      },
+      "SessionAffinityConfiguration": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/SessionAffinityRequestMode",
+            "description": "Controls whether Model Router applies session affinity to this request.",
+            "default": "sticky"
+          },
+          "session_id": {
+            "type": "string",
+            "description": "An opaque, application-owned conversation identifier. Use the same value for related requests.\nThe value is not returned in the response and must not contain secrets or personally identifiable information."
+          }
+        },
+        "description": "Request settings that control Model Router session affinity.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ModelRouterControls=V1Preview"
+          ]
+        }
+      },
+      "SessionAffinityDecision": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "initialize",
+              "retain",
+              "switch"
+            ]
+          }
+        ],
+        "description": "Final outcomes reported for Model Router session affinity.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ModelRouterControls=V1Preview"
+          ]
+        }
+      },
+      "SessionAffinityDetails": {
+        "type": "object",
+        "required": [
+          "mode"
+        ],
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/SessionAffinityMode",
+            "description": "The effective session affinity mode."
+          },
+          "source": {
+            "$ref": "#/components/schemas/SessionAffinitySource",
+            "description": "The type of conversation identifier selected after applying precedence. Omitted when affinity is disabled."
+          },
+          "decision": {
+            "$ref": "#/components/schemas/SessionAffinityDecision",
+            "description": "The final affinity outcome for the model that served the response."
+          }
+        },
+        "description": "Effective Model Router session affinity metadata for a request.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ModelRouterControls=V1Preview"
+          ]
+        }
+      },
+      "SessionAffinityMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "sticky",
+              "none"
+            ]
+          }
+        ],
+        "description": "Effective modes reported for Model Router session affinity.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ModelRouterControls=V1Preview"
+          ]
+        }
+      },
+      "SessionAffinityRequestMode": {
+        "type": "string",
+        "enum": [
+          "sticky",
+          "none"
+        ],
+        "description": "Request modes supported by Model Router session affinity.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ModelRouterControls=V1Preview"
+          ]
+        }
+      },
+      "SessionAffinitySource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "session_id",
+              "conversation",
+              "previous_response_id",
+              "no_identity_available"
+            ]
+          }
+        ],
+        "description": "Conversation identifier sources supported by Model Router session affinity.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ModelRouterControls=V1Preview"
           ]
         }
       },

@@ -26,6 +26,17 @@ namespace Azure.AI.Projects {
        * User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
        */
       user_security_context?: AzureUserSecurityContext,
+
+      /** Per-request configuration for Model Router inference calls. */
+      @extension(
+        "x-ms-foundry-meta",
+        #{
+          conditional_previews: #[
+            FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+          ],
+        }
+      )
+      routing_config?: RoutingConfiguration,
     }
   );
 
