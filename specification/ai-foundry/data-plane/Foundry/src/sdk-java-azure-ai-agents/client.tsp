@@ -360,6 +360,32 @@ using Azure.AI.Projects;
 @@usage(CreateAgentVersionRequest, Usage.input);
 @@access(CreateAgentVersionRequest, Access.public);
 
+// typespec-java collapses flattened signatures with more than six parameters
+// into an options bag. Pin this signature so the required-only convenience
+// overload accepting AgentDefinition remains available.
+namespace JavaClientCustomizations {
+  op createAgentVersionCustomization(
+    /**
+     * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
+     * - Must start and end with alphanumeric characters,
+     * - Can contain hyphens in the middle
+     * - Must not exceed 63 characters.
+     */
+    @maxLength(63)
+    @TypeSpec.Http.path
+    agent_name: string,
+
+    ...CreateAgentVersionRequest,
+    ...FoundryDataPlaneApiVersionParameter,
+  ): void;
+}
+
+@@override(
+  Agents.createAgentVersion,
+  JavaClientCustomizations.createAgentVersionCustomization,
+  "java"
+);
+
 // Ensure SessionLogEvent and SessionLogEventType are emitted
 @@usage(SessionLogEvent, Usage.output);
 @@access(SessionLogEvent, Access.public);
