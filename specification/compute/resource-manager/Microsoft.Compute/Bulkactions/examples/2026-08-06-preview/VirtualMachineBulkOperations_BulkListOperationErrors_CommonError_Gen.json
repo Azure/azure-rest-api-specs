@@ -1,5 +1,5 @@
 {
-  "title": "Invalid lookback window",
+  "title": "Response with an invalid lookback window error",
   "operationId": "VirtualMachineBulkOperations_BulkListOperationErrors",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -13,7 +13,19 @@
       "body": {
         "error": {
           "code": "BadRequestException",
-          "message": "lookbackInMinutes must be between 1 and 10080."
+          "message": "lookbackInMinutes must be between 1 and 10080.",
+          "additionalInfo": [
+            {
+              "type": "ScheduledActionsError",
+              "info": {
+                "status": "Failed",
+                "timeStamp": "2026-08-31T18:00:00Z",
+                "innerError": {
+                  "innerException": null
+                }
+              }
+            }
+          ]
         }
       }
     }

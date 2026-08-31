@@ -1,5 +1,5 @@
 {
-  "title": "No compatible VM sizes",
+  "title": "Response when the base virtual machine profile is missing",
   "operationId": "VirtualMachineBulkOperations_BulkVdiFlexCreate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -40,8 +40,20 @@
     "400": {
       "body": {
         "error": {
-          "code": "NoAvailableVMSizes",
-          "message": "No requested VM size and availability zone combination is available in the eastus region. Change the requested VM sizes, zones, or allocation settings and try again."
+          "code": "BadRequestException",
+          "message": "ResourceConfigParameters.BaseProfile is required.",
+          "additionalInfo": [
+            {
+              "type": "ScheduledActionsError",
+              "info": {
+                "status": "Failed",
+                "timeStamp": "2026-08-31T18:00:00Z",
+                "innerError": {
+                  "innerException": null
+                }
+              }
+            }
+          ]
         }
       }
     }

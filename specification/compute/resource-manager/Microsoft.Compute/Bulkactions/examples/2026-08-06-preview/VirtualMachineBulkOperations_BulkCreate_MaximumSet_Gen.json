@@ -1,5 +1,5 @@
 {
-  "title": "Linux worker creation",
+  "title": "Create multiple Linux virtual machines",
   "operationId": "VirtualMachineBulkOperations_BulkCreate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -9,28 +9,12 @@
     "requestBody": {
       "resourceConfigParameters": {
         "baseProfile": {
-          "identity": {
-            "type": "SystemAssigned, UserAssigned",
-            "userAssignedIdentities": {
-              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/bulk-actions-identity": {}
-            }
-          },
-          "placement": {
-            "zonePlacementPolicy": "Any",
-            "includeZones": [
-              "1",
-              "2",
-              "3"
-            ]
-          },
-          "tags": {
-            "environment": "production",
-            "workload": "batch-processing",
-            "costCenter": "finance"
-          },
+          "resourceGroupName": "example-rg",
+          "computeApiVersion": "2024-11-01",
+          "location": "eastus",
           "properties": {
             "hardwareProfile": {
-              "vmSize": "Standard_D4s_v5"
+              "vmSize": "Standard_D2s_v5"
             },
             "storageProfile": {
               "imageReference": {
@@ -41,65 +25,27 @@
               },
               "osDisk": {
                 "osType": "Linux",
-                "name": "bulk-vm-osdisk",
-                "caching": "ReadWrite",
                 "createOption": "FromImage",
-                "diskSizeGB": 64,
                 "managedDisk": {
                   "storageAccountType": "Premium_LRS"
                 },
                 "deleteOption": "Delete"
-              },
-              "dataDisks": [
-                {
-                  "lun": 0,
-                  "name": "bulk-vm-data",
-                  "caching": "ReadOnly",
-                  "createOption": "Empty",
-                  "diskSizeGB": 128,
-                  "managedDisk": {
-                    "storageAccountType": "Premium_LRS"
-                  },
-                  "deleteOption": "Delete"
-                }
-              ],
-              "diskControllerType": "SCSI"
+              }
             },
             "osProfile": {
               "computerName": "bulk-vm",
               "adminUsername": "azureuser",
-              "adminPassword": "<Replace-With-A-Strong-Password1!>",
-              "customData": "I2Nsb3VkLWNvbmZpZwpwYWNrYWdlX3VwZGF0ZTogdHJ1ZQo=",
               "linuxConfiguration": {
-                "disablePasswordAuthentication": false,
+                "disablePasswordAuthentication": true,
                 "ssh": {
                   "publicKeys": [
                     {
                       "path": "/home/azureuser/.ssh/authorized_keys",
-                      "keyData": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA azureuser@example"
-                    }
-                  ]
-                },
-                "provisionVMAgent": true,
-                "patchSettings": {
-                  "patchMode": "AutomaticByPlatform",
-                  "assessmentMode": "AutomaticByPlatform"
-                }
-              },
-              "secrets": [
-                {
-                  "sourceVault": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.KeyVault/vaults/example-vault"
-                  },
-                  "vaultCertificates": [
-                    {
-                      "certificateUrl": "https://example-vault.vault.azure.net/secrets/vm-certificate/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                      "keyData": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPjBmFRaY5ZKkEizrXt/Rf5KlLGUGHASQUDarmqI3FZ3 azureuser@example"
                     }
                   ]
                 }
-              ],
-              "allowExtensionOperations": true,
-              "requireGuestProvisionSignal": true
+              }
             },
             "networkProfile": {
               "networkApiVersion": "2024-05-01",
@@ -109,101 +55,43 @@
                   "properties": {
                     "primary": true,
                     "deleteOption": "Delete",
-                    "enableAcceleratedNetworking": true,
                     "ipConfigurations": [
                       {
                         "name": "primary",
                         "properties": {
+                          "primary": true,
                           "subnet": {
                             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/bulk-vnet/subnets/compute"
-                          },
-                          "primary": true,
-                          "privateIPAddressVersion": "IPv4"
+                          }
                         }
                       }
                     ]
                   }
                 }
               ]
-            },
-            "securityProfile": {
-              "uefiSettings": {
-                "secureBootEnabled": true,
-                "vTpmEnabled": true
-              },
-              "encryptionAtHost": true,
-              "securityType": "TrustedLaunch"
-            },
-            "diagnosticsProfile": {
-              "bootDiagnostics": {
-                "enabled": true
-              }
-            },
-            "extensionsTimeBudget": "PT1H30M",
-            "userData": "IyEvYmluL2Jhc2gKZWNobyAiQnVsayBBY3Rpb25zIFZNIgo=",
-            "vmExtensions": [
-              {
-                "name": "AzureMonitorLinuxAgent",
-                "properties": {
-                  "publisher": "Microsoft.Azure.Monitor",
-                  "type": "AzureMonitorLinuxAgent",
-                  "typeHandlerVersion": "1.0",
-                  "autoUpgradeMinorVersion": true,
-                  "enableAutomaticUpgrade": true,
-                  "settings": {}
-                }
-              },
-              {
-                "name": "CustomScript",
-                "properties": {
-                  "publisher": "Microsoft.Azure.Extensions",
-                  "type": "CustomScript",
-                  "typeHandlerVersion": "2.1",
-                  "autoUpgradeMinorVersion": true,
-                  "settings": {},
-                  "protectedSettings": {
-                    "fileUris": [
-                      "https://examplestorage.blob.core.windows.net/scripts/configure.sh?<sas-token>"
-                    ],
-                    "commandToExecute": "bash configure.sh --registration-token <registration-token>"
-                  }
-                }
-              }
-            ]
-          },
-          "computeApiVersion": "2024-11-01"
+            }
+          }
         },
+        "resourceCount": 2,
+        "resourcePrefix": "bulk-vm-",
         "resourceOverrides": [
           {
-            "name": "bulk-vm-01",
-            "tags": {
-              "role": "worker",
-              "instance": "01"
-            },
+            "name": "bulk-vm-0",
             "properties": {
               "osProfile": {
-                "computerName": "bulk-vm-01"
+                "computerName": "bulk-vm-0"
               }
             }
           },
           {
-            "name": "bulk-vm-02",
-            "tags": {
-              "role": "worker",
-              "instance": "02"
-            },
+            "name": "bulk-vm-1",
             "properties": {
-              "hardwareProfile": {
-                "vmSize": "Standard_D8s_v5"
-              },
               "osProfile": {
-                "computerName": "bulk-vm-02"
+                "computerName": "bulk-vm-1"
               }
             }
           }
-        ],
-        "resourceCount": 2,
-        "resourcePrefix": "bulk-vm"
+        ]
       },
       "executionParameters": {
         "retryPolicy": {
@@ -223,47 +111,21 @@
         "description": "Create Resource request",
         "results": [
           {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-            "virtualMachineInfo": {
-              "vmSize": "Standard_D4s_v5",
-              "zone": "1"
-            },
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-0",
             "operation": {
               "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-0",
               "opType": "Create",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "deadline": "2026-07-10T18:00:00Z",
-              "deadlineType": "InitiateAt",
-              "state": "PendingScheduling",
-              "timezone": "UTC",
-              "retryPolicy": {
-                "retryCount": 3,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Delete"
-              }
+              "state": "PendingScheduling"
             }
           },
           {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
-            "virtualMachineInfo": {
-              "vmSize": "Standard_D8s_v5",
-              "zone": "2"
-            },
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-1",
             "operation": {
               "operationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-1",
               "opType": "Create",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "deadline": "2026-07-10T18:00:00Z",
-              "deadlineType": "InitiateAt",
-              "state": "PendingScheduling",
-              "timezone": "UTC",
-              "retryPolicy": {
-                "retryCount": 3,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Delete"
-              }
+              "state": "PendingScheduling"
             }
           }
         ]

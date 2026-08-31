@@ -1,5 +1,5 @@
 {
-  "title": "Mixed acknowledgment results",
+  "title": "Acknowledge operation errors with mixed results",
   "operationId": "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -18,14 +18,12 @@
     "200": {
       "body": {
         "acknowledged": [
-          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-        ],
-        "notFound": [
-          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
-        ],
-        "skipped": [
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "cccccccc-cccc-cccc-cccc-cccccccccccc"
-        ]
+        ],
+        "notFound": [],
+        "skipped": []
       }
     }
   }
