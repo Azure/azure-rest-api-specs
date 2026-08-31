@@ -151,7 +151,7 @@ interface DppCrossTenantVaultMappings {
   remove is ArmResourceActionSync<
     CrossTenantVaultMapping,
     void,
-    OkResponse,
+    ArmNoContentResponse,
     Error = CloudError
   >;
 }
