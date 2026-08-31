@@ -121,7 +121,6 @@ model BlobAccessPointConnectionProperties {
 @doc("A direct endpoint connection.")
 model BlobAccessPointEndpointConnectionProperties
   extends BlobAccessPointConnectionProperties {
-  @visibility(Lifecycle.Read)
   connectionType: BlobAccessPointConnectionType.Endpoint;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -137,7 +136,6 @@ model BlobAccessPointEndpointConnectionProperties
 @doc("A connection established through Azure Private Link.")
 model BlobAccessPointPrivateLinkConnectionProperties
   extends BlobAccessPointConnectionProperties {
-  @visibility(Lifecycle.Read)
   connectionType: BlobAccessPointConnectionType.PrivateLink;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -185,7 +183,6 @@ model BlobAccessPointRemoteAuthProperties {
 @doc("S3 access-key authentication properties.")
 model BlobAccessPointAccessKeyAuthProperties
   extends BlobAccessPointRemoteAuthProperties {
-  @visibility(Lifecycle.Read)
   authType: BlobAccessPointRemoteAuthType.AccessKey;
 
   @minLength(3)
@@ -226,9 +223,7 @@ alias BlobAccessPointS3CompatibleSourceProperties = {
 @doc("A NetApp ONTAP backing source.")
 model BlobAccessPointNetAppOntapSourceProperties
   extends BlobAccessPointSourceProperties {
-  @visibility(Lifecycle.Read)
   sourceType: BlobAccessPointSourceType.NetAppOntap;
-
   ...BlobAccessPointS3CompatibleSourceProperties;
 }
 
@@ -236,9 +231,7 @@ model BlobAccessPointNetAppOntapSourceProperties
 @doc("An Azure NetApp Files backing source.")
 model BlobAccessPointAzureNetAppFilesSourceProperties
   extends BlobAccessPointSourceProperties {
-  @visibility(Lifecycle.Read)
   sourceType: BlobAccessPointSourceType.AzureNetAppFiles;
-
   ...BlobAccessPointS3CompatibleSourceProperties;
 }
 
@@ -246,9 +239,7 @@ model BlobAccessPointAzureNetAppFilesSourceProperties
 @doc("A Dell OneFS backing source.")
 model BlobAccessPointDellOneFsSourceProperties
   extends BlobAccessPointSourceProperties {
-  @visibility(Lifecycle.Read)
   sourceType: BlobAccessPointSourceType.DellOneFs;
-
   ...BlobAccessPointS3CompatibleSourceProperties;
 }
 
@@ -256,9 +247,7 @@ model BlobAccessPointDellOneFsSourceProperties
 @doc("A Qumulo backing source.")
 model BlobAccessPointQumuloSourceProperties
   extends BlobAccessPointSourceProperties {
-  @visibility(Lifecycle.Read)
   sourceType: BlobAccessPointSourceType.Qumulo;
-
   ...BlobAccessPointS3CompatibleSourceProperties;
 }
 
@@ -266,9 +255,7 @@ model BlobAccessPointQumuloSourceProperties
 @doc("A Commvault backing source.")
 model BlobAccessPointCommvaultSourceProperties
   extends BlobAccessPointSourceProperties {
-  @visibility(Lifecycle.Read)
   sourceType: BlobAccessPointSourceType.Commvault;
-
   ...BlobAccessPointS3CompatibleSourceProperties;
 }
 
@@ -276,9 +263,7 @@ model BlobAccessPointCommvaultSourceProperties
 @doc("A Nasuni backing source.")
 model BlobAccessPointNasuniSourceProperties
   extends BlobAccessPointSourceProperties {
-  @visibility(Lifecycle.Read)
   sourceType: BlobAccessPointSourceType.Nasuni;
-
   ...BlobAccessPointS3CompatibleSourceProperties;
 }
 
@@ -286,10 +271,154 @@ model BlobAccessPointNasuniSourceProperties
 @doc("Another S3-compatible backing source.")
 model BlobAccessPointGenericS3SourceProperties
   extends BlobAccessPointSourceProperties {
-  @visibility(Lifecycle.Read)
   sourceType: BlobAccessPointSourceType.S3Compatible;
-
   ...BlobAccessPointS3CompatibleSourceProperties;
+}
+
+@added(Versions.v2026_09_01)
+@discriminator("connectionType")
+@doc("Details for connecting to a backing data source.")
+model BlobAccessPointConnectionPropertiesUpdate {
+  @doc("The connection type. This value determines the remaining shape of the connection object.")
+  connectionType: BlobAccessPointConnectionType;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A direct endpoint connection.")
+model BlobAccessPointEndpointConnectionPropertiesUpdate
+  extends BlobAccessPointConnectionPropertiesUpdate {
+  connectionType: BlobAccessPointConnectionType.Endpoint;
+
+  @doc("TLS certificate verification behavior. Defaults to Perform when not specified.")
+  tlsVerification?: BlobAccessPointTlsVerification;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A connection established through Azure Private Link.")
+model BlobAccessPointPrivateLinkConnectionPropertiesUpdate
+  extends BlobAccessPointConnectionPropertiesUpdate {
+  connectionType: BlobAccessPointConnectionType.PrivateLink;
+
+  @doc("TLS certificate verification behavior. Defaults to Perform when not specified.")
+  tlsVerification?: BlobAccessPointTlsVerification;
+}
+
+@added(Versions.v2026_09_01)
+@discriminator("authType")
+@doc("Authentication properties for a non-Azure S3-compatible source.")
+model BlobAccessPointRemoteAuthPropertiesUpdate {
+  @doc("The authentication type. This value determines the remaining shape of the authentication object.")
+  authType: BlobAccessPointRemoteAuthType;
+}
+
+@added(Versions.v2026_09_01)
+@doc("S3 access-key authentication properties.")
+model BlobAccessPointAccessKeyAuthPropertiesUpdate
+  extends BlobAccessPointRemoteAuthPropertiesUpdate {
+  authType: BlobAccessPointRemoteAuthType.AccessKey;
+
+  @minLength(3)
+  @doc("The access key ID.")
+  accessKeyId?: string;
+
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
+  @minLength(3)
+  @doc("The secret access key. This value is never returned by read or list operations.")
+  secretAccessKey?: string;
+
+  @doc("The region used by the request-signing algorithm. Defaults to 'us-east-1' when not specified.")
+  signingRegion?: string;
+
+  @doc("The host used when computing request signatures. The endpoint host is used by default.")
+  hostOverride?: string;
+}
+
+@added(Versions.v2026_09_01)
+@discriminator("sourceType")
+@doc("Information about the data source exposed through a Blob Access Point.")
+model BlobAccessPointSourcePropertiesUpdate {
+  @doc("The source type. This value determines the remaining shape of the source object.")
+  sourceType: BlobAccessPointSourceType;
+}
+
+/** Properties for updating a non-Azure S3-compatible backing source. */
+alias BlobAccessPointS3CompatibleSourcePropertiesUpdate = {
+  @doc("Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards.")
+  connection?: BlobAccessPointConnectionPropertiesUpdate;
+
+  @doc("Details for authenticating to the backing data source.")
+  auth?: BlobAccessPointRemoteAuthPropertiesUpdate;
+};
+
+@added(Versions.v2026_09_01)
+@doc("A NetApp ONTAP backing source.")
+model BlobAccessPointNetAppOntapSourcePropertiesUpdate
+  extends BlobAccessPointSourcePropertiesUpdate {
+  sourceType: BlobAccessPointSourceType.NetAppOntap;
+  ...BlobAccessPointS3CompatibleSourcePropertiesUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("An Azure NetApp Files backing source.")
+model BlobAccessPointAzureNetAppFilesSourcePropertiesUpdate
+  extends BlobAccessPointSourcePropertiesUpdate {
+  sourceType: BlobAccessPointSourceType.AzureNetAppFiles;
+  ...BlobAccessPointS3CompatibleSourcePropertiesUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A Dell OneFS backing source.")
+model BlobAccessPointDellOneFsSourcePropertiesUpdate
+  extends BlobAccessPointSourcePropertiesUpdate {
+  sourceType: BlobAccessPointSourceType.DellOneFs;
+  ...BlobAccessPointS3CompatibleSourcePropertiesUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A Qumulo backing source.")
+model BlobAccessPointQumuloSourcePropertiesUpdate
+  extends BlobAccessPointSourcePropertiesUpdate {
+  sourceType: BlobAccessPointSourceType.Qumulo;
+  ...BlobAccessPointS3CompatibleSourcePropertiesUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A Commvault backing source.")
+model BlobAccessPointCommvaultSourcePropertiesUpdate
+  extends BlobAccessPointSourcePropertiesUpdate {
+  sourceType: BlobAccessPointSourceType.Commvault;
+  ...BlobAccessPointS3CompatibleSourcePropertiesUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A Nasuni backing source.")
+model BlobAccessPointNasuniSourcePropertiesUpdate
+  extends BlobAccessPointSourcePropertiesUpdate {
+  sourceType: BlobAccessPointSourceType.Nasuni;
+  ...BlobAccessPointS3CompatibleSourcePropertiesUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Another S3-compatible backing source.")
+model BlobAccessPointGenericS3SourcePropertiesUpdate
+  extends BlobAccessPointSourcePropertiesUpdate {
+  sourceType: BlobAccessPointSourceType.S3Compatible;
+  ...BlobAccessPointS3CompatibleSourcePropertiesUpdate;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Details of a Blob Access Point configuration.")
+model BlobAccessPointConfigurationPropertiesUpdate {
+  @doc("The configuration state. A configuration is created in the Active state when this value is not specified.")
+  state?: BlobAccessPointConfigurationState;
+
+  @maxLength(250)
+  @doc("An arbitrary description of the Blob Access Point configuration.")
+  description?: string;
+
+  @doc("Information about the backing data source.")
+  source?: BlobAccessPointSourcePropertiesUpdate;
 }
 
 @added(Versions.v2026_09_01)
@@ -325,6 +454,15 @@ model BlobAccessPointConfigurationProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+}
+
+@added(Versions.v2026_09_01)
+@doc("A BlobAccessPointConfiguration is a tracked Azure resource modeled as a sub-resource of a Storage Account.")
+model BlobAccessPointConfigurationUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: BlobAccessPointConfigurationPropertiesUpdate;
 }
 
 @added(Versions.v2026_09_01)
@@ -384,9 +522,9 @@ interface BlobAccessPointConfigurations {
 
   @doc("Update a Blob Access Point configuration.")
   @added(Versions.v2026_09_01)
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     BlobAccessPointConfiguration,
-    BlobAccessPointConfigurationProperties,
+    PatchModel = BlobAccessPointConfigurationUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = BlobAccessPointConfiguration> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
