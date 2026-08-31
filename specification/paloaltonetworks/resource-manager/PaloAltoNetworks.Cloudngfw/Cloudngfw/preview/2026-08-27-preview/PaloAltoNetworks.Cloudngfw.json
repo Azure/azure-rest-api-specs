@@ -7102,14 +7102,10 @@
         "sessionDrainTimeoutInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Time in minutes to keep serving existing traffic during scale-in or upgrade events before removing a firewall instance, Default will be 15.",
+          "description": "Time in minutes to keep serving existing traffic during scale-in or upgrade events before removing a firewall instance. Can only be set on PUT, not updatable via PATCH, Default will be 15.",
           "default": 15,
           "minimum": 15,
-          "maximum": 120,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "maximum": 120
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",

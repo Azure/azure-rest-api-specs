@@ -1284,10 +1284,9 @@ model FirewallDeploymentProperties {
   firewallSku?: string = "STANDARD";
 
   /**
-   * Time in minutes to keep serving existing traffic during scale-in or upgrade events before removing a firewall instance, Default will be 15.
+   * Time in minutes to keep serving existing traffic during scale-in or upgrade events before removing a firewall instance. Can only be set on PUT, not updatable via PATCH, Default will be 15.
    */
   @added(Versions.v2026_08_27_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minValue(15)
   @maxValue(120)
   sessionDrainTimeoutInMinutes?: int32 = 15;
