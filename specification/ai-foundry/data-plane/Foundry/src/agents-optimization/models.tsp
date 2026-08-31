@@ -257,8 +257,10 @@ model AgentOptimizationJobResult {
 
 @doc("Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model AgentOptimizationJob
-  is JobLike<AgentOptimizationJobResult, AgentOptimizationJobInputs> {
+model AgentOptimizationJob is JobLike<
+  AgentOptimizationJobResult,
+  AgentOptimizationJobInputs
+> {
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
@@ -282,8 +284,10 @@ model AgentOptimizationJob
 
 @doc("Slim job representation returned by the LIST endpoint.")
 @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-model AgentOptimizationJobListItem
-  is OmitProperties<AgentOptimizationJob, "inputs" | "result" | "warnings"> {
+model AgentOptimizationJobListItem is OmitProperties<
+  AgentOptimizationJob,
+  "inputs" | "result" | "warnings"
+> {
   @doc("The agent targeted by this optimization job.")
   @visibility(Lifecycle.Read)
   agent?: OptimizedAgentIdentifier;

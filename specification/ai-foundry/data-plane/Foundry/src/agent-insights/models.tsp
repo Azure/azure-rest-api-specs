@@ -308,8 +308,10 @@ model AgentInsightMonitor {
 }
 
 /** An Agent Insights monitor summary returned by list operations. */
-model AgentInsightMonitorListItem
-  is OmitProperties<AgentInsightMonitor, "overview">;
+model AgentInsightMonitorListItem is OmitProperties<
+  AgentInsightMonitor,
+  "overview"
+>;
 
 /** Fields accepted when creating an Agent Insights monitor for an agent. */
 model AgentInsightMonitorCreate {
