@@ -20,6 +20,9 @@ model RegistryDevicePropertiesBase {
   @visibility(Lifecycle.Read)
   uuid?: string;
 
+  /** A pointer to type metadata about this device (e.g., The WoT Thing Model for the device). */
+  deviceTypeRef?: url;
+
   /** A Device ID provided by the customer. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   externalDeviceId?: string;
