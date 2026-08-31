@@ -6054,6 +6054,507 @@
         ]
       }
     },
+    "NeuroShieldAgentHealthStatus": {
+      "type": "string",
+      "description": "Runtime health status of the Neuron agent.",
+      "enum": [
+        "Unknown",
+        "Healthy",
+        "PartiallyHealthy",
+        "Unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "NeuroShieldAgentHealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Agent has never sent a heartbeat."
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Agent heartbeat is within the expected interval."
+          },
+          {
+            "name": "PartiallyHealthy",
+            "value": "PartiallyHealthy",
+            "description": "VMSS aggregate status where some agents are healthy and others are not."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Agent heartbeat is stale beyond the expected interval."
+          }
+        ]
+      }
+    },
+    "NeuroShieldExtensionStatus": {
+      "type": "string",
+      "description": "Extension deployment status for a protected resource.",
+      "enum": [
+        "NotInstalled",
+        "Installing",
+        "Installed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "NeuroShieldExtensionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotInstalled",
+            "value": "NotInstalled",
+            "description": "Extension is not installed."
+          },
+          {
+            "name": "Installing",
+            "value": "Installing",
+            "description": "Extension installation is in progress."
+          },
+          {
+            "name": "Installed",
+            "value": "Installed",
+            "description": "Extension is installed and running."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Extension installation failed."
+          }
+        ]
+      }
+    },
+    "NeuroShieldFindingProperties": {
+      "type": "object",
+      "description": "Properties of a finding resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/NeuroShieldSystemChildProvisioningState",
+          "description": "Provisioning state of the finding resource.",
+          "readOnly": true
+        },
+        "cveId": {
+          "type": "string",
+          "description": "CVE identifier associated with this finding.",
+          "readOnly": true
+        },
+        "severity": {
+          "$ref": "#/definitions/NeuroShieldSeverityThreshold",
+          "description": "Severity of the finding.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the finding.",
+          "readOnly": true
+        },
+        "detectedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Detection timestamp for the finding.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/NeuroShieldFindingStatus",
+          "description": "Runtime operational status of the finding.",
+          "readOnly": true
+        }
+      }
+    },
+    "NeuroShieldFindingStatus": {
+      "type": "string",
+      "description": "Runtime operational status for findings.",
+      "enum": [
+        "Active",
+        "MitigationInProgress",
+        "Mitigated",
+        "MitigationsExhausted",
+        "Unreachable"
+      ],
+      "x-ms-enum": {
+        "name": "NeuroShieldFindingStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "No mitigation has resolved the finding yet."
+          },
+          {
+            "name": "MitigationInProgress",
+            "value": "MitigationInProgress",
+            "description": "One or more mitigation actions are currently running."
+          },
+          {
+            "name": "Mitigated",
+            "value": "Mitigated",
+            "description": "The finding has at least one successful mitigation."
+          },
+          {
+            "name": "MitigationsExhausted",
+            "value": "MitigationsExhausted",
+            "description": "All mitigations were attempted without successful resolution."
+          },
+          {
+            "name": "Unreachable",
+            "value": "Unreachable",
+            "description": "Mitigation execution is blocked by communication failure."
+          }
+        ]
+      }
+    },
+    "NeuroShieldMitigationProperties": {
+      "type": "object",
+      "description": "Properties of a mitigation resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/NeuroShieldSystemChildProvisioningState",
+          "description": "Provisioning state of the mitigation resource.",
+          "readOnly": true
+        },
+        "findingId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource identifier of the associated finding.",
+          "readOnly": true
+        },
+        "cveId": {
+          "type": "string",
+          "description": "CVE identifier addressed by this mitigation.",
+          "readOnly": true
+        },
+        "virtualMachineArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the virtual machine targeted by this mitigation.",
+          "readOnly": true
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Safety and completeness score from 0 to 100.",
+          "minimum": 0,
+          "maximum": 100,
+          "readOnly": true
+        },
+        "commandsSummary": {
+          "type": "string",
+          "description": "User-friendly summary of the commands run by this mitigation.",
+          "readOnly": true
+        },
+        "isRollbackable": {
+          "type": "boolean",
+          "description": "Indicates whether rollback is available for this mitigation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/NeuroShieldMitigationStatus",
+          "description": "Runtime operational status of the mitigation.",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "Human-readable details for the current mitigation status.",
+          "readOnly": true
+        },
+        "appliedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the mitigation was applied.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "findingId",
+        "cveId",
+        "virtualMachineArmId",
+        "score",
+        "commandsSummary",
+        "isRollbackable",
+        "status"
+      ]
+    },
+    "NeuroShieldMitigationStatus": {
+      "type": "string",
+      "description": "Runtime operational status for mitigations.",
+      "enum": [
+        "Queued",
+        "AwaitingApproval",
+        "InProgress",
+        "Succeeded",
+        "Skipped",
+        "Failed",
+        "RollbackInProgress",
+        "RolledBack",
+        "RollbackFailed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "NeuroShieldMitigationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "Mitigation is queued for execution."
+          },
+          {
+            "name": "AwaitingApproval",
+            "value": "AwaitingApproval",
+            "description": "Mitigation is waiting for explicit approval."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Mitigation execution is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Mitigation completed successfully."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "Mitigation was not applied because validation determined it was unnecessary."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Mitigation execution failed."
+          },
+          {
+            "name": "RollbackInProgress",
+            "value": "RollbackInProgress",
+            "description": "Rollback execution is in progress."
+          },
+          {
+            "name": "RolledBack",
+            "value": "RolledBack",
+            "description": "Mitigation rollback completed successfully."
+          },
+          {
+            "name": "RollbackFailed",
+            "value": "RollbackFailed",
+            "description": "Mitigation rollback failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Mitigation execution was canceled."
+          }
+        ]
+      }
+    },
+    "NeuroShieldPatch": {
+      "type": "object",
+      "description": "Patch request body for updating a NeuroShield resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NeuroShieldPatchProperties",
+          "description": "Patch properties for the NeuroShield resource."
+        }
+      }
+    },
+    "NeuroShieldPatchProperties": {
+      "type": "object",
+      "description": "Properties to patch on a NeuroShield resource.",
+      "properties": {
+        "responseMode": {
+          "$ref": "#/definitions/NeuroShieldResponseMode",
+          "description": "Response mode that controls mitigation serving behavior."
+        },
+        "severityThreshold": {
+          "$ref": "#/definitions/NeuroShieldSeverityThreshold",
+          "description": "Minimum severity level for mitigation generation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the NeuroShield resource."
+        }
+      }
+    },
+    "NeuroShieldProperties": {
+      "type": "object",
+      "description": "Properties of the NeuroShield resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateNeuroShield",
+          "description": "Provisioning state of the NeuroShield resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "System-generated GUID for the NeuroShield resource.",
+          "readOnly": true
+        },
+        "responseMode": {
+          "$ref": "#/definitions/NeuroShieldResponseMode",
+          "description": "Response mode that controls mitigation serving behavior."
+        },
+        "severityThreshold": {
+          "$ref": "#/definitions/NeuroShieldSeverityThreshold",
+          "description": "Minimum severity level for mitigation generation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the NeuroShield resource."
+        }
+      },
+      "required": [
+        "responseMode"
+      ]
+    },
+    "NeuroShieldProtectedResourceProperties": {
+      "type": "object",
+      "description": "Properties of a protected resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateNeuroShield",
+          "description": "Provisioning state of the protected resource.",
+          "readOnly": true
+        },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the target virtual machine or virtual machine scale set.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              },
+              {
+                "type": "Microsoft.Compute/virtualMachineScaleSets"
+              }
+            ]
+          }
+        },
+        "extensionStatus": {
+          "$ref": "#/definitions/NeuroShieldExtensionStatus",
+          "description": "Deployment status of the Neuron VM extension.",
+          "readOnly": true
+        },
+        "agentHealthStatus": {
+          "$ref": "#/definitions/NeuroShieldAgentHealthStatus",
+          "description": "Runtime health status of the Neuron agent.",
+          "readOnly": true
+        },
+        "lastHeartbeatTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last successful heartbeat timestamp from the Neuron agent.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetResourceId"
+      ]
+    },
+    "NeuroShieldResponseMode": {
+      "type": "string",
+      "description": "Response modes for mitigation serving behavior.",
+      "enum": [
+        "Auto",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "NeuroShieldResponseMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Automatically queues and serves mitigations."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Requires explicit customer approval before serving mitigations."
+          }
+        ]
+      }
+    },
+    "NeuroShieldSeverityThreshold": {
+      "type": "string",
+      "description": "Severity threshold used for finding and mitigation generation.",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "x-ms-enum": {
+        "name": "NeuroShieldSeverityThreshold",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Critical severity threshold."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High severity threshold."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium severity threshold."
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low severity threshold."
+          }
+        ]
+      }
+    },
+    "NeuroShieldSystemChildProvisioningState": {
+      "type": "string",
+      "description": "Provisioning states for system-generated child resources.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "NeuroShieldSystemChildProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Child resource is being deleted."
+          }
+        ]
+      }
+    },
     "NextHopType": {
       "type": "string",
       "description": "Next hop type.",
@@ -7122,6 +7623,54 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deleting"
+          }
+        ]
+      }
+    },
+    "ProvisioningStateNeuroShield": {
+      "type": "string",
+      "description": "Provisioning states of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningStateNeuroShield",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
           }
         ]
       }

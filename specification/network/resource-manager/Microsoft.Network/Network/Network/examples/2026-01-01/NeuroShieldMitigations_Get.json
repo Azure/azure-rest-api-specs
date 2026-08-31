@@ -1,0 +1,32 @@
+{
+  "operationId": "NeuroShieldMitigations_Get",
+  "title": "Get mitigation",
+  "description": "Gets a mitigation under a protected resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "protectedResourceName": "vm-01",
+    "mitigationId": "mitigation-01",
+    "api-version": "2026-01-01",
+    "neuroShieldName": "myNeuroShield"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mitigation-01",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.network/neuroShields/myNeuroShield/protectedResources/vm-01/mitigations/mitigation-01",
+        "type": "microsoft.network/neuroShields/protectedResources/mitigations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "findingId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.network/neuroShields/myNeuroShield/protectedResources/vm-01/findings/CVE-2026-12345",
+          "cveId": "CVE-2026-12345",
+          "virtualMachineArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/vm-01",
+          "score": 95,
+          "commandsSummary": "Updates the affected kernel packages.",
+          "isRollbackable": true,
+          "status": "AwaitingApproval"
+        }
+      }
+    }
+  }
+}

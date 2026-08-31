@@ -1,0 +1,1463 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2026-01-01",
+    "description": "APIs to manage Microsoft Azure network resources.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "NeuroShields"
+    },
+    {
+      "name": "NeuroShieldProtectedResources"
+    },
+    {
+      "name": "NeuroShieldFindings"
+    },
+    {
+      "name": "NeuroShieldMitigations"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/neuroShields": {
+      "get": {
+        "operationId": "NeuroShields_ListBySubscription",
+        "tags": [
+          "NeuroShields"
+        ],
+        "summary": "Gets all NeuroShield resources in a subscription.",
+        "description": "Gets all NeuroShield resources in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List NeuroShield resources by subscription": {
+            "$ref": "./examples/NeuroShields_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields": {
+      "get": {
+        "operationId": "NeuroShields_ListByResourceGroup",
+        "tags": [
+          "NeuroShields"
+        ],
+        "summary": "Gets all NeuroShield resources in a resource group.",
+        "description": "Gets all NeuroShield resources in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List NeuroShield resources by resource group": {
+            "$ref": "./examples/NeuroShields_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}": {
+      "get": {
+        "operationId": "NeuroShields_Get",
+        "tags": [
+          "NeuroShields"
+        ],
+        "summary": "Gets a NeuroShield resource.",
+        "description": "Gets a NeuroShield resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NeuroShield resource": {
+            "$ref": "./examples/NeuroShields_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NeuroShields_CreateOrUpdate",
+        "tags": [
+          "NeuroShields"
+        ],
+        "summary": "Creates or updates a NeuroShield resource.",
+        "description": "Creates or updates a NeuroShield resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The entity tag that makes the request conditional.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The create or update request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update NeuroShield resource": {
+            "$ref": "./examples/NeuroShields_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NeuroShields_Update",
+        "tags": [
+          "NeuroShields"
+        ],
+        "summary": "Updates the tags or properties of a NeuroShield resource.",
+        "description": "Updates the tags or properties of a NeuroShield resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The entity tag that makes the request conditional.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The patch request body.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/NeuroShieldPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update NeuroShield resource": {
+            "$ref": "./examples/NeuroShields_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NeuroShields_Delete",
+        "tags": [
+          "NeuroShields"
+        ],
+        "summary": "Deletes a NeuroShield resource.",
+        "description": "Deletes a NeuroShield resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete NeuroShield resource": {
+            "$ref": "./examples/NeuroShields_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources": {
+      "get": {
+        "operationId": "NeuroShieldProtectedResources_List",
+        "tags": [
+          "NeuroShieldProtectedResources"
+        ],
+        "summary": "Lists all protected resources under a NeuroShield resource.",
+        "description": "Lists all protected resources under a NeuroShield resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldProtectedResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List protected resources": {
+            "$ref": "./examples/NeuroShieldProtectedResources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}": {
+      "get": {
+        "operationId": "NeuroShieldProtectedResources_Get",
+        "tags": [
+          "NeuroShieldProtectedResources"
+        ],
+        "summary": "Gets a protected resource under a NeuroShield resource.",
+        "description": "Gets a protected resource under a NeuroShield resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldProtectedResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get protected resource": {
+            "$ref": "./examples/NeuroShieldProtectedResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NeuroShieldProtectedResources_CreateOrUpdate",
+        "tags": [
+          "NeuroShieldProtectedResources"
+        ],
+        "summary": "Creates or updates a protected resource under a NeuroShield resource.",
+        "description": "Creates or updates a protected resource under a NeuroShield resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The create or update request body for a protected resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldProtectedResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NeuroShieldProtectedResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldProtectedResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'NeuroShieldProtectedResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldProtectedResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update protected resource": {
+            "$ref": "./examples/NeuroShieldProtectedResources_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/NeuroShieldProtectedResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NeuroShieldProtectedResources_Delete",
+        "tags": [
+          "NeuroShieldProtectedResources"
+        ],
+        "summary": "Deletes a protected resource under a NeuroShield resource.",
+        "description": "Deletes a protected resource under a NeuroShield resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete protected resource": {
+            "$ref": "./examples/NeuroShieldProtectedResources_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings": {
+      "get": {
+        "operationId": "NeuroShieldFindings_List",
+        "tags": [
+          "NeuroShieldFindings"
+        ],
+        "summary": "Lists findings under a protected resource.",
+        "description": "Lists findings under a protected resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldFindingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List findings": {
+            "$ref": "./examples/NeuroShieldFindings_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings/{findingId}": {
+      "get": {
+        "operationId": "NeuroShieldFindings_Get",
+        "tags": [
+          "NeuroShieldFindings"
+        ],
+        "summary": "Gets a finding under a protected resource.",
+        "description": "Gets a finding under a protected resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "findingId",
+            "in": "path",
+            "description": "The system-generated identifier of the finding.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldFinding"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get finding": {
+            "$ref": "./examples/NeuroShieldFindings_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings/{findingId}/mitigate": {
+      "post": {
+        "operationId": "NeuroShieldFindings_Mitigate",
+        "tags": [
+          "NeuroShieldFindings"
+        ],
+        "summary": "Triggers mitigation for all awaiting-approval mitigations under a finding.",
+        "description": "Triggers mitigation for all awaiting-approval mitigations under a finding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "findingId",
+            "in": "path",
+            "description": "The system-generated identifier of the finding.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Mitigate finding": {
+            "$ref": "./examples/NeuroShieldFindings_Mitigate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings/{findingId}/rollback": {
+      "post": {
+        "operationId": "NeuroShieldFindings_Rollback",
+        "tags": [
+          "NeuroShieldFindings"
+        ],
+        "summary": "Rolls back succeeded rollbackable mitigations under a finding.",
+        "description": "Rolls back succeeded rollbackable mitigations under a finding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "findingId",
+            "in": "path",
+            "description": "The system-generated identifier of the finding.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rollback finding mitigations": {
+            "$ref": "./examples/NeuroShieldFindings_Rollback.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations": {
+      "get": {
+        "operationId": "NeuroShieldMitigations_List",
+        "tags": [
+          "NeuroShieldMitigations"
+        ],
+        "summary": "Lists mitigations under a protected resource.",
+        "description": "Lists mitigations under a protected resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldMitigationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List mitigations": {
+            "$ref": "./examples/NeuroShieldMitigations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}": {
+      "get": {
+        "operationId": "NeuroShieldMitigations_Get",
+        "tags": [
+          "NeuroShieldMitigations"
+        ],
+        "summary": "Gets a mitigation under a protected resource.",
+        "description": "Gets a mitigation under a protected resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "mitigationId",
+            "in": "path",
+            "description": "The system-generated identifier of the mitigation.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NeuroShieldMitigation"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get mitigation": {
+            "$ref": "./examples/NeuroShieldMitigations_Get.json"
+          },
+          "Get mitigation (Failed status)": {
+            "$ref": "./examples/NeuroShieldMitigations_Get_Failed.json"
+          },
+          "Get mitigation (InProgress status)": {
+            "$ref": "./examples/NeuroShieldMitigations_Get_InProgress.json"
+          },
+          "Get mitigation (Queued status)": {
+            "$ref": "./examples/NeuroShieldMitigations_Get_Queued.json"
+          },
+          "Get mitigation (Succeeded status)": {
+            "$ref": "./examples/NeuroShieldMitigations_Get_Succeeded.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/cancel": {
+      "post": {
+        "operationId": "NeuroShieldMitigations_Cancel",
+        "tags": [
+          "NeuroShieldMitigations"
+        ],
+        "summary": "Cancels a mitigation.",
+        "description": "Cancels a mitigation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "mitigationId",
+            "in": "path",
+            "description": "The system-generated identifier of the mitigation.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel mitigation": {
+            "$ref": "./examples/NeuroShieldMitigations_Cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/execute": {
+      "post": {
+        "operationId": "NeuroShieldMitigations_Execute",
+        "tags": [
+          "NeuroShieldMitigations"
+        ],
+        "summary": "Approves and queues a mitigation for execution.",
+        "description": "Approves and queues a mitigation for execution.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "mitigationId",
+            "in": "path",
+            "description": "The system-generated identifier of the mitigation.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Execute mitigation": {
+            "$ref": "./examples/NeuroShieldMitigations_Execute.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/rollback": {
+      "post": {
+        "operationId": "NeuroShieldMitigations_Rollback",
+        "tags": [
+          "NeuroShieldMitigations"
+        ],
+        "summary": "Rolls back a mitigation when rollback is available.",
+        "description": "Rolls back a mitigation when rollback is available.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "neuroShieldName",
+            "in": "path",
+            "description": "The name of the NeuroShield resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "protectedResourceName",
+            "in": "path",
+            "description": "The name of the protected resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "mitigationId",
+            "in": "path",
+            "description": "The system-generated identifier of the mitigation.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rollback mitigation": {
+            "$ref": "./examples/NeuroShieldMitigations_Rollback.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "NeuroShieldFinding": {
+      "type": "object",
+      "description": "ARM proxy child resource representing a finding.",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json#/definitions/NeuroShieldFindingProperties",
+          "description": "Properties of the finding resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NeuroShieldFindingListResult": {
+      "type": "object",
+      "description": "The response of a NeuroShieldFinding list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NeuroShieldFinding items on this page",
+          "items": {
+            "$ref": "#/definitions/NeuroShieldFinding"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NeuroShieldMitigation": {
+      "type": "object",
+      "description": "ARM proxy child resource representing a mitigation.",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json#/definitions/NeuroShieldMitigationProperties",
+          "description": "Properties of the mitigation resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NeuroShieldMitigationListResult": {
+      "type": "object",
+      "description": "The response of a NeuroShieldMitigation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NeuroShieldMitigation items on this page",
+          "items": {
+            "$ref": "#/definitions/NeuroShieldMitigation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NeuroShieldProtectedResource": {
+      "type": "object",
+      "description": "ARM proxy child resource representing a protected resource.",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json#/definitions/NeuroShieldProtectedResourceProperties",
+          "description": "Properties of the protected resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NeuroShieldProtectedResourceListResult": {
+      "type": "object",
+      "description": "The response of a NeuroShieldProtectedResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NeuroShieldProtectedResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NeuroShieldProtectedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NeuroShieldResource": {
+      "type": "object",
+      "description": "ARM tracked resource representing a NeuroShield instance.",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json#/definitions/NeuroShieldProperties",
+          "description": "Properties of the NeuroShield resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true,
+          "x-ms-client-name": "eTag"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NeuroShieldResourceListResult": {
+      "type": "object",
+      "description": "The response of a NeuroShieldResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NeuroShieldResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NeuroShieldResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}
