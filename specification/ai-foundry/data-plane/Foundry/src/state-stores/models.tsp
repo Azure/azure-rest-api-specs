@@ -96,7 +96,7 @@ model StateStoreItem {
 
   @doc("Optimistic-concurrency token for this item; also echoed in the `ETag` response header.")
   @visibility(Lifecycle.Read)
-  etag: string;
+  etag: Azure.Core.eTag;
 
   @doc("The Unix timestamp (seconds) when the item was created.")
   @visibility(Lifecycle.Read)
@@ -219,7 +219,7 @@ alias UpdateItemRequest = {
 
   @doc("`\"<etag>\"` to update a specific version, or `\"*\"` to update any existing version. Omit for unconditional last-write-wins.")
   @header("If-Match")
-  if_match?: string;
+  if_match?: Azure.Core.eTag;
 
   ...Update<StateStoreItem>;
 };
@@ -257,14 +257,14 @@ alias DeleteItemRequest = {
 
   @doc("`\"<etag>\"` for a conditional delete. Omit for unconditional delete.")
   @header("If-Match")
-  if_match?: string;
+  if_match?: Azure.Core.eTag;
 };
 
 /** Response header returned with successful item reads and writes. */
 alias StateStoreItemEtagResponseHeader = {
   @doc("The optimistic-concurrency token for the item. This value is identical to the `etag` property in the response body.")
   @header("ETag")
-  etag_header: string;
+  etag_header: Azure.Core.eTag;
 };
 
 /** Response for creating an item. */
@@ -288,5 +288,5 @@ model StateStoreConditionalErrorResponse {
 
   @doc("The current optimistic-concurrency token when the request fails with 412 Precondition Failed and the item exists.")
   @header("ETag")
-  etag_header?: string;
+  etag_header?: Azure.Core.eTag;
 }
