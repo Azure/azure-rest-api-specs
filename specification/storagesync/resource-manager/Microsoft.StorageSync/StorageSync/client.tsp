@@ -28,11 +28,6 @@ using Microsoft.StorageSync;
   "IsBackupEnabled",
   "csharp"
 );
-@@clientName(
-  CloudEndpointUpdateProperties.changeEnumerationIntervalDays,
-  "ChangeEnumerationIntervalDays",
-  "csharp"
-);
 @@alternateType(
   CloudEndpointProperties.storageAccountResourceId,
   armResourceIdentifier,
