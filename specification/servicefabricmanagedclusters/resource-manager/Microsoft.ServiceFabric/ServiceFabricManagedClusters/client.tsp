@@ -692,6 +692,11 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(
+  ProxyAgentSettings.addProxyAgentExtension,
+  "ShouldAddProxyAgentExtension",
+  "csharp"
+);
+@@clientName(
   ManagedMaintenanceWindowStatus.get,
   "GetManagedMaintenanceWindowStatus",
   "csharp"
