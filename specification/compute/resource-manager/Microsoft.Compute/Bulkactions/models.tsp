@@ -350,7 +350,7 @@ model BulkVMConfiguration {
 @doc("The shared and per-virtual-machine configuration for a bulk create action.")
 model ResourceProvisionPayload {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON object to allow loosely-typed VM configuration passthrough"
-  @doc("The virtual machine configuration applied to every virtual machine in the bulk create action.")
+  @doc("The virtual machine configuration as a JSON object applied to every virtual machine in the bulk create action.")
   @typeChangedFrom(Versions.`2026-07-06-preview`, BulkVMConfiguration)
   baseProfile?: Record<unknown>;
 
