@@ -319,7 +319,9 @@ suppressions:
     reason: clientSecret holds a Key Vault secret URL reference (e.g. https://myvault.vault.azure.net/secrets/mysecret), not the secret value itself, so it is safe to return in responses and is not marked x-ms-secret.
   - code: PatchIdentityProperty
     from: authenticationPolicy.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].patch
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].patch.parameters[4]
     reason: >-
       AuthenticationPolicies_UpdateTags is a tags-only PATCH that takes the shared Network RP
       TagsObject body, the established pattern across this RP (for example
