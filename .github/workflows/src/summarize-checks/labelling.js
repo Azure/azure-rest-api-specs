@@ -659,18 +659,32 @@ function processARMReviewWorkflowLabels(
 
   const blocked = blockedOnRpaas || blockedOnVersioningPolicy || blockedOnArmModeling;
 
+  // Check if ARM auto-signoff workflow has determined the PR qualifies for auto sign-off.
+  // If so, respect that decision and don't remove ARMSignedOff even when blocked.
+  // This prevents ping-pong between arm-auto-signoff and summarize-checks workflows.
+  // See: https://github.com/Azure/azure-rest-api-specs/pull/42239
+  const hasAutoSignedOffLabels =
+    labelContext.present.has("ARMAutoSignedOff") ||
+    labelContext.present.has("ARMAutoSignedOff-IncrementalTSP") ||
+    labelContext.present.has("ARMAutoSignedOff-Trivial");
+
+  const autoSignedOff = hasAutoSignedOffLabels && armSignedOffLabel.present;
+
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
   // of all other ARM review workflow labels.
-  notReadyForArmReviewLabel.shouldBePresent = armReviewLabelShouldBePresent && blocked;
+  // Exception: If auto-signoff has determined the PR qualifies, ARMSignedOff takes precedence.
+  notReadyForArmReviewLabel.shouldBePresent =
+    armReviewLabelShouldBePresent && blocked && !autoSignedOff;
 
   // If given PR is in scope of ARM review and the review is not blocked,
   // then "ARMSignedOff" label should remain present on the PR if it was
   // already present. This means that labels "ARMChangesRequested"
   // and "WaitForARMFeedback" are invalid and will be removed by automation
   // in presence of "ARMSignedOff".
+  // Also preserve ARMSignedOff if auto-signoff labels are present (even when blocked).
   armSignedOffLabel.shouldBePresent =
-    armReviewLabelShouldBePresent && !blocked && armSignedOffLabel.present;
+    armReviewLabelShouldBePresent && (!blocked || autoSignedOff) && armSignedOffLabel.present;
 
   // If given PR is in scope of ARM review and the review is not blocked and
   // not signed-off, then the label "ARMChangesRequested" should remain present
@@ -714,7 +728,8 @@ function processARMReviewWorkflowLabels(
     `RETURN definition processARMReviewWorkflowLabels. ` +
       `presentLabels: ${[...labelContext.present].join(",")}, ` +
       `blockedOnRpaas: ${blockedOnRpaas}, ` +
-      `blockedOnArmModeling: ${blockedOnArmModeling}. ` +
+      `blockedOnArmModeling: ${blockedOnArmModeling}, ` +
+      `autoSignedOff: ${autoSignedOff}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
 }
