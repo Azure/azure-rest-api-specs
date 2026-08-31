@@ -1,0 +1,31 @@
+{
+  "operationId": "NeuroShields_Get",
+  "title": "Get NeuroShield resource",
+  "description": "Retrieves a specific NeuroShield resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-01-01",
+    "neuroShieldName": "myNeuroShield"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myNeuroShield",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.network/neuroShields/myNeuroShield",
+        "type": "microsoft.network/neuroShields",
+        "location": "eastus",
+        "tags": {
+          "env": "test"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "11111111-1111-1111-1111-111111111111",
+          "responseMode": "Manual",
+          "severityThreshold": "Medium",
+          "description": "Test NeuroShield resource"
+        }
+      }
+    }
+  }
+}

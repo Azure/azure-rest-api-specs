@@ -51,6 +51,7 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
   - stable/2026-01-01/applicationGateway.json
+  - stable/2026-01-01/authenticationPolicy.json
   - stable/2026-01-01/azureWebCategory.json
   - stable/2026-01-01/common.json
   - stable/2026-01-01/expressRoute.json
@@ -63,6 +64,7 @@ input-file:
   - stable/2026-01-01/networkingOperations.json
   - stable/2026-01-01/networkManager.json
   - stable/2026-01-01/networkSecurityPerimeter.json
+  - stable/2026-01-01/neuroShield.json
   - stable/2026-01-01/networkWatcher.json
   - stable/2026-01-01/serviceGateway.json
   - stable/2026-01-01/virtualNetwork.json
@@ -188,6 +190,11 @@ suppressions:
   - code: PutRequestResponseSchemeArm
     from: common.json
     reason: API spec code issue in PutRequestResponseSchemeArm validation.
+  - code: R3011
+    from: common.json
+    reason: These enum value descriptions are unchanged shared Microsoft.Network contract text inherited from the base branch; correcting all shared descriptions is outside this NeuroShield-only change.
+    where:
+      - $.definitions.*.x-ms-enum.values[*].description
   - code: RequiredPropertiesMissingInResourceModel
     reason: Not a standard azure resource.
     where:
@@ -249,6 +256,30 @@ suppressions:
       - $.definitions.ExpressRouteCircuit.properties.properties.properties.activationKey
       - $.definitions.ExpressRouteCircuitPropertiesFormat.properties.activationKey
   - code: ResourceNameRestriction
+    from: expressRoute.json
+    reason: The crossConnectionName parameter is used consistently across all ExpressRoute operations for backward compatibility. Adding a pattern constraint to a brownfield resource parameter would break existing API clients that rely on the current parameter definition.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/validateCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/getCircuitMigrationInfo"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/prepareCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/shutDownBgpForCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/restoreBgpForCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/migrateCircuit"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/commitCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/rollbackCircuitMigration"]
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: expressRoute.json
+    reason: The Network TypeSpec project currently targets ARM common types v5. These actions follow the same project-wide common-types version to avoid unrelated contract churn.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/validateCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/getCircuitMigrationInfo"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/prepareCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/shutDownBgpForCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/restoreBgpForCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/migrateCircuit"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/commitCircuitMigration"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/rollbackCircuitMigration"]
+  - code: ResourceNameRestriction
     from: virtualNetwork.json
     reason: The resource name parameter 'virtualNetworkName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network APIs.
     where:
@@ -258,6 +289,39 @@ suppressions:
     reason: LRO POST operation returns 200 with no schema for completion status and 202 for async acceptance. This is the standard TypeSpec ArmResourceActionAsync pattern for void LRO operations.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/moveIpConfigurations"].post
+  # --- stable/2026-01-01/authenticationPolicy.json ---
+  # New TypeSpec-generated resource that follows the established Network RP legacy Resource
+  # pattern (the same shared base type used by every existing Network resource). The findings
+  # below are inherent to that shared pattern and are handled consistently with sibling resources.
+  - code: ProvisioningStateMustBeReadOnly
+    from: authenticationPolicy.json
+    reason: >-
+      provisioningState is marked readOnly in TypeSpec (@visibility(Lifecycle.Read)) but is emitted
+      as a $ref to the shared ProvisioningState enum. The linter does not recognize readOnly next to
+      $ref, so this suppression is needed.
+      See: https://github.com/Azure/typespec-azure/issues/4611
+  - code: RequiredPropertiesMissingInResourceModel
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy extends the local Network RP Resource base type (common.json#/definitions/Resource), the established envelope for all Network RP resources. Its id/name/type read-only properties are defined on the shared base and referenced via allOf, consistent with every other Network RP resource.
+  - code: DeleteResponseCodes
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy DELETE is synchronous and the service returns only 204 with no response body; advertising a 200 response would not match the implemented service contract.
+  - code: DeleteOperationResponses
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy DELETE is synchronous and the service returns only 204 with no response body; the generic rule's required 200 response is not implemented by the service.
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy uses the Network RP shared Resource and SubResource definitions from common.json, consistent with all resources in this API package.
+  - code: RequiredReadOnlySystemData
+    from: authenticationPolicy.json
+    reason: Network RP resources in this package intentionally use the legacy shared Resource envelope, which does not expose systemData.
+  - code: SchemaDescriptionOrTitle
+    from: common.json
+    where: $.definitions.UserTrustProviderType
+    reason: The TypeSpec union is documented, but the Swagger 2.0 emitter does not carry that documentation to this closed single-value union in the shared common.json file.
+  - code: XMSSecretInResponse
+    from: authenticationPolicy.json
+    reason: clientSecret holds a Key Vault secret URL reference (e.g. https://myvault.vault.azure.net/secrets/mysecret), not the secret value itself, so it is safe to return in responses and is not marked x-ms-secret.
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
@@ -274,7 +338,6 @@ directive:
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
-
 
 ### Tag: package-2025-09-01
 
@@ -4899,6 +4962,34 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: PutRequestResponseSchemeArm
+    from: neuroShield.json
+    reason: The TypeSpec resource envelope uses visibility to distinguish the PUT request from the response, which the validator does not account for when comparing schemas.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}"].put
+  - suppress: PostResponseCodes
+    from: neuroShield.json
+    reason: The standard TypeSpec ARM action templates emit a 200 response without a schema for void actions.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings/{findingId}/mitigate"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings/{findingId}/rollback"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/execute"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/cancel"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/rollback"].post
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: neuroShield.json
+    reason: The referenced provisioningState properties are read-only in common.json, but the validator does not follow the external references from operation schemas.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings/{findingId}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}"].get.responses["200"].schema
   - suppress: ResourceNameRestriction
     from: virtualWan.json
     reason: virtualHubName is an existing parent resource path parameter established in prior API versions. Adding a pattern constraint would be a breaking change to 2025-05-01 and earlier versions.
@@ -5167,6 +5258,12 @@ directive:
   - suppress: ResourceNameRestriction
     from: virtualNetworkGateway.json
     reason: The resource name parameter 'virtualNetworkGatewayName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
+  - suppress: ResourceNameRestriction
+    from: expressRoute.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}/listKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}/listKeys"]
+    reason: The resource name parameters 'circuitName', 'authorizationName' and 'expressRoutePortName' are existing parent/resource path parameters shipped in prior API versions without a 'pattern' restriction. Adding a pattern constraint now would be a breaking change, and these same parameters are referenced by all existing ExpressRoute circuit/port authorization APIs.
   - suppress: ParametersInPost
     from: virtualNetworkGateway.json
     reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.

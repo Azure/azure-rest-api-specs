@@ -1216,6 +1216,9 @@
           "Create ExpressRouteCircuit": {
             "$ref": "./examples/ExpressRouteCircuitCreate.json"
           },
+          "Create ExpressRouteCircuit on ExpressRouteLag": {
+            "$ref": "./examples/ExpressRouteCircuitCreateOnExpressRouteLag.json"
+          },
           "Create ExpressRouteCircuit on ExpressRoutePort": {
             "$ref": "./examples/ExpressRouteCircuitCreateOnExpressRoutePort.json"
           },
@@ -1602,6 +1605,59 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}/listKeys": {
+      "post": {
+        "operationId": "ExpressRouteCircuitAuthorizations_ListKeys",
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
+        "description": "Gets the authorization key associated with the specified express route circuit authorization.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "description": "The name of express route circuit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "description": "The name of the authorization.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ExpressRouteAuthorizationKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuit Authorization Keys": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationListKeys.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getCircuitLinkFailoverAllTestsDetails": {
@@ -3119,6 +3175,228 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/commitCircuitMigration": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_CommitCircuitMigration",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "description": "Commits the express route circuit migration for a cross connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to commit the express route circuit migration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CommitExpressRouteCircuitMigration": {
+            "$ref": "./examples/ExpressRouteCrossConnectionCommitCircuitMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/getCircuitMigrationInfo": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_GetCircuitMigrationInfo",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "description": "Gets migration health information for an express route circuit cross connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to get express route circuit migration information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitValidateAndHealthCheckRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetExpressRouteCircuitMigrationInfo": {
+            "$ref": "./examples/ExpressRouteCrossConnectionGetCircuitMigrationInfo.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/migrateCircuit": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_MigrateCircuit",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "description": "Executes the express route circuit migration for a cross connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to execute the express route circuit migration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteCrossConnectionMigrateCircuit.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings": {
       "get": {
         "operationId": "ExpressRouteCrossConnectionPeerings_List",
@@ -3605,6 +3883,376 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ExpressRouteCrossConnectionsRoutesTableSummaryListResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/prepareCircuitMigration": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_PrepareCircuitMigration",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "description": "Prepares an express route circuit migration for a cross connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to prepare the express route circuit migration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrepareExpressRouteCircuitMigration": {
+            "$ref": "./examples/ExpressRouteCrossConnectionPrepareCircuitMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/restoreBgpForCircuitMigration": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_RestoreBgpForCircuitMigration",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "description": "Restores BGP sessions as part of an express route circuit migration for a cross connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to restore BGP for the express route circuit migration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RestoreBgpForExpressRouteCircuitMigration": {
+            "$ref": "./examples/ExpressRouteCrossConnectionRestoreBgpForCircuitMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/rollbackCircuitMigration": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_RollbackCircuitMigration",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "description": "Rolls back the express route circuit migration for a cross connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to roll back the express route circuit migration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RollbackExpressRouteCircuitMigration": {
+            "$ref": "./examples/ExpressRouteCrossConnectionRollbackCircuitMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/shutDownBgpForCircuitMigration": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_ShutDownBgpForCircuitMigration",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "description": "Shuts down BGP sessions as part of an express route circuit migration for a cross connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to shut down BGP for the express route circuit migration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ShutDownBgpForExpressRouteCircuitMigration": {
+            "$ref": "./examples/ExpressRouteCrossConnectionShutDownBgpForCircuitMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrateExpressRouteCircuitHealthCheckResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/validateCircuitMigration": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_ValidateCircuitMigration",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "description": "Validates express route circuit migration for a cross connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to validate express route circuit migration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitValidateAndHealthCheckRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrateExpressRouteCircuitValidateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateExpressRouteCircuitMigration": {
+            "$ref": "./examples/ExpressRouteCrossConnectionValidateCircuitMigration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrateExpressRouteCircuitValidateResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -4457,6 +5105,59 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}/listKeys": {
+      "post": {
+        "operationId": "ExpressRoutePortAuthorizations_ListKeys",
+        "tags": [
+          "ExpressRoutePortAuthorizations"
+        ],
+        "description": "Gets the authorization key associated with the specified express route port authorization.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "description": "The name of the express route port.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "description": "The name of the authorization.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ExpressRouteAuthorizationKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRoutePort Authorization Keys": {
+            "$ref": "./examples/ExpressRoutePortAuthorizationListKeys.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters": {
@@ -6108,6 +6809,10 @@
           "$ref": "./common.json#/definitions/SubResource",
           "description": "The reference to the ExpressRoutePort resource when the circuit is provisioned on an ExpressRoutePort resource."
         },
+        "expressRouteLag": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The reference to the ExpressRouteLag resource when the circuit is provisioned on an ExpressRouteLag resource."
+        },
         "bandwidthInGbps": {
           "type": "number",
           "format": "float",
@@ -6920,6 +7625,14 @@
           "items": {
             "$ref": "#/definitions/ExpressRouteLagLink"
           }
+        },
+        "circuits": {
+          "type": "array",
+          "description": "Reference the ExpressRoute circuit(s) that are provisioned on this ExpressRouteLag resource.",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
         },
         "allocationDate": {
           "type": "string",
@@ -7831,6 +8544,144 @@
         }
       }
     },
+    "Metric": {
+      "type": "object",
+      "description": "Metric entry for migration peering statistics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The metric name."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The metric value."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The metric unit."
+        }
+      }
+    },
+    "MigrateExpressRouteCircuitHealthCheckDetails": {
+      "type": "object",
+      "description": "Detailed migration health information.",
+      "properties": {
+        "portMigrationInfos": {
+          "type": "array",
+          "description": "Per-port migration details.",
+          "items": {
+            "$ref": "#/definitions/PortMigrationInfo"
+          },
+          "x-ms-identifiers": [
+            "portId"
+          ]
+        }
+      }
+    },
+    "MigrateExpressRouteCircuitHealthCheckResponse": {
+      "type": "object",
+      "description": "Response for express route circuit migration health check and migration operations.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The overall status of the migration operation."
+        },
+        "phase": {
+          "type": "string",
+          "description": "The current phase of the migration operation."
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The failure reason if the migration operation failed."
+        },
+        "newSTag": {
+          "type": "string",
+          "description": "The new service tag assigned after migration."
+        },
+        "preparedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the migration was prepared."
+        },
+        "prepareExpiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiry time for the prepare phase."
+        },
+        "newCrossConnectionUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the new cross connection after migration."
+        },
+        "shouldRollback": {
+          "type": "boolean",
+          "description": "Indicates whether rollback should be performed."
+        },
+        "details": {
+          "$ref": "#/definitions/MigrateExpressRouteCircuitHealthCheckDetails",
+          "description": "Detailed health check information for migration."
+        }
+      }
+    },
+    "MigrateExpressRouteCircuitRequest": {
+      "type": "object",
+      "description": "Request model for express route circuit migration operations.",
+      "properties": {
+        "targetPeeringLocation": {
+          "type": "string",
+          "description": "The target peering location for circuit migration."
+        },
+        "targetPortMapping": {
+          "type": "array",
+          "description": "The source-to-target port mappings for circuit migration.",
+          "items": {
+            "$ref": "#/definitions/PortMapping"
+          },
+          "x-ms-identifiers": [
+            "sourcePortId"
+          ]
+        },
+        "portId": {
+          "type": "string",
+          "description": "The port identifier used for shutDownBgp, migrate, restoreBgp, and rollback operations."
+        }
+      }
+    },
+    "MigrateExpressRouteCircuitValidateAndHealthCheckRequest": {
+      "type": "object",
+      "description": "Request model used by validate and health check circuit migration operations.",
+      "properties": {
+        "targetPeeringLocation": {
+          "type": "string",
+          "description": "The target peering location for circuit migration."
+        },
+        "targetPortMapping": {
+          "type": "array",
+          "description": "The source-to-target port mappings for circuit migration.",
+          "items": {
+            "$ref": "#/definitions/PortMapping"
+          },
+          "x-ms-identifiers": [
+            "sourcePortId"
+          ]
+        }
+      },
+      "required": [
+        "targetPeeringLocation",
+        "targetPortMapping"
+      ]
+    },
+    "MigrateExpressRouteCircuitValidateResponse": {
+      "type": "object",
+      "description": "Response for express route circuit migration validation operation.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The validation status."
+        }
+      }
+    },
     "PatchRouteFilter": {
       "type": "object",
       "description": "Route Filter Resource.",
@@ -7970,6 +8821,103 @@
           "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the peer express route circuit connection resource.",
           "readOnly": true
+        }
+      }
+    },
+    "PeeringHealth": {
+      "type": "object",
+      "description": "Health information for a peering connection.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of peering (for example, Private, Microsoft, Public)."
+        },
+        "statsCurrent": {
+          "$ref": "#/definitions/PeeringStats",
+          "description": "The current peering statistics."
+        },
+        "statsAtPrepare": {
+          "$ref": "#/definitions/PeeringStats",
+          "description": "The peering statistics captured at prepare phase."
+        }
+      }
+    },
+    "PeeringStats": {
+      "type": "object",
+      "description": "Statistical information for a peering connection.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when these statistics were captured."
+        },
+        "metrics": {
+          "type": "array",
+          "description": "The collection of peering metrics.",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "PortMapping": {
+      "type": "object",
+      "description": "A mapping between source and target ports for migration.",
+      "properties": {
+        "sourcePortId": {
+          "type": "string",
+          "description": "The source port identifier."
+        },
+        "targetPortId": {
+          "type": "string",
+          "description": "The target port identifier."
+        }
+      },
+      "required": [
+        "sourcePortId",
+        "targetPortId"
+      ]
+    },
+    "PortMigrationInfo": {
+      "type": "object",
+      "description": "Information about a port migration status.",
+      "properties": {
+        "portId": {
+          "type": "string",
+          "description": "The identifier of the port being migrated."
+        },
+        "status": {
+          "type": "string",
+          "description": "The migration status for the port."
+        },
+        "phase": {
+          "type": "string",
+          "description": "The current migration phase for the port."
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The reason for failure if migration failed for the port."
+        },
+        "peerings": {
+          "type": "array",
+          "description": "The peering health details for the port.",
+          "items": {
+            "$ref": "#/definitions/PeeringHealth"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "sourcePortId": {
+          "type": "string",
+          "description": "The source port identifier before migration."
+        },
+        "sourcePortStats": {
+          "$ref": "#/definitions/SourcePortStats",
+          "description": "The source port statistics before migration."
         }
       }
     },
@@ -8284,6 +9232,22 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "SourcePortStats": {
+      "type": "object",
+      "description": "Statistics from the source port before migration.",
+      "properties": {
+        "peerings": {
+          "type": "array",
+          "description": "The peering health information from the source port.",
+          "items": {
+            "$ref": "#/definitions/PeeringHealth"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
         }
       }
     }
