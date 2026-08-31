@@ -43,7 +43,10 @@
       "name": "Operations"
     },
     {
-      "name": "ComputeDiagnosticBases"
+      "name": "SpotPlacementScores"
+    },
+    {
+      "name": "ComputePlacementScores"
     },
     {
       "name": "SkuMixPlacementScores"
@@ -89,11 +92,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/regular": {
+      "get": {
+        "operationId": "ComputePlacementScores_Get",
+        "tags": [
+          "ComputePlacementScores"
+        ],
+        "description": "Gets Compute Placement Scores metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputePlacementScoresBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the metadata of Compute Placement Scores.": {
+            "$ref": "./examples/GetComputePlacementScores.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/regular/generate": {
+      "post": {
+        "operationId": "ComputePlacementScores_Post",
+        "tags": [
+          "ComputePlacementScores"
+        ],
+        "description": "Generates placement scores for Compute VM skus.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "computePlacementScoresInput",
+            "in": "body",
+            "description": "ComputePlacementScores object supplied in the body of the Post compute placement scores operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComputePlacementScoresInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputePlacementScoresResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns compute VM placement scores for given configurations.": {
+            "$ref": "./examples/GenerateComputePlacementScores.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot": {
       "get": {
         "operationId": "SpotPlacementScores_Get",
         "tags": [
-          "ComputeDiagnosticBases"
+          "SpotPlacementScores"
         ],
         "description": "Gets Spot Placement Scores metadata.",
         "parameters": [
@@ -111,7 +201,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ComputeDiagnosticBase"
+              "$ref": "#/definitions/SpotPlacementScoresBase"
             }
           },
           "default": {
@@ -132,7 +222,7 @@
       "post": {
         "operationId": "SpotPlacementScores_Post",
         "tags": [
-          "ComputeDiagnosticBases"
+          "SpotPlacementScores"
         ],
         "description": "Generates placement scores for Spot VM skus.",
         "parameters": [
@@ -265,13 +355,13 @@
     }
   },
   "definitions": {
-    "ComputeDiagnosticBase": {
+    "ComputePlacementScoresBase": {
       "type": "object",
-      "description": "Contains metadata of a diagnostic type",
+      "description": "Contains metadata of the compute placement scoring resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DiagnosticProperties",
-          "description": "Contains additional properties of a diagnostic"
+          "$ref": "#/definitions/PlacementScoresProperties",
+          "description": "Contains additional properties of a placement scores resource."
         }
       },
       "allOf": [
@@ -280,15 +370,67 @@
         }
       ]
     },
-    "DiagnosticProperties": {
+    "ComputePlacementScoresInput": {
       "type": "object",
-      "description": "Contains additional properties of a diagnostic",
+      "description": "ComputePlacementScores API Input.",
       "properties": {
-        "supportedResourceTypes": {
+        "desiredLocations": {
           "type": "array",
-          "description": "Describes what are the supported resource types for a diagnostic.",
+          "description": "The desired regions",
           "items": {
             "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired virtual machine SKU sizes.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        }
+      }
+    },
+    "ComputePlacementScoresResponse": {
+      "type": "object",
+      "description": "ComputePlacementScores API response.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired virtual machine SKU sizes.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        },
+        "placementScores": {
+          "type": "array",
+          "description": "A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation.",
+          "items": {
+            "$ref": "#/definitions/PlacementScore"
           }
         }
       }
@@ -316,6 +458,19 @@
         "isQuotaAvailable": {
           "type": "boolean",
           "description": "Whether the desired quota is available."
+        }
+      }
+    },
+    "PlacementScoresProperties": {
+      "type": "object",
+      "description": "Contains additional properties of a placement scores resource.",
+      "properties": {
+        "supportedResourceTypes": {
+          "type": "array",
+          "description": "Describes the supported resource types for placement scoring.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -842,6 +997,21 @@
       },
       "required": [
         "zone"
+      ]
+    },
+    "SpotPlacementScoresBase": {
+      "type": "object",
+      "description": "Contains metadata of the Spot Placement Scores resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlacementScoresProperties",
+          "description": "Contains additional properties of a placement scores resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "SpotPlacementScoresInput": {

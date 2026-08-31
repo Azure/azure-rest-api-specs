@@ -1,21 +1,23 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Compute;
 
 /**
- * Contains additional properties of a diagnostic
+ * Contains additional properties of a placement scores resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This resource does not involve long-running operations and does not require provisioningState."
-model DiagnosticProperties {
+model PlacementScoresProperties {
   /**
-   * Describes what are the supported resource types for a diagnostic.
+   * Describes the supported resource types for placement scoring.
    */
   supportedResourceTypes?: string[];
 }
@@ -87,6 +89,18 @@ model SpotPlacementScoresResponse {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "PlacementScore is a non-resource data model used for telemetry and scoring; items are not uniquely addressable and do not require x-ms-identifiers."
   placementScores?: PlacementScore[];
 }
+
+/**
+ * ComputePlacementScores API Input.
+ */
+@added(Versions.v2026_09_05_preview)
+model ComputePlacementScoresInput is SpotPlacementScoresInput {}
+
+/**
+ * ComputePlacementScores API response.
+ */
+@added(Versions.v2026_09_05_preview)
+model ComputePlacementScoresResponse is SpotPlacementScoresResponse {}
 
 /**
  * The spot placement score for sku/region/zone combination.

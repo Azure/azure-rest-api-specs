@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "ComputeDiagnosticBases"
+      "name": "SpotPlacementScores"
     }
   ],
   "paths": {
@@ -90,7 +90,7 @@
       "get": {
         "operationId": "SpotPlacementScores_Get",
         "tags": [
-          "ComputeDiagnosticBases"
+          "SpotPlacementScores"
         ],
         "description": "Gets Spot Placement Scores metadata.",
         "parameters": [
@@ -108,7 +108,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ComputeDiagnosticBase"
+              "$ref": "#/definitions/SpotPlacementScoresBase"
             }
           },
           "default": {
@@ -129,7 +129,7 @@
       "post": {
         "operationId": "SpotPlacementScores_Post",
         "tags": [
-          "ComputeDiagnosticBases"
+          "SpotPlacementScores"
         ],
         "description": "Generates placement scores for Spot VM skus.",
         "parameters": [
@@ -175,34 +175,6 @@
     }
   },
   "definitions": {
-    "ComputeDiagnosticBase": {
-      "type": "object",
-      "description": "Contains metadata of a diagnostic type",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DiagnosticProperties",
-          "description": "Contains additional properties of a diagnostic"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "DiagnosticProperties": {
-      "type": "object",
-      "description": "Contains additional properties of a diagnostic",
-      "properties": {
-        "supportedResourceTypes": {
-          "type": "array",
-          "description": "Describes what are the supported resource types for a diagnostic.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "PlacementScore": {
       "type": "object",
       "description": "The spot placement score for sku/region/zone combination.",
@@ -229,6 +201,19 @@
         }
       }
     },
+    "PlacementScoresProperties": {
+      "type": "object",
+      "description": "Contains additional properties of a placement scores resource.",
+      "properties": {
+        "supportedResourceTypes": {
+          "type": "array",
+          "description": "Describes the supported resource types for placement scoring.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ResourceSize": {
       "type": "object",
       "description": "SpotPlacementRecommender API response.",
@@ -238,6 +223,21 @@
           "description": "The resource's CRP virtual machine SKU size."
         }
       }
+    },
+    "SpotPlacementScoresBase": {
+      "type": "object",
+      "description": "Contains metadata of the Spot Placement Scores resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlacementScoresProperties",
+          "description": "Contains additional properties of a placement scores resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SpotPlacementScoresInput": {
       "type": "object",
