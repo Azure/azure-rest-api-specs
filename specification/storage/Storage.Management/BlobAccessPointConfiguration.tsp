@@ -78,14 +78,10 @@ union BlobAccessPointConnectionType {
 
 @added(Versions.v2026_09_01)
 @doc("The format used by a Private Link identifier.")
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Only ResourceId is accepted."
 union BlobAccessPointPrivateLinkIdType {
   @doc("The identifier is an Azure resource ID.")
   ResourceId: "ResourceId",
-
-  @doc("The identifier is a Private Link alias.")
-  Alias: "Alias",
-
-  string,
 }
 
 @added(Versions.v2026_09_01)
@@ -139,11 +135,11 @@ model BlobAccessPointPrivateLinkConnectionProperties
   connectionType: BlobAccessPointConnectionType.PrivateLink;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Whether privateLinkId contains an Azure resource ID or a Private Link alias.")
+  @doc("Indicates that privateLinkId contains an Azure resource ID.")
   privateLinkIdType: BlobAccessPointPrivateLinkIdType;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The Azure resource ID or alias of the backing Private Link resource.")
+  @doc("The Azure resource ID of the backing Private Link resource.")
   privateLinkId: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
