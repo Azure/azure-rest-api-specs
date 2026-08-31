@@ -513,6 +513,12 @@ model DomainServiceProperties {
   syncApplicationId?: string;
 
   /**
+   * The object ID of the administrator group associated with the Domain Services deployment.
+   */
+  @visibility(Lifecycle.Read)
+  adminGroupObjectId?: string;
+
+  /**
    * The source used for filtered synchronization group entitlements.
    */
   @visibility(Lifecycle.Read)
