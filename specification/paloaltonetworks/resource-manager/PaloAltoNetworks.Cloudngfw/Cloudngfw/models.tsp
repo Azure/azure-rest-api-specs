@@ -1415,14 +1415,20 @@ model NetworkProfile {
   // FrontendSetting.idleTimeoutInMinutes, and the Enabled default on outboundTcpReset
   // intentionally differs from the Disabled default on FrontendSetting.tcpReset. Both
   // asymmetries were confirmed by the partner - do not normalize them.
+  //
+  // No TypeSpec default on outboundIdleTimeoutInMinutes: NetworkProfile is shared with
+  // FirewallResourceUpdateProperties, so a default would be emitted into the PATCH body
+  // schema and conflict with JSON Merge Patch semantics (RPC-Patch-V1-10). The service
+  // applies the default of 4 on create.
   /**
    * The duration, in minutes, for which an outbound source NAT session is permitted
-   * to stay inactive prior to termination. If not specified, a default of 4 is applied.
+   * to stay inactive prior to termination. If not specified on create, a default of
+   * 4 is applied.
    */
   @added(Versions.v2026_08_27_preview)
   @minValue(4)
   @maxValue(120)
-  outboundIdleTimeoutInMinutes?: int32 = 4;
+  outboundIdleTimeoutInMinutes?: int32;
 
   /**
    * Whether a TCP reset is sent when an inactive outbound source NAT session is
@@ -1651,15 +1657,19 @@ model FrontendSetting {
   // NetworkProfile.outboundIdleTimeoutInMinutes, and the Disabled default on tcpReset
   // intentionally differs from the Enabled default on NetworkProfile.outboundTcpReset.
   // Both asymmetries were confirmed by the partner - do not normalize them.
+  // No TypeSpec default on this property: FrontendSetting is shared with
+  // FirewallResourceUpdateProperties, so a default would be emitted into the PATCH body
+  // schema and conflict with JSON Merge Patch semantics (RPC-Patch-V1-10). The service
+  // applies the default of 4 on create.
   /**
    * The duration, in minutes, for which an inbound destination NAT session matching
    * this frontend setting is permitted to stay inactive prior to termination. If not
-   * specified, a default of 4 is applied.
+   * specified on create, a default of 4 is applied.
    */
   @added(Versions.v2026_08_27_preview)
   @minValue(4)
   @maxValue(100)
-  idleTimeoutInMinutes?: int32 = 4;
+  idleTimeoutInMinutes?: int32;
 
   /**
    * Whether a TCP reset is sent when an inactive inbound session matching this
