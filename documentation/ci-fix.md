@@ -267,6 +267,11 @@ suppressions in the TypeSpec projects impacted by your changes:
 - **Inline suppressions**: `#suppress` directives in `.tsp` files.
 - **Config suppressions**: `linter.disable` entries in `tspconfig.yaml`.
 
+Only suppressions for rules listed in
+[`check-rules.json`](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/tools/typespec-suppressions/check-rules.json)
+count toward review/gating; suppressions for other rules are still detected and
+reported for visibility but do not block the check.
+
 The check runs as the following workflows (mirroring the three-run structure used
 by other validations in this repo):
 
@@ -278,9 +283,9 @@ by other validations in this repo):
 
 ### Where to see the results
 
-- A **"TypeSpec suppressions requiring review"** comment is surfaced on the
-  PR , listing the new/changed suppressions with
-  their rule, source location, and justification.
+- A **"TypeSpec suppressions requiring review"** comment is surfaced on the PR,
+  listing the new/changed suppressions with their rule, source location, and
+  justification.
 - **Inline `::warning` annotations** appear on the PR diff at each suppression's
   source location.
 - The full structured report is uploaded as the `typespec-suppressions-report`
@@ -302,7 +307,8 @@ suppression, prefer fixing the underlying issue:
    string explaining why the rule cannot be satisfied; suppressions with no
    justification are flagged.
 3. **If the suppression is legitimate and requires approval**, ask the
-   appropriate reviewer to apply the `Approved-TypeSpecSuppression` label. The
+   appropriate reviewer (ARM spec PRs: only the ARM reviewer can apply the
+   label) to apply the `Approved-TypeSpecSuppression` label. The
    `TypeSpec Suppressions` check remains blocking until the suppression is
    resolved or the label is applied.
 
@@ -313,7 +319,7 @@ The check is powered by the `@azure-tools/typespec-suppressions` CLI. See
 for usage. For example, to compare your branch against `main`:
 
 ``` powershell
-npx typespec-suppressions --base origin/main --fail-on-approval <path-to-typespec-project-folder>
+npx typespec-suppressions --base origin/main --check-rules-file eng/tools/typespec-suppressions/check-rules.json --fail-on-approval <path-to-typespec-project-folder>
 ```
 
 ## `license/cla`
