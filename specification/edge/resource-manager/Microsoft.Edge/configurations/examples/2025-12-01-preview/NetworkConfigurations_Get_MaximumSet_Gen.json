@@ -1,0 +1,49 @@
+{
+  "title": "NetworkConfigurations_Get",
+  "operationId": "NetworkConfigurations_Get",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgconfigurations",
+    "configurationName": "aConfiguration",
+    "networkConfigurationName": "someName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "scenario": "Provisioning",
+          "ipAssignments": {
+            "ipAssignmentType": "Manual",
+            "ipv4": {
+              "addressRange": {
+                "startIp": "192.168.1.1",
+                "endIp": "192.168.1.10"
+              },
+              "subnetMask": "255.255.255.0",
+              "defaultGateway": "192.168.1.1",
+              "dnsServers": [
+                "8.8.8.8",
+                "8.8.4.4"
+              ],
+              "vLanId": 4
+            }
+          }
+        },
+        "kind": "LAN",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgconfigurations/providers/Microsoft.Edge/configurations/aConfiguration/networkConfigurations/someName",
+        "name": "someName",
+        "type": "Microsoft.Edge/configurations/networkConfigurations",
+        "systemData": {
+          "createdBy": "kupa",
+          "createdByType": "User",
+          "createdAt": "2024-08-16T14:49:26.220Z",
+          "lastModifiedBy": "kupa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-16T14:49:26.220Z"
+        }
+      }
+    }
+  }
+}
