@@ -1,5 +1,5 @@
 {
-  "title": "Paged canceled operation errors",
+  "title": "List paged failed operation errors",
   "operationId": "VirtualMachineBulkOperations_BulkListOperationErrors",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -12,36 +12,24 @@
       "body": {
         "value": [
           {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-            "errorCode": "OperationCancelledByUser",
-            "errorDetails": "The virtual machine operation was canceled by the customer.",
-            "virtualMachineInfo": {
-              "vmSize": "Standard_D4s_v5",
-              "zone": "1"
-            },
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-0",
+            "errorCode": "OperationNotAllowed",
+            "errorDetails": "The virtual machine is not configured to support hibernation.",
             "operation": {
-              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-              "opType": "Start",
+              "operationId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-0",
+              "opType": "Hibernate",
               "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "deadline": "2026-07-10T18:00:00Z",
-              "deadlineType": "InitiateAt",
-              "state": "Cancelled",
-              "timezone": "UTC",
-              "retryPolicy": {
-                "retryCount": 3,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Start"
-              },
-              "completedAt": "2026-07-10T17:35:00Z",
+              "state": "Failed",
+              "completedAt": "2026-08-31T18:12:00Z",
               "resourceOperationError": {
-                "errorCode": "OperationCancelledByUser",
-                "errorDetails": "The virtual machine operation was canceled by the customer."
+                "errorCode": "OperationNotAllowed",
+                "errorDetails": "The virtual machine is not configured to support hibernation."
               }
             }
           }
         ],
-        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/locations/eastus/listBulkOperationErrors?api-version=2026-08-06-preview&continuationToken=page-2"
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/locations/eastus/listBulkOperationErrors?api-version=2026-08-06-preview&$skiptoken=page-2"
       }
     }
   }

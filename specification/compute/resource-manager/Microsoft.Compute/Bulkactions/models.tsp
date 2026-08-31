@@ -397,7 +397,7 @@ model ExecutionParameters {
   retryPolicy?: RetryPolicy;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("Indicates whether Bulk Actions verifies the virtual machine guest agent health after a start operation. This setting has no effect on other operation types.")
+  @doc("If true, Bulk Actions verifies the virtual machine guest agent health after a start operation. Setting this property to true for any other operation causes the request to fail.")
   verifyVmAgentHealth?: boolean;
 
   @added(Microsoft.Compute.Versions.`2026-08-06-preview`)

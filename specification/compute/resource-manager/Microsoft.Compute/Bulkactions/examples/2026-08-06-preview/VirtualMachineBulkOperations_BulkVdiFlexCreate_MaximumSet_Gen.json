@@ -1,5 +1,5 @@
 {
-  "title": "Ranked VDI allocation",
+  "title": "Create VDI virtual machines with ranked allocation preferences",
   "operationId": "VirtualMachineBulkOperations_BulkVdiFlexCreate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -9,51 +9,86 @@
     "requestBody": {
       "resourceConfigParameters": {
         "baseProfile": {
-          "tags": {
-            "environment": "production",
-            "workload": "batch-processing"
+          "resourceGroupName": "example-rg",
+          "computeApiVersion": "2024-11-01",
+          "location": "eastus",
+          "properties": {
+            "hardwareProfile": {
+              "vmSize": "Standard_D2s_v5"
+            },
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-jammy",
+                "sku": "22_04-lts-gen2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "osType": "Linux",
+                "createOption": "FromImage",
+                "managedDisk": {
+                  "storageAccountType": "Premium_LRS"
+                },
+                "deleteOption": "Delete"
+              }
+            },
+            "osProfile": {
+              "computerName": "bulk-vm",
+              "adminUsername": "azureuser",
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": true,
+                "ssh": {
+                  "publicKeys": [
+                    {
+                      "path": "/home/azureuser/.ssh/authorized_keys",
+                      "keyData": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPjBmFRaY5ZKkEizrXt/Rf5KlLGUGHASQUDarmqI3FZ3 azureuser@example"
+                    }
+                  ]
+                }
+              }
+            },
+            "networkProfile": {
+              "networkApiVersion": "2024-05-01",
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "bulk-vm-nic",
+                  "properties": {
+                    "primary": true,
+                    "deleteOption": "Delete",
+                    "ipConfigurations": [
+                      {
+                        "name": "primary",
+                        "properties": {
+                          "primary": true,
+                          "subnet": {
+                            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/bulk-vnet/subnets/compute"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
           }
         },
-        "resourceOverrides": [
-          {
-            "name": "bulk-vm-01"
-          },
-          {
-            "name": "bulk-vm-02"
-          }
-        ],
         "resourceCount": 2,
-        "resourcePrefix": "bulk-vm",
+        "resourcePrefix": "flex-vm-",
         "flexProperties": {
+          "capacityType": "VM",
           "vmSizeProfiles": [
             {
-              "name": "Standard_D4s_v5",
-              "rank": 1
+              "name": "Standard_D2s_v5"
             },
             {
-              "name": "Standard_D8s_v5",
-              "rank": 2
+              "name": "Standard_D4s_v5"
             }
           ],
-          "osType": "Windows",
+          "osType": "Linux",
           "priorityProfile": {
             "type": "Regular",
-            "allocationStrategy": "Prioritized"
-          },
-          "zoneAllocationPolicy": {
-            "distributionStrategy": "Prioritized",
-            "zonePreferences": [
-              {
-                "zone": "1",
-                "rank": 1
-              },
-              {
-                "zone": "2",
-                "rank": 2
-              }
-            ]
-          },
-          "minCapacity": 1
+            "allocationStrategy": "LowestPrice"
+          }
         }
       },
       "executionParameters": {
@@ -74,47 +109,21 @@
         "description": "Flex Create Resource request",
         "results": [
           {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-            "virtualMachineInfo": {
-              "vmSize": "Standard_D4s_v5",
-              "zone": "1"
-            },
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/flex-vm-0",
             "operation": {
-              "operationId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/flex-vm-0",
               "opType": "Create",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "deadline": "2026-07-10T18:00:00Z",
-              "deadlineType": "InitiateAt",
-              "state": "PendingScheduling",
-              "timezone": "UTC",
-              "retryPolicy": {
-                "retryCount": 3,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Delete"
-              }
+              "state": "PendingScheduling"
             }
           },
           {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
-            "virtualMachineInfo": {
-              "vmSize": "Standard_D8s_v5",
-              "zone": "2"
-            },
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/flex-vm-1",
             "operation": {
-              "operationId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+              "operationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/flex-vm-1",
               "opType": "Create",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "deadline": "2026-07-10T18:00:00Z",
-              "deadlineType": "InitiateAt",
-              "state": "PendingScheduling",
-              "timezone": "UTC",
-              "retryPolicy": {
-                "retryCount": 3,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Delete"
-              }
+              "state": "PendingScheduling"
             }
           }
         ]

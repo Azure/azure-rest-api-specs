@@ -523,13 +523,13 @@
           }
         },
         "x-ms-examples": {
-          "Basic error acknowledgment": {
+          "Acknowledge multiple operation errors": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MinimumSet_Gen.json"
           },
-          "Mixed acknowledgment results": {
+          "Acknowledge operation errors with mixed results": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MaximumSet_Gen.json"
           },
-          "Unknown operation acknowledgment": {
+          "Response with an unknown operation error during error acknowledgment": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_CommonError_Gen.json"
           }
         }
@@ -1385,14 +1385,14 @@
           }
         },
         "x-ms-examples": {
-          "Invalid lookback window": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_CommonError_Gen.json"
-          },
-          "Paged canceled operation errors": {
+          "List paged failed operation errors": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MaximumSet_Gen.json"
           },
-          "Recent operation errors": {
+          "List recent failed operation errors": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen.json"
+          },
+          "Response with an invalid lookback window error": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_CommonError_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1447,13 +1447,13 @@
           }
         },
         "x-ms-examples": {
-          "Basic cancellation": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MinimumSet_Gen.json"
-          },
-          "Detailed start cancellation": {
+          "Cancel a start operation with detailed status": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MaximumSet_Gen.json"
           },
-          "Unknown operation cancellation": {
+          "Cancel multiple operations": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MinimumSet_Gen.json"
+          },
+          "Response with an unknown operation error during cancellation": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_CommonError_Gen.json"
           }
         }
@@ -1506,14 +1506,14 @@
           }
         },
         "x-ms-examples": {
-          "Basic VM creation": {
+          "Create multiple Linux virtual machines": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MaximumSet_Gen.json"
+          },
+          "Create multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MinimumSet_Gen.json"
           },
-          "Invalid VM size": {
+          "Response when a resource prefix is missing": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_CommonError_Gen.json"
-          },
-          "Linux worker creation": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MaximumSet_Gen.json"
           }
         }
       }
@@ -1565,14 +1565,14 @@
           }
         },
         "x-ms-examples": {
-          "Basic deallocation": {
+          "Deallocate multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MinimumSet_Gen.json"
           },
-          "Deallocate VM in wrong region": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_CommonError_Gen.json"
-          },
-          "Deallocation with retries": {
+          "Deallocate multiple virtual machines with retries": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MaximumSet_Gen.json"
+          },
+          "Response with an out-of-region virtual machine error during deallocation": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_CommonError_Gen.json"
           }
         }
       }
@@ -1624,14 +1624,14 @@
           }
         },
         "x-ms-examples": {
-          "Basic deletion": {
+          "Delete multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MinimumSet_Gen.json"
           },
-          "Delete VM in wrong region": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_CommonError_Gen.json"
-          },
-          "Forced worker deletion": {
+          "Force-delete multiple worker virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MaximumSet_Gen.json"
+          },
+          "Response with an out-of-region virtual machine error during deletion": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_CommonError_Gen.json"
           }
         }
       }
@@ -1683,17 +1683,17 @@
           }
         },
         "x-ms-examples": {
-          "Basic operation status": {
+          "Get multiple operation statuses": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_MinimumSet_Gen.json"
           },
-          "Hibernate fallback status": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_HibernateFallback_Gen.json"
-          },
-          "In-progress start status": {
+          "Get the status of an in-progress start operation": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_MaximumSet_Gen.json"
           },
-          "Unknown operation status": {
+          "Response with an unknown operation status error": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_CommonError_Gen.json"
+          },
+          "Show a successful deallocation fallback after hibernation fails": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_HibernateFallback_Gen.json"
           }
         }
       }
@@ -1745,14 +1745,14 @@
           }
         },
         "x-ms-examples": {
-          "Basic hibernation": {
+          "Hibernate multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MinimumSet_Gen.json"
           },
-          "Hibernate VM in wrong region": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_CommonError_Gen.json"
-          },
-          "Hibernate with deallocation fallback": {
+          "Hibernate virtual machines with a deallocation fallback": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MaximumSet_Gen.json"
+          },
+          "Response with an out-of-region virtual machine error during hibernation": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_CommonError_Gen.json"
           }
         }
       }
@@ -1804,13 +1804,13 @@
           }
         },
         "x-ms-examples": {
-          "Basic reimage": {
+          "Reimage multiple virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_MinimumSet_Gen.json"
           },
-          "Reimage with override": {
+          "Reimage multiple virtual machines with an override": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_MaximumSet_Gen.json"
           },
-          "VM in wrong resource group": {
+          "Response with a resource group mismatch error during reimage": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_CommonError_Gen.json"
           }
         }
@@ -1863,13 +1863,13 @@
           }
         },
         "x-ms-examples": {
-          "Basic start": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MinimumSet_Gen.json"
-          },
-          "Start VM in wrong region": {
+          "Response with an out-of-region virtual machine error during start": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_CommonError_Gen.json"
           },
-          "Start VMs with retries, health verification, and capacity recommendations": {
+          "Start multiple virtual machines": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MinimumSet_Gen.json"
+          },
+          "Start virtual machines with retries, health verification, and capacity recommendations": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MaximumSet_Gen.json"
           }
         }
@@ -1922,14 +1922,14 @@
           }
         },
         "x-ms-examples": {
-          "Basic VDI creation": {
+          "Create VDI virtual machines with ranked allocation preferences": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MaximumSet_Gen.json"
+          },
+          "Create multiple VDI virtual machines": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MinimumSet_Gen.json"
           },
-          "No compatible VM sizes": {
+          "Response when the base virtual machine profile is missing": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_CommonError_Gen.json"
-          },
-          "Ranked VDI allocation": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MaximumSet_Gen.json"
           }
         }
       }
@@ -5046,7 +5046,7 @@
         },
         "verifyVmAgentHealth": {
           "type": "boolean",
-          "description": "Indicates whether Bulk Actions verifies the virtual machine guest agent health after a start operation. This setting has no effect on other operation types."
+          "description": "If true, Bulk Actions verifies the virtual machine guest agent health after a start operation. Setting this property to true for any other operation causes the request to fail."
         },
         "capacityRecommendationParameters": {
           "$ref": "#/definitions/CapacityRecommendationParameters",

@@ -1,5 +1,5 @@
 {
-  "title": "VM in wrong resource group",
+  "title": "Response with a resource group mismatch error during reimage",
   "operationId": "VirtualMachineBulkOperations_BulkReimage",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -28,14 +28,14 @@
             "operation": {
               "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-              "opType": "Unknown",
+              "opType": "Reimage",
               "state": "PendingScheduling"
             }
           },
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/other-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
             "errorCode": "InvalidResourceGroupInResource",
-            "errorDetails": "The virtual machine 'bulk-vm-02' does not belong to the resource group 'example-rg'. All virtual machines in this request must belong to 'example-rg'."
+            "errorDetails": "Resource with armId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/other-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02 does not belong to the request resource group example-rg"
           }
         ]
       }
