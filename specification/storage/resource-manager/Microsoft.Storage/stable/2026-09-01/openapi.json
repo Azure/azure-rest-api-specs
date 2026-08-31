@@ -1811,6 +1811,9 @@
           },
           "AdvancedPlatformMetricsRules_CreateOrUpdate_ContainerPrefix - Create advanced platform metrics rule with container prefix filter": {
             "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_CreateOrUpdate_ContainerPrefix.json"
+          },
+          "AdvancedPlatformMetricsRules_CreateOrUpdate_MetricLevelEnablement - Create advanced platform metrics rule with selected metrics": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_CreateOrUpdate_MetricLevelEnablement.json"
           }
         }
       },
@@ -9063,11 +9066,10 @@
         },
         "metricsEmitted": {
           "type": "array",
-          "description": "The metrics emitted by the rule. Metrics are mapped according to the rule type from RuleTypeProperty. Rule type to metrics mapping: ContainerLevelCapacityMetrics => {ContainerUsedSize, ContainerBlobCount}.",
+          "description": "The metrics emitted by the rule. If omitted in a create or update request, the service enables all metrics supported by the selected rule type.",
           "items": {
             "$ref": "#/definitions/MetricsEmitted"
-          },
-          "readOnly": true
+          }
         },
         "ruleConfig": {
           "$ref": "#/definitions/AdvancedPlatformMetricsRuleConfig",
