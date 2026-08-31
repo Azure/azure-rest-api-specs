@@ -5,7 +5,7 @@
   paths:
     - Network
     - Vmss
-    
+
 - tool: TypeSpecValidation
   reason: >
     Not ready to split as independent services.
@@ -17,8 +17,16 @@
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
     - options.@azure-typespec/http-client-csharp-mgmt.*
-  paths: 
+  paths:
     - Network/tspconfig.yaml
+    - Vmss/tspconfig.yaml
+
+- tool: Swagger Avocado
+  path: ./stable/2018-10-01/vmssNetwork.json
+  reason: >
+    The package-2026-01-01 tag intentionally retains the frozen 2018-10-01 VMSS
+    network contract. These Microsoft.Compute child-resource APIs have always
+    used that API version while sharing the latest Microsoft.Network models.
     - Vmss/tspconfig.yaml   
 
 - tool: SwaggerAvocado

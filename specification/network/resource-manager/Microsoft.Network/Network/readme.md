@@ -64,6 +64,7 @@ input-file:
   - stable/2026-01-01/networkingOperations.json
   - stable/2026-01-01/networkManager.json
   - stable/2026-01-01/networkSecurityPerimeter.json
+  - stable/2026-01-01/neuroShield.json
   - stable/2026-01-01/networkWatcher.json
   - stable/2026-01-01/serviceGateway.json
   - stable/2026-01-01/virtualNetwork.json
@@ -189,6 +190,11 @@ suppressions:
   - code: PutRequestResponseSchemeArm
     from: common.json
     reason: API spec code issue in PutRequestResponseSchemeArm validation.
+  - code: R3011
+    from: common.json
+    reason: These enum value descriptions are unchanged shared Microsoft.Network contract text inherited from the base branch; correcting all shared descriptions is outside this NeuroShield-only change.
+    where:
+      - $.definitions.*.x-ms-enum.values[*].description
   - code: RequiredPropertiesMissingInResourceModel
     reason: Not a standard azure resource.
     where:
@@ -4968,6 +4974,34 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: PutRequestResponseSchemeArm
+    from: neuroShield.json
+    reason: The TypeSpec resource envelope uses visibility to distinguish the PUT request from the response, which the validator does not account for when comparing schemas.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}"].put
+  - suppress: PostResponseCodes
+    from: neuroShield.json
+    reason: The standard TypeSpec ARM action templates emit a 200 response without a schema for void actions.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings/{findingId}/mitigate"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings/{findingId}/rollback"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/execute"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/cancel"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}/rollback"].post
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: neuroShield.json
+    reason: The referenced provisioningState properties are read-only in common.json, but the validator does not follow the external references from operation schemas.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/findings/{findingId}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/neuroShields/{neuroShieldName}/protectedResources/{protectedResourceName}/mitigations/{mitigationId}"].get.responses["200"].schema
   - suppress: ResourceNameRestriction
     from: virtualWan.json
     reason: virtualHubName is an existing parent resource path parameter established in prior API versions. Adding a pattern constraint would be a breaking change to 2025-05-01 and earlier versions.
