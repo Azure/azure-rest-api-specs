@@ -4386,7 +4386,7 @@
                 "required": true,
                 "description": "The optimistic-concurrency token for the item. This value is identical to the `etag` property in the response body.",
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
                 }
               }
             },
@@ -4496,7 +4496,7 @@
             "required": false,
             "description": "`\"<etag>\"` to update a specific version, or `\"*\"` to update any existing version. Omit for unconditional last-write-wins.",
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/Azure.Core.eTag"
             }
           },
           {
@@ -4518,7 +4518,7 @@
                 "required": true,
                 "description": "The optimistic-concurrency token for the item. This value is identical to the `etag` property in the response body.",
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
                 }
               }
             },
@@ -4537,7 +4537,7 @@
                 "required": false,
                 "description": "The current optimistic-concurrency token when the request fails with 412 Precondition Failed and the item exists.",
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
                 }
               }
             },
@@ -4556,7 +4556,7 @@
                 "required": false,
                 "description": "The current optimistic-concurrency token when the request fails with 412 Precondition Failed and the item exists.",
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
                 }
               }
             },
@@ -4674,7 +4674,7 @@
                 "required": true,
                 "description": "The optimistic-concurrency token for the item. This value is identical to the `etag` property in the response body.",
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
                 }
               }
             },
@@ -4772,7 +4772,7 @@
             "required": false,
             "description": "`\"<etag>\"` for a conditional delete. Omit for unconditional delete.",
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/Azure.Core.eTag"
             }
           },
           {
@@ -4804,7 +4804,7 @@
                 "required": false,
                 "description": "The current optimistic-concurrency token when the request fails with 412 Precondition Failed and the item exists.",
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
                 }
               }
             },
@@ -4823,7 +4823,7 @@
                 "required": false,
                 "description": "The current optimistic-concurrency token when the request fails with 412 Precondition Failed and the item exists.",
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Azure.Core.eTag"
                 }
               }
             },
@@ -32528,6 +32528,11 @@
           }
         ],
         "description": "Enum describing allowed operation states."
+      },
+      "Azure.Core.eTag": {
+        "type": "string",
+        "format": "eTag",
+        "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
       },
       "Azure.Core.uuid": {
         "type": "string",
@@ -82459,7 +82464,7 @@
             "description": "Optional labels used to filter `listItemKeys`. Replaced wholesale on write."
           },
           "etag": {
-            "type": "string",
+            "$ref": "#/components/schemas/Azure.Core.eTag",
             "description": "Optimistic-concurrency token for this item; also echoed in the `ETag` response header.",
             "readOnly": true
           },
@@ -82509,7 +82514,7 @@
             "description": "Optional labels used to filter `listItemKeys`. Replaced wholesale on write."
           },
           "etag": {
-            "type": "string",
+            "$ref": "#/components/schemas/Azure.Core.eTag",
             "description": "Optimistic-concurrency token for this item; also echoed in the `ETag` response header."
           },
           "created_at": {
@@ -82549,7 +82554,7 @@
             "description": "Logical key, unique within the store. May contain `/`."
           },
           "etag": {
-            "type": "string",
+            "$ref": "#/components/schemas/Azure.Core.eTag",
             "description": "Optimistic-concurrency token for this item; also echoed in the `ETag` response header."
           },
           "created_at": {

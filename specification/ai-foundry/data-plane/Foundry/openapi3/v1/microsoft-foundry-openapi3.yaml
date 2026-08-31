@@ -3022,7 +3022,7 @@ paths:
               required: true
               description: The optimistic-concurrency token for the item. This value is identical to the `etag` property in the response body.
               schema:
-                type: string
+                $ref: '#/components/schemas/Azure.Core.eTag'
           content:
             application/json:
               schema:
@@ -3093,7 +3093,7 @@ paths:
           required: false
           description: '`"<etag>"` to update a specific version, or `"*"` to update any existing version. Omit for unconditional last-write-wins.'
           schema:
-            type: string
+            $ref: '#/components/schemas/Azure.Core.eTag'
         - name: api-version
           in: query
           required: true
@@ -3109,7 +3109,7 @@ paths:
               required: true
               description: The optimistic-concurrency token for the item. This value is identical to the `etag` property in the response body.
               schema:
-                type: string
+                $ref: '#/components/schemas/Azure.Core.eTag'
           content:
             application/json:
               schema:
@@ -3121,7 +3121,7 @@ paths:
               required: false
               description: The current optimistic-concurrency token when the request fails with 412 Precondition Failed and the item exists.
               schema:
-                type: string
+                $ref: '#/components/schemas/Azure.Core.eTag'
           content:
             application/json:
               schema:
@@ -3133,7 +3133,7 @@ paths:
               required: false
               description: The current optimistic-concurrency token when the request fails with 412 Precondition Failed and the item exists.
               schema:
-                type: string
+                $ref: '#/components/schemas/Azure.Core.eTag'
           content:
             application/json:
               schema:
@@ -3213,7 +3213,7 @@ paths:
               required: true
               description: The optimistic-concurrency token for the item. This value is identical to the `etag` property in the response body.
               schema:
-                type: string
+                $ref: '#/components/schemas/Azure.Core.eTag'
           content:
             application/json:
               schema:
@@ -3277,7 +3277,7 @@ paths:
           required: false
           description: '`"<etag>"` for a conditional delete. Omit for unconditional delete.'
           schema:
-            type: string
+            $ref: '#/components/schemas/Azure.Core.eTag'
         - name: api-version
           in: query
           required: true
@@ -3299,7 +3299,7 @@ paths:
               required: false
               description: The current optimistic-concurrency token when the request fails with 412 Precondition Failed and the item exists.
               schema:
-                type: string
+                $ref: '#/components/schemas/Azure.Core.eTag'
           content:
             application/json:
               schema:
@@ -3311,7 +3311,7 @@ paths:
               required: false
               description: The current optimistic-concurrency token when the request fails with 412 Precondition Failed and the item exists.
               schema:
-                type: string
+                $ref: '#/components/schemas/Azure.Core.eTag'
           content:
             application/json:
               schema:
@@ -42247,6 +42247,14 @@ components:
             - Canceled
         - type: string
       description: Enum describing allowed operation states.
+    Azure.Core.eTag:
+      type: string
+      format: eTag
+      description: |-
+        The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.
+        It lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.
+
+        It is a string of ASCII characters placed between double quotes, like "675af34563dc-tr34".
     Azure.Core.uuid:
       type: string
       format: uuid
@@ -78440,7 +78448,7 @@ components:
             type: string
           description: Optional labels used to filter `listItemKeys`. Replaced wholesale on write.
         etag:
-          type: string
+          $ref: '#/components/schemas/Azure.Core.eTag'
           description: Optimistic-concurrency token for this item; also echoed in the `ETag` response header.
           readOnly: true
         created_at:
@@ -78478,7 +78486,7 @@ components:
             type: string
           description: Optional labels used to filter `listItemKeys`. Replaced wholesale on write.
         etag:
-          type: string
+          $ref: '#/components/schemas/Azure.Core.eTag'
           description: Optimistic-concurrency token for this item; also echoed in the `ETag` response header.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
@@ -78508,7 +78516,7 @@ components:
           maxLength: 128
           description: Logical key, unique within the store. May contain `/`.
         etag:
-          type: string
+          $ref: '#/components/schemas/Azure.Core.eTag'
           description: Optimistic-concurrency token for this item; also echoed in the `ETag` response header.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
