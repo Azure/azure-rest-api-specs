@@ -14280,6 +14280,13 @@
           "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
+        "deviceTypeRefs": {
+          "type": "array",
+          "description": "Pointers to type metadata about this device (e.g., The WoT Thing Model for the device).",
+          "items": {
+            "type": "string"
+          }
+        },
         "externalDeviceId": {
           "type": "string",
           "description": "A Device ID provided by the customer.",
@@ -14339,6 +14346,13 @@
         "enablementState": {
           "$ref": "#/definitions/RegistryDeviceEnablementState",
           "description": "Whether the device is enabled or disabled. A disabled device cannot send messages, be updated, or reprovision."
+        },
+        "deviceTypeRefs": {
+          "type": "array",
+          "description": "Pointers to type metadata about this device (e.g., The WoT Thing Model for the device).",
+          "items": {
+            "type": "string"
+          }
         },
         "manufacturer": {
           "type": "string",

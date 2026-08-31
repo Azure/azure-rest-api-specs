@@ -1,6 +1,8 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/versioning";
 
+using TypeSpec.Versioning;
+
 namespace Microsoft.DeviceRegistry;
 
 /** Represents the enablement state of a device. */
