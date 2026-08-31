@@ -38250,6 +38250,49 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FoundryModelArtifactAccess": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Standard",
+              "Protected"
+            ]
+          }
+        ],
+        "description": "The customer-visible artifact access policy for a model version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
+      },
+      "FoundryModelArtifactDigest": {
+        "type": "object",
+        "required": [
+          "algorithm",
+          "value"
+        ],
+        "properties": {
+          "algorithm": {
+            "$ref": "#/components/schemas/FoundryModelDigestAlgorithm",
+            "description": "Digest algorithm."
+          },
+          "value": {
+            "type": "string",
+            "description": "Lowercase hexadecimal digest value."
+          }
+        },
+        "description": "Service-computed digest for a protected model artifact.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
+      },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [
           {
@@ -38288,6 +38331,104 @@
           }
         ],
         "description": "Signals detected in the model artifact.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
+      },
+      "FoundryModelDigestAlgorithm": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "SHA256"
+            ]
+          }
+        ],
+        "description": "Digest algorithms used to bind registered metadata to an artifact.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
+      },
+      "FoundryModelProtection": {
+        "type": "object",
+        "required": [
+          "artifactAccess"
+        ],
+        "properties": {
+          "artifactAccess": {
+            "$ref": "#/components/schemas/FoundryModelArtifactAccess",
+            "description": "The customer-visible artifact access policy."
+          },
+          "establishedBy": {
+            "$ref": "#/components/schemas/FoundryModelProtectionEstablishedBy",
+            "description": "The service workflow that established protection."
+          }
+        },
+        "description": "Safe, service-authenticated protection metadata for a model version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
+      },
+      "FoundryModelProtectionEstablishedBy": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "FoundryFineTuning"
+            ]
+          }
+        ],
+        "description": "Service workflows that can establish protected artifact access.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
+      },
+      "FoundryModelServingMetadata": {
+        "type": "object",
+        "required": [
+          "baseModelId",
+          "artifactDigest",
+          "adapterFormat"
+        ],
+        "properties": {
+          "baseModelId": {
+            "type": "string",
+            "description": "Exact base-model asset ID used to produce this model version."
+          },
+          "artifactDigest": {
+            "$ref": "#/components/schemas/FoundryModelArtifactDigest",
+            "description": "Service-computed digest binding this registration to its artifact."
+          },
+          "adapterFormat": {
+            "type": "string",
+            "enum": [
+              "PeftLora"
+            ],
+            "description": "Adapter serialization and runtime format."
+          },
+          "compatibleRuntimeFamilies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Runtime families with which registration has established compatibility."
+          }
+        },
+        "description": "Serving metadata authenticated by Project Models registration.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Models=V1Preview"
@@ -40503,7 +40644,6 @@
       "ModelVersion": {
         "type": "object",
         "required": [
-          "blobUri",
           "name",
           "version"
         ],
@@ -40540,6 +40680,16 @@
               "$ref": "#/components/schemas/FoundryModelWarning"
             },
             "description": "Service-computed advisory warnings derived from the artifact profile.",
+            "readOnly": true
+          },
+          "protection": {
+            "$ref": "#/components/schemas/FoundryModelProtection",
+            "description": "Safe protection metadata for this model artifact.",
+            "readOnly": true
+          },
+          "servingMetadata": {
+            "$ref": "#/components/schemas/FoundryModelServingMetadata",
+            "description": "Service-authenticated artifact identity and serving compatibility.",
             "readOnly": true
           },
           "id": {

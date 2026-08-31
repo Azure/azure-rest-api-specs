@@ -97,12 +97,78 @@ model FoundryModelWarning {
   message?: string;
 }
 
+@doc("The customer-visible artifact access policy for a model version.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+union FoundryModelArtifactAccess {
+  string,
+
+  @doc("The artifact follows the standard Project Models access policy.")
+  Standard: "Standard",
+
+  @doc("The artifact cannot be downloaded, exported, copied, or addressed through customer-visible storage credentials.")
+  Protected: "Protected",
+}
+
+@doc("Service workflows that can establish protected artifact access.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+union FoundryModelProtectionEstablishedBy {
+  string,
+
+  @doc("Protection was established by the Foundry fine-tuning service.")
+  FoundryFineTuning: "FoundryFineTuning",
+}
+
+@doc("Digest algorithms used to bind registered metadata to an artifact.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+union FoundryModelDigestAlgorithm {
+  string,
+
+  @doc("SHA-256 digest.")
+  Sha256: "SHA256",
+}
+
+@doc("Service-computed digest for a protected model artifact.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+model FoundryModelArtifactDigest {
+  @doc("Digest algorithm.")
+  algorithm: FoundryModelDigestAlgorithm;
+
+  @doc("Lowercase hexadecimal digest value.")
+  value: string;
+}
+
+@doc("Serving metadata authenticated by Project Models registration.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+model FoundryModelServingMetadata {
+  @doc("Exact base-model asset ID used to produce this model version.")
+  baseModelId: string;
+
+  @doc("Service-computed digest binding this registration to its artifact.")
+  artifactDigest: FoundryModelArtifactDigest;
+
+  @doc("Adapter serialization and runtime format.")
+  adapterFormat: "PeftLora";
+
+  @doc("Runtime families with which registration has established compatibility.")
+  compatibleRuntimeFamilies?: string[];
+}
+
+@doc("Safe, service-authenticated protection metadata for a model version.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
+model FoundryModelProtection {
+  @doc("The customer-visible artifact access policy.")
+  artifactAccess: FoundryModelArtifactAccess;
+
+  @doc("The service workflow that established protection.")
+  establishedBy?: FoundryModelProtectionEstablishedBy;
+}
+
 @doc("Model Version Definition")
 @Rest.resource("models")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelVersion {
   @doc("URI of the model artifact in blob storage")
-  blobUri: url;
+  blobUri?: url;
 
   @doc("The weight type of the model")
   weightType?: FoundryModelWeightType;
@@ -125,6 +191,14 @@ model ModelVersion {
   @doc("Service-computed advisory warnings derived from the artifact profile.")
   @visibility(Lifecycle.Read)
   warnings?: FoundryModelWarning[];
+
+  @doc("Safe protection metadata for this model artifact.")
+  @visibility(Lifecycle.Read)
+  protection?: FoundryModelProtection;
+
+  @doc("Service-authenticated artifact identity and serving compatibility.")
+  @visibility(Lifecycle.Read)
+  servingMetadata?: FoundryModelServingMetadata;
 
   ...AssetBase;
 }
