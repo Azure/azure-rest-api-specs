@@ -418,6 +418,30 @@ using Azure.AI.Projects;
   },
   "java"
 );
+//   ToolChoiceFunction → com.openai.models.responses.ToolChoiceFunction
+//   ToolChoiceMCP      → com.openai.models.responses.ToolChoiceMcp
+// Both are field-for-field duplicates of the openai-java classes
+// (`ToolChoiceFunction { type: "function", name }`, `ToolChoiceMCP { type: "mcp", server_label, name? }`).
+// They are only reachable through the realtime `tool_choice` unions
+// (`ToolChoiceOptions | ToolChoiceFunction | ToolChoiceMCP`), which Java already projects as `BinaryData`,
+// so no generated model carries a `ToolChoiceParam`-typed member. Mapping these two leaves also drops their
+// discriminated base `ToolChoiceParam` and its discriminator enum `ToolChoiceParamType` to `External` usage;
+// neither has an openai-java counterpart (openai-java models the choice as a union, not a base class), so
+// they are removed transitively rather than mapped.
+@@alternateType(
+  OpenAI.ToolChoiceFunction,
+  {
+    identity: "com.openai.models.responses.ToolChoiceFunction",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.ToolChoiceMCP,
+  {
+    identity: "com.openai.models.responses.ToolChoiceMcp",
+  },
+  "java"
+);
 //   ConversationResource → com.openai.models.conversations.Conversation
 @@alternateType(
   OpenAI.ConversationResource,
@@ -433,6 +457,14 @@ using Azure.AI.Projects;
 // Erase strongly-typed payloads on the namespace / tool_search Tool variants.
 @@alternateType(OpenAI.NamespaceToolParam.tools, unknown, "java");
 @@alternateType(OpenAI.ToolSearchToolParam.parameters, unknown, "java");
+
+// `RealtimeFunctionTool.parameters` is documented as "Parameters of the function in JSON Schema" but is typed as
+// `model RealtimeFunctionToolParameters {}` - an empty model with no properties and no additional properties.
+// Java therefore generates a class whose `toJson` always writes `{}` and whose `fromJson` calls `skipChildren()`,
+// silently discarding the caller's schema on the wire in both directions. The equivalent non-realtime
+// `FunctionTool.parameters` is declared `Record<unknown> | null` upstream, confirming the payload is arbitrary JSON.
+// Project it as `unknown` (BinaryData) for Java so the schema round-trips.
+@@alternateType(OpenAI.RealtimeFunctionTool.parameters, unknown, "java");
 
 // TimeZone property override via model indirection
 @alternateType(
