@@ -1,0 +1,886 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2026-06-01-preview",
+    "description": "Privileged Access — end-user API surface for Privileged Access Management.\n\nProvides two resource types under `Microsoft.Authorization`:\n1. `privilegedResources` (GET-only collection) — a unified view of the\nAzure resources you have privileged access to.\n2. `privilegedResourceFavorites` (PUT/GET/DELETE) — your personal resource\nfavorites.\n\nBoth resource types are tenant-scoped: they are addressed at the tenant, not\nunder a subscription or resource group.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PrivilegedResources"
+    },
+    {
+      "name": "PrivilegedResourceFavorites"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Authorization/privilegedResourceFavorites": {
+      "get": {
+        "operationId": "PrivilegedResourceFavorites_List",
+        "tags": [
+          "PrivilegedResourceFavorites"
+        ],
+        "description": "List the calling user's favorites.\n\nThe caller's principal id is taken from the validated user token, never\nfrom the request. There is no API surface for one user to list another\nuser's favorites — favorites are partitioned per caller.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedPrivilegedResourceFavorite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the caller's favorites": {
+            "$ref": "./examples/PrivilegedResourceFavorites_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/privilegedResourceFavorites/{favoriteId}": {
+      "get": {
+        "operationId": "PrivilegedResourceFavorites_Get",
+        "tags": [
+          "PrivilegedResourceFavorites"
+        ],
+        "description": "Get one of the calling user's favorites by id.\n\nReturns `404` if the calling user has not favorited this resource, even\nif another user has.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "favoriteId",
+            "in": "path",
+            "description": "Favorite identifier — `base64url(lowercased Azure resource ID)`. Because\nthe derivation is deterministic, the client may compute it locally\nfrom the resource id.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,2048}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivilegedResourceFavorite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a favorite by id": {
+            "$ref": "./examples/PrivilegedResourceFavorites_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivilegedResourceFavorites_CreateOrUpdate",
+        "tags": [
+          "PrivilegedResourceFavorites"
+        ],
+        "description": "Add (or re-add) a favorite for the calling user.\n\nIdempotent: re-favoriting an already-favorited resource returns the\nexisting record with status `200 OK` rather than creating a duplicate;\na new favorite returns `201 Created`. The service validates that\n`{favoriteId}` equals `base64url(lowercased(properties.resourceId))`\n(`400 InvalidRequest` on mismatch) and that the caller has read\npermission on the resource (`403 Forbidden` otherwise).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "favoriteId",
+            "in": "path",
+            "description": "Favorite identifier — `base64url(lowercased Azure resource ID)`. Because\nthe derivation is deterministic, the client may compute it locally\nfrom the resource id.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,2048}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The favorite to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivilegedResourceFavorite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivilegedResourceFavorite"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivilegedResourceFavorite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add a favorite (idempotent PUT)": {
+            "$ref": "./examples/PrivilegedResourceFavorites_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivilegedResourceFavorites_Delete",
+        "tags": [
+          "PrivilegedResourceFavorites"
+        ],
+        "description": "Remove the calling user's favorite.\n\nIdempotent. Returns `200 OK` when an existing favorite was removed and\n`204 No Content` when no matching favorite existed for the caller.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "favoriteId",
+            "in": "path",
+            "description": "Favorite identifier — `base64url(lowercased Azure resource ID)`. Because\nthe derivation is deterministic, the client may compute it locally\nfrom the resource id.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,2048}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove a favorite (idempotent DELETE)": {
+            "$ref": "./examples/PrivilegedResourceFavorites_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/privilegedResources": {
+      "get": {
+        "operationId": "PrivilegedResources_List",
+        "tags": [
+          "PrivilegedResources"
+        ],
+        "description": "List the calling user's privileged Azure resources.\n\nReturns the resources you have privileged access to, evaluated with your\nown permissions — only resources you are authorized to see are included.\n\nPagination: server-driven via `maxpagesize` (advisory) + `nextLink`.\nClients follow `nextLink` verbatim — do not parse, mutate, or append\nquery parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "accessScope",
+            "in": "query",
+            "description": "Controls whether the response is scoped to subscriptions the caller has\nPIM assignments on, or expanded to all readable subscriptions. Allowed\nvalues today: `pimOnly` (default — only subscriptions with PIM\nassignments) and `allAccessible` (any subscription the caller can read).\n\nModeled as an extensible string so future scope expansions can be\nadded without a breaking change; clients should tolerate unknown values.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "pimOnly",
+              "allAccessible"
+            ],
+            "x-ms-enum": {
+              "name": "AccessScopeFilter",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "PimOnly",
+                  "value": "pimOnly",
+                  "description": "Scope the response to subscriptions the caller has PIM assignments on."
+                },
+                {
+                  "name": "AllAccessible",
+                  "value": "allAccessible",
+                  "description": "Expand the response to all subscriptions the caller can read."
+                }
+              ]
+            }
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Advisory maximum page-size hint. The server may return fewer items than\n`maxpagesize` and still include a `nextLink`. Server cap: 1000. Name\nfollows the standard Azure pagination convention (`maxpagesize`)\nrather than the strict-maximum `$top` to signal the advisory semantics.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData `$filter` expression that selects resource rows. Flat, lowercase\n`and` expression only — `or`, `not`, and grouping are rejected.\nSupported predicates:\n\n- `type` — `eq` or `in`, e.g.\n`type eq 'microsoft.compute/virtualmachines'` or\n`type in ('microsoft.compute/virtualmachines','microsoft.desktopvirtualization/hostpools')`.\nEvery value must be a supported primary resource type.\n- `scope` — `eq` or `in`, using exact, case-insensitive ARM-ID\nmembership.\n- `subscriptionId` — `eq`, `ne`, or `in`. It is an exact resource GUID,\nso `contains` / `startswith` are rejected.\n- `subscriptionName` — `eq`, `ne`, `contains`, or `startswith`. The\nhuman-readable subscription display name (distinct from the\n`subscriptionId` GUID).\n- `resourceGroup` — `eq`, `ne`, `contains`, `startswith`, or `in`.\nMatches by name across every subscription the caller can see; because\nresource-group names are not globally unique, combine it with\n`subscriptionId` to disambiguate.\n- `tags.<key>` (dynamic) — `eq`, `ne`, `contains`, or `startswith`.\nA tag predicate addresses a single key with dotted syntax\n(e.g. `tags.environment eq 'prod'`); the whole remainder after\n`tags.` is the key, matched case-insensitively. An empty key\n(`tags.`) is rejected.\n- `displayName` and `location` — `eq`, `ne`, and function-form\n`startswith(field,'value')` / `contains(field,'value')`.\n- Favorite state: `isFavorite eq|ne true|false` — accepted and\nvalidated, but does not filter rows in this revision.\n- Role assignment status:\n`roles/any(r: r/assignmentStatus eq 'active'|'eligible')`.\n\nThe `in` membership operator is limited to `type`, `scope`,\n`subscriptionId`, and `resourceGroup`; all other fields accept only the\ninfix (`eq` / `ne`) and function (`contains` / `startswith`) forms.\n`endswith` is not supported. Values inside one `in` clause are\nOR-composed and matched case-insensitively; separate clauses remain\nAND-composed.\n\nA role assignment status predicate selects resource rows that have at\nleast one matching role; it does not filter the contents of `roles`.\nEvery matching resource returns its complete roles collection.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sort expression. Supported values: `displayName`, `displayName asc`, or\n`displayName desc`. Ordering is applied to the complete filtered set\nbefore pagination, with `scope` as the deterministic tie-breaker.\nInvalid expressions return `400 InvalidOrderBy`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "orderby"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "When `true`, the response includes the full post-filter row count in the\noptional `count` field — the cardinality of the complete filtered set\nbefore the page slice. Absent or `false` omits `count`. Any other value\nreturns `400 InvalidCount`.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "count"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedResourceProjection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List privileged resources filtered by subscription and tag, with total count": {
+            "$ref": "./examples/PrivilegedResources_List_FilteredWithCount.json"
+          },
+          "List privileged resources for the caller (first page)": {
+            "$ref": "./examples/PrivilegedResources_List.json"
+          },
+          "List privileged resources for the caller (last page)": {
+            "$ref": "./examples/PrivilegedResources_List_LastPage.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/privilegedResources/{privilegedResourceId}/relatedResources": {
+      "get": {
+        "operationId": "PrivilegedResources_ListRelatedResources",
+        "tags": [
+          "PrivilegedResources"
+        ],
+        "description": "List the connect-enablement related resources for a privileged resource.\n\nReturns the resources you must additionally access to connect to the\nprivileged resource identified by `{privilegedResourceId}` — for example,\nfor a virtual machine: the NIC, NSG, public IP, and Bastion host.\n\nEach entry is itself a projection (`RelatedResourceProjection`): the related\nresource's own `projectionId` and `scope`, plus the `roles` you hold\n(active or eligible) on that related resource. Clients drive activation\nagainst those roles to enable connect. Resource properties themselves are\nNOT returned — read them directly from the Azure Resource Manager REST APIs\nat Connect time.\n\nReturns an empty page when the privileged resource has no connect-enablement\ndependencies.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "privilegedResourceId",
+            "in": "path",
+            "description": "Opaque projection identifier of the parent privileged resource — the\n`projectionId` returned by the `privilegedResources` list operation.\nClients MUST treat this as opaque — do not parse.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,2048}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedRelatedResourceProjection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List related (connect-enablement) resources for a privileged resource": {
+            "$ref": "./examples/PrivilegedResources_ListRelatedResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssignmentStatus": {
+      "type": "string",
+      "description": "Status of a role assignment from the caller's perspective. Used by\n`RoleAssignmentSummary.assignmentStatus` and by role status predicates in\nthe `PrivilegedResources.list` `$filter` expression.\n\nExtensible string union — additional statuses can be added without a\nbreaking change; clients should tolerate unknown values.",
+      "enum": [
+        "active",
+        "eligible"
+      ],
+      "x-ms-enum": {
+        "name": "AssignmentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "The user effectively has this role active right now."
+          },
+          {
+            "name": "Eligible",
+            "value": "eligible",
+            "description": "The user can activate this role (one-step or two-step activation,\ndepending on the source's membership state)."
+          }
+        ]
+      }
+    },
+    "DirectRoleSource": {
+      "type": "object",
+      "description": "Direct user role assignment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleSource"
+        }
+      ],
+      "x-ms-discriminator-value": "direct"
+    },
+    "GroupMembershipState": {
+      "type": "string",
+      "description": "User membership state in a group, used to discriminate one-step vs two-step\nactivation flows for group-sourced roles.",
+      "enum": [
+        "active",
+        "eligible"
+      ],
+      "x-ms-enum": {
+        "name": "GroupMembershipState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "The user is an active member of the group."
+          },
+          {
+            "name": "Eligible",
+            "value": "eligible",
+            "description": "The user is an eligible member of the group — group membership must be\nactivated first before the inherited role can be activated."
+          }
+        ]
+      }
+    },
+    "GroupReference": {
+      "type": "object",
+      "description": "A reference to a Microsoft Entra ID group through which a role is granted.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Microsoft Entra ID object id of the group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Group display name."
+        }
+      },
+      "required": [
+        "id",
+        "displayName"
+      ]
+    },
+    "GroupRoleSource": {
+      "type": "object",
+      "description": "Group-sourced role assignment. The role is granted via `group`;\nthe user's membership state in that group is recorded in `membershipState`.",
+      "properties": {
+        "group": {
+          "$ref": "#/definitions/GroupReference",
+          "description": "The group through which this role is granted."
+        },
+        "membershipState": {
+          "$ref": "#/definitions/GroupMembershipState",
+          "description": "The user's membership state in the group. Drives client activation routing:\n\n- `active`   → one-step (activate the role).\n- `eligible` → two-step (activate your group membership first, then\nactivate the role)."
+        }
+      },
+      "required": [
+        "group",
+        "membershipState"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleSource"
+        }
+      ],
+      "x-ms-discriminator-value": "group"
+    },
+    "MemberType": {
+      "type": "string",
+      "description": "Membership type of a role grant. Extensible union — clients SHOULD treat\nunknown values as \"unsupported membership type\".",
+      "enum": [
+        "direct",
+        "group"
+      ],
+      "x-ms-enum": {
+        "name": "MemberType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Direct",
+            "value": "direct",
+            "description": "Direct user assignment."
+          },
+          {
+            "name": "Group",
+            "value": "group",
+            "description": "Role granted via a group the user is a member of."
+          }
+        ]
+      }
+    },
+    "PagedPrivilegedResourceFavorite": {
+      "type": "object",
+      "description": "Paged collection of PrivilegedResourceFavorite items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivilegedResourceFavorite items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivilegedResourceFavorite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedRelatedResourceProjection": {
+      "type": "object",
+      "description": "Paged collection of RelatedResourceProjection items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RelatedResourceProjection items on this page",
+          "items": {
+            "$ref": "#/definitions/RelatedResourceProjection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedResourceProjection": {
+      "type": "object",
+      "description": "Paging envelope for the `privilegedResources` list operation.\n\nSpreads the standard `Azure.Core.Page<ResourceProjection>` shape (`value` +\n`nextLink`) and adds the optional `count` field. The envelope itself is not\nan ARM resource — the ARM resource invariants are enforced on the page's\nitems (`ResourceProjection`), not on the wrapper.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResourceProjection items on this page",
+          "items": {
+            "$ref": "#/definitions/ResourceProjection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Full post-filter row count — the cardinality of the complete filtered set\nbefore the page slice. Present only when the request sets `$count=true`;\nomitted otherwise."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ParentResource": {
+      "type": "object",
+      "description": "Scope ancestor entry. Navigation only — carries no access information.\n\nGeneric shape: `type` classifies the scope tier; scope-type-specific metadata\nlives inside the open `properties` bag and is mirrored from the upstream\nscope without validation. Recursive: each entry has its own\n`parentResource` pointing at the next scope up. Present on every entry\nexcept the outermost (root) scope.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ScopeKind",
+          "description": "Scope tier classification. Allowed values today: `resourceGroup`,\n`subscription`. Future tiers (e.g., `managementGroup`, `tenant`, future\nsub-resource hierarchies) are non-breaking additions — the `properties`\nbag carries their per-type metadata."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope identifier for the parent scope. For Azure Resource Manager-addressable\nscopes this is the full Azure Resource Manager resource path (e.g.,\n`/subscriptions/{subId}/resourceGroups/my-rg`). Typed as `string` (not\n`armResourceIdentifier`) because higher scope tiers — management groups,\ntenants, and future non–Azure Resource Manager hierarchies — do not have\nAzure Resource Manager resource identifiers. Format is determined by the\nsibling `type` value."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable scope name. For subscriptions, may be the subscription id\nwhen a display name is unavailable."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Scope-type-specific metadata bag, mirrored from the upstream Azure scope\nfor the given `type`, without validation. The set of fields inside is\ndetermined by the sibling `type` value. Always emitted (possibly empty\n`{}`) so clients can safely read it. Intentionally untyped at the API\ncontract layer so new scope tiers (`managementGroup`, `tenant`, future\nsub-resource hierarchies) can be added without a contract break.\n\nExamples today (informative, not enforced by schema):\n\n- `type = \"resourceGroup\"`: `{}` (no scope-specific metadata in v1).\n- `type = \"subscription\"`:  `{ managementGroupPath: string[] }`\n(ordered root-to-direct-parent).\n\nClients SHOULD treat the bag as opaque unless they know the `type`.",
+          "additionalProperties": {}
+        },
+        "parentResource": {
+          "$ref": "#/definitions/ParentResource",
+          "description": "The next ancestor in the chain. Present on every entry except the\noutermost (root) scope, which omits the field."
+        }
+      },
+      "required": [
+        "type",
+        "scope",
+        "displayName",
+        "properties"
+      ]
+    },
+    "PrivilegedResourceFavorite": {
+      "type": "object",
+      "description": "A per-user resource favorite. Each user's favorites are private to them:\ntwo different users issuing PUT against the same `{favoriteId}` create two\nindependent favorite records.\n\nOperations (defined in routes.tsp):\n- LIST   `GET    /providers/Microsoft.Authorization/privilegedResourceFavorites`\n- GET    `GET    /providers/Microsoft.Authorization/privilegedResourceFavorites/{favoriteId}`\n- PUT    `PUT    /providers/Microsoft.Authorization/privilegedResourceFavorites/{favoriteId}` (idempotent)\n- DELETE `DELETE /providers/Microsoft.Authorization/privilegedResourceFavorites/{favoriteId}` (idempotent)\n\n`{favoriteId}` is deterministically derived from the favorited Azure resource\npath: `favoriteId = base64url(lowercased Azure resource ID)`. Because the\nderivation is deterministic, the client may compute the id locally and\nissue the PUT/GET/DELETE without an additional round-trip; the service\nvalidates the derivation on PUT.\n\nFavorites are not scoped to any subscription or resource group — they belong\nto the calling user.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivilegedResourceFavoriteProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivilegedResourceFavoriteProperties": {
+      "type": "object",
+      "description": "Properties of a `PrivilegedResourceFavorite`. The favorite's identity\n(`favoriteId` / `name`) is the URL-segment derivation of `resourceId`:\n`favoriteId = base64url(lowercased Azure resource ID)`.\n\nFavorites are created synchronously — a successful PUT or DELETE takes effect\nimmediately, with no long-running operation to poll.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The favorited Azure resource id. The `favoriteId` URL segment MUST equal\n`base64url(lowercased(resourceId))`; the service rejects mismatches with\n`400 InvalidRequest` on PUT.\n\nEffectively immutable: set on create and never changed afterward — there is\nno PATCH, and PUT validates the `favoriteId`-from-`resourceId` derivation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "RelatedResourceProjection": {
+      "type": "object",
+      "description": "A connect-enablement resource for a privileged resource — an Azure resource\nthe caller must be able to access to connect to the primary resource (for a\nvirtual machine, typically the NIC, NSG, public IP, or Bastion host),\nprojected with its own scope and the roles the caller holds on it.",
+      "properties": {
+        "projectionId": {
+          "type": "string",
+          "description": "Opaque server-generated identifier for this related-resource projection.\nStable per (caller, related resource) pair. Clients MUST treat this as\nopaque — do not parse.",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified Azure resource path of the related (connect-enablement)\nresource — e.g. the virtual machine's NIC, NSG, public IP, or Bastion host.\n\nAs with `ResourceProjection.scope`, every resource is also a scope at which\nrole assignments can be granted, so this field uses the ARM-standard\n`scope` name."
+        },
+        "roles": {
+          "type": "array",
+          "description": "Every role granting the caller access to this related resource — direct or\ninherited, direct-source or group-source, active or eligible. Each entry's\n`scope` field records the actual assignment scope. The caller activates the\nappropriate role here to enable connect to the primary resource.",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentSummary"
+          },
+          "x-ms-identifiers": [
+            "roleId"
+          ]
+        }
+      },
+      "required": [
+        "projectionId",
+        "scope",
+        "roles"
+      ]
+    },
+    "ResourceProjection": {
+      "type": "object",
+      "description": "A privileged resource projection — a unified view of an Azure resource the\ncaller has privileged access to, with all role information flattened onto the\nrow. Connect-enablement dependencies are retrieved separately via\n`GET .../privilegedResources/{privilegedResourceId}/relatedResources`.\n\nThe Azure resource-type namespace (`type`, e.g.\n`microsoft.compute/virtualmachines`) is the discriminator — new resource\ntypes are non-breaking additions and clients SHOULD tolerate unknown\nvalues.",
+      "properties": {
+        "projectionId": {
+          "type": "string",
+          "description": "Opaque server-generated identifier for this projection row. Stable per\n(caller, resource) pair. Clients MUST treat this as opaque — do not parse.\n\nDistinct from the conventional Azure resource `id`: the full Azure\nresource path lives on `scope` below.",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified Azure resource path (e.g.,\n`/subscriptions/{subId}/resourceGroups/my-rg/providers/Microsoft.Compute/virtualMachines/my-vm`).\n\nIn the privileged-access model every resource is also a scope at which\nrole assignments can be granted, so this field uses the ARM-standard\n`scope` name rather than `resourceId`."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource provider type (lowercased), e.g.\n`microsoft.compute/virtualmachines`. This is the ARM-standard `type`\nfield and also serves as the resource-kind discriminator — new resource\ntypes are non-breaking additions."
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure region (e.g. `eastus`)."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Azure resource tags, mirrored verbatim from the upstream Azure resource.\nFree-form user-defined key/value pairs, not validated — identical semantics\nto standard Azure Resource Manager `TrackedResource.tags`.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "parentResource": {
+          "$ref": "#/definitions/ParentResource",
+          "description": "Scope ancestor chain — innermost (resource group) first, outermost\n(subscription, future management group) at the chain's tail. Navigation\nonly; carries no access information.\n\nInheritance of role assignments is recorded directly on each entry of\n`roles` (each role's `scope` field), not by walking this chain. Clients\ndo not need to walk `parentResource` to discover inherited roles."
+        },
+        "roles": {
+          "type": "array",
+          "description": "Every role granting access to this resource — direct or inherited from\nany ancestor scope, and direct or via group membership (active or eligible).\nEach entry's `scope` field records the actual assignment scope.\n\nInherited and group-sourced roles are already included and fully resolved\nhere: clients do NOT need to walk `parentResource` or resolve group\nmembership themselves.",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentSummary"
+          },
+          "x-ms-identifiers": [
+            "roleId"
+          ]
+        },
+        "isFavorite": {
+          "type": "boolean",
+          "description": "Whether you have favorited this resource (see\n`privilegedResourceFavorites`). Always populated on every row."
+        }
+      },
+      "required": [
+        "projectionId",
+        "scope",
+        "displayName",
+        "type",
+        "location",
+        "tags",
+        "parentResource",
+        "roles",
+        "isFavorite"
+      ]
+    },
+    "RoleAssignmentSummary": {
+      "type": "object",
+      "description": "A single role grant on the resource. Roles for a row are flattened: direct\nand inherited assignments, direct-source and group-source assignments\n(whether active or eligible), all appear as separate entries with their\nactual assignment scope recorded in `scope`. The same role at the same\nscope from the same source MUST NOT appear twice on the same row.",
+      "properties": {
+        "roleId": {
+          "type": "string",
+          "description": "Opaque, stable identifier for this role grant. Stable per assignment, so it\nis safe to use as a client-side collection key. Clients MUST treat this as\nopaque — do not parse."
+        },
+        "parentRoleId": {
+          "type": "string",
+          "description": "The identifier of the parent role, if this role has a parent.",
+          "x-nullable": true
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure role definition id (full path).",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Authorization/roleDefinitions"
+              }
+            ]
+          }
+        },
+        "roleDisplayName": {
+          "type": "string",
+          "description": "Human-readable display name of the role definition (e.g.\n`Network Contributor`). Provided as a convenience so clients can render the\nrole without a separate lookup on `roleDefinitionId`."
+        },
+        "scope": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure scope path where the assignment is granted (resource, resource\ngroup, subscription, or future management-group id). Inheritance is\nimplicit: if `scope` differs from the row's `scope` (the resource's\nown path), the role is inherited."
+        },
+        "assignmentStatus": {
+          "$ref": "#/definitions/AssignmentStatus",
+          "description": "The caller's current status against this role on this resource:\n\n- `active`   — the user effectively has this role active right now.\n- `eligible` — the user can activate this role (one-step or two-step\nactivation, depending on `source.membershipState`).\n\nModeled as an extensible string so future statuses (e.g. additional\nlifecycle states) can be added without a breaking change; clients should\ntolerate unknown values."
+        },
+        "scheduleInfo": {
+          "$ref": "#/definitions/ScheduleInfo",
+          "description": "Schedule (start time and expiration) backing this role grant. Populated for\nboth `active` and `eligible` entries. A permanent (no-expiry) assignment is\nrepresented by `expiration.type` = `NoExpiration`; a time-bound assignment\nby `AfterDuration` (with `duration`) or `AfterDateTime` (with `endDateTime`)."
+        },
+        "source": {
+          "$ref": "#/definitions/RoleSource",
+          "description": "Origin of the role grant — direct user assignment or via group membership."
+        },
+        "isLeastPrivilege": {
+          "type": "boolean",
+          "description": "Whether this role is a least-privilege role for the resource. A value of\n`true` indicates the role grants the minimum permissions needed and is the\nrecommended choice; `false` indicates a broader-privilege role. Provided as\na recommendation so clients can guide users toward the least-privilege\noption."
+        }
+      },
+      "required": [
+        "roleId",
+        "roleDefinitionId",
+        "roleDisplayName",
+        "scope",
+        "assignmentStatus",
+        "scheduleInfo",
+        "source",
+        "isLeastPrivilege"
+      ]
+    },
+    "RoleSource": {
+      "type": "object",
+      "description": "Origin of a role grant. Discriminated by `memberType`.",
+      "properties": {
+        "memberType": {
+          "$ref": "#/definitions/MemberType",
+          "description": "Membership type: `direct` (direct user assignment) or `group` (granted via\na group the user is a member of)."
+        }
+      },
+      "discriminator": "memberType",
+      "required": [
+        "memberType"
+      ]
+    },
+    "ScheduleExpiration": {
+      "type": "object",
+      "description": "Expiration of a role grant schedule.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ScheduleExpirationType",
+          "description": "Type of expiration: `AfterDuration` (time-bound by `duration`),\n`AfterDateTime` (time-bound by `endDateTime`), or `NoExpiration`\n(permanent)."
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End DateTime of the schedule. Set when `type` is `AfterDateTime`."
+        },
+        "duration": {
+          "type": "string",
+          "description": "Duration of the schedule as an ISO-8601 TimeSpan. Set when `type` is\n`AfterDuration`."
+        }
+      }
+    },
+    "ScheduleExpirationType": {
+      "type": "string",
+      "description": "Expiration kind of a role grant schedule. Extensible string union.",
+      "enum": [
+        "AfterDuration",
+        "AfterDateTime",
+        "NoExpiration"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleExpirationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AfterDuration",
+            "value": "AfterDuration",
+            "description": "Time-bound assignment expiring after a duration — `duration` is set."
+          },
+          {
+            "name": "AfterDateTime",
+            "value": "AfterDateTime",
+            "description": "Time-bound assignment expiring at an explicit end date — `endDateTime` is\nset."
+          },
+          {
+            "name": "NoExpiration",
+            "value": "NoExpiration",
+            "description": "Permanent assignment — no expiry."
+          }
+        ]
+      }
+    },
+    "ScheduleInfo": {
+      "type": "object",
+      "description": "Schedule info backing a role grant — start time and expiration.",
+      "properties": {
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start DateTime of the schedule."
+        },
+        "expiration": {
+          "$ref": "#/definitions/ScheduleExpiration",
+          "description": "Expiration of the schedule. Absent implies no expiration is expressed."
+        }
+      }
+    },
+    "ScopeKind": {
+      "type": "string",
+      "description": "Scope-tier classification for `ParentResource`. Extensible union — `type`\nis a classification tag (NOT a strict schema discriminator); per-type\nmetadata lives in the `properties` bag.",
+      "enum": [
+        "resourceGroup",
+        "subscription"
+      ],
+      "x-ms-enum": {
+        "name": "ScopeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceGroup",
+            "value": "resourceGroup",
+            "description": "Azure resource group."
+          },
+          {
+            "name": "Subscription",
+            "value": "subscription",
+            "description": "Azure subscription."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
