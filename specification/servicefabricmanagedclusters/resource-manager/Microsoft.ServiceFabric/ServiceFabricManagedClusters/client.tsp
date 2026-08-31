@@ -728,6 +728,16 @@ namespace Azure.ResourceManager.Models {
   "PostManagedApplyMaintenanceWindow",
   "csharp"
 );
+@@clientName(
+  ManagedApplyMaintenanceWindow.post,
+  "PostManagedApplyMaintenanceWindowWithContent",
+  "csharp"
+);
+@@clientName(
+  ApplyMaintenanceWindowRequest,
+  "ApplyMaintenanceWindowContent",
+  "csharp"
+);
 @@clientName(Applications.fetchHealth::parameters.body, "content", "csharp");
 @@clientName(
   Applications.restartDeployedCodePackage::parameters.body,
