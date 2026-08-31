@@ -21,6 +21,7 @@ import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../memory-stores/routes.tsp";
+import "../state-stores/routes.tsp";
 import "../models/routes.tsp";
 import "../red-teams/routes.tsp";
 import "../routines/routes.tsp";
@@ -519,6 +520,21 @@ using Azure.AI.Projects;
 // If/when src\evaluations will be removed, consider doing the rename in
 // src\openai-evaluations\models.tsp instead.
 @@clientName(Target, "EvaluationTarget");
+
+// --------------------------------------------------------------------------------
+// Beta State Stores sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(StateStores.createStateStore, "create");
+@@clientName(StateStores.listStateStores, "list");
+@@clientName(StateStores.getStateStore, "get");
+@@clientName(StateStores.updateStateStore, "update");
+@@clientName(StateStores.deleteStateStore, "delete");
+@@clientName(StateStores.createStateStoreItem, "createItem");
+@@clientName(StateStores.listStateStoreItemKeys, "listItemKeys");
+@@clientName(StateStores.updateStateStoreItem, "updateItem");
+@@clientName(StateStores.getStateStoreItem, "getItem");
+@@clientName(StateStores.deleteStateStoreItem, "deleteItem");
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
