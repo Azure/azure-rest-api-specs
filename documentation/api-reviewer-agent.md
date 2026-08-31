@@ -561,8 +561,9 @@ scenarios:
 
 - **A -- Already covered:** the same semantic finding (rule or topic, affected
   API element, and corrective outcome) is already actionable on any discussion
-  surface. The finding is skipped and no new comment is posted. Exact wording,
-  line number, author, or marker presence does not make it new.
+  surface, and no matching inline anchor shifted. The finding is skipped and no
+  new comment is posted. Exact wording, line number, author, or marker presence
+  does not make it new. A line shift selects scenario B or C instead.
 - **B -- Line shifted (trusted workflow-owned):** same rule, code moved, and
   the old comment has a valid marker authored by `github-actions[bot]`. The
   stale thread is resolved and replaced at the current line.

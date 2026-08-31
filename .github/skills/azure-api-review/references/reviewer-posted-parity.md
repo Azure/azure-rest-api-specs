@@ -89,10 +89,19 @@ summary theme such as "naming issues were found" does not suppress a concrete
 inline finding.
 
 When actionable prior coverage exists, the new session MUST NOT post another
-standalone finding. It records `SKIP-COVERED` or, when location/state changed,
-replies to or updates the existing conversation according to the reconciliation
-plan. This applies even when the prior item is top-level, resolved, outdated,
-or lacks the agent marker.
+standalone finding. Line movement does not make the finding new, but it does
+select the reconciliation action. Choose exactly one action in this order:
+
+1. Materially incompatible guidance uses `CLARIFY-CONFLICT`.
+2. A matching inline anchor that shifted uses `RESOLVE-AND-REPOST` when trusted
+   workflow ownership is proven; otherwise it uses `REPLY-LINE-SHIFT`.
+3. Other actionable coverage uses `SKIP-COVERED`.
+4. Only a finding with no actionable coverage or contradiction uses `POST-NEW`.
+
+Therefore `SKIP-COVERED` applies only when no matching inline anchor shifted.
+Top-level comments and review bodies have no inline anchor and can use
+`SKIP-COVERED`. Resolved, outdated, or marker-free items still count as
+coverage and follow the same precedence.
 
 ### Contradiction handling
 

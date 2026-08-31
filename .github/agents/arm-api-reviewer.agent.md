@@ -1056,10 +1056,10 @@ violation, a trusted workflow-owned thread is Scenario E
 (THANK-AND-RESOLVE); every other thread is Scenario F
 (PROPOSE-HUMAN-RESOLVE) and requires explicit per-thread consent.
 
-**3. Per-finding action.** For each finding produced in Steps 4 / 4a (and amended in Step 5), apply the scenarios below. Each finding ends up labelled with **exactly one** action:
+**3. Per-finding action.** For each finding produced in Steps 4 / 4a (and amended in Step 5), apply the scenarios below. Each finding ends up labelled with **exactly one** action. Line movement does not make a finding new, but it does select the action. Apply this precedence: CLARIFY-CONFLICT for incompatible guidance, Scenario B or C for a shifted inline anchor, Scenario A for other actionable coverage, then POST-NEW:
 
 - **CLARIFY-CONFLICT.** An actionable existing item on any discussion surface has the same semantic finding identity but gives materially incompatible guidance. Do not plan a new standalone finding. For an inline thread, plan a reply that states the prior position, current evidence at the session SHA, current guidance, and why the conclusion changed. Resolve after clarification only when trusted workflow ownership is proven and the old guidance is no longer valid; otherwise leave the thread unresolved. For top-level comments or review bodies, plan one consolidated top-level clarification that links each contradicted item and states which guidance supersedes which. If the evidence is inconclusive, say so and leave the thread unresolved.
-- **Scenario A -> SKIP-COVERED.** An actionable existing item (any author, entry point, surface, or state) already covers the same semantic finding. Do not plan a new post. Record the existing item URL as the anchor. A top-level item or review body remains coverage even though it has no inline line anchor.
+- **Scenario A -> SKIP-COVERED.** An actionable existing item (any author, entry point, surface, or state) already covers the same semantic finding, and no matching inline anchor shifted. Do not plan a new post. Record the existing item URL as the anchor. A top-level item or review body remains coverage even though it has no inline line anchor.
 - **Scenario B -> RESOLVE-AND-REPOST.** Same finding, line shifted, prior
   comment is trusted workflow-owned. Plan to resolve the stale thread and post a
   replacement at the corrected line.

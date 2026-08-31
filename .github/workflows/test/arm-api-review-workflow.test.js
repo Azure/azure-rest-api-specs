@@ -310,21 +310,31 @@ describe("ARM API review workflow", () => {
   });
 
   it("reconciles duplicates and contradictions across every review entry point", async () => {
-    const [[source, compiled], reviewer, critic, protocol, inputTemplate, parity] =
-      await Promise.all([
-        readWorkflowFiles(),
-        readFile(join(ROOT, ".github/agents/arm-api-reviewer.agent.md"), "utf8"),
-        readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
-        readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
-        readFile(
-          join(ROOT, ".github/agents/protocols/arm-api-review-critic-inputs.template.md"),
-          "utf8",
-        ),
-        readFile(
-          join(ROOT, ".github/skills/azure-api-review/references/reviewer-posted-parity.md"),
-          "utf8",
-        ),
-      ]);
+    const [
+      [source, compiled],
+      reviewer,
+      critic,
+      protocol,
+      inputTemplate,
+      parity,
+      skill,
+      evalReadme,
+    ] = await Promise.all([
+      readWorkflowFiles(),
+      readFile(join(ROOT, ".github/agents/arm-api-reviewer.agent.md"), "utf8"),
+      readFile(join(ROOT, ".github/agents/arm-api-review-critic.agent.md"), "utf8"),
+      readFile(join(ROOT, ".github/agents/protocols/arm-api-review-critic.protocol.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/agents/protocols/arm-api-review-critic-inputs.template.md"),
+        "utf8",
+      ),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/reviewer-posted-parity.md"),
+        "utf8",
+      ),
+      readFile(join(ROOT, ".github/skills/azure-api-review/SKILL.md"), "utf8"),
+      readFile(join(ROOT, ".github/skills/evals/arm-api-reviewer/README.md"), "utf8"),
+    ]);
 
     expect(parity).toContain("A human invokes the ARM API Reviewer in chat");
     expect(parity).toContain("The automated workflow runs when a PR is ready");
@@ -333,9 +343,21 @@ describe("ARM API review workflow", () => {
     expect(parity).toContain("pull request review bodies");
     expect(parity).toContain("Match findings by semantic identity");
     expect(parity).toContain("Contradictions MUST use `CLARIFY-CONFLICT`");
+    expect(collapseWhitespace(parity)).toContain(
+      "Line movement does not make the finding new, but it does select the reconciliation action",
+    );
+    expect(collapseWhitespace(parity)).toContain(
+      "Therefore `SKIP-COVERED` applies only when no matching inline anchor shifted",
+    );
+    expect(collapseWhitespace(skill)).toContain(
+      "`SKIP-COVERED` for other actionable coverage, then `POST-NEW`",
+    );
 
     expect(reviewer).toContain("Fetch the complete existing discussion inventory");
     expect(reviewer).toContain("**CLARIFY-CONFLICT.**");
+    expect(collapseWhitespace(reviewer)).toContain(
+      "Scenario B or C for a shifted inline anchor, Scenario A for other actionable coverage",
+    );
     expect(reviewer).toContain("`reconciliation: clarification` marker");
     expect(reviewer).toContain("(<verification-status>, <N> iteration(s), <outcome>)");
     expect(reviewer).toMatch(/Critic unavailable;\s+reviewer self-check only/);
@@ -345,6 +367,13 @@ describe("ARM API review workflow", () => {
     expect(critic).toContain("inventory-incomplete");
     expect(critic).toContain("the canonical protocol permits a validated override");
     expect(protocol).toContain("`downstream-ci-conflict`");
+    expect(protocol).not.toContain("documentation/arm-api-reviewer-insights.md");
+    expect(collapseWhitespace(protocol)).toContain(
+      "A = SKIP-COVERED when no matching inline anchor shifted",
+    );
+    expect(evalReadme).toContain(
+      "per-stimulus timeout (duration; unit suffix required; default 2m)",
+    );
     expect(protocol).toMatch(/`downstream-ci-conflict`[^\n]+Override allowed/);
     expect(protocol).toContain("**11 non-overridable reasons**");
     expect(protocol).toContain("review target, Session SHA, Step 6 findings report, or Step 5.5");
@@ -368,6 +397,9 @@ describe("ARM API review workflow", () => {
     expect(protocol).toMatch(/Previous-version source\s+\| \*\*Required -- no default\*\*/);
     expect(critic).toContain("Inputs #1, #2, #3, #5, and #6");
     expect(source).toContain("Match by semantic finding identity");
+    expect(collapseWhitespace(source)).toContain(
+      "Same semantic finding, actionable coverage, no shifted inline anchor",
+    );
     expect(source).toContain("author login is exactly `github-actions[bot]`");
     expect(protocol).toContain("A marker is attribution, not authentication");
     expect(collapseWhitespace(protocol)).toContain(
@@ -1488,7 +1520,7 @@ describe("ARM paging and example enum calibration", () => {
     }
   });
 
-  it("keeps the eval catalog counts aligned with 85 scenarios and 57 fixtures", async () => {
+  it("keeps the eval catalog counts aligned with 87 scenarios and 57 fixtures", async () => {
     const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
     let stimulusCount = 0;
@@ -1509,11 +1541,11 @@ describe("ARM paging and example enum calibration", () => {
       { recursive: true, withFileTypes: true },
     );
     expect(evalFiles).toHaveLength(18);
-    expect(stimulusCount).toBe(85);
+    expect(stimulusCount).toBe(87);
     expect(
       fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
     ).toHaveLength(57);
-    expect(readme).toContain("Total: 85 stimuli across 18 eval files.");
+    expect(readme).toContain("Total: 87 stimuli across 18 eval files.");
     expect(readme).toContain("All 57 fixture data files");
     expect(readme).toContain("`--timeout <duration>`");
     expect(readme).toContain("`defaults.timeout`");

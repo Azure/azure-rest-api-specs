@@ -597,17 +597,21 @@ For each finding you are about to post, check the complete inventory. This
 workflow runs in **autonomous mode**, so apply the Action column below (the
 reconciliation acts directly, without human confirmation):
 
-| Scenario                                                         | Action token            | Behavior                                                                                                               |
-| ---------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Same semantic finding, actionable coverage on any surface        | `SKIP-COVERED`          | Do not post; record the existing URL                                                                                   |
-| Same finding, line shifted, trusted workflow-owned inline thread | `RESOLVE-AND-REPOST`    | Resolve the stale trusted thread and post one replacement at the current line                                          |
-| Same finding, line shifted, any other inline thread              | `REPLY-LINE-SHIFT`      | Reply with the current line; do not resolve the thread                                                                 |
-| New guidance contradicts an existing inline thread               | `CLARIFY-CONFLICT`      | Reply with the prior position, current evidence/guidance, and why it changed; resolve only superseded agent guidance   |
-| New guidance contradicts top-level comment(s) or review body     | `CLARIFY-CONFLICT`      | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings |
-| Violation already fixed, trusted workflow-owned inline thread    | `THANK-AND-RESOLVE`     | Queue the fix reply and thread resolution                                                                              |
-| Violation already fixed, any other inline thread                 | `PROPOSE-HUMAN-RESOLVE` | Never auto-resolve; autonomous mode leaves it untouched                                                                |
-| Candidate excluded by the 20-comment limit                       | `OVERFLOW-NOT-POSTED`   | Do not post; disclose only the aggregate count and themes                                                              |
-| No actionable prior coverage or contradiction on any surface     | `POST-NEW`              | Post one new finding                                                                                                   |
+Line movement does not make a finding new, but it does select the action. Choose
+exactly one action with this precedence: contradiction, shifted inline anchor,
+other actionable coverage, then no coverage.
+
+| Scenario                                                                | Action token            | Behavior                                                                                                               |
+| ----------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| New guidance contradicts an existing inline thread                      | `CLARIFY-CONFLICT`      | Reply with the prior position, current evidence/guidance, and why it changed; resolve only superseded agent guidance   |
+| New guidance contradicts top-level comment(s) or review body            | `CLARIFY-CONFLICT`      | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings |
+| Same finding, line shifted, trusted workflow-owned inline thread        | `RESOLVE-AND-REPOST`    | Resolve the stale trusted thread and post one replacement at the current line                                          |
+| Same finding, line shifted, any other inline thread                     | `REPLY-LINE-SHIFT`      | Reply with the current line; do not resolve the thread                                                                 |
+| Same semantic finding, actionable coverage, no shifted inline anchor    | `SKIP-COVERED`          | Do not post; record the existing URL                                                                                   |
+| Violation already fixed, trusted workflow-owned inline thread           | `THANK-AND-RESOLVE`     | Queue the fix reply and thread resolution                                                                              |
+| Violation already fixed, any other inline thread                        | `PROPOSE-HUMAN-RESOLVE` | Never auto-resolve; autonomous mode leaves it untouched                                                                |
+| Candidate excluded by the 20-comment limit                              | `OVERFLOW-NOT-POSTED`   | Do not post; disclose only the aggregate count and themes                                                              |
+| No actionable prior coverage or contradiction on any discussion surface | `POST-NEW`              | Post one new finding                                                                                                   |
 
 **Resolution rules (autonomous mode):**
 

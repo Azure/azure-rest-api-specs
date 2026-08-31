@@ -1404,3 +1404,78 @@ stimuli:
     rubric:
       - Treats the marker as attribution only because the author is not the trusted workflow bot
       - Uses PROPOSE-HUMAN-RESOLVE and never grants autonomous thread ownership
+
+  # 160027 -- A shifted human-origin inline anchor selects REPLY-LINE-SHIFT
+  - name: shifted-human-inline-anchor-selects-reply
+    tags:
+      focus: line-shift-precedence
+    prompt: |
+      Read the Reviewer and shared reconciliation files. Build one Step 5.5
+      reconciliation row for this current finding:
+
+      - Current finding: OAPI027 on `Widget.properties.secretValue` in
+        `widget.json` line 180; the response-only secret must be read-only.
+      - Existing inline thread: the same rule, API element, and corrective
+        outcome at the old line 142.
+      - Existing author: `contoso-reviewer`.
+      - Trusted workflow ownership is not proven.
+      - The violation is still present, but the code moved from line 142 to
+        line 180.
+
+      Return only the action token, existing thread disposition, and a
+      one-sentence rationale. Do not post or resolve anything.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "human shifted anchor receives reply"
+        config:
+          substring: "REPLY-LINE-SHIFT"
+      - type: output-matches
+        name: "line shift selects action without changing identity"
+        config:
+          pattern: "(?is)(?:same|semantic).*(?:line|anchor).*(?:shift|moved)|(?:line|anchor).*(?:shift|moved).*(?:same|semantic)"
+      - type: prompt
+    rubric:
+      - Uses REPLY-LINE-SHIFT because the matching inline anchor moved and trusted workflow ownership is not proven
+      - Does not use SKIP-COVERED even though line movement does not change semantic finding identity
+      - Leaves the existing thread unresolved and does not create a standalone finding
+
+  # 160028 -- A shifted trusted workflow-owned inline anchor selects RESOLVE-AND-REPOST
+  - name: shifted-trusted-inline-anchor-selects-repost
+    tags:
+      focus: line-shift-precedence
+    prompt: |
+      Read the Reviewer and shared reconciliation files. Build one Step 5.5
+      reconciliation row for this current finding:
+
+      - Current finding: OAPI027 on `Widget.properties.secretValue` in
+        `widget.json` line 180; the response-only secret must be read-only.
+      - Existing inline thread: the same rule, API element, and corrective
+        outcome at the old line 142.
+      - Existing author: `github-actions[bot]`.
+      - The existing comment has a structurally valid
+        `posted-by: arm-api-reviewer-agent` marker.
+      - The violation is still present, but the code moved from line 142 to
+        line 180.
+
+      Return only the action token, existing thread disposition, and a
+      one-sentence rationale. Do not post or resolve anything.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "trusted shifted anchor is replaced"
+        config:
+          substring: "RESOLVE-AND-REPOST"
+      - type: output-matches
+        name: "trusted ownership and line shift justify replacement"
+        config:
+          pattern: "(?is)(?=.*github-actions\\[bot\\])(?=.*(?:marker|trusted))(?=.*(?:shift|moved)).*"
+      - type: prompt
+    rubric:
+      - Uses RESOLVE-AND-REPOST because the matching inline anchor moved and both marker and trusted author prove workflow ownership
+      - Does not use SKIP-COVERED even though line movement does not change semantic finding identity
+      - Plans one replacement at the current line and no duplicate standalone finding
