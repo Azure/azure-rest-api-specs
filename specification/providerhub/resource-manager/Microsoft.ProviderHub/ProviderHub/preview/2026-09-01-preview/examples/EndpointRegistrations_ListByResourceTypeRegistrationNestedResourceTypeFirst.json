@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "providerNamespace": "Microsoft.Contoso",
+    "resourceType": "widgets",
+    "nestedResourceTypeFirst": "versions"
+  },
+  "responses": {
+    "200": {
+      "description": "The nested Endpoint Registrations were retrieved successfully.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourcetypeRegistrations/widgets/resourcetypeRegistrations/versions/endpoints/AustraliaCentral-Preview",
+            "name": "AustraliaCentral-Preview",
+            "type": "Microsoft.ProviderHub/providerRegistrations/resourcetypeRegistrations/resourcetypeRegistrations/endpoints",
+            "properties": {
+              "kind": "Direct",
+              "enabled": true,
+              "apiVersions": [
+                "2026-01-01-preview"
+              ],
+              "endpointUri": "https://australiacentral.widgets.contoso.com/",
+              "locations": [
+                "Australia Central"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "EndpointRegistrations_ListByResourceTypeRegistrationNestedResourceTypeFirst",
+  "title": "EndpointRegistrations_ListByResourceTypeRegistrationNestedResourceTypeFirst"
+}

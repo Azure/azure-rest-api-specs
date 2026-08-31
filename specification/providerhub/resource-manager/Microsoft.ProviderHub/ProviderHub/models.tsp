@@ -1317,10 +1317,38 @@ model CustomRolloutSpecification {
   rolloutId?: string;
 
   /**
+   * Express V2 (Ev2) metadata supplied when the custom rollout is created and preserved for subsequent reads.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  ev2RolloutSpecification?: Ev2RolloutSpecification;
+
+  /**
    * The manifest checkin specification.
    */
   @added(Versions.v2025_10_01)
   manifestCheckinSpecification?: ManifestCheckinSpecification;
+}
+
+/**
+ * Express V2 (Ev2) metadata associated with a custom rollout.
+ */
+@added(Versions.v2026_09_01_preview)
+model Ev2RolloutSpecification {
+  /**
+   * Indicates whether the Ev2 rollout is used for manifest buildout.
+   */
+  isForManifestBuildout?: boolean;
+
+  /**
+   * The Ev2 deployment type associated with the rollout.
+   */
+  deploymentType?: string;
+
+  /**
+   * The Ev2 service group associated with the rollout.
+   */
+  serviceGroup?: string;
 }
 
 /**
@@ -1399,7 +1427,7 @@ model ProviderRegistrationProperties
   /**
    * The resource provider lifecycle information.
    */
-  @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_09_01_preview)
   lifecycleInfo?: ResourceProviderLifecycleInfo;
 }
 
@@ -1960,7 +1988,7 @@ model ResourceProviderManagement {
   /**
    * List of claims to approve or reject feature registration.
    */
-  @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_09_01_preview)
   featureApprovalClaims?: string[];
 }
 
@@ -2503,7 +2531,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The resource type lifecycle information.
    */
-  @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_09_01_preview)
   lifecycleInfo?: ResourceTypeLifecycleInfo;
 
   /**
@@ -2731,6 +2759,7 @@ model ResourceTypeRegistrationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Endpoint Registration operations are synchronous and reuse this existing property bag without a provisioning lifecycle."
 model ResourceTypeEndpoint {
   /**
    * Resource type endpoint kind. This Metadata is also used by portal/tooling/etc to render different UX experiences for resources of the same type.
@@ -2901,7 +2930,7 @@ model SwaggerSpecification {
   /**
    * The swagger specification lifecycle information.
    */
-  @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_09_01_preview)
   lifecycleInfo?: SwaggerSpecificationLifecycleInfo;
 }
 
@@ -4096,7 +4125,7 @@ model ResourceProviderManifest {
    * The token auth configuration.
    */
   @added(Versions.v2025_10_01)
-  @removed(Versions.v2026_02_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   tokenAuthConfiguration?: TokenAuthConfiguration;
 }
 
@@ -4378,6 +4407,20 @@ model CheckinManifestParams {
    * The baseline ARM manifest location supplied to the checkin manifest operation.
    */
   baselineArmManifestLocation: string;
+
+  /**
+   * The swagger spec link supplied to the checkin manifest operation.
+   */
+  @added(Versions.v2026_09_01_preview)
+  swaggerLink?: url;
+
+  /**
+   * The optional comment included in the manifest repository commit or pull request.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @maxLength(200)
+  @pattern("^[\\u0020-\\u007E\\u00A0-\\uFFFF]*$")
+  checkinComment?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5575,7 +5618,7 @@ model ManifestInfoProperties {
 /**
  * The isolation type.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 union IsolationType {
   string,
 
@@ -5593,7 +5636,7 @@ union IsolationType {
 /**
  * The partner category.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 union PartnerCategory {
   string,
 
@@ -5611,7 +5654,7 @@ union PartnerCategory {
 /**
  * The lifecycle stage.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 union LifecycleStage {
   string,
 
@@ -5644,7 +5687,7 @@ union LifecycleStage {
 /**
  * Resource provider lifecycle information.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ResourceProviderLifecycleInfo {
   /**
    * The isolation type.
@@ -5670,7 +5713,7 @@ model ResourceProviderLifecycleInfo {
 /**
  * Resource type lifecycle information.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ResourceTypeLifecycleInfo {
   /**
    * The lifecycle stage.
@@ -5681,7 +5724,7 @@ model ResourceTypeLifecycleInfo {
 /**
  * Swagger specification lifecycle information.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 model SwaggerSpecificationLifecycleInfo {
   /**
    * The lifecycle stage.

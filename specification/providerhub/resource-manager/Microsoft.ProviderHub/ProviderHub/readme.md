@@ -32,6 +32,49 @@ openapi-subtype: arm
 tag: package-2025-10-01
 ```
 
+### Tag: package-2026-09-01-preview
+
+These settings apply only when `--tag=package-2026-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-01-preview'
+input-file:
+  - preview/2026-09-01-preview/providerhub.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: providerhub.json
+    where:
+      - $.definitions.ResourceTypeRegistrationProperties.properties.resourceConcurrencyControlOptions
+      - $.definitions.ResourceTypeRegistrationProperties.properties.metadata
+      - $.definitions.RolloutStatusBase.properties.failedOrSkippedRegions
+      - $.definitions.CustomRolloutStatus.properties.failedOrSkippedRegions
+    reason: This version requires metadata to be defined as an additional property or has already been there which will break customers if we change now.
+  - suppress: PutResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
+    reason: The manifest is checked in to the manifest repository rather than persisted as an ARM resource, so the service only ever returns 200. Declaring a 201 would document a response the service never sends.
+  - suppress: DeleteResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}"].delete
+    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+  - suppress: DeleteResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default"].delete
+    reason: DeleteOperationsApi in the service always returns 204, including when the operations content does not exist. Declaring a 200 would document a response the service never sends.
+  - suppress: DeleteOperationResponses
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default"].delete.responses
+    reason: DeleteOperationsApi in the service always returns 204, including when the operations content does not exist. Declaring a 200 would document a response the service never sends.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: providerhub.json
+    where:
+      - $.definitions.ManifestInfo
+    reason: The service exposes the manifest only for a specific environment; there is no API to enumerate manifests across environments, so a collection GET cannot be documented.
+```
+
 ### Tag: package-2026-02-01-preview
 
 These settings apply only when `--tag=package-2026-02-01-preview` is specified on the command line.
@@ -205,7 +248,7 @@ directive:
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: AvoidAdditionalProperties
     from: providerhub.json

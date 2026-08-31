@@ -21,6 +21,7 @@ using Microsoft.ProviderHub;
 
 @@clientName(CustomRollouts.createOrUpdate::parameters.resource, "properties");
 
+@@clientName(Manifests.createOrUpdateV1::parameters.resource, "properties");
 @@clientName(Manifests.createOrUpdate::parameters.resource, "properties");
 
 @@clientName(
@@ -53,6 +54,23 @@ using Microsoft.ProviderHub;
 
 @@clientName(
   ResourceTypeRegistrations.createOrUpdate::parameters.resource,
+  "properties"
+);
+
+@@clientName(
+  EndpointRegistrations.createOrUpdate::parameters.resource,
+  "properties"
+);
+@@clientName(
+  EndpointRegistrations.createOrUpdateNestedResourceTypeFirst::parameters.resource,
+  "properties"
+);
+@@clientName(
+  EndpointRegistrations.createOrUpdateNestedResourceTypeSecond::parameters.resource,
+  "properties"
+);
+@@clientName(
+  EndpointRegistrations.createOrUpdateNestedResourceTypeThird::parameters.resource,
   "properties"
 );
 
