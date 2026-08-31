@@ -592,17 +592,17 @@ union MigStrategy {
   string,
 
   /**
-   * No MIG partitioning is applied; the GPU is exposed as a single unified whole-device instance. Specifying this value removes any previously active MIG strategy.
+   * Don't set a MIG strategy. If you previously had one set, this will override it and set remove the set MIG strategy.
    */
   None: "None",
 
   /**
-   * All MIG partitions on every GPU in the pool are the same size (`nvidia.com/mig.strategy: single`). The uniform partition size is controlled by `nvidia.migProfiles` (exactly one element required).
+   * Set the MIG strategy for managed MIG as single.
    */
   Single: "Single",
 
   /**
-   * Each GPU in the pool can host heterogeneous partitions of different sizes simultaneously (`nvidia.com/mig.strategy: mixed`). The exact partition mix per GPU is declared via `nvidia.migProfiles`.
+   * Set the MIG strategy for managed MIG as mixed.
    */
   Mixed: "Mixed",
 }
