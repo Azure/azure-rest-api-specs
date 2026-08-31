@@ -10672,13 +10672,21 @@
     },
     "BlobAccessPointPrivateLinkIdType": {
       "type": "string",
+      "description": "The format used by a Private Link identifier.",
       "enum": [
         "ResourceId"
       ],
       "x-ms-enum": {
-        "modelAsString": false
-      },
-      "x-nullable": false
+        "name": "BlobAccessPointPrivateLinkIdType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceId",
+            "value": "ResourceId",
+            "description": "The identifier is an Azure resource ID."
+          }
+        ]
+      }
     },
     "BlobAccessPointProposedConnectionTestRequest": {
       "type": "object",

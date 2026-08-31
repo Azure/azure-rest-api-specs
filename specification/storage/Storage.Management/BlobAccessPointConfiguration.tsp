@@ -78,10 +78,11 @@ union BlobAccessPointConnectionType {
 
 @added(Versions.v2026_09_01)
 @doc("The format used by a Private Link identifier.")
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Only ResourceId is accepted."
 union BlobAccessPointPrivateLinkIdType {
   @doc("The identifier is an Azure resource ID.")
   ResourceId: "ResourceId",
+
+  string,
 }
 
 @added(Versions.v2026_09_01)
