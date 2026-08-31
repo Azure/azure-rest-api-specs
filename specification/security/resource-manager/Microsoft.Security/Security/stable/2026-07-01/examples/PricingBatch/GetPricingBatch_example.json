@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01",
+    "scopeId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "pricingBatchName": "global"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricingBatch/global",
+        "name": "global",
+        "type": "Microsoft.Security/pricingBatch",
+        "properties": {
+          "results": [
+            {
+              "planName": "VirtualMachines",
+              "success": true,
+              "result": {
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+                "name": "VirtualMachines",
+                "type": "Microsoft.Security/pricings",
+                "properties": {
+                  "pricingTier": "Standard",
+                  "subPlan": "P2",
+                  "freeTrialRemainingTime": "PT0S",
+                  "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                  "enforce": "False",
+                  "resourcesCoverageStatus": "FullyCovered",
+                  "extensions": [
+                    {
+                      "name": "AgentlessVmScanning",
+                      "isEnabled": "True",
+                      "operationStatus": {
+                        "code": "Succeeded",
+                        "message": "Successfully enabled extension"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "summary": {
+            "totalRequested": 1,
+            "successfulUpdates": 1,
+            "failedUpdates": 0
+          }
+        }
+      }
+    }
+  }
+}
