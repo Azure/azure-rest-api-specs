@@ -1297,12 +1297,18 @@ model FirewallDeploymentProperties {
   // firewallSku rather than inside networkProfile. Recorded as design Decision F; the
   // partner nests this inside dataPathInfo but the ARM shape deliberately does not mirror
   // the partner shape.
+  // Not part of FirewallResourceUpdateProperties, so it is settable on create/replace via
+  // PUT but not via PATCH - matching firewallSku, the adjacent instance-lifecycle setting.
+  // This is intentional: partners supply these values on firewall create/update (PUT).
   /**
    * A configurable period, in minutes, that allows firewall instances to continue
    * serving existing traffic during scale-in or rolling upgrade events, before the
-   * instance is removed from the pool. If not specified, a default of 15 is applied.
+   * instance is removed from the pool. Supplied when creating or replacing the
+   * firewall; it is not part of the PATCH request body. If not specified, a default
+   * of 15 is applied.
    */
   @added(Versions.v2026_08_27_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minValue(15)
   @maxValue(120)
   sessionDrainTimeoutInMinutes?: int32 = 15;

@@ -7102,10 +7102,14 @@
         "sessionDrainTimeoutInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "A configurable period, in minutes, that allows firewall instances to continue\nserving existing traffic during scale-in or rolling upgrade events, before the\ninstance is removed from the pool. If not specified, a default of 15 is applied.",
+          "description": "A configurable period, in minutes, that allows firewall instances to continue\nserving existing traffic during scale-in or rolling upgrade events, before the\ninstance is removed from the pool. Supplied when creating or replacing the\nfirewall; it is not part of the PATCH request body. If not specified, a default\nof 15 is applied.",
           "default": 15,
           "minimum": 15,
-          "maximum": 120
+          "maximum": 120,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
