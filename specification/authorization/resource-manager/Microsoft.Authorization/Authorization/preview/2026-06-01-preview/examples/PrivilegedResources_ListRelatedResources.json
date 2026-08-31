@@ -1,0 +1,89 @@
+{
+  "operationId": "PrivilegedResources_ListRelatedResources",
+  "title": "List related (connect-enablement) resources for a privileged resource",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "privilegedResourceId": "L3N1YnNjcmlwdGlvbnMvMTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1L3Jlc291cmNlR3JvdXBzL215LXJnL3Byb3ZpZGVycy9taWNyb3NvZnQuY29tcHV0ZS92aXJ0dWFsbWFjaGluZXMvbXktdm0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "projectionId": "L3N1YnNjcmlwdGlvbnMvMTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1L3Jlc291cmNlZ3JvdXBzL215LXJnL3Byb3ZpZGVycy9taWNyb3NvZnQubmV0d29yay9uZXR3b3JraW50ZXJmYWNlcy9teS12bS1uaWM",
+            "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-vm-nic",
+            "roles": [
+              {
+                "roleId": "9c6dc8fa-3f0a-4f4d-86d8-71b3e4b8b5e0",
+                "parentRoleId": null,
+                "roleDefinitionId": "/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+                "roleDisplayName": "Reader",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg",
+                "assignmentStatus": "eligible",
+                "scheduleInfo": {
+                  "startDateTime": "2026-01-15T00:00:00Z",
+                  "expiration": {
+                    "type": "AfterDateTime",
+                    "endDateTime": "2026-12-31T23:59:59Z"
+                  }
+                },
+                "source": {
+                  "memberType": "direct"
+                },
+                "isLeastPrivilege": true
+              },
+              {
+                "roleId": "f5d8b1c9-0a3e-4c8d-89b6-3a8d2c1b0a7e",
+                "parentRoleId": null,
+                "roleDefinitionId": "/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Authorization/roleDefinitions/4d97b98b-1d4f-4787-a291-c67834d212e7",
+                "roleDisplayName": "Network Contributor",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555",
+                "assignmentStatus": "active",
+                "scheduleInfo": {
+                  "startDateTime": "2026-05-22T14:00:00Z",
+                  "expiration": {
+                    "type": "AfterDateTime",
+                    "endDateTime": "2026-05-22T22:00:00Z"
+                  }
+                },
+                "source": {
+                  "memberType": "group",
+                  "group": {
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                    "displayName": "Privileged Operators"
+                  },
+                  "membershipState": "active"
+                },
+                "isLeastPrivilege": false
+              }
+            ]
+          },
+          {
+            "projectionId": "L3N1YnNjcmlwdGlvbnMvMTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1L3Jlc291cmNlZ3JvdXBzL215LXJnL3Byb3ZpZGVycy9taWNyb3NvZnQubmV0d29yay9iYXN0aW9uaG9zdHMvbXktYmFzdGlvbg",
+            "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg/providers/Microsoft.Network/bastionHosts/my-bastion",
+            "roles": [
+              {
+                "roleId": "2d7a4e1b-6c3f-4a9d-8b2e-1f0a5c3d7e9b",
+                "parentRoleId": null,
+                "roleDefinitionId": "/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+                "roleDisplayName": "Reader",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg",
+                "assignmentStatus": "active",
+                "scheduleInfo": {
+                  "startDateTime": "2025-11-01T00:00:00Z",
+                  "expiration": {
+                    "type": "NoExpiration"
+                  }
+                },
+                "source": {
+                  "memberType": "direct"
+                },
+                "isLeastPrivilege": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

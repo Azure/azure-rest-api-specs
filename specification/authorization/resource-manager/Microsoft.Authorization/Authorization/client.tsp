@@ -5,6 +5,7 @@ import "./AttributeNamespaces/main.tsp";
 import "./Authorization/main.tsp";
 import "./ClassicAdmin/main.tsp";
 import "./DenyAssignment/main.tsp";
+import "./PrivilegedAccess/main.tsp";
 import "./ProviderOperations/main.tsp";
 import "./RoleAssignment/main.tsp";
 import "./RoleDefinitions/main.tsp";
@@ -17,6 +18,7 @@ using Microsoft.AttributeNamespaces;
 using Microsoft.Authorization;
 using Microsoft.ClassicAdmin;
 using Microsoft.DenyAssignment;
+using Microsoft.PrivilegedAccess;
 using Microsoft.ProviderOperations;
 using Microsoft.RoleAssignment;
 using Microsoft.RoleDefinitions;
@@ -30,6 +32,7 @@ using Microsoft.RoleManagementAlerts;
     Microsoft.Authorization,
     Microsoft.ClassicAdmin,
     Microsoft.DenyAssignment,
+    Microsoft.PrivilegedAccess,
     Microsoft.ProviderOperations,
     Microsoft.RoleAssignment,
     Microsoft.RoleDefinitions,
@@ -72,6 +75,19 @@ union RoleManagementScopeType {
   "go,python"
 );
 @@clientName(EligibleChildResourcesOperationGroup.get, "list", "javascript");
+
+// PrivilegedAccess: `parentResource` collides with a base-class name in the .NET
+// SDK; rename to `parent` for the C# emitter only. Other languages keep the spec name.
+@@clientName(
+  Microsoft.PrivilegedAccess.ResourceProjection.parentResource,
+  "parent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ParentResource.parentResource,
+  "parent",
+  "csharp"
+);
 @@clientName(
   Microsoft.Authorization.UsersOrServicePrincipalSetUserType,
   "UserType",
