@@ -16,9 +16,27 @@ vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
 
     return Promise.resolve(
       createMetadata({
-        csharp: [{ emitterName: "csharp", ...mockData }],
-        java: [{ emitterName: "java", ...mockData }],
-        python: [{ emitterName: "python", ...mockData }],
+        csharp: [
+          {
+            emitterName: "csharp",
+            packageName: "Azure.ResourceManager.Sample",
+            ...mockData,
+          },
+        ],
+        java: [
+          {
+            emitterName: "java",
+            packageName: "com.azure.resourcemanager.sample",
+            ...mockData,
+          },
+        ],
+        python: [
+          {
+            emitterName: "python",
+            packageName: "azure-mgmt-sample",
+            ...mockData,
+          },
+        ],
       }),
     );
   }),
