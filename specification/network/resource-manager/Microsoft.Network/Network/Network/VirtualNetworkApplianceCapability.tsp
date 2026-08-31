@@ -169,6 +169,14 @@ model VirtualNetworkApplianceCapabilityProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * The IP version the capability applies to. The kind-agnostic base admits the full supported set;
+   * each capability `kind` narrows this to its own allowed value(s) and marks it required (see each
+   * kind's properties schema). It is optional here so a future property-less kind is not forced to carry it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties."
+  ipVersion?: VirtualNetworkApplianceCapabilityIpVersion;
 }
 
 /**
@@ -178,8 +186,9 @@ model VirtualNetworkApplianceCapabilityProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Model name mirrors the wire-level capability kind value 'PLGatewayFastpath' (the NRP contract discriminator value)."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
-model PLGatewayFastpathCapabilityProperties
-  is VirtualNetworkApplianceCapabilityProperties {
+model PLGatewayFastpathCapabilityProperties {
+  ...OmitProperties<VirtualNetworkApplianceCapabilityProperties, "ipVersion">;
+
   /**
    * The IP version the capability applies to. Private Link Gateway FastPath supports `DualStack` only:
    * single-stack applies to the Private Endpoint configuration only, while the gateway itself stays dual-stack.
@@ -195,8 +204,9 @@ model PLGatewayFastpathCapabilityProperties
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Model name mirrors the wire-level capability kind value 'PLGateway' (the NRP contract discriminator value)."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
-model PLGatewayCapabilityProperties
-  is VirtualNetworkApplianceCapabilityProperties {
+model PLGatewayCapabilityProperties {
+  ...OmitProperties<VirtualNetworkApplianceCapabilityProperties, "ipVersion">;
+
   /**
    * The IP version the capability applies to. Private Link Gateway (slow-path) supports `IPv6` only.
    */
@@ -211,13 +221,34 @@ model PLGatewayCapabilityProperties
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Model name mirrors the wire-level capability kind value 'PLIPForwarders' (the NRP contract discriminator value)."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
-model PLIPForwardersCapabilityProperties
-  is VirtualNetworkApplianceCapabilityProperties {
+model PLIPForwardersCapabilityProperties {
+  ...OmitProperties<VirtualNetworkApplianceCapabilityProperties, "ipVersion">;
+
   /**
    * The IP version the capability applies to. Private Link IP-forwarders (NVA) supports `IPv6` only.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties."
   ipVersion: PLIPForwardersCapabilityIpVersion;
+}
+
+/**
+ * The IP versions a virtual network appliance capability can apply to. The kind-agnostic superset; each
+ * capability kind narrows this to its own supported value(s) in the kind-specific properties schema.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Members are documented individually below."
+@added(Versions.v2026_03_01)
+union VirtualNetworkApplianceCapabilityIpVersion {
+  string,
+
+  /**
+   * IPv6.
+   */
+  IPv6: "IPv6",
+
+  /**
+   * Dual stack (both IPv4 and IPv6).
+   */
+  DualStack: "DualStack",
 }
 
 /**

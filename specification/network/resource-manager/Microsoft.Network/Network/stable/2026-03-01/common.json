@@ -6618,6 +6618,60 @@
         ]
       }
     },
+    "PLGatewayCapabilityIpVersion": {
+      "type": "string",
+      "description": "The IP versions supported by the Private Link Gateway (slow-path) capability.",
+      "enum": [
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "PLGatewayCapabilityIpVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6."
+          }
+        ]
+      }
+    },
+    "PLGatewayFastpathCapabilityIpVersion": {
+      "type": "string",
+      "description": "The IP versions supported by the Private Link Gateway FastPath capability.",
+      "enum": [
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "PLGatewayFastpathCapabilityIpVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DualStack",
+            "value": "DualStack",
+            "description": "Dual stack (both IPv4 and IPv6)."
+          }
+        ]
+      }
+    },
+    "PLIPForwardersCapabilityIpVersion": {
+      "type": "string",
+      "description": "The IP versions supported by the Private Link IP-forwarders (NVA) capability.",
+      "enum": [
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "PLIPForwardersCapabilityIpVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6."
+          }
+        ]
+      }
+    },
     "PacketCaptureTargetType": {
       "type": "string",
       "description": "Target type of the resource provided.",
@@ -8833,6 +8887,60 @@
             "name": "Full",
             "value": "Full",
             "description": "Full"
+          }
+        ]
+      }
+    },
+    "VirtualNetworkApplianceCapabilityIpVersion": {
+      "type": "string",
+      "description": "The IP versions a virtual network appliance capability can apply to. The kind-agnostic superset; each\ncapability kind narrows this to its own supported value(s) in the kind-specific properties schema.",
+      "enum": [
+        "IPv6",
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkApplianceCapabilityIpVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6."
+          },
+          {
+            "name": "DualStack",
+            "value": "DualStack",
+            "description": "Dual stack (both IPv4 and IPv6)."
+          }
+        ]
+      }
+    },
+    "VirtualNetworkApplianceCapabilityKind": {
+      "type": "string",
+      "description": "The kinds of virtual network appliance capability. The value is the top-level `kind` discriminator.",
+      "enum": [
+        "PLGatewayFastpath",
+        "PLGateway",
+        "PLIPForwarders"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkApplianceCapabilityKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PLGatewayFastpath",
+            "value": "PLGatewayFastpath",
+            "description": "Private Link Gateway FastPath."
+          },
+          {
+            "name": "PLGateway",
+            "value": "PLGateway",
+            "description": "Private Link Gateway (slow-path)."
+          },
+          {
+            "name": "PLIPForwarders",
+            "value": "PLIPForwarders",
+            "description": "Private Link IP-forwarders (NVA)."
           }
         ]
       }
