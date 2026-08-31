@@ -3,7 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2026_07_01_preview)
+@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2026_09_01_preview)
 namespace Customizations;
 
 @client({
@@ -15,6 +15,7 @@ interface ContentSafetyClient {
   analyzeText is ContentSafety.TextOperations.analyzeText;
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
+  unifiedModerate is ContentSafety.UnifiedOperations.unifiedModerate;
 }
 
 @client({
@@ -42,6 +43,11 @@ interface BlocklistClient {
   listTextBlocklists is ContentSafety.TextBlocklists.listTextBlocklists;
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
+@@clientName(
+  ContentSafety.UnifiedModerateOptions,
+  "UnifiedModerateConfig",
+  "csharp"
+);
 @@clientName(
   Azure.Core.Foundations.ResourceBody.resource,
   "options",
