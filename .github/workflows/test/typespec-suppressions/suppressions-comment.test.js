@@ -185,15 +185,16 @@ describe("buildSuppressionsComment", async () => {
         }),
       );
 
-      const body = await buildSuppressionsComment(
-        github,
-        mockCore,
-        "test-owner",
-        "test-repo",
-        "abc123",
-        42,
-        [],
-      );
+      const { body } =
+        (await buildSuppressionsComment(
+          github,
+          mockCore,
+          "test-owner",
+          "test-repo",
+          "abc123",
+          42,
+          [],
+        )) ?? {};
 
       expect(body).toContain("Approved-TypeSpecSuppression");
       expect(body).toContain(
@@ -233,15 +234,16 @@ describe("buildSuppressionsComment", async () => {
         }),
       );
 
-      const body = await buildSuppressionsComment(
-        github,
-        mockCore,
-        "test-owner",
-        "test-repo",
-        "abc123",
-        42,
-        [],
-      );
+      const { body } =
+        (await buildSuppressionsComment(
+          github,
+          mockCore,
+          "test-owner",
+          "test-repo",
+          "abc123",
+          42,
+          [],
+        )) ?? {};
 
       expect(body).toContain(
         "<strong>NO JUSTIFICATION PROVIDED, THIS IS A REQUIRED SUPPRESSION COMPONENT</strong>",
@@ -273,27 +275,25 @@ describe("buildSuppressionsComment", async () => {
         }),
       );
 
-      const pending = await buildSuppressionsComment(
-        github,
-        mockCore,
-        "test-owner",
-        "test-repo",
-        "abc123",
-        42,
-        [],
-      );
+      const pending = (
+        await buildSuppressionsComment(
+          github,
+          mockCore,
+          "test-owner",
+          "test-repo",
+          "abc123",
+          42,
+          [],
+        )
+      )?.body;
       expect(pending).toContain("❌ Approval required");
       expect(pending).toContain('<td align="center">❌</td>');
 
-      const approved = await buildSuppressionsComment(
-        github,
-        mockCore,
-        "test-owner",
-        "test-repo",
-        "abc123",
-        42,
-        ["Approved-TypeSpecSuppression"],
-      );
+      const approved = (
+        await buildSuppressionsComment(github, mockCore, "test-owner", "test-repo", "abc123", 42, [
+          "Approved-TypeSpecSuppression",
+        ])
+      )?.body;
       expect(approved).toContain("✅ Approved");
       expect(approved).toContain('<td align="center">✅</td>');
     },
@@ -322,15 +322,16 @@ describe("buildSuppressionsComment", async () => {
         mockArtifactDownload({ requiresApproval: true, newSuppressions }),
       );
 
-      const body = await buildSuppressionsComment(
-        github,
-        mockCore,
-        "test-owner",
-        "test-repo",
-        "abc123",
-        42,
-        [],
-      );
+      const { body } =
+        (await buildSuppressionsComment(
+          github,
+          mockCore,
+          "test-owner",
+          "test-repo",
+          "abc123",
+          42,
+          [],
+        )) ?? {};
 
       // Only the first 5 rows are rendered.
       expect(body).toContain("reason-0");
@@ -382,15 +383,16 @@ describe("buildSuppressionsComment", async () => {
         }),
       );
 
-      const body = await buildSuppressionsComment(
-        github,
-        mockCore,
-        "test-owner",
-        "test-repo",
-        "abc123",
-        42,
-        [],
-      );
+      const { body } =
+        (await buildSuppressionsComment(
+          github,
+          mockCore,
+          "test-owner",
+          "test-repo",
+          "abc123",
+          42,
+          [],
+        )) ?? {};
 
       // Both tables render, each capped at 5 rows (10 status cells total).
       expect(body).toContain("New suppressions (7)");
@@ -444,15 +446,16 @@ describe("buildSuppressionsComment", async () => {
         }),
       );
 
-      const body = await buildSuppressionsComment(
-        github,
-        mockCore,
-        "test-owner",
-        "test-repo",
-        "abc123",
-        42,
-        [],
-      );
+      const { body } =
+        (await buildSuppressionsComment(
+          github,
+          mockCore,
+          "test-owner",
+          "test-repo",
+          "abc123",
+          42,
+          [],
+        )) ?? {};
 
       expect(body).toContain("New suppressions (1)");
       expect(body).toContain("in-scope-rule");
@@ -496,7 +499,7 @@ describe("buildSuppressionsComment", async () => {
 
       await expect(
         buildSuppressionsComment(github, mockCore, "test-owner", "test-repo", "abc123", 42, []),
-      ).resolves.toBeUndefined();
+      ).resolves.toEqual({ body: undefined, requiresApproval: false });
     },
   );
 

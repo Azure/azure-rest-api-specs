@@ -39,6 +39,7 @@ import {
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
+  typeSpecSuppressionsTsg,
 } from "./tsgs.js";
 
 import fs from "fs/promises";
@@ -134,7 +135,7 @@ const CHECK_METADATA = [
     precedence: 0,
     name: "TypeSpec Suppressions",
     suppressionLabels: ["Approved-TypeSpecSuppression"],
-    troubleshootingGuide: defaultTsg,
+    troubleshootingGuide: typeSpecSuppressionsTsg,
   },
   {
     precedence: 0,

@@ -1193,6 +1193,27 @@ const rulesPri1Namespace = [
   },
 ];
 
+/** @type {RequiredLabelRule[]} */
+const rulesPri1TypeSpecSuppressions = [
+  // When TypeSpecSuppressionReviewRequired is present, require Approved-TypeSpecSuppression before
+  // merge. Mirrors the package-name-review-required/package-name-approved pattern in
+  // rulesPri1Namespace above: the "TypeSpec Suppressions - Set Status" workflow applies the
+  // TypeSpecSuppressionReviewRequired prerequisite label whenever the analyzer (in checked-only
+  // mode, via check-rules.json) reports a new or changed suppression requiring review, and removes
+  // it once no checked suppressions remain. See .github/workflows/src/typespec-suppressions/.
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: ["TypeSpecSuppressionReviewRequired"],
+    anyRequiredLabels: ["Approved-TypeSpecSuppression"],
+    troubleshootingGuide:
+      "This PR introduced or changed TypeSpec suppressions that require review.<br/>" +
+      "Check the <b>TypeSpec suppressions requiring review</b> comment on this PR for the list of " +
+      "suppressions, their justifications, and source locations.<br/>" +
+      "Reviewers: apply the <code>Approved-TypeSpecSuppression</code> label after confirming every " +
+      "justification is acceptable.",
+  },
+];
+
 export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0NotReadyForArmReview)
   .concat(rulesPri0ArmRpaas)
@@ -1201,6 +1222,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
   .concat(rulesPri1Namespace)
+  .concat(rulesPri1TypeSpecSuppressions)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers);
