@@ -3,34 +3,34 @@
   "operationId": "Relationships_Get",
   "parameters": {
     "api-version": "2026-05-01-preview",
-    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
-    "resourceGroupName": "rgopenapi",
-    "healthModelName": "myHealthModel",
-    "relationshipName": "Ue-21-F3M12V3w-13x18F8H-7HOk--kq6tP-HB"
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "relationshipName": "web-frontend-to-orders-api"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Succeeded",
-          "displayName": "My relationship",
-          "parentEntityName": "Entity1",
-          "childEntityName": "Entity2",
+          "displayName": "Web Frontend depends on Orders API",
+          "parentEntityName": "web-frontend",
+          "childEntityName": "orders-api",
           "tags": {
-            "key9681": "foo"
+            "environment": "production",
+            "team": "online-store"
           },
-          "discoveredBy": "discoveryRule1"
+          "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.CloudHealth/healthmodels/myHealthModel/relationships/Ue-21-F3M12V3w-13x18F8H-7HOk--kq6tP-HB",
-        "name": "Ue-21-F3M12V3w-13x18F8H-7HOk--kq6tP-HB",
+        "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/relationships/web-frontend-to-orders-api",
+        "name": "web-frontend-to-orders-api",
         "type": "Microsoft.CloudHealth/healthmodels/relationships",
         "systemData": {
-          "createdBy": "cbhzxxlvkmufetjjjwtk",
+          "createdBy": "admin@contoso.com",
           "createdByType": "User",
-          "createdAt": "2023-09-18T14:04:09.327Z",
-          "lastModifiedBy": "arz",
+          "createdAt": "2026-05-04T08:15:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+          "lastModifiedAt": "2026-05-04T09:30:00.000Z"
         }
       }
     }

@@ -44,6 +44,15 @@ directive:
     reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
 ```
 
+### Tag: package-preview-2026-03-01-preview
+
+These settings apply only when `--tag=package-preview-2026-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-01-preview'
+input-file:
+  - Microsoft.AzureArcData/preview/2026-03-01-preview/openapi.json
+```
+
 ### Tag: package-2026-01-01
 
 These settings apply only when `--tag=package-2026-01-01` is specified on the command line.

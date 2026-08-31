@@ -3,9 +3,9 @@
   "operationId": "Relationships_ListByHealthModel",
   "parameters": {
     "api-version": "2026-01-01-preview",
-    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
-    "resourceGroupName": "rgopenapi",
-    "healthModelName": "model1"
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store"
   },
   "responses": {
     "200": {
@@ -13,29 +13,120 @@
         "value": [
           {
             "properties": {
-              "provisioningState": "Succeeded",
-              "displayName": "My relationship",
-              "parentEntityName": "B3P1X3e-FZtZ-4Ak-2VLHGQ-4m4-05DE-XNW5zW3P-46XY-DC3SSX",
-              "childEntityName": "B3P1X3e-FZtZ-4Ak-2VLHGQ-4m4-05DE-XNW5zW3P-46XY-DC3SSX",
+              "displayName": "Online Store depends on Web Frontend",
+              "parentEntityName": "storefront",
+              "childEntityName": "web-frontend",
               "tags": {
-                "key9681": "sdfsdfsdfsdfsd"
+                "environment": "production",
+                "team": "online-store"
               },
-              "discoveredBy": "discoveryRule1"
+              "provisioningState": "Succeeded"
             },
-            "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.CloudHealth/healthmodels/model1/relationships/cnsofbwhgcen",
-            "name": "cnsofbwhgcen",
+            "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/relationships/storefront-to-web-frontend",
+            "name": "storefront-to-web-frontend",
             "type": "Microsoft.CloudHealth/healthmodels/relationships",
             "systemData": {
-              "createdBy": "cbhzxxlvkmufetjjjwtk",
+              "createdBy": "admin@contoso.com",
               "createdByType": "User",
-              "createdAt": "2023-09-18T14:04:09.327Z",
-              "lastModifiedBy": "arz",
+              "createdAt": "2026-05-04T08:15:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
               "lastModifiedByType": "User",
-              "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+              "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+            }
+          },
+          {
+            "properties": {
+              "displayName": "Web Frontend depends on Orders API",
+              "parentEntityName": "web-frontend",
+              "childEntityName": "orders-api",
+              "tags": {
+                "environment": "production",
+                "team": "online-store"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/relationships/web-frontend-to-orders-api",
+            "name": "web-frontend-to-orders-api",
+            "type": "Microsoft.CloudHealth/healthmodels/relationships",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-05-04T08:15:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+            }
+          },
+          {
+            "properties": {
+              "displayName": "Orders API depends on Orders Database",
+              "parentEntityName": "orders-api",
+              "childEntityName": "orders-db",
+              "tags": {
+                "environment": "production",
+                "team": "online-store"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/relationships/orders-api-to-orders-db",
+            "name": "orders-api-to-orders-db",
+            "type": "Microsoft.CloudHealth/healthmodels/relationships",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-05-04T08:15:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+            }
+          },
+          {
+            "properties": {
+              "displayName": "Orders API depends on Order Queue",
+              "parentEntityName": "orders-api",
+              "childEntityName": "order-queue",
+              "tags": {
+                "environment": "production",
+                "team": "online-store"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/relationships/orders-api-to-order-queue",
+            "name": "orders-api-to-order-queue",
+            "type": "Microsoft.CloudHealth/healthmodels/relationships",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-05-04T08:15:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+            }
+          },
+          {
+            "properties": {
+              "displayName": "Orders API depends on Catalog Storage",
+              "parentEntityName": "orders-api",
+              "childEntityName": "catalog-storage",
+              "tags": {
+                "environment": "production",
+                "team": "online-store"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/relationships/orders-api-to-catalog-storage",
+            "name": "orders-api-to-catalog-storage",
+            "type": "Microsoft.CloudHealth/healthmodels/relationships",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-05-04T08:15:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-05-04T09:30:00.000Z"
             }
           }
-        ],
-        "nextLink": "https://microsoft.com/a"
+        ]
       }
     }
   }

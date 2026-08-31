@@ -738,7 +738,7 @@ using Microsoft.SecurityInsights;
   ThreatIntelligenceIndicatorOperationGroup.queryIndicators::parameters.body,
   "ThreatIntelligenceFilteringCriteria"
 );
-@@clientName(AatpCheckRequirements, "AATPCheckRequirements");
+@@clientName(AatpCheckRequirements, "AATPCheckRequirements", "!csharp");
 @@clientName(
   AatpCheckRequirementsProperties,
   "AATPCheckRequirementsProperties"

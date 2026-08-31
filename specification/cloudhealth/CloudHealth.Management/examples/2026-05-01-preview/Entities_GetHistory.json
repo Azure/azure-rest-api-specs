@@ -3,44 +3,47 @@
   "operationId": "Entities_GetHistory",
   "parameters": {
     "api-version": "2026-05-01-preview",
-    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
-    "resourceGroupName": "rgopenapi",
-    "healthModelName": "myHealthModel",
-    "entityName": "entity1",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "entityName": "web-frontend",
     "body": {
-      "startAt": "2025-12-11T10:00:00Z",
-      "endAt": "2025-12-12T10:00:00Z",
-      "top": 4
+      "startAt": "2026-05-03T09:30:00Z",
+      "endAt": "2026-05-04T09:30:00Z",
+      "top": 100
     }
   },
   "responses": {
     "200": {
       "body": {
-        "entityName": "entity1",
+        "entityName": "web-frontend",
         "history": [
           {
             "previousState": "Healthy",
             "newState": "Degraded",
-            "occurredAt": "2025-12-11T14:30:00Z",
+            "occurredAt": "2026-05-03T14:30:00Z",
             "reason": "SignalTransition"
           },
           {
             "previousState": "Degraded",
             "newState": "Unhealthy",
-            "occurredAt": "2025-12-11T18:45:00Z"
+            "occurredAt": "2026-05-03T18:45:00Z",
+            "reason": "ChildEntityTransition"
           },
           {
             "previousState": "Unhealthy",
             "newState": "Degraded",
-            "occurredAt": "2025-12-11T22:15:00Z"
+            "occurredAt": "2026-05-03T22:15:00Z",
+            "reason": "ChildEntityTransition"
           },
           {
             "previousState": "Degraded",
             "newState": "Healthy",
-            "occurredAt": "2025-12-12T02:30:00Z"
+            "occurredAt": "2026-05-04T02:30:00Z",
+            "reason": "SignalTransition"
           }
         ],
-        "nextMarker": "eyJTdGFydEF0IjoiMjAyNS0xMi0xMVQxMDowMDowMFoiLCJFbmRBdCI6IjIwMjUtMTItMTJUMTA6MDA6MDBaIiwiTGFzdFRpbWVzdGFtcCI6IjIwMjUtMTItMTJUMDI6MzA6MDBaIiwiTGFzdElkIjoiM2Y4OWNiMTctOWJlOS00ZTM4LTk2NjEtMzliMjVjNGE3ZjBjIn0="
+        "nextMarker": "eyJsYXN0VGltZXN0YW1wIjoiMjAyNi0wNS0wNFQwMjozMDowMFoifQ=="
       }
     }
   }

@@ -11,20 +11,114 @@ using DeviceUpdateClient;
   "logCollectionId"
 );
 
-@@clientLocation(DeviceUpdateOperationGroup.listUpdates, "DeviceUpdate");
-@@clientLocation(DeviceUpdateOperationGroup.importUpdate, "DeviceUpdate");
-@@clientLocation(DeviceUpdateOperationGroup.getUpdate, "DeviceUpdate");
-@@clientLocation(DeviceUpdateOperationGroup.deleteUpdate, "DeviceUpdate");
-@@clientLocation(DeviceUpdateOperationGroup.listProviders, "DeviceUpdate");
-@@clientLocation(DeviceUpdateOperationGroup.listNames, "DeviceUpdate");
-@@clientLocation(DeviceUpdateOperationGroup.listVersions, "DeviceUpdate");
-@@clientLocation(DeviceUpdateOperationGroup.listFiles, "DeviceUpdate");
-@@clientLocation(DeviceUpdateOperationGroup.getFile, "DeviceUpdate");
+// The C# namespace is `Azure.IoT.DeviceUpdate`; a sub-client literally named
+// `DeviceUpdate` collides with the namespace's last segment, so the C# emitter
+// disambiguates by renaming the namespace to `Azure.IoT._DeviceUpdate`. Use
+// `DeviceUpdates` for C# only to avoid the collision; all other languages keep
+// the original `DeviceUpdate` name (no collision there, and it preserves the
+// already-shipped public client/operation-group name).
+@@clientLocation(
+  DeviceUpdateOperationGroup.listUpdates,
+  "DeviceUpdates",
+  "csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.listUpdates,
+  "DeviceUpdate",
+  "!csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.importUpdate,
+  "DeviceUpdates",
+  "csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.importUpdate,
+  "DeviceUpdate",
+  "!csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.getUpdate,
+  "DeviceUpdates",
+  "csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.getUpdate,
+  "DeviceUpdate",
+  "!csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.deleteUpdate,
+  "DeviceUpdates",
+  "csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.deleteUpdate,
+  "DeviceUpdate",
+  "!csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.listProviders,
+  "DeviceUpdates",
+  "csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.listProviders,
+  "DeviceUpdate",
+  "!csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.listNames,
+  "DeviceUpdates",
+  "csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.listNames,
+  "DeviceUpdate",
+  "!csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.listVersions,
+  "DeviceUpdates",
+  "csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.listVersions,
+  "DeviceUpdate",
+  "!csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.listFiles,
+  "DeviceUpdates",
+  "csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.listFiles,
+  "DeviceUpdate",
+  "!csharp"
+);
+@@clientLocation(DeviceUpdateOperationGroup.getFile, "DeviceUpdates", "csharp");
+@@clientLocation(DeviceUpdateOperationGroup.getFile, "DeviceUpdate", "!csharp");
 @@clientLocation(
   DeviceUpdateOperationGroup.listOperationStatuses,
-  "DeviceUpdate"
+  "DeviceUpdates",
+  "csharp"
 );
-@@clientLocation(DeviceUpdateOperationGroup.getOperationStatus, "DeviceUpdate");
+@@clientLocation(
+  DeviceUpdateOperationGroup.listOperationStatuses,
+  "DeviceUpdate",
+  "!csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.getOperationStatus,
+  "DeviceUpdates",
+  "csharp"
+);
+@@clientLocation(
+  DeviceUpdateOperationGroup.getOperationStatus,
+  "DeviceUpdate",
+  "!csharp"
+);
 
 @@clientLocation(
   DeviceManagementOperationGroup.listDeviceClasses,

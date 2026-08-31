@@ -36,12 +36,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Arc( Servers and K8s Clusters) API reference for Private Link's Scopes management.
+ * Azure Arc API reference for managing connected machines, machine extensions, run commands, gateways, licenses, license profiles, private link scopes, and related HybridCompute resources.
  */
 @armProviderNamespace
 @service(#{ title: "HybridComputeManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.HybridCompute;
 
 /**
@@ -51,7 +50,31 @@ enum Versions {
   /**
    * The 2025-09-16-preview API version.
    */
+  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v3)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_09_16_preview: "2025-09-16-preview",
+
+  /**
+   * The 2026-02-12-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v3)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_02_12_preview: "2026-02-12-preview",
+
+  /**
+   * The 2026-06-04-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v3)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_06_04_preview: "2026-06-04-preview",
+
+  /**
+   * The 2026-06-16-preview API version.
+   */
+  @Azure.Core.previewVersion
+  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_06_16_preview: "2026-06-16-preview",
 }
 
 interface Operations {

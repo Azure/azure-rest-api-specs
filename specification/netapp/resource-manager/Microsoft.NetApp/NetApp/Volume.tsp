@@ -122,7 +122,6 @@ model VolumeProperties {
    * Resource identifier used to identify the Snapshot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   snapshotId?:
     | Azure.Core.armResourceIdentifier<[

@@ -366,7 +366,7 @@ describe("generateSdkForSpecPr", () => {
       sdkRepoName: "azure-sdk-for-python-pr",
       sdkLanguage: SdkName.Python,
       specCommitSha: "",
-      specRepoHttpsUrl: "",
+      specRepoHttpsUrl: "https://github.com/Azure/azure-rest-api-specs",
     };
     const mockChangedSpecs = [
       {
@@ -421,6 +421,67 @@ describe("generateSdkForSpecPr", () => {
     expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
       mockCommandInput,
       "failed",
+      false,
+      true,
+      false,
+      "",
+      [],
+      true,
+    );
+  });
+
+  test("should skip Python PR validation for private spec repo", async () => {
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "spec-pull-request",
+      sdkRepoName: "azure-sdk-for-python-pr",
+      sdkLanguage: SdkName.Python,
+      specCommitSha: "",
+      specRepoHttpsUrl: "https://github.com/Azure/azure-rest-api-specs-pr",
+    };
+    const mockChangedSpecs = [
+      {
+        specs: [
+          "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
+        ],
+        typespecProject: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+        readmeMd: "specification/contosowidgetmanager/resource-manager/readme.md",
+      },
+    ];
+    const mockExecutionReport = {
+      executionResult: "succeeded",
+      packages: [{ packageName: "azure-mgmt-newwidget" }],
+      vsoLogPath: "path/to/log",
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    const pypiValidationSpy = vi.spyOn(pythonPypiValidation, "validatePythonPackagesOnPyPI");
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+
+    const { statusCode, executionResult } = await generateSdkForSpecPr();
+
+    expect(statusCode).toBe(0);
+    expect(executionResult).toBe("succeeded");
+    expect(pypiValidationSpy).not.toHaveBeenCalled();
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "succeeded",
       false,
       true,
       false,

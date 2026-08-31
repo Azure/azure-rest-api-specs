@@ -52,7 +52,8 @@ interface ContinuousWebJobOps
         @segment("continuouswebjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteContinuousWebJob"
     > {}
 
 @tag("WebApps")
@@ -148,7 +149,8 @@ interface ContinuousWebJobOperationGroupOps
         @segment("continuouswebjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotContinuousWebJob"
     > {}
 
 @tag("WebApps")

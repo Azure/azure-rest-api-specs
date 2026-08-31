@@ -1,0 +1,41 @@
+name: "Namespace Approval - Analyze Code"
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+
+permissions:
+  contents: read
+
+jobs:
+  detect-namespaces:
+    name: Analyze Code
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node and install dependencies
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Detect namespace changes
+        id: detect
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: detectNamespaces } =
+              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/detect-namespaces.js');
+            await detectNamespaces({ github, context, core });
+
+      - name: Upload namespace results
+        if: always() && steps.detect.outputs.results
+        uses: actions/upload-artifact@v7
+        with:
+          name: namespace-results
+          path: ${{ steps.detect.outputs.results_path }}
+          if-no-files-found: ignore

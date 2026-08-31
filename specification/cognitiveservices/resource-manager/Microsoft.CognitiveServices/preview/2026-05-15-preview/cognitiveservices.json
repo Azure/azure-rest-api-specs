@@ -18687,15 +18687,15 @@
     },
     "RaiEgressRuleMatch": {
       "type": "object",
-      "description": "The match criteria for an egress rule.\nIf both host and path are omitted, the rule matches all traffic.\nHost uses DNS wildcard syntax (e.g., \"*.openai.com\" matches \"api.openai.com\").\nPath uses URI prefix matching with '*' as a single-segment wildcard (e.g., \"/v1/*\" matches \"/v1/chat\").",
+      "description": "The match criteria for an egress rule.\nIf both host and path are omitted, the rule matches all traffic.\nHost uses DNS wildcard syntax (e.g., \"\\*.openai.com\" matches \"api.openai.com\").\nPath uses URI prefix matching with an asterisk as a single-segment wildcard.\nFor example, \"/v1/\\*\" matches \"/v1/chat\".",
       "properties": {
         "host": {
           "type": "string",
-          "description": "Host pattern to match using DNS wildcard syntax (e.g., \"*.openai.com\").\nA leading \"*.\" matches any subdomain. Omit to match all hosts."
+          "description": "Host pattern to match using DNS wildcard syntax (e.g., \"\\*.openai.com\").\nA leading \"\\*.\" matches any subdomain. Omit to match all hosts."
         },
         "path": {
           "type": "string",
-          "description": "Path pattern to match using URI prefix with '*' wildcard (e.g., \"/v1/*\").\nOmit to match all paths."
+          "description": "Path pattern to match using URI prefix matching.\nAn asterisk serves as a single-segment wildcard.\nFor example, \"/v1/\\*\" matches \"/v1/chat\". Omit to match all paths."
         }
       }
     },

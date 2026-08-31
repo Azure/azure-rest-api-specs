@@ -57,6 +57,14 @@ export function getArgumentValue(args: string[], flag: string, defaultValue: str
   return index !== -1 && args[index + 1] ? args[index + 1] : defaultValue;
 }
 
+export function isPrivateSpecRepo(specRepoHttpsUrl: string): boolean {
+  const normalizedUrl = specRepoHttpsUrl
+    .toLowerCase()
+    .replace(/\.git$/, "")
+    .replace(/\/$/, "");
+  return normalizedUrl.endsWith("-pr");
+}
+
 /*
  * Get the relative path from the specification folder
  */

@@ -6775,20 +6775,22 @@ union RaiEgressRuleType {
 /**
  * The match criteria for an egress rule.
  * If both host and path are omitted, the rule matches all traffic.
- * Host uses DNS wildcard syntax (e.g., "*.openai.com" matches "api.openai.com").
- * Path uses URI prefix matching with '*' as a single-segment wildcard (e.g., "/v1/*" matches "/v1/chat").
+ * Host uses DNS wildcard syntax (e.g., "\*.openai.com" matches "api.openai.com").
+ * Path uses URI prefix matching with an asterisk as a single-segment wildcard.
+ * For example, "/v1/\*" matches "/v1/chat".
  */
 @added(Versions.v2026_05_15_preview)
 model RaiEgressRuleMatch {
   /**
-   * Host pattern to match using DNS wildcard syntax (e.g., "*.openai.com").
-   * A leading "*." matches any subdomain. Omit to match all hosts.
+   * Host pattern to match using DNS wildcard syntax (e.g., "\*.openai.com").
+   * A leading "\*." matches any subdomain. Omit to match all hosts.
    */
   host?: string;
 
   /**
-   * Path pattern to match using URI prefix with '*' wildcard (e.g., "/v1/*").
-   * Omit to match all paths.
+   * Path pattern to match using URI prefix matching.
+   * An asterisk serves as a single-segment wildcard.
+   * For example, "/v1/\*" matches "/v1/chat". Omit to match all paths.
    */
   path?: string;
 }

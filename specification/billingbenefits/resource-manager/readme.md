@@ -27,7 +27,7 @@ These are the global settings for the billingbenefits.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2025-12-01-preview
+tag: package-2026-06-01
 ```
 
 ### Suppression
@@ -105,6 +105,15 @@ directive:
     from: billingbenefits.json
     reason: False-positive. Milestones is always present in resource model. There are two types of conditionalCredit models - primary and contributor. The resource model is split on this discriminator value, and milesstones is only present for primary. The patch operation is only available for primary, so milestones will always be available.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}"].patch.parameters[4]["schema"]
+```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - Microsoft.BillingBenefits/stable/2026-06-01/billingbenefits.json
 ```
 
 ### Tag: package-preview-2025-12-01-preview

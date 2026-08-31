@@ -136,6 +136,20 @@ interface Credits {
       | (ArmResponse<Credit> & ArmAsyncOperationHeader<FinalResult = Credit>)
       | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Credit>>
   >;
+
+  /**
+   * Change the sponsor of a credit.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LintDiff PostResponseCodes requires 204 for no-content LRO final response"
+  @Azure.Core.useFinalStateVia("location")
+  changeSponsor is ArmResourceActionAsyncBase<
+    Credit,
+    Request = ChangeSponsorRequest,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Credit>,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
+  >;
 }
 
 @@doc(Credit.name, "Name of the credit");

@@ -3,43 +3,44 @@
   "operationId": "DiscoveryRules_Get",
   "parameters": {
     "api-version": "2026-05-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
-    "healthModelName": "myHealthModel",
-    "discoveryRuleName": "myDiscoveryRule"
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "discoveryRuleName": "discover-web-apps"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "authenticationSetting": "authSetting1",
+          "authenticationSetting": "default-auth",
           "provisioningState": "Succeeded",
-          "displayName": "myDisplayName",
+          "displayName": "Discover web apps",
           "discoverRelationships": "Enabled",
           "addRecommendedSignals": "Enabled",
           "specification": {
             "kind": "ResourceGraphQuery",
-            "resourceGraphQuery": "resources | where subscriptionId == '7ddfffd7-9b32-40df-1234-828cbd55d6f4' | where resourceGroup == 'my-rg'"
+            "resourceGraphQuery": "resources | where type =~ 'microsoft.web/sites' and resourceGroup =~ 'online-store-rg' | project id, name, location"
           },
           "addResourceHealthSignal": "Enabled",
           "error": {
-            "message": "Authorization error on execution",
+            "message": "The discovery query failed because the authentication setting 'default-auth' does not have Reader access to the target scope.",
             "context": [
-              "subscriptionId: 7ddfffd7-9b32-40df-1234-828cbd55d6f4"
+              "scope: /subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg",
+              "authenticationSetting: default-auth"
             ]
           },
-          "entityName": "f1f0ef5e-a5b5-4d02-b69c-7145f4658829"
+          "entityName": "online-store-web-apps"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CloudHealth/healthModels/myHealthModel/discoveryRules/myDiscoveryRule",
-        "name": "myDiscoveryRule",
-        "type": "Microsoft.CloudHealth/healthModels/discoveryRules",
+        "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/discoveryRules/discover-web-apps",
+        "name": "discover-web-apps",
+        "type": "Microsoft.CloudHealth/healthmodels/discoveryRules",
         "systemData": {
-          "createdBy": "myCreatedBy",
+          "createdBy": "admin@contoso.com",
           "createdByType": "User",
-          "createdAt": "2023-09-18T14:04:09.327Z",
-          "lastModifiedBy": "myLastModifiedBy",
+          "createdAt": "2026-05-04T08:15:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+          "lastModifiedAt": "2026-05-04T09:30:00.000Z"
         }
       }
     }

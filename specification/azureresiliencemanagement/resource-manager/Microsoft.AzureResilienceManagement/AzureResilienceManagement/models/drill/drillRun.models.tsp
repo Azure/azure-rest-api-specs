@@ -102,6 +102,13 @@ model DrillRunFailoverRequest {
   failoverProperties: FailoverRequest;
 }
 
+@added(Versions.v2026_06_01_preview)
+@doc("Request body for Reprotect API.")
+model DrillRunReprotectRequest {
+  @doc("The reprotect properties.")
+  reprotectProperties: ReprotectRequest;
+}
+
 @doc("Request body for TestFailover API.")
 @removed(Versions.v2026_04_01_preview)
 model DrillRunTestFailoverRequest {

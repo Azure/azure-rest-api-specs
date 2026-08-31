@@ -3,24 +3,24 @@
   "operationId": "SignalDefinitions_CreateOrUpdate",
   "parameters": {
     "api-version": "2026-05-01-preview",
-    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
-    "resourceGroupName": "rgopenapi",
-    "healthModelName": "myHealthModel",
-    "signalDefinitionName": "sig1",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "signalDefinitionName": "sql-cpu-percent",
     "resource": {
       "properties": {
-        "metricNamespace": "microsoft.compute/virtualMachines",
-        "metricName": "cpuusage",
-        "aggregationType": "None",
-        "dimensionFilter": "node eq '*'",
-        "displayName": "cpu usage",
+        "displayName": "SQL CPU utilization",
         "signalKind": "AzureResourceMetric",
         "refreshInterval": "PT1M",
         "tags": {
-          "key4788": "ixfvzsfnpvkkbrce"
+          "environment": "production",
+          "team": "online-store"
         },
-        "timeGrain": "PT1M",
-        "dataUnit": "byte",
+        "dataUnit": "Percent",
+        "metricNamespace": "Microsoft.Sql/servers/databases",
+        "metricName": "cpu_percent",
+        "timeGrain": "PT5M",
+        "aggregationType": "Average",
         "evaluationRules": {
           "degradedRule": {
             "operator": "GreaterThan",
@@ -39,80 +39,82 @@
     "200": {
       "body": {
         "properties": {
-          "metricNamespace": "microsoft.compute/virtualMachines",
-          "metricName": "cpuusage",
-          "aggregationType": "None",
-          "dimensionFilter": "node eq '*'",
-          "provisioningState": "Succeeded",
-          "displayName": "cpu usage",
+          "displayName": "SQL CPU utilization",
           "signalKind": "AzureResourceMetric",
           "refreshInterval": "PT1M",
           "tags": {
-            "key4788": "ixfvzsfnpvkkbrce"
+            "environment": "production",
+            "team": "online-store"
           },
-          "timeGrain": "PT1M",
-          "dataUnit": "byte",
+          "dataUnit": "Percent",
+          "metricNamespace": "Microsoft.Sql/servers/databases",
+          "metricName": "cpu_percent",
+          "timeGrain": "PT5M",
+          "aggregationType": "Average",
           "evaluationRules": {
             "degradedRule": {
-              "operator": "LowerThan",
-              "threshold": 65
+              "operator": "GreaterThan",
+              "threshold": 70
             },
             "unhealthyRule": {
-              "operator": "LowerThan",
-              "threshold": 60
+              "operator": "Dynamic",
+              "sensitivity": "Medium",
+              "lookBackWindow": "PT1H"
             }
-          }
+          },
+          "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.CloudHealth/healthmodels/myHealthModel/signalDefinitions/sig1",
-        "name": "sig1",
+        "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/signalDefinitions/sql-cpu-percent",
+        "name": "sql-cpu-percent",
         "type": "Microsoft.CloudHealth/healthmodels/signalDefinitions",
         "systemData": {
-          "createdBy": "cbhzxxlvkmufetjjjwtk",
+          "createdBy": "admin@contoso.com",
           "createdByType": "User",
-          "createdAt": "2023-09-18T14:04:09.327Z",
-          "lastModifiedBy": "arz",
+          "createdAt": "2026-05-04T08:15:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+          "lastModifiedAt": "2026-05-04T09:30:00.000Z"
         }
       }
     },
     "201": {
       "body": {
         "properties": {
-          "metricNamespace": "microsoft.compute/virtualMachines",
-          "metricName": "cpuusage",
-          "aggregationType": "None",
-          "dimensionFilter": "node eq '*'",
-          "provisioningState": "Succeeded",
-          "displayName": "cpu usage",
+          "displayName": "SQL CPU utilization",
           "signalKind": "AzureResourceMetric",
           "refreshInterval": "PT1M",
           "tags": {
-            "key4788": "ixfvzsfnpvkkbrce"
+            "environment": "production",
+            "team": "online-store"
           },
-          "timeGrain": "PT1M",
-          "dataUnit": "byte",
+          "dataUnit": "Percent",
+          "metricNamespace": "Microsoft.Sql/servers/databases",
+          "metricName": "cpu_percent",
+          "timeGrain": "PT5M",
+          "aggregationType": "Average",
           "evaluationRules": {
             "degradedRule": {
-              "operator": "LowerThan",
-              "threshold": 65
+              "operator": "GreaterThan",
+              "threshold": 70
             },
             "unhealthyRule": {
-              "operator": "LowerThan",
-              "threshold": 60
+              "operator": "Dynamic",
+              "sensitivity": "Medium",
+              "lookBackWindow": "PT1H"
             }
-          }
+          },
+          "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.CloudHealth/healthmodels/myHealthModel/signalDefinitions/sig1",
-        "name": "sig1",
+        "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/signalDefinitions/sql-cpu-percent",
+        "name": "sql-cpu-percent",
         "type": "Microsoft.CloudHealth/healthmodels/signalDefinitions",
         "systemData": {
-          "createdBy": "cbhzxxlvkmufetjjjwtk",
+          "createdBy": "admin@contoso.com",
           "createdByType": "User",
-          "createdAt": "2023-09-18T14:04:09.327Z",
-          "lastModifiedBy": "arz",
+          "createdAt": "2026-05-04T08:15:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+          "lastModifiedAt": "2026-05-04T09:30:00.000Z"
         }
       }
     }
