@@ -744,6 +744,88 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
   }
 );
 
+/** Latency measurements reported for an evaluation run. */
+model EvalRunLatency {
+  /** End-to-end latency percentiles for the evaluation target. */
+  target?: TargetLatencySummary;
+}
+
+/** Run-wide end-to-end latency percentiles for the evaluation target. */
+model TargetLatencySummary {
+  /** Median target latency in milliseconds. */
+  p50_ms: float64;
+
+  /** 95th percentile target latency in milliseconds. */
+  p95_ms: float64;
+
+  /** Number of evaluation rows that contributed a usable latency measurement. */
+  sample_count: int64;
+}
+
+/** Estimated costs reported for an evaluation run. */
+model EvalRunCost {
+  /** Estimated inference cost for the evaluation target. */
+  target?: TargetInferenceCostSummary;
+}
+
+/** Indicates whether all target models attributed to the evaluation run were priced. */
+union TargetInferenceCostCompleteness {
+  string,
+
+  /** All attributed target models were priced. */
+  complete: "complete",
+
+  /** At least one attributed target model could not be priced. */
+  partial: "partial",
+}
+
+/**
+ * Run-wide estimated inference cost for the evaluation target.
+ *
+ * The estimate is derived from reported token counts and list prices. It excludes evaluator
+ * and runtime usage and does not account for negotiated pricing, commitments, or discounts.
+ */
+model TargetInferenceCostSummary {
+  /** Estimated target inference cost in the specified currency. */
+  estimated_cost: decimal128;
+
+  /** ISO 4217 currency code for the estimate. */
+  currency: string;
+
+  /** Whether all attributed target models were priced. */
+  completeness: TargetInferenceCostCompleteness;
+
+  /** Identifier of the price-list snapshot used for the estimate. */
+  pricing_version?: string;
+
+  /** Estimated cost and token usage for each priced target model. */
+  model_costs: TargetModelCost[];
+
+  /** Target models for which no reliable price was available. */
+  unpriced_models?: string[];
+}
+
+/** Estimated inference cost and token usage for one target model. */
+model TargetModelCost {
+  /**
+   * Backing model name used for pricing. For a model-router target, this is the model
+   * attributed by the runtime. For a direct deployment, this is resolved from deployment metadata.
+   */
+  model_name: string;
+
+  /** Estimated inference cost for this model. */
+  estimated_cost: decimal128;
+
+  /** Number of non-cached input tokens. */
+  prompt_tokens: int64;
+
+  /** Number of cached input tokens. */
+  cached_tokens: int64;
+
+  /** Number of output tokens. */
+  completion_tokens: int64;
+}
+
 model EvalRun is OpenAI.EvalRun {
   /** Unix timestamp (in seconds) when the evaluation run was last modified. */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
@@ -763,6 +845,12 @@ model EvalRun is OpenAI.EvalRun {
 
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
+
+  /** Latency measurements observed during the evaluation run. */
+  latency?: EvalRunLatency;
+
+  /** Estimated costs observed during the evaluation run. */
+  estimated_cost?: EvalRunCost;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Imported from OpenAI spec."
