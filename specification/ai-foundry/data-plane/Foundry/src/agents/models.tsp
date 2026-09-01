@@ -293,8 +293,6 @@ union AgentEndpointProtocol {
   a2a: "a2a",
   mcp: "mcp",
   invocations: "invocations",
-
-  @removed(Versions.v1)
   voice: "voice",
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
@@ -307,8 +305,6 @@ union AgentKind {
   hosted: "hosted",
   workflow: "workflow",
   external: "external",
-
-  @removed(Versions.v1)
   voice: "voice",
 
   @removed(Versions.v1)

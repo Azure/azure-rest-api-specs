@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
@@ -18,12 +17,10 @@ alias VoiceAgentClientEventUsage = Usage.input | Usage.json;
 alias VoiceAgentServerEventUsage = Usage.output | Usage.json;
 alias VoiceAgentWebSocketMessageUsage = Usage.input | Usage.output | Usage.json;
 
-@removed(Versions.v1)
 union VoiceAgentClientEventTypeExtension {
   session_avatar_connect: "session.avatar.connect",
 }
 
-@removed(Versions.v1)
 union VoiceAgentServerEventTypeExtension {
   warning: "warning",
   session_avatar_connecting: "session.avatar.connecting",
