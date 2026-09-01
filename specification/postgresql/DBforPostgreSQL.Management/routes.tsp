@@ -183,7 +183,7 @@ interface DbAgents {
   @put
   createOrUpdate is Legacy.CreateOrReplaceAsync<
     DbAgent,
-    Request = DbAgentWrite,
+    Request = DbAgentForUpdate,
     Response = DbAgentAcceptedResponse
   >;
 }

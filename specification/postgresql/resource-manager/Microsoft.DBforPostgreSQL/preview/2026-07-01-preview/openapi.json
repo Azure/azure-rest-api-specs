@@ -2340,7 +2340,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DbAgentWrite"
+              "$ref": "#/definitions/DbAgentForUpdate"
             }
           }
         ],
@@ -6548,7 +6548,33 @@
         }
       ]
     },
-    "DbAgentDesiredState": {
+    "DbAgentForUpdate": {
+      "type": "object",
+      "description": "A request to enable or disable the database agent.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DbAgentForUpdateProperties",
+          "description": "The requested database agent properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DbAgentForUpdateProperties": {
+      "type": "object",
+      "description": "Writable properties of the database agent configuration.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/DbAgentForUpdateState",
+          "description": "The requested state of the database agent."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "DbAgentForUpdateState": {
       "type": "string",
       "description": "The database agent states accepted in a write request.",
       "enum": [
@@ -6556,7 +6582,7 @@
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "DbAgentDesiredState",
+        "name": "DbAgentForUpdateState",
         "modelAsString": false,
         "values": [
           {
@@ -6696,32 +6722,6 @@
           }
         ]
       }
-    },
-    "DbAgentWrite": {
-      "type": "object",
-      "description": "A request to enable or disable the database agent.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DbAgentWriteProperties",
-          "description": "The requested database agent properties."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "DbAgentWriteProperties": {
-      "type": "object",
-      "description": "Writable properties of the database agent configuration.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/DbAgentDesiredState",
-          "description": "The requested state of the database agent."
-        }
-      },
-      "required": [
-        "state"
-      ]
     },
     "DbLevelValidationStatus": {
       "type": "object",
