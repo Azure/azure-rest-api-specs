@@ -472,14 +472,14 @@ using Azure.AI.Projects;
 // Beta Agent Insights sub‐client
 // --------------------------------------------------------------------------------
 
-// Preserve the existing JavaScript operation name.
+// Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
 @@clientName(AgentInsightMonitors.delete, "delete", "javascript");
 
 // --------------------------------------------------------------------------------
 // Beta Schedules sub‐client
 // --------------------------------------------------------------------------------
 
-// Preserve the existing JavaScript operation name.
+// Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
 @@clientName(Schedules.delete, "delete", "javascript");
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
@@ -518,7 +518,7 @@ using Azure.AI.Projects;
 // Beta Evaluation Taxonomies sub-client
 // --------------------------------------------------------------------------------
 
-// Preserve the existing JavaScript operation name.
+// Override default JS emitter behavior that emits "delete<model>". ("delete" is a reserved word, but we want to use namespaced "delete" for JS).
 @@clientName(EvaluationTaxonomies.delete, "delete", "javascript");
 
 // Note that we can't rename it in src\openai-evaluations\models.tsp, since in
