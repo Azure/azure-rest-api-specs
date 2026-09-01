@@ -31,7 +31,7 @@ using Microsoft.ProgrammableConnectivity;
 @@clientName(Person, "ApplicationContactPerson", "csharp");
 @@clientName(GeographicAddress, "ApplicationGeographicAddress", "csharp");
 @@clientName(LocalRepresentative, "ApplicationLocalRepresentative", "csharp");
-@@clientName(Category, "ApplicationCategory", "csharp");
+@@clientName(Category, "ProgrammableConnectivityApplicationCategory", "csharp");
 @@clientName(OrganizationType, "ApplicationOwnerOrganizationType", "csharp");
 @@clientName(DataProcessing, "OperatorApiConnectionDataProcessing", "csharp");
 @@clientName(DataRegions, "OperatorApiConnectionDataRegion", "csharp");
@@ -41,6 +41,11 @@ using Microsoft.ProgrammableConnectivity;
 @@clientName(ProcessingOperation, "DataProcessingOperation", "csharp");
 @@clientName(Purpose, "OperatorApiConnectionPurpose", "csharp");
 @@clientName(Status, "OperatorApiConnectionStatus", "csharp");
+@@clientName(
+  ProvisioningState,
+  "ProgrammableConnectivityProvisioningState",
+  "csharp"
+);
 @@clientName(
   MarketplaceProperties,
   "OperatorApiPlanMarketplaceProperties",
