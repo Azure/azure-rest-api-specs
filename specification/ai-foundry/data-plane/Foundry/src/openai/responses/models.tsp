@@ -108,8 +108,8 @@ namespace Azure.AI.Projects {
   }
 
   /** Request modes supported by Model Router session affinity. */
-  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown request modes with a 400 response."
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   union SessionAffinityRequestMode {
     /** Attempts to reuse the model associated with the selected conversation identifier. */
     sticky: "sticky",
