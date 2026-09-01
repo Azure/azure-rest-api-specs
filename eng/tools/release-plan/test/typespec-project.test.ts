@@ -16,9 +16,27 @@ vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
 
     return Promise.resolve(
       createMetadata({
-        csharp: [{ emitterName: "csharp", ...mockData }],
-        java: [{ emitterName: "java", ...mockData }],
-        python: [{ emitterName: "python", ...mockData }],
+        csharp: [
+          {
+            emitterName: "csharp",
+            packageName: "Azure.ResourceManager.Sample",
+            ...mockData,
+          },
+        ],
+        java: [
+          {
+            emitterName: "java",
+            packageName: "com.azure.resourcemanager.sample",
+            ...mockData,
+          },
+        ],
+        python: [
+          {
+            emitterName: "python",
+            packageName: "azure-mgmt-sample",
+            ...mockData,
+          },
+        ],
       }),
     );
   }),
@@ -603,6 +621,7 @@ describe("TypeSpec metadata resolution", () => {
       csharp: [
         {
           emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
           apiVersion: "2025-08-01",
           sdkType: "stable",
         },
@@ -610,6 +629,7 @@ describe("TypeSpec metadata resolution", () => {
       java: [
         {
           emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
           apiVersion: "2026-01-01-preview",
           sdkType: "preview",
         },
