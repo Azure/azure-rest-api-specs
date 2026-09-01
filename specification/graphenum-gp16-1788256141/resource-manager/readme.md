@@ -3,17 +3,12 @@
 ``` yaml
 openapi-type: arm
 tag: package-2024-01-01
+package-version: 1.0.0b1
 ```
 ### Tag: package-2024-01-01
 ``` yaml $(tag) == 'package-2024-01-01'
 input-file:
   - stable/2024-01-01/graphenum.json
-```
-## Python
-``` yaml $(python)
-python-sdk-name: azure-mgmt-graphenum
-package-version: 1.0.0b1
-package-mode: azure-mgmt
 ```
 ## swagger-to-sdk
 ```yaml $(swagger-to-sdk)
