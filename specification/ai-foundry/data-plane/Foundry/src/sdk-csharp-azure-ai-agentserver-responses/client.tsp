@@ -21,7 +21,7 @@ namespace OpenAI {
 }
 
 // Map Azure.AI.Projects augmentation types into our SDK namespace
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" ""
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties is the sanctioned mechanism for augmenting an imported model from a client.tsp customization; used here to make `logprobs` optional, to stamp the `object` literal on DeleteResponseResult, and to add `id` to the Azure-specific tool call items."
 @clientNamespace("Azure.AI.AgentServer.Responses.Models")
 namespace Azure.AI.Projects {
   // Propagate "sequence_number" to base of stream events
@@ -1287,7 +1287,7 @@ namespace Azure.AI.Projects {
   { identity: "OpenAI.Responses.ComputerCallAction", package: "OpenAI", minVersion: "2.12.0" },
   "csharp"
 );
-@@alternateType(OpenAI.ConversationReference,
+@@alternateType(OpenAI.ConversationParam,
   { identity: "OpenAI.Responses.ResponseConversationOptions", package: "OpenAI", minVersion: "2.12.0" },
   "csharp"
 );
