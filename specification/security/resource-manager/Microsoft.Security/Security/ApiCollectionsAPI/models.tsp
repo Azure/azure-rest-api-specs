@@ -60,6 +60,7 @@ model ApiCollectionProperties {
   /**
    * The base URI for this API collection. All endpoints of this API collection extend this base URI.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   baseUrl?: url;
 

@@ -23,9 +23,13 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
 @parentResource(Workspace)
-model InferencePool
-  is Azure.ResourceManager.TrackedResource<InferencePoolProperties, false> {
+model InferencePool is Azure.ResourceManager.TrackedResource<
+  InferencePoolProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = InferencePool,
     KeyName = "inferencePoolName",
@@ -51,6 +55,8 @@ model InferencePool
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 interface InferencePools {
   /**

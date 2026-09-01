@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   test:
@@ -29,10 +30,39 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           sparse-checkout: |
             .github
+
+      - if: ${{ github.event_name == 'pull_request' && matrix.folder == '.github' && matrix.os == 'ubuntu' }}
+        name: Require compiled agentic workflow locks
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              ...context.repo,
+              pull_number: context.payload.pull_request.number,
+              per_page: 100,
+            });
+            const changed = new Map(files.map(({ filename, status }) => [filename, status]));
+            const sources = files.filter(({ filename }) =>
+              /^\.github\/workflows\/[^/]+\.md$/.test(filename),
+            );
+            const invalid = sources.filter(({ filename, status }) => {
+              const lockStatus = changed.get(filename.replace(/\.md$/, ".lock.yml"));
+              return status === "removed"
+                ? lockStatus !== "removed"
+                : !lockStatus || lockStatus === "removed";
+            });
+
+            if (invalid.length > 0) {
+              core.setFailed(
+                `Update the compiled lock for each changed agentic workflow source:\n${invalid
+                  .map(({ filename, status }) => `  - ${filename} (${status})`)
+                  .join("\n")}`,
+              );
+            }
 
       - if: ${{ matrix.folder == '.github' }}
         name: Install dependencies for github-script actions

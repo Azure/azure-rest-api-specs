@@ -32,6 +32,7 @@ model ReportProperties {
 @armResourceOperations
 interface Report {
   get is ArmResourceRead<ReportResource>;
+  @doc("A long-running resource action.")
   @autoRoute
   @post
   generateReport is ArmResourceActionAsync<

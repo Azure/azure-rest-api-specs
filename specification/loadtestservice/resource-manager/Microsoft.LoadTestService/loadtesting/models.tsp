@@ -161,6 +161,7 @@ model EncryptionProperties {
   @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
   identity?: EncryptionPropertiesIdentity;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("key encryption key Url, versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek.")
   keyUrl?: string;
 }
@@ -251,6 +252,7 @@ model LoadTestProperties {
   encryption?: EncryptionProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Check quota availability response object.")
 model CheckQuotaAvailabilityResponse {
   @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
@@ -326,8 +328,7 @@ model QuotaBucketRequestPropertiesDimensions {
 model PagedOutboundEnvironmentEndpoint
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;
 
-model LoadTestResourceUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-    LoadTestResource,
-    LoadTestProperties
-  >;
+model LoadTestResourceUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  LoadTestResource,
+  LoadTestProperties
+>;

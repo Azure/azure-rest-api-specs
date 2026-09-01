@@ -893,12 +893,15 @@ model DevBox {
 
 @doc("Provides remote connection information for a Dev Box.")
 model RemoteConnection {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URL to open a browser based RDP session.")
   webUrl?: url;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Link to open a Remote Desktop session.")
   rdpConnectionUrl?: url;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(APIVersions.v2024_05_01_preview)
   @doc("Link to open a remote desktop session via a dev box's underlying Cloud PC (This will default to Windows App).")
   cloudPcConnectionUrl?: url;
@@ -1319,6 +1322,7 @@ model DevBoxTunnel extends DevBoxAddOn {
   @visibility(Lifecycle.Read)
   codeTunnelName: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The code tunnel's url.")
   @visibility(Lifecycle.Read)
   codeTunnelUrl: url;

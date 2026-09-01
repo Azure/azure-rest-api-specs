@@ -60,10 +60,10 @@ union SelectorKind {
   policyDefinitionReferenceId: "policyDefinitionReferenceId",
 
   /**
-   * The selector kind to filter policies by the resource percentage.
+   * The selector kind to filter policies by the resource rollout percentage.
    */
   @added(Versions.v2026_06_01)
-  resourcePercentage: "resourcePercentage",
+  resourceRolloutPercentage: "resourceRolloutPercentage",
 
   /**
    * The selector kind to filter policies by the user principal ID.
@@ -286,6 +286,64 @@ union PolicyAction {
 }
 
 /**
+ * The compliance state of the resource against the policy. Possible values are NotSpecified, NonCompliant, Partial, Conflict, NotApplicable, Compliant, Error, Unknown, Exempt, and Protected.
+ */
+@added(Versions.v2026_07_01)
+union ComplianceState {
+  string,
+
+  /**
+   * Indicates a policy evaluation result for which no specific value is set by the evaluator.
+   */
+  NotSpecified: "NotSpecified",
+
+  /**
+   * Indicates a non-compliant policy evaluation.
+   */
+  NonCompliant: "NonCompliant",
+
+  /**
+   * Indicates a partially completed policy evaluation.
+   */
+  Partial: "Partial",
+
+  /**
+   * Indicates a policy evaluation result, where the Policy definitions conflicted so that the evaluation couldn't complete.
+   */
+  Conflict: "Conflict",
+
+  /**
+   * Indicates a policy evaluation result, where the Policy is not applicable.
+   */
+  NotApplicable: "NotApplicable",
+
+  /**
+   * Indicates a policy evaluation result, where the Policy is compliant.
+   */
+  Compliant: "Compliant",
+
+  /**
+   * Indicates a policy evaluation result, where the Policy evaluation resulted in an error.
+   */
+  Error: "Error",
+
+  /**
+   * Indicates a policy evaluation result that is unknown.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * Indicates a policy evaluation result, where the Policy is exempt.
+   */
+  Exempt: "Exempt",
+
+  /**
+   * Indicates a policy evaluation result, where the resource is protected.
+   */
+  Protected: "Protected",
+}
+
+/**
  * The identity type. This is the only required field when adding a system or user assigned identity to a resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
@@ -296,7 +354,7 @@ enum ResourceIdentityType {
   SystemAssigned,
 
   /**
-   * Indicates that a system assigned identity is associated with the resource.
+   * Indicates that a user assigned identity is associated with the resource.
    */
   UserAssigned,
 
@@ -488,8 +546,8 @@ model Selector {
    * The percent of total resources that will be governed by the policy.
    */
   @added(Versions.v2026_06_01)
-  @maxValue(99)
-  @minValue(1)
+  @maxValue(100)
+  @minValue(0)
   progress?: int32;
 }
 
@@ -1137,6 +1195,12 @@ model ExternalEvaluationEndpointInvocationResult {
   additionalInfo?: unknown;
 
   /**
+   * The compliance state of the resource against the policy. Possible values are NotSpecified, NonCompliant, Conflict, NotApplicable, Compliant, Error, Unknown, and Exempt.
+   */
+  @added(Versions.v2026_07_01)
+  complianceState?: ComplianceState;
+
+  /**
    * The expiration of the results.
    */
   expiration?: utcDateTime;
@@ -1281,6 +1345,24 @@ union AssignmentScopeValidation {
 }
 
 /**
+ * The mode indicating how the policy exemption is managed. Possible values are Admin and UserSelfServe.
+ */
+@added(Versions.v2025_12_01_preview)
+union ExemptionManagementMode {
+  string,
+
+  /**
+   * This mode means the exemption is managed by an administrator and requires permission for the policy exemption action.
+   */
+  Admin: "Admin",
+
+  /**
+   * This mode means the exemption is managed by the user it applies to, through the self-serve exemption settings on the policy assignment.
+   */
+  UserSelfServe: "UserSelfServe",
+}
+
+/**
  * The policy exemption properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -1333,6 +1415,11 @@ model PolicyExemptionProperties {
    * The option whether validate the exemption is at or under the assignment scope.
    */
   assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The mode indicating how the policy exemption is managed.
+   */
+  exemptionManagementMode?: ExemptionManagementMode = ExemptionManagementMode.Admin;
 }
 
 /**
@@ -1363,6 +1450,11 @@ model PolicyExemptionUpdateProperties {
    * The option whether validate the exemption is at or under the assignment scope.
    */
   assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The mode indicating how the policy exemption is managed.
+   */
+  exemptionManagementMode?: ExemptionManagementMode;
 }
 
 /**
