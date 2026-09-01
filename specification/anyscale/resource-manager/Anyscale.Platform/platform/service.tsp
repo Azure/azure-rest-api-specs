@@ -41,7 +41,7 @@ model ServiceProperties {
   /** The base URL of the service endpoint. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
-  baseUrl?: string;
+  baseUrl?: url;
 
   /** Whether the service has auto-rollout enabled. */
   @visibility(Lifecycle.Read)
@@ -57,7 +57,7 @@ model ServiceProperties {
 
   /** The URL link to the service in the Anyscale console. */
   @visibility(Lifecycle.Read)
-  url?: string;
+  url?: url;
 
   /** The provisioning state of the Anyscale service. */
   @visibility(Lifecycle.Read)

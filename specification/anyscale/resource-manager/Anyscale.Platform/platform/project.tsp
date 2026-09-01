@@ -28,7 +28,7 @@ model Project is ProxyResource<ProjectProperties> {
 model ProjectProperties {
   /** The URL link of the project to the Anyscale console. */
   @visibility(Lifecycle.Read)
-  url?: string;
+  url?: url;
 
   /** The provisioning state of the project. */
   @visibility(Lifecycle.Read)

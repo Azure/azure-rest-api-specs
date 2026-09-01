@@ -35,7 +35,7 @@ model JobProperties {
 
   /** The URL to the job overview page in the Anyscale console. */
   @visibility(Lifecycle.Read)
-  url?: string;
+  url?: url;
 
   /** The provisioning state of the job. */
   @visibility(Lifecycle.Read)

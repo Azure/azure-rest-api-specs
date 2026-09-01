@@ -30,7 +30,7 @@ model ComputeConfigProperties {
 
   /** The URL to the compute config overview page in the Anyscale console. */
   @visibility(Lifecycle.Read)
-  url?: string;
+  url?: url;
 
   /** The current revision number. This is incremented when the compute config is updated. */
   @visibility(Lifecycle.Read)

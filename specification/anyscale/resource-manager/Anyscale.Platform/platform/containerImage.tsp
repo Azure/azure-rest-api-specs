@@ -33,7 +33,7 @@ model ContainerImageProperties {
 
   /** The URL link of the container image to the Anyscale console. */
   @visibility(Lifecycle.Read)
-  url?: string;
+  url?: url;
 
   /** The current revision number. This is incremented when the container image is updated. */
   @visibility(Lifecycle.Read)
