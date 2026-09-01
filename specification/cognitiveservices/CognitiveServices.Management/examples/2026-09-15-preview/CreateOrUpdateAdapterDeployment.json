@@ -1,0 +1,43 @@
+{
+  "operationId": "AdapterDeployments_CreateOrUpdate",
+  "title": "CreateOrUpdateAdapterDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "adapterDeploymentName": "medical-assistant",
+    "api-version": "2026-09-15-preview",
+    "If-None-Match": "*",
+    "resource": {
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "sourceModelId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.MachineLearningServices/workspaces/project/models/medical-assistant/versions/3",
+        "targetDeploymentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/base-model"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-09-15-preview",
+        "retry-after": "30"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/adapterDeployments/medical-assistant",
+        "name": "medical-assistant",
+        "type": "Microsoft.CognitiveServices/accounts/adapterDeployments",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "sourceModelId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.MachineLearningServices/workspaces/project/models/medical-assistant/versions/3",
+          "targetDeploymentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/base-model",
+          "provisioningState": "Accepted",
+          "servingState": "NotReady"
+        }
+      }
+    }
+  }
+}

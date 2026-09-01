@@ -1,0 +1,32 @@
+{
+  "operationId": "AdapterDeployments_List",
+  "title": "ListAdapterDeployments",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "api-version": "2026-09-15-preview",
+    "$filter": "properties/targetDeploymentId eq '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/base-model'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/adapterDeployments/medical-assistant",
+            "name": "medical-assistant",
+            "type": "Microsoft.CognitiveServices/accounts/adapterDeployments",
+            "etag": "\"0x8D1234567890ABC\"",
+            "properties": {
+              "sourceModelId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.MachineLearningServices/workspaces/project/models/medical-assistant/versions/3",
+              "targetDeploymentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/base-model",
+              "activeSourceModelId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.MachineLearningServices/workspaces/project/models/medical-assistant/versions/3",
+              "provisioningState": "Succeeded",
+              "servingState": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
