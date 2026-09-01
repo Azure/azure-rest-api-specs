@@ -87726,11 +87726,11 @@
           },
           "source": {
             "$ref": "#/components/schemas/SessionAffinitySource",
-            "description": "The type of conversation identifier selected after applying precedence. Omitted when affinity is disabled."
+            "description": "The identity source selected after applying precedence. `conversation` and `previous_response_id` apply only to the Responses API. Omitted when affinity is disabled."
           },
           "decision": {
             "$ref": "#/components/schemas/SessionAffinityDecision",
-            "description": "The final affinity outcome for the model that served the response."
+            "description": "The final affinity outcome for the model that served the response. Omitted when affinity is disabled or no usable identity was available."
           }
         },
         "description": "Effective Model Router session affinity metadata for a request.",
@@ -87781,10 +87781,11 @@
           {
             "type": "string",
             "enum": [
-              "session_id",
+              "session_id_payload",
+              "session_id_header",
+              "not_available",
               "conversation",
-              "previous_response_id",
-              "no_identity_available"
+              "previous_response_id"
             ]
           }
         ],

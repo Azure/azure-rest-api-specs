@@ -244,10 +244,10 @@ namespace Azure.AI.Projects {
     /** The effective session affinity mode. */
     mode: SessionAffinityMode;
 
-    /** The type of conversation identifier selected after applying precedence. Omitted when affinity is disabled. */
+    /** The identity source selected after applying precedence. `conversation` and `previous_response_id` apply only to the Responses API. Omitted when affinity is disabled. */
     source?: SessionAffinitySource;
 
-    /** The final affinity outcome for the model that served the response. */
+    /** The final affinity outcome for the model that served the response. Omitted when affinity is disabled or no usable identity was available. */
     decision?: SessionAffinityDecision;
   }
 
@@ -268,17 +268,20 @@ namespace Azure.AI.Projects {
   union SessionAffinitySource {
     string,
 
-    /** An explicit session identifier supplied in the request body or header. */
-    session_id: "session_id",
+    /** An explicit session identifier supplied in the request body. */
+    session_id_payload: "session_id_payload",
+
+    /** An explicit session identifier supplied in the `x-ms-session-id` request header. */
+    session_id_header: "session_id_header",
+
+    /** No usable conversation identifier was available. */
+    not_available: "not_available",
 
     /** The Responses conversation identifier. */
     conversation: "conversation",
 
     /** The Responses previous response identifier. */
     previous_response_id: "previous_response_id",
-
-    /** No usable conversation identifier was available. */
-    no_identity_available: "no_identity_available",
   }
 
   /** Final outcomes reported for Model Router session affinity. */
