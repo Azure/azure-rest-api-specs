@@ -14283,8 +14283,9 @@
         "deviceTypeRefs": {
           "type": "array",
           "description": "Pointers to type metadata about this device (e.g., The WoT Thing Model for the device).",
+          "maxItems": 1,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/RegistryDeviceTypeRef"
           }
         },
         "externalDeviceId": {
@@ -14321,6 +14322,11 @@
         "enablementState"
       ]
     },
+    "RegistryDeviceTypeRef": {
+      "type": "string",
+      "description": "Reference to type metadata about a device (e.g., the WoT Thing Model for the device).",
+      "maxLength": 512
+    },
     "RegistryDeviceUpdate": {
       "type": "object",
       "description": "The type used for update operations of the RegistryDevice.",
@@ -14350,8 +14356,9 @@
         "deviceTypeRefs": {
           "type": "array",
           "description": "Pointers to type metadata about this device (e.g., The WoT Thing Model for the device).",
+          "maxItems": 1,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/RegistryDeviceTypeRef"
           }
         },
         "manufacturer": {

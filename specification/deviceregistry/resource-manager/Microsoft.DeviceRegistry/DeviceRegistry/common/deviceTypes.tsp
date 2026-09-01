@@ -16,6 +16,10 @@ union RegistryDeviceEnablementState {
   Disabled: "Disabled",
 }
 
+/** Reference to type metadata about a device (e.g., the WoT Thing Model for the device). */
+@maxLength(512)
+scalar RegistryDeviceTypeRef extends string;
+
 /** Common device properties shared across data-plane and control-plane. */
 model RegistryDevicePropertiesBase {
   /** Whether the device is enabled or disabled. A disabled device cannot send messages, be updated, or reprovision. */
@@ -27,7 +31,8 @@ model RegistryDevicePropertiesBase {
 
   /** Pointers to type metadata about this device (e.g., The WoT Thing Model for the device). */
   @added(Versions.v2026_11_02_preview)
-  deviceTypeRefs?: string[];
+  @maxItems(1)
+  deviceTypeRefs?: RegistryDeviceTypeRef[];
 
   /** A Device ID provided by the customer. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
