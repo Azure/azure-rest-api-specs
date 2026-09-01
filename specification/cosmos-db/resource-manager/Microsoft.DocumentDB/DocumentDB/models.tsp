@@ -4055,23 +4055,6 @@ model PhysicalPartitionThroughputInfoResource {
 }
 
 /**
- * Resource to redistribute throughput for Azure Cosmos DB resource
- */
-model RedistributeThroughputPropertiesResource {
-  /**
-   * Array of PhysicalPartitionThroughputInfoResource objects.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The only identifying property is preview-only; emitting identifier metadata would change the stable 2026-07-15 OpenAPI from its stable baseline."
-  targetPhysicalPartitionThroughputInfo: PhysicalPartitionThroughputInfoResource[];
-
-  /**
-   * Array of PhysicalPartitionThroughputInfoResource objects.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The only identifying property is preview-only; emitting identifier metadata would change the stable 2026-07-15 OpenAPI from its stable baseline."
-  sourcePhysicalPartitionThroughputInfo: PhysicalPartitionThroughputInfoResource[];
-}
-
-/**
  * The List operation response, that contains the storedProcedures and their properties.
  */
 model SqlStoredProcedureListResult {
