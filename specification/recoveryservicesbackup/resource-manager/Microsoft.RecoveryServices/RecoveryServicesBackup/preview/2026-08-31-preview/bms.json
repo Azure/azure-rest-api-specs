@@ -4559,6 +4559,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Fetch Instant Item Recovery mount scripts": {
+            "$ref": "./examples/ListInstantItemRecoveryOperationResult.json"
+          }
         }
       }
     },
@@ -18388,12 +18393,6 @@
         ]
       }
     },
-    "VaultCredentialCertificate": {
-      "type": "string",
-      "format": "password",
-      "description": "Base64-encoded certificate credential data returned by cross-tenant vault credential generation.\nThis is a PFX (PKCS#12) payload that contains the certificate together with its private key, so it\nis sensitive credential material: callers must handle it as a secret and must not log or persist it\nin plaintext.",
-      "x-ms-secret": true
-    },
     "VaultCredentialCertificateCreateOptions": {
       "type": "object",
       "description": "Options for self-signed certificate generation.",
@@ -18414,7 +18413,7 @@
           "description": "Authentication type."
         },
         "certificate": {
-          "$ref": "#/definitions/VaultCredentialCertificate",
+          "type": "string",
           "description": "Base64-encoded certificate data."
         },
         "resourceId": {

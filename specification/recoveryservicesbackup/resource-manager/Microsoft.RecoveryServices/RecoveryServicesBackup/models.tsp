@@ -9501,16 +9501,6 @@ union AuthType {
 }
 
 /**
- * Base64-encoded certificate credential data returned by cross-tenant vault credential generation.
- * This is a PFX (PKCS#12) payload that contains the certificate together with its private key, so it
- * is sensitive credential material: callers must handle it as a secret and must not log or persist it
- * in plaintext.
- */
-@added(Versions.v2026_08_31_preview)
-@secret
-scalar VaultCredentialCertificate extends string;
-
-/**
  * Properties of the vault credential certificate including the certificate data
  * and AAD service principal identity details required by MARS agent.
  */
@@ -9528,8 +9518,7 @@ model VaultCredentialCertificateProperties {
   /**
    * Base64-encoded certificate data.
    */
-  @typeChangedFrom(Versions.v2026_08_31_preview, string)
-  certificate?: VaultCredentialCertificate;
+  certificate?: string;
 
   /**
    * IDM resource ID of the vault.
