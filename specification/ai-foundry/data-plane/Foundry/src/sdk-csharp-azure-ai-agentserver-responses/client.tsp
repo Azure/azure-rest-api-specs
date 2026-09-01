@@ -1299,3 +1299,18 @@ namespace Azure.AI.Projects {
 // The per-item `status` enums (code interpreter / file search / reasoning / web search) are
 // inline unions in the spec, so they have no addressable TypeSpec name to map. They stay
 // Azure-generated and are converted at the call sites that hand them to OpenAI types.
+
+// The custom-tool-call items have no counterpart in the OpenAI library, but they cannot be
+// emitted either: their base `OpenAI.Responses.ResponseItem` only exposes a
+// `protected internal ResponseItem(ResponseItemKind)` constructor, so an emitted subclass
+// cannot pass this package's Azure attribution fields to it. They are hand-written in
+// src/Custom/Models instead, deriving from ResponseItem and carrying the Azure attribution
+// over JsonPatch like the other attribution members in this package.
+@@alternateType(OpenAI.CustomToolCallResource,
+  { identity: "Azure.AI.AgentServer.Responses.OutputItemCustomToolCall" },
+  "csharp"
+);
+@@alternateType(OpenAI.CustomToolCallOutputResource,
+  { identity: "Azure.AI.AgentServer.Responses.OutputItemCustomToolCallOutput" },
+  "csharp"
+);
