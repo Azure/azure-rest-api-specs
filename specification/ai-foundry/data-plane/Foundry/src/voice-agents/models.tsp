@@ -158,7 +158,6 @@ alias VoiceConversationItemPersistence = {
   response_id?: string;
 };
 
-/*
 @@extension(
   OpenAI.RealtimeConversationItem,
   "x-ms-foundry-meta",
@@ -284,7 +283,6 @@ alias VoiceConversationItemPersistence = {
     ...VoiceConversationItemPersistence,
   }
 );
-*/
 
 // ---------------------------------------------------------------------------
 // Audio streaming
