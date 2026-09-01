@@ -1,4 +1,47 @@
+import type { TypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
+import { mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it, vi } from "vitest";
+
+const { mockMetadataMap } = vi.hoisted(() => ({
+  mockMetadataMap: new Map<string, { apiVersion: string; sdkType: "stable" | "preview" }>(),
+}));
+
+vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
+  generateTypeSpecMetadata: vi.fn((projectDir: string) => {
+    const mockData = mockMetadataMap.get(projectDir);
+    if (!mockData) {
+      return Promise.reject(new Error(`Metadata not mocked for ${projectDir}`));
+    }
+
+    return Promise.resolve(
+      createMetadata({
+        csharp: [
+          {
+            emitterName: "csharp",
+            packageName: "Azure.ResourceManager.Sample",
+            ...mockData,
+          },
+        ],
+        java: [
+          {
+            emitterName: "java",
+            packageName: "com.azure.resourcemanager.sample",
+            ...mockData,
+          },
+        ],
+        python: [
+          {
+            emitterName: "python",
+            packageName: "azure-mgmt-sample",
+            ...mockData,
+          },
+        ],
+      }),
+    );
+  }),
+}));
+
 import {
   compareApiVersionsDesc,
   createOctokit,
@@ -11,7 +54,22 @@ import {
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
   parseApiVersion,
+  resolveTypeSpecMetadata,
 } from "../src/typespec-project.ts";
+
+function createMetadata(languages: TypeSpecMetadata["languages"]): TypeSpecMetadata {
+  return {
+    emitterVersion: "0.3.0",
+    generatedAt: "2026-08-28T00:00:00.000Z",
+    typespec: { namespace: "Sample", type: "management" },
+    languages,
+  };
+}
+
+// Helper function to setup mock metadata for a test
+function setupMockMetadata(projectPath: string, apiVersion: string, sdkType: "stable" | "preview") {
+  mockMetadataMap.set(projectPath, { apiVersion, sdkType });
+}
 
 describe("version helpers", () => {
   it("sorts API versions descending with GA preferred over preview on same date", () => {
@@ -127,6 +185,13 @@ describe("GitHub PR file listing", () => {
 
 describe("TypeSpec project detection edge cases", () => {
   it("still detects project when PR lacks new-api-version label", async () => {
+    const projectPath = join(process.cwd(), "specification/foo");
+    mkdirSync(projectPath, { recursive: true });
+    writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
+
+    // Setup mock metadata for the project
+    setupMockMetadata(projectPath, "2025-08-01", "stable");
+
     const get = vi.fn().mockResolvedValueOnce({ data: { labels: [] } });
     const listFiles = vi
       .fn()
@@ -157,6 +222,9 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result?.tspProjectPath).toBe("specification/foo");
     expect(result?.apiVersion).toBe("2025-08-01");
     expect(listFiles).toHaveBeenCalled();
+
+    // Cleanup
+    rmSync(projectPath, { recursive: true, force: true });
   });
 
   it("returns null when PR has multiple tsp projects", async () => {
@@ -313,6 +381,13 @@ describe("TypeSpec project detection edge cases", () => {
   });
 
   it("uses associated PR path when commit maps to a PR", async () => {
+    const projectPath = join(process.cwd(), "specification/foo");
+    mkdirSync(projectPath, { recursive: true });
+    writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
+
+    // Setup mock metadata for the project
+    setupMockMetadata(projectPath, "2026-01-01-preview", "preview");
+
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
       data: [{ number: 123 }],
     });
@@ -350,9 +425,19 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.hasNewApiVersionLabel).toBe(true);
     expect(result.projectInfo?.tspProjectPath).toBe("specification/foo");
     expect(result.projectInfo?.apiVersion).toBe("2026-01-01-preview");
+
+    // Cleanup
+    rmSync(projectPath, { recursive: true, force: true });
   });
 
   it("falls back to commit file analysis when no PR is associated", async () => {
+    const projectPath = join(process.cwd(), "specification/bar");
+    mkdirSync(projectPath, { recursive: true });
+    writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
+
+    // Setup mock metadata for the project
+    setupMockMetadata(projectPath, "2025-09-01", "stable");
+
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({ data: [] });
     const getCommit = vi.fn().mockResolvedValueOnce({
       data: {
@@ -386,6 +471,9 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.hasNewApiVersionLabel).toBe(false);
     expect(result.projectInfo?.tspProjectPath).toBe("specification/bar");
     expect(result.projectInfo?.apiVersion).toBe("2025-09-01");
+
+    // Cleanup
+    rmSync(projectPath, { recursive: true, force: true });
   });
 
   it("skips folder-migration PRs and does not fetch changed files", async () => {
@@ -425,6 +513,13 @@ describe("TypeSpec project detection edge cases", () => {
   });
 
   it("ignores renamed files when detecting the API version", async () => {
+    const projectPath = join(process.cwd(), "specification/bar");
+    mkdirSync(projectPath, { recursive: true });
+    writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
+
+    // Setup mock metadata for the project
+    setupMockMetadata(projectPath, "2025-09-01", "stable");
+
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({ data: [] });
     const getCommit = vi.fn().mockResolvedValueOnce({
       data: {
@@ -457,6 +552,9 @@ describe("TypeSpec project detection edge cases", () => {
     });
 
     expect(result.projectInfo?.apiVersion).toBe("2025-09-01");
+
+    // Cleanup
+    rmSync(projectPath, { recursive: true, force: true });
   });
 });
 
@@ -481,5 +579,197 @@ describe("pull request label helpers", () => {
     });
 
     expect(labels).toEqual(["new-api-version", "FolderMigrationV2"]);
+  });
+});
+
+describe("TypeSpec metadata resolution", () => {
+  it("parses valid TypeSpec metadata with multiple languages", () => {
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      python: [
+        {
+          emitterName: "python",
+          packageName: "azure-mgmt-sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+    });
+
+    const result = resolveTypeSpecMetadata(metadata);
+    expect(result.apiVersion).toBe("2025-08-01");
+    expect(result.sdkType).toBe("stable");
+  });
+
+  it("uses the first API version when metadata contains multiple versions", () => {
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          apiVersion: "2026-01-01-preview",
+          sdkType: "preview",
+        },
+      ],
+    });
+
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({
+      apiVersion: "2025-08-01",
+      sdkType: "stable",
+    });
+  });
+
+  it("throws error when languages have different sdkTypes (conflicting)", () => {
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          apiVersion: "2025-08-01",
+          sdkType: "preview",
+        },
+      ],
+    });
+
+    expect(() => {
+      resolveTypeSpecMetadata(metadata);
+    }).toThrow(
+      "TypeSpec code generator output suggests that this project contains conflicting SDK release type",
+    );
+  });
+
+  it("skips language configs with missing apiVersion and logs warning", () => {
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          sdkType: "stable",
+        },
+      ],
+      python: [
+        {
+          emitterName: "python",
+          packageName: "azure-mgmt-sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+    });
+
+    const result = resolveTypeSpecMetadata(metadata);
+    expect(result.apiVersion).toBe("2025-08-01");
+    expect(result.sdkType).toBe("stable");
+  });
+
+  it("skips language configs with missing sdkType", () => {
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          apiVersion: "2025-08-01",
+        },
+      ],
+      python: [
+        {
+          emitterName: "python",
+          packageName: "azure-mgmt-sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+    });
+
+    const result = resolveTypeSpecMetadata(metadata);
+    expect(result.apiVersion).toBe("2025-08-01");
+    expect(result.sdkType).toBe("stable");
+  });
+
+  it("throws error when no valid language configurations found", () => {
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+        },
+      ],
+    });
+
+    expect(() => {
+      resolveTypeSpecMetadata(metadata);
+    }).toThrow("No valid language configurations found in TypeSpec metadata");
+  });
+
+  it("handles preview API versions correctly", () => {
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Sample",
+          apiVersion: "2025-08-01-preview",
+          sdkType: "preview",
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.sample",
+          apiVersion: "2025-08-01-preview",
+          sdkType: "preview",
+        },
+      ],
+    });
+
+    const result = resolveTypeSpecMetadata(metadata);
+    expect(result.apiVersion).toBe("2025-08-01-preview");
+    expect(result.sdkType).toBe("preview");
   });
 });
