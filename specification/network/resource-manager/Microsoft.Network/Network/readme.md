@@ -304,7 +304,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].get.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].put.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].patch.responses["200"].schema
   - code: RequiredPropertiesMissingInResourceModel
     from: authenticationPolicy.json
     reason: AuthenticationPolicy extends the local Network RP Resource base type (common.json#/definitions/Resource), the established envelope for all Network RP resources. Its id/name/type read-only properties are defined on the shared base and referenced via allOf, consistent with every other Network RP resource.
