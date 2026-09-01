@@ -142,7 +142,7 @@ op createLedgerEntryLegacy is ConfidentialLedgerCommon.LedgerOperation<
      * Comma separated tags.
      */
     @query("tags")
-    tags?: string[];
+    tags?: string;
 
     /**
      * Ledger entry.
@@ -174,7 +174,7 @@ op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
      * Comma separated tags.
      */
     @query("tags")
-    tags?: string[];
+    tags?: string;
 
     /**
      * Ledger entry.
