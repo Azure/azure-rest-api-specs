@@ -159,7 +159,25 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(ManagedEnvironmentProperties.staticIp, ipV4Address, "csharp");
 
+@@alternateType(OpenIdConnectConfig.certificationUri, url, "csharp");
+
+@@alternateType(SecretKeyVaultProperties.keyVaultUrl, url, "csharp");
+
+@@alternateType(
+  VnetConfiguration.infrastructureSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+
 @@alternateType(RegistryInfo.registryUrl, url, "csharp");
+
+@@alternateType(AzureCredentials.tenantId, uuid, "csharp");
+
+@@alternateType(CustomDomain.certificateId, armResourceIdentifier, "csharp");
+
+@@alternateType(ServiceBind.serviceId, armResourceIdentifier, "csharp");
+
+@@alternateType(ContainerAppSecret.keyVaultUrl, url, "csharp");
 
 @@alternateType(SourceControlProperties.repoUrl, url, "csharp");
 
