@@ -111,8 +111,8 @@ model RustSessionOptions {}
   "rust"
 );
 
-/** Rust-specific options used to initialize a blob service client. */
-model RustBlobServiceClientOptions {
+/** Rust-specific options used to initialize a client with session authentication. */
+model RustSessionClientOptions {
   /** Options for session token authentication. */
   sessionOptions?: RustSessionOptions;
 }
@@ -121,7 +121,7 @@ model RustBlobServiceClientOptions {
   BlobServiceClient,
   {
     initializedBy: InitializedBy.customizeCode,
-    parameters: RustBlobServiceClientOptions,
+    parameters: RustSessionClientOptions,
   },
   "rust"
 );
@@ -130,6 +130,7 @@ model RustBlobServiceClientOptions {
   BlobContainerClient,
   {
     initializedBy: InitializedBy.customizeCode,
+    parameters: RustSessionClientOptions,
   },
   "rust"
 );
@@ -138,6 +139,7 @@ model RustBlobServiceClientOptions {
   BlobClient,
   {
     initializedBy: InitializedBy.customizeCode,
+    parameters: RustSessionClientOptions,
   },
   "rust"
 );
@@ -146,6 +148,7 @@ model RustBlobServiceClientOptions {
   AppendBlobClient,
   {
     initializedBy: InitializedBy.customizeCode,
+    parameters: RustSessionClientOptions,
   },
   "rust"
 );
@@ -154,6 +157,7 @@ model RustBlobServiceClientOptions {
   BlockBlobClient,
   {
     initializedBy: InitializedBy.customizeCode,
+    parameters: RustSessionClientOptions,
   },
   "rust"
 );
@@ -162,6 +166,7 @@ model RustBlobServiceClientOptions {
   PageBlobClient,
   {
     initializedBy: InitializedBy.customizeCode,
+    parameters: RustSessionClientOptions,
   },
   "rust"
 );
