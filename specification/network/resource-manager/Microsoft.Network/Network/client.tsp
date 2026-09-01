@@ -84,6 +84,16 @@ namespace Common {
   "ArmErrorResponse",
   "javascript,python"
 );
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "ArmProxyResource",
+  "javascript"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "javascript"
+);
 
 // Java naming mitigations
 @@clientName(
