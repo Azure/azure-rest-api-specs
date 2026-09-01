@@ -20,6 +20,11 @@ using Azure.Core.Experimental;
 
 using Azure.AI.Projects;
 
+@@scope(OpenAI.RealtimeConversationItemMessage.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
+
 // Java promotes the shared Foundry-Features header with @@clientLocation, not @@scope/@@clientInitialization.
 // @@scope(..., "!java") removes the header from Java entirely, including REST-interface @HeaderParam wiring.
 // @@clientInitialization requires exact singleton opt-in properties (e.g. agents_optimization_v1_preview) per key.
