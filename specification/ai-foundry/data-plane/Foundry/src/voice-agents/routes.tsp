@@ -6,6 +6,7 @@ import "./protocol.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
@@ -98,7 +99,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<VoiceConversation>
+    Azure.Core.Page<VoiceConversation>
   >;
 
   /**
@@ -162,7 +163,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<VoiceResponse>
+    Azure.Core.Page<VoiceResponse>
   >;
 
   /**
@@ -213,7 +214,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<OpenAI.RealtimeConversationItem>
+    Azure.Core.Page<OpenAI.RealtimeConversationItem>
   >;
 
   /**
@@ -237,7 +238,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<OpenAI.RealtimeConversationItem>
+    Azure.Core.Page<OpenAI.RealtimeConversationItem>
   >;
 
   /**
