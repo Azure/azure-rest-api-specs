@@ -177,7 +177,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(ServiceBind.serviceId, armResourceIdentifier, "csharp");
 
-@@alternateType(ContainerAppSecret.keyVaultUrl, url, "csharp");
+@@alternateType(Secret.keyVaultUrl, url, "csharp");
 
 @@alternateType(SourceControlProperties.repoUrl, url, "csharp");
 
