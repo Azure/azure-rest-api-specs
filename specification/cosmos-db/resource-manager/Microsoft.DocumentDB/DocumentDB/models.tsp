@@ -5126,14 +5126,6 @@ model CassandraViewCreateUpdateProperties {
 }
 
 /**
- * Base class for all DataTransfer source/sink
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy discriminator base while remaining horizontally equivalent to stable 2026-03-15."
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Changing the existing discriminator hierarchy would alter the stable API contract; stable 2026-07-15 preserves the stable 2026-03-15 shape."
-@discriminator("component")
-model DataTransferDataSourceSink {}
-
-/**
  * List of managed Cassandra clusters.
  */
 model ListClusters {
@@ -8330,9 +8322,11 @@ model ContinuousModeProperties {
 /**
  * A base CosmosDB data source/sink
  */
-model BaseCosmosDataTransferDataSourceSink extends DataTransferDataSourceSink {
+model BaseCosmosDataTransferDataSourceSink {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   remoteAccountName?: string;
+
+  /** The data transfer component type. */
   component: DataTransferComponent.BaseCosmosDataTransferDataSourceSink;
 }
 
@@ -8348,13 +8342,14 @@ alias BaseCosmosDataTransferDataSourceSinkProperties = {
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BaseCosmosDataTransferDataSourceSink
 )
-model CosmosCassandraDataTransferDataSourceSink
-  extends DataTransferDataSourceSink {
+model CosmosCassandraDataTransferDataSourceSink {
   ...BaseCosmosDataTransferDataSourceSinkProperties;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keyspaceName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tableName: string;
+
+  /** The data transfer component type. */
   component: DataTransferComponent.CosmosDBCassandra;
 }
 
@@ -8365,12 +8360,14 @@ model CosmosCassandraDataTransferDataSourceSink
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BaseCosmosDataTransferDataSourceSink
 )
-model CosmosMongoDataTransferDataSourceSink extends DataTransferDataSourceSink {
+model CosmosMongoDataTransferDataSourceSink {
   ...BaseCosmosDataTransferDataSourceSinkProperties;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databaseName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   collectionName: string;
+
+  /** The data transfer component type. */
   component: DataTransferComponent.CosmosDBMongo;
 }
 
@@ -8378,8 +8375,7 @@ model CosmosMongoDataTransferDataSourceSink extends DataTransferDataSourceSink {
  * A CosmosDB Mongo vCore API data source/sink
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model CosmosMongoVCoreDataTransferDataSourceSink
-  extends DataTransferDataSourceSink {
+model CosmosMongoVCoreDataTransferDataSourceSink {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databaseName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8388,6 +8384,8 @@ model CosmosMongoVCoreDataTransferDataSourceSink
   hostName?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   connectionStringKeyVaultUri?: string;
+
+  /** The data transfer component type. */
   component: DataTransferComponent.CosmosDBMongoVCore;
 }
 
@@ -8398,24 +8396,28 @@ model CosmosMongoVCoreDataTransferDataSourceSink
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BaseCosmosDataTransferDataSourceSink
 )
-model CosmosSqlDataTransferDataSourceSink extends DataTransferDataSourceSink {
+model CosmosSqlDataTransferDataSourceSink {
   ...BaseCosmosDataTransferDataSourceSinkProperties;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databaseName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName: string;
+
+  /** The data transfer component type. */
   component: DataTransferComponent.CosmosDBSql;
 }
 
 /**
  * An Azure Blob Storage data source/sink
  */
-model AzureBlobDataTransferDataSourceSink extends DataTransferDataSourceSink {
+model AzureBlobDataTransferDataSourceSink {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   endpointUrl?: string;
+
+  /** The data transfer component type. */
   component: DataTransferComponent.AzureBlobStorage;
 }
 
