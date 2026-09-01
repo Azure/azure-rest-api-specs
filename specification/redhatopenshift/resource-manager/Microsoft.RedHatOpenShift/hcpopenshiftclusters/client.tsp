@@ -9,6 +9,35 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.RedHatOpenShift;
 
+// Client name overrides for azure-sdk-for-net
+namespace Microsoft.RedHatOpenShift {
+  // boolean property missing an "Is/Has/Should/Can" prefix
+  @@clientName(NodePoolProperties.autoRepair, "canAutoRepair", "csharp");
+
+  // DateTimeOffset properties must end in "On"
+  @@clientName(
+    HcpOpenShiftClusterAdminCredential.expirationTimestamp,
+    "expirationTimestampOn",
+    "csharp"
+  );
+  @@clientName(
+    HcpOpenShiftVersionProperties.endOfLifeTimestamp,
+    "endOfLifeTimestampOn",
+    "csharp"
+  );
+
+  // Add context to generic names
+  @@clientName(ApiProfile, "HcpOpenShiftClusterApiProfile", "csharp");
+  @@clientName(Condition, "HcpOpenShiftClusterCondition", "csharp");
+  @@clientName(ConditionType, "HcpOpenShiftClusterConditionType", "csharp");
+  @@clientName(Effect, "HcpOpenShiftClusterNodePoolTaintEffect", "csharp");
+  @@clientName(Label, "HcpOpenShiftClusterNodePoolLabel", "csharp");
+  @@clientName(PlatformProfile, "HcpOpenShiftClusterPlatformProfile", "csharp");
+  @@clientName(StatusType, "HcpOpenShiftClusterConditionStatusType", "csharp");
+  @@clientName(VersionProfile, "HcpOpenShiftClusterVersionProfile", "csharp");
+  @@clientName(Visibility, "HcpOpenShiftClusterApiVisibility", "csharp");
+}
+
 // JavaScript SDK visibility workaround:
 // For write operations whose body models contain server-side read-only properties
 // that are also required, provide write-specific models that omit those fields so
