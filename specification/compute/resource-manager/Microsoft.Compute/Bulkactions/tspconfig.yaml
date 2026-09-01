@@ -15,11 +15,11 @@ options:
     namespace: "Azure.ResourceManager.Compute.BulkActions"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    namespace: "azure.mgmt.computebulkactions"
+    namespace: "azure.mgmt.compute.bulkaction"
     generate-test: true
     generate-sample: true
     flavor: "azure"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computebulkactions"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-compute-bulkaction"
   "@azure-tools/typespec-java":
     service-dir: "sdk/compute"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-bulkactions"
@@ -46,3 +46,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

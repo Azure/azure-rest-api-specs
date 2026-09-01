@@ -15,11 +15,10 @@ namespace Microsoft.DBforPostgreSQL;
  * Server administrator associated to a Microsoft Entra principal.
  */
 @parentResource(Server)
-model AdministratorMicrosoftEntra
-  is Azure.ResourceManager.ProxyResource<
-    AdministratorMicrosoftEntraProperties,
-    false
-  > {
+model AdministratorMicrosoftEntra is Azure.ResourceManager.ProxyResource<
+  AdministratorMicrosoftEntraProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AdministratorMicrosoftEntra,
     KeyName = "objectId",

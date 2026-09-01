@@ -103,6 +103,26 @@ namespace Customizations;
 @@clientName(ServerVersion.Five0, "FIVE_ZERO", "java");
 @@clientName(ServerVersion.Six0, "SIX_ZERO", "java");
 @@clientName(ServerVersion.Seven0, "SEVEN_ZERO", "java");
+@@clientName(
+  ServerVersion.Three2,
+  Azure.ClientGenerator.Core.exact("V3_2"),
+  "csharp"
+);
+@@clientName(
+  ServerVersion.Three6,
+  Azure.ClientGenerator.Core.exact("V3_6"),
+  "csharp"
+);
+@@clientName(
+  ServerVersion.Four0,
+  Azure.ClientGenerator.Core.exact("V4_0"),
+  "csharp"
+);
+@@clientName(
+  ServerVersion.Four2,
+  Azure.ClientGenerator.Core.exact("V4_2"),
+  "csharp"
+);
 
 /**
  *  The subscription resource ID for an access rule.
@@ -118,7 +138,9 @@ model AccessRulePropertiesSubscriptionsItem {
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -153,7 +175,9 @@ op mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized(
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -189,7 +213,9 @@ op mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -221,7 +247,9 @@ op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -253,7 +281,9 @@ op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op mongoDBResourcesGetMongoRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -282,7 +312,9 @@ op mongoDBResourcesGetMongoRoleDefinitionCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op mongoDBResourcesGetMongoUserDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -311,7 +343,9 @@ op mongoDBResourcesGetMongoUserDefinitionCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op sqlResourcesCreateUpdateSqlRoleAssignmentCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -347,7 +381,9 @@ op sqlResourcesCreateUpdateSqlRoleAssignmentCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op sqlResourcesCreateUpdateSqlRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -383,7 +419,9 @@ op sqlResourcesCreateUpdateSqlRoleDefinitionCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op sqlResourcesDeleteSqlRoleAssignmentCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -415,7 +453,9 @@ op sqlResourcesDeleteSqlRoleAssignmentCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op sqlResourcesDeleteSqlRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -447,7 +487,9 @@ op sqlResourcesDeleteSqlRoleDefinitionCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op sqlResourcesGetSqlRoleAssignmentCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -476,7 +518,9 @@ op sqlResourcesGetSqlRoleAssignmentCustomized(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op sqlResourcesGetSqlRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
@@ -841,6 +885,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(DatabaseAccountGetProperties.ipRules, "IPRules", "csharp");
 @@clientName(
+  DatabaseAccountGetProperties.enforceHierarchicalPartitionKeyIdLastLevel,
+  "IsHierarchicalPartitionKeyIdLastLevelEnforced",
+  "csharp"
+);
+@@clientName(
   DatabaseAccountCreateUpdateProperties.enableAnalyticalStorage,
   "IsAnalyticalStorageEnabled",
   "csharp"
@@ -855,6 +904,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "IPRules",
   "csharp"
 );
+@@clientName(
+  DatabaseAccountCreateUpdateProperties.enforceHierarchicalPartitionKeyIdLastLevel,
+  "IsHierarchicalPartitionKeyIdLastLevelEnforced",
+  "csharp"
+);
 @@clientName(DatabaseAccountKind, "CosmosDBAccountKind", "csharp");
 @@clientName(
   DatabaseAccountUpdateProperties.enableAnalyticalStorage,
@@ -867,6 +921,11 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(DatabaseAccountUpdateProperties.ipRules, "IPRules", "csharp");
+@@clientName(
+  DatabaseAccountUpdateProperties.enforceHierarchicalPartitionKeyIdLastLevel,
+  "IsHierarchicalPartitionKeyIdLastLevelEnforced",
+  "csharp"
+);
 @@clientName(DataCenterResource, "CassandraDataCenter", "csharp");
 @@clientName(
   DataCenterResourceProperties,
@@ -1639,8 +1698,13 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "CassandraViewConfig",
   "csharp"
 );
-@@clientName(ARMProxyResource, "ArmProxyResource", "csharp");
+@@clientName(ARMProxyResource, "CosmosDBProxyResource", "csharp");
 @@clientName(ARMResourceProperties, "ArmResourceProperties", "csharp");
+@@clientName(
+  ScheduledEventStrategy,
+  "CassandraScheduledEventStrategy",
+  "csharp"
+);
 @@clientName(
   MaterializedViewDefinition,
   "CosmosDBMaterializedViewDefinition",
@@ -2478,7 +2542,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MongoIndex.key, "!autorest");
+@@Legacy.flattenProperty(MongoIndex.key, "!autorest,!javascript,!java");
 
 // Restorable* "GetResult" models declare id/name/type inline rather than
 // extending CommonTypes.Resource, so the generator cannot infer them as ARM
