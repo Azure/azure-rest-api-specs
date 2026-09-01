@@ -20,7 +20,7 @@ namespace Microsoft.Edge;
 @added(Versions.v2025_08_01)
 @doc("SolutionSchema Properties")
 model SolutionSchemaProperties {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Suppress no-unnamed-union since property represents a flexible configuration value"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Suppress no-unnamed-types since property represents a flexible configuration value"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | Record<unknown> is required to support both legacy string-encoded JSON and structured object payloads during client migration from prior API versions"
   @doc("Value of schema")
   @visibility(Lifecycle.Read)
