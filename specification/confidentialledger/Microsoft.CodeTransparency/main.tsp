@@ -54,9 +54,26 @@ op getTransparencyConfigCbor is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
+@removed(Versions.`2026-03-26`)
+@sharedRoute
 @doc("Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation")
 @route("/jwks")
 op getPublicKeys is Foundations.Operation<
+  {},
+  JwksDocument,
+  ServiceTraits,
+  AnyCborError
+>;
+
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetPublicKeys operationId across versions"
+@added(Versions.`2026-03-26`)
+@operationId("GetPublicKeys")
+@sharedRoute
+@doc("Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation")
+@route("/jwks")
+op getPublicKeysV09 is Foundations.Operation<
   {},
   GetPublicKeysResponse,
   ServiceTraits,
@@ -509,8 +526,77 @@ model TransparencyConfigurationCbor {
   body: bytes;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Wire model is C#-internal and normalized to public verification key types; the suffix does not surface in the public API."
 @added(Versions.`2025-01-31-preview`)
+@removed(Versions.`2026-03-26`)
+@doc("A JWKS like document")
+model JwksDocument {
+  @doc("Content type header")
+  @header
+  contentType: "application/json";
+
+  @doc("List of public keys used for receipt verification.")
+  keys: JsonWebKey[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property names follow RFC 7517 (JSON Web Key) and cannot be changed to Azure camelCase."
+@added(Versions.`2025-01-31-preview`)
+@removed(Versions.`2026-03-26`)
+@doc("rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types")
+model JsonWebKey {
+  @doc("The \"alg\" (algorithm) parameter identifies the algorithm intended for\nuse with the key.  The values used should either be registered in the\nIANA \"JSON Web Signature and Encryption Algorithms\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.")
+  alg?: string;
+
+  @doc("The \"crv\" (curve) parameter identifies the curve type")
+  crv?: string;
+
+  @doc("RSA private exponent or ECC private key")
+  d?: string;
+
+  @doc("RSA Private Key Parameter")
+  dp?: string;
+
+  @doc("RSA Private Key Parameter")
+  dq?: string;
+
+  @doc("RSA public exponent, in Base64")
+  e?: string;
+
+  @doc("Symmetric key")
+  k?: string;
+
+  @doc("The \"kid\" (key ID) parameter is used to match a specific key.  This\nis used, for instance, to choose among a set of keys within a JWK Set\nduring key rollover.  The structure of the \"kid\" value is\nunspecified.  When \"kid\" values are used within a JWK Set, different\nkeys within the JWK Set SHOULD use distinct \"kid\" values.  (One\nexample in which different keys might use the same \"kid\" value is if\nthey have different \"kty\" (key type) values but are considered to be\nequivalent alternatives by the application using them.)  The \"kid\"\nvalue is a case-sensitive string.")
+  kid?: string;
+
+  @doc("The \"kty\" (key type) parameter identifies the cryptographic algorithm\nfamily used with the key, such as \"RSA\" or \"EC\". \"kty\" values should\neither be registered in the IANA \"JSON Web Key Types\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.  The \"kty\" value is a case-sensitive string.")
+  kty: string;
+
+  @doc("RSA modulus, in Base64")
+  n?: string;
+
+  @doc("RSA secret prime")
+  p?: string;
+
+  @doc("RSA secret prime, with p < q")
+  q?: string;
+
+  @doc("RSA Private Key Parameter")
+  qi?: string;
+
+  @doc("Use (\"public key use\") identifies the intended use of\nthe public key. The \"use\" parameter is employed to indicate whether\na public key is used for encrypting data or verifying the signature\non data. Values are commonly \"sig\" (signature) or \"enc\" (encryption).")
+  use?: string;
+
+  @doc("X coordinate for the Elliptic Curve point")
+  x?: string;
+
+  @doc("The \"x5c\" (X.509 certificate chain) parameter contains a chain of one\nor more PKIX certificates [RFC5280].  The certificate chain is\nrepresented as a JSON array of certificate value strings.  Each\nstring in the array is a base64-encoded (Section 4 of [RFC4648] --\nnot base64url-encoded) DER [ITU.X690.1994] PKIX certificate value.\nThe PKIX certificate containing the key value MUST be the first\ncertificate.")
+  x5c?: Array<string>;
+
+  @doc("Y coordinate for the Elliptic Curve point")
+  y?: string;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Wire model is C#-internal and normalized to public verification key types; the suffix does not surface in the public API."
+@added(Versions.`2026-03-26`)
 @doc("Response containing the service public keys used to verify receipts.")
 model GetPublicKeysResponse {
   @doc("The response content type.")
@@ -522,14 +608,14 @@ model GetPublicKeysResponse {
   body: JsonWebKeySet;
 }
 
-@added(Versions.`2025-01-31-preview`)
+@added(Versions.`2026-03-26`)
 @doc("A JSON Web Key Set containing service receipt-verification keys.")
 model JsonWebKeySet {
   @doc("The service public keys used to verify receipts.")
   keys: PublicJsonWebKey[];
 }
 
-@added(Versions.`2025-01-31-preview`)
+@added(Versions.`2026-03-26`)
 @doc("A public asymmetric key represented as an RFC 7517 JSON Web Key.")
 model PublicJsonWebKey {
   @doc("The asymmetric key type, such as EC, RSA, or OKP.")
