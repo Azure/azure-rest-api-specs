@@ -2,14 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Subscription;
 /**
@@ -17,7 +15,6 @@ namespace Microsoft.Subscription;
  */
 @singleton("default")
 @subscriptionResource
-@removed(Versions.v2026_08_01_preview)
 model TargetDirectoryResult
   is Azure.ResourceManager.ProxyResource<TargetDirectoryResultProperties> {
   ...ResourceNameParameter<
@@ -38,7 +35,6 @@ model ListTargetDirectoryBaseParameters
   is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
 @armResourceOperations(#{ omitTags: true })
-@removed(Versions.v2026_08_01_preview)
 interface TargetDirectoryResults {
   /**
    * The operation to view Initiator Subscription Changed Request

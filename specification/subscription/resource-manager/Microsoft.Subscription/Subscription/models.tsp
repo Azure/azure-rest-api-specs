@@ -34,7 +34,6 @@ model SubscriptionAliasListResult {
 /**
  * Subscription Response to list out Changed Target Directory.
  */
-@removed(Versions.v2026_08_01_preview)
 model TargetDirectoryListResult {
   /**
    * The list of subscription response to changed target directory.
@@ -585,7 +584,6 @@ model TenantPolicy {
 /**
  * Tenant policy information list.
  */
-@removed(Versions.v2026_08_01_preview)
 model GetTenantPolicyListResponse is Azure.Core.Page<GetTenantPolicyResponse>;
 
 /**
