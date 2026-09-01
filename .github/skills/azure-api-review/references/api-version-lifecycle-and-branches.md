@@ -30,7 +30,6 @@ in, so they apply even when the spec content itself is correct.
   Provider docs). Read this for AFEC onboarding and implementation details.
 
 [api-versions-and-branches]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-versions-and-branches
-
 [feature-exposure-control]: https://eng.ms/docs/products/arm/rp_onboarding/afec/featureexposurecontrol
 
 ---
