@@ -255,9 +255,6 @@ model EvaluatorDiagnosticActor {
 
   @doc("A stable opaque principal or service identifier, when available.")
   id?: string;
-
-  @doc("A presentation name for the actor, when available.")
-  display_name?: string;
 }
 
 @doc("The severity of an evaluator diagnostic message.")
@@ -483,9 +480,6 @@ model EvaluatorGenerationSourceSnapshot {
   @pattern("^[0-9a-f]{64}$")
   content_hash: string;
 
-  @doc("The evaluator generation job that resolved the source.")
-  generation_job_id?: string;
-
   @doc("How the source was used.")
   status: EvaluatorGenerationSourceUseStatus;
 }
@@ -541,9 +535,6 @@ model EvaluatorSourceCoverageGap {
 
   @doc("A bounded explanation.")
   explanation: string;
-
-  @doc("Bounded remediation action categories.")
-  action_types?: string[];
 }
 
 @doc("Bounded source lineage and coverage recorded by evaluator generation.")

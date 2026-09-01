@@ -38277,8 +38277,6 @@
         "type": "object",
         "required": [
           "source_item_count",
-          "qualified_item_count",
-          "selected_item_count",
           "comparable_item_count",
           "excluded_item_count"
         ],
@@ -38287,16 +38285,6 @@
             "type": "integer",
             "format": "int32",
             "description": "Number of items in the registered source."
-          },
-          "qualified_item_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items satisfying registered evidence requirements."
-          },
-          "selected_item_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items selected by the service policy."
           },
           "comparable_item_count": {
             "type": "integer",
@@ -38320,8 +38308,7 @@
         "type": "object",
         "required": [
           "support",
-          "observed_agreement",
-          "disagreement_rate"
+          "observed_agreement"
         ],
         "properties": {
           "support": {
@@ -38331,10 +38318,6 @@
           "observed_agreement": {
             "$ref": "#/components/schemas/EvaluatorDiagnosticMetric",
             "description": "Observed applicability agreement."
-          },
-          "disagreement_rate": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticMetric",
-            "description": "Observed applicability disagreement rate."
           }
         },
         "description": "Applicability agreement.",
@@ -38639,10 +38622,6 @@
           "id": {
             "type": "string",
             "description": "A stable opaque principal or service identifier, when available."
-          },
-          "display_name": {
-            "type": "string",
-            "description": "A presentation name for the actor, when available."
           }
         },
         "description": "The actor responsible for an evaluator diagnostic change.",
@@ -38806,10 +38785,6 @@
             "pattern": "^[0-9a-f]{64}$",
             "description": "The lowercase 64-character SHA-256 hash of the stable item/data mapping."
           },
-          "scoring_contract": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticScoringContractReference",
-            "description": "The registered human-annotation scoring contract, when the dataset contains agreement labels."
-          },
           "guidance_content_hash": {
             "type": "string",
             "pattern": "^[0-9a-f]{64}$",
@@ -38826,6 +38801,7 @@
       "EvaluatorDiagnosticEvaluationRunReference": {
         "type": "object",
         "required": [
+          "eval_id",
           "run_id",
           "evaluator_version",
           "evaluator_content_hash"
@@ -38833,7 +38809,7 @@
         "properties": {
           "eval_id": {
             "type": "string",
-            "description": "The evaluation identifier or group containing the run, when not supplied by a containing shared evaluation reference."
+            "description": "The evaluation identifier or group containing the run."
           },
           "run_id": {
             "type": "string",
@@ -39095,14 +39071,6 @@
             "type": "integer",
             "format": "int32",
             "description": "The number of comparable evidence units."
-          },
-          "support": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Bounded class or value support when needed to interpret the metric."
           },
           "lower_bound": {
             "type": "number",
@@ -39628,10 +39596,6 @@
             "pattern": "^[0-9a-f]{64}$",
             "description": "The lowercase 64-character SHA-256 source content hash."
           },
-          "generation_job_id": {
-            "type": "string",
-            "description": "The evaluator generation job that resolved the source."
-          },
           "status": {
             "$ref": "#/components/schemas/EvaluatorGenerationSourceUseStatus",
             "description": "How the source was used."
@@ -39843,13 +39807,6 @@
           "explanation": {
             "type": "string",
             "description": "A bounded explanation."
-          },
-          "action_types": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Bounded remediation action categories."
           }
         },
         "description": "A bounded gap in evaluator source coverage.",
@@ -39927,7 +39884,6 @@
       "EvaluatorVerdictAgreementSummary": {
         "type": "object",
         "required": [
-          "support",
           "confusion",
           "observed_agreement",
           "gwet_ac1",
@@ -39935,10 +39891,6 @@
           "false_fail_rate"
         ],
         "properties": {
-          "support": {
-            "$ref": "#/components/schemas/EvaluatorVerdictSupport",
-            "description": "Human and judge class support."
-          },
           "confusion": {
             "$ref": "#/components/schemas/EvaluatorVerdictConfusion",
             "description": "Pass/fail confusion counts."
@@ -39998,43 +39950,6 @@
           }
         },
         "description": "Final-verdict confusion counts.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluatorVerdictSupport": {
-        "type": "object",
-        "required": [
-          "human_pass",
-          "human_fail",
-          "judge_pass",
-          "judge_fail"
-        ],
-        "properties": {
-          "human_pass": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Human pass count."
-          },
-          "human_fail": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Human fail count."
-          },
-          "judge_pass": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Judge pass count."
-          },
-          "judge_fail": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Judge fail count."
-          }
-        },
-        "description": "Final-verdict class support.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -82924,15 +82839,10 @@
       "RubricComparisonRunReferences": {
         "type": "object",
         "required": [
-          "eval_id",
           "baseline",
           "target"
         ],
         "properties": {
-          "eval_id": {
-            "type": "string",
-            "description": "The shared evaluation identifier or group."
-          },
           "baseline": {
             "$ref": "#/components/schemas/EvaluatorDiagnosticEvaluationRunReference",
             "description": "The baseline evaluator run."
@@ -83016,14 +82926,6 @@
             "type": "number",
             "format": "double",
             "description": "Target-minus-baseline mean score."
-          },
-          "score_distribution_delta": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "number",
-              "format": "double"
-            },
-            "description": "Bounded target-minus-baseline distribution deltas keyed by score."
           },
           "baseline_applicability_rate": {
             "type": "number",
@@ -83408,11 +83310,6 @@
             },
             "description": "Shared dimension identifiers whose definitions changed."
           },
-          "unchanged_dimension_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of unchanged shared dimensions."
-          },
           "weight_changes": {
             "type": "array",
             "items": {
@@ -83433,13 +83330,6 @@
             "minimum": 0,
             "maximum": 1,
             "description": "Target pass threshold. The value must be between 0 and 1, inclusive."
-          },
-          "warnings": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Stable bounded warnings."
           }
         },
         "description": "Bounded behavioral and structural comparison between two evaluator versions.",

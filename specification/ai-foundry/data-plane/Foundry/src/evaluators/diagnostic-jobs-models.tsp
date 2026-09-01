@@ -59,9 +59,6 @@ model EvaluatorDiagnosticMetric {
   @doc("The number of comparable evidence units.")
   sample_count: int32;
 
-  @doc("Bounded class or value support when needed to interpret the metric.")
-  support?: Record<int32>;
-
   @doc("The lower bound from the registered uncertainty procedure.")
   lower_bound?: float64;
 
@@ -124,9 +121,6 @@ model EvaluatorDiagnosticDatasetSnapshot {
   @pattern("^[0-9a-f]{64}$")
   mapping_hash: string;
 
-  @doc("The registered human-annotation scoring contract, when the dataset contains agreement labels.")
-  scoring_contract?: EvaluatorDiagnosticScoringContractReference;
-
   @doc("The lowercase 64-character SHA-256 annotation-guidance content hash, when the dataset contains agreement labels.")
   @pattern("^[0-9a-f]{64}$")
   guidance_content_hash?: string;
@@ -149,8 +143,8 @@ model EvaluatorDiagnosticScoringContractReference {
 @doc("A bounded reference to an evaluation run used by an evaluator diagnostic.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model EvaluatorDiagnosticEvaluationRunReference {
-  @doc("The evaluation identifier or group containing the run, when not supplied by a containing shared evaluation reference.")
-  eval_id?: string;
+  @doc("The evaluation identifier or group containing the run.")
+  eval_id: string;
 
   @doc("The evaluation run identifier.")
   run_id: string;
@@ -221,12 +215,6 @@ model EvaluatorAgreementSupportSummary {
   @doc("Number of items in the registered source.")
   source_item_count: int32;
 
-  @doc("Number of items satisfying registered evidence requirements.")
-  qualified_item_count: int32;
-
-  @doc("Number of items selected by the service policy.")
-  selected_item_count: int32;
-
   @doc("Number of items with comparable human and judge representations.")
   comparable_item_count: int32;
 
@@ -258,9 +246,6 @@ model EvaluatorApplicabilityAgreementSummary {
 
   @doc("Observed applicability agreement.")
   observed_agreement: EvaluatorDiagnosticMetric;
-
-  @doc("Observed applicability disagreement rate.")
-  disagreement_rate: EvaluatorDiagnosticMetric;
 }
 
 @doc("Per-dimension ordinal-score agreement.")
@@ -332,22 +317,6 @@ model EvaluatorDecisionDriverAgreementSummary {
   top_k_overlap?: EvaluatorDiagnosticMetric;
 }
 
-@doc("Final-verdict class support.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model EvaluatorVerdictSupport {
-  @doc("Human pass count.")
-  human_pass: int32;
-
-  @doc("Human fail count.")
-  human_fail: int32;
-
-  @doc("Judge pass count.")
-  judge_pass: int32;
-
-  @doc("Judge fail count.")
-  judge_fail: int32;
-}
-
 @doc("Final-verdict confusion counts.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model EvaluatorVerdictConfusion {
@@ -367,9 +336,6 @@ model EvaluatorVerdictConfusion {
 @doc("Final-verdict agreement.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model EvaluatorVerdictAgreementSummary {
-  @doc("Human and judge class support.")
-  support: EvaluatorVerdictSupport;
-
   @doc("Pass/fail confusion counts.")
   confusion: EvaluatorVerdictConfusion;
 
@@ -435,9 +401,6 @@ model RubricDimensionComparison {
 
   @doc("Target-minus-baseline mean score.")
   mean_score_delta?: float64;
-
-  @doc("Bounded target-minus-baseline distribution deltas keyed by score.")
-  score_distribution_delta?: Record<float64>;
 
   @doc("Baseline applicability rate. The value must be between 0 and 1, inclusive.")
   @minValue(0.0)
@@ -522,9 +485,6 @@ model RubricVersionComparisonSummary {
   @doc("Shared dimension identifiers whose definitions changed.")
   changed_dimension_ids?: string[];
 
-  @doc("Number of unchanged shared dimensions.")
-  unchanged_dimension_count?: int32;
-
   @doc("Shared-dimension weight changes.")
   weight_changes: RubricWeightChange[];
 
@@ -537,17 +497,11 @@ model RubricVersionComparisonSummary {
   @minValue(0.0)
   @maxValue(1.0)
   pass_threshold_after?: float64;
-
-  @doc("Stable bounded warnings.")
-  warnings?: string[];
 }
 
 @doc("One shared evaluation/group and its baseline and target runs.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model RubricComparisonRunReferences {
-  @doc("The shared evaluation identifier or group.")
-  eval_id: string;
-
   @doc("The baseline evaluator run.")
   baseline: EvaluatorDiagnosticEvaluationRunReference;
 
