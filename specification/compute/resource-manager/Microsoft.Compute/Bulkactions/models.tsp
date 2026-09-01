@@ -267,6 +267,11 @@ model ZonePreference {
 
   @doc("The rank of this zone in the priority order")
   rank: int32;
+
+  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @minValue(1)
+  @doc("The maximum capacity to place in this zone. The sum across capped zones must not exceed the requested capacity, and when every zone preference is capped the sum must equal the requested capacity.")
+  targetMaxCapacity?: int32;
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
