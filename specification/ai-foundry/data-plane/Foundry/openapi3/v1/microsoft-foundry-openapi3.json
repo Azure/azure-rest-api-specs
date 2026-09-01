@@ -50595,7 +50595,7 @@
                 }
               }
             ],
-            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
+            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
           },
           "prompt": {
             "type": "string",
@@ -50618,7 +50618,7 @@
                 "type": "null"
               }
             ],
-            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`."
+            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`."
           },
           "model": {
             "anyOf": [
@@ -50629,8 +50629,6 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "gpt-image-1",
                   "gpt-image-1-mini",
@@ -50641,7 +50639,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.",
+            "description": "The model to use for image generation. Defaults to `gpt-image-1.5`.",
             "x-oaiTypeLabel": "string"
           },
           "n": {
@@ -50790,8 +50788,6 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "dall-e-3",
                   "gpt-image-1",
@@ -50802,7 +50798,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
+            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
             "x-oaiTypeLabel": "string",
             "default": "dall-e-2"
           },
@@ -50954,7 +50950,7 @@
                 "type": "null"
               }
             ],
-            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`.",
+            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`.",
             "default": "auto"
           },
           "style": {
@@ -53710,8 +53706,6 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21",
                   "gpt-image-1",
                   "gpt-image-1-mini",
                   "chatgpt-image-latest"
@@ -53721,7 +53715,7 @@
                 "type": "null"
               }
             ],
-            "description": "The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.",
+            "description": "The model to use for image editing.",
             "x-oaiTypeLabel": "string",
             "default": "gpt-image-1.5"
           },
@@ -53868,7 +53862,7 @@
                 "type": "null"
               }
             ],
-            "description": "Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.",
+            "description": "Background behavior for generated image output.",
             "default": "auto"
           },
           "stream": {
@@ -57410,9 +57404,7 @@
                 "enum": [
                   "gpt-image-1",
                   "gpt-image-1-mini",
-                  "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21"
+                  "gpt-image-1.5"
                 ]
               }
             ],
@@ -57480,7 +57472,7 @@
               "opaque",
               "auto"
             ],
-            "description": "Set the background of the generated image. One of `transparent`,\n  `opaque`, or `auto`. Transparent backgrounds are available for\n  supported GPT Image models. For `gpt-image-2` and\n  `gpt-image-2-2026-04-21`, this support is in preview. When using\n  `transparent`, set the output format to `png` or `webp`. Default: `auto`.",
+            "description": "Background type for the generated image. One of `transparent`,\n  `opaque`, or `auto`. Default: `auto`.",
             "default": "auto"
           },
           "input_fidelity": {
@@ -58550,7 +58542,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 20971520,
+            "maxLength": 10485760,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -60307,7 +60299,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 20971520,
+            "maxLength": 10485760,
             "description": "The encrypted content of the compaction summary."
           }
         },
