@@ -130,7 +130,7 @@ op listLedgerEntries is ConfidentialLedgerCommon.LedgerOperation<
 @sharedRoute
 @route("/app/transactions")
 @post
-op createLedgerEntryImmediate is ConfidentialLedgerCommon.LedgerOperation<
+op createLedgerEntryAsync is ConfidentialLedgerCommon.LedgerOperation<
   {
     /**
      * The collection id.
