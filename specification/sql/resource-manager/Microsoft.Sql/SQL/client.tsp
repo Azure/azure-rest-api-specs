@@ -120,6 +120,15 @@ using Microsoft.Sql;
 );
 
 // C# resource and type mappings migrated from autorest.md.bak prepend-rp-prefix
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the released SQL built-in roles and role assignment helpers."
+@@clientOption(Microsoft.Sql.Server, "resource-rbac-roles", #{
+  SqlDBContributor: "9b7fa17d-e63e-47b0-bb0a-15c516ac86ec",
+  SqlManagedInstanceContributor: "4939a1f6-9ae0-4e48-a1e0-f2cbe897382d",
+  SqlSecurityManager: "056cd41c-7e88-42e1-933e-88ba6a50c9c3",
+  SqlServerContributor: "6d8ee4ec-f05a-4a1d-8b00-a9b17e38b437",
+  AzureConnectedSqlServerOnboarding: "e8113dce-c529-4d33-91fa-e9b972617508",
+}, "csharp");
+
 @@clientName(DatabaseAutomaticTuning, "SqlDatabaseAutomaticTuning", "csharp");
 @@clientName(
   DatabaseBlobAuditingPolicy,
