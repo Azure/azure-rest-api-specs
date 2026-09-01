@@ -1351,7 +1351,6 @@ model Volume {
   /**
    * Defines files for a secret volume. Dictionary keys are file names and values are Base64-encoded secret data used as file contents. The values are sensitive, and the service does not return the contents of this property in GET responses.
    */
-  @secret
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   secret?: Record<string>;
 
