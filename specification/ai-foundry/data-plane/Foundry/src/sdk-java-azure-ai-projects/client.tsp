@@ -1,6 +1,7 @@
 import "../common/service.tsp";
 import "../sdk-common/error.default.tsp";
 
+import "../agent-insights/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../indexes/routes.tsp";
@@ -17,6 +18,7 @@ import "../routines/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 
+import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 
 using Azure.ClientGenerator.Core;

@@ -35,6 +35,7 @@ model VoiceGeneratedItemAudioResponse {
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
 @tag("Voice Agent WebSocket")
+@removed(Versions.v1)
 interface VoiceAgentWebSocket {
   /**
    * Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
@@ -111,6 +112,7 @@ interface VoiceAgentWebSocket {
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The endpoint-scoped, read-only voice conversation projection and its nested response, item, and audio routes do not match a standard resource operation template."
 @tag("Agent Conversations")
+@removed(Versions.v1)
 interface AgentEndpointConversations {
   /**
    * Returns the conversations persisted for the specified voice agent endpoint.

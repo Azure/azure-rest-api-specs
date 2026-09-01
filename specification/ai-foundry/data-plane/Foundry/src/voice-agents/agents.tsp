@@ -92,6 +92,7 @@ model VoiceAgentLlmInterimResponseConfig
   `GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@removed(Versions.v1)
 model VoiceAgentDefinition extends AgentDefinition {
   @doc("The kind discriminator for a voice agent definition. Always `voice`.")
   kind: AgentKind.voice;
@@ -919,6 +920,7 @@ union VoiceOutputModality {
   definition, so the caller can edit or override any of them afterward via standard agent versioning.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@removed(Versions.v1)
 model GenerateVoiceAgentRequest {
   @doc("The agent kind. Always `voice`.")
   kind: AgentKind.voice;
@@ -962,6 +964,7 @@ model GenerateVoiceAgentRequest {
 
 @doc("The kind-specific inputs for generating and creating an agent.")
 @oneOf
+@removed(Versions.v1)
 union GenerateAgentRequest {
   voice: GenerateVoiceAgentRequest,
 }

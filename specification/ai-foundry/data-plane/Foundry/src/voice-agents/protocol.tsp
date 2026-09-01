@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
@@ -17,11 +18,13 @@ alias VoiceAgentClientEventUsage = Usage.input | Usage.json;
 alias VoiceAgentServerEventUsage = Usage.output | Usage.json;
 alias VoiceAgentWebSocketMessageUsage = Usage.input | Usage.output | Usage.json;
 
+@removed(Versions.v1)
 union VoiceAgentClientEventTypeExtension {
   session_avatar_connect: "session.avatar.connect",
   rtc_call_sdp_create: "rtc.call.sdp.create",
 }
 
+@removed(Versions.v1)
 union VoiceAgentServerEventTypeExtension {
   warning: "warning",
   session_subagent_started: "session.subagent.started",
@@ -312,13 +315,15 @@ model VoiceAgentResponseCreateParams {
   }
 );
 
+@doc("Properties shared by realtime responses returned by the voice-agent service.")
+model VoiceAgentRealtimeResponseBase {
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio" | "output">;
+}
+
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the upstream live response contract, including conversation_id, while replacing audio and output."
 @doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
-model VoiceAgentRealtimeResponse extends OmitProperties<
-  OpenAI.RealtimeResponse,
-  "audio" | "output"
-> {
+model VoiceAgentRealtimeResponse extends VoiceAgentRealtimeResponseBase {
   @doc("The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`.")
   audio?: VoiceResponseAudio;
 
