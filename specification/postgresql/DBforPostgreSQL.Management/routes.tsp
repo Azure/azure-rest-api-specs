@@ -169,16 +169,16 @@ interface DbAgents {
   @operationId("DBAgent_List")
   list is ArmResourceListByParent<DbAgent>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_Read operation ID."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_Get operation ID."
   @doc("Gets the database agent configuration for a flexible server.")
-  @operationId("DBAgent_Read")
+  @operationId("DBAgent_Get")
   get is ArmResourceRead<DbAgent>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The implemented service contract returns HTTP 202 for every database agent write."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The implemented service contract returns the in-progress database agent resource in the HTTP 202 response body."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_Write operation ID."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_Update operation ID."
   @doc("Enables or disables the database agent for a flexible server.")
-  @operationId("DBAgent_Write")
+  @operationId("DBAgent_Update")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @put
   update is Legacy.CreateOrReplaceAsync<
