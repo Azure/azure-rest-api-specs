@@ -1886,11 +1886,6 @@ model CorsPolicy {
 }
 
 /**
- * Indicates what diagnostic log settings are to be enabled.
- */
-model DiagnosticLogSettings {}
-
-/**
  * The object that represents all properties related to capacity enforcement on an account.
  */
 model Capacity {
@@ -4047,26 +4042,31 @@ model physicalPartitionStorageInfo {
 /**
  * Properties to retrieve throughput for Azure Cosmos DB resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
 model RetrieveThroughputProperties {}
 
 /**
  * Resource to retrieve throughput information for Cosmos DB resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
 model RetrieveThroughputPropertiesResource {}
 
 /**
  * PhysicalPartitionId object
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This model remains for the existing C# client customization while its preview-only identifier is intentionally absent from stable 2026-07-15."
 model PhysicalPartitionId {}
 
 /**
  * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
 model PhysicalPartitionThroughputInfoResultProperties {}
 
 /**
  * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoProperties object
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
 model PhysicalPartitionThroughputInfoProperties {}
 
 /**
@@ -4087,6 +4087,7 @@ model PhysicalPartitionThroughputInfoResource {
 /**
  * Properties to redistribute throughput for Azure Cosmos DB resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
 model RedistributeThroughputProperties {}
 
 /**
@@ -4096,11 +4097,13 @@ model RedistributeThroughputPropertiesResource {
   /**
    * Array of PhysicalPartitionThroughputInfoResource objects.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The only identifying property is preview-only; emitting identifier metadata would change the stable 2026-07-15 OpenAPI from its stable baseline."
   targetPhysicalPartitionThroughputInfo: PhysicalPartitionThroughputInfoResource[];
 
   /**
    * Array of PhysicalPartitionThroughputInfoResource objects.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The only identifying property is preview-only; emitting identifier metadata would change the stable 2026-07-15 OpenAPI from its stable baseline."
   sourcePhysicalPartitionThroughputInfo: PhysicalPartitionThroughputInfoResource[];
 }
 
@@ -5161,6 +5164,8 @@ model CassandraViewCreateUpdateProperties {
 /**
  * Base class for all DataTransfer source/sink
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy discriminator base while remaining horizontally equivalent to stable 2026-03-15."
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Changing the existing discriminator hierarchy would alter the stable API contract; stable 2026-07-15 preserves the stable 2026-03-15 shape."
 @discriminator("component")
 model DataTransferDataSourceSink {}
 
