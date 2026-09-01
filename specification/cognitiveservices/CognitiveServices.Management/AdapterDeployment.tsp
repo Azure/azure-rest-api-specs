@@ -6,7 +6,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./Account.tsp";
-import "./ManagedComputeDeployment.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -52,17 +51,18 @@ model AdapterDeployment
 model AdapterDeploymentProperties {
   /**
    * The immutable Project Models version produced by Foundry fine-tuning.
+   * The service validates LoRA weight type, protected status, provenance,
+   * compatibility metadata, and registration state.
    */
   sourceModelId: string;
 
   /**
-   * The immutable ARM ID of the compatible managed compute parent deployment.
+   * The immutable name of the compatible managed compute parent deployment.
+   * The service resolves this name within the adapter's owning account; full
+   * ARM resource IDs and cross-account references are not accepted. It cannot
+   * equal the adapter deployment's resource name.
    */
-  targetDeploymentId: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.CognitiveServices/accounts/managedComputeDeployments";
-    }
-  ]>;
+  targetDeploymentName: string;
 
   /**
    * The source model version currently admitted for inference.

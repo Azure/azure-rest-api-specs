@@ -13477,19 +13477,11 @@
       "properties": {
         "sourceModelId": {
           "type": "string",
-          "description": "The immutable Project Models version produced by Foundry fine-tuning."
+          "description": "The immutable Project Models version produced by Foundry fine-tuning.\nThe service validates LoRA weight type, protected status, provenance,\ncompatibility metadata, and registration state."
         },
-        "targetDeploymentId": {
+        "targetDeploymentName": {
           "type": "string",
-          "format": "arm-id",
-          "description": "The immutable ARM ID of the compatible managed compute parent deployment.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments"
-              }
-            ]
-          }
+          "description": "The immutable name of the compatible managed compute parent deployment.\nThe service resolves this name within the adapter's owning account; full\nARM resource IDs and cross-account references are not accepted. It cannot\nequal the adapter deployment's resource name."
         },
         "activeSourceModelId": {
           "type": "string",
@@ -13524,7 +13516,7 @@
       },
       "required": [
         "sourceModelId",
-        "targetDeploymentId"
+        "targetDeploymentName"
       ]
     },
     "AdapterDeploymentProvisioningState": {
