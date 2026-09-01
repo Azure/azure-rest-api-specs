@@ -75,10 +75,6 @@ suppressions:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"]
     reason: Default is the fixed singleton resource name, not a resource type. The actual resource type segment, dbAgents, follows camel-case naming.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put
-    reason: The implemented database agent resource reports lifecycle progress through properties.state and does not expose a separate provisioningState property.
   - code: PutResponseCodes
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put

@@ -2309,7 +2309,7 @@
         }
       },
       "put": {
-        "operationId": "DBAgent_Update",
+        "operationId": "DBAgent_CreateOrUpdate",
         "tags": [
           "DbAgents"
         ],
@@ -6602,6 +6602,11 @@
           "description": "The state of the database agent.",
           "readOnly": true
         },
+        "provisioningState": {
+          "$ref": "#/definitions/DbAgentProvisioningState",
+          "description": "The provisioning state of the database agent resource.",
+          "readOnly": true
+        },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
@@ -6613,6 +6618,42 @@
       "required": [
         "state"
       ]
+    },
+    "DbAgentProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the database agent resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "DbAgentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The database agent lifecycle operation is in progress."
+          }
+        ]
+      }
     },
     "DbAgentState": {
       "type": "string",
