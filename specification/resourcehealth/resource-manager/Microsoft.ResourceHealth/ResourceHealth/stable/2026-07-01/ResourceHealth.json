@@ -1044,7 +1044,7 @@
           }
         },
         "x-ms-examples": {
-          "SecurityAdvisoriesEventBySubscriptionIdAndTrackingId": {
+          "GetRetirementEventBySubscriptionIdAndTrackingId": {
             "$ref": "./examples/Event_GetBySubscriptionIdAndTrackingId.json"
           }
         }
@@ -1351,6 +1351,32 @@
     }
   },
   "definitions": {
+    "ApiOperationLink": {
+      "type": "object",
+      "description": "An API operation associated with an event.",
+      "properties": {
+        "httpMethod": {
+          "type": "string",
+          "description": "HTTP method to use. Resource Health returns GET for Advisor recommendations.",
+          "readOnly": true
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Opaque absolute ARM URL for the associated API operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the operation. Clients must not parse this value.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "httpMethod",
+        "url"
+      ]
+    },
     "AvailabilityStateValues": {
       "type": "string",
       "description": "Impacted resource status of the resource.",
@@ -1610,6 +1636,11 @@
         "eventSubType": {
           "$ref": "#/definitions/EventSubTypeValues",
           "description": "Sub-type of event."
+        },
+        "advisorRecommendations": {
+          "$ref": "#/definitions/ApiOperationLink",
+          "description": "Operation for listing Advisor recommendations associated with this event's tracking ID in the response subscription.",
+          "readOnly": true
         },
         "eventSource": {
           "$ref": "#/definitions/EventSourceValues",

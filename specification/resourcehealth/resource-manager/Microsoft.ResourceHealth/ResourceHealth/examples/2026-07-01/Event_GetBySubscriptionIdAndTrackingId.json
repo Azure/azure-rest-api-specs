@@ -13,20 +13,23 @@
         "type": "/providers/Microsoft.ResourceHealth/events",
         "id": "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}",
         "properties": {
+          "advisorRecommendations": {
+            "httpMethod": "GET",
+            "url": "https://management.azure.com/subscriptions/subscriptionId/providers/Microsoft.Advisor/recommendations?api-version=2025-01-01&%24filter=trackingIds%2Fany%28t%3A%20t%20eq%20%27eventTrackingId%27%29",
+            "description": "Lists Advisor recommendations associated with this retirement event."
+          },
           "article": {
-            "articleContent": "<html>An outage alert is being investigated. More information will be provided as it is known</html>"
+            "articleContent": "<html>An Azure service retirement is planned. Review the retirement guidance and recommended actions.</html>"
           },
           "enableChatWithUs": false,
           "enableMicrosoftSupport": true,
           "eventLevel": "Warning",
-          "eventSource": "ResourceHealth",
+          "eventSource": "ServiceHealth",
           "eventTags": [
-            "Action Recommended",
-            "False Positive",
-            "Preliminary PIR",
-            "Final PIR"
+            "Action Recommended"
           ],
-          "eventType": "ServiceIssue",
+          "eventSubType": "Retirement",
+          "eventType": "HealthAdvisory",
           "faqs": [
             {
               "answer": "This is an answer",
@@ -34,7 +37,7 @@
               "question": "This is a question"
             }
           ],
-          "header": "Your service might have been impacted by an Azure service issue",
+          "header": "Action may be required for an upcoming Azure service retirement",
           "hirStage": "resolved",
           "impact": [
             {
@@ -49,25 +52,18 @@
                   "status": "Active",
                   "updates": [
                     {
-                      "eventTags": [
-                        "Final PIR"
-                      ],
-                      "summary": "Update 3 - An outage alert is being investigated. More information will be provided as it is known.",
+                      "summary": "Update 3 - Retirement guidance and recommended actions have been updated.",
                       "updateDateTime": "2025-05-13T15:43:48.1203530Z"
                     },
                     {
-                      "eventTags": [
-                        "False Positive",
-                        "Preliminary PIR"
-                      ],
-                      "summary": "Update 2 - An outage alert is being investigated. More information will be provided as it is known.",
+                      "summary": "Update 2 - Additional retirement impact details are available.",
                       "updateDateTime": "2025-05-13T10:32:48.1203530Z"
                     },
                     {
                       "eventTags": [
                         "Action Recommended"
                       ],
-                      "summary": "Update 1 - An outage alert is being investigated. More information will be provided as it is known.",
+                      "summary": "Update 1 - An upcoming Azure service retirement was announced.",
                       "updateDateTime": "2025-05-12T15:00:48.1203530Z"
                     }
                   ]
@@ -126,12 +122,12 @@
             "message": "Recommended actions title"
           },
           "status": "Active",
-          "summary": "An outage alert is being investigated. More information will be provided as it is known.",
-          "title": "ACTIVE: Virtual machines in West US"
+          "summary": "An Azure service retirement is planned. Review the retirement guidance and recommended actions.",
+          "title": "Upcoming retirement: Virtual Machines in West US"
         }
       }
     }
   },
   "operationId": "Event_GetBySubscriptionIdAndTrackingId",
-  "title": "SecurityAdvisoriesEventBySubscriptionIdAndTrackingId"
+  "title": "GetRetirementEventBySubscriptionIdAndTrackingId"
 }
