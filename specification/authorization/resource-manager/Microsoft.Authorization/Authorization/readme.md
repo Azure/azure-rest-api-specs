@@ -167,16 +167,16 @@ directive:
     where:
       - $.paths['/providers/Microsoft.Authorization/privilegedResourceFavorites']
       - $.paths['/providers/Microsoft.Authorization/privilegedResourceFavorites/{favoriteId}']
+      - $.paths['/providers/Microsoft.Authorization/privilegedResources']
+      - $.paths['/providers/Microsoft.Authorization/privilegedResources/{privilegedResourceId}/relatedResources']
     reason: |
-      `privilegedResourceFavorites` is per-caller tenant-scoped storage. The
-      caller identity (validated OAuth bearer token's `principalId`) implicitly
-      partitions storage — two different users issuing PUT against the same
-      `{favoriteId}` create two independent records. Favorites belong to the
-      *caller*, not to an Azure scope (subscription or resource group), so
-      subscription/RG scoping would (a) leak per-user state into shared
-      Azure scopes and (b) imply confusing ownership semantics. This follows
-      the existing `Microsoft.Authorization` convention for caller-specific
-      operations (role-definition lookups, PIM activations).
+      `privilegedResources` returns a caller-specific view aggregated across
+      subscriptions, so subscription or resource-group scoping would prevent
+      the operation from representing the caller's complete accessible set.
+      `relatedResources` follows the same tenant-scoped parent collection.
+      `privilegedResourceFavorites` stores private per-caller state; the caller
+      identity partitions records, and favorites do not belong to an Azure
+      subscription or resource group.
 
       Chris Stackhouse approved this tenant-level API design during ARM API
       Modeling Office Hours on May 21, 2026. These APIs do not use
