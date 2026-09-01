@@ -197,10 +197,15 @@ interface Evaluators {
   >;
 
   // PATCH /evaluators/{evaluatorName}/versions/{version}
-  /** Updates the specified evaluator version in place. */
+  /**
+   * Updates catalog metadata or draft lifecycle status for an immutable
+   * evaluator version. Functional changes require creating another numbered
+   * version. A draft-status transition publishes a lineage diagnostic and
+   * immediately changes eligibility for implicit latest resolution.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("Update an evaluator version")
+  @summary("Update evaluator version metadata and draft status")
   @Http.patch(#{ implicitOptionality: true })
   updateVersion is FoundryResourceOperation<
     EvaluatorVersion,
@@ -212,14 +217,14 @@ interface Evaluators {
       @Http.path
       version: string;
 
-      @doc("Evaluator resource")
+      @doc("Mutable evaluator catalog metadata and draft lifecycle status.")
       @Http.bodyRoot
-      evaluator_version: EvaluatorVersion;
+      evaluator_version: EvaluatorVersionMetadataUpdate;
     },
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  /** Initiates a new pending upload or retrieves an existing one for the specified evaluator version. */
+  /** Initiates or retrieves a pending upload used before registering a new immutable evaluator version. The service rejects attempts to overwrite artifacts for an already registered version. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Start a pending upload")
   @post
@@ -247,7 +252,7 @@ interface Evaluators {
     PendingUploadResponse
   >;
 
-  /** Retrieves SAS credentials for accessing the storage account associated with the specified evaluator version. */
+  /** Retrieves SAS credentials for a pending evaluator upload before version registration. The credentials cannot overwrite artifacts for an already registered immutable version. */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Get evaluator credentials")

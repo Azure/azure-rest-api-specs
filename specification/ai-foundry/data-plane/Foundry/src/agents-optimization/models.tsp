@@ -138,7 +138,7 @@ model OptimizationEvaluatorRef {
   @doc("Evaluator name.")
   name: string;
 
-  @doc("Evaluator version. If not specified, the latest version is used.")
+  @doc("The exact evaluator version. If omitted, the latest non-draft version is resolved when the optimization job starts. The service never falls back to a draft and fails when no non-draft version exists. An explicit version may reference a draft.")
   version?: string;
 }
 
