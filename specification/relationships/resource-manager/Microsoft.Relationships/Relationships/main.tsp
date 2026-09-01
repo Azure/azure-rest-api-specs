@@ -357,6 +357,8 @@ interface ServiceGroupMemberRelationships {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "ContainsRelationships only has list operations — @armResourceOperations would apply @autoRoute which corrupts the manually specified route for the resource group scoped endpoint"
 @added(Versions.`2026-03-01-preview`)
+// `$top` is intentionally omitted from these collection GET operations to align
+// with RPC-Get-V1-15; only `api-version` and OData `$filter` are supported.
 interface ContainsRelationships {
   @doc("List ContainsRelationship resources by subscription ID")
   listBySubscription is ArmListBySubscription<
