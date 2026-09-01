@@ -177,6 +177,10 @@ directive:
       Azure scopes and (b) imply confusing ownership semantics. This follows
       the existing `Microsoft.Authorization` convention for caller-specific
       operations (role-definition lookups, PIM activations).
+
+      Chris Stackhouse approved this tenant-level API design during ARM API
+      Modeling Office Hours on May 21, 2026. These APIs do not use
+      `allowUnauthorizedActions` and do not bypass standard Azure RBAC.
 ```
 
 ### Tag: package-2026-06-01-preview
