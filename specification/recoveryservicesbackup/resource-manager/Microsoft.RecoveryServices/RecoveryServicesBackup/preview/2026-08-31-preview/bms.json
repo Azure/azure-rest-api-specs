@@ -18295,6 +18295,12 @@
         ]
       }
     },
+    "VaultCredentialCertificate": {
+      "type": "string",
+      "format": "password",
+      "description": "Base64-encoded certificate credential data returned by cross-tenant vault credential generation.\nThis is a PFX (PKCS#12) payload that contains the certificate together with its private key, so it\nis sensitive credential material: callers must handle it as a secret and must not log or persist it\nin plaintext.",
+      "x-ms-secret": true
+    },
     "VaultCredentialCertificateCreateOptions": {
       "type": "object",
       "description": "Options for self-signed certificate generation.",
@@ -18315,7 +18321,7 @@
           "description": "Authentication type."
         },
         "certificate": {
-          "type": "string",
+          "$ref": "#/definitions/VaultCredentialCertificate",
           "description": "Base64-encoded certificate data."
         },
         "resourceId": {
