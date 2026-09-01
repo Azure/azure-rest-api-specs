@@ -130,7 +130,7 @@ op listLedgerEntries is ConfidentialLedgerCommon.LedgerOperation<
 @sharedRoute
 @route("/app/transactions")
 @post
-op createLedgerEntryBeforeV20260731Preview is ConfidentialLedgerCommon.LedgerOperation<
+op createLedgerEntryLegacy is ConfidentialLedgerCommon.LedgerOperation<
   {
     /**
      * The collection id.
@@ -142,7 +142,7 @@ op createLedgerEntryBeforeV20260731Preview is ConfidentialLedgerCommon.LedgerOpe
      * Comma separated tags.
      */
     @query("tags")
-    tags?: string;
+    tags?: string[];
 
     /**
      * Ledger entry.
@@ -174,7 +174,7 @@ op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
      * Comma separated tags.
      */
     @query("tags")
-    tags?: string;
+    tags?: string[];
 
     /**
      * Ledger entry.
