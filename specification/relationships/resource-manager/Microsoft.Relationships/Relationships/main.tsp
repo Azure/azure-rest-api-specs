@@ -314,10 +314,9 @@ interface DependencyOfRelationships {
 /*
  * Service-group-scoped dependencyOf operations were already available on the
  * internal preview branch for 2026-03-01-preview but were missed when that
- * version was published. Introduce them from 2026-03-01-preview (this preview
- * version has not shipped to customers yet); 2023-09-01-preview remains
- * unchanged. Uses Extension.ExternalResource to define explicit tenant-level
- * ServiceGroup paths
+ * version was initially published. Introduce them from 2026-03-01-preview and
+ * carry them forward into 2026-08-01; 2023-09-01-preview remains unchanged.
+ * Uses Extension.ExternalResource to define explicit tenant-level ServiceGroup paths
  * (/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Relationships/dependencyOf[/{name}]),
  * which satisfies ARM validation that requires explicitly-routed tenant-level
  * URIs rather than the generic {resourceUri} wildcard used in
@@ -334,7 +333,6 @@ alias ServiceGroup = Extension.ExternalResource<
 
 @armResourceOperations
 @added(Versions.`2026-03-01-preview`)
-@removed(Versions.`2026-08-01`)
 interface DependencyOfRelationshipsByServiceGroup {
   get is Extension.Read<ServiceGroup, DependencyOfRelationship>;
   createOrUpdate is Extension.CreateOrReplaceAsync<
