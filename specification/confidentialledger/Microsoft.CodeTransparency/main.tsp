@@ -54,28 +54,11 @@ op getTransparencyConfigCbor is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
-@removed(Versions.`2026-03-26`)
-@sharedRoute
 @doc("Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation")
 @route("/jwks")
 op getPublicKeys is Foundations.Operation<
   {},
   JwksDocument,
-  ServiceTraits,
-  AnyCborError
->;
-
-#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetPublicKeys operationId across versions"
-@added(Versions.`2026-03-26`)
-@operationId("GetPublicKeys")
-@sharedRoute
-@doc("Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation")
-@route("/jwks")
-op getPublicKeysV09 is Foundations.Operation<
-  {},
-  GetPublicKeysResponse,
   ServiceTraits,
   AnyCborError
 >;
@@ -527,7 +510,6 @@ model TransparencyConfigurationCbor {
 }
 
 @added(Versions.`2025-01-31-preview`)
-@removed(Versions.`2026-03-26`)
 @doc("A JWKS like document")
 model JwksDocument {
   @doc("Content type header")
@@ -539,8 +521,6 @@ model JwksDocument {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property names follow RFC 7517 (JSON Web Key) and cannot be changed to Azure camelCase."
-@added(Versions.`2025-01-31-preview`)
-@removed(Versions.`2026-03-26`)
 @doc("rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types")
 model JsonWebKey {
   @doc("The \"alg\" (algorithm) parameter identifies the algorithm intended for\nuse with the key.  The values used should either be registered in the\nIANA \"JSON Web Signature and Encryption Algorithms\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.")
@@ -593,70 +573,6 @@ model JsonWebKey {
 
   @doc("Y coordinate for the Elliptic Curve point")
   y?: string;
-}
-
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Wire model is C#-internal and normalized to public verification key types; the suffix does not surface in the public API."
-@added(Versions.`2026-03-26`)
-@doc("Response containing the service public keys used to verify receipts.")
-model GetPublicKeysResponse {
-  @doc("The response content type.")
-  @header("Content-Type")
-  contentType: "application/json";
-
-  @doc("The JSON Web Key Set response body.")
-  @body
-  body: JsonWebKeySet;
-}
-
-@added(Versions.`2026-03-26`)
-@doc("A JSON Web Key Set containing service receipt-verification keys.")
-model JsonWebKeySet {
-  @doc("The service public keys used to verify receipts.")
-  keys: PublicJsonWebKey[];
-}
-
-@added(Versions.`2026-03-26`)
-@doc("A public asymmetric key represented as an RFC 7517 JSON Web Key.")
-model PublicJsonWebKey {
-  @doc("The asymmetric key type, such as EC, RSA, or OKP.")
-  @encodedName("application/json", "kty")
-  keyType: string;
-
-  @doc("The case-sensitive key ID.")
-  @encodedName("application/json", "kid")
-  keyId: string;
-
-  @doc("The algorithm intended for use with the key.")
-  @encodedName("application/json", "alg")
-  algorithm?: string;
-
-  @doc("The intended public-key use, such as signature verification.")
-  @encodedName("application/json", "use")
-  publicKeyUse?: string;
-
-  @doc("The named curve for EC or OKP keys.")
-  @encodedName("application/json", "crv")
-  curveName?: string;
-
-  @doc("The base64url-encoded X coordinate for EC keys, or public key for OKP keys.")
-  @encodedName("application/json", "x")
-  xCoordinate?: string;
-
-  @doc("The base64url-encoded Y coordinate for EC keys.")
-  @encodedName("application/json", "y")
-  yCoordinate?: string;
-
-  @doc("The base64url-encoded modulus for RSA keys.")
-  @encodedName("application/json", "n")
-  modulus?: string;
-
-  @doc("The base64url-encoded exponent for RSA keys.")
-  @encodedName("application/json", "e")
-  exponent?: string;
-
-  @doc("The base64-encoded X.509 certificate chain.")
-  @encodedName("application/json", "x5c")
-  certificateChain?: string[];
 }
 
 // -----------------------------------------------------------------
