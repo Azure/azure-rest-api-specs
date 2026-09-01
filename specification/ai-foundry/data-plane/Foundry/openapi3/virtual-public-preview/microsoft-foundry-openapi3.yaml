@@ -71856,9 +71856,6 @@ components:
           mcp_call: '#/components/schemas/OpenAI.RealtimeMCPToolCall'
           mcp_approval_request: '#/components/schemas/OpenAI.RealtimeMCPApprovalRequest'
       description: A single item within a Realtime conversation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemFunctionCall:
       type: object
       required:
@@ -71897,21 +71894,10 @@ components:
         arguments:
           type: string
           description: 'The arguments of the function call. This is a JSON-encoded string representing the arguments passed to the function, for example `{"arg1": "value1", "arg2": 42}`.'
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A function call item in a Realtime conversation.
       title: Realtime function call item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemFunctionCallOutput:
       type: object
       required:
@@ -71947,24 +71933,10 @@ components:
         output:
           type: string
           description: The output of the function call, this is free text and can contain any information or simply be empty.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-        name:
-          type: string
-          description: "The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`."
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A function call output item in a Realtime conversation.
       title: Realtime function call output item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessage:
       type: object
       required:
@@ -72025,21 +71997,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistantContent'
           description: The content of the message.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: An assistant message item in a Realtime conversation.
       title: Realtime assistant message item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageAssistantContent:
       type: object
       properties:
@@ -72094,21 +72055,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageSystemContent'
           description: The content of the message.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: A system message in a Realtime conversation can be used to provide additional context or instructions to the model. This is similar but distinct from the instruction prompt provided at the start of a conversation, as system messages can be added at any point in the conversation. For major changes to the conversation's behavior, use instructions, but for smaller updates (e.g. "the user is now asking about a different topic"), use system messages.
       title: Realtime system message item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageSystemContent:
       type: object
       properties:
@@ -72167,21 +72117,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageUserContent'
           description: The content of the message.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
       description: A user message item in a Realtime conversation.
       title: Realtime user message item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageUserContent:
       type: object
       properties:
@@ -72380,21 +72319,10 @@ components:
         arguments:
           type: string
           description: A JSON string of arguments for the tool.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item requesting human approval of a tool invocation.
       title: Realtime MCP approval request
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPApprovalResponse:
       type: object
       required:
@@ -72422,21 +72350,10 @@ components:
           anyOf:
             - type: string
             - type: 'null'
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item responding to an MCP approval request.
       title: Realtime MCP approval response
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPError:
       type: object
       required:
@@ -72493,21 +72410,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item listing tools available on an MCP server.
       title: Realtime MCP list tools
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPProtocolError:
       type: object
       required:
@@ -72564,21 +72470,10 @@ components:
             - type: 'null'
         error:
           $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
       description: A Realtime item representing an invocation of a tool on an MCP server.
       title: Realtime MCP tool call
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPToolExecutionError:
       type: object
       required:
