@@ -4268,16 +4268,16 @@ model DbAgent is Azure.ResourceManager.ProxyResource<DbAgentProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The service reports its lifecycle through state and does not expose provisioningState."
 @doc("Properties of the database agent configuration.")
 @added(Versions.v2026_07_01)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The service reports its lifecycle through state and does not expose provisioningState."
 model DbAgentProperties {
   @doc("The state of the database agent.")
   @visibility(Lifecycle.Read)
   state: DbAgentState;
 
-  @doc("The time when the database agent configuration was last modified.")
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service returns null while an enable or disable operation is in progress."
+  @doc("The time when the database agent configuration was last modified.")
   @visibility(Lifecycle.Read)
   lastModifiedTime?: utcDateTime | null;
 }
@@ -4321,9 +4321,9 @@ union DbAgentState {
   Failed: "Failed",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PUT requests accept only Enabled or Disabled; additional values must be rejected."
 @doc("The database agent states accepted in a write request.")
 @added(Versions.v2026_07_01)
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PUT requests accept only Enabled or Disabled; additional values must be rejected."
 union DbAgentDesiredState {
   @doc("Enable the database agent.")
   Enabled: "Enabled",

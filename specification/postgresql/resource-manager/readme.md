@@ -67,6 +67,14 @@ suppressions:
     from: openapi.json
     where: $.definitions.MaintenanceEventActionResponse.properties.appliedNow
     reason: This is a binary status indicator.
+  - code: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"]
+    reason: The path represents a singleton resource whose fixed resource name is Default. The validator does not recognize the literal singleton name as a resource-name segment. See https://github.com/Azure/azure-openapi-validator/issues/646.
+  - code: PathResourceTypeNameCamelCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"]
+    reason: Default is the fixed singleton resource name, not a resource type. The actual resource type segment, dbAgents, follows camel-case naming.
   - code: ProvisioningStateSpecifiedForLROPut
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put
