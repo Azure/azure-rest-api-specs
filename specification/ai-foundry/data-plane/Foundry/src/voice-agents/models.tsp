@@ -6,7 +6,6 @@ import "./agents.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 using Azure.Core.Experimental;
 
 namespace Azure.AI.Projects;
@@ -158,6 +157,7 @@ alias VoiceConversationItemPersistence = {
   response_id?: string;
 };
 
+/*
 @@extension(
   OpenAI.RealtimeConversationItem,
   "x-ms-foundry-meta",
@@ -173,15 +173,7 @@ alias VoiceConversationItemPersistence = {
 @@copyProperties(
   OpenAI.RealtimeConversationItemMessageSystem,
   {
-    @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    created_at?: FoundryTimestamp,
-
-    @doc("The id of the response that produced this item, when applicable.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    response_id?: string,
+    ...VoiceConversationItemPersistence,
   }
 );
 
@@ -194,15 +186,7 @@ alias VoiceConversationItemPersistence = {
 @@copyProperties(
   OpenAI.RealtimeConversationItemMessageUser,
   {
-    @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    created_at?: FoundryTimestamp,
-
-    @doc("The id of the response that produced this item, when applicable.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    response_id?: string,
+    ...VoiceConversationItemPersistence,
   }
 );
 
@@ -215,15 +199,7 @@ alias VoiceConversationItemPersistence = {
 @@copyProperties(
   OpenAI.RealtimeConversationItemMessageAssistant,
   {
-    @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    created_at?: FoundryTimestamp,
-
-    @doc("The id of the response that produced this item, when applicable.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    response_id?: string,
+    ...VoiceConversationItemPersistence,
   }
 );
 
@@ -236,15 +212,7 @@ alias VoiceConversationItemPersistence = {
 @@copyProperties(
   OpenAI.RealtimeConversationItemFunctionCall,
   {
-    @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    created_at?: FoundryTimestamp,
-
-    @doc("The id of the response that produced this item, when applicable.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    response_id?: string,
+    ...VoiceConversationItemPersistence,
   }
 );
 
@@ -257,18 +225,9 @@ alias VoiceConversationItemPersistence = {
 @@copyProperties(
   OpenAI.RealtimeConversationItemFunctionCallOutput,
   {
-    @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    created_at?: FoundryTimestamp,
-
-    @doc("The id of the response that produced this item, when applicable.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    response_id?: string,
+    ...VoiceConversationItemPersistence,
 
     @doc("The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`.")
-    @removed(Versions.v1)
     name?: string,
   }
 );
@@ -282,15 +241,7 @@ alias VoiceConversationItemPersistence = {
 @@copyProperties(
   OpenAI.RealtimeMCPListTools,
   {
-    @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    created_at?: FoundryTimestamp,
-
-    @doc("The id of the response that produced this item, when applicable.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    response_id?: string,
+    ...VoiceConversationItemPersistence,
   }
 );
 
@@ -303,15 +254,7 @@ alias VoiceConversationItemPersistence = {
 @@copyProperties(
   OpenAI.RealtimeMCPToolCall,
   {
-    @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    created_at?: FoundryTimestamp,
-
-    @doc("The id of the response that produced this item, when applicable.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    response_id?: string,
+    ...VoiceConversationItemPersistence,
   }
 );
 
@@ -324,15 +267,7 @@ alias VoiceConversationItemPersistence = {
 @@copyProperties(
   OpenAI.RealtimeMCPApprovalRequest,
   {
-    @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    created_at?: FoundryTimestamp,
-
-    @doc("The id of the response that produced this item, when applicable.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    response_id?: string,
+    ...VoiceConversationItemPersistence,
   }
 );
 
@@ -345,17 +280,10 @@ alias VoiceConversationItemPersistence = {
 @@copyProperties(
   OpenAI.RealtimeMCPApprovalResponse,
   {
-    @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    created_at?: FoundryTimestamp,
-
-    @doc("The id of the response that produced this item, when applicable.")
-    @visibility(Lifecycle.Read)
-    @removed(Versions.v1)
-    response_id?: string,
+    ...VoiceConversationItemPersistence,
   }
 );
+*/
 
 // ---------------------------------------------------------------------------
 // Audio streaming
