@@ -33,6 +33,16 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
+@@clientName(
+  Microsoft.CodeTransparency.getPublicKeys,
+  "getPublicKeysPreview",
+  "csharp"
+);
+@@clientName(
+  Microsoft.CodeTransparency.getPublicKeysV09,
+  "getPublicKeys",
+  "csharp"
+);
 @@convenientAPI(Microsoft.CodeTransparency.getPublicKeysV09, false, "csharp");
 @@convenientAPI(Microsoft.CodeTransparency.listScittKeys, false, "csharp");
 @@convenientAPI(Microsoft.CodeTransparency.getScittKey, false, "csharp");
