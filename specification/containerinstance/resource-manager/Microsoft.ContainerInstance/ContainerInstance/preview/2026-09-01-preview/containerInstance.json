@@ -3896,6 +3896,18 @@
         ]
       }
     },
+    "ContainerGroupResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerInstance/containerGroups"
+          }
+        ]
+      }
+    },
     "ContainerGroupRestartPolicy": {
       "type": "string",
       "description": "Restart policy for all containers within the container group.\n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart",
@@ -5236,8 +5248,8 @@
       "description": "A container group associated with a managed virtual node pool.",
       "properties": {
         "resourceId": {
-          "type": "string",
-          "description": "The ARM resource ID of the container group.",
+          "$ref": "#/definitions/ContainerGroupResourceId",
+          "description": "The Azure resource ID of the container group.",
           "readOnly": true
         },
         "type": {
@@ -5302,7 +5314,7 @@
         },
         "aksClusterResourceId": {
           "$ref": "#/definitions/AksClusterResourceId",
-          "description": "The ARM resource ID of the backing AKS managed cluster. Set at create time and immutable thereafter.",
+          "description": "The Azure resource ID of the backing AKS managed cluster. Set at create time and immutable thereafter.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5310,7 +5322,7 @@
         },
         "managedIdentityResourceId": {
           "$ref": "#/definitions/ManagedIdentityResourceId",
-          "description": "The ARM resource ID of the user-assigned managed identity used by the node pool. Set at create time and immutable thereafter.",
+          "description": "The Azure resource ID of the user-assigned managed identity used by the node pool. Set at create time and immutable thereafter.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5318,7 +5330,7 @@
         },
         "aiAgentGroupResourceId": {
           "$ref": "#/definitions/AiAgentGroupResourceId",
-          "description": "The ARM resource ID of the AI agents group associated with the node pool. Set at create time and immutable thereafter.",
+          "description": "The Azure resource ID of the AI agents group associated with the node pool. Set at create time and immutable thereafter.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5326,7 +5338,7 @@
         },
         "subnetResourceId": {
           "$ref": "#/definitions/SubnetResourceId",
-          "description": "The ARM resource ID of the subnet used by container groups in the node pool.",
+          "description": "The Azure resource ID of the subnet used by container groups in the node pool.",
           "readOnly": true
         },
         "minNodes": {

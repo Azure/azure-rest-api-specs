@@ -63,6 +63,14 @@ scalar AiAgentGroupResourceId
   ]>;
 
 @added(Versions.v2026_09_01_preview)
+scalar ContainerGroupResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerInstance/containerGroups",
+    }
+  ]>;
+
+@added(Versions.v2026_09_01_preview)
 scalar SubnetResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -82,25 +90,25 @@ model ManagedVirtualNodePoolProperties {
   provisioningState?: ManagedVirtualNodePoolProvisioningState;
 
   /**
-   * The ARM resource ID of the backing AKS managed cluster. Set at create time and immutable thereafter.
+   * The Azure resource ID of the backing AKS managed cluster. Set at create time and immutable thereafter.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   aksClusterResourceId: AksClusterResourceId;
 
   /**
-   * The ARM resource ID of the user-assigned managed identity used by the node pool. Set at create time and immutable thereafter.
+   * The Azure resource ID of the user-assigned managed identity used by the node pool. Set at create time and immutable thereafter.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   managedIdentityResourceId: ManagedIdentityResourceId;
 
   /**
-   * The ARM resource ID of the AI agents group associated with the node pool. Set at create time and immutable thereafter.
+   * The Azure resource ID of the AI agents group associated with the node pool. Set at create time and immutable thereafter.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   aiAgentGroupResourceId: AiAgentGroupResourceId;
 
   /**
-   * The ARM resource ID of the subnet used by container groups in the node pool.
+   * The Azure resource ID of the subnet used by container groups in the node pool.
    */
   @visibility(Lifecycle.Read)
   subnetResourceId?: SubnetResourceId;
@@ -143,10 +151,10 @@ model ManagedVirtualNodePoolProperties {
 @added(Versions.v2026_09_01_preview)
 model ManagedVirtualNodePoolContainerGroup {
   /**
-   * The ARM resource ID of the container group.
+   * The Azure resource ID of the container group.
    */
   @visibility(Lifecycle.Read)
-  resourceId?: string;
+  resourceId?: ContainerGroupResourceId;
 
   /**
    * The type of the container group.
