@@ -169,7 +169,7 @@ model TargetProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
   @doc("target spec")
   @madeOptional(Versions.v2026_05_01_preview)
-  targetSpecification: Record<unknown>;
+  targetSpecification?: Record<unknown>;
 
   @doc("List of capabilities")
   capabilities: string[];
