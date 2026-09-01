@@ -88,7 +88,7 @@ interface BastionHosts {
   /**
    * Updates Tags or identity for BastionHost resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This is a copy of the updateTags patch operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This is an existing api (updateTags) and the new operation reflects a change in the request body"
   @added(Versions.v2026_01_01)
   @sharedRoute
   @patch(#{ implicitOptionality: false })
