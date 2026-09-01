@@ -32,13 +32,19 @@ model SolutionVersionProperties {
   @visibility(Lifecycle.Read)
   targetDisplayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Suppress no-unnamed-union since property represents a flexible configuration value"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | Record<unknown> is required to support both legacy string-encoded JSON and structured object payloads during client migration from prior API versions"
   @doc("Resolved configuration values")
   @visibility(Lifecycle.Read)
-  configuration?: string;
+  @typeChangedFrom(Versions.v2026_05_01_preview, string)
+  configuration?: string | Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Suppress no-unnamed-union since property represents a flexible configuration value"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | Record<unknown> is required to support both legacy string-encoded JSON and structured object payloads during client migration from prior API versions"
   @doc("Configuration on the line level across all solution template versions")
   @visibility(Lifecycle.Read)
-  targetLevelConfiguration?: string;
+  @typeChangedFrom(Versions.v2026_05_01_preview, string)
+  targetLevelConfiguration?: string | Record<unknown>;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
