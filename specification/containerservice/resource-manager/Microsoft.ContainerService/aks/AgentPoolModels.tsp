@@ -1101,6 +1101,13 @@ model NvidiaGPUProfile {
    * Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None.
    */
   migStrategy?: MigStrategy;
+
+  /**
+   * The ordered list of MIG (Multi-Instance GPU) partition profiles to assign to each supported NVIDIA GPU. When `migStrategy` is `Single`, exactly one profile must be specified. When `migStrategy` is `Mixed`, one or more profiles may be specified and the combination is validated against the supported MIG geometry for the agent pool's GPU VM size. The same value may appear more than once to request multiple partitions of that size. This field is mutually exclusive with the top-level `gpuInstanceProfile` property. For more information, see https://aka.ms/aks/managed-gpu.
+   */
+  @added(Versions.v2026_07_02_preview)
+  @minItems(1)
+  migProfiles?: GPUInstanceProfile[];
 }
 
 /**
