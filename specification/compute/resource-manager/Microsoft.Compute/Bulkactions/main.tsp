@@ -7,6 +7,7 @@ import "./routes.tsp";
 import "./vmAttributes.tsp";
 import "./launchBulkInstancesOperation.tsp";
 import "./bulkCreateCustom.tsp";
+import "./bulkCreate.tsp";
 import "./recurringScheduledActions.tsp";
 import "./client.tsp";
 
