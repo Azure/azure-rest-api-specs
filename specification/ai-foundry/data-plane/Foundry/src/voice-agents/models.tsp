@@ -114,7 +114,7 @@ model VoiceResponseAudio {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponse extends OmitProperties<
   OpenAI.RealtimeResponse,
-  "audio" | "output" | "metadata"
+  "audio" | "output" | "metadata" | "id" | "conversation_id"
 > {
   @doc("The unique id of the response.")
   id: string;
