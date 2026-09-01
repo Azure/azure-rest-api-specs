@@ -100,10 +100,28 @@ interface BlockBlobClient extends Storage.Blob.BlockBlob {}
 )
 interface PageBlobClient extends Storage.Blob.PageBlob {}
 
+/** Rust session token authentication options. */
+model RustSessionOptions {}
+
+@@alternateType(
+  RustSessionOptions,
+  {
+    identity: "crate::SessionOptions",
+  },
+  "rust"
+);
+
+/** Rust-specific options used to initialize a blob service client. */
+model RustBlobServiceClientOptions {
+  /** Options for session token authentication. */
+  sessionOptions?: RustSessionOptions;
+}
+
 @@clientInitialization(
   BlobServiceClient,
   {
     initializedBy: InitializedBy.customizeCode,
+    parameters: RustBlobServiceClientOptions,
   },
   "rust"
 );
