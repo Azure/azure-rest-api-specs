@@ -6,7 +6,67 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.ContainerService;
 
+// Fix .NET code generation naming conflict: BootstrapAzureConfig has both an internal
+// BootstrapTokenInfo property and a flattened public string property that both resolve
+// to "BootstrapToken". Renaming the backing property avoids the CS0102 duplicate error.
+@@clientName(
+  BootstrapAzureConfig.bootstrapToken,
+  "BootstrapTokenDetail",
+  "csharp"
+);
+
+// .NET SDK naming: "Request" suffix is reserved for HTTP pipeline types; add the
+// AgentPool owner prefix so the request pairs symmetrically with its response
+// (PoolBootstrapData -> AgentPoolBootstrapInfo).
+@@clientName(
+  ListBootstrapDataRequest,
+  "AgentPoolBootstrapDataContent",
+  "csharp"
+);
+
+// .NET SDK naming: "Data" suffix is reserved for ResourceData/TrackedResourceData types.
+@@clientName(PoolBootstrapData, "AgentPoolBootstrapInfo", "csharp");
+
+// .NET SDK naming: add RP/service context prefix for IntelliSense clarity.
+// AllowedSubject belongs to IdentityBinding (referenced only by
+// IdentityBindingProperties.allowedSubjects), so it takes the IdentityBinding
+// client-name prefix to match ManagedClusterIdentityBindingProperties.
+@@clientName(
+  AllowedSubject,
+  "ManagedClusterIdentityBindingAllowedSubject",
+  "csharp"
+);
+@@clientName(
+  AlertConfiguration,
+  "ContainerServiceAlertConfiguration",
+  "csharp"
+);
+@@clientName(
+  AlertConfigurationMode,
+  "ContainerServiceAlertConfigurationMode",
+  "csharp"
+);
+@@clientName(
+  AlertConfigurationProperties,
+  "ContainerServiceAlertConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  AlertConfigurationProvisioningState,
+  "ContainerServiceAlertConfigurationProvisioningState",
+  "csharp"
+);
+@@clientName(AlertNotification, "ContainerServiceAlertNotification", "csharp");
+
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
+
+// .NET SDK acronym casing.
+@@clientName(
+  ManagedClusterNATGatewaySku,
+  "ManagedClusterNatGatewaySku",
+  "csharp"
+);
+@@clientName(DRANETMode, "DranetMode", "csharp");
 
 // Java specific renaming for backward compatibility
 @@clientName(
@@ -93,6 +153,11 @@ using Microsoft.ContainerService;
 @@clientName(Microsoft.ContainerService, "ContainerServiceClient", "python");
 @@clientName(
   ManagedClusterLoadBalancerProfileManagedOutboundIPs.countIPv6,
+  "count_ipv6",
+  "python"
+);
+@@clientName(
+  ManagedClusterManagedOutboundIPProfile.countIPv6,
   "count_ipv6",
   "python"
 );
@@ -512,7 +577,6 @@ using Microsoft.ContainerService;
 );
 @@clientName(OutboundType, "ContainerServiceOutboundType", "csharp");
 @@clientName(OutboundType.managedNATGateway, "ManagedNatGateway", "csharp");
-@@clientName(OutboundType.managedNATGatewayV2, "ManagedNatGatewayV2", "csharp");
 @@clientName(
   OutboundType.userAssignedNATGateway,
   "UserAssignedNatGateway",
@@ -1095,11 +1159,6 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "csharp"
 );
 @@clientName(
-  ManagedClusterAzureMonitorProfileContainerInsights.disableCustomMetrics,
-  "IsCustomMetricsDisabled",
-  "csharp"
-);
-@@clientName(
   ManagedClusterAzureMonitorProfileContainerInsights.disablePrometheusMetricsScraping,
   "IsPrometheusMetricsScrapingDisabled",
   "csharp"
@@ -1324,6 +1383,7 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@scope(ManagedClusters.operationStatusResultList, "!csharp");
 @@scope(ManagedClusters.operationStatusResultGet, "!csharp");
 @@scope(AgentPools.getByAgentPool, "!csharp");
+@@scope(AgentPools.listByAgentPool, "!csharp");
 @@scope(Operations.list, "!csharp");
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator

@@ -565,9 +565,9 @@ namespace Azure.ResourceManager.Models {
 @@clientName(DiskType.Standard_LRS, "StandardLrs", "csharp");
 @@clientName(DiskType.StandardSSD_LRS, "StandardSsdLrs", "csharp");
 @@clientName(DiskType.Premium_LRS, "PremiumLrs", "csharp");
-@@clientName(DiskType.StandardSSD_ZRS, "PremiumV2Lrs", "csharp");
+@@clientName(DiskType.PremiumV2_LRS, "PremiumV2Lrs", "csharp");
 @@clientName(DiskType.StandardSSD_ZRS, "StandardSsdZrs", "csharp");
-@@clientName(DiskType.StandardSSD_ZRS, "PremiumZrs", "csharp");
+@@clientName(DiskType.Premium_ZRS, "PremiumZrs", "csharp");
 
 @@clientName(
   SecurityEncryptionType,
@@ -692,6 +692,11 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(
+  ProxyAgentSettings.addProxyAgentExtension,
+  "ShouldAddProxyAgentExtension",
+  "csharp"
+);
+@@clientName(
   ManagedMaintenanceWindowStatus.get,
   "GetManagedMaintenanceWindowStatus",
   "csharp"
@@ -724,8 +729,18 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(
-  ManagedApplyMaintenanceWindow.post,
+  ManagedApplyMaintenanceWindow.postNoBody,
   "PostManagedApplyMaintenanceWindow",
+  "csharp"
+);
+@@clientName(
+  ManagedApplyMaintenanceWindow.post,
+  "PostManagedApplyMaintenanceWindowWithContent",
+  "csharp"
+);
+@@clientName(
+  ApplyMaintenanceWindowRequest,
+  "ApplyMaintenanceWindowContent",
   "csharp"
 );
 @@clientName(Applications.fetchHealth::parameters.body, "content", "csharp");

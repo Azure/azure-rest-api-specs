@@ -468,6 +468,7 @@ model SignedIdentifier {
 }
 
 /** The result of the Find Blobs by Tags API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model FilteredBlobResponse {
   /** The service endpoint. */
@@ -582,6 +583,7 @@ enum SkuName {
 }
 
 /** The result of the List Containers API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListContainersResponse {
   /** The service endpoint. */
@@ -1291,6 +1293,7 @@ model RetentionPolicy {
 // List Blobs
 
 /** The result of the List Blobs API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListBlobsResponse {
   /** The service endpoint. */
@@ -1375,6 +1378,7 @@ enum QueryRequestType {
 }
 
 /** Groups the set of query request settings. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model QueryRequest {
   /** Required. The type of the provided query expression. */
   @Xml.name("QueryType") queryType: QueryRequestType;
@@ -1636,6 +1640,25 @@ alias LastAccessedResponseHeader = {
   lastAccessed?: utcDateTime;
 };
 
+/** The access tier change time response header */
+alias AccessTierChangeTimeResponseHeader = {
+  /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-access-tier-change-time")
+  accessTierChangeTime?: utcDateTime;
+};
+
+/** The access tier change time response header */
+alias AccessTierChangeTimeResponseHeaderV2026_10_06 = {
+  /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @added(Versions.v2026_10_06)
+  @encode("rfc7231")
+  @header("x-ms-access-tier-change-time")
+  accessTierChangeTime?: utcDateTime;
+};
+
 /** The is sealed response header. */
 alias IsSealedResponseHeader = {
   /** Whether the blob is sealed. */
@@ -1794,6 +1817,7 @@ alias SourceRangeParameterRequired = {
 /** The source URL parameter. */
 alias SourceUrlParameter = {
   /** Specifies the URL of the source. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @header("x-ms-copy-source")
   sourceUrl: string;
 };
@@ -1823,6 +1847,14 @@ alias SkuNameResponseHeader = {
 /** The content CRC64 response header. */
 alias ContentCrc64ResponseHeader = {
   /** The CRC64 hash of the content. */
+  @header("x-ms-content-crc64")
+  contentCrc64?: bytes;
+};
+
+/** The content CRC64 response header. */
+alias ContentCrc64ResponseHeaderV2026_10_06 = {
+  /** The CRC64 hash of the content. */
+  @added(Versions.v2026_10_06)
   @header("x-ms-content-crc64")
   contentCrc64?: bytes;
 };
@@ -2541,6 +2573,7 @@ model BlobHierarchyList {
 }
 
 /** The result of the List Blobs Hierarchical API. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @Xml.name("EnumerationResults")
 model ListBlobsHierarchicalResponse {
   /** The service endpoint. */
@@ -2857,4 +2890,11 @@ alias ListBlobsStartFrom = {
   @added(Versions.v2026_02_06)
   @query
   startFrom?: string;
+};
+
+alias ListBlobsEndBefore = {
+  /** Filters the results to return only names that are ordered before this value. Currently only applies to Apache Arrow scenario. */
+  @added(Versions.v2026_12_06)
+  @query
+  endBefore?: string;
 };

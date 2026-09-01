@@ -10,6 +10,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -37,8 +38,6 @@ options:
     generate-tests: false
     generate-samples: false
     include-api-view-properties: false
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/keyvault-keys"
     experimental-extensible-enums: true
