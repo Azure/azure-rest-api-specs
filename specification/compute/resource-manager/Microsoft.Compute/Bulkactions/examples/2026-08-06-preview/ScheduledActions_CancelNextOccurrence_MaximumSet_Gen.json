@@ -1,5 +1,5 @@
 {
-  "title": "ScheduledActions_CancelNextOccurrence_MaximumSet",
+  "title": "Cancel the next scheduled action occurrence",
   "operationId": "ScheduledActions_CancelNextOccurrence",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -8,7 +8,8 @@
     "scheduledActionName": "myScheduledAction",
     "body": {
       "resourceIds": [
-        "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm"
+        "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+        "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2"
       ]
     }
   },
@@ -22,11 +23,15 @@
     },
     "200": {
       "body": {
-        "totalResources": 11,
+        "totalResources": 2,
         "resourcesStatuses": [
           {
-            "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
-            "status": "Succeeded",
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2",
+            "status": "Failed",
             "error": {
               "code": "InternalServerError",
               "message": "An internal error occurred.",
