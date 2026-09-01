@@ -110,6 +110,7 @@ model DbSystemBaseProperties {
   @minValue(2)
   dataStorageSizeInGbs?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The DB system options.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   dbSystemOptions?: DbSystemOptions;
@@ -216,6 +217,25 @@ model DbSystemBaseProperties {
   @doc("The number of compute servers for the DB system.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   computeCount?: int32;
+
+  @added(Versions.v20251101_preview)
+  @doc("Indicates user preferences for the various diagnostic collection options for the Base DB.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  dataCollectionOptions?: DataCollectionOptions;
+
+  @added(Versions.v20251115_preview)
+  @doc("The character set for the DB system. The default is AL32UTF8")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @minLength(1)
+  @maxLength(255)
+  characterSet?: string;
+
+  @added(Versions.v20251115_preview)
+  @doc("The national character set for the DB system. The default is AL16UTF16")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @minLength(1)
+  @maxLength(255)
+  ncharacterSet?: string;
 }
 
 @added(Versions.v20250701_preview)
@@ -308,6 +328,7 @@ union DbSystemSourceType {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v20250701_preview)
 @doc("DbSystemOptions resource properties.")
 model DbSystemOptions {

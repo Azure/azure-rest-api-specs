@@ -45,7 +45,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storage"
     emitter-output-dir: "{output-dir}/{service-dir}/armstorage"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstorage/v4"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstorage"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
@@ -55,7 +55,12 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Storage"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2025-08-01"
     enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.Storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2025-06-01"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
