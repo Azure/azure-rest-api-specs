@@ -374,14 +374,16 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
     for (const config of langConfigs) {
       const apiVersion = config.apiVersion;
       const sdkType = config.sdkType;
+      const packageName = config.packageName;
 
-      if (!apiVersion || !sdkType) {
+      if (!apiVersion || !sdkType || !packageName) {
         console.warn(
-          `Skipping language config with missing apiVersion or sdkType: ${JSON.stringify(config)}`,
+          `Skipping language config with missing apiVersion, sdkType, or packageName: ${JSON.stringify(config)}`,
         );
         continue;
       }
 
+      console.log(`language config: ${JSON.stringify(config)}`);
       if (!versionAndTypeMap.has(apiVersion)) {
         versionAndTypeMap.set(apiVersion, new Set());
       }
