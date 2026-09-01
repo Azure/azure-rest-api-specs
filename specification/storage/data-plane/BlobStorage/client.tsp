@@ -1312,7 +1312,6 @@ scalar HttpRange extends string;
 @@clientName(ImmutabilityPolicyMode, "BlobImmutabilityPolicyMode", "java");
 @@clientName(SignedIdentifiers, "BlobSignedIdentifiers", "java");
 @@clientName(LeaseDuration, "LeaseDurationType", "java");
-@@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "java");
 @@clientName(Blob.setProperties, "SetHttpHeaders", "java");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "java");
 @@clientName(Container.findBlobsByTags, "FilterBlobs", "java");
@@ -1326,9 +1325,33 @@ scalar HttpRange extends string;
 @@clientName(ContainerProperties, "ContainerPropertiesInternal", "java");
 @@clientName(JsonTextConfiguration, "JsonTextConfigurationInternal", "java");
 @@clientName(StorageServiceStats, "BlobServiceStatistics", "java");
-@@clientName(AccessPolicy.start, "PolicyStartsOn", "java");
-@@clientName(AccessPolicy.expiry, "PolicyExpiresOn", "java");
+@@clientName(AccessPolicy.start, "StartsOn", "java");
+@@clientName(AccessPolicy.expiry, "ExpiresOn", "java");
 @@clientName(AccessPolicy.permission, "Permissions", "java");
+
+// AccessPolicy.start/expiry use @encode("rfc3339-fixed-width"), which typespec-java does not recognise and so
+// falls back to String. go and csharp override the same two properties for the same reason; without this java
+// generates getStartsOn(): String instead of the shipped OffsetDateTime.
+@@alternateType(AccessPolicy.start, utcDateTime, "java");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "java");
+
+// UserDelegationKey/Block/BlockLookupList expose base64Bytes properties that the shipped java API surfaces as
+// String (the caller supplies an already-base64-encoded block id). go and python carry the same overrides.
+@@alternateType(UserDelegationKey.value, string, "java");
+@@alternateType(Block.name, string, "java");
+@@alternateType(BlockLookupList.committed, string, "java");
+@@alternateType(BlockLookupList.uncommitted, string, "java");
+@@alternateType(BlockLookupList.latest, string, "java");
+@@alternateType(BlockIdParameter.blockid, string, "java");
+
+// The shipped java accessors spell these out; the spec's abbreviated property names would rename the public API.
+@@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
+@@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
+@@clientName(UserDelegationKey.signedDelegatedUserTid, "signedDelegatedUserTenantId", "java");
+
+// The shipped java constant is UNCOMMITTEDBLOBS (no underscore); the emitter would otherwise derive
+// UNCOMMITTED_BLOBS from the spec member name, renaming a public constant.
+@@clientName(ListBlobsIncludeItem.UncommittedBlobs, "uncommittedblobs", "java");
 @@clientName(Metrics.includeApis, "IncludeApis", "java");
 @@clientName(BlobType.BlockBlob, "Block", "java");
 @@clientName(BlobType.PageBlob, "Page", "java");
@@ -1342,6 +1365,29 @@ scalar HttpRange extends string;
 @@clientName(SkuName.PremiumZRS, "PremiumZrs", "java");
 @@clientName(SkuName.StandardRAGZRS, "StandardRagzrs", "java");
 @@clientName(BlobDeleteTypeCustom, "BlobDeleteType", "java");
+
+// Models whose spec-native names would otherwise generate internal duplicates alongside the shipped public
+// types listed in custom-types. Without these the generated models reference the duplicate (e.g.
+// BlobServiceProperties.getLogging() returns implementation.models.Logging instead of the shipped
+// BlobAnalyticsLogging), which is a breaking public API change.
+@@clientName(AccessPolicy, "BlobAccessPolicy", "java");
+@@clientName(SignedIdentifier, "BlobSignedIdentifier", "java");
+@@clientName(CorsRule, "BlobCorsRule", "java");
+@@clientName(Logging, "BlobAnalyticsLogging", "java");
+@@clientName(Metrics, "BlobMetrics", "java");
+@@clientName(RetentionPolicy, "BlobRetentionPolicy", "java");
+@@clientName(LeaseStatus, "LeaseStatusType", "java");
+@@clientName(LeaseState, "LeaseStateType", "java");
+@@clientName(CopyStatus, "CopyStatusType", "java");
+@@clientName(ListContainersIncludeType, "ListBlobContainersIncludeType", "java");
+@@clientName(ParquetConfiguration, "ParquetTextConfiguration", "java");
+@@clientName(BlobHierarchyList, "BlobHierarchyListSegment", "java");
+
+// go and csharp both flatten these XML metadata bags to a plain string map; java was missing the same
+// alternateType, so the emitter generated BlobMetadata/ObjectReplicationMetadata wrapper classes where the
+// shipped models expose Map<String, String>.
+@@alternateType(BlobItem.metadata, Record<string>, "java");
+@@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "java");
 @@access(BlobProperties, Access.internal, "java");
 @@access(BlobItem, Access.internal, "java");
 @@access(ArrowField, Access.internal, "java");
