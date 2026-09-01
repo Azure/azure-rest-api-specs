@@ -1,0 +1,26 @@
+{
+  "swagger": "2.0",
+  "info": {"title": "GraphEnum API", "version": "2024-01-01", "description": "Azure Graph Enum"},
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/providers/Microsoft.GraphEnum/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "List operations",
+        "parameters": [{"$ref": "#/parameters/ApiVersionParameter"}],
+        "responses": {"200": {"description": "OK"}}
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string"
+    }
+  }
+}
