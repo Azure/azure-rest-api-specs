@@ -61,7 +61,7 @@ interface RedisCacheAccessPolicyAssignments {
   >;
 }
 
-@@maxLength(RedisCacheAccessPolicyAssignment.name, 63);
+@@maxLength(RedisCacheAccessPolicyAssignment.name, 256);
 @@minLength(RedisCacheAccessPolicyAssignment.name, 3);
 @@doc(
   RedisCacheAccessPolicyAssignment.name,
