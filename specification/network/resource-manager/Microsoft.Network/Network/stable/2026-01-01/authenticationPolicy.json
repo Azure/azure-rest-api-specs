@@ -252,61 +252,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "AuthenticationPolicies_UpdateTags",
-        "tags": [
-          "AuthenticationPolicies"
-        ],
-        "description": "Updates an authentication policy's tags.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "authenticationPolicyName",
-            "in": "path",
-            "description": "The name of the authentication policy.",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "^[A-Za-z0-9_-]{1,80}$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters supplied to update authentication policy tags.",
-            "required": true,
-            "schema": {
-              "$ref": "./common.json#/definitions/TagsObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AuthenticationPolicy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Updates authentication policy tags": {
-            "$ref": "./examples/AuthenticationPolicyUpdateTags.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "AuthenticationPolicies_Delete",
         "tags": [

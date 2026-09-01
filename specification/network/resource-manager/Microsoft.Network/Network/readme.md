@@ -320,20 +320,12 @@ suppressions:
   - code: RequiredReadOnlySystemData
     from: authenticationPolicy.json
     reason: Network RP resources in this package intentionally use the legacy shared Resource envelope, which does not expose systemData.
+  - code: TrackedResourcePatchOperation
+    from: authenticationPolicy.json
+    reason: AuthenticationPolicy intentionally does not expose a PATCH operation because the service supports only GET, PUT, and DELETE for this resource.
   - code: XMSSecretInResponse
     from: authenticationPolicy.json
     reason: clientSecret holds a Key Vault secret URL reference (e.g. https://myvault.vault.azure.net/secrets/mysecret), not the secret value itself, so it is safe to return in responses and is not marked x-ms-secret.
-  - code: PatchIdentityProperty
-    from: authenticationPolicy.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].patch
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].patch.parameters[4]
-    reason: >-
-      AuthenticationPolicies_UpdateTags is a tags-only PATCH that takes the shared Network RP
-      TagsObject body, the established pattern across this RP (for example
-      ApplicationGateways_UpdateTags, which has the same identity envelope property). The service
-      only updates tags on this operation, so adding identity to the request body would advertise a
-      capability the service does not implement. Identity is set through PUT.
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"

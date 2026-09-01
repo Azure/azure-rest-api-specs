@@ -180,18 +180,6 @@ interface AuthenticationPolicies {
   >;
 
   /**
-   * Updates an authentication policy's tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "AuthenticationPolicy supports a tags-only PATCH through the generic Network RP controller."
-  @tag("AuthenticationPolicies")
-  @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
-    AuthenticationPolicy,
-    PatchModel = TagsObject,
-    Error = CloudError
-  >;
-
-  /**
    * Deletes the specified authentication policy.
    */
   @tag("AuthenticationPolicies")
@@ -222,12 +210,4 @@ interface AuthenticationPolicies {
 @@doc(
   AuthenticationPolicies.createOrUpdate::parameters.resource,
   "Authentication policy to be created or updated."
-);
-@@doc(
-  AuthenticationPolicies.updateTags::parameters.properties,
-  "Parameters supplied to update authentication policy tags."
-);
-@@clientName(
-  AuthenticationPolicies.updateTags::parameters.properties,
-  "parameters"
 );
