@@ -4040,34 +4040,10 @@ model physicalPartitionStorageInfo {
 }
 
 /**
- * Properties to retrieve throughput for Azure Cosmos DB resource.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
-model RetrieveThroughputProperties {}
-
-/**
- * Resource to retrieve throughput information for Cosmos DB resource
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
-model RetrieveThroughputPropertiesResource {}
-
-/**
  * PhysicalPartitionId object
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This model remains for the existing C# client customization while its preview-only identifier is intentionally absent from stable 2026-07-15."
 model PhysicalPartitionId {}
-
-/**
- * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
-model PhysicalPartitionThroughputInfoResultProperties {}
-
-/**
- * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoProperties object
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
-model PhysicalPartitionThroughputInfoProperties {}
 
 /**
  * PhysicalPartitionThroughputInfo object
@@ -4083,12 +4059,6 @@ model PhysicalPartitionThroughputInfoResource {
    */
   targetThroughput?: float64;
 }
-
-/**
- * Properties to redistribute throughput for Azure Cosmos DB resource.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Stable 2026-07-15 retains this legacy client shape while remaining horizontally equivalent to stable 2026-03-15."
-model RedistributeThroughputProperties {}
 
 /**
  * Resource to redistribute throughput for Azure Cosmos DB resource
