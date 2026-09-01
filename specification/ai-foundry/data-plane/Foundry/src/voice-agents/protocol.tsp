@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
@@ -18,20 +19,42 @@ alias VoiceAgentServerEventUsage = Usage.output | Usage.json;
 alias VoiceAgentWebSocketMessageUsage = Usage.input | Usage.output | Usage.json;
 
 union VoiceAgentClientEventTypeExtension {
+  @removed(Versions.v1)
   session_avatar_connect: "session.avatar.connect",
 }
 
 union VoiceAgentServerEventTypeExtension {
+  @removed(Versions.v1)
   warning: "warning",
+
+  @removed(Versions.v1)
   session_avatar_connecting: "session.avatar.connecting",
+
+  @removed(Versions.v1)
   session_avatar_switch_to_speaking: "session.avatar.switch_to_speaking",
+
+  @removed(Versions.v1)
   session_avatar_switch_to_idle: "session.avatar.switch_to_idle",
+
+  @removed(Versions.v1)
   response_audio_timestamp_delta: "response.audio_timestamp.delta",
+
+  @removed(Versions.v1)
   response_audio_timestamp_done: "response.audio_timestamp.done",
+
+  @removed(Versions.v1)
   response_animation_blendshapes_delta: "response.animation_blendshapes.delta",
+
+  @removed(Versions.v1)
   response_animation_blendshapes_done: "response.animation_blendshapes.done",
+
+  @removed(Versions.v1)
   response_animation_viseme_delta: "response.animation_viseme.delta",
+
+  @removed(Versions.v1)
   response_animation_viseme_done: "response.animation_viseme.done",
+
+  @removed(Versions.v1)
   response_video_delta: "response.video.delta",
 }
 
