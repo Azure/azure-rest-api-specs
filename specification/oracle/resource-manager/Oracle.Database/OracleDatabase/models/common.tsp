@@ -44,6 +44,10 @@ union WorkloadType {
   @doc("APEX - indicates an Autonomous Database with the Oracle APEX Application Development workload type.")
   APEX: "APEX",
 
+  @added(Versions.v20251115_preview)
+  @doc("LH - indicates an Oracle Autonomous AI Lakehouse database")
+  LH: "LH",
+
   string,
 }
 
@@ -141,6 +145,7 @@ union ValidationStatus {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("DataCollectionOptions resource properties")
 model DataCollectionOptions {
   @doc("Indicates whether diagnostic collection is enabled for the VM cluster/Cloud VM cluster/VMBM DBCS.")
@@ -288,6 +293,10 @@ union SystemShapes {
   @doc("Exadata X11M shape")
   ExadataX11M: "Exadata.X11M",
 
+  @added(Versions.v20260501_preview)
+  @doc("Exadata X11M shape")
+  ExadataX11MV: "Exadata.X11MV",
+
   @doc("Exadata DB on Exascale Infrastructure shape")
   ExaDbXs: "ExaDbXS",
 
@@ -299,6 +308,10 @@ union SystemShapes {
 union BaseDbSystemShapes {
   @doc("Vm Standard X86")
   VMStandardX86: "VM.Standard.x86",
+
+  @added(Versions.v20260501_preview)
+  @doc("Vm Standard X86")
+  VMBaseDBX86: "VM.BaseDB.x86",
 
   string,
 }
