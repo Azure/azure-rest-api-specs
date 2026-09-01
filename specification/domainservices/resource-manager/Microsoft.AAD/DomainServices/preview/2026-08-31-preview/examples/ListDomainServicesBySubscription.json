@@ -1,7 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "resourceGroupName": "TestResourceGroup",
+    "api-version": "2026-08-31-preview",
     "subscriptionId": "1639790a-76a2-4ac4-98d9-8562f5dfcb4d"
   },
   "responses": {
@@ -22,7 +21,12 @@
                 "syncOnPremSamAccountName": "Enabled",
                 "tlsV1": "Disabled"
               },
+              "entitlementSourceMode": "CurrentThirdParty",
               "filteredSync": "Enabled",
+              "initialFilteredSyncGroupIds": [
+                "c2d4b743-7a4c-4f7a-95d6-5a6f6d72657c",
+                "f95a5bbc-8c42-4a41-a57c-3a24c7f55d2f"
+              ],
               "ldapsSettings": {
                 "certificateNotAfter": "2018-02-15T21:43:21Z",
                 "certificateThumbprint": "9154A390F0C387D679E0DD040701745CDFED67F3",
@@ -57,7 +61,7 @@
                       "severity": "2"
                     }
                   ],
-                  "healthLastEvaluated": "15 Feb 2018 21:43:04 GMT",
+                  "healthLastEvaluated": "15 Feb 2018 21:37:04 GMT",
                   "healthMonitors": [
                     {
                       "name": "Backup",
@@ -77,6 +81,8 @@
                   "vnetSiteId": "99083198-a39c-469f-972d-59017e7f078c"
                 }
               ],
+              "syncApplicationId": "2d84ca22-2fff-43d9-a75c-e2fec01a34c6",
+              "adminGroupObjectId": "11111111-2222-3333-4444-555555555555",
               "syncOwner": "4a619871-0150-41c4-aeb4-0b10deb7940a",
               "tenantId": "3f8cd22c-7b32-48aa-a01c-f533133b1def",
               "version": 2
@@ -86,6 +92,6 @@
       }
     }
   },
-  "operationId": "DomainServices_ListByResourceGroup",
+  "operationId": "DomainServices_List",
   "title": "List Domain Service"
 }
