@@ -3504,13 +3504,6 @@
             "description": "OData filter options.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "skipToken Filter.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -3927,6 +3920,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9]{1,99}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CrossTenantVaultMappingRemoveRequest"
+            }
           }
         ],
         "responses": {
@@ -7240,12 +7242,6 @@
             ]
           }
         },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the cross-tenant vault mapping was created.",
-          "readOnly": true
-        },
         "resourceGuardOperationRequests": {
           "type": "array",
           "description": "ResourceGuardOperationRequests on which the MUA (LAC) check will be performed.",
@@ -7267,6 +7263,29 @@
       "required": [
         "sourceVaultId"
       ]
+    },
+    "CrossTenantVaultMappingRemoveRequest": {
+      "type": "object",
+      "description": "Request body for the remove cross-tenant vault mapping action. Carries the Resource Guard\noperation requests used for the MUA (multi-user authorization) check on the remove.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CrossTenantVaultMappingRemoveRequestProperties",
+          "description": "Properties of the remove cross-tenant vault mapping request."
+        }
+      }
+    },
+    "CrossTenantVaultMappingRemoveRequestProperties": {
+      "type": "object",
+      "description": "Properties of the remove cross-tenant vault mapping request.",
+      "properties": {
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "description": "ResourceGuardOperationRequests on which the MUA (LAC) check will be performed for the remove.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "CrossTenantVaultMappingStatusResponse": {
       "type": "object",

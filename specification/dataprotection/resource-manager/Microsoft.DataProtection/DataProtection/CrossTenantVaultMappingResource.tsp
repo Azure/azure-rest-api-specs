@@ -50,12 +50,6 @@ model CrossTenantVaultMappingProperties {
   ]>;
 
   /**
-   * Timestamp when the cross-tenant vault mapping was created.
-   */
-  @visibility(Lifecycle.Read)
-  createdTime?: utcDateTime;
-
-  /**
    * ResourceGuardOperationRequests on which the MUA (LAC) check will be performed.
    */
   resourceGuardOperationRequests?: string[];
@@ -117,7 +111,30 @@ model CrossTenantVaultMapping
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Cross-tenant vault mappings are removed via the POST 'remove' action (RBAC separation-of-duties + Resource Guard / MUA body semantics), not a DELETE verb."
+/**
+ * Request body for the remove cross-tenant vault mapping action. Carries the Resource Guard
+ * operation requests used for the MUA (multi-user authorization) check on the remove.
+ */
+@added(Versions.v2026_08_31_preview)
+model CrossTenantVaultMappingRemoveRequest {
+  /**
+   * Properties of the remove cross-tenant vault mapping request.
+   */
+  properties?: CrossTenantVaultMappingRemoveRequestProperties;
+}
+
+/**
+ * Properties of the remove cross-tenant vault mapping request.
+ */
+@added(Versions.v2026_08_31_preview)
+model CrossTenantVaultMappingRemoveRequestProperties {
+  /**
+   * ResourceGuardOperationRequests on which the MUA (LAC) check will be performed for the remove.
+   */
+  resourceGuardOperationRequests?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Removal is a Resource Guard / MUA-gated critical operation modeled as a POST 'remove' action (not DELETE): its optional request body carries resourceGuardOperationRequests for multi-user authorization, mirroring other DPP MUA-gated actions and the shipped RSV cross-tenant vault mapping."
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface DppCrossTenantVaultMappings {
@@ -150,9 +167,10 @@ interface DppCrossTenantVaultMappings {
   @action("remove")
   remove is ArmResourceActionSync<
     CrossTenantVaultMapping,
-    void,
+    CrossTenantVaultMappingRemoveRequest,
     ArmNoContentResponse,
-    Error = CloudError
+    Error = CloudError,
+    OptionalRequestBody = true
   >;
 }
 
@@ -344,12 +362,6 @@ interface RecoveryPointsFromDppCrossTenantVault {
        */
       @query("$filter")
       $filter?: string;
-
-      /**
-       * skipToken Filter.
-       */
-      @query("$skipToken")
-      $skipToken?: string;
     },
     Response = ArmResponse<AzureBackupRecoveryPointResourceList>,
     OverrideErrorType = CloudError
@@ -485,7 +497,7 @@ model CrossTenantOperationResultAcceptedResponse {
   /**
    * The URL to poll for the operation result while it is still in progress.
    */
-  @header("Location") location?: string;
+  @header("Location") location: string;
 
   /**
    * The recommended number of seconds to wait before polling again.

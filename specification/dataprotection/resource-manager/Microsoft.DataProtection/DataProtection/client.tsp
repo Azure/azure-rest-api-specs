@@ -1019,3 +1019,10 @@ model BackupFindRestorableTimeRangesResponse
   "CrossTenantOperationResultAcceptedResult",
   "csharp"
 );
+
+// CSharp SDK: cross-tenant restore request models — satisfy csharp-model-suffix (Request -> Content)
+@@clientName(
+  CrossTenantVaultMappingRemoveRequest,
+  "CrossTenantVaultMappingRemoveContent",
+  "csharp"
+);
