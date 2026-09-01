@@ -352,11 +352,17 @@ union EvaluatorDiagnosticChangeType {
 
   @doc("The diagnostic change is a baseline imported from legacy evaluator history.")
   history_imported: "history_imported",
+
+  @doc("An evaluator agreement diagnostic completed successfully.")
+  agreement_completed: "agreement_completed",
+
+  @doc("A rubric version comparison diagnostic completed successfully.")
+  version_comparison_completed: "version_comparison_completed",
 }
 
 @doc("The supported evaluator diagnostic change shapes.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-union EvaluatorDiagnosticChangeKind {
+union EvaluatorDiagnosticType {
   string,
 
   @doc("An evaluator version was created.")
@@ -379,12 +385,24 @@ union EvaluatorDiagnosticChangeKind {
 
   @doc("A prior rubric health snapshot was invalidated.")
   health_invalidated: "health_invalidated",
+
+  @doc("Human and judge agreement was computed.")
+  agreement: "agreement",
+
+  @doc("Two evaluator versions were compared on shared evidence.")
+  rubric_comparison: "rubric_comparison",
 }
 
-@doc("The shared fields for every evaluator diagnostic change.")
+@doc("The shared fields for every completed evaluator diagnostic.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDiagnosticChangeBase {
+  @doc("The stable server-assigned diagnostic identifier.")
+  id: string;
+
+  @doc("The primary or target evaluator version to which the diagnostic applies. A rubric comparison additionally identifies its baseline version.")
+  evaluator_version: string;
+
   @doc("The server-recorded time when the change occurred.")
   occurred_at: utcDateTime;
 
@@ -401,8 +419,11 @@ model EvaluatorDiagnosticChangeBase {
   @pattern("^[0-9a-f]{64}$")
   content_hash: string;
 
+  @doc("The diagnostic job that published this diagnostic. Omitted for service-produced lineage and health diagnostics.")
+  source_job_id?: string;
+
   @doc("The diagnostic change shape.")
-  type: EvaluatorDiagnosticChangeKind;
+  type: EvaluatorDiagnosticType;
 }
 
 @doc("A change to one functional evaluator field.")
@@ -434,22 +455,132 @@ model RubricHealthDelta {
   overall?: float32;
 }
 
+@doc("How an evaluator generation source was used.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorGenerationSourceUseStatus {
+  string,
+
+  @doc("The source was accepted and used.")
+  accepted: "accepted",
+
+  @doc("Only part of the source was used.")
+  partially_used: "partially_used",
+
+  @doc("The source was rejected.")
+  rejected: "rejected",
+}
+
+@doc("A bounded evaluator generation source snapshot.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorGenerationSourceSnapshot {
+  @doc("The stable source identifier within the generation operation.")
+  source_id: string;
+
+  @doc("The source type.")
+  source_type: string;
+
+  @doc("The lowercase 64-character SHA-256 source content hash.")
+  @pattern("^[0-9a-f]{64}$")
+  content_hash: string;
+
+  @doc("The evaluator generation job that resolved the source.")
+  generation_job_id?: string;
+
+  @doc("How the source was used.")
+  status: EvaluatorGenerationSourceUseStatus;
+}
+
+@doc("Whether one rubric dimension is covered by recorded generation sources.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EvaluatorDimensionSourceCoverageStatus {
+  string,
+
+  @doc("The dimension has recorded source coverage.")
+  covered: "covered",
+
+  @doc("The dimension has partial recorded source coverage.")
+  partial: "partial",
+
+  @doc("The service could not resolve the dimension's source coverage.")
+  unresolved: "unresolved",
+
+  @doc("The dimension has no recorded source coverage.")
+  uncovered: "uncovered",
+}
+
+@doc("Recorded source coverage for one rubric dimension.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorDimensionSourceCoverage {
+  @doc("The stable rubric dimension identifier.")
+  dimension_id: string;
+
+  @doc("Stable source identifiers recorded for the dimension.")
+  source_ids: string[];
+
+  @doc("The recorded source-coverage status.")
+  coverage_status: EvaluatorDimensionSourceCoverageStatus;
+
+  @doc("A bounded explanation of the coverage status.")
+  explanation?: string;
+}
+
+@doc("A bounded gap in evaluator source coverage.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorSourceCoverageGap {
+  @doc("The stable gap code.")
+  code: string;
+
+  @doc("The gap severity.")
+  severity: EvaluatorDiagnosticMessageSeverity;
+
+  @doc("The related source identifier, when applicable.")
+  source_id?: string;
+
+  @doc("The related dimension identifier, when applicable.")
+  dimension_id?: string;
+
+  @doc("A bounded explanation.")
+  explanation: string;
+
+  @doc("Bounded remediation action categories.")
+  action_types?: string[];
+}
+
+@doc("Bounded source lineage and coverage recorded by evaluator generation.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model EvaluatorSourceLineageSummary {
+  @doc("Recorded generation source snapshots.")
+  sources: EvaluatorGenerationSourceSnapshot[];
+
+  @doc("Recorded source coverage by rubric dimension.")
+  dimension_coverage: EvaluatorDimensionSourceCoverage[];
+
+  @doc("Recorded source-coverage gaps.")
+  coverage_gaps: EvaluatorSourceCoverageGap[];
+
+  @doc("Bounded limitations of the recorded lineage.")
+  limitations: string[];
+}
+
 @doc("A diagnostic change recording the creation of an evaluator version.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model VersionCreatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
-  type: EvaluatorDiagnosticChangeKind.version_created;
+  type: EvaluatorDiagnosticType.version_created;
 
   @doc("The preceding evaluator version, when one exists.")
   prior_version?: string;
 
   @doc("The evaluator generation job that created the version, when applicable.")
   generation_job_id?: string;
+
+  @doc("Bounded source lineage recorded by evaluator generation, when available.")
+  source_lineage?: EvaluatorSourceLineageSummary;
 }
 
 @doc("A diagnostic change recording the addition of a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DimensionAddedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
-  type: EvaluatorDiagnosticChangeKind.dimension_added;
+  type: EvaluatorDiagnosticType.dimension_added;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
   dimension_id: string;
@@ -464,7 +595,7 @@ model DimensionAddedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
 @doc("A diagnostic change recording an update to a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DimensionUpdatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
-  type: EvaluatorDiagnosticChangeKind.dimension_updated;
+  type: EvaluatorDiagnosticType.dimension_updated;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
   dimension_id: string;
@@ -482,7 +613,7 @@ model DimensionUpdatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
 @doc("A diagnostic change recording the removal of a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DimensionRemovedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
-  type: EvaluatorDiagnosticChangeKind.dimension_removed;
+  type: EvaluatorDiagnosticType.dimension_removed;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
   dimension_id: string;
@@ -497,7 +628,7 @@ model DimensionRemovedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
 @doc("A diagnostic change recording functional evaluator changes outside individual dimensions.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DefinitionUpdatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
-  type: EvaluatorDiagnosticChangeKind.definition_updated;
+  type: EvaluatorDiagnosticType.definition_updated;
 
   @doc("The functional field changes applied.")
   @minItems(1)
@@ -507,7 +638,7 @@ model DefinitionUpdatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
 @doc("A diagnostic change recording a rubric health computation.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model HealthComputedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
-  type: EvaluatorDiagnosticChangeKind.health_computed;
+  type: EvaluatorDiagnosticType.health_computed;
 
   @doc("The computed rubric health snapshot.")
   health: RubricHealth;
@@ -525,65 +656,10 @@ model HealthComputedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
 @doc("A diagnostic change recording that a prior rubric health snapshot no longer applies.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model HealthInvalidatedDiagnosticChange extends EvaluatorDiagnosticChangeBase {
-  type: EvaluatorDiagnosticChangeKind.health_invalidated;
+  type: EvaluatorDiagnosticType.health_invalidated;
 
   @doc("Component-level diagnostic details associated with the invalidation.")
   messages?: EvaluatorDiagnosticMessage[];
-}
-
-@doc("An append-only evaluator version, dimension, definition, or rubric health diagnostic change.")
-@oneOf
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-union EvaluatorDiagnosticChange {
-  @doc("An evaluator version creation change.")
-  version_created: VersionCreatedDiagnosticChange,
-
-  @doc("A rubric dimension addition change.")
-  dimension_added: DimensionAddedDiagnosticChange,
-
-  @doc("A rubric dimension update change.")
-  dimension_updated: DimensionUpdatedDiagnosticChange,
-
-  @doc("A rubric dimension removal change.")
-  dimension_removed: DimensionRemovedDiagnosticChange,
-
-  @doc("A functional evaluator definition update change.")
-  definition_updated: DefinitionUpdatedDiagnosticChange,
-
-  @doc("A rubric health computation change.")
-  health_computed: HealthComputedDiagnosticChange,
-
-  @doc("A rubric health invalidation change.")
-  health_invalidated: HealthInvalidatedDiagnosticChange,
-}
-
-@doc("Evaluator diagnostic changes grouped under one project-local evaluator version.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model EvaluatorVersionDiagnostics {
-  @doc("The project-local evaluator version and page cursor.")
-  evaluator_version: string;
-
-  @doc("The matching diagnostic changes for this evaluator version.")
-  @minItems(1)
-  changes: EvaluatorDiagnosticChange[];
-}
-
-@doc("A page of evaluator diagnostics grouped by evaluator version.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model EvaluatorDiagnosticsPage {
-  @doc("The requested evaluator-version diagnostic groups.")
-  @pageItems
-  data: EvaluatorVersionDiagnostics[];
-
-  @doc("The first evaluator version represented in this page.")
-  first_version?: string | null;
-
-  @doc("The last evaluator version represented in this page.")
-  @continuationToken
-  last_version?: string | null;
-
-  @doc("A value indicating whether additional evaluator-version groups are available.")
-  has_more: boolean;
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
@@ -868,6 +944,10 @@ model EvaluatorVersion {
   @doc("Categories of warnings surfaced on this generated evaluator version. Present only on versions created via an EvaluatorGenerationJob when the paired job produced non-empty warnings. Absent (treat as no warnings) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories. Follow `generation_job_id` to fetch the detailed warning payloads.")
   @visibility(Lifecycle.Read)
   warnings?: GenerationWarningType[];
+
+  @doc("Whether this exact numbered evaluator version is a draft. Draft and released versions are returned by the named versions list. The latest-per-evaluator list excludes drafts and omits evaluator names that have no released version. The service defaults to `false` when omitted.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  draft?: boolean = false;
 
   @doc("The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content projection. Equal values indicate canonical functional-content equality, not semantic equivalence. This value is not an HTTP ETag and does not provide concurrency control.")
   @visibility(Lifecycle.Read)

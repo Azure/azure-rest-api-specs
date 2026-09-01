@@ -71,6 +71,11 @@ using OpenAPI;
     parent: "Evaluations",
     summary: "Evaluator generation jobs",
   },
+  #{
+    name: "EvaluatorDiagnosticJobs",
+    parent: "Evaluations",
+    summary: "Evaluator diagnostic jobs",
+  },
   #{ name: "Evaluations" },
   #{ name: "Evals", parent: "Evaluations" },
   #{ name: "Evaluation Rules", parent: "Evaluations" },

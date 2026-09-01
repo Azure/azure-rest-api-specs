@@ -1,5 +1,6 @@
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
+import "./diagnostic-jobs-models.tsp";
 import "./models.tsp";
 
 namespace Azure.AI.Projects;
@@ -20,82 +21,57 @@ alias ListEvaluatorVersionsParameters = {
   limit?: int32 = 20;
 };
 
-/** Query parameters for listing evaluator diagnostics grouped by evaluator version. */
-alias ListEvaluatorDiagnosticsPageLimitQueryParameter = {
-  ...OmitProperties<PageLimitQueryParameter, "limit">;
+alias ListEvaluatorDiagnosticsParameters = {
+  ...OmitProperties<CommonPageQueryParameters, "order">;
 
-  @doc("The maximum number of evaluator-version groups to return. The value must be between 1 and 100, inclusive. The default is 20.")
-  @query
-  @minValue(1)
-  @maxValue(100)
-  limit?: int32 = 20;
-};
-
-alias ListEvaluatorDiagnosticsPageOrderQueryParameter = {
-  ...OmitProperties<PageOrderQueryParameter, "order">;
-
-  @doc("Sort order for evaluator-version groups and their nested changes. Version groups use evaluator-version ordering; nested changes use `occurred_at` and preserve service write order for ties. The default is `desc`.")
+  @doc("Sort completed diagnostics by `occurred_at`, then diagnostic identifier. The default is `desc`.")
   @query
   order?: PageOrder = "desc";
-};
 
-alias ListEvaluatorDiagnosticsPageAfterQueryParameter = {
-  ...OmitProperties<PageAfterQueryParameter, "after">;
-
-  @doc("An evaluator-version cursor for the next page.")
-  @query
-  @continuationToken
-  after?: string;
-};
-
-alias ListEvaluatorDiagnosticsPageBeforeQueryParameter = {
-  ...OmitProperties<PageBeforeQueryParameter, "before">;
-
-  @doc("An evaluator-version cursor for the previous page.")
-  @query
-  before?: string;
-};
-
-alias ListEvaluatorDiagnosticsParameters = {
-  ...ListEvaluatorDiagnosticsPageLimitQueryParameter;
-  ...ListEvaluatorDiagnosticsPageOrderQueryParameter;
-  ...ListEvaluatorDiagnosticsPageAfterQueryParameter;
-  ...ListEvaluatorDiagnosticsPageBeforeQueryParameter;
-
-  @doc("Inclusive lower bound for the diagnostic change occurrence time.")
+  @doc("Inclusive lower bound for the completed diagnostic occurrence time.")
   @query
   start_time?: utcDateTime;
 
-  @doc("Inclusive upper bound for the diagnostic change occurrence time.")
+  @doc("Inclusive upper bound for the completed diagnostic occurrence time.")
   @query
   end_time?: utcDateTime;
 
-  @doc("Inclusive lower evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.")
+  @doc("Filter by an exact associated evaluator version. A rubric comparison matches when either its baseline or target version equals this value.")
   @query
-  from_version?: string;
+  evaluator_version?: string;
 
-  @doc("Inclusive upper evaluator-version bound. Supply an exact version identifier returned by the evaluator APIs; the service applies evaluator-version ordering rather than lexical ordering.")
-  @query
-  to_version?: string;
-
-  @doc("Filter diagnostic changes for one public rubric dimension identifier. If a caller changes an identifier, query the prior and new identifiers separately because the change is recorded as removal plus addition.")
+  @doc("Filter completed diagnostics for one public rubric dimension identifier.")
   @query
   dimension_id?: string;
 
-  @doc("Filter diagnostic changes that apply to one canonical functional evaluator state.")
+  @doc("Filter diagnostics associated with one lowercase 64-character SHA-256 functional evaluator content hash. A rubric comparison matches either baseline or target.")
   @query
   @pattern("^[0-9a-f]{64}$")
   content_hash?: string;
 
-  @doc("Filter by one or more diagnostic change shapes by repeating the query parameter.")
+  @doc("Filter by one or more completed diagnostic types by repeating the query parameter.")
   @query(#{ explode: true })
-  type?: EvaluatorDiagnosticChangeKind[];
+  type?: EvaluatorDiagnosticType[];
+};
+
+alias ListEvaluatorDiagnosticJobsParameters = {
+  @doc("Filter jobs for one evaluator name.")
+  @query
+  evaluator_name?: string;
+
+  @doc("Filter jobs by lifecycle status.")
+  @query
+  status?: JobStatus;
+
+  @doc("Filter jobs by requested diagnostic type.")
+  @query
+  type?: EvaluatorDiagnosticJobType;
 };
 
 @tag("Evaluators")
 interface Evaluators {
   // GET /evaluators/{name}/versions
-  /** Returns the available versions for the specified evaluator. */
+  /** Returns all available draft and released versions for the specified evaluator. */
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
   @summary("List evaluator versions")
   @Rest.action("versions")
@@ -109,7 +85,7 @@ interface Evaluators {
   >;
 
   // GET /evaluators
-  /** Lists the latest version of each evaluator. */
+  /** Lists the latest released (`draft=false`) version of each evaluator. Evaluator names with only draft versions are omitted. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("List latest evaluator versions")
   @Rest.listsResource(EvaluatorVersion)
@@ -120,16 +96,14 @@ interface Evaluators {
   >;
 
   /**
-   * Returns append-only diagnostic changes for the specified evaluator,
-   * grouped by evaluator version.
+   * Returns completed diagnostics for the specified evaluator.
    *
-   * Time, version, dimension, content-hash, and change-shape filters are intersected.
-   * Time and version bounds are inclusive. Version bounds use evaluator-version
-   * ordering rather than lexical ordering. Filters apply to nested changes, and
-   * version groups with no matching changes are omitted. Repeat `type` to select
-   * multiple diagnostic change shapes.
+   * Time, evaluator-version, dimension, content-hash, and type filters are
+   * intersected. A comparison matches the evaluator-version and content-hash
+   * filters when either its baseline or target association matches. Requested
+   * diagnostics appear only after the source job succeeds.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics are an append-only change collection grouped by evaluator version rather than a standard resource collection."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics are immutable completed resources with custom evaluator-scoped filtering."
   @summary("List evaluator diagnostics")
   @route("/evaluators/{name}/diagnostics")
   @get
@@ -144,7 +118,27 @@ interface Evaluators {
 
       ...ListEvaluatorDiagnosticsParameters;
     },
-    EvaluatorDiagnosticsPage
+    CompletedEvaluatorDiagnosticsPage
+  >;
+
+  /** Returns one completed evaluator diagnostic by its stable identifier. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics use an evaluator-scoped immutable read route."
+  @summary("Get an evaluator diagnostic")
+  @route("/evaluators/{name}/diagnostics/{diagnostic_id}")
+  @get
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  getDiagnostic is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @doc("The evaluator name.")
+      @path
+      name: string;
+
+      @doc("The stable completed diagnostic identifier.")
+      @path
+      diagnostic_id: string;
+    },
+    EvaluatorDiagnostic
   >;
 
   // GET /evaluators/{name}/versions/{version}
@@ -281,6 +275,59 @@ interface Evaluators {
     },
     AssetCredentialResponse
   >;
+}
+
+// ============================================================================
+// Evaluator Diagnostic Jobs
+// ============================================================================
+
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+@tag("EvaluatorDiagnosticJobs")
+interface EvaluatorDiagnosticJobs {
+  /** Creates an evaluator diagnostic job and returns the queued job. */
+  @summary("Create an evaluator diagnostic job")
+  @route("evaluator_diagnostic_jobs")
+  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
+  @pollingOperation(EvaluatorDiagnosticJobs.get)
+  create is postJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorDiagnosticJob
+  >;
+
+  /** Gets one evaluator diagnostic job by its identifier. */
+  @summary("Get an evaluator diagnostic job")
+  @route("evaluator_diagnostic_jobs/{jobId}")
+  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
+  get is queryJobStatusPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorDiagnosticJob
+  >;
+
+  /** Lists evaluator diagnostic jobs, including non-terminal and failed jobs. */
+  @summary("List evaluator diagnostic jobs")
+  @route("evaluator_diagnostic_jobs")
+  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
+  list is listJobsPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorDiagnosticJob,
+    ListEvaluatorDiagnosticJobsParameters
+  >;
+
+  /** Cancels a queued or running evaluator diagnostic job. */
+  @summary("Cancel an evaluator diagnostic job")
+  @route("evaluator_diagnostic_jobs/{jobId}:cancel")
+  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
+  cancel is cancelJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorDiagnosticJob
+  >;
+
+  /** Deletes an evaluator diagnostic job and job-owned temporary artifacts. A completed diagnostic published by the job is retained. */
+  @summary("Delete an evaluator diagnostic job")
+  @route("evaluator_diagnostic_jobs/{jobId}")
+  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
+  delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 }
 
 // ============================================================================

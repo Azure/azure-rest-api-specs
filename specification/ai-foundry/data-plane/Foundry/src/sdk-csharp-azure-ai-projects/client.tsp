@@ -156,6 +156,18 @@ namespace Azure.AI.Projects;
 @@clientName(Evaluators.getCredentials, "GetCredential");
 @@access(Evaluators.getCredentials, Access.internal);
 @@access(Evaluators.startPendingUpload, Access.internal);
+@@access(Evaluators.listDiagnostics, Access.public);
+@@access(Evaluators.getDiagnostic, Access.public);
+@@access(EvaluatorDiagnosticJobs.create, Access.public);
+@@access(EvaluatorDiagnosticJobs.get, Access.public);
+@@access(EvaluatorDiagnosticJobs.list, Access.public);
+@@access(EvaluatorDiagnosticJobs.cancel, Access.public);
+@@access(EvaluatorDiagnosticJobs.delete, Access.public);
+@@clientName(EvaluatorDiagnosticJobs.create, "createDiagnosticJob", "csharp");
+@@clientName(EvaluatorDiagnosticJobs.get, "getDiagnosticJob", "csharp");
+@@clientName(EvaluatorDiagnosticJobs.list, "listDiagnosticJobs", "csharp");
+@@clientName(EvaluatorDiagnosticJobs.cancel, "cancelDiagnosticJob", "csharp");
+@@clientName(EvaluatorDiagnosticJobs.delete, "deleteDiagnosticJob", "csharp");
 
 @@access(EvaluatorDefinitionType, Access.public);
 
