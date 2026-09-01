@@ -3,6 +3,8 @@ suppressions:
     - package: sdk/resourcemanager/network/armnetwork
       breaking-changes:
         - Type of `ManagedRuleSetRuleGroup.Rules` has been changed from `[]*string` to `[]*int32`
+        - Type of `HubVirtualNetworkConnectionProperties.EnableOnlyIPv6Peering` has been changed from `*EnableOnlyIPv6PeeringState` to `*bool`
+        - Enum `EnableOnlyIPv6PeeringState` has been removed
   azure-sdk-for-js:
     - package: '@azure/arm-network'
       breaking-changes:
@@ -11,3 +13,7 @@ suppressions:
         - Operation WebApplicationFirewallPoliciesOperations.get has a new signature
         - Operation WebApplicationFirewallPoliciesOperations.list has a new signature
         - Operation WebApplicationFirewallPoliciesOperations.listAll has a new signature
+        - Interface HubVirtualNetworkConnection no longer has parameter enableOnlyIpv6Peering
+        - Interface HubVirtualNetworkConnectionProperties no longer has parameter enableOnlyIpv6Peering
+        - Removed Type Alias EnableOnlyIpv6PeeringState
+        - Removed Enum KnownEnableOnlyIpv6PeeringState
