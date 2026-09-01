@@ -24,19 +24,14 @@ model SystemReadinessProperties {
   @visibility(Lifecycle.Read)
   systemReady: boolean;
 
-  /** The readiness percentage reported for each readiness category. */
+  /** The readiness state reported for each provider-defined category. */
   @visibility(Lifecycle.Read)
   @identifiers(#["categoryName"])
-  readinessStatusDetails: ReadinessStatusDetail[];
-
-  /** The error messages reported for each readiness category. A category presents messages when it is not ready and a specific error is available. */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["categoryName"])
-  errorMessages: ErrorMessageDetail[];
+  categories: SystemReadinessCategory[];
 }
 
-/** The readiness percentage reported for a single readiness category. */
-model ReadinessStatusDetail {
+/** The readiness state reported for a single provider-defined category. */
+model SystemReadinessCategory {
   /** The provider-defined name of the readiness category (for example, `services`, `diagnostics`, `identity`, `networking`). Categories may be added, renamed, or removed without an API-version change and must be treated as an open string. */
   categoryName: string;
 
@@ -44,14 +39,8 @@ model ReadinessStatusDetail {
   @minValue(0)
   @maxValue(100)
   readinessPercentage: int32;
-}
 
-/** The error messages reported for a single readiness category. Messages are present when the category is not ready and a specific error is available. */
-model ErrorMessageDetail {
-  /** The provider-defined name of the readiness category (for example, `services`, `diagnostics`, `identity`, `networking`). Categories may be added, renamed, or removed without an API-version change and must be treated as an open string. */
-  categoryName: string;
-
-  /** The list of error messages reported for the category. Present when the category is not ready and a specific error is available; otherwise empty. */
+  /** The error messages reported for the category. The list is empty when no specific errors are available. */
   errorMessageDetails: string[];
 }
 
