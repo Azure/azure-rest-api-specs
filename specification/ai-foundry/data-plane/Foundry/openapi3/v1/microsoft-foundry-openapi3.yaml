@@ -4,8 +4,6 @@ info:
   version: v1
 tags:
   - name: Agent Insight Monitors
-  - name: Voice Agent WebSocket
-  - name: Agent Conversations
   - name: AgentServer Task Storage
   - name: Responses Root
     description: Responses
@@ -2076,1092 +2074,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Invocations WebSocket
-  /agents/{agent_name}/endpoint/protocols/voice:
-    get:
-      operationId: VoiceAgentWebSocket_connectVoiceAgent
-      summary: Connect to a voice agent
-      description: |-
-        Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`
-        headers. The optional `realtime` subprotocol is the only accepted subprotocol value. Supply the
-        `VoiceAgents=V1Preview` opt-in through either the `Foundry-Features` header or the `foundry_features`
-        query parameter.
-
-        If the target agent is disabled, the HTTP WebSocket handshake fails before the `101 Switching Protocols`
-        upgrade. The service returns `409 Conflict` using the shared Foundry `ApiErrorResponse` shape with
-        `error.code = agent_disabled`. This failure is terminal until the caller enables the agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the voice agent.
-          schema:
-            type: string
-        - name: foundry_features
-          in: query
-          required: false
-          description: |-
-            A query alternative to the `Foundry-Features` header for clients that cannot set headers during a
-            WebSocket handshake. Set this to `VoiceAgents=V1Preview`. Either this query parameter or the header is
-            required.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-          explode: false
-        - name: store
-          in: query
-          required: false
-          description: |-
-            Whether to persist the conversation created by this WebSocket session. If omitted, the service honors the
-            persisted voice agent definition's configured `store` value. If supplied, this value overrides the
-            definition's `store` setting for this session only.
-          schema:
-            type: boolean
-          explode: false
-        - name: x-agent-version-override
-          in: query
-          required: false
-          description: Selects a specific version of the voice agent for this session.
-          schema:
-            type: string
-          explode: false
-        - name: Sec-WebSocket-Protocol
-          in: header
-          required: false
-          description: The requested WebSocket subprotocol. Omit this header or request exactly `realtime`.
-          schema:
-            $ref: '#/components/schemas/VoiceAgentWebSocketSubprotocol'
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '101':
-          description: The response that switches an HTTP connection to the voice-agent WebSocket protocol.
-          headers:
-            Sec-WebSocket-Protocol:
-              required: false
-              description: The negotiated WebSocket subprotocol. Present only when the client requests `realtime`.
-              schema:
-                $ref: '#/components/schemas/VoiceAgentWebSocketSubprotocol'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Voice Agent WebSocket
-  /agents/{agent_name}/endpoint/protocols/voice/conversations:
-    get:
-      operationId: AgentEndpointConversations_listAgentConversations
-      summary: List voice agent conversations
-      description: |-
-        Returns the conversations persisted for the specified voice agent endpoint.
-        Conversations are present when the session's effective `store` setting is `true`, whether inherited from the
-        agent definition or enabled by the WebSocket session override.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceConversation'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversation
-      summary: Get a voice agent conversation
-      description: |-
-        Retrieves a single conversation recorded for the specified voice agent endpoint by its id.
-        Returns `404` when the conversation was not persisted (`store = false`) or does not exist.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation to retrieve.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceConversation'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    delete:
-      operationId: AgentEndpointConversations_deleteAgentConversation
-      summary: Delete a voice agent conversation
-      description: |-
-        Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is
-        the customer's explicit data-deletion control for voice conversations.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation to delete.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationAudio
-      summary: Get a voice agent conversation's merged recording metadata
-      description: |-
-        Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio
-        on the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned
-        for both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally
-        includes `blob_uri`, the URI of the recording in the customer's own storage (no SAS) that the customer downloads
-        with their own credentials. The recording is built once from the per-turn segments after persistence
-        finalization succeeds. While the conversation is `in_progress`, this route returns retriable `409 Conflict`
-        with `error.code = recording_not_ready` and a `Retry-After` header when retry guidance is available. When the
-        conversation is `failed`, it returns terminal `409 Conflict` with `error.code = recording_unavailable`.
-        For a `completed` conversation, metadata is available subject to the existing BYOS behavior. Requires the
-        conversation to have persisted audio (`store = true`); otherwise returns `404`.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation whose merged recording metadata is retrieved.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceRecordingResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationAudioContent
-      summary: Stream a voice agent conversation's merged recording
-      description: |-
-        Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service
-        (no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)
-        recordings the bytes are not proxied — the caller must download directly from customer storage using the
-        `blob_uri` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.
-        While the conversation is `in_progress`, this route returns retriable `409 Conflict` with
-        `error.code = recording_not_ready` and a `Retry-After` header when retry guidance is available. When the
-        conversation is `failed`, it returns terminal `409 Conflict` with `error.code = recording_unavailable`.
-        For a `completed` conversation, content is available subject to the existing BYOS behavior. A conversation
-        without persisted audio (`store = false`) returns `404`.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation whose merged recording is streamed.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.
-          content:
-            audio/wav:
-              schema:
-                contentMediaType: audio/wav
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items:
-    get:
-      operationId: AgentEndpointConversations_listAgentConversationItems
-      summary: List items in a voice agent conversation
-      description: |-
-        Returns a paged collection of items — the complete ordered conversation history, including user input,
-        assistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the
-        conversation was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation whose items are listed.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationItem
-      summary: Get a voice agent conversation item
-      description: |-
-        Retrieves a single item from the specified conversation by its id, including its transcript. An
-        `input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item
-        audio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by
-        `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
-        (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the item.
-          schema:
-            type: string
-        - name: item_id
-          in: path
-          required: true
-          description: The id of the conversation item to retrieve.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationItemAudio
-      summary: Get a voice agent conversation item's audio metadata
-      description: |-
-        Returns metadata for a single conversation item's audio segment, including the common playback facts
-        (role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and
-        bring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_uri`, the URI
-        of the recording in the customer's own storage (no SAS) that the customer downloads with their own credentials.
-        Requires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,
-        item, or its audio was not persisted.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the item.
-          schema:
-            type: string
-        - name: item_id
-          in: path
-          required: true
-          description: The id of the conversation item whose audio metadata is retrieved.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceItemAudioResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationItemAudioContent
-      summary: Stream a voice agent conversation item's audio
-      description: |-
-        Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS
-        URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the
-        bytes are not proxied — the caller must download directly from customer storage using the `blob_uri`
-        returned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.
-        Returns `404` when the conversation, item, or its audio was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the item.
-          schema:
-            type: string
-        - name: item_id
-          in: path
-          required: true
-          description: The id of the conversation item whose audio is streamed.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.
-          content:
-            audio/wav:
-              schema:
-                contentMediaType: audio/wav
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses:
-    get:
-      operationId: AgentEndpointConversations_listAgentConversationResponses
-      summary: List responses in a voice agent conversation
-      description: |-
-        Returns a paged collection of the responses (model inference turns) recorded for the specified
-        conversation. The per-response `output` projection may be omitted here; use the response-items route
-        for the canonical paged output. Returns `404` when the conversation was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation whose responses are listed.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceResponse'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}:
-    get:
-      operationId: AgentEndpointConversations_getAgentConversationResponse
-      summary: Get a voice agent conversation response
-      description: |-
-        Retrieves a single response from the specified conversation by its id, including its `output` items,
-        `usage`, and status. Returns `404` when the conversation or response was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the response.
-          schema:
-            type: string
-        - name: response_id
-          in: path
-          required: true
-          description: The id of the response to retrieve.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VoiceResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items:
-    get:
-      operationId: AgentEndpointConversations_listAgentConversationResponseItems
-      summary: List items produced by a voice agent conversation response
-      description: |-
-        Returns a paged collection of the output items produced by a specific response (the response's output
-        projection). For the complete ordered conversation history — including user input and client-created
-        tool outputs — use the conversation items route instead. Returns `404` when the conversation or
-        response was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the response.
-          schema:
-            type: string
-        - name: response_id
-          in: path
-          required: true
-          description: The id of the response whose output items are listed.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/sessions:
     post:
       operationId: Agents_createSession
@@ -4414,60 +3326,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
-  /agents:generate:
-    post:
-      operationId: Agents_generateAgent
-      summary: Generate an agent
-      description: |-
-        Generates and creates an agent from kind-specific high-level inputs.
-        The generated definition remains fully editable through the standard agent versioning operations.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - VoiceAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentObject'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agents
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenerateAgentRequest'
-        description: The kind-specific inputs for generating and creating an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
   /agents:import:
     post:
       operationId: Agents_createAgentFromManifest
@@ -10080,10 +8938,6 @@ paths:
             encoding:
               model:
                 contentType: text/plain
-              languages:
-                contentType: application/json
-              keywords:
-                contentType: application/json
               response_format:
                 contentType: application/json
               temperature:
@@ -26053,13 +24907,16 @@ paths:
                         Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
                     deprecated: true
                   safety_identifier:
-                    anyOf:
-                      - type: string
-                      - type: 'null'
+                    type: string
+                    maxLength: 64
+                    description: |-
+                      A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
+                        The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
                   prompt_cache_key:
-                    anyOf:
-                      - type: string
-                      - type: 'null'
+                    type: string
+                    description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
+                  service_tier:
+                    $ref: '#/components/schemas/OpenAI.ServiceTier'
                   prompt_cache_retention:
                     anyOf:
                       - type: string
@@ -26093,8 +24950,6 @@ paths:
                       - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                   prompt:
                     $ref: '#/components/schemas/OpenAI.Prompt'
-                  service_tier:
-                    $ref: '#/components/schemas/OpenAI.ServiceTierResponses'
                   truncation:
                     anyOf:
                       - type: string
@@ -26184,7 +25039,7 @@ paths:
                     default: true
                   conversation:
                     anyOf:
-                      - $ref: '#/components/schemas/OpenAI.ResponseConversation'
+                      - $ref: '#/components/schemas/OpenAI.ConversationReference'
                       - type: 'null'
                   max_output_tokens:
                     anyOf:
@@ -26266,13 +25121,16 @@ paths:
                       Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
                   deprecated: true
                 safety_identifier:
-                  anyOf:
-                    - type: string
-                    - type: 'null'
+                  type: string
+                  maxLength: 64
+                  description: |-
+                    A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
+                      The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
                 prompt_cache_key:
-                  anyOf:
-                    - type: string
-                    - type: 'null'
+                  type: string
+                  description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
+                service_tier:
+                  $ref: '#/components/schemas/OpenAI.ServiceTier'
                 prompt_cache_retention:
                   anyOf:
                     - type: string
@@ -26308,8 +25166,6 @@ paths:
                     - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                 prompt:
                   $ref: '#/components/schemas/OpenAI.Prompt'
-                service_tier:
-                  $ref: '#/components/schemas/OpenAI.ServiceTierResponses'
                 truncation:
                   anyOf:
                     - type: string
@@ -40830,7 +39686,6 @@ components:
           prompt: '#/components/schemas/PromptAgentDefinition'
           workflow: '#/components/schemas/WorkflowAgentDefinition'
           external: '#/components/schemas/ExternalAgentDefinition'
-          voice: '#/components/schemas/VoiceAgentDefinition'
     AgentDefinitionOptInKeys:
       type: string
       enum:
@@ -40905,7 +39760,6 @@ components:
             - a2a
             - mcp
             - invocations
-            - voice
             - invocations_ws
     AgentEvaluatorGenerationJobSource:
       type: object
@@ -41614,7 +40468,6 @@ components:
             - hosted
             - workflow
             - external
-            - voice
     AgentObject:
       type: object
       required:
@@ -47563,64 +46416,6 @@ components:
           type: string
           description: The arguments to call the function with, as generated by the model in JSON format.
       description: Details of a function tool call.
-    GenerateAgentRequest:
-      $ref: '#/components/schemas/GenerateVoiceAgentRequest'
-      description: The kind-specific inputs for generating and creating an agent.
-    GenerateVoiceAgentRequest:
-      type: object
-      required:
-        - kind
-        - name
-      properties:
-        kind:
-          type: string
-          enum:
-            - voice
-          description: The agent kind. Always `voice`.
-        name:
-          type: string
-          minLength: 1
-          maxLength: 63
-          description: The unique name for the agent to create. Must be a non-empty DNS-like agent name.
-        model_type:
-          $ref: '#/components/schemas/VoiceModelType'
-          description: Optional inference mode. When omitted, the authoring service uses `managed`. When supplied, use `managed` or `self_deployed`.
-        model:
-          type: string
-          maxLength: 256
-          description: Optional model identifier. Required when `model_type` is `self_deployed`; optional when `model_type` is `managed` or omitted. The service never invents a customer deployment name.
-        use_case:
-          type: string
-          maxLength: 128
-          description: An optional authoring use case. An empty string is accepted.
-        goal:
-          type: string
-          maxLength: 4096
-          description: An optional natural-language description of what the agent should do. When supplied, it seeds the generated instructions.
-        description:
-          type: string
-          maxLength: 512
-          description: An optional agent description. The authoring service resolves its fallback when omitted.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentTool'
-          description: Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`).
-        draft:
-          type: boolean
-          description: (Preview) When `true`, the generated voice agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. The service defaults to `false` if a value is not specified by the caller, in which case the agent is created and published normally.
-          x-ms-foundry-meta:
-            conditional_previews:
-              - DraftAgents=V1Preview
-          default: false
-      description: |-
-        The inputs for generating a voice agent. Only `kind` and `name` are always required.
-        The authoring service expands these inputs into a full, editable `VoiceAgentDefinition`, which is then created through `POST /agents`.
-        The generated `instructions` and audio/voice settings are stored as separate fields on the resulting agent
-        definition, so the caller can edit or override any of them afterward via standard agent versioning.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     GenerationWarningType:
       anyOf:
         - type: string
@@ -50063,31 +48858,18 @@ components:
             - type: string
               enum:
                 - whisper-1
-                - gpt-transcribe
-                - gpt-live-transcribe
                 - gpt-4o-mini-transcribe
                 - gpt-4o-mini-transcribe-2025-12-15
                 - gpt-4o-transcribe
                 - gpt-4o-transcribe-diarize
                 - gpt-realtime-whisper
-          description: The model to use for transcription. Current options are `whisper-1`, `gpt-transcribe`, `gpt-live-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`. Use `gpt-4o-transcribe-diarize` when you need diarization with speaker labels.
+          description: The model to use for transcription. Current options are `whisper-1`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`. Use `gpt-4o-transcribe-diarize` when you need diarization with speaker labels.
         language:
           type: string
           description: |-
             The language of the input audio. Supplying the input language in
               [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
               will improve accuracy and latency.
-        languages:
-          type: array
-          items:
-            type: string
-          minItems: 1
-          description: Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe` and `gpt-live-transcribe`.
-        keywords:
-          type: array
-          items:
-            type: string
-          description: Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe` and `gpt-live-transcribe`.
         prompt:
           type: string
           description: |-
@@ -50117,23 +48899,15 @@ components:
             - type: string
               enum:
                 - whisper-1
-                - gpt-transcribe
-                - gpt-live-transcribe
                 - gpt-4o-mini-transcribe
                 - gpt-4o-mini-transcribe-2025-12-15
                 - gpt-4o-transcribe
                 - gpt-4o-transcribe-diarize
                 - gpt-realtime-whisper
-          description: The model used for transcription. Current options are `whisper-1`, `gpt-transcribe`, `gpt-live-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`.
+          description: The model used for transcription. Current options are `whisper-1`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`.
         language:
           type: string
           description: The language of the input audio.
-        languages:
-          type: array
-          items:
-            type: string
-          minItems: 1
-          description: The possible input audio languages configured for transcription, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format.
         prompt:
           type: string
           description: The prompt configured for input audio transcription, when present.
@@ -51865,8 +50639,6 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
         reasoning_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
-        text_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
         rejected_prediction_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
     OpenAI.CompletionUsagePromptTokensDetails:
@@ -51875,10 +50647,6 @@ components:
         audio_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
         cached_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        text_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        image_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
         cache_write_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
@@ -53011,6 +51779,7 @@ components:
       required:
         - id
         - type
+        - call_id
         - output
       properties:
         id:
@@ -53028,12 +51797,6 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
-        name:
-          type: string
-          description: The name of the tool that produced the output.
-        namespace:
-          type: string
-          description: The namespace of the tool that produced the output.
         caller:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
@@ -53321,7 +52084,6 @@ components:
         error:
           type: object
           unevaluatedProperties: {}
-          description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
@@ -53645,6 +52407,16 @@ components:
           description: The unique ID of the conversation.
       description: The conversation that this response belongs to.
       title: Conversation object
+    OpenAI.ConversationReference:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The unique ID of the conversation that this response was associated with.
+      description: The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.
+      title: Conversation
     OpenAI.ConversationResource:
       type: object
       required:
@@ -53889,13 +52661,16 @@ components:
               Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
           deprecated: true
         safety_identifier:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
+          maxLength: 64
+          description: |-
+            A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
+              The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
         prompt_cache_key:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
+          description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
+        service_tier:
+          $ref: '#/components/schemas/OpenAI.ServiceTier'
         prompt_cache_retention:
           anyOf:
             - type: string
@@ -53919,8 +52694,6 @@ components:
         model:
           type: string
           description: The model deployment to use for this chat completion.
-        service_tier:
-          $ref: '#/components/schemas/OpenAI.ServiceTier'
         modalities:
           $ref: '#/components/schemas/OpenAI.ResponseModalities'
         verbosity:
@@ -54247,10 +53020,6 @@ components:
         model:
           type: string
           description: The model deployment used for the creation of this chat completion.
-        metadata:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.Metadata'
-            - type: 'null'
         service_tier:
           $ref: '#/components/schemas/OpenAI.ServiceTier'
         system_fingerprint:
@@ -55295,7 +54064,7 @@ components:
                 contentEncoding: base64
           description: |-
             The image(s) to edit. Must be a supported image file or an array of images.
-              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`
+              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`
               file less than 50MB. You can provide up to 16 images.
               `chatgpt-image-latest` follows the same input constraints as GPT image models.
               For `dall-e-2`, you can only provide one image, and it should be a square
@@ -55314,27 +54083,24 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Set the background of the generated image(s). This parameter is only
-              supported for the GPT image models. Must be one of `transparent`, `opaque`,
-              or `auto` (default value). When `auto` is used, the model will automatically
-              determine the best background for the image.
-              Transparent backgrounds are available for supported GPT Image models. For
-              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
-              using `transparent`, set the output format to `png` or `webp`.
+            Allows to set transparency for the background of the generated image(s).
+              This parameter is only supported for the GPT image models. Must be one of
+              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
+              model will automatically determine the best background for the image.
+              If `transparent`, the output format needs to support transparency, so it
+              should be set to either `png` (default value) or `webp`.
         model:
           anyOf:
             - type: string
             - type: string
               enum:
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.
+          description: The model to use for image generation. Defaults to `gpt-image-1.5`.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -55426,14 +54192,12 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - dall-e-3
                 - gpt-image-1
                 - gpt-image-1-mini
             - type: 'null'
-          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
+          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
           x-oaiTypeLabel: string
           default: dall-e-2
         'n':
@@ -55531,13 +54295,12 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Set the background of the generated image(s). This parameter is only
-              supported for the GPT image models. Must be one of `transparent`, `opaque`,
-              or `auto` (default value). When `auto` is used, the model will automatically
-              determine the best background for the image.
-              Transparent backgrounds are available for supported GPT Image models. For
-              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
-              using `transparent`, set the output format to `png` or `webp`.
+            Allows to set transparency for the background of the generated image(s).
+              This parameter is only supported for the GPT image models. Must be one of
+              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
+              model will automatically determine the best background for the image.
+              If `transparent`, the output format needs to support transparency, so it
+              should be set to either `png` (default value) or `webp`.
           default: auto
         style:
           anyOf:
@@ -56431,9 +55194,7 @@ components:
       type: object
       properties:
         file:
-          description: |-
-            The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
-              The request must include enough format metadata for the file to be identified. We recommend an extension-bearing filename and an appropriate content type.
+          description: 'The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.'
           x-oaiTypeLabel: file
         model:
           anyOf:
@@ -56441,26 +55202,15 @@ components:
             - type: string
               enum:
                 - whisper-1
-                - gpt-transcribe
                 - gpt-4o-transcribe
                 - gpt-4o-mini-transcribe
                 - gpt-4o-mini-transcribe-2025-12-15
                 - gpt-4o-transcribe-diarize
-          description: ID of the model to use. The options are `gpt-transcribe`, `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `whisper-1` (which is powered by our open source Whisper V2 model), and `gpt-4o-transcribe-diarize`.
+          description: ID of the model to use. The options are `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `whisper-1` (which is powered by our open source Whisper V2 model), and `gpt-4o-transcribe-diarize`.
           x-oaiTypeLabel: string
         language:
           type: string
           description: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
-        languages:
-          type: array
-          items:
-            type: string
-          description: Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe`.
-        keywords:
-          type: array
-          items:
-            type: string
-          description: Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe`.
         prompt:
           type: string
           description: An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text#prompting) should match the audio language. This field is not supported when using `gpt-4o-transcribe-diarize`.
@@ -56578,11 +55328,6 @@ components:
         text:
           type: string
           description: The transcribed text.
-        languages:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.TranscriptionLanguage'
-          description: The languages detected in the audio. Returned by `gpt-transcribe`. An empty array indicates that no language could be reliably detected.
         logprobs:
           type: array
           items:
@@ -56705,7 +55450,7 @@ components:
       type: object
       properties:
         file:
-          description: 'The audio file object (not file name) translate, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. The request must include enough format metadata for the file to be identified. We recommend an extension-bearing filename and an appropriate content type.'
+          description: 'The audio file object (not file name) translate, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.'
           x-oaiTypeLabel: file
         model:
           anyOf:
@@ -57462,13 +56207,11 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.
+          description: The model to use for image editing.
           x-oaiTypeLabel: string
           default: gpt-image-1.5
         images:
@@ -57560,7 +56303,7 @@ components:
                 - opaque
                 - auto
             - type: 'null'
-          description: Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.
+          description: Background behavior for generated image output.
           default: auto
         stream:
           anyOf:
@@ -60116,8 +58859,6 @@ components:
                 - gpt-image-1
                 - gpt-image-1-mini
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
           default: gpt-image-1
         quality:
           type: string
@@ -60171,11 +58912,8 @@ components:
             - opaque
             - auto
           description: |-
-            Set the background of the generated image. One of `transparent`,
-              `opaque`, or `auto`. Transparent backgrounds are available for
-              supported GPT Image models. For `gpt-image-2` and
-              `gpt-image-2-2026-04-21`, this support is in preview. When using
-              `transparent`, set the output format to `png` or `webp`. Default: `auto`.
+            Background type for the generated image. One of `transparent`,
+              `opaque`, or `auto`. Default: `auto`.
           default: auto
         input_fidelity:
           anyOf:
@@ -60902,7 +59640,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 20971520
+          maxLength: 10485760
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
@@ -61113,6 +59851,7 @@ components:
     OpenAI.InputItemFunctionCallOutputItemParam:
       type: object
       required:
+        - call_id
         - type
         - output
       properties:
@@ -61121,9 +59860,10 @@ components:
             - type: string
             - type: 'null'
         call_id:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The unique ID of the function tool call generated by the model.
         type:
           type: string
           enum:
@@ -61141,14 +59881,6 @@ components:
                   - $ref: '#/components/schemas/OpenAI.InputImageContentParamAutoParam'
                   - $ref: '#/components/schemas/OpenAI.InputFileContentParam'
           description: Text, image, or file output of the function tool call.
-        name:
-          anyOf:
-            - type: string
-            - type: 'null'
-        namespace:
-          anyOf:
-            - type: string
-            - type: 'null'
         caller:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
@@ -61522,7 +60254,6 @@ components:
         error:
           type: object
           unevaluatedProperties: {}
-          description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
@@ -62046,7 +60777,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 20971520
+          maxLength: 10485760
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
@@ -62782,6 +61513,7 @@ components:
       required:
         - id
         - type
+        - call_id
         - output
       properties:
         id:
@@ -62799,12 +61531,6 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
-        name:
-          type: string
-          description: The name of the tool that produced the output.
-        namespace:
-          type: string
-          description: The namespace of the tool that produced the output.
         caller:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
@@ -63056,7 +61782,6 @@ components:
         error:
           type: object
           unevaluatedProperties: {}
-          description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
@@ -63411,6 +62136,7 @@ components:
     OpenAI.ItemFunctionCallOutputItemParam:
       type: object
       required:
+        - call_id
         - type
         - output
       properties:
@@ -63419,9 +62145,10 @@ components:
             - type: string
             - type: 'null'
         call_id:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The unique ID of the function tool call generated by the model.
         type:
           type: string
           enum:
@@ -63439,14 +62166,6 @@ components:
                   - $ref: '#/components/schemas/OpenAI.InputImageContentParamAutoParam'
                   - $ref: '#/components/schemas/OpenAI.InputFileContentParam'
           description: Text, image, or file output of the function tool call.
-        name:
-          anyOf:
-            - type: string
-            - type: 'null'
-        namespace:
-          anyOf:
-            - type: string
-            - type: 'null'
         caller:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
@@ -63864,7 +62583,6 @@ components:
         error:
           type: object
           unevaluatedProperties: {}
-          description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
@@ -64578,6 +63296,7 @@ components:
       required:
         - id
         - type
+        - call_id
         - output
       properties:
         id:
@@ -64595,12 +63314,6 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
-        name:
-          type: string
-          description: The name of the tool that produced the output.
-        namespace:
-          type: string
-          description: The namespace of the tool that produced the output.
         caller:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
@@ -64896,7 +63609,6 @@ components:
         error:
           type: object
           unevaluatedProperties: {}
-          description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
@@ -66255,6 +64967,8 @@ components:
       required:
         - type
         - text
+        - annotations
+        - logprobs
       properties:
         type:
           type: string
@@ -66694,12 +65408,6 @@ components:
         owned_by:
           type: string
           description: The organization that owns the model.
-        shutdown_date:
-          anyOf:
-            - type: string
-              format: date
-            - type: 'null'
-          description: The date when the model will shut down, or null if not announced.
       description: Describes an OpenAI model offering that can be used with the API.
       title: Model
       x-oaiMeta:
@@ -66709,8 +65417,7 @@ components:
             "id": "VAR_chat_model_id",
             "object": "model",
             "created": 1686935002,
-            "owned_by": "openai",
-            "shutdown_date": "2026-10-23"
+            "owned_by": "openai"
           }
     OpenAI.Moderation:
       type: object
@@ -67081,6 +65788,7 @@ components:
           description: The namespace name used in tool calls (for example, `crm`).
         description:
           type: string
+          minLength: 1
           description: A description of the namespace shown to the model.
         tools:
           type: array
@@ -67210,6 +65918,8 @@ components:
       required:
         - type
         - text
+        - annotations
+        - logprobs
       properties:
         type:
           type: string
@@ -67900,6 +66610,7 @@ components:
       required:
         - id
         - type
+        - call_id
         - output
       properties:
         id:
@@ -67917,12 +66628,6 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
-        name:
-          type: string
-          description: The name of the tool that produced the output.
-        namespace:
-          type: string
-          description: The namespace of the tool that produced the output.
         caller:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ToolCallCallerParam'
@@ -68174,7 +66879,6 @@ components:
         error:
           type: object
           unevaluatedProperties: {}
-          description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
@@ -68530,6 +67234,8 @@ components:
       required:
         - type
         - text
+        - annotations
+        - logprobs
       properties:
         type:
           type: string
@@ -68874,390 +67580,6 @@ components:
               when omitted.
       description: Parameters used to decline an incoming SIP call handled by the Realtime API.
       title: Realtime call reject request
-    OpenAI.RealtimeConversationItem:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OpenAI.RealtimeConversationItemType'
-      discriminator:
-        propertyName: type
-        mapping:
-          message: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
-          function_call: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall'
-          function_call_output: '#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput'
-          mcp_approval_response: '#/components/schemas/OpenAI.RealtimeMCPApprovalResponse'
-          mcp_list_tools: '#/components/schemas/OpenAI.RealtimeMCPListTools'
-          mcp_call: '#/components/schemas/OpenAI.RealtimeMCPToolCall'
-          mcp_approval_request: '#/components/schemas/OpenAI.RealtimeMCPApprovalRequest'
-      description: A single item within a Realtime conversation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.RealtimeConversationItemFunctionCall:
-      type: object
-      required:
-        - type
-        - name
-        - arguments
-      properties:
-        id:
-          type: string
-          description: The unique ID of the item. This may be provided by the client or generated by the server.
-        object:
-          type: string
-          enum:
-            - realtime.item
-          description: Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.
-          x-stainless-const: true
-        type:
-          type: string
-          enum:
-            - function_call
-          description: The type of the item. Always `function_call`.
-          x-stainless-const: true
-        status:
-          type: string
-          enum:
-            - completed
-            - incomplete
-            - in_progress
-          description: The status of the item. Has no effect on the conversation.
-        call_id:
-          type: string
-          description: The ID of the function call.
-        name:
-          type: string
-          description: The name of the function being called.
-        arguments:
-          type: string
-          description: 'The arguments of the function call. This is a JSON-encoded string representing the arguments passed to the function, for example `{"arg1": "value1", "arg2": 42}`.'
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-      description: A function call item in a Realtime conversation.
-      title: Realtime function call item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.RealtimeConversationItemFunctionCallOutput:
-      type: object
-      required:
-        - type
-        - call_id
-        - output
-      properties:
-        id:
-          type: string
-          description: The unique ID of the item. This may be provided by the client or generated by the server.
-        object:
-          type: string
-          enum:
-            - realtime.item
-          description: Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.
-          x-stainless-const: true
-        type:
-          type: string
-          enum:
-            - function_call_output
-          description: The type of the item. Always `function_call_output`.
-          x-stainless-const: true
-        status:
-          type: string
-          enum:
-            - completed
-            - incomplete
-            - in_progress
-          description: The status of the item. Has no effect on the conversation.
-        call_id:
-          type: string
-          description: The ID of the function call this output is for.
-        output:
-          type: string
-          description: The output of the function call, this is free text and can contain any information or simply be empty.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-        name:
-          type: string
-          description: "The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`."
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-      description: A function call output item in a Realtime conversation.
-      title: Realtime function call output item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.RealtimeConversationItemMessage:
-      type: object
-      required:
-        - role
-        - type
-      properties:
-        role:
-          $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageType'
-        type:
-          type: string
-          enum:
-            - message
-      discriminator:
-        propertyName: role
-        mapping:
-          system: '#/components/schemas/OpenAI.RealtimeConversationItemMessageSystem'
-          user: '#/components/schemas/OpenAI.RealtimeConversationItemMessageUser'
-          assistant: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistant'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.RealtimeConversationItemMessageAssistant:
-      type: object
-      required:
-        - type
-        - role
-        - content
-      properties:
-        id:
-          type: string
-          description: The unique ID of the item. This may be provided by the client or generated by the server.
-        object:
-          type: string
-          enum:
-            - realtime.item
-          description: Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.
-          x-stainless-const: true
-        type:
-          type: string
-          enum:
-            - message
-          description: The type of the item. Always `message`.
-          x-stainless-const: true
-        status:
-          type: string
-          enum:
-            - completed
-            - incomplete
-            - in_progress
-          description: The status of the item. Has no effect on the conversation.
-        role:
-          type: string
-          enum:
-            - assistant
-          description: The role of the message sender. Always `assistant`.
-          x-stainless-const: true
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistantContent'
-          description: The content of the message.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
-      description: An assistant message item in a Realtime conversation.
-      title: Realtime assistant message item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.RealtimeConversationItemMessageAssistantContent:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - output_text
-            - output_audio
-        text:
-          type: string
-        audio:
-          type: string
-        transcript:
-          type: string
-    OpenAI.RealtimeConversationItemMessageSystem:
-      type: object
-      required:
-        - type
-        - role
-        - content
-      properties:
-        id:
-          type: string
-          description: The unique ID of the item. This may be provided by the client or generated by the server.
-        object:
-          type: string
-          enum:
-            - realtime.item
-          description: Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.
-          x-stainless-const: true
-        type:
-          type: string
-          enum:
-            - message
-          description: The type of the item. Always `message`.
-          x-stainless-const: true
-        status:
-          type: string
-          enum:
-            - completed
-            - incomplete
-            - in_progress
-          description: The status of the item. Has no effect on the conversation.
-        role:
-          type: string
-          enum:
-            - system
-          description: The role of the message sender. Always `system`.
-          x-stainless-const: true
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageSystemContent'
-          description: The content of the message.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
-      description: A system message in a Realtime conversation can be used to provide additional context or instructions to the model. This is similar but distinct from the instruction prompt provided at the start of a conversation, as system messages can be added at any point in the conversation. For major changes to the conversation's behavior, use instructions, but for smaller updates (e.g. "the user is now asking about a different topic"), use system messages.
-      title: Realtime system message item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.RealtimeConversationItemMessageSystemContent:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - input_text
-          x-stainless-const: true
-        text:
-          type: string
-    OpenAI.RealtimeConversationItemMessageType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - system
-            - user
-            - assistant
-    OpenAI.RealtimeConversationItemMessageUser:
-      type: object
-      required:
-        - type
-        - role
-        - content
-      properties:
-        id:
-          type: string
-          description: The unique ID of the item. This may be provided by the client or generated by the server.
-        object:
-          type: string
-          enum:
-            - realtime.item
-          description: Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.
-          x-stainless-const: true
-        type:
-          type: string
-          enum:
-            - message
-          description: The type of the item. Always `message`.
-          x-stainless-const: true
-        status:
-          type: string
-          enum:
-            - completed
-            - incomplete
-            - in_progress
-          description: The status of the item. Has no effect on the conversation.
-        role:
-          type: string
-          enum:
-            - user
-          description: The role of the message sender. Always `user`.
-          x-stainless-const: true
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageUserContent'
-          description: The content of the message.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessage'
-      description: A user message item in a Realtime conversation.
-      title: Realtime user message item
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.RealtimeConversationItemMessageUserContent:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - input_text
-            - input_audio
-            - input_image
-        text:
-          type: string
-        audio:
-          type: string
-        image_url:
-          type: string
-          format: uri
-        detail:
-          type: string
-          enum:
-            - auto
-            - low
-            - high
-          default: auto
-        transcript:
-          type: string
-    OpenAI.RealtimeConversationItemType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - function_call
-            - function_call_output
-            - mcp_approval_response
-            - mcp_list_tools
-            - mcp_call
-            - mcp_approval_request
-            - message
     OpenAI.RealtimeCreateClientSecretRequest:
       type: object
       properties:
@@ -69392,90 +67714,6 @@ components:
       title: Function tool
     OpenAI.RealtimeFunctionToolParameters:
       type: object
-    OpenAI.RealtimeMCPApprovalRequest:
-      type: object
-      required:
-        - type
-        - id
-        - server_label
-        - name
-        - arguments
-      properties:
-        type:
-          type: string
-          enum:
-            - mcp_approval_request
-          description: The type of the item. Always `mcp_approval_request`.
-          x-stainless-const: true
-        id:
-          type: string
-          description: The unique ID of the approval request.
-        server_label:
-          type: string
-          description: The label of the MCP server making the request.
-        name:
-          type: string
-          description: The name of the tool to run.
-        arguments:
-          type: string
-          description: A JSON string of arguments for the tool.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-      description: A Realtime item requesting human approval of a tool invocation.
-      title: Realtime MCP approval request
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    OpenAI.RealtimeMCPApprovalResponse:
-      type: object
-      required:
-        - type
-        - id
-        - approval_request_id
-        - approve
-      properties:
-        type:
-          type: string
-          enum:
-            - mcp_approval_response
-          description: The type of the item. Always `mcp_approval_response`.
-          x-stainless-const: true
-        id:
-          type: string
-          description: The unique ID of the approval response.
-        approval_request_id:
-          type: string
-          description: The ID of the approval request being answered.
-        approve:
-          type: boolean
-          description: Whether the request was approved.
-        reason:
-          anyOf:
-            - type: string
-            - type: 'null'
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-      description: A Realtime item responding to an MCP approval request.
-      title: Realtime MCP approval response
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPError:
       type: object
       required:
@@ -69508,45 +67746,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP HTTP error
-    OpenAI.RealtimeMCPListTools:
-      type: object
-      required:
-        - type
-        - server_label
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - mcp_list_tools
-          description: The type of the item. Always `mcp_list_tools`.
-          x-stainless-const: true
-        id:
-          type: string
-          description: The unique ID of the list.
-        server_label:
-          type: string
-          description: The label of the MCP server.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
-          description: The tools available on the server.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-      description: A Realtime item listing tools available on an MCP server.
-      title: Realtime MCP list tools
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPProtocolError:
       type: object
       required:
@@ -69566,58 +67765,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP protocol error
-    OpenAI.RealtimeMCPToolCall:
-      type: object
-      required:
-        - type
-        - id
-        - server_label
-        - name
-        - arguments
-      properties:
-        type:
-          type: string
-          enum:
-            - mcp_call
-          description: The type of the item. Always `mcp_call`.
-          x-stainless-const: true
-        id:
-          type: string
-          description: The unique ID of the tool call.
-        server_label:
-          type: string
-          description: The label of the MCP server running the tool.
-        name:
-          type: string
-          description: The name of the tool that was run.
-        arguments:
-          type: string
-          description: A JSON string of the arguments passed to the tool.
-        approval_request_id:
-          anyOf:
-            - type: string
-            - type: 'null'
-        output:
-          anyOf:
-            - type: string
-            - type: 'null'
-        error:
-          $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the item was persisted.
-          readOnly: true
-        response_id:
-          type: string
-          description: The id of the response that produced this item, when applicable.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-      description: A Realtime item representing an invocation of a tool on an MCP server.
-      title: Realtime MCP tool call
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPToolExecutionError:
       type: object
       required:
@@ -69660,74 +67807,6 @@ components:
       description: |-
         Constrains effort on reasoning for reasoning-capable Realtime models such as
         `gpt-realtime-2`.
-    OpenAI.RealtimeResponseStatusDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - completed
-            - cancelled
-            - failed
-            - incomplete
-        reason:
-          type: string
-          enum:
-            - turn_detected
-            - client_cancelled
-            - max_output_tokens
-            - content_filter
-        error:
-          $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetailsError'
-    OpenAI.RealtimeResponseStatusDetailsError:
-      type: object
-      properties:
-        type:
-          type: string
-        code:
-          type: string
-    OpenAI.RealtimeResponseUsage:
-      type: object
-      properties:
-        total_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        input_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        output_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        input_token_details:
-          $ref: '#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetails'
-        output_token_details:
-          $ref: '#/components/schemas/OpenAI.RealtimeResponseUsageOutputTokenDetails'
-    OpenAI.RealtimeResponseUsageInputTokenDetails:
-      type: object
-      properties:
-        cached_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        text_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        image_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        audio_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        cached_tokens_details:
-          $ref: '#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails'
-    OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails:
-      type: object
-      properties:
-        text_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        image_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        audio_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-    OpenAI.RealtimeResponseUsageOutputTokenDetails:
-      type: object
-      properties:
-        text_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
-        audio_tokens:
-          $ref: '#/components/schemas/OpenAI.integer'
     OpenAI.RealtimeSessionCreateRequest:
       type: object
       required:
@@ -70964,13 +69043,16 @@ components:
               Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
           deprecated: true
         safety_identifier:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
+          maxLength: 64
+          description: |-
+            A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
+              The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
         prompt_cache_key:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
+          description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
+        service_tier:
+          $ref: '#/components/schemas/OpenAI.ServiceTier'
         prompt_cache_retention:
           anyOf:
             - type: string
@@ -71004,8 +69086,6 @@ components:
             - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
         prompt:
           $ref: '#/components/schemas/OpenAI.Prompt'
-        service_tier:
-          $ref: '#/components/schemas/OpenAI.ServiceTierResponses'
         truncation:
           anyOf:
             - type: string
@@ -71095,7 +69175,7 @@ components:
           default: true
         conversation:
           anyOf:
-            - $ref: '#/components/schemas/OpenAI.ResponseConversation'
+            - $ref: '#/components/schemas/OpenAI.ConversationReference'
             - type: 'null'
         max_output_tokens:
           anyOf:
@@ -71607,16 +69687,6 @@ components:
               "annotations": []
             }
           }
-    OpenAI.ResponseConversation:
-      type: object
-      required:
-        - id
-      properties:
-        id:
-          type: string
-          description: The unique ID of the conversation that this response was associated with.
-      description: The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.
-      title: Conversation
     OpenAI.ResponseCreatedEvent:
       type: object
       required:
@@ -71780,7 +69850,6 @@ components:
         - server_error
         - rate_limit_exceeded
         - invalid_prompt
-        - data_residency_mismatch
         - bio_policy
         - vector_store_timeout
         - invalid_image
@@ -72312,18 +70381,6 @@ components:
         partial_image_b64:
           type: string
           description: Base64-encoded partial image data, suitable for rendering as an image.
-        size:
-          type: string
-          description: The image size that was used.
-        quality:
-          type: string
-          description: The image quality that was used.
-        background:
-          type: string
-          description: The background setting that was used.
-        output_format:
-          type: string
-          description: The output format that was used.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a partial image is available during image generation streaming.
@@ -72845,11 +70902,7 @@ components:
           description: The sequence number of this event.
         item:
           $ref: '#/components/schemas/OpenAI.OutputItem'
-          description: |-
-            The output item that was added. For reasoning items, `encrypted_content`
-              may be incomplete while the item is in progress. Use the reasoning item
-              from the corresponding `response.output_item.done` event when passing it
-              as input to a subsequent request.
+          description: The output item that was added.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a new output item is added.
@@ -72967,10 +71020,10 @@ components:
             "content_index": 0,
             "annotation_index": 0,
             "annotation": {
-              "type": "file_citation",
-              "file_id": "file-abc",
-              "index": 0,
-              "filename": "example.txt"
+              "type": "text_annotation",
+              "text": "This is a test annotation",
+              "start": 0,
+              "end": 10
             },
             "sequence_number": 1
           }
@@ -73439,174 +71492,6 @@ components:
             "refusal": "final refusal text",
             "sequence_number": 1
           }
-    OpenAI.ResponseShellCallCommandAddedStreamingEvent:
-      type: object
-      required:
-        - type
-        - sequence_number
-        - output_index
-        - command_index
-        - command
-      properties:
-        type:
-          type: string
-          enum:
-            - response.shell_call_command.added
-          description: The type of the event, always `response.shell_call_command.added`.
-          x-stainless-const: true
-        sequence_number:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The sequence number of the event that was emitted.
-        output_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the output item that was updated.
-        command_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the shell command that was added.
-        command:
-          type: string
-          description: The shell command that was added.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
-      description: A streaming event that indicated a shell command was added to a tool call.
-      title: Response shell command added event
-    OpenAI.ResponseShellCallCommandDeltaStreamingEvent:
-      type: object
-      required:
-        - type
-        - sequence_number
-        - output_index
-        - command_index
-        - delta
-      properties:
-        type:
-          type: string
-          enum:
-            - response.shell_call_command.delta
-          description: The type of the event, always `response.shell_call_command.delta`.
-          x-stainless-const: true
-        sequence_number:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The sequence number of the event that was emitted.
-        output_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the output item that was updated.
-        command_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the shell command that was updated.
-        delta:
-          type: string
-          description: The shell command delta that was appended.
-        obfuscation:
-          type: string
-          description: An obfuscation string that was added to pad the event payload.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
-      description: A streaming event that indicated a shell command was incrementally updated.
-      title: Response shell command delta event
-    OpenAI.ResponseShellCallCommandDoneStreamingEvent:
-      type: object
-      required:
-        - type
-        - sequence_number
-        - output_index
-        - command_index
-        - command
-      properties:
-        type:
-          type: string
-          enum:
-            - response.shell_call_command.done
-          description: The type of the event, always `response.shell_call_command.done`.
-          x-stainless-const: true
-        sequence_number:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The sequence number of the event that was emitted.
-        output_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the output item that was updated.
-        command_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the shell command that was completed.
-        command:
-          type: string
-          description: The final shell command that was emitted.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
-      description: A streaming event that indicated a shell command was completed.
-      title: Response shell command done event
-    OpenAI.ResponseShellCallOutputContentDeltaStreamingEvent:
-      type: object
-      required:
-        - type
-        - sequence_number
-        - item_id
-        - output_index
-        - command_index
-        - delta
-      properties:
-        type:
-          type: string
-          enum:
-            - response.shell_call_output_content.delta
-          description: The type of the event, always `response.shell_call_output_content.delta`.
-          x-stainless-const: true
-        sequence_number:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The sequence number of the event that was emitted.
-        item_id:
-          type: string
-          description: The ID of the output item that was updated.
-        output_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the output item that was updated.
-        command_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the shell command that produced output.
-        delta:
-          $ref: '#/components/schemas/OpenAI.ShellCallOutputDelta'
-          description: The stdout/stderr delta that was emitted.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
-      description: A streaming event that indicated shell call output was incrementally added.
-      title: Response shell call output content delta event
-    OpenAI.ResponseShellCallOutputContentDoneStreamingEvent:
-      type: object
-      required:
-        - type
-        - sequence_number
-        - item_id
-        - output_index
-        - command_index
-        - output
-      properties:
-        type:
-          type: string
-          enum:
-            - response.shell_call_output_content.done
-          description: The type of the event, always `response.shell_call_output_content.done`.
-          x-stainless-const: true
-        sequence_number:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The sequence number of the event that was emitted.
-        item_id:
-          type: string
-          description: The ID of the output item that was updated.
-        output_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the output item that was updated.
-        command_index:
-          $ref: '#/components/schemas/OpenAI.integer'
-          description: The index of the shell command that produced output.
-        output:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputContent'
-          description: The output contents emitted for the shell command.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
-      description: A streaming event that indicated shell call output was completed.
-      title: Response shell call output content done event
     OpenAI.ResponseStreamEvent:
       type: object
       required:
@@ -73664,18 +71549,12 @@ components:
           response.reasoning_text.done: '#/components/schemas/OpenAI.ResponseReasoningTextDoneEvent'
           response.refusal.delta: '#/components/schemas/OpenAI.ResponseRefusalDeltaEvent'
           response.refusal.done: '#/components/schemas/OpenAI.ResponseRefusalDoneEvent'
-          response.shell_call_command.added: '#/components/schemas/OpenAI.ResponseShellCallCommandAddedStreamingEvent'
-          response.shell_call_command.delta: '#/components/schemas/OpenAI.ResponseShellCallCommandDeltaStreamingEvent'
-          response.shell_call_command.done: '#/components/schemas/OpenAI.ResponseShellCallCommandDoneStreamingEvent'
-          response.shell_call_output_content.delta: '#/components/schemas/OpenAI.ResponseShellCallOutputContentDeltaStreamingEvent'
-          response.shell_call_output_content.done: '#/components/schemas/OpenAI.ResponseShellCallOutputContentDoneStreamingEvent'
           response.output_text.delta: '#/components/schemas/OpenAI.ResponseTextDeltaEvent'
           response.output_text.done: '#/components/schemas/OpenAI.ResponseTextDoneEvent'
           response.web_search_call.completed: '#/components/schemas/OpenAI.ResponseWebSearchCallCompletedEvent'
           response.web_search_call.in_progress: '#/components/schemas/OpenAI.ResponseWebSearchCallInProgressEvent'
           response.web_search_call.searching: '#/components/schemas/OpenAI.ResponseWebSearchCallSearchingEvent'
           response.audio.delta: '#/components/schemas/OpenAI.ResponseAudioDeltaEvent'
-      description: Event emitted while a response is streamed.
     OpenAI.ResponseStreamEventType:
       anyOf:
         - type: string
@@ -73700,11 +71579,6 @@ components:
             - response.file_search_call.searching
             - response.function_call_arguments.delta
             - response.function_call_arguments.done
-            - response.shell_call_command.added
-            - response.shell_call_command.delta
-            - response.shell_call_command.done
-            - response.shell_call_output_content.delta
-            - response.shell_call_output_content.done
             - response.in_progress
             - response.failed
             - response.incomplete
@@ -74947,14 +72821,12 @@ components:
             - flex
             - scale
             - priority
-            - fast
         - type: 'null'
       description: |-
         Specifies the processing type used for serving the request.
         - If set to 'auto', then the request will be processed with the service tier configured in the Project settings. Unless otherwise configured, the Project will use 'default'.
         - If set to 'default', then the request will be processed with the standard pricing and performance for the selected model.
-        - If set to '[flex](/docs/guides/flex-processing)', then the request will be processed with the Flex Processing service tier.
-        - To opt-in to [Fast mode](/api/docs/guides/fast-mode) at the request level, include the `service_tier=fast` or `service_tier=priority` parameter for Responses or Chat Completions. The response will show `service_tier=priority` regardless of if you specify `service_tier=fast` or `priority` in your request.
+        - If set to '[flex](/docs/guides/flex-processing)' or '[priority](https://openai.com/api-priority-processing/)', then the request will be processed with the corresponding service tier.
         - When not set, the default behavior is 'auto'.
         When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the processing mode actually used to serve the request. This response value may be different from the value set in the parameter.
     OpenAI.ServiceTierEnum:
@@ -74962,41 +72834,8 @@ components:
       enum:
         - auto
         - default
-        - fast
         - flex
         - priority
-    OpenAI.ServiceTierResponses:
-      anyOf:
-        - type: string
-          enum:
-            - auto
-            - default
-            - flex
-            - scale
-            - priority
-            - fast
-            - ultrafast
-        - type: 'null'
-      description: |-
-        Specifies the processing type used for serving the request.
-        - If set to 'auto', then the request will be processed with the service tier configured in the Project settings. Unless otherwise configured, the Project will use 'default'.
-        - If set to 'default', then the request will be processed with the standard pricing and performance for the selected model.
-        - If set to '[flex](/docs/guides/flex-processing)', then the request will be processed with the Flex Processing service tier.
-        - To opt-in to [Fast mode](/api/docs/guides/fast-mode) at the request level, include the `service_tier=fast` or `service_tier=priority` parameter for Responses or Chat Completions. The response will show `service_tier=priority` regardless of if you specify `service_tier=fast` or `priority` in your request.
-        - If set to 'ultrafast', then the request will be processed with the access-controlled Ultrafast Processing service tier. This tier is currently available for `gpt-5.6-sol`; a response served through it will show `service_tier=ultrafast`.
-        - When not set, the default behavior is 'auto'.
-        When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the processing mode actually used to serve the request. This response value may be different from the value set in the parameter.
-    OpenAI.ShellCallOutputDelta:
-      type: object
-      properties:
-        stdout:
-          type: string
-          description: The stdout delta that was emitted.
-        stderr:
-          type: string
-          description: The stderr delta that was emitted.
-      description: A delta of stdout/stderr emitted while a shell call was running.
-      title: Shell call output delta
     OpenAI.SkillReferenceParam:
       type: object
       required:
@@ -75932,15 +73771,6 @@ components:
       type: string
       enum:
         - logprobs
-    OpenAI.TranscriptionLanguage:
-      type: object
-      required:
-        - code
-      properties:
-        code:
-          type: string
-          description: The code of a language detected in the audio.
-      description: A language detected in transcribed audio.
     OpenAI.TranscriptionSegment:
       type: object
       required:
@@ -76754,8 +74584,7 @@ components:
       description: |-
         Constrains the verbosity of the model's response. Lower values will result in
         more concise responses, while higher values will result in more verbose responses.
-        Currently supported values are `low`, `medium`, and `high`. The default is
-        `medium`.
+        Currently supported values are `low`, `medium`, and `high`.
     OpenAI.VideoCharacterResource:
       type: object
       required:
@@ -77156,10 +74985,6 @@ components:
           enum:
             - web_search
           description: The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.
-        external_web_access:
-          type: boolean
-          description: Allow live internet access for web search. Defaults to true when omitted. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content.
-          default: true
         filters:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchToolFilters'
@@ -80459,1627 +78284,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VersionSelectionRule'
-    VoiceAgentAudioConfig:
-      type: object
-      properties:
-        input:
-          $ref: '#/components/schemas/VoiceAgentAudioInputConfig'
-          description: Input (microphone) audio configuration.
-        output:
-          $ref: '#/components/schemas/VoiceAgentAudioOutputConfig'
-          description: Output (agent speech) audio configuration.
-      description: The audio configuration for a voice agent. These values are session defaults and may be overridden when connecting.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentAudioInputConfig:
-      type: object
-      properties:
-        format:
-          $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
-          description: The input audio format.
-        noise_reduction:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentNoiseReduction'
-            - type: 'null'
-          description: Input noise reduction. Set to null to disable.
-        turn_detection:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
-            - type: 'null'
-          description: Turn (end-of-speech) detection. Server-side turn detection is enabled by default; set to null to disable it, in which case the client must trigger responses manually.
-        echo_cancellation:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentEchoCancellation'
-            - type: 'null'
-          description: Optional server-side echo cancellation settings.
-        transcription:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentInputTranscription'
-            - type: 'null'
-          description: Asynchronous input-audio transcription. Set to null to disable transcription.
-      description: Input audio configuration for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentAudioOutputConfig:
-      type: object
-      properties:
-        format:
-          $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
-          description: The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.
-        voice:
-          type: string
-          description: The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar.
-        voice_type:
-          $ref: '#/components/schemas/VoiceType'
-          description: The voice implementation.
-        voice_locale:
-          type: string
-          description: The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-        speed:
-          type: number
-          format: float
-          minimum: 0.25
-          maximum: 1.5
-          description: The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.
-          default: 1
-        voice_temperature:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-        custom_lexicon_url:
-          type: string
-          format: uri
-          description: The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-        custom_text_normalization_url:
-          type: string
-          format: uri
-          description: The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-        prefer_locales:
-          type: array
-          items:
-            type: string
-          description: Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-        style:
-          type: string
-          description: The voice speaking style. Applies only when `voice_type` is `azure-standard`.
-        pitch:
-          type: string
-          description: The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-        volume:
-          type: string
-          description: The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
-        custom_voice_endpoint_id:
-          type: string
-          description: The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`.
-        personal_voice_model:
-          type: string
-          description: The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`.
-        output_audio_timestamp_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentAudioTimestampType'
-          description: Timestamp kinds to include with output audio. Applies to every `voice_type`.
-      description: |-
-        Output audio configuration for a voice agent.
-        Provider-specific fields are selected by `voice_type`:
-        - `openai`: `voice` and `speed`.
-        - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
-          `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
-        - `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.
-        - `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.
-        - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`; the voice name is derived from the avatar.
-        - `azure-realtime-native`: `voice` and `speed`.
-        `format` and `output_audio_timestamp_types` apply to every voice type.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentAudioTimestampType:
-      type: string
-      enum:
-        - word
-      description: An output-audio timestamp kind supported by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentAvatarConfig:
-      type: object
-      required:
-        - type
-        - character
-      properties:
-        type:
-          $ref: '#/components/schemas/VoiceAgentAvatarType'
-          description: The avatar type.
-        character:
-          type: string
-          description: The avatar character identifier, e.g. 'lisa'.
-        style:
-          type: string
-          description: The avatar style, e.g. 'casual-sitting'.
-        customized:
-          type: boolean
-          description: Whether the avatar is a customer-customized avatar. Defaults to false.
-          default: false
-        output_protocol:
-          $ref: '#/components/schemas/VoiceAgentAvatarOutputProtocol'
-          description: The transport used to deliver the avatar video stream.
-        model:
-          type: string
-          description: The avatar model identifier.
-        video:
-          $ref: '#/components/schemas/VoiceAgentAvatarVideoParams'
-          description: Avatar video encoder and presentation settings.
-        scene:
-          $ref: '#/components/schemas/VoiceAgentAvatarScene'
-          description: Avatar placement and motion settings.
-        output_audit_audio:
-          type: boolean
-          description: Whether audit audio is emitted with avatar output. Defaults to false.
-          default: false
-      description: Avatar configuration for a voice agent. These values are session defaults and may be overridden when connecting.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentAvatarIceServer:
-      type: object
-      required:
-        - urls
-      properties:
-        urls:
-          type: array
-          items:
-            type: string
-            format: uri
-        username:
-          anyOf:
-            - type: string
-            - type: 'null'
-        credential:
-          anyOf:
-            - type: string
-            - type: 'null'
-          format: password
-      description: An ICE server used for avatar WebRTC negotiation.
-    VoiceAgentAvatarOutputProtocol:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - webrtc
-            - websocket
-            - websocket-binary
-      description: The transport used to deliver the avatar video stream.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentAvatarScene:
-      type: object
-      properties:
-        zoom:
-          type: number
-          format: float
-          exclusiveMinimum: 0
-          default: 1
-        position_x:
-          type: number
-          format: float
-          minimum: -1
-          maximum: 1
-          default: 0
-        position_y:
-          type: number
-          format: float
-          minimum: -1
-          maximum: 1
-          default: 0
-        rotation_x:
-          type: number
-          format: float
-          minimum: -3.141592653589793
-          maximum: 3.141592653589793
-          default: 0
-        rotation_y:
-          type: number
-          format: float
-          minimum: -3.141592653589793
-          maximum: 3.141592653589793
-          default: 0
-        rotation_z:
-          type: number
-          format: float
-          minimum: -3.141592653589793
-          maximum: 3.141592653589793
-          default: 0
-        amplitude:
-          type: number
-          format: float
-          maximum: 1
-          exclusiveMinimum: 0
-          default: 1
-      description: Avatar placement and motion settings.
-    VoiceAgentAvatarType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - video_avatar
-            - photo_avatar
-      description: The avatar type.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentAvatarVideoBackground:
-      type: object
-      properties:
-        image_url:
-          type: string
-          format: uri
-        color:
-          type: string
-      description: The avatar video background.
-    VoiceAgentAvatarVideoCrop:
-      type: object
-      required:
-        - bottom_right
-        - top_left
-      properties:
-        bottom_right:
-          type: array
-          items:
-            type: integer
-            format: uint32
-          minItems: 2
-          maxItems: 2
-        top_left:
-          type: array
-          items:
-            type: integer
-            format: uint32
-          minItems: 2
-          maxItems: 2
-      description: The rectangular crop applied to avatar video.
-    VoiceAgentAvatarVideoParams:
-      type: object
-      properties:
-        bitrate:
-          type: integer
-          format: int32
-          description: The target video bitrate in bits per second.
-          default: 2000000
-        crop:
-          $ref: '#/components/schemas/VoiceAgentAvatarVideoCrop'
-        resolution:
-          $ref: '#/components/schemas/VoiceAgentAvatarVideoResolution'
-        background:
-          $ref: '#/components/schemas/VoiceAgentAvatarVideoBackground'
-        gop_size:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 2000
-          default: 10
-      description: Avatar video encoder and presentation settings.
-    VoiceAgentAvatarVideoResolution:
-      type: object
-      required:
-        - width
-        - height
-      properties:
-        width:
-          type: integer
-          format: int32
-          minimum: 1
-        height:
-          type: integer
-          format: int32
-          minimum: 1
-      description: The avatar video resolution.
-    VoiceAgentAzureSemanticVadEnTurnDetection:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - azure_semantic_vad_en
-        threshold:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: Activation threshold for voice activity detection, from 0 to 1.
-        prefix_padding_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Audio to include before detected speech, in milliseconds.
-        silence_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Silence required to end speech detection, in milliseconds.
-        idle_timeout_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Maximum idle time before the detector ends the turn, in milliseconds.
-        end_of_utterance_detection:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
-            - type: 'null'
-          description: Semantic end-of-utterance detection configuration. Set to null to disable it.
-        speech_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Minimum speech duration required to trigger detection, in milliseconds.
-        remove_filler_words:
-          type: boolean
-          description: Whether filler words are removed from transcription.
-          default: false
-        create_response:
-          type: boolean
-          description: Whether a response is created automatically when speech stops.
-          default: true
-        interrupt_response:
-          type: boolean
-          description: Whether user speech may interrupt the agent's response.
-          default: true
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
-      description: English-optimized Azure semantic voice activity detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentAzureSemanticVadMultilingualTurnDetection:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - azure_semantic_vad_multilingual
-        threshold:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: Activation threshold for voice activity detection, from 0 to 1.
-        prefix_padding_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Audio to include before detected speech, in milliseconds.
-        silence_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Silence required to end speech detection, in milliseconds.
-        idle_timeout_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Maximum idle time before the detector ends the turn, in milliseconds.
-        end_of_utterance_detection:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
-            - type: 'null'
-          description: Semantic end-of-utterance detection configuration. Set to null to disable it.
-        speech_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Minimum speech duration required to trigger detection, in milliseconds.
-        remove_filler_words:
-          type: boolean
-          description: Whether filler words are removed from transcription.
-          default: false
-        create_response:
-          type: boolean
-          description: Whether a response is created automatically when speech stops.
-          default: true
-        interrupt_response:
-          type: boolean
-          description: Whether user speech may interrupt the agent's response.
-          default: true
-        languages:
-          type: array
-          items:
-            type: string
-          description: BCP-47 language codes used for speech detection.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
-      description: Multilingual Azure semantic voice activity detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentAzureSemanticVadTurnDetection:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - azure_semantic_vad
-        threshold:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: Activation threshold for voice activity detection, from 0 to 1.
-        prefix_padding_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Audio to include before detected speech, in milliseconds.
-        silence_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Silence required to end speech detection, in milliseconds.
-        idle_timeout_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Maximum idle time before the detector ends the turn, in milliseconds.
-        end_of_utterance_detection:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
-            - type: 'null'
-          description: Semantic end-of-utterance detection configuration. Set to null to disable it.
-        speech_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Minimum speech duration required to trigger detection, in milliseconds.
-        remove_filler_words:
-          type: boolean
-          description: Whether filler words are removed from transcription.
-          default: false
-        create_response:
-          type: boolean
-          description: Whether a response is created automatically when speech stops.
-          default: true
-        interrupt_response:
-          type: boolean
-          description: Whether user speech may interrupt the agent's response.
-          default: true
-        languages:
-          type: array
-          items:
-            type: string
-          description: BCP-47 language codes used for speech detection.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
-      description: Azure semantic voice activity detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentDefinition:
-      type: object
-      required:
-        - kind
-        - model_type
-        - model
-      properties:
-        kind:
-          type: string
-          enum:
-            - voice
-          description: The kind discriminator for a voice agent definition. Always `voice`.
-        model_type:
-          $ref: '#/components/schemas/VoiceModelType'
-          description: How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` uses a service-managed model; `self_deployed` uses the customer's own Foundry deployment. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.
-        model:
-          type: string
-          description: "The model to use for this agent, paired with `model_type`: the service-managed model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. The model must support realtime or cascaded voice. The service derives the architecture from the selected model."
-        instructions:
-          type: string
-          description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
-        greeting:
-          $ref: '#/components/schemas/VoiceAgentGreetingConfig'
-          description: Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools.
-        audio:
-          $ref: '#/components/schemas/VoiceAgentAudioConfig'
-          description: |-
-            The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
-            transcription. These values are session defaults; a client may override supported fields when connecting.
-        output_modalities:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceOutputModality'
-          description: |-
-            The output modalities the agent produces. Defaults to `["audio"]`. `animation` and `avatar` are available
-            when an avatar is configured.
-          default:
-            - audio
-        max_output_tokens:
-          $ref: '#/components/schemas/VoiceAgentMaxOutputTokens'
-          description: The maximum output-token count for one response.
-        include:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentSessionIncludeOption'
-          description: Additional fields to include in service outputs.
-        interim_response:
-          $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
-          description: Interim-response settings for latency and tool execution.
-        avatar:
-          $ref: '#/components/schemas/VoiceAgentAvatarConfig'
-          description: Optional avatar configuration. These values are session defaults and may be overridden when connecting.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentTool'
-          description: |-
-            The tools the voice agent may use. Supported tool kinds are `function` (executed by the client), `mcp`,
-            `system` (service-managed session controls), and `toolbox`. Server-side tools such as `web_search`,
-            `azure_ai_search`, and `openapi` are provided through a toolbox rather than declared directly.
-        tool_choice:
-          $ref: '#/components/schemas/VoiceAgentToolChoice'
-          description: |-
-            How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,
-            `required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.
-            Defaults to `auto`.
-          default: auto
-        parallel_tool_calls:
-          type: boolean
-          description: Whether the model may call multiple tools in parallel.
-        structured_inputs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/StructuredInputDefinition'
-          description: Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.
-        store:
-          type: boolean
-          description: |-
-            Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
-            `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
-            timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
-            audio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.
-            time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
-            is not part of the persisted conversation content.
-          default: false
-      allOf:
-        - $ref: '#/components/schemas/AgentDefinition'
-      description: |-
-        The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
-        managed speech-to-speech experience. Establish realtime voice sessions through
-        `GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentEchoCancellation:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - server_echo_cancellation
-          description: The echo cancellation implementation. Always `server_echo_cancellation`.
-        reference_source:
-          $ref: '#/components/schemas/VoiceAgentEchoCancellationReferenceSource'
-          description: Whether reference audio comes from server playback or a client-provided channel.
-          default: server
-        channels:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 2
-          description: The number of input channels. Use two interleaved channels when `reference_source` is `client`.
-          default: 1
-      description: Server-side echo cancellation settings for input audio.
-    VoiceAgentEchoCancellationReferenceSource:
-      type: string
-      enum:
-        - server
-        - client
-      description: The source of reference audio used for echo cancellation.
-    VoiceAgentEndOfUtteranceDetection:
-      type: object
-      required:
-        - model
-      properties:
-        model:
-          $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetectionModel'
-          description: The semantic detection model.
-        threshold_level:
-          $ref: '#/components/schemas/VoiceAgentEndOfUtteranceThresholdLevel'
-          description: The sensitivity threshold.
-        timeout_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: The detection timeout in milliseconds.
-      description: Semantic end-of-utterance detection configuration.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentEndOfUtteranceDetectionModel:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - semantic_detection_v1
-            - semantic_detection_v1_en
-            - semantic_detection_v1_multilingual
-            - smart_end_of_turn_detection
-      description: The semantic end-of-utterance detection model.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentEndOfUtteranceThresholdLevel:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - low
-            - medium
-            - high
-            - default
-      description: The sensitivity threshold for semantic end-of-utterance detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentFunctionTool:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        description:
-          type: string
-          description: |-
-            The description of the function, including guidance on when and how
-              to call it, and guidance about what to tell the user when calling
-              (if anything).
-        parameters:
-          $ref: '#/components/schemas/OpenAI.RealtimeFunctionToolParameters'
-          description: Parameters of the function in JSON Schema.
-        type:
-          type: string
-          enum:
-            - function
-        name:
-          type: string
-          minLength: 1
-          description: The function name.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentTool'
-      description: A native function tool executed by the client.
-    VoiceAgentGreetingConfig:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          description: The greeting mode.
-      discriminator:
-        propertyName: type
-        mapping:
-          template: '#/components/schemas/VoiceAgentTemplateGreetingConfig'
-          llm_generated: '#/components/schemas/VoiceAgentLlmGeneratedGreetingConfig'
-      description: Session-start greeting configuration for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentInputTranscription:
-      type: object
-      required:
-        - model
-      properties:
-        language:
-          type: string
-          description: |-
-            The language of the input audio. Supplying the input language in
-              [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
-              will improve accuracy and latency.
-        languages:
-          type: array
-          items:
-            type: string
-          minItems: 1
-          description: Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe` and `gpt-live-transcribe`.
-        keywords:
-          type: array
-          items:
-            type: string
-          description: Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe` and `gpt-live-transcribe`.
-        prompt:
-          type: string
-          description: |-
-            An optional text to guide the model's style or continue a previous audio
-              segment.
-              For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).
-              For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example "expect words related to technology".
-              Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions.
-        delay:
-          type: string
-          enum:
-            - minimal
-            - low
-            - medium
-            - high
-            - xhigh
-          description: |-
-            Controls how long the model waits before emitting transcription text.
-              Higher values can improve transcription accuracy at the cost of latency.
-              Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
-        model:
-          $ref: '#/components/schemas/VoiceAgentInputTranscriptionModel'
-          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.
-        custom_speech:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: Optional customer custom speech deployment configuration, keyed by locale.
-        phrase_list:
-          type: array
-          items:
-            type: string
-          description: Optional phrase hints that bias recognition toward domain terms.
-      description: |-
-        Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-        options with the Azure and MAI transcription models, custom speech models, and phrase hints.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentInputTranscriptionModel:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - whisper-1
-            - gpt-realtime-whisper
-            - gpt-4o-transcribe
-            - gpt-4o-mini-transcribe
-            - gpt-4o-transcribe-diarize
-            - gpt-transcribe
-            - gpt-live-transcribe
-            - mai-transcribe
-            - azure-speech
-      description: |-
-        The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
-        voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
-        Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentInterimResponseConfig:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          description: The interim-response implementation.
-        triggers:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentInterimResponseTrigger'
-          description: Conditions that may trigger one interim response.
-          default:
-            - latency
-        latency_threshold_ms:
-          type: integer
-          format: int32
-          description: The latency threshold in milliseconds.
-          default: PT2S
-      discriminator:
-        propertyName: type
-        mapping:
-          static_interim_response: '#/components/schemas/VoiceAgentStaticInterimResponseConfig'
-          llm_interim_response: '#/components/schemas/VoiceAgentLlmInterimResponseConfig'
-      description: Fields shared by interim-response configurations.
-    VoiceAgentInterimResponseTrigger:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - latency
-            - tool
-      description: A condition that may trigger an interim response.
-    VoiceAgentLlmGeneratedGreetingConfig:
-      type: object
-      required:
-        - type
-        - prompt
-      properties:
-        type:
-          type: string
-          enum:
-            - llm_generated
-        prompt:
-          type: string
-          minLength: 1
-          description: The Handlebars prompt that guides the opening turn.
-        tool_choice:
-          $ref: '#/components/schemas/VoiceAgentToolChoice'
-          description: The tool-selection policy for the opening response. Defaults to `none`.
-          default: none
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentGreetingConfig'
-      description: A greeting authored by the session model from a scoped opening-turn prompt.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentLlmInterimResponseConfig:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - llm_interim_response
-        model:
-          type: string
-          description: The model used to generate interim responses.
-        instructions:
-          type: string
-          description: Optional instructions for generating interim responses.
-        max_completion_tokens:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The maximum completion-token count for an interim response.
-          default: 50
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
-      description: An interim response generated by a language model.
-    VoiceAgentMaxOutputTokens:
-      anyOf:
-        - type: integer
-          format: int32
-        - type: string
-          enum:
-            - inf
-      description: The maximum output-token count or the literal `inf`.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentMcpTool:
-      type: object
-      required:
-        - server_label
-        - type
-      properties:
-        server_label:
-          type: string
-          description: A label for this MCP server, used to identify it in tool calls.
-        authorization:
-          type: string
-          description: |-
-            An OAuth access token that can be used with a remote MCP server, either
-              with a custom MCP server URL or a service connector. Your application
-              must handle the OAuth authorization flow and provide the token here.
-        server_description:
-          type: string
-          description: Optional description of the MCP server, used to provide more context.
-        headers:
-          anyOf:
-            - type: object
-              unevaluatedProperties:
-                type: string
-            - type: 'null'
-        allowed_tools:
-          anyOf:
-            - type: array
-              items:
-                type: string
-            - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
-            - type: 'null'
-        allowed_callers:
-          anyOf:
-            - type: array
-              items:
-                $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
-            - type: 'null'
-        require_approval:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
-            - type: string
-              enum:
-                - always
-                - never
-            - type: 'null'
-          default: always
-        defer_loading:
-          type: boolean
-          description: Whether this MCP tool is deferred and discovered via tool search.
-        project_connection_id:
-          type: string
-          description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
-        type:
-          type: string
-          enum:
-            - mcp
-        server_url:
-          type: string
-          format: uri
-          description: The URL for the MCP server.
-        response_scheduling:
-          $ref: '#/components/schemas/VoiceAgentToolResponseScheduling'
-          description: When the MCP invocation creates a follow-up response. Defaults to `when_idle`.
-          default: when_idle
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentTool'
-      description: An MCP tool available to a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentNoiseReduction:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/VoiceAgentNoiseReductionType'
-          description: The noise reduction mode.
-      description: Input audio noise reduction configuration.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentNoiseReductionType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - near_field
-            - far_field
-            - azure_deep_noise_suppression
-      description: The input audio noise reduction mode.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentSemanticVadTurnDetection:
-      type: object
-      required:
-        - type
-      properties:
-        eagerness:
-          type: string
-          enum:
-            - low
-            - medium
-            - high
-            - auto
-          default: auto
-        create_response:
-          type: boolean
-          default: true
-        interrupt_response:
-          type: boolean
-          default: true
-        type:
-          type: string
-          enum:
-            - semantic_vad
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
-      description: OpenAI semantic VAD turn-detection settings.
-    VoiceAgentServerVadTurnDetection:
-      type: object
-      required:
-        - type
-      properties:
-        threshold:
-          $ref: '#/components/schemas/OpenAI.numeric'
-        prefix_padding_ms:
-          $ref: '#/components/schemas/OpenAI.integer'
-        silence_duration_ms:
-          $ref: '#/components/schemas/OpenAI.integer'
-        create_response:
-          type: boolean
-          default: true
-        interrupt_response:
-          type: boolean
-          default: true
-        idle_timeout_ms:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.integer'
-            - type: 'null'
-        type:
-          type: string
-          enum:
-            - server_vad
-        speech_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: Minimum speech duration required to trigger detection, in milliseconds.
-        end_of_utterance_detection:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentEndOfUtteranceDetection'
-            - type: 'null'
-          description: Semantic end-of-utterance detection configuration. Set to null to disable it.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
-      description: Server-side voice activity detection.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentSessionAvatarConfig:
-      type: object
-      properties:
-        ice_servers:
-          anyOf:
-            - type: array
-              items:
-                $ref: '#/components/schemas/VoiceAgentAvatarIceServer'
-            - type: 'null'
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentAvatarConfig'
-      description: Avatar settings accepted by the stable voice-agent WebSocket contract.
-    VoiceAgentSessionIncludeOption:
-      type: string
-      enum:
-        - item.input_audio_transcription.logprobs
-        - item.input_audio_transcription.phrases
-        - file_search_call.results
-      description: Additional fields that a voice-agent session may include in service outputs.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentStaticInterimResponseConfig:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - static_interim_response
-        texts:
-          type: array
-          items:
-            type: string
-          description: Candidate text values for the interim response.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
-      description: A static interim response selected from configured text.
-    VoiceAgentSystemTool:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - system
-          description: The type of the tool. Always `system`.
-        name:
-          $ref: '#/components/schemas/VoiceAgentSystemToolName'
-          description: The service-managed control action. Known values are stable; additional values may be added over time.
-        description:
-          type: string
-          description: An optional description of the system tool.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentTool'
-      description: A service-managed control that acts on the active voice session without customer code or external authentication.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentSystemToolName:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - end_conversation
-      description: A service-managed voice-session control action. Known values are stable; additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentTemplateGreetingConfig:
-      type: object
-      required:
-        - type
-        - text
-      properties:
-        type:
-          type: string
-          enum:
-            - template
-        text:
-          type: string
-          minLength: 1
-          description: The Handlebars text template spoken at session start.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentGreetingConfig'
-      description: A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentTool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          description: The tool kind.
-      discriminator:
-        propertyName: type
-        mapping:
-          function: '#/components/schemas/VoiceAgentFunctionTool'
-          mcp: '#/components/schemas/VoiceAgentMcpTool'
-          system: '#/components/schemas/VoiceAgentSystemTool'
-          toolbox: '#/components/schemas/VoiceAgentToolboxTool'
-      description: A tool usable by a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentToolChoice:
-      oneOf:
-        - type: string
-          enum:
-            - none
-            - auto
-            - required
-        - $ref: '#/components/schemas/OpenAI.ToolChoiceFunction'
-        - $ref: '#/components/schemas/OpenAI.ToolChoiceMCP'
-      description: Tool-selection behavior for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentToolResponseScheduling:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - silent
-            - when_idle
-            - interrupt
-            - skip_if_busy
-      description: When a tool invocation creates a follow-up response. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentToolboxTool:
-      type: object
-      required:
-        - type
-        - toolbox_name
-        - toolbox_version
-      properties:
-        type:
-          type: string
-          enum:
-            - toolbox
-          description: The type of the tool. Always `toolbox`.
-        toolbox_name:
-          type: string
-          description: The name of the toolbox to attach.
-        toolbox_version:
-          type: string
-          description: The immutable version of the toolbox to attach.
-        response_scheduling:
-          $ref: '#/components/schemas/VoiceAgentToolResponseScheduling'
-          description: When the toolbox invocation creates a follow-up response. Defaults to `when_idle`.
-          default: when_idle
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentTool'
-      description: A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentTurnDetectionConfig:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/VoiceAgentTurnDetectionType'
-          description: The turn-detection strategy.
-        auto_truncate:
-          type: boolean
-          description: Whether the input audio buffer is truncated automatically when speech stops.
-          default: false
-      discriminator:
-        propertyName: type
-        mapping:
-          server_vad: '#/components/schemas/VoiceAgentServerVadTurnDetection'
-          azure_semantic_vad: '#/components/schemas/VoiceAgentAzureSemanticVadTurnDetection'
-          azure_semantic_vad_en: '#/components/schemas/VoiceAgentAzureSemanticVadEnTurnDetection'
-          azure_semantic_vad_multilingual: '#/components/schemas/VoiceAgentAzureSemanticVadMultilingualTurnDetection'
-          semantic_vad: '#/components/schemas/VoiceAgentSemanticVadTurnDetection'
-      description: Turn-detection configuration for a voice agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentTurnDetectionType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - server_vad
-            - semantic_vad
-            - azure_semantic_vad
-            - azure_semantic_vad_en
-            - azure_semantic_vad_multilingual
-      description: The turn-detection strategy. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentWebSocketSubprotocol:
-      type: string
-      enum:
-        - realtime
-      description: The WebSocket subprotocol supported by a voice-agent connection.
-    VoiceAudioCodec:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - pcm16
-            - pcmu
-            - pcma
-      description: An audio codec. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAudioContainerFormat:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - wav
-      description: An audio container format. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAudioRole:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - user
-            - agent
-      description: A voice-audio participant role. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceConversation:
-      type: object
-      required:
-        - id
-        - object
-        - status
-        - created_at
-      properties:
-        id:
-          type: string
-          description: The unique id of the conversation.
-        object:
-          type: string
-          enum:
-            - voice.conversation
-          description: The object type. Always `voice.conversation`.
-        status:
-          $ref: '#/components/schemas/VoiceConversationStatus'
-          description: The lifecycle status of the conversation.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the conversation was created.
-        completed_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when session and persistence finalization reached the terminal `completed` or `failed` status. Absent while `status` is `in_progress`.
-        metadata:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: A set of key-value pairs attached to the conversation.
-        usage:
-          $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
-          description: Final aggregate token usage across all responses in this conversation. Absent while `status` is `in_progress` and populated after successful `completed` finalization; it may be absent when `status` is `failed`, and values are not guaranteed to be reported incrementally.
-        last_error:
-          $ref: '#/components/schemas/OpenAI.Error'
-          description: The terminal error that prevented persistence finalization. Present only when `status` is `failed`.
-      description: |-
-        A persisted voice conversation. The Foundry envelope that owns a voice agent's stored
-        transcript, responses, per-turn metrics, and audio. It is the parent, retention, and delete boundary:
-        deleting it cascades to its responses, items, metrics, and audio. When finalization fails, any partial persisted
-        responses, items, and item audio remain readable.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceConversationStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - in_progress
-            - completed
-            - failed
-      description: |-
-        The lifecycle status of a persisted voice conversation:
-        - `in_progress`: the live session is active, or post-session persistence finalization is pending.
-        - `completed`: finalization succeeded after normal or client close, `end_conversation`, a max-duration `1001`
-          close, or a client or network disconnect that the service can still finalize.
-        - `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceItemAudioResponse:
-      type: object
-      required:
-        - conversation_id
-        - item_id
-      properties:
-        conversation_id:
-          type: string
-          description: The id of the conversation the item belongs to.
-        item_id:
-          type: string
-          description: The id of the item this audio belongs to.
-        role:
-          $ref: '#/components/schemas/VoiceAudioRole'
-          description: The role the audio belongs to.
-        format:
-          $ref: '#/components/schemas/VoiceAudioContainerFormat'
-          description: The container format of the audio.
-        codec:
-          $ref: '#/components/schemas/VoiceAudioCodec'
-          description: The audio codec.
-        sample_rate:
-          type: integer
-          format: int32
-          description: The sample rate in Hz.
-        channels:
-          type: integer
-          format: int32
-          description: The number of audio channels.
-        start_offset_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: The offset from the session start at which this segment begins.
-        duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: The duration of the audio segment.
-        blob_uri:
-          type: string
-          format: uri
-          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
-      description: |-
-        Metadata for a single conversation item's audio segment. For bring-your-own-storage (BYOS), the response includes
-        `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
-        credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
-        `/audio/content` route.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceModelType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - managed
-            - self_deployed
-      description: |-
-        How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),
-        which the service derives from the selected model.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceOutputModality:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - text
-            - audio
-            - animation
-            - avatar
-      description: An output modality the agent may produce. `animation` and `avatar` are used when an avatar is configured.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceRecordingChannelLayout:
-      type: object
-      required:
-        - left
-        - right
-      properties:
-        left:
-          type: string
-          enum:
-            - user
-          description: The role carried on the left channel. Always `user`.
-        right:
-          type: string
-          enum:
-            - agent
-          description: The role carried on the right channel. Always `agent`.
-      description: The role assigned to each channel of a merged stereo voice recording.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceRecordingResponse:
-      type: object
-      required:
-        - conversation_id
-        - format
-        - sample_rate
-        - channels
-        - channel_layout
-        - duration_ms
-      properties:
-        conversation_id:
-          type: string
-          description: The id of the conversation this recording belongs to.
-        format:
-          $ref: '#/components/schemas/VoiceAudioContainerFormat'
-          description: The container format of the recording.
-        sample_rate:
-          type: integer
-          format: int32
-          description: The sample rate of the recording in Hz, e.g. 24000.
-        channels:
-          type: integer
-          format: int32
-          description: The number of audio channels. The merged recording is stereo (`2`).
-        channel_layout:
-          $ref: '#/components/schemas/VoiceRecordingChannelLayout'
-          description: The role assigned to each stereo channel.
-        duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
-          description: The total duration of the recording.
-        blob_uri:
-          type: string
-          format: uri
-          description: "For bring-your-own-storage (BYOS) recordings only: the URI of the recording in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead."
-      description: |-
-        Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,
-        agent audio on the right). Built once from the per-turn segments after the session ends and durably cached.
-        The common metadata (format, sample rate, channels, channel layout, duration) is returned for both
-        Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_uri`,
-        the URI of the recording in the customer's own storage (no SAS token), which the customer downloads using their
-        own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
-        `/audio/content` route instead.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceResponse:
-      type: object
-      required:
-        - id
-        - conversation_id
-      properties:
-        id:
-          type: string
-          description: The unique id of the response.
-        output:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-          description: The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.
-        conversation_id:
-          type: string
-          description: The id of the conversation this response belongs to.
-        audio:
-          $ref: '#/components/schemas/VoiceResponseAudio'
-          description: The audio configuration used for the response, including the voice and audio format used for output.
-        metadata:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: A set of key-value pairs attached to the response.
-        temperature:
-          type: number
-          format: float
-          description: The sampling temperature used for the response.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the response was created.
-        completed_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The Unix timestamp (in seconds) for when the response completed.
-      allOf:
-        - $ref: '#/components/schemas/VoiceResponseBase'
-      description: |-
-        A persisted voice response representing one model inference turn within a conversation. In list results the
-        `output` projection may be omitted; retrieve the
-        full response (`GET .../responses/{response_id}`) or the paged response-items route
-        (`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry
-        durable ordering extensions.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceResponseAudio:
-      type: object
-      properties:
-        output:
-          $ref: '#/components/schemas/VoiceResponseAudioOutput'
-          description: The audio output configuration used for the response.
-      description: Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceResponseAudioOutput:
-      type: object
-      properties:
-        voice:
-          type: string
-          description: The voice name used for the response's audio output.
-        voice_type:
-          $ref: '#/components/schemas/VoiceType'
-          description: The extensible provider/type of the voice used for the response's audio output.
-        voice_locale:
-          type: string
-          description: The BCP-47 locale of the voice used for the response's audio output.
-        format:
-          $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
-          description: The audio format used for the response's audio output.
-      description: The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceResponseBase:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the response, will look like `resp_1234`.
-        object:
-          type: string
-          enum:
-            - realtime.response
-          description: The object type, must be `realtime.response`.
-          x-stainless-const: true
-        status:
-          type: string
-          enum:
-            - completed
-            - cancelled
-            - failed
-            - incomplete
-            - in_progress
-          description: |-
-            The final status of the response (`completed`, `cancelled`, `failed`, or
-              `incomplete`, `in_progress`).
-        status_details:
-          $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetails'
-          description: Additional details about the status.
-        usage:
-          $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
-          description: |-
-            Usage statistics for the Response, this will correspond to billing. A
-              Realtime API session will maintain a conversation context and append new
-              Items to the Conversation, thus output from previous turns (text and
-              audio tokens) will become the input for later turns.
-        conversation_id:
-          type: string
-          description: |-
-            Which conversation the response is added to, determined by the `conversation`
-              field in the `response.create` event. If `auto`, the response will be added to
-              the default conversation and the value of `conversation_id` will be an id like
-              `conv_1234`. If `none`, the response will not be added to any conversation and
-              the value of `conversation_id` will be `null`. If responses are being triggered
-              automatically by VAD the response will be added to the default conversation
-        output_modalities:
-          type: array
-          items:
-            type: string
-            enum:
-              - text
-              - audio
-          description: |-
-            The set of modalities the model used to respond, currently the only possible values are
-              `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the
-              output to mode `text` will disable audio output from the model.
-        max_output_tokens:
-          oneOf:
-            - $ref: '#/components/schemas/OpenAI.integer'
-            - type: string
-              enum:
-                - inf
-          description: |-
-            Maximum number of output tokens for a single assistant response,
-              inclusive of tool calls, that was used in this response.
-      description: Properties shared by persisted voice responses.
-    VoiceType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - openai
-            - azure-standard
-            - azure-custom
-            - azure-personal
-            - avatar-voice-sync
-            - azure-realtime-native
-      description: The voice implementation. Additional values may be added over time.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     WebIQPreviewTool:
       type: object
       required:
@@ -82161,10 +78365,6 @@ components:
           type: string
           enum:
             - web_search
-        external_web_access:
-          type: boolean
-          description: Allow live internet access for web search. Defaults to true when omitted. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content.
-          default: true
         filters:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchToolFilters'
