@@ -102,6 +102,11 @@ model VoiceResponseAudio {
   output?: VoiceResponseAudioOutput;
 }
 
+@doc("Properties shared by persisted voice responses.")
+model VoiceResponseBase {
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio" | "output" | "metadata">;
+}
+
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the persisted projection replaces audio, output, and metadata."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
@@ -112,10 +117,7 @@ model VoiceResponseAudio {
   durable ordering extensions.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponse extends OmitProperties<
-  OpenAI.RealtimeResponse,
-  "audio" | "output" | "metadata" | "id" | "conversation_id"
-> {
+model VoiceResponse extends VoiceResponseBase {
   @doc("The unique id of the response.")
   id: string;
 
