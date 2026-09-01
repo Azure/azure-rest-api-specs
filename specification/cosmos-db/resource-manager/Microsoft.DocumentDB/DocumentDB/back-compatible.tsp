@@ -10,9 +10,6 @@ using Microsoft.DocumentDB;
 @@Legacy.flattenProperty(DatabaseAccountCreateUpdateParameters.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(GraphResourceCreateUpdateParameters.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlDatabaseCreateUpdateParameters.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -23,15 +20,6 @@ using Microsoft.DocumentDB;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlContainerCreateUpdateParameters.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(RetrieveThroughputParameters.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(PhysicalPartitionThroughputInfoResult.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(RedistributeThroughputParameters.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlStoredProcedureCreateUpdateParameters.properties);
@@ -64,9 +52,6 @@ using Microsoft.DocumentDB;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GremlinGraphCreateUpdateParameters.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(CassandraViewCreateUpdateParameters.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoRoleDefinitionCreateUpdateParameters.properties);
@@ -102,9 +87,6 @@ using Microsoft.DocumentDB;
 @@Legacy.flattenProperty(RestorableTableGetResult.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ThroughputPoolUpdate.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FleetResourceUpdate.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -112,18 +94,6 @@ using Microsoft.DocumentDB;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputPoolAccountCreateParameters.properties);
-
-@@clientLocation(ChaosFaultResources.get, "ChaosFault");
-@@clientLocation(ChaosFaultResources.enableDisable, "ChaosFault");
-@@clientName(
-  ChaosFaultResources.enableDisable::parameters.resource,
-  "chaosFaultRequest"
-);
-@@clientLocation(ChaosFaultResources.list, "ChaosFault");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(chaosFaultResource.properties);
-
-@@clientName(CopyJobs.create::parameters.resource, "jobCreateParameters");
 
 @@clientName(
   DatabaseAccounts.createOrUpdate::parameters.resource,
@@ -234,19 +204,8 @@ using Microsoft.DocumentDB;
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(
-  GraphResources.createUpdateGraph::parameters.resource,
-  "createUpdateGraphParameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(GraphResourceGetResults.properties);
-
-@@clientName(
   SqlResources.createUpdateSqlDatabase::parameters.resource,
   "createUpdateSqlDatabaseParameters"
-);
-@@clientName(
-  SqlResources.sqlDatabasePartitionMerge::parameters.body,
-  "mergeParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlDatabaseGetResults.properties);
@@ -272,22 +231,6 @@ using Microsoft.DocumentDB;
   SqlResources
 );
 @@clientLocation(
-  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution,
-  SqlResources
-);
-@@clientName(
-  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution::parameters.body,
-  "retrieveThroughputParameters"
-);
-@@clientLocation(
-  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput,
-  SqlResources
-);
-@@clientName(
-  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
-  "redistributeThroughputParameters"
-);
-@@clientLocation(
   SqlResourcesThroughputSettingsGetResultsOperationGroup.getSqlContainerThroughput,
   SqlResources
 );
@@ -307,33 +250,9 @@ using Microsoft.DocumentDB;
   SqlResourcesThroughputSettingsGetResultsOperationGroup.migrateSqlContainerToManualThroughput,
   SqlResources
 );
-@@clientLocation(
-  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution,
-  SqlResources
-);
-@@clientName(
-  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
-  "retrieveThroughputParameters"
-);
-@@clientLocation(
-  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput,
-  SqlResources
-);
-@@clientName(
-  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
-  "redistributeThroughputParameters"
-);
 @@clientName(
   MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
   "updateThroughputParameters"
-);
-@@clientName(
-  MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
-  "retrieveThroughputParameters"
-);
-@@clientName(
-  MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
-  "redistributeThroughputParameters"
 );
 @@clientLocation(
   MongoDBResourcesThroughputSettingsGetResultsOperationGroup.getMongoDBCollectionThroughput,
@@ -346,22 +265,6 @@ using Microsoft.DocumentDB;
 @@clientName(
   MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
   "updateThroughputParameters"
-);
-@@clientLocation(
-  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution,
-  MongoDBResources
-);
-@@clientName(
-  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
-  "retrieveThroughputParameters"
-);
-@@clientLocation(
-  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput,
-  MongoDBResources
-);
-@@clientName(
-  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
-  "redistributeThroughputParameters"
 );
 @@clientLocation(
   MongoDBResourcesThroughputSettingsGetResultsOperationGroup.migrateMongoDBCollectionToAutoscale,
@@ -397,26 +300,6 @@ using Microsoft.DocumentDB;
 );
 @@clientLocation(
   CassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraTableToManualThroughput,
-  CassandraResources
-);
-@@clientLocation(
-  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.getCassandraViewThroughput,
-  CassandraResources
-);
-@@clientLocation(
-  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput,
-  CassandraResources
-);
-@@clientName(
-  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
-  "updateThroughputParameters"
-);
-@@clientLocation(
-  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToAutoscale,
-  CassandraResources
-);
-@@clientLocation(
-  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToManualThroughput,
   CassandraResources
 );
 @@clientName(
@@ -484,14 +367,6 @@ using Microsoft.DocumentDB;
 @@clientLocation(
   SqlContainerGetResultsOperationGroup.listSqlContainers,
   SqlResources
-);
-@@clientLocation(
-  SqlContainerGetResultsOperationGroup.listSqlContainerPartitionMerge,
-  SqlResources
-);
-@@clientName(
-  SqlContainerGetResultsOperationGroup.listSqlContainerPartitionMerge::parameters.body,
-  "mergeParameters"
 );
 @@clientLocation(
   SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation,
@@ -593,14 +468,6 @@ using Microsoft.DocumentDB;
   MongoDBDatabaseGetResultsOperationGroup.listMongoDBDatabases,
   MongoDBResources
 );
-@@clientLocation(
-  MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge,
-  MongoDBResources
-);
-@@clientName(
-  MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge::parameters.body,
-  "mergeParameters"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoDBDatabaseGetResults.properties);
 
@@ -623,14 +490,6 @@ using Microsoft.DocumentDB;
 @@clientLocation(
   MongoDBCollectionGetResultsOperationGroup.listMongoDBCollections,
   MongoDBResources
-);
-@@clientLocation(
-  MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge,
-  MongoDBResources
-);
-@@clientName(
-  MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge::parameters.body,
-  "mergeParameters"
 );
 @@clientLocation(
   MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation,
@@ -768,52 +627,15 @@ using Microsoft.DocumentDB;
 @@clientLocation(LocationGetResults.get, "Locations");
 @@clientLocation(LocationGetResults.list, "Locations");
 
-@@clientLocation(
-  CassandraViewGetResultsOperationGroup.getCassandraView,
-  CassandraResources
-);
-@@clientLocation(
-  CassandraViewGetResultsOperationGroup.createUpdateCassandraView,
-  CassandraResources
-);
-@@clientName(
-  CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
-  "createUpdateCassandraViewParameters"
-);
-@@clientLocation(
-  CassandraViewGetResultsOperationGroup.deleteCassandraView,
-  CassandraResources
-);
-@@clientLocation(
-  CassandraViewGetResultsOperationGroup.listCassandraViews,
-  CassandraResources
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(CassandraViewGetResults.properties);
-
-@@clientName(
-  DataTransferJobs.create::parameters.resource,
-  "jobCreateParameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DataTransferJobGetResults.properties);
-
 @@clientLocation(ClusterResources.get, "CassandraClusters");
 @@clientLocation(ClusterResources.createUpdate, "CassandraClusters");
 @@clientName(ClusterResources.createUpdate::parameters.resource, "body");
-@@clientName(GarnetClusters.createUpdate::parameters.resource, "body");
 @@clientLocation(ClusterResources.update, "CassandraClusters");
 @@clientName(ClusterResources.update::parameters.properties, "body");
-@@clientName(GarnetClusters.update::parameters.properties, "body");
 @@clientLocation(ClusterResources.delete, "CassandraClusters");
 @@clientLocation(ClusterResources.listByResourceGroup, "CassandraClusters");
 @@clientLocation(ClusterResources.listBySubscription, "CassandraClusters");
 @@clientLocation(ClusterResources.invokeCommand, "CassandraClusters");
-@@clientLocation(ClusterResources.invokeCommandAsync, "CassandraClusters");
-@@clientLocation(ClusterResources.listCommand, "CassandraClusters");
-@@clientLocation(ClusterResources.getCommandAsync, "CassandraClusters");
-@@clientLocation(ClusterResources.listBackups, "CassandraClusters");
-@@clientLocation(ClusterResources.getBackup, "CassandraClusters");
 @@clientLocation(ClusterResources.deallocate, "CassandraClusters");
 @@clientLocation(ClusterResources.start, "CassandraClusters");
 @@clientLocation(ClusterResources.status, "CassandraClusters");
@@ -1075,40 +897,6 @@ using Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TableRoleAssignmentResource.properties);
 
-@@clientLocation(ThroughputPoolResources.get, "ThroughputPool");
-@@clientLocation(ThroughputPoolResources.createOrUpdate, "ThroughputPool");
-@@clientName(
-  ThroughputPoolResources.createOrUpdate::parameters.resource,
-  "body"
-);
-@@clientLocation(ThroughputPoolResources.update, "ThroughputPool");
-@@clientName(ThroughputPoolResources.update::parameters.properties, "body");
-@@clientLocation(ThroughputPoolResources.delete, "ThroughputPool");
-@@clientLocation(
-  ThroughputPoolResources.listByResourceGroup,
-  "ThroughputPools"
-);
-@@clientLocation(ThroughputPoolResources.list, "ThroughputPools");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ThroughputPoolResource.properties);
-
-@@clientLocation(ThroughputPoolAccountResources.get, "ThroughputPoolAccount");
-@@clientLocation(
-  ThroughputPoolAccountResources.create,
-  "ThroughputPoolAccount"
-);
-@@clientName(
-  ThroughputPoolAccountResources.create::parameters.resource,
-  "body"
-);
-@@clientLocation(
-  ThroughputPoolAccountResources.delete,
-  "ThroughputPoolAccount"
-);
-@@clientLocation(ThroughputPoolAccountResources.list, "ThroughputPoolAccounts");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ThroughputPoolAccountResource.properties);
-
 @@clientLocation(
   CassandraRoleDefinitionResources.getCassandraRoleDefinition,
   CassandraResources
@@ -1257,14 +1045,6 @@ using Microsoft.DocumentDB;
 @@clientLocation(FleetResources.list, "Fleet");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FleetResource.properties);
-
-@@clientLocation(FleetAnalyticsResources.get, "FleetAnalytics");
-@@clientLocation(FleetAnalyticsResources.create, "FleetAnalytics");
-@@clientName(FleetAnalyticsResources.create::parameters.resource, "body");
-@@clientLocation(FleetAnalyticsResources.delete, "FleetAnalytics");
-@@clientLocation(FleetAnalyticsResources.list, "FleetAnalytics");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(FleetAnalyticsResource.properties);
 
 @@clientLocation(FleetspaceResources.get, "Fleetspace");
 @@clientLocation(FleetspaceResources.create, "Fleetspace");
