@@ -1,0 +1,69 @@
+{
+  "title": "Add resources to a scheduled action",
+  "operationId": "ScheduledActions_AttachResources",
+  "parameters": {
+    "api-version": "2026-09-06-preview",
+    "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "resourceGroupName": "rgcompute",
+    "scheduledActionName": "myScheduledAction",
+    "body": {
+      "resources": [
+        {
+          "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+          "notificationSettings": [
+            {
+              "destination": "admin@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": true
+            }
+          ]
+        },
+        {
+          "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2",
+          "notificationSettings": [
+            {
+              "destination": "admin@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Location": "https://contoso.com/operationstatus",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "totalResources": 2,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2",
+            "status": "Failed",
+            "error": {
+              "code": "InternalServerError",
+              "message": "An internal error occurred.",
+              "target": "virtualMachines",
+              "details": [],
+              "innererror": {
+                "code": "InnerErrorCode"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

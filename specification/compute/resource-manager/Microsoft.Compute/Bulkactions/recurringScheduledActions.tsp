@@ -231,6 +231,10 @@ union ScheduledActionsProvisioningState {
   @doc("The scheduled action is being deleted.")
   Deleting: "Deleting",
 
+  @added(Versions.`2026-09-06-preview`)
+  @doc("The scheduled action is being updated.")
+  Updating: "Updating",
+
   string,
 }
 
