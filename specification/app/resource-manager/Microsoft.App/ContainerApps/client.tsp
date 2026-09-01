@@ -171,8 +171,6 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@alternateType(RegistryInfo.registryUrl, url, "csharp");
-
 @@alternateType(AzureCredentials.tenantId, uuid, "csharp");
 
 @@alternateType(CustomDomain.certificateId, armResourceIdentifier, "csharp");
