@@ -159,6 +159,8 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(ManagedEnvironmentProperties.staticIp, ipV4Address, "csharp");
 
+@@alternateType(AppLocationParameter.location, azureLocation, "csharp");
+
 @@alternateType(OpenIdConnectConfig.certificationUri, url, "csharp");
 
 @@alternateType(SecretKeyVaultProperties.keyVaultUrl, url, "csharp");
