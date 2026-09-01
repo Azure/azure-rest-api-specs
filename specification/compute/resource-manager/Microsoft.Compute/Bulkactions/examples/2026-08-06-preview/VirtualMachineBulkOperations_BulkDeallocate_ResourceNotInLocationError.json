@@ -1,5 +1,5 @@
 {
-  "title": "Deallocate multiple virtual machines with retries",
+  "title": "Response when VM is not in the requested location",
   "operationId": "VirtualMachineBulkOperations_BulkDeallocate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -7,13 +7,7 @@
     "resourceGroupName": "example-rg",
     "location": "eastus",
     "requestBody": {
-      "executionParameters": {
-        "retryPolicy": {
-          "retryCount": 3,
-          "retryWindowInMinutes": 30
-        },
-        "optimizationPreference": "CostAvailabilityBalanced"
-      },
+      "executionParameters": {},
       "resources": {
         "ids": [
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
@@ -25,9 +19,9 @@
   "responses": {
     "200": {
       "body": {
-        "description": "Deallocate Resource request",
         "type": "VirtualMachines",
         "location": "eastus",
+        "description": "Deallocate Resource request",
         "results": [
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
@@ -35,33 +29,12 @@
               "operationId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
               "opType": "Deallocate",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "deadline": "2026-07-10T18:00:00Z",
-              "deadlineType": "InitiateAt",
-              "state": "PendingScheduling",
-              "timezone": "UTC",
-              "retryPolicy": {
-                "retryCount": 3,
-                "retryWindowInMinutes": 30
-              }
+              "state": "PendingScheduling"
             }
           },
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
-            "operation": {
-              "operationId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
-              "opType": "Deallocate",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "deadline": "2026-07-10T18:00:00Z",
-              "deadlineType": "InitiateAt",
-              "state": "PendingScheduling",
-              "timezone": "UTC",
-              "retryPolicy": {
-                "retryCount": 3,
-                "retryWindowInMinutes": 30
-              }
-            }
+            "errorCode": "ResourceNotInLocation"
           }
         ]
       }

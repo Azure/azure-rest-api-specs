@@ -1,6 +1,6 @@
 {
-  "title": "Hibernate virtual machines with a deallocation fallback",
-  "operationId": "VirtualMachineBulkOperations_BulkHibernate",
+  "title": "Reimage virtual machines with shared settings and a per-VM override",
+  "operationId": "VirtualMachineBulkOperations_BulkReimage",
   "parameters": {
     "api-version": "2026-08-06-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -10,20 +10,36 @@
       "executionParameters": {
         "retryPolicy": {
           "retryCount": 2,
-          "retryWindowInMinutes": 30,
-          "onFailureAction": "Deallocate"
-        },
-        "optimizationPreference": "CostAvailabilityBalanced"
+          "retryWindowInMinutes": 30
+        }
       },
       "resourcesWithContext": {
         "resources": [
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-            "resourceContext": "maintenance-window-01"
+            "resourceContext": "image-refresh-wave-1"
           },
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
-            "resourceContext": "maintenance-window-01"
+            "resourceContext": "image-refresh-wave-1"
+          }
+        ]
+      },
+      "reimageParameters": {
+        "baseProfile": {
+          "tempDisk": false,
+          "exactVersion": "1.0.0",
+          "osProfile": {
+            "customData": "I2Nsb3VkLWNvbmZpZwpwYWNrYWdlX3VwZ3JhZGU6IHRydWUK"
+          }
+        },
+        "resourceOverrides": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "profile": {
+              "tempDisk": false,
+              "exactVersion": "1.1.0"
+            }
           }
         ]
       }
@@ -32,49 +48,47 @@
   "responses": {
     "200": {
       "body": {
-        "description": "Hibernate Resource request",
         "type": "VirtualMachines",
         "location": "eastus",
+        "description": "Reimage Resource request",
         "results": [
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
             "operation": {
-              "operationId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
-              "opType": "Hibernate",
+              "opType": "Reimage",
               "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "deadline": "2026-07-10T18:00:00Z",
+              "deadline": "2026-09-15T18:00:00Z",
               "deadlineType": "InitiateAt",
               "state": "PendingScheduling",
               "timezone": "UTC",
               "retryPolicy": {
                 "retryCount": 2,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Deallocate"
+                "retryWindowInMinutes": 30
               },
               "resourceNotificationDetails": {
-                "resourceContext": "maintenance-window-01"
+                "resourceContext": "image-refresh-wave-1"
               }
             }
           },
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
             "operation": {
-              "operationId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "operationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
-              "opType": "Hibernate",
+              "opType": "Reimage",
               "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "deadline": "2026-07-10T18:00:00Z",
+              "deadline": "2026-09-15T18:00:00Z",
               "deadlineType": "InitiateAt",
               "state": "PendingScheduling",
               "timezone": "UTC",
               "retryPolicy": {
                 "retryCount": 2,
-                "retryWindowInMinutes": 30,
-                "onFailureAction": "Deallocate"
+                "retryWindowInMinutes": 30
               },
               "resourceNotificationDetails": {
-                "resourceContext": "maintenance-window-01"
+                "resourceContext": "image-refresh-wave-1"
               }
             }
           }
