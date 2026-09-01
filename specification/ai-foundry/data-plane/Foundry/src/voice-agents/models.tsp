@@ -465,7 +465,7 @@ union TelephonyBindingStatus {
 
 @doc("A PSTN destination for a telephony transfer target.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model PstnTelephonyTransferDestination {
+model PSTNTelephonyTransferDestination {
   @doc("The PSTN destination type.")
   kind: "pstn";
 
@@ -501,7 +501,7 @@ model SipTelephonyTransferDestination {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyTransferDestination {
   @doc("A public switched telephone network destination.")
-  pstn: PstnTelephonyTransferDestination,
+  pstn: PSTNTelephonyTransferDestination,
 
   @doc("A Microsoft Teams user or resource-account destination.")
   teams: TeamsTelephonyTransferDestination,

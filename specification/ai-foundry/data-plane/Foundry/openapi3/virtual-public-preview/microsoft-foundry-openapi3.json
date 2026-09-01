@@ -84901,6 +84901,33 @@
         ],
         "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint."
       },
+      "PSTNTelephonyTransferDestination": {
+        "type": "object",
+        "required": [
+          "kind",
+          "value"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "pstn"
+            ],
+            "description": "The PSTN destination type."
+          },
+          "value": {
+            "type": "string",
+            "pattern": "^\\+[1-9]\\d{6,14}$",
+            "description": "The E.164 phone number to call."
+          }
+        },
+        "description": "A PSTN destination for a telephony transfer target.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "PageOrder": {
         "type": "string",
         "enum": [
@@ -85640,33 +85667,6 @@
           }
         },
         "description": "A record mapping for a single protocol and its version."
-      },
-      "PstnTelephonyTransferDestination": {
-        "type": "object",
-        "required": [
-          "kind",
-          "value"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": [
-              "pstn"
-            ],
-            "description": "The PSTN destination type."
-          },
-          "value": {
-            "type": "string",
-            "pattern": "^\\+[1-9]\\d{6,14}$",
-            "description": "The E.164 phone number to call."
-          }
-        },
-        "description": "A PSTN destination for a telephony transfer target.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
       },
       "PublishApprovalStatus": {
         "anyOf": [
@@ -89067,7 +89067,7 @@
         "type": "object",
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PstnTelephonyTransferDestination"
+            "$ref": "#/components/schemas/PSTNTelephonyTransferDestination"
           },
           {
             "$ref": "#/components/schemas/TeamsTelephonyTransferDestination"
@@ -89079,7 +89079,7 @@
         "discriminator": {
           "propertyName": "kind",
           "mapping": {
-            "pstn": "#/components/schemas/PstnTelephonyTransferDestination",
+            "pstn": "#/components/schemas/PSTNTelephonyTransferDestination",
             "teams": "#/components/schemas/TeamsTelephonyTransferDestination",
             "sip": "#/components/schemas/SipTelephonyTransferDestination"
           }
