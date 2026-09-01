@@ -4040,12 +4040,6 @@ model physicalPartitionStorageInfo {
 }
 
 /**
- * PhysicalPartitionId object
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This model remains for the existing C# client customization while its preview-only identifier is intentionally absent from stable 2026-07-15."
-model PhysicalPartitionId {}
-
-/**
  * PhysicalPartitionThroughputInfo object
  */
 model PhysicalPartitionThroughputInfoResource {

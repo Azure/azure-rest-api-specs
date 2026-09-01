@@ -1662,7 +1662,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(EnableFullTextQuery, "CosmosDBFullTextQueryState", "csharp");
 @@clientName(BaseCopyJobProperties, "CosmosDBCopyJobBaseProperties", "csharp");
 @@clientName(BaseCopyJobTask, "CosmosDBCopyJobBaseTask", "csharp");
-@@clientName(PhysicalPartitionId, "CosmosDBPhysicalPartitionId", "csharp");
 @@clientName(
   physicalPartitionStorageInfo,
   "CosmosDBPhysicalPartitionStorageInfo",
