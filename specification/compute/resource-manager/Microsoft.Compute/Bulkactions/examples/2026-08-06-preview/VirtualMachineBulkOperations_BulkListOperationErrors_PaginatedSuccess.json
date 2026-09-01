@@ -1,5 +1,5 @@
 {
-  "title": "List paged failed operation errors",
+  "title": "List failed operation errors with paginated response",
   "operationId": "VirtualMachineBulkOperations_BulkListOperationErrors",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -11,6 +11,23 @@
     "200": {
       "body": {
         "value": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-1",
+            "errorCode": "AllocationFailed",
+            "errorDetails": "Allocation failed because sufficient capacity was not available for the requested virtual machine size in eastus.",
+            "operation": {
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-1",
+              "opType": "Start",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "state": "Failed",
+              "completedAt": "2026-08-31T18:18:00Z",
+              "resourceOperationError": {
+                "errorCode": "AllocationFailed",
+                "errorDetails": "Allocation failed because sufficient capacity was not available for the requested virtual machine size in eastus."
+              }
+            }
+          },
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-0",
             "errorCode": "OperationNotAllowed",

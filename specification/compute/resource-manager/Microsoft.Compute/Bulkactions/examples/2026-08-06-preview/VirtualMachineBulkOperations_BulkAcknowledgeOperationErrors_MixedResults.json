@@ -1,5 +1,5 @@
 {
-  "title": "Response with an unknown operation error during error acknowledgment",
+  "title": "Acknowledge operation errors with mixed results",
   "operationId": "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -9,7 +9,8 @@
     "body": {
       "operationIds": [
         "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-        "dddddddd-dddd-dddd-dddd-dddddddddddd"
+        "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "cccccccc-cccc-cccc-cccc-cccccccccccc"
       ]
     }
   },
@@ -20,9 +21,11 @@
           "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
         ],
         "notFound": [
-          "dddddddd-dddd-dddd-dddd-dddddddddddd"
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
         ],
-        "skipped": []
+        "skipped": [
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
       }
     }
   }

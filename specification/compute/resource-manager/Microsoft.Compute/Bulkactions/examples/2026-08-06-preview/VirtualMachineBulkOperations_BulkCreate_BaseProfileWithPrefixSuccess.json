@@ -1,5 +1,5 @@
 {
-  "title": "Create multiple Linux virtual machines",
+  "title": "Create two VMs using a base profile and prefix",
   "operationId": "VirtualMachineBulkOperations_BulkCreate",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -73,34 +73,9 @@
           }
         },
         "resourceCount": 2,
-        "resourcePrefix": "bulk-vm-",
-        "resourceOverrides": [
-          {
-            "name": "bulk-vm-0",
-            "properties": {
-              "osProfile": {
-                "computerName": "bulk-vm-0"
-              }
-            }
-          },
-          {
-            "name": "bulk-vm-1",
-            "properties": {
-              "osProfile": {
-                "computerName": "bulk-vm-1"
-              }
-            }
-          }
-        ]
+        "resourcePrefix": "bulk-vm-"
       },
-      "executionParameters": {
-        "retryPolicy": {
-          "retryCount": 3,
-          "retryWindowInMinutes": 30,
-          "onFailureAction": "Delete"
-        },
-        "optimizationPreference": "CostAvailabilityBalanced"
-      }
+      "executionParameters": {}
     }
   },
   "responses": {
