@@ -1321,8 +1321,8 @@ scalar HttpRange extends string;
 @@clientName(QueryType.JSON, "Json", "java");
 @@clientName(ArrowField, "ArrowFieldInternal", "java");
 @@clientName(ArrowConfiguration, "ArrowTextConfigurationInternal", "java");
-@@clientName(ContainerItem, "ContainerItemInternal", "java");
-@@clientName(ContainerProperties, "ContainerPropertiesInternal", "java");
+@@clientName(ContainerItem, "BlobContainerItem", "java");
+@@clientName(ContainerProperties, "BlobContainerItemProperties", "java");
 @@clientName(JsonTextConfiguration, "JsonTextConfigurationInternal", "java");
 @@clientName(StorageServiceStats, "BlobServiceStatistics", "java");
 @@clientName(AccessPolicy.start, "StartsOn", "java");
@@ -1352,6 +1352,13 @@ scalar HttpRange extends string;
 // The shipped java constant is UNCOMMITTEDBLOBS (no underscore); the emitter would otherwise derive
 // UNCOMMITTED_BLOBS from the spec member name, renaming a public constant.
 @@clientName(ListBlobsIncludeItem.UncommittedBlobs, "uncommittedblobs", "java");
+
+// The shipped java KeyInfo takes the SAS start/expiry as pre-formatted ISO-8601 strings (the hand-written
+// BlobServiceClient formats them via Constants.ISO_8601_UTC_DATE_FORMATTER), and spells out the tenant id.
+// python, csharp, javascript and go all carry the same string override.
+@@alternateType(KeyInfo.start, string, "java");
+@@alternateType(KeyInfo.expiry, string, "java");
+@@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
 @@clientName(Metrics.includeApis, "IncludeApis", "java");
 @@clientName(BlobType.BlockBlob, "Block", "java");
 @@clientName(BlobType.PageBlob, "Page", "java");
@@ -1383,6 +1390,13 @@ scalar HttpRange extends string;
 @@clientName(ParquetConfiguration, "ParquetTextConfiguration", "java");
 @@clientName(BlobHierarchyList, "BlobHierarchyListSegment", "java");
 
+// The hand-written BlobServiceClient pages on the NextMarker in the segment response body, so it needs the
+// response as a typed model. Without an explicit access/usage it is only consumed inline by the emitter's paging
+// helpers and no model is generated. BlobContainersSegment is the name the shipped java impl used.
+@@clientName(ListContainersResponse, "BlobContainersSegment", "java");
+@@access(ListContainersResponse, Access.internal, "java");
+@@usage(ListContainersResponse, Usage.output, "java");
+
 // go and csharp both flatten these XML metadata bags to a plain string map; java was missing the same
 // alternateType, so the emitter generated BlobMetadata/ObjectReplicationMetadata wrapper classes where the
 // shipped models expose Map<String, String>.
@@ -1392,8 +1406,6 @@ scalar HttpRange extends string;
 @@access(BlobItem, Access.internal, "java");
 @@access(ArrowField, Access.internal, "java");
 @@access(ArrowConfiguration, Access.internal, "java");
-@@access(ContainerItem, Access.internal, "java");
-@@access(ContainerProperties, Access.internal, "java");
 @@access(DelimitedTextConfiguration, Access.internal, "java");
 @@access(JsonTextConfiguration, Access.internal, "java");
 @@access(BlobDeleteTypeCustom, Access.internal, "java");
