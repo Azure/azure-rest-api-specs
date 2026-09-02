@@ -1,0 +1,970 @@
+# Az.AzureResilienceManagement - Cmdlet Index
+
+Generated from `package-2026-08-31-preview` using `@autorest/powershell@4.0.758`.
+
+- **Total cmdlets:** 417
+- **Distinct nouns (resource types):** 34
+
+Every cmdlet ends in an underscore + variant suffix (e.g. `_Get`, `_List`, `_GetViaIdentity`, `_UpdateExpanded`, `_ViaJsonString`). See the [AutoRest cmdlet variants doc](https://github.com/Azure/autorest.powershell/blob/main/docs/design/cmdlet-variants.md) for what each suffix means.
+
+## Verb summary
+
+| Verb | Count |
+|------|------:|
+| Get | 73 |
+| Update | 71 |
+| Test | 68 |
+| Invoke | 56 |
+| New | 50 |
+| Set | 24 |
+| Add | 18 |
+| Stop | 18 |
+| Remove | 17 |
+| Resume | 14 |
+| Start | 8 |
+
+## Cmdlets grouped by noun
+
+### AzureResilienceManagementCommitRecoveryPlanActionFailover _(count: 3)_
+
+- `Invoke-AzureResilienceManagementCommitRecoveryPlanActionFailover_Commit`
+- `Invoke-AzureResilienceManagementCommitRecoveryPlanActionFailover_CommitViaIdentity`
+- `Invoke-AzureResilienceManagementCommitRecoveryPlanActionFailover_CommitViaIdentityServiceGroup`
+
+### AzureResilienceManagementDrill _(count: 47)_
+
+- `Get-AzureResilienceManagementDrill_Get`
+- `Get-AzureResilienceManagementDrill_GetViaIdentity`
+- `Get-AzureResilienceManagementDrill_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementDrill_List`
+- `New-AzureResilienceManagementDrill_Create`
+- `New-AzureResilienceManagementDrill_CreateExpanded`
+- `New-AzureResilienceManagementDrill_CreateViaIdentity`
+- `New-AzureResilienceManagementDrill_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementDrill_CreateViaIdentityServiceGroup`
+- `New-AzureResilienceManagementDrill_CreateViaIdentityServiceGroupExpanded`
+- `New-AzureResilienceManagementDrill_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementDrill_CreateViaJsonString`
+- `Remove-AzureResilienceManagementDrill_Delete`
+- `Remove-AzureResilienceManagementDrill_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementDrill_DeleteViaIdentityServiceGroup`
+- `Start-AzureResilienceManagementDrill_Start`
+- `Start-AzureResilienceManagementDrill_StartExpanded`
+- `Start-AzureResilienceManagementDrill_StartViaIdentity`
+- `Start-AzureResilienceManagementDrill_StartViaIdentityExpanded`
+- `Start-AzureResilienceManagementDrill_StartViaIdentityServiceGroup`
+- `Start-AzureResilienceManagementDrill_StartViaIdentityServiceGroupExpanded`
+- `Start-AzureResilienceManagementDrill_StartViaJsonFilePath`
+- `Start-AzureResilienceManagementDrill_StartViaJsonString`
+- `Stop-AzureResilienceManagementDrill_End`
+- `Stop-AzureResilienceManagementDrill_EndExpanded`
+- `Stop-AzureResilienceManagementDrill_EndViaIdentity`
+- `Stop-AzureResilienceManagementDrill_EndViaIdentityExpanded`
+- `Stop-AzureResilienceManagementDrill_EndViaIdentityServiceGroup`
+- `Stop-AzureResilienceManagementDrill_EndViaIdentityServiceGroupExpanded`
+- `Stop-AzureResilienceManagementDrill_EndViaJsonFilePath`
+- `Stop-AzureResilienceManagementDrill_EndViaJsonString`
+- `Test-AzureResilienceManagementDrill_Validate`
+- `Test-AzureResilienceManagementDrill_ValidateExpanded`
+- `Test-AzureResilienceManagementDrill_ValidateViaIdentity`
+- `Test-AzureResilienceManagementDrill_ValidateViaIdentityExpanded`
+- `Test-AzureResilienceManagementDrill_ValidateViaIdentityServiceGroup`
+- `Test-AzureResilienceManagementDrill_ValidateViaIdentityServiceGroupExpanded`
+- `Test-AzureResilienceManagementDrill_ValidateViaJsonFilePath`
+- `Test-AzureResilienceManagementDrill_ValidateViaJsonString`
+- `Update-AzureResilienceManagementDrill_Update`
+- `Update-AzureResilienceManagementDrill_UpdateExpanded`
+- `Update-AzureResilienceManagementDrill_UpdateViaIdentity`
+- `Update-AzureResilienceManagementDrill_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementDrill_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementDrill_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementDrill_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementDrill_UpdateViaJsonString`
+
+### AzureResilienceManagementDrillResource _(count: 21)_
+
+- `Add-AzureResilienceManagementDrillResource_Add`
+- `Add-AzureResilienceManagementDrillResource_AddExpanded`
+- `Add-AzureResilienceManagementDrillResource_AddViaIdentity`
+- `Add-AzureResilienceManagementDrillResource_AddViaIdentityExpanded`
+- `Add-AzureResilienceManagementDrillResource_AddViaIdentityServiceGroup`
+- `Add-AzureResilienceManagementDrillResource_AddViaIdentityServiceGroupExpanded`
+- `Add-AzureResilienceManagementDrillResource_AddViaJsonFilePath`
+- `Add-AzureResilienceManagementDrillResource_AddViaJsonString`
+- `Get-AzureResilienceManagementDrillResource_Get`
+- `Get-AzureResilienceManagementDrillResource_GetViaIdentity`
+- `Get-AzureResilienceManagementDrillResource_GetViaIdentityDrill`
+- `Get-AzureResilienceManagementDrillResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementDrillResource_List`
+- `Update-AzureResilienceManagementDrillResource_Update`
+- `Update-AzureResilienceManagementDrillResource_UpdateExpanded`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaIdentity`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaJsonString`
+
+### AzureResilienceManagementDrillResyncReadiness _(count: 3)_
+
+- `Test-AzureResilienceManagementDrillResyncReadiness_Check`
+- `Test-AzureResilienceManagementDrillResyncReadiness_CheckViaIdentity`
+- `Test-AzureResilienceManagementDrillResyncReadiness_CheckViaIdentityServiceGroup`
+
+### AzureResilienceManagementDrillRun _(count: 9)_
+
+- `Get-AzureResilienceManagementDrillRun_Get`
+- `Get-AzureResilienceManagementDrillRun_GetViaIdentity`
+- `Get-AzureResilienceManagementDrillRun_GetViaIdentityDrill`
+- `Get-AzureResilienceManagementDrillRun_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementDrillRun_List`
+- `Resume-AzureResilienceManagementDrillRun_Resume`
+- `Resume-AzureResilienceManagementDrillRun_ResumeViaIdentity`
+- `Resume-AzureResilienceManagementDrillRun_ResumeViaIdentityDrill`
+- `Resume-AzureResilienceManagementDrillRun_ResumeViaIdentityServiceGroup`
+
+### AzureResilienceManagementDrillRunNote _(count: 10)_
+
+- `Add-AzureResilienceManagementDrillRunNote_Add`
+- `Add-AzureResilienceManagementDrillRunNote_AddExpanded`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentity`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityDrill`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityDrillExpanded`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityExpanded`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityServiceGroup`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityServiceGroupExpanded`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaJsonFilePath`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaJsonString`
+
+### AzureResilienceManagementDrillRunReport _(count: 4)_
+
+- `New-AzureResilienceManagementDrillRunReport_Generate`
+- `New-AzureResilienceManagementDrillRunReport_GenerateViaIdentity`
+- `New-AzureResilienceManagementDrillRunReport_GenerateViaIdentityDrill`
+- `New-AzureResilienceManagementDrillRunReport_GenerateViaIdentityServiceGroup`
+
+### AzureResilienceManagementDrillRunReportDownloadUrl _(count: 4)_
+
+- `Get-AzureResilienceManagementDrillRunReportDownloadUrl_List`
+- `Get-AzureResilienceManagementDrillRunReportDownloadUrl_ListExpanded`
+- `Get-AzureResilienceManagementDrillRunReportDownloadUrl_ListViaJsonFilePath`
+- `Get-AzureResilienceManagementDrillRunReportDownloadUrl_ListViaJsonString`
+
+### AzureResilienceManagementDrillRunResource _(count: 6)_
+
+- `Get-AzureResilienceManagementDrillRunResource_Get`
+- `Get-AzureResilienceManagementDrillRunResource_GetViaIdentity`
+- `Get-AzureResilienceManagementDrillRunResource_GetViaIdentityDrill`
+- `Get-AzureResilienceManagementDrillRunResource_GetViaIdentityDrillRun`
+- `Get-AzureResilienceManagementDrillRunResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementDrillRunResource_List`
+
+### AzureResilienceManagementEnrollment _(count: 25)_
+
+- `Get-AzureResilienceManagementEnrollment_Get`
+- `Get-AzureResilienceManagementEnrollment_GetViaIdentity`
+- `Get-AzureResilienceManagementEnrollment_GetViaIdentityUsagePlan`
+- `Get-AzureResilienceManagementEnrollment_List`
+- `New-AzureResilienceManagementEnrollment_Create`
+- `New-AzureResilienceManagementEnrollment_CreateExpanded`
+- `New-AzureResilienceManagementEnrollment_CreateViaIdentity`
+- `New-AzureResilienceManagementEnrollment_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementEnrollment_CreateViaIdentityUsagePlan`
+- `New-AzureResilienceManagementEnrollment_CreateViaIdentityUsagePlanExpanded`
+- `New-AzureResilienceManagementEnrollment_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementEnrollment_CreateViaJsonString`
+- `Remove-AzureResilienceManagementEnrollment_Delete`
+- `Remove-AzureResilienceManagementEnrollment_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementEnrollment_DeleteViaIdentityUsagePlan`
+- `Set-AzureResilienceManagementEnrollment_Update`
+- `Set-AzureResilienceManagementEnrollment_UpdateExpanded`
+- `Set-AzureResilienceManagementEnrollment_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementEnrollment_UpdateViaJsonString`
+- `Update-AzureResilienceManagementEnrollment_Update`
+- `Update-AzureResilienceManagementEnrollment_UpdateExpanded`
+- `Update-AzureResilienceManagementEnrollment_UpdateViaIdentity`
+- `Update-AzureResilienceManagementEnrollment_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementEnrollment_UpdateViaIdentityUsagePlan`
+- `Update-AzureResilienceManagementEnrollment_UpdateViaIdentityUsagePlanExpanded`
+
+### AzureResilienceManagementFailDrillRunOver _(count: 10)_
+
+- `Invoke-AzureResilienceManagementFailDrillRunOver_Fail`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailExpanded`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentity`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityDrill`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityDrillExpanded`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaJsonFilePath`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaJsonString`
+
+### AzureResilienceManagementFinalizeRecoveryPlanAction _(count: 3)_
+
+- `Invoke-AzureResilienceManagementFinalizeRecoveryPlanAction_Finalize`
+- `Invoke-AzureResilienceManagementFinalizeRecoveryPlanAction_FinalizeViaIdentity`
+- `Invoke-AzureResilienceManagementFinalizeRecoveryPlanAction_FinalizeViaIdentityServiceGroup`
+
+### AzureResilienceManagementGoalAssignment _(count: 27)_
+
+- `Get-AzureResilienceManagementGoalAssignment_Get`
+- `Get-AzureResilienceManagementGoalAssignment_GetViaIdentity`
+- `Get-AzureResilienceManagementGoalAssignment_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementGoalAssignment_List`
+- `New-AzureResilienceManagementGoalAssignment_Create`
+- `New-AzureResilienceManagementGoalAssignment_CreateExpanded`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaIdentity`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaIdentityServiceGroup`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaIdentityServiceGroupExpanded`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaJsonString`
+- `Remove-AzureResilienceManagementGoalAssignment_Delete`
+- `Remove-AzureResilienceManagementGoalAssignment_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementGoalAssignment_DeleteViaIdentityServiceGroup`
+- `Set-AzureResilienceManagementGoalAssignment_Update`
+- `Set-AzureResilienceManagementGoalAssignment_UpdateExpanded`
+- `Set-AzureResilienceManagementGoalAssignment_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementGoalAssignment_UpdateViaJsonString`
+- `Update-AzureResilienceManagementGoalAssignment_Update`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateExpanded`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaIdentity`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaJsonString`
+
+### AzureResilienceManagementGoalAssignmentGoalResource _(count: 11)_
+
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_Refresh`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_RefreshViaIdentity`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_RefreshViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_Update`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateExpanded`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaIdentity`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaJsonString`
+
+### AzureResilienceManagementGoalResource _(count: 5)_
+
+- `Get-AzureResilienceManagementGoalResource_Get`
+- `Get-AzureResilienceManagementGoalResource_GetViaIdentity`
+- `Get-AzureResilienceManagementGoalResource_GetViaIdentityGoalAssignment`
+- `Get-AzureResilienceManagementGoalResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementGoalResource_List`
+
+### AzureResilienceManagementGoalTemplate _(count: 27)_
+
+- `Get-AzureResilienceManagementGoalTemplate_Get`
+- `Get-AzureResilienceManagementGoalTemplate_GetViaIdentity`
+- `Get-AzureResilienceManagementGoalTemplate_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementGoalTemplate_List`
+- `New-AzureResilienceManagementGoalTemplate_Create`
+- `New-AzureResilienceManagementGoalTemplate_CreateExpanded`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaIdentity`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaIdentityServiceGroup`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaIdentityServiceGroupExpanded`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaJsonString`
+- `Remove-AzureResilienceManagementGoalTemplate_Delete`
+- `Remove-AzureResilienceManagementGoalTemplate_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementGoalTemplate_DeleteViaIdentityServiceGroup`
+- `Set-AzureResilienceManagementGoalTemplate_Update`
+- `Set-AzureResilienceManagementGoalTemplate_UpdateExpanded`
+- `Set-AzureResilienceManagementGoalTemplate_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementGoalTemplate_UpdateViaJsonString`
+- `Update-AzureResilienceManagementGoalTemplate_Update`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateExpanded`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaIdentity`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaJsonString`
+
+### AzureResilienceManagementMarkDrillRunAsComplete _(count: 10)_
+
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_Mark`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkExpanded`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentity`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityDrill`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityDrillExpanded`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaJsonFilePath`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaJsonString`
+
+### AzureResilienceManagementOperation _(count: 1)_
+
+- `Get-AzureResilienceManagementOperation_List`
+
+### AzureResilienceManagementOperationStatus _(count: 3)_
+
+- `Get-AzureResilienceManagementOperationStatus_Get`
+- `Get-AzureResilienceManagementOperationStatus_GetViaIdentity`
+- `Get-AzureResilienceManagementOperationStatus_GetViaIdentityLocation`
+
+### AzureResilienceManagementRecommendGoalAssignmentCapacity _(count: 8)_
+
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_Recommend`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendExpanded`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaIdentity`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaJsonFilePath`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaJsonString`
+
+### AzureResilienceManagementRecoveryJob _(count: 25)_
+
+- `Get-AzureResilienceManagementRecoveryJob_Get`
+- `Get-AzureResilienceManagementRecoveryJob_GetViaIdentity`
+- `Get-AzureResilienceManagementRecoveryJob_GetViaIdentityRecoveryPlan`
+- `Get-AzureResilienceManagementRecoveryJob_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementRecoveryJob_List`
+- `Resume-AzureResilienceManagementRecoveryJob_Resume`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeExpanded`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentity`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityExpanded`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityRecoveryPlan`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityRecoveryPlanExpanded`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityServiceGroup`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityServiceGroupExpanded`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaJsonFilePath`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaJsonString`
+- `Stop-AzureResilienceManagementRecoveryJob_Cancel`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelExpanded`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentity`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityExpanded`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityRecoveryPlan`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityRecoveryPlanExpanded`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityServiceGroup`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityServiceGroupExpanded`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaJsonFilePath`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaJsonString`
+
+### AzureResilienceManagementRecoveryJobResource _(count: 6)_
+
+- `Get-AzureResilienceManagementRecoveryJobResource_Get`
+- `Get-AzureResilienceManagementRecoveryJobResource_GetViaIdentity`
+- `Get-AzureResilienceManagementRecoveryJobResource_GetViaIdentityRecoveryJob`
+- `Get-AzureResilienceManagementRecoveryJobResource_GetViaIdentityRecoveryPlan`
+- `Get-AzureResilienceManagementRecoveryJobResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementRecoveryJobResource_List`
+
+### AzureResilienceManagementRecoveryPlan _(count: 27)_
+
+- `Get-AzureResilienceManagementRecoveryPlan_Get`
+- `Get-AzureResilienceManagementRecoveryPlan_GetViaIdentity`
+- `Get-AzureResilienceManagementRecoveryPlan_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementRecoveryPlan_List`
+- `New-AzureResilienceManagementRecoveryPlan_Create`
+- `New-AzureResilienceManagementRecoveryPlan_CreateExpanded`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaIdentity`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaIdentityServiceGroup`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaIdentityServiceGroupExpanded`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaJsonString`
+- `Remove-AzureResilienceManagementRecoveryPlan_Delete`
+- `Remove-AzureResilienceManagementRecoveryPlan_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementRecoveryPlan_DeleteViaIdentityServiceGroup`
+- `Set-AzureResilienceManagementRecoveryPlan_Update`
+- `Set-AzureResilienceManagementRecoveryPlan_UpdateExpanded`
+- `Set-AzureResilienceManagementRecoveryPlan_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementRecoveryPlan_UpdateViaJsonString`
+- `Update-AzureResilienceManagementRecoveryPlan_Update`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateExpanded`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaIdentity`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaJsonString`
+
+### AzureResilienceManagementRecoveryPlanAction _(count: 42)_
+
+- `Set-AzureResilienceManagementRecoveryPlanAction_Failover`
+- `Set-AzureResilienceManagementRecoveryPlanAction_FailoverExpanded`
+- `Set-AzureResilienceManagementRecoveryPlanAction_FailoverViaJsonFilePath`
+- `Set-AzureResilienceManagementRecoveryPlanAction_FailoverViaJsonString`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate4`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate5`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateExpanded1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateExpanded2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateExpanded3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity4`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity5`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityExpanded1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityExpanded2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityExpanded3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup4`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup5`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroupExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroupExpanded1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroupExpanded2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroupExpanded3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonFilePath`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonFilePath1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonFilePath2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonFilePath3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonString`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonString1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonString2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonString3`
+
+### AzureResilienceManagementRecoveryPlanActionFailover _(count: 8)_
+
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_Test`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaIdentity`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaIdentityExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaIdentityServiceGroup`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaIdentityServiceGroupExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaJsonFilePath`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaJsonString`
+
+### AzureResilienceManagementRecoveryPlanActionFailoverCleanup _(count: 8)_
+
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_Test`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaIdentity`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaIdentityExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaIdentityServiceGroup`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaIdentityServiceGroupExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaJsonFilePath`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaJsonString`
+
+### AzureResilienceManagementRecoveryPlanActionReadiness _(count: 3)_
+
+- `Test-AzureResilienceManagementRecoveryPlanActionReadiness_Check`
+- `Test-AzureResilienceManagementRecoveryPlanActionReadiness_CheckViaIdentity`
+- `Test-AzureResilienceManagementRecoveryPlanActionReadiness_CheckViaIdentityServiceGroup`
+
+### AzureResilienceManagementRecoveryPlanActionResource _(count: 8)_
+
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_Update`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateExpanded`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaIdentity`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaJsonString`
+
+### AzureResilienceManagementRecoveryResource _(count: 5)_
+
+- `Get-AzureResilienceManagementRecoveryResource_Get`
+- `Get-AzureResilienceManagementRecoveryResource_GetViaIdentity`
+- `Get-AzureResilienceManagementRecoveryResource_GetViaIdentityRecoveryPlan`
+- `Get-AzureResilienceManagementRecoveryResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementRecoveryResource_List`
+
+### AzureResilienceManagementReprotectDrillRun _(count: 10)_
+
+- `Invoke-AzureResilienceManagementReprotectDrillRun_Reprotect`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectExpanded`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentity`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityDrill`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityDrillExpanded`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaJsonFilePath`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaJsonString`
+
+### AzureResilienceManagementReprotectRecoveryPlanAction _(count: 8)_
+
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_Reprotect`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectExpanded`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaIdentity`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaJsonFilePath`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaJsonString`
+
+### AzureResilienceManagementRetryRecoveryJob _(count: 4)_
+
+- `Invoke-AzureResilienceManagementRetryRecoveryJob_Retry`
+- `Invoke-AzureResilienceManagementRetryRecoveryJob_RetryViaIdentity`
+- `Invoke-AzureResilienceManagementRetryRecoveryJob_RetryViaIdentityRecoveryPlan`
+- `Invoke-AzureResilienceManagementRetryRecoveryJob_RetryViaIdentityServiceGroup`
+
+### AzureResilienceManagementUnifiedResilienceItem _(count: 4)_
+
+- `Get-AzureResilienceManagementUnifiedResilienceItem_Get`
+- `Get-AzureResilienceManagementUnifiedResilienceItem_GetViaIdentity`
+- `Get-AzureResilienceManagementUnifiedResilienceItem_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementUnifiedResilienceItem_List`
+
+### AzureResilienceManagementUsagePlan _(count: 22)_
+
+- `Get-AzureResilienceManagementUsagePlan_Get`
+- `Get-AzureResilienceManagementUsagePlan_GetViaIdentity`
+- `Get-AzureResilienceManagementUsagePlan_List`
+- `Get-AzureResilienceManagementUsagePlan_List1`
+- `New-AzureResilienceManagementUsagePlan_Create`
+- `New-AzureResilienceManagementUsagePlan_CreateExpanded`
+- `New-AzureResilienceManagementUsagePlan_CreateViaIdentity`
+- `New-AzureResilienceManagementUsagePlan_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementUsagePlan_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementUsagePlan_CreateViaJsonString`
+- `Remove-AzureResilienceManagementUsagePlan_Delete`
+- `Remove-AzureResilienceManagementUsagePlan_DeleteViaIdentity`
+- `Set-AzureResilienceManagementUsagePlan_Update`
+- `Set-AzureResilienceManagementUsagePlan_UpdateExpanded`
+- `Set-AzureResilienceManagementUsagePlan_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementUsagePlan_UpdateViaJsonString`
+- `Update-AzureResilienceManagementUsagePlan_Update`
+- `Update-AzureResilienceManagementUsagePlan_UpdateExpanded`
+- `Update-AzureResilienceManagementUsagePlan_UpdateViaIdentity`
+- `Update-AzureResilienceManagementUsagePlan_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementUsagePlan_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementUsagePlan_UpdateViaJsonString`
+
+## Full alphabetical list
+
+<details><summary>Expand all 417 cmdlets</summary>
+
+- `Add-AzureResilienceManagementDrillResource_Add`
+- `Add-AzureResilienceManagementDrillResource_AddExpanded`
+- `Add-AzureResilienceManagementDrillResource_AddViaIdentity`
+- `Add-AzureResilienceManagementDrillResource_AddViaIdentityExpanded`
+- `Add-AzureResilienceManagementDrillResource_AddViaIdentityServiceGroup`
+- `Add-AzureResilienceManagementDrillResource_AddViaIdentityServiceGroupExpanded`
+- `Add-AzureResilienceManagementDrillResource_AddViaJsonFilePath`
+- `Add-AzureResilienceManagementDrillResource_AddViaJsonString`
+- `Add-AzureResilienceManagementDrillRunNote_Add`
+- `Add-AzureResilienceManagementDrillRunNote_AddExpanded`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentity`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityDrill`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityDrillExpanded`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityExpanded`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityServiceGroup`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaIdentityServiceGroupExpanded`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaJsonFilePath`
+- `Add-AzureResilienceManagementDrillRunNote_AddViaJsonString`
+- `Get-AzureResilienceManagementDrill_Get`
+- `Get-AzureResilienceManagementDrill_GetViaIdentity`
+- `Get-AzureResilienceManagementDrill_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementDrill_List`
+- `Get-AzureResilienceManagementDrillResource_Get`
+- `Get-AzureResilienceManagementDrillResource_GetViaIdentity`
+- `Get-AzureResilienceManagementDrillResource_GetViaIdentityDrill`
+- `Get-AzureResilienceManagementDrillResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementDrillResource_List`
+- `Get-AzureResilienceManagementDrillRun_Get`
+- `Get-AzureResilienceManagementDrillRun_GetViaIdentity`
+- `Get-AzureResilienceManagementDrillRun_GetViaIdentityDrill`
+- `Get-AzureResilienceManagementDrillRun_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementDrillRun_List`
+- `Get-AzureResilienceManagementDrillRunReportDownloadUrl_List`
+- `Get-AzureResilienceManagementDrillRunReportDownloadUrl_ListExpanded`
+- `Get-AzureResilienceManagementDrillRunReportDownloadUrl_ListViaJsonFilePath`
+- `Get-AzureResilienceManagementDrillRunReportDownloadUrl_ListViaJsonString`
+- `Get-AzureResilienceManagementDrillRunResource_Get`
+- `Get-AzureResilienceManagementDrillRunResource_GetViaIdentity`
+- `Get-AzureResilienceManagementDrillRunResource_GetViaIdentityDrill`
+- `Get-AzureResilienceManagementDrillRunResource_GetViaIdentityDrillRun`
+- `Get-AzureResilienceManagementDrillRunResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementDrillRunResource_List`
+- `Get-AzureResilienceManagementEnrollment_Get`
+- `Get-AzureResilienceManagementEnrollment_GetViaIdentity`
+- `Get-AzureResilienceManagementEnrollment_GetViaIdentityUsagePlan`
+- `Get-AzureResilienceManagementEnrollment_List`
+- `Get-AzureResilienceManagementGoalAssignment_Get`
+- `Get-AzureResilienceManagementGoalAssignment_GetViaIdentity`
+- `Get-AzureResilienceManagementGoalAssignment_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementGoalAssignment_List`
+- `Get-AzureResilienceManagementGoalResource_Get`
+- `Get-AzureResilienceManagementGoalResource_GetViaIdentity`
+- `Get-AzureResilienceManagementGoalResource_GetViaIdentityGoalAssignment`
+- `Get-AzureResilienceManagementGoalResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementGoalResource_List`
+- `Get-AzureResilienceManagementGoalTemplate_Get`
+- `Get-AzureResilienceManagementGoalTemplate_GetViaIdentity`
+- `Get-AzureResilienceManagementGoalTemplate_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementGoalTemplate_List`
+- `Get-AzureResilienceManagementOperation_List`
+- `Get-AzureResilienceManagementOperationStatus_Get`
+- `Get-AzureResilienceManagementOperationStatus_GetViaIdentity`
+- `Get-AzureResilienceManagementOperationStatus_GetViaIdentityLocation`
+- `Get-AzureResilienceManagementRecoveryJob_Get`
+- `Get-AzureResilienceManagementRecoveryJob_GetViaIdentity`
+- `Get-AzureResilienceManagementRecoveryJob_GetViaIdentityRecoveryPlan`
+- `Get-AzureResilienceManagementRecoveryJob_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementRecoveryJob_List`
+- `Get-AzureResilienceManagementRecoveryJobResource_Get`
+- `Get-AzureResilienceManagementRecoveryJobResource_GetViaIdentity`
+- `Get-AzureResilienceManagementRecoveryJobResource_GetViaIdentityRecoveryJob`
+- `Get-AzureResilienceManagementRecoveryJobResource_GetViaIdentityRecoveryPlan`
+- `Get-AzureResilienceManagementRecoveryJobResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementRecoveryJobResource_List`
+- `Get-AzureResilienceManagementRecoveryPlan_Get`
+- `Get-AzureResilienceManagementRecoveryPlan_GetViaIdentity`
+- `Get-AzureResilienceManagementRecoveryPlan_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementRecoveryPlan_List`
+- `Get-AzureResilienceManagementRecoveryResource_Get`
+- `Get-AzureResilienceManagementRecoveryResource_GetViaIdentity`
+- `Get-AzureResilienceManagementRecoveryResource_GetViaIdentityRecoveryPlan`
+- `Get-AzureResilienceManagementRecoveryResource_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementRecoveryResource_List`
+- `Get-AzureResilienceManagementUnifiedResilienceItem_Get`
+- `Get-AzureResilienceManagementUnifiedResilienceItem_GetViaIdentity`
+- `Get-AzureResilienceManagementUnifiedResilienceItem_GetViaIdentityServiceGroup`
+- `Get-AzureResilienceManagementUnifiedResilienceItem_List`
+- `Get-AzureResilienceManagementUsagePlan_Get`
+- `Get-AzureResilienceManagementUsagePlan_GetViaIdentity`
+- `Get-AzureResilienceManagementUsagePlan_List`
+- `Get-AzureResilienceManagementUsagePlan_List1`
+- `Invoke-AzureResilienceManagementCommitRecoveryPlanActionFailover_Commit`
+- `Invoke-AzureResilienceManagementCommitRecoveryPlanActionFailover_CommitViaIdentity`
+- `Invoke-AzureResilienceManagementCommitRecoveryPlanActionFailover_CommitViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_Fail`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailExpanded`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentity`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityDrill`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityDrillExpanded`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaJsonFilePath`
+- `Invoke-AzureResilienceManagementFailDrillRunOver_FailViaJsonString`
+- `Invoke-AzureResilienceManagementFinalizeRecoveryPlanAction_Finalize`
+- `Invoke-AzureResilienceManagementFinalizeRecoveryPlanAction_FinalizeViaIdentity`
+- `Invoke-AzureResilienceManagementFinalizeRecoveryPlanAction_FinalizeViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_Mark`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkExpanded`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentity`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityDrill`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityDrillExpanded`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaJsonFilePath`
+- `Invoke-AzureResilienceManagementMarkDrillRunAsComplete_MarkViaJsonString`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_Recommend`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendExpanded`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaIdentity`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaJsonFilePath`
+- `Invoke-AzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaJsonString`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_Reprotect`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectExpanded`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentity`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityDrill`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityDrillExpanded`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaJsonFilePath`
+- `Invoke-AzureResilienceManagementReprotectDrillRun_ReprotectViaJsonString`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_Reprotect`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectExpanded`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaIdentity`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaIdentityExpanded`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaIdentityServiceGroup`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaIdentityServiceGroupExpanded`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaJsonFilePath`
+- `Invoke-AzureResilienceManagementReprotectRecoveryPlanAction_ReprotectViaJsonString`
+- `Invoke-AzureResilienceManagementRetryRecoveryJob_Retry`
+- `Invoke-AzureResilienceManagementRetryRecoveryJob_RetryViaIdentity`
+- `Invoke-AzureResilienceManagementRetryRecoveryJob_RetryViaIdentityRecoveryPlan`
+- `Invoke-AzureResilienceManagementRetryRecoveryJob_RetryViaIdentityServiceGroup`
+- `New-AzureResilienceManagementDrill_Create`
+- `New-AzureResilienceManagementDrill_CreateExpanded`
+- `New-AzureResilienceManagementDrill_CreateViaIdentity`
+- `New-AzureResilienceManagementDrill_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementDrill_CreateViaIdentityServiceGroup`
+- `New-AzureResilienceManagementDrill_CreateViaIdentityServiceGroupExpanded`
+- `New-AzureResilienceManagementDrill_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementDrill_CreateViaJsonString`
+- `New-AzureResilienceManagementDrillRunReport_Generate`
+- `New-AzureResilienceManagementDrillRunReport_GenerateViaIdentity`
+- `New-AzureResilienceManagementDrillRunReport_GenerateViaIdentityDrill`
+- `New-AzureResilienceManagementDrillRunReport_GenerateViaIdentityServiceGroup`
+- `New-AzureResilienceManagementEnrollment_Create`
+- `New-AzureResilienceManagementEnrollment_CreateExpanded`
+- `New-AzureResilienceManagementEnrollment_CreateViaIdentity`
+- `New-AzureResilienceManagementEnrollment_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementEnrollment_CreateViaIdentityUsagePlan`
+- `New-AzureResilienceManagementEnrollment_CreateViaIdentityUsagePlanExpanded`
+- `New-AzureResilienceManagementEnrollment_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementEnrollment_CreateViaJsonString`
+- `New-AzureResilienceManagementGoalAssignment_Create`
+- `New-AzureResilienceManagementGoalAssignment_CreateExpanded`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaIdentity`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaIdentityServiceGroup`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaIdentityServiceGroupExpanded`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementGoalAssignment_CreateViaJsonString`
+- `New-AzureResilienceManagementGoalTemplate_Create`
+- `New-AzureResilienceManagementGoalTemplate_CreateExpanded`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaIdentity`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaIdentityServiceGroup`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaIdentityServiceGroupExpanded`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementGoalTemplate_CreateViaJsonString`
+- `New-AzureResilienceManagementRecoveryPlan_Create`
+- `New-AzureResilienceManagementRecoveryPlan_CreateExpanded`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaIdentity`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaIdentityServiceGroup`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaIdentityServiceGroupExpanded`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementRecoveryPlan_CreateViaJsonString`
+- `New-AzureResilienceManagementUsagePlan_Create`
+- `New-AzureResilienceManagementUsagePlan_CreateExpanded`
+- `New-AzureResilienceManagementUsagePlan_CreateViaIdentity`
+- `New-AzureResilienceManagementUsagePlan_CreateViaIdentityExpanded`
+- `New-AzureResilienceManagementUsagePlan_CreateViaJsonFilePath`
+- `New-AzureResilienceManagementUsagePlan_CreateViaJsonString`
+- `Remove-AzureResilienceManagementDrill_Delete`
+- `Remove-AzureResilienceManagementDrill_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementDrill_DeleteViaIdentityServiceGroup`
+- `Remove-AzureResilienceManagementEnrollment_Delete`
+- `Remove-AzureResilienceManagementEnrollment_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementEnrollment_DeleteViaIdentityUsagePlan`
+- `Remove-AzureResilienceManagementGoalAssignment_Delete`
+- `Remove-AzureResilienceManagementGoalAssignment_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementGoalAssignment_DeleteViaIdentityServiceGroup`
+- `Remove-AzureResilienceManagementGoalTemplate_Delete`
+- `Remove-AzureResilienceManagementGoalTemplate_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementGoalTemplate_DeleteViaIdentityServiceGroup`
+- `Remove-AzureResilienceManagementRecoveryPlan_Delete`
+- `Remove-AzureResilienceManagementRecoveryPlan_DeleteViaIdentity`
+- `Remove-AzureResilienceManagementRecoveryPlan_DeleteViaIdentityServiceGroup`
+- `Remove-AzureResilienceManagementUsagePlan_Delete`
+- `Remove-AzureResilienceManagementUsagePlan_DeleteViaIdentity`
+- `Resume-AzureResilienceManagementDrillRun_Resume`
+- `Resume-AzureResilienceManagementDrillRun_ResumeViaIdentity`
+- `Resume-AzureResilienceManagementDrillRun_ResumeViaIdentityDrill`
+- `Resume-AzureResilienceManagementDrillRun_ResumeViaIdentityServiceGroup`
+- `Resume-AzureResilienceManagementRecoveryJob_Resume`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeExpanded`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentity`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityExpanded`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityRecoveryPlan`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityRecoveryPlanExpanded`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityServiceGroup`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaIdentityServiceGroupExpanded`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaJsonFilePath`
+- `Resume-AzureResilienceManagementRecoveryJob_ResumeViaJsonString`
+- `Set-AzureResilienceManagementEnrollment_Update`
+- `Set-AzureResilienceManagementEnrollment_UpdateExpanded`
+- `Set-AzureResilienceManagementEnrollment_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementEnrollment_UpdateViaJsonString`
+- `Set-AzureResilienceManagementGoalAssignment_Update`
+- `Set-AzureResilienceManagementGoalAssignment_UpdateExpanded`
+- `Set-AzureResilienceManagementGoalAssignment_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementGoalAssignment_UpdateViaJsonString`
+- `Set-AzureResilienceManagementGoalTemplate_Update`
+- `Set-AzureResilienceManagementGoalTemplate_UpdateExpanded`
+- `Set-AzureResilienceManagementGoalTemplate_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementGoalTemplate_UpdateViaJsonString`
+- `Set-AzureResilienceManagementRecoveryPlan_Update`
+- `Set-AzureResilienceManagementRecoveryPlan_UpdateExpanded`
+- `Set-AzureResilienceManagementRecoveryPlan_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementRecoveryPlan_UpdateViaJsonString`
+- `Set-AzureResilienceManagementRecoveryPlanAction_Failover`
+- `Set-AzureResilienceManagementRecoveryPlanAction_FailoverExpanded`
+- `Set-AzureResilienceManagementRecoveryPlanAction_FailoverViaJsonFilePath`
+- `Set-AzureResilienceManagementRecoveryPlanAction_FailoverViaJsonString`
+- `Set-AzureResilienceManagementUsagePlan_Update`
+- `Set-AzureResilienceManagementUsagePlan_UpdateExpanded`
+- `Set-AzureResilienceManagementUsagePlan_UpdateViaJsonFilePath`
+- `Set-AzureResilienceManagementUsagePlan_UpdateViaJsonString`
+- `Start-AzureResilienceManagementDrill_Start`
+- `Start-AzureResilienceManagementDrill_StartExpanded`
+- `Start-AzureResilienceManagementDrill_StartViaIdentity`
+- `Start-AzureResilienceManagementDrill_StartViaIdentityExpanded`
+- `Start-AzureResilienceManagementDrill_StartViaIdentityServiceGroup`
+- `Start-AzureResilienceManagementDrill_StartViaIdentityServiceGroupExpanded`
+- `Start-AzureResilienceManagementDrill_StartViaJsonFilePath`
+- `Start-AzureResilienceManagementDrill_StartViaJsonString`
+- `Stop-AzureResilienceManagementDrill_End`
+- `Stop-AzureResilienceManagementDrill_EndExpanded`
+- `Stop-AzureResilienceManagementDrill_EndViaIdentity`
+- `Stop-AzureResilienceManagementDrill_EndViaIdentityExpanded`
+- `Stop-AzureResilienceManagementDrill_EndViaIdentityServiceGroup`
+- `Stop-AzureResilienceManagementDrill_EndViaIdentityServiceGroupExpanded`
+- `Stop-AzureResilienceManagementDrill_EndViaJsonFilePath`
+- `Stop-AzureResilienceManagementDrill_EndViaJsonString`
+- `Stop-AzureResilienceManagementRecoveryJob_Cancel`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelExpanded`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentity`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityExpanded`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityRecoveryPlan`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityRecoveryPlanExpanded`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityServiceGroup`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaIdentityServiceGroupExpanded`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaJsonFilePath`
+- `Stop-AzureResilienceManagementRecoveryJob_CancelViaJsonString`
+- `Test-AzureResilienceManagementDrill_Validate`
+- `Test-AzureResilienceManagementDrill_ValidateExpanded`
+- `Test-AzureResilienceManagementDrill_ValidateViaIdentity`
+- `Test-AzureResilienceManagementDrill_ValidateViaIdentityExpanded`
+- `Test-AzureResilienceManagementDrill_ValidateViaIdentityServiceGroup`
+- `Test-AzureResilienceManagementDrill_ValidateViaIdentityServiceGroupExpanded`
+- `Test-AzureResilienceManagementDrill_ValidateViaJsonFilePath`
+- `Test-AzureResilienceManagementDrill_ValidateViaJsonString`
+- `Test-AzureResilienceManagementDrillResyncReadiness_Check`
+- `Test-AzureResilienceManagementDrillResyncReadiness_CheckViaIdentity`
+- `Test-AzureResilienceManagementDrillResyncReadiness_CheckViaIdentityServiceGroup`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate4`
+- `Test-AzureResilienceManagementRecoveryPlanAction_Validate5`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateExpanded1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateExpanded2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateExpanded3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity4`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentity5`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityExpanded1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityExpanded2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityExpanded3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup4`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup5`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroupExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroupExpanded1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroupExpanded2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroupExpanded3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonFilePath`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonFilePath1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonFilePath2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonFilePath3`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonString`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonString1`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonString2`
+- `Test-AzureResilienceManagementRecoveryPlanAction_ValidateViaJsonString3`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_Test`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaIdentity`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaIdentityExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaIdentityServiceGroup`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaIdentityServiceGroupExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaJsonFilePath`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailover_TestViaJsonString`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_Test`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaIdentity`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaIdentityExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaIdentityServiceGroup`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaIdentityServiceGroupExpanded`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaJsonFilePath`
+- `Test-AzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaJsonString`
+- `Test-AzureResilienceManagementRecoveryPlanActionReadiness_Check`
+- `Test-AzureResilienceManagementRecoveryPlanActionReadiness_CheckViaIdentity`
+- `Test-AzureResilienceManagementRecoveryPlanActionReadiness_CheckViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementDrill_Update`
+- `Update-AzureResilienceManagementDrill_UpdateExpanded`
+- `Update-AzureResilienceManagementDrill_UpdateViaIdentity`
+- `Update-AzureResilienceManagementDrill_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementDrill_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementDrill_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementDrill_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementDrill_UpdateViaJsonString`
+- `Update-AzureResilienceManagementDrillResource_Update`
+- `Update-AzureResilienceManagementDrillResource_UpdateExpanded`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaIdentity`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementDrillResource_UpdateViaJsonString`
+- `Update-AzureResilienceManagementEnrollment_Update`
+- `Update-AzureResilienceManagementEnrollment_UpdateExpanded`
+- `Update-AzureResilienceManagementEnrollment_UpdateViaIdentity`
+- `Update-AzureResilienceManagementEnrollment_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementEnrollment_UpdateViaIdentityUsagePlan`
+- `Update-AzureResilienceManagementEnrollment_UpdateViaIdentityUsagePlanExpanded`
+- `Update-AzureResilienceManagementGoalAssignment_Update`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateExpanded`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaIdentity`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementGoalAssignment_UpdateViaJsonString`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_Refresh`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_RefreshViaIdentity`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_RefreshViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_Update`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateExpanded`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaIdentity`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementGoalAssignmentGoalResource_UpdateViaJsonString`
+- `Update-AzureResilienceManagementGoalTemplate_Update`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateExpanded`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaIdentity`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementGoalTemplate_UpdateViaJsonString`
+- `Update-AzureResilienceManagementRecoveryPlan_Update`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateExpanded`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaIdentity`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementRecoveryPlan_UpdateViaJsonString`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_Update`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateExpanded`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaIdentity`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaIdentityServiceGroup`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaIdentityServiceGroupExpanded`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementRecoveryPlanActionResource_UpdateViaJsonString`
+- `Update-AzureResilienceManagementUsagePlan_Update`
+- `Update-AzureResilienceManagementUsagePlan_UpdateExpanded`
+- `Update-AzureResilienceManagementUsagePlan_UpdateViaIdentity`
+- `Update-AzureResilienceManagementUsagePlan_UpdateViaIdentityExpanded`
+- `Update-AzureResilienceManagementUsagePlan_UpdateViaJsonFilePath`
+- `Update-AzureResilienceManagementUsagePlan_UpdateViaJsonString`
+
+</details>
+
