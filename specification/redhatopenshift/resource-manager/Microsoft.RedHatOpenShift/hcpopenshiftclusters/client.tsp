@@ -11,6 +11,13 @@ using Microsoft.RedHatOpenShift;
 
 // Client name overrides for azure-sdk-for-net
 namespace Microsoft.RedHatOpenShift {
+  // request-body model names must not end with 'Request'
+  @@clientName(
+    HcpOpenShiftClusterAdminCredentialRequest,
+    "HcpOpenShiftClusterAdminCredentialContent",
+    "csharp"
+  );
+
   // boolean property missing an "Is/Has/Should/Can" prefix
   @@clientName(NodePoolProperties.autoRepair, "canAutoRepair", "csharp");
 
