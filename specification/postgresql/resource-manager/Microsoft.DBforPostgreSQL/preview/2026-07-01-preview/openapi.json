@@ -2307,13 +2307,15 @@
             "$ref": "./examples/DBAgentGet.json"
           }
         }
-      },
-      "put": {
-        "operationId": "DBAgent_CreateOrUpdate",
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default/disable": {
+      "post": {
+        "operationId": "DBAgent_Disable",
         "tags": [
           "DbAgents"
         ],
-        "description": "Enables or disables the database agent for a flexible server.",
+        "description": "Disables the database agent for a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2333,20 +2335,11 @@
             "minLength": 3,
             "maxLength": 63,
             "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DbAgentForUpdate"
-            }
           }
         ],
         "responses": {
           "202": {
-            "description": "The response returned when a database agent write is accepted.",
+            "description": "The response returned when a database agent action is accepted.",
             "schema": {
               "$ref": "#/definitions/DbAgent"
             },
@@ -2376,10 +2369,77 @@
         },
         "x-ms-examples": {
           "Disable the singleton Default database agent for a server.": {
-            "$ref": "./examples/DBAgentUpdateDisable.json"
+            "$ref": "./examples/DBAgentDisable.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DbAgent"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default/enable": {
+      "post": {
+        "operationId": "DBAgent_Enable",
+        "tags": [
+          "DbAgents"
+        ],
+        "description": "Enables the database agent for a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The response returned when a database agent action is accepted.",
+            "schema": {
+              "$ref": "#/definitions/DbAgent"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
           "Enable the singleton Default database agent for a server.": {
-            "$ref": "./examples/DBAgentUpdateEnable.json"
+            "$ref": "./examples/DBAgentEnable.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6547,56 +6607,6 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "DbAgentForUpdate": {
-      "type": "object",
-      "description": "A request to enable or disable the database agent.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DbAgentForUpdateProperties",
-          "description": "The requested database agent properties."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "DbAgentForUpdateProperties": {
-      "type": "object",
-      "description": "Writable properties of the database agent configuration.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/DbAgentForUpdateState",
-          "description": "The requested state of the database agent."
-        }
-      },
-      "required": [
-        "state"
-      ]
-    },
-    "DbAgentForUpdateState": {
-      "type": "string",
-      "description": "The database agent states accepted in a write request.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DbAgentForUpdateState",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enable the database agent."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disable the database agent."
-          }
-        ]
-      }
     },
     "DbAgentListResult": {
       "type": "object",
