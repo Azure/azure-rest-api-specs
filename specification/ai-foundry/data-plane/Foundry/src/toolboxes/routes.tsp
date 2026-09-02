@@ -72,7 +72,7 @@ interface Toolboxes {
   @summary("Invoke the latest toolbox version through MCP")
   @operationId("invokeLatestToolboxMcp")
   @post
-  @route("/toolboxes/{name}/latest/mcp")
+  @route("/toolboxes/{name}:invokeMcp")
   invokeLatestToolboxMcp is FoundryDataPlaneOperation<
     {
       /** The name of the toolbox. */

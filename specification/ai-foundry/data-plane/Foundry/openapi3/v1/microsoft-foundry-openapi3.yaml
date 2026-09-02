@@ -38699,53 +38699,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-  /toolboxes/{name}/latest/mcp:
-    post:
-      operationId: invokeLatestToolboxMcp
-      summary: Invoke the latest toolbox version through MCP
-      description: Invokes the latest version of the specified toolbox through its MCP endpoint.
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the toolbox.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            '*/*':
-              schema: {}
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Toolboxes
-      requestBody:
-        required: true
-        content:
-          '*/*':
-            schema:
-              type: object
-              unevaluatedProperties: {}
-        description: The MCP request body.
   /toolboxes/{name}/versions:
     post:
       operationId: createToolboxVersion
@@ -39003,6 +38956,53 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
+  /toolboxes/{name}:invokeMcp:
+    post:
+      operationId: invokeLatestToolboxMcp
+      summary: Invoke the latest toolbox version through MCP
+      description: Invokes the latest version of the specified toolbox through its MCP endpoint.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the toolbox.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            '*/*':
+              schema: {}
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolboxes
+      requestBody:
+        required: true
+        content:
+          '*/*':
+            schema:
+              type: object
+              unevaluatedProperties: {}
+        description: The MCP request body.
   /voice_agents:
     post:
       operationId: VoiceAgents_createVoiceAgent
