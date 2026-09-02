@@ -12,7 +12,10 @@
         "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
         "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/gpt-oss-120b-short-context/versions/1",
         "acceleratorType": "H100_80GB",
-        "versionUpgradeOption": "OnceNewDefaultVersionAvailable"
+        "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+        "gatedModelAccess": {
+          "connection": "projects/my-project/connections/my-hf-connection"
+        }
       },
       "sku": {
         "name": "GlobalManagedCompute",
@@ -34,6 +37,9 @@
           "acceleratorsPerInstance": 4,
           "totalAccelerators": 4,
           "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "gatedModelAccess": {
+            "connection": "projects/my-project/connections/my-hf-connection"
+          },
           "capabilities": {
             "assetsV2": "true"
           },
@@ -68,6 +74,9 @@
           "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/gpt-oss-120b-short-context/versions/1",
           "acceleratorType": "H100_80GB",
           "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "gatedModelAccess": {
+            "connection": "projects/my-project/connections/my-hf-connection"
+          },
           "capabilities": {
             "assetsV2": "true"
           },

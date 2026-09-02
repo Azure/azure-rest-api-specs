@@ -6294,6 +6294,19 @@ model RaiBindingListResult {
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 
 /**
+ * Gated model access configuration for a managed compute deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+model GatedModelAccessProperties {
+  /**
+   * The project-scoped connection used to authorize access to a gated model during deployment creation.
+   * The expected format is projects/{projectName}/connections/{connectionName}.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The value is a project-scoped connection resource reference and does not contain connection credentials or secrets."
+  connection: string;
+}
+
+/**
  * Properties of a Cognitive Services managed compute deployment.
  */
 @added(Versions.v2026_03_15_preview)
@@ -6330,6 +6343,13 @@ model ManagedComputeDeploymentProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Configuration used to authorize access to a gated model during deployment creation.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  gatedModelAccess?: GatedModelAccessProperties;
 
   /**
    * Deployment capabilities represented as key-value pairs.
