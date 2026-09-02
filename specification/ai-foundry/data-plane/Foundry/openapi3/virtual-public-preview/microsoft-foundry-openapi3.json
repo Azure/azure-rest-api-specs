@@ -1115,6 +1115,15 @@
             }
           },
           {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "monitor_id",
             "in": "path",
             "required": true,

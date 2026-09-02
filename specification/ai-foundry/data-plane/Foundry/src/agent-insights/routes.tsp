@@ -159,6 +159,8 @@ interface AgentInsightMonitors {
   createRun is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
+      ...WithOperationId;
+
       /** The identifier of the monitor. */
       @path monitor_id: string;
 
