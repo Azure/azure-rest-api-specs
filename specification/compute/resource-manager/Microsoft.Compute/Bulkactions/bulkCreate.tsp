@@ -74,7 +74,6 @@ alias BulkCreateSubscriptionParams = {
 // PartialFulfillmentPolicy, and ExecutionParameters.
 // ============================================================
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Bare envelope used as the @listsResource target; shape is documented via LocationBasedBulkCreate."
 @added(Versions.`2026-09-06-preview`)
 @doc("Envelope properties shared by BulkCreate. Used as the @listsResource target to avoid collision with the interface name.")
 model BulkCreateEnvelope {
