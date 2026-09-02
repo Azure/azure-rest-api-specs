@@ -169,15 +169,12 @@ model VoiceAgentDefinition extends AgentDefinition {
   store?: boolean = false;
 }
 
-@doc("Configuration for sibling Foundry text agents that a voice agent may consult, and for delivery of their responses.")
+@doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSubAgentConfig {
   @doc("The sibling Foundry text agents, in the same project, that this voice agent may consult.")
   @minItems(1)
   subagents: VoiceAgentSubAgent[];
-
-  @doc("Policy for acknowledging forwarded requests and filling gaps while waiting for a subagent response.")
-  response_policy?: VoiceAgentSubagentResponsePolicy;
 }
 
 @doc("A sibling Foundry text agent that a voice agent may consult as a background specialist.")
@@ -191,6 +188,9 @@ model VoiceAgentSubAgent {
 
   @doc("A description of the subagent's capabilities, used by the voice agent to decide whether to forward a query.")
   agent_capabilities: string;
+
+  @doc("Policy for acknowledging forwarded requests and filling gaps while waiting for this subagent's response.")
+  response_policy?: VoiceAgentSubagentResponsePolicy;
 
   @doc("Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.")
   enable_delta_progress?: boolean = false;

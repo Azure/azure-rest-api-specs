@@ -94282,6 +94282,10 @@
             "type": "string",
             "description": "A description of the subagent's capabilities, used by the voice agent to decide whether to forward a query."
           },
+          "response_policy": {
+            "$ref": "#/components/schemas/VoiceAgentSubagentResponsePolicy",
+            "description": "Policy for acknowledging forwarded requests and filling gaps while waiting for this subagent's response."
+          },
           "enable_delta_progress": {
             "type": "boolean",
             "description": "Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.",
@@ -94315,13 +94319,9 @@
             },
             "minItems": 1,
             "description": "The sibling Foundry text agents, in the same project, that this voice agent may consult."
-          },
-          "response_policy": {
-            "$ref": "#/components/schemas/VoiceAgentSubagentResponsePolicy",
-            "description": "Policy for acknowledging forwarded requests and filling gaps while waiting for a subagent response."
           }
         },
-        "description": "Configuration for sibling Foundry text agents that a voice agent may consult, and for delivery of their responses.",
+        "description": "Configuration for sibling Foundry text agents that a voice agent may consult.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
