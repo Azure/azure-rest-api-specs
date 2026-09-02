@@ -37392,7 +37392,6 @@
         "type": "object",
         "required": [
           "provider",
-          "connection",
           "resource_account_object_id"
         ],
         "properties": {
@@ -37400,30 +37399,23 @@
             "type": "string",
             "enum": [
               "teams_phone_extension"
-            ],
-            "description": "The Microsoft Teams Phone Extension provider."
-          },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Teams Phone Extension provider."
+            ]
           },
           "phone_number": {
             "type": "string",
             "maxLength": 64,
             "description": "The optional display phone number for the Teams resource account."
           },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "An optional display label for the binding."
-          },
           "resource_account_object_id": {
             "$ref": "#/components/schemas/Azure.Core.uuid",
             "description": "The Microsoft Teams resource-account object identifier as a GUID."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
         "description": "The request to create a Microsoft Teams Phone Extension binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -37433,14 +37425,27 @@
       },
       "CreateTelephonyBindingRequest": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/CreateTeamsPhoneExtensionTelephonyBindingRequest"
-          },
-          {
-            "$ref": "#/components/schemas/CreateTwilioTelephonyBindingRequest"
-          }
+        "required": [
+          "provider",
+          "connection"
         ],
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "An optional display label for the binding."
+          }
+        },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
@@ -37459,7 +37464,6 @@
         "type": "object",
         "required": [
           "provider",
-          "connection",
           "phone_number"
         ],
         "properties": {
@@ -37467,26 +37471,19 @@
             "type": "string",
             "enum": [
               "twilio"
-            ],
-            "description": "The Twilio provider."
-          },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Twilio provider."
+            ]
           },
           "phone_number": {
             "type": "string",
             "pattern": "^\\+[1-9]\\d{6,14}$",
             "description": "The Twilio E.164 phone number."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "An optional display label for the binding."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
         "description": "The request to create a Twilio binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -82619,8 +82616,7 @@
             "type": "string",
             "enum": [
               "pstn"
-            ],
-            "description": "The PSTN destination type."
+            ]
           },
           "value": {
             "type": "string",
@@ -82628,6 +82624,11 @@
             "description": "The E.164 phone number to call."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyTransferDestination"
+          }
+        ],
         "description": "A PSTN destination for a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -85052,8 +85053,7 @@
             "type": "string",
             "enum": [
               "sip"
-            ],
-            "description": "The SIP destination type."
+            ]
           },
           "value": {
             "type": "string",
@@ -85061,6 +85061,11 @@
             "description": "The SIP or SIPS URI to call."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyTransferDestination"
+          }
+        ],
         "description": "A SIP destination for a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -85616,55 +85621,31 @@
       "TeamsPhoneExtensionTelephonyBinding": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "resource_account_object_id",
-          "status",
-          "incoming_call_url"
+          "resource_account_object_id"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
               "teams_phone_extension"
-            ],
-            "description": "The Microsoft Teams Phone Extension provider."
-          },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Teams Phone Extension provider."
+            ]
           },
           "phone_number": {
             "type": "string",
             "maxLength": 64,
             "description": "The optional display phone number for the Teams resource account."
           },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
           "resource_account_object_id": {
             "$ref": "#/components/schemas/Azure.Core.uuid",
             "description": "The Microsoft Teams resource-account object identifier as a GUID."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBinding"
+          }
+        ],
         "description": "A Microsoft Teams Phone Extension binding owned by a voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -85675,61 +85656,31 @@
       "TeamsPhoneExtensionTelephonyBindingListItem": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "resource_account_object_id",
-          "status",
-          "incoming_call_url",
-          "etag"
+          "resource_account_object_id"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
               "teams_phone_extension"
-            ],
-            "description": "The Microsoft Teams Phone Extension provider."
-          },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Teams Phone Extension provider."
+            ]
           },
           "phone_number": {
             "type": "string",
             "maxLength": 64,
             "description": "The optional display phone number for the Teams resource account."
           },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
           "resource_account_object_id": {
             "$ref": "#/components/schemas/Azure.Core.uuid",
             "description": "The Microsoft Teams resource-account object identifier as a GUID."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
-          },
-          "etag": {
-            "$ref": "#/components/schemas/Azure.Core.eTag",
-            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
-            "readOnly": true
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingListItem"
+          }
+        ],
         "description": "A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -85748,8 +85699,7 @@
             "type": "string",
             "enum": [
               "teams"
-            ],
-            "description": "The Microsoft Teams destination type."
+            ]
           },
           "value": {
             "type": "string",
@@ -85758,6 +85708,11 @@
             "description": "The Microsoft Teams user or resource-account identifier."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyTransferDestination"
+          }
+        ],
         "description": "A Microsoft Teams destination for a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -85901,14 +85856,43 @@
       },
       "TelephonyBinding": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TeamsPhoneExtensionTelephonyBinding"
-          },
-          {
-            "$ref": "#/components/schemas/TwilioTelephonyBinding"
-          }
+        "required": [
+          "id",
+          "provider",
+          "connection",
+          "status",
+          "incoming_call_url"
         ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The service-generated binding identifier."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated webhook URL to configure with the telephony provider."
+          }
+        },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
@@ -85931,14 +85915,49 @@
       },
       "TelephonyBindingListItem": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TeamsPhoneExtensionTelephonyBindingListItem"
-          },
-          {
-            "$ref": "#/components/schemas/TwilioTelephonyBindingListItem"
-          }
+        "required": [
+          "id",
+          "provider",
+          "connection",
+          "status",
+          "incoming_call_url",
+          "etag"
         ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The service-generated binding identifier."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated webhook URL to configure with the telephony provider."
+          },
+          "etag": {
+            "$ref": "#/components/schemas/Azure.Core.eTag",
+            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
+            "readOnly": true
+          }
+        },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
@@ -86619,17 +86638,15 @@
       },
       "TelephonyTransferDestination": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/PSTNTelephonyTransferDestination"
-          },
-          {
-            "$ref": "#/components/schemas/TeamsTelephonyTransferDestination"
-          },
-          {
-            "$ref": "#/components/schemas/SipTelephonyTransferDestination"
-          }
+        "required": [
+          "kind"
         ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/TelephonyTransferDestinationKind",
+            "description": "The destination kind."
+          }
+        },
         "discriminator": {
           "propertyName": "kind",
           "mapping": {
@@ -86639,6 +86656,27 @@
           }
         },
         "description": "A destination for a telephony transfer target.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyTransferDestinationKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "pstn",
+              "teams",
+              "sip"
+            ]
+          }
+        ],
+        "description": "The kind of telephony transfer destination. Known values are stable; additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -87615,51 +87653,27 @@
       "TwilioTelephonyBinding": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "phone_number",
-          "status",
-          "incoming_call_url"
+          "phone_number"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
               "twilio"
-            ],
-            "description": "The Twilio provider."
-          },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Twilio provider."
+            ]
           },
           "phone_number": {
             "type": "string",
             "pattern": "^\\+[1-9]\\d{6,14}$",
             "description": "The Twilio E.164 phone number."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with Twilio."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBinding"
+          }
+        ],
         "description": "A Twilio binding owned by a voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -87670,57 +87684,27 @@
       "TwilioTelephonyBindingListItem": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "phone_number",
-          "status",
-          "incoming_call_url",
-          "etag"
+          "phone_number"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
               "twilio"
-            ],
-            "description": "The Twilio provider."
-          },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Twilio provider."
+            ]
           },
           "phone_number": {
             "type": "string",
             "pattern": "^\\+[1-9]\\d{6,14}$",
             "description": "The Twilio E.164 phone number."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with Twilio."
-          },
-          "etag": {
-            "$ref": "#/components/schemas/Azure.Core.eTag",
-            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
-            "readOnly": true
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingListItem"
+          }
+        ],
         "description": "A Twilio binding returned in a list, including its entity tag.",
         "x-ms-foundry-meta": {
           "required_previews": [
