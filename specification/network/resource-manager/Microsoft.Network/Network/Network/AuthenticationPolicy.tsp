@@ -50,6 +50,21 @@ model AuthenticationPolicy extends Common.Resource {
 }
 
 /**
+ * Parameters supplied to update an authentication policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP property models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
+model AuthenticationPolicyUpdateParameters {
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Resource tags are an open string map, consistent with the tags property on the Network RP Resource base type"
+  tags?: Record<string>;
+
+  /** The user-assigned identity used by a user sign-in policy to access its Key Vault client secret. */
+  identity?: Common.ManagedServiceIdentity;
+}
+
+/**
  * Properties of the authentication policy.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP property models"
@@ -180,6 +195,17 @@ interface AuthenticationPolicies {
   >;
 
   /**
+   * Updates the tags and identity of an authentication policy.
+   */
+  @tag("AuthenticationPolicies")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    AuthenticationPolicy,
+    PatchModel = AuthenticationPolicyUpdateParameters,
+    Error = CloudError
+  >;
+
+  /**
    * Deletes the specified authentication policy.
    */
   @tag("AuthenticationPolicies")
@@ -210,4 +236,12 @@ interface AuthenticationPolicies {
 @@doc(
   AuthenticationPolicies.createOrUpdate::parameters.resource,
   "Authentication policy to be created or updated."
+);
+@@doc(
+  AuthenticationPolicies.update::parameters.properties,
+  "Parameters supplied to update the authentication policy."
+);
+@@clientName(
+  AuthenticationPolicies.update::parameters.properties,
+  "parameters"
 );

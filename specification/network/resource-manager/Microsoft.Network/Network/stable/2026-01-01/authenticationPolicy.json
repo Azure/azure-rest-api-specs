@@ -252,6 +252,61 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "AuthenticationPolicies_Update",
+        "tags": [
+          "AuthenticationPolicies"
+        ],
+        "description": "Updates the tags and identity of an authentication policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "authenticationPolicyName",
+            "in": "path",
+            "description": "The name of the authentication policy.",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "^[A-Za-z0-9_-]{1,80}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update the authentication policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthenticationPolicyUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates authentication policy tags and identity": {
+            "$ref": "./examples/AuthenticationPolicyUpdate.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "AuthenticationPolicies_Delete",
         "tags": [
@@ -382,6 +437,23 @@
         "userTrustProviderType",
         "authenticationProperties"
       ]
+    },
+    "AuthenticationPolicyUpdateParameters": {
+      "type": "object",
+      "description": "Parameters supplied to update an authentication policy.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The user-assigned identity used by a user sign-in policy to access its Key Vault client secret."
+        }
+      }
     },
     "AuthenticationProviderProperties": {
       "type": "object",
