@@ -6,7 +6,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "SKU migration resources represent service-managed migration workflows and do not support customer-initiated deletion."
 @armResourceOperations
 @added(Versions.v2026_03_01)
 interface SkuMigrations {
