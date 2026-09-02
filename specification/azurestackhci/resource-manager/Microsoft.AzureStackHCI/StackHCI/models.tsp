@@ -7646,7 +7646,7 @@ model EdgeMachineReportedProperties {
   /**
    * Storage fabric initiator ports (iSCSI or Fibre Channel) discovered on the edge machine.
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#[])
   storageInitiators?: StorageInitiator[];
@@ -7655,7 +7655,7 @@ model EdgeMachineReportedProperties {
 /**
  * A storage fabric initiator port (iSCSI or Fibre Channel) discovered on the edge machine.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model StorageInitiator {
   /**
    * Transport type of the initiator port.
@@ -7697,7 +7697,7 @@ model StorageInitiator {
 /**
  * Transport type of a storage fabric initiator port on the edge machine.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 union StorageInitiatorType {
   string,
 
