@@ -815,48 +815,38 @@ union TelephonyCallDurationBasis {
   received: "received",
 }
 
-@doc("Detailed provider-neutral timing for an inbound telephony call. Millisecond values are Unix timestamps.")
+@doc("Detailed provider-neutral timing for an inbound telephony call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallTiming {
-  @doc("When the provider webhook was received, as Unix time in milliseconds.")
-  @minValue(0)
-  received_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when the provider webhook was received.")
+  received_at?: FoundryTimestamp;
 
-  @doc("When webhook validation completed, as Unix time in milliseconds.")
-  @minValue(0)
-  validated_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when webhook validation completed.")
+  validated_at?: FoundryTimestamp;
 
-  @doc("When the call was admitted to an agent binding, as Unix time in milliseconds.")
-  @minValue(0)
-  admitted_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when the call was admitted to an agent binding.")
+  admitted_at?: FoundryTimestamp;
 
-  @doc("When the service requested that the provider answer the call, as Unix time in milliseconds.")
-  @minValue(0)
-  answer_requested_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when the service requested that the provider answer the call.")
+  answer_requested_at?: FoundryTimestamp;
 
-  @doc("When the provider reported that the call was answered, as Unix time in milliseconds.")
-  @minValue(0)
-  answered_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when the provider reported that the call was answered.")
+  answered_at?: FoundryTimestamp;
 
-  @doc("When the provider media channel connected, as Unix time in milliseconds.")
-  @minValue(0)
-  media_connected_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when the provider media channel connected.")
+  media_connected_at?: FoundryTimestamp;
 
-  @doc("When the voice-agent session became ready, as Unix time in milliseconds.")
-  @minValue(0)
-  agent_session_ready_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when the voice-agent session became ready.")
+  agent_session_ready_at?: FoundryTimestamp;
 
-  @doc("When caller audio was first observed, as Unix time in milliseconds.")
-  @minValue(0)
-  first_caller_audio_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when caller audio was first observed.")
+  first_caller_audio_at?: FoundryTimestamp;
 
-  @doc("When agent audio was first observed, as Unix time in milliseconds.")
-  @minValue(0)
-  first_agent_audio_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when agent audio was first observed.")
+  first_agent_audio_at?: FoundryTimestamp;
 
-  @doc("When the call reached a terminal state, as Unix time in milliseconds.")
-  @minValue(0)
-  ended_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when the call reached a terminal state.")
+  ended_at?: FoundryTimestamp;
 
   @doc("The timestamp used as the basis for duration.")
   duration_basis?: TelephonyCallDurationBasis;
@@ -1022,13 +1012,11 @@ model TelephonyCallLifecycleEvent {
   @doc("The outcome of the observed lifecycle operation.")
   outcome: TelephonyCallLifecycleEventOutcome;
 
-  @doc("When the service observed the event, as Unix time in milliseconds.")
-  @minValue(0)
-  observed_at_ms: int64;
+  @doc("The Unix timestamp (in seconds) for when the service observed the event.")
+  observed_at: FoundryTimestamp;
 
-  @doc("When the event occurred according to the provider, as Unix time in milliseconds.")
-  @minValue(0)
-  occurred_at_ms?: int64;
+  @doc("The Unix timestamp (in seconds) for when the event occurred according to the provider.")
+  occurred_at?: FoundryTimestamp;
 
   @doc("The source of the event timestamp.")
   timestamp_source: TelephonyCallTimestampSource;
@@ -1096,9 +1084,8 @@ model TelephonyCallSummary {
   @doc("The Unix timestamp (in seconds) for when the call ended.")
   ended_at?: FoundryTimestamp;
 
-  @doc("The call duration in seconds.")
-  @minValue(0)
-  duration_seconds?: int64;
+  @doc("The call duration.")
+  duration_ms?: FoundryDurationMilliseconds;
 
   @doc("The service-generated reason that the call ended.")
   @maxLength(128)
@@ -1128,11 +1115,10 @@ model TelephonyCallRecord {
   @doc("Correlation to the customer-facing Foundry trace.")
   trace?: TelephonyCallTrace;
 
-  @doc("The bounded lifecycle timeline.")
-  @maxItems(32)
+  @doc("The lifecycle timeline.")
   events: TelephonyCallLifecycleEvent[];
 
-  @doc("Whether older lifecycle events were omitted because the bounded event limit was reached.")
+  @doc("Whether older lifecycle events were omitted from the timeline.")
   events_truncated: boolean;
 }
 

@@ -90576,7 +90576,7 @@
           "name",
           "source",
           "outcome",
-          "observed_at_ms",
+          "observed_at",
           "timestamp_source"
         ],
         "properties": {
@@ -90599,17 +90599,13 @@
             "$ref": "#/components/schemas/TelephonyCallLifecycleEventOutcome",
             "description": "The outcome of the observed lifecycle operation."
           },
-          "observed_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When the service observed the event, as Unix time in milliseconds."
+          "observed_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the service observed the event."
           },
-          "occurred_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When the event occurred according to the provider, as Unix time in milliseconds."
+          "occurred_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the event occurred according to the provider."
           },
           "timestamp_source": {
             "$ref": "#/components/schemas/TelephonyCallTimestampSource",
@@ -90820,11 +90816,9 @@
             "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the call ended."
           },
-          "duration_seconds": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "The call duration in seconds."
+          "duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The call duration."
           },
           "end_reason": {
             "type": "string",
@@ -90861,12 +90855,11 @@
             "items": {
               "$ref": "#/components/schemas/TelephonyCallLifecycleEvent"
             },
-            "maxItems": 32,
-            "description": "The bounded lifecycle timeline."
+            "description": "The lifecycle timeline."
           },
           "events_truncated": {
             "type": "boolean",
-            "description": "Whether older lifecycle events were omitted because the bounded event limit was reached."
+            "description": "Whether older lifecycle events were omitted from the timeline."
           }
         },
         "description": "Detailed diagnostics for a durable inbound call to a voice agent.",
@@ -90958,11 +90951,9 @@
             "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The Unix timestamp (in seconds) for when the call ended."
           },
-          "duration_seconds": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "The call duration in seconds."
+          "duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "The call duration."
           },
           "end_reason": {
             "type": "string",
@@ -91021,65 +91012,45 @@
           "timestamp_source"
         ],
         "properties": {
-          "received_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When the provider webhook was received, as Unix time in milliseconds."
+          "received_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the provider webhook was received."
           },
-          "validated_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When webhook validation completed, as Unix time in milliseconds."
+          "validated_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when webhook validation completed."
           },
-          "admitted_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When the call was admitted to an agent binding, as Unix time in milliseconds."
+          "admitted_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the call was admitted to an agent binding."
           },
-          "answer_requested_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When the service requested that the provider answer the call, as Unix time in milliseconds."
+          "answer_requested_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the service requested that the provider answer the call."
           },
-          "answered_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When the provider reported that the call was answered, as Unix time in milliseconds."
+          "answered_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the provider reported that the call was answered."
           },
-          "media_connected_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When the provider media channel connected, as Unix time in milliseconds."
+          "media_connected_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the provider media channel connected."
           },
-          "agent_session_ready_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When the voice-agent session became ready, as Unix time in milliseconds."
+          "agent_session_ready_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the voice-agent session became ready."
           },
-          "first_caller_audio_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When caller audio was first observed, as Unix time in milliseconds."
+          "first_caller_audio_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when caller audio was first observed."
           },
-          "first_agent_audio_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When agent audio was first observed, as Unix time in milliseconds."
+          "first_agent_audio_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when agent audio was first observed."
           },
-          "ended_at_ms": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "description": "When the call reached a terminal state, as Unix time in milliseconds."
+          "ended_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the call reached a terminal state."
           },
           "duration_basis": {
             "$ref": "#/components/schemas/TelephonyCallDurationBasis",
@@ -91090,7 +91061,7 @@
             "description": "The primary source of the timing milestones. Individual lifecycle events identify their own timestamp source separately."
           }
         },
-        "description": "Detailed provider-neutral timing for an inbound telephony call. Millisecond values are Unix timestamps.",
+        "description": "Detailed provider-neutral timing for an inbound telephony call.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
