@@ -9,6 +9,10 @@ The AutoRest configuration for this schema lives in `../../readme.md`.
 ``` yaml
 openapi-type: arm
 tag: package-2026-06
+suppressions:
+  - code: OperationsAPIImplementation
+    from: scheduledEvents.json
+    reason: scheduledEvents is a schema-only Azure Resource Notifications / Azure Resource Graph / Event Grid contract for Microsoft.ContainerService/managedClusters/scheduledEvents and intentionally does not define customer-callable ARM operations.
 ```
 
 ### Tag: package-2026-06
