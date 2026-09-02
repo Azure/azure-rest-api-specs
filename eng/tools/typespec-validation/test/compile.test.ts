@@ -21,11 +21,9 @@ describe("compile", function () {
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
     vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
-    gitDiffTopSpecFolderSpy = vi.spyOn(utils, "gitDiffTopSpecFolder").mockImplementation((folder) =>
+    gitDiffTopSpecFolderSpy = vi.spyOn(utils, "gitDiffTopSpecFolder").mockImplementation(() =>
       Promise.resolve({
         success: true,
-        stdOutput: `Running git diff on folder ${folder}}`,
-        errorOutput: "",
       }),
     );
     runNpmSpy = vi
@@ -77,10 +75,11 @@ describe("compile", function () {
         Promise.resolve([null, "not-swagger", ""]),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
-      success: true,
-      stdOutput: expect.stringContaining("skipping extra swagger check") as unknown,
-    });
+    const consoleSpy = vi.spyOn(console, "log");
+    const result = await new CompileRule().execute(mockFolder);
+    expect(result).toMatchObject({ success: true });
+    const allOutput = consoleSpy.mock.calls.map((args) => String(args[0])).join("\n");
+    expect(allOutput).toContain("skipping extra swagger check");
   });
 
   it("should fail if extra swaggers", async function () {
@@ -105,7 +104,7 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+      reason: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
@@ -128,11 +127,13 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
+    const consoleSpy = vi.spyOn(console, "log");
     const result = await new CompileRule().execute(mockFolder);
     expect(result).toMatchObject({
       success: true,
-      stdOutput: expect.stringContaining("older versions") as unknown,
     });
+    const allOutput = consoleSpy.mock.calls.map((args) => String(args[0])).join("\n");
+    expect(allOutput).toContain("older versions");
   });
 
   it("should fail if extra swaggers include latest preview version", async function () {
@@ -155,7 +156,7 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+      reason: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
@@ -176,7 +177,7 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+      reason: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
@@ -250,11 +251,13 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
+    const consoleSpy = vi.spyOn(console, "log");
     const result = await new CompileRule().execute(mockFolder);
     expect(result).toMatchObject({
       success: true,
-      stdOutput: expect.stringContaining("older versions") as unknown,
     });
+    const allOutput = consoleSpy.mock.calls.map((args) => String(args[0])).join("\n");
+    expect(allOutput).toContain("older versions");
   });
 
   it("should fail if extra swaggers mix preview and stable versions", async function () {
@@ -277,7 +280,7 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+      reason: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
@@ -356,7 +359,6 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      stdOutput: expect.not.stringContaining("Running git diff") as unknown,
     });
   });
 
@@ -367,19 +369,15 @@ describe("compile", function () {
 
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
 
-    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
-      const stdOut = `Running git diff on folder ${folder}`;
-
+    gitDiffTopSpecFolderSpy.mockImplementation((): Promise<RuleResult> => {
       return Promise.resolve({
         success: false,
-        stdOutput: stdOut,
-        errorOutput: `Files generated: ${folder}/bar`,
+        reason: `Files generated: ${mockFolder}/bar`,
       });
     });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
-      stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
   });
 
@@ -390,17 +388,14 @@ describe("compile", function () {
 
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
 
-    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
-      const stdOut = `Running git diff on folder ${folder}`;
+    gitDiffTopSpecFolderSpy.mockImplementation((): Promise<RuleResult> => {
       return Promise.resolve({
         success: true,
-        stdOutput: stdOut,
       });
     });
 
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: true,
-      stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
   });
 });

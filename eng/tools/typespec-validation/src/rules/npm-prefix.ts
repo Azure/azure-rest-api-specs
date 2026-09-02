@@ -19,7 +19,7 @@ export class NpmPrefixRule implements Rule {
       // If spec folder is outside git repo, or if problem running git, throws error
       return {
         success: false,
-        errorOutput: err instanceof Error ? err.message : undefined,
+        reason: err instanceof Error ? err.message : "Unknown error",
       };
     }
 
@@ -32,7 +32,7 @@ export class NpmPrefixRule implements Rule {
       "\n" +
       "Actual npm prefix: " +
       actual_npm_prefix;
-    let errorOutput: string | undefined;
+    let errorOutput = "";
 
     if (expected_npm_prefix !== actual_npm_prefix) {
       success = false;
@@ -40,10 +40,10 @@ export class NpmPrefixRule implements Rule {
         "TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root";
     }
 
-    return {
-      success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
-    };
+    if (stdOutput) console.log(stdOutput);
+
+    return success
+      ? { success: true }
+      : { success: false, reason: errorOutput || "NPM prefix validation failed." };
   }
 }
