@@ -58,10 +58,13 @@ interface NetworkFunctions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Brownfield conversion of API version 2024-04-15: the existing delete operation returns 200 in addition to 202 and 204. Removing the 200 response would be a breaking change; the response set is tracked for correction in the next API version."
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkFunction,
-    Response = ArmDeletedResponse | ArmAcceptedLroResponse<
-      "Accepted. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
-      LroHeaders = ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request is successful. Resource with the specified name does not exist.">,
+    Response =
+      | ArmDeletedResponse
+      | ArmAcceptedLroResponse<
+          "Accepted. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+          LroHeaders = ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request is successful. Resource with the specified name does not exist.">,
     LroHeaders = ArmLroLocationHeader
   >;
 
@@ -81,10 +84,12 @@ interface NetworkFunctions {
   executeRequest is NetworkFunctionsOps.ActionSync<
     Resource = NetworkFunction,
     Request = ExecuteRequestParameters,
-    Response = OkResponse | ArmAcceptedLroResponse<
-      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
-      ArmLroLocationHeader
-    >
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<
+          "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+          ArmLroLocationHeader
+        >
   >;
 }
 
@@ -102,18 +107,23 @@ alias NetworkFunctionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 @@doc(NetworkFunction.name, "Resource name for the network function resource.");
 @@maxLength(NetworkFunction.name, 64);
 @@doc(NetworkFunction.properties, "Network function properties.");
-@@doc(NetworkFunctions.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkFunctions.createOrUpdate::parameters.resource,
   "Parameters supplied in the body to the create or update network function operation."
 );
-@@doc(NetworkFunctions.updateTags::parameters.properties,
+@@doc(
+  NetworkFunctions.updateTags::parameters.properties,
   "Parameters supplied to the update network function tags operation."
 );
-@@doc(NetworkFunctions.executeRequest::parameters.body,
+@@doc(
+  NetworkFunctions.executeRequest::parameters.body,
   "Payload for execute request post call."
 );
-@@doc(NetworkFunction.identity,
+@@doc(
+  NetworkFunction.identity,
   "The managed identity of the network function."
 );
-@@doc(NetworkFunction.etag,
+@@doc(
+  NetworkFunction.etag,
   "A unique read-only string that changes whenever the resource is updated."
 );

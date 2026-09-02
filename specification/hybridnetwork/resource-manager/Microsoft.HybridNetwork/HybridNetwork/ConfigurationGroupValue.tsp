@@ -55,10 +55,12 @@ interface ConfigurationGroupValues {
   delete is ArmResourceDeleteWithoutOkAsync<
     configurationGroupValue,
     LroHeaders = ArmLroLocationHeader,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
-      ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request successful. Resource does not exist.">
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+          ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request successful. Resource does not exist.">
   >;
 
   /**
@@ -73,15 +75,19 @@ interface ConfigurationGroupValues {
 }
 
 @@maxLength(configurationGroupValue.name, 64);
-@@doc(configurationGroupValue.name,
+@@doc(
+  configurationGroupValue.name,
   "The name of the configuration group value."
 );
-@@doc(configurationGroupValue.properties,
+@@doc(
+  configurationGroupValue.properties,
   "Hybrid configuration group value properties."
 );
-@@doc(ConfigurationGroupValues.createOrUpdate::parameters.resource,
+@@doc(
+  ConfigurationGroupValues.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update configuration group value resource."
 );
-@@doc(ConfigurationGroupValues.updateTags::parameters.properties,
+@@doc(
+  ConfigurationGroupValues.updateTags::parameters.properties,
   "Parameters supplied to update configuration group values tags."
 );

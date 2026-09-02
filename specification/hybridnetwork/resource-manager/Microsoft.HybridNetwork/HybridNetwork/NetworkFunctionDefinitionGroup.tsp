@@ -54,10 +54,12 @@ interface NetworkFunctionDefinitionGroups {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkFunctionDefinitionGroup,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
-      LroHeaders = ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+          LroHeaders = ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
     LroHeaders = ArmLroLocationHeader
   >;
 
@@ -68,15 +70,19 @@ interface NetworkFunctionDefinitionGroups {
 }
 
 @@maxLength(NetworkFunctionDefinitionGroup.name, 64);
-@@doc(NetworkFunctionDefinitionGroup.name,
+@@doc(
+  NetworkFunctionDefinitionGroup.name,
   "The name of the network function definition group."
 );
-@@doc(NetworkFunctionDefinitionGroup.properties,
+@@doc(
+  NetworkFunctionDefinitionGroup.properties,
   "Network function definition group properties."
 );
-@@doc(NetworkFunctionDefinitionGroups.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkFunctionDefinitionGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update publisher network function definition group operation."
 );
-@@doc(NetworkFunctionDefinitionGroups.update::parameters.properties,
+@@doc(
+  NetworkFunctionDefinitionGroups.update::parameters.properties,
   "Parameters supplied to the create or update publisher network function definition group operation."
 );

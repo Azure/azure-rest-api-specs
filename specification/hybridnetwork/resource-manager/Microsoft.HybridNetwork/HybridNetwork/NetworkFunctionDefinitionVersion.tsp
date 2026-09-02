@@ -54,10 +54,12 @@ interface NetworkFunctionDefinitionVersions {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkFunctionDefinitionVersion,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
-      LroHeaders = ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+          LroHeaders = ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
     LroHeaders = ArmLroLocationHeader
   >;
 
@@ -74,27 +76,33 @@ interface NetworkFunctionDefinitionVersions {
   updateState is ArmResourceActionAsyncBase<
     NetworkFunctionDefinitionVersion,
     NetworkFunctionDefinitionVersionUpdateState,
-    ArmResponse<NetworkFunctionDefinitionVersionUpdateState> | ArmAcceptedLroResponse<
-      "The request of updating network function definition version state is accepted.",
-      ArmLroLocationHeader<FinalResult = NetworkFunctionDefinitionVersionUpdateState>
-    >,
+    | ArmResponse<NetworkFunctionDefinitionVersionUpdateState>
+    | ArmAcceptedLroResponse<
+        "The request of updating network function definition version state is accepted.",
+        ArmLroLocationHeader<FinalResult = NetworkFunctionDefinitionVersionUpdateState>
+      >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkFunctionDefinitionVersion>
   >;
 }
 
 @@maxLength(NetworkFunctionDefinitionVersion.name, 64);
-@@doc(NetworkFunctionDefinitionVersion.name,
+@@doc(
+  NetworkFunctionDefinitionVersion.name,
   "The name of the network function definition version. The name should conform to the SemVer 2.0.0 specification: https://semver.org/spec/v2.0.0.html."
 );
-@@doc(NetworkFunctionDefinitionVersion.properties,
+@@doc(
+  NetworkFunctionDefinitionVersion.properties,
   "Network function definition version properties."
 );
-@@doc(NetworkFunctionDefinitionVersions.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkFunctionDefinitionVersions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update network function definition version operation."
 );
-@@doc(NetworkFunctionDefinitionVersions.update::parameters.properties,
+@@doc(
+  NetworkFunctionDefinitionVersions.update::parameters.properties,
   "Parameters supplied to the create or update network function definition version operation."
 );
-@@doc(NetworkFunctionDefinitionVersions.updateState::parameters.body,
+@@doc(
+  NetworkFunctionDefinitionVersions.updateState::parameters.body,
   "Parameters supplied to update the state of network function definition version."
 );

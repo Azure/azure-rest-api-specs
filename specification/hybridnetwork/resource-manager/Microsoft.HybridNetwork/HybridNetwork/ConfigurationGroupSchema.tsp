@@ -55,10 +55,12 @@ interface ConfigurationGroupSchemas {
   delete is ArmResourceDeleteWithoutOkAsync<
     ConfigurationGroupSchema,
     LroHeaders = ArmLroLocationHeader,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
-      ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+          ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request is successful. Resource does not exist.">
   >;
 
   /**
@@ -74,27 +76,33 @@ interface ConfigurationGroupSchemas {
   updateState is ArmResourceActionAsyncBase<
     ConfigurationGroupSchema,
     ConfigurationGroupSchemaVersionUpdateState,
-    ArmResponse<ConfigurationGroupSchemaVersionUpdateState> | ArmAcceptedLroResponse<
-      "The request of updating configuration group schema state is accepted.",
-      ArmLroLocationHeader<FinalResult = ConfigurationGroupSchemaVersionUpdateState>
-    >,
+    | ArmResponse<ConfigurationGroupSchemaVersionUpdateState>
+    | ArmAcceptedLroResponse<
+        "The request of updating configuration group schema state is accepted.",
+        ArmLroLocationHeader<FinalResult = ConfigurationGroupSchemaVersionUpdateState>
+      >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ConfigurationGroupSchema>
   >;
 }
 
 @@maxLength(ConfigurationGroupSchema.name, 64);
-@@doc(ConfigurationGroupSchema.name,
+@@doc(
+  ConfigurationGroupSchema.name,
   "The name of the configuration group schema."
 );
-@@doc(ConfigurationGroupSchema.properties,
+@@doc(
+  ConfigurationGroupSchema.properties,
   "Configuration group schema properties."
 );
-@@doc(ConfigurationGroupSchemas.createOrUpdate::parameters.resource,
+@@doc(
+  ConfigurationGroupSchemas.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update configuration group schema resource."
 );
-@@doc(ConfigurationGroupSchemas.update::parameters.properties,
+@@doc(
+  ConfigurationGroupSchemas.update::parameters.properties,
   "Parameters supplied to the create or update network service design version operation."
 );
-@@doc(ConfigurationGroupSchemas.updateState::parameters.body,
+@@doc(
+  ConfigurationGroupSchemas.updateState::parameters.body,
   "Parameters supplied to update the state of configuration group schema."
 );

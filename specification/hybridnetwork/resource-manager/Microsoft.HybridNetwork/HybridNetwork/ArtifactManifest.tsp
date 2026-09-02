@@ -52,10 +52,12 @@ interface ArtifactManifests {
   delete is ArmResourceDeleteWithoutOkAsync<
     ArtifactManifest,
     LroHeaders = ArmLroLocationHeader,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
-      ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+          ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request is successful. Resource does not exist.">
   >;
 
   /**
@@ -78,10 +80,11 @@ interface ArtifactManifests {
   updateState is ArmResourceActionAsyncBase<
     ArtifactManifest,
     ArtifactManifestUpdateState,
-    ArmResponse<ArtifactManifestUpdateState> | ArmAcceptedLroResponse<
-      "Request of updating artifact manifest state is accepted.",
-      ArmLroLocationHeader<FinalResult = ArtifactManifestUpdateState>
-    >,
+    | ArmResponse<ArtifactManifestUpdateState>
+    | ArmAcceptedLroResponse<
+        "Request of updating artifact manifest state is accepted.",
+        ArmLroLocationHeader<FinalResult = ArtifactManifestUpdateState>
+      >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactManifest>
   >;
 }
@@ -89,12 +92,15 @@ interface ArtifactManifests {
 @@maxLength(ArtifactManifest.name, 64);
 @@doc(ArtifactManifest.name, "The name of the artifact manifest.");
 @@doc(ArtifactManifest.properties, "Artifact manifest properties.");
-@@doc(ArtifactManifests.createOrUpdate::parameters.resource,
+@@doc(
+  ArtifactManifests.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update artifact manifest operation."
 );
-@@doc(ArtifactManifests.update::parameters.properties,
+@@doc(
+  ArtifactManifests.update::parameters.properties,
   "Parameters supplied to the create or update artifact manifest operation."
 );
-@@doc(ArtifactManifests.updateState::parameters.body,
+@@doc(
+  ArtifactManifests.updateState::parameters.body,
   "Parameters supplied to update the state of artifact manifest."
 );

@@ -56,10 +56,12 @@ interface NetworkServiceDesignVersions {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     networkServiceDesignVersion,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
-      LroHeaders = ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+          LroHeaders = ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
     LroHeaders = ArmLroLocationHeader
   >;
 
@@ -76,27 +78,33 @@ interface NetworkServiceDesignVersions {
   updateState is ArmResourceActionAsyncBase<
     networkServiceDesignVersion,
     NetworkServiceDesignVersionUpdateState,
-    ArmResponse<NetworkServiceDesignVersionUpdateState> | ArmAcceptedLroResponse<
-      "The request of updating network service design version state is accepted.",
-      ArmLroLocationHeader<FinalResult = NetworkServiceDesignVersionUpdateState>
-    >,
+    | ArmResponse<NetworkServiceDesignVersionUpdateState>
+    | ArmAcceptedLroResponse<
+        "The request of updating network service design version state is accepted.",
+        ArmLroLocationHeader<FinalResult = NetworkServiceDesignVersionUpdateState>
+      >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<networkServiceDesignVersion>
   >;
 }
 
 @@maxLength(networkServiceDesignVersion.name, 64);
-@@doc(networkServiceDesignVersion.name,
+@@doc(
+  networkServiceDesignVersion.name,
   "The name of the network service design version. The name should conform to the SemVer 2.0.0 specification: https://semver.org/spec/v2.0.0.html."
 );
-@@doc(networkServiceDesignVersion.properties,
+@@doc(
+  networkServiceDesignVersion.properties,
   "network service design version properties."
 );
-@@doc(NetworkServiceDesignVersions.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkServiceDesignVersions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update network service design version operation."
 );
-@@doc(NetworkServiceDesignVersions.update::parameters.properties,
+@@doc(
+  NetworkServiceDesignVersions.update::parameters.properties,
   "Parameters supplied to the create or update network service design version operation."
 );
-@@doc(NetworkServiceDesignVersions.updateState::parameters.body,
+@@doc(
+  NetworkServiceDesignVersions.updateState::parameters.body,
   "Parameters supplied to update the state of network service design version."
 );

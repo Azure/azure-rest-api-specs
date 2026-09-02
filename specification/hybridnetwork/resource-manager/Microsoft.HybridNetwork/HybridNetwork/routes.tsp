@@ -1,4 +1,3 @@
-
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
@@ -23,11 +22,11 @@ interface SiteNetworkServicesOperationGroup {
     Response = ArmNoContentResponse<"Cancellation completed successfully.">,
     Scope = SubscriptionActionScope,
     Parameters = {},
-    LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
-@@doc(SiteNetworkServicesOperationGroup.cancelOperation::parameters.body,
+@@doc(
+  SiteNetworkServicesOperationGroup.cancelOperation::parameters.body,
   "The SiteNetworkService detail and an optional operation which defaults to 'Put'."
 );

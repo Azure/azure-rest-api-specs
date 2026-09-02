@@ -52,10 +52,12 @@ interface ArtifactStores {
   delete is ArmResourceDeleteWithoutOkAsync<
     ArtifactStore,
     LroHeaders = ArmLroLocationHeader,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
-      ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+          ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request is successful. Resource does not exist.">
   >;
 
   /**
@@ -96,10 +98,11 @@ interface ArtifactStores {
   listNetworkFabricControllerPrivateEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     void,
-    ArmResponse<ArtifactStoreNetworkFabricControllerEndPointsList> | ArmAcceptedLroResponse<
-      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
-      ArmLroLocationHeader<FinalResult = ArtifactStoreNetworkFabricControllerEndPointsList>
-    >,
+    | ArmResponse<ArtifactStoreNetworkFabricControllerEndPointsList>
+    | ArmAcceptedLroResponse<
+        "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+        ArmLroLocationHeader<FinalResult = ArtifactStoreNetworkFabricControllerEndPointsList>
+      >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 
@@ -136,10 +139,11 @@ interface ArtifactStores {
   listPrivateEndPoints is ArmResourceActionAsyncBase<
     ArtifactStore,
     void,
-    ArmResponse<ArtifactStorePrivateEndPointsListResult> | ArmAcceptedLroResponse<
-      "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
-      ArmLroLocationHeader<FinalResult = ArtifactStorePrivateEndPointsListResult>
-    >,
+    | ArmResponse<ArtifactStorePrivateEndPointsListResult>
+    | ArmAcceptedLroResponse<
+        "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+        ArmLroLocationHeader<FinalResult = ArtifactStorePrivateEndPointsListResult>
+      >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ArtifactStore>
   >;
 }
@@ -186,7 +190,10 @@ interface ProxyArtifact {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Brownfield conversion of API version 2024-04-15: this custom PATCH shape, including its artifactName query parameter, is part of the existing contract. Converting it to a standard ARM resource operation would change the request URI and is breaking."
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Brownfield conversion: legacyResourceOperation is the supported way to keep a non-standard PATCH route on an existing ARM resource without changing the wire contract."
-  @Azure.ResourceManager.Private.legacyResourceOperation(ArtifactStore, "update")
+  @Azure.ResourceManager.Private.legacyResourceOperation(
+    ArtifactStore,
+    "update"
+  )
   @patch(#{ implicitOptionality: false })
   updateState(
     ...ApiVersionParameter,
@@ -231,33 +238,43 @@ interface ProxyArtifact {
 
     @body
     body: ArtifactChangeState,
-  ): ArmResponse<ProxyArtifactVersionsListOverview> | ArmAcceptedLroResponse<
-    "Request of updating artifact state is accepted.",
-    ArmLroLocationHeader<FinalResult = ProxyArtifactVersionsListOverview>
-  > | ErrorResponse;
+  ):
+    | ArmResponse<ProxyArtifactVersionsListOverview>
+    | ArmAcceptedLroResponse<
+        "Request of updating artifact state is accepted.",
+        ArmLroLocationHeader<FinalResult = ProxyArtifactVersionsListOverview>
+      >
+    | ErrorResponse;
 }
 
 @@maxLength(ArtifactStore.name, 64);
 @@doc(ArtifactStore.name, "The name of the artifact store.");
 @@doc(ArtifactStore.properties, "ArtifactStores properties.");
-@@doc(ArtifactStores.createOrUpdate::parameters.resource,
+@@doc(
+  ArtifactStores.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update application group operation."
 );
-@@doc(ArtifactStores.update::parameters.properties,
+@@doc(
+  ArtifactStores.update::parameters.properties,
   "Parameters supplied to the create or update application group operation."
 );
-@@doc(ArtifactStores.addNetworkFabricControllerEndPoints::parameters.body,
+@@doc(
+  ArtifactStores.addNetworkFabricControllerEndPoints::parameters.body,
   "Parameters supplied to the create or update application group operation."
 );
-@@doc(ArtifactStores.deleteNetworkFabricControllerEndPoints::parameters.body,
+@@doc(
+  ArtifactStores.deleteNetworkFabricControllerEndPoints::parameters.body,
   "Parameters supplied to the create or update application group operation."
 );
-@@doc(ArtifactStores.approvePrivateEndPoints::parameters.body,
+@@doc(
+  ArtifactStores.approvePrivateEndPoints::parameters.body,
   "Parameters supplied to approve private endpoints."
 );
-@@doc(ArtifactStores.removePrivateEndPoints::parameters.body,
+@@doc(
+  ArtifactStores.removePrivateEndPoints::parameters.body,
   "Parameters supplied to the create or update application group operation."
 );
-@@doc(ProxyArtifact.updateState::parameters.body,
+@@doc(
+  ProxyArtifact.updateState::parameters.body,
   "Parameters supplied to update the state of artifact manifest."
 );

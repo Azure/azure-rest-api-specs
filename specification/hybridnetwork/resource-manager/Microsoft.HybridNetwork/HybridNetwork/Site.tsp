@@ -48,10 +48,12 @@ interface Sites {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     Site,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
-      LroHeaders = ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request successful. Resource does not exist.">,
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+          LroHeaders = ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request successful. Resource does not exist.">,
     LroHeaders = ArmLroLocationHeader
   >;
 
@@ -69,9 +71,11 @@ interface Sites {
 @@maxLength(Site.name, 64);
 @@doc(Site.name, "The name of the network service site.");
 @@doc(Site.properties, "Site properties.");
-@@doc(Sites.createOrUpdate::parameters.resource,
+@@doc(
+  Sites.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update network site operation."
 );
-@@doc(Sites.updateTags::parameters.properties,
+@@doc(
+  Sites.updateTags::parameters.properties,
   "Parameters supplied to update network site tags."
 );

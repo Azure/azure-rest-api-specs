@@ -56,10 +56,12 @@ interface SiteNetworkServices {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     SiteNetworkService,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
-      LroHeaders = ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request successful. Resource does not exist.">,
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+          LroHeaders = ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request successful. Resource does not exist.">,
     LroHeaders = ArmLroLocationHeader
   >;
 
@@ -77,12 +79,15 @@ interface SiteNetworkServices {
 @@maxLength(SiteNetworkService.name, 64);
 @@doc(SiteNetworkService.name, "The name of the site network service.");
 @@doc(SiteNetworkService.properties, "Site network service properties.");
-@@doc(SiteNetworkServices.createOrUpdate::parameters.resource,
+@@doc(
+  SiteNetworkServices.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update site network service operation."
 );
-@@doc(SiteNetworkServices.updateTags::parameters.properties,
+@@doc(
+  SiteNetworkServices.updateTags::parameters.properties,
   "Parameters supplied to update network site tags."
 );
-@@doc(SiteNetworkService.identity,
+@@doc(
+  SiteNetworkService.identity,
   "The managed identity of the Site network service, if configured."
 );

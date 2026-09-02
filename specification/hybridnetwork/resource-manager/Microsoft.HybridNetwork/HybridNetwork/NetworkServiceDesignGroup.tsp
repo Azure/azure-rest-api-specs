@@ -54,10 +54,12 @@ interface NetworkServiceDesignGroups {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkServiceDesignGroup,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
-      LroHeaders = ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+          LroHeaders = ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request is successful. Resource does not exist.">,
     LroHeaders = ArmLroLocationHeader
   >;
 
@@ -68,15 +70,19 @@ interface NetworkServiceDesignGroups {
 }
 
 @@maxLength(NetworkServiceDesignGroup.name, 64);
-@@doc(NetworkServiceDesignGroup.name,
+@@doc(
+  NetworkServiceDesignGroup.name,
   "The name of the network service design group."
 );
-@@doc(NetworkServiceDesignGroup.properties,
+@@doc(
+  NetworkServiceDesignGroup.properties,
   "network service design group properties."
 );
-@@doc(NetworkServiceDesignGroups.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkServiceDesignGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update publisher network service design group operation."
 );
-@@doc(NetworkServiceDesignGroups.update::parameters.properties,
+@@doc(
+  NetworkServiceDesignGroups.update::parameters.properties,
   "Parameters supplied to the create or update publisher network service design group operation."
 );

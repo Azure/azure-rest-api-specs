@@ -56,10 +56,12 @@ interface Publishers {
   delete is ArmResourceDeleteWithoutOkAsync<
     Publisher,
     LroHeaders = ArmLroLocationHeader,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
-      LroHeaders = ArmLroLocationHeader
-    > | ArmNoContentResponse<"Request is successful. Resource does not exist.">
+    Response =
+      | ArmAcceptedLroResponse<
+          "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+          LroHeaders = ArmLroLocationHeader
+        >
+      | ArmNoContentResponse<"Request is successful. Resource does not exist.">
   >;
 
   /**
@@ -76,12 +78,15 @@ interface Publishers {
 @@maxLength(Publisher.name, 64);
 @@doc(Publisher.name, "The name of the publisher.");
 @@doc(Publisher.properties, "Publisher properties.");
-@@doc(Publishers.createOrUpdate::parameters.resource,
+@@doc(
+  Publishers.createOrUpdate::parameters.resource,
   "Parameters supplied to the create publisher operation."
 );
-@@doc(Publishers.update::parameters.properties,
+@@doc(
+  Publishers.update::parameters.properties,
   "Parameters supplied to the create publisher operation."
 );
-@@doc(Publisher.identity,
+@@doc(
+  Publisher.identity,
   "The managed identity of the publisher, if configured."
 );
