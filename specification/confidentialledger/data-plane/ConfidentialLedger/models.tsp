@@ -428,36 +428,9 @@ alias CCFTransactionIdHeader = {
  * Returned as a result of a write to the Confidential Ledger, the transaction id
  * in the response indicates when the write will become durable.
  */
-@removed(Versions.v2026_07_31_preview)
-@renamedFrom(Versions.v2026_07_31_preview, "LedgerWriteResult")
-model LedgerWriteResultBeforeV20260731Preview {
-  ...CCFTransactionIdHeader;
-
-  /**
-   * The collection identifier of the ledger entry.
-   */
-  collectionId: string;
-}
-
-/**
- * Returned as a result of writing to the Confidential Ledger.
- */
-@added(Versions.v2026_07_31_preview)
-model LedgerWriteResultWithReceipt {
-  ...CCFTransactionIdHeader;
-
-  /**
-   * The response body.
-   */
-  @bodyRoot
-  body: LedgerWriteResult;
-}
-
-/**
- * The result of writing a ledger entry.
- */
-@added(Versions.v2026_07_31_preview)
 model LedgerWriteResult {
+  ...CCFTransactionIdHeader;
+
   /**
    * The collection identifier of the ledger entry.
    */
@@ -466,16 +439,19 @@ model LedgerWriteResult {
   /**
    * The receipt certifying the committed transaction.
    */
+  @added(Versions.v2026_07_31_preview)
   receipt?: ReceiptContents;
 
   /**
    * State of the write transaction.
    */
+  @added(Versions.v2026_07_31_preview)
   state: TransactionState;
 
   /**
    * The list of application claims.
    */
+  @added(Versions.v2026_07_31_preview)
   applicationClaims?: ApplicationClaim[];
 }
 

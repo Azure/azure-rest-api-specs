@@ -1922,7 +1922,7 @@
     },
     "LedgerWriteResult": {
       "type": "object",
-      "description": "The result of writing a ledger entry.",
+      "description": "Returned as a result of a write to the Confidential Ledger, the transaction id\nin the response indicates when the write will become durable.",
       "properties": {
         "collectionId": {
           "type": "string",
@@ -1947,19 +1947,6 @@
       "required": [
         "collectionId",
         "state"
-      ]
-    },
-    "LedgerWriteResultWithReceipt": {
-      "type": "object",
-      "description": "Returned as a result of writing to the Confidential Ledger.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/LedgerWriteResult",
-          "description": "The response body."
-        }
-      },
-      "required": [
-        "body"
       ]
     },
     "MerkleProofElement": {

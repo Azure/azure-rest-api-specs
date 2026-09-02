@@ -150,7 +150,7 @@ op createLedgerEntryAsync is ConfidentialLedgerCommon.LedgerOperation<
     @bodyRoot
     entry: LedgerEntry;
   },
-  LedgerWriteResultBeforeV20260731Preview
+  LedgerWriteResult
 >;
 
 /**
@@ -159,6 +159,7 @@ op createLedgerEntryAsync is ConfidentialLedgerCommon.LedgerOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The versioned ledger write route requires both the service default error and a 503 TransactionRolledBack response."
 @added(Versions.v2026_07_31_preview)
 @summary("Writes a ledger entry.")
+@returnsDoc("Returned as a result of writing to the Confidential Ledger.")
 @sharedRoute
 @route("/app/transactions")
 @post
@@ -189,7 +190,7 @@ op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
     @query("waitForCommit")
     waitForCommit?: boolean = false;
   },
-  LedgerWriteResultWithReceipt,
+  LedgerWriteResult,
   | ConfidentialLedgerCommon.ConfidentialLedgerError
   | TransactionRolledBackErrorResponse
 >;
