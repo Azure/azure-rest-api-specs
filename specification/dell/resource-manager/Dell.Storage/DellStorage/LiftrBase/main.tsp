@@ -52,6 +52,7 @@ union MarketplaceSubscriptionStatus {
 /**
  * Provisioning State of the File system resource
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   string,
 

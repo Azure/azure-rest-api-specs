@@ -5,6 +5,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted). */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeviceLifeCycleEventProperties {
   /** The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '. */
   deviceId: string;
@@ -17,12 +18,14 @@ model DeviceLifeCycleEventProperties {
 }
 
 /** Metadata information for the properties JSON document. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeviceTwinMetadata {
   /** The ISO8601 timestamp of the last time the properties were updated. */
   lastUpdated: string;
 }
 
 /** A portion of the properties that can be written only by the application back-end, and read by the device. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeviceTwinProperties {
   /** Metadata information for the properties JSON document. */
   metadata: DeviceTwinMetadata;
@@ -34,6 +37,7 @@ model DeviceTwinProperties {
 
 //THIS IS WHAT IS CAUSING THE ISSUE
 /** Information about the device twin, which is the cloud representation of application device metadata. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeviceTwinInfo {
   /** Authentication type used for this device: either SAS, SelfSigned, or CertificateAuthority. */
   authenticationType: string;
@@ -76,6 +80,7 @@ model DeviceTwinInfo {
 }
 
 /** Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected). */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeviceConnectionStateEventProperties {
   /** The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '. */
   deviceId: string;
@@ -91,6 +96,7 @@ model DeviceConnectionStateEventProperties {
 }
 
 /** Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry). */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeviceTelemetryEventProperties {
   /** The content of the message from the device. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of body is object"
@@ -106,6 +112,7 @@ model DeviceTelemetryEventProperties {
 }
 
 /** Information about the device connection state event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeviceConnectionStateEventInfo {
   /** Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number. */
   sequenceNumber: string;
@@ -113,27 +120,33 @@ model DeviceConnectionStateEventInfo {
 
 /** Event data for Microsoft.Devices.DeviceCreated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties {}
 
 /** Event data for Microsoft.Devices.DeviceDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties {}
 
 /** Event data for Microsoft.Devices.DeviceConnected event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IotHubDeviceConnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
 /** Event data for Microsoft.Devices.DeviceDisconnected event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IotHubDeviceDisconnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
 /** Event data for Microsoft.Devices.DeviceTelemetry event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 
 /** The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeviceTwinInfoX509Thumbprint {
   /** Primary thumbprint for the x509 certificate. */
   primaryThumbprint: string;
@@ -143,6 +156,7 @@ model DeviceTwinInfoX509Thumbprint {
 }
 
 /** Properties JSON element. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeviceTwinInfoProperties {
   /** A portion of the properties that can be written only by the application back-end, and read by the device. */
   desired: DeviceTwinProperties;

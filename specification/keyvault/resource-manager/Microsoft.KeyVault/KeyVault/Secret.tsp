@@ -14,6 +14,7 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @parentResource(Vault)
 model Secret is Azure.ResourceManager.ProxyResource<SecretProperties, false> {
   ...ResourceNameParameter<

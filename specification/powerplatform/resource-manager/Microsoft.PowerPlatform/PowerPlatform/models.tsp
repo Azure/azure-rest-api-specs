@@ -73,6 +73,7 @@ union EnterprisePolicyKind {
 /**
  * The state of onboarding, which only appears in the response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union State {
   string,
 
@@ -157,6 +158,7 @@ union ActionType {
  * The type of identity used for the EnterprisePolicy. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -173,6 +175,7 @@ enum ResourceIdentityType {
  * The properties that define configuration for the account.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AccountProperties {
   /**
    * The internally assigned unique identifier of the resource.

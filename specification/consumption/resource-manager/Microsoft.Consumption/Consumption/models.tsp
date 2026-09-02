@@ -2169,6 +2169,7 @@ model SavingsPlan {
 /**
  * A Consumption REST API operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation Id.

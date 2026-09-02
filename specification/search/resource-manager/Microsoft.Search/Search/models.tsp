@@ -905,6 +905,7 @@ model EncryptionWithCmk {
 /**
  * A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.v2026_03_01_preview)
 model SearchResourceEncryptionKey {
   /**

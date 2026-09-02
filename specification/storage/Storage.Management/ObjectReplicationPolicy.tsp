@@ -14,6 +14,7 @@ namespace Microsoft.Storage;
 /**
  * The replication policy between two storage accounts. Multiple rules can be defined in one policy.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @parentResource(StorageAccount)
 model ObjectReplicationPolicy
   is Azure.ResourceManager.ProxyResource<ObjectReplicationPolicyProperties> {

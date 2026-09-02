@@ -496,6 +496,7 @@ model DeploymentParameter {
 /**
  * Azure Key Vault parameter reference.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyVaultParameterReference {
   /**
    * Azure Key Vault reference.
@@ -516,6 +517,7 @@ model KeyVaultParameterReference {
 /**
  * Azure Key Vault reference.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyVaultReference {
   /**
    * Azure Key Vault resourceId.
@@ -541,6 +543,7 @@ model DeploymentStacksParametersLink {
 /**
  * Deployment external input for parameterization.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.v2025_07_01)
 model DeploymentExternalInput {
   /**
@@ -553,6 +556,7 @@ model DeploymentExternalInput {
 /**
  * Deployment external input definition for parameterization.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.v2025_07_01)
 model DeploymentExternalInputDefinition {
   /**
@@ -759,6 +763,7 @@ model DeploymentStackTemplateDefinition {
 /**
  * The value or how to get a value for an extension config property.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.v2025_07_01)
 model DeploymentExtensionConfigItem {
   /**

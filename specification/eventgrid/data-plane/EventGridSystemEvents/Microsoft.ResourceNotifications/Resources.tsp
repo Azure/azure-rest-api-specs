@@ -13,6 +13,7 @@ Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftResourceNotificationsResourcesCreatedOrUpdatedExample)
 model ResourceNotificationsResourceManagementCreatedOrUpdatedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
@@ -22,6 +23,7 @@ Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.Resources.Deleted event.
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftResourceNotificationsResourcesDeletedExample)
 model ResourceNotificationsResourceManagementDeletedEventData
   extends ResourceNotificationsResourceDeletedEventData {}

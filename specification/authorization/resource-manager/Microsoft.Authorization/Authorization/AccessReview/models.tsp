@@ -515,6 +515,7 @@ union RecordAllDecisionsResult {
 /**
  * The definition of a Microsoft.Authorization operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Name of the operation

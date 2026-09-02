@@ -98,6 +98,7 @@ model FileSystemClientParameters {
 
 /** The algorithm used to produce the encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-encryption-key header is provided. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum EncryptionAlgorithmTypeCustom {
   /** Deprecated */
   None: "None",

@@ -69,6 +69,7 @@ union KeySource {
 /**
  * Provisioning status of the workspace.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   string,
 
@@ -1092,6 +1093,7 @@ model TrackedResource extends Resource {
 /**
  * The core properties of ARM resources
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
@@ -1115,7 +1117,7 @@ model Resource {
 /**
  * Contains details when the response code indicates an error.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -1185,6 +1187,7 @@ model WorkspaceUpdate {
 /**
  * REST API operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}

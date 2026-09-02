@@ -204,6 +204,7 @@ model UserAssignedIdentity {
 /**
  * Available operation list result
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model OperationResult {
   /**
    * The name of the operation.

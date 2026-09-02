@@ -1008,6 +1008,7 @@ model ConfigDiagnosticsValidatorResultIssue {
 /**
  * The Resource model definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Resource Id

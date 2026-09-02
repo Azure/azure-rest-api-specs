@@ -135,6 +135,7 @@ union ApiVersionParameter {
 /**
  * Azure Traffic Collector REST API operation definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}

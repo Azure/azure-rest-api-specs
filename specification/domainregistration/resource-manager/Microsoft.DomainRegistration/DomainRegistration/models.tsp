@@ -320,6 +320,7 @@ model Dimension {
 /**
  * Retention policy of a resource metric.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MetricAvailability {
   /**
    * Metric availability time grain.

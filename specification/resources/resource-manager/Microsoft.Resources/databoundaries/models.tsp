@@ -78,6 +78,7 @@ union DataBoundary {
 /**
  * Denotes the state of provisioning.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   string,
 

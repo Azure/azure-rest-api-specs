@@ -9927,6 +9927,7 @@ model ManagedNetworkSettingsEx extends ManagedNetworkSettings {
  * Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceId {
   /**
    * The ID of the resource
@@ -15035,6 +15036,7 @@ model ManagedIdentity extends IdentityConfiguration {
 /**
  * Credential for user managed identity
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ManagedIdentityCredential extends DataReferenceCredential {
   /**
    * ManagedIdentityCredential identity type

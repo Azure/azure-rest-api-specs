@@ -100,6 +100,7 @@ model SentimentDocumentResult is DocumentResult {
 }
 
 /** A document's sentence sentiment. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SentenceSentiment {
   /** The sentence text. */
   text: string;

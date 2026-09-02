@@ -130,6 +130,7 @@ model ResponseWithError {
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /**
    * Error code identifying the specific error.

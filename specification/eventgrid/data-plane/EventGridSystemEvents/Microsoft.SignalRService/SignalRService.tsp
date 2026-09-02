@@ -6,6 +6,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionConnected event. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   @example(MicrosoftSignalRServiceClientConnectionConnectedExample)
   model SignalRServiceClientConnectionConnectedEventData {
     ...SignalRServiceBaseEventdata;
@@ -13,6 +14,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionDisconnected event. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   @example(MicrosoftSignalRServiceClientConnectionDisconnectedExample)
   model SignalRServiceClientConnectionDisconnectedEventData {
     ...SignalRServiceBaseEventdata;

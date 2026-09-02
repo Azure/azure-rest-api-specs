@@ -238,6 +238,7 @@ model OperationDisplay {
 /**
  * A Microsoft.Elastic REST API operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model OperationResult {
   /**
    * Operation name, i.e., {provider}/{resource}/{operation}.

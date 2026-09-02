@@ -277,6 +277,7 @@ model Facet {
 /**
  * Resource Graph REST API operation definition.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}
@@ -353,6 +354,7 @@ model Column {
 /**
  * Successfully executed facet containing additional statistics on the response of a query.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model FacetResult extends Facet {
   /**
    * Number of total records in the facet results.

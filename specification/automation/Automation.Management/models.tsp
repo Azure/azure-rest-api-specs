@@ -1260,6 +1260,7 @@ enum EncryptionKeySourceType {
  * The identity type.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -2889,6 +2890,7 @@ model DeletedRunbookProperties {
  * Properties of the certificate.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CertificateProperties {
   /**
    * Gets the thumbprint of the certificate.
@@ -4468,6 +4470,7 @@ model TypeField {
 /**
  * Automation REST API operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}

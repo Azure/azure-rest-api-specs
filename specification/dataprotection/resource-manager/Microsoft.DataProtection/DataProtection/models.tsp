@@ -1039,6 +1039,7 @@ model CloudError {
 /**
  * The resource management error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Error {
   /**
    * The error additional info.

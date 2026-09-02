@@ -70,6 +70,7 @@ alias LaunchCustomParams = {
 // Enums
 // ============================================================
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Azure.Core.lroStatus
 @doc("The status of the LaunchBulkInstancesOperation.")
 union ProvisioningState {
@@ -185,6 +186,7 @@ model ApiErrorBase {
   message?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Inner error details.")
 model InnerError {
   @doc("The exception type.")

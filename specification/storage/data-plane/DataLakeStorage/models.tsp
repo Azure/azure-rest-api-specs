@@ -31,6 +31,7 @@ enum FileSystemResourceType {
 
 /** Required only for Create File and Create Directory. The value must be "file" or "directory". */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum PathResourceType {
   /** A directory resource type. */
   directory: "directory",
@@ -41,6 +42,7 @@ enum PathResourceType {
 
 /** The rename mode. The value must be "legacy" or "posix". */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum PathRenameMode {
   /** Legacy rename mode. */
   legacy: "legacy",
@@ -51,6 +53,7 @@ enum PathRenameMode {
 
 /** The action to perform on the path during update. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum PathUpdateAction {
   /** Append data to the file. */
   append: "append",
@@ -70,6 +73,7 @@ enum PathUpdateAction {
 
 /** The lease action for Path_Lease. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum PathLeaseAction {
   /** Acquire a new lease. */
   acquire: "acquire",
@@ -89,6 +93,7 @@ enum PathLeaseAction {
 
 /** The action for Path_GetProperties. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum PathGetPropertiesAction {
   /** Get access control list. */
   getAccessControl: "getAccessControl",
@@ -112,6 +117,7 @@ enum PathSetAccessControlRecursiveMode {
 
 /** The lease action for append and flush operations. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum LeaseAction {
   /** Acquire a lease. */
   acquire: "acquire",
@@ -128,6 +134,7 @@ enum LeaseAction {
 
 /** The encryption algorithm type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum EncryptionAlgorithmType {
   /** The AES256 encryption algorithm. */
   AES256: "AES256",
@@ -214,6 +221,7 @@ model StorageErrorBody {
 // ============================================================================
 
 /** Represents a filesystem. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model FileSystemItem {
   /** The filesystem name. */
   name?: string;

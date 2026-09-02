@@ -11,6 +11,7 @@ namespace Microsoft.Workloads;
 /**
  * Defines the provisioning states.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ProvisioningState {
   string,
 

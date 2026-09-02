@@ -6,6 +6,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.DeviceRegistry;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Defines the error object with properties.")
 @added(Versions.v2025_07_01_preview)
 model Error {

@@ -59,6 +59,7 @@ enum Versions {
 
 // Models ////////////////////
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Model of an access-token linked to an account.")
 @resource("access-tokens")
 @parentResource(Account)

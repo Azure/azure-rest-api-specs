@@ -41,6 +41,7 @@ model NetAppAccountList is Azure.Core.Page<NetAppAccount>;
 /**
  * NetApp account properties
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AccountProperties {
   /**
    * Azure lifecycle management

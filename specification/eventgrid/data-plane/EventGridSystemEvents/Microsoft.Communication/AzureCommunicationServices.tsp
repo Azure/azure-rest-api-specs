@@ -7,6 +7,7 @@ namespace Microsoft.EventGrid.SystemEvents;
 
 // @example(MicrosoftCommunicationIncomingCallExample)
 /** Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsIncomingCallEventData {
   /** The communication identifier of the target user. */
   to: CommunicationIdentifierModel;
@@ -38,6 +39,7 @@ model AcsIncomingCallEventData {
 
 // @example(MicrosoftCommunicationUserDisconnectedExample)
 /** Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsUserDisconnectedEventData {
   /** The communication identifier of the user who was disconnected */
   userCommunicationIdentifier: CommunicationIdentifierModel;
@@ -45,10 +47,12 @@ model AcsUserDisconnectedEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallStartedEventData extends AcsCallingEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallEndedEventData extends AcsCallingEventProperties {
   /** The communication identifier of the user who was disconnected */
   endedBy?: AcsCallEndedByProperties;
@@ -63,15 +67,18 @@ model AcsCallEndedEventData extends AcsCallingEventProperties {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallParticipantAddedEventData extends AcsCallParticipantEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallParticipantRemovedEventData extends AcsCallParticipantEventData {}
 
 // @example(MicrosoftCommunicationChatMessageReceivedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatMessageReceivedEventData
   extends AcsChatMessageEventBaseProperties {
   ...AcsChatMessageBaseEventData;
@@ -79,6 +86,7 @@ model AcsChatMessageReceivedEventData
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommandReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatAzureBotCommandReceivedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   ...AcsChatMessageBaseEventData;
@@ -86,6 +94,7 @@ model AcsChatAzureBotCommandReceivedInThreadEventData
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatTypingIndicatorReceivedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   ...AcsChatMessageBaseEventData;
@@ -94,6 +103,7 @@ model AcsChatTypingIndicatorReceivedInThreadEventData
 // @example(MicrosoftCommunicationChatMessageReceivedInThreadExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatMessageReceivedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   ...AcsChatMessageBaseEventData;
@@ -102,6 +112,7 @@ model AcsChatMessageReceivedInThreadEventData
 // @example(MicrosoftCommunicationChatMessageEditedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatMessageEditedEventData extends AcsChatMessageEventBaseProperties {
   ...AcsChatMessageBaseEventData;
 
@@ -113,6 +124,7 @@ model AcsChatMessageEditedEventData extends AcsChatMessageEventBaseProperties {
 // @example(MicrosoftCommunicationChatMessageEditedInThreadExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatMessageEditedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   ...AcsChatMessageBaseEventData;
@@ -125,6 +137,7 @@ model AcsChatMessageEditedInThreadEventData
 // @example(MicrosoftCommunicationChatMessageDeletedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatMessageDeletedEventData extends AcsChatMessageEventBaseProperties {
   /** The time at which the message was deleted */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -134,6 +147,7 @@ model AcsChatMessageDeletedEventData extends AcsChatMessageEventBaseProperties {
 // @example(MicrosoftCommunicationChatMessageDeletedInThreadExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatMessageDeletedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   /** The time at which the message was deleted */
@@ -144,6 +158,7 @@ model AcsChatMessageDeletedInThreadEventData
 // @example(MicrosoftCommunicationChatThreadCreatedWithUserExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatThreadCreatedWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatThreadBaseEventData;
@@ -155,6 +170,7 @@ model AcsChatThreadCreatedWithUserEventData
 // @example(MicrosoftCommunicationChatThreadCreatedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatThreadCreatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadBaseEventData;
@@ -166,6 +182,7 @@ model AcsChatThreadCreatedEventData
 // @example(MicrosoftCommunicationChatThreadWithUserDeletedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatThreadWithUserDeletedEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
@@ -174,6 +191,7 @@ model AcsChatThreadWithUserDeletedEventData
 // @example(MicrosoftCommunicationChatThreadDeletedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatThreadDeletedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
@@ -185,6 +203,7 @@ model AcsChatThreadDeletedEventData
 // @example(MicrosoftCommunicationChatThreadPropertiesUpdatedPerUserExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatThreadPropertiesUpdatedPerUserEventData
   extends AcsChatThreadEventBaseProperties {
   /** The communication identifier of the user who updated the thread properties */
@@ -209,6 +228,7 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
 // @example(AcsChatThreadPropertiesUpdatedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatThreadPropertiesUpdatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadPropertiesBaseEventData;
@@ -220,6 +240,7 @@ model AcsChatThreadPropertiesUpdatedEventData
 // @example(MicrosoftCommunicationChatParticipantAddedToThreadWithUserExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatParticipantAddedToThreadWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatParticipantBaseEventData;
@@ -228,6 +249,7 @@ model AcsChatParticipantAddedToThreadWithUserEventData
 // @example(MicrosoftCommunicationChatParticipantRemovedFromThreadWithUserExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatParticipantRemovedFromThreadWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   /** The time at which the user was removed to the thread */
@@ -244,6 +266,7 @@ model AcsChatParticipantRemovedFromThreadWithUserEventData
 // @example(MicrosoftCommunicationChatThreadParticipantAddedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatParticipantAddedToThreadEventData
   extends AcsChatEventInThreadBaseProperties {
   ...AcsChatParticipantBaseEventData;
@@ -255,6 +278,7 @@ model AcsChatParticipantAddedToThreadEventData
 // @example(MicrosoftCommunicationChatThreadParticipantRemovedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatParticipantRemovedFromThreadEventData
   extends AcsChatEventInThreadBaseProperties {
   /** The time at which the user was removed to the thread */
@@ -273,6 +297,7 @@ model AcsChatParticipantRemovedFromThreadEventData
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationSMSDeliveryReportReceivedExample)
 model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   /** Status of Delivery */
@@ -295,6 +320,7 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationSMSReceivedExample)
 model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   /** The SMS content */
@@ -311,6 +337,7 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
 //TODO: This might need some fixing
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRecordingFileStatusUpdatedExample)
 model AcsRecordingFileStatusUpdatedEventData {
   /** The details of recording storage information */
@@ -341,6 +368,7 @@ model AcsRecordingFileStatusUpdatedEventData {
 
 // @example(MicrosoftCommunicationEmailDeliveryReportReceivedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsEmailDeliveryReportReceivedEventData {
   /** The Sender Email Address */
   sender: string;
@@ -367,6 +395,7 @@ model AcsEmailDeliveryReportReceivedEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationEmailEngagementTrackingReportReceivedExample)
 model AcsEmailEngagementTrackingReportReceivedEventData {
   /** The Sender Email Address */
@@ -395,6 +424,7 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterJobCancelledExample)
 model AcsRouterJobCancelledEventData extends AcsRouterJobEventData {
   /** Router Job Note */
@@ -407,6 +437,7 @@ model AcsRouterJobCancelledEventData extends AcsRouterJobEventData {
 // @example(MicrosoftCommunicationRouterJobClassificationFailedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassificationFailed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
   /** Router Job Classification Policy Id */
   classificationPolicyId?: string;
@@ -419,6 +450,7 @@ model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
 // @example(MicrosoftCommunicationRouterJobClassifiedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassified event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
   /** Router Job Queue Info */
   queueDetails: AcsRouterQueueDetails;
@@ -436,6 +468,7 @@ model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClosed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterJobClosedExample)
 model AcsRouterJobClosedEventData extends AcsRouterJobEventData {
   /** Router Job Closed Assignment Id */
@@ -450,6 +483,7 @@ model AcsRouterJobClosedEventData extends AcsRouterJobEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCompleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterJobCompletedExample)
 model AcsRouterJobCompletedEventData extends AcsRouterJobEventData {
   /** Router Job Completed Assignment Id */
@@ -461,11 +495,13 @@ model AcsRouterJobCompletedEventData extends AcsRouterJobEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobDeleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterJobDeletedExample)
 model AcsRouterJobDeletedEventData extends AcsRouterJobEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobExceptionTriggered event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterJobExceptionTriggeredExample)
 model AcsRouterJobExceptionTriggeredEventData extends AcsRouterJobEventData {
   /** Router Job Exception Triggered Rule Key */
@@ -478,6 +514,7 @@ model AcsRouterJobExceptionTriggeredEventData extends AcsRouterJobEventData {
 // @example(MicrosoftCommunicationRouterJobQueuedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobQueued event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
   /** Router Job Priority */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -495,6 +532,7 @@ model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
 // @example(MicrosoftCommunicationRouterJobReceivedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobReceived event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   /** Router Job Received Job Status */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -519,6 +557,7 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
 }
 
 /** Acs Router Job Status */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsRouterJobStatus {
   /** Router Job Status Pending Classification */
   "PendingClassification",
@@ -562,6 +601,7 @@ union AcsRouterJobStatus {
 // @example(MicrosoftCommunicationRouterJobSchedulingFailedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobSchedulingFailed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   /** Router Job Priority */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -586,6 +626,7 @@ model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobUnassigned event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterJobUnassignedExample)
 model AcsRouterJobUnassignedEventData extends AcsRouterJobEventData {
   /** Router Job Unassigned Assignment Id */
@@ -598,6 +639,7 @@ model AcsRouterJobUnassignedEventData extends AcsRouterJobEventData {
 // @example(MicrosoftCommunicationRouterJobWaitingForActivationExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWaitingForActivation event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   /** Router Job Waiting For Activation Priority */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -623,6 +665,7 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
 // @example(MicrosoftCommunicationRouterJobWorkerSelectorsExpiredExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWorkerSelectorsExpired event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterJobWorkerSelectorsExpiredEventData
   extends AcsRouterJobEventData {
   /** Router Job Worker Selectors Expired Requested Worker Selectors */
@@ -637,9 +680,11 @@ model AcsRouterJobWorkerSelectorsExpiredEventData
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 // @example(MicrosoftCommunicationRouterWorkerDeletedExample)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterWorkerDeletedEventData extends AcsRouterWorkerEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterWorkerDeregisteredExample)
 model AcsRouterWorkerDeregisteredEventData {
   /** Router Worker Deregistered Worker Id */
@@ -649,6 +694,7 @@ model AcsRouterWorkerDeregisteredEventData {
 // @example(MicrosoftCommunicationRouterWorkerOfferAcceptedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferAccepted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Accepted Queue Id */
   queueId?: string;
@@ -681,6 +727,7 @@ model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferDeclined event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterWorkerOfferDeclinedExample)
 model AcsRouterWorkerOfferDeclinedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Declined Queue Id */
@@ -692,6 +739,7 @@ model AcsRouterWorkerOfferDeclinedEventData extends AcsRouterWorkerEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferExpired event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterWorkerOfferExpiredExample)
 model AcsRouterWorkerOfferExpiredEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Expired Queue Id */
@@ -704,6 +752,7 @@ model AcsRouterWorkerOfferExpiredEventData extends AcsRouterWorkerEventData {
 // @example(MicrosoftCommunicationRouterWorkerOfferIssuedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferIssued event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Issued Queue Id */
   queueId?: string;
@@ -743,6 +792,7 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferRevoked event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterWorkerOfferRevokedExample)
 model AcsRouterWorkerOfferRevokedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Revoked Queue Id */
@@ -753,6 +803,7 @@ model AcsRouterWorkerOfferRevokedEventData extends AcsRouterWorkerEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerRegistered event */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterWorkerRegisteredExample)
 model AcsRouterWorkerRegisteredEventData {
   /** Router Worker Registered Worker Id */
@@ -781,6 +832,7 @@ model AcsRouterWorkerRegisteredEventData {
 // Base Properties
 /** Schema of common properties of all Router Job events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterJobEventData extends AcsRouterEventData {
   /** Router Job events Queue Id */
   queueId?: string;
@@ -796,12 +848,14 @@ model AcsRouterJobEventData extends AcsRouterEventData {
 
 /** Schema of common properties of all Router Worker events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterWorkerEventData extends AcsRouterEventData {
   /** Router Worker events Worker Id */
   workerId?: string;
 }
 
 /** Schema of common properties of all Router events */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterEventData {
   /** Router Event Job ID */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -815,6 +869,7 @@ model AcsRouterEventData {
 }
 
 /** Router Channel Configuration */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterChannelConfiguration {
   /** Channel ID for Router Job */
   channelId?: string;
@@ -827,6 +882,7 @@ model AcsRouterChannelConfiguration {
 }
 
 /** Router Queue Details */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterQueueDetails {
   /** Router Queue Id */
   id?: string;
@@ -859,6 +915,7 @@ model AcsRouterCommunicationError {
 }
 
 /** Router Job Worker Selector */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRouterWorkerSelector {
   /** Router Job Worker Selector Key */
   key?: string;
@@ -948,6 +1005,7 @@ alias AcsChatParticipantBaseEventData = {
 };
 
 /** Recording content type */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union recordingContentType {
   /** AudioVideo content type */
   "AudioVideo",
@@ -959,6 +1017,7 @@ union recordingContentType {
 }
 
 /** Recording channel type */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union recordingChannelType {
   /** Mixed channel type */
   "Mixed",
@@ -970,6 +1029,7 @@ union recordingChannelType {
 }
 
 /** Recording format type */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union recordingFormatType {
   /** WAV format */
   "Wav",
@@ -984,6 +1044,7 @@ union recordingFormatType {
 }
 
 /** Router Job Worker Selector Label Operator */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsRouterLabelOperator {
   /** Router Label Operator Equal */
   "Equal",
@@ -1007,6 +1068,7 @@ union AcsRouterLabelOperator {
 }
 
 /** Router Worker Selector State */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsRouterWorkerSelectorState {
   /** Router Worker Selector State Active */
   Active: "active",
@@ -1018,6 +1080,7 @@ union AcsRouterWorkerSelectorState {
 }
 
 /** The status of the email. Any value other than Delivered is considered failed. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsEmailDeliveryReportStatus {
   /** Hard bounce detected while sending the email */
   "Bounced",
@@ -1041,6 +1104,7 @@ union AcsEmailDeliveryReportStatus {
 }
 
 /** Detailed information about the status if any */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsEmailDeliveryReportStatusDetails {
   /** Detailed status message */
   statusMessage?: string;
@@ -1051,6 +1115,7 @@ model AcsEmailDeliveryReportStatusDetails {
 
 /** Schema of common properties of all chat thread events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
   /** The original creation time of the thread */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1062,6 +1127,7 @@ model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
 
 /** Schema of common properties of all chat thread events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatThreadEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   /** The original creation time of the thread */
@@ -1074,6 +1140,7 @@ model AcsChatThreadEventInThreadBaseProperties
 
 /** Schema of common properties of all chat message events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   /** The chat message id */
   messageId: string;
@@ -1101,6 +1168,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
 /** Schema of common properties of all participant events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallParticipantEventData extends AcsCallingEventProperties {
   /** The user of the call participant */
   user?: AcsCallParticipantProperties;
@@ -1117,6 +1185,7 @@ model AcsCallParticipantEventData extends AcsCallingEventProperties {
 
 /** Schema of common properties of all participant event user */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallParticipantProperties {
   /** The communication identifier of the participant user */
   communicationIdentifier?: CommunicationIdentifierModel;
@@ -1127,6 +1196,7 @@ model AcsCallParticipantProperties {
 
 /** Schema of common properties of all calling events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallingEventProperties {
   /** The call participant who initiated the call. */
   startedBy: AcsCallParticipantProperties;
@@ -1152,6 +1222,7 @@ model AcsCallingEventProperties {
 
 /** Schema of calling event group properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallGroupProperties {
   /** Group Id. */
   id?: string;
@@ -1159,6 +1230,7 @@ model AcsCallGroupProperties {
 
 /** Schema of calling event room properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallRoomProperties {
   /** Room Id. */
   id?: string;
@@ -1166,6 +1238,7 @@ model AcsCallRoomProperties {
 
 /** Schema of calling event ended by properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallEndedByProperties {
   /** The communication identifier of the call ended by */
   communicationIdentifier: CommunicationIdentifierModel;
@@ -1180,6 +1253,7 @@ model AcsCallEndedByProperties {
 
 /** Schema of calling event reason properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsCallEndReasonProperties {
   /** Reason code for ending the call. */
   code?: int32;
@@ -1193,6 +1267,7 @@ model AcsCallEndReasonProperties {
 
 /** Schema of common properties of all thread-level chat message events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatMessageEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   /** The chat message id */
@@ -1220,6 +1295,7 @@ model AcsChatMessageEventInThreadBaseProperties
 }
 
 /** Schema of common properties of all thread-level chat events */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatEventInThreadBaseProperties {
   /** The transaction id will be used as co-relation vector */
   transactionId?: string;
@@ -1229,6 +1305,7 @@ model AcsChatEventInThreadBaseProperties {
 }
 
 /** Schema of common properties of all chat events */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatEventBaseProperties {
   /** The communication identifier of the target user */
   recipientCommunicationIdentifier: CommunicationIdentifierModel;
@@ -1237,6 +1314,7 @@ model AcsChatEventBaseProperties {
 }
 
 /** Schema of the chat thread participant */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsChatThreadParticipantProperties {
   /** The name of the user */
   displayName?: string;
@@ -1250,6 +1328,7 @@ model AcsChatThreadParticipantProperties {
 }
 
 /** Schema of common properties of all SMS events */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsSmsEventBaseProperties {
   /** The identity of the SMS message */
   messageId: string;
@@ -1262,6 +1341,7 @@ model AcsSmsEventBaseProperties {
 }
 
 /** Schema for details of a delivery attempt */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsSmsDeliveryAttemptProperties {
   /** TimeStamp when delivery was attempted */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1277,6 +1357,7 @@ model AcsSmsDeliveryAttemptProperties {
 }
 
 /** Schema for all properties of Recording Storage Information. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRecordingStorageInfoProperties {
   /** List of details of recording chunks information */
   @visibility(Lifecycle.Read)
@@ -1284,6 +1365,7 @@ model AcsRecordingStorageInfoProperties {
 }
 
 /** Schema for all properties of  Recording Chunk Information. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsRecordingChunkInfoProperties {
   /** The documentId of the recording chunk */
   documentId?: string;
@@ -1305,6 +1387,7 @@ model AcsRecordingChunkInfoProperties {
 }
 
 /** Custom Context of Incoming Call */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsIncomingCallCustomContext {
   /** Sip Headers for incoming call */
   @visibility(Lifecycle.Read)
@@ -1316,6 +1399,7 @@ model AcsIncomingCallCustomContext {
 }
 
 /** The type of engagement user have with email. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsUserEngagement {
   /** View */
   "view",
@@ -1327,6 +1411,7 @@ union AcsUserEngagement {
 }
 
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CommunicationIdentifierModel {
   /** The identifier kind. Only required in responses. */
   kind?: CommunicationIdentifierModelKind;
@@ -1378,6 +1463,7 @@ model MicrosoftTeamsAppIdentifierModel {
 }
 
 /** A Microsoft Teams user. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MicrosoftTeamsUserIdentifierModel {
   /** The Id of the Microsoft Teams user. If not anonymous, this is the AAD object Id of the user. */
   userId: string;
@@ -1391,18 +1477,21 @@ model MicrosoftTeamsUserIdentifierModel {
 }
 
 /** A phone number. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model PhoneNumberIdentifierModel {
   /** The phone number in E.164 format. */
   value: string;
 }
 
 /** A user that got created with an Azure Communication Services resource. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model CommunicationUserIdentifierModel {
   /** The Id of the communication user. */
   id: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerUpdated event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationRouterWorkerUpdatedExample)
 model AcsRouterWorkerUpdatedEventData {
   /** Router Worker Updated Worker Id */
@@ -1434,6 +1523,7 @@ model AcsRouterWorkerUpdatedEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationAdvancedMessageDeliveryStatusUpdatedExample)
 model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
   /** The message id */
@@ -1455,6 +1545,7 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @example(MicrosoftCommunicationAdvancedMessageReceivedExample)
 model AcsMessageReceivedEventData extends AcsMessageEventData {
   /** Optional. The message content */
@@ -1492,6 +1583,7 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
 }
 
 /** Message Media Content */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsMessageMediaContent {
   /** Required. The MIME type of the file this media represents */
   mimeType: string;
@@ -1510,6 +1602,7 @@ model AcsMessageMediaContent {
 }
 
 /** Message Reaction Content */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsMessageReactionContent {
   /** Required. WhatsApp message ID of the message that the emoji is applied to */
   messageId: string;
@@ -1519,6 +1612,7 @@ model AcsMessageReactionContent {
 }
 
 /** Message Context */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsMessageContext {
   /** The WhatsApp ID for the customer who replied to an inbound message. */
   from?: string;
@@ -1528,6 +1622,7 @@ model AcsMessageContext {
 }
 
 /** Message Button Content */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsMessageButtonContent {
   /** The Text of the button */
   text?: string;
@@ -1537,6 +1632,7 @@ model AcsMessageButtonContent {
 }
 
 /** Message Interactive Content */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsMessageInteractiveContent {
   /** The Message interactive reply type */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1550,6 +1646,7 @@ model AcsMessageInteractiveContent {
 }
 
 /** Message Interactive button reply content for a user to business message */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsMessageInteractiveButtonReplyContent {
   /** The ID of the button */
   id?: string;
@@ -1559,6 +1656,7 @@ model AcsMessageInteractiveButtonReplyContent {
 }
 
 /** Message Interactive list reply content for a user to business message */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsMessageInteractiveListReplyContent {
   /** The ID of the selected list item */
   id?: string;
@@ -1571,6 +1669,7 @@ model AcsMessageInteractiveListReplyContent {
 }
 
 /** Schema of common properties of all chat thread events */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model AcsMessageEventData {
   /** The message sender */
   from: string;
@@ -1605,6 +1704,7 @@ model AcsChatRetentionPolicy {
 }
 
 /** Interactive reply kind */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsInteractiveReplyKind {
   /** Messaged interactive reply type is ButtonReply */
   "buttonReply",
@@ -1641,6 +1741,7 @@ union AcsChatThreadDeletedReasonType {
 }
 
 /** Message channel kind */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsMessageChannelKind {
   /** Updated message channel type is WhatsApp */
   "whatsapp",
@@ -1649,6 +1750,7 @@ union AcsMessageChannelKind {
 }
 
 /** Message delivery status */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsMessageDeliveryStatus {
   /** Read */
   "read",
@@ -1672,6 +1774,7 @@ union AcsMessageDeliveryStatus {
 }
 
 /** Worker properties that can be updated */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsRouterUpdatedWorkerProperty {
   /** AvailableForOffers */
   "AvailableForOffers",
@@ -1695,6 +1798,7 @@ union AcsRouterUpdatedWorkerProperty {
 }
 
 /** Call ended participant kind. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsCallEndedByKind {
   /** Participant */
   "Participant",
@@ -1706,6 +1810,7 @@ union AcsCallEndedByKind {
 }
 
 /** Call participant kind. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union AcsCallParticipantKind {
   /** Attendee */
   "Attendee",
@@ -1726,6 +1831,7 @@ union AcsCallParticipantKind {
 }
 
 /** Communication cloud environment model. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union CommunicationCloudEnvironmentModel {
   /** Public */
   "public",

@@ -75,6 +75,7 @@ union DevBoxProvisioningState {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Indicates the general provisioning state.")
 @added(APIVersions.v2025_04_01_preview)
 union ProvisioningState {
@@ -86,6 +87,7 @@ union ProvisioningState {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Indicates the Dev Box compute.")
 union SkuName {
   @doc("Intel, 8 vCPU, 32 GB RAM, 256 GB Storage.")

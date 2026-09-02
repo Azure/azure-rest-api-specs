@@ -3,6 +3,7 @@ using TypeSpec.Versioning;
 /** Describes the schema of the Azure Storage events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   /** The access tier of the blob. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   union StorageBlobAccessTier {
     /** The blob is in access tier Hot */
     "Hot",
@@ -23,6 +24,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageBlobCreatedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -61,6 +63,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobDeleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageBlobDeletedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -87,6 +90,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryCreated event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageDirectoryCreatedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -110,6 +114,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryDeleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageDirectoryDeletedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -133,6 +138,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobRenamed event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageBlobRenamedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -158,6 +164,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryRenamed event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageDirectoryRenamedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -183,6 +190,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.LifecyclePolicyCompleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageLifecyclePolicyCompletedEventData {
     /** The time the policy task was scheduled. */
     scheduleTime?: string;
@@ -204,6 +212,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Execution statistics of a specific policy action in a Blob Management cycle. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageLifecyclePolicyActionSummaryDetail {
     /** Total number of objects to be acted on by this action. */
     totalObjectsCount?: int64;
@@ -216,12 +225,14 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Policy run status of an account in a Blob Management cycle. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageLifecyclePolicyRunSummary {
     /** Policy status can be Completed/CompletedWithError/Incomplete. */
     completionStatus: StorageLifecycleCompletionStatus;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageBlobTierChangedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -257,6 +268,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.AsyncOperationInitiated event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageAsyncOperationInitiatedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -286,6 +298,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageBlobInventoryPolicyCompletedEventData {
     /** The time at which inventory policy was scheduled. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -312,6 +325,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageTaskCompletedEventData {
     /** The status for a storage task. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -332,6 +346,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageTaskQueuedEventData {
     /** The time at which a storage task was queued. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -342,6 +357,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentQueued event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageTaskAssignmentQueuedEventData {
     /** The time at which a storage task was queued. */
     // @encode("ISO8601")
@@ -353,6 +369,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentCompleted event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model StorageTaskAssignmentCompletedEventData {
     /** The status for a storage task. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -374,6 +391,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** The status for a LCM policy. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   union StorageLifecycleCompletionStatus {
     /** Completed */
     "Completed",
@@ -388,6 +406,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** The status for a storage task. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   union StorageTaskAssignmentCompletedStatus {
     /** Succeeded */
     "Succeeded",
@@ -399,6 +418,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** The status for a storage task. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   union StorageTaskCompletedStatus {
     /** Succeeded */
     "Succeeded",

@@ -64,6 +64,7 @@ model EntityLinkingResultWithDetectedLanguage {
 }
 
 /** The LinkedEntity object containing the detected entity with the associated sources/links. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model LinkedEntity {
   /** Entity Linking formal name. */
   name: string;

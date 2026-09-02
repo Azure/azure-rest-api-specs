@@ -16,7 +16,7 @@ model DeploymentListResult is Azure.Core.Page<DeploymentExtended>;
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorResponse {
   /** The error code. */
   @visibility(Lifecycle.Read)
@@ -44,6 +44,7 @@ model ErrorResponse {
 /**
  * Type of an extension config property value.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @removed(Versions.v2026_06_01)
 union ExtensionConfigPropertyType {
   string,
@@ -87,6 +88,7 @@ union ExtensionConfigPropertyType {
 /**
  * The scope to be used for evaluation of parameters, variables and functions in a nested template.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ExpressionEvaluationOptionsScopeType {
   string,
 
@@ -131,6 +133,7 @@ union ValidationLevel {
 /**
  * The identity type.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union DeploymentIdentityType {
   string,
 
@@ -709,6 +712,7 @@ model DeploymentParameter {
 /**
  * Azure Key Vault parameter reference.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyVaultParameterReference {
   /**
    * Azure Key Vault reference.
@@ -729,6 +733,7 @@ model KeyVaultParameterReference {
 /**
  * Azure Key Vault reference.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model KeyVaultReference {
   /**
    * Azure Key Vault resource id.
@@ -840,6 +845,7 @@ model ExpressionEvaluationOptions {
 /**
  * The Managed Identity configuration for a deployment.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DeploymentIdentity {
   /**
    * The identity type.
@@ -1024,6 +1030,7 @@ model Provider {
 /**
  * Resource type managed by the resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ProviderResourceType {
   /**
    * The resource type.
@@ -1211,6 +1218,7 @@ model ZoneMapping {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ApiProfile {
   /**
    * The profile version.
@@ -1864,6 +1872,7 @@ model TargetResource {
 /**
  * HTTP message.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model HttpMessage {
   /**
    * HTTP message content.

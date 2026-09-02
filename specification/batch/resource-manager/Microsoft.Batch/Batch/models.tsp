@@ -271,6 +271,7 @@ enum AuthenticationMode {
  * The type of identity used for the Batch account.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ResourceIdentityType {
   /**
    * Batch account has a system assigned identity with it.
@@ -293,6 +294,7 @@ enum ResourceIdentityType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ProvisioningState {
   /**
    * The account is in an invalid state.
@@ -1745,6 +1747,7 @@ model SkuCapability {
 /**
  * A REST API operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @summary("A REST API operation")
 model Operation {
   /**
@@ -1812,6 +1815,7 @@ model OperationDisplay {
  * The result of the request to list operations.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ResourceType {
   /**
    * The resource type for Microsoft.Batch/batchAccounts
@@ -1867,6 +1871,7 @@ model ListCertificatesResult is Azure.Core.Page<Certificate>;
  * Certificate properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy Design"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @removed(Versions.v2025_06_01)
 model CertificateProperties extends CertificateBaseProperties {
   /**

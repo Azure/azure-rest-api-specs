@@ -103,6 +103,7 @@ union ScriptType {
   powerShell: "PowerShell",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Azure.Core.lroStatus
 @doc("The provisioning state of the image customization.")
 union ProvisioningState {

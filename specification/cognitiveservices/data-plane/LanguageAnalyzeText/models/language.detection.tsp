@@ -49,6 +49,7 @@ model LanguageDetectionDocumentResult is DocumentResult {
 }
 
 /** Contains the details of the detected language for the text. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model DetectedLanguage {
   /** Long name of a detected language (e.g. English, French). */
   name: string;

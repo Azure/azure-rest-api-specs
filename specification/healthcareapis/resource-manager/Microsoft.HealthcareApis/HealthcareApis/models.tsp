@@ -627,6 +627,7 @@ model ServicesResourceIdentity {
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model ErrorDetails {
   /**
@@ -850,6 +851,7 @@ model WorkspacePatchResource extends ResourceTags {}
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model Error {
   /**

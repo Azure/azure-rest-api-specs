@@ -8896,6 +8896,7 @@ model ApplicationGatewayPrivateLinkResourceProperties {
 /**
  * Common error representation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @error
 model Error {
   /**
@@ -8928,6 +8929,7 @@ model Error {
 /**
  * Common error details representation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ErrorDetails {
   /**
    * Error code.
@@ -15620,6 +15622,7 @@ model ContainerNetworkInterfaceConfigurationPropertiesFormat {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model Container extends SubResource {}
 
@@ -17160,6 +17163,7 @@ model InboundSecurityRules {
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 @error
 model ErrorResponse {
@@ -19279,6 +19283,7 @@ model ConnectionMonitorListResult {
  * Network REST API operation definition.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 model Operation {
   /**

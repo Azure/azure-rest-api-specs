@@ -76,6 +76,7 @@ model DeploymentSafeguardsProperties {
   podSecurityStandardsLevel?: PodSecurityStandardsLevel;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
 union ProvisioningState {

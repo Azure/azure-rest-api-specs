@@ -12,6 +12,7 @@ namespace Microsoft.ExtendedLocation;
 /**
  * The identity type.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ResourceIdentityType {
   string,
 

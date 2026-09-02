@@ -3,6 +3,7 @@ using TypeSpec.Versioning;
 /** EG Edge Data Model */
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Edge.SolutionVersionPublished event. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
   model EdgeSolutionVersionPublishedEventData {
     /** A GUID to uniquely track External Solution Validation */
     externalValidationId: string;

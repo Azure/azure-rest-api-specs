@@ -101,6 +101,7 @@ model HealthcareEntitiesDocumentResult is DocumentResult {
 model FhirBundle is Record<unknown>;
 
 /** Healthcare entity extracted from the document */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model HealthcareEntity {
   /** Entity text as appears in the request. */
   text: string;

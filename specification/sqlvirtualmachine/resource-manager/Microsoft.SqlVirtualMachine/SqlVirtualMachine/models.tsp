@@ -508,6 +508,7 @@ model AgReplica {
 /**
  * ARM resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Resource {
   /**
    * Resource ID.
@@ -657,6 +658,7 @@ model SqlVirtualMachineGroupUpdate {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceIdentity {
   /**
    * The Azure Active Directory principal id.

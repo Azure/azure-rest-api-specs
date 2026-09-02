@@ -164,6 +164,7 @@ model AbstractiveSummaryDocumentResultWithDetectedLanguage
 }
 
 /** An object representing a single summary with context for given document. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @added(Versions.v2023_04_01)
 model AbstractiveSummary {
   /** The text of the summary. */

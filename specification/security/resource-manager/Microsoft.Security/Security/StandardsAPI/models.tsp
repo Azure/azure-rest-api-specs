@@ -133,6 +133,7 @@ model AzureTrackedResourceKind {
  */
 // #suppress applies to the next declaration
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ETag {
   /**
    * Entity tag is used for comparing two or more entities from the same requested resource.

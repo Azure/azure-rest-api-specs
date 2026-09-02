@@ -1587,6 +1587,7 @@ model ManagementGroup {
 /**
  * Management group properties.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ManagementGroupProperties {
   /**
    * The number of servers connected to the management group.
@@ -1636,6 +1637,7 @@ model OperationListResult is Azure.Core.Page<Operation>;
 /**
  * Supported operation of OperationalInsights resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}

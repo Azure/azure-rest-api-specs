@@ -40,6 +40,7 @@ model WithDescription {
   description: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @doc("Enum for resource visibility Scope.")
 @removed(Versions.`2026-02-01-preview`)
 union Scope {

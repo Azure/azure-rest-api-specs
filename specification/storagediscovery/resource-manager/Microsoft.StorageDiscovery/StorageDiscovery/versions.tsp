@@ -7,6 +7,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.StorageDiscovery;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 enum ApiVersion {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_06_01_preview: "2025-06-01-preview",

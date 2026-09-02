@@ -4,6 +4,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MachineLearningServicesModelRegisteredEventData {
   /** The name of the model that was registered. */
   modelName: string;
@@ -21,6 +22,7 @@ model MachineLearningServicesModelRegisteredEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MachineLearningServicesModelDeployedEventData {
   /** The name of the deployed service. */
   serviceName: string;
@@ -41,6 +43,7 @@ model MachineLearningServicesModelDeployedEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MachineLearningServicesRunCompletedEventData {
   /** The ID of the experiment that the run belongs to. */
   experimentId: string;
@@ -64,6 +67,7 @@ model MachineLearningServicesRunCompletedEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MachineLearningServicesDatasetDriftDetectedEventData {
   /** The ID of the data drift monitor that triggered the event. */
   dataDriftId: string;
@@ -96,6 +100,7 @@ model MachineLearningServicesDatasetDriftDetectedEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model MachineLearningServicesRunStatusChangedEventData {
   /** The ID of the experiment that the Machine Learning Run belongs to. */
   experimentId: string;

@@ -164,6 +164,7 @@ enum Type {
 /**
  * The operation supported by Microsoft Support resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}.

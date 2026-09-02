@@ -1265,6 +1265,7 @@ model OperationDisplay {
 /**
  * A Nginx.NginxPlus REST API operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model OperationResult {
   /**
    * Operation name: {provider}/{resource}/{operation}

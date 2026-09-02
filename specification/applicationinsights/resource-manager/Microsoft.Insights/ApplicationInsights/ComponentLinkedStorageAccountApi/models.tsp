@@ -10,6 +10,7 @@ using Azure.ResourceManager.Foundations;
 namespace ComponentLinkedStorageAccountApi;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union StorageType {
   string,
 

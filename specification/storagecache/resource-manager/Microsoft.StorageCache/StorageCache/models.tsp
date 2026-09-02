@@ -796,7 +796,8 @@ union FilesystemSubnetStatusType {
   Invalid: "Invalid",
 }
 
-/** Metric aggregation type. */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union MetricAggregationType {
   string,
 
@@ -1300,6 +1301,7 @@ model userAssignedIdentitiesValue {
 /**
  * SKU for the resource.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SkuName {
   /**
    * SKU name for this resource.

@@ -352,6 +352,7 @@ model SecretRestoreParameters {
 /**
  * Properties of the key backing a certificate.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model SecretProperties {
   /**
    * The media type (MIME type).
@@ -362,6 +363,7 @@ model SecretProperties {
 /**
  * The media type (MIME type).
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
 union ContentType {
   string,

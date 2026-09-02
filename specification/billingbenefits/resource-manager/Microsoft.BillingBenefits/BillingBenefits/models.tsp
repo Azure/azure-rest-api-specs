@@ -697,6 +697,7 @@ union BenefitType {
 /**
  * The top-level ARM resource type for a billing benefit (e.g., maccs, credits, savingsPlans, reservations).
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 union ResourceType {
   string,
 
@@ -1247,6 +1248,7 @@ model RenewProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-no-type-name-conflict" "Name kept for backward compatibility"
 model ResourceSku {
   name?: string;
 }
