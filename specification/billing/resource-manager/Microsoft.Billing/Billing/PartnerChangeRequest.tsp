@@ -73,8 +73,8 @@ model PartnerChangeDocumentDownloadResult
 }
 
 /** Details of a partner change request initiation response. */
-@added(Versions.v2024_08_01_preview)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
+@added(Versions.v2024_08_01_preview)
 model PartnerChangeRequestInitiatedResponse {
   ...AcceptedResponse;
 
@@ -86,8 +86,8 @@ model PartnerChangeRequestInitiatedResponse {
 }
 
 /** Details of a partner change request cancellation response. */
-@added(Versions.v2024_08_01_preview)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
+@added(Versions.v2024_08_01_preview)
 model PartnerChangeRequestCancelledResponse {
   ...AcceptedResponse;
 

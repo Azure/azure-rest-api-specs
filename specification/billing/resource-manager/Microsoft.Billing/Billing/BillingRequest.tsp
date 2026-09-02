@@ -8,8 +8,8 @@ namespace Microsoft.Billing;
 /**
  * A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.
  */
-@tenantResource
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat. Furthermore, Request is the ARM resource."
+@tenantResource
 model BillingRequest
   is Azure.ResourceManager.ProxyResource<BillingRequestProperties> {
   ...ResourceNameParameter<
