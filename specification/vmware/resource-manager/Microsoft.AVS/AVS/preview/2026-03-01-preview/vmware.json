@@ -2231,6 +2231,76 @@
             "$ref": "./examples/Hosts_Get.json"
           }
         }
+      },
+      "patch": {
+        "operationId": "Hosts_Update",
+        "tags": [
+          "Hosts"
+        ],
+        "description": "Update a Host",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "description": "Name of the private cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Name of the cluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "hostId",
+            "in": "path",
+            "description": "The host identifier.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Host"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hosts_Update": {
+            "$ref": "./examples/Hosts_Update.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/listZones": {
@@ -9724,6 +9794,38 @@
         ]
       }
     },
+    "HostLicense": {
+      "type": "object",
+      "description": "A license assigned to a host.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/HostLicenseKind",
+          "description": "License kind"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "HostLicenseKind": {
+      "type": "string",
+      "description": "The kind of host license.",
+      "enum": [
+        "WindowsServer"
+      ],
+      "x-ms-enum": {
+        "name": "HostLicenseKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WindowsServer",
+            "value": "WindowsServer",
+            "description": "The host is to be used with Azure Hybrid Benefit for Windows Server."
+          }
+        ]
+      }
+    },
     "HostListResult": {
       "type": "object",
       "description": "The response of a Host list operation.",
@@ -9809,6 +9911,14 @@
         "faultDomain": {
           "type": "string",
           "readOnly": true
+        },
+        "licenses": {
+          "type": "array",
+          "description": "The licenses assigned to the host.",
+          "items": {
+            "$ref": "#/definitions/HostLicense"
+          },
+          "x-ms-identifiers": []
         }
       },
       "discriminator": "kind",
@@ -9846,6 +9956,30 @@
         ]
       },
       "readOnly": true
+    },
+    "HostUpdate": {
+      "type": "object",
+      "description": "The properties of a host to update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HostUpdateProperties",
+          "description": "The properties of a host resource that may be updated"
+        }
+      }
+    },
+    "HostUpdateProperties": {
+      "type": "object",
+      "description": "The properties for updating a host.",
+      "properties": {
+        "licenses": {
+          "type": "array",
+          "description": "The licenses assigned to the host.",
+          "items": {
+            "$ref": "#/definitions/HostLicense"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "IdentitySource": {
       "type": "object",
@@ -13359,6 +13493,16 @@
         }
       ],
       "x-ms-discriminator-value": "VmwareFirewall"
+    },
+    "WindowsServerLicense": {
+      "type": "object",
+      "description": "The host is to be used with Azure Hybrid Benefit for Windows Server.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HostLicense"
+        }
+      ],
+      "x-ms-discriminator-value": "WindowsServer"
     },
     "WorkloadNetwork": {
       "type": "object",
