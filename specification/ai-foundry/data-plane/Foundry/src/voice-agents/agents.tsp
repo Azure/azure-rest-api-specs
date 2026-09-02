@@ -22,6 +22,14 @@ const VoiceAgentRequiredPreview = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
+// Keep the intermediate message discriminator model aligned with the preview metadata on the voice-item base and
+// concrete persisted item models.
+@@extension(
+  OpenAI.RealtimeConversationItemMessage,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+
 @doc("Additional fields that a voice-agent session may include in service outputs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSessionIncludeOption {
