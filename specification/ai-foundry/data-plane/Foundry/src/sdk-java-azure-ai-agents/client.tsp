@@ -109,6 +109,9 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
 @@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
 @@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(AgentOptimizationDatasetItem.desired_num_turns, "desiredNumberTurns");
+@@clientName(AgentOptimizationEvaluatorRef, "AgentOptimizationEvaluatorReference");
+@@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 
@@ -466,6 +469,13 @@ model TimeZoneType {}
   TimeZoneType,
   "java"
 );
+
+// Java-only helper scalar so `elapsed_seconds` (wire = fractional seconds as float64)
+// is exposed to callers as java.time.Duration while keeping the wire format unchanged.
+@encode(DurationKnownEncoding.seconds, float64)
+scalar DurationInFloatSeconds extends duration;
+
+@@alternateType(AgentOptimizationJobProgress.elapsed_seconds, DurationInFloatSeconds, "java");
 
 // ---- Expandable enum overrides ------------------------------------------------
 // Convert fixed OpenAI enums / inline literal unions to expandable string enums
