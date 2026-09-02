@@ -44,6 +44,7 @@ import "./EdgeMachineNetworkAdapters.tsp";
 import "./EdgeMachineStorage.tsp";
 import "./EdgeMachineSecuritySettings.tsp";
 import "./EdgeMachineDeploymentSetting.tsp";
+import "./ProxyConfiguration.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;

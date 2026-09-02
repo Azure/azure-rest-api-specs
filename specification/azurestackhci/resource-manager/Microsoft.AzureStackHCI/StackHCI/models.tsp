@@ -11575,6 +11575,69 @@ model ProxyConfigurationDetail {
   isEnabled?: boolean;
 }
 
+/** Properties of a proxy configuration resource. */
+@added(Versions.v2026_10_15_preview)
+model ProxyConfigurationProperties {
+  /**
+   * The intended proxy configuration as set from the cloud.
+   * Updated at Apply job creation time. Seeded from webProxy in
+   * TargetDeviceConfiguration when the EdgeMachine first reaches Purposed.
+   */
+  @visibility(Lifecycle.Read)
+  desiredConfiguration?: ProxyConfigurationDetail;
+
+  /** The actual proxy configuration last reported by the device via the RP data path. */
+  @visibility(Lifecycle.Read)
+  reportedConfiguration?: ProxyConfigurationReportedDetail;
+
+  /** Indicates whether desiredConfiguration and reportedConfiguration are in sync. */
+  @visibility(Lifecycle.Read)
+  configurationState?: ProxyConfigurationState;
+
+  /** Provisioning state of the proxy configuration resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * The actual proxy configuration as last reported by the device.
+ * Written by the RP data path; read-only for customers.
+ */
+@added(Versions.v2026_10_15_preview)
+model ProxyConfigurationReportedDetail {
+  /** Connection URI as reported by the device. */
+  @visibility(Lifecycle.Read)
+  connectionUri?: string;
+
+  /** Port number as reported by the device. */
+  @visibility(Lifecycle.Read)
+  port?: string;
+
+  /** Bypass list as reported by the device. */
+  @visibility(Lifecycle.Read)
+  bypassList?: string[];
+
+  /** Whether the proxy is currently active on the device, as reported. */
+  @visibility(Lifecycle.Read)
+  isEnabled?: boolean;
+
+  /** UTC timestamp of the last device report received by the RP. */
+  @visibility(Lifecycle.Read)
+  lastReportedTimestamp?: utcDateTime;
+}
+
+/** Indicates whether the desired and reported proxy configurations are in sync. */
+@added(Versions.v2026_10_15_preview)
+union ProxyConfigurationState {
+  string,
+
+  /** Desired and reported configurations match. */
+  InSync: "InSync",
+
+  /** Desired and reported configurations diverge. A Sync job must be submitted before a new Apply job is accepted. */
+  Drifted: "Drifted",
+}
+
 /** Snapshot of the desired networking configuration used as the baseline for drift detection. */
 @added(Versions.v2026_10_15_preview)
 model NetworkProfileDesiredSnapshot {
