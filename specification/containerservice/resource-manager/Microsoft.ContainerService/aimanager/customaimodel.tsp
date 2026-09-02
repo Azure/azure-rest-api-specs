@@ -66,7 +66,7 @@ model CustomAIModelProperties {
 @doc("Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only. Reserved so custom-model-specific fields can be added without changing the SDK surface.")
 model CustomAIModelSpec is ModelSpec;
 
-@doc("The base model a custom model was trained from. A HuggigFace repository supplied by the user because the platform may lack access to private source repositories.")
+@doc("The base model a custom model was trained from. A HuggingFace repository supplied by the user because the platform may lack access to private source repositories.")
 model BaseModelReference {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The HuggingFace `<org>/<repo>` id of the base model, e.g. `meta-llama/Llama-2-7b-chat`. Immutable after creation.")
