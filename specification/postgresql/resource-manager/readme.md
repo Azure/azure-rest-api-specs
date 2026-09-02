@@ -71,12 +71,22 @@ suppressions:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"]
     reason: Default is the fixed singleton resource name, not a resource type. The actual resource type segment, dbAgents, follows camel-case naming.
+  - code: PathForResourceAction
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default/enable"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default/disable"]
+    reason: The actions target the singleton database agent resource whose fixed resource name is Default. The validator does not recognize the literal singleton name as a resource-name segment.
+  - code: PathResourceTypeNameCamelCase
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default/enable"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default/disable"]
+    reason: Default is the fixed singleton resource name, not a resource type. The actual resource type and action segments follow camel-case naming.
   - code: ProvisioningStateMustBeReadOnly
     from: openapi.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default/enable"].post.responses["202"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default/disable"].post.responses["202"].schema
     reason: The provisioningState property is marked readOnly in the generated OpenAPI, but the validator does not recognize readOnly when it is a sibling of $ref. See https://github.com/Azure/azure-openapi-validator/issues/637.
 ```
 

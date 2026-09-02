@@ -174,29 +174,27 @@ interface DbAgents {
   @operationId("DBAgent_Get")
   get is ArmResourceRead<DbAgent>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The implemented service contract returns the in-progress database agent resource in the HTTP 202 response body."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_Enable operation ID."
   @doc("Enables the database agent for a flexible server.")
   @operationId("DBAgent_Enable")
   @action("enable")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   enable is ArmResourceActionAsyncBase<
     DbAgent,
     void,
-    DbAgentAcceptedResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DbAgent>
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The implemented service contract returns the in-progress database agent resource in the HTTP 202 response body."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_Disable operation ID."
   @doc("Disables the database agent for a flexible server.")
   @operationId("DBAgent_Disable")
   @action("disable")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   disable is ArmResourceActionAsyncBase<
     DbAgent,
     void,
-    DbAgentAcceptedResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DbAgent>
   >;
 }

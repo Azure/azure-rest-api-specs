@@ -4315,18 +4315,6 @@ union DbAgentProvisioningState {
   InProgress: "InProgress",
 }
 
-@doc("The response returned when a database agent action is accepted.")
-@added(Versions.v2026_07_01)
-model DbAgentAcceptedResponse {
-  ...AcceptedResponse;
-  ...ArmCombinedLroHeaders<FinalResult = DbAgent>;
-  ...Azure.Core.Foundations.RetryAfterHeader;
-
-  @doc("The database agent resource while the lifecycle operation is in progress.")
-  @bodyRoot
-  resource: DbAgent;
-}
-
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);
 @@visibility(CapabilityList.value, Lifecycle.Read);
 @@visibility(MigrationList.value, Lifecycle.Read);
