@@ -7,12 +7,12 @@
 1. Run [agentic search](agentic-search.md) using the Step 1 result and the user's request.
 2. Identify the case from the table below and gather more information if case matches. If no case matches, skip Step 2.2.
 
-| Case | Name                      | Description                                            | Service Type     |
-| ---- | ------------------------- | ------------------------------------------------------ | ---------------- |
-| 1    | Add ARM Resource Type     | Define a new ARM resource with operations              | ARM              |
+| Case | Name                       | Description                                            | Service Type     |
+| ---- | -------------------------- | ------------------------------------------------------ | ---------------- |
+| 1    | Add ARM Resource Type      | Define a new ARM resource with operations              | ARM              |
 | 2    | Add ARM Resource Operation | Add CRUD or custom actions on an existing resource     | ARM              |
-| 3    | API Versioning            | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane |
-| 4    | Add Data-Plane Operations | Add CRUD or custom operations on a data-plane resource | Data-plane       |
+| 3    | API Versioning             | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane |
+| 4    | Add Data-Plane Operations  | Add CRUD or custom operations on a data-plane resource | Data-plane       |
 
 ---
 
