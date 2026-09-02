@@ -86073,36 +86073,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentConversationBridge:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - agent
-          description: Selects a Foundry agent as the conversation bridge.
-        name:
-          type: string
-          minLength: 1
-          maxLength: 63
-          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$
-          description: The non-empty DNS-like name of the target hosted text agent in the same project.
-        version:
-          type: string
-          maxLength: 25
-          pattern: ^(?:[1-9][0-9]{0,18}|draft-[1-9][0-9]{0,18})$
-          description: The target agent version. Omit this property to select the latest version when the voice session starts. When supplied, use a positive integer or `draft-{positive-unix-timestamp}` whose numeric component fits in a signed 64-bit integer.
-      unevaluatedProperties:
-        not: {}
-      allOf:
-        - $ref: '#/components/schemas/VoiceConversationBridge'
-      description: A closed reference to the text agent that owns conversation handling for a bridged voice agent. The target is resolved within the same project. The initial implementation requires a hosted agent that supports the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentDefinition:
       type: object
       required:
@@ -86115,13 +86085,13 @@ components:
           description: The kind discriminator for a voice agent definition. Always `voice`.
         model_type:
           $ref: '#/components/schemas/VoiceModelType'
-          description: How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_bridge` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.
+          description: How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.
         model:
           type: string
-          description: The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `conversation_bridge` is provided. The model must support realtime or cascaded voice.
-        conversation_bridge:
-          $ref: '#/components/schemas/VoiceConversationBridge'
-          description: Delegates conversation handling to another backend. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the bridge owns the conversation logic. The initial implementation supports an agent bridge.
+          description: The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `conversation_engine` is provided. The model must support realtime or cascaded voice.
+        conversation_engine:
+          $ref: '#/components/schemas/VoiceConversationEngine'
+          description: The engine that owns conversation handling for this voice agent. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the engine owns the conversation logic. The initial implementation supports a hosted-agent engine.
         instructions:
           type: string
           description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
@@ -87030,19 +87000,19 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceConversationBridge:
+    VoiceConversationEngine:
       type: object
       required:
         - type
       properties:
         type:
           type: string
-          description: The conversation bridge type.
+          description: The conversation engine type.
       discriminator:
         propertyName: type
         mapping:
-          agent: '#/components/schemas/VoiceAgentConversationBridge'
-      description: A backend that owns conversation handling for a bridged voice agent.
+          hosted_agent: '#/components/schemas/VoiceHostedAgentConversationEngine'
+      description: An engine that owns conversation handling for a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87107,6 +87077,36 @@ components:
         `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
         credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
         `/audio/generated/content` route.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceHostedAgentConversationEngine:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - hosted_agent
+          description: Selects a hosted Foundry agent as the conversation engine.
+        name:
+          type: string
+          minLength: 1
+          maxLength: 63
+          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$
+          description: The non-empty DNS-like name of the target hosted text agent in the same project.
+        version:
+          type: string
+          maxLength: 25
+          pattern: ^(?:[1-9][0-9]{0,18}|draft-[1-9][0-9]{0,18})$
+          description: The target agent version. Omit this property to select the latest version when the voice session starts. When supplied, use a positive integer or `draft-{positive-unix-timestamp}` whose numeric component fits in a signed 64-bit integer.
+      unevaluatedProperties:
+        not: {}
+      allOf:
+        - $ref: '#/components/schemas/VoiceConversationEngine'
+      description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

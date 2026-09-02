@@ -96,14 +96,14 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("The kind discriminator for a voice agent definition. Always `voice`.")
   kind: AgentKind.voice;
 
-  @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_bridge` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
+  @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
   model_type?: VoiceModelType;
 
-  @doc("The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `conversation_bridge` is provided. The model must support realtime or cascaded voice.")
+  @doc("The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `conversation_engine` is provided. The model must support realtime or cascaded voice.")
   `model`?: string;
 
-  @doc("Delegates conversation handling to another backend. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the bridge owns the conversation logic. The initial implementation supports an agent bridge.")
-  conversation_bridge?: VoiceConversationBridge;
+  @doc("The engine that owns conversation handling for this voice agent. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the engine owns the conversation logic. The initial implementation supports a hosted-agent engine.")
+  conversation_engine?: VoiceConversationEngine;
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string;
@@ -276,21 +276,21 @@ union VoiceModelType {
   self_deployed: "self_deployed",
 }
 
-@doc("A backend that owns conversation handling for a bridged voice agent.")
+@doc("An engine that owns conversation handling for a voice agent.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationBridge {
-  @doc("The conversation bridge type.")
+model VoiceConversationEngine {
+  @doc("The conversation engine type.")
   type: string;
 }
 
-@doc("A closed reference to the text agent that owns conversation handling for a bridged voice agent. The target is resolved within the same project. The initial implementation requires a hosted agent that supports the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
+@doc("A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentConversationBridge extends VoiceConversationBridge {
+model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   ...Record<never>;
 
-  @doc("Selects a Foundry agent as the conversation bridge.")
-  type: "agent";
+  @doc("Selects a hosted Foundry agent as the conversation engine.")
+  type: "hosted_agent";
 
   @doc("The non-empty DNS-like name of the target hosted text agent in the same project.")
   @minLength(1)
