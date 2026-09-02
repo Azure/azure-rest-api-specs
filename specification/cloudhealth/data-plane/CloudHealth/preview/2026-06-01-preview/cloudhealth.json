@@ -344,7 +344,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IngestHealthReportResponse"
+              "$ref": "#/definitions/IngestHealthReportResult"
             },
             "headers": {
               "Repeatability-Result": {
@@ -1516,16 +1516,28 @@
         "occurredAt"
       ]
     },
-    "IngestHealthReportResponse": {
-      "type": "object",
-      "description": "Confirmation that a health report was durably accepted for processing."
-    },
     "IngestHealthReportResult": {
+      "type": "object",
+      "description": "Confirmation that a health report was durably accepted for processing.",
+      "properties": {
+        "accepted": {
+          "type": "boolean",
+          "description": "Indicates that the health report was durably accepted into the ingestion pipeline.",
+          "enum": [
+            true
+          ]
+        }
+      },
+      "required": [
+        "accepted"
+      ]
+    },
+    "IngestHealthReportSuccess": {
       "type": "object",
       "description": "Health-report ingestion completed successfully.",
       "properties": {
         "body": {
-          "$ref": "#/definitions/IngestHealthReportResponse",
+          "$ref": "#/definitions/IngestHealthReportResult",
           "description": "Confirmation that the report was durably accepted into the ingestion pipeline."
         }
       },
