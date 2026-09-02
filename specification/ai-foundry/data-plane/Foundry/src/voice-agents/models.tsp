@@ -1115,11 +1115,10 @@ model TelephonyCallRecord {
   @doc("Correlation to the customer-facing Foundry trace.")
   trace?: TelephonyCallTrace;
 
-  @doc("The bounded lifecycle timeline.")
-  @maxItems(32)
+  @doc("The lifecycle timeline.")
   events: TelephonyCallLifecycleEvent[];
 
-  @doc("Whether older lifecycle events were omitted because the bounded event limit was reached.")
+  @doc("Whether older lifecycle events were omitted from the timeline.")
   events_truncated: boolean;
 }
 
