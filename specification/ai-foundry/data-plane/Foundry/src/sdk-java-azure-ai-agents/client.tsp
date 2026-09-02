@@ -29,7 +29,10 @@ op connectVoiceAgentJava(
   @query("foundry_features") foundry_features_query?: string,
   @query store?: boolean,
   @query("x-agent-version-override") agent_version_override?: string,
-  @header("Sec-WebSocket-Protocol") websocket_subprotocol?: VoiceAgentWebSocketSubprotocol,
+
+  @header("Sec-WebSocket-Protocol")
+  websocket_subprotocol?: VoiceAgentWebSocketSubprotocol,
+
   ...FoundryDataPlaneApiVersionParameter,
 ): VoiceAgentWebSocketUpgradeResponse;
 
@@ -441,7 +444,11 @@ op connectVoiceAgentJava(
 model TimeZoneType {}
 
 @@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
-@@alternateType(OpenAI.WebSearchApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(
+  OpenAI.WebSearchApproximateLocation.timezone,
+  TimeZoneType,
+  "java"
+);
 @@alternateType(
   OpenAI.ConversationResource,
   {
