@@ -66,8 +66,8 @@ alias LicenseReservationOps = Azure.ResourceManager.Legacy.ExtensionOperations<
 /**
  * The license reservation was/is being updated. If the provisioningState in the response does not indicate a terminal state, an 'Azure-AsyncOperation' header will be included, allowing the client to poll for details about the operation's progress.
  */
-@added(Versions.v2024_08_01_preview)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
+@added(Versions.v2024_08_01_preview)
 model LicenseReservationUpdatedLroResponse {
   ...ArmResponse<LicenseReservation>;
   ...ArmAsyncOperationHeader<FinalResult = LicenseReservation>;
@@ -77,8 +77,8 @@ model LicenseReservationUpdatedLroResponse {
 /**
  * The license reservation was/is being created. If the provisioningState in the response does not indicate a terminal state, an 'Azure-AsyncOperation' header will be included, allowing the client to poll for details about the operation's progress.
  */
-@added(Versions.v2024_08_01_preview)
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
+@added(Versions.v2024_08_01_preview)
 model LicenseReservationCreatedLroResponse {
   ...CreatedResponse;
   ...ArmAsyncOperationHeader<FinalResult = LicenseReservation>;
