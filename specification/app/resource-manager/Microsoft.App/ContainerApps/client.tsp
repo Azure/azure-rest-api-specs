@@ -182,6 +182,8 @@ union OpenIdConnectClientCredentialMethod {
 @@alternateType(SourceControlProperties.repoUrl, url, "csharp");
 
 // C# @@clientName customizations.
+@@clientName(Affinity, "StickySessionAffinity", "csharp");
+
 @@clientName(
   AvailableWorkloadProfilesOperationGroup.get,
   "GetAvailableWorkloadProfiles",
