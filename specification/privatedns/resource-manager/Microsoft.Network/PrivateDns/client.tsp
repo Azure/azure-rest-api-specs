@@ -112,7 +112,11 @@ using Microsoft.Network;
   "csharp"
 );
 @@alternateType(RecordSet.etag, Azure.Core.eTag, "csharp");
-@@alternateType(RecordSet.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  Azure.ResourceManager.ProxyResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(ARecord.ipv4Address, Azure.Core.ipV4Address, "csharp");
 @@alternateType(AaaaRecord.ipv6Address, Azure.Core.ipV6Address, "csharp");
 @@alternateType(
