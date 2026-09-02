@@ -63,13 +63,12 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_metricsProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("metricsProperties"), out var __jsonMetricsProperties) ? Sample.API.Models.MetricsPropertiesOfDrillUpdate.FromJson(__jsonMetricsProperties) : _metricsProperty;}
             {_recoveryPlanProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("recoveryPlanProperties"), out var __jsonRecoveryPlanProperties) ? Sample.API.Models.RecoveryPlanPropertiesOfDrillUpdate.FromJson(__jsonRecoveryPlanProperties) : _recoveryPlanProperty;}
             {_drillAssetProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("drillAssetProperties"), out var __jsonDrillAssetProperties) ? Sample.API.Models.AssetPropertiesOfDrillUpdate.FromJson(__jsonDrillAssetProperties) : _drillAssetProperty;}
-            {_chaosExperimentProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("chaosExperimentProperties"), out var __jsonChaosExperimentProperties) ? Sample.API.Models.ChaosExperimentPropertiesOfDrillUpdate.FromJson(__jsonChaosExperimentProperties) : _chaosExperimentProperty;}
             {_chaosResourceProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("chaosResourceProperties"), out var __jsonChaosResourceProperties) ? Sample.API.Models.ChaosResourcePropertiesOfDrillUpdate.FromJson(__jsonChaosResourceProperties) : _chaosResourceProperty;}
-            {_healthModelProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("healthModelProperties"), out var __jsonHealthModelProperties) ? Sample.API.Models.HealthModelPropertiesOfDrillUpdate.FromJson(__jsonHealthModelProperties) : _healthModelProperty;}
             {_monitoringProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("monitoringProperties"), out var __jsonMonitoringProperties) ? Sample.API.Models.MonitoringPropertiesOfDrillUpdate.FromJson(__jsonMonitoringProperties) : _monitoringProperty;}
+            {_healthModelMonitoringProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("healthModelMonitoringProperties"), out var __jsonHealthModelMonitoringProperties) ? Sample.API.Models.HealthModelMonitoringPropertiesUpdate.FromJson(__jsonHealthModelMonitoringProperties) : _healthModelMonitoringProperty;}
+            {_sliMonitoringProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("sliMonitoringProperties"), out var __jsonSliMonitoringProperties) ? Sample.API.Models.SliMonitoringPropertiesUpdate.FromJson(__jsonSliMonitoringProperties) : _sliMonitoringProperty;}
             {_rbacSetupMode = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("rbacSetupMode"), out var __jsonRbacSetupMode) ? (string)__jsonRbacSetupMode : (string)_rbacSetupMode;}
             AfterFromJson(json);
         }
@@ -103,13 +102,12 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._metricsProperty ? (Sample.API.Runtime.Json.JsonNode) this._metricsProperty.ToJson(null,serializationMode) : null, "metricsProperties" ,container.Add );
             AddIf( null != this._recoveryPlanProperty ? (Sample.API.Runtime.Json.JsonNode) this._recoveryPlanProperty.ToJson(null,serializationMode) : null, "recoveryPlanProperties" ,container.Add );
             AddIf( null != this._drillAssetProperty ? (Sample.API.Runtime.Json.JsonNode) this._drillAssetProperty.ToJson(null,serializationMode) : null, "drillAssetProperties" ,container.Add );
-            AddIf( null != this._chaosExperimentProperty ? (Sample.API.Runtime.Json.JsonNode) this._chaosExperimentProperty.ToJson(null,serializationMode) : null, "chaosExperimentProperties" ,container.Add );
             AddIf( null != this._chaosResourceProperty ? (Sample.API.Runtime.Json.JsonNode) this._chaosResourceProperty.ToJson(null,serializationMode) : null, "chaosResourceProperties" ,container.Add );
-            AddIf( null != this._healthModelProperty ? (Sample.API.Runtime.Json.JsonNode) this._healthModelProperty.ToJson(null,serializationMode) : null, "healthModelProperties" ,container.Add );
             AddIf( null != this._monitoringProperty ? (Sample.API.Runtime.Json.JsonNode) this._monitoringProperty.ToJson(null,serializationMode) : null, "monitoringProperties" ,container.Add );
+            AddIf( null != this._healthModelMonitoringProperty ? (Sample.API.Runtime.Json.JsonNode) this._healthModelMonitoringProperty.ToJson(null,serializationMode) : null, "healthModelMonitoringProperties" ,container.Add );
+            AddIf( null != this._sliMonitoringProperty ? (Sample.API.Runtime.Json.JsonNode) this._sliMonitoringProperty.ToJson(null,serializationMode) : null, "sliMonitoringProperties" ,container.Add );
             AddIf( null != (((object)this._rbacSetupMode)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._rbacSetupMode.ToString()) : null, "rbacSetupMode" ,container.Add );
             AfterToJson(ref container);
             return container;

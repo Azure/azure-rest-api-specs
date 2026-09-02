@@ -159,6 +159,10 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalResourceInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IGoalResourceInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
+            if (content.Contains("ZonalResiliency"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliency = (Sample.API.Models.IResiliencyProperties) content.GetValueForProperty("ZonalResiliency",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliency, Sample.API.Models.ResiliencyPropertiesTypeConverter.ConvertFrom);
+            }
             if (content.Contains("ResourceArmId"))
             {
                 ((Sample.API.Models.IGoalResourceInternal)this).ResourceArmId = (string) content.GetValueForProperty("ResourceArmId",((Sample.API.Models.IGoalResourceInternal)this).ResourceArmId, global::System.Convert.ToString);
@@ -181,11 +185,27 @@ namespace Sample.API.Models
             }
             if (content.Contains("UserConfirmationForHighAvailability"))
             {
-                ((Sample.API.Models.IGoalResourceInternal)this).UserConfirmationForHighAvailability = (System.Collections.Generic.List<Sample.API.Models.IUserConfirmationForHighAvailabilityItem>) content.GetValueForProperty("UserConfirmationForHighAvailability",((Sample.API.Models.IGoalResourceInternal)this).UserConfirmationForHighAvailability, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IUserConfirmationForHighAvailabilityItem>(__y, Sample.API.Models.UserConfirmationForHighAvailabilityItemTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IGoalResourceInternal)this).UserConfirmationForHighAvailability = (System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem>) content.GetValueForProperty("UserConfirmationForHighAvailability",((Sample.API.Models.IGoalResourceInternal)this).UserConfirmationForHighAvailability, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IUserConfirmationItem>(__y, Sample.API.Models.UserConfirmationItemTypeConverter.ConvertFrom));
             }
             if (content.Contains("ServiceGroupMembership"))
             {
                 ((Sample.API.Models.IGoalResourceInternal)this).ServiceGroupMembership = (System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership>) content.GetValueForProperty("ServiceGroupMembership",((Sample.API.Models.IGoalResourceInternal)this).ServiceGroupMembership, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceGroupMembership>(__y, Sample.API.Models.ServiceGroupMembershipTypeConverter.ConvertFrom));
+            }
+            if (content.Contains("ZonalResiliencyExclusionReason"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyExclusionReason = (string) content.GetValueForProperty("ZonalResiliencyExclusionReason",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyExclusionReason, global::System.Convert.ToString);
+            }
+            if (content.Contains("ZonalResiliencyGoalParticipation"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyGoalParticipation = (string) content.GetValueForProperty("ZonalResiliencyGoalParticipation",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyGoalParticipation, global::System.Convert.ToString);
+            }
+            if (content.Contains("ZonalResiliencyAttestationStatus"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyAttestationStatus = (string) content.GetValueForProperty("ZonalResiliencyAttestationStatus",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyAttestationStatus, global::System.Convert.ToString);
+            }
+            if (content.Contains("ZonalResiliencyUserConfirmation"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyUserConfirmation = (System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem>) content.GetValueForProperty("ZonalResiliencyUserConfirmation",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyUserConfirmation, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IUserConfirmationItem>(__y, Sample.API.Models.UserConfirmationItemTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -260,6 +280,10 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalResourceInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IGoalResourceInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
+            if (content.Contains("ZonalResiliency"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliency = (Sample.API.Models.IResiliencyProperties) content.GetValueForProperty("ZonalResiliency",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliency, Sample.API.Models.ResiliencyPropertiesTypeConverter.ConvertFrom);
+            }
             if (content.Contains("ResourceArmId"))
             {
                 ((Sample.API.Models.IGoalResourceInternal)this).ResourceArmId = (string) content.GetValueForProperty("ResourceArmId",((Sample.API.Models.IGoalResourceInternal)this).ResourceArmId, global::System.Convert.ToString);
@@ -282,11 +306,27 @@ namespace Sample.API.Models
             }
             if (content.Contains("UserConfirmationForHighAvailability"))
             {
-                ((Sample.API.Models.IGoalResourceInternal)this).UserConfirmationForHighAvailability = (System.Collections.Generic.List<Sample.API.Models.IUserConfirmationForHighAvailabilityItem>) content.GetValueForProperty("UserConfirmationForHighAvailability",((Sample.API.Models.IGoalResourceInternal)this).UserConfirmationForHighAvailability, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IUserConfirmationForHighAvailabilityItem>(__y, Sample.API.Models.UserConfirmationForHighAvailabilityItemTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IGoalResourceInternal)this).UserConfirmationForHighAvailability = (System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem>) content.GetValueForProperty("UserConfirmationForHighAvailability",((Sample.API.Models.IGoalResourceInternal)this).UserConfirmationForHighAvailability, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IUserConfirmationItem>(__y, Sample.API.Models.UserConfirmationItemTypeConverter.ConvertFrom));
             }
             if (content.Contains("ServiceGroupMembership"))
             {
                 ((Sample.API.Models.IGoalResourceInternal)this).ServiceGroupMembership = (System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership>) content.GetValueForProperty("ServiceGroupMembership",((Sample.API.Models.IGoalResourceInternal)this).ServiceGroupMembership, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceGroupMembership>(__y, Sample.API.Models.ServiceGroupMembershipTypeConverter.ConvertFrom));
+            }
+            if (content.Contains("ZonalResiliencyExclusionReason"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyExclusionReason = (string) content.GetValueForProperty("ZonalResiliencyExclusionReason",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyExclusionReason, global::System.Convert.ToString);
+            }
+            if (content.Contains("ZonalResiliencyGoalParticipation"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyGoalParticipation = (string) content.GetValueForProperty("ZonalResiliencyGoalParticipation",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyGoalParticipation, global::System.Convert.ToString);
+            }
+            if (content.Contains("ZonalResiliencyAttestationStatus"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyAttestationStatus = (string) content.GetValueForProperty("ZonalResiliencyAttestationStatus",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyAttestationStatus, global::System.Convert.ToString);
+            }
+            if (content.Contains("ZonalResiliencyUserConfirmation"))
+            {
+                ((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyUserConfirmation = (System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem>) content.GetValueForProperty("ZonalResiliencyUserConfirmation",((Sample.API.Models.IGoalResourceInternal)this).ZonalResiliencyUserConfirmation, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IUserConfirmationItem>(__y, Sample.API.Models.UserConfirmationItemTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }

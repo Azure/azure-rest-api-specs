@@ -18,7 +18,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IRecoveryPlanActionBaseResponse))]
     [global::Sample.API.Description(@"This action triggers the test failover cleanup operation on the recovery orchestration plan for the qualified resources.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/testFailoverCleanup", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/testFailoverCleanup", ApiVersion = "2026-08-31-preview")]
     [global::Sample.API.NotSuggestDefaultParameterSet]
     public partial class TestAzureResilienceManagementRecoveryPlanActionFailoverCleanup_TestViaJsonFilePath : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,

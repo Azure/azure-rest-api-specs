@@ -259,7 +259,7 @@ namespace Sample.API.Models
         Description = @"The provisioning state of the recovery job resource.",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>User description of the action.</summary>
         [Sample.API.Runtime.Info(
@@ -328,7 +328,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("None", "AzureNative", "AzureSiteRecovery", "CrossZoneVMRecovery", "CustomRunbook")]
         string ProtectionSolutionType { get; set; }
         /// <summary>The provisioning state of the recovery job resource.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>The recovery action settings.</summary>
         Sample.API.Models.IRecoveryGroupActionSettings RecoveryGroupActionSetting { get; set; }

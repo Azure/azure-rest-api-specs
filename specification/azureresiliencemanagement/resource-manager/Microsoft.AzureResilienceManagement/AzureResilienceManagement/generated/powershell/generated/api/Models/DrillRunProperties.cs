@@ -78,13 +78,6 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).ExecutionConfigurationUserConsent; }
 
-        /// <summary>Backing field for <see cref="HealthStatus" /> property.</summary>
-        private string _healthStatus;
-
-        /// <summary>Measured health status through the drill run.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string HealthStatus { get => this._healthStatus; }
-
         /// <summary>Additional information about the job.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         internal Sample.API.Models.IJobExtendedInfo JobExtendedInfo { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).JobExtendedInfo; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).JobExtendedInfo = value ?? null /* model class */; }
@@ -102,12 +95,17 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string JobType { get => "DrillRun"; set => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).JobType = "DrillRun"; }
 
-        /// <summary>Backing field for <see cref="MetricValue" /> property.</summary>
-        private string _metricValue;
+        /// <summary>Error code.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string LastErrorCode { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorCode; }
 
-        /// <summary>Measured aggregated Metric value through the drill run.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string MetricValue { get => this._metricValue; }
+        /// <summary>Error message.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string LastErrorMessage { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorMessage; }
+
+        /// <summary>A list of recommendations to resolve the error.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<string> LastErrorRecommendation { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorRecommendation; }
 
         /// <summary>Backing field for <see cref="Note" /> property.</summary>
         private System.Collections.Generic.List<string> _note;
@@ -119,6 +117,37 @@ namespace Sample.API.Models
         /// <summary>The operation that this job is intended to perform.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string Operation { get => ((Sample.API.Models.IJobPropertiesInternal)__jobProperties).Operation; }
+
+        /// <summary>Backing field for <see cref="Report" /> property.</summary>
+        private Sample.API.Models.IDrillReportSummary _report;
+
+        /// <summary>Summary of report generation for this Drill Run.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IDrillReportSummary Report { get => (this._report = this._report ?? new Sample.API.Models.DrillReportSummary()); }
+
+        /// <summary>Formats the report is currently available for download in.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<string> ReportAvailableFormat { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).AvailableFormat; }
+
+        /// <summary>Finalization state of the report. A finalized report is immutable.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ReportFinalizationState { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).FinalizationState; }
+
+        /// <summary>Overall report generation status for the Drill Run.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ReportGenerationStatus { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).GenerationStatus; }
+
+        /// <summary>Timestamp of the last successful report generation.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public global::System.DateTime? ReportLastGeneratedTimestamp { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastGeneratedTimestamp; }
+
+        /// <summary>Schema version of the generated report content.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ReportSchemaVersion { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).SchemaVersion; }
+
+        /// <summary>Per-stage report generation statuses.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.IReportStageStatus> ReportStageStatuses { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).StageStatuses; }
 
         /// <summary>
         /// The resource for which this job was created. This is typically the resource that the job is intended to manage or operate
@@ -143,14 +172,41 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for DrillMode</summary>
         string Sample.API.Models.IDrillRunPropertiesInternal.DrillMode { get => this._drillMode; set { {_drillMode = value;} } }
 
-        /// <summary>Internal Acessors for HealthStatus</summary>
-        string Sample.API.Models.IDrillRunPropertiesInternal.HealthStatus { get => this._healthStatus; set { {_healthStatus = value;} } }
+        /// <summary>Internal Acessors for LastErrorCode</summary>
+        string Sample.API.Models.IDrillRunPropertiesInternal.LastErrorCode { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorCode; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorCode = value ?? null; }
 
-        /// <summary>Internal Acessors for MetricValue</summary>
-        string Sample.API.Models.IDrillRunPropertiesInternal.MetricValue { get => this._metricValue; set { {_metricValue = value;} } }
+        /// <summary>Internal Acessors for LastErrorMessage</summary>
+        string Sample.API.Models.IDrillRunPropertiesInternal.LastErrorMessage { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorMessage; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorMessage = value ?? null; }
+
+        /// <summary>Internal Acessors for LastErrorRecommendation</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillRunPropertiesInternal.LastErrorRecommendation { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorRecommendation; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastErrorRecommendation = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for Note</summary>
         System.Collections.Generic.List<string> Sample.API.Models.IDrillRunPropertiesInternal.Note { get => this._note; set { {_note = value;} } }
+
+        /// <summary>Internal Acessors for Report</summary>
+        Sample.API.Models.IDrillReportSummary Sample.API.Models.IDrillRunPropertiesInternal.Report { get => (this._report = this._report ?? new Sample.API.Models.DrillReportSummary()); set { {_report = value;} } }
+
+        /// <summary>Internal Acessors for ReportAvailableFormat</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillRunPropertiesInternal.ReportAvailableFormat { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).AvailableFormat; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).AvailableFormat = value ?? null /* arrayOf */; }
+
+        /// <summary>Internal Acessors for ReportFinalizationState</summary>
+        string Sample.API.Models.IDrillRunPropertiesInternal.ReportFinalizationState { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).FinalizationState; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).FinalizationState = value ?? null; }
+
+        /// <summary>Internal Acessors for ReportGenerationStatus</summary>
+        string Sample.API.Models.IDrillRunPropertiesInternal.ReportGenerationStatus { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).GenerationStatus; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).GenerationStatus = value ?? null; }
+
+        /// <summary>Internal Acessors for ReportLastError</summary>
+        Sample.API.Models.IErrorDetails Sample.API.Models.IDrillRunPropertiesInternal.ReportLastError { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastError; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastError = value ?? null /* model class */; }
+
+        /// <summary>Internal Acessors for ReportLastGeneratedTimestamp</summary>
+        global::System.DateTime? Sample.API.Models.IDrillRunPropertiesInternal.ReportLastGeneratedTimestamp { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastGeneratedTimestamp; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).LastGeneratedTimestamp = value ?? default(global::System.DateTime); }
+
+        /// <summary>Internal Acessors for ReportSchemaVersion</summary>
+        string Sample.API.Models.IDrillRunPropertiesInternal.ReportSchemaVersion { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).SchemaVersion; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).SchemaVersion = value ?? null; }
+
+        /// <summary>Internal Acessors for ReportStageStatuses</summary>
+        System.Collections.Generic.List<Sample.API.Models.IReportStageStatus> Sample.API.Models.IDrillRunPropertiesInternal.ReportStageStatuses { get => ((Sample.API.Models.IDrillReportSummaryInternal)Report).StageStatuses; set => ((Sample.API.Models.IDrillReportSummaryInternal)Report).StageStatuses = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for SupportedVerbsForStage</summary>
         System.Collections.Generic.List<Sample.API.Models.ISupportedVerbsForStage> Sample.API.Models.IDrillRunPropertiesInternal.SupportedVerbsForStage { get => this._supportedVerbsForStage; set { {_supportedVerbsForStage = value;} } }
@@ -298,31 +354,41 @@ namespace Sample.API.Models
         Description = @"Drill mode.",
         SerializedName = @"drillMode",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "TestFailover")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Failover")]
         string DrillMode { get;  }
-        /// <summary>Measured health status through the drill run.</summary>
+        /// <summary>Error code.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
         ReadOnly = true,
         Read = true,
         Create = false,
         Update = false,
-        Description = @"Measured health status through the drill run.",
-        SerializedName = @"healthStatus",
+        Description = @"Error code.",
+        SerializedName = @"code",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Healthy", "Degraded", "Unhealthy")]
-        string HealthStatus { get;  }
-        /// <summary>Measured aggregated Metric value through the drill run.</summary>
+        string LastErrorCode { get;  }
+        /// <summary>Error message.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
         ReadOnly = true,
         Read = true,
         Create = false,
         Update = false,
-        Description = @"Measured aggregated Metric value through the drill run.",
-        SerializedName = @"metricValue",
+        Description = @"Error message.",
+        SerializedName = @"message",
         PossibleTypes = new [] { typeof(string) })]
-        string MetricValue { get;  }
+        string LastErrorMessage { get;  }
+        /// <summary>A list of recommendations to resolve the error.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"A list of recommendations to resolve the error.",
+        SerializedName = @"recommendations",
+        PossibleTypes = new [] { typeof(string) })]
+        System.Collections.Generic.List<string> LastErrorRecommendation { get;  }
         /// <summary>Notes for this Drill.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -334,6 +400,75 @@ namespace Sample.API.Models
         SerializedName = @"notes",
         PossibleTypes = new [] { typeof(string) })]
         System.Collections.Generic.List<string> Note { get;  }
+        /// <summary>Formats the report is currently available for download in.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"Formats the report is currently available for download in.",
+        SerializedName = @"availableFormats",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("Html")]
+        System.Collections.Generic.List<string> ReportAvailableFormat { get;  }
+        /// <summary>Finalization state of the report. A finalized report is immutable.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"Finalization state of the report. A finalized report is immutable.",
+        SerializedName = @"finalizationState",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("NotFinalized", "Finalized")]
+        string ReportFinalizationState { get;  }
+        /// <summary>Overall report generation status for the Drill Run.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"Overall report generation status for the Drill Run.",
+        SerializedName = @"generationStatus",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("NotStarted", "InProgress", "Succeeded", "Failed")]
+        string ReportGenerationStatus { get;  }
+        /// <summary>Timestamp of the last successful report generation.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"Timestamp of the last successful report generation.",
+        SerializedName = @"lastGeneratedTimestamp",
+        PossibleTypes = new [] { typeof(global::System.DateTime) })]
+        global::System.DateTime? ReportLastGeneratedTimestamp { get;  }
+        /// <summary>Schema version of the generated report content.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"Schema version of the generated report content.",
+        SerializedName = @"schemaVersion",
+        PossibleTypes = new [] { typeof(string) })]
+        string ReportSchemaVersion { get;  }
+        /// <summary>Per-stage report generation statuses.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"Per-stage report generation statuses.",
+        SerializedName = @"stageStatuses",
+        PossibleTypes = new [] { typeof(Sample.API.Models.IReportStageStatus) })]
+        System.Collections.Generic.List<Sample.API.Models.IReportStageStatus> ReportStageStatuses { get;  }
         /// <summary>Matrix of Actions supported on Operations.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -361,15 +496,35 @@ namespace Sample.API.Models
         /// <summary>Parent Drill resource.</summary>
         string DrillId { get; set; }
         /// <summary>Drill mode.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "TestFailover")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Failover")]
         string DrillMode { get; set; }
-        /// <summary>Measured health status through the drill run.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Healthy", "Degraded", "Unhealthy")]
-        string HealthStatus { get; set; }
-        /// <summary>Measured aggregated Metric value through the drill run.</summary>
-        string MetricValue { get; set; }
+        /// <summary>Error code.</summary>
+        string LastErrorCode { get; set; }
+        /// <summary>Error message.</summary>
+        string LastErrorMessage { get; set; }
+        /// <summary>A list of recommendations to resolve the error.</summary>
+        System.Collections.Generic.List<string> LastErrorRecommendation { get; set; }
         /// <summary>Notes for this Drill.</summary>
         System.Collections.Generic.List<string> Note { get; set; }
+        /// <summary>Summary of report generation for this Drill Run.</summary>
+        Sample.API.Models.IDrillReportSummary Report { get; set; }
+        /// <summary>Formats the report is currently available for download in.</summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("Html")]
+        System.Collections.Generic.List<string> ReportAvailableFormat { get; set; }
+        /// <summary>Finalization state of the report. A finalized report is immutable.</summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("NotFinalized", "Finalized")]
+        string ReportFinalizationState { get; set; }
+        /// <summary>Overall report generation status for the Drill Run.</summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("NotStarted", "InProgress", "Succeeded", "Failed")]
+        string ReportGenerationStatus { get; set; }
+        /// <summary>Error from the last failed report generation attempt.</summary>
+        Sample.API.Models.IErrorDetails ReportLastError { get; set; }
+        /// <summary>Timestamp of the last successful report generation.</summary>
+        global::System.DateTime? ReportLastGeneratedTimestamp { get; set; }
+        /// <summary>Schema version of the generated report content.</summary>
+        string ReportSchemaVersion { get; set; }
+        /// <summary>Per-stage report generation statuses.</summary>
+        System.Collections.Generic.List<Sample.API.Models.IReportStageStatus> ReportStageStatuses { get; set; }
         /// <summary>Matrix of Actions supported on Operations.</summary>
         System.Collections.Generic.List<Sample.API.Models.ISupportedVerbsForStage> SupportedVerbsForStage { get; set; }
 

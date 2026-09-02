@@ -18,7 +18,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IMarkAsCompleteResponse))]
     [global::Sample.API.Description(@"This enables the user to mark this stage as complete, disabling further retries on it.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/markAsComplete", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/markAsComplete", ApiVersion = "2026-08-31-preview")]
     [global::Sample.API.NotSuggestDefaultParameterSet]
     public partial class InvokeAzureResilienceManagementMarkDrillRunAsComplete_MarkViaJsonString : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,

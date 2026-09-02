@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IDrillActionResponse))]
     [global::Sample.API.Description(@"This starts a new running instance of the Drill.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/start", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/start", ApiVersion = "2026-08-31-preview")]
     public partial class StartAzureResilienceManagementDrill_StartViaIdentityExpanded : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext
@@ -101,18 +101,6 @@ namespace Sample.API.Cmdlets
         /// <summary><see cref="Sample.API.Runtime.IEventListener" /> cancellation token.</summary>
         global::System.Threading.CancellationToken Sample.API.Runtime.IEventListener.Token => _cancellationTokenSource.Token;
 
-        /// <summary>Mode of starting the Drill</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Mode of starting the Drill")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = true,
-        ReadOnly = false,
-        Description = @"Mode of starting the Drill",
-        SerializedName = @"mode",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "TestFailover")]
-        public string Mode { get => _body.Mode ?? null; set => _body.Mode = value; }
-
         /// <summary>
         /// when specified, will make the remote call, and return an AsyncOperationResponse, letting the remote operation continue
         /// asynchronously.
@@ -155,17 +143,6 @@ namespace Sample.API.Cmdlets
         [global::System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Use the default credentials for the proxy")]
         [global::Sample.API.Category(global::Sample.API.ParameterCategory.Runtime)]
         public global::System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials { get; set; }
-
-        /// <summary>Direction of the failover</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Direction of the failover")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = true,
-        ReadOnly = false,
-        Description = @"Direction of the failover",
-        SerializedName = @"failoverDirection",
-        PossibleTypes = new [] { typeof(string) })]
-        public string RecoveryPlanInputFailoverDirection { get => _body.RecoveryPlanInputFailoverDirection ?? null; set => _body.RecoveryPlanInputFailoverDirection = value; }
 
         /// <summary>
         /// <c>overrideOnDefault</c> will be called before the regular onDefault has been processed, allowing customization of what

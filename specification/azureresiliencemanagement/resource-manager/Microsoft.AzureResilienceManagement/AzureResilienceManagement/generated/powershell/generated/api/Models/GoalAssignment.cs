@@ -45,7 +45,7 @@ namespace Sample.API.Models
 
         /// <summary>The type of goal assignment.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalAssignmentType { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).GoalAssignmentType; }
+        public string GoalAssignmentType { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).GoalAssignmentType; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).GoalAssignmentType = value ?? null; }
 
         /// <summary>Arm id of the goal template.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
@@ -78,6 +78,10 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
         public string ProvisioningState { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ProvisioningState; }
 
+        /// <summary>Whether zonal resiliency is required for this goal assignment.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public bool? RequireZonalResiliency { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).RequireZonalResiliency; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).RequireZonalResiliency = value ?? default(bool); }
+
         /// <summary>Gets the resource group name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
@@ -105,9 +109,6 @@ namespace Sample.API.Models
 
         /// <summary>Internal Acessors for ErrorDetailTarget</summary>
         string Sample.API.Models.IGoalAssignmentInternal.ErrorDetailTarget { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailTarget; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailTarget = value ?? null; }
-
-        /// <summary>Internal Acessors for GoalAssignmentType</summary>
-        string Sample.API.Models.IGoalAssignmentInternal.GoalAssignmentType { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).GoalAssignmentType; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).GoalAssignmentType = value ?? null; }
 
         /// <summary>Internal Acessors for Property</summary>
         Sample.API.Models.IGoalAssignmentProperties Sample.API.Models.IGoalAssignmentInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.GoalAssignmentProperties()); set { {_property = value;} } }
@@ -293,7 +294,7 @@ namespace Sample.API.Models
         /// <summary>The type of goal assignment.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
-        ReadOnly = true,
+        ReadOnly = false,
         Read = true,
         Create = true,
         Update = true,
@@ -301,7 +302,7 @@ namespace Sample.API.Models
         SerializedName = @"goalAssignmentType",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Resiliency")]
-        string GoalAssignmentType { get;  }
+        string GoalAssignmentType { get; set; }
         /// <summary>Arm id of the goal template.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -334,8 +335,19 @@ namespace Sample.API.Models
         Description = @"Provisioning state",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
+        /// <summary>Whether zonal resiliency is required for this goal assignment.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Whether zonal resiliency is required for this goal assignment.",
+        SerializedName = @"requireZonalResiliency",
+        PossibleTypes = new [] { typeof(bool) })]
+        bool? RequireZonalResiliency { get; set; }
 
         [Sample.API.Runtime.Info(
         Required = false,
@@ -387,8 +399,10 @@ namespace Sample.API.Models
         /// <summary>The resource-specific properties for this resource.</summary>
         Sample.API.Models.IGoalAssignmentProperties Property { get; set; }
         /// <summary>Provisioning state</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
+        /// <summary>Whether zonal resiliency is required for this goal assignment.</summary>
+        bool? RequireZonalResiliency { get; set; }
 
         int? RetryAfter { get; set; }
         /// <summary>List of service level resources.</summary>

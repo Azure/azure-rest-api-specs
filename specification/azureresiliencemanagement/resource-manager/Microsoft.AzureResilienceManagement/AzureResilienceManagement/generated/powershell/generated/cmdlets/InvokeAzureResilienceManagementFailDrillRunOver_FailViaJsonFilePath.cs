@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IDrillRunActionResponse))]
     [global::Sample.API.Description(@"This initiates a new Failover operation on this Drill Run.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/failOver", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/failOver", ApiVersion = "2026-08-31-preview")]
     [global::Sample.API.NotSuggestDefaultParameterSet]
     public partial class InvokeAzureResilienceManagementFailDrillRunOver_FailViaJsonFilePath : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,

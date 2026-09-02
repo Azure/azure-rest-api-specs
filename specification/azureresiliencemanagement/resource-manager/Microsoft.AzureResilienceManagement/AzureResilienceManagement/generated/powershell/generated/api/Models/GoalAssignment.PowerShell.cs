@@ -175,6 +175,10 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalAssignmentInternal)this).GoalAssignmentType = (string) content.GetValueForProperty("GoalAssignmentType",((Sample.API.Models.IGoalAssignmentInternal)this).GoalAssignmentType, global::System.Convert.ToString);
             }
+            if (content.Contains("RequireZonalResiliency"))
+            {
+                ((Sample.API.Models.IGoalAssignmentInternal)this).RequireZonalResiliency = (bool?) content.GetValueForProperty("RequireZonalResiliency",((Sample.API.Models.IGoalAssignmentInternal)this).RequireZonalResiliency, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
+            }
             if (content.Contains("ServiceLevelResource"))
             {
                 ((Sample.API.Models.IGoalAssignmentInternal)this).ServiceLevelResource = (System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource>) content.GetValueForProperty("ServiceLevelResource",((Sample.API.Models.IGoalAssignmentInternal)this).ServiceLevelResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceLevelResource>(__y, Sample.API.Models.ServiceLevelResourceTypeConverter.ConvertFrom));
@@ -287,6 +291,10 @@ namespace Sample.API.Models
             if (content.Contains("GoalAssignmentType"))
             {
                 ((Sample.API.Models.IGoalAssignmentInternal)this).GoalAssignmentType = (string) content.GetValueForProperty("GoalAssignmentType",((Sample.API.Models.IGoalAssignmentInternal)this).GoalAssignmentType, global::System.Convert.ToString);
+            }
+            if (content.Contains("RequireZonalResiliency"))
+            {
+                ((Sample.API.Models.IGoalAssignmentInternal)this).RequireZonalResiliency = (bool?) content.GetValueForProperty("RequireZonalResiliency",((Sample.API.Models.IGoalAssignmentInternal)this).RequireZonalResiliency, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
             }
             if (content.Contains("ServiceLevelResource"))
             {

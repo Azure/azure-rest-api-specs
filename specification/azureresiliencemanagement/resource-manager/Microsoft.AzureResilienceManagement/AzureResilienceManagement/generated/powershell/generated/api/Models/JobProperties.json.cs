@@ -74,10 +74,6 @@ namespace Sample.API.Models
                 {
                     return new DrillRunProperties(json);
                 }
-                case "ChaosExperiment":
-                {
-                    return new ChaosJobProperties(json);
-                }
                 case "RecoveryPlan":
                 {
                     return new RecoveryJobProperties(json);

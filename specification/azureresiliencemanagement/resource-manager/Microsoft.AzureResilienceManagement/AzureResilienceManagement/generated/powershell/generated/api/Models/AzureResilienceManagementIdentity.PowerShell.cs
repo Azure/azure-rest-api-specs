@@ -97,22 +97,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunName = (string) content.GetValueForProperty("DrillRunName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunName, global::System.Convert.ToString);
             }
-            if (content.Contains("ChaosJobName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobName = (string) content.GetValueForProperty("ChaosJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobName, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosJobChildJobName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobChildJobName = (string) content.GetValueForProperty("ChaosJobChildJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobChildJobName, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosJobResourceName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobResourceName = (string) content.GetValueForProperty("ChaosJobResourceName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobResourceName, global::System.Convert.ToString);
-            }
-            if (content.Contains("DrillRunChildJobName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunChildJobName = (string) content.GetValueForProperty("DrillRunChildJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunChildJobName, global::System.Convert.ToString);
-            }
             if (content.Contains("DrillRunResourceName"))
             {
                 ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunResourceName = (string) content.GetValueForProperty("DrillRunResourceName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunResourceName, global::System.Convert.ToString);
@@ -136,10 +120,6 @@ namespace Sample.API.Models
             if (content.Contains("RecoveryJobName"))
             {
                 ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).RecoveryJobName = (string) content.GetValueForProperty("RecoveryJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).RecoveryJobName, global::System.Convert.ToString);
-            }
-            if (content.Contains("RecoveryChildJobName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).RecoveryChildJobName = (string) content.GetValueForProperty("RecoveryChildJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).RecoveryChildJobName, global::System.Convert.ToString);
             }
             if (content.Contains("RecoveryJobResourceName"))
             {
@@ -214,22 +194,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunName = (string) content.GetValueForProperty("DrillRunName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunName, global::System.Convert.ToString);
             }
-            if (content.Contains("ChaosJobName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobName = (string) content.GetValueForProperty("ChaosJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobName, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosJobChildJobName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobChildJobName = (string) content.GetValueForProperty("ChaosJobChildJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobChildJobName, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosJobResourceName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobResourceName = (string) content.GetValueForProperty("ChaosJobResourceName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).ChaosJobResourceName, global::System.Convert.ToString);
-            }
-            if (content.Contains("DrillRunChildJobName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunChildJobName = (string) content.GetValueForProperty("DrillRunChildJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunChildJobName, global::System.Convert.ToString);
-            }
             if (content.Contains("DrillRunResourceName"))
             {
                 ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunResourceName = (string) content.GetValueForProperty("DrillRunResourceName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).DrillRunResourceName, global::System.Convert.ToString);
@@ -253,10 +217,6 @@ namespace Sample.API.Models
             if (content.Contains("RecoveryJobName"))
             {
                 ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).RecoveryJobName = (string) content.GetValueForProperty("RecoveryJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).RecoveryJobName, global::System.Convert.ToString);
-            }
-            if (content.Contains("RecoveryChildJobName"))
-            {
-                ((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).RecoveryChildJobName = (string) content.GetValueForProperty("RecoveryChildJobName",((Sample.API.Models.IAzureResilienceManagementIdentityInternal)this).RecoveryChildJobName, global::System.Convert.ToString);
             }
             if (content.Contains("RecoveryJobResourceName"))
             {

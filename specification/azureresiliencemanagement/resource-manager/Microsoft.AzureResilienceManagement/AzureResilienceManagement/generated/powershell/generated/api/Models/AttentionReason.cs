@@ -11,13 +11,6 @@ namespace Sample.API.Models
         Sample.API.Models.IAttentionReasonInternal
     {
 
-        /// <summary>Backing field for <see cref="ChaosExperimentUserMsi" /> property.</summary>
-        private string _chaosExperimentUserMsi;
-
-        /// <summary>User MSI associated with chaos experiment object is deleted.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ChaosExperimentUserMsi { get => this._chaosExperimentUserMsi; set => this._chaosExperimentUserMsi = value; }
-
         /// <summary>Backing field for <see cref="ChaosResource" /> property.</summary>
         private string _chaosResource;
 
@@ -39,6 +32,13 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ChaosResourceUserMsi { get => this._chaosResourceUserMsi; set => this._chaosResourceUserMsi = value; }
 
+        /// <summary>Backing field for <see cref="DiscoveryRuleExist" /> property.</summary>
+        private string _discoveryRuleExist;
+
+        /// <summary>Whether the selected discovery rule still exists.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        public string DiscoveryRuleExist { get => this._discoveryRuleExist; set => this._discoveryRuleExist = value; }
+
         /// <summary>Backing field for <see cref="DrillMonitoringError" /> property.</summary>
         private System.Collections.Generic.List<Sample.API.Models.IErrorDetails> _drillMonitoringError;
 
@@ -53,22 +53,6 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string DrillMonitoringResource { get => this._drillMonitoringResource; }
 
-        /// <summary>Backing field for <see cref="DrillRbacOnAzureHealthModel" /> property.</summary>
-        private string _drillRbacOnAzureHealthModel;
-
-        /// <summary>Drill object does not have the necessary RBAC to read the Azure Health Model.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string DrillRbacOnAzureHealthModel { get => this._drillRbacOnAzureHealthModel; set => this._drillRbacOnAzureHealthModel = value; }
-
-        /// <summary>Backing field for <see cref="DrillRbacOnAzureMonitoringWorkspace" /> property.</summary>
-        private string _drillRbacOnAzureMonitoringWorkspace;
-
-        /// <summary>
-        /// Drill object does not have the necessary RBAC to read the Azure Monitoring Workspace account.
-        /// </summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string DrillRbacOnAzureMonitoringWorkspace { get => this._drillRbacOnAzureMonitoringWorkspace; set => this._drillRbacOnAzureMonitoringWorkspace = value; }
-
         /// <summary>Backing field for <see cref="DrillRbacOnChaosResource" /> property.</summary>
         private string _drillRbacOnChaosResource;
 
@@ -76,12 +60,14 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string DrillRbacOnChaosResource { get => this._drillRbacOnChaosResource; set => this._drillRbacOnChaosResource = value; }
 
-        /// <summary>Backing field for <see cref="DrillRbacOnExperiment" /> property.</summary>
-        private string _drillRbacOnExperiment;
+        /// <summary>Backing field for <see cref="DrillRbacOnHealthModel" /> property.</summary>
+        private string _drillRbacOnHealthModel;
 
-        /// <summary>Drill object does not have the necessary RBAC to run the chaos experiment.</summary>
+        /// <summary>
+        /// Whether the Drill identity has the necessary RBAC (Reader) to read the selected Azure Health Model.
+        /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string DrillRbacOnExperiment { get => this._drillRbacOnExperiment; set => this._drillRbacOnExperiment = value; }
+        public string DrillRbacOnHealthModel { get => this._drillRbacOnHealthModel; set => this._drillRbacOnHealthModel = value; }
 
         /// <summary>Backing field for <see cref="DrillRbacOnMonitoringResource" /> property.</summary>
         private string _drillRbacOnMonitoringResource;
@@ -99,12 +85,14 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string DrillRbacOnRecoveryPlan { get => this._drillRbacOnRecoveryPlan; set => this._drillRbacOnRecoveryPlan = value; }
 
-        /// <summary>Backing field for <see cref="DrillRbacOnSlo" /> property.</summary>
-        private string _drillRbacOnSlo;
+        /// <summary>Backing field for <see cref="DrillRbacOnSli" /> property.</summary>
+        private string _drillRbacOnSli;
 
-        /// <summary>Drill object does not have the necessary RBAC to read the SLO object.</summary>
+        /// <summary>
+        /// Rolled-up RBAC state: NotSet if the Drill identity is missing the necessary RBAC to read any selected SLI.
+        /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string DrillRbacOnSlo { get => this._drillRbacOnSlo; set => this._drillRbacOnSlo = value; }
+        public string DrillRbacOnSli { get => this._drillRbacOnSli; set => this._drillRbacOnSli = value; }
 
         /// <summary>Backing field for <see cref="DrillUserMsi" /> property.</summary>
         private string _drillUserMsi;
@@ -113,12 +101,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string DrillUserMsi { get => this._drillUserMsi; set => this._drillUserMsi = value; }
 
-        /// <summary>Backing field for <see cref="FaultRbacOnTarget" /> property.</summary>
-        private string _faultRbacOnTarget;
+        /// <summary>Backing field for <see cref="HealthModelExist" /> property.</summary>
+        private string _healthModelExist;
 
-        /// <summary>RBAC required by Experiment MSI not setup on the target resources.</summary>
+        /// <summary>Whether the selected Azure Health Model still exists.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string FaultRbacOnTarget { get => this._faultRbacOnTarget; set => this._faultRbacOnTarget = value; }
+        public string HealthModelExist { get => this._healthModelExist; set => this._healthModelExist = value; }
 
         /// <summary>Backing field for <see cref="IncludedResourceInDrill" /> property.</summary>
         private string _includedResourceInDrill;
@@ -143,21 +131,15 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string MonitoringRbacOnDrillResource { get => this._monitoringRbacOnDrillResource; set => this._monitoringRbacOnDrillResource = value; }
 
-        /// <summary>Backing field for <see cref="RbacNeededForDrillOnAzureHealthModel" /> property.</summary>
-        private System.Collections.Generic.List<string> _rbacNeededForDrillOnAzureHealthModel;
-
-        /// <summary>Permissions needed by the Drill MSI to read Azure Health Model.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RbacNeededForDrillOnAzureHealthModel { get => this._rbacNeededForDrillOnAzureHealthModel; set => this._rbacNeededForDrillOnAzureHealthModel = value; }
+        /// <summary>Backing field for <see cref="MonitoringSourceNotConfigured" /> property.</summary>
+        private bool? _monitoringSourceNotConfigured;
 
         /// <summary>
-        /// Backing field for <see cref="RbacNeededForDrillOnAzureMonitoringWorkspace" /> property.
+        /// Neither an Azure Health Model nor an SLI is configured for the Drill. Execution is blocked until a monitoring source is
+        /// configured.
         /// </summary>
-        private System.Collections.Generic.List<string> _rbacNeededForDrillOnAzureMonitoringWorkspace;
-
-        /// <summary>Permissions needed by the Drill MSI to read Azure Monitoring Workspace account.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RbacNeededForDrillOnAzureMonitoringWorkspace { get => this._rbacNeededForDrillOnAzureMonitoringWorkspace; set => this._rbacNeededForDrillOnAzureMonitoringWorkspace = value; }
+        public bool? MonitoringSourceNotConfigured { get => this._monitoringSourceNotConfigured; set => this._monitoringSourceNotConfigured = value; }
 
         /// <summary>Backing field for <see cref="RbacNeededForDrillOnChaosResource" /> property.</summary>
         private System.Collections.Generic.List<string> _rbacNeededForDrillOnChaosResource;
@@ -186,12 +168,14 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public System.Collections.Generic.List<string> RbacNeededForDrillOnDrillResource { get => this._rbacNeededForDrillOnDrillResource; set => this._rbacNeededForDrillOnDrillResource = value; }
 
-        /// <summary>Backing field for <see cref="RbacNeededForDrillOnExperiment" /> property.</summary>
-        private System.Collections.Generic.List<string> _rbacNeededForDrillOnExperiment;
+        /// <summary>Backing field for <see cref="RbacNeededForDrillOnHealthModel" /> property.</summary>
+        private System.Collections.Generic.List<string> _rbacNeededForDrillOnHealthModel;
 
-        /// <summary>Permissions needed by the Drill MSI to run the chaos experiment.</summary>
+        /// <summary>
+        /// Permissions needed by the Drill identity to read the selected Azure Health Model.
+        /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RbacNeededForDrillOnExperiment { get => this._rbacNeededForDrillOnExperiment; set => this._rbacNeededForDrillOnExperiment = value; }
+        public System.Collections.Generic.List<string> RbacNeededForDrillOnHealthModel { get => this._rbacNeededForDrillOnHealthModel; set => this._rbacNeededForDrillOnHealthModel = value; }
 
         /// <summary>Backing field for <see cref="RbacNeededForDrillOnRecoveryPlan" /> property.</summary>
         private System.Collections.Generic.List<string> _rbacNeededForDrillOnRecoveryPlan;
@@ -199,13 +183,6 @@ namespace Sample.API.Models
         /// <summary>Permissions needed by the Drill MSI to run the Recovery Plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public System.Collections.Generic.List<string> RbacNeededForDrillOnRecoveryPlan { get => this._rbacNeededForDrillOnRecoveryPlan; set => this._rbacNeededForDrillOnRecoveryPlan = value; }
-
-        /// <summary>Backing field for <see cref="RbacNeededForDrillOnSlo" /> property.</summary>
-        private System.Collections.Generic.List<string> _rbacNeededForDrillOnSlo;
-
-        /// <summary>Permissions needed by the Drill MSI to read SLO object.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RbacNeededForDrillOnSlo { get => this._rbacNeededForDrillOnSlo; set => this._rbacNeededForDrillOnSlo = value; }
 
         /// <summary>Backing field for <see cref="RbacOnTargetResource" /> property.</summary>
         private string _rbacOnTargetResource;
@@ -247,12 +224,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ServiceGroupAndDrillResourcesState { get => this._serviceGroupAndDrillResourcesState; set => this._serviceGroupAndDrillResourcesState = value; }
 
-        /// <summary>Backing field for <see cref="Target" /> property.</summary>
-        private string _target;
+        /// <summary>Backing field for <see cref="SliAttentionStatuses" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.ISliAttentionStatus> _sliAttentionStatuses;
 
-        /// <summary>One or more Target or Capability object is deleted.</summary>
+        /// <summary>Per-SLI attention status for each SLI selected for Drill monitoring.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string Target { get => this._target; set => this._target = value; }
+        public System.Collections.Generic.List<Sample.API.Models.ISliAttentionStatus> SliAttentionStatuses { get => this._sliAttentionStatuses; set => this._sliAttentionStatuses = value; }
 
         /// <summary>Creates an new <see cref="AttentionReason" /> instance.</summary>
         public AttentionReason()
@@ -264,18 +241,6 @@ namespace Sample.API.Models
     public partial interface IAttentionReason :
         Sample.API.Runtime.IJsonSerializable
     {
-        /// <summary>User MSI associated with chaos experiment object is deleted.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"User MSI associated with chaos experiment object is deleted.",
-        SerializedName = @"chaosExperimentUserMsi",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string ChaosExperimentUserMsi { get; set; }
         /// <summary>Chaos resource for faulting exists or not.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -311,6 +276,18 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
         string ChaosResourceUserMsi { get; set; }
+        /// <summary>Whether the selected discovery rule still exists.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Whether the selected discovery rule still exists.",
+        SerializedName = @"discoveryRuleExists",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
+        string DiscoveryRuleExist { get; set; }
         /// <summary>Errors related to Drill Monitoring resources.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -334,32 +311,6 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
         string DrillMonitoringResource { get;  }
-        /// <summary>Drill object does not have the necessary RBAC to read the Azure Health Model.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Drill object does not have the necessary RBAC to read the Azure Health Model.",
-        SerializedName = @"drillRbacOnAzureHealthModel",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string DrillRbacOnAzureHealthModel { get; set; }
-        /// <summary>
-        /// Drill object does not have the necessary RBAC to read the Azure Monitoring Workspace account.
-        /// </summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Drill object does not have the necessary RBAC to read the Azure Monitoring Workspace account.",
-        SerializedName = @"drillRbacOnAzureMonitoringWorkspace",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string DrillRbacOnAzureMonitoringWorkspace { get; set; }
         /// <summary>Drill object does not have the necessary RBAC to run the chaos resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -372,18 +323,20 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string DrillRbacOnChaosResource { get; set; }
-        /// <summary>Drill object does not have the necessary RBAC to run the chaos experiment.</summary>
+        /// <summary>
+        /// Whether the Drill identity has the necessary RBAC (Reader) to read the selected Azure Health Model.
+        /// </summary>
         [Sample.API.Runtime.Info(
         Required = false,
         ReadOnly = false,
         Read = true,
         Create = true,
         Update = true,
-        Description = @"Drill object does not have the necessary RBAC to run the chaos experiment.",
-        SerializedName = @"drillRbacOnExperiment",
+        Description = @"Whether the Drill identity has the necessary RBAC (Reader) to read the selected Azure Health Model.",
+        SerializedName = @"drillRbacOnHealthModel",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string DrillRbacOnExperiment { get; set; }
+        string DrillRbacOnHealthModel { get; set; }
         /// <summary>
         /// Drill MSI does not have the necessary RBAC to read the Drill Monitoring resources.
         /// </summary>
@@ -410,18 +363,20 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string DrillRbacOnRecoveryPlan { get; set; }
-        /// <summary>Drill object does not have the necessary RBAC to read the SLO object.</summary>
+        /// <summary>
+        /// Rolled-up RBAC state: NotSet if the Drill identity is missing the necessary RBAC to read any selected SLI.
+        /// </summary>
         [Sample.API.Runtime.Info(
         Required = false,
         ReadOnly = false,
         Read = true,
         Create = true,
         Update = true,
-        Description = @"Drill object does not have the necessary RBAC to read the SLO object.",
-        SerializedName = @"drillRbacOnSlo",
+        Description = @"Rolled-up RBAC state: NotSet if the Drill identity is missing the necessary RBAC to read any selected SLI.",
+        SerializedName = @"drillRbacOnSli",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string DrillRbacOnSlo { get; set; }
+        string DrillRbacOnSli { get; set; }
         /// <summary>User MSI associated with Drill object is deleted.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -434,18 +389,18 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
         string DrillUserMsi { get; set; }
-        /// <summary>RBAC required by Experiment MSI not setup on the target resources.</summary>
+        /// <summary>Whether the selected Azure Health Model still exists.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
         ReadOnly = false,
         Read = true,
         Create = true,
         Update = true,
-        Description = @"RBAC required by Experiment MSI not setup on the target resources.",
-        SerializedName = @"faultRbacOnTargets",
+        Description = @"Whether the selected Azure Health Model still exists.",
+        SerializedName = @"healthModelExists",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string FaultRbacOnTarget { get; set; }
+        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
+        string HealthModelExist { get; set; }
         /// <summary>Included resource in Drill.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -483,28 +438,20 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string MonitoringRbacOnDrillResource { get; set; }
-        /// <summary>Permissions needed by the Drill MSI to read Azure Health Model.</summary>
+        /// <summary>
+        /// Neither an Azure Health Model nor an SLI is configured for the Drill. Execution is blocked until a monitoring source is
+        /// configured.
+        /// </summary>
         [Sample.API.Runtime.Info(
         Required = false,
         ReadOnly = false,
         Read = true,
         Create = true,
         Update = true,
-        Description = @"Permissions needed by the Drill MSI to read Azure Health Model.",
-        SerializedName = @"rbacNeededForDrillOnAzureHealthModel",
-        PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RbacNeededForDrillOnAzureHealthModel { get; set; }
-        /// <summary>Permissions needed by the Drill MSI to read Azure Monitoring Workspace account.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Permissions needed by the Drill MSI to read Azure Monitoring Workspace account.",
-        SerializedName = @"rbacNeededForDrillOnAzureMonitoringWorkspace",
-        PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RbacNeededForDrillOnAzureMonitoringWorkspace { get; set; }
+        Description = @"Neither an Azure Health Model nor an SLI is configured for the Drill. Execution is blocked until a monitoring source is configured.",
+        SerializedName = @"monitoringSourceNotConfigured",
+        PossibleTypes = new [] { typeof(bool) })]
+        bool? MonitoringSourceNotConfigured { get; set; }
         /// <summary>Permissions needed by the Drill MSI to run the chaos resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -542,17 +489,19 @@ namespace Sample.API.Models
         SerializedName = @"rbacNeededForDrillOnDrillResources",
         PossibleTypes = new [] { typeof(string) })]
         System.Collections.Generic.List<string> RbacNeededForDrillOnDrillResource { get; set; }
-        /// <summary>Permissions needed by the Drill MSI to run the chaos experiment.</summary>
+        /// <summary>
+        /// Permissions needed by the Drill identity to read the selected Azure Health Model.
+        /// </summary>
         [Sample.API.Runtime.Info(
         Required = false,
         ReadOnly = false,
         Read = true,
         Create = true,
         Update = true,
-        Description = @"Permissions needed by the Drill MSI to run the chaos experiment.",
-        SerializedName = @"rbacNeededForDrillOnExperiment",
+        Description = @"Permissions needed by the Drill identity to read the selected Azure Health Model.",
+        SerializedName = @"rbacNeededForDrillOnHealthModel",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RbacNeededForDrillOnExperiment { get; set; }
+        System.Collections.Generic.List<string> RbacNeededForDrillOnHealthModel { get; set; }
         /// <summary>Permissions needed by the Drill MSI to run the Recovery Plan.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -564,17 +513,6 @@ namespace Sample.API.Models
         SerializedName = @"rbacNeededForDrillOnRecoveryPlan",
         PossibleTypes = new [] { typeof(string) })]
         System.Collections.Generic.List<string> RbacNeededForDrillOnRecoveryPlan { get; set; }
-        /// <summary>Permissions needed by the Drill MSI to read SLO object.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Permissions needed by the Drill MSI to read SLO object.",
-        SerializedName = @"rbacNeededForDrillOnSlo",
-        PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RbacNeededForDrillOnSlo { get; set; }
         /// <summary>RBAC required by Chaos Resource MSI not setup on the target resources.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -637,27 +575,23 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("InSync", "OutOfSync")]
         string ServiceGroupAndDrillResourcesState { get; set; }
-        /// <summary>One or more Target or Capability object is deleted.</summary>
+        /// <summary>Per-SLI attention status for each SLI selected for Drill monitoring.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
         ReadOnly = false,
         Read = true,
         Create = true,
         Update = true,
-        Description = @"One or more Target or Capability object is deleted.",
-        SerializedName = @"targets",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string Target { get; set; }
+        Description = @"Per-SLI attention status for each SLI selected for Drill monitoring.",
+        SerializedName = @"sliAttentionStatuses",
+        PossibleTypes = new [] { typeof(Sample.API.Models.ISliAttentionStatus) })]
+        System.Collections.Generic.List<Sample.API.Models.ISliAttentionStatus> SliAttentionStatuses { get; set; }
 
     }
     /// Reason why the Drill is in NeedsAttention state, and not ready to run.
     internal partial interface IAttentionReasonInternal
 
     {
-        /// <summary>User MSI associated with chaos experiment object is deleted.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string ChaosExperimentUserMsi { get; set; }
         /// <summary>Chaos resource for faulting exists or not.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
         string ChaosResource { get; set; }
@@ -666,25 +600,22 @@ namespace Sample.API.Models
         /// <summary>User MSI associated with chaos resource object is deleted.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
         string ChaosResourceUserMsi { get; set; }
+        /// <summary>Whether the selected discovery rule still exists.</summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
+        string DiscoveryRuleExist { get; set; }
         /// <summary>Errors related to Drill Monitoring resources.</summary>
         System.Collections.Generic.List<Sample.API.Models.IErrorDetails> DrillMonitoringError { get; set; }
         /// <summary>Monitoring Resources created for Drill</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
         string DrillMonitoringResource { get; set; }
-        /// <summary>Drill object does not have the necessary RBAC to read the Azure Health Model.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string DrillRbacOnAzureHealthModel { get; set; }
-        /// <summary>
-        /// Drill object does not have the necessary RBAC to read the Azure Monitoring Workspace account.
-        /// </summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string DrillRbacOnAzureMonitoringWorkspace { get; set; }
         /// <summary>Drill object does not have the necessary RBAC to run the chaos resource.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string DrillRbacOnChaosResource { get; set; }
-        /// <summary>Drill object does not have the necessary RBAC to run the chaos experiment.</summary>
+        /// <summary>
+        /// Whether the Drill identity has the necessary RBAC (Reader) to read the selected Azure Health Model.
+        /// </summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string DrillRbacOnExperiment { get; set; }
+        string DrillRbacOnHealthModel { get; set; }
         /// <summary>
         /// Drill MSI does not have the necessary RBAC to read the Drill Monitoring resources.
         /// </summary>
@@ -693,15 +624,17 @@ namespace Sample.API.Models
         /// <summary>Drill object does not have the necessary RBAC to run the Recovery Plan.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string DrillRbacOnRecoveryPlan { get; set; }
-        /// <summary>Drill object does not have the necessary RBAC to read the SLO object.</summary>
+        /// <summary>
+        /// Rolled-up RBAC state: NotSet if the Drill identity is missing the necessary RBAC to read any selected SLI.
+        /// </summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string DrillRbacOnSlo { get; set; }
+        string DrillRbacOnSli { get; set; }
         /// <summary>User MSI associated with Drill object is deleted.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
         string DrillUserMsi { get; set; }
-        /// <summary>RBAC required by Experiment MSI not setup on the target resources.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string FaultRbacOnTarget { get; set; }
+        /// <summary>Whether the selected Azure Health Model still exists.</summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
+        string HealthModelExist { get; set; }
         /// <summary>Included resource in Drill.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
         string IncludedResourceInDrill { get; set; }
@@ -712,10 +645,11 @@ namespace Sample.API.Models
         /// <summary>Monitoring RBAC required by Drill MSI not setup on the target resources.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string MonitoringRbacOnDrillResource { get; set; }
-        /// <summary>Permissions needed by the Drill MSI to read Azure Health Model.</summary>
-        System.Collections.Generic.List<string> RbacNeededForDrillOnAzureHealthModel { get; set; }
-        /// <summary>Permissions needed by the Drill MSI to read Azure Monitoring Workspace account.</summary>
-        System.Collections.Generic.List<string> RbacNeededForDrillOnAzureMonitoringWorkspace { get; set; }
+        /// <summary>
+        /// Neither an Azure Health Model nor an SLI is configured for the Drill. Execution is blocked until a monitoring source is
+        /// configured.
+        /// </summary>
+        bool? MonitoringSourceNotConfigured { get; set; }
         /// <summary>Permissions needed by the Drill MSI to run the chaos resource.</summary>
         System.Collections.Generic.List<string> RbacNeededForDrillOnChaosResource { get; set; }
         /// <summary>
@@ -726,12 +660,12 @@ namespace Sample.API.Models
         /// Permissions needed by the Drill MSI to read health metrics data for resources in service group.
         /// </summary>
         System.Collections.Generic.List<string> RbacNeededForDrillOnDrillResource { get; set; }
-        /// <summary>Permissions needed by the Drill MSI to run the chaos experiment.</summary>
-        System.Collections.Generic.List<string> RbacNeededForDrillOnExperiment { get; set; }
+        /// <summary>
+        /// Permissions needed by the Drill identity to read the selected Azure Health Model.
+        /// </summary>
+        System.Collections.Generic.List<string> RbacNeededForDrillOnHealthModel { get; set; }
         /// <summary>Permissions needed by the Drill MSI to run the Recovery Plan.</summary>
         System.Collections.Generic.List<string> RbacNeededForDrillOnRecoveryPlan { get; set; }
-        /// <summary>Permissions needed by the Drill MSI to read SLO object.</summary>
-        System.Collections.Generic.List<string> RbacNeededForDrillOnSlo { get; set; }
         /// <summary>RBAC required by Chaos Resource MSI not setup on the target resources.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string RbacOnTargetResource { get; set; }
@@ -749,9 +683,8 @@ namespace Sample.API.Models
         /// <summary>Resources in Service Group and Drill are out of sync.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("InSync", "OutOfSync")]
         string ServiceGroupAndDrillResourcesState { get; set; }
-        /// <summary>One or more Target or Capability object is deleted.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string Target { get; set; }
+        /// <summary>Per-SLI attention status for each SLI selected for Drill monitoring.</summary>
+        System.Collections.Generic.List<Sample.API.Models.ISliAttentionStatus> SliAttentionStatuses { get; set; }
 
     }
 }

@@ -119,6 +119,10 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("OperationQualificationDetailNotQualifiedReason",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
+            if (content.Contains("OperationQualificationDetailResourceFeasibilityReview"))
+            {
+                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReview = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("OperationQualificationDetailResourceFeasibilityReview",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReview, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
+            }
             AfterDeserializeDictionary(content);
         }
 
@@ -151,6 +155,10 @@ namespace Sample.API.Models
             if (content.Contains("OperationQualificationDetailNotQualifiedReason"))
             {
                 ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("OperationQualificationDetailNotQualifiedReason",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailNotQualifiedReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+            }
+            if (content.Contains("OperationQualificationDetailResourceFeasibilityReview"))
+            {
+                ((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReview = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("OperationQualificationDetailResourceFeasibilityReview",((Sample.API.Models.IRecoveryResourceQualificationInternal)this).OperationQualificationDetailResourceFeasibilityReview, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }

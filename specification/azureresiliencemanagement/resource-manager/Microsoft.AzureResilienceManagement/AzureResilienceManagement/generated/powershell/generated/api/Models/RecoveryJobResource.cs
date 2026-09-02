@@ -403,7 +403,7 @@ namespace Sample.API.Models
         Description = @"Discriminator for the JobResource object hierarchy.",
         SerializedName = @"jobResourceType",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "RecoveryPlanChild", "DrillRun", "ChaosExperiment")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "DrillRun")]
         string JobResourceType { get; set; }
         /// <summary>The operation that this job is intended to perform.</summary>
         [Sample.API.Runtime.Info(
@@ -438,7 +438,7 @@ namespace Sample.API.Models
         Description = @"The provisioning state of the recovery job resource.",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>User description of the action.</summary>
         [Sample.API.Runtime.Info(
@@ -605,7 +605,7 @@ namespace Sample.API.Models
         /// <summary>Id of the Job under which this job-resource exists.</summary>
         string JobId { get; set; }
         /// <summary>Discriminator for the JobResource object hierarchy.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "RecoveryPlanChild", "DrillRun", "ChaosExperiment")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "DrillRun")]
         string JobResourceType { get; set; }
         /// <summary>The operation that this job is intended to perform.</summary>
         string Operation { get; set; }
@@ -615,7 +615,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("None", "AzureNative", "AzureSiteRecovery", "CrossZoneVMRecovery", "CustomRunbook")]
         string ProtectionSolutionType { get; set; }
         /// <summary>The provisioning state of the recovery job resource.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>The recovery action settings.</summary>
         Sample.API.Models.IRecoveryGroupActionSettings RecoveryGroupActionSetting { get; set; }

@@ -358,7 +358,7 @@ namespace Sample.API.Models
         Description = @"The type of job.",
         SerializedName = @"jobType",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "RecoveryPlanChild", "DrillRun", "DrillRunChild", "ChaosExperiment", "ChaosExperimentChild")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "DrillRun")]
         string JobType { get;  }
         /// <summary>The operation that this job is intended to perform.</summary>
         [Sample.API.Runtime.Info(
@@ -381,7 +381,7 @@ namespace Sample.API.Models
         Description = @"The provisioning state of the recovery job.",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>
         /// The resource for which this job was created. This is typically the resource that the job is intended to manage or operate
@@ -484,14 +484,14 @@ namespace Sample.API.Models
         /// <summary>List of tasks associated with this job.</summary>
         System.Collections.Generic.List<Sample.API.Models.IJobTaskDetail> JobExtendedInfoTasksList { get; set; }
         /// <summary>The type of job.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "RecoveryPlanChild", "DrillRun", "DrillRunChild", "ChaosExperiment", "ChaosExperimentChild")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "DrillRun")]
         string JobType { get; set; }
         /// <summary>The operation that this job is intended to perform.</summary>
         string Operation { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
         Sample.API.Models.IRecoveryJobProperties Property { get; set; }
         /// <summary>The provisioning state of the recovery job.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>
         /// The resource for which this job was created. This is typically the resource that the job is intended to manage or operate

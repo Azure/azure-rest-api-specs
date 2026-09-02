@@ -16,13 +16,33 @@ namespace Sample.API.Models
         /// </summary>
         private Sample.API.Models.IProxyResource __proxyResource = new Sample.API.Models.ProxyResource();
 
+        /// <summary>The error additional info.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailAdditionalInfo; }
+
+        /// <summary>The error code.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ErrorDetailCode { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailCode; }
+
+        /// <summary>The error details.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailDetails; }
+
+        /// <summary>The error message.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ErrorDetailMessage { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailMessage; }
+
+        /// <summary>The error target.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ErrorDetailTarget { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailTarget; }
+
         /// <summary>The type of goal assignment.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalAssignmentType { get => ((Sample.API.Models.IGoalAssignmentPropertiesUpdateInternal)Property).GoalAssignmentType; set => ((Sample.API.Models.IGoalAssignmentPropertiesUpdateInternal)Property).GoalAssignmentType = value ?? null; }
+        public string GoalAssignmentType { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).GoalAssignmentType; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).GoalAssignmentType = value ?? null; }
 
         /// <summary>Arm id of the goal template.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string GoalTemplateId { get => ((Sample.API.Models.IGoalAssignmentPropertiesUpdateInternal)Property).GoalTemplateId; set => ((Sample.API.Models.IGoalAssignmentPropertiesUpdateInternal)Property).GoalTemplateId = value ?? null; }
+        public string GoalTemplateId { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).GoalTemplateId; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).GoalTemplateId = value ?? null; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -35,14 +55,43 @@ namespace Sample.API.Models
         public string Name { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Name; }
 
         /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IGoalAssignmentPropertiesUpdate _property;
+        private Sample.API.Models.IGoalAssignmentProperties _property;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IGoalAssignmentPropertiesUpdate Property { get => (this._property = this._property ?? new Sample.API.Models.GoalAssignmentPropertiesUpdate()); set => this._property = value; }
+        internal Sample.API.Models.IGoalAssignmentProperties Property { get => (this._property = this._property ?? new Sample.API.Models.GoalAssignmentProperties()); set => this._property = value; }
+
+        /// <summary>Provisioning state</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ProvisioningState { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ProvisioningState; }
+
+        /// <summary>Whether zonal resiliency is required for this goal assignment.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public bool? RequireZonalResiliency { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).RequireZonalResiliency; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).RequireZonalResiliency = value ?? default(bool); }
+
+        /// <summary>Internal Acessors for ErrorDetail</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IGoalAssignmentUpdateInternal.ErrorDetail { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetail; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetail = value ?? null /* model class */; }
+
+        /// <summary>Internal Acessors for ErrorDetailAdditionalInfo</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IGoalAssignmentUpdateInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
+
+        /// <summary>Internal Acessors for ErrorDetailCode</summary>
+        string Sample.API.Models.IGoalAssignmentUpdateInternal.ErrorDetailCode { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailCode; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailCode = value ?? null; }
+
+        /// <summary>Internal Acessors for ErrorDetailDetails</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IGoalAssignmentUpdateInternal.ErrorDetailDetails { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailDetails; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailDetails = value ?? null /* arrayOf */; }
+
+        /// <summary>Internal Acessors for ErrorDetailMessage</summary>
+        string Sample.API.Models.IGoalAssignmentUpdateInternal.ErrorDetailMessage { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailMessage; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailMessage = value ?? null; }
+
+        /// <summary>Internal Acessors for ErrorDetailTarget</summary>
+        string Sample.API.Models.IGoalAssignmentUpdateInternal.ErrorDetailTarget { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailTarget; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ErrorDetailTarget = value ?? null; }
 
         /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IGoalAssignmentPropertiesUpdate Sample.API.Models.IGoalAssignmentUpdateInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.GoalAssignmentPropertiesUpdate()); set { {_property = value;} } }
+        Sample.API.Models.IGoalAssignmentProperties Sample.API.Models.IGoalAssignmentUpdateInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.GoalAssignmentProperties()); set { {_property = value;} } }
+
+        /// <summary>Internal Acessors for ProvisioningState</summary>
+        string Sample.API.Models.IGoalAssignmentUpdateInternal.ProvisioningState { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ProvisioningState; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ProvisioningState = value ?? null; }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -76,7 +125,7 @@ namespace Sample.API.Models
 
         /// <summary>List of service level resources.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> ServiceLevelResource { get => ((Sample.API.Models.IGoalAssignmentPropertiesUpdateInternal)Property).ServiceLevelResource; set => ((Sample.API.Models.IGoalAssignmentPropertiesUpdateInternal)Property).ServiceLevelResource = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> ServiceLevelResource { get => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ServiceLevelResource; set => ((Sample.API.Models.IGoalAssignmentPropertiesInternal)Property).ServiceLevelResource = value ?? null /* arrayOf */; }
 
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -137,6 +186,61 @@ namespace Sample.API.Models
         Sample.API.Runtime.IJsonSerializable,
         Sample.API.Models.IProxyResource
     {
+        /// <summary>The error additional info.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"The error additional info.",
+        SerializedName = @"additionalInfo",
+        PossibleTypes = new [] { typeof(Sample.API.Models.IErrorAdditionalInfo) })]
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get;  }
+        /// <summary>The error code.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"The error code.",
+        SerializedName = @"code",
+        PossibleTypes = new [] { typeof(string) })]
+        string ErrorDetailCode { get;  }
+        /// <summary>The error details.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"The error details.",
+        SerializedName = @"details",
+        PossibleTypes = new [] { typeof(Sample.API.Models.IErrorDetail) })]
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get;  }
+        /// <summary>The error message.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"The error message.",
+        SerializedName = @"message",
+        PossibleTypes = new [] { typeof(string) })]
+        string ErrorDetailMessage { get;  }
+        /// <summary>The error target.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"The error target.",
+        SerializedName = @"target",
+        PossibleTypes = new [] { typeof(string) })]
+        string ErrorDetailTarget { get;  }
         /// <summary>The type of goal assignment.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -160,6 +264,29 @@ namespace Sample.API.Models
         SerializedName = @"goalTemplateId",
         PossibleTypes = new [] { typeof(string) })]
         string GoalTemplateId { get; set; }
+        /// <summary>Provisioning state</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"Provisioning state",
+        SerializedName = @"provisioningState",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
+        string ProvisioningState { get;  }
+        /// <summary>Whether zonal resiliency is required for this goal assignment.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Whether zonal resiliency is required for this goal assignment.",
+        SerializedName = @"requireZonalResiliency",
+        PossibleTypes = new [] { typeof(bool) })]
+        bool? RequireZonalResiliency { get; set; }
         /// <summary>List of service level resources.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -177,13 +304,30 @@ namespace Sample.API.Models
     internal partial interface IGoalAssignmentUpdateInternal :
         Sample.API.Models.IProxyResourceInternal
     {
+        /// <summary>Details of any errors encountered during the operation.</summary>
+        Sample.API.Models.IErrorDetail ErrorDetail { get; set; }
+        /// <summary>The error additional info.</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get; set; }
+        /// <summary>The error code.</summary>
+        string ErrorDetailCode { get; set; }
+        /// <summary>The error details.</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get; set; }
+        /// <summary>The error message.</summary>
+        string ErrorDetailMessage { get; set; }
+        /// <summary>The error target.</summary>
+        string ErrorDetailTarget { get; set; }
         /// <summary>The type of goal assignment.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Resiliency")]
         string GoalAssignmentType { get; set; }
         /// <summary>Arm id of the goal template.</summary>
         string GoalTemplateId { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IGoalAssignmentPropertiesUpdate Property { get; set; }
+        Sample.API.Models.IGoalAssignmentProperties Property { get; set; }
+        /// <summary>Provisioning state</summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
+        string ProvisioningState { get; set; }
+        /// <summary>Whether zonal resiliency is required for this goal assignment.</summary>
+        bool? RequireZonalResiliency { get; set; }
         /// <summary>List of service level resources.</summary>
         System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> ServiceLevelResource { get; set; }
 

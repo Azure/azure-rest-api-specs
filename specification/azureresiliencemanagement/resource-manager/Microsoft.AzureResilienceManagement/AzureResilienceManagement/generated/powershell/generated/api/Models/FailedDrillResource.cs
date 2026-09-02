@@ -56,68 +56,6 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for RbacAssignmentErrorRecommendation</summary>
         System.Collections.Generic.List<string> Sample.API.Models.IFailedDrillResourceInternal.RbacAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendation = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for TargetAndCapabilityAssignmentError</summary>
-        Sample.API.Models.IErrorDetails Sample.API.Models.IFailedDrillResourceInternal.TargetAndCapabilityAssignmentError { get => (this._targetAndCapabilityAssignmentError = this._targetAndCapabilityAssignmentError ?? new Sample.API.Models.ErrorDetails()); set { {_targetAndCapabilityAssignmentError = value;} } }
-
-        /// <summary>Internal Acessors for TargetAndCapabilityAssignmentErrorCode</summary>
-        string Sample.API.Models.IFailedDrillResourceInternal.TargetAndCapabilityAssignmentErrorCode { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Code; set => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Code = value ?? null; }
-
-        /// <summary>Internal Acessors for TargetAndCapabilityAssignmentErrorMessage</summary>
-        string Sample.API.Models.IFailedDrillResourceInternal.TargetAndCapabilityAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Message; set => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Message = value ?? null; }
-
-        /// <summary>Internal Acessors for TargetAndCapabilityAssignmentErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IFailedDrillResourceInternal.TargetAndCapabilityAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Recommendation = value ?? null /* arrayOf */; }
-
-        /// <summary>Internal Acessors for TargetResourceAssignmentError</summary>
-        Sample.API.Models.IErrorDetails Sample.API.Models.IFailedDrillResourceInternal.TargetResourceAssignmentError { get => (this._targetResourceAssignmentError = this._targetResourceAssignmentError ?? new Sample.API.Models.ErrorDetails()); set { {_targetResourceAssignmentError = value;} } }
-
-        /// <summary>Internal Acessors for TargetResourceAssignmentErrorCode</summary>
-        string Sample.API.Models.IFailedDrillResourceInternal.TargetResourceAssignmentErrorCode { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Code; set => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Code = value ?? null; }
-
-        /// <summary>Internal Acessors for TargetResourceAssignmentErrorMessage</summary>
-        string Sample.API.Models.IFailedDrillResourceInternal.TargetResourceAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Message; set => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Message = value ?? null; }
-
-        /// <summary>Internal Acessors for TargetResourceAssignmentErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IFailedDrillResourceInternal.TargetResourceAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Recommendation = value ?? null /* arrayOf */; }
-
-        /// <summary>Backing field for <see cref="TargetAndCapabilityAssignmentError" /> property.</summary>
-        private Sample.API.Models.IErrorDetails _targetAndCapabilityAssignmentError;
-
-        /// <summary>Target and Capability assignment error.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IErrorDetails TargetAndCapabilityAssignmentError { get => (this._targetAndCapabilityAssignmentError = this._targetAndCapabilityAssignmentError ?? new Sample.API.Models.ErrorDetails()); }
-
-        /// <summary>Error code.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TargetAndCapabilityAssignmentErrorCode { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Code; }
-
-        /// <summary>Error message.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TargetAndCapabilityAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Message; }
-
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> TargetAndCapabilityAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Recommendation; }
-
-        /// <summary>Backing field for <see cref="TargetResourceAssignmentError" /> property.</summary>
-        private Sample.API.Models.IErrorDetails _targetResourceAssignmentError;
-
-        /// <summary>Target resource RBAC assignment error.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IErrorDetails TargetResourceAssignmentError { get => (this._targetResourceAssignmentError = this._targetResourceAssignmentError ?? new Sample.API.Models.ErrorDetails()); }
-
-        /// <summary>Error code.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TargetResourceAssignmentErrorCode { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Code; }
-
-        /// <summary>Error message.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TargetResourceAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Message; }
-
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> TargetResourceAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Recommendation; }
-
         /// <summary>Creates an new <see cref="FailedDrillResource" /> instance.</summary>
         public FailedDrillResource()
         {
@@ -183,72 +121,6 @@ namespace Sample.API.Models
         SerializedName = @"resourceId",
         PossibleTypes = new [] { typeof(string) })]
         string ResourceId { get; set; }
-        /// <summary>Error code.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Error code.",
-        SerializedName = @"code",
-        PossibleTypes = new [] { typeof(string) })]
-        string TargetAndCapabilityAssignmentErrorCode { get;  }
-        /// <summary>Error message.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Error message.",
-        SerializedName = @"message",
-        PossibleTypes = new [] { typeof(string) })]
-        string TargetAndCapabilityAssignmentErrorMessage { get;  }
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"A list of recommendations to resolve the error.",
-        SerializedName = @"recommendations",
-        PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> TargetAndCapabilityAssignmentErrorRecommendation { get;  }
-        /// <summary>Error code.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Error code.",
-        SerializedName = @"code",
-        PossibleTypes = new [] { typeof(string) })]
-        string TargetResourceAssignmentErrorCode { get;  }
-        /// <summary>Error message.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Error message.",
-        SerializedName = @"message",
-        PossibleTypes = new [] { typeof(string) })]
-        string TargetResourceAssignmentErrorMessage { get;  }
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"A list of recommendations to resolve the error.",
-        SerializedName = @"recommendations",
-        PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> TargetResourceAssignmentErrorRecommendation { get;  }
 
     }
     /// Failed Include, Exclude or Update resource.
@@ -267,22 +139,6 @@ namespace Sample.API.Models
         System.Collections.Generic.List<string> RbacAssignmentErrorRecommendation { get; set; }
         /// <summary>Resource Id of the underlying resource of the failed Drill resource.</summary>
         string ResourceId { get; set; }
-        /// <summary>Target and Capability assignment error.</summary>
-        Sample.API.Models.IErrorDetails TargetAndCapabilityAssignmentError { get; set; }
-        /// <summary>Error code.</summary>
-        string TargetAndCapabilityAssignmentErrorCode { get; set; }
-        /// <summary>Error message.</summary>
-        string TargetAndCapabilityAssignmentErrorMessage { get; set; }
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> TargetAndCapabilityAssignmentErrorRecommendation { get; set; }
-        /// <summary>Target resource RBAC assignment error.</summary>
-        Sample.API.Models.IErrorDetails TargetResourceAssignmentError { get; set; }
-        /// <summary>Error code.</summary>
-        string TargetResourceAssignmentErrorCode { get; set; }
-        /// <summary>Error message.</summary>
-        string TargetResourceAssignmentErrorMessage { get; set; }
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> TargetResourceAssignmentErrorRecommendation { get; set; }
 
     }
 }

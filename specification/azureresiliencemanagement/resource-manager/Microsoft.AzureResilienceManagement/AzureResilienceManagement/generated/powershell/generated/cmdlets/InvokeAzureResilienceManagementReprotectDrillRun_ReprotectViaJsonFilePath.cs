@@ -413,7 +413,7 @@ namespace Sample.API.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'DrillRunsReprotect1' operation"))
+                if (ShouldProcess($"Call remote 'DrillRunsReprotect' operation"))
                 {
                     if (true == MyInvocation?.BoundParameters?.ContainsKey("AsJob"))
                     {
@@ -477,7 +477,7 @@ namespace Sample.API.Cmdlets
                 try
                 {
                     await ((Sample.API.Runtime.IEventListener)this).Signal(Sample.API.Runtime.Events.CmdletBeforeAPICall); if( ((Sample.API.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.DrillRunsReprotect1ViaJsonString(ServiceGroupName, DrillName, DrillRunName, OperationId, _jsonString, onOk, onDefault, this, Pipeline);
+                    await this.Client.DrillRunsReprotectViaJsonString(ServiceGroupName, DrillName, DrillRunName, OperationId, _jsonString, onOk, onDefault, this, Pipeline);
                     await ((Sample.API.Runtime.IEventListener)this).Signal(Sample.API.Runtime.Events.CmdletAfterAPICall); if( ((Sample.API.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (Sample.API.Runtime.UndeclaredResponseException urexception)

@@ -22,50 +22,6 @@ namespace Sample.API.Models
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string ChaosExperimentIdentityForFaultType { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentIdentityForFaultType; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentIdentityForFaultType = value ?? null; }
-
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string ChaosExperimentIdentityForFaultUserAssignedIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentIdentityForFaultUserAssignedIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentIdentityForFaultUserAssignedIdentity = value ?? null; }
-
-        /// <summary>Identity type linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string ChaosExperimentPropertiesIdentityType { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertiesIdentityType; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertiesIdentityType = value ?? null; }
-
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string ChaosExperimentPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertiesIdentityUserAssignedIdentity = value ?? null; }
-
-        /// <summary>Chaos Experiment properties.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IChaosExperimentPropertiesOfDrill ChaosExperimentProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentProperty = value ?? null /* model class */; }
-
-        /// <summary>Chaos Experiment resource created for this Drill</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string ChaosExperimentPropertyChaosExperimentId { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyChaosExperimentId; }
-
-        /// <summary>Identity to be used by the Chaos Experiment for invoking faults on resources.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IAssociatedIdentity ChaosExperimentPropertyChaosExperimentIdentityForFault { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyChaosExperimentIdentityForFault; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyChaosExperimentIdentityForFault = value ?? null /* model class */; }
-
-        /// <summary>Duration of faults.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public int? ChaosExperimentPropertyFaultDurationInMin { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyFaultDurationInMin; }
-
-        /// <summary>Identity to use for Chaos Experiment operations.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IAssociatedIdentity ChaosExperimentPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyIdentity = value ?? null /* model class */; }
-
-        /// <summary>Region for chaosExperiment resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string ChaosExperimentPropertyRegion { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyRegion; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyRegion = value ?? null; }
-
-        /// <summary>Subscription for chaosExperiment resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string ChaosExperimentPropertySubscription { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertySubscription; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertySubscription = value ?? null; }
-
-        /// <summary>Identity type linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string ChaosResourceIdentityForFaultType { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosResourceIdentityForFaultType; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosResourceIdentityForFaultType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
@@ -126,7 +82,7 @@ namespace Sample.API.Models
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetail { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailDetails; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailDetails; }
 
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -146,7 +102,7 @@ namespace Sample.API.Models
 
         /// <summary>Error details associated with the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IErrorDetail ErrorDetails { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetail; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetail = value ?? null /* model class */; }
+        internal Sample.API.Models.IErrorDetail ErrorDetail { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetail; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetail = value ?? null /* model class */; }
 
         /// <summary>Readiness state of the Drill.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -158,23 +114,29 @@ namespace Sample.API.Models
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string HealthModelPropertiesIdentityType { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertiesIdentityType; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertiesIdentityType = value ?? null; }
+        public string HealthModelMonitoringPropertiesIdentityType { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertiesIdentityType; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertiesIdentityType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string HealthModelPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertiesIdentityUserAssignedIdentity = value ?? null; }
+        public string HealthModelMonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity = value ?? null; }
 
-        /// <summary>HealthModel properties.</summary>
+        /// <summary>Azure Health Model monitoring properties of the Drill.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IHealthModelPropertiesOfDrill HealthModelProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelProperty = value ?? null /* model class */; }
+        internal Sample.API.Models.IHealthModelMonitoringProperties HealthModelMonitoringProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringProperty = value ?? null /* model class */; }
 
-        /// <summary>Full ARM Id of the Health Model.</summary>
+        /// <summary>
+        /// Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is
+        /// the only identifier accepted on the wire.
+        /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string HealthModelPropertyHealthModelId { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertyHealthModelId; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertyHealthModelId = value ?? null; }
+        public string HealthModelMonitoringPropertyDiscoveryRuleId { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertyDiscoveryRuleId; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertyDiscoveryRuleId = value ?? null; }
 
-        /// <summary>Identity to use for Health Model operations.</summary>
+        /// <summary>
+        /// Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this
+        /// identity.
+        /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IAssociatedIdentity HealthModelPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertyIdentity = value ?? null /* model class */; }
+        internal Sample.API.Models.IAssociatedIdentity HealthModelMonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertyIdentity = value ?? null /* model class */; }
 
         /// <summary>Last resync and readiness check time.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -203,36 +165,6 @@ namespace Sample.API.Models
         /// <summary>Last sync time.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public global::System.DateTime? LastSyncTime { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).LastSyncTime; }
-
-        /// <summary>Managed RG v2 properties.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IManagedOnBehalfOfConfiguration ManagedOnBehalfOfConfiguration { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ManagedOnBehalfOfConfiguration; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ManagedOnBehalfOfConfiguration = value ?? null /* model class */; }
-
-        /// <summary>Associated MoboBrokerResources.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public System.Collections.Generic.List<Sample.API.Models.IMoboBrokerResource> ManagedOnBehalfOfConfigurationMoboBrokerResource { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ManagedOnBehalfOfConfigurationMoboBrokerResource; }
-
-        /// <summary>Identity to use for metrics operations.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IAssociatedIdentity MetricPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricPropertyIdentity = value ?? null /* model class */; }
-
-        /// <summary>
-        /// Metrics associated with this Drill. These will be tracked through the Drill Run.
-        /// </summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public System.Collections.Generic.List<Sample.API.Models.IMetricsToTrack> MetricPropertyMetricsToTrack { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricPropertyMetricsToTrack; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricPropertyMetricsToTrack = value ?? null /* arrayOf */; }
-
-        /// <summary>Identity type linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string MetricsPropertiesIdentityType { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricsPropertiesIdentityType; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricsPropertiesIdentityType = value ?? null; }
-
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public string MetricsPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricsPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricsPropertiesIdentityUserAssignedIdentity = value ?? null; }
-
-        /// <summary>Metric properties.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        internal Sample.API.Models.IMetricsPropertiesOfDrill MetricsProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricsProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricsProperty = value ?? null /* model class */; }
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -312,21 +244,6 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for AttentionReason</summary>
         Sample.API.Models.IAttentionReason Sample.API.Models.IDrillPropertiesInternal.AttentionReason { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).AttentionReason; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).AttentionReason = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for ChaosExperimentProperty</summary>
-        Sample.API.Models.IChaosExperimentPropertiesOfDrill Sample.API.Models.IDrillPropertiesInternal.ChaosExperimentProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentProperty = value ?? null /* model class */; }
-
-        /// <summary>Internal Acessors for ChaosExperimentPropertyChaosExperimentId</summary>
-        string Sample.API.Models.IDrillPropertiesInternal.ChaosExperimentPropertyChaosExperimentId { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyChaosExperimentId; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyChaosExperimentId = value ?? null; }
-
-        /// <summary>Internal Acessors for ChaosExperimentPropertyChaosExperimentIdentityForFault</summary>
-        Sample.API.Models.IAssociatedIdentity Sample.API.Models.IDrillPropertiesInternal.ChaosExperimentPropertyChaosExperimentIdentityForFault { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyChaosExperimentIdentityForFault; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyChaosExperimentIdentityForFault = value ?? null /* model class */; }
-
-        /// <summary>Internal Acessors for ChaosExperimentPropertyFaultDurationInMin</summary>
-        int? Sample.API.Models.IDrillPropertiesInternal.ChaosExperimentPropertyFaultDurationInMin { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyFaultDurationInMin; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyFaultDurationInMin = value ?? default(int); }
-
-        /// <summary>Internal Acessors for ChaosExperimentPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentity Sample.API.Models.IDrillPropertiesInternal.ChaosExperimentPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosExperimentPropertyIdentity = value ?? null /* model class */; }
-
         /// <summary>Internal Acessors for ChaosResourceProperty</summary>
         Sample.API.Models.IChaosResourcePropertiesOfDrill Sample.API.Models.IDrillPropertiesInternal.ChaosResourceProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosResourceProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ChaosResourceProperty = value ?? null /* model class */; }
 
@@ -346,7 +263,7 @@ namespace Sample.API.Models
         Sample.API.Models.IAssetPropertiesOfDrill Sample.API.Models.IDrillPropertiesInternal.DrillAssetProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).DrillAssetProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).DrillAssetProperty = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for ErrorDetail</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IDrillPropertiesInternal.ErrorDetail { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailDetails; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailDetails = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IDrillPropertiesInternal.ErrorDetailDetails { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailDetails; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailDetails = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailAdditionalInfo</summary>
         System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IDrillPropertiesInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
@@ -361,7 +278,7 @@ namespace Sample.API.Models
         string Sample.API.Models.IDrillPropertiesInternal.ErrorDetailTarget { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailTarget; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetailTarget = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetails</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IDrillPropertiesInternal.ErrorDetails { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetail; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetail = value ?? null /* model class */; }
+        Sample.API.Models.IErrorDetail Sample.API.Models.IDrillPropertiesInternal.ErrorDetail { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetail; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ErrorDetail = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for ExecutionReadinessState</summary>
         string Sample.API.Models.IDrillPropertiesInternal.ExecutionReadinessState { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ExecutionReadinessState; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ExecutionReadinessState = value ?? null; }
@@ -369,11 +286,11 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for ExecutionState</summary>
         string Sample.API.Models.IDrillPropertiesInternal.ExecutionState { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ExecutionState; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ExecutionState = value ?? null; }
 
-        /// <summary>Internal Acessors for HealthModelProperty</summary>
-        Sample.API.Models.IHealthModelPropertiesOfDrill Sample.API.Models.IDrillPropertiesInternal.HealthModelProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelProperty = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for HealthModelMonitoringProperty</summary>
+        Sample.API.Models.IHealthModelMonitoringProperties Sample.API.Models.IDrillPropertiesInternal.HealthModelMonitoringProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringProperty = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for HealthModelPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentity Sample.API.Models.IDrillPropertiesInternal.HealthModelPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelPropertyIdentity = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for HealthModelMonitoringPropertyIdentity</summary>
+        Sample.API.Models.IAssociatedIdentity Sample.API.Models.IDrillPropertiesInternal.HealthModelMonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).HealthModelMonitoringPropertyIdentity = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for LastResyncReadinessCheckTime</summary>
         global::System.DateTime? Sample.API.Models.IDrillPropertiesInternal.LastResyncReadinessCheckTime { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).LastResyncReadinessCheckTime; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).LastResyncReadinessCheckTime = value ?? default(global::System.DateTime); }
@@ -395,18 +312,6 @@ namespace Sample.API.Models
 
         /// <summary>Internal Acessors for LastSyncTime</summary>
         global::System.DateTime? Sample.API.Models.IDrillPropertiesInternal.LastSyncTime { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).LastSyncTime; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).LastSyncTime = value ?? default(global::System.DateTime); }
-
-        /// <summary>Internal Acessors for ManagedOnBehalfOfConfiguration</summary>
-        Sample.API.Models.IManagedOnBehalfOfConfiguration Sample.API.Models.IDrillPropertiesInternal.ManagedOnBehalfOfConfiguration { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ManagedOnBehalfOfConfiguration; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ManagedOnBehalfOfConfiguration = value ?? null /* model class */; }
-
-        /// <summary>Internal Acessors for ManagedOnBehalfOfConfigurationMoboBrokerResource</summary>
-        System.Collections.Generic.List<Sample.API.Models.IMoboBrokerResource> Sample.API.Models.IDrillPropertiesInternal.ManagedOnBehalfOfConfigurationMoboBrokerResource { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ManagedOnBehalfOfConfigurationMoboBrokerResource; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ManagedOnBehalfOfConfigurationMoboBrokerResource = value ?? null /* arrayOf */; }
-
-        /// <summary>Internal Acessors for MetricPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentity Sample.API.Models.IDrillPropertiesInternal.MetricPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricPropertyIdentity = value ?? null /* model class */; }
-
-        /// <summary>Internal Acessors for MetricsProperty</summary>
-        Sample.API.Models.IMetricsPropertiesOfDrill Sample.API.Models.IDrillPropertiesInternal.MetricsProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricsProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MetricsProperty = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for MonitoringProperty</summary>
         Sample.API.Models.IMonitoringPropertiesOfDrill Sample.API.Models.IDrillPropertiesInternal.MonitoringProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MonitoringProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).MonitoringProperty = value ?? null /* model class */; }
@@ -444,6 +349,12 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for ServiceGroupId</summary>
         string Sample.API.Models.IDrillPropertiesInternal.ServiceGroupId { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ServiceGroupId; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ServiceGroupId = value ?? null; }
 
+        /// <summary>Internal Acessors for SliMonitoringProperty</summary>
+        Sample.API.Models.ISliMonitoringProperties Sample.API.Models.IDrillPropertiesInternal.SliMonitoringProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringProperty = value ?? null /* model class */; }
+
+        /// <summary>Internal Acessors for SliMonitoringPropertyIdentity</summary>
+        Sample.API.Models.IAssociatedIdentity Sample.API.Models.IDrillPropertiesInternal.SliMonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertyIdentity = value ?? null /* model class */; }
+
         /// <summary>Internal Acessors for SystemMetadata</summary>
         Sample.API.Models.ISystemMetadata Sample.API.Models.IDrillPropertiesInternal.SystemMetadata { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SystemMetadata; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SystemMetadata = value ?? null /* model class */; }
 
@@ -459,6 +370,32 @@ namespace Sample.API.Models
         /// <summary>Parent SG resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string ServiceGroupId { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).ServiceGroupId; }
+
+        /// <summary>Identity type linked with the resource</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
+        public string SliMonitoringPropertiesIdentityType { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertiesIdentityType; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertiesIdentityType = value ?? null; }
+
+        /// <summary>User assigned identity id linked with the resource</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
+        public string SliMonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertiesIdentityUserAssignedIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertiesIdentityUserAssignedIdentity = value ?? null; }
+
+        /// <summary>SLI monitoring properties of the Drill.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
+        internal Sample.API.Models.ISliMonitoringProperties SliMonitoringProperty { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringProperty; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringProperty = value ?? null /* model class */; }
+
+        /// <summary>
+        /// Identity that the Drill uses to read evaluated SLI results from each SLI's destination Azure Monitor Workspace. The Drill
+        /// is granted Monitoring Reader on every destination AMW of every selected SLI for this identity.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
+        internal Sample.API.Models.IAssociatedIdentity SliMonitoringPropertyIdentity { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertyIdentity; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertyIdentity = value ?? null /* model class */; }
+
+        /// <summary>
+        /// The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types
+        /// or duplicate SLI Ids are rejected.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
+        public System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySli { get => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertySli; set => ((Sample.API.Models.IDrillPropertiesInternal)__drillProperties).SliMonitoringPropertySli = value ?? null /* arrayOf */; }
 
         /// <summary>Internal System Metadata, to be used by internal components only.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]

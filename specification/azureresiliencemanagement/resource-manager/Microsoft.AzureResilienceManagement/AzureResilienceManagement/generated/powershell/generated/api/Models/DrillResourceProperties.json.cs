@@ -65,8 +65,6 @@ namespace Sample.API.Models
             }
             {_faultProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("faultProperties"), out var __jsonFaultProperties) ? Sample.API.Models.FaultProperties.FromJson(__jsonFaultProperties) : _faultProperty;}
             {_attentionReason = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("attentionReason"), out var __jsonAttentionReason) ? Sample.API.Models.DrillResourceAttentionReason.FromJson(__jsonAttentionReason) : _attentionReason;}
-            {_targetAndCapabilityAssignmentError = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("targetAndCapabilityAssignmentError"), out var __jsonTargetAndCapabilityAssignmentError) ? Sample.API.Models.ErrorDetails.FromJson(__jsonTargetAndCapabilityAssignmentError) : _targetAndCapabilityAssignmentError;}
-            {_targetResourceAssignmentError = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("targetResourceAssignmentError"), out var __jsonTargetResourceAssignmentError) ? Sample.API.Models.ErrorDetails.FromJson(__jsonTargetResourceAssignmentError) : _targetResourceAssignmentError;}
             {_rbacAssignmentError = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("rbacAssignmentError"), out var __jsonRbacAssignmentError) ? Sample.API.Models.ErrorDetails.FromJson(__jsonRbacAssignmentError) : _rbacAssignmentError;}
             {_monitoringRbacAssignmentError = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("monitoringRbacAssignmentError"), out var __jsonMonitoringRbacAssignmentError) ? Sample.API.Models.ErrorDetails.FromJson(__jsonMonitoringRbacAssignmentError) : _monitoringRbacAssignmentError;}
             {_resourceId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("resourceId"), out var __jsonResourceId) ? (string)__jsonResourceId : (string)_resourceId;}
@@ -125,14 +123,6 @@ namespace Sample.API.Models
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
                 AddIf( null != this._attentionReason ? (Sample.API.Runtime.Json.JsonNode) this._attentionReason.ToJson(null,serializationMode) : null, "attentionReason" ,container.Add );
-            }
-            if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
-            {
-                AddIf( null != this._targetAndCapabilityAssignmentError ? (Sample.API.Runtime.Json.JsonNode) this._targetAndCapabilityAssignmentError.ToJson(null,serializationMode) : null, "targetAndCapabilityAssignmentError" ,container.Add );
-            }
-            if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
-            {
-                AddIf( null != this._targetResourceAssignmentError ? (Sample.API.Runtime.Json.JsonNode) this._targetResourceAssignmentError.ToJson(null,serializationMode) : null, "targetResourceAssignmentError" ,container.Add );
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {

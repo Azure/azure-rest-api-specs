@@ -104,14 +104,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReason = (Sample.API.Models.IDrillResourceAttentionReason) content.GetValueForProperty("AttentionReason",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReason, Sample.API.Models.DrillResourceAttentionReasonTypeConverter.ConvertFrom);
             }
-            if (content.Contains("TargetAndCapabilityAssignmentError"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("TargetAndCapabilityAssignmentError",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("TargetResourceAssignmentError"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("TargetResourceAssignmentError",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
-            }
             if (content.Contains("RbacAssignmentError"))
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("RbacAssignmentError",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
@@ -204,10 +196,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyCustomFault = (Sample.API.Models.ICustomFaultDetails) content.GetValueForProperty("FaultPropertyCustomFault",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyCustomFault, Sample.API.Models.CustomFaultDetailsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("AttentionReasonFaultRbacOnTarget"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTarget = (string) content.GetValueForProperty("AttentionReasonFaultRbacOnTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTarget, global::System.Convert.ToString);
-            }
             if (content.Contains("AttentionReasonFaultRbacOnTargetResource"))
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTargetResource = (string) content.GetValueForProperty("AttentionReasonFaultRbacOnTargetResource",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTargetResource, global::System.Convert.ToString);
@@ -220,37 +208,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTarget = (string) content.GetValueForProperty("AttentionReasonMonitoringRbacOnTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTarget, global::System.Convert.ToString);
             }
-            if (content.Contains("AttentionReasonTarget"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonTarget = (string) content.GetValueForProperty("AttentionReasonTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonTarget, global::System.Convert.ToString);
-            }
             if (content.Contains("AttentionReasonResourceState"))
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonResourceState = (System.Collections.Generic.List<string>) content.GetValueForProperty("AttentionReasonResourceState",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonResourceState, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorCode"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorCode = (string) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorCode",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorCode, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorMessage"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorMessage = (string) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorMessage",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorMessage, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorRecommendation"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorRecommendation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("TargetResourceAssignmentErrorCode"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorCode = (string) content.GetValueForProperty("TargetResourceAssignmentErrorCode",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorCode, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetResourceAssignmentErrorMessage"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorMessage = (string) content.GetValueForProperty("TargetResourceAssignmentErrorMessage",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorMessage, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetResourceAssignmentErrorRecommendation"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("TargetResourceAssignmentErrorRecommendation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("RbacAssignmentErrorCode"))
             {
@@ -333,14 +293,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReason = (Sample.API.Models.IDrillResourceAttentionReason) content.GetValueForProperty("AttentionReason",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReason, Sample.API.Models.DrillResourceAttentionReasonTypeConverter.ConvertFrom);
             }
-            if (content.Contains("TargetAndCapabilityAssignmentError"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("TargetAndCapabilityAssignmentError",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("TargetResourceAssignmentError"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("TargetResourceAssignmentError",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
-            }
             if (content.Contains("RbacAssignmentError"))
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("RbacAssignmentError",((Sample.API.Models.IDrillResourcePropertiesInternal)this).RbacAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
@@ -433,10 +385,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyCustomFault = (Sample.API.Models.ICustomFaultDetails) content.GetValueForProperty("FaultPropertyCustomFault",((Sample.API.Models.IDrillResourcePropertiesInternal)this).FaultPropertyCustomFault, Sample.API.Models.CustomFaultDetailsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("AttentionReasonFaultRbacOnTarget"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTarget = (string) content.GetValueForProperty("AttentionReasonFaultRbacOnTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTarget, global::System.Convert.ToString);
-            }
             if (content.Contains("AttentionReasonFaultRbacOnTargetResource"))
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTargetResource = (string) content.GetValueForProperty("AttentionReasonFaultRbacOnTargetResource",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonFaultRbacOnTargetResource, global::System.Convert.ToString);
@@ -449,37 +397,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTarget = (string) content.GetValueForProperty("AttentionReasonMonitoringRbacOnTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonMonitoringRbacOnTarget, global::System.Convert.ToString);
             }
-            if (content.Contains("AttentionReasonTarget"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonTarget = (string) content.GetValueForProperty("AttentionReasonTarget",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonTarget, global::System.Convert.ToString);
-            }
             if (content.Contains("AttentionReasonResourceState"))
             {
                 ((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonResourceState = (System.Collections.Generic.List<string>) content.GetValueForProperty("AttentionReasonResourceState",((Sample.API.Models.IDrillResourcePropertiesInternal)this).AttentionReasonResourceState, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorCode"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorCode = (string) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorCode",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorCode, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorMessage"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorMessage = (string) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorMessage",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorMessage, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorRecommendation"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorRecommendation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetAndCapabilityAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("TargetResourceAssignmentErrorCode"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorCode = (string) content.GetValueForProperty("TargetResourceAssignmentErrorCode",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorCode, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetResourceAssignmentErrorMessage"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorMessage = (string) content.GetValueForProperty("TargetResourceAssignmentErrorMessage",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorMessage, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetResourceAssignmentErrorRecommendation"))
-            {
-                ((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("TargetResourceAssignmentErrorRecommendation",((Sample.API.Models.IDrillResourcePropertiesInternal)this).TargetResourceAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("RbacAssignmentErrorCode"))
             {

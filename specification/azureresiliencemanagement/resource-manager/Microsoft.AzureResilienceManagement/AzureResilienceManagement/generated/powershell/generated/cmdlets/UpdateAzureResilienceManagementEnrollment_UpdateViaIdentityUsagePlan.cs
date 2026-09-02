@@ -366,7 +366,7 @@ namespace Sample.API.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'EnrollmentsCreateOrUpdate1' operation"))
+                if (ShouldProcess($"Call remote 'EnrollmentsCreateOrUpdate' operation"))
                 {
                     if (true == MyInvocation?.BoundParameters?.ContainsKey("AsJob"))
                     {
@@ -435,7 +435,7 @@ namespace Sample.API.Cmdlets
                         this.UsagePlanInputObject.Id += $"/enrollments/{(global::System.Uri.EscapeDataString(this.Name.ToString()))}";
                         Resource = await this.Client.EnrollmentsGetViaIdentityWithResult(UsagePlanInputObject.Id, this, Pipeline);
                         this.UpdateResource();
-                        await this.Client.EnrollmentsCreateOrUpdate1ViaIdentity(UsagePlanInputObject.Id, Resource, onOk, onDefault, this, Pipeline, Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate);
+                        await this.Client.EnrollmentsCreateOrUpdateViaIdentity(UsagePlanInputObject.Id, Resource, onOk, onDefault, this, Pipeline, Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate);
                     }
                     else
                     {
@@ -454,7 +454,7 @@ namespace Sample.API.Cmdlets
                         }
                         Resource = await this.Client.EnrollmentsGetWithResult(UsagePlanInputObject.SubscriptionId ?? null, UsagePlanInputObject.ResourceGroupName ?? null, UsagePlanInputObject.UsagePlanName ?? null, Name, this, Pipeline);
                         this.UpdateResource();
-                        await this.Client.EnrollmentsCreateOrUpdate1(UsagePlanInputObject.SubscriptionId ?? null, UsagePlanInputObject.ResourceGroupName ?? null, UsagePlanInputObject.UsagePlanName ?? null, Name, Resource, onOk, onDefault, this, Pipeline, Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate);
+                        await this.Client.EnrollmentsCreateOrUpdate(UsagePlanInputObject.SubscriptionId ?? null, UsagePlanInputObject.ResourceGroupName ?? null, UsagePlanInputObject.UsagePlanName ?? null, Name, Resource, onOk, onDefault, this, Pipeline, Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate);
                     }
                     await ((Sample.API.Runtime.IEventListener)this).Signal(Sample.API.Runtime.Events.CmdletAfterAPICall); if( ((Sample.API.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }

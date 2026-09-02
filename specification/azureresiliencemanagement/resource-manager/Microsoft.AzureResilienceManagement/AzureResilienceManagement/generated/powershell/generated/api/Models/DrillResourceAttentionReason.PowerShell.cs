@@ -96,10 +96,6 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FaultRbacOnTarget"))
-            {
-                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTarget = (string) content.GetValueForProperty("FaultRbacOnTarget",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTarget, global::System.Convert.ToString);
-            }
             if (content.Contains("FaultRbacOnTargetResource"))
             {
                 ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTargetResource = (string) content.GetValueForProperty("FaultRbacOnTargetResource",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTargetResource, global::System.Convert.ToString);
@@ -111,10 +107,6 @@ namespace Sample.API.Models
             if (content.Contains("MonitoringRbacOnTarget"))
             {
                 ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTarget = (string) content.GetValueForProperty("MonitoringRbacOnTarget",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTarget, global::System.Convert.ToString);
-            }
-            if (content.Contains("Target"))
-            {
-                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).Target = (string) content.GetValueForProperty("Target",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).Target, global::System.Convert.ToString);
             }
             if (content.Contains("ResourceState"))
             {
@@ -137,10 +129,6 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FaultRbacOnTarget"))
-            {
-                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTarget = (string) content.GetValueForProperty("FaultRbacOnTarget",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTarget, global::System.Convert.ToString);
-            }
             if (content.Contains("FaultRbacOnTargetResource"))
             {
                 ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTargetResource = (string) content.GetValueForProperty("FaultRbacOnTargetResource",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).FaultRbacOnTargetResource, global::System.Convert.ToString);
@@ -152,10 +140,6 @@ namespace Sample.API.Models
             if (content.Contains("MonitoringRbacOnTarget"))
             {
                 ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTarget = (string) content.GetValueForProperty("MonitoringRbacOnTarget",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).MonitoringRbacOnTarget, global::System.Convert.ToString);
-            }
-            if (content.Contains("Target"))
-            {
-                ((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).Target = (string) content.GetValueForProperty("Target",((Sample.API.Models.IDrillResourceAttentionReasonInternal)this).Target, global::System.Convert.ToString);
             }
             if (content.Contains("ResourceState"))
             {

@@ -366,7 +366,7 @@ namespace Sample.API.Models
         Description = @"Provisioning state",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>The recovery orchestration group id associated with the recovery resources.</summary>
         [Sample.API.Runtime.Info(
@@ -510,7 +510,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Protected", "NotProtected", "HighlyAvailable")]
         string ProtectionStatus { get; set; }
         /// <summary>Provisioning state</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>The recovery orchestration group id associated with the recovery resources.</summary>
         string RecoveryGroupId { get; set; }

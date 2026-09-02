@@ -70,6 +70,10 @@ namespace Sample.API.Models
 
             switch ( json.StringProperty("protectionSolutionType") )
             {
+                case "CrossZoneVMRecovery":
+                {
+                    return new ResourceCrossZoneVMRecoveryProtectionSetting(json);
+                }
                 case "CustomRunbook":
                 {
                     return new ResourceCustomProtectionSetting(json);
@@ -81,10 +85,6 @@ namespace Sample.API.Models
                 case "AzureSiteRecovery":
                 {
                     return new ResourceSiteRecoveryProtectionSetting(json);
-                }
-                case "CrossZoneVMRecovery":
-                {
-                    return new ResourceCrossZoneVMRecoveryProtectionSetting(json);
                 }
             }
             return new ResourceBaseProtectionSolutionSetting(json);

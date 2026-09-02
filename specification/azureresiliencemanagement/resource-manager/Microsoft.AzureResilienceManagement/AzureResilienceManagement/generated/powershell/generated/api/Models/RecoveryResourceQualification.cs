@@ -26,6 +26,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
         public string OperationQualificationDetailQualificationState { get => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).QualificationState; set => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).QualificationState = value ; }
 
+        /// <summary>
+        /// Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> OperationQualificationDetailResourceFeasibilityReview { get => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).ResourceFeasibilityReview; set => ((Sample.API.Models.IOperationQualificationDetailsInternal)OperationQualificationDetail).ResourceFeasibilityReview = value ?? null /* arrayOf */; }
+
         /// <summary>Backing field for <see cref="RecoveryResource" /> property.</summary>
         private Sample.API.Models.IRecoveryResource _recoveryResource;
 
@@ -69,6 +75,19 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Qualified", "NotQualified", "Excluded")]
         string OperationQualificationDetailQualificationState { get; set; }
+        /// <summary>
+        /// Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.
+        /// </summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.",
+        SerializedName = @"resourceFeasibilityReviews",
+        PossibleTypes = new [] { typeof(Sample.API.Models.IResourceFeasibilityReview) })]
+        System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> OperationQualificationDetailResourceFeasibilityReview { get; set; }
         /// <summary>Recovery orchestration resource.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -93,6 +112,10 @@ namespace Sample.API.Models
         /// <summary>Resource qualification state for the operation.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Qualified", "NotQualified", "Excluded")]
         string OperationQualificationDetailQualificationState { get; set; }
+        /// <summary>
+        /// Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.
+        /// </summary>
+        System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> OperationQualificationDetailResourceFeasibilityReview { get; set; }
         /// <summary>Recovery orchestration resource.</summary>
         Sample.API.Models.IRecoveryResource RecoveryResource { get; set; }
 

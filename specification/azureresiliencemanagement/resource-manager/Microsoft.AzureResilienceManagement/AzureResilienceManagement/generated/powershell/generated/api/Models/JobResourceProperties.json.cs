@@ -68,10 +68,6 @@ namespace Sample.API.Models
 
             switch ( json.StringProperty("jobResourceType") )
             {
-                case "ChaosExperiment":
-                {
-                    return new ChaosJobResourceProperties(json);
-                }
                 case "DrillRun":
                 {
                     return new DrillRunResourceProperties(json);

@@ -89,7 +89,7 @@ namespace Sample.API.Models
         Description = @"Name of the Drill Run stage this status applies to.",
         SerializedName = @"drillRunStage",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "TestFailover", "TestFailoverCleanup", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
         string DrillRunStage { get; set; }
         /// <summary>Report generation status for this stage.</summary>
         [Sample.API.Runtime.Info(
@@ -154,7 +154,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Name of the Drill Run stage this status applies to.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "TestFailover", "TestFailoverCleanup", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
         string DrillRunStage { get; set; }
         /// <summary>Report generation status for this stage.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("NotStarted", "InProgress", "Succeeded", "Failed")]

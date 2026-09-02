@@ -38,7 +38,7 @@ namespace Sample.API.Models
         Description = @"State of the Drill Run.",
         SerializedName = @"drillRunStage",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "TestFailover", "TestFailoverCleanup", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
         string DrillRunStage { get; set; }
 
     }
@@ -47,7 +47,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>State of the Drill Run.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "TestFailover", "TestFailoverCleanup", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
         string DrillRunStage { get; set; }
 
     }

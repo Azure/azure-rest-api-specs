@@ -19,7 +19,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IRecommendCapacityResult))]
     [global::Sample.API.Description(@"Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments and recommendations.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/recommendCapacity", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/recommendCapacity", ApiVersion = "2026-08-31-preview")]
     public partial class InvokeAzureResilienceManagementRecommendGoalAssignmentCapacity_RecommendViaIdentityServiceGroupExpanded : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext

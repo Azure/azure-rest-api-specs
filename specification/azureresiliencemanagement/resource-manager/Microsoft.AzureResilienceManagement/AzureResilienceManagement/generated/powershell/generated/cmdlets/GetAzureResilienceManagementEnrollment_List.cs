@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IEnrollment))]
     [global::Sample.API.Description(@"List Enrollments by Usage Plan.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureResilienceManagement/usagePlans/{usagePlanName}/enrollments", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureResilienceManagement/usagePlans/{usagePlanName}/enrollments", ApiVersion = "2026-08-31-preview")]
     public partial class GetAzureResilienceManagementEnrollment_List : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext
