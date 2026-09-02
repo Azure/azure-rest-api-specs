@@ -1,6 +1,7 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 
 namespace Azure.AI.Projects;
@@ -61,14 +62,15 @@ alias AgentInsightMonitorCreatedResponse = ResourceCreatedResponse<AgentInsightM
   location: string;
 };
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent Insights uses project-standard FoundryDataPlanePreviewOperation templates for Foundry data-plane preview routing and error handling."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent Insights uses project-standard FoundryDataPlaneRequiredPreviewOperation templates for Foundry data-plane preview routing and error handling."
 @tag("Agent Insight Monitors")
 interface AgentInsightMonitors {
   /** List Agent Insights monitors, optionally filtered by agent name. */
   @get
   @list
   @route("/agent_insight_monitors")
-  list is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  list is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       ...AgentInsightsPageQueryParameters;
@@ -80,7 +82,8 @@ interface AgentInsightMonitors {
   /** Create an Agent Insights monitor for an agent. */
   @post
   @route("/agent_insight_monitors")
-  create is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  create is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The monitor to create. */
@@ -92,7 +95,8 @@ interface AgentInsightMonitors {
   /** Get an Agent Insights monitor. */
   @get
   @route("/agent_insight_monitors/{monitor_id}")
-  get is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  get is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -104,7 +108,8 @@ interface AgentInsightMonitors {
   /** Delete an Agent Insights monitor and all of its runs, insights, and state. */
   @delete
   @route("/agent_insight_monitors/{monitor_id}")
-  delete is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  delete is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -116,7 +121,8 @@ interface AgentInsightMonitors {
   /** Update an Agent Insights monitor. */
   @patch
   @route("/agent_insight_monitors/{monitor_id}")
-  update is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  update is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -135,7 +141,8 @@ interface AgentInsightMonitors {
   /** Reset an Agent Insights monitor's overview, checkpoint, and active insight state. */
   @post
   @route("/agent_insight_monitors/{monitor_id}:reset")
-  reset is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  reset is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -148,7 +155,8 @@ interface AgentInsightMonitors {
   @post
   @route("/agent_insight_monitors/{monitor_id}/runs")
   @pollingOperation(AgentInsightMonitors.getRun)
-  createRun is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  createRun is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -164,7 +172,8 @@ interface AgentInsightMonitors {
   @get
   @list
   @route("/agent_insight_monitors/{monitor_id}/runs")
-  listRuns is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  listRuns is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -179,7 +188,8 @@ interface AgentInsightMonitors {
   /** Get an Agent Insights run. */
   @get
   @route("/agent_insight_monitors/{monitor_id}/runs/{run_id}")
-  getRun is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  getRun is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -194,7 +204,8 @@ interface AgentInsightMonitors {
   /** Cancel an Agent Insights run. */
   @post
   @route("/agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel")
-  cancelRun is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  cancelRun is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -210,7 +221,8 @@ interface AgentInsightMonitors {
   @get
   @list
   @route("/agent_insight_monitors/{monitor_id}/insights")
-  listInsights is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  listInsights is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -226,7 +238,8 @@ interface AgentInsightMonitors {
   /** Get a full insight for an Agent Insights monitor. */
   @get
   @route("/agent_insight_monitors/{monitor_id}/insights/{insight_id}")
-  getInsight is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  getInsight is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
@@ -243,7 +256,8 @@ interface AgentInsightMonitors {
   /** Update the lifecycle status of an insight. */
   @patch
   @route("/agent_insight_monitors/{monitor_id}/insights/{insight_id}")
-  updateInsight is FoundryDataPlanePreviewOperation<
+  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+  updateInsight is FoundryDataPlaneRequiredPreviewOperation<
     AgentInsightsPreviewKey,
     {
       /** The identifier of the monitor. */
