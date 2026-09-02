@@ -54,7 +54,6 @@ suppressions:
       - $.definitions.RaiAcsManifest.properties.intervention_points
       - $.definitions.RaiAcsModerationBindingExtension.properties.subject_format
       - $.definitions.RaiAcsModerationBindingExtension.properties.harm_configs
-      - $.definitions.RaiAcsModerationBindingExtension.properties.external_safety_providers
       - $.definitions.RaiAcsPolicyBinding.properties.aacs_moderation
   - code: AvoidAdditionalProperties
     reason: The canonical ACS manifest defines metadata as an extensible JSON object and policies as a map keyed by logical policy identifier. Replacing these maps with fixed properties or arrays would break ACS manifest portability and round-tripping.
