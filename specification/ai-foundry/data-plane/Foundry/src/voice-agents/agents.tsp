@@ -96,13 +96,13 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("The kind discriminator for a voice agent definition. Always `voice`.")
   kind: AgentKind.voice;
 
-  @doc("How the voice agent obtains its conversational backend. `managed` uses the service-managed model named by `model`; `self_deployed` uses the customer's Foundry deployment named by `model`; `hosted_agent` fronts the hosted text agent referenced by `target_agent`. This is independent of the architecture (realtime or cascaded), which the service derives from the selected backend.")
-  model_type: VoiceModelType;
+  @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `target_agent` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
+  model_type?: VoiceModelType;
 
-  @doc("The model to use for this agent. Required when `model_type` is `managed` (the service-managed model name) or `self_deployed` (the customer's Foundry deployment name). Omit this property when `model_type` is `hosted_agent`; `target_agent` identifies the conversational backend. The model must support realtime or cascaded voice.")
+  @doc("The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `target_agent` is provided. The model must support realtime or cascaded voice.")
   `model`?: string;
 
-  @doc("The hosted text agent that this voice agent fronts. Required when `model_type` is `hosted_agent` and not applicable otherwise. In this mode, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the target agent owns the conversation logic. The target must be in the same project and support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
+  @doc("The text agent that this voice agent fronts. Providing this property selects the agent-backed bridge path; `model_type` and `model` must be omitted. In this mode, `instructions`, `tools`, and `tool_choice` must also be omitted, and `greeting.tool_choice` cannot be `required`, because the target agent owns the conversation logic. The target must be in the same project. The initial implementation requires a hosted agent that supports the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
   target_agent?: VoiceAgentTargetAgent;
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
@@ -274,12 +274,9 @@ union VoiceModelType {
 
   @doc("The service uses the customer's own Foundry deployment named by `model`.")
   self_deployed: "self_deployed",
-
-  @doc("The service fronts a hosted text agent referenced by `target_agent`; `model` is not applicable in this mode.")
-  hosted_agent: "hosted_agent",
 }
 
-@doc("A closed reference to the hosted text agent that a `hosted_agent` voice agent fronts, containing only its name and optional version. The target is resolved within the same project.")
+@doc("A closed reference to the text agent that an agent-backed voice agent fronts, containing only its name and optional version. The target is resolved within the same project. The initial implementation requires the target to be a hosted agent that supports the Voice Live bridge protocol.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTargetAgent {
   ...Record<never>;

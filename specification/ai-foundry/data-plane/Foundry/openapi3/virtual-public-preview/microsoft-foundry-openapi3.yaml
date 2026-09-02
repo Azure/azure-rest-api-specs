@@ -59423,7 +59423,7 @@ components:
                 contentEncoding: base64
           description: |-
             The image(s) to edit. Must be a supported image file or an array of images.
-              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`
+              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`
               file less than 50MB. You can provide up to 16 images.
               `chatgpt-image-latest` follows the same input constraints as GPT image models.
               For `dall-e-2`, you can only provide one image, and it should be a square
@@ -59442,24 +59442,27 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Allows to set transparency for the background of the generated image(s).
-              This parameter is only supported for the GPT image models. Must be one of
-              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
-              model will automatically determine the best background for the image.
-              If `transparent`, the output format needs to support transparency, so it
-              should be set to either `png` (default value) or `webp`.
+            Set the background of the generated image(s). This parameter is only
+              supported for the GPT image models. Must be one of `transparent`, `opaque`,
+              or `auto` (default value). When `auto` is used, the model will automatically
+              determine the best background for the image.
+              Transparent backgrounds are available for supported GPT Image models. For
+              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
+              using `transparent`, set the output format to `png` or `webp`.
         model:
           anyOf:
             - type: string
             - type: string
               enum:
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The model to use for image generation. Defaults to `gpt-image-1.5`.
+          description: The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -59551,12 +59554,14 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - dall-e-3
                 - gpt-image-1
                 - gpt-image-1-mini
             - type: 'null'
-          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
+          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
           x-oaiTypeLabel: string
           default: dall-e-2
         'n':
@@ -59654,12 +59659,13 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Allows to set transparency for the background of the generated image(s).
-              This parameter is only supported for the GPT image models. Must be one of
-              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
-              model will automatically determine the best background for the image.
-              If `transparent`, the output format needs to support transparency, so it
-              should be set to either `png` (default value) or `webp`.
+            Set the background of the generated image(s). This parameter is only
+              supported for the GPT image models. Must be one of `transparent`, `opaque`,
+              or `auto` (default value). When `auto` is used, the model will automatically
+              determine the best background for the image.
+              Transparent backgrounds are available for supported GPT Image models. For
+              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
+              using `transparent`, set the output format to `png` or `webp`.
           default: auto
         style:
           anyOf:
@@ -61584,11 +61590,13 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The model to use for image editing.
+          description: The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.
           x-oaiTypeLabel: string
           default: gpt-image-1.5
         images:
@@ -61680,7 +61688,7 @@ components:
                 - opaque
                 - auto
             - type: 'null'
-          description: Background behavior for generated image output.
+          description: Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.
           default: auto
         stream:
           anyOf:
@@ -64236,6 +64244,8 @@ components:
                 - gpt-image-1
                 - gpt-image-1-mini
                 - gpt-image-1.5
+                - gpt-image-2
+                - gpt-image-2-2026-04-21
           default: gpt-image-1
         quality:
           type: string
@@ -64289,8 +64299,11 @@ components:
             - opaque
             - auto
           description: |-
-            Background type for the generated image. One of `transparent`,
-              `opaque`, or `auto`. Default: `auto`.
+            Set the background of the generated image. One of `transparent`,
+              `opaque`, or `auto`. Transparent backgrounds are available for
+              supported GPT Image models. For `gpt-image-2` and
+              `gpt-image-2-2026-04-21`, this support is in preview. When using
+              `transparent`, set the output format to `png` or `webp`. Default: `auto`.
           default: auto
         input_fidelity:
           anyOf:
@@ -65017,7 +65030,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 10485760
+          maxLength: 20971520
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
@@ -66161,7 +66174,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 10485760
+          maxLength: 20971520
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
@@ -86064,7 +86077,6 @@ components:
       type: object
       required:
         - kind
-        - model_type
       properties:
         kind:
           type: string
@@ -86073,13 +86085,13 @@ components:
           description: The kind discriminator for a voice agent definition. Always `voice`.
         model_type:
           $ref: '#/components/schemas/VoiceModelType'
-          description: How the voice agent obtains its conversational backend. `managed` uses the service-managed model named by `model`; `self_deployed` uses the customer's Foundry deployment named by `model`; `hosted_agent` fronts the hosted text agent referenced by `target_agent`. This is independent of the architecture (realtime or cascaded), which the service derives from the selected backend.
+          description: How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `target_agent` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.
         model:
           type: string
-          description: The model to use for this agent. Required when `model_type` is `managed` (the service-managed model name) or `self_deployed` (the customer's Foundry deployment name). Omit this property when `model_type` is `hosted_agent`; `target_agent` identifies the conversational backend. The model must support realtime or cascaded voice.
+          description: The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `target_agent` is provided. The model must support realtime or cascaded voice.
         target_agent:
           $ref: '#/components/schemas/VoiceAgentTargetAgent'
-          description: The hosted text agent that this voice agent fronts. Required when `model_type` is `hosted_agent` and not applicable otherwise. In this mode, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the target agent owns the conversation logic. The target must be in the same project and support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.
+          description: The text agent that this voice agent fronts. Providing this property selects the agent-backed bridge path; `model_type` and `model` must be omitted. In this mode, `instructions`, `tools`, and `tool_choice` must also be omitted, and `greeting.tool_choice` cannot be `required`, because the target agent owns the conversation logic. The target must be in the same project. The initial implementation requires a hosted agent that supports the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.
         instructions:
           type: string
           description: A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.
@@ -86782,7 +86794,7 @@ components:
           description: The target agent version. Omit this property to select the latest version when the voice session starts. When supplied, use a positive integer or `draft-{positive-unix-timestamp}` whose numeric component fits in a signed 64-bit integer.
       unevaluatedProperties:
         not: {}
-      description: A closed reference to the hosted text agent that a `hosted_agent` voice agent fronts, containing only its name and optional version. The target is resolved within the same project.
+      description: A closed reference to the text agent that an agent-backed voice agent fronts, containing only its name and optional version. The target is resolved within the same project. The initial implementation requires the target to be a hosted agent that supports the Voice Live bridge protocol.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87128,7 +87140,6 @@ components:
           enum:
             - managed
             - self_deployed
-            - hosted_agent
       description: |-
         How the model backing a voice agent is served. This is independent of the architecture (realtime or cascaded),
         which the service derives from the selected model.
