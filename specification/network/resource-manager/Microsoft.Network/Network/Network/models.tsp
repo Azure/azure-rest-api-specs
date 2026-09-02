@@ -13141,9 +13141,9 @@ union FirewallPolicySecurityProfileKind {
   AdvancedApplicationThreatProtection: "AdvancedApplicationThreatProtection",
 
   /**
-   * Inspects large language model traffic for prompt injection attacks.
+   * Inspects large language model traffic for prompt threats.
    */
-  PromptInjectionProtection: "PromptInjectionProtection",
+  PromptThreatProtection: "PromptThreatProtection",
 }
 
 /**
@@ -13188,6 +13188,29 @@ union FirewallPolicyThreatProtectionMode {
 }
 
 /**
+ * The enforcement mode of a prompt threat protection security profile.
+ */
+@added(Versions.v2026_01_01)
+union FirewallPolicyPromptThreatProtectionMode {
+  string,
+
+  /**
+   * Inspection is disabled and traffic is neither alerted on nor denied.
+   */
+  Off: "Off",
+
+  /**
+   * Matching traffic is alerted on but allowed.
+   */
+  Alert: "Alert",
+
+  /**
+   * Matching traffic is alerted on and denied.
+   */
+  AlertAndDeny: "AlertAndDeny",
+}
+
+/**
  * The traffic direction a prompt injection security profile inspects.
  */
 @added(Versions.v2026_01_01)
@@ -13225,7 +13248,7 @@ union FirewallPolicyPromptInjectionFailAction {
   /**
    * Block the traffic.
    */
-  FailClose: "FailClose",
+  FailClosed: "FailClosed",
 }
 
 /**
@@ -13441,7 +13464,7 @@ model FirewallPolicyPurviewVendorSettings {
 }
 
 /**
- * Security profile that inspects large language model traffic for prompt injection attacks.
+ * Security profile that inspects large language model traffic for prompt threats.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FirewallPolicyPromptInjectionProtectionProfileProperties belongs to the firewallPolicy resource tree, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature is required to keep these child types consistent with the parent firewall policy."
 @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
@@ -13451,12 +13474,12 @@ model FirewallPolicyPromptInjectionProtectionProfileProperties
   /**
    * The kind of protection this security profile provides.
    */
-  kind: "PromptInjectionProtection";
+  kind: "PromptThreatProtection";
 
   /**
    * The enforcement mode applied to traffic that matches this profile.
    */
-  mode: FirewallPolicyThreatProtectionMode;
+  mode: FirewallPolicyPromptThreatProtectionMode;
 
   /**
    * The traffic direction to inspect.

@@ -4446,6 +4446,36 @@
         ]
       }
     },
+    "FirewallPolicyPromptThreatProtectionMode": {
+      "type": "string",
+      "description": "The enforcement mode of a prompt threat protection security profile.",
+      "enum": [
+        "Off",
+        "Alert",
+        "AlertAndDeny"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyPromptThreatProtectionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Inspection is disabled and traffic is neither alerted on nor denied."
+          },
+          {
+            "name": "Alert",
+            "value": "Alert",
+            "description": "Matching traffic is alerted on but allowed."
+          },
+          {
+            "name": "AlertAndDeny",
+            "value": "AlertAndDeny",
+            "description": "Matching traffic is alerted on and denied."
+          }
+        ]
+      }
+    },
     "FirewallPolicyRuleApplicationProtocolType": {
       "type": "string",
       "description": "The application protocol type of a Rule.",
@@ -4567,7 +4597,7 @@
         "DataLossPrevention",
         "AdvancedMalwareThreatProtection",
         "AdvancedApplicationThreatProtection",
-        "PromptInjectionProtection"
+        "PromptThreatProtection"
       ],
       "x-ms-enum": {
         "name": "FirewallPolicySecurityProfileKind",
@@ -4589,9 +4619,9 @@
             "description": "Inspects traffic for application layer threats using advanced threat protection."
           },
           {
-            "name": "PromptInjectionProtection",
-            "value": "PromptInjectionProtection",
-            "description": "Inspects large language model traffic for prompt injection attacks."
+            "name": "PromptThreatProtection",
+            "value": "PromptThreatProtection",
+            "description": "Inspects large language model traffic for prompt threats."
           }
         ]
       }

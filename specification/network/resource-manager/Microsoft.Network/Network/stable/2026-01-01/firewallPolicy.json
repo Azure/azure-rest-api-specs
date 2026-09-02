@@ -1816,7 +1816,7 @@
           "Create FirewallPolicySecurityProfile": {
             "$ref": "./examples/FirewallPolicySecurityProfilePut.json"
           },
-          "Create FirewallPolicySecurityProfile of kind PromptInjectionProtection": {
+          "Create FirewallPolicySecurityProfile of kind PromptThreatProtection": {
             "$ref": "./examples/FirewallPolicySecurityProfilePromptInjectionPut.json"
           }
         },
@@ -2827,10 +2827,10 @@
     },
     "FirewallPolicyPromptInjectionProtectionProfileProperties": {
       "type": "object",
-      "description": "Security profile that inspects large language model traffic for prompt injection attacks.",
+      "description": "Security profile that inspects large language model traffic for prompt threats.",
       "properties": {
         "mode": {
-          "$ref": "./common.json#/definitions/FirewallPolicyThreatProtectionMode",
+          "$ref": "./common.json#/definitions/FirewallPolicyPromptThreatProtectionMode",
           "description": "The enforcement mode applied to traffic that matches this profile."
         },
         "direction": {
@@ -2843,7 +2843,7 @@
           "default": "FailOpen",
           "enum": [
             "FailOpen",
-            "FailClose"
+            "FailClosed"
           ],
           "x-ms-enum": {
             "name": "FirewallPolicyPromptInjectionFailAction",
@@ -2855,8 +2855,8 @@
                 "description": "Allow the traffic."
               },
               {
-                "name": "FailClose",
-                "value": "FailClose",
+                "name": "FailClosed",
+                "value": "FailClosed",
                 "description": "Block the traffic."
               }
             ]
@@ -2880,7 +2880,7 @@
           "$ref": "#/definitions/FirewallPolicySecurityProfileProperties"
         }
       ],
-      "x-ms-discriminator-value": "PromptInjectionProtection"
+      "x-ms-discriminator-value": "PromptThreatProtection"
     },
     "FirewallPolicyPromptInjectionUserAssignedIdentityAuth": {
       "type": "object",
