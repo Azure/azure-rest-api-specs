@@ -96,14 +96,14 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("The kind discriminator for a voice agent definition. Always `voice`.")
   kind: AgentKind.voice;
 
-  @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `target_agent` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
+  @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_bridge` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
   model_type?: VoiceModelType;
 
-  @doc("The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `target_agent` is provided. The model must support realtime or cascaded voice.")
+  @doc("The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `conversation_bridge` is provided. The model must support realtime or cascaded voice.")
   `model`?: string;
 
-  @doc("The text agent that this voice agent fronts. Providing this property selects the agent-backed bridge path; `model_type` and `model` must be omitted. In this mode, `instructions`, `tools`, and `tool_choice` must also be omitted, and `greeting.tool_choice` cannot be `required`, because the target agent owns the conversation logic. The target must be in the same project. The initial implementation requires a hosted agent that supports the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
-  target_agent?: VoiceAgentTargetAgent;
+  @doc("Delegates conversation handling to another backend. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the bridge owns the conversation logic. The initial implementation supports an agent bridge.")
+  conversation_bridge?: VoiceConversationBridge;
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string;
@@ -276,10 +276,21 @@ union VoiceModelType {
   self_deployed: "self_deployed",
 }
 
-@doc("A closed reference to the text agent that an agent-backed voice agent fronts, containing only its name and optional version. The target is resolved within the same project. The initial implementation requires the target to be a hosted agent that supports the Voice Live bridge protocol.")
+@doc("A backend that owns conversation handling for a bridged voice agent.")
+@discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentTargetAgent {
+model VoiceConversationBridge {
+  @doc("The conversation bridge type.")
+  type: string;
+}
+
+@doc("A closed reference to the text agent that owns conversation handling for a bridged voice agent. The target is resolved within the same project. The initial implementation requires a hosted agent that supports the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentConversationBridge extends VoiceConversationBridge {
   ...Record<never>;
+
+  @doc("Selects a Foundry agent as the conversation bridge.")
+  type: "agent";
 
   @doc("The non-empty DNS-like name of the target hosted text agent in the same project.")
   @minLength(1)
