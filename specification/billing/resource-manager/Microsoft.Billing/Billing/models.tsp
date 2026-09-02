@@ -4734,8 +4734,9 @@ model InvoiceRecipientContact {
 
 /**
  * Request parameters that are provided to update invoice recipient contacts.
- */
+*/
 @added(Versions.v2024_08_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model UpdateInvoiceRecipientContactsRequest {
   /**
    * The list of contacts who will receive invoices by email for the selected billing profile and will be contacted if there are issues related to payments of these invoices.
@@ -6083,6 +6084,7 @@ model UtilizationAggregates {
 /**
  * Savings plan patch request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model SavingsPlanUpdateRequest {
   /**
    * Savings plan patch request
@@ -6758,6 +6760,7 @@ model InvoicePayEligibilityResult {
  * The request details for a pay now operation.
  */
 @added(Versions.v2024_08_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model InvoicePaynowRequest {
   /**
    * The amount to be paid for the invoice.
@@ -6911,6 +6914,7 @@ model LicenseReservationListResult is Azure.Core.Page<LicenseReservation>;
  * Request parameters for canceling a license reservation.
  */
 @added(Versions.v2024_08_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model CancelLicenseReservationRequest {
   /**
    * Cancellation reason.
@@ -7036,6 +7040,7 @@ model PartnerChangeRequestCancellationProperties {
  * The request parameters for cancellation of partner change request.
  */
 @added(Versions.v2024_08_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model PartnerChangeCancelRequest {
   /**
    * Request parameters to partner change cancel request.
@@ -7059,6 +7064,7 @@ model PartnerChangeCancelRequestProperties {
  * The details of the partner change request for initiate operations.
  */
 @added(Versions.v2024_08_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model PartnerChangeRequestInitiateResponse
   is Azure.ResourceManager.ProxyResource<PartnerChangeRequestInitiateResponseProperties> {
   ...ResourceNameParameter<Resource = PartnerChangeRequestInitiateResponseProperties>;
@@ -7245,6 +7251,7 @@ model PartnerChangeRequestErrorProperties {
  * The request parameters for initiating a partner change request.
  */
 @added(Versions.v2024_08_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model PartnerChangeInitiateRequest {
   /**
    * Request parameters to initiate partner change request.
@@ -9251,6 +9258,7 @@ model RenewPropertiesResponse {
 /**
  * The request for reservation purchase
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model ReservationPurchaseRequest {
   /**
    * The name of sku
@@ -10382,6 +10390,7 @@ model RecipientTransferProperties {
 /**
  * Result of transfer validation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model ValidateTransferListResponse {
   /**
    * The list of transfer validation results.
@@ -10747,6 +10756,7 @@ union POMappingStatus {
  * Request body for validating purchase order mappings.
  */
 @added(Versions.v2024_08_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model PurchaseOrderMappingValidationRequest {
   ...PurchaseOrderMappingBase;
 }
@@ -10755,6 +10765,7 @@ model PurchaseOrderMappingValidationRequest {
  * Response of purchase order mapping validation.
  */
 @added(Versions.v2024_08_01_preview)
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing API model contract. Back compat."
 model PurchaseOrderMappingValidationResponse {
   ...PurchaseOrderMappingBase;
 
