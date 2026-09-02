@@ -146,6 +146,10 @@ union BrowserSessionSourceType {
   @doc("The browser session source is a browser automation tool.")
   BrowserAutomationTool: "BrowserAutomationTool",
 
+  @doc("The browser session source is MCP Server.")
+  @added(Versions.v2026_06_01_preview)
+  Mcp: "Mcp",
+
   @doc("The browser session source is of other types.")
   Others: "Others",
 }
