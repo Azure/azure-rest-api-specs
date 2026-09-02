@@ -145,7 +145,6 @@ namespace Azure.AI.Projects;
 @@clientName(AgentInsightMonitors.getInsight, "getAgentInsight");
 @@clientName(AgentInsightMonitors.updateInsight, "updateAgentInsight");
 
-
 // --------------------------------------------------------------------------------
 // Renames - models
 // --------------------------------------------------------------------------------
