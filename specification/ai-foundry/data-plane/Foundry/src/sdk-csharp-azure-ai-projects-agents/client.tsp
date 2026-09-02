@@ -1131,6 +1131,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+  @@alternateType(
+    OpenAI.ToolChoiceParam,
+    {
+      identity: "OpenAI.Responses.ToolChoice",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(
     OpenAI.InputTextContent,
