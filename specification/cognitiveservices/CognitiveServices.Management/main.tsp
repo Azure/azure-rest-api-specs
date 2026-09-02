@@ -20,6 +20,8 @@ import "./CommitmentPlan.tsp";
 import "./CommitmentPlanAccountAssociation.tsp";
 import "./EncryptionScope.tsp";
 import "./RaiPolicy.tsp";
+import "./RaiRego.tsp";
+import "./RaiBinding.tsp";
 import "./RaiBlocklist.tsp";
 import "./RaiBlocklistItem.tsp";
 import "./RaiTopic.tsp";
@@ -115,6 +117,11 @@ enum Versions {
    * The 2026-09-01 API version.
    */
   v2026_09_01: "2026-09-01",
+
+  /**
+   * The 2026-09-15-preview API version.
+   */
+  v2026_09_15_preview: "2026-09-15-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
