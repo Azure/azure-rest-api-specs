@@ -9518,18 +9518,7 @@ model VaultCredentialCertificateProperties {
   /**
    * Base64-encoded certificate data.
    */
-  @removed(Versions.v2026_05_01)
-  @added(Versions.v2026_05_31_preview)
-  @removed(Versions.v2026_07_01)
   certificate?: string;
-
-  /**
-   * Base64-encoded certificate data.
-   */
-  @added(Versions.v2026_08_31_preview)
-  @secret
-  @encodedName("application/json", "certificate")
-  certificateSecret?: string;
 
   /**
    * IDM resource ID of the vault.
