@@ -1,3 +1,9 @@
 - tool: TypeSpecRequirement
   path: ./stable/2020-11-20/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  paths:
+    - .
+  rules:
+    - StaleApiVersionPin
+  reason: This preview is spec-only, so SDK generation remains pinned to the latest stable API version.
