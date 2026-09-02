@@ -8,6 +8,14 @@ The AutoRest configuration for this schema lives in `../../readme.md`.
 
 ``` yaml
 openapi-type: arm
+tag: package-2026-06
+```
+
+### Tag: package-2026-06
+
+These settings apply only when `--tag=package-2026-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-06'
 input-file:
   - scheduledEvents.json
 ```
