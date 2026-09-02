@@ -316,6 +316,7 @@ union EnableStatus {
  * Whether a TCP reset is sent when a session is terminated
  */
 @added(Versions.v2026_08_27_preview)
+@removed(Versions.v2026_09_01)
 union TcpReset {
   string,
 
@@ -334,6 +335,7 @@ union TcpReset {
  * Hash algorithm used to distribute inbound traffic
  */
 @added(Versions.v2026_08_27_preview)
+@removed(Versions.v2026_09_01)
 union LoadDistribution {
   string,
 
@@ -1287,6 +1289,7 @@ model FirewallDeploymentProperties {
    * Time in minutes to keep serving existing traffic during scale-in or upgrade events before removing a firewall instance. Can only be set on PUT, not updatable via PATCH, Default will be 15.
    */
   @added(Versions.v2026_08_27_preview)
+  @removed(Versions.v2026_09_01)
   @minValue(15)
   @maxValue(120)
   sessionDrainTimeoutInMinutes?: int32 = 15;
@@ -1399,6 +1402,7 @@ model NetworkProfile {
    * Time in minutes an outbound source NAT session can stay inactive before termination, Default will be 4.
    */
   @added(Versions.v2026_08_27_preview)
+  @removed(Versions.v2026_09_01)
   @minValue(4)
   @maxValue(120)
   outboundIdleTimeoutInMinutes?: int32;
@@ -1407,6 +1411,7 @@ model NetworkProfile {
    * Send a TCP reset when an inactive outbound source NAT session is terminated, Default will be Enabled.
    */
   @added(Versions.v2026_08_27_preview)
+  @removed(Versions.v2026_09_01)
   outboundTcpReset?: TcpReset;
 }
 
@@ -1629,6 +1634,7 @@ model FrontendSetting {
    * Time in minutes an inbound session can stay inactive before termination, Default will be 4.
    */
   @added(Versions.v2026_08_27_preview)
+  @removed(Versions.v2026_09_01)
   @minValue(4)
   @maxValue(100)
   idleTimeoutInMinutes?: int32;
@@ -1637,12 +1643,14 @@ model FrontendSetting {
    * Send a TCP reset when an inactive inbound session is terminated, Default will be Disabled.
    */
   @added(Versions.v2026_08_27_preview)
+  @removed(Versions.v2026_09_01)
   tcpReset?: TcpReset;
 
   /**
    * Hash algorithm used to distribute inbound traffic, Default will be a five-tuple hash.
    */
   @added(Versions.v2026_08_27_preview)
+  @removed(Versions.v2026_09_01)
   loadDistribution?: LoadDistribution;
 }
 
@@ -2080,6 +2088,7 @@ model MonitorLog {
  * to the modern DCR ingestion path. When this block is supplied, all four fields are required.
  */
 @added(Versions.v2026_07_29_preview)
+@removed(Versions.v2026_09_01)
 model MonitorLogV2 {
   /**
    * ARM resource ID of the Data Collection Rule (DCR) that governs how these logs are transformed and routed.
@@ -2106,6 +2115,7 @@ model MonitorLogV2 {
  * Log Destination for the Azure Monitor Log Ingestion (Data Collection Rule) method. Carries the DCR-based `monitorConfigurationsV2`.
  */
 @added(Versions.v2026_07_29_preview)
+@removed(Versions.v2026_09_01)
 model LogDestinationV2 {
   /**
    * Storage account configurations
@@ -2128,6 +2138,7 @@ model LogDestinationV2 {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Sync proxy resource: log ingestion settings are forwarded to the partner synchronously (no async provisioning), so there is intentionally no provisioningState field — consistent with the firewall's other sync child resources."
 @added(Versions.v2026_07_29_preview)
+@removed(Versions.v2026_09_01)
 model LogIngestionSettingsProperties {
   /**
    * One of possible log type
