@@ -87,6 +87,9 @@ model VolumeProperties {
   @added(Versions.v2026_06_01)
   @removed(Versions.v2026_06_15_preview)
   @renamedFrom(Versions.v2026_06_15_preview, "usageThreshold")
+  @added(Versions.v2026_07_01)
+  @removed(Versions.v2026_07_15_preview)
+  @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -107,6 +110,8 @@ model VolumeProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -308,6 +313,8 @@ model VolumeProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -464,6 +471,8 @@ model VolumeProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -495,6 +504,8 @@ model VolumeProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   language?: VolumeLanguage;
 
   /**
@@ -1356,6 +1367,9 @@ model VolumePatchProperties {
   @added(Versions.v2026_06_01)
   @removed(Versions.v2026_06_15_preview)
   @renamedFrom(Versions.v2026_06_15_preview, "usageThreshold")
+  @added(Versions.v2026_07_01)
+  @removed(Versions.v2026_07_15_preview)
+  @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1376,6 +1390,8 @@ model VolumePatchProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
