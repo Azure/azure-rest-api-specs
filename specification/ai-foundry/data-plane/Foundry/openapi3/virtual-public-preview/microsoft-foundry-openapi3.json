@@ -242,7 +242,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -377,7 +377,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "post": {
         "operationId": "AgentInsightMonitors_create",
@@ -386,7 +391,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -460,6 +465,11 @@
             }
           },
           "description": "The monitor to create."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       }
     },
@@ -471,7 +481,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -534,7 +544,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "delete": {
         "operationId": "AgentInsightMonitors_delete",
@@ -543,7 +558,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -599,7 +614,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "patch": {
         "operationId": "AgentInsightMonitors_update",
@@ -608,7 +628,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -682,6 +702,11 @@
             }
           },
           "description": "The monitor fields to update."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       }
     },
@@ -693,7 +718,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -868,7 +893,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}/insights/{insight_id}": {
@@ -879,7 +909,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -962,7 +992,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "patch": {
         "operationId": "AgentInsightMonitors_updateInsight",
@@ -971,7 +1006,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1054,6 +1089,11 @@
             }
           },
           "description": "The insight fields to update."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       }
     },
@@ -1065,13 +1105,22 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
                 "AgentInsights=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -1155,6 +1204,11 @@
             }
           },
           "description": "Run inputs. Send an empty object to use the default 168-hour lookback window."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       },
       "get": {
@@ -1164,7 +1218,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1318,7 +1372,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}/runs/{run_id}": {
@@ -1329,7 +1388,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1401,7 +1460,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel": {
@@ -1412,7 +1476,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1484,7 +1548,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}:reset": {
@@ -1495,7 +1564,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1551,7 +1620,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_optimization_jobs": {
@@ -34047,7 +34121,12 @@
             "readOnly": true
           }
         },
-        "description": "A persisted issue discovered from an agent's traces."
+        "description": "A persisted issue discovered from an agent's traces.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightDetails": {
         "type": "object",
@@ -34078,7 +34157,12 @@
             "description": "The recommended remediation for this insight."
           }
         },
-        "description": "Additional insight details. Omitted unless details are requested."
+        "description": "Additional insight details. Omitted unless details are requested.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightEstimatedCost": {
         "type": "object",
@@ -34100,7 +34184,12 @@
             "description": "Currency for the estimated cost amount. Agent Insights estimates are reported in US dollars."
           }
         },
-        "description": "Estimated Agent Insights cost."
+        "description": "Estimated Agent Insights cost.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightHighlightedTrace": {
         "type": "object",
@@ -34134,7 +34223,12 @@
             "description": "The time when the trace was recorded."
           }
         },
-        "description": "A highlighted trace that provides evidence for an agent insight."
+        "description": "A highlighted trace that provides evidence for an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightLinkedTrace": {
         "type": "object",
@@ -34154,7 +34248,12 @@
             "readOnly": true
           }
         },
-        "description": "A lightweight trace reference linked to an agent insight as supporting evidence."
+        "description": "A lightweight trace reference linked to an agent insight as supporting evidence.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitor": {
         "type": "object",
@@ -34237,7 +34336,12 @@
             "readOnly": true
           }
         },
-        "description": "A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights."
+        "description": "A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitorCreate": {
         "type": "object",
@@ -34268,7 +34372,12 @@
             "description": "The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
           }
         },
-        "description": "Fields accepted when creating an Agent Insights monitor for an agent."
+        "description": "Fields accepted when creating an Agent Insights monitor for an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitorListItem": {
         "type": "object",
@@ -34338,7 +34447,12 @@
             "readOnly": true
           }
         },
-        "description": "An Agent Insights monitor summary returned by list operations."
+        "description": "An Agent Insights monitor summary returned by list operations.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitorUpdate": {
         "type": "object",
@@ -34370,7 +34484,12 @@
             "description": "Sets the effective user overview, or clears it when explicitly set to null. Omission leaves\nthe overview unchanged. This field cannot be combined with other monitor updates."
           }
         },
-        "description": "Fields that can be updated on an Agent Insights monitor."
+        "description": "Fields that can be updated on an Agent Insights monitor.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightOverviewSource": {
         "anyOf": [
@@ -34385,7 +34504,12 @@
             ]
           }
         ],
-        "description": "Identifies where an Agent Insights overview came from."
+        "description": "Identifies where an Agent Insights overview came from.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightPromptSurface": {
         "anyOf": [
@@ -34400,7 +34524,12 @@
             ]
           }
         ],
-        "description": "The Prompt surface changed by a proposed fix."
+        "description": "The Prompt surface changed by a proposed fix.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightProposedFix": {
         "type": "object",
@@ -34425,7 +34554,12 @@
             "description": "The concrete changes. Omitted for a prose-only fix."
           }
         },
-        "description": "A recommended fix for an agent insight."
+        "description": "A recommended fix for an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightProposedFixChange": {
         "type": "object",
@@ -34469,7 +34603,12 @@
             "description": "The bounded Prompt value after the change. Present for Prompt changes, including when null."
           }
         },
-        "description": "A customer-renderable change in a proposed fix."
+        "description": "A customer-renderable change in a proposed fix.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightProposedFixKind": {
         "anyOf": [
@@ -34485,7 +34624,12 @@
             ]
           }
         ],
-        "description": "The customer-renderable kind of an agent insight's proposed fix."
+        "description": "The customer-renderable kind of an agent insight's proposed fix.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRecommendedAction": {
         "type": "object",
@@ -34498,7 +34642,12 @@
             "description": "The single recommended fix for the issue represented by the insight."
           }
         },
-        "description": "The recommended remediation for an agent insight."
+        "description": "The recommended remediation for an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRun": {
         "type": "object",
@@ -34590,7 +34739,12 @@
             "readOnly": true
           }
         },
-        "description": "A long-running run that analyzes one agent's traces and updates that agent's insights."
+        "description": "A long-running run that analyzes one agent's traces and updates that agent's insights.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRunCreate": {
         "type": "object",
@@ -34604,7 +34758,12 @@
             "default": 168
           }
         },
-        "description": "Inputs used when creating an agent insight run."
+        "description": "Inputs used when creating an agent insight run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRunResult": {
         "type": "object",
@@ -34647,7 +34806,12 @@
             "description": "Token usage for the run's insight-generation analysis."
           }
         },
-        "description": "Result statistics produced when an agent insight run succeeds."
+        "description": "Result statistics produced when an agent insight run succeeds.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRunTrigger": {
         "anyOf": [
@@ -34662,7 +34826,12 @@
             ]
           }
         ],
-        "description": "The trigger that started an agent insight run."
+        "description": "The trigger that started an agent insight run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightSeverity": {
         "anyOf": [
@@ -34678,7 +34847,12 @@
             ]
           }
         ],
-        "description": "The severity of an agent insight."
+        "description": "The severity of an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightStatus": {
         "anyOf": [
@@ -34694,7 +34868,12 @@
             ]
           }
         ],
-        "description": "The lifecycle status of an agent insight."
+        "description": "The lifecycle status of an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightSuspension": {
         "type": "object",
@@ -34722,7 +34901,12 @@
             "description": "Additional reason-specific suspension details."
           }
         },
-        "description": "Structured reason why scheduled generation is suspended for a monitor."
+        "description": "Structured reason why scheduled generation is suspended for a monitor.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightTokenUsage": {
         "type": "object",
@@ -34753,7 +34937,12 @@
             "description": "The total number of tokens used by the run."
           }
         },
-        "description": "Token usage for an Agent Insights run."
+        "description": "Token usage for an Agent Insights run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightUpdate": {
         "type": "object",
@@ -34763,7 +34952,12 @@
             "description": "The lifecycle status to apply to the insight."
           }
         },
-        "description": "Fields that can be updated on an agent insight."
+        "description": "Fields that can be updated on an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightsOverview": {
         "type": "object",
@@ -34786,7 +34980,12 @@
             "description": "The time when this overview was last updated."
           }
         },
-        "description": "The effective overview for an Agent Insights monitor."
+        "description": "The effective overview for an Agent Insights monitor.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightsOverviewOverride": {
         "type": "object",
@@ -34799,7 +34998,12 @@
             "description": "The nonblank overview content, limited to 64 KiB when encoded as UTF-8."
           }
         },
-        "description": "A user-provided overview that becomes effective immediately and seeds the next generation."
+        "description": "A user-provided overview that becomes effective immediately and seeds the next generation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentKind": {
         "anyOf": [
@@ -74713,7 +74917,12 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemMessageAssistant": {
         "type": "object",

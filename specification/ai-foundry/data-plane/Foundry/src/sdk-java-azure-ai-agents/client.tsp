@@ -17,6 +17,7 @@ import "../openai/conversations/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using TypeSpec.OpenAPI;
 
 using Azure.AI.Projects;
 
@@ -108,6 +109,15 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
 @@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
 @@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(
+  AgentOptimizationDatasetItem.desired_num_turns,
+  "desiredNumberTurns"
+);
+@@clientName(
+  AgentOptimizationEvaluatorRef,
+  "AgentOptimizationEvaluatorReference"
+);
+@@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 
@@ -224,6 +234,10 @@ using Azure.AI.Projects;
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
 
+// Java's HTTP pipeline cannot expose the upgraded WebSocket connection or exchange frames.
+// Exclude this operation until the Java SDK has a supported WebSocket transport implementation.
+@@scope(Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent, "!java");
+
 @@access(Agents.createAgent, Access.internal);
 @@access(Agents.updateAgent, Access.internal);
 @@access(Agents.createAgentFromManifest, Access.internal);
@@ -330,6 +344,8 @@ using Azure.AI.Projects;
 @@usage(AgentDefinitionOptInKeys, Usage.input);
 @@access(AgentDefinitionOptInKeys, Access.internal, "java");
 
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMcpHttpError", "java");
+
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
 
@@ -365,14 +381,18 @@ using Azure.AI.Projects;
 
 @@access(UpdateToolboxRequest, Access.internal, "java");
 
+// RealtimeConversationItemMessage forms a doubly discriminated hierarchy: the base item dispatches on `type`, then
+// the message branch dispatches on `role`. Each concrete message leaf redundantly redeclares its inherited
+// `type: "message"` property. The Java emitter does not de-duplicate that property across this three-level hierarchy,
+// so it otherwise generates duplicate `type` fields and accessors. Suppress only the redundant Java leaf properties;
+// the inherited `type` discriminator remains serialized and continues to select the message branch.
+@@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
-
-// Keep persisted voice-item Unix timestamps as Java longs. Treating the encoded
-// utcDateTime as OffsetDateTime conflicts with the generated integer JSON reader
-// across the polymorphic item hierarchy.
-@@alternateType(VoiceConversationItemPersistence.created_at, int64, "java");
 
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
@@ -399,12 +419,73 @@ using Azure.AI.Projects;
   },
   "java"
 );
+
+@@alternateType(
+  OpenAI.Reasoning,
+  {
+    identity: "com.openai.models.Reasoning",
+  },
+  "java"
+);
+// Do NOT map OpenAI.ToolChoiceFunction / OpenAI.ToolChoiceMCP to their openai-java equivalents
+// (com.openai.models.responses.ToolChoiceFunction / ToolChoiceMcp). Although both are field-for-field
+// duplicates, they are discriminated subtypes of `ToolChoiceParam` (@discriminator("type")). Substituting a
+// subtype with an external identity type strips the discriminator the Java emitter needs, and generation
+// fails with:
+//   IllegalArgumentException: discriminator not found in type ToolChoiceFunction and its parents
+// This matches the general rule that members of a discriminator hierarchy are structural equivalents, not
+// actionable duplicates. Verified empirically against tsp-client update; do not re-attempt without emitter
+// support for external types in discriminated hierarchies.
+//   ConversationResource → com.openai.models.conversations.Conversation
+@@alternateType(
+  OpenAI.ConversationResource,
+  {
+    identity: "com.openai.models.conversations.Conversation",
+  },
+  "java"
+);
+
 @@alternateType(OpenAI.OutputItem, unknown, "java");
 @@alternateType(OpenAI.InputItem, unknown, "java");
 
 // Erase strongly-typed payloads on the namespace / tool_search Tool variants.
 @@alternateType(OpenAI.NamespaceToolParam.tools, unknown, "java");
 @@alternateType(OpenAI.ToolSearchToolParam.parameters, unknown, "java");
+
+// `RealtimeFunctionTool.parameters` is documented as "Parameters of the function in JSON Schema" but is typed as
+// `model RealtimeFunctionToolParameters {}` - an empty model with no properties and no additional properties.
+// Java therefore generates a class whose `toJson` always writes `{}` and whose `fromJson` calls `skipChildren()`,
+// silently discarding the caller's schema on the wire in both directions. The equivalent non-realtime
+// `FunctionTool.parameters` is declared `Record<unknown> | null` upstream, confirming the payload is arbitrary JSON.
+// Project it as `unknown` (BinaryData) for Java so the schema round-trips.
+@@alternateType(OpenAI.RealtimeFunctionTool.parameters, unknown, "java");
+
+// TimeZone property override via model indirection
+@alternateType(
+  {
+    identity: "java.util.TimeZone",
+  },
+  "java"
+)
+model TimeZoneType {}
+
+@@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(
+  OpenAI.WebSearchApproximateLocation.timezone,
+  TimeZoneType,
+  "java"
+);
+
+// Java-only helper scalar so `elapsed_seconds` (wire = fractional seconds as float64)
+// is exposed to callers as java.time.Duration while keeping the wire format unchanged.
+@encode(DurationKnownEncoding.seconds, float64)
+scalar DurationInFloatSeconds extends duration;
+
+@@alternateType(
+  AgentOptimizationJobProgress.elapsed_seconds,
+  DurationInFloatSeconds,
+  "java"
+);
 
 // ---- Expandable enum overrides ------------------------------------------------
 // Convert fixed OpenAI enums / inline literal unions to expandable string enums
@@ -598,6 +679,38 @@ union McpToolConnectorIdExpandable {
 @@alternateType(
   OpenAI.MCPTool.connector_id,
   McpToolConnectorIdExpandable,
+  "java"
+);
+
+// Reuse one expandable type for the repeated `object: "realtime.item"` literal.
+union RealtimeConversationItemObject {
+  string,
+  realtime_item: "realtime.item",
+}
+
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageSystem.object,
+  RealtimeConversationItemObject,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageUser.object,
+  RealtimeConversationItemObject,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemMessageAssistant.object,
+  RealtimeConversationItemObject,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemFunctionCall.object,
+  RealtimeConversationItemObject,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeConversationItemFunctionCallOutput.object,
+  RealtimeConversationItemObject,
   "java"
 );
 
