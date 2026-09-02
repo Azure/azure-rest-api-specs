@@ -25,7 +25,13 @@ model Namespace is TrackedResource<NamespaceProperties> {
   @maxLength(64)
   name: string;
 
-  ...ManagedSystemAssignedIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Explicit identity property required for @typeChangedFrom versioning"
+  @doc("The managed service identities assigned to this resource.")
+  @typeChangedFrom(
+    Versions.v2026_11_01,
+    Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
+  )
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @added(Versions.v2025_07_01_preview)

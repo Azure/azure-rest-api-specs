@@ -10896,7 +10896,6 @@
       "description": "The status of a job run.",
       "enum": [
         "Scheduled",
-        "Queued",
         "Active",
         "Succeeded",
         "Failed",
@@ -10911,11 +10910,6 @@
             "name": "Scheduled",
             "value": "Scheduled",
             "description": "The job run is scheduled."
-          },
-          {
-            "name": "Queued",
-            "value": "Queued",
-            "description": "The job run is queued for dispatch and is consuming concurrency quota."
           },
           {
             "name": "Active",
@@ -11537,7 +11531,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -13592,7 +13586,7 @@
       "description": "The type used for update operations of the Namespace.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -14569,7 +14563,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -14655,7 +14649,7 @@
       "description": "The type used for update operations of the SchemaRegistry.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {

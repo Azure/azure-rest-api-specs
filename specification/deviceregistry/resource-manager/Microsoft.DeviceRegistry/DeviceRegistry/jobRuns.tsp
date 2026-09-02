@@ -69,9 +69,6 @@ union JobRunStatus {
   @doc("The job run is scheduled.")
   Scheduled: "Scheduled",
 
-  @doc("The job run is queued for dispatch and is consuming concurrency quota.")
-  Queued: "Queued",
-
   @doc("The job run is actively executing.")
   Active: "Active",
 
