@@ -148,6 +148,9 @@
       "name": "ManagedComputeCapacities"
     },
     {
+      "name": "CostControls"
+    },
+    {
       "name": "Skus"
     },
     {
@@ -3690,6 +3693,340 @@
         "x-ms-examples": {
           "DeleteAccountConnection": {
             "$ref": "./examples/AccountConnection/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls": {
+      "get": {
+        "operationId": "CostControls_List",
+        "tags": [
+          "CostControls"
+        ],
+        "description": "Lists the cost controls owned by an account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostControlListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cost controls with all settings": {
+            "$ref": "./examples/CostControl/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls/{costControlName}": {
+      "get": {
+        "operationId": "CostControls_Get",
+        "tags": [
+          "CostControls"
+        ],
+        "description": "Gets a cost control.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The name of the CostControl",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostControl"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag for the cost control."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a cost control with all settings": {
+            "$ref": "./examples/CostControl/get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CostControls_CreateOrUpdate",
+        "tags": [
+          "CostControls"
+        ],
+        "description": "Creates or replaces a cost control.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The name of the CostControl",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+          },
+          {
+            "$ref": "#/parameters/CostControlCreateOrUpdateHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/CostControlCreateOrUpdateHeaders.ifNoneMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CostControl"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostControl"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag for the cost control."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/CostControl"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag for the cost control."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a cost control with all settings": {
+            "$ref": "./examples/CostControl/createOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CostControls_Update",
+        "tags": [
+          "CostControls"
+        ],
+        "description": "Updates selected properties of a cost control.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The name of the CostControl",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+          },
+          {
+            "$ref": "#/parameters/CostControlIfMatchHeader"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CostControlPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostControl"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag for the cost control."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update all configurable cost control settings": {
+            "$ref": "./examples/CostControl/update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CostControls_Delete",
+        "tags": [
+          "CostControls"
+        ],
+        "description": "Deletes a cost control.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The name of the CostControl",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+          },
+          {
+            "$ref": "#/parameters/CostControlIfMatchHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a cost control conditionally": {
+            "$ref": "./examples/CostControl/delete.json"
           }
         }
       }
@@ -12619,6 +12956,32 @@
             "read",
             "create"
           ]
+        },
+        "costControlIds": {
+          "type": "array",
+          "description": "The full resource IDs of cost controls directly attached to this account.",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.CognitiveServices/accounts/costControls"
+                }
+              ]
+            }
+          }
+        },
+        "costControlConnections": {
+          "$ref": "#/definitions/CostControlConnections",
+          "description": "The account-level connections used to publish cost control telemetry and events. Configure this property after account creation and before attaching cost controls.",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       }
     },
@@ -16031,6 +16394,494 @@
         ]
       }
     },
+    "CostControl": {
+      "type": "object",
+      "description": "A cost control owned by a Cognitive Services account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CostControlProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag used for optimistic concurrency.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CostControlConnections": {
+      "type": "object",
+      "description": "Account-level connections used to publish cost control telemetry and events.",
+      "properties": {
+        "appInsightsConnectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full resource ID of the Application Insights connection used for cost control telemetry. This connection must be configured before a cost control can be attached and cannot be removed while any cost control remains attached.",
+          "x-nullable": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.MachineLearningServices/workspaces/connections"
+              }
+            ]
+          }
+        },
+        "eventGridConnectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full resource ID of the Event Grid connection used for cost control alerts. This connection must be configured when an attached cost control contains an alert threshold action and cannot be removed while such an action remains attached.",
+          "x-nullable": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.MachineLearningServices/workspaces/connections"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "CostControlDimension": {
+      "type": "object",
+      "description": "A request dimension used to partition cost control consumption.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CostControlDimensionType",
+          "description": "The kind of request dimension.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "attribute": {
+          "type": "string",
+          "description": "The request attribute used by a custom dimension. This property is required for custom dimensions and must be omitted for built-in dimensions.",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CostControlDimensionType": {
+      "type": "string",
+      "description": "The supported cost control counter dimensions.",
+      "enum": [
+        "agent",
+        "identity",
+        "session",
+        "project",
+        "account",
+        "custom"
+      ],
+      "x-ms-enum": {
+        "name": "CostControlDimensionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Agent",
+            "value": "agent",
+            "description": "Consumption is partitioned by the stable Foundry agent ID."
+          },
+          {
+            "name": "Identity",
+            "value": "identity",
+            "description": "Consumption is partitioned by the authenticated principal object ID."
+          },
+          {
+            "name": "Session",
+            "value": "session",
+            "description": "Consumption is partitioned by the Foundry session ID."
+          },
+          {
+            "name": "Project",
+            "value": "project",
+            "description": "Consumption is partitioned by the Foundry project resource ID."
+          },
+          {
+            "name": "Account",
+            "value": "account",
+            "description": "Consumption is partitioned by the owning Cognitive Services account."
+          },
+          {
+            "name": "Custom",
+            "value": "custom",
+            "description": "Consumption is partitioned by a custom request attribute."
+          }
+        ]
+      }
+    },
+    "CostControlEtagHeader": {
+      "type": "object",
+      "description": "The entity tag returned with a cost control."
+    },
+    "CostControlListResult": {
+      "type": "object",
+      "description": "A page of cost controls.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of cost controls."
+        },
+        "value": {
+          "type": "array",
+          "description": "The cost controls in this page.",
+          "items": {
+            "$ref": "#/definitions/CostControl"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "CostControlMatch": {
+      "type": "object",
+      "description": "Up to four trusted request attributes and their allowed values used to select matching requests.",
+      "properties": {
+        "foundry.caller.agent.id": {
+          "type": "array",
+          "description": "The stable Foundry agent IDs to match.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/CostControlMatchValue"
+          },
+          "x-ms-client-name": "agentIds"
+        },
+        "foundry.caller.identity.oid": {
+          "type": "array",
+          "description": "The authenticated principal object IDs to match.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/CostControlMatchValue"
+          },
+          "x-ms-client-name": "identityObjectIds"
+        },
+        "foundry.caller.session.id": {
+          "type": "array",
+          "description": "The Foundry session IDs to match.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/CostControlMatchValue"
+          },
+          "x-ms-client-name": "sessionIds"
+        },
+        "foundry.project.id": {
+          "type": "array",
+          "description": "The Foundry project resource IDs to match.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/CostControlMatchValue"
+          },
+          "x-ms-client-name": "projectIds"
+        }
+      }
+    },
+    "CostControlMatchValue": {
+      "type": "string",
+      "description": "A non-empty value used to match a trusted request attribute.",
+      "minLength": 1
+    },
+    "CostControlPatch": {
+      "type": "object",
+      "description": "The request used to update a cost control.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CostControlPatchProperties",
+          "description": "The cost control properties to update."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CostControlPatchProperties": {
+      "type": "object",
+      "description": "The properties that can be changed on a cost control.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "An optional human-readable name for the cost control. Set this property to null to clear it.",
+          "maxLength": 128,
+          "x-nullable": true
+        },
+        "rules": {
+          "type": "array",
+          "description": "The complete replacement set of cost control rules.",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/CostControlRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "CostControlPeriod": {
+      "type": "string",
+      "description": "The calendar-aligned UTC renewal periods for recurring cost control rules.",
+      "enum": [
+        "minute",
+        "hour",
+        "day",
+        "week",
+        "month",
+        "year"
+      ],
+      "x-ms-enum": {
+        "name": "CostControlPeriod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Minute",
+            "value": "minute",
+            "description": "Renews at the start of the next UTC minute."
+          },
+          {
+            "name": "Hour",
+            "value": "hour",
+            "description": "Renews at the start of the next UTC hour."
+          },
+          {
+            "name": "Day",
+            "value": "day",
+            "description": "Renews daily at 00:00 UTC."
+          },
+          {
+            "name": "Week",
+            "value": "week",
+            "description": "Renews Monday at 00:00 UTC."
+          },
+          {
+            "name": "Month",
+            "value": "month",
+            "description": "Renews on the first day of each month at 00:00 UTC."
+          },
+          {
+            "name": "Year",
+            "value": "year",
+            "description": "Renews January 1 at 00:00 UTC."
+          }
+        ]
+      }
+    },
+    "CostControlProperties": {
+      "type": "object",
+      "description": "The customer-authored settings of a cost control.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "An optional human-readable name for the cost control.",
+          "maxLength": 128
+        },
+        "rules": {
+          "type": "array",
+          "description": "The rules enforced by the cost control.",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/CostControlRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "rules"
+      ]
+    },
+    "CostControlRule": {
+      "type": "object",
+      "description": "A cost limit and the population to which it applies.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The stable rule identifier, unique within the cost control without regard to case.",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "counterKey": {
+          "type": "array",
+          "description": "The built-in dimension used to partition consumption. The initial preview supports exactly one dimension.",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/CostControlDimension"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "unit": {
+          "$ref": "#/definitions/CostControlUnit",
+          "description": "The unit used for the cost control amount and absolute thresholds."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum consumption allowed by this rule, expressed in the selected unit."
+        },
+        "period": {
+          "$ref": "#/definitions/CostControlPeriod",
+          "description": "The calendar-aligned UTC renewal period. This property is required for recurring rules and omitted for non-recurring rules."
+        },
+        "recurring": {
+          "type": "boolean",
+          "description": "Whether the cost control renews. The default is true.",
+          "default": true
+        },
+        "match": {
+          "$ref": "#/definitions/CostControlMatch",
+          "description": "Trusted request attributes and allowed values used to select matching requests."
+        },
+        "thresholds": {
+          "type": "array",
+          "description": "The actions evaluated as consumption approaches the configured amount.",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/CostControlThreshold"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "counterKey",
+        "unit",
+        "amount",
+        "thresholds"
+      ]
+    },
+    "CostControlThreshold": {
+      "type": "object",
+      "description": "An action evaluated when cost control consumption reaches a threshold.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CostControlThresholdType",
+          "description": "How the threshold value is interpreted."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The threshold value. Percentage values range from 0 through 100, and absolute values cannot exceed the rule amount.",
+          "minimum": 0
+        },
+        "action": {
+          "type": "string",
+          "description": "The action taken when the threshold is reached. The default is audit.",
+          "default": "audit",
+          "enum": [
+            "audit",
+            "alert"
+          ],
+          "x-ms-enum": {
+            "name": "CostControlThresholdAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Audit",
+                "value": "audit",
+                "description": "Records the threshold crossing without notifying the customer or blocking requests."
+              },
+              {
+                "name": "Alert",
+                "value": "alert",
+                "description": "Emits a customer-facing alert without blocking requests."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "CostControlThresholdAction": {
+      "type": "string",
+      "description": "The supported actions when a threshold is reached.",
+      "enum": [
+        "audit",
+        "alert"
+      ],
+      "x-ms-enum": {
+        "name": "CostControlThresholdAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Audit",
+            "value": "audit",
+            "description": "Records the threshold crossing without notifying the customer or blocking requests."
+          },
+          {
+            "name": "Alert",
+            "value": "alert",
+            "description": "Emits a customer-facing alert without blocking requests."
+          }
+        ]
+      }
+    },
+    "CostControlThresholdType": {
+      "type": "string",
+      "description": "The supported threshold value interpretations.",
+      "enum": [
+        "percentage",
+        "absolute"
+      ],
+      "x-ms-enum": {
+        "name": "CostControlThresholdType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Percentage",
+            "value": "percentage",
+            "description": "The value is a percentage of the configured rule amount."
+          },
+          {
+            "name": "Absolute",
+            "value": "absolute",
+            "description": "The value is expressed in the rule's unit."
+          }
+        ]
+      }
+    },
+    "CostControlUnit": {
+      "type": "string",
+      "description": "The supported unit for cost control amounts and thresholds.",
+      "enum": [
+        "usd"
+      ],
+      "x-ms-enum": {
+        "name": "CostControlUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Usd",
+            "value": "usd",
+            "description": "Estimated cost in United States dollars."
+          }
+        ]
+      }
+    },
     "CreatedByType": {
       "type": "string",
       "description": "The type of identity that created the resource.",
@@ -16447,6 +17298,23 @@
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
           "description": "Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
+        },
+        "costControlIds": {
+          "type": "array",
+          "description": "The full resource IDs of cost controls directly attached to this deployment.",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.CognitiveServices/accounts/costControls"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -22694,6 +23562,33 @@
     }
   },
   "parameters": {
+    "CostControlCreateOrUpdateHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "Proceeds only when the current entity tag matches this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "CostControlCreateOrUpdateHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "Proceeds only when the current entity tag does not match this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "CostControlIfMatchHeader": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "Proceeds only when the current entity tag matches this value.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
     "RaiBindingListParameters": {
       "name": "$top",
       "in": "query",
