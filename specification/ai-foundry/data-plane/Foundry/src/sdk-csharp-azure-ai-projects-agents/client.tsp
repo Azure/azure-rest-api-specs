@@ -389,5 +389,8 @@ namespace Azure.AI.Projects {
   @@access(AgentOptimizationJobs.cancel, Access.internal);
   @@access(AgentOptimizationJobs.delete, Access.internal);
 
-  @@clientName(OptimizationDatasetItem.desired_num_turns, "DesiredTurnCount");
+  @@clientName(
+    AgentOptimizationDatasetItem.desired_num_turns,
+    "DesiredTurnCount"
+  );
 }
