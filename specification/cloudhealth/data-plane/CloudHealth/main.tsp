@@ -482,7 +482,7 @@ model HealthReportPayload {
 @doc("Confirmation that a health report was durably accepted for processing.")
 model IngestHealthReportResult {
   @doc("Indicates that the health report was durably accepted into the ingestion pipeline.")
-  accepted: true;
+  accepted: boolean;
 }
 
 @doc("Health-report ingestion completed successfully.")
