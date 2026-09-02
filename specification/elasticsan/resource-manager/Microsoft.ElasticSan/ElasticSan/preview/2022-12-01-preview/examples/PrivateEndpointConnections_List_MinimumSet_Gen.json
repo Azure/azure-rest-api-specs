@@ -1,0 +1,46 @@
+{
+  "title": "PrivateEndpointConnections_List",
+  "operationId": "PrivateEndpointConnections_List",
+  "parameters": {
+    "subscriptionId": "subscriptionid",
+    "resourceGroupName": "resourcegroupname",
+    "elasticSanName": "elasticsanname",
+    "api-version": "2022-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateEndpoint": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Pending",
+                "description": "Auto-Approved",
+                "actionsRequired": "None"
+              },
+              "groupIds": [
+                "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}"
+              ]
+            },
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateEndpointConnections/{privateEndpointConnectionName}",
+            "name": "{privateEndpointConnectionName}",
+            "type": "Microsoft.ElasticSan/elasticSans/privateEndpointConnections",
+            "systemData": {
+              "createdBy": "otfifnrahdshqombvtg",
+              "createdByType": "User",
+              "createdAt": "2023-07-03T09:59:45.919Z",
+              "lastModifiedBy": "jnaxavnlhrboshtidtib",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-07-03T09:59:45.919Z"
+            }
+          }
+        ],
+        "nextLink": "mwzcxnylrsniowju"
+      }
+    }
+  }
+}

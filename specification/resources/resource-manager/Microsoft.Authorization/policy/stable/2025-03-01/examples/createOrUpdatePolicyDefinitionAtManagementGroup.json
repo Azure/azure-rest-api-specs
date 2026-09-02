@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "managementGroupId": "MyManagementGroup",
+    "parameters": {
+      "properties": {
+        "description": "Force resource names to begin with given 'prefix' and/or end with given 'suffix'",
+        "displayName": "Enforce resource naming convention",
+        "metadata": {
+          "category": "Naming"
+        },
+        "mode": "All",
+        "parameters": {
+          "prefix": {
+            "type": "String",
+            "metadata": {
+              "description": "Resource name prefix",
+              "displayName": "Prefix"
+            }
+          },
+          "suffix": {
+            "type": "String",
+            "metadata": {
+              "description": "Resource name suffix",
+              "displayName": "Suffix"
+            }
+          }
+        },
+        "policyRule": {
+          "if": {
+            "not": {
+              "field": "name",
+              "like": "[concat(parameters('prefix'), '*', parameters('suffix'))]"
+            }
+          },
+          "then": {
+            "effect": "deny"
+          }
+        }
+      }
+    },
+    "policyDefinitionName": "ResourceNaming"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "ResourceNaming",
+        "type": "Microsoft.Authorization/policyDefinitions",
+        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+        "properties": {
+          "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+          "displayName": "Naming Convention",
+          "metadata": {
+            "category": "Naming"
+          },
+          "mode": "All",
+          "parameters": {
+            "prefix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name prefix",
+                "displayName": "Prefix"
+              }
+            },
+            "suffix": {
+              "type": "String",
+              "metadata": {
+                "description": "Resource name suffix",
+                "displayName": "Suffix"
+              }
+            }
+          },
+          "policyRule": {
+            "if": {
+              "not": {
+                "field": "name",
+                "like": "[concat(parameters('prefix'), '*', parameters('suffix'))]"
+              }
+            },
+            "then": {
+              "effect": "deny"
+            }
+          },
+          "policyType": "Custom",
+          "version": "1.2.1",
+          "versions": [
+            "1.2.1",
+            "1.0.0"
+          ]
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyDefinitions_CreateOrUpdateAtManagementGroup",
+  "title": "Create or update a policy definition at management group level"
+}

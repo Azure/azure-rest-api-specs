@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2022-07-18-preview",
+    "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+    "patch": {
+      "name": "Main test",
+      "exceptionRules": {
+        "MaxWaitTimeExceeded": {
+          "actions": {
+            "MoveJobToEscalatedQueue": {
+              "kind": "reclassify",
+              "classificationPolicyId": "Main",
+              "labelsToUpsert": {
+                "escalated": true
+              }
+            }
+          },
+          "trigger": {
+            "kind": "wait-time",
+            "thresholdSeconds": 20
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+        "name": "Main test",
+        "exceptionRules": {
+          "MaxWaitTimeExceeded": {
+            "trigger": {
+              "kind": "wait-time",
+              "thresholdSeconds": 20
+            },
+            "actions": {
+              "MoveJobToEscalatedQueue": {
+                "kind": "reclassify",
+                "classificationPolicyId": "Main",
+                "labelsToUpsert": {
+                  "escalated": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+        "name": "Main test",
+        "exceptionRules": {
+          "MaxWaitTimeExceeded": {
+            "trigger": {
+              "kind": "wait-time",
+              "thresholdSeconds": 20
+            },
+            "actions": {
+              "MoveJobToEscalatedQueue": {
+                "kind": "reclassify",
+                "classificationPolicyId": "Main",
+                "labelsToUpsert": {
+                  "escalated": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "parameters": {
+    "amlFilesystem": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+        }
+      },
+      "location": "eastus",
+      "properties": {
+        "encryptionSettings": {
+          "keyEncryptionKey": {
+            "keyUrl": "https://examplekv.vault.azure.net/keys/kvk/3540a47df75541378d3518c6a4bdf5af",
+            "sourceVault": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+            }
+          }
+        },
+        "filesystemSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/fsSub",
+        "hsm": {
+          "settings": {
+            "container": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/storageaccountname/blobServices/default/containers/containername",
+            "importPrefixesInitial": [
+              "/"
+            ],
+            "loggingContainer": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/storageaccountname/blobServices/default/containers/loggingcontainername"
+          }
+        },
+        "maintenanceWindow": {
+          "dayOfWeek": "Friday",
+          "timeOfDayUTC": "22:00"
+        },
+        "rootSquashSettings": {
+          "mode": "All",
+          "noSquashNidLists": "10.0.0.[5-6]@tcp;10.0.1.2@tcp",
+          "squashGID": 99,
+          "squashUID": 99
+        },
+        "storageCapacityTiB": 16
+      },
+      "sku": {
+        "name": "AMLFS-Durable-Premium-250"
+      },
+      "tags": {
+        "Dept": "ContosoAds"
+      },
+      "zones": [
+        "1"
+      ]
+    },
+    "amlFilesystemName": "fs1",
+    "api-version": "2026-01-01",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fs1",
+        "type": "Microsoft.StorageCache/amlFilesystem",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+          }
+        },
+        "location": "eastus",
+        "properties": {
+          "clientInfo": {
+            "containerStorageInterface": {
+              "persistentVolume": "<Base64 encoded YAML>",
+              "persistentVolumeClaim": "<Base64 encoded YAML>",
+              "storageClass": "<Base64 encoded YAML>"
+            },
+            "lustreVersion": "2.15.0",
+            "mgsAddress": "10.0.0.4",
+            "mountCommand": "mount -t lustre 10.0.0.4@tcp:/lustrefs /lustre/lustrefs"
+          },
+          "filesystemSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/fsSub",
+          "health": {
+            "state": "Available",
+            "statusDescription": "amlFilesystem is ok."
+          },
+          "hsm": {
+            "archiveStatus": [
+              {
+                "filesystemPath": "/",
+                "status": {
+                  "lastCompletionTime": "2019-04-21T18:25:43.511Z",
+                  "lastStartedTime": "2019-04-21T17:25:43.511Z",
+                  "state": "Completed"
+                }
+              }
+            ],
+            "settings": {
+              "container": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/storageaccountname/blobServices/default/containers/containername",
+              "importPrefixesInitial": [
+                "/"
+              ],
+              "loggingContainer": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/storageaccountname/blobServices/default/containers/loggingcontainername"
+            }
+          },
+          "maintenanceWindow": {
+            "dayOfWeek": "Friday",
+            "timeOfDayUTC": "22:00"
+          },
+          "provisioningState": "Succeeded",
+          "rootSquashSettings": {
+            "mode": "All",
+            "noSquashNidLists": "10.0.0.[5-6]@tcp;10.0.1.2@tcp",
+            "squashGID": 99,
+            "squashUID": 99,
+            "status": "nodemap.active=1"
+          },
+          "storageCapacityTiB": 16,
+          "throughputProvisionedMBps": 500
+        },
+        "sku": {
+          "name": "AMLFS-Durable-Premium-250"
+        },
+        "tags": {
+          "Dept": "ContosoAds"
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "fs1",
+        "type": "Microsoft.StorageCache/amlFilesystem",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+          }
+        },
+        "location": "eastus",
+        "properties": {
+          "clientInfo": {
+            "containerStorageInterface": {
+              "persistentVolume": "<Base64 encoded YAML>",
+              "persistentVolumeClaim": "<Base64 encoded YAML>",
+              "storageClass": "<Base64 encoded YAML>"
+            },
+            "lustreVersion": "2.15.0",
+            "mgsAddress": "10.0.0.4",
+            "mountCommand": "mount -t lustre 10.0.0.4@tcp:/lustrefs /lustre/lustrefs"
+          },
+          "encryptionSettings": {
+            "keyEncryptionKey": {
+              "keyUrl": "https://examplekv.vault.azure.net/keys/kvk/3540a47df75541378d3518c6a4bdf5af",
+              "sourceVault": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+              }
+            }
+          },
+          "filesystemSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/fsSub",
+          "health": {
+            "state": "Available",
+            "statusDescription": "amlFilesystem is ok."
+          },
+          "hsm": {
+            "settings": {
+              "container": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/storageaccountname/blobServices/default/containers/containername",
+              "importPrefixesInitial": [
+                "/"
+              ],
+              "loggingContainer": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/storageaccountname/blobServices/default/containers/loggingcontainername"
+            }
+          },
+          "maintenanceWindow": {
+            "dayOfWeek": "Friday",
+            "timeOfDayUTC": "22:00"
+          },
+          "provisioningState": "Succeeded",
+          "rootSquashSettings": {
+            "mode": "All",
+            "noSquashNidLists": "10.0.0.[5-6]@tcp;10.0.1.2@tcp",
+            "squashGID": 99,
+            "squashUID": 99,
+            "status": "nodemap.active=1"
+          },
+          "storageCapacityTiB": 16,
+          "throughputProvisionedMBps": 500
+        },
+        "sku": {
+          "name": "AMLFS-Durable-Premium-250"
+        },
+        "tags": {
+          "Dept": "ContosoAds"
+        },
+        "zones": [
+          "1"
+        ]
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/westus/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2026-01-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/eastus/ascOperations/00000000-0000-0000-0000-000000000000?monitor=true&api-version=2026-01-01"
+      }
+    }
+  },
+  "operationId": "amlFilesystems_CreateOrUpdate",
+  "title": "amlFilesystems_CreateOrUpdate"
+}

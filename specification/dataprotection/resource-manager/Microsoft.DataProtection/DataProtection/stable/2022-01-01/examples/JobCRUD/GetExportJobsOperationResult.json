@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "NetSDKTestRsVault",
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2022-01-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "blobUrl": "https://azureblob.blob.core.windows.net/reportcontainer/exportjobsreport00000000-0000-0000-0000-000000000000",
+        "blobSasKey": "someKey",
+        "excelFileBlobUrl": "https://azureblob.blob.core.windows.net/reportcontainer/exportjobsreport00000000-0000-0000-0000-000000000000_ExcelFile.xlsx",
+        "excelFileBlobSasKey": "someKey"
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 60,
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.DataProtection/backupVaults/NetSDKTestRsVault/backupJobs/operations/00000000-0000-0000-0000-000000000000?api-version=2022-01-01"
+      }
+    }
+  }
+}

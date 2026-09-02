@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "dataControllerName": "testdataController1",
+    "dataControllerResource": {
+      "tags": {
+        "mytag": "myval"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testdataController1",
+        "type": "Microsoft.AzureArcData/dataControllers",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/arclocation",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/dataControllers/testdataController1",
+        "location": "northeurope",
+        "properties": {
+          "basicLoginInformation": {
+            "username": "username"
+          },
+          "clusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s",
+          "extensionId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s/providers/Microsoft.KubernetesConfiguration/extensions/extension",
+          "infrastructure": "onpremises",
+          "logAnalyticsWorkspaceConfig": {
+            "workspaceId": "00000000-1111-2222-3333-444444444444"
+          },
+          "logsDashboardCredential": {
+            "username": "username"
+          },
+          "metricsDashboardCredential": {
+            "username": "username"
+          },
+          "onPremiseProperty": {
+            "id": "12345678-1234-1234-ab12-1a2b3c4d5e6f",
+            "publicSigningKey": "publicOnPremSigningKey",
+            "signingCertificateThumbprint": "Unique thumbprint returned to customer to verify the certificate they uploaded"
+          },
+          "uploadServicePrincipal": {
+            "authority": "https://login.microsoftonline.com/",
+            "clientId": "00000000-1111-2222-3333-444444444444",
+            "tenantId": "00000000-1111-2222-3333-444444444444"
+          },
+          "uploadWatermark": {
+            "logs": "2020-01-01T17:18:19.1234567Z",
+            "metrics": "2020-01-01T17:18:19.1234567Z",
+            "usages": "2020-01-01T17:18:19.1234567Z"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.AzureArcData/operationResults/id1"
+      }
+    }
+  },
+  "operationId": "DataControllers_PatchDataController",
+  "title": "Updates a dataController tags."
+}

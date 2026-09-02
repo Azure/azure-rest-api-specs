@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2018-11-02-privatepreview",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com:443/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/providers/Microsoft.AlertsManagement/actionRules?api-version=2018-11-02-privatepreview&ctoken=%2bRID%3aPlwOAPHEGwB9UwEAAAAgCw%3d%3d%23RT%3a2%23TRC%3a500%23RTD%3aqtQyMDE4LTA2LTEyVDE1OjEyOjE1",
+        "value": [
+          {
+            "properties": {
+              "scope": {
+                "type": "ResourceGroup",
+                "values": [
+                  "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+                ]
+              },
+              "conditions": {
+                "severity": {
+                  "operator": "Equals",
+                  "values": [
+                    "Sev0",
+                    "Sev2"
+                  ]
+                },
+                "monitorService": {
+                  "operator": "Equals",
+                  "values": [
+                    "Platform",
+                    "Application Insights"
+                  ]
+                },
+                "targetResourceType": {
+                  "operator": "NotEquals",
+                  "values": [
+                    "Microsoft.Compute/VirtualMachines"
+                  ]
+                }
+              },
+              "suppressionConfig": {
+                "recurrenceType": "Daily",
+                "schedule": {
+                  "startDate": "12/09/2018",
+                  "endDate": "12/18/2018",
+                  "startTime": "06:00:00",
+                  "endTime": "14:00:00"
+                }
+              },
+              "description": "Action rule on resource group for daily suppression",
+              "resourceGroup": "alertscorrelationrg",
+              "status": "enabled",
+              "createdAt": "2018-06-12T22:05:09Z",
+              "lastModifiedAt": "2018-06-12T22:05:09Z",
+              "createdBy": "abc@microsoft.com",
+              "lastModifiedBy": "xyz@microsoft.com"
+            },
+            "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/DailySuppression",
+            "type": "Microsoft.AlertsManagement/actionRules",
+            "name": "DailySuppression",
+            "location": "Global",
+            "tags": {}
+          },
+          {
+            "properties": {
+              "scope": {
+                "type": "Resource",
+                "values": [
+                  "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.Compute/VirtualMachines/testResource"
+                ]
+              },
+              "conditions": {
+                "monitorCondition": {
+                  "operator": "Equals",
+                  "values": [
+                    "Fired"
+                  ]
+                },
+                "description": {
+                  "operator": "Contains",
+                  "values": [
+                    "Percentage CPU greater than 80%",
+                    "Metric alert on resource foo"
+                  ]
+                }
+              },
+              "suppressionConfig": {
+                "recurrenceType": "Weekly",
+                "schedule": {
+                  "startDate": "12/09/2018",
+                  "endDate": "12/18/2018",
+                  "startTime": "19:00:00",
+                  "endTime": "10:00:00",
+                  "recurrenceValues": [
+                    0,
+                    3,
+                    6
+                  ]
+                }
+              },
+              "description": "Action rule on resource group for weekly suppression",
+              "resourceGroup": "alertsrg",
+              "status": "enabled",
+              "createdAt": "2018-06-12T22:05:09Z",
+              "lastModifiedAt": "2018-06-12T22:05:09Z",
+              "createdBy": "abc@microsoft.com",
+              "lastModifiedBy": "xyz@microsoft.com"
+            },
+            "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/WeeklySuppression",
+            "type": "Microsoft.AlertsManagement/actionRules",
+            "name": "WeeklySuppression",
+            "location": "Global",
+            "tags": {}
+          }
+        ]
+      }
+    }
+  }
+}

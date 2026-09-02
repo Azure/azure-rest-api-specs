@@ -1,0 +1,56 @@
+{
+  "title": "Get_NamespaceDiscoveredDevice",
+  "operationId": "NamespaceDiscoveredDevices_Get",
+  "description": "Get a Namespace Discovered Device",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "discoveredDeviceName": "my-discovereddevice-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/discoveredDevices/my-discovereddevice-1",
+        "name": "my-discovereddevice-1",
+        "type": "Microsoft.DeviceRegistry/namespaces/discoveredDevices",
+        "location": "West Europe",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+        },
+        "tags": {
+          "site": "building-1"
+        },
+        "systemData": {
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+        },
+        "properties": {
+          "endpoints": {
+            "outbound": {
+              "assigned": {
+                "eventGridEndpoint": {
+                  "endpointType": "Microsoft.EventGrid",
+                  "address": "https://myeventgridtopic.westeurope-1.eventgrid.azure.net/api/events"
+                },
+                "eventGridEndpoint2": {
+                  "endpointType": "Microsoft.EventGrid",
+                  "address": "https://myeventgridtopic2.westeurope-1.eventgrid.azure.net/api/events"
+                }
+              }
+            }
+          },
+          "discoveryId": "discoveryId2",
+          "version": 1,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

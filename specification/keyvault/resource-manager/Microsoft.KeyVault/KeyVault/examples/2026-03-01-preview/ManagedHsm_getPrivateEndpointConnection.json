@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "name": "sample-mhsm",
+    "api-version": "2026-03-01-preview",
+    "privateEndpointConnectionName": "sample-pec",
+    "resourceGroupName": "sample-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sample-pec",
+        "type": "Microsoft.KeyVault/managedhsms/privateEndpointConnections",
+        "etag": "",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "This was automatically approved by user1234@contoso.com",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "MHSMPrivateEndpointConnections_Get",
+  "title": "ManagedHsmGetPrivateEndpointConnection"
+}

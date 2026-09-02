@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "jobName": "testcontainerappsjob0",
+    "template": {
+      "containers": [
+        {
+          "image": "repo/testcontainerappsjob0:v4",
+          "name": "testcontainerappsjob0",
+          "resources": {
+            "cpu": 0.5,
+            "memory": "1Gi"
+          }
+        }
+      ],
+      "initContainers": [
+        {
+          "image": "repo/testcontainerappsjob0:v4",
+          "name": "testinitcontainerAppsJob0",
+          "resources": {
+            "cpu": 0.5,
+            "memory": "1Gi"
+          },
+          "command": [
+            "/bin/sh"
+          ],
+          "args": [
+            "-c",
+            "while true; do echo hello; sleep 10;done"
+          ]
+        }
+      ]
+    },
+    "api-version": "2024-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "testcontainerappsjob0-pjxhsye",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/{containerAppsJobName}/executions/{jobExecutionName}"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "location"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communication.azure.com/",
+    "api-version": "2022-02-01",
+    "createRoomRequest": {
+      "validFrom": "2022-05-30T00:00:00Z",
+      "validUntil": "2022-06-30T00:00:00Z",
+      "roomJoinPolicy": "InviteOnly",
+      "participants": [
+        {
+          "communicationIdentifier": {
+            "rawId": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000222",
+            "communicationUser": {
+              "id": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000222"
+            }
+          },
+          "role": "Presenter"
+        },
+        {
+          "communicationIdentifier": {
+            "rawId": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000333",
+            "communicationUser": {
+              "id": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000333"
+            }
+          },
+          "role": "Attendee"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "99117812428622880",
+        "createdDateTime": "2022-05-26T05:46:17.8159131+00:00",
+        "validFrom": "2022-05-30T00:00:00+00:00",
+        "validUntil": "2022-06-30T00:00:00+00:00",
+        "roomJoinPolicy": "InviteOnly",
+        "participants": [
+          {
+            "communicationIdentifier": {
+              "rawId": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000222",
+              "communicationUser": {
+                "id": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000222"
+              }
+            },
+            "role": "Presenter"
+          },
+          {
+            "communicationIdentifier": {
+              "rawId": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000333",
+              "communicationUser": {
+                "id": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000333"
+              }
+            },
+            "role": "Attendee"
+          }
+        ]
+      }
+    }
+  }
+}

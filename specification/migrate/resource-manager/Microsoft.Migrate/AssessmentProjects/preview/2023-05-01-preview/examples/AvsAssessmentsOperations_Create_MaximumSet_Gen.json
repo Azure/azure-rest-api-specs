@@ -1,0 +1,326 @@
+{
+  "title": "AvsAssessmentsOperations_Create",
+  "operationId": "AvsAssessmentsOperations_Create",
+  "parameters": {
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "4bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
+    "resourceGroupName": "ayagrawrg",
+    "projectName": "app18700project",
+    "groupName": "kuchatur-test",
+    "assessmentName": "asm2",
+    "resource": {
+      "properties": {
+        "failuresToTolerateAndRaidLevel": "Unknown",
+        "failuresToTolerateAndRaidLevelList": [
+          "Ftt1Raid1",
+          "Ftt1Raid5",
+          "Ftt3Raid1"
+        ],
+        "vcpuOversubscription": 4.0,
+        "nodeType": "Unknown",
+        "nodeTypes": [
+          "AV36",
+          "AV52",
+          "AV36P",
+          "AV64"
+        ],
+        "avsAssessmentScenario": "NewAvsSddc",
+        "externalStorageTypes": [
+          "AnfStandard",
+          "AnfPremium",
+          "AnfUltra"
+        ],
+        "isVcfByolEnabled": true,
+        "reservedInstance": "RI3Year",
+        "suitability": "Unknown",
+        "suitabilityExplanation": "Unknown",
+        "memOvercommit": 1.0,
+        "dedupeCompression": 1.5,
+        "isStretchClusterEnabled": true,
+        "groupType": "Default",
+        "assessmentType": "AvsAssessment",
+        "azureLocation": "EastUs",
+        "azureOfferCode": "MSAZR0003P",
+        "currency": "USD",
+        "scalingFactor": 1.0,
+        "percentile": "Percentile95",
+        "timeRange": "Day",
+        "perfDataStartTime": "2023-09-25T13:35:56.5671462Z",
+        "perfDataEndTime": "2023-09-26T13:35:56.5671462Z",
+        "stage": "InProgress",
+        "discountPercentage": 0.0,
+        "sizingCriterion": "AsOnPremises",
+        "status": "Created",
+        "provisioningState": "Succeeded"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "failuresToTolerateAndRaidLevel": "Unknown",
+          "failuresToTolerateAndRaidLevelList": [
+            "Ftt1Raid1",
+            "Ftt1Raid5",
+            "Ftt3Raid1"
+          ],
+          "vcpuOversubscription": 4.0,
+          "nodeType": "Unknown",
+          "nodeTypes": [
+            "AV36",
+            "AV36P",
+            "AV52"
+          ],
+          "avsAssessmentScenario": "NewAvsSddc",
+          "externalStorageTypes": [
+            "AnfStandard",
+            "AnfPremium",
+            "AnfUltra"
+          ],
+          "isVcfByolEnabled": true,
+          "costComponents": [
+            {
+              "name": "MonthlyAvsNodeCost",
+              "value": 9088.5,
+              "description": "Monthly Cost of AVS Nodes."
+            },
+            {
+              "name": "MonthlyAvsExternalStorageCost",
+              "value": 600.0,
+              "description": "Monthly AVS External Storage Cost for Assessment."
+            },
+            {
+              "name": "MonthlyAvsNetworkCost",
+              "value": 120,
+              "description": "Monthly AVS Cost of Network."
+            },
+            {
+              "name": "MonthlyVcfByolCostDifference",
+              "value": 7088.5,
+              "description": "Monthly compute cost difference between VCF BYOL and non VCF BYOL SKUs"
+            }
+          ],
+          "reservedInstance": "RI3Year",
+          "totalMonthlyCost": 9808.5,
+          "suitability": "Suitable",
+          "suitabilityExplanation": "NotApplicable",
+          "numberOfNodes": 3,
+          "cpuUtilization": 46.3,
+          "ramUtilization": 12.73,
+          "storageUtilization": 77.43,
+          "totalCpuCores": 108.0,
+          "totalRamInGB": 1728.0,
+          "totalStorageInGB": 48128.0,
+          "numberOfMachines": 3,
+          "avsEstimatedNodes": [
+            {
+              "monthlyPrice": 9088.5,
+              "nodeType": "AV36",
+              "nodeNumber": 3,
+              "cpuUtilization": 46.3,
+              "ramUtilization": 12.73,
+              "storageUtilization": 76.99,
+              "totalCpu": 108.0,
+              "totalRam": 1728.0,
+              "totalStorage": 46080.0,
+              "pricingModel": "RI3Year",
+              "fttRaidLevel": "Ftt1Raid1"
+            }
+          ],
+          "avsEstimatedExternalStorages": [
+            {
+              "monthlyPrice": 250.0,
+              "storageType": "AnfStandard",
+              "totalStorageInGB": 1024.0,
+              "storageUtilization": 97.0
+            },
+            {
+              "monthlyPrice": 350.0,
+              "storageType": "AnfPremium",
+              "totalStorageInGB": 1024.0,
+              "storageUtilization": 78.0
+            }
+          ],
+          "avsEstimatedNetworks": [
+            {
+              "monthlyPrice": 120,
+              "networkType": "ExpressRouteUltra"
+            }
+          ],
+          "suitabilitySummary": {
+            "conditionallySuitable": 3
+          },
+          "memOvercommit": 1.0,
+          "dedupeCompression": 1.5,
+          "limitingFactor": "Storage",
+          "assessmentErrorSummary": {},
+          "isStretchClusterEnabled": false,
+          "groupType": "Default",
+          "assessmentType": "AvsAssessment",
+          "azureLocation": "EastUs",
+          "azureOfferCode": "MSAZR0003P",
+          "currency": "USD",
+          "scalingFactor": 1.0,
+          "percentile": "Percentile95",
+          "timeRange": "Day",
+          "perfDataStartTime": "2023-09-25T13:35:56.5671462Z",
+          "perfDataEndTime": "2023-09-26T13:35:56.5671462Z",
+          "stage": "InProgress",
+          "discountPercentage": 0.0,
+          "sizingCriterion": "AsOnPremises",
+          "confidenceRatingInPercentage": 100.0,
+          "pricesTimestamp": "2023-08-16T00:00:00",
+          "createdTimestamp": "2023-09-26T13:35:56.5983656Z",
+          "updatedTimestamp": "2023-09-26T13:36:01.1699411Z",
+          "status": "Completed",
+          "schemaVersion": null,
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/ayagrawrg/providers/Microsoft.Migrate/assessmentprojects/app18700project/groups/kuchatur-test/avsAssessments/asm2",
+        "name": "asm2",
+        "type": "Microsoft.Migrate/assessmentprojects/groups/avsAssessments",
+        "systemData": {
+          "createdBy": "bhjfiiwermbzqfoqxtxpjigj",
+          "createdByType": "User",
+          "createdAt": "2023-09-15T07:22:18.589Z",
+          "lastModifiedBy": "lrmhonmbodwva",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-15T07:22:18.589Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "failuresToTolerateAndRaidLevel": "Unknown",
+          "failuresToTolerateAndRaidLevelList": [
+            "Ftt1Raid1",
+            "Ftt1Raid5",
+            "Ftt3Raid1"
+          ],
+          "vcpuOversubscription": 4.0,
+          "nodeType": "Unknown",
+          "avsAssessmentScenario": "NewAvsSddc",
+          "nodeTypes": [
+            "AV36",
+            "AV52",
+            "AV36P"
+          ],
+          "externalStorageTypes": [
+            "AnfStandard",
+            "AnfPremium",
+            "AnfUltra"
+          ],
+          "isVcfByolEnabled": true,
+          "costComponents": [
+            {
+              "name": "MonthlyAvsNodeCost",
+              "value": 9088.5,
+              "description": "Monthly Cost of AVS Nodes."
+            },
+            {
+              "name": "MonthlyExternalStorageCost",
+              "value": 600.0,
+              "description": "Monthly External Storage Cost for Assessment."
+            },
+            {
+              "name": "MonthlyNetworkCost",
+              "value": 120,
+              "description": "Monthly Cost of Network."
+            }
+          ],
+          "reservedInstance": "RI3Year",
+          "totalMonthlyCost": 9808.5,
+          "suitability": "Suitable",
+          "suitabilityExplanation": "NotApplicable",
+          "numberOfNodes": 3,
+          "cpuUtilization": 46.3,
+          "ramUtilization": 12.73,
+          "storageUtilization": 77.43,
+          "totalCpuCores": 108.0,
+          "totalRamInGB": 1728.0,
+          "totalStorageInGB": 48128.0,
+          "numberOfMachines": 3,
+          "avsEstimatedNodes": [
+            {
+              "monthlyPrice": 9088.5,
+              "nodeType": "AV36",
+              "nodeNumber": 3,
+              "cpuUtilization": 46.3,
+              "ramUtilization": 12.73,
+              "storageUtilization": 76.99,
+              "totalCpu": 108.0,
+              "totalRam": 1728.0,
+              "totalStorage": 46080.0,
+              "pricingModel": "RI3Year",
+              "fttRaidLevel": "Ftt1Raid1"
+            }
+          ],
+          "avsEstimatedExternalStorages": [
+            {
+              "monthlyPrice": 250.0,
+              "storageType": "AnfStandard",
+              "totalStorageInGB": 1024.0,
+              "storageUtilization": 97.0
+            },
+            {
+              "monthlyPrice": 350.0,
+              "storageType": "AnfPremium",
+              "totalStorageInGB": 1024.0,
+              "storageUtilization": 78.0
+            }
+          ],
+          "avsEstimatedNetworks": [
+            {
+              "monthlyPrice": 120,
+              "networkType": "ExpressRouteUltra"
+            }
+          ],
+          "suitabilitySummary": {
+            "conditionallySuitable": 3
+          },
+          "memOvercommit": 1.0,
+          "dedupeCompression": 1.5,
+          "limitingFactor": "Storage",
+          "assessmentErrorSummary": {},
+          "isStretchClusterEnabled": false,
+          "groupType": "Default",
+          "assessmentType": "AvsAssessment",
+          "azureLocation": "EastUs",
+          "azureOfferCode": "MSAZR0003P",
+          "currency": "USD",
+          "scalingFactor": 1.0,
+          "percentile": "Percentile95",
+          "timeRange": "Day",
+          "perfDataStartTime": "2023-09-25T13:35:56.5671462Z",
+          "perfDataEndTime": "2023-09-26T13:35:56.5671462Z",
+          "stage": "InProgress",
+          "discountPercentage": 0.0,
+          "sizingCriterion": "AsOnPremises",
+          "confidenceRatingInPercentage": 100.0,
+          "pricesTimestamp": "2023-08-16T00:00:00",
+          "createdTimestamp": "2023-09-26T13:35:56.5983656Z",
+          "updatedTimestamp": "2023-09-26T13:36:01.1699411Z",
+          "status": "Completed",
+          "schemaVersion": null,
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/ayagrawrg/providers/Microsoft.Migrate/assessmentprojects/app18700project/groups/kuchatur-test/avsAssessments/asm2",
+        "name": "asm2",
+        "type": "Microsoft.Migrate/assessmentprojects/groups/avsAssessments",
+        "systemData": {
+          "createdBy": "bhjfiiwermbzqfoqxtxpjigj",
+          "createdByType": "User",
+          "createdAt": "2023-09-15T07:22:18.589Z",
+          "lastModifiedBy": "lrmhonmbodwva",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-15T07:22:18.589Z"
+        }
+      }
+    }
+  }
+}

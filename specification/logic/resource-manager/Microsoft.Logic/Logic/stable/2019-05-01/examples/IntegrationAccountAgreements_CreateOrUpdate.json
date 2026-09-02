@@ -1,0 +1,485 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "integrationAccountName": "testIntegrationAccount",
+    "agreementName": "testAgreement",
+    "agreement": {
+      "properties": {
+        "metadata": {},
+        "agreementType": "AS2",
+        "hostPartner": "HostPartner",
+        "guestPartner": "GuestPartner",
+        "hostIdentity": {
+          "qualifier": "ZZ",
+          "value": "ZZ"
+        },
+        "guestIdentity": {
+          "qualifier": "AA",
+          "value": "AA"
+        },
+        "content": {
+          "aS2": {
+            "receiveAgreement": {
+              "protocolSettings": {
+                "messageConnectionSettings": {
+                  "ignoreCertificateNameMismatch": true,
+                  "supportHttpStatusCodeContinue": true,
+                  "keepHttpConnectionAlive": true,
+                  "unfoldHttpHeaders": true
+                },
+                "acknowledgementConnectionSettings": {
+                  "ignoreCertificateNameMismatch": true,
+                  "supportHttpStatusCodeContinue": true,
+                  "keepHttpConnectionAlive": true,
+                  "unfoldHttpHeaders": true
+                },
+                "mdnSettings": {
+                  "needMDN": true,
+                  "signMDN": true,
+                  "sendMDNAsynchronously": true,
+                  "receiptDeliveryUrl": "http://tempuri.org",
+                  "dispositionNotificationTo": "http://tempuri.org",
+                  "signOutboundMDNIfOptional": true,
+                  "mdnText": "Sample",
+                  "sendInboundMDNToMessageBox": true,
+                  "micHashingAlgorithm": "SHA1"
+                },
+                "securitySettings": {
+                  "overrideGroupSigningCertificate": false,
+                  "enableNRRForInboundEncodedMessages": true,
+                  "enableNRRForInboundDecodedMessages": true,
+                  "enableNRRForOutboundMDN": true,
+                  "enableNRRForOutboundEncodedMessages": true,
+                  "enableNRRForOutboundDecodedMessages": true,
+                  "enableNRRForInboundMDN": true
+                },
+                "validationSettings": {
+                  "overrideMessageProperties": true,
+                  "encryptMessage": false,
+                  "signMessage": false,
+                  "compressMessage": true,
+                  "checkDuplicateMessage": true,
+                  "interchangeDuplicatesValidityDays": 100,
+                  "checkCertificateRevocationListOnSend": true,
+                  "checkCertificateRevocationListOnReceive": true,
+                  "encryptionAlgorithm": "AES128"
+                },
+                "envelopeSettings": {
+                  "messageContentType": "text/plain",
+                  "transmitFileNameInMimeHeader": true,
+                  "fileNameTemplate": "Test",
+                  "suspendMessageOnFileNameGenerationError": true,
+                  "autogenerateFileName": true
+                },
+                "errorSettings": {
+                  "suspendDuplicateMessage": true,
+                  "resendIfMDNNotReceived": true
+                }
+              },
+              "senderBusinessIdentity": {
+                "qualifier": "AA",
+                "value": "AA"
+              },
+              "receiverBusinessIdentity": {
+                "qualifier": "ZZ",
+                "value": "ZZ"
+              }
+            },
+            "sendAgreement": {
+              "protocolSettings": {
+                "messageConnectionSettings": {
+                  "ignoreCertificateNameMismatch": true,
+                  "supportHttpStatusCodeContinue": true,
+                  "keepHttpConnectionAlive": true,
+                  "unfoldHttpHeaders": true
+                },
+                "acknowledgementConnectionSettings": {
+                  "ignoreCertificateNameMismatch": true,
+                  "supportHttpStatusCodeContinue": true,
+                  "keepHttpConnectionAlive": true,
+                  "unfoldHttpHeaders": true
+                },
+                "mdnSettings": {
+                  "needMDN": true,
+                  "signMDN": true,
+                  "sendMDNAsynchronously": true,
+                  "receiptDeliveryUrl": "http://tempuri.org",
+                  "dispositionNotificationTo": "http://tempuri.org",
+                  "signOutboundMDNIfOptional": true,
+                  "mdnText": "Sample",
+                  "sendInboundMDNToMessageBox": true,
+                  "micHashingAlgorithm": "SHA1"
+                },
+                "securitySettings": {
+                  "overrideGroupSigningCertificate": false,
+                  "enableNRRForInboundEncodedMessages": true,
+                  "enableNRRForInboundDecodedMessages": true,
+                  "enableNRRForOutboundMDN": true,
+                  "enableNRRForOutboundEncodedMessages": true,
+                  "enableNRRForOutboundDecodedMessages": true,
+                  "enableNRRForInboundMDN": true
+                },
+                "validationSettings": {
+                  "overrideMessageProperties": true,
+                  "encryptMessage": false,
+                  "signMessage": false,
+                  "compressMessage": true,
+                  "checkDuplicateMessage": true,
+                  "interchangeDuplicatesValidityDays": 100,
+                  "checkCertificateRevocationListOnSend": true,
+                  "checkCertificateRevocationListOnReceive": true,
+                  "encryptionAlgorithm": "AES128"
+                },
+                "envelopeSettings": {
+                  "messageContentType": "text/plain",
+                  "transmitFileNameInMimeHeader": true,
+                  "fileNameTemplate": "Test",
+                  "suspendMessageOnFileNameGenerationError": true,
+                  "autogenerateFileName": true
+                },
+                "errorSettings": {
+                  "suspendDuplicateMessage": true,
+                  "resendIfMDNNotReceived": true
+                }
+              },
+              "senderBusinessIdentity": {
+                "qualifier": "ZZ",
+                "value": "ZZ"
+              },
+              "receiverBusinessIdentity": {
+                "qualifier": "AA",
+                "value": "AA"
+              }
+            }
+          }
+        }
+      },
+      "location": "westus",
+      "tags": {
+        "IntegrationAccountAgreement": "<IntegrationAccountAgreementName>"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "hostPartner": "HostPartner",
+          "guestPartner": "GuestPartner",
+          "hostIdentity": {
+            "qualifier": "ZZ",
+            "value": "ZZ"
+          },
+          "guestIdentity": {
+            "qualifier": "AA",
+            "value": "AA"
+          },
+          "agreementType": "AS2",
+          "content": {
+            "aS2": {
+              "receiveAgreement": {
+                "protocolSettings": {
+                  "messageConnectionSettings": {
+                    "ignoreCertificateNameMismatch": true,
+                    "supportHttpStatusCodeContinue": true,
+                    "keepHttpConnectionAlive": true,
+                    "unfoldHttpHeaders": true
+                  },
+                  "acknowledgementConnectionSettings": {
+                    "ignoreCertificateNameMismatch": true,
+                    "supportHttpStatusCodeContinue": true,
+                    "keepHttpConnectionAlive": true,
+                    "unfoldHttpHeaders": true
+                  },
+                  "mdnSettings": {
+                    "needMDN": true,
+                    "signMDN": true,
+                    "sendMDNAsynchronously": true,
+                    "receiptDeliveryUrl": "http://tempuri.org",
+                    "dispositionNotificationTo": "http://tempuri.org",
+                    "signOutboundMDNIfOptional": true,
+                    "mdnText": "Sample",
+                    "sendInboundMDNToMessageBox": true,
+                    "micHashingAlgorithm": "SHA1"
+                  },
+                  "securitySettings": {
+                    "overrideGroupSigningCertificate": false,
+                    "enableNRRForInboundEncodedMessages": true,
+                    "enableNRRForInboundDecodedMessages": true,
+                    "enableNRRForOutboundMDN": true,
+                    "enableNRRForOutboundEncodedMessages": true,
+                    "enableNRRForOutboundDecodedMessages": true,
+                    "enableNRRForInboundMDN": true
+                  },
+                  "validationSettings": {
+                    "overrideMessageProperties": true,
+                    "encryptMessage": false,
+                    "signMessage": false,
+                    "compressMessage": true,
+                    "checkDuplicateMessage": true,
+                    "interchangeDuplicatesValidityDays": 100,
+                    "checkCertificateRevocationListOnSend": true,
+                    "checkCertificateRevocationListOnReceive": true,
+                    "encryptionAlgorithm": "AES128"
+                  },
+                  "envelopeSettings": {
+                    "messageContentType": "text/plain",
+                    "transmitFileNameInMimeHeader": true,
+                    "fileNameTemplate": "Test",
+                    "suspendMessageOnFileNameGenerationError": true,
+                    "autogenerateFileName": true
+                  },
+                  "errorSettings": {
+                    "suspendDuplicateMessage": true,
+                    "resendIfMDNNotReceived": true
+                  }
+                },
+                "senderBusinessIdentity": {
+                  "qualifier": "AA",
+                  "value": "AA"
+                },
+                "receiverBusinessIdentity": {
+                  "qualifier": "ZZ",
+                  "value": "ZZ"
+                }
+              },
+              "sendAgreement": {
+                "protocolSettings": {
+                  "messageConnectionSettings": {
+                    "ignoreCertificateNameMismatch": true,
+                    "supportHttpStatusCodeContinue": true,
+                    "keepHttpConnectionAlive": true,
+                    "unfoldHttpHeaders": true
+                  },
+                  "acknowledgementConnectionSettings": {
+                    "ignoreCertificateNameMismatch": true,
+                    "supportHttpStatusCodeContinue": true,
+                    "keepHttpConnectionAlive": true,
+                    "unfoldHttpHeaders": true
+                  },
+                  "mdnSettings": {
+                    "needMDN": true,
+                    "signMDN": true,
+                    "sendMDNAsynchronously": true,
+                    "receiptDeliveryUrl": "http://tempuri.org",
+                    "dispositionNotificationTo": "http://tempuri.org",
+                    "signOutboundMDNIfOptional": true,
+                    "mdnText": "Sample",
+                    "sendInboundMDNToMessageBox": true,
+                    "micHashingAlgorithm": "SHA1"
+                  },
+                  "securitySettings": {
+                    "overrideGroupSigningCertificate": false,
+                    "enableNRRForInboundEncodedMessages": true,
+                    "enableNRRForInboundDecodedMessages": true,
+                    "enableNRRForOutboundMDN": true,
+                    "enableNRRForOutboundEncodedMessages": true,
+                    "enableNRRForOutboundDecodedMessages": true,
+                    "enableNRRForInboundMDN": true
+                  },
+                  "validationSettings": {
+                    "overrideMessageProperties": true,
+                    "encryptMessage": false,
+                    "signMessage": false,
+                    "compressMessage": true,
+                    "checkDuplicateMessage": true,
+                    "interchangeDuplicatesValidityDays": 100,
+                    "checkCertificateRevocationListOnSend": true,
+                    "checkCertificateRevocationListOnReceive": true,
+                    "encryptionAlgorithm": "AES128"
+                  },
+                  "envelopeSettings": {
+                    "messageContentType": "text/plain",
+                    "transmitFileNameInMimeHeader": true,
+                    "fileNameTemplate": "Test",
+                    "suspendMessageOnFileNameGenerationError": true,
+                    "autogenerateFileName": true
+                  },
+                  "errorSettings": {
+                    "suspendDuplicateMessage": true,
+                    "resendIfMDNNotReceived": true
+                  }
+                },
+                "senderBusinessIdentity": {
+                  "qualifier": "ZZ",
+                  "value": "ZZ"
+                },
+                "receiverBusinessIdentity": {
+                  "qualifier": "AA",
+                  "value": "AA"
+                }
+              }
+            }
+          },
+          "createdTime": "2017-03-06T22:32:54.2938748Z",
+          "changedTime": "2017-03-06T22:32:54.2945291Z",
+          "metadata": {}
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/IntegrationAccount4533/agreements/<IntegrationAccountAgreementName>",
+        "name": "<IntegrationAccountAgreementName>",
+        "type": "Microsoft.Logic/integrationAccounts/agreements"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "hostPartner": "HostPartner",
+          "guestPartner": "GuestPartner",
+          "hostIdentity": {
+            "qualifier": "ZZ",
+            "value": "ZZ"
+          },
+          "guestIdentity": {
+            "qualifier": "AA",
+            "value": "AA"
+          },
+          "agreementType": "AS2",
+          "content": {
+            "aS2": {
+              "receiveAgreement": {
+                "protocolSettings": {
+                  "messageConnectionSettings": {
+                    "ignoreCertificateNameMismatch": true,
+                    "supportHttpStatusCodeContinue": true,
+                    "keepHttpConnectionAlive": true,
+                    "unfoldHttpHeaders": true
+                  },
+                  "acknowledgementConnectionSettings": {
+                    "ignoreCertificateNameMismatch": true,
+                    "supportHttpStatusCodeContinue": true,
+                    "keepHttpConnectionAlive": true,
+                    "unfoldHttpHeaders": true
+                  },
+                  "mdnSettings": {
+                    "needMDN": true,
+                    "signMDN": true,
+                    "sendMDNAsynchronously": true,
+                    "receiptDeliveryUrl": "http://tempuri.org",
+                    "dispositionNotificationTo": "http://tempuri.org",
+                    "signOutboundMDNIfOptional": true,
+                    "mdnText": "Sample",
+                    "sendInboundMDNToMessageBox": true,
+                    "micHashingAlgorithm": "SHA1"
+                  },
+                  "securitySettings": {
+                    "overrideGroupSigningCertificate": false,
+                    "enableNRRForInboundEncodedMessages": true,
+                    "enableNRRForInboundDecodedMessages": true,
+                    "enableNRRForOutboundMDN": true,
+                    "enableNRRForOutboundEncodedMessages": true,
+                    "enableNRRForOutboundDecodedMessages": true,
+                    "enableNRRForInboundMDN": true
+                  },
+                  "validationSettings": {
+                    "overrideMessageProperties": true,
+                    "encryptMessage": false,
+                    "signMessage": false,
+                    "compressMessage": true,
+                    "checkDuplicateMessage": true,
+                    "interchangeDuplicatesValidityDays": 100,
+                    "checkCertificateRevocationListOnSend": true,
+                    "checkCertificateRevocationListOnReceive": true,
+                    "encryptionAlgorithm": "AES128"
+                  },
+                  "envelopeSettings": {
+                    "messageContentType": "text/plain",
+                    "transmitFileNameInMimeHeader": true,
+                    "fileNameTemplate": "Test",
+                    "suspendMessageOnFileNameGenerationError": true,
+                    "autogenerateFileName": true
+                  },
+                  "errorSettings": {
+                    "suspendDuplicateMessage": true,
+                    "resendIfMDNNotReceived": true
+                  }
+                },
+                "senderBusinessIdentity": {
+                  "qualifier": "AA",
+                  "value": "AA"
+                },
+                "receiverBusinessIdentity": {
+                  "qualifier": "ZZ",
+                  "value": "ZZ"
+                }
+              },
+              "sendAgreement": {
+                "protocolSettings": {
+                  "messageConnectionSettings": {
+                    "ignoreCertificateNameMismatch": true,
+                    "supportHttpStatusCodeContinue": true,
+                    "keepHttpConnectionAlive": true,
+                    "unfoldHttpHeaders": true
+                  },
+                  "acknowledgementConnectionSettings": {
+                    "ignoreCertificateNameMismatch": true,
+                    "supportHttpStatusCodeContinue": true,
+                    "keepHttpConnectionAlive": true,
+                    "unfoldHttpHeaders": true
+                  },
+                  "mdnSettings": {
+                    "needMDN": true,
+                    "signMDN": true,
+                    "sendMDNAsynchronously": true,
+                    "receiptDeliveryUrl": "http://tempuri.org",
+                    "dispositionNotificationTo": "http://tempuri.org",
+                    "signOutboundMDNIfOptional": true,
+                    "mdnText": "Sample",
+                    "sendInboundMDNToMessageBox": true,
+                    "micHashingAlgorithm": "SHA1"
+                  },
+                  "securitySettings": {
+                    "overrideGroupSigningCertificate": false,
+                    "enableNRRForInboundEncodedMessages": true,
+                    "enableNRRForInboundDecodedMessages": true,
+                    "enableNRRForOutboundMDN": true,
+                    "enableNRRForOutboundEncodedMessages": true,
+                    "enableNRRForOutboundDecodedMessages": true,
+                    "enableNRRForInboundMDN": true
+                  },
+                  "validationSettings": {
+                    "overrideMessageProperties": true,
+                    "encryptMessage": false,
+                    "signMessage": false,
+                    "compressMessage": true,
+                    "checkDuplicateMessage": true,
+                    "interchangeDuplicatesValidityDays": 100,
+                    "checkCertificateRevocationListOnSend": true,
+                    "checkCertificateRevocationListOnReceive": true,
+                    "encryptionAlgorithm": "AES128"
+                  },
+                  "envelopeSettings": {
+                    "messageContentType": "text/plain",
+                    "transmitFileNameInMimeHeader": true,
+                    "fileNameTemplate": "Test",
+                    "suspendMessageOnFileNameGenerationError": true,
+                    "autogenerateFileName": true
+                  },
+                  "errorSettings": {
+                    "suspendDuplicateMessage": true,
+                    "resendIfMDNNotReceived": true
+                  }
+                },
+                "senderBusinessIdentity": {
+                  "qualifier": "ZZ",
+                  "value": "ZZ"
+                },
+                "receiverBusinessIdentity": {
+                  "qualifier": "AA",
+                  "value": "AA"
+                }
+              }
+            }
+          },
+          "createdTime": "2017-03-06T22:32:54.2938748Z",
+          "changedTime": "2017-03-06T22:32:54.2945291Z",
+          "metadata": {}
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/IntegrationAccount4533/agreements/<IntegrationAccountAgreementName>",
+        "name": "<IntegrationAccountAgreementName>",
+        "type": "Microsoft.Logic/integrationAccounts/agreements"
+      }
+    }
+  }
+}

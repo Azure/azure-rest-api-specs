@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/interfaceEndpoints/ie1",
+            "name": "ie1",
+            "type": "Microsoft.Network/interfaceEndpoints",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "fqdn": "uniqueIdentifier.fqdn.windows.net",
+              "owner": "User",
+              "endpointService": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Provider/resourceType/resourceName"
+              },
+              "subnet": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+              },
+              "networkInterfaces": [
+                {
+                  "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/ie1.nic.abcd1234"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/interfaceEndpoints/ie2",
+            "name": "ie2",
+            "type": "Microsoft.Network/interfaceEndpoints",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "fqdn": "alsoUnique.fqdn.windows.net",
+              "owner": "User",
+              "endpointService": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Provider/resourceType/otherResourceName"
+              },
+              "subnet": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+              },
+              "networkInterfaces": [
+                {
+                  "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/ie2.nic.zyxw9876"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

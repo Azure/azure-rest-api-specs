@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2018-03-01.6.1",
+    "jobId": "jobId",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-data": "Fri, 17 Feb 2017 00:00:00 GMT",
+    "task": {
+      "id": "taskId",
+      "commandLine": "bash -c 'echo hello'",
+      "containerSettings": {
+        "imageName": "ubuntu",
+        "containerRunOptions": "--rm"
+      },
+      "userIdentity": {
+        "autoUser": {
+          "scope": "task",
+          "elevationLevel": "nonadmin"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {}
+  }
+}

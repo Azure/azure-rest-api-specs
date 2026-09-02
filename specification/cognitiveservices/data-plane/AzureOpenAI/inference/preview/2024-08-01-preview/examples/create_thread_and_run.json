@@ -1,0 +1,54 @@
+{
+  "title": "Create a thread and run it in one request.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-08-01-preview",
+    "body": {
+      "assistant_id": "asst_abc123",
+      "thread": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Explain deep learning to a 5 year old."
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "run_abc123",
+        "object": "thread.run",
+        "created_at": 1699076792,
+        "assistant_id": "asst_abc123",
+        "thread_id": "thread_abc123",
+        "status": "queued",
+        "started_at": null,
+        "expires_at": 1699077392,
+        "cancelled_at": null,
+        "failed_at": null,
+        "completed_at": null,
+        "required_action": null,
+        "last_error": null,
+        "model": "gpt-4-turbo",
+        "instructions": "You are a helpful assistant.",
+        "tools": [],
+        "tool_resources": {},
+        "metadata": {},
+        "temperature": 1.0,
+        "top_p": 1.0,
+        "max_completion_tokens": null,
+        "max_prompt_tokens": null,
+        "truncation_strategy": {
+          "type": "auto",
+          "last_messages": null
+        },
+        "incomplete_details": null,
+        "usage": null,
+        "response_format": "auto",
+        "tool_choice": "auto"
+      }
+    }
+  }
+}

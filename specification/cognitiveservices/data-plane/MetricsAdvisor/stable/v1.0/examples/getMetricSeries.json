@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "metricId": "22222222-2222-2222-2222-000000000001",
+    "Content-Type": "application/json",
+    "body": {
+      "activeSince": "2020-01-01T00:00:00.000Z",
+      "dimensionFilter": {
+        "city": [
+          "Beijing"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "@nextLink": "https://localhost/metrics/22222222-2222-2222-2222-000000000001/series/query?$skip=2&$maxpagesize=2",
+        "value": [
+          {
+            "metricId": "22222222-2222-2222-2222-000000000001",
+            "dimension": {
+              "category": "__SUM__",
+              "city": "Beijing"
+            }
+          },
+          {
+            "metricId": "22222222-2222-2222-2222-000000000001",
+            "dimension": {
+              "category": "Jewelry",
+              "city": "Beijing"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

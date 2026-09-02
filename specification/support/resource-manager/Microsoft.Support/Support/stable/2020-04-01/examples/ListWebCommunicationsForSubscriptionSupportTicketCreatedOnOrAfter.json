@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "supportTicketName": "testticket",
+    "$filter": "communicationType eq 'web' and createdDate ge 2020-03-10T22:08:51Z",
+    "api-version": "2020-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/providers/Microsoft.Support/supportTickets/testticket/communications/testmessage1",
+            "name": "testmessage1",
+            "type": "Microsoft.Support/communications",
+            "properties": {
+              "subject": "this is a test message",
+              "body": "this is a test message",
+              "communicationType": "web",
+              "communicationDirection": "outbound",
+              "sender": "user@contoso.com",
+              "createdDate": "2020-03-11T20:18:19Z"
+            }
+          },
+          {
+            "id": "/subscriptions/subid/providers/Microsoft.Support/supportTickets/testticket/communications/testmessage2",
+            "name": "testmessage2",
+            "type": "Microsoft.Support/communications",
+            "properties": {
+              "subject": "test",
+              "body": "test",
+              "communicationType": "web",
+              "communicationDirection": "outbound",
+              "sender": "user@contoso.com",
+              "createdDate": "2020-03-12T10:53:19Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

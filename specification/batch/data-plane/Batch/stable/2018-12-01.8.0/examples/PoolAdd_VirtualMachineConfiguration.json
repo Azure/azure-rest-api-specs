@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "batchUrl": "account.region.batch.azure.com",
+    "api-version": "2018-12-01.8.0",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 17 Feb 2017 00:00:00 GMT",
+    "pool": {
+      "id": "pool2",
+      "vmSize": "standard_a1",
+      "virtualMachineConfiguration": {
+        "imageReference": {
+          "publisher": "Canonical",
+          "offer": "UbuntuServer",
+          "sku": "16.04.0-LTS"
+        },
+        "nodeAgentSKUId": "batch.node.ubuntu 16.04"
+      },
+      "resizeTimeout": "PT15M",
+      "targetDedicatedNodes": 5,
+      "targetLowPriorityNodes": 0,
+      "maxTasksPerNode": 3,
+      "taskSchedulingPolicy": {
+        "nodeFillType": "spread"
+      },
+      "enableAutoScale": false,
+      "enableInterNodeCommunication": true,
+      "metadata": [
+        {
+          "name": "myproperty",
+          "value": "myvalue"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "request-id": "00000000-0000-0000-0000-000000000000",
+      "ETag": "0x8D45765A6A2DC04",
+      "Last-Modified": "Fri, 17 Feb 2017 00:00:00 GMT"
+    }
+  }
+}

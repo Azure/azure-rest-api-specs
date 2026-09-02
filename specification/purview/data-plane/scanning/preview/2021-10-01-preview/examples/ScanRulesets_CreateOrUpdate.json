@@ -1,0 +1,168 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "scanRulesetName": "nyScanRulesetName",
+    "api-version": "2021-10-01-preview",
+    "body": {
+      "kind": "AzureStorage",
+      "scanRulesetType": "Custom",
+      "properties": {
+        "scanningRule": {
+          "fileExtensions": [
+            "CSV",
+            "JSON",
+            "PSV",
+            "SSV",
+            "TSV",
+            "TXT",
+            "XML",
+            "PARQUET"
+          ],
+          "customFileExtensions": [
+            {
+              "customFileType": {
+                "builtInType": null,
+                "customDelimiter": "$"
+              },
+              "description": "model file type",
+              "enabled": true,
+              "fileExtension": ".model"
+            },
+            {
+              "customFileType": {
+                "builtInType": "JSON",
+                "customDelimiter": null
+              },
+              "description": "mdoel1 type",
+              "enabled": true,
+              "fileExtension": ".model1"
+            }
+          ]
+        },
+        "description": null,
+        "excludedSystemClassifications": [
+          "MICROSOFT.FINANCIAL.AUSTRALIA.BANK_ACCOUNT_NUMBER",
+          "MICROSOFT.MISCELLANEOUS.IPADDRESS"
+        ],
+        "includedCustomClassificationRuleNames": [
+          "BF_PII",
+          "Dummy_Rule2"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "kind": "AzureStorage",
+        "scanRulesetType": "Custom",
+        "id": "scanrulesets/nyScanRulesetName",
+        "name": "nyScanRulesetName",
+        "properties": {
+          "scanningRule": {
+            "fileExtensions": [
+              "CSV",
+              "JSON",
+              "PSV",
+              "SSV",
+              "TSV",
+              "TXT",
+              "XML",
+              "PARQUET"
+            ],
+            "customFileExtensions": [
+              {
+                "customFileType": {
+                  "builtInType": null,
+                  "customDelimiter": "$"
+                },
+                "description": "model file type",
+                "enabled": true,
+                "fileExtension": ".model"
+              },
+              {
+                "customFileType": {
+                  "builtInType": "JSON",
+                  "customDelimiter": null
+                },
+                "description": "mdoel1 type",
+                "enabled": true,
+                "fileExtension": ".model1"
+              }
+            ]
+          },
+          "createdAt": "2021-02-12T16:03:13.4377581Z",
+          "description": null,
+          "excludedSystemClassifications": [
+            "MICROSOFT.FINANCIAL.AUSTRALIA.BANK_ACCOUNT_NUMBER",
+            "MICROSOFT.MISCELLANEOUS.IPADDRESS"
+          ],
+          "includedCustomClassificationRuleNames": [
+            "BF_PII",
+            "Dummy_Rule2"
+          ],
+          "lastModifiedAt": "2021-02-12T16:03:13.4377582Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "kind": "AzureStorage",
+        "scanRulesetType": "Custom",
+        "id": "scanrulesets/nyScanRulesetName",
+        "name": "nyScanRulesetName",
+        "properties": {
+          "scanningRule": {
+            "fileExtensions": [
+              "CSV",
+              "JSON",
+              "PSV",
+              "SSV",
+              "TSV",
+              "TXT",
+              "XML",
+              "PARQUET"
+            ],
+            "customFileExtensions": [
+              {
+                "customFileType": {
+                  "builtInType": null,
+                  "customDelimiter": "$"
+                },
+                "description": "model file type",
+                "enabled": true,
+                "fileExtension": ".model"
+              },
+              {
+                "customFileType": {
+                  "builtInType": "JSON",
+                  "customDelimiter": null
+                },
+                "description": "mdoel1 type",
+                "enabled": true,
+                "fileExtension": ".model1"
+              }
+            ]
+          },
+          "createdAt": "2021-02-12T16:03:13.4377581Z",
+          "description": null,
+          "excludedSystemClassifications": [
+            "MICROSOFT.FINANCIAL.AUSTRALIA.BANK_ACCOUNT_NUMBER",
+            "MICROSOFT.MISCELLANEOUS.IPADDRESS"
+          ],
+          "includedCustomClassificationRuleNames": [
+            "BF_PII",
+            "Dummy_Rule2"
+          ],
+          "lastModifiedAt": "2021-02-12T16:03:13.4377582Z"
+        }
+      }
+    }
+  }
+}

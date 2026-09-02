@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "keywords": null,
+      "limit": 10,
+      "filter": {
+        "or": [
+          {
+            "attributeName": "<BusinessMetadataName>.<StringAttributeName>",
+            "operator": "eq|ne|contains|prefix",
+            "attributeValue": "string value"
+          },
+          {
+            "attributeName": "<BusinessMetadataName>.<NumberAttributeName>",
+            "operator": "eq|ne|gt|ge|lt|le",
+            "attributeValue": 123
+          },
+          {
+            "attributeName": "<BusinessMetadataName>.<BooleanAttributeName>",
+            "operator": "eq|ne",
+            "attributeValue": true
+          },
+          {
+            "attributeName": "<BusinessMetadataName>.<DateAttributeName>",
+            "operator": "timerange",
+            "attributeValue": "LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D"
+          }
+        ]
+      }
+    },
+    "api-version": "2024-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 1,
+        "@search.count.approximate": false,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "63b92968-c9ac-4af8-8cff-f61d147bbf88",
+            "qualifiedName": "https://exampleaccount.blob.core.windows.net/examplepath/csv/exampledata.csv",
+            "name": "exampledata.csv",
+            "entityType": "azure_blob_path",
+            "objectType": "Files"
+          }
+        ]
+      }
+    }
+  },
+  "title": "Discovery_Query_BusinessMetadataAttribute",
+  "operationId": "Discovery_Query"
+}

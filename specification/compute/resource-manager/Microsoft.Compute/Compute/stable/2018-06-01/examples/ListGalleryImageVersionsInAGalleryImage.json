@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2018-06-01",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "publishingProfile": {
+                "targetRegions": [
+                  {
+                    "name": "West US",
+                    "regionalReplicaCount": 1
+                  },
+                  {
+                    "name": "East US",
+                    "regionalReplicaCount": 2
+                  }
+                ],
+                "source": {
+                  "managedImage": {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+                  }
+                },
+                "replicaCount": 1,
+                "publishedDate": "2018-01-01T00:00:00Z"
+              },
+              "storageProfile": {
+                "osDiskImage": {
+                  "sizeInGB": 10,
+                  "hostCaching": "ReadOnly"
+                },
+                "dataDiskImages": [
+                  {
+                    "lun": 1,
+                    "sizeInGB": 10,
+                    "hostCaching": "None"
+                  }
+                ]
+              },
+              "provisioningState": "Succeeded"
+            },
+            "location": "West US",
+            "name": "1.0.0"
+          }
+        ],
+        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/images/myGalleryImageName/versions?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/galleries/myGalleryName/images/myGalleryImageName/versions/myGalleryImageVersionName"
+      }
+    }
+  }
+}

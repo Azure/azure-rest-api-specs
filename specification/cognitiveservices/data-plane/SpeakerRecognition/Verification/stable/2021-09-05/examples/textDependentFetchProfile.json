@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "endpoint": "https://westus.api.cognitive.microsoft.com",
+    "api-version": "2021-09-05",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f",
+        "locale": "en-US",
+        "enrollmentStatus": "Enrolling",
+        "createdDateTime": "2015-04-23T18:25:43.41Z",
+        "lastUpdatedDateTime": "2015-04-23T19:34:51.52Z",
+        "enrollmentsCount": 1,
+        "enrollmentsLengthInSec": 1.83,
+        "enrollmentsSpeechLengthInSec": 1.35,
+        "remainingEnrollmentsCount": 2,
+        "modelVersion": "2019-12-05"
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      },
+      "body": {
+        "error": {
+          "code": "Error Code",
+          "message": "Erro Messae"
+        }
+      }
+    }
+  }
+}

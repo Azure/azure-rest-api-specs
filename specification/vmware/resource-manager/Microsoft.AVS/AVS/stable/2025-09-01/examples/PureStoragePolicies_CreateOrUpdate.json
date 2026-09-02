@@ -1,0 +1,43 @@
+{
+  "title": "PureStoragePolicies_CreateOrUpdate",
+  "operationId": "PureStoragePolicies_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "storagePolicyName": "storagePolicy1",
+    "resource": {
+      "properties": {
+        "storagePolicyDefinition": "storagePolicyDefinition1",
+        "storagePoolId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/PureStorage.Block/storagePools/storagePool1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/pureStoragePolicies/storagePolicy1",
+        "name": "storagePolicy1",
+        "properties": {
+          "storagePolicyDefinition": "storagePolicyDefinition1",
+          "storagePoolId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/PureStorage.Block/storagePools/storagePool1",
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.AVS/privateClouds/pureStoragePolicies"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/pureStoragePolicies/storagePolicy1",
+        "name": "storagePolicy1",
+        "properties": {
+          "storagePolicyDefinition": "storagePolicyDefinition1",
+          "storagePoolId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/PureStorage.Block/storagePools/storagePool1",
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.AVS/privateClouds/pureStoragePolicies"
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default",
+    "serverName": "failover-group-primary-server",
+    "failoverGroupName": "failover-group-test-3",
+    "api-version": "2021-05-01-preview",
+    "parameters": {
+      "properties": {
+        "readWriteEndpoint": {
+          "failoverPolicy": "Automatic",
+          "failoverWithDataLossGracePeriodMinutes": 480
+        },
+        "readOnlyEndpoint": {
+          "failoverPolicy": "Disabled"
+        },
+        "partnerServers": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-secondary-server"
+          }
+        ],
+        "databases": [
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-primary-server/databases/testdb-1",
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-primary-server/databases/testdb-2"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-primary-server/failoverGroups/failover-group-test-3",
+        "name": "failover-group-test-3",
+        "type": "Microsoft.Sql/servers/failoverGroups",
+        "location": "Japan East",
+        "properties": {
+          "readWriteEndpoint": {
+            "failoverPolicy": "Automatic",
+            "failoverWithDataLossGracePeriodMinutes": 480
+          },
+          "readOnlyEndpoint": {
+            "failoverPolicy": "Disabled"
+          },
+          "replicationRole": "Primary",
+          "replicationState": "CATCH_UP",
+          "partnerServers": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-secondary-server",
+              "location": "Japan West",
+              "replicationRole": "Secondary"
+            }
+          ],
+          "databases": [
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-primary-server/databases/testdb-1",
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-primary-server/databases/testdb-2"
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-primary-server/failoverGroups/failover-group-test-3",
+        "name": "failover-group-test-3",
+        "type": "Microsoft.Sql/servers/failoverGroups",
+        "location": "Japan East",
+        "properties": {
+          "readWriteEndpoint": {
+            "failoverPolicy": "Automatic",
+            "failoverWithDataLossGracePeriodMinutes": 480
+          },
+          "readOnlyEndpoint": {
+            "failoverPolicy": "Disabled"
+          },
+          "replicationRole": "Primary",
+          "replicationState": "CATCH_UP",
+          "partnerServers": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-secondary-server",
+              "location": "Japan West",
+              "replicationRole": "Secondary"
+            }
+          ],
+          "databases": [
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-primary-server/databases/testdb-1",
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-primary-server/databases/testdb-2"
+          ]
+        }
+      }
+    },
+    "202": {}
+  }
+}

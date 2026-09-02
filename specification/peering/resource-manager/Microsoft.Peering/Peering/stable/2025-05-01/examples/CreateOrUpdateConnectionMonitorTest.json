@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "connectionMonitorTest": {
+      "properties": {
+        "destination": "Example Destination",
+        "destinationPort": 443,
+        "sourceAgent": "Example Source Agent",
+        "testFrequencyInSec": 30
+      }
+    },
+    "connectionMonitorTestName": "connectionMonitorTestName",
+    "peeringServiceName": "peeringServiceName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "connectionMonitorTestName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/connectionMonitorTests/connectionMonitorTestName",
+        "properties": {
+          "path": [],
+          "destination": "Example Destination",
+          "destinationPort": 443,
+          "isTestSuccessful": false,
+          "provisioningState": "Succeeded",
+          "sourceAgent": "Example Source Agent",
+          "testFrequencyInSec": 30
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "connectionMonitorTestName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/connectionMonitorTests/connectionMonitorTestName",
+        "properties": {
+          "path": [],
+          "destination": "Example Destination",
+          "destinationPort": 443,
+          "isTestSuccessful": false,
+          "provisioningState": "Succeeded",
+          "sourceAgent": "Example Source Agent",
+          "testFrequencyInSec": 30
+        }
+      }
+    }
+  },
+  "operationId": "ConnectionMonitorTests_CreateOrUpdate",
+  "title": "Create or Update Connection Monitor Test"
+}

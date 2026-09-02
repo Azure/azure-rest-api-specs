@@ -1,0 +1,331 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedDatabaseRestoreDetails"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/restoreDetails/{restoreDetailsName}": {
+      "get": {
+        "operationId": "ManagedDatabaseRestoreDetails_Get",
+        "tags": [
+          "ManagedDatabaseRestoreDetails"
+        ],
+        "description": "Gets managed database restore details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restoreDetailsName",
+            "in": "path",
+            "description": "The name of the restore details to retrieve.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "RestoreDetailsName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseRestoreDetailsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Managed database restore details.": {
+            "$ref": "./examples/ManagedDatabaseRestoreDetails.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedDatabaseRestoreDetailsBackupSetProperties": {
+      "type": "object",
+      "description": "The managed database's restore details backup set properties.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Backup set status.",
+          "readOnly": true
+        },
+        "firstStripeName": {
+          "type": "string",
+          "description": "First stripe name.",
+          "readOnly": true
+        },
+        "numberOfStripes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of stripes.",
+          "readOnly": true
+        },
+        "backupSizeMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Backup size.",
+          "readOnly": true
+        },
+        "restoreStartedTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last restored file time.",
+          "readOnly": true
+        },
+        "restoreFinishedTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last restored file time.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedDatabaseRestoreDetailsProperties": {
+      "type": "object",
+      "description": "The managed database's restore details properties.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Restore type.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Restore status.",
+          "readOnly": true
+        },
+        "blockReason": {
+          "type": "string",
+          "description": "The reason why restore is in Blocked state.",
+          "readOnly": true
+        },
+        "lastUploadedFileName": {
+          "type": "string",
+          "description": "Last uploaded file name.",
+          "readOnly": true
+        },
+        "lastUploadedFileTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded file time.",
+          "readOnly": true
+        },
+        "lastRestoredFileName": {
+          "type": "string",
+          "description": "Last restored file name.",
+          "readOnly": true
+        },
+        "lastRestoredFileTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last restored file time.",
+          "readOnly": true
+        },
+        "percentCompleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Percent completed.",
+          "readOnly": true
+        },
+        "currentRestoredSizeMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current restored size MB.",
+          "readOnly": true
+        },
+        "currentRestorePlanSizeMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current restore plan size MB.",
+          "readOnly": true
+        },
+        "currentBackupType": {
+          "type": "string",
+          "description": "Current backup type.",
+          "readOnly": true
+        },
+        "currentRestoringFileName": {
+          "type": "string",
+          "description": "Current restoring file name.",
+          "readOnly": true
+        },
+        "numberOfFilesDetected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of files detected.",
+          "readOnly": true
+        },
+        "numberOfFilesQueued": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of files queued.",
+          "readOnly": true
+        },
+        "numberOfFilesSkipped": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of files skipped.",
+          "readOnly": true
+        },
+        "numberOfFilesRestoring": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of files restoring.",
+          "readOnly": true
+        },
+        "numberOfFilesRestored": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of files restored.",
+          "readOnly": true
+        },
+        "numberOfFilesUnrestorable": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of files unrestorable.",
+          "readOnly": true
+        },
+        "fullBackupSets": {
+          "type": "array",
+          "description": "Full backup sets.",
+          "items": {
+            "$ref": "#/definitions/ManagedDatabaseRestoreDetailsBackupSetProperties"
+          },
+          "readOnly": true
+        },
+        "diffBackupSets": {
+          "type": "array",
+          "description": "Diff backup sets.",
+          "items": {
+            "$ref": "#/definitions/ManagedDatabaseRestoreDetailsBackupSetProperties"
+          },
+          "readOnly": true
+        },
+        "logBackupSets": {
+          "type": "array",
+          "description": "Log backup sets.",
+          "items": {
+            "$ref": "#/definitions/ManagedDatabaseRestoreDetailsBackupSetProperties"
+          },
+          "readOnly": true
+        },
+        "unrestorableFiles": {
+          "type": "array",
+          "description": "Unrestorable files.",
+          "items": {
+            "$ref": "#/definitions/ManagedDatabaseRestoreDetailsUnrestorableFileProperties"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedDatabaseRestoreDetailsResult": {
+      "type": "object",
+      "description": "A managed database restore details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedDatabaseRestoreDetailsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedDatabaseRestoreDetailsUnrestorableFileProperties": {
+      "type": "object",
+      "description": "The managed database's restore details unrestorable file properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "File name.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

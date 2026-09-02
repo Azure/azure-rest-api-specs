@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2023-09-15-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rgName",
+    "accountName": "accountName",
+    "databaseName": "databaseName",
+    "clientEncryptionKeyName": "cekName",
+    "createUpdateClientEncryptionKeyParameters": {
+      "properties": {
+        "resource": {
+          "id": "cekName",
+          "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+          "wrappedDataEncryptionKey": "VGhpcyBpcyBhY3R1YWxseSBhbiBhcnJheSBvZiBieXRlcy4gVGhpcyByZXF1ZXN0L3Jlc3BvbnNlIGlzIGJlaW5nIHByZXNlbnRlZCBhcyBhIHN0cmluZyBmb3IgcmVhZGFiaWxpdHkgaW4gdGhlIGV4YW1wbGU=",
+          "keyWrapMetadata": {
+            "name": "customerManagedKey",
+            "type": "AzureKeyVault",
+            "value": "AzureKeyVault Key URL",
+            "algorithm": "RSA-OAEP"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.DocumentDB/databaseAccounts/accountName/sqlDatabases/databaseName/clientEncryptionKeys/cekName",
+        "name": "cekName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/clientEncryptionKey",
+        "properties": {
+          "resource": {
+            "id": "cekName",
+            "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+            "wrappedDataEncryptionKey": "VGhpcyBpcyBhY3R1YWxseSBhbiBhcnJheSBvZiBieXRlcy4gVGhpcyByZXF1ZXN0L3Jlc3BvbnNlIGlzIGJlaW5nIHByZXNlbnRlZCBhcyBhIHN0cmluZyBmb3IgcmVhZGFiaWxpdHkgaW4gdGhlIGV4YW1wbGU=",
+            "keyWrapMetadata": {
+              "name": "customerManagedKey",
+              "type": "AzureKeyVault",
+              "value": "AzureKeyVault Key URL",
+              "algorithm": "RSA-OAEP"
+            },
+            "_rid": "tNc4AAAAAAAQkjzWAgAAAA==",
+            "_ts": 1626425552,
+            "_etag": "00000000-0000-0000-7a1f-bc0828e801d7"
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc",
+    "api-version": "2025-05-01-preview",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "lookbackPeriod": "P1D",
+        "scheduledQueryRuleProperties": {
+          "location": "eastus",
+          "properties": {
+            "description": "Performance rule",
+            "severity": 4,
+            "enabled": true,
+            "evaluationFrequency": "PT5M",
+            "scopes": [
+              "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+            ],
+            "windowSize": "PT10M",
+            "criteria": {
+              "allOf": [
+                {
+                  "criterionType": "DynamicThresholdCriterion",
+                  "query": "Perf | where ObjectName == \"Processor\"",
+                  "timeAggregation": "Average",
+                  "metricMeasureColumn": "% Processor Time",
+                  "resourceIdColumn": "resourceId",
+                  "dimensions": [
+                    {
+                      "name": "ComputerIp",
+                      "operator": "Exclude",
+                      "values": [
+                        "192.168.1.1"
+                      ]
+                    },
+                    {
+                      "name": "OSType",
+                      "operator": "Include",
+                      "values": [
+                        "*"
+                      ]
+                    }
+                  ],
+                  "operator": "GreaterOrLessThan",
+                  "alertSensitivity": "Medium",
+                  "ignoreDataBefore": "2024-06-01T21:00:00.000Z"
+                }
+              ]
+            },
+            "muteActionsDuration": "PT30M"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "rulePreviewResults": [
+          {
+            "dimensionCombination": [
+              {
+                "name": "Region",
+                "value": "East US"
+              },
+              {
+                "name": "Environment",
+                "value": "Production"
+              }
+            ],
+            "evaluations": [
+              {
+                "evaluationTime": "2025-02-15T10:00:00Z",
+                "alertState": "Fired",
+                "thresholdMet": true,
+                "evaluatedPeriods": [
+                  {
+                    "timestamp": "2025-02-15T09:00:00Z",
+                    "highThreshold": 80.0,
+                    "lowThreshold": 20.0,
+                    "metricValue": 85.0,
+                    "thresholdMet": true
+                  },
+                  {
+                    "timestamp": "2025-02-15T08:00:00Z",
+                    "highThreshold": 80.0,
+                    "lowThreshold": 20.0,
+                    "metricValue": 75.0,
+                    "thresholdMet": false
+                  }
+                ]
+              },
+              {
+                "evaluationTime": "2025-02-15T11:00:00Z",
+                "alertState": "Resolved",
+                "thresholdMet": false,
+                "evaluatedPeriods": [
+                  {
+                    "timestamp": "2025-02-15T10:00:00Z",
+                    "highThreshold": 80.0,
+                    "lowThreshold": 20.0,
+                    "metricValue": 65.0,
+                    "thresholdMet": false
+                  },
+                  {
+                    "timestamp": "2025-02-15T09:00:00Z",
+                    "highThreshold": 80.0,
+                    "lowThreshold": 20.0,
+                    "metricValue": 85.0,
+                    "thresholdMet": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

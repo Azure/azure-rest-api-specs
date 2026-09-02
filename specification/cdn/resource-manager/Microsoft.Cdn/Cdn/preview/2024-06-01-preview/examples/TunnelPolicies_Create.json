@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "tunnelPolicyName": "tunnelPolicy1",
+    "tunnelPolicy": {
+      "properties": {
+        "tunnelType": "HttpConnect",
+        "domains": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain1"
+          },
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain2"
+          }
+        ],
+        "targetGroups": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/targetgroups/targetgroup1"
+          },
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/targetgroups/targetgroup2"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "tunnelPolicy1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/tunnelpolicies/tunnelPolicy1",
+        "type": "Microsoft.Cdn/profiles/tunnelpolicies",
+        "properties": {
+          "tunnelType": "HttpConnect",
+          "domains": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain1"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain2"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/targetgroups/targetgroup1"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/targetgroups/targetgroup2"
+            }
+          ],
+          "deploymentStatus": "NotStarted",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "tunnelPolicy1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/tunnelpolicies/tunnelPolicy1",
+        "type": "Microsoft.Cdn/profiles/tunnelpolicies",
+        "properties": {
+          "tunnelType": "HttpConnect",
+          "domains": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain1"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain2"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/targetgroups/targetgroup1"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/targetgroups/targetgroup2"
+            }
+          ],
+          "deploymentStatus": "NotStarted",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2024-06-01-preview"
+      },
+      "body": {
+        "name": "tunnelPolicy1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/tunnelpolicies/tunnelPolicy1",
+        "type": "Microsoft.Cdn/profiles/tunnelpolicies",
+        "properties": {
+          "tunnelType": "HttpConnect",
+          "domains": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain1"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain2"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/targetgroups/targetgroup1"
+            },
+            {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/targetgroups/targetgroup2"
+            }
+          ],
+          "deploymentStatus": "NotStarted",
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  }
+}

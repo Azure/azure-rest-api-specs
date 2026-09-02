@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.MachineLearningServices/workspaces?api-version=2025-07-01-preview&$skip=2",
+        "value": [
+          {
+            "name": "testworkspace",
+            "type": "Microsoft.MachineLearningServices/workspaces",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace",
+            "location": "eastus2euap",
+            "properties": {
+              "description": "test description",
+              "applicationInsights": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights",
+              "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry",
+              "discoveryUrl": "http://example.com",
+              "friendlyName": "HelloName",
+              "keyVault": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
+              "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount"
+            }
+          },
+          {
+            "name": "testworkspace",
+            "type": "Microsoft.MachineLearningServices/workspaces",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-5678/providers/Microsoft.MachineLearningServices/workspaces/testworkspace",
+            "location": "eastus2euap",
+            "properties": {
+              "description": "test description",
+              "applicationInsights": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights",
+              "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistryNew",
+              "discoveryUrl": "http://example.com",
+              "friendlyName": "HelloName",
+              "keyVault": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkvNew",
+              "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccountOld"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Workspaces_ListBySubscription",
+  "title": "Get Workspaces by subscription"
+}

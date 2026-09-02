@@ -1,0 +1,90 @@
+{
+  "title": "Creates a worker",
+  "operationId": "JobRouterOperations_UpsertWorker",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "workerId": "WorkerId",
+    "resource": {
+      "capacity": 10,
+      "queues": [
+        "MainQueue"
+      ],
+      "labels": {},
+      "tags": {},
+      "channels": [
+        {
+          "channelId": "CustomChatChannel",
+          "capacityCostPerJob": 11,
+          "maxNumberOfJobs": 4
+        },
+        {
+          "channelId": "CustomVoiceChannel",
+          "capacityCostPerJob": 10,
+          "maxNumberOfJobs": 1
+        }
+      ],
+      "availableForOffers": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "WorkerId",
+        "state": "inactive",
+        "queues": [
+          "MainQueue"
+        ],
+        "capacity": 10,
+        "labels": {},
+        "tags": {},
+        "channels": [
+          {
+            "channelId": "CustomChatChannel",
+            "capacityCostPerJob": 11,
+            "maxNumberOfJobs": 4
+          },
+          {
+            "channelId": "CustomVoiceChannel",
+            "capacityCostPerJob": 10,
+            "maxNumberOfJobs": 1
+          }
+        ],
+        "offers": [],
+        "assignedJobs": [],
+        "loadRatio": 0,
+        "availableForOffers": false,
+        "etag": "etag"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "WorkerId",
+        "state": "inactive",
+        "queues": [
+          "MainQueue"
+        ],
+        "capacity": 10,
+        "labels": {},
+        "tags": {},
+        "channels": [
+          {
+            "channelId": "CustomChatChannel",
+            "capacityCostPerJob": 11,
+            "maxNumberOfJobs": 4
+          },
+          {
+            "channelId": "CustomVoiceChannel",
+            "capacityCostPerJob": 10,
+            "maxNumberOfJobs": 1
+          }
+        ],
+        "offers": [],
+        "assignedJobs": [],
+        "loadRatio": 0,
+        "availableForOffers": false,
+        "etag": "etag"
+      }
+    }
+  }
+}

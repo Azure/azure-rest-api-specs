@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2019-03-01-preview",
+    "subscriptionId": "55312978-ba1b-415c-9304-c4b9c43c0481",
+    "resourceGroupName": "ScreenSharingTest-peer",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "MonthToDate",
+      "dataset": {
+        "granularity": "Daily",
+        "filter": {
+          "and": [
+            {
+              "or": [
+                {
+                  "dimension": {
+                    "name": "ResourceLocation",
+                    "operator": "In",
+                    "values": [
+                      "East US",
+                      "West Europe"
+                    ]
+                  }
+                },
+                {
+                  "tag": {
+                    "name": "Environment",
+                    "operator": "In",
+                    "values": [
+                      "UAT",
+                      "Prod"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "dimension": {
+                "name": "ResourceGroup",
+                "operator": "In",
+                "values": [
+                  "API"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/55312978-ba1b-415c-9304-c4b9c43c0481/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
+            "name": "9af9459d-441d-4055-9ed0-83d4c4a363fb",
+            "type": "microsoft.costmanagement/Query",
+            "properties": {
+              "nextLink": null,
+              "columns": [
+                {
+                  "name": "PreTaxCost",
+                  "type": "Number"
+                },
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                },
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [
+                [
+                  2.10333307059661,
+                  20180417,
+                  "USD"
+                ],
+                [
+                  20.10333307059661,
+                  20180418,
+                  "USD"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

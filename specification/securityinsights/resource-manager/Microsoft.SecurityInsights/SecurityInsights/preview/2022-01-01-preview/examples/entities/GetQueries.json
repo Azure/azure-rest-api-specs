@@ -1,0 +1,456 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "entityId": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
+    "kind": "Insight"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1/queries/6db7f5d1-f41e-46c2-b935-230b36a569e6",
+            "name": "6db7f5d1-f41e-46c2-b935-230b36a569e6",
+            "type": "Microsoft.SecurityInsights/entities/queries",
+            "kind": "Insight",
+            "properties": {
+              "displayName": "Actions on account",
+              "description": "Summary of actions taken on the specified account, grouped by action: password resets and changes, account lockouts (policy or admin), account creation and deletion, account enabled and disabled\n",
+              "baseQuery": "let GetAccountActions = (v_Account_Name:string, v_Account_NTDomain:string, v_Account_UPNSuffix:string, v_Account_AADUserId:string, v_Account_SID:string){\nAuditLogs\n| where OperationName in~ ('Delete user', 'Change user password', 'Reset user password', 'Change password (self-service)',  'Reset password (by admin)', 'Reset password (self-service)', 'Update user')\n| extend UserPrincipalName = tostring(TargetResources[0].userPrincipalName)\n| extend Account_Name = tostring(split(UserPrincipalName, '@')[0])\n| extend Account_UPNSuffix = tostring(split(UserPrincipalName, '@')[1])\n| extend Action = tostring(parse_json(tostring(parse_json(tostring(TargetResources[0].modifiedProperties))[0])))\n| extend ModifiedProperty = parse_json(Action).displayName\n| extend ModifiedValue = parse_json(Action).newValue\n| extend Account_AADUserId = tostring(TargetResources[0].id)\n| extend DisableUser = iif(ModifiedProperty =~ 'AccountEnabled' and ModifiedValue =~ '[false]', 'True', 'False')\n| union isfuzzy=true (\nSecurityEvent\n| where EventID in (4720, 4722, 4723, 4724, 4725, 4726, 4740)\n| extend OperationName = tostring(EventID)\n| where AccountType =~ \"user\" or isempty(AccountType)\n| extend Account_Name = TargetUserName, Account_NTDomain = TargetDomainName, Account_SID = TargetSid\n)\n| where (Account_Name =~ v_Account_Name and (Account_UPNSuffix =~ v_Account_UPNSuffix or Account_NTDomain =~ v_Account_NTDomain)) or Account_AADUserId =~ v_Account_AADUserId or Account_SID =~ v_Account_SID\n};\nGetAccountActions('CTFFUser4', '', 'seccxp.ninja', '', '')\n",
+              "tableQuery": {
+                "columnsDefinitions": [
+                  {
+                    "header": "Action",
+                    "outputType": "String",
+                    "supportDeepLink": false
+                  },
+                  {
+                    "header": "Most Recent",
+                    "outputType": "Date",
+                    "supportDeepLink": false
+                  },
+                  {
+                    "header": "Count",
+                    "outputType": "Number",
+                    "supportDeepLink": true
+                  }
+                ],
+                "queriesDefinitions": [
+                  {
+                    "filter": "where OperationName in~ ('Change user password', 'Reset user password', 'Change password (self-service)',  'Reset password (by admin)', 'Reset password (self-service)', '4724', '4723')",
+                    "summarize": "summarize MostRecent = max(TimeGenerated), Count = count() by OperationName",
+                    "project": "project Title = OperationName, MostRecent, Count",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "Count",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  },
+                  {
+                    "filter": "where OperationName in~ ('Blocked from self-service password reset', '4740')",
+                    "summarize": "summarize MostRecent = max(TimeGenerated), Count = count() by OperationName",
+                    "project": "project Title = OperationName, MostRecent, Count",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "Count",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  },
+                  {
+                    "filter": "where OperationName  == '4725' or (OperationName  =~ 'Update user' and DisableUser =~ 'True')",
+                    "summarize": "summarize MostRecent = max(TimeGenerated), Count = count() by OperationName",
+                    "project": "project Title = OperationName, MostRecent, Count",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "Count",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  },
+                  {
+                    "filter": "where OperationName in~ ('Add user', '4720')",
+                    "summarize": "summarize MostRecent = max(TimeGenerated), Count = count() by OperationName",
+                    "project": "project Title = OperationName, MostRecent, Count",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "Count",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  },
+                  {
+                    "filter": "where OperationName in~ ('Delete user', '4726')",
+                    "summarize": "summarize MostRecent = max(TimeGenerated), Count = count() by OperationName",
+                    "project": "project Title = OperationName, MostRecent, Count",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "Count",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  },
+                  {
+                    "filter": "where OperationName in~ ('4725', 'Blocked from self-service password reset', '4740') or (OperationName  =~ 'Update user' and DisableUser =~ 'True')",
+                    "summarize": "summarize MostRecent = max(TimeGenerated), Count = count() by OperationName",
+                    "project": "project Title = OperationName, MostRecent, Count",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "Count",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  },
+                  {
+                    "filter": "where OperationName in~ ('4722', '4767') or (OperationName  =~ 'Update user' and DisableUser =~ 'False')",
+                    "summarize": "summarize MostRecent = max(TimeGenerated), Count = count() by OperationName",
+                    "project": "project Title = OperationName, MostRecent, Count",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "Count",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  },
+                  {
+                    "filter": "where OperationName in~ ('Update user','4738')",
+                    "summarize": "summarize MostRecent = max(TimeGenerated), Count = count() by OperationName",
+                    "project": "project Title = OperationName, MostRecent, Count",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "Count",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  }
+                ]
+              },
+              "chartQuery": {
+                "title": "Actions by type",
+                "dataSets": [
+                  {
+                    "query": "summarize Count = count() by bin(TimeGenerated, 1h), OperationName",
+                    "xColumnName": "TimeGenerated",
+                    "yColumnName": "Count",
+                    "legendColumnName": "OperationName"
+                  }
+                ],
+                "type": "BarChart"
+              },
+              "additionalQuery": {
+                "text": "See all account activity",
+                "query": "project TimeGenerated, UserPrincipalName, Account_Name, OperationName, Activity, DisableUser, TargetSid, AADUserId, InitiatedBy, AADTenantId, AccountType, Computer, SubjectAccount, SubjectUserSid, EventData"
+              },
+              "defaultTimeRange": {
+                "beforeRange": "12h",
+                "afterRange": "12h"
+              },
+              "referenceTimeRange": null,
+              "dataTypes": [
+                {
+                  "dataType": "AuditLogs"
+                },
+                {
+                  "dataType": "SecurityEvent"
+                }
+              ],
+              "inputEntityType": "Account",
+              "requiredInputFieldsSets": [
+                [
+                  "Account_Name",
+                  "Account_NTDomain"
+                ],
+                [
+                  "Account_Name",
+                  "Account_UPNSuffix"
+                ],
+                [
+                  "Account_AADUserId"
+                ],
+                [
+                  "Account_SID"
+                ]
+              ],
+              "entitiesFilter": {}
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1/queries/0a5d7b14-b485-450a-a0ac-4100c860ac32",
+            "name": "0a5d7b14-b485-450a-a0ac-4100c860ac32",
+            "type": "Microsoft.SecurityInsights/entities/queries",
+            "kind": "Insight",
+            "properties": {
+              "displayName": "Anomalously high office operation count",
+              "description": "Highlight office operations of the user with anomalously high count compared to those observed in the preceding 14 days.",
+              "baseQuery": "let AScoreThresh = 3; \nlet maxAnomalies = 3;\nlet BeforeRange = 12d; \nlet EndTime = todatetime('{{EndTimeUTC}}'); \nlet StartTime = todatetime('{{StartTimeUTC}}');\nlet numDays = tolong((EndTime-StartTime)/1d); \nlet userData = (v_Account_Name:string, v_Account_UPNSuffix:string) { \n  OfficeActivity \n  | extend splitUserId=split(UserId, '@')\n  | extend Account_Name = tostring(splitUserId[0]), Account_UPNSuffix = tostring(splitUserId[1])\n  | where Account_Name =~ v_Account_Name and Account_UPNSuffix =~ v_Account_UPNSuffix }; \nuserData('CTFFUser4', 'seccxp.ninja')\n",
+              "tableQuery": {
+                "columnsDefinitions": [
+                  {
+                    "header": "Operation",
+                    "outputType": "String",
+                    "supportDeepLink": true
+                  },
+                  {
+                    "header": "Expected Count",
+                    "outputType": "Number",
+                    "supportDeepLink": false
+                  },
+                  {
+                    "header": "Actual Count",
+                    "outputType": "Number",
+                    "supportDeepLink": false
+                  }
+                ],
+                "queriesDefinitions": [
+                  {
+                    "filter": "make-series count() default=0 on TimeGenerated from (StartTime - BeforeRange) to EndTime step 1d by Operation \n| extend (anomalies,anomalyScore, expectedCount)=series_decompose_anomalies(count_,AScoreThresh,7,'linefit',numDays, 'ctukey') \n| extend count1=count_, TimeGenerated1=TimeGenerated, anomalyScore1=anomalyScore\n| mv-apply count1 to typeof(long), TimeGenerated1 to typeof(datetime), anomalyScore1 to typeof(double), anomalies to typeof(long) on (summarize totAnomalies=sumif(abs(anomalies), TimeGenerated1 < StartTime), baseStd=stdevif(count1, TimeGenerated1 < StartTime), baseAvg=avgif(count1, TimeGenerated1 < StartTime), maxCountPost=maxif(count1,TimeGenerated1 >= StartTime), maxAnomalyScorePost=maxif(anomalyScore1, TimeGenerated1 >= StartTime)) \n| extend count1=count_ \n| mv-apply count1 to typeof(long), anomalyScore to typeof(double), expectedCount to typeof(double) on ( summarize (dummy, postExpectedCount, postActualCount)=arg_min(abs(anomalyScore-maxAnomalyScorePost), expectedCount, count1) ) \n| where totAnomalies < maxAnomalies \n| extend postAnomalyScore=iff(baseStd == 0 and maxCountPost > tolong(count_[0]),1000.0,maxAnomalyScorePost), postExpectedCount=iff(postExpectedCount < 0,0.0,postExpectedCount) \n| where maxAnomalyScorePost > AScoreThresh \n| order by maxAnomalyScorePost desc\n",
+                    "summarize": "take 1",
+                    "project": "project Operation, expectedCount=round(postExpectedCount,2), actualCount=postActualCount, anomalyScore=round(postAnomalyScore,2)",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "Operation",
+                        "Query": "{{BaseQuery}} \n| where TimeGenerated between (StartTime .. EndTime) \n| where Operation == ''\n"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "chartQuery": {
+                "title": "Anomalous operation timeline",
+                "dataSets": [
+                  {
+                    "query": "make-series count() default=0 on TimeGenerated from (StartTime - BeforeRange) to EndTime step 1d by Operation \n| extend (anomalies,anomalyScore, expectedCount)=series_decompose_anomalies(count_,AScoreThresh,7,'linefit',numDays, 'ctukey') \n| extend count1=count_, TimeGenerated1=TimeGenerated, anomalyScore1=anomalyScore\n| mv-apply count1 to typeof(long), TimeGenerated1 to typeof(datetime), anomalyScore1 to typeof(double), anomalies to typeof(long) on (summarize totAnomalies=sumif(abs(anomalies), TimeGenerated1 < StartTime), baseStd=stdevif(count1, TimeGenerated1 < StartTime), baseAvg=avgif(count1, TimeGenerated1 < StartTime), maxCountPost=maxif(count1,TimeGenerated1 >= StartTime), maxAnomalyScorePost=maxif(anomalyScore1, TimeGenerated1 >= StartTime)) \n| extend count1=count_ \n| mv-apply count1 to typeof(long), anomalyScore to typeof(double), expectedCount to typeof(double) on ( summarize (dummy, postExpectedCount, postActualCount)=arg_min(abs(anomalyScore-maxAnomalyScorePost), expectedCount, count1) ) \n| where totAnomalies < maxAnomalies \n| extend postAnomalyScore=iff(baseStd == 0 and maxCountPost > tolong(count_[0]),1000.0,maxAnomalyScorePost), postExpectedCount=iff(postExpectedCount < 0,0.0,round(postExpectedCount,2)) \n| where maxAnomalyScorePost > AScoreThresh \n| order by maxAnomalyScorePost desc \n| take 1 \n| project Operation, TimeGenerated, count_\n| mvexpand TimeGenerated, count_ | project todatetime(TimeGenerated), toint(count_), Operation\n",
+                    "xColumnName": "TimeGenerated",
+                    "yColumnName": "count_",
+                    "legendColumnName": "Operation"
+                  }
+                ],
+                "type": "LineChart"
+              },
+              "additionalQuery": {
+                "text": "Query all anomalous operations",
+                "query": "make-series count() default=0 on TimeGenerated from (StartTime - BeforeRange) to EndTime step 1d by Operation \n| extend (anomalies,anomalyScore, expectedCount)=series_decompose_anomalies(count_,AScoreThresh,7,'linefit',numDays, 'ctukey') \n| extend count1=count_, TimeGenerated1=TimeGenerated, anomalyScore1=anomalyScore\n| mv-apply count1 to typeof(long), TimeGenerated1 to typeof(datetime), anomalyScore1 to typeof(double), anomalies to typeof(long) on (summarize totAnomalies=sumif(abs(anomalies), TimeGenerated1 < StartTime), baseStd=stdevif(count1, TimeGenerated1 < StartTime), baseAvg=avgif(count1, TimeGenerated1 < StartTime), maxCountPost=maxif(count1,TimeGenerated1 >= StartTime), maxAnomalyScorePost = maxif(anomalyScore1, TimeGenerated1 >= StartTime)) \n| extend count1=count_\n| mv-apply  count1 to typeof(long), anomalyScore to typeof(double), expectedCount to typeof(double) on ( summarize (dummy, postExpectedCount, postActualCount)=arg_min(abs(anomalyScore - maxAnomalyScorePost), expectedCount, count1) ) \n| where totAnomalies < maxAnomalies\n| extend postAnomalyScore=iff(baseStd == 0 and maxCountPost > tolong(count_[0]),1000.0,maxAnomalyScorePost), postExpectedCount=iff(postExpectedCount < 0,0.0,postExpectedCount) \n| where maxAnomalyScorePost > AScoreThresh | order by maxAnomalyScorePost desc \n| project Operation, expectedCount=round(postExpectedCount,2), actualCount=postActualCount, anomalyScore=round(postAnomalyScore,2)\n"
+              },
+              "defaultTimeRange": {
+                "beforeRange": "1d",
+                "afterRange": "0d"
+              },
+              "referenceTimeRange": {
+                "beforeRange": "12d"
+              },
+              "dataTypes": [
+                {
+                  "dataType": "OfficeActivity"
+                }
+              ],
+              "inputEntityType": "Account",
+              "requiredInputFieldsSets": [
+                [
+                  "Account_Name",
+                  "Account_UPNSuffix"
+                ]
+              ],
+              "entitiesFilter": {}
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1/queries/e6cf68e6-1eca-4fbb-9fad-6280f2a9476e",
+            "name": "e6cf68e6-1eca-4fbb-9fad-6280f2a9476e",
+            "type": "Microsoft.SecurityInsights/entities/queries",
+            "kind": "Insight",
+            "properties": {
+              "displayName": "Resource access",
+              "description": "Provides the count and distinct resource accesses by a given user account\n",
+              "baseQuery": "let Operations = dynamic([\"FileDownloaded\", \"FileUploaded\"]);\nlet UserOperationToSharePoint =  (v_Account_Name:string, v_Account_UPNSuffix:string) {\nOfficeActivity\n// Select sharepoint activity that is relevant\n| where RecordType in~ ('SharePointFileOperation')\n| where Operation in~ (Operations)\n| extend Account_Name = tostring(split(UserId, '@')[0])\n| extend Account_UPNSuffix = tostring(split(UserId, '@')[1])\n| where Account_Name =~ v_Account_Name and Account_UPNSuffix =~ v_Account_UPNSuffix\n| project TimeGenerated, Account_Name, Account_UPNSuffix, UserId, OfficeId, RecordType, Operation, OrganizationId, UserType, UserKey, OfficeWorkload, OfficeObjectId, ClientIP, ItemType, UserAgent, Site_Url, SourceRelativeUrl, SourceFileName, SourceFileExtension , Start_Time , ElevationTime , TenantId, SourceSystem , Type\n};\nUserOperationToSharePoint ('CTFFUser4','seccxp.ninja')\n",
+              "tableQuery": {
+                "columnsDefinitions": [
+                  {
+                    "header": "Resource Type",
+                    "outputType": "String",
+                    "supportDeepLink": false
+                  },
+                  {
+                    "header": "Distinct Resources",
+                    "outputType": "Number",
+                    "supportDeepLink": true
+                  },
+                  {
+                    "header": "Total Resources",
+                    "outputType": "Number",
+                    "supportDeepLink": true
+                  },
+                  {
+                    "header": "IPAddress(es)",
+                    "outputType": "String",
+                    "supportDeepLink": false
+                  }
+                ],
+                "queriesDefinitions": [
+                  {
+                    "filter": "where Operation =~ 'FileUploaded'",
+                    "summarize": "summarize DistinctResources = dcount(SourceFileName), TotalResources = count(SourceFileName), IPAddresses = make_set(ClientIP) by Operation",
+                    "project": "project Title = Operation, DistinctResources, TotalResources, IPAddresses = case(array_length(IPAddresses) == 1, tostring(IPAddresses[0]), array_length(IPAddresses) > 1, 'Many', 'None')",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "DistinctResources",
+                        "Query": "{{BaseQuery}} | "
+                      },
+                      {
+                        "projectedName": "TotalResources",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  },
+                  {
+                    "filter": "where Operation =~ 'FileDownloaded'",
+                    "summarize": "summarize DistinctResources = dcount(SourceFileName), TotalResources = count(SourceFileName), IPAddresses = make_set(ClientIP) by Operation",
+                    "project": "project Title = Operation, DistinctResources, TotalResources, IPAddresses = case(array_length(IPAddresses) == 1, tostring(IPAddresses[0]), array_length(IPAddresses) > 1, 'Many', 'None')",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "DistinctResources",
+                        "Query": "{{BaseQuery}} | "
+                      },
+                      {
+                        "projectedName": "TotalResources",
+                        "Query": "{{BaseQuery}} | "
+                      }
+                    ]
+                  }
+                ]
+              },
+              "chartQuery": {
+                "title": "Resource access over time",
+                "dataSets": [
+                  {
+                    "query": "summarize DistinctResources = dcountif(Operation, Operation =~ 'FileUploaded'), TotalResources = countif(Operation =~ 'FileUploaded') by bin(TimeGenerated, 1h) | extend Legend = 'File Uploads'",
+                    "xColumnName": "TimeGenerated",
+                    "yColumnName": "TotalResources",
+                    "legendColumnName": "Legend"
+                  },
+                  {
+                    "query": "summarize DistinctResources = dcountif(Operation, Operation =~ 'FileDownloaded'), TotalResources = countif(Operation =~ 'FileDownloaded') by bin(TimeGenerated, 1h) | extend Legend = 'File Downloads'",
+                    "xColumnName": "TimeGenerated",
+                    "yColumnName": "TotalResources",
+                    "legendColumnName": "Legend"
+                  }
+                ],
+                "type": "LineChart"
+              },
+              "additionalQuery": {
+                "text": "See all resource activity",
+                "query": "where Operation in~ (Operations)"
+              },
+              "defaultTimeRange": {
+                "beforeRange": "12h",
+                "afterRange": "12h"
+              },
+              "referenceTimeRange": null,
+              "dataTypes": [
+                {
+                  "dataType": "OfficeActivity"
+                }
+              ],
+              "inputEntityType": "Account",
+              "requiredInputFieldsSets": [
+                [
+                  "Account_Name",
+                  "Account_UPNSuffix"
+                ],
+                [
+                  "Account_AADUserId"
+                ]
+              ],
+              "entitiesFilter": {}
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1/queries/cae8d0aa-aa45-4d53-8d88-17dd64ffd4e4",
+            "name": "cae8d0aa-aa45-4d53-8d88-17dd64ffd4e4",
+            "type": "Microsoft.SecurityInsights/entities/queries",
+            "kind": "Insight",
+            "properties": {
+              "displayName": "Anomalously high Azure sign-in result count",
+              "description": "Highlight Azure sign-in results by the user principal with anomalously high count compared to those observed in the preceding 14 days.",
+              "baseQuery": "let AScoreThresh=3; \nlet maxAnomalies=3; \nlet BeforeRange = 12d; \nlet EndTime=todatetime('{{EndTimeUTC}}');\nlet StartTime = todatetime('{{StartTimeUTC}}'); \nlet numDays = tolong((EndTime-StartTime)/1d); \nlet userData = (v_Account_Name:string, v_Account_UPNSuffix:string, v_Account_AADUserId:string) { \n   SigninLogs \n   | where TimeGenerated between ((StartTime-BeforeRange) .. EndTime)\n   | extend splitUserId=split(UserPrincipalName, '@')\n   | extend Account_Name = tostring(splitUserId[0]), Account_UPNSuffix = tostring(splitUserId[1])\n   | where (Account_Name =~ v_Account_Name and Account_UPNSuffix =~ v_Account_UPNSuffix) or UserId =~ v_Account_AADUserId };\nuserData('CTFFUser4', 'seccxp.ninja', '')\n",
+              "tableQuery": {
+                "columnsDefinitions": [
+                  {
+                    "header": "Result Description",
+                    "outputType": "String",
+                    "supportDeepLink": true
+                  },
+                  {
+                    "header": "Expected Count",
+                    "outputType": "Number",
+                    "supportDeepLink": false
+                  },
+                  {
+                    "header": "Actual Count",
+                    "outputType": "Number",
+                    "supportDeepLink": false
+                  }
+                ],
+                "queriesDefinitions": [
+                  {
+                    "filter": "make-series count() default=0 on TimeGenerated from (StartTime - BeforeRange) to EndTime step 1d by ResultDescription \n| extend (anomalies,anomalyScore, expectedCount)=series_decompose_anomalies(count_,AScoreThresh,7,'linefit',numDays, 'ctukey') \n| extend count1=count_, TimeGenerated1=TimeGenerated, anomalyScore1=anomalyScore\n| mv-apply count1 to typeof(long), TimeGenerated1 to typeof(datetime), anomalyScore1 to typeof(double), anomalies to typeof(long) on (summarize totAnomalies=sumif(abs(anomalies), TimeGenerated1 < StartTime), baseStd=stdevif(count1, TimeGenerated1 < StartTime), baseAvg=avgif(count1, TimeGenerated1 < StartTime), maxCountPost=maxif(count1,TimeGenerated1 >= StartTime), maxAnomalyScorePost = maxif(anomalyScore1, TimeGenerated1 >= StartTime)) \n| extend count1=count_ \n| mv-apply  count1 to typeof(long), anomalyScore to typeof(double), expectedCount to typeof(double) on ( summarize (dummy, postExpectedCount, postActualCount)=arg_min(abs(anomalyScore - maxAnomalyScorePost), expectedCount, count1) ) \n| where totAnomalies < maxAnomalies \n| extend postAnomalyScore=iff(baseStd == 0 and maxCountPost > tolong(count_[0]),1000.0,maxAnomalyScorePost), postExpectedCount=iff(postExpectedCount < 0,0.0,postExpectedCount) \n| where maxAnomalyScorePost > AScoreThresh \n| order by maxAnomalyScorePost desc\n",
+                    "summarize": "take 1",
+                    "project": "project ResultDescription, expectedCount=round(postExpectedCount,2), actualCount=postActualCount, anomalyScore=round(postAnomalyScore,2)",
+                    "linkColumnsDefinitions": [
+                      {
+                        "projectedName": "ResultDescription",
+                        "Query": "{{BaseQuery}} \n| where TimeGenerated between (StartTime .. EndTime) \n| where ResultDescription == ''\n"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "chartQuery": {
+                "title": "Anomalous sign-in result timeline",
+                "dataSets": [
+                  {
+                    "query": "make-series count() default=0 on TimeGenerated from (StartTime - BeforeRange) to EndTime step 1d by ResultDescription \n| extend (anomalies,anomalyScore, expectedCount)=series_decompose_anomalies(count_,AScoreThresh,7,'linefit',numDays, 'ctukey') \n| extend count1=count_, TimeGenerated1=TimeGenerated, anomalyScore1=anomalyScore\n| mv-apply count1 to typeof(long), TimeGenerated1 to typeof(datetime), anomalyScore1 to typeof(double), anomalies to typeof(long) on (summarize totAnomalies=sumif(abs(anomalies), TimeGenerated1 < StartTime), baseStd=stdevif(count1, TimeGenerated1 < StartTime), baseAvg=avgif(count1, TimeGenerated1 < StartTime), maxCountPost=maxif(count1,TimeGenerated1 >= StartTime), maxAnomalyScorePost = maxif(anomalyScore1, TimeGenerated1 >= StartTime)) \n| extend count1=count_ \n| mv-apply  count1 to typeof(long), anomalyScore to typeof(double), expectedCount to typeof(double) on ( summarize (dummy, postExpectedCount, postActualCount)=arg_min(abs(anomalyScore - maxAnomalyScorePost), expectedCount, count1) ) \n| where totAnomalies < maxAnomalies \n| extend postAnomalyScore=iff(baseStd == 0 and maxCountPost > tolong(count_[0]),1000.0,maxAnomalyScorePost), postExpectedCount=iff(postExpectedCount < 0,0.0,round(postExpectedCount,2)) \n| where maxAnomalyScorePost > AScoreThresh \n| order by maxAnomalyScorePost desc \n| take 1 \n| project ResultDescription, TimeGenerated, count_ \n| mvexpand TimeGenerated, count_ \n| project todatetime(TimeGenerated), toint(count_), ResultDescription \n",
+                    "xColumnName": "TimeGenerated",
+                    "yColumnName": "count_",
+                    "legendColumnName": "ResultDescription"
+                  }
+                ],
+                "type": "LineChart"
+              },
+              "additionalQuery": {
+                "text": "Query all anomalous sign-in results",
+                "query": "make-series count() default=0 on TimeGenerated from (StartTime - BeforeRange) to EndTime step 1d by ResultDescription \n| extend (anomalies,anomalyScore, expectedCount)=series_decompose_anomalies(count_,AScoreThresh,7,'linefit',numDays, 'ctukey') \n| extend count1=count_, TimeGenerated1=TimeGenerated, anomalyScore1=anomalyScore\n| mv-apply count1 to typeof(long), TimeGenerated1 to typeof(datetime), anomalyScore1 to typeof(double), anomalies to typeof(long) on (summarize totAnomalies=sumif(abs(anomalies), TimeGenerated1 < StartTime), baseStd=stdevif(count1, TimeGenerated1 < StartTime), baseAvg=avgif(count1, TimeGenerated1 < StartTime), maxCountPost=maxif(count1,TimeGenerated1 >= StartTime), maxAnomalyScorePost = maxif(anomalyScore1, TimeGenerated1 >= StartTime)) \n| extend count1=count_\n| mv-apply  count1 to typeof(long), anomalyScore to typeof(double), expectedCount to typeof(double) on ( summarize (dummy, postExpectedCount, postActualCount)=arg_min(abs(anomalyScore - maxAnomalyScorePost), expectedCount, count1) ) \n| where totAnomalies < maxAnomalies\n| extend postAnomalyScore=iff(baseStd == 0 and maxCountPost > tolong(count_[0]),1000.0,maxAnomalyScorePost), postExpectedCount=iff(postExpectedCount < 0,0.0,postExpectedCount) \n| where maxAnomalyScorePost > AScoreThresh \n| order by maxAnomalyScorePost desc \n| project ResultDescription, expectedCount=round(postExpectedCount,2), actualCount=postActualCount, anomalyScore=round(postAnomalyScore,2)\n"
+              },
+              "defaultTimeRange": {
+                "beforeRange": "1d",
+                "afterRange": "0d"
+              },
+              "referenceTimeRange": {
+                "beforeRange": "12d"
+              },
+              "dataTypes": [
+                {
+                  "dataType": "SigninLogs"
+                }
+              ],
+              "inputEntityType": "Account",
+              "requiredInputFieldsSets": [
+                [
+                  "Account_Name",
+                  "Account_UPNSuffix"
+                ],
+                [
+                  "Account_AADUserId"
+                ]
+              ],
+              "entitiesFilter": {}
+            }
+          }
+        ]
+      }
+    }
+  }
+}

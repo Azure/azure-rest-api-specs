@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "targetDbServerName": "exampletarget",
+    "migrationName": "examplemigration",
+    "migrationMode": "Online",
+    "parameters": {
+      "properties": {
+        "cancel": "True"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "currentStatus": {
+            "state": "Canceled",
+            "currentSubStateDetails": {
+              "currentSubState": "Completed"
+            }
+          },
+          "migrationMode": "Online",
+          "migrationWindowEndTimeInUtc": "2025-01-01T20:30:22.123456Z",
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "dbsToMigrate": [
+            "postgres"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2025-01-01T18:30:22.123456Z",
+          "migrateRoles": "False",
+          "sourceDbServerMetadata": {
+            "location": "westus",
+            "sku": {
+              "name": "B_Gen5_2",
+              "tier": "Basic"
+            }
+          },
+          "targetDbServerMetadata": {
+            "location": "westus",
+            "sku": {
+              "name": "Standard_D2ds_v4",
+              "tier": "GeneralPurpose"
+            }
+          }
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}

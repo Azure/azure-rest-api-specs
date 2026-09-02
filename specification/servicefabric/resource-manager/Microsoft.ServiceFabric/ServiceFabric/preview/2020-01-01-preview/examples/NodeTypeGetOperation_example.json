@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "nodeTypeName": "FE",
+    "api-version": "2020-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "type": "nodeTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/FE",
+        "name": "FE",
+        "tags": {},
+        "properties": {
+          "isPrimary": true,
+          "dataDiskSizeGB": 100,
+          "placementProperties": {},
+          "capacities": {},
+          "vmSize": "Standard_D2",
+          "vmImagePublisher": "MicrosoftWindowsServer",
+          "vmImageOffer": "WindowsServer",
+          "vmImageSku": "2016-Datacenter",
+          "vmImageVersion": "latest",
+          "vmInstanceCount": 5,
+          "vmSecrets": [
+            {
+              "sourceVault": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+              },
+              "vaultCertificates": [
+                {
+                  "certificateStore": "My",
+                  "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

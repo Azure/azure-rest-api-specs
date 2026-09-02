@@ -1,0 +1,249 @@
+{
+  "parameters": {
+    "appResource": {
+      "properties": {
+        "public": true,
+        "fqdn": "myapp.mydomain.com",
+        "httpsOnly": false,
+        "enableEndToEndTLS": false,
+        "temporaryDisk": {
+          "sizeInGB": 2,
+          "mountPath": "/mytemporarydisk"
+        },
+        "addonConfigs": {
+          "ApplicationConfigurationService": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/configurationServices/myacs"
+          },
+          "ServiceRegistry": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/serviceRegistries/myServiceRegistry"
+          }
+        },
+        "persistentDisk": {
+          "sizeInGB": 2,
+          "mountPath": "/mypersistentdisk"
+        },
+        "loadedCertificates": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/certificates/mycert1",
+            "loadTrustStore": false
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/certificates/mycert2",
+            "loadTrustStore": true
+          }
+        ],
+        "customPersistentDisks": [
+          {
+            "customPersistentDiskProperties": {
+              "type": "AzureFileVolume",
+              "mountPath": "/mypath1/mypath2",
+              "mountOptions": [
+                "uid=0",
+                "gid=0",
+                "dir_mode=0777",
+                "file_mode=0777"
+              ],
+              "shareName": "myFileShare"
+            },
+            "storageId": "myASCStorageID"
+          }
+        ]
+      },
+      "identity": null,
+      "location": "eastus"
+    },
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "appName": "myapp"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "public": true,
+          "url": "myapp.myservice.azuremicroservices.io",
+          "provisioningState": "Succeeded",
+          "fqdn": "myapp.mydomain.com",
+          "httpsOnly": false,
+          "enableEndToEndTLS": false,
+          "temporaryDisk": {
+            "sizeInGB": 2,
+            "mountPath": "/mytemporarydisk"
+          },
+          "addonConfigs": {
+            "ApplicationConfigurationService": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/configurationServices/myacs"
+            },
+            "ServiceRegistry": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/serviceRegistries/myServiceRegistry"
+            }
+          },
+          "persistentDisk": {
+            "sizeInGB": 2,
+            "usedInGB": 1,
+            "mountPath": "/mypersistentdisk"
+          },
+          "customPersistentDisks": [
+            {
+              "customPersistentDiskProperties": {
+                "type": "AzureFileVolume",
+                "mountPath": "/mypath1/mypath2",
+                "mountOptions": [
+                  "uid=0",
+                  "gid=0",
+                  "dir_mode=0777",
+                  "file_mode=0777"
+                ],
+                "shareName": "myFileShare"
+              },
+              "storageId": "myASCStorageID"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "principalid",
+          "tenantId": "tenantid"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp",
+        "name": "myapp"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "public": true,
+          "url": "myapp.myservice.azuremicroservices.io",
+          "provisioningState": "Creating",
+          "fqdn": "myapp.mydomain.com",
+          "httpsOnly": false,
+          "enableEndToEndTLS": false,
+          "temporaryDisk": {
+            "sizeInGB": 2,
+            "mountPath": "/mytemporarydisk"
+          },
+          "addonConfigs": {
+            "ApplicationConfigurationService": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/configurationServices/myacs"
+            },
+            "ServiceRegistry": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/serviceRegistries/myServiceRegistry"
+            }
+          },
+          "persistentDisk": {
+            "sizeInGB": 2,
+            "usedInGB": 1,
+            "mountPath": "/mypersistentdisk"
+          },
+          "customPersistentDisks": [
+            {
+              "customPersistentDiskProperties": {
+                "type": "AzureFileVolume",
+                "mountPath": "/mypath1/mypath2",
+                "mountOptions": [
+                  "uid=0",
+                  "gid=0",
+                  "dir_mode=0777",
+                  "file_mode=0777"
+                ],
+                "shareName": "myFileShare"
+              },
+              "storageId": "myASCStorageID"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "principalid",
+          "tenantId": "tenantid"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp",
+        "name": "myapp"
+      }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "public": true,
+          "url": "myapp.myservice.azuremicroservices.io",
+          "provisioningState": "Updating",
+          "fqdn": "myapp.mydomain.com",
+          "httpsOnly": false,
+          "enableEndToEndTLS": false,
+          "temporaryDisk": {
+            "sizeInGB": 2,
+            "mountPath": "/mytemporarydisk"
+          },
+          "addonConfigs": {
+            "ApplicationConfigurationService": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/configurationServices/myacs"
+            },
+            "ServiceRegistry": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/serviceRegistries/myServiceRegistry"
+            }
+          },
+          "persistentDisk": {
+            "sizeInGB": 2,
+            "usedInGB": 1,
+            "mountPath": "/mypersistentdisk"
+          },
+          "customPersistentDisks": [
+            {
+              "customPersistentDiskProperties": {
+                "type": "AzureFileVolume",
+                "mountPath": "/mypath1/mypath2",
+                "mountOptions": [
+                  "uid=0",
+                  "gid=0",
+                  "dir_mode=0777",
+                  "file_mode=0777"
+                ],
+                "shareName": "myFileShare"
+              },
+              "storageId": "myASCStorageID"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "principalid",
+          "tenantId": "tenantid"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp",
+        "name": "myapp"
+      }
+    }
+  }
+}

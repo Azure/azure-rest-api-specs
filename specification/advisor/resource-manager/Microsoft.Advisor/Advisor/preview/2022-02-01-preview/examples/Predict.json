@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "predictionRequest": {
+      "properties": {
+        "predictionType": "PredictiveRightsizing",
+        "extendedProperties": {
+          "region": "CentralUS",
+          "deploymentType": "Linux_IaaS_Software_Store",
+          "sku": "Standard_Dv4",
+          "type": "iaas",
+          "numberOfInstances": 10
+        }
+      }
+    },
+    "api-version": "2022-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "predictionType": "PredictiveRightsizing",
+          "extendedProperties": {
+            "region": "CentralUS",
+            "deploymentType": "Linux_IaaS_Software_Store",
+            "sku": "Standard_Dv4",
+            "type": "iaas",
+            "numberOfInstances": 10,
+            "prediction": {
+              "recommendedSku": "Standard_Dv2",
+              "numberOfInstances": 8,
+              "confidence": 0.9
+            }
+          },
+          "category": "Cost",
+          "impact": "Low",
+          "impactedField": "Microsoft.Compute/virtualMachines",
+          "lastUpdated": "2022-02-14T14:47:18.436Z",
+          "shortDescription": {
+            "solution": "We recommend using 8 instances of type Standard_Dv2."
+          }
+        }
+      }
+    }
+  }
+}

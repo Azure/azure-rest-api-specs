@@ -1,0 +1,1024 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-02-01",
+    "title": "Recommendations API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/recommendations": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "List all recommendations for a subscription.",
+        "description": "List all recommendations for a subscription.",
+        "operationId": "Recommendations_List",
+        "parameters": [
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.",
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/recommendations/reset": {
+      "post": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Reset all recommendation opt-out settings for a subscription.",
+        "description": "Reset all recommendation opt-out settings for a subscription.",
+        "operationId": "Recommendations_ResetAllFilters",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/recommendations/{name}/disable": {
+      "post": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Disables the specified rule so it will not apply to a subscription in the future.",
+        "description": "Disables the specified rule so it will not apply to a subscription in the future.",
+        "operationId": "Recommendations_DisableRecommendationForSubscription",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Rule name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully disabled recommendations."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendationHistory": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Get past recommendations for an app, optionally specified by the time range.",
+        "description": "Get past recommendations for an app, optionally specified by the time range.",
+        "operationId": "Recommendations_ListHistoryForHostingEnvironment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "hostingEnvironmentName",
+            "in": "path",
+            "description": "Name of the hosting environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expiredOnly",
+            "in": "query",
+            "description": "Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.",
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Get all recommendations for an app.",
+        "description": "Get all recommendations for an app.",
+        "operationId": "Recommendations_ListRecommendedRulesForHostingEnvironment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "hostingEnvironmentName",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.",
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations/disable": {
+      "post": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Disable all recommendations for an app.",
+        "description": "Disable all recommendations for an app.",
+        "operationId": "Recommendations_DisableAllForHostingEnvironment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "query",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostingEnvironmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations/reset": {
+      "post": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Reset all recommendation opt-out settings for an app.",
+        "description": "Reset all recommendation opt-out settings for an app.",
+        "operationId": "Recommendations_ResetAllFiltersForHostingEnvironment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "query",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostingEnvironmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations/{name}": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Get a recommendation rule for an app.",
+        "description": "Get a recommendation rule for an app.",
+        "operationId": "Recommendations_GetRuleDetailsByHostingEnvironment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "hostingEnvironmentName",
+            "in": "path",
+            "description": "Name of the hosting environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the recommendation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateSeen",
+            "in": "query",
+            "description": "Specify <code>true</code> to update the last-seen timestamp of the recommendation object.",
+            "type": "boolean"
+          },
+          {
+            "name": "recommendationId",
+            "in": "query",
+            "description": "The GUID of the recommendation object if you query an expired one. You don't need to specify it to query an active entry.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationRule"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations/{name}/disable": {
+      "post": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Disables the specific rule for a web site permanently.",
+        "description": "Disables the specific rule for a web site permanently.",
+        "operationId": "Recommendations_DisableRecommendationForHostingEnvironment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "query",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Rule name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostingEnvironmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully disabled recommendations."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendationHistory": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Get past recommendations for an app, optionally specified by the time range.",
+        "description": "Get past recommendations for an app, optionally specified by the time range.",
+        "operationId": "Recommendations_ListHistoryForWebApp",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expiredOnly",
+            "in": "query",
+            "description": "Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.",
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Get all recommendations for an app.",
+        "description": "Get all recommendations for an app.",
+        "operationId": "Recommendations_ListRecommendedRulesForWebApp",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.",
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations/disable": {
+      "post": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Disable all recommendations for an app.",
+        "description": "Disable all recommendations for an app.",
+        "operationId": "Recommendations_DisableAllForWebApp",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations/reset": {
+      "post": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Reset all recommendation opt-out settings for an app.",
+        "description": "Reset all recommendation opt-out settings for an app.",
+        "operationId": "Recommendations_ResetAllFiltersForWebApp",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations/{name}": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Get a recommendation rule for an app.",
+        "description": "Get a recommendation rule for an app.",
+        "operationId": "Recommendations_GetRuleDetailsByWebApp",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the recommendation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateSeen",
+            "in": "query",
+            "description": "Specify <code>true</code> to update the last-seen timestamp of the recommendation object.",
+            "type": "boolean"
+          },
+          {
+            "name": "recommendationId",
+            "in": "query",
+            "description": "The GUID of the recommendation object if you query an expired one. You don't need to specify it to query an active entry.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationRule"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations/{name}/disable": {
+      "post": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Disables the specific rule for a web site permanently.",
+        "description": "Disables the specific rule for a web site permanently.",
+        "operationId": "Recommendations_DisableRecommendationForSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Rule name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully disabled recommendations."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Recommendation": {
+      "description": "Represents a recommendation result generated by the recommendation engine.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Recommendation resource specific properties",
+          "properties": {
+            "creationTime": {
+              "format": "date-time",
+              "description": "Timestamp when this instance was created.",
+              "type": "string"
+            },
+            "recommendationId": {
+              "format": "uuid",
+              "description": "A GUID value that each recommendation object is associated with.",
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
+            },
+            "resourceId": {
+              "description": "Full ARM resource ID string that this recommendation object is associated with.",
+              "type": "string"
+            },
+            "resourceScope": {
+              "description": "Name of a resource type this recommendation applies, e.g. Subscription, ServerFarm, Site.",
+              "enum": [
+                "ServerFarm",
+                "Subscription",
+                "WebSite"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ResourceScopeType",
+                "modelAsString": true
+              }
+            },
+            "ruleName": {
+              "description": "Unique name of the rule.",
+              "type": "string"
+            },
+            "displayName": {
+              "description": "UI friendly name of the rule (may not be unique).",
+              "type": "string"
+            },
+            "message": {
+              "description": "Recommendation text.",
+              "type": "string"
+            },
+            "level": {
+              "description": "Level indicating how critical this recommendation can impact.",
+              "enum": [
+                "Critical",
+                "Warning",
+                "Information",
+                "NonUrgentSuggestion"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "NotificationLevel",
+                "modelAsString": false
+              }
+            },
+            "channels": {
+              "description": "List of channels that this recommendation can apply.",
+              "enum": [
+                "Notification",
+                "Api",
+                "Email",
+                "Webhook",
+                "All"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Channels",
+                "modelAsString": false
+              }
+            },
+            "categoryTags": {
+              "description": "The list of category tags that this recommendation belongs to.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "actionName": {
+              "description": "Name of action recommended by this object.",
+              "type": "string"
+            },
+            "enabled": {
+              "format": "int32",
+              "description": "True if this recommendation is still valid (i.e. \"actionable\"). False if it is invalid.",
+              "type": "integer"
+            },
+            "states": {
+              "description": "The list of states of this recommendation. If it's null then it should be considered \"Active\".",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "startTime": {
+              "format": "date-time",
+              "description": "The beginning time in UTC of a range that the recommendation refers to.",
+              "type": "string"
+            },
+            "endTime": {
+              "format": "date-time",
+              "description": "The end time in UTC of a range that the recommendation refers to.",
+              "type": "string"
+            },
+            "nextNotificationTime": {
+              "format": "date-time",
+              "description": "When to notify this recommendation next in UTC. Null means that this will never be notified anymore.",
+              "type": "string"
+            },
+            "notificationExpirationTime": {
+              "format": "date-time",
+              "description": "Date and time in UTC when this notification expires.",
+              "type": "string"
+            },
+            "notifiedTime": {
+              "format": "date-time",
+              "description": "Last timestamp in UTC this instance was actually notified. Null means that this recommendation hasn't been notified yet.",
+              "type": "string"
+            },
+            "score": {
+              "format": "double",
+              "description": "A metric value measured by the rule.",
+              "type": "number"
+            },
+            "isDynamic": {
+              "description": "True if this is associated with a dynamically added rule",
+              "type": "boolean"
+            },
+            "extensionName": {
+              "description": "Extension name of the portal if exists.",
+              "type": "string"
+            },
+            "bladeName": {
+              "description": "Deep link to a blade on the portal.",
+              "type": "string"
+            },
+            "forwardLink": {
+              "description": "Forward link to an external document associated with the rule.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendationCollection": {
+      "description": "Collection of recommendations.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recommendation"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendationRule": {
+      "description": "Represents a recommendation rule that the recommendation engine can perform.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "RecommendationRule resource specific properties",
+          "properties": {
+            "recommendationName": {
+              "description": "Unique name of the rule.",
+              "type": "string"
+            },
+            "displayName": {
+              "description": "UI friendly name of the rule.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Localized name of the rule (Good for UI).",
+              "type": "string"
+            },
+            "recommendationId": {
+              "format": "uuid",
+              "description": "Recommendation ID of an associated recommendation object tied to the rule, if exists.\nIf such an object doesn't exist, it is set to null.",
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
+            },
+            "description": {
+              "description": "Localized detailed description of the rule.",
+              "type": "string"
+            },
+            "actionName": {
+              "description": "Name of action that is recommended by this rule in string.",
+              "type": "string"
+            },
+            "level": {
+              "description": "Level of impact indicating how critical this rule is.",
+              "enum": [
+                "Critical",
+                "Warning",
+                "Information",
+                "NonUrgentSuggestion"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "NotificationLevel",
+                "modelAsString": false
+              }
+            },
+            "channels": {
+              "description": "List of available channels that this rule applies.",
+              "enum": [
+                "Notification",
+                "Api",
+                "Email",
+                "Webhook",
+                "All"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Channels",
+                "modelAsString": false
+              }
+            },
+            "categoryTags": {
+              "description": "The list of category tags that this recommendation rule belongs to.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "isDynamic": {
+              "description": "True if this is associated with a dynamically added rule",
+              "type": "boolean"
+            },
+            "extensionName": {
+              "description": "Extension name of the portal if exists. Applicable to dynamic rule only.",
+              "type": "string"
+            },
+            "bladeName": {
+              "description": "Deep link to a blade on the portal. Applicable to dynamic rule only.",
+              "type": "string"
+            },
+            "forwardLink": {
+              "description": "Forward link to an external document associated with the rule. Applicable to dynamic rule only.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "automationRuleId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "type": "Microsoft.SecurityInsights/incidents",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "order": 1,
+          "displayName": "High severity incidents escalation",
+          "createdTimeUtc": "2021-09-01T13:00:30Z",
+          "lastModifiedTimeUtc": "2021-09-01T13:00:30Z",
+          "createdBy": {
+            "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+            "email": "john.doe@contoso.com",
+            "userPrincipalName": "john@contoso.com",
+            "name": "john doe"
+          },
+          "lastModifiedBy": {
+            "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+            "email": "john.doe@contoso.com",
+            "userPrincipalName": "john@contoso.com",
+            "name": "john doe"
+          },
+          "triggeringLogic": {
+            "isEnabled": true,
+            "triggersOn": "Incidents",
+            "triggersWhen": "Created",
+            "conditions": [
+              {
+                "conditionType": "Property",
+                "conditionProperties": {
+                  "propertyName": "IncidentTitle",
+                  "operator": "Contains",
+                  "propertyValues": [
+                    "logon failure"
+                  ]
+                }
+              },
+              {
+                "conditionType": "Property",
+                "conditionProperties": {
+                  "propertyName": "HostName",
+                  "operator": "Equals",
+                  "propertyValues": [
+                    "TestVM"
+                  ]
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "order": 1,
+              "actionType": "ModifyProperties",
+              "actionConfiguration": {
+                "status": "Closed",
+                "classification": "BenignPositive",
+                "classificationReason": "SuspiciousButExpected"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

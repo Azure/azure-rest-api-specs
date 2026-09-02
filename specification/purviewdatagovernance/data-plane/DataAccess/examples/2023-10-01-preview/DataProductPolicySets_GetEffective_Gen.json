@@ -1,0 +1,44 @@
+{
+  "title": "DataProductPolicySets_GetEffective",
+  "operationId": "DataProductPolicySets_GetEffective",
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "dataProductId": "22222222-3333-4444-5555-666666666666"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "policySetId": "d3d3d3d3-eeee-ffff-aaaa-b3b3b3b3b3b3",
+        "targetResource": {
+          "targetId": "22222222-3333-4444-5555-666666666666",
+          "targetType": "DataProduct"
+        },
+        "policySetKind": "DataProduct",
+        "policies": {
+          "approvalTimeline": "P7D",
+          "permittedUseCases": [
+            {
+              "title": "Analytics",
+              "description": "Use the data for analytical reporting."
+            },
+            {
+              "title": "Reporting",
+              "description": "Use the data for operational reporting."
+            }
+          ],
+          "approvers": [
+            {
+              "objectId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+              "identityType": "User",
+              "displayName": "Jane Doe",
+              "email": "jane.doe@contoso.com"
+            }
+          ],
+          "termsOfUseRequired": true,
+          "partnerSharingPermitted": false,
+          "skipWorkflow": false
+        }
+      }
+    }
+  }
+}

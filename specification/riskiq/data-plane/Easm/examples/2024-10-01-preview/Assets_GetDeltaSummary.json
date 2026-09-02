@@ -1,0 +1,106 @@
+{
+  "operationId": "Assets_GetDeltaSummary",
+  "title": "Assets_GetDeltaSummary",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace",
+    "body": {
+      "priorDays": 30,
+      "date": "2024-03-17"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "range": 30,
+          "removed": 4,
+          "added": 36924,
+          "difference": 36920,
+          "kindSummaries": [
+            {
+              "kind": "ipAddress",
+              "removed": 0,
+              "added": 3,
+              "difference": 3
+            },
+            {
+              "kind": "contact",
+              "removed": 0,
+              "added": 0,
+              "difference": 0
+            },
+            {
+              "kind": "host",
+              "removed": 0,
+              "added": 11817,
+              "difference": 11817
+            },
+            {
+              "kind": "ipBlock",
+              "removed": 0,
+              "added": 0,
+              "difference": 0
+            }
+          ]
+        },
+        "daily": [
+          {
+            "date": "2024-03-17T00:00:00Z",
+            "deltas": [
+              {
+                "kind": "contact",
+                "removed": 0,
+                "added": 0,
+                "difference": 0,
+                "count": 61
+              },
+              {
+                "kind": "sslCert",
+                "removed": 0,
+                "added": 4,
+                "difference": 4,
+                "count": 1943
+              },
+              {
+                "kind": "domain",
+                "removed": 0,
+                "added": 0,
+                "difference": 0,
+                "count": 528
+              },
+              {
+                "kind": "ipBlock",
+                "removed": 0,
+                "added": 0,
+                "difference": 0,
+                "count": 44
+              }
+            ]
+          },
+          {
+            "date": "2024-02-17T00:00:00Z",
+            "deltas": [
+              {
+                "kind": "ipAddress",
+                "removed": 0,
+                "added": 0,
+                "difference": 0,
+                "count": 331105
+              },
+              {
+                "kind": "contact",
+                "removed": 0,
+                "added": 0,
+                "difference": 0,
+                "count": 61
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "res7687",
+    "accountName": "sto9699",
+    "blobInventoryPolicyName": "default",
+    "api-version": "2021-09-01",
+    "monitor": "true",
+    "properties": {
+      "properties": {
+        "policy": {
+          "enabled": true,
+          "type": "Inventory",
+          "rules": [
+            {
+              "enabled": true,
+              "name": "inventoryPolicyRule1",
+              "destination": "container1",
+              "definition": {
+                "filters": {
+                  "blobTypes": [
+                    "blockBlob",
+                    "appendBlob",
+                    "pageBlob"
+                  ],
+                  "prefixMatch": [
+                    "inventoryprefix1",
+                    "inventoryprefix2"
+                  ],
+                  "excludePrefix": [
+                    "excludeprefix1",
+                    "excludeprefix2"
+                  ],
+                  "includeSnapshots": true,
+                  "includeBlobVersions": true,
+                  "includeDeleted": true
+                },
+                "format": "Csv",
+                "schedule": "Daily",
+                "objectType": "Blob",
+                "schemaFields": [
+                  "Name",
+                  "Creation-Time",
+                  "Last-Modified",
+                  "Content-Length",
+                  "Content-MD5",
+                  "BlobType",
+                  "AccessTier",
+                  "AccessTierChangeTime",
+                  "Snapshot",
+                  "VersionId",
+                  "IsCurrentVersion",
+                  "Tags",
+                  "ContentType",
+                  "ContentEncoding",
+                  "ContentLanguage",
+                  "ContentCRC64",
+                  "CacheControl",
+                  "Metadata",
+                  "Deleted",
+                  "RemainingRetentionDays"
+                ]
+              }
+            },
+            {
+              "enabled": true,
+              "name": "inventoryPolicyRule2",
+              "definition": {
+                "format": "Parquet",
+                "schedule": "Weekly",
+                "objectType": "Container",
+                "schemaFields": [
+                  "Name",
+                  "Last-Modified",
+                  "Metadata",
+                  "LeaseStatus",
+                  "LeaseState",
+                  "LeaseDuration",
+                  "PublicAccess",
+                  "HasImmutabilityPolicy",
+                  "HasLegalHold",
+                  "Etag",
+                  "DefaultEncryptionScope",
+                  "DenyEncryptionScopeOverride",
+                  "ImmutableStorageWithVersioningEnabled",
+                  "Deleted",
+                  "Version",
+                  "DeletedTime",
+                  "RemainingRetentionDays"
+                ]
+              },
+              "destination": "container2"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/sto9699/inventoryPolicies/default",
+        "name": "DefaultInventoryPolicy",
+        "type": "Microsoft.Storage/storageAccounts/inventoryPolicies",
+        "properties": {
+          "policy": {
+            "enabled": true,
+            "type": "Inventory",
+            "rules": [
+              {
+                "enabled": true,
+                "name": "inventoryPolicyRule1",
+                "destination": "container1",
+                "definition": {
+                  "filters": {
+                    "blobTypes": [
+                      "blockBlob",
+                      "appendBlob",
+                      "pageBlob"
+                    ],
+                    "prefixMatch": [
+                      "inventoryprefix1",
+                      "inventoryprefix2"
+                    ],
+                    "excludePrefix": [
+                      "excludeprefix1",
+                      "excludeprefix2"
+                    ],
+                    "includeSnapshots": true,
+                    "includeBlobVersions": true,
+                    "includeDeleted": true
+                  },
+                  "format": "Csv",
+                  "schedule": "Daily",
+                  "objectType": "Blob",
+                  "schemaFields": [
+                    "Name",
+                    "Creation-Time",
+                    "Last-Modified",
+                    "Content-Length",
+                    "Content-MD5",
+                    "BlobType",
+                    "AccessTier",
+                    "AccessTierChangeTime",
+                    "Snapshot",
+                    "VersionId",
+                    "IsCurrentVersion",
+                    "Tags",
+                    "ContentType",
+                    "ContentEncoding",
+                    "ContentLanguage",
+                    "ContentCRC64",
+                    "CacheControl",
+                    "Metadata",
+                    "Deleted",
+                    "RemainingRetentionDays"
+                  ]
+                }
+              },
+              {
+                "enabled": true,
+                "name": "inventoryPolicyRule2",
+                "definition": {
+                  "format": "Parquet",
+                  "schedule": "Weekly",
+                  "objectType": "Container",
+                  "schemaFields": [
+                    "Name",
+                    "Last-Modified",
+                    "Metadata",
+                    "LeaseStatus",
+                    "LeaseState",
+                    "LeaseDuration",
+                    "PublicAccess",
+                    "HasImmutabilityPolicy",
+                    "HasLegalHold",
+                    "Etag",
+                    "DefaultEncryptionScope",
+                    "DenyEncryptionScopeOverride",
+                    "ImmutableStorageWithVersioningEnabled",
+                    "Deleted",
+                    "Version",
+                    "DeletedTime",
+                    "RemainingRetentionDays"
+                  ]
+                },
+                "destination": "container2"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

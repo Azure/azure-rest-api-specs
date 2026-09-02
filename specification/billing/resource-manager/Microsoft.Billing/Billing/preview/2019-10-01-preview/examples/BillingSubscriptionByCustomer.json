@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "customerName": "{customerName}",
+    "billingSubscriptionName": "{billingSubscriptionName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions/{billingSubscriptionName}",
+        "name": "{billingSubscriptionName}",
+        "type": "Microsoft.Billing/billingSubscriptions",
+        "properties": {
+          "displayName": "My Subscription",
+          "subscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
+          "subscriptionBillingStatus": "Active",
+          "lastMonthCharges": {
+            "currency": "USD",
+            "value": 5000.00
+          },
+          "monthToDateCharges": {
+            "currency": "USD",
+            "value": 600
+          },
+          "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
+          "customerDisplayName": "Customer1",
+          "reseller": {
+            "resellerId": "3b65b5a8-bd4f-4084-90e9-e1bd667a2b19",
+            "description": "Reseller2"
+          },
+          "skuId": "0002",
+          "skuDescription": "Microsoft Azure Standard"
+        }
+      }
+    }
+  }
+}

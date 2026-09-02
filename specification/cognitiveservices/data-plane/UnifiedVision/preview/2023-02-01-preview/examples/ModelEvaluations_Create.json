@@ -1,0 +1,28 @@
+{
+  "title": "Evaluate an existing model.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: An evaluation with the specified name already exists.",
+  "operationId": "ModelEvaluations_Create",
+  "parameters": {
+    "name": "my_model_name",
+    "evaluationName": "my_evaluation_name",
+    "api-version": "2023-02-01-preview",
+    "body": {
+      "evaluationParameters": {
+        "testDatasetName": "my_test_dataset_name"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "my_evaluation_name",
+        "modelName": "my_model_name",
+        "createdDateTime": "2023-01-13T20:46:22.127Z",
+        "updatedDateTime": "2023-01-13T20:46:22.127Z",
+        "status": "notStarted",
+        "evaluationParameters": {
+          "testDatasetName": "my_test_dataset_name"
+        }
+      }
+    }
+  }
+}

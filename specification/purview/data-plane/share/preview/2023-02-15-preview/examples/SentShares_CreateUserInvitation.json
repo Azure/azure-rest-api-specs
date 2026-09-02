@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-02-15-preview",
+    "endpoint": "accountName.purview.azure.com/share",
+    "sentShareId": "FF4A2AAE-8755-47BB-9C00-A774B5A7006E",
+    "sentShareInvitationId": "9F154FA4-93D1-426B-A908-A9CAC7192B21",
+    "sentShareInvitation": {
+      "properties": {
+        "targetEmail": "testReceiver@microsoft.com",
+        "notify": true,
+        "expirationDate": "2025-07-21T23:52:00.7691109Z"
+      },
+      "invitationKind": "User"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Date": "Thu, 4 Aug 2022 13:04:32 GMT",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "properties": {
+          "targetEmail": "testReceiver@microsoft.com",
+          "notify": true,
+          "expirationDate": "2025-07-21T23:52:00.7691109Z",
+          "sentAt": "2022-08-04T13:04:32.8172128Z",
+          "shareStatus": "Detached",
+          "senderName": "Test Sender",
+          "senderTenantName": "Test Tenant",
+          "senderEmail": "testSender@microsoft.com",
+          "state": "Succeeded"
+        },
+        "id": "9F154FA4-93D1-426B-A908-A9CAC7192B21",
+        "type": "sentShares/sentShareInvitations",
+        "invitationKind": "User"
+      }
+    }
+  }
+}

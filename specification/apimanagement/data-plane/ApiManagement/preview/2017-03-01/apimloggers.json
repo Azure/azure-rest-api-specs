@@ -1,0 +1,407 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on logger entity Azure API Management deployment.The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure EventHub.",
+    "version": "2017-03-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{apimBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "apimBaseUrl",
+        "description": "The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "paths": {
+    "/loggers": {
+      "get": {
+        "tags": [
+          "Loggers"
+        ],
+        "operationId": "Logger_List",
+        "description": "Lists a collection of loggers in the specified service instance.",
+        "x-ms-examples": {
+          "ApiManagementListLoggers": {
+            "$ref": "./examples/ApiManagementListLoggers.json"
+          }
+        },
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-log-event-hubs"
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| type  | eq                     |                                             |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of Logger entities.",
+            "schema": {
+              "$ref": "#/definitions/LoggerCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/LoggerContract"
+      }
+    },
+    "/loggers/{loggerid}": {
+      "get": {
+        "tags": [
+          "Loggers"
+        ],
+        "operationId": "Logger_Get",
+        "description": "Gets the details of the logger specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetLoggers": {
+            "$ref": "./examples/ApiManagementGetLoggers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/LoggerIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Logger entity.",
+            "schema": {
+              "$ref": "#/definitions/LoggerContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Loggers"
+        ],
+        "operationId": "Logger_CreateOrUpdate",
+        "description": "Creates or Updates a logger.",
+        "x-ms-examples": {
+          "ApiManagementPutLoggers": {
+            "$ref": "./examples/ApiManagementPutLoggers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/LoggerIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoggerContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Logger was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/LoggerContract"
+            }
+          },
+          "200": {
+            "description": "The existing logger was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/LoggerContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Loggers"
+        ],
+        "operationId": "Logger_Update",
+        "description": "Updates an existing logger.",
+        "x-ms-examples": {
+          "ApiManagementPatchLoggers": {
+            "$ref": "./examples/ApiManagementPatchLoggers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/LoggerIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoggerUpdateContract"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the logger to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The existing logger was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Loggers"
+        ],
+        "operationId": "Logger_Delete",
+        "description": "Deletes the specified logger.",
+        "x-ms-examples": {
+          "ApiManagementDeleteLoggers": {
+            "$ref": "./examples/ApiManagementDeleteLoggers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/LoggerIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the logger to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The logger was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LoggerCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoggerContract"
+          },
+          "description": "Logger values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Logger list representation."
+    },
+    "LoggerContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Logger Entity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LoggerContractProperties"
+        }
+      ],
+      "description": "Logger details."
+    },
+    "LoggerContractProperties": {
+      "properties": {
+        "loggerType": {
+          "type": "string",
+          "description": "Logger type.",
+          "enum": [
+            "azureEventHub"
+          ],
+          "x-ms-enum": {
+            "name": "LoggerType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "azureEventHub",
+                "description": "Azure Event Hub as log destination."
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Logger description.",
+          "maxLength": 256
+        },
+        "credentials": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The name and SendRule connection string of the event hub.",
+          "example": {
+            "name": "apim",
+            "connectionString": "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=..."
+          }
+        },
+        "isBuffered": {
+          "type": "boolean",
+          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
+        }
+      },
+      "required": [
+        "loggerType",
+        "credentials"
+      ],
+      "description": "The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs."
+    },
+    "LoggerUpdateContract": {
+      "properties": {
+        "loggerType": {
+          "type": "string",
+          "description": "Logger type.",
+          "enum": [
+            "azureEventHub"
+          ],
+          "x-ms-enum": {
+            "name": "LoggerType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "azureEventHub",
+                "description": "Azure Event Hub as log destination."
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Logger description."
+        },
+        "credentials": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Logger credentials."
+        },
+        "isBuffered": {
+          "type": "boolean",
+          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
+        }
+      },
+      "description": "Parameters supplied to the Update Logger operation."
+    }
+  },
+  "parameters": {
+    "LoggerIdParameter": {
+      "name": "loggerid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "description": "Logger identifier. Must be unique in the API Management service instance.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

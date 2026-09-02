@@ -1,0 +1,67 @@
+{
+  "title": "GoalAssignments_RecommendCapacity_MaximumSet",
+  "operationId": "GoalAssignments_RecommendCapacity",
+  "parameters": {
+    "serviceGroupName": "sg1",
+    "api-version": "2026-04-01-preview",
+    "goalAssignmentName": "ga1",
+    "body": {
+      "resourceIds": [
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1",
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Storage/storageAccounts/sa1"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceCapacities": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1",
+            "resourceType": "Microsoft.Compute/virtualMachines",
+            "skuName": "Standard_D4s_v3",
+            "location": "eastus",
+            "capacityAssessment": "[ZrEligible] Standard_D4s_v3 in eastus supports availability zones. Deploy VMs across availability zones for higher resiliency.",
+            "category": "ZrEligible",
+            "steps": [
+              "Deploy VMs across availability zones for higher resiliency."
+            ],
+            "links": [
+              "https://learn.microsoft.com/azure/virtual-machines/availability"
+            ]
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Storage/storageAccounts/sa1",
+            "resourceType": "Microsoft.Storage/storageAccounts",
+            "skuName": "Standard_LRS",
+            "location": "eastus",
+            "capacityAssessment": "[SkuIneligible] SKU 'Standard_LRS' in eastus is not eligible for redundancy. Eligible SKUs: Standard_ZRS, Standard_GZRS.",
+            "category": "SkuIneligible",
+            "suggestedSkus": [
+              "Standard_ZRS",
+              "Standard_GZRS"
+            ],
+            "steps": [
+              "Change SKU to one of: Standard_ZRS, Standard_GZRS and enable redundant deployment."
+            ],
+            "links": [
+              "https://learn.microsoft.com/azure/storage/common/storage-redundancy"
+            ]
+          }
+        ],
+        "recommendations": [
+          "1 resource(s) are eligible for zonal resiliency. Review the per-resource assessment for enablement steps.",
+          "1 resource(s) have SKUs that are not eligible for zone redundancy. Consider upgrading to an eligible SKU."
+        ],
+        "agentError": null
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/sg1/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/12345678-1234-1234-1234-123456789012",
+        "Location": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/sg1/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1",
+        "Retry-After": 30
+      }
+    }
+  }
+}

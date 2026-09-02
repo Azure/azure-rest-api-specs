@@ -1,0 +1,159 @@
+{
+  "parameters": {
+    "api-version": "2017-12-01",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "sku": {
+              "name": "B_Gen4_1",
+              "tier": "Basic",
+              "family": "Gen4",
+              "capacity": 1
+            },
+            "properties": {
+              "administratorLogin": "testuser",
+              "storageProfile": {
+                "storageMB": 5120,
+                "backupRetentionDays": 10,
+                "geoRedundantBackup": "Disabled"
+              },
+              "version": "9.5",
+              "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_1",
+              "userVisibleState": "Ready",
+              "fullyQualifiedDomainName": "pgtestsvc1.postgres.database.azure.com",
+              "earliestRestoreDate": "2018-03-04T21:01:55.1498475+00:00",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": []
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc1",
+            "name": "pgtestsvc1",
+            "type": "Microsoft.DBforPostgreSQL/servers"
+          },
+          {
+            "sku": {
+              "name": "GP_Gen4_2",
+              "tier": "GeneralPurpose",
+              "family": "Gen4",
+              "capacity": 2
+            },
+            "properties": {
+              "administratorLogin": "testuser",
+              "storageProfile": {
+                "storageMB": 5120,
+                "backupRetentionDays": 7,
+                "geoRedundantBackup": "Disabled"
+              },
+              "version": "9.6",
+              "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_2",
+              "userVisibleState": "Ready",
+              "fullyQualifiedDomainName": "pgtestsvc2.postgres.database.azure.com",
+              "earliestRestoreDate": "2018-03-07T21:01:55.1498475+00:00",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc2/privateEndpointConnections/private-endpoint-name-00000000-1111-2222-3333-444444444444",
+                  "properties": {
+                    "provisioningState": "Ready",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Auto-approved",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ]
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc2",
+            "name": "pgtestsvc2",
+            "type": "Microsoft.DBforPostgreSQL/servers"
+          },
+          {
+            "sku": {
+              "name": "GP_Gen4_4",
+              "tier": "GeneralPurpose",
+              "family": "Gen4",
+              "capacity": 4
+            },
+            "properties": {
+              "administratorLogin": "testuser",
+              "storageProfile": {
+                "storageMB": 204800,
+                "backupRetentionDays": 35,
+                "geoRedundantBackup": "Enabled"
+              },
+              "version": "9.6",
+              "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_0",
+              "userVisibleState": "Ready",
+              "fullyQualifiedDomainName": "pgtestsvc3.postgres.database.azure.com",
+              "earliestRestoreDate": "2018-03-01T00:11:08.55+00:00",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc3/privateEndpointConnections/private-endpoint-name-00000000-1111-2222-3333-444444444444",
+                  "properties": {
+                    "provisioningState": "Ready",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Auto-approved",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ]
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg1/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc3",
+            "name": "pgtestsvc3",
+            "type": "Microsoft.DBforPostgreSQL/servers"
+          },
+          {
+            "sku": {
+              "name": "B_Gen4_2",
+              "tier": "Basic",
+              "family": "Gen4",
+              "capacity": 2
+            },
+            "properties": {
+              "administratorLogin": "cloudsa",
+              "storageProfile": {
+                "storageMB": 128000,
+                "backupRetentionDays": 7,
+                "geoRedundantBackup": "Disabled"
+              },
+              "version": "9.6",
+              "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_0",
+              "userVisibleState": "Ready",
+              "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+              "earliestRestoreDate": "2018-03-14T21:08:24.637+00:00",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": []
+            },
+            "location": "westus",
+            "tags": {
+              "ElasticServer": "1"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc4",
+            "name": "pgtestsvc4",
+            "type": "Microsoft.DBforPostgreSQL/servers"
+          }
+        ]
+      }
+    }
+  }
+}

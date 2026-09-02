@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000",
+            "type": "Microsoft.Management/managementGroups",
+            "name": "20000000-0001-0000-0000-000000000000",
+            "properties": {
+              "tenantId": "20000000-0000-0000-0000-000000000000",
+              "displayName": "Group 1 Tenant 2",
+              "parent": {
+                "id": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000"
+              },
+              "permissions": "view",
+              "inheritedPermissions": "view",
+              "parentDisplayNameChain": [
+                "Tenant Root Group",
+                "Group 1 Tenant 2 Parent"
+              ],
+              "parentNameChain": [
+                "TenantRootGroup",
+                "Group1Tenant2Parent"
+              ],
+              "numberOfDescendants": 3,
+              "numberOfChildren": 2,
+              "numberOfChildGroups": 1
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/20000000-0004-0000-0000-000000000000",
+            "type": "Microsoft.Management/managementGroups",
+            "name": "20000000-0004-0000-0000-000000000000",
+            "properties": {
+              "tenantId": "20000000-0000-0000-0000-000000000000",
+              "displayName": "Group 4 Tenant 2",
+              "parent": {
+                "id": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000"
+              },
+              "permissions": "delete",
+              "inheritedPermissions": "delete",
+              "parentDisplayNameChain": [
+                "Tenant Root Group",
+                "Group 4 Tenant 2 Parent"
+              ],
+              "parentNameChain": [
+                "TenantRootGroup",
+                "Group4 Tenant2Parent"
+              ],
+              "numberOfDescendants": 0,
+              "numberOfChildren": 0,
+              "numberOfChildGroups": 0
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

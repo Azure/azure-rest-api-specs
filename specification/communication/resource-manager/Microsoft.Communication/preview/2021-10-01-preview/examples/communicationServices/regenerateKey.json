@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "communicationServiceName": "MyCommunicationResource",
+    "api-version": "2021-10-01-preview",
+    "parameters": {
+      "keyType": "Primary"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "primaryKey": "1234",
+        "primaryConnectionString": "endpoint=http://example.com;accesskey=1234"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Communication/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
+      },
+      "body": {
+        "primaryKey": "1234",
+        "primaryConnectionString": "endpoint=http://example.com;accesskey=1234"
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "policyAssignmentName": "EnforceNaming",
+    "api-version": "2018-05-01",
+    "parameters": {
+      "location": "eastus",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "displayName": "Enforce resource naming rules",
+        "description": "Force resource names to begin with given DeptA and end with -LC",
+        "metadata": {
+          "assignedBy": "Foo Bar"
+        },
+        "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+        "parameters": {
+          "prefix": {
+            "value": "DeptA"
+          },
+          "suffix": {
+            "value": "-LC"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "properties": {
+          "displayName": "Enforce resource naming rules",
+          "description": "Force resource names to begin with given DeptA and end with -LC",
+          "metadata": {
+            "assignedBy": "Special Someone"
+          },
+          "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+          "notScopes": [],
+          "parameters": {
+            "prefix": {
+              "value": "DeptA"
+            },
+            "suffix": {
+              "value": "-LC"
+            }
+          },
+          "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "e6d23f8d-af97-4fbc-bda6-00604e4e3d0a",
+          "tenantId": "4bee2b8a-1bee-47c2-90e9-404241551135"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/EnforceNaming",
+        "type": "Microsoft.Authorization/policyAssignments",
+        "name": "EnforceNaming"
+      }
+    }
+  }
+}

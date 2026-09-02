@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "profileName": "profile1",
+    "profileUpgradeParameters": {
+      "wafMappingList": [
+        {
+          "changeToWafPolicy": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/waf2"
+          },
+          "securityPolicyName": "securityPolicy1"
+        }
+      ]
+    },
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "profile1",
+        "type": "Microsoft.Cdn/profiles",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
+        "kind": "frontdoor",
+        "location": "Global",
+        "properties": {
+          "extendedProperties": {},
+          "frontDoorId": "id",
+          "originResponseTimeoutSeconds": 60,
+          "provisioningState": "Succeeded",
+          "resourceState": "Enabled"
+        },
+        "sku": {
+          "name": "Standard_AzureFrontDoor"
+        },
+        "tags": {}
+      }
+    },
+    "202": {
+      "body": {
+        "name": "profile1",
+        "type": "Microsoft.Cdn/profiles",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
+        "kind": "frontdoor",
+        "location": "Global",
+        "properties": {
+          "extendedProperties": {},
+          "frontDoorId": "id",
+          "originResponseTimeoutSeconds": 60,
+          "provisioningState": "Succeeded",
+          "resourceState": "Upgrading"
+        },
+        "sku": {
+          "name": "Standard_AzureFrontDoor"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-06-01"
+      }
+    }
+  },
+  "operationId": "AFDProfiles_Upgrade",
+  "title": "AFDProfiles_Upgrade"
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Add or update a service principal in your application",
+  "description": "Add or update an AAD service principal in your application.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "userId": "123",
+    "api-version": "1.2-preview",
+    "body": {
+      "type": "servicePrincipal",
+      "tenantId": "027fdad7-cf0f-470a-a26a-272197813322",
+      "objectId": "65e13aac-1443-4c49-9d49-57b87197cfff",
+      "roles": [
+        {
+          "role": "c7be2c6b-797e-4551-bb24-33709f6b2e20"
+        },
+        {
+          "role": "c495eb57-eb18-489e-9802-62c474e5645c",
+          "organization": "seattle"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "123",
+        "type": "servicePrincipal",
+        "tenantId": "027fdad7-cf0f-470a-a26a-272197813322",
+        "objectId": "65e13aac-1443-4c49-9d49-57b87197cfff",
+        "roles": [
+          {
+            "role": "c7be2c6b-797e-4551-bb24-33709f6b2e20"
+          },
+          {
+            "role": "c495eb57-eb18-489e-9802-62c474e5645c",
+            "organization": "seattle"
+          }
+        ]
+      }
+    }
+  }
+}

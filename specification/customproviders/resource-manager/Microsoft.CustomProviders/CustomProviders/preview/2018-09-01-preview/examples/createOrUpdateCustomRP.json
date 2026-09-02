@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "resourceProviderName": "newrp",
+    "resourceGroupName": "testRG",
+    "api-version": "2018-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceProvider": {
+      "location": "eastus",
+      "properties": {
+        "actions": [
+          {
+            "name": "TestAction",
+            "routingType": "Proxy",
+            "endpoint": "https://mytestendpoint/"
+          }
+        ],
+        "resourceTypes": [
+          {
+            "name": "TestResource",
+            "routingType": "Proxy,Cache",
+            "endpoint": "https://mytestendpoint2/"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "newrp",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.CustomProviders/resourceProviders/newrp",
+        "type": "Microsoft.CustomProviders/resourceProviders",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Accepted",
+          "actions": [
+            {
+              "name": "TestAction",
+              "routingType": "Proxy",
+              "endpoint": "https://mytestendpoint/"
+            }
+          ],
+          "resourceTypes": [
+            {
+              "name": "TestResource",
+              "routingType": "Proxy,Cache",
+              "endpoint": "https://mytestendpoint2/"
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "newrp",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.CustomProviders/resourceProviders/newrp",
+        "type": "Microsoft.CustomProviders/resourceProviders",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Accepted",
+          "actions": [
+            {
+              "name": "TestAction",
+              "routingType": "Proxy",
+              "endpoint": "https://mytestendpoint/"
+            }
+          ],
+          "resourceTypes": [
+            {
+              "name": "TestResource",
+              "routingType": "Proxy,Cache",
+              "endpoint": "https://mytestendpoint2/"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

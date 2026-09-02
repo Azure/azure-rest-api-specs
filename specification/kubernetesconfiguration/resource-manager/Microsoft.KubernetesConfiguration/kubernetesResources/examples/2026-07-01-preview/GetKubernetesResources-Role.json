@@ -1,0 +1,75 @@
+{
+  "title": "Get KubernetesResources - Role",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "role-pod-reader-default",
+    "api-version": "2026-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/role-pod-reader-default",
+        "name": "role-pod-reader-default",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "Role",
+          "metadata": {
+            "name": "pod-reader",
+            "namespaceName": "default",
+            "uid": "c5d6e7f8-a9b0-1234-cdef-456789012345",
+            "resourceVersion": "1356789",
+            "creationTimestamp": "2026-01-20T14:00:00Z"
+          },
+          "spec": {
+            "rbacRules": [
+              {
+                "apiGroups": [
+                  ""
+                ],
+                "resources": [
+                  "pods",
+                  "pods/log"
+                ],
+                "verbs": [
+                  "get",
+                  "list",
+                  "watch"
+                ]
+              },
+              {
+                "apiGroups": [
+                  "apps"
+                ],
+                "resources": [
+                  "deployments",
+                  "replicasets"
+                ],
+                "verbs": [
+                  "get",
+                  "list"
+                ]
+              }
+            ]
+          },
+          "status": {},
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "operationId": "MeshApplication_List",
+  "description": "This example shows how to list all application resources.",
+  "parameters": {
+    "api-version": "6.4-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "ContinuationToken": "",
+        "Items": [
+          {
+            "name": "sampleApplication",
+            "properties": {
+              "description": "Service Fabric Mesh sample application.",
+              "serviceNames": [
+                "helloWorldService"
+              ],
+              "healthState": "Ok",
+              "status": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

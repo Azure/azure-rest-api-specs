@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "OneResourceGroupName",
+    "api-version": "2018-07-12",
+    "resourceName": "contoso-dl",
+    "parameters": {
+      "location": "West US",
+      "sku": {
+        "name": "S1"
+      },
+      "etag": "etag1",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "id": "someid",
+      "properties": {
+        "state": "Stopping",
+        "nodes": [
+          {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "state": "Stopping",
+            "name": "Node 1",
+            "azureSku": "Int1",
+            "azureLocation": "WestUs"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "West US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "id": "someid",
+        "etag": "etag1",
+        "properties": {
+          "state": "Stopping",
+          "nodes": [
+            {
+              "id": "00000000-0000-0000-0000-000000000000",
+              "state": "Stopping",
+              "name": "Node 1",
+              "azureSku": "Int1",
+              "azureLocation": "WestUs"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "location": "West US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "id": "someid",
+        "properties": {
+          "state": "Stopping",
+          "nodes": [
+            {
+              "id": "00000000-0000-0000-0000-000000000000",
+              "state": "Stopping",
+              "name": "Node 1",
+              "azureSku": "Int1",
+              "azureLocation": "WestUs"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

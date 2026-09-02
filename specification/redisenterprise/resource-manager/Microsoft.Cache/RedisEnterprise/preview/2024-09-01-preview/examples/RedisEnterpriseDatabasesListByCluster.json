@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+            "name": "cache1/default",
+            "type": "Microsoft.Cache/redisEnterprise/databases",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceState": "Running",
+              "clientProtocol": "Encrypted",
+              "clusteringPolicy": "OSSCluster",
+              "evictionPolicy": "AllKeysLRU",
+              "persistence": {
+                "rdbEnabled": true,
+                "rdbFrequency": "12h"
+              },
+              "port": 10000,
+              "modules": [
+                {
+                  "name": "RediSearch",
+                  "args": "",
+                  "version": "1.0.0"
+                }
+              ],
+              "deferUpgrade": "NotDeferred",
+              "redisVersion": "6.0"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "monitorName": "mySapMonitor",
+    "providerInstanceName": "myProviderInstance",
+    "resource": {
+      "properties": {
+        "providerSettings": {
+          "providerType": "SapNetWeaver",
+          "sapClientId": "111",
+          "sapHostFileEntries": [
+            "127.0.0.1 name fqdn"
+          ],
+          "sapHostname": "name",
+          "sapInstanceNr": "00",
+          "sapPassword": "****",
+          "sapPasswordUri": "",
+          "sapPortNumber": "1234",
+          "sapSid": "SID",
+          "sapUsername": "username",
+          "sslPreference": "RootCertificate"
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myProviderInstance",
+        "type": "Microsoft.Workloads/monitors/providerInstances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance",
+        "properties": {
+          "health": {
+            "healthState": "Healthy",
+            "impactingReasons": "None"
+          },
+          "providerSettings": {
+            "providerType": "SapNetWeaver",
+            "sapClientId": "111",
+            "sapHostFileEntries": [
+              "127.0.0.1 name fqdn"
+            ],
+            "sapHostname": "name",
+            "sapInstanceNr": "00",
+            "sapPasswordUri": "",
+            "sapPortNumber": "1234",
+            "sapSid": "SID",
+            "sapUsername": "username",
+            "sslPreference": "RootCertificate"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myProviderInstance",
+        "type": "Microsoft.Workloads/monitors/providerInstances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance",
+        "properties": {
+          "health": {
+            "healthState": "Healthy",
+            "impactingReasons": "None"
+          },
+          "providerSettings": {
+            "providerType": "SapNetWeaver",
+            "sapClientId": "111",
+            "sapHostFileEntries": [
+              "127.0.0.1 name fqdn"
+            ],
+            "sapHostname": "name",
+            "sapInstanceNr": "00",
+            "sapPasswordUri": "",
+            "sapPortNumber": "1234",
+            "sapSid": "SID",
+            "sapUsername": "username",
+            "sslPreference": "RootCertificate"
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  },
+  "operationId": "ProviderInstances_Create",
+  "title": "Create a SAP monitor NetWeaver provider with Root Certificate"
+}

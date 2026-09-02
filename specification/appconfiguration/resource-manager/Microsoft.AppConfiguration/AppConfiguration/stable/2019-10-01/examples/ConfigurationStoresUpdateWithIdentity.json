@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
+    "resourceGroupName": "myResourceGroup",
+    "configStoreName": "contoso",
+    "api-version": "2019-10-01",
+    "configStoreUpdateParameters": {
+      "tags": {
+        "Category": "Marketing"
+      },
+      "sku": {
+        "name": "Standard"
+      },
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourcegroups/myResourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AppConfiguration/configurationStores",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "creationDate": "2018-04-24T16:30:55+00:00",
+          "endpoint": "https://contoso.azconfig.io"
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "identity": {
+          "principalId": "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA",
+          "tenantId": "BBBBBBBB-BBBB-BBBB-BBBB-BBBBBBBBBBBB",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourcegroups/myResourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {
+              "clientId": "CCCCCCCC-CCCC-CCCC-CCCC-CCCCCCCCCCCC",
+              "principalId": "DDDDDDDD-DDDD-DDDD-DDDD-DDDDDDDDDDDD"
+            }
+          }
+        },
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
+        "name": "contoso",
+        "location": "westus",
+        "tags": {
+          "Category": "Marketing"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.AppConfiguration/configurationStores",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationDate": "2018-04-24T16:30:55+00:00",
+          "endpoint": "https://contoso.azconfig.io"
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "identity": {
+          "principalId": "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA",
+          "tenantId": "BBBBBBBB-BBBB-BBBB-BBBB-BBBBBBBBBBBB",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourcegroups/myResourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {
+              "clientId": "CCCCCCCC-CCCC-CCCC-CCCC-CCCCCCCCCCCC",
+              "principalId": "DDDDDDDD-DDDD-DDDD-DDDD-DDDDDDDDDDDD"
+            }
+          }
+        },
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
+        "name": "contoso",
+        "location": "westus",
+        "tags": {
+          "Category": "Marketing"
+        }
+      }
+    }
+  }
+}

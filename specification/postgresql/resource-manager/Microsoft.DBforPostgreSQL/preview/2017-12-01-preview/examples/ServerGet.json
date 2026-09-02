@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "serverName": "pgtestsvc1",
+    "resourceGroupName": "testrg",
+    "api-version": "2017-12-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "B_Gen4_1",
+          "tier": "Basic",
+          "family": "Gen4",
+          "capacity": 1
+        },
+        "properties": {
+          "administratorLogin": "testuser",
+          "storageProfile": {
+            "storageMB": 5120,
+            "backupRetentionDays": 10,
+            "geoRedundantBackup": "Disabled"
+          },
+          "version": "9.5",
+          "sslEnforcement": "Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "pgtestsvc1.postgres.database.azure.com",
+          "earliestRestoreDate": "2018-03-04T21:00:58.9243541+00:00",
+          "replicationRole": "",
+          "masterServerId": ""
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc1",
+        "name": "pgtestsvc1",
+        "type": "Microsoft.DBforPostgreSQL/servers"
+      }
+    }
+  }
+}

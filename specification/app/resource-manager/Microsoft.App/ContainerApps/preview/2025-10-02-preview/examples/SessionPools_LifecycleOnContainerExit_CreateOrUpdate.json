@@ -1,0 +1,195 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "resourceGroupName": "rg",
+    "sessionPoolEnvelope": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "East US",
+      "properties": {
+        "containerType": "CustomContainer",
+        "customContainerTemplate": {
+          "containers": [
+            {
+              "name": "testinitcontainer",
+              "args": [
+                "-c",
+                "while true; do echo hello; sleep 10;done"
+              ],
+              "command": [
+                "/bin/sh"
+              ],
+              "image": "repo/testcontainer:v4",
+              "resources": {
+                "cpu": 0.25,
+                "memory": "0.5Gi"
+              }
+            }
+          ],
+          "ingress": {
+            "targetPort": 80
+          },
+          "registryCredentials": {
+            "identity": "/subscriptions/7a497526-bb8d-4816-9795-db1418a1f977/resourcegroups/test/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testSP",
+            "server": "test.azurecr.io"
+          }
+        },
+        "dynamicPoolConfiguration": {
+          "lifecycleConfiguration": {
+            "lifecycleType": "OnContainerExit",
+            "maxAlivePeriodInSeconds": 86400
+          }
+        },
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+        "managedIdentitySettings": [
+          {
+            "identity": "system",
+            "lifecycle": "Main"
+          }
+        ],
+        "poolManagementType": "Dynamic",
+        "scaleConfiguration": {
+          "maxConcurrentSessions": 500,
+          "readySessionInstances": 100
+        },
+        "sessionNetworkConfiguration": {
+          "status": "EgressEnabled"
+        }
+      }
+    },
+    "sessionPoolName": "testsessionpool",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testsessionpool",
+        "type": "Microsoft.App/sessionPools",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "bce8c037-3d10-44a4-a970-25f799611fc6",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "location": "East US",
+        "properties": {
+          "containerType": "CustomContainer",
+          "customContainerTemplate": {
+            "containers": [
+              {
+                "name": "testinitcontainer",
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainer:v4",
+                "resources": {
+                  "cpu": 0.25,
+                  "memory": "0.5Gi"
+                }
+              }
+            ],
+            "ingress": {
+              "targetPort": 80
+            },
+            "registryCredentials": {
+              "identity": "/subscriptions/7a497526-bb8d-4816-9795-db1418a1f977/resourcegroups/test/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testSP",
+              "server": "test.azurecr.io"
+            }
+          },
+          "dynamicPoolConfiguration": {
+            "lifecycleConfiguration": {
+              "lifecycleType": "OnContainerExit",
+              "maxAlivePeriodInSeconds": 86400
+            }
+          },
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "nodeCount": 1,
+          "poolManagementEndpoint": "https://testsessionpool.agreeableriver-3d30edf1.eastus.azurecontainerapps.io",
+          "poolManagementType": "Dynamic",
+          "provisioningState": "Succeeded",
+          "scaleConfiguration": {
+            "maxConcurrentSessions": 500,
+            "readySessionInstances": 100
+          },
+          "sessionNetworkConfiguration": {
+            "status": "EgressEnabled"
+          }
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "testsessionpool",
+        "type": "Microsoft.App/sessionPools",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "bce8c037-3d10-44a4-a970-25f799611fc6",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "location": "East US",
+        "properties": {
+          "containerType": "CustomContainer",
+          "customContainerTemplate": {
+            "containers": [
+              {
+                "name": "testinitcontainer",
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainer:v4",
+                "resources": {
+                  "cpu": 0.25,
+                  "memory": "0.5Gi"
+                }
+              }
+            ],
+            "ingress": {
+              "targetPort": 80
+            },
+            "registryCredentials": {
+              "identity": "/subscriptions/7a497526-bb8d-4816-9795-db1418a1f977/resourcegroups/test/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testSP",
+              "server": "test.azurecr.io"
+            }
+          },
+          "dynamicPoolConfiguration": {
+            "lifecycleConfiguration": {
+              "lifecycleType": "OnContainerExit",
+              "maxAlivePeriodInSeconds": 86400
+            }
+          },
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "managedIdentitySettings": [
+            {
+              "identity": "system",
+              "lifecycle": "Main"
+            }
+          ],
+          "poolManagementEndpoint": "https://testsessionpool.agreeableriver-3d30edf1.eastus.azurecontainerapps.io",
+          "poolManagementType": "Dynamic",
+          "provisioningState": "InProgress",
+          "scaleConfiguration": {
+            "maxConcurrentSessions": 500,
+            "readySessionInstances": 100
+          },
+          "sessionNetworkConfiguration": {
+            "status": "EgressEnabled"
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerAppsSessionPools_CreateOrUpdate",
+  "title": "Create or Update Session Pool with lifecycle OnContainerExit Timed"
+}

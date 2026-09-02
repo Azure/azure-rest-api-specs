@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2021-10-20_preview2",
+    "id": "90eb00c4-234e-4df7-a231-ef7895518384",
+    "patch": {
+      "name": "MainUpdate"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "90eb00c4-234e-4df7-a231-ef7895518384",
+        "name": "MainUpdate",
+        "fallbackQueueId": "MainQueue",
+        "queueSelectors": [
+          {
+            "kind": "conditional",
+            "condition": {
+              "kind": "expression-rule",
+              "language": "PowerFx",
+              "expression": "1 = 1"
+            },
+            "labelSelectors": [
+              {
+                "key": "foo",
+                "operator": "equal",
+                "value": "bar"
+              }
+            ]
+          }
+        ],
+        "prioritizationRule": {
+          "kind": "static-rule",
+          "value": "2"
+        },
+        "workerSelectors": []
+      }
+    }
+  }
+}

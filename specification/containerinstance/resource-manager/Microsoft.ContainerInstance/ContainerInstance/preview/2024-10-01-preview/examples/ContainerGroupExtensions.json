@@ -1,0 +1,208 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2024-10-01-preview",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "zones": [
+      "1"
+    ],
+    "containerGroup": {
+      "location": "eastus2",
+      "properties": {
+        "containers": [
+          {
+            "name": "demo1",
+            "properties": {
+              "command": [],
+              "environmentVariables": [],
+              "image": "nginx",
+              "ports": [
+                {
+                  "port": 80
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "cpu": 1,
+                  "memoryInGB": 1.5
+                }
+              }
+            }
+          }
+        ],
+        "imageRegistryCredentials": [],
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
+          "type": "Private"
+        },
+        "osType": "Linux",
+        "subnetIds": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-rg-vnet/subnets/test-subnet"
+          }
+        ],
+        "extensions": [
+          {
+            "name": "kube-proxy",
+            "properties": {
+              "extensionType": "kube-proxy",
+              "version": "1.0",
+              "settings": {
+                "clusterCidr": "10.240.0.0/16",
+                "kubeVersion": "v1.9.10"
+              },
+              "protectedSettings": {
+                "kubeConfig": "<kubeconfig encoded string>"
+              }
+            }
+          },
+          {
+            "name": "vk-realtime-metrics",
+            "properties": {
+              "extensionType": "realtime-metrics",
+              "version": "1.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "provisioningState": "Pending",
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "image": "nginx",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "extensions": [
+            {
+              "name": "kube-proxy",
+              "properties": {
+                "extensionType": "kube-proxy",
+                "version": "1.0",
+                "settings": {
+                  "clusterCidr": "10.240.0.0/16",
+                  "kubeVersion": "v1.9.10"
+                }
+              }
+            },
+            {
+              "name": "vk-realtime-metrics",
+              "properties": {
+                "extensionType": "realtime-metrics",
+                "version": "1.0"
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Pending"
+          },
+          "subnetIds": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-rg-vnet/subnets/test-subnet"
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/test-rg/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus2"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "provisioningState": "Pending",
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "image": "nginx",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "extensions": [
+            {
+              "name": "kube-proxy",
+              "properties": {
+                "extensionType": "kube-proxy",
+                "version": "1.0",
+                "settings": {
+                  "clusterCidr": "10.240.0.0/16",
+                  "kubeVersion": "v1.9.10"
+                }
+              }
+            },
+            {
+              "name": "vk-realtime-metrics",
+              "properties": {
+                "extensionType": "realtime-metrics",
+                "version": "1.0"
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Running"
+          },
+          "subnetIds": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-rg-vnet/subnets/test-subnet"
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/test-rg/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus2"
+      }
+    }
+  }
+}

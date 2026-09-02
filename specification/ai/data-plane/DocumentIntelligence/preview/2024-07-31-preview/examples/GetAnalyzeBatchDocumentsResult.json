@@ -1,0 +1,48 @@
+{
+  "operationId": "DocumentModels_GetAnalyzeBatchResult",
+  "title": "Get Analyze Batch Documents Result",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-07-31-preview",
+    "modelId": "prebuilt-invoice",
+    "resultId": "3b31320d-8bab-4f88-b19c-2322a7f11034"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "completed",
+        "percentCompleted": 100,
+        "createdDateTime": "2021-09-24T13:00:46Z",
+        "lastUpdatedDateTime": "2021-09-24T13:00:49Z",
+        "result": {
+          "succeededCount": 1,
+          "failedCount": 1,
+          "skippedCount": 1,
+          "details": [
+            {
+              "sourceUrl": "https://myStorageAccount.blob.core.windows.net/myContainer/trainingDocs/file1.pdf",
+              "resultUrl": "https://myStorageAccount.blob.core.windows.net/myOutputContainer/trainingDocsResult/file1.pdf.ocr.json",
+              "status": "succeeded"
+            },
+            {
+              "sourceUrl": "https://myStorageAccount.blob.core.windows.net/myContainer/trainingDocs/file2.jpg",
+              "status": "failed",
+              "error": {
+                "code": "InvalidRequest",
+                "message": "Invalid request.",
+                "innererror": {
+                  "code": "InvalidContent",
+                  "message": "The file format is unsupported or corrupted. Refer to documentation for the list of supported formats."
+                }
+              }
+            },
+            {
+              "sourceUrl": "https://myStorageAccount.blob.core.windows.net/myContainer/trainingDocs/file3.png",
+              "status": "skipped"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

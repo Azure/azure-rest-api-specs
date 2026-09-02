@@ -1,0 +1,32 @@
+{
+  "title": "Update an enrollment group",
+  "description": "Update an enrollment group.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "enrollmentGroupId": "myEnrollmentGroupId",
+    "api-version": "2022-10-31-preview",
+    "body": {
+      "displayName": "My new group name"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "myEnrollmentGroupId",
+        "displayName": "My new group name",
+        "enabled": true,
+        "type": "iot",
+        "attestation": {
+          "type": "symmetricKey",
+          "symmetricKey": {
+            "primaryKey": "<primary-symmetric-key>",
+            "secondaryKey": "<secondary-symmetric-key>"
+          }
+        },
+        "etag": "IjA4MDUwMTJiLTAwMDAtMDcwMC0wMDAwLTYyODJhOWVjMDAwMCI=",
+        "idScope": "scope1"
+      }
+    }
+  }
+}

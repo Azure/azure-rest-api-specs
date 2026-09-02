@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "Endpoint": "{Endpoint}",
+    "evaluation": {
+      "enablePolicyOptimization": true,
+      "name": "myFirstEvaluation",
+      "startTime": "2018-12-19T00:00:00Z",
+      "endTime": "2019-01-19T00:00:00Z",
+      "policies": [
+        {
+          "name": "Custom learning settings 1",
+          "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
+        }
+      ]
+    },
+    "evaluationId": "id",
+    "Ocp-Apim-Subscription-Key": "{API key}"
+  },
+  "responses": {
+    "200": {}
+  }
+}

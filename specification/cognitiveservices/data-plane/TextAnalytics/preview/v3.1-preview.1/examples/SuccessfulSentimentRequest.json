@@ -1,0 +1,323 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "language": "en",
+          "id": "1",
+          "text": "Great atmosphere. Close to plenty of restaurants, hotels, and transit! Staff are friendly and helpful."
+        },
+        {
+          "language": "en",
+          "id": "2",
+          "text": "Bad atmosphere. Not close to plenty of restaurants, hotels, and transit! Staff are not friendly and helpful."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "id": "1",
+            "sentiment": "positive",
+            "confidenceScores": {
+              "positive": 1.0,
+              "neutral": 0.0,
+              "negative": 0.0
+            },
+            "sentences": [
+              {
+                "text": "Great atmosphere.",
+                "sentiment": "positive",
+                "confidenceScores": {
+                  "positive": 1.0,
+                  "neutral": 0.0,
+                  "negative": 0.0
+                },
+                "offset": 0,
+                "length": 17,
+                "aspects": [
+                  {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                      "positive": 1.0,
+                      "negative": 0.0
+                    },
+                    "offset": 6,
+                    "length": 10,
+                    "text": "atmosphere",
+                    "relations": [
+                      {
+                        "relationType": "opinion",
+                        "ref": "#/documents/0/sentences/0/opinions/0"
+                      }
+                    ]
+                  }
+                ],
+                "opinions": [
+                  {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                      "positive": 1.0,
+                      "negative": 0.0
+                    },
+                    "offset": 0,
+                    "length": 5,
+                    "text": "great",
+                    "isNegated": false
+                  }
+                ]
+              },
+              {
+                "text": "Close to plenty of restaurants, hotels, and transit!",
+                "sentiment": "neutral",
+                "confidenceScores": {
+                  "positive": 0.13,
+                  "neutral": 0.86,
+                  "negative": 0.01
+                },
+                "offset": 18,
+                "length": 52,
+                "aspects": [
+                  {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                      "positive": 0.99,
+                      "negative": 0.01
+                    },
+                    "offset": 37,
+                    "length": 11,
+                    "text": "restaurants",
+                    "relations": [
+                      {
+                        "relationType": "opinion",
+                        "ref": "#/documents/0/sentences/1/opinions/0"
+                      }
+                    ]
+                  },
+                  {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                      "positive": 0.99,
+                      "negative": 0.01
+                    },
+                    "offset": 50,
+                    "length": 6,
+                    "text": "hotels",
+                    "relations": [
+                      {
+                        "relationType": "opinion",
+                        "ref": "#/documents/0/sentences/1/opinions/0"
+                      }
+                    ]
+                  }
+                ],
+                "opinions": [
+                  {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                      "positive": 0.99,
+                      "negative": 0.01
+                    },
+                    "offset": 18,
+                    "length": 15,
+                    "text": "close to plenty",
+                    "isNegated": false
+                  }
+                ]
+              },
+              {
+                "text": "Staff are friendly and helpful.",
+                "sentiment": "positive",
+                "confidenceScores": {
+                  "positive": 1.0,
+                  "neutral": 0.0,
+                  "negative": 0.0
+                },
+                "offset": 71,
+                "length": 31,
+                "aspects": [
+                  {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                      "positive": 1.0,
+                      "negative": 0.0
+                    },
+                    "offset": 71,
+                    "length": 5,
+                    "text": "Staff",
+                    "relations": [
+                      {
+                        "relationType": "opinion",
+                        "ref": "#/documents/0/sentences/2/opinions/0"
+                      }
+                    ]
+                  }
+                ],
+                "opinions": [
+                  {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                      "positive": 1.0,
+                      "negative": 0.0
+                    },
+                    "offset": 81,
+                    "length": 8,
+                    "text": "friendly",
+                    "isNegated": false
+                  }
+                ]
+              }
+            ],
+            "warnings": []
+          },
+          {
+            "id": "2",
+            "sentiment": "negative",
+            "confidenceScores": {
+              "positive": 0.01,
+              "neutral": 0.14,
+              "negative": 0.85
+            },
+            "sentences": [
+              {
+                "text": "Bad atmosphere.",
+                "sentiment": "negative",
+                "confidenceScores": {
+                  "positive": 0.0,
+                  "neutral": 0.0,
+                  "negative": 1.0
+                },
+                "offset": 8,
+                "length": 15,
+                "aspects": [
+                  {
+                    "sentiment": "negative",
+                    "confidenceScores": {
+                      "positive": 0.01,
+                      "negative": 0.99
+                    },
+                    "offset": 4,
+                    "length": 10,
+                    "text": "atmosphere",
+                    "relations": [
+                      {
+                        "relationType": "opinion",
+                        "ref": "#/documents/1/sentences/0/opinions/0"
+                      }
+                    ]
+                  }
+                ],
+                "opinions": [
+                  {
+                    "sentiment": "negative",
+                    "confidenceScores": {
+                      "positive": 0.01,
+                      "negative": 0.99
+                    },
+                    "offset": 0,
+                    "length": 3,
+                    "text": "bad",
+                    "isNegated": false
+                  }
+                ]
+              },
+              {
+                "text": "Not close to plenty of restaurants, hotels, and transit!",
+                "sentiment": "negative",
+                "confidenceScores": {
+                  "positive": 0.02,
+                  "neutral": 0.44,
+                  "negative": 0.54
+                },
+                "offset": 16,
+                "length": 56,
+                "aspects": [
+                  {
+                    "sentiment": "negative",
+                    "confidenceScores": {
+                      "positive": 0.03,
+                      "negative": 0.97
+                    },
+                    "offset": 39,
+                    "length": 11,
+                    "text": "restaurants",
+                    "relations": [
+                      {
+                        "relationType": "opinion",
+                        "ref": "#/documents/1/sentences/1/opinions/0"
+                      }
+                    ]
+                  }
+                ],
+                "opinions": [
+                  {
+                    "sentiment": "negative",
+                    "confidenceScores": {
+                      "positive": 0.03,
+                      "negative": 0.97
+                    },
+                    "offset": 20,
+                    "length": 5,
+                    "text": "close",
+                    "isNegated": true
+                  }
+                ]
+              },
+              {
+                "text": "Staff are not friendly and helpful.",
+                "sentiment": "negative",
+                "confidenceScores": {
+                  "positive": 0.0,
+                  "neutral": 0.0,
+                  "negative": 1.0
+                },
+                "offset": 73,
+                "length": 35,
+                "aspects": [
+                  {
+                    "sentiment": "negative",
+                    "confidenceScores": {
+                      "positive": 0.0,
+                      "negative": 1.0
+                    },
+                    "offset": 73,
+                    "length": 5,
+                    "text": "Staff",
+                    "relations": [
+                      {
+                        "relationType": "opinion",
+                        "ref": "#/documents/1/sentences/2/opinions/0"
+                      }
+                    ]
+                  }
+                ],
+                "opinions": [
+                  {
+                    "sentiment": "negative",
+                    "confidenceScores": {
+                      "positive": 0.0,
+                      "negative": 1.0
+                    },
+                    "offset": 87,
+                    "length": 8,
+                    "text": "friendly",
+                    "isNegated": true
+                  }
+                ]
+              }
+            ],
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2020-04-01"
+      }
+    }
+  }
+}

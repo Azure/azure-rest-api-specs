@@ -1,0 +1,127 @@
+{
+  "parameters": {
+    "api-version": "2020-04-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "policyName": "Policy1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Policy1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/Policy1",
+        "type": "Microsoft.Network/frontdoorwebapplicationfirewallpolicies",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "resourceState": "Enabled",
+          "provisioningState": "Succeeded",
+          "policySettings": {
+            "enabledState": "Enabled",
+            "mode": "Prevention",
+            "redirectUrl": "http://www.bing.com",
+            "customBlockResponseStatusCode": 499,
+            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "Rule1",
+                "priority": 1,
+                "enabledState": "Enabled",
+                "ruleType": "RateLimitRule",
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 1000,
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "IPMatch",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ],
+                    "transforms": []
+                  }
+                ],
+                "action": "Block"
+              },
+              {
+                "name": "Rule2",
+                "priority": 2,
+                "enabledState": "Enabled",
+                "ruleType": "MatchRule",
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 0,
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "GeoMatch",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "CH"
+                    ]
+                  },
+                  {
+                    "matchVariable": "RequestHeader",
+                    "selector": "UserAgent",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "windows"
+                    ],
+                    "transforms": [
+                      "Lowercase"
+                    ]
+                  }
+                ],
+                "action": "Block"
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "DefaultRuleSet",
+                "ruleSetVersion": "1.0",
+                "exclusions": [
+                  {
+                    "matchVariable": "RequestHeaderNames",
+                    "selectorMatchOperator": "Equals",
+                    "selector": "User-Agent"
+                  }
+                ],
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "SQLI",
+                    "rules": [
+                      {
+                        "ruleId": "942100",
+                        "enabledState": "Enabled",
+                        "action": "Redirect"
+                      },
+                      {
+                        "ruleId": "942110",
+                        "enabledState": "Disabled"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "frontendEndpointLinks": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontdoors/fd1/frontendendpoints/fd1-azurefd-net"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

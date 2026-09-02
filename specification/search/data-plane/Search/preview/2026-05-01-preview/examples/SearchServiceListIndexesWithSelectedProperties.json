@@ -1,0 +1,39 @@
+{
+  "operationId": "Indexes_ListWithSelectedProperties",
+  "title": "SearchServiceListIndexesWithSelectedProperties",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2026-05-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "$select": [
+      "name",
+      "description"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "preview-test",
+            "description": "description",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Edm.String",
+                "searchable": true,
+                "filterable": true,
+                "retrievable": true,
+                "stored": true,
+                "sortable": true,
+                "facetable": true,
+                "key": true,
+                "synonymMaps": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

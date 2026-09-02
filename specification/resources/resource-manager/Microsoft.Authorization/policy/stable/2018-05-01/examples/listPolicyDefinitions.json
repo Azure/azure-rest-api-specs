@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "api-version": "2018-05-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "displayName": "Allowed storage account SKUs",
+              "policyType": "BuiltIn",
+              "description": "This policy enables you to specify a set of storage account SKUs that your organization can deploy.",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "type": "Array",
+                  "metadata": {
+                    "description": "The list of SKUs that can be specified for storage accounts.",
+                    "displayName": "Allowed SKUs",
+                    "strongType": "StorageSKUs"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "allOf": [
+                    {
+                      "field": "type",
+                      "equals": "Microsoft.Storage/storageAccounts"
+                    },
+                    {
+                      "not": {
+                        "field": "Microsoft.Storage/storageAccounts/sku.name",
+                        "in": "[parameters('listOfAllowedSKUs')]"
+                      }
+                    }
+                  ]
+                },
+                "then": {
+                  "effect": "Deny"
+                }
+              }
+            },
+            "id": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "name": "7433c107-6db4-4ad1-b57a-a76dce0154a1"
+          },
+          {
+            "properties": {
+              "displayName": "Naming Convention",
+              "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+              "metadata": {
+                "category": "Naming"
+              },
+              "parameters": {
+                "prefix": {
+                  "type": "String",
+                  "metadata": {
+                    "displayName": "Prefix",
+                    "description": "Resource name prefix"
+                  }
+                },
+                "suffix": {
+                  "type": "String",
+                  "metadata": {
+                    "displayName": "Suffix",
+                    "description": "Resource name suffix"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "not": {
+                    "field": "name",
+                    "like": "[concat(parameters('prefix'), '*', parameters('suffix'))]"
+                  }
+                },
+                "then": {
+                  "effect": "deny"
+                }
+              },
+              "policyType": "Custom"
+            },
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "name": "ResourceNaming"
+          }
+        ]
+      }
+    }
+  }
+}

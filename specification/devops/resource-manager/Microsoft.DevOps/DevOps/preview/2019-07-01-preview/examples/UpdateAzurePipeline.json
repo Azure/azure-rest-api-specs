@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myAspNetWebAppPipeline-rg",
+    "pipelineName": "myAspNetWebAppPipeline",
+    "api-version": "2019-07-01-preview",
+    "updateOperationParameters": {
+      "tags": {
+        "tagKey": "tagvalue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "The Azure Pipeline has been updated successfully.",
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myAspNetWebAppPipeline-rg/providers/Microsoft.DevOps/pipelines/myAspNetWebAppPipeline",
+        "name": "myAspNetWebAppPipeline",
+        "type": "Microsoft.DevOps/pipelines",
+        "location": "South India",
+        "tags": {
+          "tagKey": "tagvalue"
+        },
+        "properties": {
+          "organization": {
+            "name": "myAspNetWebAppPipeline-org"
+          },
+          "project": {
+            "name": "myAspNetWebAppPipeline-project"
+          },
+          "bootstrapConfiguration": {
+            "template": {
+              "id": "ms.vss-continuous-delivery-pipeline-templates.aspnet-windowswebapp",
+              "parameters": {
+                "subscriptionId": "{subscriptionId}",
+                "resourceGroup": "myAspNetWebAppPipeline-rg",
+                "webAppName": "myAspNetWebApp",
+                "location": "South India",
+                "appServicePlan": "S1 Standard",
+                "appInsightLocation": "South India",
+                "azureAuth": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

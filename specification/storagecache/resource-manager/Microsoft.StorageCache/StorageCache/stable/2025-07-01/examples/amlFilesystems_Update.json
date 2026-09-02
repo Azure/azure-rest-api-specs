@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "amlFilesystemName": "fs1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-07-01",
+    "amlFilesystem": {
+      "tags": {
+        "Dept": "ContosoAds"
+      },
+      "properties": {
+        "encryptionSettings": {
+          "keyEncryptionKey": {
+            "keyUrl": "https://examplekv.vault.azure.net/keys/kvk/3540a47df75541378d3518c6a4bdf5af",
+            "sourceVault": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+            }
+          }
+        },
+        "maintenanceWindow": {
+          "dayOfWeek": "Friday",
+          "timeOfDayUTC": "22:00"
+        },
+        "rootSquashSettings": {
+          "mode": "All",
+          "noSquashNidLists": "10.0.0.[5-6]@tcp;10.0.1.2@tcp",
+          "squashUID": 99,
+          "squashGID": 99
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/eastus/ascOperations/00000000-0000-0000-0000-000000000000?monitor=true&api-version=2025-07-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/eastus/ascOperations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+      }
+    },
+    "200": {
+      "body": {
+        "tags": {
+          "Dept": "ContosoAds"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1",
+        "location": "eastus",
+        "zones": [
+          "1"
+        ],
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+          }
+        },
+        "name": "fs1",
+        "type": "Microsoft.StorageCache/amlFilesystem",
+        "properties": {
+          "storageCapacityTiB": 16,
+          "throughputProvisionedMBps": 500,
+          "health": {
+            "state": "Available",
+            "statusDescription": "amlFilesystem is ok."
+          },
+          "provisioningState": "Succeeded",
+          "filesystemSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/fsSub",
+          "clientInfo": {
+            "mgsAddress": "10.0.0.4",
+            "mountCommand": "mount -t lustre 10.0.0.4@tcp:/lustrefs /lustre/lustrefs",
+            "lustreVersion": "2.15.0",
+            "containerStorageInterface": {
+              "persistentVolumeClaim": "<Base64 encoded YAML>",
+              "persistentVolume": "<Base64 encoded YAML>",
+              "storageClass": "<Base64 encoded YAML>"
+            }
+          },
+          "maintenanceWindow": {
+            "dayOfWeek": "Friday",
+            "timeOfDayUTC": "22:00"
+          },
+          "encryptionSettings": {
+            "keyEncryptionKey": {
+              "keyUrl": "https://examplekv.vault.azure.net/keys/kvk/3540a47df75541378d3518c6a4bdf5af",
+              "sourceVault": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+              }
+            }
+          },
+          "hsm": {
+            "settings": {
+              "container": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/storageaccountname/blobServices/default/containers/containername",
+              "loggingContainer": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/storageaccountname/blobServices/default/containers/loggingcontainername",
+              "importPrefixesInitial": [
+                "/"
+              ]
+            },
+            "archiveStatus": [
+              {
+                "filesystemPath": "/",
+                "status": {
+                  "state": "Completed",
+                  "lastCompletionTime": "2019-04-21T18:25:43.511Z",
+                  "lastStartedTime": "2019-04-21T17:25:43.511Z"
+                }
+              }
+            ]
+          },
+          "rootSquashSettings": {
+            "mode": "All",
+            "noSquashNidLists": "10.0.0.[5-6]@tcp;10.0.1.2@tcp",
+            "squashUID": 99,
+            "squashGID": 99,
+            "status": "nodemap.active=1"
+          }
+        },
+        "sku": {
+          "name": "AMLFS-Durable-Premium-250"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Storage system operation endpoints and objects.",
+    "title": "FabricAdminClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems/{storageSubSystem}": {
+      "get": {
+        "x-ms-examples": {
+          "Return the requested storage subsystem.": {
+            "$ref": "./examples/StorageSystem/Get.json"
+          }
+        },
+        "tags": [
+          "StorageSystems"
+        ],
+        "description": "Return the requested storage subsystem.",
+        "operationId": "StorageSystems_Get",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageSubSystemParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageSystem"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all storage subsystems for a location.": {
+            "$ref": "./examples/StorageSystem/List.json"
+          }
+        },
+        "tags": [
+          "StorageSystems"
+        ],
+        "description": "Returns a list of all storage subsystems for a location.",
+        "operationId": "StorageSystems_List",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageSystemList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/StorageSystem"
+      }
+    }
+  },
+  "definitions": {
+    "StorageSystem": {
+      "description": "Representation of a storage system resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "All properties of a storage system.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageSystemModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "StorageSystemModel": {
+      "description": "All properties of a storage system.",
+      "type": "object",
+      "properties": {
+        "totalCapacityGB": {
+          "description": "Total capacity of the system.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "StorageSystemList": {
+      "description": "Pageable list of storage systems.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of storage systems.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageSystem"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "StorageSubSystemParameter": {
+      "name": "storageSubSystem",
+      "description": "Name of the storage system.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

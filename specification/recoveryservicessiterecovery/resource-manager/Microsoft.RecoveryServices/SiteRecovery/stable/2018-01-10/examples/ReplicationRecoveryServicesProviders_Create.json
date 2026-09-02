@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2018-01-10",
+    "providerName": "vmwareprovider1",
+    "fabricName": "vmwarefabric1",
+    "resourceName": "migrationvault",
+    "resourceGroupName": "resourcegroup1",
+    "subscriptionId": "cb53d0c3-bd59-4721-89bc-06916a9147ef",
+    "addProviderInput": {
+      "properties": {
+        "machineName": "vmwareprovider1",
+        "authenticationIdentityInput": {
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "applicationId": "f66fce08-c0c6-47a1-beeb-0ede5ea94f90",
+          "objectId": "141360b8-5686-4240-a027-5e24e6affeba",
+          "audience": "https://microsoft.onmicrosoft.com/cf19e349-644c-4c6a-bcae-9c8f35357874",
+          "aadAuthority": "https://login.microsoftonline.com"
+        },
+        "resourceAccessIdentityInput": {
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "applicationId": "f66fce08-c0c6-47a1-beeb-0ede5ea94f90",
+          "objectId": "141360b8-5686-4240-a027-5e24e6affeba",
+          "audience": "https://microsoft.onmicrosoft.com/cf19e349-644c-4c6a-bcae-9c8f35357874",
+          "aadAuthority": "https://login.microsoftonline.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/vmwareprovider1",
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders",
+        "name": "vmwareprovider1",
+        "properties": {
+          "fabricType": "VMwareV2",
+          "friendlyName": "vmwareprovider1",
+          "providerVersion": "5.1.3688.0",
+          "serverVersion": "3.2.7510.0",
+          "providerVersionState": "Latest",
+          "fabricFriendlyName": "vmwarefabric1",
+          "lastHeartBeat": "2017-04-27T09:16:04.9405768Z",
+          "connectionStatus": "Connected",
+          "protectedItemCount": 2,
+          "allowedScenarios": [
+            "Refresh"
+          ]
+        }
+      }
+    },
+    "202": {}
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-01-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "properties": {
+        "virtualNetworkConfiguration": {
+          "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/apimService1v2/subnets/default"
+        },
+        "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/apimService1ip",
+        "virtualNetworkType": "External"
+      },
+      "sku": {
+        "name": "Premium",
+        "capacity": 2
+      },
+      "zones": [
+        "1",
+        "2"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/TGV2eTExMDZtMDJfVGVybV9jMmZlY2QwMA==?api-version=2021-01-01-preview"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {},
+        "location": "West Europe",
+        "etag": "AAAAAABlaZ0=",
+        "properties": {
+          "publisherEmail": "foobar@contoso.com",
+          "publisherName": "Microsoft",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
+          "createdAtUtc": "2016-04-12T00:20:15.6018952Z",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-westeurope-01.regional.azure-api.net",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": false,
+              "certificateSource": "BuiltIn"
+            },
+            {
+              "type": "Proxy",
+              "hostName": "proxy.msitesting.net",
+              "keyVaultId": "https://demo-msi-keyvault.vault.azure.net/secrets/msicertificate",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2020-12-18T11:11:47+00:00",
+                "thumbprint": "9833D531D7A4XXXX766F2A85908BD3692E0BD3F",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": true,
+              "certificateSource": "Custom"
+            }
+          ],
+          "publicIPAddresses": [
+            "13.94.XXX.188"
+          ],
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/apimService1v2/subnets/default"
+          },
+          "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/apimService1ip",
+          "virtualNetworkType": "External",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+          },
+          "disableGateway": false
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 2
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "ca1d33f7-XXXX-42ec-b3e9-XXXX",
+          "tenantId": "72f988bf-XXXX-41af-91ab-2d7cd011db47"
+        },
+        "zones": [
+          "1",
+          "2"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2021-06-01-preview",
+    "providerName": "myattestationprovider"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.Attestation/attestationProviders/myattestationprovider/privateLinkResources/tenant",
+            "name": "tenant",
+            "type": "Microsoft.Attestation/attestationProviders/privateLinkResources",
+            "properties": {
+              "groupId": "standard",
+              "requiredMembers": [
+                "default"
+              ],
+              "requiredZoneNames": [
+                "privatelink.attest.azure.net"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "default": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "",
+          "message": ""
+        }
+      }
+    }
+  }
+}

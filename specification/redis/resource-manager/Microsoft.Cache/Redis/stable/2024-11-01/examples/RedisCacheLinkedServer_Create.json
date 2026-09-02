@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "name": "cache1",
+    "api-version": "2024-11-01",
+    "linkedServerName": "cache2",
+    "parameters": {
+      "properties": {
+        "linkedRedisCacheId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache2",
+        "linkedRedisCacheLocation": "West US",
+        "serverRole": "Secondary"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache2",
+        "type": "Microsoft.Cache/Redis/linkedServers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/linkedServers/cache2",
+        "properties": {
+          "geoReplicatedPrimaryHostName": "cache2.geo.redis.cache.windows.net",
+          "linkedRedisCacheId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache2",
+          "linkedRedisCacheLocation": "West US",
+          "primaryHostName": "cache1.redis.cache.windows.net",
+          "provisioningState": "Creating",
+          "serverRole": "Secondary"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cache2",
+        "type": "Microsoft.Cache/Redis/linkedServers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/linkedServers/cache2",
+        "properties": {
+          "geoReplicatedPrimaryHostName": "cache2.geo.redis.cache.windows.net",
+          "linkedRedisCacheId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache2",
+          "linkedRedisCacheLocation": "West US",
+          "primaryHostName": "cache1.redis.cache.windows.net",
+          "provisioningState": "Creating",
+          "serverRole": "Secondary"
+        }
+      }
+    }
+  },
+  "operationId": "LinkedServer_Create",
+  "title": "LinkedServer_Create"
+}

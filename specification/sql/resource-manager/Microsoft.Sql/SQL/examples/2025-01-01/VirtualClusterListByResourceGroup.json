@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "VirtualClustercltest",
+            "type": "Microsoft.Sql/virtualClusters",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/virtualClusters/VirtualClustercltest",
+            "location": "japaneast",
+            "properties": {
+              "childResources": [
+                "/subscriptions/65dc2520-d3b9-4d11-b638-f3c41f962550/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl"
+              ],
+              "subnetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/cltest",
+              "version": "1.0"
+            }
+          },
+          {
+            "name": "vc2",
+            "type": "Microsoft.Sql/virtualClusters",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/virtualClusters/vc2",
+            "location": "japaneast",
+            "properties": {
+              "childResources": [],
+              "subnetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/cltest2",
+              "version": "2.0"
+            }
+          },
+          {
+            "name": "vc1",
+            "type": "Microsoft.Sql/virtualClusters",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/virtualClusters/vc1",
+            "location": "japaneast",
+            "properties": {
+              "childResources": [
+                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl",
+                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/mi"
+              ],
+              "subnetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/cltest",
+              "version": "2.0"
+            },
+            "tags": {
+              "tkey": "tvalue3"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualClusters_ListByResourceGroup",
+  "title": "List virtual clusters by resource group"
+}

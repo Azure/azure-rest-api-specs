@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "capabilityName": "Shutdown-1.0",
+    "parentProviderNamespace": "Microsoft.Compute",
+    "parentResourceName": "exampleVM",
+    "parentResourceType": "virtualMachines",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "targetName": "Microsoft-VirtualMachine"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Shutdown-1.0",
+        "type": "Microsoft.Chaos/targets/capabilities",
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM/providers/Microsoft.Chaos/targets/Microsoft-VirtualMachine/capabilities/Shutdown-1.0",
+        "properties": {
+          "description": "Shutdown an Azure Virtual Machine for a defined period of time.",
+          "parametersSchema": "https://schema.centralus.chaos-prod.azure.com/targets/Microsoft-VirtualMachine/capabilities/Shutdown-1.0.json",
+          "publisher": "Microsoft",
+          "targetType": "VirtualMachine",
+          "urn": "urn:csci:microsoft:virtualMachine:shutdown/1.0"
+        },
+        "systemData": {
+          "createdAt": "2020-05-14T05:08:38.4662189Z",
+          "lastModifiedAt": "2020-05-14T05:08:38.4662189Z"
+        }
+      }
+    }
+  },
+  "operationId": "Capabilities_Get",
+  "title": "Get a Capability that extends a virtual machine Target resource."
+}

@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-07-01",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "1.0.0",
+    "galleryImageVersion": {
+      "location": "West US",
+      "properties": {
+        "publishingProfile": {
+          "targetRegions": [
+            {
+              "name": "West US",
+              "regionalReplicaCount": 1
+            },
+            {
+              "name": "East US",
+              "regionalReplicaCount": 2
+            }
+          ]
+        }
+      },
+      "storageProfile": {
+        "osDiskImage": {
+          "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}",
+          "hostCaching": "ReadOnly"
+        },
+        "dataDiskImages": [
+          {
+            "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}",
+            "lun": 1,
+            "hostCaching": "None"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS"
+              },
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_LRS"
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "osDiskImage": {
+              "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}",
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}",
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    }
+  }
+}

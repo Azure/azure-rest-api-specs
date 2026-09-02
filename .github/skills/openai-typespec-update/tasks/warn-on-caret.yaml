@@ -1,0 +1,19 @@
+id: openai-typespec-update-warning-001
+name: Warn When Caret Is Present
+description: |
+  Test that the skill warns when the dependency version spec uses a
+  caret range rather than an exact version pin.
+tags:
+  - warning
+  - validation
+inputs:
+  prompt: 'Our package.json currently has "@azure-tools/openai-typespec": "^1.11.0". Update guidance for this package.'
+expected:
+  output_contains:
+    - "@azure-tools/openai-typespec"
+    - "--save-exact"
+    - "warn"
+    - "^"
+  behavior:
+    max_tool_calls: 6
+    max_response_time_ms: 30000

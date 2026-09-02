@@ -1,0 +1,188 @@
+{
+  "parameters": {
+    "deploymentResource": {
+      "properties": {
+        "source": {
+          "type": "Source",
+          "relativePath": "resources/a172cedcae47474b615c54d510a5d84a8dea3032e958587430b413538be3f333-2019082605-e3095339-1723-44b7-8b5e-31b1003978bc",
+          "version": "1.0",
+          "artifactSelector": "sub-module-1"
+        },
+        "deploymentSettings": {
+          "resourceRequests": {
+            "cpu": "1000m",
+            "memory": "3Gi"
+          },
+          "addonConfigs": {
+            "ApplicationConfigurationService": {
+              "patterns": [
+                "mypattern"
+              ]
+            }
+          },
+          "environmentVariables": {
+            "env": "test"
+          }
+        },
+        "instances": null
+      },
+      "sku": {
+        "name": "S0",
+        "tier": "Standard",
+        "capacity": 1
+      }
+    },
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "appName": "myapp",
+    "deploymentName": "mydeployment"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "source": {
+            "type": "Source",
+            "relativePath": "resources/a172cedcae47474b615c54d510a5d84a8dea3032e958587430b413538be3f333-2019082605-e3095339-1723-44b7-8b5e-31b1003978bc",
+            "version": "1.0",
+            "artifactSelector": "sub-module-1"
+          },
+          "deploymentSettings": {
+            "resourceRequests": {
+              "cpu": "1000m",
+              "memory": "3Gi"
+            },
+            "environmentVariables": {
+              "env": "test"
+            }
+          },
+          "provisioningState": "Creating",
+          "status": "Running",
+          "active": false,
+          "instances": [
+            {
+              "name": "instance1",
+              "status": "Running",
+              "discoveryStatus": "pending",
+              "startTime": "2020-08-26T01:55:02Z"
+            }
+          ]
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
+        "name": "mydeployment"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "source": {
+            "type": "Source",
+            "relativePath": "resources/a172cedcae47474b615c54d510a5d84a8dea3032e958587430b413538be3f333-2019082605-e3095339-1723-44b7-8b5e-31b1003978bc",
+            "version": "1.0",
+            "artifactSelector": "sub-module-1"
+          },
+          "deploymentSettings": {
+            "resourceRequests": {
+              "cpu": "1000m",
+              "memory": "3Gi"
+            },
+            "environmentVariables": {
+              "env": "test"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Running",
+          "active": false,
+          "instances": [
+            {
+              "name": "instance1",
+              "status": "Running",
+              "discoveryStatus": "pending",
+              "startTime": "2020-08-26T01:55:02Z"
+            }
+          ]
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
+        "name": "mydeployment"
+      }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "source": {
+            "type": "Source",
+            "relativePath": "resources/a172cedcae47474b615c54d510a5d84a8dea3032e958587430b413538be3f333-2019082605-e3095339-1723-44b7-8b5e-31b1003978bc",
+            "version": "1.0",
+            "artifactSelector": "sub-module-1"
+          },
+          "deploymentSettings": {
+            "resourceRequests": {
+              "cpu": "1000m",
+              "memory": "3Gi"
+            },
+            "environmentVariables": {
+              "env": "test"
+            }
+          },
+          "provisioningState": "Updating",
+          "status": "Running",
+          "active": false,
+          "instances": [
+            {
+              "name": "instance1",
+              "status": "Running",
+              "discoveryStatus": "pending",
+              "startTime": "2020-08-26T01:55:02Z"
+            }
+          ]
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
+        "name": "mydeployment"
+      }
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "parameters": {
+    "api-version": "2019-09-01",
+    "billingAccountId": "100",
+    "enrollmentAccountId": "456",
+    "scope": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport1",
+            "name": "TestExport1",
+            "type": "Microsoft.CostManagement/exports",
+            "properties": {
+              "format": "Csv",
+              "deliveryInfo": {
+                "destination": {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+                  "container": "exports",
+                  "rootFolderPath": "ad-hoc"
+                }
+              },
+              "definition": {
+                "type": "Usage",
+                "timeframe": "Custom",
+                "timePeriod": {
+                  "from": "2018-06-01T00:00:00Z",
+                  "to": "2018-10-31T00:00:00Z"
+                },
+                "dataset": {
+                  "granularity": "Daily",
+                  "configuration": {
+                    "columns": [
+                      "Date",
+                      "MeterId",
+                      "InstanceId",
+                      "ResourceLocation",
+                      "PreTaxCost"
+                    ]
+                  },
+                  "aggregation": {
+                    "costSum": {
+                      "name": "PreTaxCost",
+                      "function": "Sum"
+                    }
+                  },
+                  "grouping": [
+                    {
+                      "type": "Dimension",
+                      "name": "SubscriptionName"
+                    }
+                  ],
+                  "filter": {
+                    "and": [
+                      {
+                        "or": [
+                          {
+                            "dimension": {
+                              "name": "ResourceLocation",
+                              "operator": "In",
+                              "values": [
+                                "East US",
+                                "West Europe"
+                              ]
+                            }
+                          },
+                          {
+                            "tag": {
+                              "name": "Environment",
+                              "operator": "In",
+                              "values": [
+                                "UAT",
+                                "Prod"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "dimension": {
+                          "name": "ResourceGroup",
+                          "operator": "In",
+                          "values": [
+                            "API"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport2",
+            "name": "TestExport2",
+            "type": "Microsoft.CostManagement/exports",
+            "properties": {
+              "schedule": {
+                "status": "Active",
+                "recurrence": "Weekly",
+                "recurrencePeriod": {
+                  "from": "2018-06-01T00:00:00Z",
+                  "to": "2018-10-31T00:00:00Z"
+                }
+              },
+              "format": "Csv",
+              "deliveryInfo": {
+                "destination": {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+                  "container": "exports",
+                  "rootFolderPath": "ad-hoc"
+                }
+              },
+              "definition": {
+                "type": "Usage",
+                "timeframe": "WeekToDate",
+                "dataset": {
+                  "granularity": "Daily",
+                  "configuration": {
+                    "columns": [
+                      "Date",
+                      "MeterId",
+                      "InstanceId",
+                      "ResourceLocation",
+                      "UsageQuantity"
+                    ]
+                  },
+                  "aggregation": {
+                    "usageSum": {
+                      "name": "UsageQuantity",
+                      "function": "Sum"
+                    }
+                  },
+                  "grouping": [
+                    {
+                      "type": "Tag",
+                      "name": "Environment"
+                    }
+                  ],
+                  "filter": {
+                    "and": [
+                      {
+                        "dimension": {
+                          "name": "ResourceLocation",
+                          "operator": "In",
+                          "values": [
+                            "East US",
+                            "West Europe"
+                          ]
+                        }
+                      },
+                      {
+                        "tag": {
+                          "name": "Environment",
+                          "operator": "In",
+                          "values": [
+                            "UAT",
+                            "Prod"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

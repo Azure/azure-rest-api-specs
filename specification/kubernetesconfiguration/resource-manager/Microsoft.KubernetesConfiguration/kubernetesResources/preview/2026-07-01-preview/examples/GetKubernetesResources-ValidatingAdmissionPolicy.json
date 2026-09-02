@@ -1,0 +1,73 @@
+{
+  "title": "Get KubernetesResources - ValidatingAdmissionPolicy",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "validatingadmissionpolicy-deny-privileged-containers",
+    "api-version": "2026-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/validatingadmissionpolicy-deny-privileged-containers",
+        "name": "validatingadmissionpolicy-deny-privileged-containers",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "admissionregistration.k8s.io/v1",
+          "kind": "ValidatingAdmissionPolicy",
+          "metadata": {
+            "name": "deny-privileged-containers",
+            "uid": "b8c9d0e1-f2a3-4567-bcde-890123456789",
+            "resourceVersion": "5678901",
+            "generation": 1,
+            "creationTimestamp": "2026-03-15T11:00:00Z",
+            "labels": [
+              {
+                "name": "policy.security.io/category",
+                "value": "pod-security"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "policy.security.io/severity",
+                "value": "critical"
+              }
+            ]
+          },
+          "spec": {
+            "admissionPolicyFailurePolicy": "Fail",
+            "admissionPolicyMatchConstraints": [
+              "Group=* Resource=pods Operations=[CREATE UPDATE]",
+              "Group=apps Resource=deployments Operations=[CREATE UPDATE]",
+              "Group=apps Resource=statefulsets Operations=[CREATE UPDATE]"
+            ]
+          },
+          "status": {
+            "conditions": [
+              {
+                "type": "Ready",
+                "status": "True",
+                "reason": "ValidationApplied",
+                "message": "Policy is active and enforcing.",
+                "lastTransitionTime": "2026-03-15T11:01:00Z"
+              }
+            ]
+          },
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

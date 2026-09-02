@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg8440",
+    "jobName": "sj9597"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg8440/providers/Microsoft.StreamAnalytics/streamingjobs/sj9597/inputs/input7225",
+            "name": "input7225",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+            "properties": {
+              "type": "Reference",
+              "datasource": {
+                "type": "Microsoft.Storage/Blob",
+                "properties": {
+                  "storageAccounts": [
+                    {
+                      "accountName": "someAccountName"
+                    }
+                  ],
+                  "container": "differentContainer",
+                  "pathPattern": "{date}/{time}",
+                  "dateFormat": "yyyy/MM/dd",
+                  "timeFormat": "HH"
+                }
+              },
+              "serialization": {
+                "type": "Csv",
+                "properties": {
+                  "fieldDelimiter": "|",
+                  "encoding": "UTF8"
+                }
+              },
+              "etag": "a4ceb697-1c8f-40c8-b951-fb5ee4757437"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg8440/providers/Microsoft.StreamAnalytics/streamingjobs/sj9597/inputs/input8899",
+            "name": "input8899",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+            "properties": {
+              "type": "Stream",
+              "datasource": {
+                "type": "Microsoft.Storage/Blob",
+                "properties": {
+                  "sourcePartitionCount": 32,
+                  "storageAccounts": [
+                    {
+                      "accountName": "someAccountName"
+                    }
+                  ],
+                  "container": "state",
+                  "pathPattern": "{date}/{time}",
+                  "dateFormat": "yyyy/MM/dd",
+                  "timeFormat": "HH"
+                }
+              },
+              "serialization": {
+                "type": "Csv",
+                "properties": {
+                  "fieldDelimiter": "|",
+                  "encoding": "UTF8"
+                }
+              },
+              "etag": "3b35d57c-02f4-4b41-8e1d-af02a86c2fa1"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg8440/providers/Microsoft.StreamAnalytics/streamingjobs/sj9597/inputs/input7425",
+            "name": "input7425",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+            "properties": {
+              "type": "Stream",
+              "datasource": {
+                "type": "Microsoft.ServiceBus/EventHub",
+                "properties": {
+                  "eventHubName": "sdkeventhub",
+                  "consumerGroupName": "differentConsumerGroupName",
+                  "serviceBusNamespace": "sdktest",
+                  "sharedAccessPolicyName": "RootManageSharedAccessKey"
+                }
+              },
+              "serialization": {
+                "type": "Avro",
+                "properties": {}
+              },
+              "etag": "7548f259-81b5-4ea7-b896-25c6717d98ba"
+            }
+          },
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg8440/providers/Microsoft.StreamAnalytics/streamingjobs/sj9597/inputs/input7970",
+            "name": "input7970",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+            "properties": {
+              "type": "Stream",
+              "datasource": {
+                "type": "Microsoft.Devices/IotHubs",
+                "properties": {
+                  "iotHubNamespace": "iothub",
+                  "sharedAccessPolicyName": "owner",
+                  "endpoint": "messages/operationsMonitoringEvents",
+                  "consumerGroupName": "sdkconsumergroup"
+                }
+              },
+              "serialization": {
+                "type": "Csv",
+                "properties": {
+                  "fieldDelimiter": "|",
+                  "encoding": "UTF8"
+                }
+              },
+              "etag": "e2d847e0-c95b-48ef-9e14-1afc1f2270cb"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

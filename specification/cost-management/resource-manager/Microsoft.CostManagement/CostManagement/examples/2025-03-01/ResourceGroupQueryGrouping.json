@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "parameters": {
+      "type": "Usage",
+      "dataset": {
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
+        },
+        "granularity": "Daily",
+        "grouping": [
+          {
+            "name": "ResourceType",
+            "type": "Dimension"
+          }
+        ]
+      },
+      "timeframe": "TheLastMonth"
+    },
+    "resourceGroupName": "ScreenSharingTest-peer",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ScreenSharingTest-peer",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "9af9459d-441d-4055-9ed0-83d4c4a363fb",
+        "type": "microsoft.costmanagement/Query",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
+        "properties": {
+          "columns": [
+            {
+              "name": "PreTaxCost",
+              "type": "Number"
+            },
+            {
+              "name": "ResourceType",
+              "type": "String"
+            },
+            {
+              "name": "UsageDate",
+              "type": "Number"
+            },
+            {
+              "name": "Currency",
+              "type": "String"
+            }
+          ],
+          "nextLink": null,
+          "rows": [
+            [
+              2.10333307059661,
+              "Microsoft.SqlServer",
+              20180417,
+              "USD"
+            ],
+            [
+              20.10333307059661,
+              "Microsoft.Compute",
+              20180418,
+              "USD"
+            ]
+          ]
+        }
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Query_Usage",
+  "title": "ResourceGroupQueryGrouping-Legacy"
+}

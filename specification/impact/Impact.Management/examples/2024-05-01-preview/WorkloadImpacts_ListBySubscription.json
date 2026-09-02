@@ -1,0 +1,38 @@
+{
+  "operationId": "WorkloadImpacts_ListBySubscription",
+  "title": "List WorkloadImpact resources by subscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Impacts-rg/providers/Microsoft.Impact/workloadImpacts/impact2",
+            "name": "impact2",
+            "type": "Microsoft.Impact/workloadImpacts",
+            "properties": {
+              "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm1",
+              "impactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+              "reportedTimeUtc": "2022-06-15T06:01:46.6517821Z",
+              "startDateTime": "2022-06-15T05:59:46.6517821Z",
+              "endDateTime": null,
+              "impactDescription": "",
+              "impactCategory": "Resource.Other",
+              "additionalProperties": {
+                "errorCode": "504",
+                "errorMessage": "Gateway timeout error"
+              },
+              "workload": {
+                "context": "webapp/scenario1",
+                "toolset": "Other"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "projectName": "{projectName}",
+    "poolName": "{poolName}",
+    "body": {
+      "properties": {
+        "devBoxDefinitionName": "WebDevBox",
+        "networkConnectionName": "Network1-westus2",
+        "licenseType": "Windows_Client",
+        "localAdministrator": "Enabled"
+      },
+      "location": "centralus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}",
+        "name": "{poolName}",
+        "type": "Microsoft.DevCenter/pools",
+        "properties": {
+          "devBoxDefinitionName": "WebDevBox",
+          "networkConnectionName": "Network1-westus2",
+          "licenseType": "Windows_Client",
+          "localAdministrator": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+        },
+        "location": "centralus"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}",
+        "name": "{poolName}",
+        "type": "Microsoft.DevCenter/pools",
+        "properties": {
+          "devBoxDefinitionName": "WebDevBox",
+          "networkConnectionName": "Network1-westus2",
+          "licenseType": "Windows_Client",
+          "localAdministrator": "Enabled",
+          "provisioningState": "Created"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+        },
+        "location": "centralus"
+      }
+    }
+  }
+}

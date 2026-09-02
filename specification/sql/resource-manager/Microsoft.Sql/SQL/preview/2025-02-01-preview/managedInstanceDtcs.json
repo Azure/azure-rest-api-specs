@@ -1,0 +1,373 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedInstanceDtcs"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dtc": {
+      "get": {
+        "operationId": "ManagedInstanceDtcs_ListByManagedInstance",
+        "tags": [
+          "ManagedInstanceDtcs"
+        ],
+        "description": "Gets a list of managed instance DTC settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtcListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of managed instance DTC settings.": {
+            "$ref": "./examples/ManagedInstanceDtcList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dtc/{dtcName}": {
+      "get": {
+        "operationId": "ManagedInstanceDtcs_Get",
+        "tags": [
+          "ManagedInstanceDtcs"
+        ],
+        "description": "Gets managed instance DTC settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dtcName",
+            "in": "path",
+            "description": "The name of the managed instance DTC.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "DtcName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "current",
+                  "value": "current",
+                  "description": "current"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtc"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets managed instance DTC settings.": {
+            "$ref": "./examples/ManagedInstanceDtcGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedInstanceDtcs_CreateOrUpdate",
+        "tags": [
+          "ManagedInstanceDtcs"
+        ],
+        "description": "Updates managed instance DTC settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dtcName",
+            "in": "path",
+            "description": "The name of the managed instance DTC.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "DtcName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "current",
+                  "value": "current",
+                  "description": "current"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Managed instance DTC settings.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceDtc"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates managed instance DTC settings by enabling DTC.": {
+            "$ref": "./examples/ManagedInstanceDtcUpdateEnableDtc.json"
+          },
+          "Updates managed instance DTC settings with all optional parameters specified.": {
+            "$ref": "./examples/ManagedInstanceDtcUpdateMax.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceDtc"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceDtc": {
+      "type": "object",
+      "description": "SQL Managed Instance DTC",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceDtcProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedInstanceDtcListResult": {
+      "type": "object",
+      "description": "The response of a ManagedInstanceDtc list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedInstanceDtc items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceDtc"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedInstanceDtcProperties": {
+      "type": "object",
+      "description": "The properties of managed instance DTC.",
+      "properties": {
+        "dtcEnabled": {
+          "type": "boolean",
+          "description": "Active status of managed instance DTC."
+        },
+        "securitySettings": {
+          "$ref": "#/definitions/ManagedInstanceDtcSecuritySettings",
+          "description": "Security settings of managed instance DTC."
+        },
+        "externalDnsSuffixSearchList": {
+          "type": "array",
+          "description": "External dns suffix search list of managed instance DTC.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dtcHostNameDnsSuffix": {
+          "type": "string",
+          "description": "Host name dns suffix of managed instance DTC.",
+          "readOnly": true
+        },
+        "fqdnEnabled": {
+          "type": "boolean",
+          "description": "Status of FQDN of managed instance DTC. Toggling this setting might trigger a restart of the managed instance."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "Provisioning state of managed instance DTC.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceDtcSecuritySettings": {
+      "type": "object",
+      "description": "The Security Settings of managed instance DTC.",
+      "properties": {
+        "transactionManagerCommunicationSettings": {
+          "$ref": "#/definitions/ManagedInstanceDtcTransactionManagerCommunicationSettings",
+          "description": "Transaction Manager communication settings of managed instance DTC."
+        },
+        "xaTransactionsEnabled": {
+          "type": "boolean",
+          "description": "Allow XA Transactions to managed instance DTC."
+        },
+        "snaLu6point2TransactionsEnabled": {
+          "type": "boolean",
+          "description": "Allow SNA LU 6.2 Transactions to managed instance DTC."
+        },
+        "xaTransactionsDefaultTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default timeout for XA Transactions (in seconds)."
+        },
+        "xaTransactionsMaximumTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum timeout for XA Transactions (in seconds)."
+        }
+      }
+    },
+    "ManagedInstanceDtcTransactionManagerCommunicationSettings": {
+      "type": "object",
+      "description": "The Transaction Manager Communication Settings of managed instance DTC.",
+      "properties": {
+        "allowInboundEnabled": {
+          "type": "boolean",
+          "description": "Allow Inbound traffic to managed instance DTC."
+        },
+        "allowOutboundEnabled": {
+          "type": "boolean",
+          "description": "Allow Outbound traffic of managed instance DTC."
+        },
+        "authentication": {
+          "type": "string",
+          "description": "Authentication type of managed instance DTC."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,258 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0-preview",
+    "title": "Form Recognizer Client",
+    "description": "Extracts information from forms and images into structured data based on a model created by a set of representative training forms."
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/formrecognizer/v1.0-preview",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "FormRecognizerReceiptOcr.json#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/prebuilt/receipt/asyncBatchAnalyze": {
+      "post": {
+        "description": "Batch Read Receipt operation. The response contains a field called 'Operation-Location', which contains the URL that you must use for your 'Get Read Receipt Result' operation.",
+        "operationId": "BatchReadReceipt",
+        "parameters": [
+          {
+            "$ref": "FormRecognizerReceiptOcr.json#/parameters/ImageUrl"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header. The 'Operation-Location' URL will expire in 48 hours.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The URL will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful 'Batch Read Receipt' request": {
+            "$ref": "./examples/SuccessfulBatchReadReceiptWithUrl.json"
+          }
+        }
+      }
+    },
+    "/prebuilt/receipt/operations/{operationId}": {
+      "get": {
+        "description": "This interface is used for getting the analysis results of a 'Batch Read Receipt' operation. The URL to this interface should be retrieved from the 'Operation-Location' field returned from the 'Batch Read Receipt' operation.",
+        "operationId": "GetReadReceiptResult",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Id of read operation returned in the response of a 'Batch Read Receipt' operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the read operation status.",
+            "schema": {
+              "$ref": "#/definitions/readReceiptResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful 'Get Read Receipt Result' request": {
+            "$ref": "./examples/SuccessfulReadReceiptResult.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/prebuilt/receipt/asyncBatchAnalyze?overload=stream": {
+      "post": {
+        "description": "Read Receipt operation. When you use the 'Batch Read Receipt' interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'Get Read Receipt Result' operation.",
+        "operationId": "BatchReadReceiptInStream",
+        "parameters": [
+          {
+            "$ref": "FormRecognizerReceiptOcr.json#/parameters/ImageStream"
+          }
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header. The 'Operation-Location' URL will expire in 48 hours.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The URL will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful 'Batch Read Receipt' request": {
+            "$ref": "./examples/SuccessfulBatchReadReceiptWithStream.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "readReceiptResult": {
+      "type": "object",
+      "description": "Analysis result of the 'Batch Read Receipt' operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the read operation.",
+          "$ref": "FormRecognizerReceiptOcr.json#/definitions/OperationStatus"
+        },
+        "recognitionResults": {
+          "description": "Text recognition result of the 'Batch Read Receipt' operation.",
+          "type": "array",
+          "items": {
+            "$ref": "FormRecognizerReceiptOcr.json#/definitions/TextRecognitionResult"
+          }
+        },
+        "understandingResults": {
+          "description": "Semantic understanding result of the 'Batch Read Receipt' operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/understandingResult"
+          }
+        }
+      }
+    },
+    "understandingResult": {
+      "description": "A set of extracted fields corresponding to a semantic object, such as a receipt, in the input document.",
+      "properties": {
+        "pages": {
+          "description": "List of pages where the document is found.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "x-nullable": false
+          }
+        },
+        "fields": {
+          "description": "Dictionary of recognized field values.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/fieldValue"
+          }
+        }
+      }
+    },
+    "elementReference": {
+      "description": "Reference to an OCR word.",
+      "properties": {
+        "$ref": {
+          "type": "string"
+        }
+      }
+    },
+    "fieldValue": {
+      "description": "Base class representing a recognized field value.",
+      "type": "object",
+      "discriminator": "valueType",
+      "required": [
+        "valueType"
+      ],
+      "properties": {
+        "valueType": {
+          "description": "Discriminator for derived types.",
+          "type": "string"
+        },
+        "text": {
+          "description": "OCR text content of the recognized field.",
+          "type": "string"
+        },
+        "elements": {
+          "description": "List of references to OCR words comprising the recognized field value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/elementReference"
+          }
+        }
+      }
+    },
+    "stringValue": {
+      "description": "Recognized string field value.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/fieldValue"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "String value of the recognized field.",
+          "type": "string"
+        }
+      }
+    },
+    "numberValue": {
+      "description": "Recognized numeric field value.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/fieldValue"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "Numeric value of the recognized field.",
+          "type": "number"
+        }
+      }
+    }
+  }
+}

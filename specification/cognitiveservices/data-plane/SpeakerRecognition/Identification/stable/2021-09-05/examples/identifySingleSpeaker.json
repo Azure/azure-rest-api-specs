@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "endpoint": "https://westus.api.cognitive.microsoft.com",
+    "api-version": "2021-09-05",
+    "Content-Type": "audio/wav; codecs=audio/pcm",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "profileIds": "3669fa29-1bf3-45ad-beea-6b348d058d7e,111f427c-3791-468f-b709-fcef7660fff9,0e196cd9-32d5-4883-8631-54a0e7c7cb3d,0e196cd9-32d5-4883-8631-54a0e7c7cb3d,726e57d9-04e0-4214-b482-7f786fa83560,f95189fd-1bf5-4485-9c2e-e5897e0c98ca",
+    "audioData": "{binary file date}"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "identifiedProfile": {
+          "profileId": "111f427c-3791-468f-b709-fcef7660fff9",
+          "score": 0.63
+        },
+        "profilesRanking": [
+          {
+            "profileId": "111f427c-3791-468f-b709-fcef7660fff9",
+            "score": 0.63
+          },
+          {
+            "profileId": "3669fa29-1bf3-45ad-beea-6b348d058d7e",
+            "score": 0.49
+          },
+          {
+            "profileId": "0e196cd9-32d5-4883-8631-54a0e7c7cb3d",
+            "score": 0.4
+          },
+          {
+            "profileId": "726e57d9-04e0-4214-b482-7f786fa83560",
+            "score": 0.1
+          },
+          {
+            "profileId": "f95189fd-1bf5-4485-9c2e-e5897e0c98ca",
+            "score": 0.03
+          }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      },
+      "body": {
+        "error": {
+          "code": "Error Code",
+          "message": "Erro Messae"
+        }
+      }
+    }
+  }
+}

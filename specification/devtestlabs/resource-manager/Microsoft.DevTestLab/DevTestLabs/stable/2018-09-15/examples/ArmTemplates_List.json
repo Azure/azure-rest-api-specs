@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "artifactSourceName": "{artifactSourceName}",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Template1",
+            "type": "Microsoft.DevTestLab/labs/artifactSources/armTemplates",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/artifactSources/{artifactSourceName}/armTemplates/{armTemplateName}",
+            "location": "{location}",
+            "properties": {
+              "contents": {
+                "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {},
+                "resources": [],
+                "variables": {
+                  "hostingPlanName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6), '-sp'))]",
+                  "resourceNamePrefix": "[take(uniqueString(resourceGroup().id), 3)]",
+                  "siteName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6)))]"
+                }
+              },
+              "displayName": "Template1",
+              "enabled": true,
+              "parametersValueFilesInfo": [],
+              "publisher": "Microsoft"
+            },
+            "tags": {
+              "MyTag": "MyValue"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ArmTemplates_List",
+  "title": "ArmTemplates_List"
+}

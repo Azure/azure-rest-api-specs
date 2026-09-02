@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2024-02-01",
+    "parameters": {
+      "properties": {
+        "vmSize": "Standard_d2s_v3",
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "publisher": "microsoftwindowsserver",
+              "offer": "windowsserver",
+              "sku": "2022-datacenter-smalldisk"
+            },
+            "osDisk": {
+              "diskSizeGB": 100,
+              "managedDisk": {
+                "storageAccountType": "StandardSSD_LRS"
+              },
+              "caching": "ReadWrite",
+              "writeAcceleratorEnabled": false
+            },
+            "nodeAgentSkuId": "batch.node.windows amd64"
+          }
+        },
+        "scaleSettings": {
+          "fixedScale": {
+            "targetDedicatedNodes": 1,
+            "targetLowPriorityNodes": 0
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8DB51F14DC1A8AD\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8DB51F396992B8D\"",
+        "properties": {
+          "lastModified": "2023-08-24T02:12:27.7527697Z",
+          "creationTime": "2023-08-24T02:12:27.7527697Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2023-08-24T02:12:27.7527697Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2023-08-24T02:12:27.7527697Z",
+          "vmSize": "STANDARD_D2_V3",
+          "interNodeCommunication": "Disabled",
+          "taskSlotsPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "microsoftwindowsserver",
+                "offer": "windowsserver",
+                "sku": "2022-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64",
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "StandardSSD_LRS"
+                },
+                "diskSizeGB": 100,
+                "writeAcceleratorEnabled": false
+              }
+            }
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0,
+              "resizeTimeout": "PT15M"
+            }
+          },
+          "resizeOperationStatus": {
+            "targetDedicatedNodes": 1,
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2023-08-24T02:12:27.7527697Z"
+          },
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0
+        }
+      }
+    }
+  }
+}

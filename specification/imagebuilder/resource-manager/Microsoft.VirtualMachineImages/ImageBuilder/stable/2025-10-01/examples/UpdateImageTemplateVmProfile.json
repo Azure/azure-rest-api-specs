@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "imageTemplateName": "myImageTemplate",
+    "parameters": {
+      "properties": {
+        "vmProfile": {
+          "osDiskSizeGB": 127,
+          "vmSize": "{updated_vmsize}",
+          "vnetConfig": {
+            "containerInstanceSubnetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnetname",
+            "subnetId": "{updated_aci_subnet}"
+          }
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myImageTemplate",
+        "type": "Microsoft.VirtualMachineImages/imageTemplates",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
+        "identity": {
+          "type": "None"
+        },
+        "location": "westus",
+        "properties": {
+          "customize": [
+            {
+              "name": "Shell customization example",
+              "type": "Shell",
+              "scriptUri": "https://example.com/path/to/script.sh"
+            }
+          ],
+          "distribute": [
+            {
+              "type": "ManagedImage",
+              "artifactTags": {
+                "tagName": "value"
+              },
+              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "location": "1_location",
+              "runOutputName": "image_it_pir_1"
+            }
+          ],
+          "source": {
+            "type": "ManagedImage",
+            "imageId": "/subscriptions/{subscription-id}/resourceGroups/source_rg/providers/Microsoft.Compute/images/source_image"
+          },
+          "vmProfile": {
+            "osDiskSizeGB": 127,
+            "vmSize": "{updated_vmsize}",
+            "vnetConfig": {
+              "containerInstanceSubnetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnetname",
+              "subnetId": "{updated_aci_subnet}"
+            }
+          }
+        },
+        "tags": {
+          "tag": "tag-value"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operation-id}?api-version=2025-10-01"
+      }
+    }
+  },
+  "operationId": "VirtualMachineImageTemplates_Update",
+  "title": "Update parameters for vm profile."
+}

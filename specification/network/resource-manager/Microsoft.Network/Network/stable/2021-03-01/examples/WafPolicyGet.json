@@ -1,0 +1,140 @@
+{
+  "parameters": {
+    "api-version": "2021-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "policyName": "Policy1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Policy1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/Policy1",
+        "type": "Microsoft.Network/applicationgatewaywebapplicationfirewallpolicies",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "resourceState": "Enabled",
+          "provisioningState": "Succeeded",
+          "policySettings": {
+            "state": "Enabled",
+            "mode": "Prevention",
+            "maxRequestBodySizeInKb": 2000,
+            "fileUploadLimitInMb": 4000,
+            "requestBodyCheck": true
+          },
+          "customRules": [
+            {
+              "name": "Rule1",
+              "priority": 1,
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ],
+                  "transforms": []
+                }
+              ],
+              "action": "Block"
+            },
+            {
+              "name": "Rule2",
+              "priority": 2,
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.1.0/24"
+                  ]
+                },
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RequestHeader",
+                      "selector": "UserAgent"
+                    }
+                  ],
+                  "operator": "Contains",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "Windows"
+                  ]
+                }
+              ],
+              "action": "Block"
+            }
+          ],
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "OWASP",
+                "ruleSetVersion": "3.2",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "REQUEST-942-APPLICATION-ATTACK-SQLI",
+                    "rules": [
+                      {
+                        "ruleId": "942130",
+                        "state": "Disabled"
+                      },
+                      {
+                        "ruleId": "942110",
+                        "state": "Disabled"
+                      }
+                    ]
+                  },
+                  {
+                    "ruleGroupName": "REQUEST-920-PROTOCOL-ENFORCEMENT",
+                    "rules": [
+                      {
+                        "ruleId": "920100",
+                        "state": "Disabled"
+                      },
+                      {
+                        "ruleId": "920120",
+                        "state": "Disabled"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "exclusions": [
+              {
+                "matchVariable": "RequestHeaderNames",
+                "selectorMatchOperator": "Equals",
+                "selector": "testHeader1"
+              },
+              {
+                "matchVariable": "RequestHeaderNames",
+                "selectorMatchOperator": "StartsWith",
+                "selector": "testHeader2"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

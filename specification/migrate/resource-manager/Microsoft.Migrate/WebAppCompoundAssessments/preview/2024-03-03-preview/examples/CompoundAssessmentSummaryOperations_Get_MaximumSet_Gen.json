@@ -1,0 +1,198 @@
+{
+  "title": "CompoundAssessmentSummaryOperations_Get",
+  "operationId": "CompoundAssessmentSummaryOperations_Get",
+  "parameters": {
+    "api-version": "2024-03-03-preview",
+    "subscriptionId": "6898488D-BBF0-40FC-A5E3-3DF2C00C5F21",
+    "resourceGroupName": "rgwebAppCompoundAssessments",
+    "projectName": "contosoProject",
+    "compoundAssessmentName": "assessmentName",
+    "summaryName": "Modernize"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "summaryName": "Modernize",
+          "summaryType": "Strategy",
+          "sources": [
+            {
+              "count": 5,
+              "platform": "PaaS",
+              "sourceName": "WebApps",
+              "sourceType": "WebApplication"
+            }
+          ],
+          "targets": [
+            {
+              "count": 2,
+              "platform": "PaaS",
+              "targetName": "AzureAppService",
+              "targetType": "WebApplication"
+            },
+            {
+              "count": 3,
+              "platform": "PaaS",
+              "targetName": "AKS",
+              "targetType": "WebApplication"
+            },
+            {
+              "count": 0,
+              "platform": "Unknown",
+              "targetName": "Unknown",
+              "targetType": "Unknown"
+            }
+          ],
+          "targetSourceMapping": [
+            {
+              "confidenceScore": null,
+              "costDetails": [
+                {
+                  "savingOptions": "None",
+                  "costDetail": [
+                    {
+                      "name": "MonthlyComputeCost",
+                      "value": 751.17
+                    },
+                    {
+                      "name": "MonthlySecurityCost",
+                      "value": 43.8
+                    }
+                  ]
+                }
+              ],
+              "managementDetails": null,
+              "migrationDetails": {
+                "migrationType": "Replatform",
+                "readinessSummary": [
+                  {
+                    "name": "Suitable",
+                    "value": 2
+                  },
+                  {
+                    "name": "NotSuitable",
+                    "value": 0
+                  }
+                ]
+              },
+              "savingsDetails": [],
+              "sourceCount": 2,
+              "sourceRef": "WebApps",
+              "targetCount": 2,
+              "targetRef": "AzureAppService"
+            },
+            {
+              "confidenceScore": null,
+              "costDetails": [
+                {
+                  "savingOptions": "None",
+                  "costDetail": [
+                    {
+                      "name": "MonthlyComputeCost",
+                      "value": 437
+                    },
+                    {
+                      "name": "TotalMonthlyCost",
+                      "value": 437
+                    }
+                  ]
+                }
+              ],
+              "managementDetails": null,
+              "migrationDetails": {
+                "migrationType": "Replatform",
+                "readinessSummary": [
+                  {
+                    "name": "Suitable",
+                    "value": 3
+                  }
+                ]
+              },
+              "savingsDetails": [],
+              "sourceCount": 3,
+              "sourceRef": "WebApps",
+              "targetCount": 1,
+              "targetRef": "AKS"
+            },
+            {
+              "confidenceScore": null,
+              "costDetails": null,
+              "managementDetails": null,
+              "migrationDetails": {
+                "migrationType": "Unknown",
+                "readinessSummary": [
+                  {
+                    "name": "Suitable",
+                    "value": 0
+                  },
+                  {
+                    "name": "NotSuitable",
+                    "value": 0
+                  },
+                  {
+                    "name": "ReadinessUnknown",
+                    "value": 0
+                  }
+                ]
+              },
+              "savingsDetails": null,
+              "sourceCount": 0,
+              "sourceRef": "WebApps",
+              "targetCount": 0,
+              "targetRef": "Unknown"
+            }
+          ],
+          "costComponents": [
+            {
+              "savingOptions": "None",
+              "costDetail": [
+                {
+                  "name": "MonthlyComputeCost",
+                  "value": 1188.17
+                },
+                {
+                  "name": "MonthlySecurityCost",
+                  "value": 43.8
+                },
+                {
+                  "name": "TotalMonthlyCost",
+                  "value": 437
+                }
+              ]
+            }
+          ],
+          "savingsComponents": [],
+          "assessmentName": "Modernize",
+          "discoveredLightSummary": {
+            "numberOfWebApps": 30,
+            "numberOfWebAppsPerType": [
+              {
+                "webAppType": "Unknown",
+                "count": 17
+              }
+            ],
+            "numberOfWebServersPerType": [
+              {
+                "webServerType": "Unknown",
+                "count": 4
+              }
+            ],
+            "numberOfWebServers": 2,
+            "numberOfServers": 19
+          }
+        },
+        "id": "/subscriptions/6898488D-BBF0-40FC-A5E3-3DF2C00C5F21/resourceGroups/rgwebAppCompoundAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/webAppCompoundAssessments/assessmentName/summaries/Modernize",
+        "name": "Modernize",
+        "type": "Microsoft.Migrate/assessmentProjects/WebAppCompoundAssessments/summaries",
+        "systemData": {
+          "createdBy": "tiaurcxhaskoyhbessmc",
+          "createdByType": "User",
+          "createdAt": "2024-10-22T07:07:34.888Z",
+          "lastModifiedBy": "tiaurcxhaskoyhbessmc",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-10-22T07:07:34.888Z"
+        }
+      }
+    }
+  }
+}

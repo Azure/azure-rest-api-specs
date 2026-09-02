@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-11-15-preview",
+    "subscriptionId": "subid",
+    "serviceName": "DataTransfer",
+    "createUpdateParameters": {
+      "properties": {
+        "instanceSize": "Cosmos.D4s",
+        "instanceCount": 1,
+        "serviceType": "DataTransfer"
+      }
+    }
+  },
+  "responses": {
+    "202": {},
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/services/DataTransfer",
+        "name": "DataTransfer",
+        "type": "Microsoft.DocumentDB/databaseAccounts/services",
+        "properties": {
+          "status": "Running",
+          "creationTime": "2021-01-25T12:56:05.4622517Z",
+          "instanceSize": "Cosmos.D4s",
+          "instanceCount": 1,
+          "serviceType": "DataTransfer",
+          "locations": [
+            {
+              "name": "DataTransfer-westus2",
+              "location": "West US 2",
+              "status": "Running"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "syncgroupcrud-65440",
+    "serverName": "syncgroupcrud-8475",
+    "databaseName": "syncgroupcrud-4328",
+    "syncGroupName": "syncgroupcrud-3187",
+    "startTime": "2017-01-01T00:00:00",
+    "endTime": "2017-12-31T00:00:00",
+    "type": "All",
+    "api-version": "2021-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "timestamp": "2017-05-30T07:16:08.25Z",
+            "type": "Success",
+            "source": "syncgroupcrud-8475.database.windows.net/hub",
+            "details": "Schema information obtained successfully.",
+            "tracingId": "c0480c8e-6269-424e-9404-b00efce0ebae",
+            "operationStatus": "SchemaRefreshSuccess"
+          },
+          {
+            "timestamp": "2017-05-30T07:03:37.5733333Z",
+            "type": "Error",
+            "source": "syncgroupcrud-8475.database.windows.net/member",
+            "details": "Getting schema information for the database failed with the exception \"Failed to connect to server .\nInner exception: SqlException Error Code: -2146232060 - SqlError Number:53, Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) \nInner exception: The network path was not found\n For more information, provide tracing ID ‘cd3aa28c-0c31-471f-8a77-f1b21c908cbd’ to customer support.\"",
+            "tracingId": "cd3aa28c-0c31-471f-8a77-f1b21c908cbd",
+            "operationStatus": "SchemaRefreshFailure"
+          }
+        ]
+      }
+    }
+  }
+}

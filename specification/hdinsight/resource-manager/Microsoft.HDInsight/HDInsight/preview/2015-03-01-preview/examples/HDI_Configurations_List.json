@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2015-03-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configurations": {
+          "core-site": {
+            "fs.defaultFS": "wasb://test.blob.core.windows.net",
+            "fs.azure.account.key.test.blob.core.windows.net": "accountKey"
+          },
+          "gateway": {
+            "restAuthCredential.isEnabled": "true",
+            "restAuthCredential.username": "admin",
+            "restAuthCredential.password": "**********"
+          }
+        }
+      }
+    }
+  }
+}

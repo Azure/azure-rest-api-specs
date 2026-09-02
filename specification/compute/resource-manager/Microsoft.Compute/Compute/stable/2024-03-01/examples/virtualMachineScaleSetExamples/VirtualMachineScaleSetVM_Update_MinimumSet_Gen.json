@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "resourceGroupName": "rgcompute",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaa",
+    "instanceId": "aaaaaaaaaaaaaaaaaaaa",
+    "parameters": {
+      "location": "westus"
+    },
+    "api-version": "2024-03-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0"
+      }
+    }
+  }
+}

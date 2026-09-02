@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineGroupName": "testvmgroup",
+    "api-version": "2017-03-01-preview",
+    "parameters": {
+      "tags": {
+        "mytag": "myval"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "UpdatingDomainful",
+          "sqlImageOffer": "SQL2017-WS2016",
+          "sqlImageSku": "Enterprise",
+          "wsfcDomainProfile": {
+            "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+          }
+        },
+        "location": "northeurope",
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "name": "testvmgroup",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups"
+      }
+    }
+  }
+}

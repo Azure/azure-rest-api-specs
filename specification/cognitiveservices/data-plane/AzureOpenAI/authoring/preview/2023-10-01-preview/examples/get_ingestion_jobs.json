@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2023-10-01-preview",
+    "content-Type": "application/json"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "test2",
+            "dataRefreshIntervalInMinutes": 60,
+            "completionAction": "cleanUpAssets",
+            "status": "running",
+            "warnings": [],
+            "progress": {
+              "stageProgress": [
+                {
+                  "name": "Preprocessing",
+                  "totalItems": 100,
+                  "processedItems": 100
+                },
+                {
+                  "name": "Indexing",
+                  "totalItems": 200,
+                  "processedItems": 50
+                }
+              ]
+            }
+          },
+          {
+            "id": "test1",
+            "dataRefreshIntervalInMinutes": 60,
+            "completionAction": "cleanUpAssets",
+            "status": "succeeded",
+            "warnings": []
+          }
+        ]
+      }
+    }
+  }
+}

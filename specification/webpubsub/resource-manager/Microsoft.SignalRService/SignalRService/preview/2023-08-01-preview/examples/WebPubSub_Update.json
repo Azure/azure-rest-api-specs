@@ -1,0 +1,183 @@
+{
+  "parameters": {
+    "parameters": {
+      "sku": {
+        "name": "Premium_P1",
+        "tier": "Premium",
+        "capacity": 1
+      },
+      "properties": {
+        "tls": {
+          "clientCertEnabled": false
+        },
+        "liveTraceConfiguration": {
+          "enabled": "false",
+          "categories": [
+            {
+              "name": "ConnectivityLogs",
+              "enabled": "true"
+            }
+          ]
+        },
+        "networkACLs": {
+          "defaultAction": "Deny",
+          "publicNetwork": {
+            "allow": [
+              "ClientConnection"
+            ]
+          },
+          "privateEndpoints": [
+            {
+              "name": "mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+              "allow": [
+                "ServerConnection"
+              ]
+            }
+          ]
+        },
+        "publicNetworkAccess": "Enabled",
+        "disableLocalAuth": false,
+        "disableAadAuth": false
+      },
+      "kind": "WebPubSub",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "eastus",
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myWebPubSubService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Premium_P1",
+          "tier": "Premium",
+          "size": "P1",
+          "capacity": 1
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "externalIP": "10.0.0.1",
+          "hostName": "mywebpubsubservice.webpubsub.azure.com",
+          "publicPort": 443,
+          "serverPort": 443,
+          "version": "1.0",
+          "privateEndpointConnections": [
+            {
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "actionsRequired": "None"
+                }
+              },
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/privateEndpointConnections/mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+              "name": "mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+              "type": "Microsoft.SignalRService/WebPubSub/privateEndpointConnections",
+              "systemData": {
+                "createdBy": "string",
+                "createdByType": "User",
+                "createdAt": "2015-02-03T04:05:06Z",
+                "lastModifiedBy": "string",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2015-02-03T04:05:06Z"
+              }
+            }
+          ],
+          "tls": {
+            "clientCertEnabled": true
+          },
+          "liveTraceConfiguration": {
+            "enabled": "false",
+            "categories": [
+              {
+                "name": "ConnectivityLogs",
+                "enabled": "true"
+              }
+            ]
+          },
+          "resourceLogConfiguration": {
+            "categories": [
+              {
+                "name": "ConnectivityLogs",
+                "enabled": "true"
+              }
+            ]
+          },
+          "networkACLs": {
+            "defaultAction": "Deny",
+            "publicNetwork": {
+              "allow": [
+                "ClientConnection"
+              ]
+            },
+            "privateEndpoints": [
+              {
+                "name": "mywebpubsubservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+                "allow": [
+                  "ServerConnection"
+                ]
+              }
+            ],
+            "ipRules": [
+              {
+                "value": "123.456.789.123/24",
+                "action": "Allow"
+              },
+              {
+                "value": "123.456.789.123",
+                "action": "Allow"
+              },
+              {
+                "value": "AppService",
+                "action": "Allow"
+              }
+            ]
+          },
+          "publicNetworkAccess": "Enabled",
+          "disableLocalAuth": false,
+          "disableAadAuth": false,
+          "regionEndpointEnabled": "Enabled",
+          "resourceStopped": "false"
+        },
+        "kind": "WebPubSub",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService",
+        "name": "myWebPubSubService",
+        "type": "Microsoft.SignalRService/WebPubSub",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2015-02-03T04:05:06Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2015-02-03T04:05:06Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationStatus..."
+      }
+    }
+  }
+}

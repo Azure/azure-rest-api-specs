@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "dataConnectorId": "afef3743-0c88-469c-84ff-ca2e87dc1e48",
+    "resourceGroupName": "myRg",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "afef3743-0c88-469c-84ff-ca2e87dc1e48",
+        "type": "Microsoft.SecurityInsights/dataConnectors",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/afef3743-0c88-469c-84ff-ca2e87dc1e48",
+        "kind": "AmazonWebServicesS3",
+        "properties": {
+          "dataTypes": {
+            "logs": {
+              "state": "Enabled"
+            }
+          },
+          "destinationTable": "AWSVPCFlow",
+          "roleArn": "arn:aws:iam::072643944673:role/RoleName",
+          "sqsUrls": [
+            "https://sqs.us-west-1.amazonaws.com/111111111111/sqsTestName"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "DataConnectors_Get",
+  "title": "Get an Aws S3 data connector"
+}

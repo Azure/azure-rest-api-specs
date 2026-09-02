@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "scope": "subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2",
+    "eventSubscriptionName": "examplesubscription1",
+    "api-version": "2021-10-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "destination": {
+            "properties": {
+              "resourceId": "/subscriptions/d33c5f7a-02ea-40f4-bf52-07f17e84d6a8/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg",
+              "queueName": "queue1",
+              "queueMessageTimeToLiveInSeconds": 300
+            },
+            "endpointType": "StorageQueue"
+          },
+          "filter": {
+            "isSubjectCaseSensitive": false,
+            "subjectBeginsWith": "ExamplePrefix",
+            "subjectEndsWith": "ExampleSuffix"
+          },
+          "labels": [
+            "label1",
+            "label2"
+          ],
+          "provisioningState": "Succeeded",
+          "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventgrid/topics/exampletopic2"
+        },
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
+        "name": "examplesubscription1",
+        "type": "Microsoft.EventGrid/eventSubscriptions"
+      }
+    }
+  }
+}

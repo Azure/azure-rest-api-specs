@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "name": "mypubsubcomponent",
+    "api-version": "2025-10-02-preview",
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysubscription",
+        "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mysubscription",
+        "properties": {
+          "bulkSubscribe": {
+            "enabled": true,
+            "maxAwaitDurationMs": 500,
+            "maxMessagesCount": 123
+          },
+          "pubsubName": "mypubsubcomponent",
+          "routes": {
+            "default": "/products",
+            "rules": []
+          },
+          "scopes": [
+            "warehouseapp",
+            "customersupportapp"
+          ],
+          "topic": "inventory"
+        }
+      }
+    }
+  },
+  "operationId": "DaprSubscriptions_Get",
+  "title": "Get Dapr subscription with default route only"
+}

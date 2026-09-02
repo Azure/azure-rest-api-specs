@@ -1,0 +1,281 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Update operation endpoints and objects.",
+    "title": "UpdateAdminClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of updates at an update locations.": {
+            "$ref": "./examples/Updates/List.json"
+          }
+        },
+        "tags": [
+          "Updates"
+        ],
+        "description": "Get the list of update locations",
+        "operationId": "Updates_List",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a specific update at an update location.": {
+            "$ref": "./examples/Updates/Get.json"
+          }
+        },
+        "tags": [
+          "Updates"
+        ],
+        "description": "Get a specific update at an update location.",
+        "operationId": "Updates_Get",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Updates.json#/parameters/UpdateParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/Apply": {
+      "post": {
+        "x-ms-examples": {
+          "Apply a specific update at an update location.": {
+            "$ref": "./examples/Updates/Apply.json"
+          }
+        },
+        "tags": [
+          "Updates"
+        ],
+        "description": "Apply a specific update at an update location.",
+        "operationId": "Updates_Apply",
+        "parameters": [
+          {
+            "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+          },
+          {
+            "$ref": "Updates.json#/parameters/UpdateParameter"
+          },
+          {
+            "$ref": "Update.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "schema": {
+              "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Update": {
+      "description": "Information pertaining to an update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of an update.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Update.json#/definitions/Resource"
+        }
+      ]
+    },
+    "UpdateModel": {
+      "description": "Properties of an update.",
+      "properties": {
+        "installedDate": {
+          "description": "Date update was installed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "description": "Description of the update.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Current state of the update.",
+          "$ref": "#/definitions/UpdateState"
+        },
+        "kbLink": {
+          "description": "Link to the KB article about the update.",
+          "type": "string"
+        },
+        "minVersionRequired": {
+          "description": "The minimum version required to install.",
+          "type": "string"
+        },
+        "minOemVersionRequired": {
+          "description": "The minimum OEM version required to install.",
+          "type": "string"
+        },
+        "packagePath": {
+          "description": "Path to the update package.",
+          "type": "string"
+        },
+        "packageSizeInMb": {
+          "description": "Size of update package.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "displayName": {
+          "description": "Name of the update.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the update.",
+          "type": "string"
+        },
+        "oemVersion": {
+          "description": "OEM version of the update.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "Publisher of the update.",
+          "type": "string"
+        }
+      }
+    },
+    "UpdateList": {
+      "description": "List of updates.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of updates.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Update"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page of updates.",
+          "type": "string"
+        }
+      }
+    },
+    "UpdateState": {
+      "description": "State of the update.",
+      "type": "string",
+      "enum": [
+        "HasPrerequisite",
+        "Obsolete",
+        "Ready",
+        "NotApplicableBecauseAnotherUpdateIsInProgress",
+        "Preparing",
+        "Installing",
+        "Installed",
+        "PreparationFailed",
+        "InstallationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "UpdateParameter": {
+      "name": "updateName",
+      "description": "Name of the update.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

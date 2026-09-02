@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusters",
+        "location": "West US",
+        "etag": "4cd8b5a9-ca9c-4239-9e5b-3916032e994c",
+        "tags": {
+          "key1": "val1"
+        },
+        "properties": {
+          "clusterVersion": "3.5.1000.0",
+          "osType": "Linux",
+          "clusterDefinition": {
+            "blueprint": "https://blueprints.azurehdinsight.net/spark-3.5.1000.0.9625065.json",
+            "kind": "SPARK",
+            "componentVersion": {
+              "Spark": "2.0"
+            }
+          },
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "headnode",
+                "targetInstanceCount": 2,
+                "hardwareProfile": {
+                  "vmSize": "Standard_D12_V2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                }
+              },
+              {
+                "name": "workernode",
+                "targetInstanceCount": 4,
+                "hardwareProfile": {
+                  "vmSize": "Standard_D4_V2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                }
+              },
+              {
+                "name": "zookeepernode",
+                "targetInstanceCount": 3,
+                "hardwareProfile": {
+                  "vmSize": "Medium"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "clusterState": "Running",
+          "createdDate": "2017-03-03T08:35:07.323",
+          "quotaInfo": {
+            "coresUsed": 40
+          },
+          "connectivityEndpoints": [
+            {
+              "name": "SSH",
+              "protocol": "TCP",
+              "location": "cluster1-ssh.azurehdinsight.net",
+              "port": 22
+            },
+            {
+              "name": "HTTPS",
+              "protocol": "TCP",
+              "location": "cluster1.azurehdinsight.net",
+              "port": 443
+            }
+          ],
+          "tier": "Standard"
+        }
+      }
+    }
+  }
+}

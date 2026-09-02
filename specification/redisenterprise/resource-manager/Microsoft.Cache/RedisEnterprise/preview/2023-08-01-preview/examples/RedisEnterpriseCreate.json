@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "location": "West US",
+      "sku": {
+        "name": "EnterpriseFlash_F300",
+        "capacity": 3
+      },
+      "zones": [
+        "1",
+        "2",
+        "3"
+      ],
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity": {}
+        }
+      },
+      "properties": {
+        "minimumTlsVersion": "1.2",
+        "encryption": {
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyIdentity": {
+              "identityType": "userAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity"
+            },
+            "keyEncryptionKeyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version"
+          }
+        }
+      },
+      "tags": {
+        "tag1": "value1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "location": "West US",
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 3
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ],
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "resourceState": "Creating",
+          "hostName": "cache1.westus.something.azure.net",
+          "redisVersion": "5",
+          "minimumTlsVersion": "1.2",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "userAssignedIdentityResourceId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity",
+                "identityType": "userAssignedIdentity"
+              },
+              "keyEncryptionKeyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version"
+            }
+          }
+        },
+        "tags": {
+          "tag1": "value1"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "location": "West US",
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 3
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ],
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Running",
+          "hostName": "cache1.westus.something.azure.net",
+          "redisVersion": "5",
+          "minimumTlsVersion": "1.2"
+        },
+        "tags": {
+          "tag1": "value1"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "title": "StandbyContainerGroupPoolRuntimeViews_Get",
+  "operationId": "StandbyContainerGroupPoolRuntimeViews_Get",
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000009",
+    "resourceGroupName": "rgstandbypool",
+    "standbyContainerGroupPoolName": "pool",
+    "runtimeView": "latest"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "instanceCountSummary": [
+            {
+              "instanceCountsByState": [
+                {
+                  "state": "creating",
+                  "count": 100
+                },
+                {
+                  "state": "running",
+                  "count": 500
+                },
+                {
+                  "state": "deleting",
+                  "count": 20
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyContainerGroupPools/pool/runtimeViews/latest",
+        "name": "pool",
+        "type": "Microsoft.StandbyPool/standbyContainerGroupPools/runtimeViews",
+        "systemData": {
+          "createdBy": "pooluser@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2023-09-07T16:33:22.210Z",
+          "lastModifiedBy": "pooluser@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-07T16:33:22.210Z"
+        }
+      }
+    }
+  }
+}

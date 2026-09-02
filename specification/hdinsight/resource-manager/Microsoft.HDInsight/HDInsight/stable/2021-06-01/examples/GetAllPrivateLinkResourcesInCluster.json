@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/privateLinkResources/gateway",
+            "name": "gateway",
+            "type": "Microsoft.HDInsight/clusters/privateLinkResources",
+            "properties": {
+              "groupId": "gateway",
+              "requiredMembers": [
+                "gateway"
+              ],
+              "requiredZoneNames": [
+                "privatelink.azurehdinsight.net"
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/privateLinkResources/headnode",
+            "name": "headnode",
+            "type": "Microsoft.HDInsight/clusters/privateLinkResources",
+            "properties": {
+              "groupId": "headnode",
+              "requiredMembers": [
+                "headnode"
+              ],
+              "requiredZoneNames": [
+                "privatelink.azurehdinsight.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

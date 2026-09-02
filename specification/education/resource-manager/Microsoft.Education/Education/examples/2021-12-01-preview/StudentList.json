@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "includeRemoved": true,
+    "invoiceSectionName": "{invoiceSectionName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{studentAlias}",
+            "type": "Microsoft.Education/Students",
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default/students/{studentAlias}",
+            "properties": {
+              "budget": {
+                "currency": "USD",
+                "value": 100
+              },
+              "effectiveDate": "2021-11-09T21:43:54.161Z",
+              "email": "test@contoso.com",
+              "expirationDate": "2022-11-09T21:43:54.161Z",
+              "firstName": "test",
+              "lastName": "user",
+              "role": "Student",
+              "status": "Active",
+              "subscriptionAlias": "000000000-0000-0000-0000-00000000000000",
+              "subscriptionId": "000000000-0000-0000-0000-00000000000000",
+              "subscriptionInviteLastSentDate": "2021-11-09T21:43:54.161Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Students_List",
+  "title": "StudentList"
+}

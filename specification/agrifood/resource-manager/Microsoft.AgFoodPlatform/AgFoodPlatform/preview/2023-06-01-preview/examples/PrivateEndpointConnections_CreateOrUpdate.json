@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "examples-rg",
+    "dataManagerForAgricultureResourceName": "examples-farmbeatsResourceName",
+    "privateEndpointConnectionName": "privateEndpointConnectionName",
+    "request": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Approved by johndoe@contoso.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName/privateEndpointConnections/privateEndpointConnectionName",
+        "name": "privateEndpointConnectionName",
+        "type": "Microsoft.AgFoodPlatform/farmBeats/privateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by johndoe@contoso.com",
+            "actionsRequired": "None"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "ModelValidationFailed",
+          "message": "Request input validation failed.",
+          "details": [
+            {
+              "code": "ModelValidationFailed",
+              "message": "The Payload field is required.",
+              "target": "Payload"
+            },
+            {
+              "code": "ModelValidationFailed",
+              "message": "Error converting value \"InvalidStatus\" to type 'PrivateEndpointState'. Path 'properties.privateLinkServiceConnectionState.status', line 1, position 624. Refer path description for more information.",
+              "target": "Payload.properties.privateLinkServiceConnectionState.status"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

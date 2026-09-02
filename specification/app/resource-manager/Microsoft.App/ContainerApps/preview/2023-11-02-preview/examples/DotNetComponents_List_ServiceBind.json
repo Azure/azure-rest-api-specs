@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
+    "api-version": "2023-11-02-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/blueshark",
+            "name": "blueshark",
+            "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+            "properties": {
+              "componentType": "AspireDashboard",
+              "provisioningState": "Succeeded",
+              "configurations": [
+                {
+                  "propertyName": "dashboard-theme",
+                  "value": "dark"
+                }
+              ],
+              "serviceBinds": [
+                {
+                  "name": "yellowcat",
+                  "serviceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/yellowcat"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/yellowcat",
+            "name": "yellowcat",
+            "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+            "properties": {
+              "componentType": "AspireResourceServerApi",
+              "provisioningState": "Succeeded",
+              "configurations": [
+                {
+                  "propertyName": "timeout-value",
+                  "value": "10000ms"
+                }
+              ],
+              "serviceBinds": [
+                {
+                  "name": "blueshark",
+                  "serviceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/blueshark"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

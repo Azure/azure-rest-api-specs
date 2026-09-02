@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "name": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "format": "RDB",
+      "prefix": "datadump1",
+      "container": "https://contosostorage.blob.core.window.net/urltoBlobContainer?sasKeyParameters",
+      "storage-subscription-id": "storageSubId"
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    },
+    "204": {}
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2018-09-30-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/openShiftManagedClusters",
+            "location": "location1",
+            "name": "clustername1",
+            "tags": {
+              "archv2": "",
+              "tier": "production"
+            },
+            "type": "Microsoft.ContainerService/OpenShiftManagedClusters",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "openShiftVersion": "v3.11",
+              "clusterVersion": "osa.1",
+              "fqdn": "df9337748a4b.location1.cloudapp.azure.com",
+              "networkProfile": {
+                "vnetCidr": "10.0.0.0/8"
+              },
+              "masterPoolProfile": {
+                "count": 3,
+                "vmSize": "Standard_D4s_v3",
+                "subnetCidr": "10.0.0.0/24"
+              },
+              "agentPoolProfiles": [
+                {
+                  "name": "infra",
+                  "role": "infra",
+                  "count": 2,
+                  "vmSize": "Standard_D4s_v3",
+                  "osType": "Linux",
+                  "subnetCidr": "10.0.0.0/24"
+                },
+                {
+                  "name": "compute",
+                  "role": "compute",
+                  "count": 4,
+                  "vmSize": "Standard_D4s_v3",
+                  "osType": "Linux",
+                  "subnetCidr": "10.0.0.0/24"
+                }
+              ],
+              "routerProfiles": [
+                {
+                  "name": "default",
+                  "fqdn": "dce5faa189c841b99f8a.location1.cloudapp.azure.com",
+                  "publicSubdomain": "b788fade68d345da9b77.location1.int.aksapp.io"
+                }
+              ],
+              "authProfile": {
+                "identityProviders": [
+                  {
+                    "name": "Azure AD",
+                    "provider": {
+                      "kind": "AADIdentityProvider",
+                      "clientId": "clientId",
+                      "tenantId": "tenantId",
+                      "customerAdminGroupId": "customerAdminGroupId"
+                    }
+                  }
+                ]
+              },
+              "monitorProfile": {
+                "enabled": true,
+                "workspaceResourceID": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.OperationalInsights/workspaces/workspacename1"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

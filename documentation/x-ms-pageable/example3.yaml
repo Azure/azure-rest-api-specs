@@ -1,0 +1,28 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+  - application/json
+paths:
+  /getIntegers:
+    get:
+      operationId: list
+      description: "Gets those integers."
+      x-ms-pageable:
+        nextLinkName: null                      # there are no further pages
+        value: payload                          # property name for the "page" (overrides "value")
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PagedIntegerCollection'
+definitions:
+  PagedIntegerCollection:
+    description: "Page of integers."
+    type: object
+    properties:
+      payload:                                  # the only "page" (referred to by "value")
+        type: array
+        items:
+          type: integer

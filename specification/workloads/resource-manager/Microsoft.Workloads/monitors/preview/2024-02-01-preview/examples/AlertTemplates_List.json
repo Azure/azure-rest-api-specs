@@ -1,0 +1,126 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "providerType": "SapHana",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "mySapMonitor"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "saphana-cpu-memory-health",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.workloads/monitors/mySapMonitor/alertTemplates/saphana-cpu-memory-health",
+            "type": "Microsoft.workloads/monitors/alertTemplates",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "templateDisplayName": "SAP HANA Health Base on CPU and Memory",
+              "providerType": "SapHana",
+              "description": "Fired when a SAP HANA database is unhealth based on CPU and memory. Looks at the 95th percentile value over 5 minutes, and if both CPU and memory exceeds 80 percent, the SAP HANA database is considered unhealthy.",
+              "severity": 2,
+              "query": "SapHana_LoadHistory_CL | where PROVIDER_INSTANCE_s == '{ProviderInstance}' | where HOST_s == '{Aggregate}' | extend memoryPercent=MEMORY_USED_d/MEMORY_SIZE_d*100 | summarize AggregatedCPU = percentile(CPU_d,95), AggregatedMemory = percentile(memoryPercent,95) by bin(TimeGenerated, 5m), HOST_s| extend AggregatedValue = iff(AggregatedCPU > 80 and AggregatedMemory > 80, 0, 1)",
+              "thresholdOperator": "LessThan",
+              "defaultThreshold": 1,
+              "lowerBound": 0,
+              "upperBound": 100,
+              "defaultThresholdInputOption": "Required",
+              "alertUnit": "percent",
+              "metricMeasurement": {
+                "thresholdOperator": "GreaterThan",
+                "threshold": 3,
+                "metricTriggerType": "Consecutive",
+                "metricColumn": "HOST_s",
+                "frequencyInMinutes": 10,
+                "timeWindowInMinutes": 45
+              },
+              "queryInputParameters": [
+                {
+                  "name": "providerInstance",
+                  "defaultValue": "",
+                  "description": "The provider instance names."
+                },
+                {
+                  "name": "haCluster",
+                  "defaultValue": "",
+                  "description": "The ha cluster instance names."
+                },
+                {
+                  "name": "alertThreshold",
+                  "defaultValue": "1",
+                  "description": "The alert threshold value."
+                },
+                {
+                  "name": "laQuery",
+                  "type": "LogAnalyticsQuery",
+                  "defaultValue": "host1",
+                  "description": "The LA query value.",
+                  "laQuery": "SapHana_LoadHistory_CL | distinct HOST_s | where name in ({providerInstance})",
+                  "selectionMode": "Single",
+                  "displayName": ""
+                }
+              ]
+            }
+          },
+          {
+            "name": "saphana-cpu-memory-health",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.workloads/monitors/mySapMonitor/alertTemplates/saphana-cpu-memory-health",
+            "type": "Microsoft.workloads/monitors/alertTemplates",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "templateDisplayName": "SAP HANA Health Base on CPU and Memory",
+              "providerType": "SapHana",
+              "description": "Fired when a SAP HANA database is unhealth based on CPU and memory. Looks at the 95th percentile value over 5 minutes, and if both CPU and memory exceeds 80 percent, the SAP HANA database is considered unhealthy.",
+              "severity": 2,
+              "query": "SapHana_LoadHistory_CL | where PROVIDER_INSTANCE_s == '{ProviderInstance}' | where HOST_s == '{Aggregate}' | extend memoryPercent=MEMORY_USED_d/MEMORY_SIZE_d*100 | summarize AggregatedCPU = percentile(CPU_d,95), AggregatedMemory = percentile(memoryPercent,95) by bin(TimeGenerated, 5m), HOST_s| extend AggregatedValue = iff(AggregatedCPU > 80 and AggregatedMemory > 80, 0, 1)",
+              "thresholdOperator": "LessThan",
+              "defaultThreshold": 1,
+              "lowerBound": 0,
+              "upperBound": 100,
+              "defaultThresholdInputOption": "Required",
+              "alertUnit": "percent",
+              "metricMeasurement": {
+                "thresholdOperator": "GreaterThan",
+                "threshold": 3,
+                "metricTriggerType": "Consecutive",
+                "metricColumn": "HOST_s",
+                "frequencyInMinutes": 10,
+                "timeWindowInMinutes": 45
+              },
+              "queryInputParameters": [
+                {
+                  "name": "providerInstance",
+                  "defaultValue": "",
+                  "description": "The provider instance names."
+                },
+                {
+                  "name": "haCluster",
+                  "defaultValue": "",
+                  "description": "The ha cluster instance names."
+                },
+                {
+                  "name": "alertThreshold",
+                  "defaultValue": "1",
+                  "description": "The alert threshold value."
+                },
+                {
+                  "name": "laQuery",
+                  "type": "LogAnalyticsQuery",
+                  "defaultValue": "host1",
+                  "description": "The LA query value.",
+                  "laQuery": "SapHana_LoadHistory_CL | distinct HOST_s | where name in ({providerInstance})",
+                  "selectionMode": "Multiple",
+                  "displayName": ""
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "http://example.com/codeflow?start=1&length=6"
+      }
+    }
+  },
+  "operationId": "AlertTemplates_List",
+  "title": "List all Alert Templates in a subscription"
+}

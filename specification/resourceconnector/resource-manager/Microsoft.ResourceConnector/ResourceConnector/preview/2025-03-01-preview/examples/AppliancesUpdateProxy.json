@@ -1,0 +1,76 @@
+{
+  "operationId": "Appliances_CreateOrUpdate",
+  "title": "Update Appliance Proxy Configuration",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "testresourcegroup",
+    "resourceName": "appliance01",
+    "identity": {
+      "type": "SystemAssigned"
+    },
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "distro": "AKSEdge",
+        "publicKey": "xxxxxxxx",
+        "infrastructureConfig": {
+          "provider": "VMWare"
+        },
+        "networkProfile": {
+          "proxyConfiguration": {
+            "version": "latest"
+          }
+        }
+      }
+    }
+  },
+  "description": "HTTP 200 is returned when the proxy update request is accepted. Check the async operation link for the operation status. HTTP 201 is not returned because this operation requires the resource to already exist.",
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ResourceConnector/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/default?api-version=2025-03-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/providers/Microsoft.ResourceConnector/appliances/appliance01",
+        "name": "appliance01",
+        "type": "Microsoft.ResourceConnector/appliances",
+        "location": "West US",
+        "properties": {
+          "distro": "AKSEdge",
+          "version": "1.0.1",
+          "provisioningState": "Updating",
+          "status": "NetworkProxyUpdatePreparing",
+          "publicKey": "xxxxxxxx",
+          "infrastructureConfig": {
+            "provider": "VMWare"
+          },
+          "networkProfile": {
+            "proxyConfiguration": {
+              "version": "1750464301"
+            },
+            "dnsConfiguration": {
+              "version": "1744221145"
+            },
+            "gatewayConfiguration": {
+              "version": "1744221145"
+            }
+          }
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "111111-1111-1111-1111-111111111111"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2025-04-09T17:52:25.0928001Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2025-06-21T00:05:15.0000000Z"
+        }
+      }
+    }
+  }
+}

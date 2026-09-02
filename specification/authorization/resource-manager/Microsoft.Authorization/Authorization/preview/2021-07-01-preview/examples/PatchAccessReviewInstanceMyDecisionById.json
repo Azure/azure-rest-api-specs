@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2021-07-01-preview",
+    "scheduleDefinitionId": "488a6d0e-0a63-4946-86e3-1f5bbc934661",
+    "id": "4135f961-be78-4005-8101-c72a5af307a2",
+    "decisionId": "fa73e90b-5bf1-45fd-a182-35ce5fc0674d",
+    "properties": {},
+    "body": {
+      "properties": {
+        "decision": "Approve",
+        "justification": "I trust this person."
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/488a6d0e-0a63-4946-86e3-1f5bbc934661/instances/4135f961-be78-4005-8101-c72a5af307a2/decisions/fa73e90b-5bf1-45fd-a182-35ce5fc0674d",
+        "type": "Microsoft.Authorization/accessReviewScheduleDefinitions/instances/decisions",
+        "name": "fa73e90b-5bf1-45fd-a182-35ce5fc0674d",
+        "properties": {
+          "reviewedBy": {
+            "principalType": "user",
+            "principalId": "a6c7aecb-cbfd-4763-87ef-e91b4bd509d9",
+            "principalName": "Shubham Gupta",
+            "userPrincipalName": "shugup@microsoft.com"
+          },
+          "reviewedDateTime": "2018-08-03T21:02:30.667Z",
+          "decision": "Deny",
+          "justification": "This person has left this team",
+          "appliedBy": {
+            "principalType": "user",
+            "principalId": "36777fc8-4ec2-49ea-a56c-cec0bd47d83a",
+            "principalName": "Amit Ghosh",
+            "userPrincipalName": "amitgho@microsoft.com"
+          },
+          "appliedDateTime": "2018-10-03T21:02:30.667Z",
+          "applyResult": "Success",
+          "recommendation": "Deny",
+          "principal": {
+            "type": "user",
+            "id": "a6c7aecb-cbfd-4763-87ef-e91b4bd509d9",
+            "displayName": "Shubham Gupta",
+            "userPrincipalName": "shugup@microsoft.com"
+          },
+          "resource": {
+            "type": "azureRole",
+            "id": "a6c7aecb-cbfd-4763-87ef-e91b4bd509d9",
+            "displayName": "Owner"
+          }
+        }
+      }
+    }
+  }
+}

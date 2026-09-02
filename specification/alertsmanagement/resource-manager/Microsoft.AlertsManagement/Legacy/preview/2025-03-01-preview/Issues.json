@@ -1,0 +1,2252 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Alerts Management",
+    "version": "2025-03-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Issue"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/issues": {
+      "get": {
+        "operationId": "Issue_List",
+        "tags": [
+          "Issue"
+        ],
+        "description": "List all issues under the parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IssueResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Issue_List_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/issues/{issueName}": {
+      "get": {
+        "operationId": "Issue_Get",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Get issue properties",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Issue_Create",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Create a new issue or updates an existing one",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IssueResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'IssueResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Issue_Update",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Update an issue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Issue_Delete",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Delete an issue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/issues/{issueName}/addOrUpdateAlerts": {
+      "post": {
+        "operationId": "Issue_AddOrUpdateAlerts",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Add or update alerts in the issue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelatedAlerts"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RelatedAlerts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_AddOrUpdateAlerts_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_AddOrUpdateAlerts_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/issues/{issueName}/addOrUpdateResources": {
+      "post": {
+        "operationId": "Issue_AddOrUpdateResources",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Add or update resources in the issue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelatedResources"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RelatedResources"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_AddOrUpdateResources_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_AddOrUpdateResources_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/issues/{issueName}/fetchInvestigationResult": {
+      "post": {
+        "operationId": "Issue_FetchInvestigationResult",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Fetch investigation results",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FetchInvestigationResultParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InvestigationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_FetchInvestigationResult_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_FetchInvestigationResult_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/issues/{issueName}/listAlerts": {
+      "post": {
+        "operationId": "Issue_ListAlerts",
+        "tags": [
+          "Issue"
+        ],
+        "description": "List all alerts in the issue - this method uses pagination to return all alerts",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedRelatedAlert"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Issue_ListAlerts_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_ListAlerts_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/issues/{issueName}/listResources": {
+      "post": {
+        "operationId": "Issue_ListResources",
+        "tags": [
+          "Issue"
+        ],
+        "description": "List all resources in the issue - this method uses pagination to return all resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedRelatedResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Issue_ListResources_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_ListResources_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/issues/{issueName}/startInvestigation": {
+      "post": {
+        "operationId": "Issue_StartInvestigation",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Start a new investigation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartInvestigationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InvestigationMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_StartInvestigation_MaximumSet_Gen": {
+            "$ref": "./examples/Issue_StartInvestigation_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AbnormalEventAnomalyInsight": {
+      "type": "object",
+      "description": "The insight for an abnormal event",
+      "properties": {
+        "cloudRoleName": {
+          "type": "string",
+          "description": "The cloud role name for which the log was made"
+        },
+        "analysisStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the analysis (in UTC)"
+        },
+        "analysisEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the analysis (in UTC)"
+        },
+        "target": {
+          "type": "string",
+          "description": "The source of the detected anomaly, for example: target URI of a dependency, name of a failed operation, or type of an exception"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the abnormal event"
+        },
+        "examples": {
+          "type": "array",
+          "description": "Examples of the abnormal event",
+          "items": {
+            "type": "string"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total count of log entries analyzed"
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of failed log entries"
+        },
+        "abnormalEventType": {
+          "$ref": "#/definitions/AbnormalEventType",
+          "description": "The type of abnormal event"
+        },
+        "anomalyTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the anomaly was detected (in UTC)"
+        },
+        "transactionPatternAnomalies": {
+          "type": "array",
+          "description": "The transaction pattern anomalies",
+          "items": {
+            "$ref": "#/definitions/TransactionPatternAnomaly"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "tracePatternAnomalies": {
+          "type": "array",
+          "description": "The trace pattern anomalies",
+          "items": {
+            "$ref": "#/definitions/TracePatternAnomaly"
+          },
+          "x-ms-identifiers": [
+            "pattern"
+          ]
+        },
+        "exceptionPatternAnomalies": {
+          "type": "array",
+          "description": "The exception pattern anomalies",
+          "items": {
+            "$ref": "#/definitions/ExceptionPatternAnomaly"
+          },
+          "x-ms-identifiers": [
+            "itemId"
+          ]
+        }
+      },
+      "required": [
+        "cloudRoleName",
+        "analysisStartTime",
+        "analysisEndTime",
+        "target",
+        "examples",
+        "abnormalEventType",
+        "anomalyTime",
+        "transactionPatternAnomalies",
+        "tracePatternAnomalies",
+        "exceptionPatternAnomalies"
+      ]
+    },
+    "AbnormalEventData": {
+      "type": "object",
+      "description": "The data details for logs",
+      "properties": {
+        "kqlFilter": {
+          "type": "string",
+          "description": "The kql filter to display"
+        }
+      },
+      "required": [
+        "kqlFilter"
+      ]
+    },
+    "AbnormalEventDetails": {
+      "type": "object",
+      "description": "An abnormal event details",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/AbnormalEventData",
+          "description": "The details data, which could be user generated or system generated"
+        },
+        "insight": {
+          "$ref": "#/definitions/AbnormalEventAnomalyInsight",
+          "description": "Insight about the anomaly, this is system generated"
+        }
+      },
+      "required": [
+        "data",
+        "insight"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AbnormalEvent"
+    },
+    "AbnormalEventType": {
+      "type": "string",
+      "description": "The type of the abnormal event",
+      "enum": [
+        "Dependency",
+        "Request",
+        "Exception"
+      ],
+      "x-ms-enum": {
+        "name": "AbnormalEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dependency",
+            "value": "Dependency",
+            "description": "The abnormal event type is a dependency"
+          },
+          {
+            "name": "Request",
+            "value": "Request",
+            "description": "The abnormal event type is a request"
+          },
+          {
+            "name": "Exception",
+            "value": "Exception",
+            "description": "The abnormal event type is an exception"
+          }
+        ]
+      }
+    },
+    "AddedByType": {
+      "type": "string",
+      "description": "The type of entity that added data to the issue",
+      "enum": [
+        "Manual",
+        "Automatic"
+      ],
+      "x-ms-enum": {
+        "name": "AddedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "The data was added manually by a user"
+          },
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "The data was added automatically"
+          }
+        ]
+      }
+    },
+    "AggregationType": {
+      "type": "string",
+      "description": "The aggregation type of the metric",
+      "enum": [
+        "Average",
+        "Minimum",
+        "Maximum",
+        "Total",
+        "Count",
+        "Unique",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "AggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "The metric aggregation type is average"
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum",
+            "description": "The metric aggregation type is minimum"
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum",
+            "description": "The metric aggregation type is maximum"
+          },
+          {
+            "name": "Total",
+            "value": "Total",
+            "description": "The metric aggregation type is total"
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "The metric aggregation type is count"
+          },
+          {
+            "name": "Unique",
+            "value": "Unique",
+            "description": "The metric aggregation type is unique, used for logs"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "There is no aggregation type"
+          }
+        ]
+      }
+    },
+    "AnomalyDirection": {
+      "type": "string",
+      "description": "The direction of the anomaly",
+      "enum": [
+        "Increase",
+        "Decrease",
+        "IncreaseAndDecrease"
+      ],
+      "x-ms-enum": {
+        "name": "AnomalyDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Increase",
+            "value": "Increase",
+            "description": "The anomaly direction is increasing"
+          },
+          {
+            "name": "Decrease",
+            "value": "Decrease",
+            "description": "The anomaly direction is decreasing"
+          },
+          {
+            "name": "IncreaseAndDecrease",
+            "value": "IncreaseAndDecrease",
+            "description": "The anomaly direction is both increasing and decreasing"
+          }
+        ]
+      }
+    },
+    "AnomalyRange": {
+      "type": "object",
+      "description": "The range for anomaly scanning",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the range (in UTC)"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the range (in UTC)"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
+    },
+    "AvailabilityState": {
+      "type": "string",
+      "description": "Represents the health state of a resource",
+      "enum": [
+        "Available",
+        "Degraded",
+        "Unavailable",
+        "Unknown",
+        "UserInitiated"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The resource is available"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The resource is degraded"
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "The resource is unavailable"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The availability state of the resource is unknown"
+          },
+          {
+            "name": "UserInitiated",
+            "value": "UserInitiated",
+            "description": "The user initiated this state change"
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AzureMetricAnomalyInsight": {
+      "type": "object",
+      "description": "The insight for a metric anomaly",
+      "properties": {
+        "anomalyScanRange": {
+          "$ref": "#/definitions/AnomalyRange",
+          "description": "The range of that was scanned for anomalies"
+        },
+        "thresholds": {
+          "$ref": "#/definitions/BaselineRange",
+          "description": "The baseline range for the metric"
+        },
+        "anomalyDirection": {
+          "$ref": "#/definitions/AnomalyDirection",
+          "description": "The direction of the anomaly"
+        },
+        "anomalyTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the anomaly (in UTC)"
+        }
+      },
+      "required": [
+        "anomalyScanRange",
+        "thresholds",
+        "anomalyDirection",
+        "anomalyTime"
+      ]
+    },
+    "AzureMetricData": {
+      "type": "object",
+      "description": "The data details for azure metrics",
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "The name of the metric"
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "The namespace of the metric"
+        },
+        "metricInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The interval at which the metric is collected"
+        },
+        "metricAggregation": {
+          "$ref": "#/definitions/AggregationType",
+          "description": "The aggregation type of the metric"
+        },
+        "scanRange": {
+          "$ref": "#/definitions/AnomalyRange",
+          "description": "The range for anomaly scanning"
+        },
+        "dimensions": {
+          "type": "object",
+          "description": "The dimensions of the metric",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        }
+      },
+      "required": [
+        "metricName",
+        "metricNamespace",
+        "metricInterval",
+        "metricAggregation",
+        "scanRange",
+        "dimensions"
+      ]
+    },
+    "AzureMetricDetails": {
+      "type": "object",
+      "description": "An azure metric details",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/AzureMetricData",
+          "description": "The details data, which could be user generated or system generated"
+        },
+        "insight": {
+          "$ref": "#/definitions/AzureMetricAnomalyInsight",
+          "description": "Insight about the anomaly, which is system generated"
+        }
+      },
+      "required": [
+        "data",
+        "insight"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureMetric"
+    },
+    "BaselineRange": {
+      "type": "object",
+      "description": "The range for the baseline for an anomaly",
+      "properties": {
+        "high": {
+          "type": "number",
+          "format": "double",
+          "description": "The highest value of the range"
+        },
+        "low": {
+          "type": "number",
+          "format": "double",
+          "description": "The lowest value of the range"
+        }
+      },
+      "required": [
+        "high",
+        "low"
+      ]
+    },
+    "CategoryType": {
+      "type": "string",
+      "description": "The category type",
+      "enum": [
+        "Investigation",
+        "Metric",
+        "Log",
+        "Alert",
+        "ResourceHealth",
+        "Diagnostics"
+      ],
+      "x-ms-enum": {
+        "name": "CategoryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Investigation",
+            "value": "Investigation",
+            "description": "The category is for an investigation"
+          },
+          {
+            "name": "Metric",
+            "value": "Metric",
+            "description": "The category is for a metric"
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "The category is for a log"
+          },
+          {
+            "name": "Alert",
+            "value": "Alert",
+            "description": "The category is for an alert"
+          },
+          {
+            "name": "ResourceHealth",
+            "value": "ResourceHealth",
+            "description": "The category is for resource health"
+          },
+          {
+            "name": "Diagnostics",
+            "value": "Diagnostics",
+            "description": "The category is for diagnostics"
+          }
+        ]
+      }
+    },
+    "DetailsBase": {
+      "type": "object",
+      "description": "The details base type",
+      "properties": {
+        "detailsType": {
+          "$ref": "#/definitions/DetailsType",
+          "description": "The type of details"
+        },
+        "category": {
+          "$ref": "#/definitions/CategoryType",
+          "description": "The details category"
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "The resource ids related to the anomaly",
+          "items": {
+            "type": "string",
+            "format": "arm-id"
+          }
+        }
+      },
+      "discriminator": "detailsType",
+      "required": [
+        "detailsType",
+        "category"
+      ]
+    },
+    "DetailsType": {
+      "type": "string",
+      "description": "The details type",
+      "enum": [
+        "Investigation",
+        "Finding",
+        "AzureMetric",
+        "AbnormalEvent",
+        "RelatedAlert",
+        "ResourceHealth",
+        "Diagnostics"
+      ],
+      "x-ms-enum": {
+        "name": "DetailsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Investigation",
+            "value": "Investigation",
+            "description": "The details is for an investigation"
+          },
+          {
+            "name": "Finding",
+            "value": "Finding",
+            "description": "The details is for a finding"
+          },
+          {
+            "name": "AzureMetric",
+            "value": "AzureMetric",
+            "description": "The details is for an azure metric"
+          },
+          {
+            "name": "AbnormalEvent",
+            "value": "AbnormalEvent",
+            "description": "The details is for a abnormal event"
+          },
+          {
+            "name": "RelatedAlert",
+            "value": "RelatedAlert",
+            "description": "The details is for a related alert"
+          },
+          {
+            "name": "ResourceHealth",
+            "value": "ResourceHealth",
+            "description": "The details is for resource health"
+          },
+          {
+            "name": "Diagnostics",
+            "value": "Diagnostics",
+            "description": "The details for diagnostics"
+          }
+        ]
+      }
+    },
+    "DiagnosticsInsight": {
+      "type": "object",
+      "description": "The insight for diagnostics",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The diagnostics HTML content"
+        },
+        "solutionId": {
+          "type": "string",
+          "description": "The diagnostics solution Id"
+        }
+      },
+      "required": [
+        "content",
+        "solutionId"
+      ]
+    },
+    "DiagnosticsSolutionDetails": {
+      "type": "object",
+      "description": "An diagnostics details",
+      "properties": {
+        "insight": {
+          "$ref": "#/definitions/DiagnosticsInsight",
+          "description": "Insight about the anomaly, this is system generated"
+        }
+      },
+      "required": [
+        "insight"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Diagnostics"
+    },
+    "ExceptionPatternAnomaly": {
+      "type": "object",
+      "description": "The exception pattern anomaly",
+      "properties": {
+        "problemId": {
+          "type": "string",
+          "description": "The problem ID of the exception, from the Application Insights telemetry data model"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of the exception occurrences"
+        },
+        "itemId": {
+          "type": "string",
+          "description": "The exception's item ID, from the Application Insights telemetry data model"
+        },
+        "generatedMessage": {
+          "type": "string",
+          "description": "The generated message for the exception"
+        }
+      },
+      "required": [
+        "problemId",
+        "count",
+        "itemId",
+        "generatedMessage"
+      ]
+    },
+    "FetchInvestigationResultParameters": {
+      "type": "object",
+      "description": "Parameters provided to get the investigation result",
+      "properties": {
+        "investigationId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the investigation"
+        }
+      },
+      "required": [
+        "investigationId"
+      ]
+    },
+    "HealthState": {
+      "type": "string",
+      "description": "The health state of the investigation result",
+      "enum": [
+        "Unknown",
+        "Healthy",
+        "Unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The health state of the result is unknown"
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "The result is healthy"
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "The result is unhealthy"
+          }
+        ]
+      }
+    },
+    "InvestigationDetails": {
+      "type": "object",
+      "description": "An investigation details",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/StartInvestigationParameters",
+          "description": "The parameters used for this investigation execution"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Investigation"
+    },
+    "InvestigationEntity": {
+      "type": "object",
+      "description": "Details about the investigation entity",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the entity"
+        },
+        "entityType": {
+          "$ref": "#/definitions/InvestigationEntityType",
+          "description": "The type of the entity"
+        },
+        "relevance": {
+          "$ref": "#/definitions/Relevance",
+          "description": "The relevance of the entity"
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "The health state of the entity"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "The origin of the entity"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the entity (in UTC)"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of the entity (in UTC)"
+        },
+        "execution": {
+          "$ref": "#/definitions/InvestigationExecution",
+          "description": "The execution details of the entity"
+        },
+        "summary": {
+          "$ref": "#/definitions/Summary",
+          "description": "The summary of the entity"
+        },
+        "details": {
+          "$ref": "#/definitions/DetailsBase",
+          "description": "The details of the entity"
+        },
+        "children": {
+          "type": "array",
+          "description": "The children of this investigation entity",
+          "items": {
+            "$ref": "#/definitions/InvestigationEntity"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "entityType",
+        "healthState",
+        "origin",
+        "createdAt",
+        "lastModifiedAt",
+        "execution"
+      ]
+    },
+    "InvestigationEntityType": {
+      "type": "string",
+      "description": "The type of the investigation entity",
+      "enum": [
+        "Investigation",
+        "Finding",
+        "Evidence"
+      ],
+      "x-ms-enum": {
+        "name": "InvestigationEntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Investigation",
+            "value": "Investigation",
+            "description": "Investigation entity"
+          },
+          {
+            "name": "Finding",
+            "value": "Finding",
+            "description": "Finding entity"
+          },
+          {
+            "name": "Evidence",
+            "value": "Evidence",
+            "description": "Evidence entity"
+          }
+        ]
+      }
+    },
+    "InvestigationExecution": {
+      "type": "object",
+      "description": "Details about the execution of the investigation",
+      "properties": {
+        "runState": {
+          "$ref": "#/definitions/InvestigationExecutionRunState",
+          "description": "The state of the investigation execution"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the investigation execution completed (in UTC)"
+        }
+      },
+      "required": [
+        "runState",
+        "completedAt"
+      ]
+    },
+    "InvestigationExecutionRunState": {
+      "type": "string",
+      "description": "The execution state of the investigation",
+      "enum": [
+        "None",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "InvestigationExecutionRunState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The investigation execution didn't start"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The investigation execution is in progress"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The investigation execution completed successfully"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The investigation execution failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The investigation execution was canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "InvestigationMetadata": {
+      "type": "object",
+      "description": "Properties of the current investigation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the investigation"
+        },
+        "execution": {
+          "$ref": "#/definitions/InvestigationExecution",
+          "description": "The execution details of the investigation"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the investigation (in UTC)"
+        },
+        "runParameters": {
+          "$ref": "#/definitions/RunParameters",
+          "description": "The parameters that were used to start the investigation"
+        }
+      },
+      "required": [
+        "id",
+        "execution",
+        "createdAt",
+        "runParameters"
+      ]
+    },
+    "InvestigationResult": {
+      "type": "object",
+      "description": "Details about the investigation result",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the investigation"
+        },
+        "entityType": {
+          "$ref": "#/definitions/InvestigationEntityType",
+          "description": "The type of the investigation"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "The origin of the investigation"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the investigation (in UTC)"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of the investigation (in UTC)"
+        },
+        "execution": {
+          "$ref": "#/definitions/InvestigationExecution",
+          "description": "The execution details of the investigation"
+        },
+        "runParameters": {
+          "$ref": "#/definitions/RunParameters",
+          "description": "The parameters used to run the investigation"
+        },
+        "children": {
+          "type": "array",
+          "description": "The children of this investigation, findings and evidences",
+          "items": {
+            "$ref": "#/definitions/InvestigationEntity"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "entityType",
+        "origin",
+        "createdAt",
+        "lastModifiedAt",
+        "execution",
+        "runParameters",
+        "children"
+      ]
+    },
+    "InvestigationScope": {
+      "type": "object",
+      "description": "A single scope of the investigation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ID of the scope of the investigation - either an Azure alert ID or an Azure resource ID"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "The origin of the scope"
+        },
+        "relevance": {
+          "$ref": "#/definitions/Relevance",
+          "description": "The relevance of the scope"
+        }
+      },
+      "required": [
+        "id",
+        "origin"
+      ]
+    },
+    "IssueProperties": {
+      "type": "object",
+      "description": "The issue properties",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The issue title"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The issue status"
+        },
+        "severity": {
+          "type": "string",
+          "description": "The issue severity"
+        },
+        "investigations": {
+          "type": "array",
+          "description": "The list of investigations in the issue",
+          "items": {
+            "$ref": "#/definitions/InvestigationMetadata"
+          },
+          "readOnly": true
+        },
+        "impactTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The issue impact time (in UTC)"
+        },
+        "investigationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of investigations in the issue",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "title",
+        "status",
+        "severity",
+        "investigations",
+        "impactTime",
+        "investigationsCount"
+      ]
+    },
+    "IssuePropertiesUpdate": {
+      "type": "object",
+      "description": "The issue properties",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The issue title"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The issue status"
+        },
+        "severity": {
+          "type": "string",
+          "description": "The issue severity"
+        },
+        "impactTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The issue impact time (in UTC)"
+        }
+      }
+    },
+    "IssueResource": {
+      "type": "object",
+      "description": "The Issue resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IssueProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IssueResourceListResult": {
+      "type": "object",
+      "description": "The response of a IssueResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IssueResource items on this page",
+          "items": {
+            "$ref": "#/definitions/IssueResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IssueResourceUpdate": {
+      "type": "object",
+      "description": "The Issue resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IssuePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ListParameter": {
+      "type": "object",
+      "description": "Parameters for listing related entities",
+      "properties": {
+        "filter": {
+          "type": "string",
+          "description": "The filter to apply on the operation. For example, to filter by relevance, use \"$filter=relevance eq 'Relevant'\""
+        }
+      }
+    },
+    "Origin": {
+      "type": "object",
+      "description": "Details about the origin of the entity - the source that added it to the issue",
+      "properties": {
+        "addedBy": {
+          "type": "string",
+          "description": "The ID of the origin - for example, in case of 'Manual', the object ID of the identity, and in case of 'Automatic', the name of the automatic system"
+        },
+        "addedByType": {
+          "$ref": "#/definitions/AddedByType",
+          "description": "The source of the origin - Manual or Automatic"
+        }
+      },
+      "required": [
+        "addedBy",
+        "addedByType"
+      ]
+    },
+    "PagedRelatedAlert": {
+      "type": "object",
+      "description": "Paged collection of RelatedAlert items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RelatedAlert items on this page",
+          "items": {
+            "$ref": "#/definitions/RelatedAlert"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedRelatedResource": {
+      "type": "object",
+      "description": "Paged collection of RelatedResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RelatedResource items on this page",
+          "items": {
+            "$ref": "#/definitions/RelatedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RelatedAlert": {
+      "type": "object",
+      "description": "Properties of an alert which is related to the issue",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The alert ID"
+        },
+        "relevance": {
+          "$ref": "#/definitions/Relevance",
+          "description": "The alerts's relevance status"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "The source that related the alert to the issue",
+          "readOnly": true
+        },
+        "addedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time this relation was added to the issue (in UTC)",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of this relation (in UTC)",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "relevance",
+        "origin",
+        "addedAt",
+        "lastModifiedAt"
+      ]
+    },
+    "RelatedAlertAnomalyInsight": {
+      "type": "object",
+      "description": "The insight for a related alert",
+      "properties": {
+        "firedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the alert was fired (in UTC)"
+        },
+        "anomalyTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the anomaly was detected (in UTC)"
+        }
+      },
+      "required": [
+        "firedTime",
+        "anomalyTime"
+      ]
+    },
+    "RelatedAlertData": {
+      "type": "object",
+      "description": "The data details for alerts",
+      "properties": {
+        "firedAlertId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fired alert id"
+        }
+      },
+      "required": [
+        "firedAlertId"
+      ]
+    },
+    "RelatedAlertDetails": {
+      "type": "object",
+      "description": "A related alert details",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/RelatedAlertData",
+          "description": "The details data, which could be user generated or system generated"
+        },
+        "insight": {
+          "$ref": "#/definitions/RelatedAlertAnomalyInsight",
+          "description": "Insight about the anomaly, this is system generated"
+        }
+      },
+      "required": [
+        "data",
+        "insight"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "RelatedAlert"
+    },
+    "RelatedAlerts": {
+      "type": "object",
+      "description": "A list of related alerts",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of related alerts",
+          "items": {
+            "$ref": "#/definitions/RelatedAlert"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RelatedResource": {
+      "type": "object",
+      "description": "Properties of a resource which is related to the issue",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID"
+        },
+        "relevance": {
+          "$ref": "#/definitions/Relevance",
+          "description": "The resource's relevance status"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "The source that related the resource to the issue",
+          "readOnly": true
+        },
+        "addedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time this relation was added to the issue (in UTC)",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of this relation (in UTC)",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "relevance",
+        "origin",
+        "addedAt",
+        "lastModifiedAt"
+      ]
+    },
+    "RelatedResources": {
+      "type": "object",
+      "description": "A list of related resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of related resources",
+          "items": {
+            "$ref": "#/definitions/RelatedResource"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Relevance": {
+      "type": "string",
+      "description": "The relevance status of the resource",
+      "enum": [
+        "None",
+        "Relevant",
+        "Irrelevant"
+      ],
+      "x-ms-enum": {
+        "name": "Relevance",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No relevance status for the resource"
+          },
+          {
+            "name": "Relevant",
+            "value": "Relevant",
+            "description": "The resource is relevant to the issue"
+          },
+          {
+            "name": "Irrelevant",
+            "value": "Irrelevant",
+            "description": "The resource is irrelevant to the issue"
+          }
+        ]
+      }
+    },
+    "ResourceHealthDetails": {
+      "type": "object",
+      "description": "A resource health details",
+      "properties": {
+        "insight": {
+          "$ref": "#/definitions/ResourceHealthInsight",
+          "description": "Insight about the anomaly, this is system generated"
+        }
+      },
+      "required": [
+        "insight"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceHealth"
+    },
+    "ResourceHealthInsight": {
+      "type": "object",
+      "description": "The insight for resource health",
+      "properties": {
+        "availabilityState": {
+          "$ref": "#/definitions/AvailabilityState",
+          "description": "The availability state of the resource"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the resource health event"
+        },
+        "summary": {
+          "type": "string",
+          "description": "The summary of the resource health event"
+        },
+        "occurredTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the resource health event occurred (in UTC)"
+        }
+      },
+      "required": [
+        "availabilityState",
+        "title",
+        "summary",
+        "occurredTime"
+      ]
+    },
+    "RunParameters": {
+      "type": "object",
+      "description": "The parameters used to run the investigation",
+      "properties": {
+        "impactTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The impact time to investigate (in UTC)"
+        },
+        "alerts": {
+          "type": "array",
+          "description": "The alerts used to run the investigation",
+          "items": {
+            "$ref": "#/definitions/InvestigationScope"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "description": "The resources used to run the investigation",
+          "items": {
+            "$ref": "#/definitions/InvestigationScope"
+          }
+        }
+      },
+      "required": [
+        "impactTime",
+        "alerts",
+        "resources"
+      ]
+    },
+    "StartInvestigationParameters": {
+      "type": "object",
+      "description": "Parameters provided to start an investigation operation",
+      "properties": {
+        "impactTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The impact time to use for this investigation - by default, the impact time from the issue is used (in UTC)"
+        },
+        "investigationScopes": {
+          "type": "array",
+          "description": "The scope of the investigation (resources and alerts) - by default, the resources and alerts related to the issue are used",
+          "items": {
+            "$ref": "#/definitions/InvestigationScope"
+          }
+        }
+      },
+      "required": [
+        "investigationScopes"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "The issue status",
+      "enum": [
+        "New",
+        "InProgress",
+        "Mitigated",
+        "Closed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New",
+            "description": "The issue is new"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The issue is in progress"
+          },
+          {
+            "name": "Mitigated",
+            "value": "Mitigated",
+            "description": "The issue is mitigated"
+          },
+          {
+            "name": "Closed",
+            "value": "Closed",
+            "description": "The issue is closed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The issue is canceled"
+          }
+        ]
+      }
+    },
+    "Summary": {
+      "type": "object",
+      "description": "The text summary of the investigation entity",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the entity"
+        },
+        "whatHappened": {
+          "type": "string",
+          "description": "Description of what happened"
+        },
+        "possibleExplanation": {
+          "type": "string",
+          "description": "Possible explanation of the entity"
+        },
+        "whatCanBeDoneNext": {
+          "type": "string",
+          "description": "Suggestions for next steps"
+        }
+      },
+      "required": [
+        "title",
+        "whatHappened",
+        "possibleExplanation",
+        "whatCanBeDoneNext"
+      ]
+    },
+    "TracePatternAnomaly": {
+      "type": "object",
+      "description": "The trace pattern anomaly",
+      "properties": {
+        "generatedMessage": {
+          "type": "string",
+          "description": "A generated message that describes the anomalous trace pattern"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "The anomalous trace pattern that was detected in the Application Insights traces table"
+        },
+        "sampleEvent": {
+          "type": "string",
+          "description": "The sample event of the trace pattern"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of the trace occurrences"
+        }
+      },
+      "required": [
+        "generatedMessage",
+        "pattern",
+        "sampleEvent",
+        "count"
+      ]
+    },
+    "TransactionEdge": {
+      "type": "object",
+      "description": "The edge of a transaction pattern",
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "The textual identifier of the start node of the edge"
+        },
+        "end": {
+          "type": "string",
+          "description": "The textual identifier of the end node of the edge"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The edge's metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "metadata"
+      ]
+    },
+    "TransactionNode": {
+      "type": "object",
+      "description": "The node of a transaction pattern",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The textual identifier of the transaction participant's node"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The node's metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "metadata"
+      ]
+    },
+    "TransactionPatternAnomaly": {
+      "type": "object",
+      "description": "The transaction pattern anomaly",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the transaction pattern"
+        },
+        "generatedMessage": {
+          "type": "string",
+          "description": "A generated message that describes the anomalous transaction pattern"
+        },
+        "targetNode": {
+          "type": "string",
+          "description": "The textual identifier of the target of the anomalous transaction"
+        },
+        "nodes": {
+          "type": "array",
+          "description": "The nodes of the transaction pattern",
+          "items": {
+            "$ref": "#/definitions/TransactionNode"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "description": "The edges of the transaction pattern",
+          "items": {
+            "$ref": "#/definitions/TransactionEdge"
+          },
+          "x-ms-identifiers": [
+            "start",
+            "end"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "generatedMessage",
+        "targetNode",
+        "nodes",
+        "edges"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "IssueNameParameter": {
+      "name": "issueName",
+      "in": "path",
+      "description": "The name of the IssueResource",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "operationId": "DocumentClassifiers_AuthorizeClassifierCopy",
+  "title": "Authorize Copy of Document Classifier",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-07-31-preview",
+    "authorizeCopyRequest": {
+      "classifierId": "targetClassifier",
+      "description": "Target classifier description"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "targetResourceId": "/subscriptions/targetSub/resourceGroups/targetRG/providers/Microsoft.CognitiveServices/accounts/targetService",
+        "targetResourceRegion": "targetResourceRegion",
+        "targetClassifierId": "targetClassifier",
+        "targetClassifierLocation": "https://targetEndpoint.cognitiveservices.azure.com/documentintelligence/documentClassifiers/targetClassifier",
+        "accessToken": "accessToken",
+        "expirationDateTime": "2021-09-23T09:12:54.552Z"
+      }
+    }
+  }
+}

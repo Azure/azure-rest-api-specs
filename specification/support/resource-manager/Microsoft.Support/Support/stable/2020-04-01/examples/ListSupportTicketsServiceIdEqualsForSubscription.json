@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "$filter": "ServiceId eq 'vm_windows_service_guid'",
+    "api-version": "2020-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/providers/Microsoft.Support/supportTickets",
+            "name": "testticket1",
+            "type": "Microsoft.Support/supportTickets",
+            "properties": {
+              "supportTicketId": "2205040010000082",
+              "description": "my description",
+              "problemClassificationId": "/providers/Microsoft.Support/services/vm_windows_service_guid/problemClassifications/problemClassification_guid",
+              "problemClassificationDisplayName": "problemClassification_displayName",
+              "severity": "minimal",
+              "require24X7Response": false,
+              "enrollmentId": "",
+              "contactDetails": {
+                "firstName": "abc",
+                "lastName": "xyz",
+                "preferredContactMethod": "email",
+                "primaryEmailAddress": "abc@contoso.com",
+                "preferredTimeZone": "Pacific Standard Time",
+                "country": "usa",
+                "preferredSupportLanguage": "en-US"
+              },
+              "supportEngineer": {
+                "emailAddress": "xyz@contoso.com"
+              },
+              "supportPlanType": "Premier",
+              "title": "my title",
+              "serviceId": "/providers/Microsoft.Support/services/vm_windows_service_guid",
+              "serviceDisplayName": "Virtual Machine running Windows",
+              "status": "Open",
+              "createdDate": "2022-05-04T21:52:10Z",
+              "modifiedDate": "2022-05-12T23:05:19Z"
+            }
+          },
+          {
+            "id": "/subscriptions/subid/providers/Microsoft.Support/supportTickets",
+            "name": "testticket2",
+            "type": "Microsoft.Support/supportTickets",
+            "properties": {
+              "supportTicketId": "2205040010000080",
+              "description": "This is a test - please ignore",
+              "problemClassificationId": "/providers/Microsoft.Support/services/vm_windows_service_guid/problemClassifications/problemClassification_guid",
+              "problemClassificationDisplayName": "problemClassification_displayName",
+              "severity": "minimal",
+              "require24X7Response": false,
+              "contactDetails": {
+                "firstName": "abc",
+                "lastName": "xyz",
+                "preferredContactMethod": "email",
+                "primaryEmailAddress": "abc@contoso.com",
+                "preferredTimeZone": "Pacific Standard Time",
+                "country": "USA",
+                "preferredSupportLanguage": "en-US"
+              },
+              "supportEngineer": {
+                "emailAddress": "xyz@contoso.com"
+              },
+              "supportPlanType": "Premier",
+              "title": "Test - please ignore",
+              "serviceId": "/providers/Microsoft.Support/services/vm_windows_service_guid",
+              "serviceDisplayName": "Virtual Machine running Windows",
+              "status": "Open",
+              "createdDate": "2022-05-04T21:38:42Z",
+              "modifiedDate": "2022-05-04T21:39:14Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

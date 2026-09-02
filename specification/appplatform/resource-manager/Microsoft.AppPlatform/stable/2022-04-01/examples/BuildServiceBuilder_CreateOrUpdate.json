@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "buildServiceName": "default",
+    "builderName": "mybuilder",
+    "builderResource": {
+      "properties": {
+        "stack": {
+          "id": "io.buildpacks.stacks.bionic",
+          "version": "base"
+        },
+        "buildpackGroups": [
+          {
+            "name": "mix",
+            "buildpacks": [
+              {
+                "id": "tanzu-buildpacks/java-azure"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stack": {
+            "id": "io.buildpacks.stacks.bionic",
+            "version": "base"
+          },
+          "buildpackGroups": [
+            {
+              "name": "mix",
+              "buildpacks": [
+                {
+                  "id": "tanzu-buildpacks/java-azure"
+                },
+                {
+                  "id": "tanzu-buildpacks/dotnet-core"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/buildServices/builders",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builders/mybuilder",
+        "name": "mybuilder"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "stack": {
+            "id": "io.buildpacks.stacks.bionic",
+            "version": "base"
+          },
+          "buildpackGroups": [
+            {
+              "name": "mix",
+              "buildpacks": [
+                {
+                  "id": "tanzu-buildpacks/java-azure"
+                },
+                {
+                  "id": "tanzu-buildpacks/dotnet-core"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/buildServices/builders",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builders/mybuilder",
+        "name": "mybuilder"
+      }
+    }
+  }
+}

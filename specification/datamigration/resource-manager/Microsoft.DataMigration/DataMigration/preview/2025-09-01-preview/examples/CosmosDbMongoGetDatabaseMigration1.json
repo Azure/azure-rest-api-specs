@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "migrationName": "migrationRequest",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "targetResourceName": "targetCosmosDbClusterName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "migrationRequest",
+        "type": "Microsoft.DataMigration/databaseMigrations",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DocumentDB/mongoClusters/targetCosmosDbClusterName/providers/Microsoft.DataMigration/databaseMigrations/migrationRequest",
+        "properties": {
+          "collectionList": [
+            {
+              "sourceCollection": "sourceCol1",
+              "sourceDatabase": "sourceDb1",
+              "targetCollection": "targetCol1",
+              "targetDatabase": "targetDb1"
+            },
+            {
+              "sourceCollection": "sourceCol2",
+              "sourceDatabase": "sourceDb2",
+              "targetCollection": "sourceCol2",
+              "targetDatabase": "sourceDb2"
+            }
+          ],
+          "kind": "MongoToCosmosDbMongo",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/migrationServices/testMigrationService",
+          "migrationStatus": "Creating",
+          "provisioningState": "Creating",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DocumentDB/mongoClusters/targetCosmosDbClusterName",
+          "sourceMongoConnection": {
+            "host": "abc.mongodb.com",
+            "port": 88
+          },
+          "targetMongoConnection": {
+            "host": "xyz.mongocluster.cosmos.azure.com",
+            "port": 10255
+          }
+        }
+      }
+    }
+  },
+  "operationId": "DatabaseMigrationsMongoToCosmosDbvCoreMongo_Get",
+  "title": "Get Mongo to CosmosDb Mongo(vCore) database Migration without the expand parameter."
+}

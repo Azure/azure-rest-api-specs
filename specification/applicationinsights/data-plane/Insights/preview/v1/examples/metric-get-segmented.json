@@ -1,0 +1,146 @@
+{
+  "title": "Get intervaled and segmented request count",
+  "description": "Gets intervaled and segmented metric",
+  "parameters": {
+    "appId": "DEMO_APP",
+    "metricId": "requests%2Fcount",
+    "timespan": "P2D",
+    "interval": "P1D",
+    "segment": [
+      "operation/name",
+      "request/success"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": {
+          "start": "2018-10-22T10:40:09.065Z",
+          "end": "2018-10-22T22:40:09.065Z",
+          "segments": [
+            {
+              "operation/name": "GET Home/Index",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 156483,
+                  "request/success": false
+                },
+                {
+                  "requests/count": null,
+                  "sum": 3795,
+                  "request/success": true
+                }
+              ]
+            },
+            {
+              "operation/name": "GET /",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 34168,
+                  "request/success": false
+                },
+                {
+                  "requests/count": null,
+                  "sum": 12,
+                  "request/success": true
+                }
+              ]
+            },
+            {
+              "operation/name": "GET /FabrikamProd/Content/fonts/segoewp-light-webfont.eot",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 9378,
+                  "request/success": true
+                }
+              ]
+            },
+            {
+              "operation/name": "GET /FabrikamProd/Content/fonts/segoewp-webfont.eot",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 9370,
+                  "request/success": true
+                }
+              ]
+            },
+            {
+              "operation/name": "GET ServiceTickets/Details",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 1989,
+                  "request/success": false
+                },
+                {
+                  "requests/count": null,
+                  "sum": 14,
+                  "request/success": true
+                }
+              ]
+            },
+            {
+              "operation/name": "GET ServiceTickets/Index",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 1991,
+                  "request/success": true
+                }
+              ]
+            },
+            {
+              "operation/name": "GET Employees/Index",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 1990,
+                  "request/success": true
+                }
+              ]
+            },
+            {
+              "operation/name": "GET ServiceTickets/GetLogEntries",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 1985,
+                  "request/success": true
+                }
+              ]
+            },
+            {
+              "operation/name": "GET Employees/Details",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 663,
+                  "request/success": false
+                },
+                {
+                  "requests/count": null,
+                  "sum": 663,
+                  "request/success": true
+                }
+              ]
+            },
+            {
+              "operation/name": "GET Reports/Index",
+              "segments": [
+                {
+                  "requests/count": null,
+                  "sum": 1086,
+                  "request/success": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

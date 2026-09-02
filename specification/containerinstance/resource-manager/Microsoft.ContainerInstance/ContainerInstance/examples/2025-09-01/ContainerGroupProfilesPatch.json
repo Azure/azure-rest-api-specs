@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "containerGroupProfileName": "demo1",
+    "properties": {
+      "tags": {
+        "tag1key": "tag1Value",
+        "tag2key": "tag2Value"
+      }
+    },
+    "resourceGroupName": "demoResource",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
+        "id": "/subscriptions/subid/resourceGroups/demoResource/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
+        "location": "WestUs",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGB": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume3",
+                    "mountPath": "/mnt/volume3",
+                    "readOnly": true
+                  }
+                ]
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "type": "Public",
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ]
+          },
+          "osType": "Linux",
+          "revision": 2,
+          "sku": "Standard",
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName"
+              }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            },
+            {
+              "name": "volume3",
+              "secret": {}
+            }
+          ]
+        },
+        "tags": {
+          "tag1key": "tag1Value",
+          "tag2key": "tag2Value"
+        }
+      }
+    }
+  },
+  "operationId": "CGProfile_Update",
+  "title": "ContainerGroupProfilesPatch"
+}

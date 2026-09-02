@@ -1,0 +1,349 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DataMaskingRules"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules": {
+      "get": {
+        "operationId": "DataMaskingRules_ListByDatabase",
+        "tags": [
+          "DataMaskingRules"
+        ],
+        "description": "Gets a list of database data masking rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataMaskingPolicyName",
+            "in": "path",
+            "description": "The name of the database for which the data masking policy applies.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "DataMaskingPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of database data masking rules.": {
+            "$ref": "./examples/DataMaskingRuleListByDatabase.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}": {
+      "put": {
+        "operationId": "DataMaskingRules_CreateOrUpdate",
+        "tags": [
+          "DataMaskingRules"
+        ],
+        "description": "Creates or updates a database data masking rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataMaskingPolicyName",
+            "in": "path",
+            "description": "The name of the database for which the data masking policy applies.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "DataMaskingPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "dataMaskingRuleName",
+            "in": "path",
+            "description": "The name of the data masking rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The required parameters for creating or updating a data masking rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataMaskingRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/Update data masking rule for default max.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMax.json"
+          },
+          "Create/Update data masking rule for default min.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMin.json"
+          },
+          "Create/Update data masking rule for numbers.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateNumber.json"
+          },
+          "Create/Update data masking rule for text.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateText.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataMaskingRule": {
+      "type": "object",
+      "description": "A database data masking rule.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the data masking rule.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of Data Masking Rule. Metadata, used for Azure portal.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DataMaskingRuleProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataMaskingRuleListResult": {
+      "type": "object",
+      "description": "The response of a DataMaskingRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataMaskingRule items on this page",
+          "items": {
+            "$ref": "#/definitions/DataMaskingRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataMaskingRuleProperties": {
+      "type": "object",
+      "description": "The properties of a database data masking rule.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The rule Id.",
+          "readOnly": true
+        },
+        "ruleState": {
+          "$ref": "./common.json#/definitions/DataMaskingRuleState",
+          "description": "The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The schema name on which the data masking rule is applied."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name on which the data masking rule is applied."
+        },
+        "columnName": {
+          "type": "string",
+          "description": "The column name on which the data masking rule is applied."
+        },
+        "aliasName": {
+          "type": "string",
+          "description": "The alias name. This is a legacy parameter and is no longer used."
+        },
+        "maskingFunction": {
+          "$ref": "./common.json#/definitions/DataMaskingFunction",
+          "description": "The masking function that is used for the data masking rule."
+        },
+        "numberFrom": {
+          "type": "string",
+          "description": "The numberFrom property of the masking rule. Required if maskingFunction is set to Number, otherwise this parameter will be ignored."
+        },
+        "numberTo": {
+          "type": "string",
+          "description": "The numberTo property of the data masking rule. Required if maskingFunction is set to Number, otherwise this parameter will be ignored."
+        },
+        "prefixSize": {
+          "type": "string",
+          "description": "If maskingFunction is set to Text, the number of characters to show unmasked in the beginning of the string. Otherwise, this parameter will be ignored."
+        },
+        "suffixSize": {
+          "type": "string",
+          "description": "If maskingFunction is set to Text, the number of characters to show unmasked at the end of the string. Otherwise, this parameter will be ignored."
+        },
+        "replacementString": {
+          "type": "string",
+          "description": "If maskingFunction is set to Text, the character to use for masking the unexposed part of the string. Otherwise, this parameter will be ignored."
+        }
+      },
+      "required": [
+        "schemaName",
+        "tableName",
+        "columnName",
+        "maskingFunction"
+      ]
+    }
+  },
+  "parameters": {}
+}

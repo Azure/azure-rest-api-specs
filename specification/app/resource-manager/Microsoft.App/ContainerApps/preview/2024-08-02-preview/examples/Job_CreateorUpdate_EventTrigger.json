@@ -1,0 +1,226 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "jobName": "testcontainerAppsJob0",
+    "api-version": "2024-08-02-preview",
+    "JobEnvelope": {
+      "location": "East US",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {}
+        }
+      },
+      "properties": {
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+        "configuration": {
+          "replicaTimeout": 10,
+          "replicaRetryLimit": 10,
+          "eventTriggerConfig": {
+            "replicaCompletionCount": 1,
+            "parallelism": 4,
+            "scale": {
+              "pollingInterval": 40,
+              "minExecutions": 1,
+              "maxExecutions": 5,
+              "rules": [
+                {
+                  "name": "servicebuscalingrule",
+                  "type": "azure-servicebus",
+                  "metadata": {
+                    "topicName": "my-topic"
+                  },
+                  "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                }
+              ]
+            }
+          },
+          "triggerType": "Event"
+        },
+        "template": {
+          "containers": [
+            {
+              "image": "repo/testcontainerAppsJob0:v1",
+              "name": "testcontainerAppsJob0"
+            }
+          ],
+          "initContainers": [
+            {
+              "image": "repo/testcontainerAppsJob0:v4",
+              "name": "testinitcontainerAppsJob0",
+              "resources": {
+                "cpu": 0.2,
+                "memory": "100Mi"
+              },
+              "command": [
+                "/bin/sh"
+              ],
+              "args": [
+                "-c",
+                "while true; do echo hello; sleep 10;done"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0",
+        "name": "testcontainerAppsJob0",
+        "type": "Microsoft.App/jobs",
+        "location": "East US",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
+              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312",
+              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "InProgress",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "configuration": {
+            "replicaTimeout": 10,
+            "replicaRetryLimit": 10,
+            "eventTriggerConfig": {
+              "replicaCompletionCount": 1,
+              "parallelism": 4,
+              "scale": {
+                "pollingInterval": 20,
+                "minExecutions": 1,
+                "maxExecutions": 5,
+                "rules": [
+                  {
+                    "name": "servicebuscalingrule",
+                    "type": "azure-servicebus",
+                    "metadata": {
+                      "topicName": "my-topic"
+                    },
+                    "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                  }
+                ]
+              }
+            },
+            "triggerType": "Event"
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testinitcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ]
+          },
+          "eventStreamEndpoint": "testEndpoint"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "location"
+      },
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0",
+        "name": "testcontainerAppsJob0",
+        "type": "Microsoft.App/jobs",
+        "location": "East US",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
+              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312",
+              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "InProgress",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "configuration": {
+            "replicaTimeout": 10,
+            "replicaRetryLimit": 10,
+            "eventTriggerConfig": {
+              "replicaCompletionCount": 1,
+              "parallelism": 4,
+              "scale": {
+                "minExecutions": 1,
+                "maxExecutions": 5,
+                "pollingInterval": 20,
+                "rules": [
+                  {
+                    "name": "servicebuscalingrule",
+                    "type": "azure-servicebus",
+                    "metadata": {
+                      "queueName": "my-queue",
+                      "messageCount": "50"
+                    },
+                    "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                  }
+                ]
+              }
+            },
+            "triggerType": "Event"
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testinitcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ]
+          },
+          "eventStreamEndpoint": "testEndpoint"
+        }
+      }
+    }
+  }
+}

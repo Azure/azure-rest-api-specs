@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "77777777-b0c6-47a2-b37c-d8e65a629c18",
+    "resourceGroupName": "Default-RecoveryServices-ResourceGroup",
+    "vaultName": "swaggerExample",
+    "api-version": "2021-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "name": "swaggerExample",
+        "etag": "W/\"datetime'2017-12-15T12%3A36%3A51.68Z'\"",
+        "tags": {
+          "TestUpdatedKey": "TestUpdatedValue"
+        },
+        "identity": {
+          "tenantId": "d676e86e-2206-4a7c-999c-ece52c144b5b",
+          "principalId": "3137d6c7-5d6c-411c-b934-7a2a729ee247",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/6c48fa17-39c7-45f1-90ac-47a587128ace/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/Vaults/pemsi-ecy-rsv2/privateEndpointConnections/pe114-pemsi-ecy-rsv.5944358949303501042.backup.75061caa-cba4-4849-8e09-608da4914aad",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/6c48fa17-39c7-45f1-90ac-47a587128ace/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.Network/privateEndpoints/pe114-pemsi-ecy-rsv"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "None",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ],
+          "privateEndpointStateForBackup": "Enabled",
+          "privateEndpointStateForSiteRecovery": "None"
+        },
+        "id": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/vaults/swaggerExample",
+        "type": "Microsoft.RecoveryServices/vaults",
+        "sku": {
+          "name": "Standard"
+        }
+      }
+    }
+  }
+}

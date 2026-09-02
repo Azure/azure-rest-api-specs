@@ -1,0 +1,160 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2025-06-01",
+    "parameters": {
+      "properties": {
+        "vmSize": "Standard_DC2as_v5",
+        "taskSchedulingPolicy": {
+          "nodeFillType": "Pack"
+        },
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2019-datacenter-core-g2",
+              "version": "latest"
+            },
+            "nodeAgentSkuId": "batch.node.windows amd64",
+            "securityProfile": {
+              "securityType": "confidentialVM",
+              "encryptionAtHost": false,
+              "uefiSettings": {
+                "vTpmEnabled": true,
+                "secureBootEnabled": true
+              }
+            },
+            "osDisk": {
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS",
+                "diskEncryptionSet": {
+                  "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+                },
+                "securityProfile": {
+                  "securityEncryptionType": "DiskWithVMGuestState",
+                  "diskEncryptionSet": {
+                    "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/ConfidentialDiskEncryptionSetId"
+                  }
+                }
+              }
+            },
+            "dataDisks": [
+              {
+                "lun": 0,
+                "diskSizeGB": 1024,
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS",
+                  "diskEncryptionSet": {
+                    "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "scaleSettings": {
+          "fixedScale": {
+            "targetDedicatedNodes": 1,
+            "resizeTimeout": "PT15M"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "properties": {
+          "lastModified": "2025-06-30T07:30:49.7522647Z",
+          "creationTime": "2025-06-30T07:30:49.7522634Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2025-06-30T07:30:49.7522634Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2025-06-30T07:30:49.7522647Z",
+          "vmSize": "STANDARD_DC2as_v5",
+          "interNodeCommunication": "Disabled",
+          "taskSlotsPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Pack",
+            "jobDefaultOrder": "None"
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2019-datacenter-core-g2",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64",
+              "dataDisks": [
+                {
+                  "lun": 0,
+                  "caching": "None",
+                  "diskSizeGB": 1024,
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS",
+                    "diskEncryptionSet": {
+                      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+                    }
+                  }
+                }
+              ],
+              "osDisk": {
+                "caching": "None",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS",
+                  "securityProfile": {
+                    "securityEncryptionType": "DiskWithVMGuestState",
+                    "diskEncryptionSet": {
+                      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/ConfidentialDiskEncryptionSetId"
+                    }
+                  },
+                  "diskEncryptionSet": {
+                    "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+                  }
+                }
+              },
+              "securityProfile": {
+                "securityType": "confidentialVM",
+                "encryptionAtHost": false,
+                "uefiSettings": {
+                  "secureBootEnabled": true,
+                  "vTpmEnabled": true
+                }
+              }
+            }
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0,
+              "resizeTimeout": "PT15M"
+            }
+          },
+          "resizeOperationStatus": {
+            "targetDedicatedNodes": 1,
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2025-06-30T07:30:49.7522324Z"
+          },
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0
+        }
+      }
+    }
+  },
+  "operationId": "Pool_Create",
+  "title": "CreatePool - confidential disk encryption set for user subscription accounts"
+}

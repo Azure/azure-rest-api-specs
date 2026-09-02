@@ -1,0 +1,413 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Data Migration Service Resource Provider",
+    "version": "2018-03-31-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrationValidationOptions": {
+      "type": "object",
+      "description": "Types of validations to run after the migration",
+      "properties": {
+        "enableSchemaValidation": {
+          "type": "boolean",
+          "description": "Allows to compare the schema information between source and target."
+        },
+        "enableDataIntegrityValidation": {
+          "type": "boolean",
+          "description": "Allows to perform a checksum based data integrity validation between source and target for the selected database / tables ."
+        },
+        "enableQueryAnalysisValidation": {
+          "type": "boolean",
+          "description": "Allows to perform a quick and intelligent query analysis by retrieving queries from the source database and executes them in the target. The result will have execution statistics for executions in source and target databases for the extracted queries."
+        }
+      }
+    },
+    "MigrationReportResult": {
+      "type": "object",
+      "description": "Migration validation report result, contains the url for downloading the generated report.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Migration validation result identifier"
+        },
+        "reportUrl": {
+          "type": "string",
+          "description": "The url of the report."
+        }
+      }
+    },
+    "MigrationValidationResult": {
+      "type": "object",
+      "description": "Migration Validation Result",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Migration validation result identifier",
+          "readOnly": true
+        },
+        "migrationId": {
+          "type": "string",
+          "description": "Migration Identifier",
+          "readOnly": true
+        },
+        "summaryResults": {
+          "type": "object",
+          "description": "Validation summary results for each database",
+          "additionalProperties": {
+            "$ref": "#/definitions/MigrationValidationDatabaseSummaryResult"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/ValidationStatus",
+          "description": "Current status of validation at the migration level. Status from the database validation result status will be aggregated here.",
+          "readOnly": true
+        }
+      }
+    },
+    "MigrationValidationDatabaseSummaryResult": {
+      "type": "object",
+      "description": "Migration Validation Database level summary result",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "migrationId": {
+          "type": "string",
+          "description": "Migration Identifier",
+          "readOnly": true
+        },
+        "sourceDatabaseName": {
+          "type": "string",
+          "description": "Name of the source database",
+          "readOnly": true
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Name of the target database",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Validation start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Validation end time",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ValidationStatus",
+          "description": "Current status of validation at the database level",
+          "readOnly": true
+        }
+      }
+    },
+    "MigrationValidationDatabaseLevelResult": {
+      "type": "object",
+      "description": "Database level validation results",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "migrationId": {
+          "type": "string",
+          "description": "Migration Identifier",
+          "readOnly": true
+        },
+        "sourceDatabaseName": {
+          "type": "string",
+          "description": "Name of the source database",
+          "readOnly": true
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Name of the target database",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Validation start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Validation end time",
+          "readOnly": true
+        },
+        "dataIntegrityValidationResult": {
+          "description": "Provides data integrity validation result between the source and target tables that are migrated.",
+          "$ref": "#/definitions/DataIntegrityValidationResult",
+          "readOnly": true
+        },
+        "schemaValidationResult": {
+          "description": "Provides schema comparison result between source and target database",
+          "$ref": "#/definitions/SchemaComparisonValidationResult",
+          "readOnly": true
+        },
+        "queryAnalysisValidationResult": {
+          "description": "Results of some of the query execution result between source and target database",
+          "$ref": "#/definitions/QueryAnalysisValidationResult",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ValidationStatus",
+          "description": "Current status of validation at the database level",
+          "readOnly": true
+        }
+      }
+    },
+    "DataIntegrityValidationResult": {
+      "type": "object",
+      "description": "Results for checksum based Data Integrity validation results",
+      "properties": {
+        "failedObjects": {
+          "type": "object",
+          "description": "List of failed table names of source and target pair",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "validationErrors": {
+          "type": "array",
+          "description": "List of errors that happened while performing data integrity validation",
+          "$ref": "#/definitions/ValidationError"
+        }
+      }
+    },
+    "SchemaComparisonValidationResult": {
+      "type": "object",
+      "description": "Results for schema comparison between the source and target",
+      "properties": {
+        "schemaDifferences": {
+          "type": "array",
+          "description": "List of schema differences between the source and target databases",
+          "$ref": "#/definitions/SchemaComparisonValidationResultType"
+        },
+        "validationErrors": {
+          "type": "array",
+          "description": "List of errors that happened while performing schema compare validation",
+          "$ref": "#/definitions/ValidationError"
+        },
+        "sourceDatabaseObjectCount": {
+          "type": "object",
+          "description": "Count of source database objects",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "targetDatabaseObjectCount": {
+          "type": "object",
+          "description": "Count of target database objects",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "SchemaComparisonValidationResultType": {
+      "type": "object",
+      "description": "Description about the errors happen while performing migration validation",
+      "properties": {
+        "objectName": {
+          "type": "string",
+          "description": "Name of the object that has the difference"
+        },
+        "objectType": {
+          "type": "object",
+          "$ref": "./TasksCommon.json#/definitions/DatabaseObjectType",
+          "description": "Type of the object that has the difference. e.g (Table/View/StoredProcedure)"
+        },
+        "updateAction": {
+          "type": "string",
+          "description": "Update action type with respect to target",
+          "$ref": "#/definitions/UpdateActionType"
+        }
+      }
+    },
+    "UpdateActionType": {
+      "type": "string",
+      "description": "Type of the actual difference for the compared object, while performing schema comparison",
+      "enum": [
+        "DeletedOnTarget",
+        "ChangedOnTarget",
+        "AddedOnTarget"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateActionType",
+        "modelAsString": true
+      }
+    },
+    "QueryAnalysisValidationResult": {
+      "type": "object",
+      "description": "Results for query analysis comparison between the source and target",
+      "properties": {
+        "queryResults": {
+          "type": "array",
+          "description": "List of queries executed and it's execution results in source and target",
+          "$ref": "#/definitions/QueryExecutionResult"
+        },
+        "validationErrors": {
+          "type": "array",
+          "description": "Errors that are part of the execution",
+          "$ref": "#/definitions/ValidationError"
+        }
+      }
+    },
+    "QueryExecutionResult": {
+      "type": "object",
+      "description": "Describes query analysis results for execution in source and target",
+      "properties": {
+        "queryText": {
+          "type": "string",
+          "description": "Query text retrieved from the source server"
+        },
+        "statementsInBatch": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total no. of statements in the batch"
+        },
+        "sourceResult": {
+          "type": "object",
+          "description": "Query analysis result from the source",
+          "$ref": "#/definitions/ExecutionStatistics"
+        },
+        "targetResult": {
+          "type": "object",
+          "description": "Query analysis result from the target",
+          "$ref": "#/definitions/ExecutionStatistics"
+        }
+      }
+    },
+    "ExecutionStatistics": {
+      "type": "object",
+      "description": "Description about the errors happen while performing migration validation",
+      "properties": {
+        "executionCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "No. of query executions"
+        },
+        "cpuTimeMs": {
+          "type": "number",
+          "format": "float",
+          "description": "CPU Time in millisecond(s) for the query execution"
+        },
+        "elapsedTimeMs": {
+          "type": "number",
+          "format": "float",
+          "description": "Time taken in millisecond(s) for executing the query"
+        },
+        "waitStats": {
+          "type": "object",
+          "description": "Dictionary of sql query execution wait types and the respective statistics",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/WaitStatistics"
+          }
+        },
+        "hasErrors": {
+          "type": "boolean",
+          "description": "Indicates whether the query resulted in an error"
+        },
+        "sqlErrors": {
+          "type": "array",
+          "description": "List of sql Errors",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WaitStatistics": {
+      "type": "object",
+      "description": "Wait statistics gathered during query batch execution",
+      "properties": {
+        "waitType": {
+          "type": "string",
+          "description": "Type of the Wait"
+        },
+        "waitTimeMs": {
+          "type": "number",
+          "format": "float",
+          "default": 0,
+          "description": "Total wait time in millisecond(s) "
+        },
+        "waitCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total no. of waits"
+        }
+      }
+    },
+    "Severity": {
+      "type": "string",
+      "description": "Severity of the validation error",
+      "enum": [
+        "Message",
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "Severity",
+        "modelAsString": true
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "description": "Description about the errors happen while performing migration validation",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Error Text"
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity of the error",
+          "$ref": "#/definitions/Severity"
+        }
+      }
+    },
+    "ValidationStatus": {
+      "type": "string",
+      "description": "Current status of the validation",
+      "enum": [
+        "Default",
+        "NotStarted",
+        "Initialized",
+        "InProgress",
+        "Completed",
+        "CompletedWithIssues",
+        "Failed",
+        "Stopped"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationStatus",
+        "modelAsString": true
+      }
+    }
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "title": "Get KubernetesResources",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "pod-nginx-6d4cf56db6-x7q2p-default",
+    "api-version": "2026-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/pod-nginx-6d4cf56db6-x7q2p-default",
+        "name": "pod-nginx-6d4cf56db6-x7q2p-default",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "v1",
+          "kind": "Pod",
+          "metadata": {
+            "name": "nginx-6d4cf56db6-x7q2p",
+            "namespaceName": "default",
+            "uid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "resourceVersion": "8834210",
+            "generation": 1,
+            "creationTimestamp": "2026-05-01T10:00:00Z",
+            "labels": [
+              {
+                "name": "app",
+                "value": "nginx"
+              },
+              {
+                "name": "pod-template-hash",
+                "value": "6d4cf56db6"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "kubectl.kubernetes.io/last-applied-configuration",
+                "value": "{}"
+              }
+            ],
+            "ownerReferences": [
+              {
+                "apiVersion": "apps/v1",
+                "kind": "ReplicaSet",
+                "name": "nginx-6d4cf56db6",
+                "uid": "c3d4e5f6-a7b8-9012-cdef-012345678901",
+                "controller": true,
+                "blockOwnerDeletion": true
+              }
+            ]
+          },
+          "spec": {
+            "nodeName": "aks-nodepool1-12345678-0",
+            "restartPolicy": "Always",
+            "serviceAccountName": "nginx-sa",
+            "dnsPolicy": "ClusterFirst",
+            "terminationGracePeriodSeconds": 30,
+            "priorityClassName": "high-priority",
+            "nodeSelector": [
+              {
+                "name": "kubernetes.io/os",
+                "value": "linux"
+              },
+              {
+                "name": "agentpool",
+                "value": "nodepool1"
+              }
+            ],
+            "hostNetwork": false,
+            "hostPid": false,
+            "hostIpc": false,
+            "runtimeClassName": "containerd",
+            "securityContext": {
+              "runAsUser": 1000,
+              "runAsGroup": 3000,
+              "fsGroup": 2000,
+              "runAsNonRoot": true,
+              "seccompProfile": "RuntimeDefault"
+            },
+            "tolerations": [
+              {
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "effect": "NoExecute",
+                "tolerationSeconds": 300
+              },
+              {
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "effect": "NoExecute",
+                "tolerationSeconds": 300
+              }
+            ],
+            "volumes": [
+              {
+                "name": "nginx-config",
+                "sourceType": "configMap",
+                "source": "nginx-config-map"
+              },
+              {
+                "name": "tmp-dir",
+                "sourceType": "emptyDir",
+                "sizeLimit": "50Mi"
+              },
+              {
+                "name": "kube-api-access",
+                "sourceType": "projected"
+              }
+            ],
+            "containers": [
+              {
+                "name": "nginx",
+                "image": "nginx:1.25.4",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "name": "http",
+                    "containerPort": 80,
+                    "protocol": "TCP"
+                  },
+                  {
+                    "name": "https",
+                    "containerPort": 443,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "POD_NAMESPACE",
+                    "value": "default"
+                  },
+                  {
+                    "name": "NGINX_WORKER_PROCESSES",
+                    "value": "2"
+                  }
+                ],
+                "envFrom": [
+                  {
+                    "configMapRef": "nginx-common-config"
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  },
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "256Mi"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "nginx-config",
+                    "mountPath": "/etc/nginx/conf.d",
+                    "readOnly": true
+                  },
+                  {
+                    "name": "tmp-dir",
+                    "mountPath": "/tmp"
+                  },
+                  {
+                    "name": "kube-api-access",
+                    "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                    "readOnly": true
+                  }
+                ],
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "readOnlyRootFilesystem": true,
+                  "runAsNonRoot": true,
+                  "runAsUser": 1000,
+                  "privileged": false,
+                  "seccompProfile": "RuntimeDefault",
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "livenessProbe": {
+                  "type": "HTTPGet",
+                  "path": "/healthz",
+                  "port": 8080
+                },
+                "readinessProbe": {
+                  "type": "HTTPGet",
+                  "path": "/readyz",
+                  "port": 8080
+                }
+              }
+            ]
+          },
+          "status": {
+            "phase": "Running",
+            "podIp": "10.244.1.42",
+            "podIps": [
+              "10.244.1.42",
+              "fd00::1:2a"
+            ],
+            "hostIp": "10.240.0.4",
+            "hostIps": [
+              "10.240.0.4"
+            ],
+            "startTime": "2026-05-01T10:00:05Z",
+            "qosClass": "Burstable",
+            "reason": "",
+            "initContainerStatuses": [],
+            "conditions": [
+              {
+                "type": "Initialized",
+                "status": "True",
+                "lastTransitionTime": "2026-05-01T10:00:05Z"
+              },
+              {
+                "type": "Ready",
+                "status": "True",
+                "lastTransitionTime": "2026-05-01T10:00:18Z"
+              },
+              {
+                "type": "ContainersReady",
+                "status": "True",
+                "lastTransitionTime": "2026-05-01T10:00:18Z"
+              },
+              {
+                "type": "PodScheduled",
+                "status": "True",
+                "lastTransitionTime": "2026-05-01T10:00:05Z"
+              }
+            ],
+            "containerStatuses": [
+              {
+                "name": "nginx",
+                "ready": true,
+                "restartCount": 0,
+                "started": true,
+                "image": "nginx:1.25.4",
+                "containerId": "containerd://a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+                "state": {
+                  "running": {
+                    "startedAt": "2026-05-01T10:00:17Z"
+                  }
+                }
+              }
+            ]
+          },
+          "events": [
+            {
+              "type": "Normal",
+              "reason": "Scheduled",
+              "age": "28d",
+              "from": "default-scheduler",
+              "message": "Successfully assigned default/nginx-6d4cf56db6-x7q2p to aks-nodepool1-12345678-0"
+            },
+            {
+              "type": "Normal",
+              "reason": "Pulled",
+              "age": "28d",
+              "from": "kubelet",
+              "message": "Container image \"nginx:1.25.4\" already present on machine"
+            },
+            {
+              "type": "Normal",
+              "reason": "Started",
+              "age": "28d",
+              "from": "kubelet",
+              "message": "Started container nginx"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

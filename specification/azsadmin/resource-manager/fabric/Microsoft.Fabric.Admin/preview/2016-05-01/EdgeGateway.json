@@ -1,0 +1,196 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Edge gateway operation endpoints and objects.",
+    "title": "FabricAdminClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/edgeGateways/{edgeGateway}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the requested edge gateway.": {
+            "$ref": "./examples/EdgeGateway/Get.json"
+          }
+        },
+        "tags": [
+          "EdgeGateways"
+        ],
+        "description": "Returns the requested edge gateway.",
+        "operationId": "EdgeGateways_Get",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/EdgeGatewayParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeGateway"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/edgeGateways": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of all edge gateways at a certain location.": {
+            "$ref": "./examples/EdgeGateway/List.json"
+          }
+        },
+        "tags": [
+          "EdgeGateways"
+        ],
+        "description": "Returns the list of all edge gateways at a certain location.",
+        "operationId": "EdgeGateways_List",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeGatewayList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/EdgeGateway"
+      }
+    }
+  },
+  "definitions": {
+    "EdgeGateway": {
+      "description": "This resource represents a gateway, which provides the configuration needed to provide gateway services to virtual networks.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Object which holds information related to edge gateways.",
+          "$ref": "#/definitions/EdgeGatewayModel",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "EdgeGatewayModel": {
+      "description": "Object which holds information related to edge gateways.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "The current state of the edge gateway.",
+          "type": "string"
+        },
+        "totalCapacity": {
+          "description": "The total network capacity.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "availableCapacity": {
+          "description": "The available network capacity.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "numberOfConnections": {
+          "description": "The current number of connections.",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "EdgeGatewayList": {
+      "description": "Pageable list of edge gateways.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of edge gateways.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeGateway"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "EdgeGatewayParameter": {
+      "name": "edgeGateway",
+      "description": "Name of the edge gateway.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

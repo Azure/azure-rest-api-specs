@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2025-12-01",
+    "body": {
+      "pendingUploadId": "string",
+      "pendingUploadType": "None"
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "blobReferenceForConsumption": {
+          "blobUri": "https://www.contoso.com/example",
+          "credential": {
+            "credentialType": "SAS",
+            "sasUri": "https://www.contoso.com/example"
+          },
+          "storageAccountArmId": "string"
+        },
+        "pendingUploadId": "string",
+        "pendingUploadType": "None"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "CodeVersions_CreateOrGetStartPendingUpload",
+  "title": "CreateOrGetStartPendingUpload Workspace Code Version."
+}

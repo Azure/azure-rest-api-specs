@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount11",
+    "api-version": "2021-06-22"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "name": {
+              "value": "AccountUsage",
+              "localizedValue": "AccountUsage"
+            },
+            "unit": "Minute",
+            "currentValue": 0.0,
+            "limit": 500,
+            "throttleStatus": "NotThrottled"
+          },
+          {
+            "name": {
+              "value": "SubscriptionUsage",
+              "localizedValue": "SubscriptionUsage"
+            },
+            "unit": "Minute",
+            "currentValue": 429.0,
+            "limit": 500,
+            "throttleStatus": "NotThrottled"
+          },
+          {
+            "name": {
+              "value": "DscSubscriptionUsage",
+              "localizedValue": "DscSubscriptionUsage"
+            },
+            "unit": "Count",
+            "currentValue": 8.0,
+            "limit": 5,
+            "throttleStatus": "ThrottledAtSubscriptionLevel"
+          }
+        ]
+      }
+    }
+  }
+}

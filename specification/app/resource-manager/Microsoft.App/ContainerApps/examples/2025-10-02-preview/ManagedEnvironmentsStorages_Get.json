@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "environmentName": "managedEnv",
+    "resourceGroupName": "examplerg",
+    "storageName": "jlaw-demo1",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "jlaw-demo1",
+        "type": "Microsoft.App/managedEnvironments/storages",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/storages/jlaw-demo1",
+        "properties": {
+          "azureFile": {
+            "accessMode": "ReadOnly",
+            "accountKeyVaultProperties": {
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
+              "keyVaultUrl": "https://myvault.vault.azure.net/secrets/mysecret"
+            },
+            "accountName": "account1",
+            "shareName": "share1"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ManagedEnvironmentsStorages_Get",
+  "title": "get a environments storage"
+}

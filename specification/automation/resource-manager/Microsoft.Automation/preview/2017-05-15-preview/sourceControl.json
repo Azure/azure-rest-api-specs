@@ -1,0 +1,533 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2017-05-15-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}": {
+      "put": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_CreateOrUpdate",
+        "description": "Create a source control.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "Create or update a source control": {
+            "$ref": "./examples/sourceControl/createOrUpdateSourceControl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The source control name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SourceControlCreateOrUpdateParameters"
+            },
+            "description": "The parameters supplied to the create or update source control operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_Update",
+        "description": "Update a source control.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "Update a source control": {
+            "$ref": "./examples/sourceControl/updateSourceControl_patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The source control name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SourceControlUpdateParameters"
+            },
+            "description": "The parameters supplied to the update source control operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_Delete",
+        "description": "Delete the source control.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "Delete a source control": {
+            "$ref": "./examples/sourceControl/deleteSourceControl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of source control."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_Get",
+        "description": "Retrieve the source control identified by source control name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "Get a source control": {
+            "$ref": "./examples/sourceControl/getSourceControl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of source control."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls": {
+      "get": {
+        "tags": [
+          "SourceControl"
+        ],
+        "operationId": "SourceControl_ListByAutomationAccount",
+        "description": "Retrieve a list of source controls.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontroloperations"
+        },
+        "x-ms-examples": {
+          "List sourceControls": {
+            "$ref": "./examples/sourceControl/getAllSourceControls.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControlListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SourceControlListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceControl"
+          },
+          "description": "The list of source controls."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next link."
+        }
+      },
+      "description": "The response model for the list source controls operation."
+    },
+    "SourceControlUpdateProperties": {
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "The repo branch of the source control."
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "The folder path of the source control. Path must be relative."
+        },
+        "autoSync": {
+          "type": "boolean",
+          "description": "The auto sync of the source control. Default is false."
+        },
+        "publishRunbook": {
+          "type": "boolean",
+          "description": "The auto publish of the source control. Default is true."
+        },
+        "securityToken": {
+          "description": "The authorization token for the repo of the source control.",
+          "$ref": "#/definitions/SourceControlSecurityTokenProperties"
+        },
+        "description": {
+          "type": "string",
+          "description": "The user description of the source control."
+        }
+      },
+      "description": "The properties of the update source control"
+    },
+    "SourceControlUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SourceControlUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "The value of the source control."
+        }
+      },
+      "description": "The parameters supplied to the update source control operation."
+    },
+    "SourceControl": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SourceControlProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the source control."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Definition of the source control."
+    },
+    "SourceControlProperties": {
+      "properties": {
+        "repoUrl": {
+          "type": "string",
+          "description": "The repo url of the source control."
+        },
+        "branch": {
+          "type": "string",
+          "description": "The repo branch of the source control. Include branch as empty string for VsoTfvc."
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "The folder path of the source control."
+        },
+        "autoSync": {
+          "type": "boolean",
+          "description": "The auto sync of the source control. Default is false."
+        },
+        "publishRunbook": {
+          "type": "boolean",
+          "description": "The auto publish of the source control. Default is true."
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "The source type. Must be one of VsoGit, VsoTfvc, GitHub.",
+          "enum": [
+            "VsoGit",
+            "VsoTfvc",
+            "GitHub"
+          ],
+          "x-ms-enum": {
+            "name": "sourceType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "The creation time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "The last modified time."
+        }
+      },
+      "description": "Definition of the source control properties"
+    },
+    "SourceControlCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SourceControlCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the source control."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update source control operation."
+    },
+    "SourceControlCreateOrUpdateProperties": {
+      "properties": {
+        "repoUrl": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "The repo url of the source control."
+        },
+        "branch": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "The repo branch of the source control. Include branch as empty string for VsoTfvc."
+        },
+        "folderPath": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "The folder path of the source control. Path must be relative."
+        },
+        "autoSync": {
+          "type": "boolean",
+          "description": "The auto async of the source control. Default is false."
+        },
+        "publishRunbook": {
+          "type": "boolean",
+          "description": "The auto publish of the source control. Default is true."
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "The source type. Must be one of VsoGit, VsoTfvc, GitHub, case sensitive.",
+          "enum": [
+            "VsoGit",
+            "VsoTfvc",
+            "GitHub"
+          ],
+          "x-ms-enum": {
+            "name": "sourceType",
+            "modelAsString": true
+          }
+        },
+        "securityToken": {
+          "description": "The authorization token for the repo of the source control.",
+          "$ref": "#/definitions/SourceControlSecurityTokenProperties"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 512,
+          "description": "The user description of the source control."
+        }
+      },
+      "description": "The properties of the create source control operation."
+    },
+    "SourceControlSecurityTokenProperties": {
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "The access token."
+        },
+        "refreshToken": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "The refresh token."
+        },
+        "tokenType": {
+          "type": "string",
+          "description": "The token type. Must be either PersonalAccessToken or Oauth.",
+          "enum": [
+            "PersonalAccessToken",
+            "Oauth"
+          ],
+          "x-ms-enum": {
+            "name": "tokenType",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  }
+}

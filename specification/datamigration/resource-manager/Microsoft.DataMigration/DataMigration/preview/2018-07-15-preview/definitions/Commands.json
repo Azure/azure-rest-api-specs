@@ -1,0 +1,164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-07-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "CommandProperties": {
+      "type": "object",
+      "description": "Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.",
+      "properties": {
+        "commandType": {
+          "description": "Command type.",
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ODataError"
+          },
+          "description": "Array of errors. This is ignored if submitted.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the command. This is ignored if submitted.",
+          "enum": [
+            "Unknown",
+            "Accepted",
+            "Running",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "CommandState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "commandType"
+      ],
+      "discriminator": "commandType"
+    },
+    "MigrateSyncCompleteCommandProperties": {
+      "x-ms-discriminator-value": "Migrate.Sync.Complete.Database",
+      "type": "object",
+      "description": "Properties for the command that completes sync migration for a database.",
+      "properties": {
+        "input": {
+          "description": "Command input",
+          "$ref": "#/definitions/MigrateSyncCompleteCommandInput"
+        },
+        "output": {
+          "description": "Command output. This is ignored if submitted.",
+          "$ref": "#/definitions/MigrateSyncCompleteCommandOutput",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommandProperties"
+        }
+      ]
+    },
+    "MigrateSyncCompleteCommandInput": {
+      "type": "object",
+      "description": "Input for command that completes sync migration for a database.",
+      "properties": {
+        "databaseName": {
+          "description": "Name of database",
+          "type": "string"
+        },
+        "commitTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time stamp to complete"
+        }
+      },
+      "required": [
+        "databaseName"
+      ]
+    },
+    "MigrateSyncCompleteCommandOutput": {
+      "type": "object",
+      "description": "Output for command that completes sync migration for a database.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "List of errors that happened during the command execution",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MigrateMISyncCompleteCommandProperties": {
+      "x-ms-discriminator-value": "Migrate.SqlServer.AzureDbSqlMi.Complete",
+      "type": "object",
+      "description": "Properties for the command that completes online migration for an Azure SQL Database Managed Instance.",
+      "properties": {
+        "input": {
+          "description": "Command input",
+          "$ref": "#/definitions/MigrateMISyncCompleteCommandInput"
+        },
+        "output": {
+          "description": "Command output. This is ignored if submitted.",
+          "$ref": "#/definitions/MigrateMISyncCompleteCommandOutput",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommandProperties"
+        }
+      ]
+    },
+    "MigrateMISyncCompleteCommandInput": {
+      "type": "object",
+      "description": "Input for command that completes online migration for an Azure SQL Database Managed Instance.",
+      "properties": {
+        "sourceDatabaseName": {
+          "description": "Name of managed instance database",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sourceDatabaseName"
+      ]
+    },
+    "MigrateMISyncCompleteCommandOutput": {
+      "type": "object",
+      "description": "Output for command that completes online migration for an Azure SQL Database Managed Instance.",
+      "properties": {
+        "errors": {
+          "description": "List of errors that happened during the command execution",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          }
+        }
+      }
+    }
+  }
+}

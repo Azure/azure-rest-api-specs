@@ -1,0 +1,29 @@
+{
+  "operationId": "GetDeployedApplicationInfoList",
+  "description": "This example shows how to get information about an application deployed on a specified node by using an application identifier. If the application is found it's information is returned with 200 status code. An empty response with status code 204 is returned, if the specified application is not deployed on the node.",
+  "parameters": {
+    "api-version": "6.1",
+    "nodeName": "_Node_0",
+    "applicationId": "samples~CalculatorApp",
+    "IncludeHealthState": true
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "Id": "samples~CalculatorApp",
+        "Name": "fabric:/samples/CalculatorApp",
+        "TypeName": "CalculatorApp",
+        "Status": "Active",
+        "WorkDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_1\\CalculatorApp_App0\\work",
+        "LogDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_1\\CalculatorApp_App0\\log",
+        "TempDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_1\\CalculatorApp_App0\\temp",
+        "HealthState": "Ok"
+      }
+    },
+    "204": {
+      "headers": {},
+      "body": ""
+    }
+  }
+}

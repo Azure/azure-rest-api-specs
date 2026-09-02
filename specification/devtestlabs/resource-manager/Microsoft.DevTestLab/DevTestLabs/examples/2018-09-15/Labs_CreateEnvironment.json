@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "name": "{labName}",
+    "api-version": "2018-09-15",
+    "labVirtualMachineCreationParameter": {
+      "name": "{vmName}",
+      "location": "{location}",
+      "properties": {
+        "allowClaim": true,
+        "disallowPublicIpAddress": true,
+        "galleryImageReference": {
+          "offer": "UbuntuServer",
+          "osType": "Linux",
+          "publisher": "Canonical",
+          "sku": "16.04-LTS",
+          "version": "Latest"
+        },
+        "labSubnetName": "{virtualnetwork-subnet-name}",
+        "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+        "password": "{userPassword}",
+        "size": "Standard_A2_v2",
+        "storageType": "Standard",
+        "userName": "{userName}"
+      },
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.DevTestLabs/locations/{location}"
+      }
+    }
+  },
+  "operationId": "Labs_CreateEnvironment",
+  "title": "Labs_CreateEnvironment"
+}

@@ -1,0 +1,84 @@
+{
+  "title": "Creates an exception policy",
+  "operationId": "JobRouterAdministrationOperations_UpsertExceptionPolicy",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "exceptionPolicyId": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+    "resource": {
+      "name": "Main",
+      "exceptionRules": [
+        {
+          "id": "MaxWaitTimeExceeded",
+          "actions": [
+            {
+              "kind": "reclassify",
+              "classificationPolicyId": "Main",
+              "labelsToUpsert": {
+                "escalated": true
+              }
+            }
+          ],
+          "trigger": {
+            "kind": "waitTime",
+            "thresholdSeconds": 20
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+        "name": "Main",
+        "exceptionRules": [
+          {
+            "id": "MaxWaitTimeExceeded",
+            "trigger": {
+              "kind": "waitTime",
+              "thresholdSeconds": 20
+            },
+            "actions": [
+              {
+                "id": "babd4f6f-916e-4e91-9c89-e0bb05a2c425",
+                "kind": "reclassify",
+                "classificationPolicyId": "Main",
+                "labelsToUpsert": {
+                  "escalated": true
+                }
+              }
+            ]
+          }
+        ],
+        "etag": "etag"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+        "name": "Main",
+        "exceptionRules": [
+          {
+            "id": "MaxWaitTimeExceeded",
+            "trigger": {
+              "kind": "waitTime",
+              "thresholdSeconds": 20
+            },
+            "actions": [
+              {
+                "id": "babd4f6f-916e-4e91-9c89-e0bb05a2c425",
+                "kind": "reclassify",
+                "classificationPolicyId": "Main",
+                "labelsToUpsert": {
+                  "escalated": true
+                }
+              }
+            ]
+          }
+        ],
+        "etag": "etag"
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "api-version": "2021-08-27"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
+            "name": "KustoClusterRPTest4",
+            "type": "Microsoft.Kusto/Clusters",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "enableDiskEncryption": false,
+              "enableStreamingIngest": true,
+              "keyVaultProperties": {
+                "keyVaultUri": "https://dummy.keyvault.com",
+                "keyName": "keyName",
+                "keyVersion": "keyVersion"
+              },
+              "engineType": "V3",
+              "enableAutoStop": true,
+              "publicNetworkAccess": "Enabled",
+              "allowedIpRangeList": [],
+              "restrictOutboundNetworkAccess": "Enabled",
+              "allowedFqdnList": [
+                "my-stroage.blob.core.windows.net"
+              ]
+            },
+            "sku": {
+              "name": "Standard_L8s",
+              "capacity": 2,
+              "tier": "Standard"
+            },
+            "etag": "abcd123"
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest3",
+            "name": "KustoClusterRPTest3",
+            "type": "Microsoft.Kusto/Clusters",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "enableDiskEncryption": true,
+              "enableStreamingIngest": true,
+              "engineType": "V2",
+              "publicNetworkAccess": "Enabled",
+              "allowedIpRangeList": [
+                "0.0.0.0/0"
+              ],
+              "restrictOutboundNetworkAccess": "Disabled"
+            },
+            "sku": {
+              "name": "Standard_L8s",
+              "capacity": 2,
+              "tier": "Standard"
+            },
+            "etag": "abcd123"
+          }
+        ]
+      }
+    }
+  }
+}

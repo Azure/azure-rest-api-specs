@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "$filter": "properties/eventDate+ge+2020-05-20+AND+properties/eventDate+le+2020-05-30",
+    "api-version": "2024-08-01",
+    "billingAccountId": "fcebaabc-fced-4284-a83d-79f83dee183c:45796ba8-988f-45ad-bea9-7b71fc6c7513_2018-09-30",
+    "billingProfileId": "Z76D-SGAF-BG7-TGB"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "a838a8c3-a408-49e1-ac90-42cb95bff9b2",
+            "type": "Microsoft.Consumption/reservationTransactions",
+            "id": "/providers/Microsoft.Billing/billingAccounts/fcebaabc-fced-4284-a83d-79f83dee183c:45796ba8-988f-45ad-bea9-7b71fc6c7513_2018-09-30/billingProfiles/Z76D-SGAF-BG7-TGB/providers/Microsoft.Consumption/reservationTransactions",
+            "properties": {
+              "description": "Reserved VM Instance, Standard_B1ls, US East, 3 Years",
+              "amount": 1.44,
+              "armSkuName": "Standard_B1ls",
+              "billingFrequency": "Recurring",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/fcebaabc-fced-4284-a83d-79f83dee183c:45796ba8-988f-45ad-bea9-7b71fc6c7513_2018-09-30/billingProfiles/Z76D-SGAF-BG7-TGB",
+              "billingProfileName": "IT Department*",
+              "currency": "USD",
+              "eventDate": "2020-04-25T21:21:38Z",
+              "eventType": "Purchase",
+              "invoice": "T000456437",
+              "invoiceId": "/providers/Microsoft.Billing/billingAccounts/fcebaabc-fced-4284-a83d-79f83dee183c:45796ba8-988f-45ad-bea9-7b71fc6c7513_2018-09-30/billingProfiles/Z76D-SGAF-BG7-TGB/invoices/T000456437",
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/fcebaabc-fced-4284-a83d-79f83dee183c:45796ba8-988f-45ad-bea9-7b71fc6c7513_2018-09-30/invoiceSections/QBTB-EYAK-PJA-TGB",
+              "invoiceSectionName": "IT Department",
+              "purchasingSubscriptionGuid": "d924ad15-4a3d-4047-971d-c8b1b300a97b",
+              "purchasingSubscriptionName": "contoso",
+              "quantity": 1,
+              "region": "eastus",
+              "reservationOrderId": "a838a8c3-a408-49e1-ac90-42cb95bff9b2",
+              "reservationOrderName": "VM_RI_03-25-2020_14-18",
+              "term": "P3Y"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ReservationTransactions_ListByBillingProfile",
+  "title": "ReservationTransactionsByBillingProfileId"
+}

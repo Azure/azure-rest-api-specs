@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "$skipToken": "token",
+    "accountName": "account1",
+    "api-version": "2024-04-01-preview",
+    "resourceGroupName": "rgpurview",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rgpurview/providers/Microsoft.Purview/accounts/account1/kafkaConfigurations?api-version=2024-04-01-preview&$skipToken=token2",
+        "value": [
+          {
+            "name": "kafkaconfigName",
+            "type": "Microsoft.Purview/accounts/kafkaconfiguration",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/kafkaConfigurations/default",
+            "properties": {
+              "consumerGroup": "consumerGroup",
+              "credentials": {
+                "type": "UserAssigned",
+                "identityId": "/subscriptions/47e8596d-ee73-4eb2-b6b4-cc13c2b87ssd/resourceGroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testId"
+              },
+              "eventHubPartitionId": "partitionId",
+              "eventHubResourceId": "/subscriptions/225be6fe-ec1c-4d51-a368-f69348d2e6c5/resourceGroups/testRG/providers/Microsoft.EventHub/namespaces/eventHubNameSpaceName",
+              "eventHubType": "Notification",
+              "eventStreamingState": "Disabled",
+              "eventStreamingType": "None"
+            },
+            "systemData": {
+              "createdAt": "2022-03-17T04:23:24.157Z",
+              "createdBy": "user",
+              "createdByType": "User",
+              "lastModifiedAt": "2022-03-17T04:23:24.157Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "KafkaConfigurations_ListByAccount",
+  "title": "KafkaConfigurations_ListByAccount"
+}

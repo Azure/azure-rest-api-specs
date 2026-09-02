@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01",
+    "cluster": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "East US",
+      "properties": {
+        "aadClientId": "24a6e53d-04e5-44d2-b7cc-1b732a847dfc",
+        "aadTenantId": "7e589cc1-a8b6-4dff-91bd-5ec0fa18db94",
+        "cloudManagementEndpoint": "https://98294836-31be-4668-aeae-698667faf99b.waconazure.com"
+      }
+    },
+    "clusterName": "myCluster",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myCluster",
+        "type": "Microsoft.AzureStackHCI/clusters",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "87a834db-2e45-409e-911b-e16a44562ec3",
+          "tenantId": "7e589cc1-a8b6-4dff-91bd-5ec0fa18db94"
+        },
+        "location": "East US",
+        "properties": {
+          "aadClientId": "24a6e53d-04e5-44d2-b7cc-1b732a847dfc",
+          "aadTenantId": "7e589cc1-a8b6-4dff-91bd-5ec0fa18db94",
+          "billingModel": "Trial",
+          "cloudId": "a3c0468f-e38e-4dda-ac48-817f620536f0",
+          "cloudManagementEndpoint": "https://98294836-31be-4668-aeae-698667faf99b.waconazure.com",
+          "connectivityStatus": "NotYetRegistered",
+          "desiredProperties": {
+            "diagnosticLevel": "Basic",
+            "windowsServerSubscription": "Disabled"
+          },
+          "isManagementCluster": true,
+          "provisioningState": "Succeeded",
+          "reportedProperties": {},
+          "serviceEndpoint": "https://azurestackhci.azurefd.net/eastus",
+          "status": "NotYetRegistered",
+          "trialDaysRemaining": 30
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "Clusters_Create",
+  "title": "Create cluster"
+}

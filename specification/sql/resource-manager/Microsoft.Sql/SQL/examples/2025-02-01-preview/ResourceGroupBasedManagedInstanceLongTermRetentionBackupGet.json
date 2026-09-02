@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "backupName": "55555555-6666-7777-8888-999999999999;131637960820000000;Archive",
+    "databaseName": "testDatabase",
+    "locationName": "japaneast",
+    "managedInstanceName": "testInstance",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "55555555-6666-7777-8888-999999999999;131637960820000000;Archive",
+        "type": "Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionDatabases/longTermRetentionManagedInstanceBackups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/Locations/japaneast/longTermRetentionManagedInstances/testInstance/longTermRetentionDatabases/testDatabase/longTermRetentionManagedInstanceBackups/55555555-6666-7777-8888-999999999999;131637960820000000;Archive",
+        "properties": {
+          "backupStorageAccessTier": "Archive",
+          "backupStorageRedundancy": "Geo",
+          "backupTime": "2017-09-06T08:00:00Z",
+          "databaseDeletionTime": null,
+          "databaseName": "testDatabase",
+          "managedInstanceCreateTime": "2017-03-10T08:00:00Z",
+          "managedInstanceName": "testInstance"
+        }
+      }
+    }
+  },
+  "operationId": "LongTermRetentionManagedInstanceBackups_GetByResourceGroup",
+  "title": "Get the long term retention backup."
+}

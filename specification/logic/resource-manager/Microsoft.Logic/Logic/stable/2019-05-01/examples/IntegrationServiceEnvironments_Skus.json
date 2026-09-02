@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroup": "testResourceGroup",
+    "integrationServiceEnvironmentName": "testIntegrationServiceEnvironment"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceType": "Microsoft.Logic/integrationServiceEnvironments",
+            "sku": {
+              "name": "Premium"
+            },
+            "capacity": {
+              "minimum": 0,
+              "maximum": 10,
+              "default": 0,
+              "scaleType": "Automatic"
+            }
+          },
+          {
+            "resourceType": "Microsoft.Logic/integrationServiceEnvironments",
+            "sku": {
+              "name": "Developer"
+            },
+            "capacity": {
+              "minimum": 0,
+              "maximum": 0,
+              "default": 0,
+              "scaleType": "None"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

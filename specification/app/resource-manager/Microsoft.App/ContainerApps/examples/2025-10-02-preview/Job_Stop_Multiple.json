@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "jobExecutionName": {
+      "value": [
+        {
+          "name": "jobExecution-27944453"
+        },
+        {
+          "name": "jobExecution-27944452"
+        },
+        {
+          "name": "jobExecution-27944451"
+        }
+      ]
+    },
+    "jobName": "testcontainerAppsJob0",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "jobExecution-27944453",
+            "properties": {
+              "endTime": "2023-02-13T20:47:30+00:00",
+              "message": "Job has reached the specified backoff limit",
+              "reason": "BackoffLimitExceeded",
+              "startTime": "2023-02-13T20:37:30+00:00",
+              "status": "Running"
+            }
+          },
+          {
+            "name": "jobExecution-27944452",
+            "properties": {
+              "endTime": "2023-02-13T21:47:30+00:00",
+              "message": "Job has reached the specified backoff limit",
+              "reason": "BackoffLimitExceeded",
+              "startTime": "2023-02-13T21:37:30+00:00",
+              "status": "Running"
+            }
+          },
+          {
+            "name": "jobExecution-27944453",
+            "properties": {
+              "endTime": "2023-02-13T22:47:30+00:00",
+              "message": "Job has reached the specified backoff limit",
+              "reason": "BackoffLimitExceeded",
+              "startTime": "2023-02-13T22:37:30+00:00",
+              "status": "Running"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "location"
+      }
+    }
+  },
+  "operationId": "Jobs_StopMultipleExecutions",
+  "title": "Terminate Multiple Container Apps Job"
+}

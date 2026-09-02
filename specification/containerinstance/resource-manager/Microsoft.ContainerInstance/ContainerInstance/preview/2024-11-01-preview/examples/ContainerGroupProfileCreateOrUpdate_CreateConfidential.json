@@ -1,0 +1,180 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-11-01-preview",
+    "resourceGroupName": "demo",
+    "containerGroupProfileName": "demo1",
+    "ContainerGroupProfile": {
+      "location": "westeurope",
+      "zones": [
+        "1"
+      ],
+      "properties": {
+        "containers": [
+          {
+            "name": "accdemo",
+            "properties": {
+              "command": [],
+              "environmentVariables": [],
+              "image": "confiimage",
+              "ports": [
+                {
+                  "port": 8000
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "cpu": 1,
+                  "memoryInGB": 1.5
+                }
+              },
+              "securityContext": {
+                "privileged": false,
+                "capabilities": {
+                  "add": [
+                    "CAP_NET_ADMIN"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "imageRegistryCredentials": [],
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 8000
+            }
+          ],
+          "type": "Public"
+        },
+        "osType": "Linux",
+        "sku": "Confidential",
+        "confidentialComputeProperties": {
+          "ccePolicy": "eyJhbGxvd19hbGwiOiB0cnVlLCAiY29udGFpbmVycyI6IHsibGVuZ3RoIjogMCwgImVsZW1lbnRzIjogbnVsbH19"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sku": "Confidential",
+          "containers": [
+            {
+              "name": "accdemo",
+              "properties": {
+                "image": "confiimage",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 8000
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                },
+                "securityContext": {
+                  "privileged": false,
+                  "capabilities": {
+                    "add": [
+                      "CAP_NET_ADMIN"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "ipAddress": {
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 8000
+              }
+            ],
+            "type": "Public"
+          },
+          "initContainers": [],
+          "imageRegistryCredentials": [],
+          "osType": "Linux",
+          "confidentialComputeProperties": {
+            "ccePolicy": "eyJhbGxvd19hbGwiOiB0cnVlLCAiY29udGFpbmVycyI6IHsibGVuZ3RoIjogMCwgImVsZW1lbnRzIjogbnVsbH19"
+          },
+          "revision": 0
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/test-rg/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
+        "location": "westeurope",
+        "zones": [
+          "1"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "sku": "Confidential",
+          "containers": [
+            {
+              "name": "accdemo",
+              "properties": {
+                "image": "confiimage",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 8000
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                },
+                "securityContext": {
+                  "privileged": false,
+                  "capabilities": {
+                    "add": [
+                      "CAP_NET_ADMIN"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "ipAddress": {
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 8000
+              }
+            ],
+            "type": "Public"
+          },
+          "initContainers": [],
+          "imageRegistryCredentials": [],
+          "osType": "Linux",
+          "confidentialComputeProperties": {
+            "ccePolicy": "eyJhbGxvd19hbGwiOiB0cnVlLCAiY29udGFpbmVycyI6IHsibGVuZ3RoIjogMCwgImVsZW1lbnRzIjogbnVsbH19"
+          },
+          "revision": 1
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/test-rg/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
+        "location": "westeurope",
+        "zones": [
+          "1"
+        ]
+      }
+    }
+  }
+}

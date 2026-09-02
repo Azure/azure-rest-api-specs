@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "$expand": "properties/data",
+    "$top": 5,
+    "api-version": "2025-03-01",
+    "resourceGroupName": "system.orlando",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/system.orlando",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/system.orlando/providers/microsoft.CostManagement/dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "properties": {
+              "description": "Resource type",
+              "category": "ResourceType",
+              "data": [
+                "microsoft.storage/storageaccounts"
+              ],
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 1,
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "usageStart": "2018-05-01T00:00:00-07:00"
+            }
+          },
+          {
+            "name": "dimensions_ResourceId_2018-05-01_2018-05-31_5",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/system.orlando/providers/microsoft.CostManagement/dimensions_ResourceId_2018-05-01_2018-05-31_5",
+            "properties": {
+              "description": "Resource Id",
+              "category": "ResourceId",
+              "data": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/authprod",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/systemevents",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/armadminprod",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/srphytenaccount",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/publicsystemportal"
+              ],
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 27,
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "usageStart": "2018-05-01T00:00:00-07:00"
+            }
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Dimensions_List",
+  "title": "ResourceGroupDimensionsList-Legacy"
+}

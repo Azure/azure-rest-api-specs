@@ -1,0 +1,138 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "devToolPortalName": "default",
+    "DevToolPortalResource": {
+      "properties": {
+        "public": true,
+        "ssoProperties": {
+          "clientId": "00000000-0000-0000-0000-000000000000",
+          "scopes": [
+            "openid"
+          ],
+          "clientSecret": "xxxxx",
+          "metadataUrl": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration"
+        },
+        "features": {
+          "applicationAccelerator": {
+            "state": "Enabled"
+          },
+          "applicationLiveView": {
+            "state": "Enabled"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "public": true,
+          "ssoProperties": {
+            "clientId": "00000000-0000-0000-0000-000000000000",
+            "scopes": [
+              "openid"
+            ],
+            "metadataUrl": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration"
+          },
+          "features": {
+            "applicationAccelerator": {
+              "state": "Enabled",
+              "route": "create"
+            },
+            "applicationLiveView": {
+              "state": "Enabled",
+              "route": "appliveview"
+            }
+          },
+          "url": "aaa.com",
+          "provisioningState": "Succeeded",
+          "components": [
+            {
+              "name": "server",
+              "resourceRequests": {
+                "cpu": "1",
+                "memory": "1Gi",
+                "instanceCount": 1
+              },
+              "instances": [
+                {
+                  "name": "dev-tool-portal-server-name",
+                  "status": "Running"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/applicationLiveViews",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/applicationLiveViews/default",
+        "name": "default"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "public": true,
+          "ssoProperties": {
+            "clientId": "00000000-0000-0000-0000-000000000000",
+            "scopes": [
+              "openid"
+            ],
+            "metadataUrl": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration"
+          },
+          "features": {
+            "applicationAccelerator": {
+              "state": "Enabled",
+              "route": "create"
+            },
+            "applicationLiveView": {
+              "state": "Enabled",
+              "route": "appliveview"
+            }
+          },
+          "url": "aaa.com",
+          "provisioningState": "Succeeded",
+          "components": [
+            {
+              "name": "server",
+              "resourceRequests": {
+                "cpu": "1",
+                "memory": "1Gi",
+                "instanceCount": 1
+              },
+              "instances": [
+                {
+                  "name": "dev-tool-portal-server-name",
+                  "status": "Running"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/applicationLiveViews",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/applicationLiveViews/default",
+        "name": "default"
+      }
+    }
+  }
+}

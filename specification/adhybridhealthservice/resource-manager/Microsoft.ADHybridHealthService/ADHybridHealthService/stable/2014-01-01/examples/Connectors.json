@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "serviceName": "sampleServiceName",
+    "serviceMemberId": "SampleServiceMemberId",
+    "api-version": "2014-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "SampleId",
+            "name": "SampleName",
+            "version": 12418,
+            "type": "SampleType",
+            "description": "SampleDescription",
+            "schemaXml": "SampleSchema",
+            "passwordManagementSettings": {
+              "enabled": true,
+              "extensionFilePath": "SampleFilePath",
+              "connectTo": "SampleConnectTo",
+              "connectionTimeout": 24,
+              "user": "SampleUser",
+              "supportedPasswordOperations": "Undefined",
+              "maximumRetryCount": 10,
+              "retryIntervalInSeconds": 20,
+              "requiresSecureConnection": true,
+              "unlockAccount": true
+            },
+            "passwordHashSyncConfiguration": {
+              "enabled": true,
+              "target": "SampleTarget"
+            },
+            "timeCreated": "2017-08-04T19:07:02.957Z",
+            "timeLastModified": "2018-05-03T23:08:25.273Z",
+            "partitions": [
+              {
+                "id": "SampleId",
+                "dn": "SampleDN",
+                "enabled": false,
+                "timeCreated": "2017-08-04T19:07:34.903Z",
+                "timeLastModified": "2018-05-03T23:08:25.273+00:00",
+                "partitionScope": {
+                  "isDefault": false,
+                  "objectClasses": [
+                    "SampleClass"
+                  ],
+                  "containersIncluded": [
+                    "SampleContainer"
+                  ],
+                  "containersExcluded": [
+                    "SampleContainer1"
+                  ]
+                },
+                "name": "SampleName",
+                "isDomain": true,
+                "type": "AD"
+              },
+              {
+                "id": "SampleId2",
+                "dn": "SampleDN",
+                "enabled": true,
+                "timeCreated": "2017-08-04T19:07:34.97Z",
+                "timeLastModified": "2018-05-03T23:08:25.273+00:00",
+                "partitionScope": {
+                  "isDefault": false,
+                  "objectClasses": [
+                    "sampleClass"
+                  ],
+                  "containersIncluded": [
+                    "SampleContainer"
+                  ],
+                  "containersExcluded": [
+                    "SampleContainer1"
+                  ]
+                },
+                "name": "SampleName",
+                "isDomain": true,
+                "type": "AD"
+              }
+            ],
+            "runProfiles": [
+              {
+                "id": "SampleId",
+                "name": "Full Import",
+                "runSteps": [
+                  {
+                    "batchSize": 50,
+                    "objectProcessLimit": 0,
+                    "objectDeleteLimit": 0,
+                    "pageSize": 500,
+                    "partitionId": "SamplePartitionId",
+                    "operationType": 1,
+                    "timeout": 120
+                  }
+                ]
+              }
+            ],
+            "connectorId": "SampleConnectorId"
+          }
+        ]
+      }
+    }
+  }
+}

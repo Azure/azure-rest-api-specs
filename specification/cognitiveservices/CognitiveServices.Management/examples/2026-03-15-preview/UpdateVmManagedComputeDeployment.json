@@ -1,0 +1,53 @@
+{
+  "operationId": "ManagedComputeDeployments_Update",
+  "title": "UpdateVmManagedComputeDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "gpt-oss-120b-byoc",
+    "api-version": "2026-03-15-preview",
+    "properties": {
+      "sku": {
+        "name": "VmManagedCompute",
+        "capacity": 2
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/gpt-oss-120b-byoc",
+        "name": "gpt-oss-120b-byoc",
+        "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+        "etag": "\"0x8D...\"",
+        "properties": {
+          "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
+          "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
+          "priority": "High",
+          "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "provisioningState": "Succeeded",
+          "provisioningDetails": {
+            "message": "Scale operation completed successfully.",
+            "lastOperationTimestamp": "2026-04-12T10:55:00Z"
+          },
+          "routes": {
+            "chatCompletionsScoringPath": "/managed-deployments/gpt-oss-120b-byoc/v1/chat/completions"
+          }
+        },
+        "sku": {
+          "name": "VmManagedCompute",
+          "capacity": 2
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?operationResultResponseType=Location&api-version=2026-03-15-preview",
+        "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-03-15-preview",
+        "retry-after": "30"
+      }
+    }
+  }
+}

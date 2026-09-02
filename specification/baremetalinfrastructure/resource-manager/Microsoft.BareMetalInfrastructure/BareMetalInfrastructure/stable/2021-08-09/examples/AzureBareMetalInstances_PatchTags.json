@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2021-08-09",
+    "subscriptionId": "f0f4887f-d13c-4943-a8ba-d7da28d2a3fd",
+    "resourceGroupName": "myResourceGroup",
+    "azureBareMetalInstanceName": "myABMInstance",
+    "tagsParameter": {
+      "tags": {
+        "testkey": "testvalue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/myABMInstance",
+        "name": "myABMInstance",
+        "type": "Microsoft.BareMetalInfrastructure/bareMetalInstances",
+        "location": "westus",
+        "tags": {
+          "testkey": "testvalue"
+        },
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2020-12-20T23:10:22.6828621Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-07-21T08:01:22.0000000Z"
+        },
+        "properties": {
+          "azureBareMetalInstanceId": "23415635-4d7e-41dc-9598-8194f22c24e1",
+          "powerState": "started",
+          "proximityPlacementGroup": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
+          "hwRevision": "Rev 3",
+          "hardwareProfile": {
+            "hardwareType": "Cisco_UCS",
+            "azureBareMetalInstanceSize": "S72"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "ipAddress": "100.100.100.100"
+              }
+            ],
+            "circuitId": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit"
+          },
+          "storageProfile": {
+            "nfsIpAddress": "200.200.200.200"
+          },
+          "osProfile": {
+            "computerName": "myComputerName",
+            "osType": "SUSE",
+            "version": "12 SP1",
+            "sshPublicKey": "AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L"
+          },
+          "partnerNodeId": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/myABMInstance2",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

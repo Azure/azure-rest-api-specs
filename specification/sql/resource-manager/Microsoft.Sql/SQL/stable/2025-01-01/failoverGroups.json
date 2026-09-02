@@ -1,0 +1,861 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "FailoverGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups": {
+      "get": {
+        "operationId": "FailoverGroups_ListByServer",
+        "tags": [
+          "FailoverGroups"
+        ],
+        "description": "Lists the failover groups in a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FailoverGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List failover group": {
+            "$ref": "./examples/FailoverGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}": {
+      "get": {
+        "operationId": "FailoverGroups_Get",
+        "tags": [
+          "FailoverGroups"
+        ],
+        "description": "Gets a failover group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FailoverGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get failover group": {
+            "$ref": "./examples/FailoverGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FailoverGroups_CreateOrUpdate",
+        "tags": [
+          "FailoverGroups"
+        ],
+        "description": "Creates or updates a failover group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The failover group parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FailoverGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FailoverGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FailoverGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'FailoverGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FailoverGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create failover group": {
+            "$ref": "./examples/FailoverGroupCreateOrUpdate.json"
+          },
+          "Create failover group with standby secondary database on partner server.": {
+            "$ref": "./examples/FailoverGroupCreateOrUpdateStandbySecondary.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FailoverGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FailoverGroups_Update",
+        "tags": [
+          "FailoverGroups"
+        ],
+        "description": "Updates a failover group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The failover group parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FailoverGroupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FailoverGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add database to failover group with standby secondary on partner server.": {
+            "$ref": "./examples/FailoverGroupUpdateStandbySecondary.json"
+          },
+          "Update failover group": {
+            "$ref": "./examples/FailoverGroupUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FailoverGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FailoverGroups_Delete",
+        "tags": [
+          "FailoverGroups"
+        ],
+        "description": "Deletes a failover group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete failover group": {
+            "$ref": "./examples/FailoverGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/failover": {
+      "post": {
+        "operationId": "FailoverGroups_Failover",
+        "tags": [
+          "FailoverGroups"
+        ],
+        "description": "Fails over from the current primary server to this server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FailoverGroup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Planned failover of a failover group": {
+            "$ref": "./examples/FailoverGroupFailover.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FailoverGroup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/forceFailoverAllowDataLoss": {
+      "post": {
+        "operationId": "FailoverGroups_ForceFailoverAllowDataLoss",
+        "tags": [
+          "FailoverGroups"
+        ],
+        "description": "Fails over from the current primary server to this server. This operation might result in data loss.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FailoverGroup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Forced failover of a failover group allowing data loss": {
+            "$ref": "./examples/FailoverGroupForceFailoverAllowDataLoss.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FailoverGroup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/tryPlannedBeforeForcedFailover": {
+      "post": {
+        "operationId": "FailoverGroups_TryPlannedBeforeForcedFailover",
+        "tags": [
+          "FailoverGroups"
+        ],
+        "description": "Fails over from the current primary server to this server. This operation tries planned before forced failover but might still result in data loss.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverGroupName",
+            "in": "path",
+            "description": "The name of the failover group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FailoverGroup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Try planned before forced failover of a failover group": {
+            "$ref": "./examples/FailoverGroupTryPlannedBeforeForcedFailover.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FailoverGroup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "FailoverGroup": {
+      "type": "object",
+      "description": "A failover group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FailoverGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FailoverGroupListResult": {
+      "type": "object",
+      "description": "The response of a FailoverGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FailoverGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/FailoverGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FailoverGroupProperties": {
+      "type": "object",
+      "description": "Properties of a failover group.",
+      "properties": {
+        "readWriteEndpoint": {
+          "$ref": "#/definitions/FailoverGroupReadWriteEndpoint",
+          "description": "Read-write endpoint of the failover group instance."
+        },
+        "readOnlyEndpoint": {
+          "$ref": "#/definitions/FailoverGroupReadOnlyEndpoint",
+          "description": "Read-only endpoint of the failover group instance."
+        },
+        "replicationRole": {
+          "$ref": "./common.json#/definitions/FailoverGroupReplicationRole",
+          "description": "Local replication role of the failover group instance.",
+          "readOnly": true
+        },
+        "replicationState": {
+          "type": "string",
+          "description": "Replication state of the failover group instance.",
+          "readOnly": true
+        },
+        "partnerServers": {
+          "type": "array",
+          "description": "List of partner server information for the failover group.",
+          "items": {
+            "$ref": "#/definitions/PartnerInfo"
+          }
+        },
+        "databases": {
+          "type": "array",
+          "description": "List of databases in the failover group.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Sql/servers/databases"
+                }
+              ]
+            }
+          }
+        },
+        "secondaryType": {
+          "$ref": "./common.json#/definitions/FailoverGroupDatabasesSecondaryType",
+          "description": "Databases secondary type on partner server.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "readWriteEndpoint",
+        "partnerServers"
+      ]
+    },
+    "FailoverGroupReadOnlyEndpoint": {
+      "type": "object",
+      "description": "Read-only endpoint of the failover group instance.",
+      "properties": {
+        "failoverPolicy": {
+          "$ref": "./common.json#/definitions/ReadOnlyEndpointFailoverPolicy",
+          "description": "Failover policy of the read-only endpoint for the failover group."
+        },
+        "targetServer": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The target partner server where the read-only endpoint points to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "FailoverGroupReadWriteEndpoint": {
+      "type": "object",
+      "description": "Read-write endpoint of the failover group instance.",
+      "properties": {
+        "failoverPolicy": {
+          "$ref": "./common.json#/definitions/ReadWriteEndpointFailoverPolicy",
+          "description": "Failover policy of the read-write endpoint for the failover group. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required."
+        },
+        "failoverWithDataLossGracePeriodMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Grace period before failover with data loss is attempted for the read-write endpoint. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required."
+        }
+      },
+      "required": [
+        "failoverPolicy"
+      ]
+    },
+    "FailoverGroupUpdate": {
+      "type": "object",
+      "description": "A failover group update request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FailoverGroupUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FailoverGroupUpdateProperties": {
+      "type": "object",
+      "description": "Properties of a failover group update.",
+      "properties": {
+        "readWriteEndpoint": {
+          "$ref": "#/definitions/FailoverGroupReadWriteEndpoint",
+          "description": "Read-write endpoint of the failover group instance."
+        },
+        "readOnlyEndpoint": {
+          "$ref": "#/definitions/FailoverGroupReadOnlyEndpoint",
+          "description": "Read-only endpoint of the failover group instance."
+        },
+        "databases": {
+          "type": "array",
+          "description": "List of databases in the failover group.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Sql/servers/databases"
+                }
+              ]
+            }
+          }
+        },
+        "partnerServers": {
+          "type": "array",
+          "description": "List of partner server information for the failover group.",
+          "items": {
+            "$ref": "#/definitions/PartnerInfo"
+          }
+        },
+        "secondaryType": {
+          "$ref": "./common.json#/definitions/FailoverGroupDatabasesSecondaryType",
+          "description": "Databases secondary type on partner server.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "PartnerInfo": {
+      "type": "object",
+      "description": "Partner server information for the failover group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource identifier of the partner server.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers"
+              }
+            ]
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "Geo location of the partner server.",
+          "readOnly": true
+        },
+        "replicationRole": {
+          "$ref": "./common.json#/definitions/FailoverGroupReplicationRole",
+          "description": "Replication role of the partner server.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
+    }
+  },
+  "parameters": {}
+}

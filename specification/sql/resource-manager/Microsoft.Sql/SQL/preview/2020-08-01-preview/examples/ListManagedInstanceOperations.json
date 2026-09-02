@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "sqlcrudtest-7398",
+    "managedInstanceName": "sqlcrudtest-4645",
+    "api-version": "2020-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "managedInstanceName": "sqlcrudtest-4645",
+              "operation": "UpsertManagedServer",
+              "operationFriendlyName": "UPDATE MANAGED SERVER",
+              "percentComplete": 100,
+              "startTime": "2019-12-06T11:08:44.49Z",
+              "state": "Cancelled",
+              "isCancellable": false
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/managedInstances/sqlcrudtest-4645/operations/11111111-1111-1111-1111-111111111111",
+            "name": "11111111-1111-1111-1111-111111111111",
+            "type": "Microsoft.Sql/managedInstances/operations"
+          },
+          {
+            "properties": {
+              "managedInstanceName": "sqlcrudtest-4645",
+              "operation": "UpsertManagedServer",
+              "operationFriendlyName": "UPDATE MANAGED SERVER",
+              "percentComplete": 50,
+              "startTime": "2019-12-06T11:08:44.49Z",
+              "state": "InProgress",
+              "isCancellable": true,
+              "operationParameters": {
+                "currentParameters": {
+                  "family": "Gen4",
+                  "tier": "GeneralPurpose",
+                  "vCores": 8,
+                  "storageSizeInGB": 32
+                },
+                "requestedParameters": {
+                  "family": "Gen4",
+                  "tier": "BusinessCritical",
+                  "vCores": 8,
+                  "storageSizeInGB": 128
+                }
+              },
+              "operationSteps": {
+                "totalSteps": "3",
+                "currentStep": 3,
+                "stepsList": [
+                  {
+                    "order": 1,
+                    "name": "Request validation",
+                    "status": "Completed"
+                  },
+                  {
+                    "order": 2,
+                    "name": "Virtual Cluster resize/creation",
+                    "status": "Completed"
+                  },
+                  {
+                    "order": 3,
+                    "name": "New SQL Instance Startup",
+                    "status": "InProgress"
+                  }
+                ]
+              }
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/managedInstances/sqlcrudtest-4645/operations/22222222-2222-2222-2222-222222222222",
+            "name": "22222222-2222-2222-2222-222222222222",
+            "type": "Microsoft.Sql/managedInstances/operations"
+          },
+          {
+            "properties": {
+              "managedInstanceName": "sqlcrudtest-4645",
+              "operation": "UpsertManagedServer",
+              "operationFriendlyName": "UPDATE MANAGED SERVER",
+              "percentComplete": 100,
+              "startTime": "2019-12-06T14:48:34.583Z",
+              "state": "Failed",
+              "errorCode": 45157,
+              "errorDescription": "Server 'sqlcrudtest-4645' is busy with another operation. Please try your operation later.",
+              "errorSeverity": 16,
+              "isUserError": true,
+              "isCancellable": false
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/managedInstances/sqlcrudtest-4645/operations/33333333-3333-3333-3333-333333333333",
+            "name": "33333333-3333-3333-3333-333333333333",
+            "type": "Microsoft.Sql/managedInstances/operations"
+          },
+          {
+            "properties": {
+              "managedInstanceName": "sqlcrudtest-4645",
+              "operation": "MakeAllManagedDatabasesAccessible",
+              "operationFriendlyName": "MAKE ALL MANAGED DBS ACCESSIBLE",
+              "percentComplete": 100,
+              "startTime": "2017-06-01T09:00:08.1Z",
+              "state": "Succeeded",
+              "operationSteps": {
+                "totalSteps": "1",
+                "currentStep": 1,
+                "stepsList": [
+                  {
+                    "order": 1,
+                    "name": "Request validation",
+                    "status": "Failed"
+                  }
+                ]
+              }
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/managedInstances/sqlcrudtest-4645/operations/44444444-4444-4444-4444-444444444444",
+            "name": "44444444-4444-4444-4444-444444444444",
+            "type": "Microsoft.Sql/managedInstances/operations"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "language": "en",
+          "id": "1",
+          "text": "Hello world. This is some input text that I love."
+        },
+        {
+          "language": "en",
+          "id": "2",
+          "text": "It's incredibly sunny outside! I'm so happy."
+        },
+        {
+          "language": "en",
+          "id": "3",
+          "text": "Pike place market is my favorite Seattle attraction."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "id": "1",
+            "sentiment": "positive",
+            "confidenceScores": {
+              "positive": 0.98,
+              "neutral": 0.01,
+              "negative": 0.01
+            },
+            "sentences": [
+              {
+                "text": "Hello world.",
+                "sentiment": "neutral",
+                "confidenceScores": {
+                  "positive": 0.07,
+                  "neutral": 0.91,
+                  "negative": 0.02
+                },
+                "offset": 0,
+                "length": 12
+              },
+              {
+                "text": "This is some input text that I love.",
+                "sentiment": "positive",
+                "confidenceScores": {
+                  "positive": 0.98,
+                  "neutral": 0.01,
+                  "negative": 0.01
+                },
+                "offset": 13,
+                "length": 36
+              }
+            ],
+            "warnings": []
+          },
+          {
+            "id": "2",
+            "sentiment": "positive",
+            "confidenceScores": {
+              "positive": 0.98,
+              "neutral": 0.01,
+              "negative": 0.01
+            },
+            "sentences": [
+              {
+                "text": "It's incredibly sunny outside!",
+                "sentiment": "neutral",
+                "confidenceScores": {
+                  "positive": 0.04,
+                  "neutral": 0.93,
+                  "negative": 0.03
+                },
+                "offset": 0,
+                "length": 30
+              },
+              {
+                "text": "I'm so happy.",
+                "sentiment": "positive",
+                "confidenceScores": {
+                  "positive": 0.98,
+                  "neutral": 0.01,
+                  "negative": 0.01
+                },
+                "offset": 31,
+                "length": 13
+              }
+            ],
+            "warnings": []
+          },
+          {
+            "id": "3",
+            "sentiment": "positive",
+            "confidenceScores": {
+              "positive": 0.98,
+              "neutral": 0.01,
+              "negative": 0.01
+            },
+            "sentences": [
+              {
+                "text": "Pike place market is my favorite Seattle attraction.",
+                "sentiment": "positive",
+                "confidenceScores": {
+                  "positive": 0.98,
+                  "neutral": 0.01,
+                  "negative": 0.01
+                },
+                "offset": 0,
+                "length": 52
+              }
+            ],
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2020-04-01"
+      }
+    }
+  }
+}

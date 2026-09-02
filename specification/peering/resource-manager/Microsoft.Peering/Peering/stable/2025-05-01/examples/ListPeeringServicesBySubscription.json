@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "peeringServiceName",
+            "type": "Microsoft.Peering/peeringServices",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName",
+            "location": "eastus",
+            "properties": {
+              "logAnalyticsWorkspaceProperties": {
+                "connectedAgents": [
+                  "Agent1",
+                  "Agent2"
+                ],
+                "key": "key",
+                "workspaceID": "00000000-0000-0000-0000-000000000000"
+              },
+              "peeringServiceLocation": "state1",
+              "peeringServiceProvider": "serviceProvider1",
+              "providerBackupPeeringLocation": "peeringLocation2",
+              "providerPrimaryPeeringLocation": "peeringLocation1",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PeeringServices_ListBySubscription",
+  "title": "List peering services in a subscription"
+}

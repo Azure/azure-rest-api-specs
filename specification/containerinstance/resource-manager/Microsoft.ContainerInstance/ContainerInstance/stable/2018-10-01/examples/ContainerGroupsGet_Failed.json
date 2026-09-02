@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "api-version": "2018-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "location": "WestUs",
+        "name": "demo1",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "instanceView": {
+                  "restartCount": 0,
+                  "currentState": {
+                    "state": "Waiting",
+                    "startTime": "2017-08-08T00:09:10Z",
+                    "detailStatus": ""
+                  },
+                  "events": [
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2017-08-08T00:09:01Z",
+                      "lastTimestamp": "2017-08-08T00:09:01Z",
+                      "message": "pulling image \"nginx\"",
+                      "name": "Pulling",
+                      "type": "Normal"
+                    },
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2017-08-08T00:09:10Z",
+                      "lastTimestamp": "2017-08-08T00:09:10Z",
+                      "message": "Successfully pulled image \"nginx\"",
+                      "name": "Pulled",
+                      "type": "Normal"
+                    }
+                  ]
+                },
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGB": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "mountPath": "/mnt/volume1",
+                    "name": "volume1",
+                    "readOnly": false
+                  }
+                ]
+              }
+            }
+          ],
+          "imageRegistryCredentials": [
+            {
+              "server": "azcloudconsoleregistry.azurecr.io",
+              "username": "azcloudconsoleregistry"
+            }
+          ],
+          "instanceView": {
+            "events": [
+              {
+                "count": 1,
+                "firstTimestamp": "2017-10-08T00:19:10Z",
+                "lastTimestamp": "2017-10-08T00:19:10Z",
+                "message": "Output: mount error(2): Permission denied",
+                "name": "FailedMount",
+                "type": "Normal"
+              }
+            ],
+            "state": "Pending"
+          },
+          "ipAddress": {
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "type": "Public"
+          },
+          "osType": "Linux",
+          "provisioningState": "Failed",
+          "volumes": [
+            {
+              "azureFile": {
+                "readOnly": false,
+                "shareName": "share1",
+                "storageAccountName": "storage1"
+              },
+              "name": "volume1"
+            }
+          ]
+        },
+        "type": "Microsoft.ContainerInstance/containerGroups"
+      }
+    }
+  }
+}

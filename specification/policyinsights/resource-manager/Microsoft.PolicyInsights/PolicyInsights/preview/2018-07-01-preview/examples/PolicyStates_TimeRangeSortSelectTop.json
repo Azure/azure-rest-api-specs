@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "policyStatesResource": "latest",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+    "api-version": "2018-07-01-preview",
+    "$from": "2018-02-05T18:00:00Z",
+    "$to": "2018-02-06T18:00:00Z",
+    "$orderby": "Timestamp desc, PolicyAssignmentId asc, SubscriptionId asc, ResourceGroup asc, ResourceId",
+    "$select": "Timestamp, PolicyAssignmentId, PolicyDefinitionId, SubscriptionId, ResourceGroup, ResourceId",
+    "$top": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.nextLink": null,
+        "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest",
+        "@odata.count": 2,
+        "value": [
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "timestamp": "2018-02-06T17:58:00Z",
+            "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/8cb1e007-947f-423a-ad0c-7ab7dc7d0255/providers/Microsoft.Authorization/policyAssignments/1654a0254ab34920a60f94eb",
+            "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/655cb504-bcee-4362-bd4c-402e6aa38759",
+            "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+            "resourceGroup": "myrg1",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/mysa1"
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "timestamp": "2018-02-06T17:58:00Z",
+            "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/8cb1e007-947f-423a-ad0c-7ab7dc7d0255/providers/Microsoft.Authorization/policyAssignments/1654a0254ab34920a60f94eb",
+            "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/655cb504-bcee-4362-bd4c-402e6aa38759",
+            "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+            "resourceGroup": "myrg2",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg2/providers/Microsoft.Storage/storageAccounts/mysa2"
+          }
+        ]
+      }
+    }
+  }
+}

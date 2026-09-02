@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "recoverabledatabasetest-6852",
+    "serverName": "recoverabledatabasetest-2080",
+    "databaseName": "recoverabledatabasetest-9187",
+    "api-version": "2024-05-01-preview",
+    "$expand": "keys"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/recoverabledatabasetest-6852/providers/Microsoft.Sql/servers/recoverabledatabasetest-2080/recoverableDatabases/recoverabledatabasetest-9187",
+        "name": "recoverabledatabasetest-9187",
+        "type": "Microsoft.Sql/servers/recoverableDatabases",
+        "properties": {
+          "edition": "Basic",
+          "serviceLevelObjective": "Basic",
+          "lastAvailableBackupDate": "2017-05-26T01:06:29.78Z",
+          "elasticPoolName": null,
+          "keys": {
+            "https://your-key-vault-name.vault.azure.net/yourKey/yourKeyVersion": {},
+            "https://your-key-vault-name.vault.azure.net/yourKey2/yourKey2Version": {}
+          }
+        }
+      }
+    }
+  }
+}

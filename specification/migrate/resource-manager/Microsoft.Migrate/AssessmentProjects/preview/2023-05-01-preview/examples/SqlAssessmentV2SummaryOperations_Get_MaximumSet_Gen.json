@@ -1,0 +1,128 @@
+{
+  "title": "SqlAssessmentV2SummaryOperations_Get",
+  "operationId": "SqlAssessmentV2SummaryOperations_Get",
+  "parameters": {
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "4bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
+    "resourceGroupName": "rgmigrate",
+    "projectName": "fci-test6904project",
+    "groupName": "test_fci_hadr",
+    "assessmentName": "test_swagger_1",
+    "summaryName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/bansalankit-rg/providers/Microsoft.Migrate/assessmentprojects/fci-ankit-test6904project/groups/test_fci_hadr/sqlAssessments/test_swagger_1/summaries/default",
+        "name": "default",
+        "systemData": {
+          "createdAt": "0001-01-01T00:00:00",
+          "createdBy": null,
+          "createdByType": null,
+          "lastModifiedAt": "0001-01-01T00:00:00",
+          "lastModifiedBy": null,
+          "lastModifiedByType": null
+        },
+        "type": "Microsoft.Migrate/assessmentprojects/groups/sqlAssessments/summaries",
+        "properties": {
+          "assessmentSummary": {
+            "azureSqlManagedInstance": {
+              "suitabilitySummary": {
+                "notSuitable": 7,
+                "readinessUnknown": 15,
+                "suitableForSqlMI": 1
+              },
+              "monthlyComputeCost": 4581.992448,
+              "monthlyStorageCost": 0.0,
+              "monthlyLicenseCost": 6568.5107999999991,
+              "confidenceScore": 0.0,
+              "monthlySecurityCost": 0.0
+            },
+            "azureSqlVirtualMachine": {
+              "suitabilitySummary": {
+                "suitableForSqlVM": 21,
+                "readinessUnknown": 2
+              },
+              "monthlyComputeCost": 889.49663999999962,
+              "monthlyStorageCost": 73.943999999999988,
+              "monthlyLicenseCost": 25281.36,
+              "confidenceScore": 0.0,
+              "monthlySecurityCost": 0.0
+            },
+            "azureSqlDatabase": {
+              "suitabilitySummary": {
+                "readinessUnknown": 1468,
+                "suitableForSqlDB": 16
+              },
+              "monthlyComputeCost": 175079.07398399821,
+              "monthlyStorageCost": 1054.8825000000395,
+              "monthlyLicenseCost": 214401.07883999476,
+              "confidenceScore": 0.0,
+              "monthlySecurityCost": 0.0
+            },
+            "azureVirtualMachine": {
+              "suitabilitySummary": {
+                "suitableForVM": 19
+              },
+              "monthlyComputeCost": 625.94207999999981,
+              "monthlyStorageCost": 374.48999999999995,
+              "monthlyLicenseCost": 1300.5120000000002,
+              "confidenceScore": 0.0,
+              "monthlySecurityCost": 0.0
+            },
+            "recommended": {
+              "suitabilitySummary": {
+                "suitableForSqlVM": 19,
+                "suitableForVM": 4
+              },
+              "monthlyComputeCost": 823.60799999999972,
+              "monthlyStorageCost": 100.88400000000002,
+              "monthlyLicenseCost": 22912.896,
+              "confidenceScore": 0.0,
+              "monthlySecurityCost": 0.0
+            }
+          },
+          "distributionBySupportStatus": {
+            "extended": 11,
+            "outOfSupport": 9,
+            "mainstream": 3
+          },
+          "distributionByServicePackInsight": {
+            "unknown": 23
+          },
+          "distributionBySqlVersion": {
+            "sql Server 2014": 4,
+            "sql Server 2012": 9,
+            "sql Server 2019": 3,
+            "sql Server 2016": 5,
+            "sql Server 2017": 2
+          },
+          "distributionBySqlEdition": {
+            "enterprise Edition: Core-based Licensing (64-bit)": 15,
+            "web Edition": 1,
+            "express Edition (64-bit)": 2,
+            "enterprise Evaluation Edition (64-bit)": 1,
+            "enterprise Edition: Core-based Licensing": 1,
+            "enterprise Edition (64-bit)": 1,
+            "standard Edition (64-bit)": 2
+          },
+          "instanceDistributionBySizingCriterion": {
+            "performanceBased": 0,
+            "asOnPremises": 0,
+            "perfBasedFallbackToAsOnPremises": 23
+          },
+          "databaseDistributionBySizingCriterion": {
+            "performanceBased": 0,
+            "asOnPremises": 0,
+            "perfBasedFallbackToAsOnPremises": 1484
+          },
+          "numberOfMachines": 19,
+          "numberOfSqlInstances": 23,
+          "numberOfSqlDatabases": 1484,
+          "numberOfFciInstances": 4,
+          "numberOfSqlAvailabilityGroups": 5
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,547 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-04-01-preview",
+    "title": "azureactivedirectory",
+    "description": "Azure Active Directory Client.",
+    "x-ms-code-generation-settings": {
+      "name": "azureactivedirectoryClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/microsoft.aadiam/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Gets the operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "description": "Operation to return the list of available operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to get list of AadIam operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationsDiscoveryCollection"
+            }
+          },
+          "default": {
+            "description": "Error, failed to get list of AadIam operations.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/microsoft.aadiam/diagnosticSettings": {
+      "get": {
+        "tags": [
+          "DiagnosticSettings"
+        ],
+        "operationId": "DiagnosticSettings_List",
+        "description": "Gets the active diagnostic settings list for AadIam.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error. Request for AadIam diagnostic settings has failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get more information about AadIam diagnostic settings",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResourceCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the diagnostic settings": {
+            "$ref": "./examples/listDiagnosticSettings.json"
+          }
+        }
+      }
+    },
+    "/providers/microsoft.aadiam/diagnosticSettings/{name}": {
+      "get": {
+        "tags": [
+          "DiagnosticSettings"
+        ],
+        "operationId": "DiagnosticSettings_Get",
+        "description": "Gets the active diagnostic setting for AadIam.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error. Request for AadIam diagnostic setting has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get more information about diagnostic setting",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the diagnostic setting": {
+            "$ref": "./examples/getDiagnosticSetting.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DiagnosticSettings"
+        ],
+        "operationId": "DiagnosticSettings_CreateOrUpdate",
+        "x-ms-examples": {
+          "BatchAccountDelete": {
+            "$ref": "./examples/createOrUpdateDiagnosticSetting.json"
+          }
+        },
+        "description": "Creates or updates diagnostic settings for AadIam.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to create AadIam diagnostic setting.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            }
+          },
+          "default": {
+            "description": "Error. The request to create diagnostic setting has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DiagnosticSettings"
+        ],
+        "operationId": "DiagnosticSettings_Delete",
+        "description": "Deletes existing diagnostic setting for AadIam.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error. The request to delete named diagnostic setting has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to remove a diagnostic setting"
+          },
+          "204": {
+            "description": "Successful request to remove a diagnostic setting"
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the diagnostic setting": {
+            "$ref": "./examples/deleteDiagnosticSetting.json"
+          }
+        }
+      }
+    },
+    "/providers/microsoft.aadiam/diagnosticSettingsCategories": {
+      "get": {
+        "tags": [
+          "DiagnosticSettingsCategories"
+        ],
+        "operationId": "DiagnosticSettingsCategory_List",
+        "description": "Lists the diagnostic settings categories for AadIam.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error. The request to view diagnostic setting categories has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get list of diagnostic setting categories",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsCategoryResourceCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the diagnostic setting categories": {
+            "$ref": "./examples/listDiagnosticSettingsCategories.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProxyOnlyResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "A proxy only azure resource object."
+    },
+    "RetentionPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "A value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The number of days for the retention in days. A value of 0 will retain the events indefinitely."
+        }
+      },
+      "required": [
+        "enabled",
+        "days"
+      ],
+      "description": "Specifies the retention policy for the log."
+    },
+    "LogSettings": {
+      "properties": {
+        "category": {
+          "enum": [
+            "AuditLogs",
+            "SignInLogs"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          },
+          "description": "Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "A value indicating whether this log is enabled."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "The retention policy for this log."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
+    },
+    "DiagnosticSettings": {
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs."
+        },
+        "serviceBusRuleId": {
+          "type": "string",
+          "description": "The service bus rule Id of the diagnostic setting. This is here to maintain backwards compatibility."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID (resource ID of a Log Analytics workspace) for a Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
+        },
+        "eventHubAuthorizationRuleId": {
+          "type": "string",
+          "description": "The resource Id for the event hub authorization rule."
+        },
+        "eventHubName": {
+          "type": "string",
+          "description": "The name of the event hub. If none is specified, the default event hub will be selected."
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSettings"
+          },
+          "description": "The list of logs settings."
+        }
+      },
+      "description": "The diagnostic settings."
+    },
+    "DiagnosticSettingsResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiagnosticSettings",
+          "description": "Properties of a Diagnostic Settings Resource."
+        }
+      },
+      "description": "The diagnostic setting resource."
+    },
+    "DiagnosticSettingsResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticSettingsResource"
+          },
+          "description": "The collection of diagnostic settings resources."
+        }
+      },
+      "description": "Represents a collection of alert rule resources."
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OperationsDiscoveryProperties": {
+      "description": "ClientDiscovery properties.",
+      "type": "object",
+      "properties": {}
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action. These value will be used by several clients for (1) custom role definitions for RBAC; (2) complex query filters for the event service; and (3) audit history / records for management operations.",
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "description": "The publisher. The localized friendly form of the resource publisher name.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "The provider. The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The resource. The localized friendly form of the resource related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing. This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent’s display.resource field). e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\"",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The operation. The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing. Prescriptive guidance: Read Create or Update Delete 'ActionName'",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description. The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise – it will be used in tool tips and detailed views. Prescriptive guidance for namespaces: Read any 'display.provider' resource Create or Update any 'display.provider' resource Delete any 'display.provider' resource Perform any other action on any 'display.provider' resource Prescriptive guidance for namespaces: Read any 'display.resource' Create or Update any 'display.resource' Delete any 'display.resource' 'ActionName' any 'display.resources'",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsDiscovery": {
+      "description": "Operations discovery class.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the API. The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service. Examples of operations include: * Microsoft.Compute/virtualMachine/capture/action * Microsoft.Compute/virtualMachine/restart/action * Microsoft.Compute/virtualMachine/write * Microsoft.Compute/virtualMachine/read * Microsoft.Compute/virtualMachine/delete Each action should include, in order: (1) Resource Provider Namespace (2) Type hierarchy for which the action applies (e.g. server/databases for a SQL Azure database) (3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH on a collection or named value, Write should be used. If it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it is a POST, Action should be used.",
+          "type": "string"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation applies to data-plane. Set the value to true for data-plane operations and false for ARM/control-plane operations."
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "Object type"
+        },
+        "origin": {
+          "description": "Origin. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is \"user,system\"",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationsDiscoveryProperties",
+          "description": "Properties. Reserved for future use."
+        }
+      }
+    },
+    "OperationsDiscoveryCollection": {
+      "description": "Collection of ClientDiscovery details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The ClientDiscovery details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationsDiscovery"
+          }
+        }
+      }
+    },
+    "DiagnosticSettingsCategory": {
+      "properties": {
+        "categoryType": {
+          "enum": [
+            "Logs"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "categoryType",
+            "modelAsString": true
+          },
+          "x-nullable": false,
+          "description": "The type of the diagnostic settings category."
+        }
+      },
+      "description": "The diagnostic settings Category."
+    },
+    "DiagnosticSettingsCategoryResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiagnosticSettingsCategory",
+          "description": "The properties of a Diagnostic Settings Category."
+        }
+      },
+      "description": "The diagnostic settings category resource."
+    },
+    "DiagnosticSettingsCategoryResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticSettingsCategoryResource"
+          },
+          "description": "The collection of diagnostic settings category resources."
+        }
+      },
+      "description": "Represents a collection of diagnostic setting category resources."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "NameParameter": {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the diagnostic setting.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

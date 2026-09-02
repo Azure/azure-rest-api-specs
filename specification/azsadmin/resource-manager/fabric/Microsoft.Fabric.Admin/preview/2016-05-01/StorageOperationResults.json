@@ -1,0 +1,188 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Storage operation results.",
+    "title": "FabricAdminClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageOperationResults/{operation}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the status of the operation.": {
+            "$ref": "./examples/StorageOperationResult/Get.json"
+          }
+        },
+        "tags": [
+          "StorageOperationResults"
+        ],
+        "description": "Returns the status of a storage operation.",
+        "operationId": "StorageOperationResults_Get",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageOperationResult"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageOperationResults": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all storage operation results at a location.": {
+            "$ref": "./examples/StorageOperationResult/List.json"
+          }
+        },
+        "tags": [
+          "StorageOperationResults"
+        ],
+        "description": "Returns a list of all storage operation results at a location.",
+        "operationId": "StorageOperationResults_List",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageOperationResultList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/StorageOperationResult"
+      }
+    }
+  },
+  "definitions": {
+    "StorageOperationResult": {
+      "description": "Storage operation result description.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Storage operation result properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageOperationResultModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "StorageOperationResultModel": {
+      "description": "Storage operation result properties.",
+      "type": "object",
+      "properties": {
+        "instances": {
+          "description": "List of operation result instances.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "description": "Success or failure of operation.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageOperationResultList": {
+      "description": "Pageable list of storage operation results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of storage operation results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageOperationResult"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "OperationParameter": {
+      "name": "operation",
+      "description": "Operation identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

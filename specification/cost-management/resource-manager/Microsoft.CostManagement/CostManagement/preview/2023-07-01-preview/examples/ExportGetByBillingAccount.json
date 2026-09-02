@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "billingAccountId": "123456",
+    "scope": "providers/Microsoft.Billing/billingAccounts/123456",
+    "exportName": "TestExport"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "location": "centralus",
+        "properties": {
+          "format": "Csv",
+          "deliveryInfo": {
+            "destination": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "container": "exports",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "definition": {
+            "type": "ActualCost",
+            "timeframe": "Custom",
+            "timePeriod": {
+              "from": "2020-05-01T00:00:00Z",
+              "to": "2020-05-31T00:00:00Z"
+            },
+            "dataSet": {
+              "granularity": "Daily",
+              "configuration": {
+                "dataVersion": "2023-05-01"
+              }
+            }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
+        }
+      }
+    }
+  }
+}

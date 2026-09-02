@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "rankRequest": {
+      "contextFeatures": [
+        {
+          "timeOfDay": "Morning"
+        }
+      ],
+      "actions": [
+        {
+          "id": "NewsArticle",
+          "features": [
+            {
+              "type": "News"
+            }
+          ]
+        },
+        {
+          "id": "SportsArticle",
+          "features": [
+            {
+              "type": "Sports"
+            }
+          ]
+        },
+        {
+          "id": "EntertainmentArticle",
+          "features": [
+            {
+              "type": "Entertainment"
+            }
+          ]
+        }
+      ],
+      "excludedActions": [
+        "SportsArticle"
+      ],
+      "eventId": "75269AD0-BFEE-4598-8196-C57383D38E10",
+      "deferActivation": false
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "ranking": [
+          {
+            "id": "EntertainmentArticle",
+            "probability": 0.8
+          },
+          {
+            "id": "SportsArticle",
+            "probability": 0.0
+          },
+          {
+            "id": "NewsArticle",
+            "probability": 0.2
+          }
+        ],
+        "eventId": "75269AD0-BFEE-4598-8196-C57383D38E10",
+        "rewardActionId": "EntertainmentArticle"
+      },
+      "header": {}
+    }
+  }
+}

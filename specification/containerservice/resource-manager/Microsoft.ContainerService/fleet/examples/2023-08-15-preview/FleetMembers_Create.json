@@ -1,0 +1,68 @@
+{
+  "operationId": "FleetMembers_Create",
+  "title": "Creates a FleetMember resource with a long running operation.",
+  "parameters": {
+    "api-version": "2023-08-15-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1",
+    "fleetMemberName": "member-1",
+    "resource": {
+      "properties": {
+        "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "ETag": "23ujdflewrj3=",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-02-01"
+      },
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/members/member-1",
+        "name": "member-1",
+        "type": "Microsoft.ContainerService/fleets/members",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        },
+        "eTag": "23ujdflewrj3=",
+        "properties": {
+          "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "ETag": "23ujdflewrj3=",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-02-01"
+      },
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/members/member-1",
+        "name": "member-1",
+        "type": "Microsoft.ContainerService/fleets/members",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        },
+        "eTag": "23ujdflewrj3=",
+        "properties": {
+          "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

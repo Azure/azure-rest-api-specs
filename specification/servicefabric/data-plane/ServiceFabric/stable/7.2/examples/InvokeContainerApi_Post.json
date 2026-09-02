@@ -1,0 +1,29 @@
+{
+  "operationId": "InvokeContainerApi",
+  "description": "This example shows how to call container API with HTTP POST for a code package deployed on a node.",
+  "parameters": {
+    "api-version": "6.2",
+    "nodeName": "N0020",
+    "applicationId": "samples/nodejs1",
+    "ServiceManifestName": "NodeOnSF",
+    "CodePackageName": "Code",
+    "CodePackageInstanceId": "131673596679688285",
+    "ContainerApiRequestBody": {
+      "HttpVerb": "POST",
+      "UriPath": "/containers/{id}/update",
+      "Body": "{ \"CpuShares\": 512}"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "ContainerApiResult": {
+          "Status": 200,
+          "Content-Type": "application/json",
+          "Body": "{\"Warnings\":null}\n"
+        }
+      }
+    }
+  }
+}

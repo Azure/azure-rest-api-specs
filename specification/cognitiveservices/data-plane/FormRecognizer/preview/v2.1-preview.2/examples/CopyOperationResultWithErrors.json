@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "modelId": "{modelId}",
+    "resultId": "{resultId}",
+    "body": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "failed",
+        "createdDateTime": "2020-01-01T00:00:00Z",
+        "lastUpdatedDateTime": "2020-01-01T00:01:00Z",
+        "copyResult": {
+          "modelId": "{modelId}",
+          "errors": [
+            {
+              "code": "ResourceResolverError",
+              "message": "{ErrorMessage}"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

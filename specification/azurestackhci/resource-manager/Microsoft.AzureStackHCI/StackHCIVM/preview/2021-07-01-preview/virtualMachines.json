@@ -1,0 +1,845 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureStackHCI",
+    "description": "The Microsoft.AzureStackHCI Rest API spec.",
+    "version": "2021-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}": {
+      "get": {
+        "operationId": "virtualmachines_Retrieve",
+        "x-ms-examples": {
+          "GetVirtualMachine": {
+            "$ref": "./examples/GetVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Retrieves the virtualmachines resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualmachines"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "virtualmachines_CreateOrUpdate",
+        "x-ms-examples": {
+          "PutVirtualMachine": {
+            "$ref": "./examples/PutVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualmachines",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/virtualmachines"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Updates the virtualmachines resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualmachines"
+            }
+          },
+          "201": {
+            "description": "Creates the virtualmachines resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualmachines"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "virtualmachines_Delete",
+        "x-ms-examples": {
+          "DeleteVirtualMachine": {
+            "$ref": "./examples/DeleteVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Deletes the virtualmachines resource."
+          },
+          "204": {
+            "description": "No content"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "virtualmachines_Update",
+        "x-ms-examples": {
+          "UpdateVirtualMachine": {
+            "$ref": "./examples/UpdateVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualmachines",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/virtualmachinesPatch"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Updates the virtualmachines resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualmachines"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/start": {
+      "post": {
+        "operationId": "virtualmachines_Start",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "StartVirtualMachine": {
+            "$ref": "./examples/StartVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/stop": {
+      "post": {
+        "operationId": "virtualmachines_Stop",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "StopVirtualMachine": {
+            "$ref": "./examples/StopVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/restart": {
+      "post": {
+        "operationId": "virtualmachines_Restart",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RestartVirtualMachine": {
+            "$ref": "./examples/RestartVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualmachinesNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines": {
+      "get": {
+        "operationId": "virtualmachines_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListVirtualMachineByResourceGroup": {
+            "$ref": "./examples/ListVirtualMachineByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Lists all virtualmachines under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/virtualmachinesListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/virtualmachines": {
+      "get": {
+        "operationId": "virtualmachines_ListBySubscription",
+        "x-ms-examples": {
+          "ListVirtualMachineBySubscription": {
+            "$ref": "./examples/ListVirtualMachineBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Lists all virtualmachines under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/virtualmachinesListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "virtualmachinesProperties": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "hardwareProfile": {
+          "type": "object",
+          "properties": {
+            "vmSize": {
+              "type": "string",
+              "default": "Default"
+            },
+            "processors": {
+              "type": "integer",
+              "format": "int32",
+              "description": "number of processors for the virtual machine"
+            },
+            "memoryGB": {
+              "type": "integer",
+              "format": "int32",
+              "description": "RAM in gb for the virtual machine"
+            },
+            "dynamicMemoryConfig": {
+              "type": "object",
+              "properties": {
+                "maximumMemoryGB": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "minimumMemoryGB": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "targetMemoryBuffer": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "description": "HardwareProfile - Specifies the hardware settings for the virtual machine."
+        },
+        "networkProfile": {
+          "type": "object",
+          "properties": {
+            "networkInterfaces": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Name of the network interface"
+                  }
+                }
+              },
+              "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine"
+            }
+          },
+          "description": "NetworkProfile - describes the network configuration the virtual machine"
+        },
+        "osProfile": {
+          "type": "object",
+          "properties": {
+            "adminPassword": {
+              "type": "string",
+              "x-ms-secret": true,
+              "description": "AdminPassword - admin password",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "adminUsername": {
+              "type": "string",
+              "description": "AdminUsername - admin username"
+            },
+            "computerName": {
+              "type": "string",
+              "description": "ComputerName - name of the compute"
+            },
+            "linuxConfiguration": {
+              "type": "object",
+              "properties": {
+                "disablePasswordAuthentication": {
+                  "type": "boolean",
+                  "description": "DisablePasswordAuthentication - whether password authentication should be disabled"
+                },
+                "ssh": {
+                  "type": "object",
+                  "properties": {
+                    "publicKeys": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "keyData": {
+                            "type": "string",
+                            "x-ms-secret": true,
+                            "description": "KeyData - SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Li      nux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+                          },
+                          "path": {
+                            "type": "string",
+                            "description": "Path - Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys"
+                          }
+                        }
+                      },
+                      "description": "PublicKeys - The list of SSH public keys used to authenticate with linux based VMs.",
+                      "x-ms-identifiers": []
+                    }
+                  },
+                  "description": "SSH - contains settings related to ssh configuration"
+                }
+              },
+              "description": "LinuxConfiguration - linux specific configuration values for the virtual machine"
+            },
+            "osType": {
+              "type": "string",
+              "description": "OsType - string specifying whether the OS is Linux or Windows",
+              "enum": [
+                "Linux",
+                "Windows"
+              ],
+              "x-ms-enum": {
+                "name": "OsTypeEnum",
+                "modelAsString": true
+              }
+            },
+            "windowsConfiguration": {
+              "type": "object",
+              "properties": {
+                "enableAutomaticUpdates": {
+                  "type": "boolean",
+                  "description": "Whether to EnableAutomaticUpdates on the machine"
+                },
+                "ssh": {
+                  "type": "object",
+                  "properties": {
+                    "publicKeys": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "keyData": {
+                            "type": "string",
+                            "x-ms-secret": true,
+                            "description": "KeyData - SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Li      nux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+                          },
+                          "path": {
+                            "type": "string",
+                            "description": "Path - Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys"
+                          }
+                        }
+                      },
+                      "description": "PublicKeys - The list of SSH public keys used to authenticate with linux based VMs.",
+                      "x-ms-identifiers": []
+                    }
+                  },
+                  "description": "SSH Configuration"
+                },
+                "timeZone": {
+                  "type": "string",
+                  "description": "TimeZone for the virtual machine"
+                }
+              },
+              "description": "Windows Configuration for the virtual machine "
+            }
+          },
+          "description": "OsProfile - describes the configuration of the operating system and sets login data"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "name of the object to be used in moc"
+        },
+        "securityProfile": {
+          "type": "object",
+          "properties": {
+            "enableTPM": {
+              "type": "boolean"
+            }
+          },
+          "description": "SecurityProfile - Specifies the security settings for the virtual machine."
+        },
+        "storageProfile": {
+          "type": "object",
+          "properties": {
+            "dataDisks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "description": "adds data disks to the virtual machine",
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "imageReference": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name - Name of the image",
+                  "x-ms-mutability": [
+                    "create",
+                    "read"
+                  ]
+                }
+              },
+              "description": "Which Image to use for the virtual machine"
+            }
+          },
+          "description": "StorageProfile - contains information about the disks and storage information for the virtual machine"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Accepted",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/VirtualMachineStatus"
+        }
+      },
+      "description": "VirtualMachineSpec defines the desired state of VirtualMachine"
+    },
+    "VirtualMachineStatus": {
+      "type": "object",
+      "description": "VirtualMachineStatus defines the observed state of VirtualMachine",
+      "x-ms-client-flatten": true,
+      "readOnly": true,
+      "properties": {
+        "powerState": {
+          "type": "string",
+          "description": "PowerState of the VM",
+          "enum": [
+            "Deallocated",
+            "Deallocating",
+            "Running",
+            "Starting",
+            "Stopped",
+            "Stopping",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "PowerStateEnum",
+            "modelAsString": true
+          }
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "VM provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        }
+      }
+    },
+    "virtualmachines": {
+      "type": "object",
+      "description": "The virtualmachines resource definition.",
+      "x-ms-client-flatten": true,
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/virtualmachinesProperties"
+        },
+        "extendedLocation": {
+          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "hardwareProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Standard_A2_v2",
+            "Standard_A4_v2",
+            "Standard_D2s_v3",
+            "Standard_D4s_v3",
+            "Standard_D8s_v3",
+            "Standard_D16s_v3",
+            "Standard_D32s_v3",
+            "Standard_DS2_v2",
+            "Standard_DS3_v2",
+            "Standard_DS4_v2",
+            "Standard_DS5_v2",
+            "Standard_DS13_v2",
+            "Standard_K8S_v1",
+            "Standard_K8S2_v1",
+            "Standard_K8S3_v1",
+            "Standard_K8S4_v1",
+            "Standard_NK6",
+            "Standard_NK12",
+            "Standard_NV6",
+            "Standard_NV12",
+            "Standard_K8S5_v1",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "VmSizeEnum",
+            "modelAsString": true
+          }
+        },
+        "processors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "number of processors for the virtual machine"
+        },
+        "memoryGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "RAM in gb for the virtual machine"
+        }
+      },
+      "description": "HardwareProfile - Specifies the hardware settings for the virtual machine."
+    },
+    "networkProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Name of the network interface"
+              }
+            }
+          },
+          "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine"
+        }
+      },
+      "description": "NetworkProfile - describes the network update configuration the virtual machine"
+    },
+    "storageProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "adds data disks to the virtual machine for the update call",
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "virtualMachineUpdateProperties": {
+      "description": "Defines the resource properties for the update.",
+      "type": "object",
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/hardwareProfileUpdate"
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/storageProfileUpdate"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/networkProfileUpdate"
+        }
+      }
+    },
+    "virtualmachinesPatch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/virtualMachineUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The virtualmachines resource patch definition."
+    },
+    "virtualmachinesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/virtualmachines"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "virtualmachinesNameParameter": {
+      "name": "virtualmachinesName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "minLength": 3
+    }
+  }
+}

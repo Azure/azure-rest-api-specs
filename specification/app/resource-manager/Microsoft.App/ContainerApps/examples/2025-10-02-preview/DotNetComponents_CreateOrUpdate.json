@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "name": "mydotnetcomponent",
+    "api-version": "2025-10-02-preview",
+    "dotNetComponentEnvelope": {
+      "properties": {
+        "componentType": "AspireDashboard",
+        "configurations": [
+          {
+            "propertyName": "dashboard-theme",
+            "value": "dark"
+          }
+        ]
+      }
+    },
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mydotnetcomponent",
+        "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/mydotnetcomponent",
+        "properties": {
+          "componentType": "AspireDashboard",
+          "configurations": [
+            {
+              "propertyName": "dashboard-theme",
+              "value": "dark"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "mydotnetcomponent",
+        "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/mydotnetcomponent",
+        "properties": {
+          "componentType": "AspireDashboard",
+          "configurations": [
+            {
+              "propertyName": "dashboard-theme",
+              "value": "dark"
+            }
+          ],
+          "provisioningState": "InProgress"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "DotNetComponents_CreateOrUpdate",
+  "title": "Create or Update .NET Component"
+}

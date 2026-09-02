@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "identitybinding1",
+            "type": "Microsoft.ContainerService/managedClusters/identityBindings",
+            "eTag": "string",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/identityBindings/identitybinding1",
+            "properties": {
+              "managedIdentity": {
+                "clientId": "00000000-0000-0000-0000-000000000000",
+                "objectId": "00000000-0000-0000-0000-000000000000",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1",
+                "tenantId": "00000000-0000-0000-0000-000000000000"
+              },
+              "oidcIssuer": {
+                "oidcIssuerUrl": "https://oidc-endpoint"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "IdentityBindings_ListByManagedCluster",
+  "title": "List Identity Bindings by Managed Cluster"
+}

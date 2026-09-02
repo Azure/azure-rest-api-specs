@@ -1,0 +1,224 @@
+{
+  "parameters": {
+    "subscriptionId": "ae43b1e3-c35d-4c8c-bc0d-f148b4c52b78",
+    "api-version": "2017-10-01-preview",
+    "resourceGroupName": "demo",
+    "containerGroupName": "mycontainers",
+    "containerGroup": {
+      "name": "mycontainers",
+      "type": "Microsoft.ContainerInstance/containerGroups",
+      "location": "westus",
+      "properties": {
+        "containers": [
+          {
+            "name": "mycontainers",
+            "properties": {
+              "command": [],
+              "environmentVariables": [],
+              "image": "nginx",
+              "instanceView": {},
+              "ports": [
+                {
+                  "port": 80
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "memoryInGB": 1.5,
+                  "cpu": 1
+                }
+              },
+              "volumeMounts": [
+                {
+                  "name": "volume1",
+                  "mountPath": "/mnt/volume1",
+                  "readOnly": false
+                },
+                {
+                  "name": "volume2",
+                  "mountPath": "/mnt/volume2",
+                  "readOnly": false
+                }
+              ]
+            }
+          }
+        ],
+        "imageRegistryCredentials": [],
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
+          "type": "Public"
+        },
+        "osType": "Linux",
+        "volumes": [
+          {
+            "name": "volume1",
+            "azureFile": {
+              "shareName": "shareName",
+              "storageAccountName": "accountName",
+              "storageAccountKey": ""
+            }
+          },
+          {
+            "name": "volume2",
+            "emptyDir": {}
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "containers": [
+            {
+              "name": "mycontainers",
+              "properties": {
+                "image": "nginx",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  }
+                ]
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 80
+              }
+            ],
+            "ip": "13.64.70.13",
+            "type": "Public"
+          },
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Pending"
+          },
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName",
+                "storageAccountKey": ""
+              }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            }
+          ]
+        },
+        "id": "/subscriptions/ae43b1e3-c35d-4c8c-bc0d-f148b4c52b78/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/mycontainers",
+        "name": "mycontainers",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "westus"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "containers": [
+            {
+              "name": "mycontainers",
+              "properties": {
+                "image": "nginx",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  }
+                ]
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 80
+              }
+            ],
+            "ip": "13.64.70.13",
+            "type": "Public"
+          },
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Pending"
+          },
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName",
+                "storageAccountKey": ""
+              }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            }
+          ]
+        },
+        "id": "/subscriptions/ae43b1e3-c35d-4c8c-bc0d-f148b4c52b78/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/mycontainers",
+        "name": "mycontainers",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "westus"
+      }
+    }
+  }
+}

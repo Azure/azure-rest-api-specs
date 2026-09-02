@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "location": "westus",
+    "api-version": "2019-12-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceType": "containerGroups",
+            "osType": "Linux",
+            "location": "West US",
+            "ipAddressType": "Public",
+            "gpu": "K80",
+            "capabilities": {
+              "maxMemoryInGB": 14,
+              "maxCpu": 4,
+              "maxGpuCount": 4
+            }
+          },
+          {
+            "resourceType": "containerGroups",
+            "osType": "Windows",
+            "location": "West US",
+            "ipAddressType": "Public",
+            "gpu": "None",
+            "capabilities": {
+              "maxMemoryInGB": 14,
+              "maxCpu": 4,
+              "maxGpuCount": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}

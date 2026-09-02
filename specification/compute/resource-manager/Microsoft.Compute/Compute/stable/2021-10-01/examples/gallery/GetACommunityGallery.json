@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-10-01",
+    "galleryName": "myGalleryName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Succeeded",
+          "sharingProfile": {
+            "permissions": "Community",
+            "communityGalleryInfo": {
+              "publisherUri": "uri",
+              "publisherContact": "pir@microsoft.com",
+              "eula": "eula",
+              "publicNames": [
+                "GalelryPublicName"
+              ],
+              "communityGalleryEnabled": true
+            }
+          },
+          "sharingStatus": {
+            "aggregatedState": "Succeeded",
+            "summary": [
+              {
+                "region": "westus",
+                "state": "Succeeded",
+                "details": ""
+              }
+            ]
+          }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
+      }
+    }
+  }
+}

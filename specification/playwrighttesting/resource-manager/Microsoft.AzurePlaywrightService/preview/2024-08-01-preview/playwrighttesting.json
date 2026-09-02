@@ -1,0 +1,1219 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft AzurePlaywrightService Management API",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AzurePlaywrightService Resource Provider Management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Accounts"
+    },
+    {
+      "name": "Quotas"
+    },
+    {
+      "name": "AccountQuotas"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzurePlaywrightService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/accounts": {
+      "get": {
+        "operationId": "Accounts_ListBySubscription",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "List Account resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_ListBySubscription": {
+            "$ref": "./examples/Accounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/checkNameAvailability": {
+      "post": {
+        "operationId": "Accounts_CheckNameAvailability",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Adds check global name availability operation, normally used if a resource name must be globally unique.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_CheckNameAvailability": {
+            "$ref": "./examples/Accounts_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas": {
+      "get": {
+        "operationId": "Quotas_ListBySubscription",
+        "tags": [
+          "Quotas"
+        ],
+        "description": "List quotas for a given subscription Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location of quota in ARM Normalized format like eastus, southeastasia etc.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_ListBySubscription": {
+            "$ref": "./examples/Quotas_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{quotaName}": {
+      "get": {
+        "operationId": "Quotas_Get",
+        "tags": [
+          "Quotas"
+        ],
+        "description": "Get subscription quota by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location of quota in ARM Normalized format like eastus, southeastasia etc.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "quotaName",
+            "in": "path",
+            "description": "The quota name.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ScalableExecution",
+              "Reporting"
+            ],
+            "x-ms-enum": {
+              "name": "QuotaNames",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ScalableExecution",
+                  "value": "ScalableExecution",
+                  "description": "The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations."
+                },
+                {
+                  "name": "Reporting",
+                  "value": "Reporting",
+                  "description": "The quota details for reporting feature. When enabled, Playwright client will be able to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Quota"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_Get": {
+            "$ref": "./examples/Quotas_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts": {
+      "get": {
+        "operationId": "Accounts_ListByResourceGroup",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "List Account resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_ListByResourceGroup": {
+            "$ref": "./examples/Accounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}": {
+      "get": {
+        "operationId": "Accounts_Get",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get a Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of account.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Accounts_CreateOrUpdate",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Create a Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of account.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Account' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "201": {
+            "description": "Resource 'Account' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_CreateOrUpdate": {
+            "$ref": "./examples/Accounts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Accounts_Update",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Update a Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of account.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Update": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Accounts_Delete",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Delete a Account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of account.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Delete": {
+            "$ref": "./examples/Accounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}/quotas": {
+      "get": {
+        "operationId": "AccountQuotas_ListByAccount",
+        "tags": [
+          "AccountQuotas"
+        ],
+        "description": "List quotas for a given account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of account.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountQuotaListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountQuotas_ListByAccount": {
+            "$ref": "./examples/AccountQuotas_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}/quotas/{quotaName}": {
+      "get": {
+        "operationId": "AccountQuotas_Get",
+        "tags": [
+          "AccountQuotas"
+        ],
+        "description": "Get quota by name for an account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of account.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+          },
+          {
+            "name": "quotaName",
+            "in": "path",
+            "description": "The Playwright service account quota name.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ScalableExecution",
+              "Reporting"
+            ],
+            "x-ms-enum": {
+              "name": "QuotaNames",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ScalableExecution",
+                  "value": "ScalableExecution",
+                  "description": "The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations."
+                },
+                {
+                  "name": "Reporting",
+                  "value": "Reporting",
+                  "description": "The quota details for reporting feature. When enabled, Playwright client will be able to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountQuota"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountQuotas_Get": {
+            "$ref": "./examples/AccountQuotas_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "type": "object",
+      "description": "A Playwright service account resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AccountFreeTrialProperties": {
+      "type": "object",
+      "description": "The Playwright service account quota resource free-trial properties.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The free-trial createdAt utcDateTime.",
+          "readOnly": true
+        },
+        "expiryAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The free-trial expiryAt utcDateTime.",
+          "readOnly": true
+        },
+        "allocatedValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The free-trial allocated limit value eg. allocated free minutes.",
+          "readOnly": true
+        },
+        "usedValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The free-trial used value eg. used free minutes.",
+          "readOnly": true
+        },
+        "percentageUsed": {
+          "type": "number",
+          "format": "float",
+          "description": "The free-trial percentage used.",
+          "minimum": 0,
+          "maximum": 100,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "createdAt",
+        "expiryAt",
+        "allocatedValue",
+        "usedValue",
+        "percentageUsed"
+      ]
+    },
+    "AccountListResult": {
+      "type": "object",
+      "description": "The response of a Account list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Account items on this page",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AccountProperties": {
+      "type": "object",
+      "description": "Account resource properties.",
+      "properties": {
+        "dashboardUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Playwright testing dashboard URI for the account resource.",
+          "readOnly": true
+        },
+        "regionalAffinity": {
+          "type": "string",
+          "description": "This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "scalableExecution": {
+          "type": "string",
+          "description": "When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "reporting": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "localAuth": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to use local auth(through access key) for authentication of test runs.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "AccountQuota": {
+      "type": "object",
+      "description": "A quota resource for a Playwright service account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountQuotaProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AccountQuotaListResult": {
+      "type": "object",
+      "description": "The response of a AccountQuota list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AccountQuota items on this page",
+          "items": {
+            "$ref": "#/definitions/AccountQuota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AccountQuotaProperties": {
+      "type": "object",
+      "description": "The Playwright service account quota resource properties.",
+      "properties": {
+        "freeTrial": {
+          "$ref": "#/definitions/AccountFreeTrialProperties",
+          "description": "The Playwright service account quota resource free-trial properties."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "AccountUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Account.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AccountUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AccountUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Account.",
+      "properties": {
+        "regionalAffinity": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created."
+        },
+        "scalableExecution": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations."
+        },
+        "reporting": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting."
+        },
+        "localAuth": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "When enabled, this feature allows the workspace to use local auth(through access key) for authentication of test runs."
+        }
+      }
+    },
+    "EnablementStatus": {
+      "type": "string",
+      "description": "The enablement status of a feature.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnablementStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The feature is Enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The feature is Disabled."
+          }
+        ]
+      }
+    },
+    "FreeTrialProperties": {
+      "type": "object",
+      "description": "The subscription quota resource free-trial properties.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The Playwright service account id.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/FreeTrialState",
+          "description": "The free-trial state.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accountId",
+        "state"
+      ]
+    },
+    "FreeTrialState": {
+      "type": "string",
+      "description": "The free-trial state.",
+      "enum": [
+        "Active",
+        "Expired",
+        "NotEligible",
+        "NotRegistered"
+      ],
+      "x-ms-enum": {
+        "name": "FreeTrialState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The free-trial is Active."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The free-trial is Expired."
+          },
+          {
+            "name": "NotEligible",
+            "value": "NotEligible",
+            "description": "The free-trial is Not Eligible."
+          },
+          {
+            "name": "NotRegistered",
+            "value": "NotRegistered",
+            "description": "The free-trial is Not Registered."
+          }
+        ]
+      }
+    },
+    "OfferingType": {
+      "type": "string",
+      "description": "Offering type state.",
+      "enum": [
+        "NotApplicable",
+        "PrivatePreview",
+        "PublicPreview",
+        "GeneralAvailability"
+      ],
+      "x-ms-enum": {
+        "name": "OfferingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The offeringType is NotApplicable."
+          },
+          {
+            "name": "PrivatePreview",
+            "value": "PrivatePreview",
+            "description": "The offeringType is PrivatePreview."
+          },
+          {
+            "name": "PublicPreview",
+            "value": "PublicPreview",
+            "description": "The offeringType is PublicPreview."
+          },
+          {
+            "name": "GeneralAvailability",
+            "value": "GeneralAvailability",
+            "description": "The offeringType is GeneralAvailability."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creation in progress.."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress.."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing.."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Quota": {
+      "type": "object",
+      "description": "A subscription quota resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QuotaListResult": {
+      "type": "object",
+      "description": "The response of a Quota list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Quota items on this page",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaProperties": {
+      "type": "object",
+      "description": "The subscription quota resource properties.",
+      "properties": {
+        "freeTrial": {
+          "$ref": "#/definitions/FreeTrialProperties",
+          "description": "The subscription quota resource free-trial properties."
+        },
+        "offeringType": {
+          "$ref": "#/definitions/OfferingType",
+          "description": "Indicates the offering type for the subscription.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

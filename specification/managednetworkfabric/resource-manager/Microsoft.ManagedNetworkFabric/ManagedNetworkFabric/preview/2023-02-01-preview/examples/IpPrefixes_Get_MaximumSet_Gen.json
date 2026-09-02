@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "xxxxxx",
+    "resourceGroupName": "resourcegroupname",
+    "api-version": "2023-02-01-preview",
+    "ipPrefixName": "example-ipPrefix"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "ipPrefixRules": [
+            {
+              "action": "Permit",
+              "sequenceNumber": 12,
+              "networkPrefix": "1.1.1.0/24",
+              "condition": "EqualTo",
+              "subnetMaskLength": 28
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "annotation": "annotationValue"
+        },
+        "tags": {
+          "key6404": ""
+        },
+        "location": "EastUS",
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/ipPrefixes/example-ipPrefix",
+        "name": "example-ipPrefix",
+        "type": "microsoft.managednetworkfabric/ipPrefixes",
+        "systemData": {
+          "createdBy": "User",
+          "createdByType": "User",
+          "createdAt": "2023-03-16T15:43:02.233Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-03-16T15:43:02.233Z"
+        }
+      }
+    }
+  }
+}

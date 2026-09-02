@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2017-10-12",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "endpoint": {
+      "location": "WestCentralUs",
+      "properties": {
+        "origins": [
+          {
+            "name": "www-bing-com",
+            "properties": {
+              "hostName": "www.bing.com",
+              "httpPort": 80,
+              "httpsPort": 443
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "endpoint1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "tags": {},
+        "location": "WestCentralUs",
+        "properties": {
+          "hostName": "endpoint1.azureedge.net",
+          "originHostHeader": null,
+          "provisioningState": "Creating",
+          "resourceState": "Creating",
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "queryStringCachingBehavior": "IgnoreQueryString",
+          "originPath": null,
+          "origins": [
+            {
+              "name": "www-bing-com",
+              "properties": {
+                "hostName": "www.bing.com",
+                "httpPort": 80,
+                "httpsPort": 443
+              }
+            }
+          ],
+          "customDomains": [],
+          "contentTypesToCompress": [],
+          "isCompressionEnabled": false,
+          "optimizationType": null,
+          "probePath": null,
+          "geoFilters": []
+        }
+      }
+    }
+  }
+}

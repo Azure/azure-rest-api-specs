@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2016-06-01",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "integrationAccountName": "testIntegrationAccount",
+    "batchConfigurationName": "testBatchConfiguration",
+    "batchConfiguration": {
+      "properties": {
+        "batchGroupName": "DEFAULT",
+        "releaseCriteria": {
+          "recurrence": {
+            "frequency": "Minute",
+            "interval": 1,
+            "startTime": "2017-03-24T11:43:00",
+            "timeZone": "India Standard Time"
+          },
+          "messageCount": 10,
+          "batchSize": 234567
+        }
+      },
+      "location": "westus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "batchGroupName": "DEFAULT",
+          "releaseCriteria": {
+            "recurrence": {
+              "frequency": "Minute",
+              "interval": 1,
+              "startTime": "2017-03-24T11:43:00",
+              "timeZone": "India Standard Time"
+            },
+            "messageCount": 10,
+            "batchSize": 234567
+          },
+          "createdTime": "2018-03-26T06:14:16.6518552Z",
+          "changedTime": "2018-03-26T06:14:16.7042301Z"
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/batchConfigurations/testBatchConfiguration",
+        "name": "testBatchConfiguration",
+        "type": "Microsoft.Logic/integrationAccounts/batchConfigurations"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "batchGroupName": "DEFAULT",
+          "releaseCriteria": {
+            "recurrence": {
+              "frequency": "Minute",
+              "interval": 1,
+              "startTime": "2017-03-24T11:43:00",
+              "timeZone": "India Standard Time"
+            },
+            "messageCount": 10,
+            "batchSize": 234567
+          },
+          "createdTime": "2018-03-26T06:14:16.6518552Z",
+          "changedTime": "2018-03-26T06:14:16.7042301Z"
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/batchConfigurations/testBatchConfiguration",
+        "name": "testBatchConfiguration",
+        "type": "Microsoft.Logic/integrationAccounts/batchConfigurations"
+      }
+    }
+  }
+}

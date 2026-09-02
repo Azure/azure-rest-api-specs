@@ -1,0 +1,6937 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MicrosoftScanningClient",
+    "description": "Creates a Microsoft.Scanning management client.",
+    "version": "2021-10-01-preview"
+  },
+  "host": "purview.azure.com",
+  "basePath": "/scan",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "paths": {
+    "/azureKeyVaults/{keyVaultName}": {
+      "get": {
+        "tags": [
+          "AzureKeyVaults"
+        ],
+        "description": "Gets key vault information",
+        "operationId": "KeyVaultConnections_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "keyVaultName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureKeyVault"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyVaultConnections_Get": {
+            "$ref": "./examples/KeyVaultConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AzureKeyVaults"
+        ],
+        "description": "Creates an instance of a key vault connection",
+        "operationId": "KeyVaultConnections_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "keyVaultName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureKeyVault"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureKeyVault"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyVaultConnections_Create": {
+            "$ref": "./examples/KeyVaultConnections_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AzureKeyVaults"
+        ],
+        "description": "Deletes the key vault connection associated with the account",
+        "operationId": "KeyVaultConnections_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "keyVaultName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureKeyVault"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyVaultConnections_Delete": {
+            "$ref": "./examples/KeyVaultConnections_Delete.json"
+          }
+        }
+      }
+    },
+    "/azureKeyVaults": {
+      "get": {
+        "tags": [
+          "AzureKeyVaults"
+        ],
+        "description": "List key vault connections in account",
+        "operationId": "KeyVaultConnections_ListAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureKeyVaultList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyVaultConnections_ListAll": {
+            "$ref": "./examples/KeyVaultConnections_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/classificationrules/{classificationRuleName}": {
+      "get": {
+        "tags": [
+          "ClassificationRules"
+        ],
+        "description": "Get a classification rule",
+        "operationId": "ClassificationRules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "classificationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClassificationRule"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClassificationRules_Get": {
+            "$ref": "./examples/ClassificationRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ClassificationRules"
+        ],
+        "description": "Creates or Updates a classification rule",
+        "operationId": "ClassificationRules_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "classificationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ClassificationRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClassificationRule"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClassificationRule"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClassificationRules_CreateOrUpdate": {
+            "$ref": "./examples/ClassificationRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ClassificationRules"
+        ],
+        "description": "Deletes a classification rule",
+        "operationId": "ClassificationRules_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "classificationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClassificationRule"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClassificationRules_Delete": {
+            "$ref": "./examples/ClassificationRules_Delete.json"
+          }
+        }
+      }
+    },
+    "/classificationrules": {
+      "get": {
+        "tags": [
+          "ClassificationRules"
+        ],
+        "description": "List classification rules in Account",
+        "operationId": "ClassificationRules_ListAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClassificationRuleList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClassificationRules_ListAll": {
+            "$ref": "./examples/ClassificationRules_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/classificationrules/{classificationRuleName}/versions": {
+      "get": {
+        "tags": [
+          "ClassificationRules"
+        ],
+        "description": "Lists the rule versions of a classification rule",
+        "operationId": "ClassificationRules_ListVersionsByClassificationRuleName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "classificationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClassificationRuleList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClassificationRules_ListVersionsByClassificationRuleName": {
+            "$ref": "./examples/ClassificationRules_ListVersionsByClassificationRuleName.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/classificationrules/{classificationRuleName}/versions/{classificationRuleVersion}/:tag": {
+      "post": {
+        "tags": [
+          "ClassificationRules"
+        ],
+        "description": "Sets Classification Action on a specific classification rule version.",
+        "operationId": "ClassificationRules_TagClassificationVersion",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "classificationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "classificationRuleVersion",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "action",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Keep",
+              "Delete"
+            ],
+            "x-ms-enum": {
+              "name": "ClassificationAction",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClassificationRules_TagClassificationVersion": {
+            "$ref": "./examples/ClassificationRules_TagClassificationVersion.json"
+          }
+        }
+      }
+    },
+    "/datasources/{dataSourceName}": {
+      "put": {
+        "tags": [
+          "DataSources"
+        ],
+        "description": "Creates or Updates a data source",
+        "operationId": "DataSources_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSources_CreateOrUpdate": {
+            "$ref": "./examples/DataSources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataSources"
+        ],
+        "description": "Get a data source",
+        "operationId": "DataSources_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSources_Get": {
+            "$ref": "./examples/DataSources_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataSources"
+        ],
+        "description": "Deletes a data source",
+        "operationId": "DataSources_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSources_Delete": {
+            "$ref": "./examples/DataSources_Delete.json"
+          }
+        }
+      }
+    },
+    "/datasources": {
+      "get": {
+        "tags": [
+          "DataSources"
+        ],
+        "description": "List data sources in Data catalog",
+        "operationId": "DataSources_ListAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSourceList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSources_ListAll": {
+            "$ref": "./examples/DataSources_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans/{scanName}/filters/custom": {
+      "get": {
+        "tags": [
+          "Filters"
+        ],
+        "description": "Get a filter",
+        "operationId": "Filters_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Filter"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Filters_Get": {
+            "$ref": "./examples/Filters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Filters"
+        ],
+        "description": "Creates or updates a filter",
+        "operationId": "Filters_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Filter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Filter"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Filter"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Filters_CreateOrUpdate": {
+            "$ref": "./examples/Filters_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans/{scanName}": {
+      "put": {
+        "tags": [
+          "Scan"
+        ],
+        "description": "Creates an instance of a scan",
+        "operationId": "Scans_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Scan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Scan"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Scan"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scans_CreateOrUpdate": {
+            "$ref": "./examples/Scans_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Scan"
+        ],
+        "description": "Gets a scan information",
+        "operationId": "Scans_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Scan"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scans_Get": {
+            "$ref": "./examples/Scans_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Scan"
+        ],
+        "description": "Deletes the scan associated with the data source",
+        "operationId": "Scans_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Scan"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scans_Delete": {
+            "$ref": "./examples/Scans_Delete.json"
+          }
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans": {
+      "get": {
+        "tags": [
+          "Scan"
+        ],
+        "description": "List scans in data source",
+        "operationId": "Scans_ListByDataSource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scans_ListByDataSource": {
+            "$ref": "./examples/Scans_ListByDataSource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans/{scanName}/runs/{runId}": {
+      "put": {
+        "tags": [
+          "ScanResult"
+        ],
+        "description": "Runs the scan",
+        "operationId": "ScanResult_RunScan",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "scanLevel",
+            "type": "string",
+            "enum": [
+              "Full",
+              "Incremental"
+            ],
+            "x-ms-enum": {
+              "name": "ScanLevelType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanResult_RunScan": {
+            "$ref": "./examples/ScanResult_RunScan.json"
+          }
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans/{scanName}/runs/{runId}/:cancel": {
+      "post": {
+        "tags": [
+          "ScanResult"
+        ],
+        "description": "Cancels a scan",
+        "operationId": "ScanResult_CancelScan",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanResult_CancelScan": {
+            "$ref": "./examples/ScanResult_CancelScan.json"
+          }
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans/{scanName}/runs": {
+      "get": {
+        "tags": [
+          "ScanResult"
+        ],
+        "description": "Lists the scan history of a scan",
+        "operationId": "ScanResult_ListScanHistory",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanHistoryList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanResult_ListScanHistory": {
+            "$ref": "./examples/ScanResult_ListScanHistory.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/scanrulesets/{scanRulesetName}": {
+      "get": {
+        "tags": [
+          "ScanRulesets"
+        ],
+        "description": "Get a scan ruleset",
+        "operationId": "ScanRulesets_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scanRulesetName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanRuleset"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanRulesets_Get": {
+            "$ref": "./examples/ScanRulesets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScanRulesets"
+        ],
+        "description": "Creates or Updates a scan ruleset",
+        "operationId": "ScanRulesets_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scanRulesetName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ScanRuleset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanRuleset"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanRuleset"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanRulesets_CreateOrUpdate": {
+            "$ref": "./examples/ScanRulesets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScanRulesets"
+        ],
+        "description": "Deletes a scan ruleset",
+        "operationId": "ScanRulesets_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scanRulesetName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanRuleset"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanRulesets_Delete": {
+            "$ref": "./examples/ScanRulesets_Delete.json"
+          }
+        }
+      }
+    },
+    "/scanrulesets": {
+      "get": {
+        "tags": [
+          "ScanRulesets"
+        ],
+        "description": "List scan rulesets in Data catalog",
+        "operationId": "ScanRulesets_ListAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanRulesetList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanRulesets_ListAll": {
+            "$ref": "./examples/ScanRulesets_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/systemScanRulesets": {
+      "get": {
+        "tags": [
+          "SystemScanRulesets"
+        ],
+        "description": "List all system scan rulesets for an account",
+        "operationId": "SystemScanRulesets_ListAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SystemScanRulesetList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SystemScanRulesets_ListAll": {
+            "$ref": "./examples/SystemScanRulesets_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/systemScanRulesets/datasources/{dataSourceType}": {
+      "get": {
+        "tags": [
+          "SystemScanRulesets"
+        ],
+        "description": "Get a system scan ruleset for a data source",
+        "operationId": "SystemScanRulesets_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceType",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "None",
+              "AzureSubscription",
+              "AzureResourceGroup",
+              "AzureSynapseWorkspace",
+              "AzureSynapse",
+              "AdlsGen1",
+              "AdlsGen2",
+              "AmazonAccount",
+              "AmazonS3",
+              "AmazonSql",
+              "AzureCosmosDb",
+              "AzureDataExplorer",
+              "AzureFileService",
+              "AzureSqlDatabase",
+              "AmazonPostgreSql",
+              "AzurePostgreSql",
+              "SqlServerDatabase",
+              "AzureSqlDatabaseManagedInstance",
+              "AzureSqlDataWarehouse",
+              "AzureMySql",
+              "AzureStorage",
+              "Teradata",
+              "Oracle",
+              "SapS4Hana",
+              "SapEcc",
+              "PowerBI"
+            ],
+            "x-ms-enum": {
+              "name": "DataSourceType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SystemScanRuleset"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SystemScanRulesets_Get": {
+            "$ref": "./examples/SystemScanRulesets_Get.json"
+          }
+        }
+      }
+    },
+    "/systemScanRulesets/versions/{version}": {
+      "get": {
+        "tags": [
+          "SystemScanRulesets"
+        ],
+        "description": "Get a scan ruleset by version",
+        "operationId": "SystemScanRulesets_GetByVersion",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dataSourceType",
+            "type": "string",
+            "enum": [
+              "None",
+              "AzureSubscription",
+              "AzureResourceGroup",
+              "AzureSynapseWorkspace",
+              "AzureSynapse",
+              "AdlsGen1",
+              "AdlsGen2",
+              "AmazonAccount",
+              "AmazonS3",
+              "AmazonSql",
+              "AzureCosmosDb",
+              "AzureDataExplorer",
+              "AzureFileService",
+              "AzureSqlDatabase",
+              "AmazonPostgreSql",
+              "AzurePostgreSql",
+              "SqlServerDatabase",
+              "AzureSqlDatabaseManagedInstance",
+              "AzureSqlDataWarehouse",
+              "AzureMySql",
+              "AzureStorage",
+              "Teradata",
+              "Oracle",
+              "SapS4Hana",
+              "SapEcc",
+              "PowerBI"
+            ],
+            "x-ms-enum": {
+              "name": "DataSourceType",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SystemScanRuleset"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SystemScanRulesets_GetByVersion": {
+            "$ref": "./examples/SystemScanRulesets_GetByVersion.json"
+          }
+        }
+      }
+    },
+    "/systemScanRulesets/versions/latest": {
+      "get": {
+        "tags": [
+          "SystemScanRulesets"
+        ],
+        "description": "Get the latest version of a system scan ruleset",
+        "operationId": "SystemScanRulesets_GetLatest",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dataSourceType",
+            "type": "string",
+            "enum": [
+              "None",
+              "AzureSubscription",
+              "AzureResourceGroup",
+              "AzureSynapseWorkspace",
+              "AzureSynapse",
+              "AdlsGen1",
+              "AdlsGen2",
+              "AmazonAccount",
+              "AmazonS3",
+              "AmazonSql",
+              "AzureCosmosDb",
+              "AzureDataExplorer",
+              "AzureFileService",
+              "AzureSqlDatabase",
+              "AmazonPostgreSql",
+              "AzurePostgreSql",
+              "SqlServerDatabase",
+              "AzureSqlDatabaseManagedInstance",
+              "AzureSqlDataWarehouse",
+              "AzureMySql",
+              "AzureStorage",
+              "Teradata",
+              "Oracle",
+              "SapS4Hana",
+              "SapEcc",
+              "PowerBI"
+            ],
+            "x-ms-enum": {
+              "name": "DataSourceType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SystemScanRuleset"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SystemScanRulesets_GetLatest": {
+            "$ref": "./examples/SystemScanRulesets_GetLatest.json"
+          }
+        }
+      }
+    },
+    "/systemScanRulesets/versions": {
+      "get": {
+        "tags": [
+          "SystemScanRulesets"
+        ],
+        "description": "List system scan ruleset versions in Data catalog",
+        "operationId": "SystemScanRulesets_ListVersionsByDataSource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dataSourceType",
+            "type": "string",
+            "enum": [
+              "None",
+              "AzureSubscription",
+              "AzureResourceGroup",
+              "AzureSynapseWorkspace",
+              "AzureSynapse",
+              "AdlsGen1",
+              "AdlsGen2",
+              "AmazonAccount",
+              "AmazonS3",
+              "AmazonSql",
+              "AzureCosmosDb",
+              "AzureDataExplorer",
+              "AzureFileService",
+              "AzureSqlDatabase",
+              "AmazonPostgreSql",
+              "AzurePostgreSql",
+              "SqlServerDatabase",
+              "AzureSqlDatabaseManagedInstance",
+              "AzureSqlDataWarehouse",
+              "AzureMySql",
+              "AzureStorage",
+              "Teradata",
+              "Oracle",
+              "SapS4Hana",
+              "SapEcc",
+              "PowerBI"
+            ],
+            "x-ms-enum": {
+              "name": "DataSourceType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SystemScanRulesetList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SystemScanRulesets_ListVersionsByDataSource": {
+            "$ref": "./examples/SystemScanRulesets_ListVersionsByDataSource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans/{scanName}/triggers/default": {
+      "get": {
+        "tags": [
+          "Triggers"
+        ],
+        "description": "Gets trigger information",
+        "operationId": "Triggers_GetTrigger",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Triggers_GetTrigger": {
+            "$ref": "./examples/Triggers_GetTrigger.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Triggers"
+        ],
+        "description": "Creates an instance of a trigger",
+        "operationId": "Triggers_CreateTrigger",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Triggers_CreateTrigger": {
+            "$ref": "./examples/Triggers_CreateTrigger.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Triggers"
+        ],
+        "description": "Deletes the trigger associated with the scan",
+        "operationId": "Triggers_DeleteTrigger",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Triggers_DeleteTrigger": {
+            "$ref": "./examples/Triggers_DeleteTrigger.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureKeyVaultProperties": {
+      "type": "object",
+      "properties": {
+        "baseUrl": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "ProxyResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureKeyVault": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureKeyVaultProperties"
+            }
+          ]
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          ]
+        }
+      }
+    },
+    "AzureKeyVaultList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureKeyVault"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "ClassificationRule": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "System",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClassificationRuleType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ClassificationRuleList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationRule"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "ErrorInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorInfo"
+          }
+        }
+      }
+    },
+    "OperationResponse": {
+      "type": "object",
+      "properties": {
+        "scanResultId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "TransientFailure",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true
+          }
+        },
+        "error": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorInfo"
+            }
+          ]
+        }
+      }
+    },
+    "Notification": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ScanDiagnostics": {
+      "type": "object",
+      "properties": {
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Notification"
+          }
+        },
+        "exceptionCountMap": {
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ScanResult": {
+      "type": "object",
+      "properties": {
+        "parentId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true
+        },
+        "assetsDiscovered": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "assetsClassified": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "diagnostics": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ScanDiagnostics"
+            }
+          ],
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineStartTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "scanRulesetVersion": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "scanRulesetType": {
+          "enum": [
+            "Custom",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ScanRulesetType",
+            "modelAsString": true
+          }
+        },
+        "scanLevelType": {
+          "enum": [
+            "Full",
+            "Incremental"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ScanLevelType",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "runType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSourceType": {
+          "enum": [
+            "None",
+            "AzureSubscription",
+            "AzureResourceGroup",
+            "AzureSynapseWorkspace",
+            "AzureSynapse",
+            "AdlsGen1",
+            "AdlsGen2",
+            "AmazonAccount",
+            "AmazonS3",
+            "AmazonSql",
+            "AzureCosmosDb",
+            "AzureDataExplorer",
+            "AzureFileService",
+            "AzureSqlDatabase",
+            "AmazonPostgreSql",
+            "AzurePostgreSql",
+            "SqlServerDatabase",
+            "AzureSqlDatabaseManagedInstance",
+            "AzureSqlDataWarehouse",
+            "AzureMySql",
+            "AzureStorage",
+            "Teradata",
+            "Oracle",
+            "SapS4Hana",
+            "SapEcc",
+            "PowerBI"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Scan": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "AzureSubscriptionCredential",
+            "AzureSubscriptionMsi",
+            "AzureResourceGroupCredential",
+            "AzureResourceGroupMsi",
+            "AzureSynapseWorkspaceCredential",
+            "AzureSynapseWorkspaceMsi",
+            "AzureSynapseCredential",
+            "AzureSynapseMsi",
+            "AdlsGen1Credential",
+            "AdlsGen1Msi",
+            "AdlsGen2Credential",
+            "AdlsGen2Msi",
+            "AmazonAccountCredential",
+            "AmazonS3Credential",
+            "AmazonS3RoleARN",
+            "AmazonSqlCredential",
+            "AzureCosmosDbCredential",
+            "AzureDataExplorerCredential",
+            "AzureDataExplorerMsi",
+            "AzureFileServiceCredential",
+            "AzureSqlDatabaseCredential",
+            "AzureSqlDatabaseMsi",
+            "AmazonPostgreSqlCredential",
+            "AmazonPostgreSqlRoleARN",
+            "AzurePostgreSqlCredential",
+            "SqlServerDatabaseCredential",
+            "AzureSqlDatabaseManagedInstanceCredential",
+            "AzureSqlDatabaseManagedInstanceMsi",
+            "AzureSqlDataWarehouseCredential",
+            "AzureSqlDataWarehouseMsi",
+            "AzureMySqlCredential",
+            "AzureStorageCredential",
+            "AzureStorageMsi",
+            "TeradataTeradataCredential",
+            "TeradataTeradataUserPass",
+            "TeradataUserPass",
+            "OracleOracleCredential",
+            "OracleOracleUserPass",
+            "SapS4HanaSapS4HanaCredential",
+            "SapS4HanaSapS4HanaUserPass",
+            "SapEccSapEccCredential",
+            "SapEccSapEccUserPass",
+            "PowerBIDelegated",
+            "PowerBIMsi"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScanAuthorizationType",
+            "modelAsString": true
+          }
+        },
+        "scanResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanResult"
+          },
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind"
+    },
+    "DataSource": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "None",
+            "AzureSubscription",
+            "AzureResourceGroup",
+            "AzureSynapseWorkspace",
+            "AzureSynapse",
+            "AdlsGen1",
+            "AdlsGen2",
+            "AmazonAccount",
+            "AmazonS3",
+            "AmazonSql",
+            "AzureCosmosDb",
+            "AzureDataExplorer",
+            "AzureFileService",
+            "AzureSqlDatabase",
+            "AmazonPostgreSql",
+            "AzurePostgreSql",
+            "SqlServerDatabase",
+            "AzureSqlDatabaseManagedInstance",
+            "AzureSqlDataWarehouse",
+            "AzureMySql",
+            "AzureStorage",
+            "Teradata",
+            "Oracle",
+            "SapS4Hana",
+            "SapEcc",
+            "PowerBI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        },
+        "scans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Scan"
+          },
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind"
+    },
+    "DataSourceList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "FilterProperties": {
+      "type": "object",
+      "properties": {
+        "excludeUriPrefixes": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includeUriPrefixes": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Filter": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FilterProperties"
+            }
+          ]
+        }
+      }
+    },
+    "ScanList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Scan"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "ScanHistoryList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanResult"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "VersionedScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "scanRulesetType": {
+          "enum": [
+            "Custom",
+            "System"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScanRulesetType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ScanRulesetStatus",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ScanRuleset": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VersionedScanRuleset"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "None",
+            "AzureSubscription",
+            "AzureResourceGroup",
+            "AzureSynapseWorkspace",
+            "AzureSynapse",
+            "AdlsGen1",
+            "AdlsGen2",
+            "AmazonAccount",
+            "AmazonS3",
+            "AmazonSql",
+            "AzureCosmosDb",
+            "AzureDataExplorer",
+            "AzureFileService",
+            "AzureSqlDatabase",
+            "AmazonPostgreSql",
+            "AzurePostgreSql",
+            "SqlServerDatabase",
+            "AzureSqlDatabaseManagedInstance",
+            "AzureSqlDataWarehouse",
+            "AzureMySql",
+            "AzureStorage",
+            "Teradata",
+            "Oracle",
+            "SapS4Hana",
+            "SapEcc",
+            "PowerBI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ScanRulesetList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanRuleset"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "SystemScanRuleset": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VersionedScanRuleset"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "None",
+            "AzureSubscription",
+            "AzureResourceGroup",
+            "AzureSynapseWorkspace",
+            "AzureSynapse",
+            "AdlsGen1",
+            "AdlsGen2",
+            "AmazonAccount",
+            "AmazonS3",
+            "AmazonSql",
+            "AzureCosmosDb",
+            "AzureDataExplorer",
+            "AzureFileService",
+            "AzureSqlDatabase",
+            "AmazonPostgreSql",
+            "AzurePostgreSql",
+            "SqlServerDatabase",
+            "AzureSqlDatabaseManagedInstance",
+            "AzureSqlDataWarehouse",
+            "AzureMySql",
+            "AzureStorage",
+            "Teradata",
+            "Oracle",
+            "SapS4Hana",
+            "SapEcc",
+            "PowerBI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "SystemScanRulesetList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SystemScanRuleset"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "RecurrenceScheduleOccurrence": {
+      "type": "object",
+      "properties": {
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "day": {
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "occurrence": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "RecurrenceSchedule": {
+      "type": "object",
+      "properties": {
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "minutes": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "hours": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DaysOfWeek",
+              "modelAsString": true
+            }
+          }
+        },
+        "monthDays": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecurrenceScheduleOccurrence"
+          }
+        }
+      }
+    },
+    "TriggerRecurrence": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "enum": [
+            "Week",
+            "Month"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerFrequency",
+            "modelAsString": true
+          }
+        },
+        "interval": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "schedule": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/RecurrenceSchedule"
+            }
+          ]
+        },
+        "timeZone": {
+          "type": "string"
+        }
+      }
+    },
+    "TriggerProperties": {
+      "type": "object",
+      "properties": {
+        "recurrence": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TriggerRecurrence"
+            }
+          ]
+        },
+        "recurrenceInterval": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastScheduled": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "scanLevel": {
+          "enum": [
+            "Full",
+            "Incremental"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScanLevelType",
+            "modelAsString": true
+          }
+        },
+        "incrementalScanStartTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "Trigger": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TriggerProperties"
+            }
+          ]
+        }
+      }
+    },
+    "CollectionReference": {
+      "type": "object",
+      "properties": {
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "referenceName": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "SystemClassificationRuleProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "classificationName": {
+          "type": "string"
+        },
+        "ruleStatus": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClassificationRuleStatus",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SystemClassificationRule": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClassificationRule"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemClassificationRuleProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "System"
+    },
+    "ClassificationRulePattern": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "Regex"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClassificationRulePatternType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "CustomClassificationRuleProperties": {
+      "type": "object",
+      "properties": {
+        "minimumPercentageMatch": {
+          "format": "double",
+          "type": "number"
+        },
+        "classificationAction": {
+          "enum": [
+            "Keep",
+            "Delete"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ClassificationAction",
+            "modelAsString": true
+          }
+        },
+        "dataPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationRulePattern"
+          }
+        },
+        "columnPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationRulePattern"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "classificationName": {
+          "type": "string"
+        },
+        "ruleStatus": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClassificationRuleStatus",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomClassificationRule": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClassificationRule"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomClassificationRuleProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Custom"
+    },
+    "RegexClassificationRulePattern": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClassificationRulePattern"
+        }
+      ],
+      "properties": {
+        "pattern": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Regex"
+    },
+    "DataSourceProperties": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "collection": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CollectionReference"
+            }
+          ]
+        }
+      }
+    },
+    "AzureSubscriptionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "subscriptionId": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureSubscriptionDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSubscriptionProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSubscription"
+    },
+    "AzureResourceGroupProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "subscriptionId": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureResourceGroupDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureResourceGroupProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureResourceGroup"
+    },
+    "AzureDataSourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "resourceGroup": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "resourceName": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureSynapseWorkspaceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "dedicatedSqlEndpoint": {
+          "type": "string"
+        },
+        "serverlessSqlEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureSynapseWorkspaceDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseWorkspaceProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSynapseWorkspace"
+    },
+    "AzureSynapseProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "sqlEndpoint": {
+          "type": "string"
+        },
+        "sqlOnDemandEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureSynapseDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSynapse"
+    },
+    "AdlsGen1Properties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AdlsGen1DataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen1Properties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen1"
+    },
+    "AdlsGen2Properties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AdlsGen2DataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen2Properties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2"
+    },
+    "AmazonAccountProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "awsAccountId": {
+          "type": "string"
+        },
+        "roleARN": {
+          "type": "string"
+        }
+      }
+    },
+    "AmazonAccountDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonAccountProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonAccount"
+    },
+    "AmazonS3Properties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "serviceUrl": {
+          "type": "string"
+        },
+        "roleARN": {
+          "type": "string"
+        }
+      }
+    },
+    "AmazonS3DataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonS3Properties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonS3"
+    },
+    "AmazonSqlProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "vpcEndpointServiceName": {
+          "type": "string"
+        }
+      }
+    },
+    "AmazonSqlDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonSqlProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonSql"
+    },
+    "AzureCosmosDbProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "accountUri": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureCosmosDbDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureCosmosDbProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureCosmosDb"
+    },
+    "AzureDataExplorerProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataExplorerDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureDataExplorerProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataExplorer"
+    },
+    "AzureFileServiceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureFileServiceDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureFileServiceProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureFileService"
+    },
+    "AzureSqlDatabaseProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureSqlDatabaseDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDatabase"
+    },
+    "AmazonPostgreSqlProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "vpcEndpointServiceName": {
+          "type": "string"
+        }
+      }
+    },
+    "AmazonPostgreSqlDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonPostgreSqlProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonPostgreSql"
+    },
+    "AzurePostgreSqlProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "AzurePostgreSqlDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzurePostgreSqlProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzurePostgreSql"
+    },
+    "SqlServerDatabaseProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "SqlServerDatabaseDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlServerDatabaseProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SqlServerDatabase"
+    },
+    "AzureSqlDatabaseManagedInstanceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureSqlDatabaseManagedInstanceDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstance"
+    },
+    "AzureSqlDataWarehouseProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureSqlDataWarehouseDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDataWarehouseProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDataWarehouse"
+    },
+    "AzureMySqlProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "AzureMySqlDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureMySqlProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureMySql"
+    },
+    "AzureStorageProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureStorageDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureStorageProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureStorage"
+    },
+    "TeradataProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "host": {
+          "type": "string"
+        }
+      }
+    },
+    "TeradataDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TeradataProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Teradata"
+    },
+    "OracleProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "OracleDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OracleProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Oracle"
+    },
+    "SapS4HanaProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "applicationServer": {
+          "type": "string"
+        },
+        "systemNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "SapS4HanaDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapS4HanaProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SapS4Hana"
+    },
+    "SapEccProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "applicationServer": {
+          "type": "string"
+        },
+        "systemNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "SapEccDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapEccProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SapEcc"
+    },
+    "PowerBIProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "properties": {
+        "tenant": {
+          "type": "string"
+        }
+      }
+    },
+    "PowerBIDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PowerBIProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "PowerBI"
+    },
+    "ScanRulesetProperties": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string"
+        },
+        "excludedSystemClassifications": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedCustomClassificationRuleNames": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureSubscriptionScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureSubscriptionScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSubscription"
+    },
+    "AzureResourceGroupScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureResourceGroupScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureResourceGroup"
+    },
+    "AzureSynapseWorkspaceScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureSynapseWorkspaceScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseWorkspaceScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSynapseWorkspace"
+    },
+    "AzureSynapseScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureSynapseScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSynapse"
+    },
+    "CustomFileType": {
+      "type": "object",
+      "properties": {
+        "builtInType": {
+          "enum": [
+            "AVRO",
+            "ORC",
+            "PARQUET",
+            "JSON",
+            "TXT",
+            "XML",
+            "Documents",
+            "CSV",
+            "PSV",
+            "SSV",
+            "TSV",
+            "GZ",
+            "DOC",
+            "DOCM",
+            "DOCX",
+            "DOT",
+            "ODP",
+            "ODS",
+            "ODT",
+            "PDF",
+            "POT",
+            "PPS",
+            "PPSX",
+            "PPT",
+            "PPTM",
+            "PPTX",
+            "XLC",
+            "XLS",
+            "XLSB",
+            "XLSM",
+            "XLSX",
+            "XLT"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FileExtensionsType",
+            "modelAsString": true
+          }
+        },
+        "customDelimiter": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomFileExtension": {
+      "type": "object",
+      "properties": {
+        "customFileType": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomFileType"
+            }
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "fileExtension": {
+          "type": "string"
+        }
+      }
+    },
+    "ScanningRule": {
+      "type": "object",
+      "properties": {
+        "fileExtensions": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "enum": [
+              "AVRO",
+              "ORC",
+              "PARQUET",
+              "JSON",
+              "TXT",
+              "XML",
+              "Documents",
+              "CSV",
+              "PSV",
+              "SSV",
+              "TSV",
+              "GZ",
+              "DOC",
+              "DOCM",
+              "DOCX",
+              "DOT",
+              "ODP",
+              "ODS",
+              "ODT",
+              "PDF",
+              "POT",
+              "PPS",
+              "PPSX",
+              "PPT",
+              "PPTM",
+              "PPTX",
+              "XLC",
+              "XLS",
+              "XLSB",
+              "XLSM",
+              "XLSX",
+              "XLT"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "FileExtensionsType",
+              "modelAsString": true
+            }
+          }
+        },
+        "customFileExtensions": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomFileExtension"
+          }
+        }
+      }
+    },
+    "ScanningRuleScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ],
+      "properties": {
+        "scanningRule": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ScanningRule"
+            }
+          ]
+        }
+      }
+    },
+    "AdlsGen1ScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
+        }
+      ]
+    },
+    "AdlsGen1ScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen1ScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen1"
+    },
+    "AdlsGen2ScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
+        }
+      ]
+    },
+    "AdlsGen2ScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen2ScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2"
+    },
+    "AmazonAccountScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AmazonAccountScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonAccountScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonAccount"
+    },
+    "AmazonS3ScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
+        }
+      ]
+    },
+    "AmazonS3ScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonS3ScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonS3"
+    },
+    "AmazonSqlScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AmazonSqlScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonSqlScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonSql"
+    },
+    "AzureCosmosDbScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureCosmosDbScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureCosmosDbScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureCosmosDb"
+    },
+    "AzureDataExplorerScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureDataExplorerScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureDataExplorerScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataExplorer"
+    },
+    "AzureFileServiceScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureFileServiceScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureFileServiceScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureFileService"
+    },
+    "AzureSqlDatabaseScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureSqlDatabaseScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDatabase"
+    },
+    "AmazonPostgreSqlScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AmazonPostgreSqlScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonPostgreSqlScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonPostgreSql"
+    },
+    "AzurePostgreSqlScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzurePostgreSqlScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzurePostgreSqlScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzurePostgreSql"
+    },
+    "SqlServerDatabaseScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "SqlServerDatabaseScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlServerDatabaseScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SqlServerDatabase"
+    },
+    "AzureSqlDatabaseManagedInstanceScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureSqlDatabaseManagedInstanceScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstance"
+    },
+    "AzureSqlDataWarehouseScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureSqlDataWarehouseScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDataWarehouseScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDataWarehouse"
+    },
+    "AzureMySqlScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureMySqlScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureMySqlScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureMySql"
+    },
+    "AzureStorageScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
+        }
+      ]
+    },
+    "AzureStorageScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureStorageScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureStorage"
+    },
+    "TeradataScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "TeradataScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TeradataScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Teradata"
+    },
+    "OracleScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "OracleScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OracleScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Oracle"
+    },
+    "SapS4HanaScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "SapS4HanaScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapS4HanaScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SapS4Hana"
+    },
+    "SapEccScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "SapEccScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapEccScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SapEcc"
+    },
+    "PowerBIScanRulesetProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRulesetProperties"
+        }
+      ]
+    },
+    "PowerBIScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PowerBIScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "PowerBI"
+    },
+    "ResourceNameFilter": {
+      "type": "object",
+      "properties": {
+        "excludePrefixes": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includePrefixes": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CredentialReference": {
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "type": "string"
+        },
+        "credentialType": {
+          "enum": [
+            "AccountKey",
+            "ServicePrincipal",
+            "BasicAuth",
+            "SqlAuth",
+            "AmazonARN"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ResourceTypeFilter": {
+      "type": "object",
+      "properties": {
+        "scanRulesetName": {
+          "type": "string"
+        },
+        "scanRulesetType": {
+          "enum": [
+            "Custom",
+            "System"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScanRulesetType",
+            "modelAsString": true
+          }
+        },
+        "resourceNameFilter": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceNameFilter"
+            }
+          ]
+        },
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        }
+      }
+    },
+    "ConnectedVia": {
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "type": "string"
+        }
+      }
+    },
+    "ScanProperties": {
+      "type": "object",
+      "properties": {
+        "scanRulesetName": {
+          "type": "string"
+        },
+        "scanRulesetType": {
+          "enum": [
+            "Custom",
+            "System"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScanRulesetType",
+            "modelAsString": true
+          }
+        },
+        "collection": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CollectionReference"
+            }
+          ]
+        },
+        "workers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectedVia": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConnectedVia"
+            }
+          ]
+        }
+      }
+    },
+    "ExpandingResourceScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "resourceTypes": {
+          "type": "object",
+          "properties": {
+            "None": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureSubscription": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureResourceGroup": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureSynapseWorkspace": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureSynapse": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AdlsGen1": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AdlsGen2": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AmazonAccount": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AmazonS3": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AmazonSql": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureCosmosDb": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureDataExplorer": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureFileService": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureSqlDatabase": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AmazonPostgreSql": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzurePostgreSql": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "SqlServerDatabase": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureSqlDatabaseManagedInstance": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureSqlDataWarehouse": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureMySql": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "AzureStorage": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "Teradata": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "Oracle": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "SapS4Hana": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "SapEcc": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            },
+            "PowerBI": {
+              "$ref": "#/definitions/ResourceTypeFilter"
+            }
+          }
+        },
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        }
+      }
+    },
+    "AzureSubscriptionCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpandingResourceScanProperties"
+        }
+      ]
+    },
+    "AzureSubscriptionCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSubscriptionCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSubscriptionCredential"
+    },
+    "AzureSubscriptionMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpandingResourceScanProperties"
+        }
+      ]
+    },
+    "AzureSubscriptionMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSubscriptionMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSubscriptionMsi"
+    },
+    "AzureResourceGroupCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpandingResourceScanProperties"
+        }
+      ]
+    },
+    "AzureResourceGroupCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureResourceGroupCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureResourceGroupCredential"
+    },
+    "AzureResourceGroupMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpandingResourceScanProperties"
+        }
+      ]
+    },
+    "AzureResourceGroupMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureResourceGroupMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureResourceGroupMsi"
+    },
+    "AzureSynapseWorkspaceCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpandingResourceScanProperties"
+        }
+      ]
+    },
+    "AzureSynapseWorkspaceCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseWorkspaceCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSynapseWorkspaceCredential"
+    },
+    "AzureSynapseWorkspaceMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpandingResourceScanProperties"
+        }
+      ]
+    },
+    "AzureSynapseWorkspaceMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseWorkspaceMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSynapseWorkspaceMsi"
+    },
+    "AzureSynapseCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpandingResourceScanProperties"
+        }
+      ]
+    },
+    "AzureSynapseCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSynapseCredential"
+    },
+    "AzureSynapseMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpandingResourceScanProperties"
+        }
+      ]
+    },
+    "AzureSynapseMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSynapseMsi"
+    },
+    "AdlsGen1CredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        }
+      }
+    },
+    "AdlsGen1CredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen1CredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen1Credential"
+    },
+    "AdlsGen1MsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ]
+    },
+    "AdlsGen1MsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen1MsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen1Msi"
+    },
+    "AdlsGen2CredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        }
+      }
+    },
+    "AdlsGen2CredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen2CredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2Credential"
+    },
+    "AdlsGen2MsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ]
+    },
+    "AdlsGen2MsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen2MsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2Msi"
+    },
+    "AmazonAccountCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpandingResourceScanProperties"
+        }
+      ]
+    },
+    "AmazonAccountCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonAccountCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonAccountCredential"
+    },
+    "AmazonS3CredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "roleARN": {
+          "type": "string"
+        },
+        "isMauiScan": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AmazonS3CredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonS3CredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonS3Credential"
+    },
+    "AmazonS3RoleARNScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "roleARN": {
+          "type": "string"
+        },
+        "isMauiScan": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AmazonS3RoleARNScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonS3RoleARNScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonS3RoleARN"
+    },
+    "AmazonSqlCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "vpcEndpointServiceName": {
+          "type": "string"
+        }
+      }
+    },
+    "AmazonSqlCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonSqlCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonSqlCredential"
+    },
+    "AzureCosmosDbCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "databaseName": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureCosmosDbCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureCosmosDbCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureCosmosDbCredential"
+    },
+    "AzureDataExplorerCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "database": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataExplorerCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureDataExplorerCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataExplorerCredential"
+    },
+    "AzureDataExplorerMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "database": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataExplorerMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureDataExplorerMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataExplorerMsi"
+    },
+    "AzureFileServiceCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "shareName": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureFileServiceCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureFileServiceCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureFileServiceCredential"
+    },
+    "AzureSqlScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureSqlCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        }
+      }
+    },
+    "AzureSqlDatabaseCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlCredentialScanProperties"
+        }
+      ]
+    },
+    "AzureSqlDatabaseCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDatabaseCredential"
+    },
+    "AzureSqlDatabaseMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlScanProperties"
+        }
+      ]
+    },
+    "AzureSqlDatabaseMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDatabaseMsi"
+    },
+    "AmazonPostgreSqlCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "vpcEndpointServiceName": {
+          "type": "string"
+        }
+      }
+    },
+    "AmazonPostgreSqlCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonPostgreSqlCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonPostgreSqlCredential"
+    },
+    "AmazonPostgreSqlRoleARNScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "vpcEndpointServiceName": {
+          "type": "string"
+        }
+      }
+    },
+    "AmazonPostgreSqlRoleARNScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonPostgreSqlRoleARNScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AmazonPostgreSqlRoleARN"
+    },
+    "AzurePostgreSqlCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sslMode": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "AzurePostgreSqlCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzurePostgreSqlCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzurePostgreSqlCredential"
+    },
+    "SqlServerDatabaseCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlCredentialScanProperties"
+        }
+      ]
+    },
+    "SqlServerDatabaseCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlServerDatabaseCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SqlServerDatabaseCredential"
+    },
+    "AzureSqlDatabaseManagedInstanceCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlCredentialScanProperties"
+        }
+      ]
+    },
+    "AzureSqlDatabaseManagedInstanceCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstanceCredential"
+    },
+    "AzureSqlDatabaseManagedInstanceMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlScanProperties"
+        }
+      ]
+    },
+    "AzureSqlDatabaseManagedInstanceMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstanceMsi"
+    },
+    "AzureSqlDataWarehouseCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlCredentialScanProperties"
+        }
+      ]
+    },
+    "AzureSqlDataWarehouseCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDataWarehouseCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDataWarehouseCredential"
+    },
+    "AzureSqlDataWarehouseMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlScanProperties"
+        }
+      ]
+    },
+    "AzureSqlDataWarehouseMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDataWarehouseMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureSqlDataWarehouseMsi"
+    },
+    "AzureMySqlScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "serverEndpoint": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "databaseName": {
+          "type": "string"
+        },
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        }
+      }
+    },
+    "AzureMySqlCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureMySqlScanProperties"
+        }
+      ]
+    },
+    "AzureMySqlCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureMySqlCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureMySqlCredential"
+    },
+    "MitiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "maximumMemoryAllowedInGb": {
+          "type": "string"
+        },
+        "mitiCache": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureStorageCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        }
+      }
+    },
+    "AzureStorageCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureStorageCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureStorageCredential"
+    },
+    "AzureStorageMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ]
+    },
+    "AzureStorageMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureStorageMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzureStorageMsi"
+    },
+    "TeradataTeradataCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MitiScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "schema": {
+          "type": "string"
+        },
+        "driverLocation": {
+          "type": "string"
+        }
+      }
+    },
+    "TeradataTeradataCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TeradataTeradataCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "TeradataTeradataCredential"
+    },
+    "TeradataUserPassScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "TeradataUserPassScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TeradataUserPassScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "TeradataUserPass"
+    },
+    "TeradataTeradataUserPassScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MitiScanProperties"
+        }
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "driverLocation": {
+          "type": "string"
+        }
+      }
+    },
+    "TeradataTeradataUserPassScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TeradataTeradataUserPassScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "TeradataTeradataUserPass"
+    },
+    "OracleOracleCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MitiScanProperties"
+        }
+      ],
+      "properties": {
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "schema": {
+          "type": "string"
+        },
+        "driverLocation": {
+          "type": "string"
+        }
+      }
+    },
+    "OracleOracleCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OracleOracleCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "OracleOracleCredential"
+    },
+    "OracleOracleUserPassScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MitiScanProperties"
+        }
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "driverLocation": {
+          "type": "string"
+        }
+      }
+    },
+    "OracleOracleUserPassScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OracleOracleUserPassScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "OracleOracleUserPass"
+    },
+    "SapS4HanaSapS4HanaCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MitiScanProperties"
+        }
+      ],
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "jCoLibraryPath": {
+          "type": "string"
+        }
+      }
+    },
+    "SapS4HanaSapS4HanaCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapS4HanaSapS4HanaCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SapS4HanaSapS4HanaCredential"
+    },
+    "SapS4HanaSapS4HanaUserPassScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MitiScanProperties"
+        }
+      ],
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "jCoLibraryPath": {
+          "type": "string"
+        }
+      }
+    },
+    "SapS4HanaSapS4HanaUserPassScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapS4HanaSapS4HanaUserPassScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SapS4HanaSapS4HanaUserPass"
+    },
+    "SapEccSapEccCredentialScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MitiScanProperties"
+        }
+      ],
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "credential": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        },
+        "jCoLibraryPath": {
+          "type": "string"
+        }
+      }
+    },
+    "SapEccSapEccCredentialScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapEccSapEccCredentialScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SapEccSapEccCredential"
+    },
+    "SapEccSapEccUserPassScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MitiScanProperties"
+        }
+      ],
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "jCoLibraryPath": {
+          "type": "string"
+        }
+      }
+    },
+    "SapEccSapEccUserPassScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapEccSapEccUserPassScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SapEccSapEccUserPass"
+    },
+    "PowerBIDelegatedScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "tenant": {
+          "type": "string"
+        },
+        "authenticationType": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "includePersonalWorkspaces": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PowerBIDelegatedScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PowerBIDelegatedScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "PowerBIDelegated"
+    },
+    "PowerBIMsiScanProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScanProperties"
+        }
+      ],
+      "properties": {
+        "includePersonalWorkspaces": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PowerBIMsiScan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scan"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PowerBIMsiScanProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "PowerBIMsi"
+    },
+    "AzureSubscriptionSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureResourceGroupSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureSynapseWorkspaceSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseWorkspaceScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureSynapseSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSynapseScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AdlsGen1SystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen1ScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AdlsGen2SystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdlsGen2ScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AmazonAccountSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonAccountScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AmazonS3SystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonS3ScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AmazonSqlSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonSqlScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureCosmosDbSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureCosmosDbScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureDataExplorerSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureDataExplorerScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureFileServiceSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureFileServiceScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureSqlDatabaseSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AmazonPostgreSqlSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AmazonPostgreSqlScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzurePostgreSqlSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzurePostgreSqlScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "SqlServerDatabaseSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlServerDatabaseScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureSqlDatabaseManagedInstanceSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureSqlDataWarehouseSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDataWarehouseScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureMySqlSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureMySqlScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "AzureStorageSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureStorageScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "TeradataSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TeradataScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "OracleSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OracleScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "SapS4HanaSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapS4HanaScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "SapEccSystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SapEccScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    },
+    "PowerBISystemScanRuleset": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemScanRuleset"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PowerBIScanRulesetProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "None"
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  }
+}

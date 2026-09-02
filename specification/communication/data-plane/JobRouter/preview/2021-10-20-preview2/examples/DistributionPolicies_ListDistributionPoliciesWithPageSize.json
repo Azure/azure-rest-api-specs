@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2021-10-20_preview2",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "SecondaryDistributionPolicy",
+            "name": "Secondary",
+            "offerTtlSeconds": 300,
+            "mode": {
+              "kind": "round-robin",
+              "minConcurrentOffers": 1,
+              "maxConcurrentOffers": 2,
+              "bypassSelectors": false
+            }
+          },
+          {
+            "id": "MainDistributionPolicy",
+            "name": "Main",
+            "offerTtlSeconds": 300,
+            "mode": {
+              "kind": "longest-idle",
+              "minConcurrentOffers": 1,
+              "maxConcurrentOffers": 5,
+              "bypassSelectors": false
+            }
+          }
+        ],
+        "nextLink": "null"
+      }
+    }
+  }
+}

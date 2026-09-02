@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "netsdktestrg",
+    "vaultName": "testVault",
+    "api-version": "2024-07-30-preview",
+    "parameters": {
+      "objectType": "FetchTieringCostInfoForRehydrationRequest",
+      "containerName": "IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+      "protectedItemName": "VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+      "recoveryPointId": "1222343434",
+      "rehydrationPriority": "High",
+      "sourceTierType": "ArchivedRP",
+      "targetTierType": "HardenedRP"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "objectType": "TieringCostRehydrationInfo",
+        "rehydrationSizeInBytes": 1204000,
+        "retailRehydrationCostPerGBPerMonth": 0.02
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupTieringCost/default/operationResults/00000000-0000-0000-0000-000000000000?api-version=2024-07-30-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupTieringCost/default/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2024-07-30-preview",
+        "Retry-After": 60
+      }
+    }
+  }
+}

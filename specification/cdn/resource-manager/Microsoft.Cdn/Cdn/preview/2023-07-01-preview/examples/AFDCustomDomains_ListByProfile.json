@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/domain1",
+            "name": "domain1",
+            "type": "Microsoft.Cdn/profiles/customdomains",
+            "properties": {
+              "profileName": "profile1",
+              "hostName": "www.contoso.com",
+              "tlsSettings": {
+                "certificateType": "ManagedCertificate",
+                "minimumTlsVersion": "TLS12",
+                "secret": {
+                  "id": ""
+                }
+              },
+              "azureDnsZone": {
+                "id": ""
+              },
+              "preValidatedCustomDomainResourceId": {
+                "id": ""
+              },
+              "validationProperties": {
+                "validationToken": "8c9912db-c615-4eeb-8465",
+                "expirationDate": "2009-06-15T13:45:43.0000000Z"
+              },
+              "domainValidationState": "Pending",
+              "provisioningState": "Updating",
+              "deploymentStatus": "NotStarted"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

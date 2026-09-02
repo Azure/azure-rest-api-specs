@@ -1,0 +1,41 @@
+{
+  "title": "Retrieves an existing worker by Id",
+  "operationId": "JobRouterOperations_GetWorker",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "workerId": "DefaultWorker"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "DefaultWorker",
+        "state": "active",
+        "queues": [
+          "MainQueue",
+          "SecondaryQueue"
+        ],
+        "capacity": 100,
+        "labels": {},
+        "tags": {},
+        "channels": [
+          {
+            "channelId": "CustomChatChannel",
+            "capacityCostPerJob": 10,
+            "maxNumberOfJobs": 4
+          },
+          {
+            "channelId": "CustomVoiceChannel",
+            "capacityCostPerJob": 100,
+            "maxNumberOfJobs": 1
+          }
+        ],
+        "offers": [],
+        "assignedJobs": [],
+        "loadRatio": 0,
+        "availableForOffers": true,
+        "etag": "etag"
+      }
+    }
+  }
+}

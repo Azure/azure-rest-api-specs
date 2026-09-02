@@ -1,0 +1,38 @@
+{
+  "operationId": "GetCompletions",
+  "title": "Creates a completion for the provided prompt, parameters and chosen model.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-08-01-preview",
+    "deployment-id": "<deployment-id>",
+    "body": {
+      "prompt": [
+        "tell me a joke about mango"
+      ],
+      "max_tokens": 32,
+      "temperature": 1.0,
+      "n": 1
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "cmpl-7QmVI15qgYVllxK0FtxVGG6ywfzaq",
+        "created": 1686617332,
+        "choices": [
+          {
+            "text": "es\n\nWhat do you call a mango who's in charge?\n\nThe head mango.",
+            "index": 0,
+            "finish_reason": "stop",
+            "logprobs": null
+          }
+        ],
+        "usage": {
+          "completion_tokens": 20,
+          "prompt_tokens": 6,
+          "total_tokens": 26
+        }
+      }
+    }
+  }
+}

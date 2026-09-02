@@ -1,0 +1,459 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on OpenId Connect Provider entity associated with your Azure API Management deployment. API Management allows you to access APIs secured with token from [OpenID Connect Provider ](http://openid.net/connect/) to be accessed from the Developer Console.",
+    "version": "2018-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders": {
+      "get": {
+        "tags": [
+          "OpenIdConnectProviders"
+        ],
+        "operationId": "OpenIdConnectProvider_ListByService",
+        "description": "Lists all OpenID Connect Providers.",
+        "x-ms-examples": {
+          "ApiManagementListOpenIdConnectProviders": {
+            "$ref": "./examples/ApiManagementListOpenIdConnectProviders.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists of all the OpenId Connect Providers.",
+            "schema": {
+              "$ref": "#/definitions/OpenIdConnectProviderCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/OpenidConnectProviderContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}": {
+      "head": {
+        "tags": [
+          "OpenIdConnectProviders"
+        ],
+        "operationId": "OpenIdConnectProvider_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadOpenIdConnectProvider": {
+            "$ref": "./examples/ApiManagementHeadOpenIdConnectProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OpenIdConnectIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified openidConnectProvider entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OpenIdConnectProviders"
+        ],
+        "operationId": "OpenIdConnectProvider_Get",
+        "description": "Gets specific OpenID Connect Provider.",
+        "x-ms-examples": {
+          "ApiManagementGetOpenIdConnectProvider": {
+            "$ref": "./examples/ApiManagementGetOpenIdConnectProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OpenIdConnectIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified OpenId Connect Provider entity.",
+            "schema": {
+              "$ref": "#/definitions/OpenidConnectProviderContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OpenIdConnectProviders"
+        ],
+        "operationId": "OpenIdConnectProvider_CreateOrUpdate",
+        "description": "Creates or updates the OpenID Connect Provider.",
+        "x-ms-examples": {
+          "ApiManagementCreateOpenIdConnectProvider": {
+            "$ref": "./examples/ApiManagementCreateOpenIdConnectProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OpenIdConnectIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenidConnectProviderContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OpenIdConnect Provider was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/OpenidConnectProviderContract"
+            }
+          },
+          "200": {
+            "description": "OpenIdConnect Provider was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/OpenidConnectProviderContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OpenIdConnectProviders"
+        ],
+        "operationId": "OpenIdConnectProvider_Update",
+        "description": "Updates the specific OpenID Connect Provider.",
+        "x-ms-examples": {
+          "ApiManagementUpdateOpenIdConnectProvider": {
+            "$ref": "./examples/ApiManagementUpdateOpenIdConnectProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OpenIdConnectIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenidConnectProviderUpdateContract"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OpenId Connect Provider was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OpenIdConnectProviders"
+        ],
+        "operationId": "OpenIdConnectProvider_Delete",
+        "description": "Deletes specific OpenID Connect Provider of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementDeleteOpenIdConnectProvider": {
+            "$ref": "./examples/ApiManagementDeleteOpenIdConnectProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OpenIdConnectIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OpenId Connect Provider was successfully deleted."
+          },
+          "204": {
+            "description": "OpenId Connect Provider was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OpenIdConnectProviderCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenidConnectProviderContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged OpenIdProviders list representation."
+    },
+    "OpenidConnectProviderContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OpenidConnectProviderContractProperties",
+          "description": "OpenId Connect Provider contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "OpenId Connect Provider details."
+    },
+    "OpenidConnectProviderContractProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "User-friendly OpenID Connect Provider name.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "User-friendly description of OpenID Connect Provider."
+        },
+        "metadataEndpoint": {
+          "type": "string",
+          "description": "Metadata endpoint URI."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client Secret of developer console which is the client application."
+        }
+      },
+      "required": [
+        "displayName",
+        "metadataEndpoint",
+        "clientId"
+      ],
+      "description": "OpenID Connect Providers Contract."
+    },
+    "OpenidConnectProviderUpdateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OpenidConnectProviderUpdateContractProperties",
+          "description": "OpenId Connect Provider Update contract properties."
+        }
+      },
+      "description": "Parameters supplied to the Update OpenID Connect Provider operation."
+    },
+    "OpenidConnectProviderUpdateContractProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "User-friendly OpenID Connect Provider name.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "User-friendly description of OpenID Connect Provider."
+        },
+        "metadataEndpoint": {
+          "type": "string",
+          "description": "Metadata endpoint URI."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client Secret of developer console which is the client application."
+        }
+      },
+      "description": "Parameters supplied to the Update OpenID Connect Provider operation."
+    }
+  },
+  "parameters": {
+    "OpenIdConnectIdParameter": {
+      "name": "opid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the OpenID Connect Provider.",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

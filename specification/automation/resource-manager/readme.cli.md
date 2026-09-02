@@ -1,0 +1,178 @@
+## CLI
+
+These settings apply only when `--cli` is specified on the command line.
+
+``` yaml $(cli)
+cli:
+  cli-name: automation
+  package-name: azure-mgmt-automation
+  namespace: azure.mgmt.automation
+  test-scenario:
+    - name: Create or update automation account
+    - name: Create job
+    - name: Create or update a module
+    - name: Create or update webhook
+    - name: Create runbook as draft
+    - name: Create or update runbook and publish it
+    - name: Create or update watcher
+    - name: Create or update a schedule
+    - name: Create or update a variable
+    - name: Create a credential
+    - name: Create or update connection
+    - name: Create or update a certificate
+    - name: Create a job schedule
+    - name: Create or Update Configuration
+    - name: Create or update a source control
+    - name: Create or update a python 2 package
+    - name: Create or update a DSC Compilation job
+    - name: Create or update connection type
+    - name: Create node configuration
+    - name: Create or update runbook draft
+    - name: Create test job
+    - name: Create software update configuration
+    - name: Create or update a source control sync job
+    - name: Get a sync job stream identified by sync job stream id.
+    - name: Get a list of sync job streams identified by sync job id
+    - name: Get a source control sync job by job id
+    - name: Get software update configuration machine run
+    - name: Get test job stream
+    - name: Get software update configuration runs by Id
+    - name: Get a list of fields of a given type
+    - name: Get software update configuration by name
+    - name: Get a DSC Compilation job stream by job stream id
+    - name: Get a hybrid worker group
+    - name: Get a list of source control sync jobs
+    - name: List job streams by job name
+    - name: Get Activity in a module
+    - name: Get content of node
+    - name: Get a list of fields of a given type
+    - name: Get a list of fields of a given type across all accessible modules
+    - name: Get runbook draft content
+    - name: Get test job
+    - name: List DSC Compilation job streams
+    - name: Get a DSC node configuration
+    - name: Get DSC Configuration content
+    - name: Get Dsc node report data by node id and report id.
+    - name: Get job stream
+    - name: Get connection type
+    - name: Get a DSC Compilation job
+    - name: Get a python 2 package
+    - name: Get a source control
+    - name: Get a DSC Configuration
+    - name: List software update configuration machine runs for a specific software update configuration run
+    - name: List software update configuration machine runs
+    - name: List activities by a module
+    - name: Get a job schedule
+    - name: Get runbook content
+    - name: Get a certificate
+    - name: Get Job Runbook Content
+    - name: Get runbook draft
+    - name: Get a connection
+    - name: Get a credential
+    - name: Get node's status counts
+    - name: Get node's node configuration counts
+    - name: List software update configuration machine run with status equal to 'Failed'
+    - name: List software update configuration machine runs
+    - name: List DSC reports by node id.
+    - name: Get a variable
+    - name: Get a schedule
+    - name: Get the agent registration information
+    - name: List software update configurations Targeting a specific azure virtual machine
+    - name: List software update configurations
+    - name: Get runbook
+    - name: List job streams by job name
+    - name: Get watcher
+    - name: Get webhook
+    - name: Get Job Output
+    - name: List hybrid worker groups by Automation Account
+    - name: Get a module
+    - name: Get a node
+    - name: Get job
+    - name: List Paged DSC node configurations by Automation Account with name filter
+    - name: List DSC node configurations by Automation Account
+    - name: List Paged DSC node configurations by Automation Account with no filter
+    - name: List python 2 packages by automation account
+    - name: Get connection types, first 100
+    - name: List DSC Compilation job in Automation Account
+    - name: Get connection types, next 100
+    - name: Get the linked workspace of an automation account
+    - name: Get DSC Configuration
+    - name: List Paged DSC Configurations with name filter
+    - name: List sourceControls
+    - name: List Paged DSC Configurations with no filter
+    - name: List certificates
+    - name: List all job schedules by automation account
+    - name: List credentials by automation account, next 100
+    - name: List credentials by automation account, first 100
+    - name: List connections by automation account, next 100
+    - name: List connections by automation account, first 100
+    - name: Get statistics of an automation account
+    - name: List variables, First 100
+    - name: List variables, Next 100
+    - name: List schedules by automation account, first 100
+    - name: List schedules by automation account, next 100
+    - name: List watchers by Automation Account
+    - name: List runbooks by automation account
+    - name: List webhooks by Automation Account
+    - name: List modules by automation account
+    - name: Get usages of an automation account
+    - name: List Paged DSC nodes by Automation Account with version filter
+    - name: List Paged DSC nodes by Automation Account with name filter
+    - name: List Paged DSC nodes by Automation Account with no filters
+    - name: List DSC nodes by Automation Account
+    - name: List Paged DSC nodes by Automation Account with node status filter
+    - name: List Paged DSC nodes by Automation Account with Node Configuration Custom filter
+    - name: List Paged DSC nodes by Automation Account where Node Configurations are not assigned filter
+    - name: List Paged DSC nodes with filters separated by 'and'
+    - name: List jobs by automation account
+    - name: Get automation account
+    - name: List automation accounts by resource group
+    - name: List automation accounts by resource group
+    - name: Regenerate registration key
+    - name: Update hybrid worker group
+    - name: Suspend test job
+    - name: Resume test job
+    - name: Stop test job
+    - name: Undo draft edit to last known published state
+    - name: Update a module
+    - name: Update a source control
+    - name: Create or Update Configuration
+    - name: Update a certificate
+    - name: Publish runbook draft
+    - name: Update a credential
+    - name: Update a connection
+    - name: Start Watcher
+    - name: Start Watcher
+    - name: Update a variable
+    - name: Update a schedule
+    - name: Update runbook
+    - name: Update watcher
+    - name: Suspend job
+    - name: Update webhook
+    - name: Generate webhook uri
+    - name: Resume job
+    - name: Update a module
+    - name: Stop job
+    - name: Update a node
+    - name: Get lists of an automation account
+    - name: Update an automation account
+    - name: Delete software update configuration
+    - name: Delete a hybrid worker group
+    - name: Delete a DSC node configuration
+    - name: Delete an existing connection type
+    - name: Delete a python 2 package
+    - name: Delete a source control
+    - name: Delete DSC Configuration
+    - name: Delete a job schedule
+    - name: Delete a certificate
+    - name: Delete a credential
+    - name: Delete an existing connection
+    - name: Delete schedule
+    - name: Delete a variable
+    - name: Delete webhook
+    - name: Delete a runbook
+    - name: Delete watcher
+    - name: Delete a module
+    - name: Delete a DSC Node
+    - name: Delete automation account
+```

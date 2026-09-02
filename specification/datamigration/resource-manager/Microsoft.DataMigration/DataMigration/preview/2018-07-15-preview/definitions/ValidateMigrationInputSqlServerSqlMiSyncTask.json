@@ -1,0 +1,54 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-07-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ValidateMigrationInputSqlServerSqlMISyncTaskInput": {
+      "type": "object",
+      "description": "Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.",
+      "allOf": [
+        {
+          "$ref": "TasksCommon.json#/definitions/SqlServerSqlMISyncTaskInput"
+        }
+      ]
+    },
+    "ValidateMigrationInputSqlServerSqlMISyncTaskOutput": {
+      "type": "object",
+      "description": "Output for task that validates migration input for Azure SQL Database Managed Instance online migration",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Database identifier",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of database",
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Errors associated with a selected database object",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

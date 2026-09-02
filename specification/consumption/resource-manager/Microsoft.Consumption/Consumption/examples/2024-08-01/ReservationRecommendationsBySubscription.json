@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "resourceScope": "subscriptions/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations?api-version=2024-08-01&$skiptoken=AQAAAA%3D%3D&",
+        "value": [
+          {
+            "name": "reservationRecommendations1",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations1",
+            "kind": "legacy",
+            "location": "northeurope",
+            "properties": {
+              "costWithNoReservedInstances": 0,
+              "firstUsageDate": "2018-03-06T00:00:00Z",
+              "lastUsageDate": "2018-03-10T00:00:00Z",
+              "lookBackPeriod": "Last7Days",
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "netSavings": 4.634521202630137,
+              "recommendedQuantity": 1,
+              "scope": "Single",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "term": "P1Y",
+              "totalCostWithReservedInstances": 0,
+              "totalHours": 827
+            },
+            "sku": "Standard_DS1_v2"
+          },
+          {
+            "name": "reservationRecommendations2",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations2",
+            "kind": "legacy",
+            "location": "northeurope",
+            "properties": {
+              "costWithNoReservedInstances": 0,
+              "firstUsageDate": "2018-03-06T00:00:00Z",
+              "lastUsageDate": "2018-03-15T00:00:00Z",
+              "lookBackPeriod": "Last7Days",
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "netSavings": 7.289315723178081,
+              "recommendedQuantity": 1,
+              "scope": "Single",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "term": "P3Y",
+              "totalCostWithReservedInstances": 0,
+              "totalHours": 927
+            },
+            "sku": "Standard_DS1_v2"
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "ReservationRecommendations_List",
+  "title": "ReservationRecommendationsBySubscription-Legacy"
+}

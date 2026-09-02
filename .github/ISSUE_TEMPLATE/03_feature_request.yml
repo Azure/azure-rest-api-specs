@@ -1,0 +1,34 @@
+name: Feature request
+description: Use this template to file a feature request on an API Spec.
+title: "[FEATURE REQ]"
+
+labels:
+  - feature-request
+
+body:
+  - type: input
+    id: api_spec
+    attributes:
+      label: API Spec link
+      description: "Link to the OpenAPI or TypeSpec spec"
+      placeholder: "e.g. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/containerservice/Fleet.Management/main.tsp"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: API Spec version
+      description: "Version of the API Spec"
+      placeholder: "e.g. 2023-10-15"
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Please describe the feature.
+      description: What feature would you like to get added? What problem is it solving?
+      placeholder: Feature description
+    validations:
+      required: true

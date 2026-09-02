@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "policyEventsResource": "default",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+    "api-version": "2018-04-04",
+    "$from": "2018-01-01T00:00:00Z",
+    "$filter": "PolicyDefinitionAction eq 'deny'",
+    "$apply": "groupby((PolicyAssignmentId, PolicyDefinitionId, ResourceId))/groupby((PolicyAssignmentId, PolicyDefinitionId), aggregate($count as NumDeniedResources))",
+    "$orderby": "NumDeniedResources desc",
+    "$top": 10
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default",
+        "@odata.count": 6,
+        "value": [
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup1/providers/microsoft.authorization/policyassignments/0591f497c35344fcbaf7a393",
+            "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c",
+            "NumDeniedResources": 3
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup1/providers/microsoft.authorization/policyassignments/myassignment1",
+            "policyDefinitionId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/mydefinition1",
+            "NumDeniedResources": 2
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup1/providers/microsoft.authorization/policyassignments/myassignment1",
+            "policyDefinitionId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/mydefinition2",
+            "NumDeniedResources": 2
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/5bc427ca-0089-4d0d-85bd-e98d1e40b3bf/providers/microsoft.authorization/policyassignments/storageaccountsku",
+            "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "NumDeniedResources": 1
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup2/providers/microsoft.authorization/policyassignments/da43b50031bf4bce84584faa",
+            "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62",
+            "NumDeniedResources": 1
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup2/providers/microsoft.authorization/policyassignments/myassignment2",
+            "policyDefinitionId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/mydefinition3",
+            "NumDeniedResources": 1
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "operationId": "AutomationProjects_ListByResourceGroup",
+  "title": "List Automation Projects by Resource Group",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logic/automationProjects/myAutomationProject",
+            "name": "myAutomationProject",
+            "type": "Microsoft.Logic/automationProjects",
+            "location": "eastus",
+            "tags": {
+              "environment": "production"
+            },
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "tenantId": "22222222-2222-2222-2222-222222222222"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "description": "Production workflow automation project"
+            },
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2026-03-01T00:00:00.000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-03-01T00:00:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

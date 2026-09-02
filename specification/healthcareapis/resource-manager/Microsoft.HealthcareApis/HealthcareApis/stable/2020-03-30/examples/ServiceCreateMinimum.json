@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "resourceName": "service2",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-03-30",
+    "subscriptionId": "subid",
+    "serviceDescription": {
+      "location": "westus2",
+      "tags": {},
+      "kind": "fhir-R4",
+      "properties": {
+        "accessPolicies": [
+          {
+            "objectId": "c487e7d1-3210-41a3-8ccc-e9372b78da47"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/service2",
+        "name": "service2",
+        "type": "Microsoft.HealthcareApis/services",
+        "etag": "etagvalue",
+        "location": "westus2",
+        "kind": "fhir-R4",
+        "tags": {},
+        "properties": {
+          "accessPolicies": [
+            {
+              "objectId": "c487e7d1-3210-41a3-8ccc-e9372b78da47"
+            }
+          ],
+          "cosmosDbConfiguration": {
+            "offerThroughput": 1000
+          },
+          "authenticationConfiguration": {
+            "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+            "audience": "https://azurehealthcareapis.com",
+            "smartProxyEnabled": false
+          },
+          "corsConfiguration": {
+            "origins": [],
+            "headers": [],
+            "methods": [],
+            "maxAge": null,
+            "allowCredentials": false
+          },
+          "provisioningState": "Creating",
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Disabled"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/service2",
+        "name": "service2",
+        "type": "Microsoft.HealthcareApis/services",
+        "etag": "etagvalue",
+        "location": "westus2",
+        "kind": "fhir-R4",
+        "tags": {},
+        "properties": {
+          "accessPolicies": [
+            {
+              "objectId": "c487e7d1-3210-41a3-8ccc-e9372b78da47"
+            }
+          ],
+          "cosmosDbConfiguration": {
+            "offerThroughput": 1000,
+            "keyVaultKeyUri": null
+          },
+          "authenticationConfiguration": {
+            "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+            "audience": "https://azurehealthcareapis.com",
+            "smartProxyEnabled": false
+          },
+          "corsConfiguration": {
+            "origins": [],
+            "headers": [],
+            "methods": [],
+            "maxAge": null,
+            "allowCredentials": false
+          },
+          "provisioningState": "Creating",
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Disabled"
+        }
+      }
+    }
+  }
+}

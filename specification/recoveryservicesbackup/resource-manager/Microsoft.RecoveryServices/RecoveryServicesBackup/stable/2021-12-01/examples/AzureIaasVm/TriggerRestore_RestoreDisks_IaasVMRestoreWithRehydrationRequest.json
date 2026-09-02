@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "netsdktestrg",
+    "vaultName": "testVault",
+    "fabricName": "Azure",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+    "protectedItemName": "VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+    "recoveryPointId": "348916168024334",
+    "api-version": "2021-12-01",
+    "parameters": {
+      "properties": {
+        "objectType": "IaasVMRestoreWithRehydrationRequest",
+        "recoveryPointId": "348916168024334",
+        "recoveryType": "RestoreDisks",
+        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1",
+        "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testingRg/providers/Microsoft.Storage/storageAccounts/testAccount",
+        "region": "southeastasia",
+        "createNewCloudService": true,
+        "originalStorageAccountOption": false,
+        "encryptionDetails": {
+          "encryptionEnabled": false
+        },
+        "recoveryPointRehydrationInfo": {
+          "rehydrationRetentionDuration": "P7D",
+          "rehydrationPriority": "Standard"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasVMContainerV2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasVMContainerV2;netsdktestrg;netvmtestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2020-09-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasVMContainerV2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasVMContainerV2;netsdktestrg;netvmtestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2020-09-01",
+        "Retry-After": 60
+      }
+    }
+  }
+}

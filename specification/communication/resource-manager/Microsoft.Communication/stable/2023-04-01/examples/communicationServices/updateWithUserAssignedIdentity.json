@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
+    "resourceGroupName": "MyResourceGroup",
+    "communicationServiceName": "MyCommunicationResource",
+    "api-version": "2023-04-01",
+    "parameters": {
+      "tags": {
+        "newTag": "newVal"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/user/assigned/resource/id": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/CommunicationServices/MyCommunicationResource",
+        "name": "MyCommunicationResource",
+        "type": "Microsoft.Communication/CommunicationServices",
+        "location": "Global",
+        "tags": {
+          "newTag": "newVal"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "dataLocation": "United States",
+          "hostName": "mycommunicationresource.communications.azure.com",
+          "version": "0.2.0"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/user/assigned/resource/id": {
+              "principalId": "11112222-3333-4444-5555-666677778888",
+              "clientId": "11112222-3333-4444-5555-666677778888"
+            }
+          }
+        }
+      }
+    }
+  }
+}

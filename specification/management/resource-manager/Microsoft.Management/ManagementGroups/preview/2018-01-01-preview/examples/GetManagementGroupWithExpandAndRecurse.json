@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2018-01-01-preview",
+    "groupId": "20000000-0001-0000-0000-000000000000",
+    "$expand": "children",
+    "$recurse": true,
+    "Cache-Control": "no-cache"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/RootGroup",
+        "type": "/providers/Microsoft.Management/managementGroups",
+        "name": "RootGroup",
+        "properties": {
+          "tenantId": "20000000-0000-0000-0000-000000000000",
+          "displayName": "RootGroup",
+          "details": {
+            "version": 2,
+            "updatedTime": "2018-01-25T02:26:49.0022093Z",
+            "updatedBy": "bd490e30-04cb-433e-b8c8-6066959a8bab",
+            "parent": {
+              "id": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
+              "name": "20000000-0000-0000-0000-000000000000",
+              "displayName": "20000000-0000-0000-0000-000000000000"
+            }
+          },
+          "children": [
+            {
+              "id": "/providers/Microsoft.Management/managementGroups/Child",
+              "type": "/providers/Microsoft.Management/managementGroups",
+              "name": "Child",
+              "displayName": "Child",
+              "roles": [
+                "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+              ],
+              "children": [
+                {
+                  "id": "/providers/Microsoft.Management/managementGroups/Leaf",
+                  "type": "/providers/Microsoft.Management/managementGroups",
+                  "name": "Leaf",
+                  "displayName": "Leaf",
+                  "roles": [
+                    "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+                  ],
+                  "children": [
+                    {
+                      "id": "/subscriptions/728bcbe4-8d56-4510-86c2-4921b8beefbc",
+                      "type": "/subscriptions",
+                      "name": "728bcbe4-8d56-4510-86c2-4921b8beefbc",
+                      "displayName": "Pay-As-You-Go",
+                      "roles": [
+                        "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "/providers/Microsoft.Management/managementGroups/AnotherChild",
+              "type": "/providers/Microsoft.Management/managementGroups",
+              "name": "AnotherChild",
+              "displayName": "Leaf",
+              "roles": [
+                "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

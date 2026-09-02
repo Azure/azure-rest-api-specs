@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "deploymentName": "myDeployment",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "cert1",
+            "type": "nginx.nginxplus/nginxdeployments/certificates",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/certificates/cert1",
+            "properties": {
+              "certificateError": {
+                "code": "CertificateNotYetValid",
+                "message": "The certificate is not yet valid. The certificate is not yet valid. NotBefore: '2020-01-01T00:00:00Z', NotAfter: '2020-01-01T00:00:00Z'"
+              },
+              "certificateVirtualPath": "/src/cert/somePath.cert",
+              "keyVaultSecretCreated": "2020-01-01T00:00:00Z",
+              "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID",
+              "keyVaultSecretVersion": "12345678ef9a12345678ef9a12345678",
+              "keyVirtualPath": "/src/cert/somekey.key",
+              "provisioningState": "Succeeded",
+              "sha1Thumbprint": "1234567890ABCDEF1234567890ABCDEF12345678"
+            }
+          },
+          {
+            "name": "cert2",
+            "type": "nginx.nginxplus/nginxdeployments/certificates",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/certificates/cert2",
+            "properties": {
+              "certificateError": null,
+              "certificateVirtualPath": "/src/cert/somePath2.cert",
+              "keyVaultSecretCreated": "2020-01-01T00:00:00Z",
+              "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID2",
+              "keyVaultSecretVersion": "12345678ef9a12345678ef9a12345678",
+              "keyVirtualPath": "/src/cert/somekey2.key",
+              "provisioningState": "Succeeded",
+              "sha1Thumbprint": "1234567890ABCDEF1234567890ABCDEF12345678"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Certificates_List",
+  "title": "Certificates_List"
+}

@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "executionId": "f24500ad-744e-4a26-864b-b76199eac333",
+    "experimentName": "exampleExperiment",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "f24500ad-744e-4a26-864b-b76199eac333",
+        "type": "Microsoft.Chaos/experiments/executions/getExecutionDetails",
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/experiments/exampleExperiment/executions/f24500ad-744e-4a26-864b-b76199eac333/getExecutionDetails",
+        "properties": {
+          "failureReason": "Dependency failure",
+          "lastActionAt": "2020-12-14T21:52:52.2552574Z",
+          "runInformation": {
+            "steps": [
+              {
+                "branches": [
+                  {
+                    "actions": [
+                      {
+                        "actionId": "59499d33-6751-4b6e-a1f6-58f4d56a040a",
+                        "actionName": "urn:provider:agent-v2:Microsoft.Azure.Chaos.Fault.CPUPressureAllProcessors",
+                        "endTime": "2020-12-14T13:56:13.6270153-08:00",
+                        "startTime": "2020-12-14T13:56:13.6270153-08:00",
+                        "status": "failed",
+                        "targets": [
+                          {
+                            "status": "succeeded",
+                            "target": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/VM1",
+                            "targetCompletedTime": "2021-04-02T17:30:55+00:00",
+                            "targetFailedTime": "2021-04-02T16:30:55+00:00"
+                          },
+                          {
+                            "status": "failed",
+                            "target": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/VM1",
+                            "targetCompletedTime": "2021-04-02T17:30:55+00:00",
+                            "targetFailedTime": "2021-04-02T16:30:55+00:00"
+                          }
+                        ]
+                      }
+                    ],
+                    "branchId": "FirstBranch",
+                    "branchName": "FirstBranch",
+                    "status": "failed"
+                  }
+                ],
+                "status": "failed",
+                "stepId": "FirstStep",
+                "stepName": "FirstStep"
+              }
+            ]
+          },
+          "startedAt": "2020-12-14T21:52:52.2552574Z",
+          "status": "failed",
+          "stoppedAt": "2020-12-14T21:56:18.9281956Z"
+        }
+      }
+    }
+  },
+  "operationId": "Experiments_ExecutionDetails",
+  "title": "Get experiment execution details."
+}

@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "serverName": "targetserver",
+    "resourceGroupName": "TargetResourceGroup",
+    "api-version": "2017-12-01",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "brazilsouth",
+      "properties": {
+        "restorePointInTime": "2017-12-14T00:00:37.467Z",
+        "createMode": "PointInTimeRestore",
+        "sourceServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforPostgreSQL/servers/sourceserver"
+      },
+      "sku": {
+        "name": "B_Gen5_2",
+        "tier": "Basic",
+        "capacity": 2,
+        "family": "Gen5"
+      },
+      "tags": {
+        "ElasticServer": "1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "B_Gen5_2",
+          "tier": "Basic",
+          "family": "Gen5",
+          "capacity": 2
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled"
+          },
+          "version": "9.6",
+          "sslEnforcement": "Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "targetserver.postgres.database.azure.com",
+          "earliestRestoreDate": "2017-12-14T21:08:24.637+00:00"
+        },
+        "location": "brazilsouth",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforPostgreSQL/servers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "name": "B_Gen5_2",
+          "tier": "Basic",
+          "family": "Gen5",
+          "capacity": 2
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled"
+          },
+          "version": "9.6",
+          "sslEnforcement": "Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "targetserver.postgres.database.azure.com",
+          "earliestRestoreDate": "2017-12-14T21:08:24.637+00:00"
+        },
+        "location": "brazilsouth",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforPostgreSQL/servers"
+      }
+    },
+    "202": {}
+  }
+}

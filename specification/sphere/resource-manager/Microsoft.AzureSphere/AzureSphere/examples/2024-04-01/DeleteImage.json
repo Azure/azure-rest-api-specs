@@ -1,0 +1,25 @@
+{
+  "operationId": "Images_Delete",
+  "title": "Images_Delete",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "imageName": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "description": "Resource deleted successfully."
+    },
+    "202": {
+      "description": "Resource deletion accepted.",
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    },
+    "204": {
+      "description": "Resource deleted successfully."
+    }
+  }
+}

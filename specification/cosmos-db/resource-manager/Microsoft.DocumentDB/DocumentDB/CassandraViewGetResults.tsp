@@ -1,0 +1,104 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "./models.tsp";
+import "./CassandraKeyspaceGetResults.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+
+namespace Microsoft.DocumentDB;
+/**
+ * An Azure Cosmos DB Cassandra view.
+ */
+@parentResource(CassandraKeyspaceGetResults)
+@added(Versions.v2026_04_01_preview)
+model CassandraViewGetResults
+  is Azure.ResourceManager.ProxyResource<CassandraViewGetProperties> {
+  ...ResourceNameParameter<
+    Resource = CassandraViewGetResults,
+    KeyName = "viewName",
+    SegmentName = "views",
+    NamePattern = ""
+  >;
+
+  /** The location of the resource group to which the resource belongs. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /** Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \"defaultExperience\": \"Cassandra\". Current \"defaultExperience\" values also include \"Table\", \"Graph\", \"DocumentDB\", and \"MongoDB\". */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /**
+   * Identity for the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  identity?: ManagedServiceIdentity;
+}
+
+@added(Versions.v2026_04_01_preview)
+@armResourceOperations(#{ omitTags: true })
+interface CassandraViewGetResultsOperationGroup {
+  /**
+   * Gets the Cassandra view under an existing Azure Cosmos DB database account.
+   */
+  getCassandraView is ArmResourceRead<CassandraViewGetResults>;
+
+  /**
+   * Create or update an Azure Cosmos DB Cassandra View
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  createUpdateCassandraView is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+    CassandraViewGetResults,
+    Request = CassandraViewCreateUpdateParameters,
+    Response =
+      | ArmResourceUpdatedResponse<CassandraViewGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraViewGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
+  >;
+
+  /**
+   * Deletes an existing Azure Cosmos DB Cassandra view.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  deleteCassandraView is ArmResourceDeleteWithoutOkAsync<
+    CassandraViewGetResults,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists the Cassandra materialized views under an existing Azure Cosmos DB database account.
+   */
+  listCassandraViews is ArmResourceListByParent<
+    CassandraViewGetResults,
+    Response = ArmResponse<CassandraViewListResult>
+  >;
+}
+
+@@doc(CassandraViewGetResults.name, "Cosmos DB view name.");
+@@doc(
+  CassandraViewGetResults.properties,
+  "The properties of an Azure Cosmos DB Cassandra view"
+);
+@@doc(
+  CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
+  "The parameters to provide for the current Cassandra View."
+);
+
+@@visibility(
+  CassandraViewGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

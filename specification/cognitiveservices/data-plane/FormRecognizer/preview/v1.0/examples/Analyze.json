@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "id": "{Model Id}",
+    "body": {
+      "formData": {}
+    },
+    "form_stream": "{Image or Pdf file stream}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "success",
+        "pages": [
+          {
+            "number": 1,
+            "height": 800,
+            "width": 600,
+            "clusterId": 0,
+            "keyValuePairs": [
+              {
+                "key": [
+                  {
+                    "text": "Address:",
+                    "boundingBox": [
+                      57.4,
+                      683.1,
+                      100.5,
+                      683.1,
+                      100.5,
+                      673.7,
+                      57.4,
+                      673.7
+                    ]
+                  }
+                ],
+                "value": [
+                  {
+                    "text": "1 Microsoft Way",
+                    "boundingBox": [
+                      57.4,
+                      672.2,
+                      126.6,
+                      672.2,
+                      126.6,
+                      658.9,
+                      57.4,
+                      658.9
+                    ],
+                    "confidence": 0.9
+                  }
+                ]
+              }
+            ],
+            "tables": [
+              {
+                "id": "table_0",
+                "columns": [
+                  {
+                    "header": [
+                      {
+                        "text": "InvoiceNumber",
+                        "boundingBox": [
+                          38.5,
+                          585.2,
+                          113.4,
+                          585.2,
+                          113.4,
+                          575.8,
+                          38.5,
+                          575.8
+                        ]
+                      }
+                    ],
+                    "entries": [
+                      [
+                        {
+                          "text": "38772349",
+                          "boundingBox": [
+                            305.6,
+                            692.1,
+                            403.5,
+                            692.1,
+                            403.5,
+                            684.2,
+                            305.6,
+                            684.2
+                          ],
+                          "confidence": 0.9
+                        }
+                      ]
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "errors": [
+          {
+            "errorMessage": "Page1: Field not extracted"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "title": "Alias Query",
+  "description": "A query accessing one of the resource properties through [alias](https://docs.microsoft.com/en-us/azure/azure-policy/policy-definition#aliases).",
+  "parameters": {
+    "api-version": "2018-09-01-preview",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "where type =~ 'Microsoft.Web/serverFarms' | extend skuName = tostring(aliases['Microsoft.Web/serverfarms/sku.name']) | summarize count() by skuName"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 3,
+        "count": 3,
+        "resultTruncated": "false",
+        "data": {
+          "columns": [
+            {
+              "name": "skuName",
+              "type": "string"
+            },
+            {
+              "name": "count_",
+              "type": "integer"
+            }
+          ],
+          "rows": [
+            [
+              "S2",
+              1
+            ],
+            [
+              "Y1",
+              3
+            ],
+            [
+              "S1",
+              1
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "title": "Retrieves existing classification policies",
+  "operationId": "JobRouterAdministrationOperations_ListClassificationPolicies",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "MainClassificationPolicy",
+            "name": "Main",
+            "fallbackQueueId": "MainQueue",
+            "queueSelectorAttachments": [
+              {
+                "kind": "ruleEngine",
+                "rule": {
+                  "kind": "expression",
+                  "language": "powerFx",
+                  "expression": "If(job.Escalated = true, \"SecondaryQueue\", \"MainQueue\")"
+                }
+              }
+            ],
+            "prioritizationRule": {
+              "kind": "static",
+              "value": "2"
+            },
+            "workerSelectorAttachments": [],
+            "etag": "etag"
+          },
+          {
+            "id": "SecondaryClassificationPolicy",
+            "name": "Secondary",
+            "fallbackQueueId": "MainQueue",
+            "queueSelectorAttachments": [
+              {
+                "kind": "ruleEngine",
+                "rule": {
+                  "kind": "expression",
+                  "language": "powerFx",
+                  "expression": "If(job.VIP = true, \"VIPQueue\", \"MainQueue\")"
+                }
+              }
+            ],
+            "prioritizationRule": {
+              "kind": "static",
+              "value": "1"
+            },
+            "workerSelectorAttachments": [],
+            "etag": "etag"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

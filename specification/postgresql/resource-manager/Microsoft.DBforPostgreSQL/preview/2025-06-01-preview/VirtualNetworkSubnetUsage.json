@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2025-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/checkVirtualNetworkSubnetUsage": {
+      "post": {
+        "tags": [
+          "VirtualNetworkSubnetUsage"
+        ],
+        "operationId": "VirtualNetworkSubnetUsage_List",
+        "x-ms-examples": {
+          "List the virtual network subnet usage for a given virtual network.": {
+            "$ref": "./examples/VirtualNetworkSubnetUsageList.json"
+          }
+        },
+        "description": "Lists the virtual network subnet usage for a given virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageParameter"
+            },
+            "description": "The required parameters for creating or updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualNetworkSubnetUsageParameter": {
+      "type": "object",
+      "properties": {
+        "virtualNetworkArmResourceId": {
+          "type": "string",
+          "description": "Virtual network resource id."
+        }
+      },
+      "description": "Virtual network subnet usage parameter"
+    },
+    "VirtualNetworkSubnetUsageModel": {
+      "type": "object",
+      "properties": {
+        "delegatedSubnetsUsage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedSubnetUsage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "subnetName"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "location of the delegated subnet usage"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "subscriptionId of the delegated subnet usage"
+        }
+      },
+      "description": "Virtual network subnet usage data."
+    },
+    "DelegatedSubnetUsage": {
+      "type": "object",
+      "properties": {
+        "subnetName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the delegated subnet for which IP addresses are in use"
+        },
+        "usage": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Number of IP addresses used by the delegated subnet"
+        }
+      },
+      "description": "Delegated subnet usage data."
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "SRV",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/SRV?api-version=2018-09-01&$skipToken=skipToken",
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/SRV/recordsrv",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "name": "recordsrv",
+            "type": "Microsoft.Network/privateDnsZones/SRV",
+            "properties": {
+              "metadata": {
+                "key1": "value1"
+              },
+              "ttl": 3600,
+              "fqdn": "recordsrv.privatezone1.com.",
+              "isAutoRegistered": false,
+              "srvRecords": [
+                {
+                  "priority": 0,
+                  "weight": 10,
+                  "port": 80,
+                  "target": "contoso.com"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

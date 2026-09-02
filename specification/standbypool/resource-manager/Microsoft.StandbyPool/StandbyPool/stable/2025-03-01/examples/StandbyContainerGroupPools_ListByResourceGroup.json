@@ -1,0 +1,56 @@
+{
+  "title": "StandbyContainerGroupPools_ListByResourceGroup",
+  "operationId": "StandbyContainerGroupPools_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2025-03-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000009",
+    "resourceGroupName": "rgstandbypool"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "elasticityProfile": {
+                "maxReadyCapacity": 688,
+                "refillPolicy": "always"
+              },
+              "provisioningState": "Succeeded",
+              "containerGroupProperties": {
+                "containerGroupProfile": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.ContainerInstance/containerGroupProfiles/cgProfile",
+                  "revision": 1
+                },
+                "subnetIds": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.Network/virtualNetworks/cgSubnet/subnets/cgSubnet"
+                  }
+                ]
+              },
+              "zones": [
+                "1",
+                "2",
+                "3"
+              ]
+            },
+            "tags": {},
+            "location": "West US",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyContainerGroupPools/pool",
+            "name": "pool",
+            "type": "Microsoft.StandbyPool/standbyContainerGroupPools",
+            "systemData": {
+              "createdBy": "pooluser@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2023-09-07T16:33:22.210Z",
+              "lastModifiedBy": "pooluser@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-09-07T16:33:22.210Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "certificateName": "default",
+    "deploymentName": "myDeployment",
+    "requestBody": {
+      "properties": {
+        "certificateVirtualPath": "/src/cert/somePath.cert",
+        "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID",
+        "keyVirtualPath": "/src/cert/somekey.key"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "nginx.nginxplus/nginxdeployments/certificates",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/certificates/default",
+        "properties": {
+          "certificateVirtualPath": "/src/cert/somePath.cert",
+          "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID",
+          "keyVirtualPath": "/src/cert/somekey.key",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "default",
+        "type": "nginx.nginxplus/nginxdeployments/certificates",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/certificates/default",
+        "properties": {
+          "certificateVirtualPath": "/src/cert/somePath.cert",
+          "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID",
+          "keyVirtualPath": "/src/cert/somekey.key",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  },
+  "operationId": "Certificates_CreateOrUpdate",
+  "title": "Certificates_CreateOrUpdate"
+}

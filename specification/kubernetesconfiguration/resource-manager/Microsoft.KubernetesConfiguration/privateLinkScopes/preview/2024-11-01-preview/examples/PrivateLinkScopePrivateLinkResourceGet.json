@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "groupName": "KubernetesConfiguration",
+    "resourceGroupName": "myResourceGroup",
+    "scopeName": "myPrivateLinkScope",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "KubernetesConfiguration",
+        "type": "Microsoft.KubernetesConfiguration/privateLinkScopes/privateLinkResources",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/myPrivateLinkScope/privateLinkResources/KubernetesConfiguration",
+        "properties": {
+          "groupId": "KubernetesConfiguration",
+          "requiredMembers": [
+            "KubernetesConfiguration.Server",
+            "KubernetesConfiguration.K8sConfiguration",
+            "GuestConfig.DP"
+          ],
+          "requiredZoneNames": [
+            "privatelink.his.arc.azure.com",
+            "privatelink.kubernetesconfiguration.azure.com",
+            "privatelink.Guestconfiguration.azure.com"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_Get",
+  "title": "Gets private endpoint connection."
+}

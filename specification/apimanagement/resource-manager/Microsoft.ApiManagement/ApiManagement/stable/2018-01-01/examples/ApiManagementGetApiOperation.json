@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-01-01",
+    "subscriptionId": "subid",
+    "apiId": "57d2ef278aa04f0888cba3f3",
+    "operationId": "57d2ef278aa04f0ad01d6cdc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/57d2ef278aa04f0888cba3f3/operations/57d2ef278aa04f0ad01d6cdc",
+        "type": "Microsoft.ApiManagement/service/apis/operations",
+        "name": "57d2ef278aa04f0ad01d6cdc",
+        "properties": {
+          "displayName": "CancelOrder",
+          "method": "POST",
+          "urlTemplate": "/?soapAction=http://tempuri.org/IFazioService/CancelOrder",
+          "templateParameters": [],
+          "request": {
+            "description": "IFazioService_CancelOrder_InputMessage",
+            "queryParameters": [],
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "text/xml",
+                "sample": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <Body>\r\n    <CancelOrder xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://tempuri.org/\">\r\n      <orderId>1</orderId>\r\n    </CancelOrder>\r\n  </Body>\r\n</Envelope>",
+                "schemaId": "6980a395-f08b-4a59-8295-1440cbd909b8",
+                "typeName": "CancelOrder"
+              }
+            ]
+          },
+          "responses": [
+            {
+              "statusCode": 200,
+              "description": "IFazioService_CancelOrder_OutputMessage",
+              "representations": [
+                {
+                  "contentType": "text/xml",
+                  "sample": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <Body>\r\n    <CancelOrderResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://tempuri.org/\">\r\n      <CancelOrderResult>1</CancelOrderResult>\r\n    </CancelOrderResponse>\r\n  </Body>\r\n</Envelope>",
+                  "schemaId": "6980a395-f08b-4a59-8295-1440cbd909b8",
+                  "typeName": "CancelOrderResponse"
+                }
+              ],
+              "headers": []
+            }
+          ]
+        }
+      }
+    }
+  }
+}

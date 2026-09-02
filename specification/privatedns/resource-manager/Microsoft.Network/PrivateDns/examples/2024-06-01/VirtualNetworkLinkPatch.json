@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "parameters": {
+      "properties": {
+        "registrationEnabled": true,
+        "resolutionPolicy": "NxDomainRedirect"
+      },
+      "tags": {
+        "key2": "value2"
+      }
+    },
+    "privateZoneName": "privatelink.contoso.com",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId",
+    "virtualNetworkLinkName": "virtualNetworkLink1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "virtualNetworkLink1",
+        "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatelink.contoso.com/virtualNetworkLinks/virtualNetworkLink1",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "registrationEnabled": true,
+          "resolutionPolicy": "NxDomainRedirect",
+          "virtualNetwork": {
+            "id": "/subscriptions/virtualNetworkSubscriptionId/resourceGroups/virtualNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/virtualNetworkName"
+          },
+          "virtualNetworkLinkState": "Completed"
+        },
+        "tags": {
+          "key2": "value2"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationStatuses/asyncOperationId?api-version=2024-06-01",
+        "Location": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationResults/asyncOperationId?api-version=2024-06-01",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "VirtualNetworkLinks_Update",
+  "title": "PATCH Private DNS Zone Virtual Network Link"
+}

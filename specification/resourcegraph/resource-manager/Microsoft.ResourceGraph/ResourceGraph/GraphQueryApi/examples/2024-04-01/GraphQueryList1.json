@@ -1,0 +1,45 @@
+{
+  "description": "Get a list of saved queries within subscription id and resource group.",
+  "parameters": {
+    "api-version": "2024-04-01",
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "024e2271-06fa-46b6-9079-f1ed3c7b070e"
+  },
+  "title": "Get a list of Graph Queries",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/providers/Microsoft.ResourceGraph/queries?api-version=2019-09-01-preview&$top=10&$skiptoken=skiptoken",
+        "value": [
+          {
+            "name": "MyDockerVMs",
+            "type": "Microsoft.ResourceGraph/queries",
+            "etag": "5d64408e-4ca3-41f7-b725-6914f3012afa",
+            "id": "/subscriptions/87f4f8b0-83c1-4aa9-b318-5237aeb15264/resourceGroups/my-resource-group/providers/Microsoft.ResourceGraph/queries/MyDockerVMs",
+            "properties": {
+              "description": "Docker VMs in PROD",
+              "query": "where isnotnull(tags['Prod']) and properties.extensions[0].Name == 'docker'",
+              "resultKind": "basic",
+              "timeModified": "2019-03-12T13:51:13-07:00"
+            },
+            "tags": {}
+          },
+          {
+            "name": "MyTestVMs",
+            "type": "Microsoft.ResourceGraph/queries",
+            "etag": "b0809832-ca62-4133-8f13-0c46580f9db1",
+            "id": "/subscriptions/6abb2f31-3e6a-4134-9968-219a596012a0/resourceGroups/my-resource-group/providers/Microsoft.ResourceGraph/queries/MyTestVMs",
+            "properties": {
+              "description": "Test VMs in PROD",
+              "query": "where isnotnull(tags['Prod']) and properties.extensions[0].Name == 'test'",
+              "resultKind": "basic",
+              "timeModified": "2019-03-13T13:51:13-07:00"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GraphQuery_List"
+}

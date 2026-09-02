@@ -1,0 +1,41 @@
+{
+  "title": "Post Ingest Using Data Collection Rule",
+  "description": "Allows data to be ingested directly using Data Collection Rules",
+  "parameters": {
+    "endpoint": "https://dce-name.eastus-2.ingest.monitor.azure.com",
+    "ruleId": "c512b59c-4005-40e2-b13d-ac29cfb46af4",
+    "stream": "test-rg",
+    "api-version": "2021-11-01-preview",
+    "Authorization": "Bearer ey...",
+    "Content-Type": "application/json",
+    "Content-Encoding": "gzip",
+    "x-ms-client-request-id": "",
+    "body": [
+      {
+        "Time": "2021-12-08T23:51:14.1104269Z",
+        "Computer": "Computer1",
+        "AdditionalContext": {
+          "InstanceName": "user1",
+          "TimeZone": "Pacific Time",
+          "Level": 4,
+          "CounterName": "AppMetric1",
+          "CounterValue": 15.3
+        }
+      },
+      {
+        "Time": "2021-12-08T23:51:14.1104269Z",
+        "Computer": "Computer2",
+        "AdditionalContext": {
+          "InstanceName": "user2",
+          "TimeZone": "Central Time",
+          "Level": 3,
+          "CounterName": "AppMetric1",
+          "CounterValue": 23.5
+        }
+      }
+    ]
+  },
+  "responses": {
+    "204": {}
+  }
+}

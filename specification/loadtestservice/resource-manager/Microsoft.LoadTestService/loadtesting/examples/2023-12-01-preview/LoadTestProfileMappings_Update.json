@@ -1,0 +1,34 @@
+{
+  "title": "Update a Load Test Profile Mapping",
+  "operationId": "LoadTestProfileMappings_Update",
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename",
+    "loadTestProfileMappingName": "myLoadTestProfileMapping",
+    "properties": {
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename/providers/Microsoft.LoadTestService/loadTestProfileMappings/myLoadTestProfileMapping",
+        "name": "myLoadTestProfileMapping",
+        "type": "Microsoft.LoadTestService/loadTestProfileMappings",
+        "systemData": {
+          "createdBy": "userId1001",
+          "createdByType": "User",
+          "createdAt": "2021-09-28T12:32:33Z",
+          "lastModifiedBy": "userId1001",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-09-28T12:32:33Z"
+        },
+        "properties": {
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename",
+          "azureLoadTestingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/loadTests/myLoadTest",
+          "testProfileId": "123456"
+        }
+      }
+    }
+  }
+}

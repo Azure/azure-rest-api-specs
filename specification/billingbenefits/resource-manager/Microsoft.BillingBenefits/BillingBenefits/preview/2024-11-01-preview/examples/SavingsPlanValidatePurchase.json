@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "properties": {
+            "appliedScopeProperties": {
+              "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/testrg"
+            },
+            "appliedScopeType": "Single",
+            "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+            "commitment": {
+              "amount": 15.23,
+              "currencyCode": "USD",
+              "grain": "Hourly"
+            },
+            "displayName": "ComputeSavingsPlan_2021-07-01",
+            "term": "P1Y"
+          },
+          "sku": {
+            "name": "Compute_Savings_Plan"
+          }
+        },
+        {
+          "properties": {
+            "appliedScopeProperties": {
+              "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/RG"
+            },
+            "appliedScopeType": "Single",
+            "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+            "commitment": {
+              "amount": 20,
+              "currencyCode": "USD",
+              "grain": "Hourly"
+            },
+            "displayName": "ComputeSavingsPlan_2021-07-01",
+            "term": "P1Y"
+          },
+          "sku": {
+            "name": "Compute_Savings_Plan"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "reason": "Your provider has not enabled Savings Plan purchase on this subscription.",
+            "reasonCode": "CustomerCannotPurchaseSavingsPlan",
+            "valid": false
+          },
+          {
+            "valid": true
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ValidatePurchase",
+  "title": "SavingsPlanValidatePurchase"
+}

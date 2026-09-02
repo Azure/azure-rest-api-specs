@@ -1,0 +1,153 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-08-08-preview",
+    "title": "StorageManagementClient",
+    "description": "The Admin Storage Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/settings": {
+      "put": {
+        "x-ms-examples": {
+          "Update srp settings.": {
+            "$ref": "./examples/Settings/Update.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Update storage resource provider settings.",
+        "operationId": "StorageSettings_Update",
+        "parameters": [
+          {
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "storage.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Parameters used to update storage resource provider settings",
+            "name": "settingsObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The new storage resource provider setting is updated.",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "x-ms-examples": {
+          "Returns the storage resource provider settings.": {
+            "$ref": "./examples/Settings/Get.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Returns the storage resource provider settings.",
+        "operationId": "StorageSettings_Get",
+        "parameters": [
+          {
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "storage.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The settings has been returned.",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SettingProperties": {
+      "description": "Properties of storage setting.",
+      "type": "object",
+      "properties": {
+        "retentionPeriodForDeletedStorageAccountsInDays": {
+          "description": "The number of days a deleted storage account is kept before being permanently deleted.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Settings": {
+      "description": "Storage resource provider settings",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of the storage account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SettingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "storage.json#/definitions/Resource"
+        }
+      ]
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

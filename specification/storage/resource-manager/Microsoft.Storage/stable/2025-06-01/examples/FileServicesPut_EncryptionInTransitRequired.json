@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "FileServicesName": "default",
+    "accountName": "sto8607",
+    "api-version": "2025-06-01",
+    "monitor": "true",
+    "parameters": {
+      "properties": {
+        "protocolSettings": {
+          "nfs": {
+            "encryptionInTransit": {
+              "required": true
+            }
+          },
+          "smb": {
+            "encryptionInTransit": {
+              "required": true
+            }
+          }
+        }
+      }
+    },
+    "resourceGroupName": "res4410",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Storage/storageAccounts/fileServices",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/fileServices/default",
+        "properties": {
+          "protocolSettings": {
+            "nfs": {
+              "encryptionInTransit": {
+                "required": true
+              }
+            },
+            "smb": {
+              "encryptionInTransit": {
+                "required": true
+              }
+            }
+          }
+        },
+        "sku": {
+          "name": "Premium_LRS",
+          "tier": "Premium"
+        }
+      }
+    }
+  },
+  "operationId": "FileServices_SetServiceProperties",
+  "title": "PutFileServices_EncryptionInTransitRequired"
+}

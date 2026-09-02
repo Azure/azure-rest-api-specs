@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01",
+    "resourceGroupName": "test-rg",
+    "sapVirtualInstanceName": "X00",
+    "subscriptionId": "6d875e77-e412-4d7d-9af4-8895278b4443"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "centralServer",
+            "type": "Microsoft.Workloads/sapVirtualInstances/centralInstances",
+            "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/sapVirtualInstances/X00/centralInstances/centralServer",
+            "location": "westcentralus",
+            "properties": {
+              "enqueueReplicationServerProperties": {
+                "ersVersion": "EnqueueReplicator1",
+                "health": "Healthy",
+                "hostname": "vh-ers1",
+                "instanceNo": "00",
+                "ipAddress": "10.0.0.5",
+                "kernelPatch": "patch 300",
+                "kernelVersion": "777"
+              },
+              "enqueueServerProperties": {
+                "health": "Healthy",
+                "hostname": "vh-ascs1",
+                "ipAddress": "10.0.0.5",
+                "port": 3600
+              },
+              "errors": null,
+              "gatewayServerProperties": {
+                "health": "Healthy",
+                "port": 3300
+              },
+              "health": "Healthy",
+              "instanceNo": "00",
+              "kernelPatch": "patch 300",
+              "kernelVersion": "777",
+              "messageServerProperties": {
+                "health": "Healthy",
+                "hostname": "vh-ascs1",
+                "httpPort": 8100,
+                "httpsPort": 44400,
+                "internalMsPort": 3900,
+                "ipAddress": "10.0.0.5",
+                "msPort": 3600
+              },
+              "provisioningState": "Succeeded",
+              "status": "Running",
+              "subnet": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/SAP-E2ETest-rg/providers/Microsoft.Network/virtualNetworks/loop-test-vnet/subnets/loopsubnet",
+              "vmDetails": [
+                {
+                  "type": "Primary",
+                  "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/cs-vm"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2021-08-19T15:10:46.196Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SapCentralServerInstances_List",
+  "title": "SAPCentralInstances List by SAP virtual instance"
+}

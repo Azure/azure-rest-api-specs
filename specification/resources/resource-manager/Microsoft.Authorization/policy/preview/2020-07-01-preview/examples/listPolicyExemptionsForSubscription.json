@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "api-version": "2020-07-01-preview",
+    "$filter": "atScope()"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/DevOrg/providers/Microsoft.Authorization/policyAssignments/CostManagement",
+              "policyDefinitionReferenceIds": [
+                "Limit_Skus"
+              ],
+              "exemptionCategory": "Waiver",
+              "displayName": "Exempt demo cluster",
+              "description": "Exempt demo cluster from limit sku",
+              "metadata": {
+                "reason": "Temporary exemption for a expensive VM demo"
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2020-07-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-07-01T02:01:01.1075056Z"
+            },
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyExemptions/TestVMSub",
+            "type": "Microsoft.Authorization/policyExemptions",
+            "name": "TestVMSub"
+          },
+          {
+            "properties": {
+              "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/DevOrg/providers/Microsoft.Authorization/policyAssignments/LimitPorts",
+              "exemptionCategory": "Mitigated",
+              "displayName": "Exempt jump box open ports",
+              "description": "Exempt jump box open ports from limit ports policy",
+              "metadata": {
+                "reason": "Need to open RDP port to corp net"
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2020-07-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-07-01T02:01:01.1075056Z"
+            },
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyExemptions/TestVNetSub",
+            "type": "Microsoft.Authorization/policyExemptions",
+            "name": "TestVNetSub"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Public IP Address admin endpoints and objects.",
+    "title": "NetworkAdminManagementClient",
+    "version": "2015-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network.Admin/adminPublicIpAddresses": {
+      "get": {
+        "x-ms-examples": {
+          "List of public IP addresses": {
+            "$ref": "./examples/PublicIpAddresses/List.json"
+          }
+        },
+        "tags": [
+          "PublicIpAddresses"
+        ],
+        "description": "List of public IP addresses.",
+        "operationId": "PublicIPAddresses_List",
+        "parameters": [
+          {
+            "$ref": "Network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/InlineCountParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PublicIpAddressList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/PublicIpAddress"
+      }
+    }
+  },
+  "definitions": {
+    "PublicIpAddress": {
+      "description": "This resource represents an IP Address.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of an IP Address.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PublicIPAddressProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PublicIPAddressProperties": {
+      "description": "Properties of a public IP Address.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "The IP address.",
+          "type": "string"
+        },
+        "ipPool": {
+          "description": "The IP pool.",
+          "type": "string"
+        },
+        "allocationMethod": {
+          "description": "The allocation method.",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AllocationMethodType"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Network.json#/definitions/ProvisionedResource"
+        },
+        {
+          "$ref": "Network.json#/definitions/TenantResource"
+        }
+      ]
+    },
+    "PublicIpAddressList": {
+      "description": "Pageable list of public ip addresses.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of public ip addresses for this page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublicIpAddress"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PublicIpAddressParameter": {
+      "name": "publicIpAddress",
+      "description": "Public IP address parameter.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

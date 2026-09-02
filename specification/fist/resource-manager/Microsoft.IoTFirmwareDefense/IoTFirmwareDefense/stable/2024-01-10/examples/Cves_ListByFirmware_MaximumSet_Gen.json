@@ -1,0 +1,79 @@
+{
+  "title": "Cves_ListByFirmware",
+  "operationId": "Cves_ListByFirmware",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "FirmwareAnalysisRG",
+    "workspaceName": "default",
+    "firmwareId": "109a9886-50bf-85a8-9d75-000000000000",
+    "api-version": "2024-01-10"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "cveId": "7496e8a7-537e-40e4-a43b-000000000000",
+              "component": {},
+              "severity": "High",
+              "name": "CVE-2018-1000500",
+              "cvssV2Score": "6.8",
+              "cvssV3Score": "8.1",
+              "links": [
+                {
+                  "label": "http://lists.busybox.net/pipermail/busybox/2018-May/086462.html",
+                  "href": "http://lists.busybox.net/pipermail/busybox/2018-May/086462.html"
+                },
+                {
+                  "label": "https://git.busybox.net/busybox/commit/?id=45fa3f18adf57ef9d743038743d9c90573aeeb91",
+                  "href": "https://git.busybox.net/busybox/commit/?id=45fa3f18adf57ef9d743038743d9c90573aeeb91"
+                },
+                {
+                  "href": "https://usn.ubuntu.com/4531-1/"
+                }
+              ],
+              "description": "Busybox contains a Missing SSL certificate validation vulnerability in The \"busybox wget\" applet that can result in arbitrary code execution. This attack appear to be exploitable via Simply download any file over HTTPS using \"busybox wget https://compromised-domain.com/important-file\".",
+              "cvssScore": "8.1",
+              "cvssVersion": "3"
+            },
+            "id": "/subscriptions/07aed47b-60ad-4d6e-a07a-000000000000/resourceGroups/FirmwareAnalysisRG/providers/Microsoft.IoTFirmwareDefense/workspaces/default/firmwares/109a9886-50bf-85a8-9d75-000000000000/cves/7496e8a7-537e-40e4-a43b-000000000000",
+            "name": "7496e8a7-537e-40e4-a43b-000000000000",
+            "type": "Microsoft.IoTFirmwareDefense/workspaces/firmwares/cves"
+          },
+          {
+            "properties": {
+              "cveId": "fad414da-0055-4dfb-a3d4-000000000000",
+              "component": {},
+              "severity": "High",
+              "name": "CVE-2022-28391",
+              "cvssV2Score": "6.8",
+              "cvssV3Score": "8.8",
+              "links": [
+                {
+                  "label": "https://git.alpinelinux.org/aports/plain/main/busybox/0002-nslookup-sanitize-all-printed-strings-with-printable.patch",
+                  "href": "https://git.alpinelinux.org/aports/plain/main/busybox/0002-nslookup-sanitize-all-printed-strings-with-printable.patch"
+                },
+                {
+                  "label": "https://gitlab.alpinelinux.org/alpine/aports/-/issues/13661",
+                  "href": "https://gitlab.alpinelinux.org/alpine/aports/-/issues/13661"
+                },
+                {
+                  "label": "https://git.alpinelinux.org/aports/plain/main/busybox/0001-libbb-sockaddr2str-ensure-only-printable-characters-.patch",
+                  "href": "https://git.alpinelinux.org/aports/plain/main/busybox/0001-libbb-sockaddr2str-ensure-only-printable-characters-.patch"
+                }
+              ],
+              "description": "BusyBox through 1.35.0 allows remote attackers to execute arbitrary code if netstat is used to print a DNS PTR record's value to a VT compatible terminal. Alternatively, the attacker could choose to change the terminal's colors.",
+              "cvssScore": "8.8",
+              "cvssVersion": "3"
+            },
+            "id": "/subscriptions/07aed47b-60ad-4d6e-a07a-000000000000/resourceGroups/FirmwareAnalysisRG/providers/Microsoft.IoTFirmwareDefense/workspaces/default/firmwares/109a9886-50bf-85a8-9d75-000000000000/cves/fad414da-0055-4dfb-a3d4-000000000000",
+            "name": "fad414da-0055-4dfb-a3d4-000000000000",
+            "type": "Microsoft.IoTFirmwareDefense/workspaces/firmwares/cves"
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}

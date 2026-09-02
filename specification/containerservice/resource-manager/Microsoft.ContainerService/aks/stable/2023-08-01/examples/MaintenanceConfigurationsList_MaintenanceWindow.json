@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2023-08-01",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/aksManagedNodeOSUpgradeSchedule",
+            "name": "aksManagedNodeOSUpgradeSchedule",
+            "properties": {
+              "maintenanceWindow": {
+                "schedule": {
+                  "daily": {
+                    "intervalDays": 5
+                  }
+                },
+                "durationHours": 10,
+                "utcOffset": "-07:00",
+                "startDate": "2023-01-01",
+                "startTime": "13:30"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/aksManagedAutoUpgradeSchedule",
+            "name": "aksManagedAutoUpgradeSchedule",
+            "properties": {
+              "maintenanceWindow": {
+                "schedule": {
+                  "absoluteMonthly": {
+                    "intervalMonths": 3,
+                    "dayOfMonth": 15
+                  }
+                },
+                "durationHours": 5,
+                "utcOffset": "+00:00",
+                "startDate": "2023-01-01",
+                "startTime": "08:30",
+                "notAllowedDates": [
+                  {
+                    "start": "2023-02-18",
+                    "end": "2023-02-25"
+                  },
+                  {
+                    "start": "2023-12-23",
+                    "end": "2024-01-05"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

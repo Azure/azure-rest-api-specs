@@ -1,0 +1,282 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-01-01",
+    "title": "AzureBridgeAdminClient",
+    "description": "AzureBridge Admin Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts": {
+      "get": {
+        "x-ms-examples": {
+          "Get a list of downloaded products.": {
+            "$ref": "./examples/DownloadedProduct/List.json"
+          }
+        },
+        "description": "Get a list of downloaded products.",
+        "tags": [
+          "DownloadedProducts"
+        ],
+        "operationId": "DownloadedProducts_List",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DownloadedProductResourcesPage"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts/{productName}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the specified downloaded product.": {
+            "$ref": "./examples/DownloadedProduct/Get.json"
+          }
+        },
+        "description": "Get a downloaded product.",
+        "tags": [
+          "DownloadedProducts"
+        ],
+        "operationId": "DownloadedProducts_Get",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Deletes the specified downloaded product.": {
+            "$ref": "./examples/DownloadedProduct/Delete.json"
+          }
+        },
+        "description": "Delete a downloaded product.",
+        "tags": [
+          "DownloadedProducts"
+        ],
+        "operationId": "DownloadedProducts_Delete",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "x-ms-examples": {
+          "Puts the specified downloaded product.": {
+            "$ref": "./examples/DownloadedProduct/Put.json"
+          }
+        },
+        "description": "Creates a downloaded product.",
+        "tags": [
+          "DownloadedProducts"
+        ],
+        "operationId": "DownloadedProducts_Create",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DownloadedProductParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "DownloadedProductResourcesPage": {
+      "description": "Holds an array of downloaded products and the URI to the next page.",
+      "properties": {
+        "value": {
+          "description": "Array of downloaded products.",
+          "type": "array",
+          "items": {
+            "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DownloadedProductParameter": {
+      "description": "Downloaded product resource definition.",
+      "name": "downloadedProduct",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

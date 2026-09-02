@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2017-10-12",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "hostName": "endpoint1.azureedge.net",
+        "originHostHeader": "www.bing.com",
+        "provisioningState": "Succeeded",
+        "resourceState": "Stopping",
+        "isHttpAllowed": true,
+        "isHttpsAllowed": true,
+        "queryStringCachingBehavior": "NotSet",
+        "originPath": null,
+        "origins": [
+          {
+            "name": "www-bing-com",
+            "properties": {
+              "hostName": "www.bing.com",
+              "httpPort": 80,
+              "httpsPort": 443
+            }
+          }
+        ],
+        "customDomains": [],
+        "contentTypesToCompress": [],
+        "isCompressionEnabled": false,
+        "optimizationType": "DynamicSiteAcceleration",
+        "probePath": "/image",
+        "geoFilters": []
+      }
+    }
+  }
+}

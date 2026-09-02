@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "jobName": "j1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.DocumentDB/databaseAccounts/dataTransferJobs",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/dataTransferJobs/j1",
+        "properties": {
+          "destination": {
+            "component": "AzureBlobStorage",
+            "containerName": "blob_container",
+            "endpointUrl": "https://blob.windows.net"
+          },
+          "duration": "01:23:56",
+          "jobName": "j1",
+          "lastUpdatedUtcTime": "2021-06-12T12:04:23.1530000Z",
+          "processedCount": 50,
+          "source": {
+            "component": "CosmosDBCassandra",
+            "keyspaceName": "keyspace",
+            "tableName": "table"
+          },
+          "status": "Completed",
+          "totalCount": 50
+        }
+      }
+    }
+  },
+  "operationId": "DataTransferJobs_Get",
+  "title": "CosmosDBDataTransferJobGet"
+}

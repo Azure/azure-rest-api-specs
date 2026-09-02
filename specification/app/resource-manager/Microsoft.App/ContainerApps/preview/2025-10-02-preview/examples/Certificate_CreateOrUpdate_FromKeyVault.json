@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "certificateEnvelope": {
+      "location": "East US",
+      "properties": {
+        "certificateKeyVaultProperties": {
+          "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/microsoft.managedidentity/userassignedidentities/test-user-mi",
+          "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/certificates/certName"
+        },
+        "certificateType": "ServerSSLCertificate"
+      }
+    },
+    "certificateName": "certificate-firendly-name",
+    "environmentName": "testcontainerenv",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.App/ManagedEnvironments/Certificates",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-firendly-name",
+        "location": "East US",
+        "properties": {
+          "certificateKeyVaultProperties": {
+            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/microsoft.managedidentity/userassignedidentities/test-user-mi",
+            "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/certificates/certName"
+          },
+          "certificateType": "ServerSSLCertificate",
+          "expirationDate": "2022-11-06T04:00:00Z",
+          "issueDate": "2021-11-06T04:00:00Z",
+          "issuer": "Issuer Name",
+          "provisioningState": "Succeeded",
+          "subjectAlternativeNames": [
+            "CN=my-subject-name.com"
+          ],
+          "subjectName": "my-subject-name.company.country.net",
+          "thumbprint": "CERTIFICATE_THUMBPRINT",
+          "valid": true
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Certificates_CreateOrUpdate",
+  "title": "Create or Update Certificate using Managed Identity"
+}

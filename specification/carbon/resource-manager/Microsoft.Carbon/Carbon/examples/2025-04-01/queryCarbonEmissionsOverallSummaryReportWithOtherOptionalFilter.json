@@ -1,0 +1,54 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReports",
+  "title": "QueryCarbonEmission Overall Summary Report with optional filter - locationList, resourceTypeList, resourceGroupUrlList",
+  "parameters": {
+    "api-version": "2025-04-01",
+    "queryParameters": {
+      "reportType": "OverallSummaryReport",
+      "subscriptionList": [
+        "00000000-0000-0000-0000-000000000000"
+      ],
+      "carbonScopeList": [
+        "Scope1",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2023-06-01",
+        "end": "2023-06-01"
+      },
+      "locationList": [
+        "east us",
+        "west us"
+      ],
+      "resourceTypeList": [
+        "microsoft.storage/storageaccounts",
+        "microsoft.databricks/workspaces"
+      ],
+      "resourceGroupUrlList": [
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg-name"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for overall summary report.",
+      "body": {
+        "subscriptionAccessDecisionList": [
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "decision": "Allowed"
+          }
+        ],
+        "value": [
+          {
+            "dataType": "OverallSummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05
+          }
+        ]
+      }
+    }
+  }
+}

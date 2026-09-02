@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "language": "en",
+          "id": "1",
+          "text": "I had a wonderful trip to Seattle last week."
+        },
+        {
+          "language": "en",
+          "id": "2",
+          "text": "I work at Microsoft."
+        },
+        {
+          "language": "en",
+          "id": "3",
+          "text": "I visited Space Needle 2 times."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "id": "1",
+            "entities": [
+              {
+                "name": "Seattle",
+                "matches": [
+                  {
+                    "text": "Seattle",
+                    "offset": 26,
+                    "length": 7,
+                    "score": 0.15046201222847677
+                  }
+                ],
+                "language": "en",
+                "id": "Seattle",
+                "url": "https://en.wikipedia.org/wiki/Seattle",
+                "dataSource": "Wikipedia"
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "entities": [
+              {
+                "name": "Microsoft",
+                "matches": [
+                  {
+                    "text": "Microsoft",
+                    "offset": 10,
+                    "length": 9,
+                    "score": 0.1869365971673207
+                  }
+                ],
+                "language": "en",
+                "id": "Microsoft",
+                "url": "https://en.wikipedia.org/wiki/Microsoft",
+                "dataSource": "Wikipedia"
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "entities": [
+              {
+                "name": "Space Needle",
+                "matches": [
+                  {
+                    "text": "Space Needle",
+                    "offset": 10,
+                    "length": 12,
+                    "score": 0.155903620065595
+                  }
+                ],
+                "language": "en",
+                "id": "Space Needle",
+                "url": "https://en.wikipedia.org/wiki/Space_Needle",
+                "dataSource": "Wikipedia"
+              }
+            ]
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2019-10-01"
+      }
+    }
+  }
+}

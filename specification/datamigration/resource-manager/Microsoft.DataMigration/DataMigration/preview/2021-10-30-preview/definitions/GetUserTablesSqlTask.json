@@ -1,0 +1,72 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-10-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "GetUserTablesSqlTaskInput": {
+      "type": "object",
+      "description": "Input for the task that collects user tables for the given list of databases",
+      "properties": {
+        "connectionInfo": {
+          "description": "Connection information for SQL Server",
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        },
+        "selectedDatabases": {
+          "type": "array",
+          "description": "List of database names to collect tables for",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "connectionInfo",
+        "selectedDatabases"
+      ]
+    },
+    "GetUserTablesSqlTaskOutput": {
+      "type": "object",
+      "description": "Output of the task that collects user tables for the given list of databases",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "databasesToTables": {
+          "type": "string",
+          "description": "Mapping from database name to list of tables",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "./TasksCommon.json#/definitions/DatabaseTable"
+            }
+          },
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

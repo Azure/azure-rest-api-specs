@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-06-01-preview",
+    "subscriptionId": "subid",
+    "certificateId": "templateCertkv",
+    "parameters": {
+      "properties": {
+        "keyVault": {
+          "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+          "secretIdentifier": "https://rpbvtkeyvaultintegration.vault-int.azure-int.net/secrets/msitestingCert"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/templateCertkv",
+        "type": "Microsoft.ApiManagement/service/certificates",
+        "name": "templateCertkv",
+        "properties": {
+          "subject": "CN=*.msitesting.net",
+          "thumbprint": "EA**********************9AD690",
+          "expirationDate": "2037-01-01T07:00:00Z",
+          "keyVault": {
+            "secretIdentifier": "https://rpbvtkeyvaultintegration.vault-int.azure-int.net/secrets/msitestingCert",
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-22T00:24:53.3191468Z"
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/templateCertkv",
+        "type": "Microsoft.ApiManagement/service/certificates",
+        "name": "templateCertkv",
+        "properties": {
+          "subject": "CN=*.msitesting.net",
+          "thumbprint": "EA**********************9AD690",
+          "expirationDate": "2037-01-01T07:00:00Z",
+          "keyVault": {
+            "secretIdentifier": "https://rpbvtkeyvaultintegration.vault-int.azure-int.net/secrets/msitestingCert",
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-22T00:24:53.3191468Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}

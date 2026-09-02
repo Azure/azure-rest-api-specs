@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "querySpecification": {
+      "query": "SELECT * FROM DIGITALTWINS WHERE temp = 79"
+    },
+    "api-version": "2022-05-31"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "$dtId": "Twin-01",
+            "$metadata": {
+              "$lastUpdateTime": "2022-02-28T00:30:00.1234567Z",
+              "$model": "dtmi:com:example:Sample;1",
+              "name": {
+                "lastUpdateTime": "2022-02-28T00:30:00.1234567Z"
+              },
+              "temp": {
+                "lastUpdateTime": "2022-02-28T00:30:00.1234567Z"
+              },
+              "comfortIndex": {
+                "lastUpdateTime": "2022-02-28T00:30:00.1234567Z"
+              }
+            },
+            "name": "Sample01",
+            "temp": 79,
+            "comfortIndex": 50
+          },
+          {
+            "$dtId": "Twin-02",
+            "$metadata": {
+              "$lastUpdateTime": "2022-02-28T00:29:00.1234567Z",
+              "$model": "dtmi:com:example:Sample;1",
+              "name": {
+                "lastUpdateTime": "2022-02-28T00:29:00.1234567Z"
+              },
+              "temp": {
+                "lastUpdateTime": "2022-02-28T00:29:00.1234567Z",
+                "sourceTime": "2022-05-31T12:00:00.000125009Z"
+              },
+              "comfortIndex": {
+                "lastUpdateTime": "2022-02-28T00:29:00.1234567Z"
+              }
+            },
+            "name": "Sample02",
+            "temp": 79,
+            "comfortIndex": 50
+          },
+          {
+            "$dtId": "Twin-03",
+            "$metadata": {
+              "$lastUpdateTime": "2022-02-28T00:31:00.1234567Z",
+              "$model": "dtmi:com:example:Sample;1",
+              "name": {
+                "lastUpdateTime": "2022-02-28T00:31:00.1234567Z"
+              },
+              "temp": {
+                "lastUpdateTime": "2022-02-28T00:31:00.1234567Z"
+              },
+              "comfortIndex": {
+                "lastUpdateTime": "2022-02-28T00:31:00.1234567Z"
+              }
+            },
+            "name": "Sample03",
+            "temp": 79,
+            "comfortIndex": 50
+          }
+        ],
+        "continuationToken": "<token>"
+      }
+    }
+  }
+}

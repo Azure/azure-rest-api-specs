@@ -1,0 +1,313 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on Quota entity associated with your Azure API Management deployment. To configure call rate limit and quota policies refer to [how to configure call rate limit and quota](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies).",
+    "version": "2017-03-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{apimBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "apimBaseUrl",
+        "description": "The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "paths": {
+    "/quotas/{quotaCounterKey}": {
+      "get": {
+        "tags": [
+          "QuotaByCounterKeys"
+        ],
+        "operationId": "QuotaByCounterKeys_List",
+        "description": "Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.",
+        "x-ms-examples": {
+          "ApiManagementGetQuotas": {
+            "$ref": "./examples/ApiManagementGetQuotas.json"
+          }
+        },
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies",
+          "description": "Document describing how to configure the quota policies."
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of the quota counter values.",
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "QuotaByCounterKeys"
+        ],
+        "operationId": "QuotaByCounterKeys_Update",
+        "description": "Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.",
+        "x-ms-examples": {
+          "ApiManagementPatchQuotas": {
+            "$ref": "./examples/ApiManagementPatchQuotas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterValueContractProperties"
+            },
+            "description": "The value of the quota counter to be applied to all quota counter periods."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Quota counter period was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/quotas/{quotaCounterKey}/{quotaPeriodKey}": {
+      "get": {
+        "tags": [
+          "QuotaByPeriodKeys"
+        ],
+        "operationId": "QuotaByPeriodKeys_Get",
+        "description": "Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.",
+        "x-ms-examples": {
+          "ApiManagementGetQuotasByQuotaPeriod": {
+            "$ref": "./examples/ApiManagementGetQuotasByQuotaPeriod.json"
+          }
+        },
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies",
+          "description": "Document describing how to configure the quota policies."
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the Quota counter details for the specified period.",
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "QuotaByPeriodKeys"
+        ],
+        "operationId": "QuotaByPeriodKeys_Update",
+        "description": "Updates an existing quota counter value in the specified service instance.",
+        "x-ms-examples": {
+          "ApiManagementPatchQuotasByQuotaPeriod": {
+            "$ref": "./examples/ApiManagementPatchQuotasByQuotaPeriod.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterValueContractProperties"
+            },
+            "description": "The value of the Quota counter to be applied on the specified period."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The quota counter value was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "QuotaCounterCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaCounterContract"
+          },
+          "description": "Quota counter values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Quota Counter list representation."
+    },
+    "QuotaCounterContract": {
+      "properties": {
+        "counterKey": {
+          "type": "string",
+          "description": "The Key value of the Counter. Must not be empty.",
+          "minLength": 1
+        },
+        "periodKey": {
+          "type": "string",
+          "description": "Identifier of the Period for which the counter was collected. Must not be empty.",
+          "minLength": 1
+        },
+        "periodStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "periodEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "Value": {
+          "$ref": "#/definitions/QuotaCounterValueContractProperties",
+          "description": "Quota Value Properties"
+        }
+      },
+      "required": [
+        "counterKey",
+        "periodKey",
+        "periodStartTime",
+        "periodEndTime"
+      ],
+      "description": "Quota counter details."
+    },
+    "QuotaCounterValueContract": {
+      "properties": {
+        "value": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaCounterValueContractProperties",
+          "description": "Quota counter Value Properties."
+        }
+      },
+      "description": "Quota counter value details."
+    },
+    "QuotaCounterValueContractProperties": {
+      "properties": {
+        "callsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times Counter was called."
+        },
+        "kbTransferred": {
+          "type": "number",
+          "format": "double",
+          "description": "Data Transferred in KiloBytes."
+        }
+      },
+      "description": "Quota counter value details."
+    }
+  },
+  "parameters": {
+    "QuotaCounterKeyParameter": {
+      "name": "quotaCounterKey",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key",
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaPeriodKeyParameter": {
+      "name": "quotaPeriodKey",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Quota period key identifier.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

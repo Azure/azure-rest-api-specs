@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "authorizationProviderId": "aadwithclientcred",
+    "authorizationId": "authz1",
+    "parameters": {
+      "properties": {
+        "authorizationType": "OAuth2",
+        "oauth2grantType": "AuthorizationCode",
+        "parameters": {
+          "clientId": "clientsecretid",
+          "clientSecret": "clientsecretvalue"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred/authorizations/authz1",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+        "name": "authz1",
+        "properties": {
+          "authorizationType": "OAuth2",
+          "oauth2grantType": "ClientCredentials",
+          "parameters": {
+            "clientId": "clientsecretid"
+          },
+          "status": "Connected"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred/authorizations/authz1",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+        "name": "authz1",
+        "properties": {
+          "authorizationType": "OAuth2",
+          "oauth2grantType": "ClientCredentials",
+          "parameters": {
+            "clientId": "clientsecretid"
+          },
+          "status": "Connected"
+        }
+      }
+    }
+  }
+}

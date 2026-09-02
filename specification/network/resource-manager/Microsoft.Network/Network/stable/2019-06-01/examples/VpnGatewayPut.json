@@ -1,0 +1,170 @@
+{
+  "parameters": {
+    "gatewayName": "gateway1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-06-01",
+    "subscriptionId": "subid",
+    "vpnGatewayParameters": {
+      "location": "westcentralus",
+      "tags": {
+        "key1": "value1"
+      },
+      "properties": {
+        "virtualHub": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1"
+        },
+        "connections": [
+          {
+            "name": "vpnConnection1",
+            "properties": {
+              "remoteVpnSite": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+              },
+              "vpnLinkConnections": [
+                {
+                  "name": "Connection-Link1",
+                  "properties": {
+                    "vpnSiteLink": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+                    },
+                    "connectionBandwidth": 200,
+                    "vpnConnectionProtocolType": "IKEv2",
+                    "sharedKey": "key"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "bgpSettings": {
+          "asn": 65515,
+          "peerWeight": 0
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "gateway1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "location": "West US",
+        "type": "Microsoft.Network/vpnGateways",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1"
+          },
+          "connections": [
+            {
+              "name": "vpnConnection1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "remoteVpnSite": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+                },
+                "enableInternetSecurity": false,
+                "ingressBytesTransferred": 0,
+                "egressBytesTransferred": 0,
+                "vpnLinkConnections": [
+                  {
+                    "name": "Connection-Link1",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/VpnSiteLinkConnections/Connection-Link1",
+                    "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+                    "type": "Microsoft.Network/vpnGateways/vpnConnections/VpnSiteLinkConnections",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "vpnSiteLink": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+                      },
+                      "connectionBandwidth": 200,
+                      "ipsecPolicies": [],
+                      "vpnConnectionProtocolType": "IKEv2",
+                      "sharedKey": "key",
+                      "ingressBytesTransferred": 0,
+                      "egressBytesTransferred": 0,
+                      "enableBgp": false,
+                      "enableRateLimiting": false,
+                      "useLocalAzureIpAddress": false,
+                      "usePolicyBasedTrafficSelectors": false,
+                      "routingWeight": 0
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "bgpSettings": {
+            "asn": 65514,
+            "bgpPeeringAddress": "10.0.1.30",
+            "peerWeight": 0
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "gateway1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "location": "West US",
+        "type": "Microsoft.Network/vpnGateways",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1"
+          },
+          "connections": [
+            {
+              "name": "vpnConnection1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "remoteVpnSite": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+                },
+                "enableInternetSecurity": false,
+                "ingressBytesTransferred": 0,
+                "egressBytesTransferred": 0,
+                "vpnLinkConnections": [
+                  {
+                    "name": "Connection-Link1",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/VpnSiteLinkConnections/Connection-Link1",
+                    "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+                    "type": "Microsoft.Network/vpnGateways/vpnConnections/VpnSiteLinkConnections",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "vpnSiteLink": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+                      },
+                      "connectionBandwidth": 200,
+                      "ipsecPolicies": [],
+                      "vpnConnectionProtocolType": "IKEv2",
+                      "sharedKey": "key",
+                      "ingressBytesTransferred": 0,
+                      "egressBytesTransferred": 0,
+                      "enableBgp": false,
+                      "enableRateLimiting": false,
+                      "useLocalAzureIpAddress": false,
+                      "usePolicyBasedTrafficSelectors": false,
+                      "routingWeight": 0
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "bgpSettings": {
+            "asn": 65514,
+            "bgpPeeringAddress": "10.0.1.30",
+            "peerWeight": 0
+          }
+        }
+      }
+    }
+  }
+}

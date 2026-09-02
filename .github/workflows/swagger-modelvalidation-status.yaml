@@ -1,0 +1,40 @@
+name: "Swagger ModelValidation - Set Status"
+
+on:
+  # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
+  # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
+  # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
+  # which simplifies implementation.
+  pull_request_target:
+    types:
+      # Run workflow on default types, to update status as quickly as possible.
+      - opened
+      - synchronize
+      - reopened
+      # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
+      - labeled
+      - unlabeled
+  workflow_run:
+    # Trigger on both old and new names, to handle the rename more gracefully
+    workflows:
+      [
+        "Swagger ModelValidation - Analyze Code",
+        "\\[TEST-IGNORE\\] Swagger ModelValidation - Analyze Code",
+      ]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  issues: read
+  pull-requests: read
+  statuses: write
+
+jobs:
+  model-validation-status:
+    name: Set ModelValidation Status
+    uses: ./.github/workflows/_reusable-set-check-status.yaml
+    with:
+      monitored_workflow_name: "Swagger ModelValidation - Analyze Code"
+      required_check_name: "Swagger ModelValidation"
+      overriding_label: "Approved-ModelValidation"

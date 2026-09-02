@@ -1,0 +1,145 @@
+{
+  "parameters": {
+    "deploymentResource": {
+      "properties": {
+        "source": {
+          "type": "Container",
+          "customContainer": {
+            "server": "mynewacr.azurecr.io",
+            "containerImage": "myNewContainerImage:v1",
+            "command": [
+              "/bin/sh"
+            ],
+            "args": [
+              "-c",
+              "while true; do echo hello; sleep 10;done"
+            ],
+            "imageRegistryCredential": {
+              "username": "myNewUsername",
+              "password": "<myNewPassword>"
+            }
+          }
+        },
+        "instances": null
+      }
+    },
+    "api-version": "2022-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "appName": "myapp",
+    "deploymentName": "mydeployment"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "source": {
+            "type": "Container",
+            "customContainer": {
+              "server": "mynewacr.azurecr.io",
+              "containerImage": "myNewContainerImage:v1",
+              "imageRegistryCredential": {
+                "username": "myNewUsername",
+                "password": ""
+              }
+            }
+          },
+          "deploymentSettings": {
+            "resourceRequests": {
+              "cpu": "1000m",
+              "memory": "3Gi"
+            },
+            "environmentVariables": {
+              "env": "test"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Running",
+          "active": false,
+          "instances": [
+            {
+              "name": "instance1",
+              "status": "Running",
+              "discoveryStatus": "N/A",
+              "startTime": "2020-08-26T01:55:02Z"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
+        "name": "mydeployment"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2022-05-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2022-05-01-preview"
+      },
+      "body": {
+        "properties": {
+          "source": {
+            "type": "Container",
+            "customContainer": {
+              "server": "mynewacr.azurecr.io",
+              "containerImage": "myNewContainerImage:v1",
+              "imageRegistryCredential": {
+                "username": "myNewUsername",
+                "password": ""
+              }
+            }
+          },
+          "deploymentSettings": {
+            "resourceRequests": {
+              "cpu": "1000m",
+              "memory": "3Gi"
+            },
+            "environmentVariables": {
+              "env": "test"
+            }
+          },
+          "provisioningState": "Updating",
+          "status": "Running",
+          "active": false,
+          "instances": [
+            {
+              "name": "instance1",
+              "status": "Running",
+              "discoveryStatus": "N/A",
+              "startTime": "2020-08-26T01:55:02Z"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
+        "name": "mydeployment"
+      }
+    }
+  }
+}

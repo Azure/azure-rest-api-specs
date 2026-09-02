@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "ruleName": "ExampleIpFirewallRule",
+    "api-version": "2021-06-01-preview",
+    "ipFirewallRuleInfo": {
+      "properties": {
+        "startIpAddress": "10.0.0.0",
+        "endIpAddress": "10.0.0.254"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/firewallRules/ExampleIpFirewallRule",
+        "type": "Microsoft.Synapse/workspaces/firewallRules",
+        "name": "ExampleIpFirewallRule",
+        "properties": {
+          "startIpAddress": "10.0.0.0",
+          "endIpAddress": "10.0.0.254",
+          "provisioningState": "Provisioning"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/firewallRules/ExampleIpFirewallRule",
+        "type": "Microsoft.Synapse/workspaces/firewallRules",
+        "name": "ExampleIpFirewallRule",
+        "properties": {
+          "startIpAddress": "10.0.0.0",
+          "endIpAddress": "10.0.0.254",
+          "provisioningState": "Provisioning"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

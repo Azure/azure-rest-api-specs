@@ -1,0 +1,45 @@
+{
+  "title": "Occurrences_ListResources_MaximumSet",
+  "operationId": "Occurrences_ListResources",
+  "parameters": {
+    "api-version": "2026-04-15-preview",
+    "subscriptionId": "732116BD-AF31-4E74-9283-B387C44B4A44",
+    "resourceGroupName": "rgcomputeschedule",
+    "scheduledActionName": "scheduled-action-01",
+    "occurrenceId": "11111111-1111-1111-1111-111111111111"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myVm",
+            "id": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+            "type": "Microsoft.ComputeSchedule/scheduledActions/occurrences/resources",
+            "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+            "notificationSettings": [
+              {
+                "destination": "admin@contoso.com",
+                "type": "Email",
+                "language": "en-us",
+                "disabled": true
+              }
+            ],
+            "scheduledTime": "2026-03-12T02:39:48.436Z",
+            "provisioningState": "Succeeded",
+            "errorDetails": {
+              "code": "ResourceNotFound",
+              "message": "The specified resource was not found.",
+              "target": "virtualMachines/myVm",
+              "details": [],
+              "innererror": {
+                "code": "ResourceNotFoundError"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/732116BD-AF31-4E74-9283-B387C44B4A44/providers/Microsoft.ComputeSchedule/scheduledActions?api-version=2026-04-15-preview&$skiptoken=abc123"
+      }
+    }
+  }
+}

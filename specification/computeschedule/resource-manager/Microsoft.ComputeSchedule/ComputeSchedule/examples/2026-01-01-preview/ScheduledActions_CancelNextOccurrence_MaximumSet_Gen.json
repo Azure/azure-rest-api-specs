@@ -1,0 +1,37 @@
+{
+  "title": "ScheduledActions_CancelNextOccurrence_MaximumSet",
+  "operationId": "ScheduledActions_CancelNextOccurrence",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "067DEB5E-4E15-4A54-B546-DA48FCED4531",
+    "resourceGroupName": "rgcomputeschedule",
+    "scheduledActionName": "scheduledaction-test",
+    "body": {
+      "resourceIds": [
+        "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/vm-test"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalResources": 27,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/vm-test",
+            "status": "Succeeded",
+            "error": {
+              "code": "nqxotublbaaqnbvgkrqbajtwo",
+              "message": "ght",
+              "target": "bsxjdzkenjxkgyyagxykzlfeueoac",
+              "details": [],
+              "innererror": {
+                "code": "mfetjmmhbkqdbkuvbtblslrgw"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

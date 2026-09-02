@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "billingAccountId": "1234",
+    "departmentId": "42425",
+    "scope": "providers/Microsoft.Billing/BillingAccounts/1234",
+    "$filter": "usageStart eq '2018-04-01' AND usageEnd eq '2018-05-30'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/1234/departments/42425/providers/Microsoft.Consumption/charges/chargeSummaryId1",
+        "name": "chargeSummaryId1",
+        "type": "Microsoft.Consumption/charges",
+        "properties": {
+          "billingPeriodId": "/providers/Microsoft.Billing/BillingAccounts/1234/providers/Microsoft.Billing/billingPeriods/201804",
+          "usageStart": "2018-04-01",
+          "usageEnd": "2018-04-30",
+          "azureCharges": 5000.00,
+          "chargesBilledSeparately": 60.90,
+          "marketplaceCharges": 100.00,
+          "currency": "USD"
+        }
+      }
+    }
+  }
+}

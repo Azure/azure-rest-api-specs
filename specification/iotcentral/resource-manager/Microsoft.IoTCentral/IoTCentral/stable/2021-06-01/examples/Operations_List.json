@@ -1,0 +1,317 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "code": "200"
+      },
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.IoTCentral/IoTApps/read",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "IoTApps",
+              "operation": "Get IoT Central Application",
+              "description": "Gets a single IoT Central Application"
+            }
+          },
+          {
+            "name": "Microsoft.IoTCentral/IoTApps/write",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "IoTApps",
+              "operation": "Create or Update IoT Central Application",
+              "description": "Creates or Updates an IoT Central Applications"
+            }
+          },
+          {
+            "name": "Microsoft.IoTCentral/IoTApps/delete",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "IoTApps",
+              "operation": "Delete IoT Central Application",
+              "description": "Deletes an IoT Central Applications"
+            }
+          },
+          {
+            "name": "Microsoft.IoTCentral/checkNameAvailability/action",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "",
+              "operation": "Check resource name availability",
+              "description": "Checks if an IoT Central Application name is available"
+            }
+          },
+          {
+            "name": "Microsoft.IoTCentral/checkSubdomainAvailability/action",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "",
+              "operation": "Check resource subdomain availability",
+              "description": "Checks if an IoT Central Application subdomain is available"
+            }
+          },
+          {
+            "name": "Microsoft.IoTCentral/operations/read",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "",
+              "operation": "Get all the available operations",
+              "description": "Gets all the available operations on IoT Central Applications"
+            }
+          },
+          {
+            "name": "Microsoft.IoTCentral/appTemplates/action",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "Azure IoT Central Resource Provider",
+              "operation": "Get all available application templates",
+              "description": "Gets all the available application templates on Azure IoT Central"
+            }
+          },
+          {
+            "name": "Microsoft.IoTCentral/register/action",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "Azure IoT Central Resource Provider",
+              "operation": "Register Azure IoT Central resource provider",
+              "description": "Register the subscription for Azure IoT Central resource provider"
+            }
+          },
+          {
+            "name": "Microsoft.IoTCentral/IoTApps/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "IoTApps",
+              "operation": "Get all available Metrics definitions",
+              "description": "Gets all the available Metrics definitions on Azure IoT Central"
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "connectedDeviceCount",
+                    "displayName": "Total Connected Devices",
+                    "displayDescription": "Number of devices connected to IoT Central",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1M",
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "lockAggregationType": "Total"
+                  },
+                  {
+                    "name": "c2d.property.read.success",
+                    "displayName": "Successful Device Property Reads from IoT Central",
+                    "displayDescription": "The count of all successful property reads initiated from IoT Central",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "supportedAggregationTypes": [
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1M",
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "c2d.property.read.failure",
+                    "displayName": "Failed Device Property Reads from IoT Central",
+                    "displayDescription": "The count of all failed property reads initiated from IoT Central",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "supportedAggregationTypes": [
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1M",
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "d2c.property.read.success",
+                    "displayName": "Successful Device Property Reads from Devices",
+                    "displayDescription": "The count of all successful property reads initiated from devices",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "supportedAggregationTypes": [
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1M",
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "d2c.property.read.failure",
+                    "displayName": "Failed Device Property Reads from Devices",
+                    "displayDescription": "The count of all failed property reads initiated from devices",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "supportedAggregationTypes": [
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1M",
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "c2d.property.update.success",
+                    "displayName": "Successful Device Property Updates from IoT Central",
+                    "displayDescription": "The count of all successful property updates initiated from IoT Central",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "supportedAggregationTypes": [
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1M",
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "c2d.property.update.failure",
+                    "displayName": "Failed Device Property Updates from IoT Central",
+                    "displayDescription": "The count of all failed property updates initiated from IoT Central",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "supportedAggregationTypes": [
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1M",
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "d2c.property.update.success",
+                    "displayName": "Successful Device Property Updates from Devices",
+                    "displayDescription": "The count of all successful property updates initiated from devices",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "supportedAggregationTypes": [
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1M",
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  },
+                  {
+                    "name": "d2c.property.update.failure",
+                    "displayName": "Failed Device Property Updates from Devices",
+                    "displayDescription": "The count of all failed property updates initiated from devices",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "supportedAggregationTypes": [
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT1M",
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.IoTCentral/IoTApps/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "IoTApps",
+              "operation": "Read diagnostic setting",
+              "description": "Gets the diagnostic setting for the resource"
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.IoTCentral/IoTApps/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "provider": "Azure IoT Central",
+              "resource": "IoTApps",
+              "operation": "Write diagnostic setting",
+              "description": "Creates or updates the diagnostic setting for the resource"
+            },
+            "origin": "system"
+          }
+        ],
+        "nextLink": null
+      }
+    },
+    "default": {
+      "description": "Error message returned for an unexpected response",
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "target": "Error target"
+        }
+      }
+    }
+  }
+}

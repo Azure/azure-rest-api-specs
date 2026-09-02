@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "testrg",
+    "loadBalancerName": "lb",
+    "frontendIPConfigurationName": "frontend",
+    "api-version": "2018-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "frontend",
+        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/frontend",
+        "etag": "W/\\\"00000000-0000-0000-0000-000000000000\\\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateIPAddress": "10.0.1.4",
+          "privateIPAllocationMethod": "Dynamic",
+          "subnet": {
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+          },
+          "loadBalancingRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+            }
+          ],
+          "inboundNatRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/inrlb"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "operationId": "TextAuthoringTrainedModel_EvaluateModel",
+  "title": "SuccessfulEvaluationProject",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2025-05-15-preview",
+    "projectName": "LoanAgreements",
+    "trainedModelLabel": "model1",
+    "body": {
+      "kind": "percentage",
+      "testingSplitPercentage": 20,
+      "trainingSplitPercentage": 80
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/models/model1/evaluate/jobs/4d37982f-fded-4c2c-afe3-15953b5919b6_637858368000000000?api-version=2025-05-15-preview"
+      }
+    }
+  }
+}

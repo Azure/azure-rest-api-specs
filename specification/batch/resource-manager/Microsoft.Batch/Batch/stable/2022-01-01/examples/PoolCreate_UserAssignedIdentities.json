@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2022-01-01",
+    "parameters": {
+      "properties": {
+        "vmSize": "STANDARD_D4",
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "publisher": "Canonical",
+              "offer": "UbuntuServer",
+              "sku": "18.04-LTS",
+              "version": "latest"
+            },
+            "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+          }
+        },
+        "scaleSettings": {
+          "autoScale": {
+            "formula": "$TargetDedicatedNodes=1",
+            "evaluationInterval": "PT5M"
+          }
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {},
+          "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "properties": {
+          "lastModified": "2020-10-01T10:22:55.9407275Z",
+          "creationTime": "2020-10-01T10:22:55.9407275Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2020-10-01T10:22:55.9407275Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2020-10-01T10:22:55.9407275Z",
+          "vmSize": "STANDARD_D4",
+          "interNodeCommunication": "Disabled",
+          "taskSlotsPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "UbuntuServer",
+                "sku": "18.04-LTS",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+            }
+          },
+          "scaleSettings": {
+            "autoScale": {
+              "formula": "$TargetDedicatedNodes=1",
+              "evaluationInterval": "PT5M"
+            }
+          },
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "principalId1",
+              "clientId": "clientId1"
+            },
+            "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "principalId": "principalId2",
+              "clientId": "clientId2"
+            }
+          }
+        }
+      }
+    }
+  }
+}

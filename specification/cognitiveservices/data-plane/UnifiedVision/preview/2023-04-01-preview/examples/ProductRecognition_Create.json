@@ -1,0 +1,60 @@
+{
+  "title": "Run the product recognition against a model with an image.",
+  "operationId": "ProductRecognition_Create",
+  "parameters": {
+    "modelName": "model-1",
+    "runName": "run-1",
+    "api-version": "2023-04-01-preview"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "runName": "run-1",
+        "modelName": "model-1",
+        "createdDateTime": "2023-04-12T21:56:42.827Z",
+        "updatedDateTime": "2023-04-12T21:56:42.827Z",
+        "status": "completed",
+        "result": {
+          "imageMetadata": {
+            "width": 660,
+            "height": 495
+          },
+          "products": [
+            {
+              "id": "1",
+              "boundingBox": {
+                "x": 197,
+                "y": 68,
+                "w": 356,
+                "h": 394
+              },
+              "tags": [
+                {
+                  "name": "class1",
+                  "confidence": 0.92431640625
+                }
+              ]
+            }
+          ],
+          "gaps": [
+            {
+              "id": "1",
+              "boundingBox": {
+                "x": 197,
+                "y": 68,
+                "w": 356,
+                "h": 394
+              },
+              "tags": [
+                {
+                  "name": "gap",
+                  "confidence": 0.92431640625
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

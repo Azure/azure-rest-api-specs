@@ -1,0 +1,232 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "accountName": "ddb1",
+    "databaseName": "databaseName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/containers/containerName",
+            "name": "containerName",
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
+            "location": "West US",
+            "tags": {},
+            "properties": {
+              "resource": {
+                "id": "testctn",
+                "indexingPolicy": {
+                  "indexingMode": "consistent",
+                  "automatic": true,
+                  "includedPaths": [
+                    {
+                      "path": "/*",
+                      "indexes": [
+                        {
+                          "kind": "Range",
+                          "dataType": "String",
+                          "precision": -1
+                        },
+                        {
+                          "kind": "Range",
+                          "dataType": "Number",
+                          "precision": -1
+                        }
+                      ]
+                    }
+                  ],
+                  "excludedPaths": []
+                },
+                "partitionKey": {
+                  "paths": [
+                    "/AccountNumber"
+                  ],
+                  "kind": "Hash"
+                },
+                "defaultTtl": 100,
+                "uniqueKeyPolicy": {
+                  "uniqueKeys": [
+                    {
+                      "paths": [
+                        "/testPath"
+                      ]
+                    }
+                  ]
+                },
+                "conflictResolutionPolicy": {
+                  "mode": "LastWriterWins",
+                  "conflictResolutionPath": "/path"
+                },
+                "clientEncryptionPolicy": {
+                  "includedPaths": [
+                    {
+                      "path": "/path",
+                      "clientEncryptionKeyId": "keyId",
+                      "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+                      "encryptionType": "Deterministic"
+                    }
+                  ],
+                  "policyFormatVersion": 1
+                },
+                "computedProperties": [
+                  {
+                    "name": "cp_lowerName",
+                    "query": "SELECT VALUE LOWER(c.name) FROM c"
+                  }
+                ],
+                "_rid": "PD5DALigDgw=",
+                "_ts": 1459200611,
+                "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName1",
+            "name": "containerName1",
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
+            "location": "West US",
+            "tags": {},
+            "properties": {
+              "resource": {
+                "id": "testctn1",
+                "indexingPolicy": {
+                  "indexingMode": "consistent",
+                  "automatic": true,
+                  "includedPaths": [
+                    {
+                      "path": "/*",
+                      "indexes": [
+                        {
+                          "kind": "Range",
+                          "dataType": "String",
+                          "precision": -1
+                        },
+                        {
+                          "kind": "Range",
+                          "dataType": "Number",
+                          "precision": -1
+                        }
+                      ]
+                    }
+                  ],
+                  "excludedPaths": []
+                },
+                "partitionKey": {
+                  "paths": [
+                    "/AccountNumber",
+                    "/AccountLocation"
+                  ],
+                  "kind": "MultiHash",
+                  "version": 2
+                },
+                "defaultTtl": 100,
+                "uniqueKeyPolicy": {
+                  "uniqueKeys": [
+                    {
+                      "paths": [
+                        "/testPath"
+                      ]
+                    }
+                  ]
+                },
+                "conflictResolutionPolicy": {
+                  "mode": "LastWriterWins",
+                  "conflictResolutionPath": "/path"
+                },
+                "clientEncryptionPolicy": {
+                  "includedPaths": [
+                    {
+                      "path": "/path",
+                      "clientEncryptionKeyId": "keyId",
+                      "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+                      "encryptionType": "Deterministic"
+                    }
+                  ],
+                  "policyFormatVersion": 1
+                },
+                "computedProperties": [],
+                "_rid": "PD5DALigDiw=",
+                "_ts": 1459200611,
+                "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName2",
+            "name": "containerName2",
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
+            "location": "West US",
+            "tags": {},
+            "properties": {
+              "resource": {
+                "id": "testctn2",
+                "indexingPolicy": {
+                  "indexingMode": "consistent",
+                  "automatic": true,
+                  "includedPaths": [
+                    {
+                      "path": "/*",
+                      "indexes": [
+                        {
+                          "kind": "Range",
+                          "dataType": "String",
+                          "precision": -1
+                        },
+                        {
+                          "kind": "Range",
+                          "dataType": "Number",
+                          "precision": -1
+                        }
+                      ]
+                    }
+                  ],
+                  "excludedPaths": []
+                },
+                "partitionKey": {
+                  "paths": [
+                    "/_partitionKey"
+                  ],
+                  "kind": "Hash",
+                  "version": 2,
+                  "systemKey": true
+                },
+                "defaultTtl": 100,
+                "uniqueKeyPolicy": {
+                  "uniqueKeys": [
+                    {
+                      "paths": [
+                        "/testPath"
+                      ]
+                    }
+                  ]
+                },
+                "conflictResolutionPolicy": {
+                  "mode": "LastWriterWins",
+                  "conflictResolutionPath": "/path"
+                },
+                "clientEncryptionPolicy": {
+                  "includedPaths": [
+                    {
+                      "path": "/path",
+                      "clientEncryptionKeyId": "keyId",
+                      "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+                      "encryptionType": "Deterministic"
+                    }
+                  ],
+                  "policyFormatVersion": 1
+                },
+                "_rid": "PD5DALigDhw=",
+                "_ts": 1459200611,
+                "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

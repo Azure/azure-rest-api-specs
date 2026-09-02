@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "alertRuleName": "SampleActivityLogAlertSHRuleOnTenantLevel",
+    "api-version": "2023-04-01-preview",
+    "managementGroupName": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+    "tenantActivityLogAlertRulePatch": {
+      "properties": {
+        "enabled": false
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SampleActivityLogAlertSHRuleOnTenantLevel",
+        "type": "Microsoft.AlertsManagement/TenantActivityLogAlerts",
+        "id": "/providers/Microsoft.Management/ManagementGroups/72f988bf-86f1-41af-91ab-2d7cd011db47/providers/Microsoft.AlertsManagement/TenantActivityLogAlerts/SampleActivityLogAlertSHRuleOnTenantLevel",
+        "location": "Global",
+        "properties": {
+          "description": "Description of sample Activity Log Alert service health rule on tenant level events.",
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/providers/Microsoft.Management/ManagementGroups/72f988bf-86f1-41af-91ab-2d7cd011db47/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
+                "actionProperties": {
+                  "Email.Title": "my email title"
+                },
+                "webhookProperties": {
+                  "sampleWebhookProperty": "SamplePropertyValue"
+                }
+              }
+            ]
+          },
+          "condition": {
+            "allOf": [
+              {
+                "equals": "ServiceHealth",
+                "field": "category"
+              }
+            ]
+          },
+          "enabled": false,
+          "tenantScope": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TenantActivityLogAlerts_Update",
+  "title": "Patch a Tenant Activity Log Alert rule"
+}

@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "appName": "myapp",
+    "deploymentName": "mydeployment"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "port": 5005,
+        "enabled": false
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.AppPlatform/...pathToOperationResult..."
+      },
+      "body": {
+        "port": 5005,
+        "enabled": false
+      }
+    }
+  }
+}

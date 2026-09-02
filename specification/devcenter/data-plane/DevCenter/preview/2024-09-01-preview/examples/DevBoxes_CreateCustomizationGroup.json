@@ -1,0 +1,57 @@
+{
+  "title": "Applies customizations to the Dev Box.",
+  "operationId": "DevBoxes_CreateCustomizationGroup",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/",
+    "projectName": "myProject",
+    "userId": "me",
+    "devBoxName": "MyDevBox",
+    "customizationGroupName": "Provisioning",
+    "body": {
+      "tasks": [
+        {
+          "name": "catalogName/choco",
+          "displayName": "Install VS Code",
+          "parameters": {
+            "packageName": "vscode",
+            "packageVersion": "1.0.0"
+          }
+        },
+        {
+          "name": "catalogName/write-to-file",
+          "runAs": "User"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Provisioning",
+        "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/b08e39b4-2ac6-4465-a35e-48322efb0f98/devboxes/MyDevBox/customizationgroups/Provisioning",
+        "tasks": [
+          {
+            "id": "a9202018-fb6a-4007-8b52-26d7c6d1c1fb",
+            "name": "catalogName/choco",
+            "displayName": "Install VS Code",
+            "status": "NotStarted",
+            "parameters": {
+              "packageName": "vscode",
+              "packageVersion": "1.0.0"
+            },
+            "logUri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/b08e39b4-2ac6-4465-a35e-48322efb0f98/devboxes/MyDevBox/customizationgroups/Provisioning/logs/a9202018-fb6a-4007-8b52-26d7c6d1c1fb"
+          },
+          {
+            "id": "91835dc0-ef5a-4f58-9e3a-099aea8481f4",
+            "name": "catalogName/write-to-file",
+            "runAs": "User",
+            "status": "NotStarted",
+            "logUri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/b08e39b4-2ac6-4465-a35e-48322efb0f98/devboxes/MyDevBox/customizationgroups/Provisioning/logs/91835dc0-ef5a-4f58-9e3a-099aea8481f4"
+          }
+        ],
+        "status": "NotStarted"
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2018-08-31",
+    "billingAccountId": "100",
+    "enrollmentAccountId": "456",
+    "$expand": "properties/data",
+    "$top": 5
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/microsoft.consumption/dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
+            "name": "dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
+            "type": "microsoft.consumption/dimensions",
+            "properties": {
+              "data": [
+                "thoroetrg01",
+                "default-notificationhubs-westus",
+                "jedikeyvaultrg",
+                "contosocodeflow8d4a",
+                "noobaa"
+              ],
+              "total": 377,
+              "category": "ResourceGroup",
+              "usageStart": "2018-05-01T00:00:00-07:00",
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "description": "Resource group",
+              "filterEnabled": true,
+              "groupingEnabled": true
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/microsoft.consumption/dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "name": "dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "type": "microsoft.consumption/dimensions",
+            "properties": {
+              "data": [
+                "microsoft.automation/automationaccounts",
+                "microsoft.databricks/workspaces",
+                "microsoft.dbformysql/servers",
+                "microsoft.containerregistry/registries",
+                "microsoft.search/searchservices"
+              ],
+              "total": 37,
+              "category": "ResourceType",
+              "usageStart": "2018-05-01T00:00:00-07:00",
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "description": "Resource type",
+              "filterEnabled": true,
+              "groupingEnabled": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

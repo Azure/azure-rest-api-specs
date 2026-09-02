@@ -1,0 +1,174 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "configurationProfileName": "customConfigurationProfile",
+    "versionName": "version1",
+    "api-version": "2021-04-30-preview",
+    "parameters": {
+      "location": "East US",
+      "tags": {
+        "Organization": "Administration"
+      },
+      "properties": {
+        "configuration": {
+          "Antimalware/Enable": false,
+          "Backup/Enable": false,
+          "VMInsights/Enable": true,
+          "AzureSecurityCenter/Enable": true,
+          "UpdateManagement/Enable": true,
+          "ChangeTrackingAndInventory/Enable": true,
+          "GuestConfiguration/Enable": true,
+          "LogAnalytics/Enable": true,
+          "BootDiagnostics/Enable": true
+        },
+        "overrides": [
+          {
+            "priority": 100,
+            "if": {
+              "field": "$.location",
+              "equals": "eastus"
+            },
+            "then": {
+              "LogAnalytics/Enable": true,
+              "LogAnalytics/Workspace": "/subscriptions/abc/resourceGroups/xyz/providers/Microsoft.La/Workspaces/eastus",
+              "LogAnalytics/Reprovision": true
+            }
+          },
+          {
+            "priority": 200,
+            "if": {
+              "field": "$.location",
+              "equals": "centralcanada"
+            },
+            "then": {
+              "LogAnalytics/Enable": true,
+              "LogAnalytics/Workspace": "/subscriptions/abc/resourceGroups/xyz/providers/Microsoft.La/Workspaces/centralcanada",
+              "LogAnalytics/Reprovision": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile/versions/version1",
+        "name": "customConfigurationProfile/version1",
+        "type": "Microsoft.Automanage/configurationProfiles/versions",
+        "location": "East US",
+        "tags": {
+          "Organization": "Administration"
+        },
+        "properties": {
+          "configuration": {
+            "Antimalware/Enable": false,
+            "Backup/Enable": false,
+            "VMInsights/Enable": true,
+            "AzureSecurityCenter/Enable": true,
+            "UpdateManagement/Enable": true,
+            "ChangeTrackingAndInventory/Enable": true,
+            "GuestConfiguration/Enable": true,
+            "LogAnalytics/Enable": true,
+            "BootDiagnostics/Enable": true
+          },
+          "overrides": [
+            {
+              "priority": 100,
+              "if": {
+                "field": "$.location",
+                "equals": "eastus"
+              },
+              "then": {
+                "LogAnalytics/Enable": true,
+                "LogAnalytics/Workspace": "/subscriptions/abc/resourceGroups/xyz/providers/Microsoft.La/Workspaces/eastus",
+                "LogAnalytics/Reprovision": true
+              }
+            },
+            {
+              "priority": 200,
+              "if": {
+                "field": "$.location",
+                "equals": "centralcanada"
+              },
+              "then": {
+                "LogAnalytics/Enable": true,
+                "LogAnalytics/Workspace": "/subscriptions/abc/resourceGroups/xyz/providers/Microsoft.La/Workspaces/centralcanada",
+                "LogAnalytics/Reprovision": true
+              }
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile/versions/version1",
+        "name": "customConfigurationProfile/version1",
+        "type": "Microsoft.Automanage/configurationProfiles/versions",
+        "location": "East US",
+        "tags": {
+          "Organization": "Administration"
+        },
+        "properties": {
+          "configuration": {
+            "Antimalware/Enable": false,
+            "Backup/Enable": false,
+            "VMInsights/Enable": true,
+            "AzureSecurityCenter/Enable": true,
+            "UpdateManagement/Enable": true,
+            "ChangeTrackingAndInventory/Enable": true,
+            "GuestConfiguration/Enable": true,
+            "LogAnalytics/Enable": true,
+            "BootDiagnostics/Enable": true
+          },
+          "overrides": [
+            {
+              "priority": 100,
+              "if": {
+                "field": "$.location",
+                "equals": "eastus"
+              },
+              "then": {
+                "LogAnalytics/Enable": true,
+                "LogAnalytics/Workspace": "/subscriptions/abc/resourceGroups/xyz/providers/Microsoft.La/Workspaces/eastus",
+                "LogAnalytics/Reprovision": true
+              }
+            },
+            {
+              "priority": 200,
+              "if": {
+                "field": "$.location",
+                "equals": "centralcanada"
+              },
+              "then": {
+                "LogAnalytics/Enable": true,
+                "LogAnalytics/Workspace": "/subscriptions/abc/resourceGroups/xyz/providers/Microsoft.La/Workspaces/centralcanada",
+                "LogAnalytics/Reprovision": true
+              }
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        }
+      }
+    }
+  }
+}

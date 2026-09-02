@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "groupId": "TestGroup",
+    "deviceClassId": "deviceClassId",
+    "deploymentId": "deploymentId",
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "deploymentId": "deploymentId",
+        "startDateTime": "2020-04-22T12:12:12.0000000+00:00",
+        "groupId": "TestGroup",
+        "update": {
+          "updateId": {
+            "provider": "provider",
+            "name": "name",
+            "version": "1.2.3.4"
+          }
+        },
+        "rollbackPolicy": {
+          "update": {
+            "updateId": {
+              "provider": "provider",
+              "name": "name",
+              "version": "1.2.3.3"
+            }
+          },
+          "failure": {
+            "devicesFailedPercentage": 50,
+            "devicesFailedCount": 100
+          }
+        },
+        "isCanceled": false,
+        "isRetried": false,
+        "isCloudInitiatedRollback": false
+      }
+    }
+  }
+}

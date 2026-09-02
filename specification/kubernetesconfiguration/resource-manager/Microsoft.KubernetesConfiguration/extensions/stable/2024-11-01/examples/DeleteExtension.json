@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "extensionName": "ClusterMonitor",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/operationId?api-version=2024-11-01",
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/{operationId}",
+        "x-ms-async-operation-timeout": "PT1H"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Extensions_Delete",
+  "title": "Delete Extension"
+}

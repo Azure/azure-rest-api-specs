@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2023-02-28-preview",
+    "classifierId": "myClassifier"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "classifierId": "myClassifier",
+        "description": "Classifier description",
+        "createdDateTime": "2022-07-30T00:00:00Z",
+        "expirationDateTime": "2023-01-01T00:00:00Z",
+        "apiVersion": "2023-02-28-preview",
+        "docTypes": {
+          "formA": {
+            "azureBlobSource": {
+              "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer?mySasToken",
+              "prefix": "formADocs/"
+            }
+          },
+          "formB": {
+            "azureBlobFileListSource": {
+              "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer?mySasToken",
+              "fileList": "formB.jsonl"
+            }
+          }
+        }
+      }
+    }
+  }
+}

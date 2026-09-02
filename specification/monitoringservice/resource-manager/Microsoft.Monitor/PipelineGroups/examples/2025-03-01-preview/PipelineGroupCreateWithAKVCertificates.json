@@ -1,0 +1,366 @@
+{
+  "title": "Create a PipelineGroup instance using Azure Key Vault certificates with combined PEM format for Bring Your Own Certificate",
+  "operationId": "PipelineGroups_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "pipelineGroupName": "plGroup-akv",
+    "api-version": "2025-03-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "extendedLocation": {
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+        "type": "CustomLocation"
+      },
+      "tags": {
+        "environment": "production",
+        "certificateSource": "azureKeyVault"
+      },
+      "properties": {
+        "receivers": [
+          {
+            "type": "OTLP",
+            "name": "akv-secured-otlp-receiver",
+            "tlsConfiguration": "akv-mtls-config",
+            "otlp": {
+              "endpoint": "0.0.0.0:4317"
+            }
+          }
+        ],
+        "processors": [
+          {
+            "type": "Batch",
+            "name": "batch-processor1"
+          }
+        ],
+        "exporters": [
+          {
+            "type": "AzureMonitorWorkspaceLogs",
+            "name": "secure-production-exporter",
+            "azureMonitorWorkspaceLogs": {
+              "api": {
+                "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                "stream": "Custom-SecureProductionLogs_CL",
+                "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                "schema": {
+                  "recordMap": [
+                    {
+                      "from": "severity_text",
+                      "to": "SeverityText"
+                    },
+                    {
+                      "from": "body",
+                      "to": "Body"
+                    },
+                    {
+                      "from": "time_unix_nano",
+                      "to": "TimeGenerated"
+                    },
+                    {
+                      "from": "resource.service.name",
+                      "to": "ServiceName"
+                    },
+                    {
+                      "from": "SecurityLevel",
+                      "to": "SecurityLevel"
+                    },
+                    {
+                      "from": "CertificateSource",
+                      "to": "CertificateSource"
+                    }
+                  ]
+                }
+              },
+              "concurrency": {
+                "workerCount": 4,
+                "batchQueueSize": 200
+              }
+            }
+          }
+        ],
+        "service": {
+          "pipelines": [
+            {
+              "name": "AKVSecuredPipeline",
+              "type": "Logs",
+              "receivers": [
+                "akv-secured-otlp-receiver"
+              ],
+              "processors": [
+                "batch-processor1"
+              ],
+              "exporters": [
+                "secure-production-exporter"
+              ]
+            }
+          ]
+        },
+        "tlsConfigurations": [
+          {
+            "name": "akv-mtls-config",
+            "mode": "mutualTls",
+            "tlsCertificate": {
+              "certificate": {
+                "type": "kubernetesSecret",
+                "location": "akv-synced-tls-cert",
+                "subLocation": "tls.pem"
+              },
+              "privateKey": {
+                "type": "kubernetesSecret",
+                "location": "akv-synced-tls-cert",
+                "subLocation": "tls.pem"
+              }
+            },
+            "clientCa": {
+              "type": "kubernetesSecret",
+              "location": "akv-synced-client-ca",
+              "subLocation": "ca.pem"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup-akv",
+        "name": "plGroup-akv",
+        "type": "Microsoft.Monitor/pipelineGroups",
+        "location": "eastus2",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+          "type": "CustomLocation"
+        },
+        "tags": {
+          "environment": "production",
+          "certificateSource": "azureKeyVault"
+        },
+        "properties": {
+          "receivers": [
+            {
+              "type": "OTLP",
+              "name": "akv-secured-otlp-receiver",
+              "tlsConfiguration": "akv-mtls-config",
+              "otlp": {
+                "endpoint": "0.0.0.0:4317"
+              }
+            }
+          ],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+          ],
+          "exporters": [
+            {
+              "type": "AzureMonitorWorkspaceLogs",
+              "name": "secure-production-exporter",
+              "azureMonitorWorkspaceLogs": {
+                "api": {
+                  "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                  "stream": "Custom-SecureProductionLogs_CL",
+                  "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                  "schema": {
+                    "recordMap": [
+                      {
+                        "from": "severity_text",
+                        "to": "SeverityText"
+                      },
+                      {
+                        "from": "body",
+                        "to": "Body"
+                      },
+                      {
+                        "from": "time_unix_nano",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "resource.service.name",
+                        "to": "ServiceName"
+                      },
+                      {
+                        "from": "SecurityLevel",
+                        "to": "SecurityLevel"
+                      },
+                      {
+                        "from": "CertificateSource",
+                        "to": "CertificateSource"
+                      }
+                    ]
+                  }
+                },
+                "concurrency": {
+                  "workerCount": 4,
+                  "batchQueueSize": 200
+                }
+              }
+            }
+          ],
+          "service": {
+            "pipelines": [
+              {
+                "name": "AKVSecuredPipeline",
+                "type": "Logs",
+                "receivers": [
+                  "akv-secured-otlp-receiver"
+                ],
+                "processors": [
+                  "batch-processor1"
+                ],
+                "exporters": [
+                  "secure-production-exporter"
+                ]
+              }
+            ]
+          },
+          "tlsConfigurations": [
+            {
+              "name": "akv-mtls-config",
+              "mode": "mutualTls",
+              "tlsCertificate": {
+                "certificate": {
+                  "type": "kubernetesSecret",
+                  "location": "akv-synced-tls-cert",
+                  "subLocation": "tls.pem"
+                },
+                "privateKey": {
+                  "type": "kubernetesSecret",
+                  "location": "akv-synced-tls-cert",
+                  "subLocation": "tls.pem"
+                }
+              },
+              "clientCa": {
+                "type": "kubernetesSecret",
+                "location": "akv-synced-client-ca",
+                "subLocation": "ca.pem"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup-akv",
+        "name": "plGroup-akv",
+        "type": "Microsoft.Monitor/pipelineGroups",
+        "location": "eastus2",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+          "type": "CustomLocation"
+        },
+        "tags": {
+          "environment": "production",
+          "certificateSource": "azureKeyVault"
+        },
+        "properties": {
+          "receivers": [
+            {
+              "type": "OTLP",
+              "name": "akv-secured-otlp-receiver",
+              "tlsConfiguration": "akv-mtls-config",
+              "otlp": {
+                "endpoint": "0.0.0.0:4317"
+              }
+            }
+          ],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+          ],
+          "exporters": [
+            {
+              "type": "AzureMonitorWorkspaceLogs",
+              "name": "secure-production-exporter",
+              "azureMonitorWorkspaceLogs": {
+                "api": {
+                  "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                  "stream": "Custom-SecureProductionLogs_CL",
+                  "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                  "schema": {
+                    "recordMap": [
+                      {
+                        "from": "severity_text",
+                        "to": "SeverityText"
+                      },
+                      {
+                        "from": "body",
+                        "to": "Body"
+                      },
+                      {
+                        "from": "time_unix_nano",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "resource.service.name",
+                        "to": "ServiceName"
+                      },
+                      {
+                        "from": "SecurityLevel",
+                        "to": "SecurityLevel"
+                      },
+                      {
+                        "from": "CertificateSource",
+                        "to": "CertificateSource"
+                      }
+                    ]
+                  }
+                },
+                "concurrency": {
+                  "workerCount": 4,
+                  "batchQueueSize": 200
+                }
+              }
+            }
+          ],
+          "service": {
+            "pipelines": [
+              {
+                "name": "AKVSecuredPipeline",
+                "type": "Logs",
+                "receivers": [
+                  "akv-secured-otlp-receiver"
+                ],
+                "processors": [
+                  "batch-processor1"
+                ],
+                "exporters": [
+                  "secure-production-exporter"
+                ]
+              }
+            ]
+          },
+          "tlsConfigurations": [
+            {
+              "name": "akv-mtls-config",
+              "mode": "mutualTls",
+              "tlsCertificate": {
+                "certificate": {
+                  "type": "kubernetesSecret",
+                  "location": "akv-synced-tls-cert",
+                  "subLocation": "tls.pem"
+                },
+                "privateKey": {
+                  "type": "kubernetesSecret",
+                  "location": "akv-synced-tls-cert",
+                  "subLocation": "tls.pem"
+                }
+              },
+              "clientCa": {
+                "type": "kubernetesSecret",
+                "location": "akv-synced-client-ca",
+                "subLocation": "ca.pem"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

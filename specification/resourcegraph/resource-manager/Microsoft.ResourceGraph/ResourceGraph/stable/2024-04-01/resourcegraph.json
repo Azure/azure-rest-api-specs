@@ -1,0 +1,617 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Resource Graph",
+    "version": "2024-04-01",
+    "description": "Azure Resource Graph API Reference",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Resources"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ResourceGraph/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceGraphCommon.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceGraph/resources": {
+      "post": {
+        "operationId": "Resources",
+        "tags": [
+          "Resources"
+        ],
+        "description": "Queries the resources managed by Azure Resource Manager for scopes specified in the request.",
+        "externalDocs": {
+          "description": "Learn more about the query syntax here",
+          "url": "https://aka.ms/resource-graph/learntoquery"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "query",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceGraphCommon.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access a properties field": {
+            "$ref": "./examples/ResourcesPropertiesQuery.json"
+          },
+          "Basic management group query": {
+            "$ref": "./examples/ResourcesMgBasicQuery.json"
+          },
+          "Basic query": {
+            "$ref": "./examples/ResourcesBasicQuery.json"
+          },
+          "Basic tenant query": {
+            "$ref": "./examples/ResourcesTenantBasicQuery.json"
+          },
+          "Complex query": {
+            "$ref": "./examples/ResourcesComplexQuery.json"
+          },
+          "Filter resources": {
+            "$ref": "./examples/ResourcesFilterQuery.json"
+          },
+          "First page query": {
+            "$ref": "./examples/ResourcesFirstPageQuery.json"
+          },
+          "Next page query": {
+            "$ref": "./examples/ResourcesNextPageQuery.json"
+          },
+          "Query with a facet request": {
+            "$ref": "./examples/ResourcesFacetQuery.json"
+          },
+          "Random page query": {
+            "$ref": "./examples/ResourcesRandomPageQuery.json"
+          },
+          "Summarize resources by location": {
+            "$ref": "./examples/ResourcesSummarizeQuery.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Facet": {
+      "type": "object",
+      "description": "A facet containing additional statistics on the response of a query. Can be either FacetResult or FacetError.",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Facet expression, same as in the corresponding facet request."
+        },
+        "resultType": {
+          "type": "string",
+          "description": "Result type"
+        }
+      },
+      "discriminator": "resultType",
+      "required": [
+        "expression",
+        "resultType"
+      ]
+    },
+    "FacetError": {
+      "type": "object",
+      "description": "A facet whose execution resulted in an error.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "An array containing detected facet errors with details.",
+          "items": {
+            "$ref": "#/definitions/ResourceGraphCommon.ErrorDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "errors"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Facet"
+        }
+      ],
+      "x-ms-discriminator-value": "FacetError"
+    },
+    "FacetRequest": {
+      "type": "object",
+      "description": "A request to compute additional statistics (facets) over the query results.",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "The column or list of columns to summarize by"
+        },
+        "options": {
+          "$ref": "#/definitions/FacetRequestOptions",
+          "description": "The options for facet evaluation"
+        }
+      },
+      "required": [
+        "expression"
+      ]
+    },
+    "FacetRequestOptions": {
+      "type": "object",
+      "description": "The options for facet evaluation",
+      "properties": {
+        "sortBy": {
+          "type": "string",
+          "description": "The column name or query expression to sort on. Defaults to count if not present."
+        },
+        "sortOrder": {
+          "type": "string",
+          "description": "The sorting order by the selected column (count by default).",
+          "default": "desc",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "x-ms-enum": {
+            "name": "FacetSortOrder",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "asc",
+                "value": "asc",
+                "description": "asc"
+              },
+              {
+                "name": "desc",
+                "value": "desc",
+                "description": "desc"
+              }
+            ]
+          }
+        },
+        "filter": {
+          "type": "string",
+          "description": "Specifies the filter condition for the 'where' clause which will be run on main query's result, just before the actual faceting."
+        },
+        "$top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of facet rows that should be returned.",
+          "minimum": 1,
+          "maximum": 1000
+        }
+      }
+    },
+    "FacetResult": {
+      "type": "object",
+      "description": "Successfully executed facet containing additional statistics on the response of a query.",
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of total records in the facet results."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of records returned in the facet response."
+        },
+        "data": {
+          "description": "A JObject array or Table containing the desired facets. Only present if the facet is valid."
+        }
+      },
+      "required": [
+        "totalRecords",
+        "count",
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Facet"
+        }
+      ],
+      "x-ms-discriminator-value": "FacetResult"
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Resource Graph REST API operation definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display metadata associated with the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of operations."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft Resource Graph."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed etc."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the operation."
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Paged collection of Operation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryRequest": {
+      "type": "object",
+      "description": "Describes a query to be executed.",
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "description": "Azure subscriptions against which to execute the query.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managementGroups": {
+          "type": "array",
+          "description": "Azure management groups against which to execute the query. Example: [ 'mg1', 'mg2' ]",
+          "items": {
+            "type": "string"
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The resources query."
+        },
+        "options": {
+          "$ref": "#/definitions/QueryRequestOptions",
+          "description": "The query evaluation options"
+        },
+        "facets": {
+          "type": "array",
+          "description": "An array of facet requests to be computed against the query result.",
+          "items": {
+            "$ref": "#/definitions/FacetRequest"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "QueryRequestOptions": {
+      "type": "object",
+      "description": "The options for query evaluation",
+      "properties": {
+        "$skipToken": {
+          "type": "string",
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query."
+        },
+        "$top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "$skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
+          "minimum": 0
+        },
+        "resultFormat": {
+          "type": "string",
+          "description": "Defines in which format query result returned.",
+          "default": "objectArray",
+          "enum": [
+            "table",
+            "objectArray"
+          ],
+          "x-ms-enum": {
+            "name": "ResultFormat",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "table",
+                "value": "table",
+                "description": "table"
+              },
+              {
+                "name": "objectArray",
+                "value": "objectArray",
+                "description": "objectArray"
+              }
+            ]
+          }
+        },
+        "allowPartialScopes": {
+          "type": "boolean",
+          "description": "Only applicable for tenant and management group level queries to decide whether to allow partial scopes for result in case the number of subscriptions exceed allowed limits.",
+          "default": false
+        },
+        "authorizationScopeFilter": {
+          "type": "string",
+          "description": "Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes.",
+          "default": "AtScopeAndBelow",
+          "enum": [
+            "AtScopeAndBelow",
+            "AtScopeAndAbove",
+            "AtScopeExact",
+            "AtScopeAboveAndBelow"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorizationScopeFilter",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "AtScopeAndBelow",
+                "value": "AtScopeAndBelow",
+                "description": "AtScopeAndBelow"
+              },
+              {
+                "name": "AtScopeAndAbove",
+                "value": "AtScopeAndAbove",
+                "description": "AtScopeAndAbove"
+              },
+              {
+                "name": "AtScopeExact",
+                "value": "AtScopeExact",
+                "description": "AtScopeExact"
+              },
+              {
+                "name": "AtScopeAboveAndBelow",
+                "value": "AtScopeAboveAndBelow",
+                "description": "AtScopeAboveAndBelow"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "QueryResponse": {
+      "type": "object",
+      "description": "Query result.",
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of total records matching the query."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of records returned in the current response. In the case of paging, this is the number of records in the current page."
+        },
+        "resultTruncated": {
+          "$ref": "#/definitions/ResultTruncated",
+          "description": "Indicates whether the query results are truncated."
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        },
+        "data": {
+          "description": "Query output in JObject array or Table format."
+        },
+        "facets": {
+          "type": "array",
+          "description": "Query facets.",
+          "items": {
+            "$ref": "#/definitions/Facet"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "totalRecords",
+        "count",
+        "resultTruncated",
+        "data"
+      ]
+    },
+    "ResourceGraphCommon.Error": {
+      "type": "object",
+      "title": "Error info.",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the specific error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details",
+          "items": {
+            "$ref": "#/definitions/ResourceGraphCommon.ErrorDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ResourceGraphCommon.ErrorDetails": {
+      "type": "object",
+      "title": "Error details.",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the specific error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": {}
+    },
+    "ResourceGraphCommon.ErrorResponse": {
+      "type": "object",
+      "title": "Error response.",
+      "description": "An error response from the API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ResourceGraphCommon.Error",
+          "description": "Error information."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ResultTruncated": {
+      "type": "string",
+      "description": "Indicates whether the query results are truncated.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "ResultTruncated",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "true"
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "false"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

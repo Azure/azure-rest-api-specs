@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "dataSourceName": "DataSource1",
+    "scanName": "Scan1",
+    "api-version": "2021-10-01-preview",
+    "body": {
+      "properties": {
+        "includeUriPrefixes": [
+          "https://foo.file.core.windows.net/share1/user",
+          "https://foo.file.core.windows.net/share1/aggregated"
+        ],
+        "excludeUriPrefixes": [
+          "https://foo.file.core.windows.net/share1/user/temp"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "name": "custom",
+        "id": "datasources/myDataSource/scans/Scan1/filters/custom",
+        "properties": {
+          "includeUriPrefixes": [
+            "https://foo.file.core.windows.net/share1/user",
+            "https://foo.file.core.windows.net/share1/aggregated"
+          ],
+          "excludeUriPrefixes": [
+            "https://foo.file.core.windows.net/share1/user/temp"
+          ]
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "name": "custom",
+        "id": "datasources/myDataSource/scans/Scan1/filters/custom",
+        "properties": {
+          "includeUriPrefixes": [
+            "https://foo.file.core.windows.net/share1/user",
+            "https://foo.file.core.windows.net/share1/aggregated"
+          ],
+          "excludeUriPrefixes": [
+            "https://foo.file.core.windows.net/share1/user/temp"
+          ]
+        }
+      }
+    }
+  }
+}

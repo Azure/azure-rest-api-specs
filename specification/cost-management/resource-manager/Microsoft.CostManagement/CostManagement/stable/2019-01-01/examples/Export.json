@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MYDEVTESTRG",
+    "exportName": "TestExport",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/{subscription-id}/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "properties": {
+          "format": "Csv",
+          "deliveryInfo": {
+            "destination": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "container": "exports",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "definition": {
+            "type": "Usage",
+            "timeframe": "Custom",
+            "timePeriod": {
+              "from": "2018-06-01T00:00:00Z",
+              "to": "2018-10-31T00:00:00Z"
+            },
+            "dataset": {
+              "granularity": "Daily",
+              "configuration": {
+                "columns": [
+                  "UsageDate",
+                  "MeterId",
+                  "InstanceId",
+                  "ResourceLocation",
+                  "UsageQuantity"
+                ]
+              },
+              "aggregation": {
+                "usageSum": {
+                  "name": "UsageQuantity",
+                  "function": "Sum"
+                }
+              },
+              "grouping": [
+                {
+                  "type": "Dimension",
+                  "name": "SubscriptionName"
+                },
+                {
+                  "type": "Tag",
+                  "name": "Environment"
+                }
+              ],
+              "filter": {
+                "and": [
+                  {
+                    "dimension": {
+                      "name": "ResourceLocation",
+                      "operator": "In",
+                      "values": [
+                        "East US",
+                        "West Europe"
+                      ]
+                    }
+                  },
+                  {
+                    "tag": {
+                      "name": "Environment",
+                      "operator": "Contains",
+                      "values": [
+                        "UAT",
+                        "Prod"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

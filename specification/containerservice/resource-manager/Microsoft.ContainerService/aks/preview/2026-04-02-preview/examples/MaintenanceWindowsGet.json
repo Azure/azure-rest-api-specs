@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2026-04-02-preview",
+    "resourceGroupName": "rg-maintenance",
+    "maintenanceWindowName": "production-weekends",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-maintenance/providers/Microsoft.ContainerService/maintenanceWindows/production-weekends",
+        "name": "production-weekends",
+        "type": "Microsoft.ContainerService/maintenanceWindows",
+        "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "schedule": {
+            "weekly": {
+              "intervalWeeks": 1,
+              "dayOfWeek": "Saturday"
+            }
+          },
+          "startDate": "2026-04-05",
+          "startTime": "02:00",
+          "durationHours": 8,
+          "utcOffset": "-07:00",
+          "notAllowedDates": [
+            {
+              "start": "2026-12-23",
+              "end": "2027-01-03"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-01T10:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-01T10:00:00Z"
+        }
+      }
+    }
+  },
+  "operationId": "MaintenanceWindows_Get",
+  "title": "Get Maintenance Window"
+}

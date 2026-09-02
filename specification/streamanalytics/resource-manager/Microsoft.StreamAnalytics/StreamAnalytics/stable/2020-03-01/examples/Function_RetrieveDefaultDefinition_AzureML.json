@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg7",
+    "jobName": "sj9093",
+    "functionName": "function588",
+    "functionRetrieveDefaultDefinitionParameters": {
+      "bindingType": "Microsoft.MachineLearning/WebService",
+      "bindingRetrievalProperties": {
+        "executeEndpoint": "someAzureMLExecuteEndpointUrl",
+        "udfType": "Scalar"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "function588",
+        "properties": {
+          "type": "Scalar",
+          "properties": {
+            "inputs": [
+              {
+                "dataType": "nvarchar(max)"
+              }
+            ],
+            "output": {
+              "dataType": "nvarchar(max)"
+            },
+            "binding": {
+              "type": "Microsoft.MachineLearning/WebService",
+              "properties": {
+                "endpoint": "someAzureMLExecuteEndpointUrl",
+                "inputs": {
+                  "name": "input1",
+                  "columnNames": [
+                    {
+                      "name": "tweet",
+                      "dataType": "string",
+                      "mapTo": 0
+                    }
+                  ]
+                },
+                "outputs": [
+                  {
+                    "name": "Sentiment",
+                    "dataType": "string"
+                  }
+                ],
+                "batchSize": 1000
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

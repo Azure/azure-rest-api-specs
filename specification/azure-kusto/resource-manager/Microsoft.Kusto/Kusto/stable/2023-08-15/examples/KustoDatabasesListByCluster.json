@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "clusterName": "kustoCluster",
+    "api-version": "2023-08-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8",
+            "name": "kustoCluster/KustoDatabase8",
+            "type": "Microsoft.Kusto/Clusters/Databases",
+            "location": "westus",
+            "kind": "ReadWrite",
+            "properties": {
+              "softDeletePeriod": "P1D",
+              "hotCachePeriod": "P1D",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase9",
+            "name": "kustoCluster/KustoDatabase9",
+            "type": "Microsoft.Kusto/Clusters/Databases",
+            "location": "westus",
+            "kind": "ReadOnlyFollowing",
+            "properties": {
+              "softDeletePeriod": "P1D",
+              "hotCachePeriod": "P1D",
+              "provisioningState": "Succeeded",
+              "statistics": {
+                "size": 1024
+              },
+              "leaderClusterResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster2",
+              "attachedDatabaseConfigurationName": "attachedDatabaseConfigurationsTest",
+              "principalsModificationKind": "Union",
+              "tableLevelSharingProperties": {
+                "tablesToInclude": [
+                  "Table1"
+                ],
+                "tablesToExclude": [
+                  "Table2"
+                ],
+                "externalTablesToInclude": [
+                  "ExternalTable1"
+                ],
+                "externalTablesToExclude": [
+                  "ExternalTable2"
+                ],
+                "materializedViewsToInclude": [
+                  "MaterializedViewTable1"
+                ],
+                "materializedViewsToExclude": [
+                  "MaterializedViewTable2"
+                ]
+              },
+              "originalDatabaseName": "KustoDatabase9",
+              "databaseShareOrigin": "Direct"
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase10",
+            "name": "kustoCluster/KustoDatabase10",
+            "type": "Microsoft.Kusto/Clusters/Databases",
+            "location": "westus",
+            "kind": "ReadWrite",
+            "properties": {
+              "softDeletePeriod": "P1D",
+              "hotCachePeriod": "P1D",
+              "provisioningState": "Succeeded",
+              "suspensionDetails": {
+                "suspensionStartDate": "2023-04-16T15:06:54.2757906Z"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

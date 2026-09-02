@@ -1,0 +1,89 @@
+{
+  "operationId": "Environments_CreateOrUpdate",
+  "title": "Environments_CreateOrUpdate",
+  "parameters": {
+    "resourceGroupName": "contoso-resources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "serviceName": "contoso",
+    "workspaceName": "default",
+    "environmentName": "public",
+    "api-version": "2024-06-01-preview",
+    "payload": {
+      "properties": {
+        "title": "Contoso Europe Azure API Management",
+        "description": "The primary Azure API Management service for the European division of Contoso.",
+        "kind": "production",
+        "server": {
+          "type": "Azure API Management",
+          "managementPortalUri": [
+            "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiManagement/service/contoso"
+          ]
+        },
+        "onboarding": {
+          "instructions": "Sign in or sign up in the specified developer portal to request API access. You must complete the internal privacy training for your account to be approved.",
+          "developerPortalUri": [
+            "https://developer.contoso.com"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ApiCenter/services/workspaces/environments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiCenter/services/contoso/workspaces/default/environments/public",
+        "name": "public",
+        "systemData": {
+          "createdAt": "2023-07-03T18:27:09.128871Z",
+          "lastModifiedAt": "2023-07-03T18:27:09.1288716Z"
+        },
+        "properties": {
+          "title": "Contoso Europe Azure API Management",
+          "description": "The primary Azure API Management service for the European division of Contoso.",
+          "kind": "production",
+          "server": {
+            "type": "Azure API Management",
+            "managementPortalUri": [
+              "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiManagement/service/contoso"
+            ]
+          },
+          "onboarding": {
+            "instructions": "Sign in or sign up in the specified developer portal to request API access. You must complete the internal privacy training for your account to be approved.",
+            "developerPortalUri": [
+              "https://developer.contoso.com"
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.ApiCenter/services/workspaces/environments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiCenter/services/contoso/workspaces/default/environments/public",
+        "name": "public",
+        "systemData": {
+          "createdAt": "2023-07-03T18:27:09.128871Z",
+          "lastModifiedAt": "2023-07-03T18:27:09.1288716Z"
+        },
+        "properties": {
+          "title": "Contoso Europe Azure API Management",
+          "description": "The primary Azure API Management service for the European division of Contoso.",
+          "kind": "production",
+          "server": {
+            "type": "Azure API Management",
+            "managementPortalUri": [
+              "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiManagement/service/contoso"
+            ]
+          },
+          "onboarding": {
+            "instructions": "Sign in or sign up in the specified developer portal to request API access. You must complete the internal privacy training for your account to be approved.",
+            "developerPortalUri": [
+              "https://developer.contoso.com"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

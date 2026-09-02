@@ -1,0 +1,66 @@
+{
+  "operationId": "DataShares_Update",
+  "title": "UpdateDataShare",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "accountName": "teststorageaccount",
+    "api-version": "2025-08-01",
+    "dataShareName": "testdatashare",
+    "properties": {
+      "properties": {
+        "description": "New dummy data share",
+        "accessPolicies": [
+          {
+            "principalId": "00000000-0000-0000-0000-123456781234",
+            "tenantId": "00000000-0000-0000-0000-987654321987",
+            "permission": "Read"
+          }
+        ],
+        "assets": [
+          {
+            "assetPath": "/container/folder1/bar",
+            "displayName": "virtualBar"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/dataShares/testdatashare",
+        "name": "testdatashare",
+        "type": "Microsoft.Storage/storageAccounts/dataShares",
+        "location": "eastus",
+        "properties": {
+          "dataShareIdentifier": "00000000-0000-0000-0000-000000000000",
+          "description": "New dummy data share",
+          "dataShareUri": "azds://eastus:testdatashare:00000000-0000-0000-0000-000000000000",
+          "accessPolicies": [
+            {
+              "principalId": "00000000-0000-0000-0000-123456781234",
+              "tenantId": "00000000-0000-0000-0000-987654321987",
+              "permission": "Read"
+            }
+          ],
+          "assets": [
+            {
+              "assetPath": "/container/folder1/bar",
+              "displayName": "virtualBar"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "status": "Accepted",
+      "message": "The resource operation has been received and is being processed.",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/xxxx/resourceGroups/rg-name/providers/Microsoft.Storage/operations/operation-98765",
+        "Retry-After": 30
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2018-09-01-preview",
+    "subscriptionId": "75dd7e42-4fd1-4512-af04-83ad9864335b",
+    "migrateProjectName": "project01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/75dd7e42-4fd1-4512-af04-83ad9864335b/resourceGroups/myResourceGroup/providers/Microsoft.Migrate/MigrateProjects/project01/Solutions/dbsolution",
+            "name": "dbsolution",
+            "type": "Microsoft.Migrate/MigrateProjects/Solutions",
+            "etag": "\"1c0018c7-0000-0000-0000-5c936e530000\"",
+            "properties": {
+              "tool": "DataMigrationAssistant",
+              "purpose": "Assessment",
+              "goal": "Databases",
+              "status": "Inactive",
+              "cleanupState": "None",
+              "summary": {
+                "instanceType": "Databases",
+                "databasesAssessedCount": 0,
+                "databaseInstancesAssessedCount": 0,
+                "migrationReadyCount": 0
+              },
+              "details": {
+                "groupCount": 0,
+                "assessmentCount": 0,
+                "extendedDetails": {
+                  "mykey": "myvalue"
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/75dd7e42-4fd1-4512-af04-83ad9864335b/resourceGroups/myResourceGroup/providers/Microsoft.Migrate/MigrateProjects/project01/Solutions/serversolution",
+            "name": "serversolution",
+            "type": "Microsoft.Migrate/MigrateProjects/Solutions",
+            "etag": "\"1c001dc7-0000-0000-0000-5c936e6f0000\"",
+            "properties": {
+              "tool": "ServerDiscovery",
+              "purpose": "Discovery",
+              "goal": "Servers",
+              "status": "Inactive",
+              "cleanupState": "None",
+              "summary": {
+                "instanceType": "Servers",
+                "discoveredCount": 0,
+                "assessedCount": 0,
+                "replicatingCount": 0,
+                "testMigratedCount": 0,
+                "migratedCount": 0
+              },
+              "details": {
+                "groupCount": 0,
+                "assessmentCount": 0,
+                "extendedDetails": {
+                  "mykey": "myvalue"
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

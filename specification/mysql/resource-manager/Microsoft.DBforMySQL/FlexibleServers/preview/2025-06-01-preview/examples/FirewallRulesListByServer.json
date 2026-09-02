@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "resourceGroupName": "TestGroup",
+    "serverName": "testserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "rule1",
+            "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/firewallRules/rule1",
+            "properties": {
+              "endIpAddress": "255.255.255.255",
+              "startIpAddress": "0.0.0.0"
+            }
+          },
+          {
+            "name": "rule2",
+            "type": "Microsoft.DBforMySQL/flexibleServers/firewallRules",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/firewallRules/rule2",
+            "properties": {
+              "endIpAddress": "255.0.0.0",
+              "startIpAddress": "1.0.0.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FirewallRules_ListByServer",
+  "title": "List all firewall rules in a server"
+}

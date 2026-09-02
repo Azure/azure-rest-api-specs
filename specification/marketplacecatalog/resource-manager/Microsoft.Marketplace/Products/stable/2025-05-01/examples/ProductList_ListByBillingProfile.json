@@ -1,0 +1,27 @@
+{
+  "title": "ProductList_ListByBillingProfile",
+  "operationId": "ProductList_ListByBillingProfile",
+  "parameters": {
+    "api-version": "2025-05-01",
+    "billingAccountId": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-05-31",
+    "billingProfileId": "ABCD-EFGH-1234-5678",
+    "language": "en",
+    "$filter": "productType eq 'SaaS' or productType eq 'VirtualMachine'",
+    "$select": "displayName,uniqueProductId,productType,publisherDisplayName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "uniqueProductId": "microsoft.managedinstance_standard",
+            "displayName": "Azure SQL Managed Instance",
+            "publisherDisplayName": "Microsoft",
+            "productType": "SaaS"
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-05-31/billingProfiles/ABCD-EFGH-1234-5678/providers/Microsoft.Marketplace/products?api-version=2025-05-01&language=en&$select=displayName,uniqueProductId,productType,publisherDisplayName&$filter=productType eq 'SaaS' or productType eq 'VirtualMachine'&$skiptoken=W3sid..."
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/appcontainers/armappcontainers'
+      breaking-changes:
+        - Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed
+        - Function `*ConnectedEnvironmentsClient.Update` parameter(s) have been changed from `(context.Context, string, string, *ConnectedEnvironmentsClientUpdateOptions)` to `(context.Context, string, string, ConnectedEnvironmentPatchResource, *ConnectedEnvironmentsClientUpdateOptions)`
+        - Operation `*ConnectedEnvironmentsCertificatesClient.CreateOrUpdate` has been changed to LRO, use `*ConnectedEnvironmentsCertificatesClient.BeginCreateOrUpdate` instead.
+        - Operation `*ConnectedEnvironmentsCertificatesClient.Delete` has been changed to LRO, use `*ConnectedEnvironmentsCertificatesClient.BeginDelete` instead.
+        - Operation `*ConnectedEnvironmentsCertificatesClient.Update` has been changed to LRO, use `*ConnectedEnvironmentsCertificatesClient.BeginUpdate` instead.
+        - Operation `*ConnectedEnvironmentsDaprComponentsClient.CreateOrUpdate` has been changed to LRO, use `*ConnectedEnvironmentsDaprComponentsClient.BeginCreateOrUpdate` instead.
+        - Operation `*ConnectedEnvironmentsDaprComponentsClient.Delete` has been changed to LRO, use `*ConnectedEnvironmentsDaprComponentsClient.BeginDelete` instead.
+        - Operation `*ConnectedEnvironmentsStoragesClient.CreateOrUpdate` has been changed to LRO, use `*ConnectedEnvironmentsStoragesClient.BeginCreateOrUpdate` instead.
+        - Operation `*ConnectedEnvironmentsStoragesClient.Delete` has been changed to LRO, use `*ConnectedEnvironmentsStoragesClient.BeginDelete` instead.
+  azure-sdk-for-python:
+    - package: azure-mgmt-appcontainers
+      breaking-changes:
+        - Model BillingMeter no longer has parameter system_data
+        - Operation ContainerAppsSourceControlsOperations.begin_create_or_update has a new required parameter x_ms_github_auxiliary
+        - Operation ContainerAppsSourceControlsOperations.begin_delete has a new required parameter x_ms_github_auxiliary
+        - Operation JobsOperations.proxy_get no longer has parameter api_name
+        - The 'JobsOperations' method 'proxy_get' had its parameter 'api_name' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'JobsOperations' method 'proxy_get' had its parameter 'api_name' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - Method `JobsOperations.proxy_get` deleted or renamed its parameter `api_name` of kind `positional_or_keyword`
+        - Deleted or renamed method `ConnectedEnvironmentsCertificatesOperations.create_or_update`
+        - Deleted or renamed method `ConnectedEnvironmentsCertificatesOperations.delete`
+        - Deleted or renamed method `ConnectedEnvironmentsCertificatesOperations.update`
+        - Deleted or renamed method `ConnectedEnvironmentsDaprComponentsOperations.create_or_update`
+        - Deleted or renamed method `ConnectedEnvironmentsDaprComponentsOperations.delete`
+        - Deleted or renamed method `ConnectedEnvironmentsStoragesOperations.create_or_update`
+        - Deleted or renamed method `ConnectedEnvironmentsStoragesOperations.delete`

@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "eventSubscriptionInfo": {
+      "properties": {
+        "deliveryConfiguration": {
+          "deliveryMode": "Queue",
+          "queue": {
+            "eventTimeToLive": "P1D",
+            "maxDeliveryCount": 4,
+            "receiveLockDurationInSeconds": 60
+          }
+        },
+        "eventDeliverySchema": "CloudEventSchemaV1_0"
+      }
+    },
+    "eventSubscriptionName": "examplenamespacetopicEventSub2",
+    "namespaceName": "examplenamespace2",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "topicName": "examplenamespacetopic2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examplenamespacetopicEventSub2",
+        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/examplenamespacetopic2/eventSubscriptions/examplenamespacetopicEventSub2",
+        "properties": {
+          "deliveryConfiguration": {
+            "deliveryMode": "Queue",
+            "queue": {
+              "eventTimeToLive": "P1D",
+              "maxDeliveryCount": 4,
+              "receiveLockDurationInSeconds": 60
+            }
+          },
+          "eventDeliverySchema": "CloudEventSchemaV1_0",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": null
+      }
+    },
+    "201": {
+      "body": {
+        "name": "examplenamespacetopicEventSub2",
+        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/examplenamespacetopic2/eventSubscriptions/examplenamespacetopicEventSub2",
+        "properties": {
+          "deliveryConfiguration": {
+            "deliveryMode": "Queue",
+            "queue": {
+              "eventTimeToLive": "P1D",
+              "maxDeliveryCount": 4,
+              "receiveLockDurationInSeconds": 60
+            }
+          },
+          "provisioningState": "Creating"
+        },
+        "systemData": null
+      }
+    }
+  },
+  "operationId": "NamespaceTopicEventSubscriptions_CreateOrUpdate",
+  "title": "NamespaceTopicEventSubscriptions_CreateOrUpdate"
+}

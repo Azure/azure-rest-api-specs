@@ -1,0 +1,248 @@
+{
+  "parameters": {
+    "subscriptionId": "476f61a4-952c-422a-b4db-568a828f35df",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "api-version": "2020-12-16-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/packages/contoso-package1",
+            "name": "contoso-package1",
+            "type": "Microsoft.TestBase/testBaseAccounts/packages",
+            "location": "westus",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "applicationName": "contoso-package1",
+              "version": "1.0.0",
+              "testTypes": [
+                "OutOfBoxTest",
+                "FunctionalTest"
+              ],
+              "targetOSList": [
+                {
+                  "osUpdateType": "Security updates",
+                  "targetOSs": [
+                    "Windows 10 2004",
+                    "Windows 10 1903"
+                  ]
+                },
+                {
+                  "osUpdateType": "Feature updates",
+                  "targetOSs": [
+                    "Windows 10 2004",
+                    "Windows 10 1903",
+                    "Windows 10 1809"
+                  ]
+                }
+              ],
+              "packageStatus": "Ready",
+              "lastModifiedTime": "2020-12-28T17:30:00Z",
+              "flightingRing": "Insider Beta Channel",
+              "isEnabled": true,
+              "blobPath": "storageAccountPath/package.zip",
+              "validationResults": [
+                {
+                  "validationName": "Syntax Validation",
+                  "isValid": true
+                },
+                {
+                  "validationName": "Package Run Validation",
+                  "isValid": true
+                }
+              ],
+              "tests": [
+                {
+                  "testType": "OutOfBoxTest",
+                  "validationRunStatus": "Passed",
+                  "isActive": true,
+                  "commands": [
+                    {
+                      "name": "Install",
+                      "action": "Install",
+                      "contentType": "Path",
+                      "content": "app/scripts/install/job.ps1",
+                      "runElevated": true,
+                      "restartAfter": true,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": true,
+                      "applyUpdateBefore": false
+                    },
+                    {
+                      "name": "Launch",
+                      "action": "Launch",
+                      "contentType": "Path",
+                      "content": "app/scripts/launch/job.ps1",
+                      "runElevated": true,
+                      "restartAfter": false,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": false,
+                      "applyUpdateBefore": true
+                    },
+                    {
+                      "name": "Close",
+                      "action": "Close",
+                      "contentType": "Path",
+                      "content": "app/scripts/close/job.ps1",
+                      "runElevated": true,
+                      "restartAfter": false,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": false,
+                      "applyUpdateBefore": false
+                    },
+                    {
+                      "name": "Uninstall",
+                      "action": "Uninstall",
+                      "contentType": "Path",
+                      "content": "app/scripts/uninstall/job.ps1",
+                      "runElevated": true,
+                      "restartAfter": false,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": true,
+                      "applyUpdateBefore": false
+                    }
+                  ]
+                },
+                {
+                  "testType": "FunctionalTest",
+                  "validationRunStatus": "Passed",
+                  "isActive": true,
+                  "commands": [
+                    {
+                      "name": "Custom1",
+                      "action": "Custom",
+                      "contentType": "Path",
+                      "content": "app/scripts/custom/custom1.ps1",
+                      "runElevated": true,
+                      "restartAfter": false,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": true,
+                      "applyUpdateBefore": false
+                    },
+                    {
+                      "name": "Custom2",
+                      "action": "Custom",
+                      "contentType": "Path",
+                      "content": "app/scripts/custom/custom2.ps1",
+                      "runElevated": true,
+                      "restartAfter": false,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": true,
+                      "applyUpdateBefore": true
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/packages/contoso-package2",
+            "name": "contoso-package2",
+            "type": "Microsoft.TestBase/testBaseAccounts/packages",
+            "location": "westus",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "applicationName": "contoso-package2",
+              "version": "1.0.0",
+              "testTypes": [
+                "OutOfBoxTest"
+              ],
+              "targetOSList": [
+                {
+                  "osUpdateType": "Security updates",
+                  "targetOSs": [
+                    "Windows 10 2004",
+                    "Windows 10 1903"
+                  ]
+                }
+              ],
+              "packageStatus": "Ready",
+              "lastModifiedTime": "2020-12-28T17:30:00Z",
+              "flightingRing": "Insider Beta Channel",
+              "isEnabled": true,
+              "blobPath": "storageAccountPath/package.zip",
+              "validationResults": [
+                {
+                  "validationName": "Syntax Validation",
+                  "isValid": true
+                },
+                {
+                  "validationName": "Package Run Validation",
+                  "isValid": true
+                }
+              ],
+              "tests": [
+                {
+                  "testType": "OutOfBoxTest",
+                  "validationRunStatus": "Passed",
+                  "isActive": true,
+                  "commands": [
+                    {
+                      "name": "Install",
+                      "action": "Install",
+                      "contentType": "Path",
+                      "content": "app/scripts/install/job.ps1",
+                      "runElevated": true,
+                      "restartAfter": true,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": true,
+                      "applyUpdateBefore": false
+                    },
+                    {
+                      "name": "Launch",
+                      "action": "Launch",
+                      "contentType": "Path",
+                      "content": "app/scripts/launch/job.ps1",
+                      "runElevated": true,
+                      "restartAfter": false,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": false,
+                      "applyUpdateBefore": true
+                    },
+                    {
+                      "name": "Close",
+                      "action": "Close",
+                      "contentType": "Path",
+                      "content": "app/scripts/close/job.ps1",
+                      "runElevated": true,
+                      "restartAfter": false,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": false,
+                      "applyUpdateBefore": false
+                    },
+                    {
+                      "name": "Uninstall",
+                      "action": "Uninstall",
+                      "contentType": "Path",
+                      "content": "app/scripts/uninstall/job.ps1",
+                      "runElevated": true,
+                      "restartAfter": false,
+                      "maxRunTime": 1800,
+                      "runAsInteractive": true,
+                      "alwaysRun": true,
+                      "applyUpdateBefore": false
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

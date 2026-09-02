@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2021-09-01",
+    "cacheName": "sc1",
+    "storageTargetName": "st1",
+    "storagetarget": {
+      "properties": {
+        "targetType": "blobNfs",
+        "junctions": [
+          {
+            "namespacePath": "/blobnfs"
+          }
+        ],
+        "blobNfs": {
+          "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/blofnfs/blobServices/default/containers/blobnfs",
+          "usageModel": "WRITE_WORKLOAD_15"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "st1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1/storagetargets/st1",
+        "type": "Microsoft.StorageCache/Cache/StorageTarget",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "targetType": "blobNfs",
+          "junctions": [
+            {
+              "namespacePath": "/blobnfs"
+            }
+          ],
+          "state": "Ready",
+          "blobNfs": {
+            "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/blofnfs/blobServices/default/containers/blobnfs",
+            "usageModel": "WRITE_WORKLOAD_15"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "st1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1/storagetargets/st1",
+        "type": "Microsoft.StorageCache/Cache/StorageTarget",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "targetType": "blobNfs",
+          "junctions": [
+            {
+              "namespacePath": "/blobnfs"
+            }
+          ],
+          "state": "Ready",
+          "blobNfs": {
+            "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/blofnfs/blobServices/default/containers/blobnfs",
+            "usageModel": "WRITE_WORKLOAD_15"
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

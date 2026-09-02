@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "name": "testkubeenv",
+    "api-version": "2025-05-01",
+    "extendedLocation": {
+      "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+      "type": "customLocation"
+    },
+    "kind": "kubernetes",
+    "kubeEnvironmentEnvelope": {
+      "location": "East US",
+      "properties": {
+        "staticIp": "1.2.3.4"
+      }
+    },
+    "location": "East US",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testkubeenv",
+        "type": "Microsoft.Web/kubeEnvironments",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "customLocation"
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.Web/kubeEnvironments/testkubeenv",
+        "location": "East US",
+        "properties": {
+          "aksResourceID": "test",
+          "appLogsConfiguration": null,
+          "arcConfiguration": null,
+          "defaultDomain": "testkubeenv.k4apps.io",
+          "deploymentErrors": null,
+          "internalLoadBalancerEnabled": false,
+          "provisioningState": "Succeeded",
+          "staticIp": "1.2.3.4"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testkubeenv",
+        "type": "Microsoft.Web/kubeEnvironments",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "customLocation"
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.Web/kubeEnvironments/testkubeenv",
+        "location": "East US",
+        "properties": {
+          "aksResourceID": "test",
+          "appLogsConfiguration": null,
+          "arcConfiguration": null,
+          "defaultDomain": "testkubeenv.k4apps.io",
+          "deploymentErrors": null,
+          "internalLoadBalancerEnabled": false,
+          "provisioningState": "InitializationInProgress",
+          "staticIp": "1.2.3.4"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "KubeEnvironments_CreateOrUpdate",
+  "title": "Create kube environments"
+}

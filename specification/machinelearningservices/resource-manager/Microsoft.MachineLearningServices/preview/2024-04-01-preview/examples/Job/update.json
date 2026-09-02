@@ -1,0 +1,154 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "my-aml-workspace",
+    "id": "string",
+    "api-version": "2024-04-01-preview",
+    "body": {
+      "properties": {
+        "notificationSetting": {
+          "webhooks": {
+            "string": {
+              "eventType": "string",
+              "webhookType": "AzureDevOps"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "string",
+        "name": "string",
+        "type": "string",
+        "properties": {
+          "description": "string",
+          "tags": {
+            "string": "string"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "displayName": "string",
+          "status": "Canceled",
+          "experimentName": "string",
+          "services": {
+            "string": {
+              "jobServiceType": "string",
+              "port": 1,
+              "endpoint": "string",
+              "status": "string",
+              "errorMessage": "string",
+              "properties": {
+                "string": "string"
+              },
+              "nodes": {
+                "nodesValueType": "All"
+              }
+            }
+          },
+          "computeId": "string",
+          "isArchived": false,
+          "identity": {
+            "identityType": "AMLToken"
+          },
+          "componentId": "string",
+          "notificationSetting": {
+            "emails": [
+              "string"
+            ],
+            "emailOn": [
+              "JobCompleted"
+            ],
+            "webhooks": {
+              "string": {
+                "eventType": "string",
+                "webhookType": "AzureDevOps"
+              }
+            }
+          },
+          "secretsConfiguration": {
+            "string": {
+              "workspaceSecretName": "string",
+              "uri": null
+            }
+          },
+          "jobType": "Command",
+          "resources": {
+            "instanceCount": 1,
+            "maxInstanceCount": 1,
+            "instanceType": "string",
+            "locations": [
+              "string"
+            ],
+            "properties": {
+              "string": {
+                "00cac5bf-6a80-4db4-9c7f-1feebe8c21c8": null
+              }
+            },
+            "shmSize": "2g",
+            "dockerArgs": "string"
+          },
+          "codeId": "string",
+          "command": "string",
+          "environmentId": "string",
+          "inputs": {
+            "string": {
+              "description": "string",
+              "jobInputType": "literal",
+              "value": "string"
+            }
+          },
+          "outputs": {
+            "string": {
+              "description": "string",
+              "uri": "string",
+              "assetName": "string",
+              "assetVersion": "string",
+              "mode": "Upload",
+              "autoDeleteSetting": {
+                "condition": "CreatedGreaterThan",
+                "value": "string"
+              },
+              "jobOutputType": "uri_file"
+            }
+          },
+          "distribution": {
+            "distributionType": "TensorFlow",
+            "workerCount": 1,
+            "parameterServerCount": 1
+          },
+          "autologgerSettings": {
+            "mlflowAutologger": "Enabled"
+          },
+          "limits": {
+            "timeout": "PT5M",
+            "jobLimitsType": "Command"
+          },
+          "environmentVariables": {
+            "string": "string"
+          },
+          "parameters": {
+            "6f851dd9-5a2d-4bd7-8a67-3b0e6a075bdb": null
+          },
+          "queueSettings": {
+            "jobTier": "Premium",
+            "priority": 1
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:44",
+          "createdBy": "string",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:44",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        }
+      }
+    }
+  }
+}

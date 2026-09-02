@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2024-07-01",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      },
+      "location": "japaneast",
+      "properties": {
+        "autoStorage": {
+          "storageAccountId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage"
+        }
+      }
+    },
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleacct",
+        "type": "Microsoft.Batch/batchAccounts",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "clientId1",
+              "principalId": "principalId1"
+            }
+          }
+        },
+        "location": "japaneast",
+        "properties": {
+          "accountEndpoint": "sampleacct.japaneast.batch.azure.com",
+          "activeJobAndJobScheduleQuota": 20,
+          "autoStorage": {
+            "lastKeySync": "2016-03-10T23:48:38.9878479Z",
+            "storageAccountId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage"
+          },
+          "dedicatedCoreQuota": 20,
+          "lowPriorityCoreQuota": 20,
+          "poolAllocationMode": "BatchService",
+          "poolQuota": 20,
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "BatchAccount_Create",
+  "title": "BatchAccountCreate_UserAssignedIdentity"
+}

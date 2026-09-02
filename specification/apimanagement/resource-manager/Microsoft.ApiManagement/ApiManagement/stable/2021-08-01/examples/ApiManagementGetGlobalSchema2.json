@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-08-01",
+    "subscriptionId": "subid",
+    "schemaId": "schema2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema2",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "name": "schema2",
+        "properties": {
+          "description": "sample schema description",
+          "schemaType": "json",
+          "document": {
+            "$id": "https://example.com/person.schema.json",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Person",
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "The person's first name."
+              },
+              "lastName": {
+                "type": "string",
+                "description": "The person's last name."
+              },
+              "age": {
+                "description": "Age in years which must be equal to or greater than zero.",
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

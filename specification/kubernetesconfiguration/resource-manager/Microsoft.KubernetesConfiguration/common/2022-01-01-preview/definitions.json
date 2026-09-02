@@ -1,0 +1,165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-01-01-preview",
+    "title": "Common types and definitions",
+    "description": "Definitions and parameters common for all resource types of KubernetesConfiguration RP"
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ProvisioningStateDefinition": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "OperationStatusResult": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Additional information, if available.",
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "description": "If present, details of the operation error.",
+          "type": "object",
+          "readOnly": true,
+          "x-nullable": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "OperationStatusList": {
+      "description": "The async operations in progress, in the cluster.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationStatusResult"
+          },
+          "description": "List of async operations in progress, in the cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of Operation Result objects, if any."
+        }
+      }
+    },
+    "ResourceProviderOperation": {
+      "description": "Supported operation of this resource provider.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Operation name, in format of {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Resource provider: Microsoft KubernetesConfiguration.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of this operation.",
+              "type": "string"
+            }
+          }
+        },
+        "isDataAction": {
+          "description": "The flag that indicates whether the operation applies to data plane.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "description": "Result of the request to list operations.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "description": "List of operations supported by this resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to the next set of results, if any."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

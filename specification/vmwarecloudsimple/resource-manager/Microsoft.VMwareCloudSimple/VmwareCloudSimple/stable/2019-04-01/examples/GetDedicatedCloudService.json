@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "dedicatedCloudServiceName": "myService",
+    "api-version": "2019-04-01",
+    "dedicatedCloudServiceRequest": {
+      "location": "westus",
+      "properties": {
+        "gatewaySubnet": "10.0.0.0"
+      },
+      "name": "myService"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/myService",
+        "location": "westus",
+        "name": "myService",
+        "properties": {
+          "gatewaySubnet": "10.0.10.0/28",
+          "isAccountOnboarded": "notOnBoarded",
+          "nodes": 1,
+          "serviceURL": "https://westus-he.azure.cloudsimple.com"
+        },
+        "type": "Microsoft.VMwareCloudSimple/dedicatedCloudServices"
+      }
+    }
+  }
+}

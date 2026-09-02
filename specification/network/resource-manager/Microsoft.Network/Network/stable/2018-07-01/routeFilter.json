@@ -1,0 +1,805 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2018-07-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}": {
+      "delete": {
+        "tags": [
+          "RouteFilters"
+        ],
+        "operationId": "RouteFilters_Delete",
+        "x-ms-examples": {
+          "RouteFilterDelete": {
+            "$ref": "./examples/RouteFilterDelete.json"
+          }
+        },
+        "description": "Deletes the specified route filter.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          },
+          "204": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "RouteFilters"
+        ],
+        "operationId": "RouteFilters_Get",
+        "x-ms-examples": {
+          "RouteFilterGet": {
+            "$ref": "./examples/RouteFilterGet.json"
+          }
+        },
+        "description": "Gets the specified route filter.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced express route bgp peering resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Route Filter resource.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RouteFilters"
+        ],
+        "operationId": "RouteFilters_CreateOrUpdate",
+        "x-ms-examples": {
+          "RouteFilterCreate": {
+            "$ref": "./examples/RouteFilterCreate.json"
+          }
+        },
+        "description": "Creates or updates a route filter in a specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter."
+          },
+          {
+            "name": "routeFilterParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            },
+            "description": "Parameters supplied to the create or update route filter operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Route Filter resource.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Route Filter resource.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "RouteFilters"
+        ],
+        "operationId": "RouteFilters_Update",
+        "x-ms-examples": {
+          "RouteFilterUpdate": {
+            "$ref": "./examples/RouteFilterUpdate.json"
+          }
+        },
+        "description": "Updates a route filter in a specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter."
+          },
+          {
+            "name": "routeFilterParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchRouteFilter"
+            },
+            "description": "Parameters supplied to the update route filter operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Route Filter resource.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters": {
+      "get": {
+        "tags": [
+          "RouteFilters"
+        ],
+        "operationId": "RouteFilters_ListByResourceGroup",
+        "x-ms-examples": {
+          "RouteFilterListByResourceGroup": {
+            "$ref": "./examples/RouteFilterListByResourceGroup.json"
+          }
+        },
+        "description": "Gets all route filters in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Route Filter resources.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/routeFilters": {
+      "get": {
+        "tags": [
+          "RouteFilters"
+        ],
+        "operationId": "RouteFilters_List",
+        "x-ms-examples": {
+          "RouteFilterList": {
+            "$ref": "./examples/RouteFilterList.json"
+          }
+        },
+        "description": "Gets all route filters in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Route Filter resources.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}": {
+      "delete": {
+        "tags": [
+          "RouteFilterRules"
+        ],
+        "operationId": "RouteFilterRules_Delete",
+        "x-ms-examples": {
+          "RouteFilterRuleDelete": {
+            "$ref": "./examples/RouteFilterRuleDelete.json"
+          }
+        },
+        "description": "Deletes the specified rule from a route filter.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "Rule was deleted or not found."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "RouteFilterRules"
+        ],
+        "operationId": "RouteFilterRules_Get",
+        "x-ms-examples": {
+          "RouteFilterRuleGet": {
+            "$ref": "./examples/RouteFilterRuleGet.json"
+          }
+        },
+        "description": "Gets the specified rule from a route filter.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Route Filter Rule resource.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRule"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RouteFilterRules"
+        ],
+        "operationId": "RouteFilterRules_CreateOrUpdate",
+        "x-ms-examples": {
+          "RouteFilterRuleCreate": {
+            "$ref": "./examples/RouteFilterRuleCreate.json"
+          }
+        },
+        "description": "Creates or updates a route in the specified route filter.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter rule."
+          },
+          {
+            "name": "routeFilterRuleParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRule"
+            },
+            "description": "Parameters supplied to the create or update route filter rule operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Route Filter Rule resource.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRule"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Route Filter Rule resource.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRule"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "RouteFilterRules"
+        ],
+        "operationId": "RouteFilterRules_Update",
+        "x-ms-examples": {
+          "RouteFilterRuleUpdate": {
+            "$ref": "./examples/RouteFilterRuleUpdate.json"
+          }
+        },
+        "description": "Updates a route in the specified route filter.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter rule."
+          },
+          {
+            "name": "routeFilterRuleParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchRouteFilterRule"
+            },
+            "description": "Parameters supplied to the update route filter rule operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Route Filter Rule resource.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRule"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules": {
+      "get": {
+        "tags": [
+          "RouteFilterRules"
+        ],
+        "operationId": "RouteFilterRules_ListByRouteFilter",
+        "x-ms-examples": {
+          "RouteFilterRuleListByRouteFilter": {
+            "$ref": "./examples/RouteFilterRuleListByRouteFilter.json"
+          }
+        },
+        "description": "Gets all RouteFilterRules in a route filter.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route filter."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Route Filter Rule resources.",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RouteFilterRulePropertiesFormat": {
+      "required": [
+        "access",
+        "routeFilterRuleType",
+        "communities"
+      ],
+      "properties": {
+        "access": {
+          "type": "string",
+          "description": "The access type of the rule. Valid values are: 'Allow', 'Deny'",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "Access",
+            "modelAsString": true
+          }
+        },
+        "routeFilterRuleType": {
+          "type": "string",
+          "description": "The rule type of the rule. Valid value is: 'Community'",
+          "enum": [
+            "Community"
+          ],
+          "x-ms-enum": {
+            "name": "RouteFilterRuleType",
+            "modelAsString": true
+          }
+        },
+        "communities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The collection for bgp community values to filter on. e.g. ['12076:5010','12076:5020']"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+        }
+      },
+      "description": "Route Filter Rule Resource"
+    },
+    "RouteFilterRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RouteFilterRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Route Filter Rule Resource"
+    },
+    "PatchRouteFilterRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RouteFilterRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Route Filter Rule Resource"
+    },
+    "RouteFilterPropertiesFormat": {
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteFilterRule"
+          },
+          "description": "Collection of RouteFilterRules contained within a route filter."
+        },
+        "peerings": {
+          "type": "array",
+          "items": {
+            "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
+          },
+          "description": "A collection of references to express route circuit peerings."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+        }
+      },
+      "description": "Route Filter Resource"
+    },
+    "RouteFilter": {
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RouteFilterPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Route Filter Resource."
+    },
+    "PatchRouteFilter": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RouteFilterPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Route Filter Resource."
+    },
+    "RouteFilterListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteFilter"
+          },
+          "description": "Gets a list of route filters in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for the ListRouteFilters API service call."
+    },
+    "RouteFilterRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteFilterRule"
+          },
+          "description": "Gets a list of RouteFilterRules in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for the ListRouteFilterRules API service call"
+    }
+  }
+}

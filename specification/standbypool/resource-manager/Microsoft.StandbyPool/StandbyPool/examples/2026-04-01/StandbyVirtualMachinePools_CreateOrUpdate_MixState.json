@@ -1,0 +1,106 @@
+{
+  "title": "StandbyVirtualMachinePools_CreateOrUpdate_MixState",
+  "operationId": "StandbyVirtualMachinePools_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000009",
+    "resourceGroupName": "rgstandbypool",
+    "standbyVirtualMachinePoolName": "pool",
+    "resource": {
+      "properties": {
+        "elasticityProfile": {
+          "maxReadyCapacity": 304,
+          "minReadyCapacity": 300,
+          "postProvisioningDelay": "PT2S",
+          "dynamicSizing": {
+            "enabled": true
+          }
+        },
+        "virtualMachineState": "Mix",
+        "vmStateDistribution": {
+          "runningPercent": 20,
+          "deallocatedPercent": 80,
+          "hibernatedPercent": 0
+        },
+        "attachedVirtualMachineScaleSetId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss"
+      },
+      "tags": {},
+      "location": "West US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "elasticityProfile": {
+            "maxReadyCapacity": 304,
+            "minReadyCapacity": 300,
+            "postProvisioningDelay": "PT2S",
+            "dynamicSizing": {
+              "enabled": true
+            }
+          },
+          "virtualMachineState": "Mix",
+          "vmStateDistribution": {
+            "runningPercent": 20,
+            "deallocatedPercent": 80,
+            "hibernatedPercent": 0
+          },
+          "attachedVirtualMachineScaleSetId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {},
+        "location": "West US",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/pool",
+        "name": "pool",
+        "type": "Microsoft.StandbyPool/standbyVirtualMachinePools",
+        "systemData": {
+          "createdBy": "pooluser@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2023-09-07T16:33:22.210Z",
+          "lastModifiedBy": "pooluser@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-07T16:33:22.210Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "elasticityProfile": {
+            "maxReadyCapacity": 304,
+            "minReadyCapacity": 300,
+            "postProvisioningDelay": "PT2S",
+            "dynamicSizing": {
+              "enabled": true
+            }
+          },
+          "virtualMachineState": "Mix",
+          "vmStateDistribution": {
+            "runningPercent": 20,
+            "deallocatedPercent": 80,
+            "hibernatedPercent": 0
+          },
+          "attachedVirtualMachineScaleSetId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {},
+        "location": "West US",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/pool",
+        "name": "pool",
+        "type": "Microsoft.StandbyPool/standbyVirtualMachinePools",
+        "systemData": {
+          "createdBy": "pooluser@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2023-09-07T16:33:22.210Z",
+          "lastModifiedBy": "pooluser@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-07T16:33:22.210Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+id: pr.stale
+name: Stale PR
+description: Mark and close stale pull requests
+owner:
+resource: repository
+disabled: false
+where:
+configuration:
+  resourceManagementConfiguration:
+    scheduledSearches:
+      - description: Mark PRs with no activity for 14 days as stale
+        frequencies:
+          - daily:
+              time: 13:00
+        filters:
+          - isPullRequest
+          - isOpen
+          - isNotLabeledWith:
+              label: no-recent-activity
+          - noActivitySince:
+              days: 14
+        actions:
+          - addLabel:
+              label: no-recent-activity
+          - addReply:
+              reply: >-
+                Hi @${issueAuthor}.
+                Your PR has had no activity for 14 days and is marked as stale. If no further updates are made within 14 days, this PR will automatically be closed.
+                To keep this PR active, please remove the `no-recent-activity` label or push new changes.
+
+      - description: Close PRs that have been stale for 14 more days (28 days total)
+        frequencies:
+          - daily:
+              time: 13:00
+        filters:
+          - isPullRequest
+          - isOpen
+          - hasLabel:
+              label: no-recent-activity
+          - noActivitySince:
+              days: 14
+        actions:
+          - closeIssue
+          - addReply:
+              reply: >-
+                Hi @${issueAuthor}.
+                This PR has been closed since it had no activity for 28 days. If you still need this change, please reopen the PR and @mention the assignee for review.
+
+onFailure:
+onSuccess:

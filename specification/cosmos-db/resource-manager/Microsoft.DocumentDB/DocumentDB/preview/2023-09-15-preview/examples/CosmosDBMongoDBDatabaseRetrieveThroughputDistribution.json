@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-09-15-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
+    "retrieveThroughputParameters": {
+      "properties": {
+        "resource": {
+          "physicalPartitionIds": [
+            {
+              "id": "0"
+            },
+            {
+              "id": "1"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "resource": {
+            "physicalPartitionThroughputInfo": [
+              {
+                "id": "0",
+                "throughput": 5000
+              },
+              {
+                "id": "1",
+                "throughput": 5000
+              }
+            ]
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2023-09-15-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2023-09-15-preview"
+      }
+    }
+  }
+}

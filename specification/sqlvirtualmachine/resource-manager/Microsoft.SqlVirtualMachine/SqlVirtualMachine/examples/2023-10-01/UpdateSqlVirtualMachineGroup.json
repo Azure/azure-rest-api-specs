@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "parameters": {
+      "tags": {
+        "mytag": "myval"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineGroupName": "testvmgroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvmgroup",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "location": "northeurope",
+        "properties": {
+          "provisioningState": "UpdatingDomainful",
+          "sqlImageOffer": "SQL2017-WS2016",
+          "sqlImageSku": "Enterprise",
+          "wsfcDomainProfile": {
+            "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+          }
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  },
+  "operationId": "SqlVirtualMachineGroups_Update",
+  "title": "Updates a SQL virtual machine group tags."
+}

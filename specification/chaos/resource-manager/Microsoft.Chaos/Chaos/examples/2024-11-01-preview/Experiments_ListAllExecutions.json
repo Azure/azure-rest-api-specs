@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "experimentName": "exampleExperiment",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/experiments/exampleExperiment/executionDetails?continuationToken=&api-version=2025-01-01",
+        "value": [
+          {
+            "name": "f24500ad-744e-4a26-864b-b76199eac333",
+            "type": "Microsoft.Chaos/experiments/executions",
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/experiments/exampleExperiment/executions/f24500ad-744e-4a26-864b-b76199eac333",
+            "properties": {
+              "startedAt": "2020-12-14T21:52:52.2552574Z",
+              "status": "failed",
+              "stoppedAt": "2020-12-14T21:56:18.9281956Z"
+            }
+          },
+          {
+            "name": "14d98367-52ef-4596-be4f-53fc81bbfc33",
+            "type": "Microsoft.Chaos/experiments/executions",
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/experiments/exampleExperiment/executions/14d98367-52ef-4596-be4f-53fc81bbfc33",
+            "properties": {
+              "startedAt": "2020-12-14T21:52:52.2552574Z",
+              "status": "success",
+              "stoppedAt": "2020-12-14T21:56:18.9281956Z"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Experiments_ListAllExecutions",
+  "title": "List all executions of an Experiment."
+}

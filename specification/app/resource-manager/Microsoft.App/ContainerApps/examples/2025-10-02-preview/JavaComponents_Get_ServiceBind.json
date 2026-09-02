@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "name": "myjavacomponent",
+    "api-version": "2025-10-02-preview",
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myjavacomponent",
+        "type": "Microsoft.App/managedEnvironments/javaComponents",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/myjavacomponent",
+        "properties": {
+          "componentType": "SpringBootAdmin",
+          "configurations": [
+            {
+              "propertyName": "spring.boot.admin.ui.enable-toasts",
+              "value": "true"
+            },
+            {
+              "propertyName": "spring.boot.admin.monitor.status-interval",
+              "value": "10000ms"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "scale": {
+            "maxReplicas": 1,
+            "minReplicas": 1
+          },
+          "serviceBinds": [
+            {
+              "name": "yellowcat",
+              "serviceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/yellowcat"
+            }
+          ]
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "JavaComponents_Get",
+  "title": "Get Java Component with ServiceBinds"
+}

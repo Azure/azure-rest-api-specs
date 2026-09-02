@@ -1,0 +1,1981 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1.1-preview.3",
+    "title": "Personalizer Client v1.1-preview.3",
+    "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls."
+  },
+  "basePath": "/personalizer/v1.1-preview.3",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/configurations/service": {
+      "get": {
+        "tags": [
+          "ConfigurationsV1Dot1Preview1"
+        ],
+        "summary": "Get Service Configuration.",
+        "description": "Get the Personalizer service configuration.",
+        "operationId": "ServiceConfiguration_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful ServiceConfiguration_Get request": {
+            "$ref": "./examples/ServiceConfiguration_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConfigurationsV1Dot1Preview1"
+        ],
+        "summary": "Update Service Configuration.",
+        "description": "Update the Personalizer service configuration.",
+        "operationId": "ServiceConfiguration_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "config",
+            "in": "body",
+            "description": "The personalizer service configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Updating defaultReward, rewardWaitTime and rewardAggregation when changing learning mode from Online to Apprentice mode and vice versa is not allowed. Make the mode change and then change the additional settings with an additional API call.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful ServiceConfiguration_Update request": {
+            "$ref": "./examples/ServiceConfiguration_Update.json"
+          }
+        }
+      }
+    },
+    "/configurations/policy": {
+      "get": {
+        "tags": [
+          "ConfigurationsV1Dot1Preview1"
+        ],
+        "summary": "Get Policy.",
+        "description": "Get the Learning Settings currently used by the Personalizer service.",
+        "operationId": "Policy_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Policy_Get request": {
+            "$ref": "./examples/Policy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConfigurationsV1Dot1Preview1"
+        ],
+        "summary": "Update Policy.",
+        "description": "Update the Learning Settings that the Personalizer service will use to train models.",
+        "operationId": "Policy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "policy",
+            "in": "body",
+            "description": "The learning settings.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          },
+          "default": {
+            "description": "Invalid policy configuration.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Policy_Update request": {
+            "$ref": "./examples/Policy_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationsV1Dot1Preview1"
+        ],
+        "summary": "Reset Policy.",
+        "description": "Resets the learning settings of the Personalizer service to default.",
+        "operationId": "Policy_Reset",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Policy_Reset request": {
+            "$ref": "./examples/Policy_Reset.json"
+          }
+        }
+      }
+    },
+    "/evaluations/{evaluationId}": {
+      "get": {
+        "tags": [
+          "EvaluationsV1Dot1Preview1"
+        ],
+        "summary": "Get Evaluation.",
+        "description": "Get the Offline Evaluation associated with the Id.",
+        "operationId": "Evaluations_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "description": "Id of the Offline Evaluation.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "Offline Evaluation not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluations_Get request": {
+            "$ref": "./examples/Evaluations_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EvaluationsV1Dot1Preview1"
+        ],
+        "summary": "Delete Evaluation.",
+        "description": "Delete the Offline Evaluation associated with the Id.",
+        "operationId": "Evaluations_Delete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "description": "Id of the Offline Evaluation to delete.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluations_Delete request": {
+            "$ref": "./examples/Evaluations_Delete.json"
+          }
+        }
+      }
+    },
+    "/evaluations": {
+      "get": {
+        "tags": [
+          "EvaluationsV1Dot1Preview1"
+        ],
+        "summary": "List Offline Evaluations.",
+        "description": "List of all Offline Evaluations.",
+        "operationId": "Evaluations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Evaluation"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluations_List request": {
+            "$ref": "./examples/Evaluations_List.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "EvaluationsV1Dot1Preview1"
+        ],
+        "summary": "Create Offline Evaluation.",
+        "description": "Submit a new Offline Evaluation job.",
+        "operationId": "Evaluations_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "The Offline Evaluation job definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationContract"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            },
+            "headers": {
+              "Location": {
+                "description": "Location of the Offline Evaluation status and data.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Invalid evaluation contract.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluations_Create request": {
+            "$ref": "./examples/Evaluations_Create.json"
+          }
+        }
+      }
+    },
+    "/events/{eventId}/reward": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Post Reward.",
+        "description": "Report reward between 0 and 1 that resulted from using the action specified in rewardActionId, for the specified event.",
+        "operationId": "Events_Reward",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The event id this reward applies to.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "reward",
+            "in": "body",
+            "description": "The reward should be a floating point number, typically between 0 and 1.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RewardRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Invalid reward request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Events_Reward request": {
+            "$ref": "./examples/Events_Reward.json"
+          }
+        }
+      }
+    },
+    "/events/{eventId}/activate": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Activate Event.",
+        "description": "Report that the specified event was actually used (e.g. by being displayed to the user) and a reward should be expected for it.",
+        "operationId": "Events_Activate",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The event ID to be activated.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Invalid activate event request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Events_Activate request": {
+            "$ref": "./examples/Events_Activate.json"
+          }
+        }
+      }
+    },
+    "/configurations/applyFromEvaluation": {
+      "post": {
+        "tags": [
+          "ConfigurationsV1Dot1Preview1"
+        ],
+        "summary": "Apply Learning Settings and model from a pre-existing Offline Evaluation, making them the current online Learning Settings and model and replacing the previous ones.",
+        "operationId": "ServiceConfiguration_ApplyFromEvaluation",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reference to the policy within the evaluation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyReferenceContract"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Learning Settings not found in evaluation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful ServiceConfiguration_ApplyFromEvaluation request": {
+            "$ref": "./examples/ServiceConfiguration_ApplyFromEvaluation.json"
+          }
+        }
+      }
+    },
+    "/logs/interactions": {
+      "post": {
+        "tags": [
+          "LogsV1Dot1Preview2"
+        ],
+        "summary": "Post interactions.",
+        "description": "The endpoint is intended to be used from within a SDK for logging interactions and accepts specific format defined in https://github.com/VowpalWabbit/reinforcement_learning. This endpoint should not be used by the customer.",
+        "operationId": "Log_Interactions",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Interactions binary payload.",
+            "required": true,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Log_Interactions request": {
+            "$ref": "./examples/Log_Interactions.json"
+          }
+        }
+      }
+    },
+    "/logs/observations": {
+      "post": {
+        "tags": [
+          "LogsV1Dot1Preview2"
+        ],
+        "summary": "Post observations.",
+        "description": "The endpoint is intended to be used from within a SDK for logging observations and accepts specific format defined in https://github.com/VowpalWabbit/reinforcement_learning. This endpoint should not be used by the customer.",
+        "operationId": "Log_Observations",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Observations binary payload.",
+            "required": true,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Log_Observations request": {
+            "$ref": "./examples/Log_Observations.json"
+          }
+        }
+      }
+    },
+    "/logs": {
+      "delete": {
+        "tags": [
+          "LogsV1Dot1Preview2"
+        ],
+        "summary": "Deletes Logs.",
+        "description": "Delete all logs of Rank and Reward calls stored by Personalizer.",
+        "operationId": "Log_Delete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Successful Log_Delete request": {
+            "$ref": "./examples/Log_Delete.json"
+          }
+        }
+      }
+    },
+    "/logs/properties": {
+      "get": {
+        "tags": [
+          "LogsV1Dot1Preview2"
+        ],
+        "summary": "Get Log Properties.",
+        "description": "Get properties of the Personalizer logs.",
+        "operationId": "Log_GetProperties",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogsProperties"
+            }
+          },
+          "default": {
+            "description": "Log properties not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Log_GetProperties request": {
+            "$ref": "./examples/Log_GetProperties.json"
+          }
+        }
+      }
+    },
+    "/model": {
+      "get": {
+        "tags": [
+          "ModelV1Dot1Preview3"
+        ],
+        "summary": "Get Model.",
+        "description": "Get the model file generated by Personalizer service.",
+        "operationId": "Model_Get",
+        "consumes": [],
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "signed",
+            "description": "True if requesting signed model zip archive, false otherwise.",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Requested resource does not exist on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Model_Get request": {
+            "$ref": "./examples/Model_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ModelV1Dot1Preview3"
+        ],
+        "summary": "Put the digitally signed model file.",
+        "description": "Replace the existing model file for the Personalizer service.",
+        "operationId": "Model_Import",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The digitally signed model file obtained from getting the model.",
+            "required": true,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Given model file is not signed or does not have a valid signature.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Model_Import request": {
+            "$ref": "./examples/Model_Import.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ModelV1Dot1Preview3"
+        ],
+        "summary": "Reset Model.",
+        "description": "Resets the model file generated by Personalizer service.",
+        "operationId": "Model_Reset",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Model reset failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Model_Reset request": {
+            "$ref": "./examples/Model_Reset.json"
+          }
+        }
+      }
+    },
+    "/model/properties": {
+      "get": {
+        "tags": [
+          "ModelV1Dot1Preview3"
+        ],
+        "summary": "Get Model Properties.",
+        "description": "Get properties of the model file generated by Personalizer service.",
+        "operationId": "Model_GetProperties",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelProperties"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Model_GetProperties request": {
+            "$ref": "./examples/Model_GetProperties.json"
+          }
+        }
+      }
+    },
+    "/multislot/events/{eventId}/reward": {
+      "post": {
+        "tags": [
+          "MultiSlotEvents"
+        ],
+        "summary": "Post multi-slot Rewards.",
+        "description": "Report reward that resulted from using the action specified in rewardActionId for the slot.",
+        "operationId": "MultiSlotEvents_Reward",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventId",
+            "description": "The event id this reward applies to.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "List of slot id and reward values. The reward should be a floating point number, typically between 0 and 1.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultiSlotRewardRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Invalid reward request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful MultiSlotEvents_Reward request": {
+            "$ref": "./examples/MultiSlotEvents_Reward.json"
+          }
+        }
+      }
+    },
+    "/multislot/events/{eventId}/activate": {
+      "post": {
+        "tags": [
+          "MultiSlotEvents"
+        ],
+        "summary": "Activate multi-slot Event.",
+        "description": "Report that the specified event was actually used or displayed to the user and a rewards should be expected for it.",
+        "operationId": "MultiSlotEvents_Activate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventId",
+            "description": "The event ID this activation applies to.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Invalid activate event request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful MultiSlotEvents_Activate request": {
+            "$ref": "./examples/MultiSlotEvents_Activate.json"
+          }
+        }
+      }
+    },
+    "/multislot/rank": {
+      "post": {
+        "tags": [
+          "MultiSlotRank"
+        ],
+        "summary": "Post multi-slot Rank.",
+        "description": "Submit a Personalizer multi-slot rank request. Receives a context, a list of actions, and a list of slots. Returns which of the provided actions should be used in each slot, in each rewardActionId.",
+        "operationId": "MultiSlot_Rank",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A Personalizer multi-slot Rank request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultiSlotRankRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MultiSlotRankResponse"
+            }
+          },
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful MultiSlot_Rank request": {
+            "$ref": "./examples/MultiSlot_Rank.json"
+          }
+        }
+      }
+    },
+    "/rank": {
+      "post": {
+        "tags": [
+          "Rank"
+        ],
+        "summary": "Post Rank.",
+        "description": "Submit a Personalizer rank request. Receives a context and a list of actions. Returns which of the provided actions should be used by your application, in rewardActionId.",
+        "operationId": "Rank",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "rankRequest",
+            "in": "body",
+            "description": "A Personalizer Rank request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RankRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RankResponse"
+            }
+          },
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Rank request": {
+            "$ref": "./examples/Rank.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServiceConfiguration": {
+      "description": "The configuration of the service.",
+      "required": [
+        "rewardWaitTime",
+        "defaultReward",
+        "rewardAggregation",
+        "explorationPercentage",
+        "modelExportFrequency",
+        "logRetentionDays"
+      ],
+      "type": "object",
+      "properties": {
+        "rewardWaitTime": {
+          "format": "duration",
+          "description": "The time span waited until a request is marked with the default reward\r\nand should be between 5 seconds and 2 days.\r\nFor example, PT5M (5 mins). For information about the time format,\r\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+          "type": "string"
+        },
+        "defaultReward": {
+          "format": "float",
+          "description": "The reward given if a reward is not received within the specified wait time.",
+          "maximum": 1,
+          "minimum": -1,
+          "type": "number"
+        },
+        "rewardAggregation": {
+          "description": "The function used to process rewards, if multiple reward scores are received before rewardWaitTime is over.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "explorationPercentage": {
+          "format": "float",
+          "description": "The percentage of rank responses that will use exploration.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "modelExportFrequency": {
+          "format": "duration",
+          "description": "Personalizer will start using the most updated trained model for online ranks automatically every specified time period.\r\nFor example, PT5M (5 mins). For information about the time format,\r\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+          "type": "string"
+        },
+        "logMirrorEnabled": {
+          "description": "Flag indicates whether log mirroring is enabled.",
+          "type": "boolean"
+        },
+        "logMirrorSasUri": {
+          "description": "Azure storage account container SAS URI for log mirroring.",
+          "type": "string"
+        },
+        "logRetentionDays": {
+          "format": "int32",
+          "description": "Number of days historical logs are to be maintained. -1 implies the logs will never be deleted.",
+          "maximum": 2147483647,
+          "minimum": -1,
+          "type": "integer"
+        },
+        "lastConfigurationEditDate": {
+          "format": "date-time",
+          "description": "Last time model training configuration was updated",
+          "type": "string"
+        },
+        "learningMode": {
+          "description": "Learning Modes for Personalizer",
+          "enum": [
+            "Online",
+            "Apprentice",
+            "LoggingOnly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LearningMode",
+            "modelAsString": true
+          }
+        },
+        "isAutoOptimizationEnabled": {
+          "description": "Flag indicating whether Personalizer will automatically optimize Learning Settings by running Offline Evaluations periodically.",
+          "type": "boolean"
+        },
+        "autoOptimizationFrequency": {
+          "format": "duration",
+          "description": "Frequency of automatic optimization. Only relevant if IsAutoOptimizationEnabled is true.\r\nFor example, PT5M (5 mins). For information about the time format,\r\n\\r\\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+          "type": "string"
+        },
+        "autoOptimizationStartDate": {
+          "format": "date-time",
+          "description": "Date when the first automatic optimization evaluation must be performed. Only relevant if IsAutoOptimizationEnabled is true.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Used to return an error to the client",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/PersonalizerError"
+        }
+      }
+    },
+    "PersonalizerError": {
+      "description": "The error object.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error Codes returned by Personalizer",
+          "enum": [
+            "BadRequest",
+            "InvalidServiceConfiguration",
+            "InvalidLearningModeServiceConfiguration",
+            "InvalidPolicyConfiguration",
+            "InvalidPolicyContract",
+            "InvalidEvaluationContract",
+            "DuplicateCustomPolicyNames",
+            "NoLogsExistInDateRange",
+            "LogsSizeExceedAllowedLimit",
+            "InvalidRewardRequest",
+            "InvalidEventIdToActivate",
+            "InvalidRankRequest",
+            "InvalidExportLogsRequest",
+            "InvalidRequest",
+            "InvalidContainer",
+            "InvalidModelMetadata",
+            "ApprenticeModeNeverTurnedOn",
+            "MissingAppId",
+            "InvalidRewardWaitTime",
+            "InvalidLogRetentionDays",
+            "InvalidMultiSlotApiAccess",
+            "PayloadSizeExceeded",
+            "InvalidModelImportSignature",
+            "InvalidModelImportFormat",
+            "InvalidApiAccess",
+            "ModelFileAccessDenied",
+            "ProblemTypeIncompatibleWithAutoOptimization",
+            "ResourceNotFound",
+            "FrontEndNotFound",
+            "EvaluationNotFound",
+            "LearningSettingsNotFound",
+            "EvaluationModelNotFound",
+            "LogsPropertiesNotFound",
+            "ModelRankingError",
+            "InternalServerError",
+            "RankNullResponse",
+            "UpdateConfigurationFailed",
+            "ModelResetFailed",
+            "ModelPublishFailed",
+            "ModelMetadataUpdateFailed",
+            "OperationNotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PersonalizerErrorCode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "BadRequest",
+                "description": "Request could not be understood by the server."
+              },
+              {
+                "value": "InvalidServiceConfiguration",
+                "description": "Invalid service configuration."
+              },
+              {
+                "value": "InvalidLearningModeServiceConfiguration",
+                "description": "Updating defaultReward, rewardWaitTime and rewardAggregation when changing learning mode from Online to Apprentice mode and vice versa is not allowed. Make the mode change and then change the additional settings with an additional API call."
+              },
+              {
+                "value": "InvalidPolicyConfiguration",
+                "description": "Invalid policy configuration."
+              },
+              {
+                "value": "InvalidPolicyContract",
+                "description": "Invalid policy contract."
+              },
+              {
+                "value": "InvalidEvaluationContract",
+                "description": "Invalid evaluation contract."
+              },
+              {
+                "value": "DuplicateCustomPolicyNames",
+                "description": "Custom policy names should be unique."
+              },
+              {
+                "value": "NoLogsExistInDateRange",
+                "description": "No logs exist in date range."
+              },
+              {
+                "value": "LogsSizeExceedAllowedLimit",
+                "description": "Total size of logs exceed allowed limit."
+              },
+              {
+                "value": "InvalidRewardRequest",
+                "description": "Invalid reward request."
+              },
+              {
+                "value": "InvalidEventIdToActivate",
+                "description": "Invalid activate event request."
+              },
+              {
+                "value": "InvalidRankRequest",
+                "description": "Invalid request."
+              },
+              {
+                "value": "InvalidExportLogsRequest",
+                "description": "Invalid request."
+              },
+              {
+                "value": "InvalidRequest",
+                "description": "Invalid request."
+              },
+              {
+                "value": "InvalidContainer",
+                "description": "SAS Uri must be the Uri to a container that has write permissions."
+              },
+              {
+                "value": "InvalidModelMetadata",
+                "description": "Invalid model metadata."
+              },
+              {
+                "value": "ApprenticeModeNeverTurnedOn",
+                "description": "Apprentice mode never turned on."
+              },
+              {
+                "value": "MissingAppId",
+                "description": "AppId is missing in the header."
+              },
+              {
+                "value": "InvalidRewardWaitTime",
+                "description": "Reward wait time should be either 10 minutes or 4 hours or 12 hours or 24 hours"
+              },
+              {
+                "value": "InvalidLogRetentionDays",
+                "description": "Log Retention Days must be -1 to store indefinitely or must be at least reward wait time plus 1 day (rounded up)"
+              },
+              {
+                "value": "InvalidMultiSlotApiAccess",
+                "description": "Multi-slot feature is currently disabled. Please follow multi-slot Personalizer documentation to update your loop settings to enable multi-slot functionality."
+              },
+              {
+                "value": "PayloadSizeExceeded",
+                "description": "Exceeds maximum allowed payload size."
+              },
+              {
+                "value": "InvalidModelImportSignature",
+                "description": "Given model file is not signed or does not have a valid signature."
+              },
+              {
+                "value": "InvalidModelImportFormat",
+                "description": "Given model file format is invalid."
+              },
+              {
+                "value": "InvalidApiAccess",
+                "description": "Api is currently disabled for the instance."
+              },
+              {
+                "value": "ModelFileAccessDenied",
+                "description": "Key vault Key used for customer managed key cannot be accessed."
+              },
+              {
+                "value": "ProblemTypeIncompatibleWithAutoOptimization",
+                "description": "Auto-optimization is not compatible with multi-slot personalization."
+              },
+              {
+                "value": "ResourceNotFound",
+                "description": "Requested resource does not exist on the server."
+              },
+              {
+                "value": "FrontEndNotFound",
+                "description": "Front end not found."
+              },
+              {
+                "value": "EvaluationNotFound",
+                "description": "Offline Evaluation not found."
+              },
+              {
+                "value": "LearningSettingsNotFound",
+                "description": "Learning Settings not found in evaluation."
+              },
+              {
+                "value": "EvaluationModelNotFound",
+                "description": "Model not found in evaluation."
+              },
+              {
+                "value": "LogsPropertiesNotFound",
+                "description": "Log properties not found."
+              },
+              {
+                "value": "ModelRankingError",
+                "description": "Error while ranking actions using model. Please verify the learning settings are valid."
+              },
+              {
+                "value": "InternalServerError",
+                "description": "A generic error has occurred on the server."
+              },
+              {
+                "value": "RankNullResponse",
+                "description": "Rank call returned null response."
+              },
+              {
+                "value": "UpdateConfigurationFailed",
+                "description": "Failed to update configuration."
+              },
+              {
+                "value": "ModelResetFailed",
+                "description": "Model reset failed."
+              },
+              {
+                "value": "ModelPublishFailed",
+                "description": "Model publish failed."
+              },
+              {
+                "value": "ModelMetadataUpdateFailed",
+                "description": "Model metadata update failed."
+              },
+              {
+                "value": "OperationNotAllowed",
+                "description": "This operation is not allowed at this time."
+              }
+            ]
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Error source element.",
+          "type": "string"
+        },
+        "details": {
+          "description": "An array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PersonalizerError"
+          }
+        },
+        "innerError": {
+          "$ref": "#/definitions/InternalError"
+        }
+      }
+    },
+    "InternalError": {
+      "description": "An object containing more specific information than the parent object about the error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Detailed error code.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InternalError"
+        }
+      }
+    },
+    "PolicyContract": {
+      "description": "Learning settings specifying how to train the model.",
+      "required": [
+        "name",
+        "arguments"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the learning settings.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "arguments": {
+          "description": "Arguments of the learning settings.",
+          "maxLength": 1024,
+          "type": "string"
+        }
+      }
+    },
+    "Evaluation": {
+      "description": "A counterfactual evaluation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the evaluation.",
+          "maxLength": 256,
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the evaluation.",
+          "maxLength": 256,
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time of the evaluation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The end time of the evaluation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "jobId": {
+          "description": "The ID of the job processing the evaluation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the job processing the evaluation.",
+          "enum": [
+            "completed",
+            "pending",
+            "failed",
+            "notSubmitted",
+            "timeout",
+            "optimalPolicyApplied",
+            "onlinePolicyRetained"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EvaluationJobStatus",
+            "modelAsString": true
+          }
+        },
+        "policyResults": {
+          "description": "The results of the evaluation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyResult"
+          }
+        },
+        "featureImportance": {
+          "description": "Feature Importance.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "evaluationType": {
+          "description": "Evaluation type (manual or through Automatic Optimization).",
+          "enum": [
+            "Manual",
+            "Auto"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EvaluationType",
+            "modelAsString": true
+          }
+        },
+        "optimalPolicy": {
+          "description": "Thr optimal policy.",
+          "type": "string"
+        },
+        "creationTime": {
+          "description": "Creation time.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyResult": {
+      "description": "This class contains the Learning Settings information and the results of the Offline Evaluation using that policy.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Learning Settings.",
+          "type": "string",
+          "readOnly": true
+        },
+        "arguments": {
+          "description": "The arguments of the Learning Settings.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySource": {
+          "description": "The source of the Learning Settings.",
+          "enum": [
+            "Online",
+            "Baseline",
+            "Random",
+            "Custom",
+            "OfflineExperimentation"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PolicySource",
+            "modelAsString": true
+          }
+        },
+        "summary": {
+          "description": "The aggregate results of the Offline Evaluation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyResultSummary"
+          },
+          "readOnly": true
+        },
+        "totalSummary": {
+          "description": "The aggregate total of the Offline Evaluation.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PolicyResultSummary"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyResultSummary": {
+      "description": "This class contains the summary of evaluating a policy on a counterfactual evaluation.",
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "format": "date-time",
+          "description": "Timestamp of the aggregation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipsEstimatorNumerator": {
+          "format": "float",
+          "description": "Numerator for IPS estimator.",
+          "type": "number",
+          "readOnly": true
+        },
+        "ipsEstimatorDenominator": {
+          "format": "float",
+          "description": "Denominator for IPS estimator.",
+          "type": "number",
+          "readOnly": true
+        },
+        "snipsEstimatorDenominator": {
+          "format": "float",
+          "description": "Denominator for SNIPS estimator.",
+          "type": "number",
+          "readOnly": true
+        },
+        "aggregateTimeWindow": {
+          "format": "duration",
+          "description": "Time window for aggregation.\r\nFor example, PT5M (5 mins). For information about the time format,\r\nsee http://en.wikipedia.org/wiki/ISO_8601#Durations",
+          "type": "string",
+          "readOnly": true
+        },
+        "nonZeroProbability": {
+          "format": "float",
+          "description": "Probability of non-zero values for the Policy evaluation.",
+          "type": "number"
+        },
+        "sumOfSquares": {
+          "format": "float",
+          "description": "Sum of Squares for the Policy evaluation results.",
+          "type": "number",
+          "readOnly": true
+        },
+        "confidenceInterval": {
+          "format": "float",
+          "description": "Gaussian confidence interval for the Policy evaluation.",
+          "type": "number",
+          "readOnly": true
+        },
+        "averageReward": {
+          "format": "float",
+          "description": "Average reward.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyReferenceContract": {
+      "description": "Reference to the policy within the evaluation.",
+      "required": [
+        "evaluationId",
+        "policyName"
+      ],
+      "type": "object",
+      "properties": {
+        "evaluationId": {
+          "description": "Evaluation Id of the evaluation.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "policyName": {
+          "description": "Name of the learning settings.",
+          "maxLength": 256,
+          "type": "string"
+        }
+      }
+    },
+    "EvaluationContract": {
+      "description": "A counterfactual evaluation.",
+      "required": [
+        "name",
+        "startTime",
+        "endTime",
+        "policies"
+      ],
+      "type": "object",
+      "properties": {
+        "enableOfflineExperimentation": {
+          "description": "True if the evaluation should explore for a more optimal learning settings.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "The name of the evaluation.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time of the evaluation.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The end time of the evaluation.",
+          "type": "string"
+        },
+        "policies": {
+          "description": "Additional learning settings to evaluate.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyContract"
+          }
+        }
+      }
+    },
+    "RewardRequest": {
+      "description": "Reward given to a rank response.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "float",
+          "description": "Reward to be assigned to an action. Value is a float calculated by your application, typically between 0 and 1, and must be between -1 and 1.",
+          "type": "number"
+        }
+      }
+    },
+    "LogsProperties": {
+      "description": "Properties related to data used to train the model.",
+      "type": "object",
+      "properties": {
+        "dateRange": {
+          "description": "Date range.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DateRange"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "DateRange": {
+      "description": "A date range starting at From and ending at To.",
+      "type": "object",
+      "properties": {
+        "from": {
+          "format": "date-time",
+          "description": "Start date for the range.",
+          "type": "string",
+          "readOnly": true
+        },
+        "to": {
+          "format": "date-time",
+          "description": "End date for the range.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModelProperties": {
+      "description": "Properties related to the trained model.",
+      "type": "object",
+      "properties": {
+        "creationTime": {
+          "format": "date-time",
+          "description": "Creation time of the model.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "format": "date-time",
+          "description": "Last time the model was modified.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SlotReward": {
+      "required": [
+        "slotId",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "slotId": {
+          "description": "Slot id for which we are sending the reward.",
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "value": {
+          "format": "float",
+          "description": "Reward to be assigned to slotId. Value should be between -1 and 1 inclusive.",
+          "type": "number"
+        }
+      }
+    },
+    "MultiSlotRewardRequest": {
+      "description": "Reward given to a list of slots.",
+      "required": [
+        "reward"
+      ],
+      "type": "object",
+      "properties": {
+        "reward": {
+          "description": "List of SlotRewards",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlotReward"
+          }
+        }
+      }
+    },
+    "RankRequest": {
+      "description": "Request a set of actions to be ranked by the Personalizer service.",
+      "required": [
+        "actions"
+      ],
+      "type": "object",
+      "properties": {
+        "contextFeatures": {
+          "description": "Features of the context used for Personalizer as a\r\ndictionary of dictionaries. This is determined by your application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, aggregated data about time and date, etc.\r\nFeatures should not include personally identifiable information (PII),\r\nunique UserIDs, or precise timestamps.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "actions": {
+          "description": "The set of actions the Personalizer service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.\r\nThe first item in the array will be used as Baseline item in Offline Evaluations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RankableAction"
+          }
+        },
+        "excludedActions": {
+          "description": "The set of action ids to exclude from ranking.\r\nPersonalizer will consider the first non-excluded item in the array as the Baseline action when performing Offline Evaluations.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eventId": {
+          "description": "Optionally pass an eventId that uniquely identifies this Rank event.\r\nIf null, the service generates a unique eventId. The eventId will be used for\r\nassociating this request with its reward, as well as seeding the pseudo-random\r\ngenerator when making a Personalizer call.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "deferActivation": {
+          "description": "Send false if it is certain the rewardActionId in rank results will be shown to the user, therefore\r\nPersonalizer will expect a Reward call, otherwise it will assign the default\r\nReward to the event. Send true if it is possible the user will not see the action specified in the rank results,\r\n(e.g. because the page is rendering later, or the Rank results may be overridden by code further downstream).\r\nYou must call the Activate Event API if the event output is shown to users, otherwise Rewards will be ignored.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "RankableAction": {
+      "description": "An action with its associated features used for ranking.",
+      "required": [
+        "id",
+        "features"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the action.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "features": {
+          "description": "List of dictionaries containing features.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "SlotRequest": {
+      "description": "A slot with it's associated features and list of excluded actions",
+      "required": [
+        "baselineAction",
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Slot ID",
+          "type": "string"
+        },
+        "features": {
+          "description": "List of dictionaries containing slot features.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "excludedActions": {
+          "description": "List of excluded action Ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "baselineAction": {
+          "description": "The 'baseline action' ID for the slot.\r\nThe BaselineAction is the Id of the Action your application would use in that slot if Personalizer didn't exist.\r\nBaselineAction must be defined for every slot.\r\nBaselineAction should never be part of ExcludedActions.\r\nEach slot must have a unique BaselineAction which corresponds to an an action from the event's Actions list.",
+          "type": "string"
+        }
+      }
+    },
+    "MultiSlotRankRequest": {
+      "required": [
+        "actions",
+        "slots"
+      ],
+      "type": "object",
+      "properties": {
+        "contextFeatures": {
+          "description": "Features of the context used for Personalizer as a\r\ndictionary of dictionaries. This is determined by your application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, aggregated data about time and date, etc.\r\nFeatures should not include personally identifiable information (PII),\r\nunique UserIDs, or precise timestamps.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "actions": {
+          "description": "The set of actions the Personalizer service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.\r\nThe first item in the array will be used as Baseline item in Offline Evaluations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RankableAction"
+          }
+        },
+        "slots": {
+          "description": "The set of slots the Personalizer service should select actions for.\r\nThe set should not contain more than 50 slots.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlotRequest"
+          }
+        },
+        "eventId": {
+          "description": "Optionally pass an eventId that uniquely identifies this Rank event.\r\nIf null, the service generates a unique eventId. The eventId will be used for\r\nassociating this request with its reward, as well as seeding the pseudo-random\r\ngenerator when making a Personalizer call.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "deferActivation": {
+          "description": "Send false if it is certain the rewardActionId in rank results will be shown to the user, therefore\r\nPersonalizer will expect a Reward call, otherwise it will assign the default\r\nReward to the event. Send true if it is possible the user will not see the action specified in the rank results,\r\n(e.g. because the page is rendering later, or the Rank results may be overridden by code further downstream).\r\nYou must call the Activate Event API if the event output is shown to users, otherwise Rewards will be ignored.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "SlotResponse": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id is the slot ID.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "rewardActionId": {
+          "description": "RewardActionID is the action ID recommended by Personalizer.",
+          "maxLength": 256,
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MultiSlotRankResponse": {
+      "type": "object",
+      "properties": {
+        "slots": {
+          "description": "Each slot has a corresponding rewardActionID which is the action ID recommended by Personalizer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlotResponse"
+          },
+          "readOnly": true
+        },
+        "eventId": {
+          "description": "The eventId for the round trip from request to response.",
+          "maxLength": 256,
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RankResponse": {
+      "description": "Returns which action to use as rewardActionId, and additional information about each action as a result of a Rank request.",
+      "type": "object",
+      "properties": {
+        "ranking": {
+          "description": "The calculated ranking for the current request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RankedAction"
+          },
+          "readOnly": true
+        },
+        "eventId": {
+          "description": "The eventId for the round trip from request to response.",
+          "maxLength": 256,
+          "type": "string",
+          "readOnly": true
+        },
+        "rewardActionId": {
+          "description": "The action chosen by the Personalizer service.\r\nThis is the action your application should display, and for which to report the reward.\r\nThis might not be the first found in 'ranking'.",
+          "maxLength": 256,
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RankedAction": {
+      "description": "A ranked action with its resulting probability.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the action",
+          "maxLength": 256,
+          "type": "string",
+          "readOnly": true
+        },
+        "probability": {
+          "format": "float",
+          "description": "Probability of the action",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceStatus": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string"
+        },
+        "apiStatus": {
+          "type": "string"
+        },
+        "apiStatusMessage": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "in": "path",
+      "description": "Supported Cognitive Services endpoint.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "description": "The secret key for your Azure Cognitive Services subscription.",
+      "in": "header",
+      "type": "apiKey"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "ConfigurationsV1Dot1Preview1",
+      "description": "Manages configuration operations."
+    },
+    {
+      "name": "EvaluationsV1Dot1Preview1",
+      "description": "Manages counterfactual evaluation operations."
+    },
+    {
+      "name": "MultiSlotEvents",
+      "description": "Manages multi-slot event operations."
+    },
+    {
+      "name": "MultiSlotRank",
+      "description": "Manages multi-slot ranking operations."
+    },
+    {
+      "name": "Events",
+      "description": "Manages event operations."
+    },
+    {
+      "name": "Rank",
+      "description": "Manages ranking operations."
+    },
+    {
+      "name": "LogsV1Dot1Preview2",
+      "description": "Manages reinforcement learning logs."
+    },
+    {
+      "name": "ModelV1Dot1Preview3",
+      "description": "Manages reinforcement learning configuration operations."
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}

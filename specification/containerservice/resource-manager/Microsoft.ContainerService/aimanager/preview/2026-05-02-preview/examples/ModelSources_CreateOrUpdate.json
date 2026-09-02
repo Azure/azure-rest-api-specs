@@ -1,0 +1,68 @@
+{
+  "title": "ModelSources_CreateOrUpdate_MaximumSet",
+  "operationId": "ModelSources_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-05-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgaimanagers",
+    "If-Match": "\"00000000-0000-0000-0000-000000000000\"",
+    "If-None-Match": "*",
+    "aiManagerName": "aimanager1",
+    "modelSourceName": "huggingface",
+    "resource": {
+      "properties": {
+        "sourceType": "HuggingFace",
+        "description": "Hugging Face model source",
+        "credential": {
+          "inline": {
+            "value": "hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sourceType": "HuggingFace",
+          "description": "Hugging Face model source"
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/huggingface",
+        "name": "huggingface",
+        "type": "Microsoft.ContainerService/aiManagers/modelSources",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sourceType": "HuggingFace",
+          "description": "Hugging Face model source"
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/huggingface",
+        "name": "huggingface",
+        "type": "Microsoft.ContainerService/aiManagers/modelSources",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}

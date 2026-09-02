@@ -1,0 +1,86 @@
+{
+  "operationId": "GetReplica",
+  "description": "This example shows how to get the information about all replicas of a given service of an application..",
+  "parameters": {
+    "api-version": "6.3-preview",
+    "applicationResourceName": "helloWorldApp",
+    "serviceResourceName": "helloWorldService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ContinuationToken": "",
+        "Items": [
+          {
+            "osType": "Linux",
+            "codePackages": [
+              {
+                "name": "helloWorldCode",
+                "image": "seabreeze/sbz-helloworld:1.0-alpine",
+                "endpoints": [
+                  {
+                    "name": "helloWorldListener",
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1,
+                    "cpu": 1
+                  }
+                },
+                "instanceView": {
+                  "restartCount": 1,
+                  "currentState": {
+                    "state": "Running",
+                    "exitCode": "0"
+                  },
+                  "previousState": {
+                    "state": "NotSpecified",
+                    "exitCode": "0"
+                  }
+                }
+              }
+            ],
+            "networkRefs": [],
+            "replicaName": "1"
+          },
+          {
+            "osType": "Linux",
+            "codePackages": [
+              {
+                "name": "helloWorldCode",
+                "image": "seabreeze/sbz-helloworld:1.0-alpine",
+                "endpoints": [
+                  {
+                    "name": "helloWorldListener",
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1,
+                    "cpu": 1
+                  }
+                },
+                "instanceView": {
+                  "restartCount": 1,
+                  "currentState": {
+                    "state": "Running",
+                    "exitCode": "0"
+                  },
+                  "previousState": {
+                    "state": "NotSpecified",
+                    "exitCode": "0"
+                  }
+                }
+              }
+            ],
+            "networkRefs": [],
+            "replicaName": "0"
+          }
+        ]
+      }
+    }
+  }
+}

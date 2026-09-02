@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "disableBgpRoutePropagation": false,
+        "routes": [
+          {
+            "name": "ecmp-route",
+            "properties": {
+              "addressPrefix": "10.1.0.0/16",
+              "nextHopType": "VirtualApplianceEcmp",
+              "nextHop": {
+                "nextHopIpAddresses": [
+                  "10.0.0.4",
+                  "10.0.0.5",
+                  "10.0.0.6"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "routeTableName": "testrt-ecmp",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testrt-ecmp",
+        "type": "Microsoft.Network/routeTables",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt-ecmp",
+        "location": "westus",
+        "properties": {
+          "disableBgpRoutePropagation": false,
+          "provisioningState": "Succeeded",
+          "routes": [
+            {
+              "name": "ecmp-route",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt-ecmp/routes/ecmp-route",
+              "properties": {
+                "addressPrefix": "10.1.0.0/16",
+                "nextHopType": "VirtualApplianceEcmp",
+                "nextHop": {
+                  "nextHopIpAddresses": [
+                    "10.0.0.4",
+                    "10.0.0.5",
+                    "10.0.0.6"
+                  ]
+                },
+                "provisioningState": "Succeeded"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testrt-ecmp",
+        "type": "Microsoft.Network/routeTables",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt-ecmp",
+        "location": "westus",
+        "properties": {
+          "disableBgpRoutePropagation": false,
+          "provisioningState": "Succeeded",
+          "routes": [
+            {
+              "name": "ecmp-route",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt-ecmp/routes/ecmp-route",
+              "properties": {
+                "addressPrefix": "10.1.0.0/16",
+                "nextHopType": "VirtualApplianceEcmp",
+                "nextHop": {
+                  "nextHopIpAddresses": [
+                    "10.0.0.4",
+                    "10.0.0.5",
+                    "10.0.0.6"
+                  ]
+                },
+                "provisioningState": "Succeeded"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "RouteTables_CreateOrUpdate",
+  "title": "Create route table with ECMP route"
+}

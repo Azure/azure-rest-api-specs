@@ -1,0 +1,1163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DiskResourceProviderClient",
+    "description": "The Disk Resource Provider Client.",
+    "version": "2018-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}": {
+      "put": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_CreateOrUpdate",
+        "description": "Creates or updates a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "disk",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            },
+            "description": "Disk object supplied in the body of the Put disk operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an empty managed disk.": {
+            "$ref": "./examples/CreateAnEmptyManagedDisk.json"
+          },
+          "Create a managed disk from a platform image.": {
+            "$ref": "./examples/CreateAManagedDiskFromAPlatformImage.json"
+          },
+          "Create a managed disk from an existing managed disk in the same or different subscription.": {
+            "$ref": "./examples/CreateAManagedDiskFromAnExistingManagedDisk.json"
+          },
+          "Create a managed disk by importing an unmanaged blob from the same subscription.": {
+            "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromTheSameSubscription.json"
+          },
+          "Create a managed disk by importing an unmanaged blob from a different subscription.": {
+            "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+          },
+          "Create a managed disk by copying a snapshot.": {
+            "$ref": "./examples/CreateAManagedDiskByCopyingASnapshot.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_Update",
+        "description": "Updates (patches) a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "disk",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskUpdate"
+            },
+            "description": "Disk object supplied in the body of the Patch disk operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_Get",
+        "description": "Gets information about a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a managed disk.": {
+            "$ref": "./examples/GetInformationAboutAManagedDisk.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_Delete",
+        "description": "Deletes a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the disk is deleted, this is an expected error code."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks": {
+      "get": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_ListByResourceGroup",
+        "description": "Lists all the disks under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all managed disks in a resource group.": {
+            "$ref": "./examples/ListManagedDisksInAResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/disks": {
+      "get": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_List",
+        "description": "Lists all the disks under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all managed disks in a subscription.": {
+            "$ref": "./examples/ListManagedDisksInASubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/beginGetAccess": {
+      "post": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_GrantAccess",
+        "description": "Grants access to a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "grantAccessData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrantAccessData"
+            },
+            "description": "Access data object supplied in the body of the get disk access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/endGetAccess": {
+      "post": {
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_RevokeAccess",
+        "description": "Revokes access to a disk.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}": {
+      "put": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_CreateOrUpdate",
+        "description": "Creates or updates a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "snapshot",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            },
+            "description": "Snapshot object supplied in the body of the Put disk operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a snapshot from an existing snapshot in the same or a different subscription.": {
+            "$ref": "./examples/CreateASnapshotFromAnExistingSnapshot.json"
+          },
+          "Create a snapshot by importing an unmanaged blob from the same subscription.": {
+            "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromTheSameSubscription.json"
+          },
+          "Create a snapshot by importing an unmanaged blob from a different subscription.": {
+            "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Update",
+        "description": "Updates (patches) a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "snapshot",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapshotUpdate"
+            },
+            "description": "Snapshot object supplied in the body of the Patch snapshot operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Get",
+        "description": "Gets information about a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a snapshot.": {
+            "$ref": "./examples/GetInformationAboutASnapshot.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Delete",
+        "description": "Deletes a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the snapshot is deleted, this is an expected error code."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_ListByResourceGroup",
+        "description": "Lists snapshots under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all snapshots in a resource group.": {
+            "$ref": "./examples/ListSnapshotsInAResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_List",
+        "description": "Lists snapshots under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all snapshots in a subscription.": {
+            "$ref": "./examples/ListSnapshotsInASubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/beginGetAccess": {
+      "post": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_GrantAccess",
+        "description": "Grants access to a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "grantAccessData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrantAccessData"
+            },
+            "description": "Access data object supplied in the body of the get snapshot access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/endGetAccess": {
+      "post": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_RevokeAccess",
+        "description": "Revokes access to a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "Disk": {
+      "properties": {
+        "managedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A relative URI containing the ID of the VM that has the disk attached."
+        },
+        "sku": {
+          "$ref": "#/definitions/DiskSku"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Logical zone list for Disk."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Disk resource."
+    },
+    "DiskUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/DiskSku"
+        }
+      },
+      "description": "Disk update resource."
+    },
+    "DiskList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "description": "A list of disks."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of disks. Call ListNext() with this to fetch the next page of disks."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Disks operation response."
+    },
+    "DiskSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountTypes",
+            "modelAsString": true
+          },
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "readOnly": true,
+          "default": "Standard",
+          "description": "The sku tier."
+        }
+      },
+      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, or StandardSSD_LRS."
+    },
+    "SnapshotSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "Standard_ZRS"
+          ],
+          "x-ms-enum": {
+            "name": "SnapshotStorageAccountTypes",
+            "modelAsString": true
+          },
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "readOnly": true,
+          "default": "Standard",
+          "description": "The sku tier."
+        }
+      },
+      "description": "The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS."
+    },
+    "DiskProperties": {
+      "properties": {
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the disk was created."
+        },
+        "osType": {
+          "type": "string",
+          "description": "The Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+        },
+        "encryptionSettings": {
+          "$ref": "#/definitions/EncryptionSettings",
+          "description": "Encryption settings for disk or snapshot"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The disk provisioning state."
+        }
+      },
+      "required": [
+        "creationData"
+      ],
+      "description": "Disk resource properties."
+    },
+    "EncryptionSettings": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Set this flag to true and provide DiskEncryptionKey and optional KeyEncryptionKey to enable encryption. Set this flag to false and remove DiskEncryptionKey and KeyEncryptionKey to disable encryption. If EncryptionSettings is null in the request object, the existing settings remain unchanged."
+        },
+        "diskEncryptionKey": {
+          "$ref": "#/definitions/KeyVaultAndSecretReference",
+          "description": "Key Vault Secret Url and vault id of the disk encryption key"
+        },
+        "keyEncryptionKey": {
+          "$ref": "#/definitions/KeyVaultAndKeyReference",
+          "description": "Key Vault Key Url and vault id of the key encryption key"
+        }
+      },
+      "description": "Encryption settings for disk or snapshot"
+    },
+    "KeyVaultAndSecretReference": {
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault",
+          "description": "Resource id of the KeyVault containing the key or secret"
+        },
+        "secretUrl": {
+          "type": "string",
+          "description": "Url pointing to a key or secret in KeyVault"
+        }
+      },
+      "required": [
+        "secretUrl",
+        "sourceVault"
+      ],
+      "description": "Key Vault Secret Url and vault id of the encryption key "
+    },
+    "KeyVaultAndKeyReference": {
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault",
+          "description": "Resource id of the KeyVault containing the key or secret"
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Url pointing to a key or secret in KeyVault"
+        }
+      },
+      "required": [
+        "keyUrl",
+        "sourceVault"
+      ],
+      "description": "Key Vault Key Url and vault id of KeK, KeK is optional and when provided is used to unwrap the encryptionKey"
+    },
+    "SourceVault": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "description": "The vault id is an Azure Resource Manager Resource id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
+    },
+    "DiskUpdateProperties": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "the Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+        },
+        "encryptionSettings": {
+          "$ref": "#/definitions/EncryptionSettings",
+          "description": "Encryption settings for disk or snapshot"
+        }
+      },
+      "description": "Disk resource update properties."
+    },
+    "CreationData": {
+      "properties": {
+        "createOption": {
+          "type": "string",
+          "enum": [
+            "Empty",
+            "Attach",
+            "FromImage",
+            "Import",
+            "Copy",
+            "Restore"
+          ],
+          "x-ms-enum": {
+            "name": "DiskCreateOption",
+            "modelAsString": true
+          },
+          "description": "This enumerates the possible sources of a disk's creation."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "If createOption is Import, the Azure Resource Manager identifier of the storage account containing the blob to import as a disk. Required only if the blob is in a different subscription"
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageDiskReference",
+          "description": "Disk source information."
+        },
+        "sourceUri": {
+          "type": "string",
+          "description": "If createOption is Import, this is the URI of a blob to be imported into a managed disk."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk."
+        }
+      },
+      "required": [
+        "createOption"
+      ],
+      "description": "Data used when creating a disk."
+    },
+    "ImageDiskReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A relative uri containing either a Platform Image Repository or user image reference."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the disk is created from an image's data disk, this is an index that indicates which of the data disks in the image to use. For OS disks, this field is null."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "The source image used for creating the disk."
+    },
+    "GrantAccessData": {
+      "properties": {
+        "access": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Read"
+          ],
+          "x-ms-enum": {
+            "name": "AccessLevel",
+            "modelAsString": true
+          }
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time duration in seconds until the SAS access expires."
+        }
+      },
+      "required": [
+        "access",
+        "durationInSeconds"
+      ],
+      "description": "Data used for requesting a SAS."
+    },
+    "AccessUri": {
+      "properties": {
+        "accessSAS": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A SAS uri for accessing a disk."
+        }
+      },
+      "description": "A disk access SAS uri."
+    },
+    "Snapshot": {
+      "properties": {
+        "managedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unused. Always Null."
+        },
+        "sku": {
+          "$ref": "#/definitions/SnapshotSku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Snapshot resource."
+    },
+    "SnapshotUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/SnapshotSku"
+        }
+      },
+      "description": "Snapshot update resource."
+    },
+    "SnapshotList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          },
+          "description": "A list of snapshots."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Snapshots operation response."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiskNameParameter": {
+      "name": "diskName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    },
+    "SnapshotNameParameter": {
+      "name": "snapshotName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The max name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

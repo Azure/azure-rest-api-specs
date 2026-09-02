@@ -1,0 +1,42 @@
+{
+  "title": "Retrieves existing distribution policies",
+  "operationId": "JobRouterAdministrationOperations_ListDistributionPolicies",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "SecondaryDistributionPolicy",
+            "name": "Secondary",
+            "offerExpiresAfterSeconds": 300,
+            "mode": {
+              "kind": "roundRobin",
+              "minConcurrentOffers": 1,
+              "maxConcurrentOffers": 2,
+              "bypassSelectors": false
+            },
+            "etag": "etag"
+          },
+          {
+            "id": "MainDistributionPolicy",
+            "name": "Main",
+            "offerExpiresAfterSeconds": 300,
+            "mode": {
+              "kind": "longestIdle",
+              "minConcurrentOffers": 1,
+              "maxConcurrentOffers": 5,
+              "bypassSelectors": false
+            },
+            "etag": "etag"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

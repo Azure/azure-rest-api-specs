@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "privateLinkResourceName": "backupResource",
+    "resourceGroupName": "petesting",
+    "subscriptionId": "6c48fa17-39c7-45f1-90ac-47a587128ace",
+    "vaultName": "pemsi-ecy-rsv2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "backupResource",
+        "type": "Microsoft.RecoveryServices/Vaults/privateLinkResources",
+        "id": "/subscriptions/6c48fa17-39c7-45f1-90ac-47a587128ace/resourceGroups/petesting/providers/Microsoft.RecoveryServices/Vaults/pemsi-ecy-rsv2/privateLinkResources/backupResource",
+        "properties": {
+          "groupId": "AzureBackup",
+          "requiredMembers": [
+            "backup-fab1",
+            "backup-rec2",
+            "backup-prot1",
+            "backup-ecs1",
+            "backup-tel1",
+            "backup-wbcm1",
+            "backup-fc1",
+            "backup-id1"
+          ],
+          "requiredZoneNames": [
+            "privatelink.ecy.backup.windowsazure.com",
+            "privatelink.queue.core.windows.net",
+            "privatelink.blob.core.windows.net"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_Get",
+  "title": "Get PrivateLinkResource"
+}

@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "{apiVersion}",
+    "buildRequest": {
+      "modelId": "{modelId}",
+      "description": "{modelDescription}",
+      "azureBlobSource": {
+        "containerUrl": "https://{storageAccount}.blob.core.windows.net/{containerName}?{sasToken}",
+        "prefix": "{blobNamePrefix}"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/formrecognizer/operations/{operationId}?api-version={apiVersion}"
+      }
+    }
+  }
+}

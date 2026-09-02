@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2018-01-31",
+    "reservationOrderId": "87f3c981-3e33-43d0-b26b-dfca785cf18a",
+    "reservationId": "ba4a5693-71ef-4ec2-a5ea-c4897ee7e740",
+    "$filter": "properties/usageDate ge '2017-10-01' AND properties/usageDate le '2017-12-05'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Capacity/reservationOrders/87f3c981-3e33-43d0-b26b-dfca785cf18a/reservations/ba4a5693-71ef-4ec2-a5ea-c4897ee7e740/providers/Microsoft.Consumption/reservationDetails/20171129",
+            "name": "87f3c981-3e33-43d0-b26b-dfca785cf18a_ba4a5693-71ef-4ec2-a5ea-c4897ee7e740_20171129",
+            "type": "Microsoft.Consumption/reservationDetails",
+            "tags": {
+              "env": "newcrp",
+              "dev": "tools"
+            },
+            "properties": {
+              "reservationOrderId": "87f3c981-3e33-43d0-b26b-dfca785cf18a",
+              "reservationId": "ba4a5693-71ef-4ec2-a5ea-c4897ee7e740",
+              "usageDate": "2017-11-29T00:00:00Z",
+              "skuName": "Standard_D2_v2",
+              "instanceId": "/subscriptions/ace02136-302a-429c-a2c8-dac173f60bea/resourcegroups/wvn-sql/providers/microsoft.compute/virtualmachines/wvn-sql2014sp33",
+              "totalReservedQuantity": 1.000000000000000,
+              "reservedHours": 24.000000000000000,
+              "usedHours": 24.000000000000000
+            }
+          }
+        ]
+      }
+    }
+  }
+}

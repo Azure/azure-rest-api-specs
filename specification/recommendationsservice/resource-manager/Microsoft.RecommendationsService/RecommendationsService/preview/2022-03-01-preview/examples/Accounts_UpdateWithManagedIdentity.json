@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "rg",
+    "accountName": "sampleAccount",
+    "body": {
+      "tags": {
+        "Environment": "Test"
+      },
+      "properties": {
+        "endpointAuthentications": [
+          {
+            "aadTenantID": "tenant",
+            "principalID": "oid",
+            "principalType": "User"
+          },
+          {
+            "aadTenantID": "tenant",
+            "principalID": "oid2",
+            "principalType": "User"
+          }
+        ],
+        "cors": [
+          {
+            "allowedOrigins": [
+              "http://siteA.com"
+            ],
+            "allowedMethods": [
+              "GET",
+              "PUT",
+              "POST"
+            ],
+            "allowedHeaders": [
+              "X-Custom-Header",
+              "X-Custom-Header2"
+            ]
+          }
+        ],
+        "reportsConnectionString": "https://storageAccount.blob.core.windows.net/container/root"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/accounts",
+        "location": "West US",
+        "tags": {
+          "Environment": "Test"
+        },
+        "systemData": {},
+        "properties": {
+          "configuration": "Capacity",
+          "endpointAuthentications": [
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid",
+              "principalType": "User"
+            },
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid2",
+              "principalType": "User"
+            }
+          ],
+          "cors": [
+            {
+              "allowedOrigins": [
+                "http://siteA.com"
+              ],
+              "allowedMethods": [
+                "GET",
+                "PUT",
+                "POST"
+              ],
+              "allowedHeaders": [
+                "X-Custom-Header",
+                "X-Custom-Header2"
+              ]
+            }
+          ],
+          "reportsConnectionString": "https://storageAccount.blob.core.windows.net/container/root",
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "92e65ecf-0fae-432e-8272-fedb6edb96c7",
+          "tenantId": "a661c16c-ee39-46e7-93f6-7fb80d17ef13"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.RecommendationsService/locations/WESTUS/operationStatuses/{operationId}?api-version={api-version}"
+      },
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/accounts",
+        "location": "West US",
+        "tags": {
+          "Environment": "Test"
+        },
+        "systemData": {},
+        "properties": {
+          "configuration": "Capacity",
+          "endpointAuthentications": [
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid",
+              "principalType": "User"
+            },
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid2",
+              "principalType": "User"
+            }
+          ],
+          "cors": [
+            {
+              "allowedOrigins": [
+                "http://siteA.com"
+              ],
+              "allowedMethods": [
+                "GET",
+                "PUT",
+                "POST"
+              ],
+              "allowedHeaders": [
+                "X-Custom-Header",
+                "X-Custom-Header2"
+              ]
+            }
+          ],
+          "reportsConnectionString": "https://storageAccount.blob.core.windows.net/container/root",
+          "provisioningState": "Accepted"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "92e65ecf-0fae-432e-8272-fedb6edb96c7",
+          "tenantId": "a661c16c-ee39-46e7-93f6-7fb80d17ef13"
+        }
+      }
+    }
+  }
+}

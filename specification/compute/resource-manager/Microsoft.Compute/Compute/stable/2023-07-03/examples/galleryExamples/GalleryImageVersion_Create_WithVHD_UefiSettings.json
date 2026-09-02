@@ -1,0 +1,404 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2023-07-03",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "1.0.0",
+    "galleryImageVersion": {
+      "location": "West US",
+      "properties": {
+        "publishingProfile": {
+          "targetRegions": [
+            {
+              "name": "West US",
+              "regionalReplicaCount": 1,
+              "encryption": {
+                "osDiskImage": {
+                  "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                },
+                "dataDiskImages": [
+                  {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet",
+                    "lun": 1
+                  }
+                ]
+              },
+              "excludeFromLatest": false
+            },
+            {
+              "name": "East US",
+              "regionalReplicaCount": 2,
+              "storageAccountType": "Standard_ZRS",
+              "excludeFromLatest": false
+            }
+          ]
+        },
+        "storageProfile": {
+          "osDiskImage": {
+            "source": {
+              "storageAccountId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+              "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+            },
+            "hostCaching": "ReadOnly"
+          },
+          "dataDiskImages": [
+            {
+              "source": {
+                "storageAccountId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+              },
+              "lun": 1,
+              "hostCaching": "None"
+            }
+          ]
+        },
+        "safetyProfile": {
+          "allowDeletionOfReplicatedLocations": false
+        },
+        "securityProfile": {
+          "uefiSettings": {
+            "signatureTemplateNames": [
+              "MicrosoftUefiCertificateAuthorityTemplate"
+            ],
+            "additionalSignatures": {
+              "kek": [
+                {
+                  "type": "sha256",
+                  "value": [
+                    "<sha256 value>"
+                  ]
+                }
+              ],
+              "db": [
+                {
+                  "type": "x509",
+                  "value": [
+                    "<x509 value>"
+                  ]
+                }
+              ],
+              "dbx": [
+                {
+                  "type": "x509",
+                  "value": [
+                    "<x509 value>"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Compute/locations/westus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 1,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                    }
+                  ]
+                },
+                "excludeFromLatest": false
+              },
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS",
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "osDiskImage": {
+              "source": {
+                "storageAccountId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+              },
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "source": {
+                  "storageAccountId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                  "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+                },
+                "lun": 1,
+                "hostCaching": "None"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "reportedForPolicyViolation": true,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
+              }
+            ]
+          },
+          "securityProfile": {
+            "uefiSettings": {
+              "signatureTemplateNames": [
+                "MicrosoftUefiCertificateAuthorityTemplate"
+              ],
+              "additionalSignatures": {
+                "kek": [
+                  {
+                    "type": "sha256",
+                    "value": [
+                      "<sha256 value>"
+                    ]
+                  }
+                ],
+                "db": [
+                  {
+                    "type": "x509",
+                    "value": [
+                      "<x509 value>"
+                    ]
+                  }
+                ],
+                "dbx": [
+                  {
+                    "type": "x509",
+                    "value": [
+                      "<x509 value>"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Compute/locations/westus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 1,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                    }
+                  ]
+                },
+                "excludeFromLatest": false
+              },
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS",
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "osDiskImage": {
+              "source": {
+                "storageAccountId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+              },
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "source": {
+                  "storageAccountId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                  "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+                },
+                "lun": 1,
+                "hostCaching": "None"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "reportedForPolicyViolation": true,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
+              }
+            ]
+          },
+          "securityProfile": {
+            "uefiSettings": {
+              "signatureTemplateNames": [
+                "MicrosoftUefiCertificateAuthorityTemplate"
+              ],
+              "additionalSignatures": {
+                "kek": [
+                  {
+                    "type": "sha256",
+                    "value": [
+                      "<sha256 value>"
+                    ]
+                  }
+                ],
+                "db": [
+                  {
+                    "type": "x509",
+                    "value": [
+                      "<x509 value>"
+                    ]
+                  }
+                ],
+                "dbx": [
+                  {
+                    "type": "x509",
+                    "value": [
+                      "<x509 value>"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "provisioningState": "Creating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/providers/Microsoft.Compute/locations/westus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 1,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                    }
+                  ]
+                },
+                "excludeFromLatest": false
+              },
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS",
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "osDiskImage": {
+              "source": {
+                "storageAccountId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+              },
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "source": {
+                  "storageAccountId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                  "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+                },
+                "lun": 1,
+                "hostCaching": "None"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "reportedForPolicyViolation": true,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
+              }
+            ]
+          },
+          "securityProfile": {
+            "uefiSettings": {
+              "signatureTemplateNames": [
+                "MicrosoftUefiCertificateAuthorityTemplate"
+              ],
+              "additionalSignatures": {
+                "kek": [
+                  {
+                    "type": "sha256",
+                    "value": [
+                      "<sha256 value>"
+                    ]
+                  }
+                ],
+                "db": [
+                  {
+                    "type": "x509",
+                    "value": [
+                      "<x509 value>"
+                    ]
+                  }
+                ],
+                "dbx": [
+                  {
+                    "type": "x509",
+                    "value": [
+                      "<x509 value>"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    }
+  }
+}

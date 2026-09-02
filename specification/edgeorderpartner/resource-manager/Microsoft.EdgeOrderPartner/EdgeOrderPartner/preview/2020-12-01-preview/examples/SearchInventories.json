@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "b783ea86-c85c-4175-b76d-3992656af50d",
+    "api-version": "2020-12-01-preview",
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Referer": [
+      "https://localhost/subscriptions/b783ea86-c85c-4175-b76d-3992656af50d/providers/Microsoft.EdgeOrderPartner/searchInventories?api-version=2020-12-01-preview"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "75"
+    ],
+    "searchInventoriesRequest": {
+      "serialNumber": "SerialNumber1",
+      "familyIdentifier": "AzureStackEdge"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "serialNumber": "SerialNumber1",
+              "location": "westus",
+              "orderItem": {
+                "armId": "/subscriptions/b783ea86-c85c-4175-b76d-3992656af50d/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orders/TestOrderName1",
+                "orderItemType": "Rental"
+              },
+              "configuration": {
+                "familyIdentifier": "AzureStackEdge",
+                "productLineIdentifier": "AzureStackEdgePL",
+                "productIdentifier": "AzureStackEdgeProGPU",
+                "configurationIdentifier": "EdgeP_Base",
+                "configurationIdentifierOnDevice": "EdgeP_High"
+              },
+              "managementResource": {
+                "armId": "/subscriptions/c783ea86-c85c-4175-b76d-3992656af50d/resourceGroups/EdgeTestRG/providers/Microsoft.DataBoxEdge/DataBoxEdgeDevices/TestEdgeDeviceName1",
+                "tenantId": "a783ea86-c85c-4175-b76d-3992656af50d"
+              },
+              "inventory": {
+                "status": "Healthy",
+                "location": "Rack",
+                "registrationAllowed": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

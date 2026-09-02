@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "databaseName": "dbSynapse",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "serverName": "testsvr",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "workspaces": [
+                {
+                  "workspaceId": "/subcriptions/00000000-1111-2222-3333-444444444444/resourcegroups/Default-SQL-SouthEastAsia/providers/Microsoft.Synapse/workspaces/workspace1",
+                  "linkConnectionName": "buildlink-cloud1"
+                },
+                {
+                  "workspaceId": "/subcriptions/00000000-1111-2222-3333-444444444444/resourcegroups/Default-SQL-SouthEastAsia/providers/Microsoft.Synapse/workspaces/workspace2",
+                  "linkConnectionName": "buildlink-cloud2"
+                }
+              ]
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/dbSynapse/linkWorkspaces/current",
+            "name": "current",
+            "type": "Microsoft.Sql/servers/databases/linkWorkspaces"
+          }
+        ]
+      }
+    }
+  }
+}
