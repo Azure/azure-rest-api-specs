@@ -50,7 +50,9 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 Repeatability-Result: accepted
 
-{}
+{
+  "accepted": true
+}
 ```
 
 The response confirms that the report was durably accepted into the ingestion pipeline. The operation is not long-running and exposes no polling resource. If the client loses the response, it retries with the same repeatability headers to avoid duplicate ingestion.

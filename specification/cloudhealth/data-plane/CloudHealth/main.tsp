@@ -480,15 +480,18 @@ model HealthReportPayload {
 }
 
 @doc("Confirmation that a health report was durably accepted for processing.")
-model IngestHealthReportResponse {}
+model IngestHealthReportResult {
+  @doc("Indicates that the health report was durably accepted into the ingestion pipeline.")
+  accepted: true;
+}
 
 @doc("Health-report ingestion completed successfully.")
-model IngestHealthReportResult {
+model IngestHealthReportSuccess {
   ...TypeSpec.Http.OkResponse;
 
   @doc("Confirmation that the report was durably accepted into the ingestion pipeline.")
   @body
-  body: IngestHealthReportResponse;
+  body: IngestHealthReportResult;
 }
 
 @error
@@ -709,7 +712,7 @@ interface HealthReportIngestion {
       @body
       body: HealthReportPayload;
     },
-    IngestHealthReportResult &
+    IngestHealthReportSuccess &
       Azure.Core.Traits.Private.TraitProperties<
         Azure.Core.Traits.SupportsRepeatableRequests,
         Azure.Core.Traits.TraitLocation.Response,
