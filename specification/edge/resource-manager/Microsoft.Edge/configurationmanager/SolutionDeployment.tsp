@@ -18,6 +18,7 @@ using Azure.ResourceManager.CommonTypes;
 namespace Microsoft.Edge;
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_06_01)
 @doc("Solution Deployment Target Details")
 model TargetMetadata {
   @doc("List of capabilities")
@@ -32,6 +33,7 @@ model TargetMetadata {
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_06_01)
 @doc("Solution Template Details")
 model SolutionTemplateMetadata {
   @doc("Solution template subscription")
@@ -48,6 +50,7 @@ model SolutionTemplateMetadata {
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_06_01)
 @doc("Solution Deployment Properties")
 model SolutionDeploymentProperties {
   @doc("Target properties")
@@ -73,6 +76,7 @@ model SolutionDeploymentProperties {
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_06_01)
 @doc("Solution Template Details for update operations")
 model SolutionTemplateMetadataUpdate {
   @doc("Solution template subscription")
@@ -89,6 +93,7 @@ model SolutionTemplateMetadataUpdate {
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_06_01)
 @doc("The updatable properties of the SolutionDeploymentProperties.")
 model SolutionDeploymentUpdateProperties {
   @doc("Target properties")
@@ -104,6 +109,7 @@ model SolutionDeploymentUpdateProperties {
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_06_01)
 @doc("The type used for update operations of the SolutionDeployment.")
 model SolutionDeploymentUpdate {
   ...ArmTagsProperty;
@@ -113,6 +119,7 @@ model SolutionDeploymentUpdate {
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_06_01)
 @doc("Solution Deployment Resource. Represents a resource to be deployed on the cloud or edge.")
 model SolutionDeployment
   is Azure.ResourceManager.TrackedResource<SolutionDeploymentProperties> {
@@ -121,6 +128,7 @@ model SolutionDeployment
 }
 
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_06_01)
 @armResourceOperations
 interface SolutionDeployments {
   @doc("Get a SolutionDeployment Resource")
