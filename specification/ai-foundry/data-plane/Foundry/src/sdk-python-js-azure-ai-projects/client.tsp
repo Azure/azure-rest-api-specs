@@ -1,6 +1,6 @@
 //
-// This file is used for emitting the Python client (package azure-ai-projects) and
-// the JS client (package @azure/ai-projects).
+// This file is used for emitting the Python client (package azure-ai-projects).
+// The JavaScript entry point imports this file to share its customizations.
 //
 
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
@@ -15,7 +15,6 @@ import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
-import "../voice-agents/routes.tsp";
 import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
