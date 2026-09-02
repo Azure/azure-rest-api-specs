@@ -4429,13 +4429,13 @@ model AzureIaaSVMProtectionPolicy extends ProtectionPolicy {
   /**
    * Specifies whether Instant Access snapshot is enabled for the policy.
    */
-  @added(Versions.v2026_09_30)
+  @added(Versions.v2026_10_01)
   instantAccessSnapshotEnabled?: boolean;
 
   /**
    * Duration in minutes for which the Instant Access snapshot is retained.
    */
-  @added(Versions.v2026_09_30)
+  @added(Versions.v2026_10_01)
   instantAccessDurationMinutes?: int32;
 
   /**
