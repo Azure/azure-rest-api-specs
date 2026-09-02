@@ -6360,36 +6360,6 @@
       },
       "readOnly": true
     },
-    "OptimizationPreference": {
-      "type": "string",
-      "description": "The preferred optimization goal for scheduled action operations.",
-      "enum": [
-        "Cost",
-        "Availability",
-        "CostAvailabilityBalanced"
-      ],
-      "x-ms-enum": {
-        "name": "OptimizationPreference",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Cost",
-            "value": "Cost",
-            "description": "Prioritizes cost savings."
-          },
-          {
-            "name": "Availability",
-            "value": "Availability",
-            "description": "Prioritizes resource availability."
-          },
-          {
-            "name": "CostAvailabilityBalanced",
-            "value": "CostAvailabilityBalanced",
-            "description": "Balances cost savings and resource availability."
-          }
-        ]
-      }
-    },
     "OsType": {
       "type": "string",
       "description": "The supported operating system types for flex VM creation",
@@ -7604,7 +7574,6 @@
       "type": "string",
       "description": "How the scheduled time is interpreted for the resource operation.",
       "enum": [
-        "Unknown",
         "InitiateAt",
         "CompleteBy"
       ],
@@ -7612,11 +7581,6 @@
         "name": "ScheduledActionsDeadlineType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The deadline type is not specified."
-          },
           {
             "name": "InitiateAt",
             "value": "InitiateAt",
@@ -7634,10 +7598,6 @@
       "type": "object",
       "description": "Settings that control how the scheduled action operation is executed.",
       "properties": {
-        "optimizationPreference": {
-          "$ref": "#/definitions/OptimizationPreference",
-          "description": "The preferred optimization goal."
-        },
         "retryPolicy": {
           "$ref": "#/definitions/ScheduledActionsRetryPolicy",
           "description": "The retry settings for failed resource operations."
@@ -7768,7 +7728,6 @@
       "type": "string",
       "description": "The operation to retry when a scheduled action fails.",
       "enum": [
-        "Unknown",
         "Start",
         "Deallocate",
         "Hibernate",
@@ -7779,11 +7738,6 @@
         "name": "ScheduledActionsResourceOperationType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The operation is not specified."
-          },
           {
             "name": "Start",
             "value": "Start",

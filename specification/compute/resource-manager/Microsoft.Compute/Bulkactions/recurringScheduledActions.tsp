@@ -239,6 +239,7 @@ union ScheduledActionsProvisioningState {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-09-06-preview`)
 @doc("The preferred optimization goal for scheduled action operations.")
 union OptimizationPreference {
   @doc("Prioritizes cost savings.")
@@ -288,6 +289,7 @@ model NotificationProperties {
 )
 @doc("How the scheduled time is interpreted for the resource operation.")
 union ScheduledActionsDeadlineType {
+  @removed(Versions.`2026-09-06-preview`)
   @doc("The deadline type is not specified.")
   Unknown: "Unknown",
 
@@ -307,6 +309,7 @@ union ScheduledActionsDeadlineType {
 )
 @doc("The operation to retry when a scheduled action fails.")
 union ScheduledActionsResourceOperationType {
+  @removed(Versions.`2026-09-06-preview`)
   @doc("The operation is not specified.")
   Unknown: "Unknown",
 
@@ -352,6 +355,7 @@ model ScheduledActionsRetryPolicy {
 )
 @doc("Settings that control how the scheduled action operation is executed.")
 model ScheduledActionsExecutionParameters {
+  @removed(Versions.`2026-09-06-preview`)
   @doc("The preferred optimization goal.")
   optimizationPreference?: OptimizationPreference;
 
