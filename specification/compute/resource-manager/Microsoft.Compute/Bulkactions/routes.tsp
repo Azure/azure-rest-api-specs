@@ -153,6 +153,7 @@ interface VirtualMachineBulkOperations {
   /** BulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @removed(Versions.`2026-06-06`)
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @post
   @autoRoute
   @armResourceCollectionAction
