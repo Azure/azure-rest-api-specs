@@ -3,6 +3,8 @@ import "../common/custom-types.tsp";
 import "../sdk-common/error.default.tsp";
 import "../sdk-common/ops-relocation-agents.tsp";
 
+import "@typespec/http";
+
 import "../agents/routes.tsp";
 import "../voice-agents/routes.tsp";
 import "../memory-stores/routes.tsp";
@@ -17,8 +19,33 @@ import "../openai/conversations/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using TypeSpec.Http;
 
 using Azure.AI.Projects;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
+op connectVoiceAgentJava(
+  @path agent_name: string,
+  @query("foundry_features") foundry_features_query?: string,
+  @query store?: boolean,
+  @query("x-agent-version-override") agent_version_override?: string,
+
+  @header("Sec-WebSocket-Protocol")
+  websocket_subprotocol?: VoiceAgentWebSocketSubprotocol,
+
+  ...FoundryDataPlaneApiVersionParameter,
+): VoiceAgentWebSocketUpgradeResponse;
+
+@@override(
+  VoiceAgentWebSocket.connectVoiceAgent,
+  connectVoiceAgentJava,
+  "java"
+);
+
+@@scope(OpenAI.RealtimeConversationItemMessage.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
 
 // Java promotes the shared Foundry-Features header with @@clientLocation, not @@scope/@@clientInitialization.
 // @@scope(..., "!java") removes the header from Java entirely, including REST-interface @HeaderParam wiring.
@@ -327,8 +354,14 @@ using Azure.AI.Projects;
 
 @@usage(FoundryFeaturesOptInKeys, Usage.input);
 @@access(FoundryFeaturesOptInKeys, Access.internal, "java");
-@@usage(AgentDefinitionOptInKeys, Usage.input);
+@@usage(AgentDefinitionOptInKeys, Usage.input, "java");
 @@access(AgentDefinitionOptInKeys, Access.internal, "java");
+
+@@usage(OpenAI.ApproximateLocation, Usage.input, "java");
+@@access(OpenAI.ApproximateLocation, Access.public, "java");
+@@usage(OpenAI.WebSearchApproximateLocation, Usage.input, "java");
+@@access(OpenAI.WebSearchApproximateLocation, Access.public, "java");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "java");
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
@@ -401,6 +434,28 @@ using Azure.AI.Projects;
 );
 @@alternateType(OpenAI.OutputItem, unknown, "java");
 @@alternateType(OpenAI.InputItem, unknown, "java");
+
+@alternateType(
+  {
+    identity: "java.util.TimeZone",
+  },
+  "java"
+)
+model TimeZoneType {}
+
+@@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(
+  OpenAI.WebSearchApproximateLocation.timezone,
+  TimeZoneType,
+  "java"
+);
+@@alternateType(
+  OpenAI.ConversationResource,
+  {
+    identity: "com.openai.models.conversations.Conversation",
+  },
+  "java"
+);
 
 // Erase strongly-typed payloads on the namespace / tool_search Tool variants.
 @@alternateType(OpenAI.NamespaceToolParam.tools, unknown, "java");
