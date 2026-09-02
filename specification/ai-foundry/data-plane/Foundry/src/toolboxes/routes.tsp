@@ -82,7 +82,7 @@ interface Toolboxes {
       @header contentType: string;
 
       /** The MCP request body. */
-      @body request: unknown;
+      @body request: Record<unknown>;
     },
     {
       /** The content type of the MCP response body. */
