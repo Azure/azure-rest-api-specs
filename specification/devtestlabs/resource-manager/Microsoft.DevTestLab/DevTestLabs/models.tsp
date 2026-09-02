@@ -1521,6 +1521,19 @@ model CustomImageFragment extends UpdateResource {}
 model FormulaList is Azure.Core.Page<Formula>;
 
 /**
+ * The configured credential state of a formula.
+ */
+union FormulaCredentialState {
+  string,
+  /** No credential is configured. */
+  NotConfigured: "NotConfigured",
+  /** A password credential is configured. */
+  PasswordConfigured: "PasswordConfigured",
+  /** An SSH key credential is configured. */
+  SshKeyConfigured: "SshKeyConfigured",
+}
+
+/**
  * Properties of a formula.
  */
 model FormulaProperties {
@@ -1551,6 +1564,12 @@ model FormulaProperties {
    * The content of the formula.
    */
   formulaContent?: LabVirtualMachineCreationParameter;
+
+  /**
+   * The configured credential state of the formula. This property does not expose the credential value or storage mechanism.
+   */
+  @visibility(Lifecycle.Read)
+  credentialState?: FormulaCredentialState;
 
   /**
    * Information about a VM from which a formula is to be created.
@@ -1647,13 +1666,15 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The password of the virtual machine administrator.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   password?: string;
 
   /**
    * The SSH key of the virtual machine administrator.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   sshKey?: string;
 
   /**
