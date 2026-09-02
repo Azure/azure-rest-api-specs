@@ -36,6 +36,7 @@ import "./EdgeMachineJobs.tsp";
 import "./EdgeMachineUpdate.tsp";
 import "./ValidateOwnershipVouchers.tsp";
 import "./ClusterJobs.tsp";
+import "./ClusterVolume.tsp";
 import "./DevicePool.tsp";
 import "./EdgeMachineGpu.tsp";
 import "./EdgeMachineNetworkAdapters.tsp";
