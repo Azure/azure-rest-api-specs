@@ -19,6 +19,24 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/adapterDeployments/adapterDeploymentName",
+        "name": "adapterDeploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/adapterDeployments",
+        "etag": "\"0x8D1234567890ABC\"",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "sourceModelId": "azureai://accounts/accountName/projects/projectName/models/modelName/versions/1",
+          "targetDeploymentName": "managedComputeDeploymentName",
+          "activeSourceModelId": "azureai://accounts/accountName/projects/projectName/models/modelName/versions/1",
+          "provisioningState": "Succeeded",
+          "servingState": "Ready"
+        }
+      }
+    },
     "201": {
       "headers": {
         "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-09-15-preview",
