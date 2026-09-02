@@ -1,0 +1,115 @@
+{
+  "operationId": "CostControls_Update",
+  "parameters": {
+    "accountName": "foundry-account",
+    "api-version": "2026-09-15-preview",
+    "costControlName": "production-agents",
+    "If-Match": "\"00000000-0000-0000-0000-000000000001\"",
+    "properties": {
+      "properties": {
+        "displayName": "Updated production agent budget",
+        "rules": [
+          {
+            "name": "monthly-agent-budget",
+            "counterKey": [
+              {
+                "type": "agent"
+              }
+            ],
+            "unit": "usd",
+            "amount": 1500,
+            "period": "month",
+            "recurring": true,
+            "match": {
+              "foundry.caller.agent.id": [
+                "customer-support-agent",
+                "sales-assistant-agent"
+              ],
+              "foundry.caller.identity.oid": [
+                "11111111-2222-3333-4444-555555555555"
+              ],
+              "foundry.caller.session.id": [
+                "production-session"
+              ],
+              "foundry.project.id": [
+                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/projects/production"
+              ]
+            },
+            "thresholds": [
+              {
+                "type": "percentage",
+                "value": 80,
+                "action": "alert"
+              },
+              {
+                "type": "absolute",
+                "value": 1500,
+                "action": "audit"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "foundry-resource-group",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "Update all configurable cost control settings",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000002\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/costControls/production-agents",
+        "name": "production-agents",
+        "type": "Microsoft.CognitiveServices/accounts/costControls",
+        "etag": "\"00000000-0000-0000-0000-000000000002\"",
+        "properties": {
+          "displayName": "Updated production agent budget",
+          "rules": [
+            {
+              "name": "monthly-agent-budget",
+              "counterKey": [
+                {
+                  "type": "agent"
+                }
+              ],
+              "unit": "usd",
+              "amount": 1500,
+              "period": "month",
+              "recurring": true,
+              "match": {
+                "foundry.caller.agent.id": [
+                  "customer-support-agent",
+                  "sales-assistant-agent"
+                ],
+                "foundry.caller.identity.oid": [
+                  "11111111-2222-3333-4444-555555555555"
+                ],
+                "foundry.caller.session.id": [
+                  "production-session"
+                ],
+                "foundry.project.id": [
+                  "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/projects/production"
+                ]
+              },
+              "thresholds": [
+                {
+                  "type": "percentage",
+                  "value": 80,
+                  "action": "alert"
+                },
+                {
+                  "type": "absolute",
+                  "value": 1500,
+                  "action": "audit"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
