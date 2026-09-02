@@ -1026,7 +1026,7 @@ model HardLink {
 
 /** The list of hard links for a file. */
 @added(Versions.v2027_03_07)
-@Xml.name("EnumerationResults")
+@Xml.name("HardLinks")
 model HardLinkList {
   /** The hard links. */
   @Xml.unwrapped
