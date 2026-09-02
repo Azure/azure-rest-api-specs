@@ -26,6 +26,18 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
     Agents
   );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.publishAgentToMicrosoft365,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365AppPackage,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365PublishDefaults,
+    Agents
+  );
 }
 
 namespace Azure.AI.Projects.Beta {
@@ -66,4 +78,60 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
+
+  interface VoiceAgentWebSocket {}
+  @@clientLocation(
+    Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent,
+    VoiceAgentWebSocket
+  );
+
+  interface AgentEndpointConversations {}
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversation,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.deleteAgentConversation,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponses,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationResponse,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponseItems,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationItems,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItem,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudio,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudioContent,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudio,
+    AgentEndpointConversations
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudioContent,
+    AgentEndpointConversations
+  );
 }

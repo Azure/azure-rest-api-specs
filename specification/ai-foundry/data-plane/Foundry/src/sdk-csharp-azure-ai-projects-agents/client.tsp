@@ -1,5 +1,6 @@
 import "../sdk-common/error.default.tsp";
 import "../agents/routes.tsp";
+import "../voice-agents/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
@@ -23,6 +24,12 @@ namespace Azure.AI.Projects {
 
   @@usage(ApiError, Usage.output);
   @@access(ApiError, Access.public);
+
+  // The Realtime message base now owns the `message` discriminator in the
+  // OpenAI hierarchy. Do not regenerate duplicate leaf properties in C#.
+  @@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!csharp");
+  @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!csharp");
+  @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
   // --------------------------------------------------------------------------------
   // Fix the xref.
@@ -143,6 +150,9 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   @@access(Agents.createAgentVersionFromCode, Access.internal);
   @@access(Agents.downloadAgentCode, Access.internal);
+
+  // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
+  @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
@@ -1266,5 +1276,54 @@ namespace Azure.AI.Projects {
   @@clientName(
     AgentOptimizationDatasetItem.desired_num_turns,
     "DesiredTurnCount"
+  );
+
+  // --------------------------------------------------------------------------------
+  // Realtime classes replacements
+  // --------------------------------------------------------------------------------
+  @@alternateType(
+    OpenAI.RealtimeAudioFormats,
+    {
+      identity: "OpenAI.Realtime.RealtimeAudioFormat",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeConversationItem,
+    {
+      identity: "OpenAI.Realtime.RealtimeItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeResponseUsage,
+    {
+      identity: "OpenAI.Realtime.RealtimeResponseUsage",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeMCPListTools,
+    {
+      identity: "OpenAI.Realtime.RealtimeMcpToolDefinitionListItem",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeResponseStatusDetails,
+    {
+      identity: "OpenAI.Realtime.RealtimeResponseStatusDetails",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
   );
 }

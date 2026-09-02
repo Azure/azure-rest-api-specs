@@ -688,6 +688,7 @@ model ProtectionGroupResources {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   manual?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Rules to match resources")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   matchRules?: {
@@ -874,6 +875,7 @@ interface ProtectionGroups {
   listByCloudAccount is ArmResourceListByParent<ProtectionGroup>;
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "stopBackup is a long-running operation that returns 204 with no content on completion"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @doc("Stop Backup for a Protection Group")
   @armResourceAction(ProtectionGroup)
   @post

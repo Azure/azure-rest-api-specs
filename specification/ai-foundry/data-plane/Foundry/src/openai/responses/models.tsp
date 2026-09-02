@@ -5,9 +5,16 @@ import "../../common/models.tsp";
 using Azure.Core.Experimental;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Experimental features applied to augment inherited OpenAI models"
 namespace Azure.AI.Projects {
+  const ModelRoutersRequiredPreviews = #{
+    conditional_previews: #[
+      FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+    ],
+  };
+
   @@changePropertyType(OpenAI.CreateResponse.`model`, string);
   @@changePropertyType(OpenAI.Response.`model`, string);
   @@changePropertyType(OpenAI.CompactResponseMethodPublicBody.`model`, string);
@@ -93,6 +100,100 @@ namespace Azure.AI.Projects {
   model AzureCreateResponseDetails {
     /** The agent used for this response */
     agent_reference: AgentReference | null;
+
+    /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    model_selection_details?: ModelSelectionDetails;
+  }
+
+  /** The routing mode used by Model Router for the request. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union ModelRouterMode {
+    string,
+
+    /** Default routing strategy balancing cost and accuracy across eligible models. */
+    balanced: "balanced",
+
+    /** Prioritizes cost. */
+    cost: "cost",
+
+    /** Prioritizes accuracy. */
+    quality: "quality",
+  }
+
+  /** A value returned in a response header from a model routing attempt. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union ModelRouterResponseHeaderValue {
+    string,
+    int32,
+  }
+
+  /** Error details returned by a model routing attempt. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterAttemptError {
+    /** A service-defined error code. */
+    code?: string;
+
+    /** A human-readable description of the error. */
+    message: string;
+  }
+
+  /** The HTTP-style result returned by a model routing attempt. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterAttemptResult {
+    /** The HTTP status code returned by the model. */
+    @minValue(100)
+    @maxValue(599)
+    status: int32;
+
+    /** Response headers returned by the model. */
+    headers?: Record<ModelRouterResponseHeaderValue>;
+
+    /** Error details returned when the attempt did not succeed. */
+    error?: ModelRouterAttemptError;
+  }
+
+  /** A single routing attempt targeting a specific model. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterAttempt {
+    /** The model targeted in this attempt. */
+    `model`: string;
+
+    /** How this attempt concluded — whether the model served the request successfully or encountered an error. */
+    result: ModelRouterAttemptResult;
+  }
+
+  /** A single entry in the routing trace representing one inference turn. Each entry contains the latency and the ordered list of attempts for that turn. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model RoutingTraceEntry {
+    /** Identifier of the output item/turn this routing decision is associated with. This is omitted for Chat Completions. */
+    output_id?: string;
+
+    /** Time in milliseconds spent in the routing decision for this turn. */
+    #suppress "@azure-tools/typespec-azure-core/known-encoding" "Service uses milliseconds."
+    @encode(DurationKnownEncoding.milliseconds, uint32)
+    latency_ms: duration;
+
+    /** Ordered list of routing attempts. First element is the initial selection; subsequent elements are fallback attempts. There is always at least one attempt. */
+    @minItems(1)
+    attempts: ModelRouterAttempt[];
+  }
+
+  /** Routing decision metadata from Model Router. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterDetails {
+    /** The routing mode for the request. */
+    mode: ModelRouterMode;
+
+    /** Ordered trace of routing decisions. Contains one entry for Chat Completions, and may contain multiple entries for Responses API or agent scenarios where multiple inference turns occur. */
+    routing_trace: RoutingTraceEntry[];
+  }
+
+  /** Model selection metadata providing visibility into routing decisions. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelSelectionDetails {
+    /** Routing decision metadata from Model Router. Present when the request was handled by Model Router. */
+    model_router_details: ModelRouterDetails;
   }
 
   @@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
@@ -104,7 +205,7 @@ namespace Azure.AI.Projects {
        * optional `memory_limit` setting.
        * If not provided, the service assumes auto.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Copying existing union type."
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Copying existing union type."
       container?: string | OpenAI.AutoCodeInterpreterToolParam,
     }
   );
@@ -200,7 +301,7 @@ namespace Azure.AI.Projects {
     {
       /** The information about the creator of the item */
       #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "This is required due to a conflict with the service."
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "This is required due to a conflict with the service."
       @removed(Versions.v1)
       created_by?: CreatedBy | string,
 
@@ -243,7 +344,7 @@ namespace Azure.AI.Projects {
     @doc("ID of the previous action if this action follows another.")
     previous_action_id?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
     @doc("Status of the action (e.g., 'in_progress', 'completed', 'failed', 'cancelled').")
     status: "completed" | "failed" | "in_progress" | "cancelled";
   }

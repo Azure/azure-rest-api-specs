@@ -1028,6 +1028,7 @@ interface SharedAccessSignature {
 
 // --- Item Point Options ---
 /** Options for item point query operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetItemPointOptions {
   /** STAC Collection Identifier. */
@@ -1060,6 +1061,7 @@ model GetItemPointOptions {
 
 // --- Item TileJSON Options (no TMS in path) ---
 /** Options for item TileJSON metadata operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetItemTileJsonOptions {
   /** STAC Collection Identifier. */
@@ -1096,6 +1098,7 @@ model GetItemTileJsonOptions {
 
 // --- Item TileJSON By TMS Options (TMS in path) ---
 /** Options for item TileJSON metadata operations with TileMatrixSetId as path. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetItemTileJsonByTmsOptions {
   /** STAC Collection Identifier. */
@@ -1134,6 +1137,7 @@ model GetItemTileJsonByTmsOptions {
 
 // --- Collection TileJSON Options (no TMS in path) ---
 /** Options for collection-level TileJSON metadata operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetCollectionTileJsonOptions {
   /** STAC Collection Identifier. */
@@ -1166,6 +1170,7 @@ model GetCollectionTileJsonOptions {
 
 // --- Collection TileJSON By TMS Options (TMS in path) ---
 /** Options for collection-level TileJSON with TileMatrixSetId as path. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetCollectionTileJsonByTmsOptions {
   /** STAC Collection Identifier. */
@@ -1200,6 +1205,7 @@ model GetCollectionTileJsonByTmsOptions {
 
 // --- Search TileJSON Options (no TMS in path) ---
 /** Options for search-based TileJSON metadata operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetSearchTileJsonOptions {
   /** Search Id (pgSTAC Search Hash). */
@@ -1265,6 +1271,7 @@ model GetSearchTileJsonOptions {
 
 // --- Search TileJSON By TMS Options (TMS in path) ---
 /** Options for search-based TileJSON with TileMatrixSetId as path. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetSearchTileJsonByTmsOptions {
   /** Search Id (pgSTAC Search Hash). */
@@ -1298,6 +1305,7 @@ model GetSearchTileJsonByTmsOptions {
 
 // --- Collection Point Options ---
 /** Options for collection-level point query operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetCollectionPointOptions {
   /** STAC Collection Identifier. */
@@ -1326,6 +1334,7 @@ model GetCollectionPointOptions {
 
 // --- Search Point Options ---
 /** Options for search-based point query operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetSearchPointOptions {
   /** Search Id (pgSTAC Search Hash). */
@@ -1353,6 +1362,7 @@ model GetSearchPointOptions {
 
 // --- Item Statistics Options ---
 /** Options for item merged statistics operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetItemStatisticsOptions {
   /** STAC Collection Identifier. */
@@ -1386,6 +1396,7 @@ model GetItemStatisticsOptions {
 
 // --- Item Asset Statistics Options ---
 /** Options for item per-asset statistics operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetItemAssetStatisticsOptions {
   /** STAC Collection Identifier. */
@@ -1439,6 +1450,7 @@ model GetItemAssetStatisticsOptions {
 
 // --- Item Feature Statistics Options ---
 /** Options for item GeoJSON feature statistics operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetItemFeatureStatisticsOptions {
   /** STAC Collection Identifier. */
@@ -1477,6 +1489,7 @@ model GetItemFeatureStatisticsOptions {
 
 // --- Collection Tilesets Options ---
 /** Options for collection tileset list operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetCollectionTilesetsOptions {
   /** STAC Collection Identifier. */
@@ -1491,6 +1504,7 @@ model GetCollectionTilesetsOptions {
 
 // --- Collection Tileset Metadata Options ---
 /** Options for collection tileset metadata operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetCollectionTilesetMetadataOptions {
   /** STAC Collection Identifier. */
@@ -1511,6 +1525,7 @@ model GetCollectionTilesetMetadataOptions {
 
 // --- Item Tilesets Options (shared: GetTilesets, GetItemBounds) ---
 /** Options for item tileset list and bounds operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetItemTilesetsOptions {
   /** STAC Collection Identifier. */
@@ -1530,6 +1545,7 @@ model GetItemTilesetsOptions {
 
 // --- Item Tileset Metadata Options ---
 /** Options for item tileset metadata operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetItemTilesetMetadataOptions {
   /** STAC Collection Identifier. */
@@ -1555,6 +1571,7 @@ model GetItemTilesetMetadataOptions {
 
 // --- Item Info Options (shared: GetItemInfo, GetItemInfoGeoJson) ---
 /** Options for item info operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetItemInfoOptions {
   /** STAC Collection Identifier. */
@@ -1578,6 +1595,7 @@ model GetItemInfoOptions {
 
 // --- Search Tilesets Options ---
 /** Options for search tileset list operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetSearchTilesetsOptions {
   /** Search Id (pgSTAC Search Hash). */
@@ -1591,6 +1609,7 @@ model GetSearchTilesetsOptions {
 
 // --- Search Tileset Metadata Options ---
 /** Options for search tileset metadata operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_04_15)
 model GetSearchTilesetMetadataOptions {
   /** Search Id (pgSTAC Search Hash). */
@@ -2026,6 +2045,7 @@ op getSearchTilesetMetadataOverride(
 // ============================================================================
 
 /** Options for the `getTile` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetTileOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2071,6 +2091,7 @@ model GetTileOptions {
 }
 
 /** Options for the `getTileByFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetTileByFormatOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2120,6 +2141,7 @@ model GetTileByFormatOptions {
 }
 
 /** Options for the `getTileByScale` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetTileByScaleOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2167,6 +2189,7 @@ model GetTileByScaleOptions {
 }
 
 /** Options for the `getTileByScaleAndFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetTileByScaleAndFormatOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2218,6 +2241,7 @@ model GetTileByScaleAndFormatOptions {
 }
 
 /** Options for the `getTileNoTms` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetTileNoTmsOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2262,6 +2286,7 @@ model GetTileNoTmsOptions {
 }
 
 /** Options for the `getTileNoTmsByFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetTileNoTmsByFormatOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2310,6 +2335,7 @@ model GetTileNoTmsByFormatOptions {
 }
 
 /** Options for the `getTileNoTmsByScale` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetTileNoTmsByScaleOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2356,6 +2382,7 @@ model GetTileNoTmsByScaleOptions {
 }
 
 /** Options for the `getTileNoTmsByScaleAndFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetTileNoTmsByScaleAndFormatOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2406,6 +2433,7 @@ model GetTileNoTmsByScaleAndFormatOptions {
 }
 
 /** Options for the `getItemPreview` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetItemPreviewOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2463,6 +2491,7 @@ model GetItemPreviewOptions {
 }
 
 /** Options for the `getItemPreviewWithFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetItemPreviewWithFormatOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2522,6 +2551,7 @@ model GetItemPreviewWithFormatOptions {
 }
 
 /** Options for the `getItemBboxCrop` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetItemBboxCropOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2589,6 +2619,7 @@ model GetItemBboxCropOptions {
 }
 
 /** Options for the `getItemBboxCropWithDimensions` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetItemBboxCropWithDimensionsOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2667,6 +2698,7 @@ model GetItemBboxCropWithDimensionsOptions {
 }
 
 /** Options for the `cropFeature` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model CropFeatureOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2725,6 +2757,7 @@ model CropFeatureOptions {
 }
 
 /** Options for the `cropFeatureByFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model CropFeatureByFormatOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2785,6 +2818,7 @@ model CropFeatureByFormatOptions {
 }
 
 /** Options for the `cropFeatureWidthByHeight` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model CropFeatureWidthByHeightOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2856,6 +2890,7 @@ model CropFeatureWidthByHeightOptions {
 }
 
 /** Options for the `getItemWmtsCapabilities` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetItemWmtsCapabilitiesOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2903,6 +2938,7 @@ model GetItemWmtsCapabilitiesOptions {
 }
 
 /** Options for the `getItemWmtsCapabilitiesByTms` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetItemWmtsCapabilitiesByTmsOptions {
   ...AssetQueryParameters;
   ...TerrainAlgorithmQueryParameters;
@@ -2951,6 +2987,7 @@ model GetItemWmtsCapabilitiesByTmsOptions {
 }
 
 /** Options for the `getCollectionTile` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionTileOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -2990,6 +3027,7 @@ model GetCollectionTileOptions {
 }
 
 /** Options for the `getCollectionTileByFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionTileByFormatOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3033,6 +3071,7 @@ model GetCollectionTileByFormatOptions {
 }
 
 /** Options for the `getCollectionTileByScale` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionTileByScaleOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3074,6 +3113,7 @@ model GetCollectionTileByScaleOptions {
 }
 
 /** Options for the `getCollectionTileByScaleAndFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionTileByScaleAndFormatOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3119,6 +3159,7 @@ model GetCollectionTileByScaleAndFormatOptions {
 }
 
 /** Options for the `getCollectionTileNoTms` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionTileNoTmsOptions {
   /**
    * STAC Collection Identifier
@@ -3156,6 +3197,7 @@ model GetCollectionTileNoTmsOptions {
 }
 
 /** Options for the `getCollectionTileNoTmsByFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionTileNoTmsByFormatOptions {
   /**
    * STAC Collection Identifier
@@ -3197,6 +3239,7 @@ model GetCollectionTileNoTmsByFormatOptions {
 }
 
 /** Options for the `getCollectionTileNoTmsByScale` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionTileNoTmsByScaleOptions {
   /**
    * STAC Collection Identifier
@@ -3236,6 +3279,7 @@ model GetCollectionTileNoTmsByScaleOptions {
 }
 
 /** Options for the `getCollectionTileNoTmsByScaleAndFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionTileNoTmsByScaleAndFormatOptions {
   /**
    * STAC Collection Identifier
@@ -3279,6 +3323,7 @@ model GetCollectionTileNoTmsByScaleAndFormatOptions {
 }
 
 /** Options for the `getCollectionBboxCrop` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionBboxCropOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3329,6 +3374,7 @@ model GetCollectionBboxCropOptions {
 }
 
 /** Options for the `getCollectionBboxCropWithDimensions` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionBboxCropWithDimensionsOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3390,6 +3436,7 @@ model GetCollectionBboxCropWithDimensionsOptions {
 }
 
 /** Options for the `cropCollectionFeature` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model CropCollectionFeatureOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3431,6 +3478,7 @@ model CropCollectionFeatureOptions {
 }
 
 /** Options for the `cropCollectionFeatureByFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model CropCollectionFeatureByFormatOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3474,6 +3522,7 @@ model CropCollectionFeatureByFormatOptions {
 }
 
 /** Options for the `cropCollectionFeatureWidthByHeight` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model CropCollectionFeatureWidthByHeightOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3528,6 +3577,7 @@ model CropCollectionFeatureWidthByHeightOptions {
 }
 
 /** Options for the `getCollectionWmtsCapabilities` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionWmtsCapabilitiesOptions {
   ...CollectionMosaicFilterQueryParameters;
 
@@ -3563,6 +3613,7 @@ model GetCollectionWmtsCapabilitiesOptions {
 }
 
 /** Options for the `getCollectionWmtsCapabilitiesByTms` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionWmtsCapabilitiesByTmsOptions {
   ...CollectionMosaicFilterQueryParameters;
 
@@ -3599,6 +3650,7 @@ model GetCollectionWmtsCapabilitiesByTmsOptions {
 }
 
 /** Options for the `getSearchTile` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchTileOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3637,6 +3689,7 @@ model GetSearchTileOptions {
 }
 
 /** Options for the `getSearchTileByFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchTileByFormatOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3679,6 +3732,7 @@ model GetSearchTileByFormatOptions {
 }
 
 /** Options for the `getSearchTileByScale` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchTileByScaleOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3719,6 +3773,7 @@ model GetSearchTileByScaleOptions {
 }
 
 /** Options for the `getSearchTileByScaleAndFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchTileByScaleAndFormatOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3763,6 +3818,7 @@ model GetSearchTileByScaleAndFormatOptions {
 }
 
 /** Options for the `getSearchTileNoTms` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchTileNoTmsOptions {
   /** Search Id (pgSTAC Search Hash) */
   @path
@@ -3794,6 +3850,7 @@ model GetSearchTileNoTmsOptions {
 }
 
 /** Options for the `getSearchTileNoTmsByFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchTileNoTmsByFormatOptions {
   /** Search Id (pgSTAC Search Hash) */
   @path
@@ -3827,6 +3884,7 @@ model GetSearchTileNoTmsByFormatOptions {
 }
 
 /** Options for the `getSearchTileNoTmsByScale` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchTileNoTmsByScaleOptions {
   /** Search Id (pgSTAC Search Hash) */
   @path
@@ -3857,6 +3915,7 @@ model GetSearchTileNoTmsByScaleOptions {
 }
 
 /** Options for the `getSearchTileNoTmsByScaleAndFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchTileNoTmsByScaleAndFormatOptions {
   /** Search Id (pgSTAC Search Hash) */
   @path
@@ -3889,6 +3948,7 @@ model GetSearchTileNoTmsByScaleAndFormatOptions {
 }
 
 /** Options for the `getSearchBboxCrop` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchBboxCropOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3938,6 +3998,7 @@ model GetSearchBboxCropOptions {
 }
 
 /** Options for the `getSearchBboxCropWithDimensions` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchBboxCropWithDimensionsOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -3998,6 +4059,7 @@ model GetSearchBboxCropWithDimensionsOptions {
 }
 
 /** Options for the `cropSearchFeature` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model CropSearchFeatureOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -4038,6 +4100,7 @@ model CropSearchFeatureOptions {
 }
 
 /** Options for the `cropSearchFeatureByFormat` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model CropSearchFeatureByFormatOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -4080,6 +4143,7 @@ model CropSearchFeatureByFormatOptions {
 }
 
 /** Options for the `cropSearchFeatureWidthByHeight` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model CropSearchFeatureWidthByHeightOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
@@ -4133,6 +4197,7 @@ model CropSearchFeatureWidthByHeightOptions {
 }
 
 /** Options for the `getSearchWmtsCapabilities` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchWmtsCapabilitiesOptions {
   /**
    * Search Id (pgSTAC Search Hash)
@@ -4167,6 +4232,7 @@ model GetSearchWmtsCapabilitiesOptions {
 }
 
 /** Options for the `getSearchWmtsCapabilitiesByTms` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchWmtsCapabilitiesByTmsOptions {
   /**
    * Search Id (pgSTAC Search Hash)
@@ -4202,6 +4268,7 @@ model GetSearchWmtsCapabilitiesByTmsOptions {
 }
 
 /** Options for the `getLegend` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetLegendOptions {
   /**
    * The name of the registered colormap to generate a legend for
@@ -4237,6 +4304,7 @@ model GetLegendOptions {
 }
 
 /** Options for the `getCollectionThumbnail` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionThumbnailOptions {
   /**
    * STAC Collection ID
@@ -4248,6 +4316,7 @@ model GetCollectionThumbnailOptions {
 }
 
 /** Options for the `getItemAvailableAssets` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetItemAvailableAssetsOptions {
   /**
    * STAC Collection Identifier
@@ -4269,6 +4338,7 @@ model GetItemAvailableAssetsOptions {
 }
 
 /** Options for the `getCollectionAssetsForTile` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionAssetsForTileOptions {
   /**
    * STAC Collection Identifier
@@ -4294,6 +4364,7 @@ model GetCollectionAssetsForTileOptions {
 }
 
 /** Options for the `getCollectionAssetsForTileNoTms` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionAssetsForTileNoTmsOptions {
   /**
    * STAC Collection Identifier
@@ -4317,6 +4388,7 @@ model GetCollectionAssetsForTileNoTmsOptions {
 }
 
 /** Options for the `getCollectionAssetsForBbox` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionAssetsForBboxOptions {
   /**
    * STAC Collection Identifier
@@ -4339,6 +4411,7 @@ model GetCollectionAssetsForBboxOptions {
 }
 
 /** Options for the `getCollectionPointAssets` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetCollectionPointAssetsOptions {
   ...MosaicSearchQueryParameters;
   ...CollectionMosaicFilterQueryParameters;
@@ -4372,6 +4445,7 @@ model GetCollectionPointAssetsOptions {
 }
 
 /** Options for the `getSearchAssetsForTile` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchAssetsForTileOptions {
   /**
    * Search Id (pgSTAC Search Hash)
@@ -4404,6 +4478,7 @@ model GetSearchAssetsForTileOptions {
 }
 
 /** Options for the `getSearchBboxAssets` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchBboxAssetsOptions {
   /**
    * Search Id (pgSTAC Search Hash)
@@ -4425,6 +4500,7 @@ model GetSearchBboxAssetsOptions {
 }
 
 /** Options for the `getSearchAssetsForTileNoTms` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchAssetsForTileNoTmsOptions {
   /** Search Id (pgSTAC Search Hash) */
   @path
@@ -4442,6 +4518,7 @@ model GetSearchAssetsForTileNoTmsOptions {
 }
 
 /** Options for the `getSearchPointWithAssets` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetSearchPointWithAssetsOptions {
   ...MosaicSearchQueryParameters;
   ...SubDatasetQueryParameters;
@@ -5274,6 +5351,7 @@ op getSearchPointWithAssetsOverride(
 );
 
 /** Options for the `getItemCollection` operation. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model GetItemCollectionOptions {
   @doc("Catalog collection id")
   @path

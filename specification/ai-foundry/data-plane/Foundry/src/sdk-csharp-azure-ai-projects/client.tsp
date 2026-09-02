@@ -1,5 +1,6 @@
 import "../common/service.tsp";
 import "../sdk-common/error.default.tsp";
+import "../agent-insights/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../indexes/routes.tsp";
@@ -304,6 +305,23 @@ namespace Azure.AI.Projects;
 );
 @@clientName(RoutineActionType, "RoutineActionKind");
 @@clientName(RoutineTriggerType, "RoutineTriggerKind");
+
+// --------------------------------------------------------------------------------
+// Agent Insight Monitor sub‐client
+// --------------------------------------------------------------------------------
+@@access(AgentInsightMonitors.list, Access.internal);
+@@access(AgentInsightMonitors.create, Access.internal);
+@@access(AgentInsightMonitors.get, Access.internal);
+@@access(AgentInsightMonitors.delete, Access.internal);
+@@access(AgentInsightMonitors.update, Access.internal);
+@@access(AgentInsightMonitors.reset, Access.internal);
+@@access(AgentInsightMonitors.createRun, Access.internal);
+@@access(AgentInsightMonitors.listRuns, Access.internal);
+@@access(AgentInsightMonitors.getRun, Access.internal);
+@@access(AgentInsightMonitors.cancelRun, Access.internal);
+@@access(AgentInsightMonitors.listInsights, Access.internal);
+@@access(AgentInsightMonitors.getInsight, Access.internal);
+@@access(AgentInsightMonitors.updateInsight, Access.internal);
 
 // --------------------------------------------------------------------------------
 // Export Azure Tool types from the OpenAI package instead of re-emitting them.
