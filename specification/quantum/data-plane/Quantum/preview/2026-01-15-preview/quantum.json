@@ -2369,24 +2369,6 @@
         "period"
       ]
     },
-    "QuotaUsage": {
-      "type": "object",
-      "description": "The accumulated quota usage values for a suite offer provider.",
-      "properties": {
-        "standardMinutesLifetime": {
-          "type": "number",
-          "format": "double",
-          "description": "The accumulated standard-priority minutes used over the lifetime.",
-          "readOnly": true
-        },
-        "highMinutesLifetime": {
-          "type": "number",
-          "format": "double",
-          "description": "The accumulated high-priority minutes used over the lifetime.",
-          "readOnly": true
-        }
-      }
-    },
     "QuotaUsageData": {
       "type": "object",
       "description": "Quota usage data for a suite offer provider.",
@@ -2407,7 +2389,7 @@
           "readOnly": true
         },
         "usage": {
-          "$ref": "#/definitions/QuotaUsage",
+          "$ref": "#/definitions/Usage",
           "description": "The accumulated quota usage values.",
           "readOnly": true
         },

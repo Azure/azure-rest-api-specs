@@ -5,6 +5,7 @@
 
 import "./common.tsp";
 import "./models.tsp";
+import "./models-items.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -27,18 +28,6 @@ union SuiteOfferScope {
 
   /** The usage is applied at the workspace target level. */
   WorkspaceTarget: "WorkspaceTarget",
-}
-
-/** The accumulated quota usage values for a suite offer provider. */
-@added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
-model QuotaUsage {
-  /** The accumulated standard-priority minutes used over the lifetime. */
-  @visibility(Lifecycle.Read)
-  standardMinutesLifetime?: float64;
-
-  /** The accumulated high-priority minutes used over the lifetime. */
-  @visibility(Lifecycle.Read)
-  highMinutesLifetime?: float64;
 }
 
 /** Quota usage data for a suite offer provider. */
@@ -65,7 +54,7 @@ model QuotaUsageData {
 
   /** The accumulated quota usage values. */
   @visibility(Lifecycle.Read)
-  usage: QuotaUsage;
+  usage: Usage;
 
   /** The time when the quota usage was last modified. */
   @visibility(Lifecycle.Read)
