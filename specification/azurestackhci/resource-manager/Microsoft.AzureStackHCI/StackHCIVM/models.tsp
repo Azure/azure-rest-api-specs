@@ -2377,6 +2377,10 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 
   @doc("Defines the amount of extra memory that should be reserved for a virtual machine instance at runtime, as a percentage of the total memory that the virtual machine instance is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000.")
   targetMemoryBuffer?: int32;
+
+  @added(Versions.v2026_07_01_preview)
+  @doc("Specifies whether dynamic memory is enabled for the virtual machine instance. When omitted, dynamic memory remains enabled; setting this to false converts the virtual machine instance to static memory.")
+  enabled?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
@@ -2697,6 +2701,10 @@ model HardwareProfileUpdate {
   @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
   @Azure.ResourceManager.identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
+
+  @added(Versions.v2026_07_01_preview)
+  @doc("Dynamic memory config for day-2 updates and static-to-dynamic conversion of the virtual machine instance.")
+  dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
 }
 
 @doc("Storage profile update")
