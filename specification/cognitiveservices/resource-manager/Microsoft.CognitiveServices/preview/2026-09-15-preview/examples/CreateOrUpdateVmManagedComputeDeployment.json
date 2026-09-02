@@ -12,7 +12,10 @@
         "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
         "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
         "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
-        "priority": "High"
+        "priority": "High",
+        "gatedModelAccess": {
+          "connection": "projects/my-project/connections/my-hf-connection"
+        }
       },
       "sku": {
         "name": "VmManagedCompute",
@@ -33,6 +36,9 @@
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
           "priority": "High",
           "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "gatedModelAccess": {
+            "connection": "projects/my-project/connections/my-hf-connection"
+          },
           "capabilities": {
             "assetsV2": "true"
           },
@@ -65,6 +71,9 @@
           "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
           "priority": "High",
+          "gatedModelAccess": {
+            "connection": "projects/my-project/connections/my-hf-connection"
+          },
           "provisioningState": "Accepted"
         },
         "sku": {
