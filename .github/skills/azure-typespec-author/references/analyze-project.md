@@ -4,7 +4,7 @@ Collect the inputs below from the TypeSpec project. Ask **up to 6 concise questi
 
 | #   | Input                       | Example                                                          |
 | --- | --------------------------- | ---------------------------------------------------------------- |
-| 1   | TypeSpec project root       | `/specification/widget/resource-manager/Microsoft.Widget/Widget` |
+| 1   | TypeSpec project root       | ARM: `/specification/widget/resource-manager/Microsoft.Widget/Widget`<br>Data-plane: `/specification/widget/data-plane/WidgetAnalytics` |
 | 2   | Path to `tspconfig.yaml`    | `<spec-root>/tspconfig.yaml`                                     |
 | 3   | Service type                | ARM / data-plane                                                 |
 | 4   | Existing API versions       | `2024-01-01 (stable)`, `2024-06-01-preview`                      |
