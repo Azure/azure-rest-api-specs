@@ -1,0 +1,38 @@
+{
+  "operationId": "CdcDestinations_Update",
+  "title": "Disable a Microsoft Fabric change data capture destination",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "destinationName": "fabric-mirroring",
+    "api-version": "2027-03-01-preview",
+    "properties": { "properties": { "desiredState": "Disabled" } }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring",
+        "name": "fabric-mirroring",
+        "type": "Microsoft.HorizonDb/clusters/cdcDestinations",
+        "eTag": "\"00000000-0000-0000-0000-000000000011\"",
+        "properties": {
+          "destination": { "destinationType": "Fabric", "protocol": "Native", "workspaceId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" },
+          "desiredState": "Disabled",
+          "effectiveState": "Disabled",
+          "provisioningState": "Succeeded",
+          "activeIdentityAssignmentResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring/identityAssignments/fabric-writer",
+          "configurationCount": 0,
+          "status": { "code": "Disabled", "message": "The Microsoft Fabric destination is disabled." }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/10000000-0000-0000-0000-000000000011?api-version=2027-03-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/10000000-0000-0000-0000-000000000011?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      }
+    }
+  }
+}

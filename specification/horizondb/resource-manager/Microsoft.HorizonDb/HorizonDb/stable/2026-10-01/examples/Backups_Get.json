@@ -1,23 +1,24 @@
 {
   "operationId": "Backups_Get",
-  "title": "Get an available user-created backup for a HorizonDB cluster",
+  "title": "Get an available automatic backup for a HorizonDB cluster",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "example-resource-group",
     "clusterName": "example-cluster",
-    "backupName": "before-schema-migration",
+    "backupName": "system-2026-08-10-0200",
     "api-version": "2026-10-01"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/backups/before-schema-migration",
-        "name": "before-schema-migration",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/backups/system-2026-08-10-0200",
+        "name": "system-2026-08-10-0200",
         "type": "Microsoft.HorizonDb/clusters/backups",
         "properties": {
-          "takenAtUtc": "2026-08-10T14:30:00Z",
+          "takenAtUtc": "2026-08-10T02:00:00Z",
           "postgreSqlVersion": "17",
-          "backupType": "User"
+          "backupType": "System",
+          "expiredAtUtc": "2026-08-24T02:00:00Z"
         }
       }
     }

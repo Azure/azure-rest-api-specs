@@ -2,8 +2,20 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
-import "./routes.tsp";
+import "./common.tsp";
+import "./clusters.tsp";
+import "./pools.tsp";
+import "./replication.tsp";
+import "./endpoints.tsp";
+import "./authentication.tsp";
+import "./administrators.tsp";
+import "./maintenance.tsp";
+import "./backups.tsp";
+import "./system-ai-models.tsp";
+import "./firewall-rules.tsp";
+import "./private-link.tsp";
+import "./parameter-groups.tsp";
+import "./cdc.tsp";
 import "./client.tsp";
 
 using TypeSpec.Versioning;
@@ -31,6 +43,12 @@ enum Versions {
    * The 2026-10-01 API version.
    */
   v2026_10_01: "2026-10-01",
+
+  /**
+   * The 2027-03-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2027_03_01_preview: "2027-03-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

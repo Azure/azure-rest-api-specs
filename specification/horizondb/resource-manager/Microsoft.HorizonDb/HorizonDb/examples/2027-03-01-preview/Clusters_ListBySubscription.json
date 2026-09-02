@@ -1,0 +1,57 @@
+{
+  "operationId": "Clusters_ListBySubscription",
+  "title": "List HorizonDB clusters in a subscription",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+            "name": "example-cluster",
+            "type": "Microsoft.HorizonDb/clusters",
+            "location": "eastus2",
+            "properties": {
+              "postgreSqlVersion": "17",
+              "creationMode": "Create",
+              "replication": {
+                "roles": [
+                  "Source",
+                  "Target"
+                ],
+                "replicaLevel": 1,
+                "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/source-cluster"
+              },
+              "network": {
+                "publicAccess": "Disabled"
+              },
+              "backup": {
+                "geoRedundancy": "Enabled",
+                "retentionDays": 14,
+                "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
+              },
+              "deletion": {
+                "policy": "RetainUntilNoBackupsRemain"
+              },
+              "state": "Ready",
+              "provisioningState": "Succeeded",
+              "readWritePool": {
+                "designatedPoolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+                "zoneRedundancy": {
+                  "state": "Ready"
+                },
+                "failover": {
+                  "state": "NotReady",
+                  "unavailableReason": "The read-only nodes in the designated read-write pool are not functional."
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

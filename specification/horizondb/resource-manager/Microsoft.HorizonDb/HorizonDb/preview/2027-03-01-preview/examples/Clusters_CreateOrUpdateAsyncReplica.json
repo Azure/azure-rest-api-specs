@@ -1,0 +1,73 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Create a cross-region terminal asynchronous replica from an intermediate cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "async-replica-cluster",
+    "api-version": "2027-03-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "postgreSqlVersion": "17",
+        "creationMode": "AsyncReplica",
+        "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-westus3-resource-group/providers/Microsoft.HorizonDb/clusters/intermediate-replica-cluster",
+        "network": {
+          "publicAccess": "Disabled"
+        },
+        "backup": {
+          "geoRedundancy": "Enabled",
+          "retentionDays": 14
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/77777777-7777-7777-7777-777777777777?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/async-replica-cluster",
+        "name": "async-replica-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "AsyncReplica",
+          "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-westus3-resource-group/providers/Microsoft.HorizonDb/clusters/intermediate-replica-cluster",
+          "replication": {
+            "roles": [
+              "Target"
+            ],
+            "replicaLevel": 2,
+            "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-westus3-resource-group/providers/Microsoft.HorizonDb/clusters/intermediate-replica-cluster"
+          },
+          "network": {
+            "publicAccess": "Disabled"
+          },
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 14
+          },
+          "deletion": {
+            "policy": "Immediate"
+          },
+          "state": "Provisioning",
+          "provisioningState": "Provisioning",
+          "readWritePool": {
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            }
+          }
+        }
+      }
+    }
+  }
+}

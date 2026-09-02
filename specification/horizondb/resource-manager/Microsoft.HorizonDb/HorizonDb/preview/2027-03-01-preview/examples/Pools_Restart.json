@@ -1,0 +1,37 @@
+{
+  "operationId": "Pools_Restart",
+  "title": "Restart PostgreSQL containers in a HorizonDB pool",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "poolName": "example-pool-01",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationStatuses/33333333-3333-3333-3333-333333333333",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationResults/33333333-3333-3333-3333-333333333333",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01",
+        "name": "example-pool-01",
+        "type": "Microsoft.HorizonDb/clusters/pools",
+        "properties": {
+          "state": "Ready",
+          "allocatedNodeCount": 2,
+          "parameterGroup": {
+            "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
+            "applyMethod": "Immediate",
+            "syncStatus": "InSync"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

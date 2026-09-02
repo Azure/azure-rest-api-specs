@@ -15,9 +15,6 @@
         "network": {
           "publicAccess": "Disabled"
         },
-        "deletion": {
-          "policy": "RetainUntilNoBackupsRemain"
-        },
         "backup": {
           "retentionDays": 21
         }
@@ -46,22 +43,8 @@
             "retentionDays": 21,
             "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
           },
-          "deletion": {
-            "policy": "RetainUntilNoBackupsRemain"
-          },
           "state": "Ready",
-          "provisioningState": "Succeeded",
-          "readWritePool": {
-            "designatedPoolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
-            "zoneRedundancy": {
-              "state": "NotReady",
-              "unavailableReason": "All nodes in the designated read-write pool are deployed in a single availability zone."
-            },
-            "failover": {
-              "state": "NotReady",
-              "unavailableReason": "The designated read-write pool is stopped."
-            }
-          }
+          "provisioningState": "Succeeded"
         }
       }
     },

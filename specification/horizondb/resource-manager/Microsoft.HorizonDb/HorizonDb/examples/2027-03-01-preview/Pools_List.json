@@ -1,0 +1,46 @@
+{
+  "operationId": "Pools_List",
+  "title": "List HorizonDB pools in a cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+            "name": "example-pool-01",
+            "type": "Microsoft.HorizonDb/clusters/pools",
+            "properties": {
+              "state": "Ready",
+              "computeModel": {
+                "type": "Provisioned",
+                "computeProcessor": "AMD",
+                "computeGeneration": 3,
+                "vCores": 8
+              },
+              "desiredNodeCount": 3,
+              "allocatedNodeCount": 3,
+              "parameterGroup": {
+                "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
+                "applyMethod": "Immediate",
+                "syncStatus": "InSync"
+              },
+              "scheduledMaintenance": {
+                "maintenanceManagementType": "User",
+                "dayOfWeek": "Sunday",
+                "startHourUtc": 2,
+                "startMinuteUtc": 30
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

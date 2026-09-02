@@ -52,9 +52,6 @@
       "name": "Endpoints"
     },
     {
-      "name": "VirtualEndpoints"
-    },
-    {
       "name": "PasswordAuthentications"
     },
     {
@@ -83,6 +80,18 @@
     },
     {
       "name": "ParameterGroups"
+    },
+    {
+      "name": "CdcCapabilities"
+    },
+    {
+      "name": "CdcDestinations"
+    },
+    {
+      "name": "IdentityAssignments"
+    },
+    {
+      "name": "CdcConfigurations"
     }
   ],
   "paths": {
@@ -286,45 +295,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/virtualEndpoints": {
-      "get": {
-        "operationId": "VirtualEndpoints_ListBySubscription",
-        "tags": [
-          "VirtualEndpoints"
-        ],
-        "description": "Lists all HorizonDB virtual endpoints in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpointListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List HorizonDB virtual endpoints in a subscription": {
-            "$ref": "./examples/VirtualEndpoints_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters": {
       "get": {
         "operationId": "Clusters_ListByResourceGroup",
@@ -413,12 +383,6 @@
           "Get a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Get.json"
           },
-          "Get a HorizonDB cluster whose deletion is blocked by a user-created backup": {
-            "$ref": "./examples/Clusters_GetDeletionBlockedByBackups.json"
-          },
-          "Get a HorizonDB cluster whose deletion is blocked by automatic backups": {
-            "$ref": "./examples/Clusters_GetDeletionBlockedByAutomaticBackups.json"
-          },
           "Get a cluster after pool creation while it had no existing pools": {
             "$ref": "./examples/Clusters_GetAfterPoolCreationOnEmptyCluster.json"
           },
@@ -432,7 +396,7 @@
         "tags": [
           "Clusters"
         ],
-        "description": "Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. The Endpoint role is ReadWrite for a new level-0 root Cluster and ReadOnly when creationMode is AsyncReplica because the new Cluster's replication.roles contains Target. PostgreSQL version is inherited from backup metadata; all other new-cluster configuration comes from the request or service defaults. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource.",
+        "description": "Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. PostgreSQL version is inherited from backup metadata; all other new-cluster configuration comes from the request or service defaults. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -509,35 +473,20 @@
           "Create a HorizonDB cluster with minimum configuration and service defaults": {
             "$ref": "./examples/Clusters_CreateOrUpdateMinimumDefaults.json"
           },
-          "Create a cross-region terminal asynchronous replica from an intermediate cluster": {
-            "$ref": "./examples/Clusters_CreateOrUpdateAsyncReplica.json"
-          },
           "Create or update a HorizonDB cluster": {
             "$ref": "./examples/Clusters_CreateOrUpdate.json"
           },
           "Reject Create mode with restore properties": {
             "$ref": "./examples/Clusters_CreateOrUpdateInvalidCreateWithRestoreProperties.json"
           },
-          "Reject asynchronous replica creation with a restore point": {
-            "$ref": "./examples/Clusters_CreateOrUpdateInvalidAsyncReplicaWithPointInTime.json"
-          },
           "Reject changing the PostgreSQL major version during replacement": {
             "$ref": "./examples/Clusters_CreateOrUpdateChangePostgreSqlVersion.json"
-          },
-          "Reject creating a third-level asynchronous replica": {
-            "$ref": "./examples/Clusters_CreateOrUpdateThirdReplicaLevel.json"
           },
           "Reject cross-region point-in-time restore until it is supported": {
             "$ref": "./examples/Clusters_CreateOrUpdateCrossRegionPointInTimeRestore.json"
           },
           "Reject point-in-time restore without a creation source": {
             "$ref": "./examples/Clusters_CreateOrUpdateInvalidPointInTimeRestoreMissingSource.json"
-          },
-          "Replace a cluster while omitting deletion configuration": {
-            "$ref": "./examples/Clusters_CreateOrUpdateReplacementOmitDeletion.json"
-          },
-          "Replace an asynchronous replica while omitting creation mode": {
-            "$ref": "./examples/Clusters_CreateOrUpdateReplacementOmitCreationMode.json"
           },
           "Restore a HorizonDB cluster to a point in time": {
             "$ref": "./examples/Clusters_CreateOrUpdatePointInTimeRestore.json"
@@ -614,9 +563,6 @@
           }
         },
         "x-ms-examples": {
-          "Reject reversing the retained-backup deletion policy": {
-            "$ref": "./examples/Clusters_UpdateReverseDeletionPolicy.json"
-          },
           "Rename the PostgreSQL administrator role and reset its password while updating a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Update.json"
           }
@@ -632,7 +578,7 @@
         "tags": [
           "Clusters"
         ],
-        "description": "Deletes a HorizonDB cluster, its Cluster-scoped Endpoint, and all remaining child resources. The service first rejects the request with 409 ClusterReferencedByVirtualEndpoint, without making destructive changes, when any virtual endpoint writer or reader target belongs to the cluster. Use virtualEndpointReferences to discover blocking references and retarget or delete them before retrying. When deletion.policy is RetainUntilNoBackupsRemain and backups remain, the service removes all pools together with their Pool-scoped Endpoints and FirewallRules, stops creation of automatic backups, transitions the cluster to DeletionBlockedByBackups, and returns 409 Conflict without starting a long-running operation. The Cluster-scoped Endpoint remains tied to the Cluster lifecycle while deletion is blocked. While blocked, reads remain available, but the service rejects mutating operations other than deletion of user-created backups and another cluster delete request. Retry cluster deletion after all backups are removed or expire. For an accepted deletion, the long-running operation remains nonterminal until physical deletion completes and point GET returns 404 Not Found.",
+        "description": "Deletes a HorizonDB cluster, its Cluster-scoped Endpoint, and all remaining child resources. For an accepted deletion, the long-running operation remains nonterminal until physical deletion completes and point GET returns 404 Not Found.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -687,9 +633,6 @@
         "x-ms-examples": {
           "Delete a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Delete.json"
-          },
-          "Reject cluster deletion while a virtual endpoint references the cluster": {
-            "$ref": "./examples/Clusters_DeleteBlockedByVirtualEndpoint.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1026,7 +969,7 @@
         "tags": [
           "Backups"
         ],
-        "description": "Lists the backups available for a HorizonDB cluster. Expired automatic backups are omitted; user-created backups remain available until explicitly deleted.",
+        "description": "Lists the backups available for a HorizonDB cluster. Expired automatic backups are omitted.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1078,7 +1021,7 @@
         "tags": [
           "Backups"
         ],
-        "description": "Gets an available backup for a HorizonDB cluster. Expired automatic backups are not available through this operation; user-created backups remain available until explicitly deleted.",
+        "description": "Gets an available backup for a HorizonDB cluster. Expired automatic backups are not available through this operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1125,17 +1068,118 @@
           }
         },
         "x-ms-examples": {
-          "Get an available user-created backup for a HorizonDB cluster": {
+          "Get an available automatic backup for a HorizonDB cluster": {
             "$ref": "./examples/Backups_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdc": {
+      "get": {
+        "operationId": "CdcCapabilities_List",
+        "tags": [
+          "CdcCapabilities"
+        ],
+        "description": "Lists the optional singleton change data capture capability for a cluster. The result contains zero or one item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CdcCapabilityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the optional cluster change data capture capability": {
+            "$ref": "./examples/CdcCapabilities_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdc/default": {
+      "get": {
+        "operationId": "CdcCapabilities_Get",
+        "tags": [
+          "CdcCapabilities"
+        ],
+        "description": "Gets the singleton change data capture capability for a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CdcCapability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the cluster change data capture capability": {
+            "$ref": "./examples/CdcCapabilities_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "Backups_Create",
+        "operationId": "CdcCapabilities_CreateOrUpdate",
         "tags": [
-          "Backups"
+          "CdcCapabilities"
         ],
-        "description": "Creates a user backup with the name specified in the request path. Backup properties are service-generated and cannot be supplied by the caller.",
+        "description": "Creates or replaces the singleton change data capture capability and reconciles shared engine prerequisites.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1157,27 +1201,26 @@
             "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "name": "backupName",
-            "in": "path",
-            "description": "The name of the HorizonDB backup.",
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
             "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$"
+            "schema": {
+              "$ref": "#/definitions/CdcCapability"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Backup' update operation succeeded",
+            "description": "Resource 'CdcCapability' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Backup"
+              "$ref": "#/definitions/CdcCapability"
             }
           },
           "201": {
-            "description": "Resource 'Backup' create operation succeeded",
+            "description": "Resource 'CdcCapability' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Backup"
+              "$ref": "#/definitions/CdcCapability"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1199,22 +1242,22 @@
           }
         },
         "x-ms-examples": {
-          "Create a user backup for a HorizonDB cluster": {
-            "$ref": "./examples/Backups_Create.json"
+          "Enable the cluster change data capture capability": {
+            "$ref": "./examples/CdcCapabilities_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Backup"
+          "final-state-schema": "#/definitions/CdcCapability"
         },
         "x-ms-long-running-operation": true
       },
-      "delete": {
-        "operationId": "Backups_Delete",
+      "patch": {
+        "operationId": "CdcCapabilities_Update",
         "tags": [
-          "Backups"
+          "CdcCapabilities"
         ],
-        "description": "Deletes a user-created backup. The request fails with 409 Conflict when the specified backup is an automatic backup. Automatic backups cannot be deleted explicitly and are removed only when they reach their expiry date.",
+        "description": "Updates mutable change data capture capability properties. Omitted properties preserve their current values.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1236,25 +1279,85 @@
             "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "name": "backupName",
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CdcCapabilityForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CdcCapability"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the cluster change data capture capability": {
+            "$ref": "./examples/CdcCapabilities_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/CdcCapability"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CdcCapabilities_Delete",
+        "tags": [
+          "CdcCapabilities"
+        ],
+        "description": "Deletes the change data capture capability after all change data capture destinations and configurations have been removed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDB backup.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$"
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1277,11 +1380,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete a user-created backup": {
-            "$ref": "./examples/Backups_Delete.json"
-          },
-          "Reject deletion of an automatic backup": {
-            "$ref": "./examples/Backups_DeleteAutomaticBackup.json"
+          "Delete the cluster change data capture capability": {
+            "$ref": "./examples/CdcCapabilities_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1290,13 +1390,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/clearReadWritePool": {
-      "post": {
-        "operationId": "Clusters_ClearReadWritePool",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcConfigurations": {
+      "get": {
+        "operationId": "CdcConfigurations_List",
         "tags": [
-          "Clusters"
+          "CdcConfigurations"
         ],
-        "description": "Clears the cluster's read-write pool designation so that no pool hosts the cluster's read-write node. This POST action can be authorized separately from general cluster write permissions. On success, the service removes readWritePool.designatedPoolResourceId. Endpoint scopes, roles, FQDNs, aliases, and firewall rules do not change; the Cluster-scoped ReadWrite Endpoint remains discoverable but has no routing destination.",
+        "description": "Lists change data capture configurations in a HorizonDB cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1322,16 +1422,228 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/CdcConfigurationListResult"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Microsoft Fabric Mirroring configurations": {
+            "$ref": "./examples/CdcConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcConfigurations/{configurationName}": {
+      "get": {
+        "operationId": "CdcConfigurations_Get",
+        "tags": [
+          "CdcConfigurations"
+        ],
+        "description": "Gets a change data capture configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The caller-selected ARM-safe name of the change data capture configuration. The exact PostgreSQL database name is stored in properties.databaseName.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CdcConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Microsoft Fabric Mirroring configuration": {
+            "$ref": "./examples/CdcConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CdcConfigurations_CreateOrUpdate",
+        "tags": [
+          "CdcConfigurations"
+        ],
+        "description": "Creates or replaces a change data capture configuration that enrolls a PostgreSQL database for Microsoft Fabric Mirroring.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The caller-selected ARM-safe name of the change data capture configuration. The exact PostgreSQL database name is stored in properties.databaseName.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CdcConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CdcConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CdcConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'CdcConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CdcConfiguration"
+            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
               },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enroll a database for Microsoft Fabric Mirroring": {
+            "$ref": "./examples/CdcConfigurations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/CdcConfiguration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CdcConfigurations_Update",
+        "tags": [
+          "CdcConfigurations"
+        ],
+        "description": "Updates mutable change data capture configuration properties. Omitted properties preserve their current values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The caller-selected ARM-safe name of the change data capture configuration. The exact PostgreSQL database name is stored in properties.databaseName.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CdcConfigurationForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CdcConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1351,23 +1663,22 @@
           }
         },
         "x-ms-examples": {
-          "Clear the HorizonDB read-write pool designation": {
-            "$ref": "./examples/Clusters_ClearReadWritePool.json"
+          "Disable a Microsoft Fabric Mirroring configuration": {
+            "$ref": "./examples/CdcConfigurations_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/CdcConfiguration"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/designateReadWritePool": {
-      "post": {
-        "operationId": "Clusters_DesignateReadWritePool",
+      },
+      "delete": {
+        "operationId": "CdcConfigurations_Delete",
         "tags": [
-          "Clusters"
+          "CdcConfigurations"
         ],
-        "description": "Designates an existing pool to host the cluster's read-write node. This POST action can be authorized separately from general cluster write permissions. The pool resource ID must identify a child resource of this cluster; a pool in another cluster is rejected. On success, the service sets readWritePool.designatedPoolResourceId to the requested resource ID. Endpoint scopes, roles, FQDNs, aliases, and firewall rules do not change during designation.",
+        "description": "Deletes a change data capture configuration after destination-side replication has been stopped or detached. This operation never deletes the Microsoft Fabric mirrored-database item.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1382,6 +1693,449 @@
             "name": "clusterName",
             "in": "path",
             "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The caller-selected ARM-safe name of the change data capture configuration. The exact PostgreSQL database name is stored in properties.databaseName.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Microsoft Fabric Mirroring configuration": {
+            "$ref": "./examples/CdcConfigurations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations": {
+      "get": {
+        "operationId": "CdcDestinations_List",
+        "tags": [
+          "CdcDestinations"
+        ],
+        "description": "Lists change data capture destinations in a HorizonDB cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CdcDestinationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Microsoft Fabric change data capture destinations": {
+            "$ref": "./examples/CdcDestinations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations/{destinationName}": {
+      "get": {
+        "operationId": "CdcDestinations_Get",
+        "tags": [
+          "CdcDestinations"
+        ],
+        "description": "Gets a change data capture destination.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CdcDestination"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Microsoft Fabric change data capture destination": {
+            "$ref": "./examples/CdcDestinations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CdcDestinations_CreateOrUpdate",
+        "tags": [
+          "CdcDestinations"
+        ],
+        "description": "Creates or replaces a Microsoft Fabric change data capture destination.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CdcDestination"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CdcDestination' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CdcDestination"
+            }
+          },
+          "201": {
+            "description": "Resource 'CdcDestination' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CdcDestination"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Microsoft Fabric change data capture destination": {
+            "$ref": "./examples/CdcDestinations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/CdcDestination"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CdcDestinations_Update",
+        "tags": [
+          "CdcDestinations"
+        ],
+        "description": "Updates mutable change data capture destination properties. Omitted properties preserve their current values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CdcDestinationForPatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CdcDestination"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disable a Microsoft Fabric change data capture destination": {
+            "$ref": "./examples/CdcDestinations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/CdcDestination"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CdcDestinations_Delete",
+        "tags": [
+          "CdcDestinations"
+        ],
+        "description": "Deletes a change data capture destination after all referencing configurations and identity assignments have been removed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Microsoft Fabric change data capture destination": {
+            "$ref": "./examples/CdcDestinations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations/{destinationName}/activateIdentity": {
+      "post": {
+        "operationId": "CdcDestinations_ActivateIdentity",
+        "tags": [
+          "CdcDestinations"
+        ],
+        "description": "Atomically activates a validated identity assignment for this destination. If-Match is evaluated against the destination entity tag. Activating the already-active assignment succeeds idempotently.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CdcDestinationIfMatchParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1394,7 +2148,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DesignateReadWritePoolRequest"
+              "$ref": "#/definitions/ActivateCdcIdentityRequest"
             }
           }
         ],
@@ -1402,16 +2156,12 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/ActivateCdcIdentityResult"
             }
           },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1431,8 +2181,320 @@
           }
         },
         "x-ms-examples": {
-          "Designate a HorizonDB pool for read-write traffic": {
-            "$ref": "./examples/Clusters_DesignateReadWritePool.json"
+          "Activate a validated identity assignment for a change data capture destination": {
+            "$ref": "./examples/CdcDestinations_ActivateIdentity.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ActivateCdcIdentityResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations/{destinationName}/identityAssignments": {
+      "get": {
+        "operationId": "IdentityAssignments_List",
+        "tags": [
+          "IdentityAssignments"
+        ],
+        "description": "Lists identity assignments for a change data capture destination.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List change data capture identity assignments": {
+            "$ref": "./examples/IdentityAssignments_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/cdcDestinations/{destinationName}/identityAssignments/{assignmentName}": {
+      "get": {
+        "operationId": "IdentityAssignments_Get",
+        "tags": [
+          "IdentityAssignments"
+        ],
+        "description": "Gets a change data capture identity assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "assignmentName",
+            "in": "path",
+            "description": "The caller-selected name of the identity assignment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a change data capture identity assignment": {
+            "$ref": "./examples/IdentityAssignments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IdentityAssignments_CreateOrUpdate",
+        "tags": [
+          "IdentityAssignments"
+        ],
+        "description": "Creates or idempotently replaces a change data capture identity assignment. The identity resource ID is immutable.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "assignmentName",
+            "in": "path",
+            "description": "The caller-selected name of the identity assignment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IdentityAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'IdentityAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IdentityAssignment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a change data capture identity assignment": {
+            "$ref": "./examples/IdentityAssignments_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/IdentityAssignment"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "IdentityAssignments_Delete",
+        "tags": [
+          "IdentityAssignments"
+        ],
+        "description": "Deletes an inactive change data capture identity assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "destinationName",
+            "in": "path",
+            "description": "The caller-selected name of the change data capture destination.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "assignmentName",
+            "in": "path",
+            "description": "The caller-selected name of the identity assignment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an inactive change data capture identity assignment": {
+            "$ref": "./examples/IdentityAssignments_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1551,12 +2613,6 @@
           },
           "Get a read-only HorizonDB pool endpoint": {
             "$ref": "./examples/Endpoints_GetReadOnly.json"
-          },
-          "Get the Cluster-scoped Endpoint of a terminal asynchronous replica": {
-            "$ref": "./examples/Endpoints_GetTerminalReplicaCluster.json"
-          },
-          "Get the Cluster-scoped Endpoint of an intermediate asynchronous replica": {
-            "$ref": "./examples/Endpoints_GetReplicaCluster.json"
           }
         }
       },
@@ -2028,7 +3084,7 @@
         "tags": [
           "Clusters"
         ],
-        "description": "Triggers a failover operation for the HorizonDB cluster. Before invoking this action, callers should inspect the always-present properties.readWritePool.failover.state value returned by cluster reads; Ready represents eligibility for automatic and caller-requested failover, while NotReady means unavailableReason explains why failover cannot currently run. The service selects the new read-write node using the same mechanics as automatic failover.",
+        "description": "Triggers a failover operation for the HorizonDB cluster. The service selects the new read-write node using the same mechanics as automatic failover.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2478,7 +3534,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When a pool is created while its parent cluster currently has no pools, the service automatically designates the new pool as the cluster's read-write pool and selects an eligible read-write node when one is available. This behavior applies whether the cluster has never had a pool or previously had pools that were all deleted, and supports end-to-end declarative deployment without a separate designation request. The resulting designation is reported by the parent cluster's readWritePool.designatedPoolResourceId. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. For a Serverless compute model, the service validates that minVCores is less than or equal to maxVCores. The request is rejected if it would leave the pool with an effective desiredNodeCount of 0 while that pool is currently the parent cluster's designated read-write pool. Clear the designation through clearReadWritePool first. On rejection, the pool and designation remain unchanged.",
+        "description": "Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. For a Serverless compute model, the service validates that minVCores is less than or equal to maxVCores. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2565,7 +3621,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. For an effective Serverless compute model, the service validates that the recursively merged minVCores value is less than or equal to the recursively merged maxVCores value. The request is rejected if it would leave the pool with an effective desiredNodeCount of 0 while that pool is currently the parent cluster's designated read-write pool. Clear the designation through clearReadWritePool first. On rejection, the pool and designation remain unchanged.",
+        "description": "Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. For an effective Serverless compute model, the service validates that the recursively merged minVCores value is less than or equal to the recursively merged maxVCores value. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2662,7 +3718,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Deletes a HorizonDB pool together with the Pool-scoped Endpoint whose associatedResourceId identifies that Pool and all FirewallRule children of that Endpoint. The Endpoint cannot outlive or be deleted independently from its Pool. Deletion fails with a conflict while the pool is designated as the cluster's read-write pool. Transfer or clear the designation before deleting the pool.",
+        "description": "Deletes a HorizonDB pool together with the Pool-scoped Endpoint whose associatedResourceId identifies that Pool and all FirewallRule children of that Endpoint. The Endpoint cannot outlive or be deleted independently from its Pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3778,212 +4834,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/promote": {
-      "post": {
-        "operationId": "Clusters_Promote",
-        "tags": [
-          "Clusters"
-        ],
-        "description": "Promotes this replica cluster by detaching it and all of its descendant replicas from the current replication set, creating an isolated replication set rooted at this cluster while preserving its descendant relationships. The operation is valid only when the cluster has the Target role. Current root clusters, clusters outside a replication set, and clusters in an incompatible operational or replication state are rejected. The service also rejects promotion with 409 ClusterReferencedByVirtualEndpoint when the topology change would invalidate a virtual endpoint reader relationship; callers must retarget or delete the virtual endpoint first.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Promote a replica and its descendants into an isolated replication set": {
-            "$ref": "./examples/Clusters_PromoteReplica.json"
-          },
-          "Reject promoting the current root cluster": {
-            "$ref": "./examples/Clusters_PromoteCurrentRoot.json"
-          },
-          "Reject replica promotion when it would invalidate a virtual endpoint reader": {
-            "$ref": "./examples/Clusters_PromoteBlockedByVirtualEndpoint.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/replicas": {
-      "get": {
-        "operationId": "Clusters_ListReplicas",
-        "tags": [
-          "Clusters"
-        ],
-        "description": "Lists the direct asynchronous replicas of this cluster. Each item identifies a cluster that has the Target role and uses this cluster as its immediate source, and reports the state of that replication link. Descendant replicas whose immediate source is another replica are not returned.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ClusterReplicaLinkListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List the direct replicas of a HorizonDB cluster": {
-            "$ref": "./examples/Clusters_ListReplicas.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/switchover": {
-      "post": {
-        "operationId": "Clusters_Switchover",
-        "tags": [
-          "Clusters"
-        ],
-        "description": "Switches this replica cluster with its immediate source while preserving the replication set and descendant relationships. The operation is valid only when the cluster has the Target role. Before starting, a virtual endpoint must exist whose writer targets the Cluster-scoped Endpoint named cluster in the immediate source Cluster and whose reader targets the Cluster-scoped Endpoint named cluster in this direct replica; otherwise the service rejects the request with 409 VirtualEndpointSwitchoverPreconditionFailed. On success, the service atomically swaps the replication topology, changes the invoked replica's Cluster-scoped Endpoint role to ReadWrite, changes the former source's Cluster-scoped Endpoint role to ReadOnly, and swaps the virtual endpoint writer and reader resource IDs and DNS CNAME destinations. The virtual endpoint resource ID and stable writer and reader FQDNs do not change. If the topology, role, or endpoint retarget cannot commit, the service rolls back all changes and reports a failed operation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reject switching over the current root cluster": {
-            "$ref": "./examples/Clusters_SwitchoverCurrentRoot.json"
-          },
-          "Reject switchover when the virtual endpoint targets are not configured for the cluster pair": {
-            "$ref": "./examples/Clusters_SwitchoverVirtualEndpointPreconditionFailed.json"
-          },
-          "Switch over a replica with its immediate source": {
-            "$ref": "./examples/Clusters_SwitchoverReplica.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/systemAiModels": {
       "get": {
         "operationId": "SystemAiModels_List",
@@ -4089,58 +4939,6 @@
           "Get a system-managed AI model for a HorizonDB cluster": {
             "$ref": "./examples/SystemAiModels_Get.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/virtualEndpointReferences": {
-      "get": {
-        "operationId": "Clusters_ListVirtualEndpointReferences",
-        "tags": [
-          "Clusters"
-        ],
-        "description": "Lists virtual endpoints whose writer or reader endpoint target belongs to this cluster. Each item identifies the virtual endpoint and the Writer or Reader role through which it references the cluster. Callers can use this operation to discover dependencies that block cluster deletion or replication topology changes.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ClusterVirtualEndpointReferenceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List virtual endpoint references to a HorizonDB cluster": {
-            "$ref": "./examples/Clusters_ListVirtualEndpointReferences.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4506,321 +5304,57 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/virtualEndpoints": {
-      "get": {
-        "operationId": "VirtualEndpoints_ListByResourceGroup",
-        "tags": [
-          "VirtualEndpoints"
-        ],
-        "description": "Lists all HorizonDB virtual endpoints in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpointListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List HorizonDB virtual endpoints in a resource group": {
-            "$ref": "./examples/VirtualEndpoints_ListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/virtualEndpoints/{virtualEndpointName}": {
-      "get": {
-        "operationId": "VirtualEndpoints_Get",
-        "tags": [
-          "VirtualEndpoints"
-        ],
-        "description": "Gets information about a HorizonDB virtual endpoint.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEndpointName",
-            "in": "path",
-            "description": "The globally unique DNS base name of the virtual endpoint. The writer FQDN is <name>.writer.horizondb.azure.com and the reader FQDN is <name>.reader.horizondb.azure.com.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a HorizonDB virtual endpoint": {
-            "$ref": "./examples/VirtualEndpoints_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "VirtualEndpoints_CreateOrUpdate",
-        "tags": [
-          "VirtualEndpoints"
-        ],
-        "description": "Creates or replaces a HorizonDB virtual endpoint. The resource name must be globally available as a HorizonDB endpoint DNS base name. The writer target must be the Cluster-scoped Endpoint named cluster in the current root Cluster. The reader target must be the Cluster-scoped Endpoint named cluster in that Cluster or one of its direct level-1 replica Clusters; indirect descendants are rejected. For regional resilience, customers should deploy the VirtualEndpoint in an Azure region that has a paired region and that is different from every Cluster region in the referenced replication set. This recommendation is not validated or enforced; any otherwise supported location remains accepted. This placement can help the VirtualEndpoint remain available for promote or switchover recovery workflows during a regional outage affecting the root Cluster, but does not guarantee availability.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEndpointName",
-            "in": "path",
-            "description": "The globally unique DNS base name of the virtual endpoint. The writer FQDN is <name>.writer.horizondb.azure.com and the reader FQDN is <name>.reader.horizondb.azure.com.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'VirtualEndpoint' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
-            }
-          },
-          "201": {
-            "description": "Resource 'VirtualEndpoint' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a HorizonDB virtual endpoint": {
-            "$ref": "./examples/VirtualEndpoints_CreateOrUpdate.json"
-          },
-          "Reject a virtual endpoint whose writer is not the root read-write endpoint": {
-            "$ref": "./examples/VirtualEndpoints_CreateOrUpdateInvalidWriter.json"
-          },
-          "Reject an indirect replica as a virtual endpoint reader target": {
-            "$ref": "./examples/VirtualEndpoints_CreateOrUpdateInvalidIndirectReplica.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/VirtualEndpoint"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "VirtualEndpoints_Update",
-        "tags": [
-          "VirtualEndpoints"
-        ],
-        "description": "Updates the writer or reader target of a HorizonDB virtual endpoint. Omitted properties preserve their current values, and the complete effective target pair must satisfy the root-cluster and direct-replica constraints.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEndpointName",
-            "in": "path",
-            "description": "The globally unique DNS base name of the virtual endpoint. The writer FQDN is <name>.writer.horizondb.azure.com and the reader FQDN is <name>.reader.horizondb.azure.com.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpointForPatchUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retarget a HorizonDB virtual endpoint reader": {
-            "$ref": "./examples/VirtualEndpoints_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualEndpoint"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "VirtualEndpoints_Delete",
-        "tags": [
-          "VirtualEndpoints"
-        ],
-        "description": "Deletes a HorizonDB virtual endpoint. This removes its strong references to the target clusters but does not delete or modify the target endpoints or clusters.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEndpointName",
-            "in": "path",
-            "description": "The globally unique DNS base name of the virtual endpoint. The writer FQDN is <name>.writer.horizondb.azure.com and the reader FQDN is <name>.reader.horizondb.azure.com.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a HorizonDB virtual endpoint": {
-            "$ref": "./examples/VirtualEndpoints_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
     }
   },
   "definitions": {
+    "ActivateCdcIdentityRequest": {
+      "type": "object",
+      "description": "The request to activate an identity assignment for a change data capture destination.",
+      "properties": {
+        "identityAssignmentResourceId": {
+          "$ref": "#/definitions/CdcIdentityAssignmentResourceId",
+          "description": "The resource ID of an inactive, successfully validated identity assignment under the destination receiving the action."
+        },
+        "drainExistingSessions": {
+          "type": "boolean",
+          "description": "Whether existing destination sessions should drain before the identity cutover. The default is false."
+        }
+      },
+      "required": [
+        "identityAssignmentResourceId"
+      ]
+    },
+    "ActivateCdcIdentityResult": {
+      "type": "object",
+      "description": "The completed result of activating a change data capture destination identity.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The completed activation status.",
+          "enum": [
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "targetIdentityAssignmentResourceId": {
+          "$ref": "#/definitions/CdcIdentityAssignmentResourceId",
+          "description": "The resource ID of the newly active identity assignment.",
+          "readOnly": true
+        },
+        "previousIdentityAssignmentResourceId": {
+          "$ref": "#/definitions/CdcIdentityAssignmentResourceId",
+          "description": "The resource ID of the previously active identity assignment, when one existed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "targetIdentityAssignmentResourceId"
+      ]
+    },
     "Authentication": {
       "type": "object",
       "description": "A service-created authentication configuration returned by the authentications collection. The resource name is passwordMethod or microsoftEntra.",
@@ -5078,7 +5612,7 @@
         "expiredAtUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when an automatic backup expires, in UTC. This property is absent for user-created backups, which remain available until explicitly deleted.",
+          "description": "The date and time when an automatic backup expires, in UTC. This property can be absent for backup types that do not expire automatically.",
           "readOnly": true
         }
       },
@@ -5092,8 +5626,7 @@
       "type": "string",
       "description": "The type of a HorizonDB backup. New values may be added over time.",
       "enum": [
-        "System",
-        "User"
+        "System"
       ],
       "x-ms-enum": {
         "name": "BackupType",
@@ -5103,11 +5636,1220 @@
             "name": "System",
             "value": "System",
             "description": "A backup created automatically by the HorizonDB service."
+          }
+        ]
+      }
+    },
+    "CdcCapability": {
+      "type": "object",
+      "description": "The singleton change data capture capability for a HorizonDB cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CdcCapabilityProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CdcCapabilityForPatchUpdate": {
+      "type": "object",
+      "description": "A sparse update request for the singleton change data capture capability.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CdcCapabilityPropertiesForPatchUpdate",
+          "description": "The capability properties to update."
+        }
+      }
+    },
+    "CdcCapabilityListResult": {
+      "type": "object",
+      "description": "The response of a CdcCapability list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CdcCapability items on this page",
+          "items": {
+            "$ref": "#/definitions/CdcCapability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CdcCapabilityProperties": {
+      "type": "object",
+      "description": "The properties of the singleton change data capture capability.",
+      "properties": {
+        "desiredState": {
+          "$ref": "#/definitions/CdcDesiredState",
+          "description": "The requested capability state.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "effectiveState": {
+          "$ref": "#/definitions/CdcEffectiveState",
+          "description": "The current effective capability state.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the latest capability mutation.",
+          "readOnly": true
+        },
+        "autoUpgradeExtension": {
+          "type": "boolean",
+          "description": "Whether HorizonDB may automatically upgrade the service-owned change data capture extension within the supported compatibility policy.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "replicationArchitecture": {
+          "$ref": "#/definitions/CdcReplicationArchitecture",
+          "description": "The implementation architecture currently used for change capture.",
+          "readOnly": true
+        },
+        "extension": {
+          "$ref": "#/definitions/CdcExtensionStatus",
+          "description": "The installed change data capture extension and its current lifecycle state.",
+          "readOnly": true
+        },
+        "prerequisites": {
+          "$ref": "#/definitions/CdcPrerequisiteStatus",
+          "description": "The current readiness of change data capture engine and read-write endpoint prerequisites.",
+          "readOnly": true
+        },
+        "destinationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of change data capture destinations under this cluster.",
+          "readOnly": true
+        },
+        "configurationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of change data capture configurations under this cluster.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CdcStatus",
+          "description": "Customer-safe health information for the capability.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "desiredState",
+        "effectiveState",
+        "replicationArchitecture",
+        "extension",
+        "prerequisites",
+        "destinationCount",
+        "configurationCount",
+        "status"
+      ]
+    },
+    "CdcCapabilityPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for updating the singleton change data capture capability. Omitted properties preserve their current values.",
+      "properties": {
+        "desiredState": {
+          "$ref": "#/definitions/CdcDesiredState",
+          "description": "The requested capability state.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "autoUpgradeExtension": {
+          "type": "boolean",
+          "description": "Whether HorizonDB may automatically upgrade the service-owned change data capture extension within the supported compatibility policy.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "CdcConfiguration": {
+      "type": "object",
+      "description": "A HorizonDB database enrollment for Microsoft Fabric Mirroring.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CdcConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CdcConfigurationForPatchUpdate": {
+      "type": "object",
+      "description": "A sparse update request for a change data capture configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CdcConfigurationPropertiesForPatchUpdate",
+          "description": "The configuration properties to update."
+        }
+      }
+    },
+    "CdcConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a CdcConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CdcConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/CdcConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CdcConfigurationProperties": {
+      "type": "object",
+      "description": "The properties of a Microsoft Fabric Mirroring configuration.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The exact PostgreSQL database name enrolled in this logical stream. This value is immutable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "usageProfile": {
+          "$ref": "#/definitions/CdcUsageProfile",
+          "description": "The immutable usage profile. API version 2026-10-01 accepts Mirroring only.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "destinationResourceId": {
+          "$ref": "#/definitions/CdcDestinationResourceId",
+          "description": "The immutable resource ID of an enabled change data capture destination under the same cluster.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "logicalStreamId": {
+          "type": "string",
+          "description": "A service-generated identifier for the logical stream, represented as an RFC 4122 GUID. This value remains stable when a writer role moves and the service materializes a replacement ARM resource under the new writer cluster.",
+          "readOnly": true
+        },
+        "desiredState": {
+          "$ref": "#/definitions/CdcDesiredState",
+          "description": "The requested configuration state.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "effectiveState": {
+          "$ref": "#/definitions/CdcEffectiveState",
+          "description": "The current effective configuration state.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the latest configuration mutation.",
+          "readOnly": true
+        },
+        "extension": {
+          "$ref": "#/definitions/CdcExtensionStatus",
+          "description": "The change data capture extension state for the enrolled database.",
+          "readOnly": true
+        },
+        "replication": {
+          "$ref": "#/definitions/CdcReplicationStatus",
+          "description": "The known status of the destination-owned replication session.",
+          "readOnly": true
+        },
+        "topology": {
+          "$ref": "#/definitions/CdcTopologyBindingStatus",
+          "description": "The current writer-topology binding for this logical stream.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CdcStatus",
+          "description": "Customer-safe health information for the configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "databaseName",
+        "usageProfile",
+        "destinationResourceId",
+        "logicalStreamId",
+        "desiredState",
+        "effectiveState",
+        "extension",
+        "replication",
+        "topology",
+        "status"
+      ]
+    },
+    "CdcConfigurationPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for updating a change data capture configuration. Omitted properties preserve their current values.",
+      "properties": {
+        "desiredState": {
+          "$ref": "#/definitions/CdcDesiredState",
+          "description": "The requested configuration state.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "CdcConfigurationResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a HorizonDB change data capture configuration.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HorizonDb/clusters/cdcConfigurations"
+          }
+        ]
+      }
+    },
+    "CdcDesiredState": {
+      "type": "string",
+      "description": "The requested state of a HorizonDB change data capture capability, destination, or configuration.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CdcDesiredState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The resource should be enabled."
           },
           {
-            "name": "User",
-            "value": "User",
-            "description": "A backup created at a customer's request."
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The resource should be disabled."
+          }
+        ]
+      }
+    },
+    "CdcDestination": {
+      "type": "object",
+      "description": "A reusable Microsoft Fabric destination for HorizonDB change data capture configurations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CdcDestinationProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CdcDestinationDetails": {
+      "type": "object",
+      "description": "Destination-specific settings discriminated by destinationType.",
+      "properties": {
+        "destinationType": {
+          "$ref": "#/definitions/CdcDestinationType",
+          "description": "The destination family.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "protocol": {
+          "$ref": "#/definitions/CdcProtocol",
+          "description": "The protocol used to communicate with the destination.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "destinationType",
+      "required": [
+        "destinationType",
+        "protocol"
+      ]
+    },
+    "CdcDestinationEffectiveState": {
+      "type": "string",
+      "description": "The effective state of a HorizonDB change data capture destination.",
+      "enum": [
+        "WaitingForIdentity",
+        "Enabling",
+        "Enabled",
+        "Disabling",
+        "Disabled",
+        "Degraded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CdcDestinationEffectiveState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WaitingForIdentity",
+            "value": "WaitingForIdentity",
+            "description": "The destination is waiting for a validated active identity assignment."
+          },
+          {
+            "name": "Enabling",
+            "value": "Enabling",
+            "description": "The destination is being enabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The destination is enabled."
+          },
+          {
+            "name": "Disabling",
+            "value": "Disabling",
+            "description": "The destination is being disabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The destination is disabled."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The destination is available with reduced functionality or impaired health."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The destination is not operational because reconciliation failed."
+          }
+        ]
+      }
+    },
+    "CdcDestinationForPatchUpdate": {
+      "type": "object",
+      "description": "A sparse update request for a change data capture destination.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CdcDestinationPropertiesForPatchUpdate",
+          "description": "The destination properties to update."
+        }
+      }
+    },
+    "CdcDestinationListResult": {
+      "type": "object",
+      "description": "The response of a CdcDestination list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CdcDestination items on this page",
+          "items": {
+            "$ref": "#/definitions/CdcDestination"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CdcDestinationProperties": {
+      "type": "object",
+      "description": "The properties of a Microsoft Fabric change data capture destination.",
+      "properties": {
+        "destination": {
+          "$ref": "#/definitions/CdcDestinationDetails",
+          "description": "The immutable Microsoft Fabric destination settings. Resubmitting the same values is accepted; changing them requires deleting and recreating the destination.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "desiredState": {
+          "$ref": "#/definitions/CdcDesiredState",
+          "description": "The requested destination state.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "effectiveState": {
+          "$ref": "#/definitions/CdcDestinationEffectiveState",
+          "description": "The current effective destination state.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the latest destination mutation.",
+          "readOnly": true
+        },
+        "activeIdentityAssignmentResourceId": {
+          "$ref": "#/definitions/CdcIdentityAssignmentResourceId",
+          "description": "The resource ID of the currently active identity assignment, if one is active.",
+          "readOnly": true
+        },
+        "configurationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of change data capture configurations that reference this destination.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CdcStatus",
+          "description": "Customer-safe health information for the destination.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "destination",
+        "desiredState",
+        "effectiveState",
+        "configurationCount",
+        "status"
+      ]
+    },
+    "CdcDestinationPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for updating a change data capture destination. Omitted properties preserve their current values.",
+      "properties": {
+        "desiredState": {
+          "$ref": "#/definitions/CdcDesiredState",
+          "description": "The requested destination state.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "CdcDestinationResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a HorizonDB change data capture destination.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HorizonDb/clusters/cdcDestinations"
+          }
+        ]
+      }
+    },
+    "CdcDestinationType": {
+      "type": "string",
+      "description": "The destination type supported by this API version.",
+      "enum": [
+        "Fabric"
+      ],
+      "x-ms-enum": {
+        "name": "CdcDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fabric",
+            "value": "Fabric",
+            "description": "A Microsoft Fabric destination."
+          }
+        ]
+      }
+    },
+    "CdcEffectiveState": {
+      "type": "string",
+      "description": "The effective state of a HorizonDB change data capture capability or configuration.",
+      "enum": [
+        "Enabling",
+        "Enabled",
+        "Disabling",
+        "Disabled",
+        "Degraded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CdcEffectiveState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabling",
+            "value": "Enabling",
+            "description": "The resource is being enabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The resource is enabled."
+          },
+          {
+            "name": "Disabling",
+            "value": "Disabling",
+            "description": "The resource is being disabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The resource is disabled."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The resource is available with reduced functionality or impaired health."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource is not operational because reconciliation failed."
+          }
+        ]
+      }
+    },
+    "CdcEngineConfigurationState": {
+      "type": "string",
+      "description": "The readiness of HorizonDB engine settings required for change data capture.",
+      "enum": [
+        "Ready",
+        "NotReady",
+        "Reconciling",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CdcEngineConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The required engine settings are ready."
+          },
+          {
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "One or more required engine settings are not ready."
+          },
+          {
+            "name": "Reconciling",
+            "value": "Reconciling",
+            "description": "The service is reconciling required engine settings."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Engine-setting reconciliation failed."
+          }
+        ]
+      }
+    },
+    "CdcExtensionState": {
+      "type": "string",
+      "description": "The lifecycle state of the HorizonDB change data capture extension.",
+      "enum": [
+        "NotInstalled",
+        "Installing",
+        "Ready",
+        "Upgrading",
+        "Removing",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CdcExtensionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotInstalled",
+            "value": "NotInstalled",
+            "description": "The extension is not installed."
+          },
+          {
+            "name": "Installing",
+            "value": "Installing",
+            "description": "The extension is being installed."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The extension is ready."
+          },
+          {
+            "name": "Upgrading",
+            "value": "Upgrading",
+            "description": "The extension is being upgraded."
+          },
+          {
+            "name": "Removing",
+            "value": "Removing",
+            "description": "The extension is being removed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The extension operation failed."
+          }
+        ]
+      }
+    },
+    "CdcExtensionStatus": {
+      "type": "object",
+      "description": "The installed HorizonDB change data capture extension and its current state.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The extension name.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The installed extension version.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/CdcExtensionState",
+          "description": "The current extension lifecycle state.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "state"
+      ]
+    },
+    "CdcIdentityActivationState": {
+      "type": "string",
+      "description": "The activation state of a change data capture identity assignment.",
+      "enum": [
+        "Inactive",
+        "Activating",
+        "Active",
+        "Deactivating",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CdcIdentityActivationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "The identity assignment is not active."
+          },
+          {
+            "name": "Activating",
+            "value": "Activating",
+            "description": "The identity assignment is being activated."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The identity assignment is active."
+          },
+          {
+            "name": "Deactivating",
+            "value": "Deactivating",
+            "description": "The identity assignment is being deactivated."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The identity activation transition failed."
+          }
+        ]
+      }
+    },
+    "CdcIdentityAssignmentProperties": {
+      "type": "object",
+      "description": "The properties of a change data capture identity assignment.",
+      "properties": {
+        "identityResourceId": {
+          "$ref": "#/definitions/CdcUserAssignedIdentityResourceId",
+          "description": "The immutable resource ID of the user-assigned managed identity. Resubmitting the same value is accepted; changing it requires deleting and recreating the assignment.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "effectiveState": {
+          "$ref": "#/definitions/CdcIdentityAssignmentState",
+          "description": "The current assignment lifecycle state.",
+          "readOnly": true
+        },
+        "activationState": {
+          "$ref": "#/definitions/CdcIdentityActivationState",
+          "description": "The current activation state within the parent destination.",
+          "readOnly": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The Microsoft Entra principal ID resolved from the user-assigned managed identity, represented as an RFC 4122 GUID.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Microsoft Entra tenant ID resolved from the user-assigned managed identity, represented as an RFC 4122 GUID.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the latest identity-assignment mutation.",
+          "readOnly": true
+        },
+        "validation": {
+          "$ref": "#/definitions/IdentityValidationStatus",
+          "description": "The latest validation result for this identity assignment.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CdcStatus",
+          "description": "Customer-safe health information for the identity assignment.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "identityResourceId",
+        "effectiveState",
+        "activationState",
+        "principalId",
+        "tenantId",
+        "validation",
+        "status"
+      ]
+    },
+    "CdcIdentityAssignmentResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a HorizonDB change data capture identity assignment.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HorizonDb/clusters/cdcDestinations/identityAssignments"
+          }
+        ]
+      }
+    },
+    "CdcIdentityAssignmentState": {
+      "type": "string",
+      "description": "The lifecycle state of a change data capture identity assignment.",
+      "enum": [
+        "Assigning",
+        "Assigned",
+        "Removing",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CdcIdentityAssignmentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Assigning",
+            "value": "Assigning",
+            "description": "The identity is being assigned."
+          },
+          {
+            "name": "Assigned",
+            "value": "Assigned",
+            "description": "The identity is assigned."
+          },
+          {
+            "name": "Removing",
+            "value": "Removing",
+            "description": "The identity assignment is being removed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The identity assignment operation failed."
+          }
+        ]
+      }
+    },
+    "CdcIdentityValidationState": {
+      "type": "string",
+      "description": "The validation state of a change data capture identity assignment.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CdcIdentityValidationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Identity validation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Identity validation is running."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Identity validation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Identity validation failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CdcPrerequisiteStatus": {
+      "type": "object",
+      "description": "The current readiness of prerequisites shared by change data capture configurations.",
+      "properties": {
+        "engineConfigurationState": {
+          "$ref": "#/definitions/CdcEngineConfigurationState",
+          "description": "The readiness of the required engine configuration.",
+          "readOnly": true
+        },
+        "readWriteEndpointState": {
+          "$ref": "#/definitions/CdcReadWriteEndpointState",
+          "description": "The availability of the read-write endpoint required for engine mutations.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "engineConfigurationState",
+        "readWriteEndpointState"
+      ]
+    },
+    "CdcProtocol": {
+      "type": "string",
+      "description": "The protocol used to communicate with a change data capture destination.",
+      "enum": [
+        "Native"
+      ],
+      "x-ms-enum": {
+        "name": "CdcProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Native",
+            "value": "Native",
+            "description": "The destination's native protocol."
+          }
+        ]
+      }
+    },
+    "CdcReadWriteEndpointState": {
+      "type": "string",
+      "description": "The availability of a read-write endpoint for change data capture engine mutations.",
+      "enum": [
+        "Ready",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "CdcReadWriteEndpointState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "An eligible read-write endpoint is ready."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "No eligible read-write endpoint is currently available."
+          }
+        ]
+      }
+    },
+    "CdcReplicationArchitecture": {
+      "type": "string",
+      "description": "The implementation architecture used to capture and publish changes.",
+      "enum": [
+        "ComputeBased",
+        "StorageBased",
+        "Hybrid"
+      ],
+      "x-ms-enum": {
+        "name": "CdcReplicationArchitecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ComputeBased",
+            "value": "ComputeBased",
+            "description": "Change capture runs with the HorizonDB compute layer."
+          },
+          {
+            "name": "StorageBased",
+            "value": "StorageBased",
+            "description": "Change capture runs with the HorizonDB storage layer."
+          },
+          {
+            "name": "Hybrid",
+            "value": "Hybrid",
+            "description": "Change capture uses both compute and storage components."
+          }
+        ]
+      }
+    },
+    "CdcReplicationState": {
+      "type": "string",
+      "description": "The state of a destination-owned replication session.",
+      "enum": [
+        "NotApplicable",
+        "NotConnected",
+        "Connecting",
+        "Replicating",
+        "Reconnecting",
+        "Paused",
+        "Stopping",
+        "Degraded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CdcReplicationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "A destination session does not apply to the current resource state."
+          },
+          {
+            "name": "NotConnected",
+            "value": "NotConnected",
+            "description": "No destination session is connected."
+          },
+          {
+            "name": "Connecting",
+            "value": "Connecting",
+            "description": "A destination session is connecting."
+          },
+          {
+            "name": "Replicating",
+            "value": "Replicating",
+            "description": "A destination session is replicating changes."
+          },
+          {
+            "name": "Reconnecting",
+            "value": "Reconnecting",
+            "description": "A destination session is reconnecting after an interruption."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The destination session is paused."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "The destination session is stopping."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The destination session is operating with impaired health."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The destination session failed."
+          }
+        ]
+      }
+    },
+    "CdcReplicationStatus": {
+      "type": "object",
+      "description": "The destination-owned replication-session status known to HorizonDB.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/CdcReplicationState",
+          "description": "The current replication-session state.",
+          "readOnly": true
+        },
+        "externalArtifactId": {
+          "type": "string",
+          "description": "An opaque identifier of a destination-owned artifact, such as a Microsoft Fabric mirrored-database item. HorizonDB does not create, update, or delete the identified artifact.",
+          "readOnly": true
+        },
+        "lastConnectedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, in UTC, when a destination session most recently connected.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "CdcStatus": {
+      "type": "object",
+      "description": "Customer-safe health information for a HorizonDB change data capture resource.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A stable machine-readable status code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A localized customer-safe description of the current status.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "CdcTopologyBindingState": {
+      "type": "string",
+      "description": "The relationship of a change data capture configuration to the current writer topology.",
+      "enum": [
+        "Active",
+        "Reconciling",
+        "RebindRequired",
+        "Superseded",
+        "Conflict"
+      ],
+      "x-ms-enum": {
+        "name": "CdcTopologyBindingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The configuration belongs to the current active writer."
+          },
+          {
+            "name": "Reconciling",
+            "value": "Reconciling",
+            "description": "The service is reconciling the configuration after a writer change."
+          },
+          {
+            "name": "RebindRequired",
+            "value": "RebindRequired",
+            "description": "The destination session must bind to a replacement configuration resource ID."
+          },
+          {
+            "name": "Superseded",
+            "value": "Superseded",
+            "description": "The configuration belongs to a former writer and has been replaced."
+          },
+          {
+            "name": "Conflict",
+            "value": "Conflict",
+            "description": "Equivalent change data capture state could not be materialized without overwriting unrelated state."
+          }
+        ]
+      }
+    },
+    "CdcTopologyBindingStatus": {
+      "type": "object",
+      "description": "The current writer-topology binding of a change data capture configuration.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/CdcTopologyBindingState",
+          "description": "The configuration's relationship to the current writer topology.",
+          "readOnly": true
+        },
+        "generation": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A monotonically increasing topology generation for this logical stream.",
+          "readOnly": true
+        },
+        "activeClusterResourceId": {
+          "$ref": "#/definitions/HorizonDbClusterResourceId",
+          "description": "The Azure resource ID of the cluster that currently owns the active configuration projection.",
+          "readOnly": true
+        },
+        "replacementConfigurationResourceId": {
+          "$ref": "#/definitions/CdcConfigurationResourceId",
+          "description": "The replacement configuration resource ID when this projection has been superseded or requires rebinding.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state",
+        "generation",
+        "activeClusterResourceId"
+      ]
+    },
+    "CdcUsageProfile": {
+      "type": "string",
+      "description": "The reason that a change data capture configuration exists.",
+      "enum": [
+        "Mirroring"
+      ],
+      "x-ms-enum": {
+        "name": "CdcUsageProfile",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mirroring",
+            "value": "Mirroring",
+            "description": "The configuration publishes database changes for Microsoft Fabric Mirroring."
+          }
+        ]
+      }
+    },
+    "CdcUserAssignedIdentityResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "An Azure resource ID that identifies a user-assigned managed identity.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
           }
         ]
       }
@@ -5136,8 +6878,7 @@
       "description": "Controls how a HorizonDB cluster PUT request is processed.",
       "enum": [
         "Create",
-        "PointInTimeRestore",
-        "AsyncReplica"
+        "PointInTimeRestore"
       ],
       "x-ms-enum": {
         "name": "ClusterCreateMode",
@@ -5152,100 +6893,8 @@
             "name": "PointInTimeRestore",
             "value": "PointInTimeRestore",
             "description": "Create the cluster from a point-in-time restore."
-          },
-          {
-            "name": "AsyncReplica",
-            "value": "AsyncReplica",
-            "description": "Create the cluster as an asynchronous replica and add it to the source cluster's existing replication set."
           }
         ]
-      }
-    },
-    "ClusterDeletionBlockingReason": {
-      "type": "string",
-      "description": "The reason that physical deletion of a HorizonDB cluster is blocked.",
-      "enum": [
-        "AutomaticBackups",
-        "UserCreatedBackups"
-      ],
-      "x-ms-enum": {
-        "name": "ClusterDeletionBlockingReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AutomaticBackups",
-            "value": "AutomaticBackups",
-            "description": "Physical deletion is blocked until all remaining automatic backups expire."
-          },
-          {
-            "name": "UserCreatedBackups",
-            "value": "UserCreatedBackups",
-            "description": "Physical deletion is blocked until all user-created backups are deleted."
-          }
-        ]
-      }
-    },
-    "ClusterDeletionPolicy": {
-      "type": "string",
-      "description": "Determines when a HorizonDB cluster is permanently deleted after a delete request.",
-      "enum": [
-        "Immediate",
-        "RetainUntilNoBackupsRemain"
-      ],
-      "x-ms-enum": {
-        "name": "ClusterDeletionPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Immediate",
-            "value": "Immediate",
-            "description": "Permanently deletes the cluster as soon as the delete request is processed"
-          },
-          {
-            "name": "RetainUntilNoBackupsRemain",
-            "value": "RetainUntilNoBackupsRemain",
-            "description": "Removes all pools, stops new automatic backups, and retains the cluster until all remaining backups are removed or expire"
-          }
-        ]
-      }
-    },
-    "ClusterDeletionProperties": {
-      "type": "object",
-      "description": "The deletion configuration and current deletion-blocking status for a HorizonDB cluster.",
-      "properties": {
-        "policy": {
-          "$ref": "#/definitions/ClusterDeletionPolicy",
-          "description": "Determines when the cluster is permanently deleted. When this property is omitted while creating a new cluster, the service records Immediate. When it is omitted from a replacement PUT, the existing policy is preserved. With RetainUntilNoBackupsRemain, a delete request removes all pools, stops creation of automatic backups, transitions the cluster to DeletionBlockedByBackups, and returns 409 Conflict while automatic or user-created backups remain. In that state, reads remain available, but mutating operations other than deletion of user-created backups and another cluster delete request are rejected. Once no backups remain, retrying the cluster delete request starts physical deletion. The policy can be changed from Immediate to RetainUntilNoBackupsRemain, but cannot be changed back to Immediate. Resubmitting the current value succeeds as an idempotent no-op.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "deletionEligibleAtUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time, in UTC, when the cluster becomes eligible for physical deletion based on its remaining automatic backups. This property is present only when state is DeletionBlockedByBackups, blockingReason is AutomaticBackups, and a real eligibility time can be calculated. It is absent while user-created backups block deletion.",
-          "readOnly": true
-        },
-        "blockingReason": {
-          "$ref": "#/definitions/ClusterDeletionBlockingReason",
-          "description": "The current reason that physical deletion is blocked. This property is present only when state is DeletionBlockedByBackups.",
-          "readOnly": true
-        }
-      }
-    },
-    "ClusterDeletionPropertiesForPatchUpdate": {
-      "type": "object",
-      "description": "The deletion configuration for updating a HorizonDB cluster.",
-      "properties": {
-        "policy": {
-          "$ref": "#/definitions/ClusterDeletionPolicy",
-          "description": "Determines when the cluster is permanently deleted. With RetainUntilNoBackupsRemain, a delete request removes all pools, stops creation of automatic backups, and retains the cluster in DeletionBlockedByBackups until all backups are removed or expire. The policy can be changed from Immediate to RetainUntilNoBackupsRemain, but cannot be changed back to Immediate. Resubmitting the current value succeeds as an idempotent no-op.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        }
       }
     },
     "ClusterForPatchUpdate": {
@@ -5304,7 +6953,7 @@
         },
         "creationMode": {
           "$ref": "#/definitions/ClusterCreateMode",
-          "description": "The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must match the source backup's major version, and the target cluster location must match the source cluster location until cross-region point-in-time restore is supported. Set it to AsyncReplica only when creating an asynchronous replica; creationSourceClusterResourceId is then required, pointInTimeUtc must be absent, and the source can be in the same Azure region or a different Azure region. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.",
+          "description": "The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must match the source backup's major version, and the target cluster location must match the source cluster location until cross-region point-in-time restore is supported. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5313,7 +6962,7 @@
         "pointInTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent when creationMode is Create, AsyncReplica, or omitted. The service honors this value for same-region restore. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource. This property can only be specified during resource creation.",
+          "description": "The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-region restore. Until cross-region point-in-time restore is supported, the target cluster location must match the source cluster location; a cross-region request is rejected synchronously with 400 CrossRegionPointInTimeRestoreNotSupported and does not create or modify a resource. This property can only be specified during resource creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5322,7 +6971,7 @@
         "creationSourceClusterResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the source HorizonDB cluster supplied when this cluster was created by point-in-time restore or as an asynchronous replica. This property is required when creationMode is PointInTimeRestore or AsyncReplica and must be absent when creationMode is Create or omitted. AsyncReplica allows the source to be in the same Azure region as the new cluster or in a different Azure region. Until cross-region point-in-time restore is supported, PointInTimeRestore requires the target and source clusters to be in the same Azure region. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change when topology operations change the cluster's current immediate source; use replication.sourceClusterResourceId for the current topology. It can only be specified during resource creation.",
+          "description": "The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. Until cross-region point-in-time restore is supported, PointInTimeRestore requires the target and source clusters to be in the same Azure region. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5334,11 +6983,6 @@
               }
             ]
           }
-        },
-        "replication": {
-          "$ref": "#/definitions/ClusterReplicationProperties",
-          "description": "The replication-set metadata for this cluster. This property is present on every cluster that belongs to a replication set, including the current root cluster and replicas created with creationMode AsyncReplica.",
-          "readOnly": true
         },
         "network": {
           "$ref": "#/definitions/Network",
@@ -5358,15 +7002,6 @@
             "create"
           ]
         },
-        "deletion": {
-          "$ref": "#/definitions/ClusterDeletionProperties",
-          "description": "The deletion configuration and current deletion-blocking status for the cluster. When this object is omitted while creating a new cluster, the service records policy Immediate. When it is omitted from a replacement PUT, the existing policy is preserved.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "state": {
           "$ref": "#/definitions/ClusterState",
           "description": "Current state of the cluster.",
@@ -5376,18 +7011,12 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the cluster.",
           "readOnly": true
-        },
-        "readWritePool": {
-          "$ref": "#/definitions/ReadWritePoolProperties",
-          "description": "The current designated read-write pool and read-write status for the cluster.",
-          "readOnly": true
         }
       },
       "required": [
         "postgreSqlVersion",
         "state",
-        "provisioningState",
-        "readWritePool"
+        "provisioningState"
       ]
     },
     "ClusterPropertiesForPatchUpdate": {
@@ -5407,157 +7036,7 @@
           "x-ms-mutability": [
             "update"
           ]
-        },
-        "deletion": {
-          "$ref": "#/definitions/ClusterDeletionPropertiesForPatchUpdate",
-          "description": "The deletion configuration to update for the cluster.",
-          "x-ms-mutability": [
-            "update"
-          ]
         }
-      }
-    },
-    "ClusterReplicaLevel": {
-      "type": "integer",
-      "format": "int32",
-      "description": "The depth of a HorizonDB cluster in its current asynchronous replication topology. Level 0 is the current root cluster, level 1 is a direct replica of the current root that can be used as the source for one additional replica level, and level 2 is a terminal second-level replica that cannot be used as the source of another asynchronous replica.",
-      "minimum": 0,
-      "maximum": 2
-    },
-    "ClusterReplicaLink": {
-      "type": "object",
-      "description": "A projection of the current replication relationship from a HorizonDB cluster to one of its direct replica clusters. This model is not an ARM resource.",
-      "properties": {
-        "clusterResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the direct replica cluster. The identified cluster has the Target role and uses the cluster on which the replicas operation was invoked as its immediate source.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.HorizonDb/clusters"
-              }
-            ]
-          }
-        },
-        "replicationState": {
-          "$ref": "#/definitions/ClusterReplicationState",
-          "description": "The current state of replication from the source cluster to this direct replica.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "clusterResourceId",
-        "replicationState"
-      ]
-    },
-    "ClusterReplicaLinkListResult": {
-      "type": "object",
-      "description": "The custom response of a list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The items on this page",
-          "items": {
-            "$ref": "#/definitions/ClusterReplicaLink"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ClusterReplicationProperties": {
-      "type": "object",
-      "description": "The replication metadata for a HorizonDB cluster that participates in a replication set. Creating a cluster with creationMode AsyncReplica adds it to the replication set that already contains the referenced source cluster and any other members.",
-      "properties": {
-        "roles": {
-          "type": "array",
-          "description": "The roles this cluster currently plays in its replication set. Source means that the cluster sends replicated data to another cluster, and Target means that it receives replicated data from another cluster. Cascading replication supports at most two replica levels below the current root cluster. A direct replica of the current root has the Target role and can be used as the source for one additional replica level; when it has a child replica, it also has the Source role. A second-level replica is terminal, has the Target role, and cannot be used as the source of another asynchronous replica.",
-          "items": {
-            "$ref": "#/definitions/ClusterReplicationRole"
-          },
-          "readOnly": true
-        },
-        "replicaLevel": {
-          "$ref": "#/definitions/ClusterReplicaLevel",
-          "description": "The depth of this cluster in the current replication topology. The current root cluster has level 0, a direct replica of the root has level 1, and a terminal second-level replica has level 2. This value changes when topology operations such as switchover change the cluster's position.",
-          "readOnly": true
-        },
-        "sourceClusterResourceId": {
-          "$ref": "#/definitions/HorizonDbClusterResourceId",
-          "description": "The Azure resource ID of this cluster's immediate source cluster. This property is present when roles contains Target, including intermediate replicas whose roles contain both Source and Target, and is absent for Source-only current root clusters.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "roles",
-        "replicaLevel"
-      ]
-    },
-    "ClusterReplicationRole": {
-      "type": "string",
-      "description": "A role played by a HorizonDB cluster in a replication set.",
-      "enum": [
-        "Source",
-        "Target"
-      ],
-      "x-ms-enum": {
-        "name": "ClusterReplicationRole",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Source",
-            "value": "Source",
-            "description": "The cluster sends replicated data to one or more target clusters."
-          },
-          {
-            "name": "Target",
-            "value": "Target",
-            "description": "The cluster receives replicated data from a source cluster."
-          }
-        ]
-      }
-    },
-    "ClusterReplicationState": {
-      "type": "string",
-      "description": "The current state of replication between a source cluster and a direct replica cluster.",
-      "enum": [
-        "Replicating",
-        "Lagging",
-        "CatchingUp",
-        "Error"
-      ],
-      "x-ms-enum": {
-        "name": "ClusterReplicationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Replicating",
-            "value": "Replicating",
-            "description": "Replication is operating normally and the replica is receiving changes from its source."
-          },
-          {
-            "name": "Lagging",
-            "value": "Lagging",
-            "description": "The replica is behind its source, but replication remains active."
-          },
-          {
-            "name": "CatchingUp",
-            "value": "CatchingUp",
-            "description": "The replica is actively applying changes to reach the current state of its source."
-          },
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "Replication has encountered an error and is not operating normally."
-          }
-        ]
       }
     },
     "ClusterState": {
@@ -5567,7 +7046,6 @@
         "Ready",
         "Provisioning",
         "Deleting",
-        "DeletionBlockedByBackups",
         "Inaccessible",
         "Updating"
       ],
@@ -5591,11 +7069,6 @@
             "description": "Is being deleted"
           },
           {
-            "name": "DeletionBlockedByBackups",
-            "value": "DeletionBlockedByBackups",
-            "description": "A delete request removed all pools and stopped new automatic backups, but physical deletion is blocked until all remaining backups are removed or expire"
-          },
-          {
             "name": "Inaccessible",
             "value": "Inaccessible",
             "description": "Is inaccessible"
@@ -5607,54 +7080,6 @@
           }
         ]
       }
-    },
-    "ClusterVirtualEndpointReference": {
-      "type": "object",
-      "description": "A projection of a virtual endpoint reference to a HorizonDB cluster. This model is not an ARM resource.",
-      "properties": {
-        "virtualEndpointResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the virtual endpoint that references this cluster.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.HorizonDb/virtualEndpoints"
-              }
-            ]
-          }
-        },
-        "role": {
-          "$ref": "#/definitions/VirtualEndpointReferenceRole",
-          "description": "The virtual endpoint alias whose target belongs to this cluster.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "virtualEndpointResourceId",
-        "role"
-      ]
-    },
-    "ClusterVirtualEndpointReferenceListResult": {
-      "type": "object",
-      "description": "The custom response of a list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The items on this page",
-          "items": {
-            "$ref": "#/definitions/ClusterVirtualEndpointReference"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "ComputeProcessorType": {
       "type": "string",
@@ -5732,24 +7157,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "DesignateReadWritePoolRequest": {
-      "type": "object",
-      "description": "Parameters for designating a pool to host the cluster's read-write node.",
-      "properties": {
-        "poolResourceId": {
-          "$ref": "#/definitions/PoolResourceId",
-          "description": "The Azure resource ID of the existing pool to designate as the read-write pool. The pool must be a child resource of the cluster on which this action is invoked. A resource ID for a pool in another cluster is rejected."
-        },
-        "allowNoActiveReadWriteNode": {
-          "type": "boolean",
-          "description": "Indicates whether the operation can succeed when the named target pool has no active or running compute, leaving the cluster without an active or running read-write node. The default is false.",
-          "default": false
-        }
-      },
-      "required": [
-        "poolResourceId"
       ]
     },
     "DottedDecimalIpv4Address": {
@@ -5834,7 +7241,7 @@
       "properties": {
         "scope": {
           "$ref": "#/definitions/EndpointScope",
-          "description": "The scope of the endpoint. Cluster-scoped Endpoint roles are derived from replication topology. Pool-scoped Endpoints have the ReadOnly role.",
+          "description": "The scope of the endpoint. Cluster-scoped Endpoints provide the cluster connection, and Pool-scoped Endpoints provide read-only connections to eligible nodes in one pool.",
           "readOnly": true
         },
         "associatedResourceId": {
@@ -5849,7 +7256,7 @@
         },
         "role": {
           "$ref": "#/definitions/EndpointRole",
-          "description": "The routing role of the endpoint. The Cluster-scoped Endpoint is ReadWrite only for the current level-0 root, top-most upstream Cluster. A Cluster-scoped Endpoint is ReadOnly for every asynchronous replica Cluster whose replication.roles contains Target, including intermediate Source and Target replicas and terminal Target replicas. Pool-scoped Endpoints are also ReadOnly and route only to allocated nodes in the associated Pool that are not currently playing the read-write role. A Pool-scoped ReadOnly Endpoint has no routing destination unless at least one such node exists, including when the Pool is Stopped or Shutdown, has zero allocated nodes, or has only one allocated node and that node is playing the read-write role.",
+          "description": "The routing role of the endpoint. A Cluster-scoped Endpoint normally has the ReadWrite role. Pool-scoped Endpoints have the ReadOnly role and route only to allocated nodes in the associated Pool that are not currently playing the read-write role. A Pool-scoped ReadOnly Endpoint has no routing destination unless at least one such node exists, including when the Pool is Stopped or Shutdown, has zero allocated nodes, or has only one allocated node and that node is playing the read-write role.",
           "readOnly": true
         },
         "aliases": {
@@ -5902,18 +7309,6 @@
         "aliases"
       ]
     },
-    "EndpointResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "An Azure resource ID that identifies a HorizonDB endpoint.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.HorizonDb/clusters/endpoints"
-          }
-        ]
-      }
-    },
     "EndpointRole": {
       "type": "string",
       "description": "Role of the endpoint.",
@@ -5928,12 +7323,12 @@
           {
             "name": "ReadOnly",
             "value": "ReadOnly",
-            "description": "The Endpoint accepts read-only traffic. This applies to Pool-scoped Endpoints and to Cluster-scoped Endpoints for asynchronous replica Clusters whose replication.roles contains Target, including intermediate and terminal replicas."
+            "description": "The Endpoint accepts read-only traffic. This applies to Pool-scoped Endpoints and may apply to other endpoint scenarios introduced by later API versions."
           },
           {
             "name": "ReadWrite",
             "value": "ReadWrite",
-            "description": "The Cluster-scoped Endpoint accepts read and write traffic. This applies only to the current level-0 root, top-most upstream Cluster."
+            "description": "The Cluster-scoped Endpoint accepts read and write traffic."
           }
         ]
       }
@@ -5952,7 +7347,7 @@
           {
             "name": "Cluster",
             "value": "Cluster",
-            "description": "The Endpoint is associated with its parent Cluster. Its role is derived from replication topology."
+            "description": "The Endpoint is associated with its parent Cluster."
           },
           {
             "name": "Pool",
@@ -5962,48 +7357,43 @@
         ]
       }
     },
-    "FailoverProperties": {
+    "FabricDestinationDetails": {
       "type": "object",
-      "description": "The current automatic and requested failover eligibility for a cluster.",
+      "description": "Settings for a Microsoft Fabric destination.",
       "properties": {
-        "state": {
-          "$ref": "#/definitions/FailoverState",
-          "description": "The current readiness state for both automatic failover and a caller-requested failover operation.",
-          "readOnly": true
-        },
-        "unavailableReason": {
+        "protocol": {
           "type": "string",
-          "description": "The reason failover is not ready. This property is present only when state is NotReady and absent when state is Ready. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, the designated read-write pool is stopped or shut down, or its read-only nodes are not functional.",
-          "readOnly": true
+          "description": "Specifies the Microsoft Fabric native destination protocol.",
+          "enum": [
+            "Native"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The opaque identifier of the Microsoft Fabric workspace that owns the destination artifact.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
-        "state"
-      ]
-    },
-    "FailoverState": {
-      "type": "string",
-      "description": "The readiness state for automatic and caller-requested failover.",
-      "enum": [
-        "Ready",
-        "NotReady"
+        "protocol",
+        "workspaceId"
       ],
-      "x-ms-enum": {
-        "name": "FailoverState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Failover is ready."
-          },
-          {
-            "name": "NotReady",
-            "value": "NotReady",
-            "description": "Failover is not ready. Inspect unavailableReason for details."
-          }
-        ]
-      }
+      "allOf": [
+        {
+          "$ref": "#/definitions/CdcDestinationDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Fabric"
     },
     "FirewallRule": {
       "type": "object",
@@ -6155,6 +7545,72 @@
           }
         ]
       }
+    },
+    "IdentityAssignment": {
+      "type": "object",
+      "description": "A user-assigned managed identity authorized for a HorizonDB change data capture destination.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CdcIdentityAssignmentProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IdentityAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a IdentityAssignment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IdentityAssignment items on this page",
+          "items": {
+            "$ref": "#/definitions/IdentityAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IdentityValidationStatus": {
+      "type": "object",
+      "description": "The current validation result for a change data capture identity assignment.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/CdcIdentityValidationState",
+          "description": "The current validation state.",
+          "readOnly": true
+        },
+        "validatedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, in UTC, when validation most recently completed.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The customer-safe validation error when validation failed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
     },
     "MaintenanceEvent": {
       "type": "object",
@@ -7254,7 +8710,7 @@
         },
         "desiredNodeCount": {
           "$ref": "#/definitions/PoolNodeCount",
-          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes; it does not delete the pool. If this pool is currently the parent cluster's designated read-write pool, a PUT or PATCH request that would leave the effective desiredNodeCount at 0 is rejected. Clear the designation through clearReadWritePool before scaling this pool to zero. On rejection, the pool and designation remain unchanged.",
+          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes; it does not delete the pool. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -7308,7 +8764,7 @@
         },
         "desiredNodeCount": {
           "$ref": "#/definitions/PoolNodeCount",
-          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its configuration but allocates no nodes; it does not delete the pool. Omission preserves the current target. If this pool is currently the parent cluster's designated read-write pool, the PATCH request is rejected when the resulting effective desiredNodeCount would be 0. Clear the designation through clearReadWritePool first. On rejection, the pool and designation remain unchanged.",
+          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its configuration but allocates no nodes; it does not delete the pool. Omission preserves the current target. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
           "x-ms-mutability": [
             "update"
           ]
@@ -7628,50 +9084,6 @@
         ]
       }
     },
-    "ReadWritePoolProperties": {
-      "type": "object",
-      "description": "The current designated read-write pool and read-write status for a HorizonDB cluster. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.",
-      "properties": {
-        "designatedPoolResourceId": {
-          "$ref": "#/definitions/PoolResourceId",
-          "description": "The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.",
-          "readOnly": true
-        },
-        "failover": {
-          "$ref": "#/definitions/FailoverProperties",
-          "description": "The current failover status for the read-write node. This object is always returned on reads. When failover is not ready, state is NotReady and unavailableReason explains why.",
-          "readOnly": true
-        },
-        "zoneRedundancy": {
-          "$ref": "#/definitions/ReadWritePoolZoneRedundancyProperties",
-          "description": "The current zone redundancy status for the read-write node. This object is always returned on reads. When zone redundancy is not ready, state is NotReady and unavailableReason explains why.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "failover",
-        "zoneRedundancy"
-      ]
-    },
-    "ReadWritePoolZoneRedundancyProperties": {
-      "type": "object",
-      "description": "The current zone redundancy status for the read-write node.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/ZoneRedundancyState",
-          "description": "The current zone-redundancy readiness state for the read-write node. The state is NotReady when no read-write pool is designated.",
-          "readOnly": true
-        },
-        "unavailableReason": {
-          "type": "string",
-          "description": "The reason zone redundancy is not ready. This property is present only when state is NotReady and absent when state is Ready. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "state"
-      ]
-    },
     "ScheduledMaintenanceDayOfWeek": {
       "type": "string",
       "description": "The day of the week for user-managed scheduled maintenance.",
@@ -7989,177 +9401,21 @@
       ],
       "x-ms-discriminator-value": "User"
     },
-    "VirtualEndpoint": {
-      "type": "object",
-      "description": "Represents stable writer and reader DNS aliases for a HorizonDB replication topology. For regional resilience, customers should deploy the VirtualEndpoint in an Azure region that has a paired region and that is different from every Cluster region in the referenced replication set. This is a recommendation only: the service does not validate or enforce it, and any otherwise supported location remains accepted. Separating the VirtualEndpoint control-plane resource from all replication-set Cluster regions can help it survive a regional outage affecting the root Cluster and remain available for promote or switchover recovery workflows, but does not guarantee availability.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualEndpointProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "VirtualEndpointForPatchUpdate": {
-      "type": "object",
-      "description": "A HorizonDB virtual endpoint update request.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/VirtualEndpointPropertiesForPatchUpdate",
-          "description": "The properties to update. Omission preserves the current writer and reader targets."
-        }
-      }
-    },
-    "VirtualEndpointListResult": {
-      "type": "object",
-      "description": "The response of a VirtualEndpoint list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The VirtualEndpoint items on this page",
-          "items": {
-            "$ref": "#/definitions/VirtualEndpoint"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "VirtualEndpointProperties": {
-      "type": "object",
-      "description": "Properties of a HorizonDB virtual endpoint.",
-      "properties": {
-        "writerEndpointResourceId": {
-          "$ref": "#/definitions/EndpointResourceId",
-          "description": "The Azure resource ID of the endpoint that receives writer traffic. The target must be the Cluster-scoped ReadWrite Endpoint of the current level-0 root cluster.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "readerEndpointResourceId": {
-          "$ref": "#/definitions/EndpointResourceId",
-          "description": "The Azure resource ID of the Cluster-scoped Endpoint that receives reader traffic. The target must be the Endpoint named cluster in the writer Cluster or one of its direct level-1 replica Clusters; indirect descendants are not valid targets. The target role is topology-derived: the writer Cluster's Endpoint is ReadWrite when that Cluster is the current root, while a direct replica Cluster's Endpoint is ReadOnly because its replication.roles contains Target.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "writerFullyQualifiedDomainName": {
-          "type": "string",
-          "description": "The stable writer fully qualified domain name, in the format <virtual-endpoint-name>.writer.horizondb.azure.com.",
-          "readOnly": true
-        },
-        "readerFullyQualifiedDomainName": {
-          "type": "string",
-          "description": "The stable reader fully qualified domain name, in the format <virtual-endpoint-name>.reader.horizondb.azure.com.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the virtual endpoint resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "writerEndpointResourceId",
-        "readerEndpointResourceId",
-        "writerFullyQualifiedDomainName",
-        "readerFullyQualifiedDomainName"
-      ]
-    },
-    "VirtualEndpointPropertiesForPatchUpdate": {
-      "type": "object",
-      "description": "Properties of a HorizonDB virtual endpoint for an update operation. Omitted properties preserve their current values.",
-      "properties": {
-        "writerEndpointResourceId": {
-          "$ref": "#/definitions/EndpointResourceId",
-          "description": "The Cluster-scoped Endpoint target to apply for writer traffic. The target must be the Endpoint named cluster in the current level-0 root Cluster.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "readerEndpointResourceId": {
-          "$ref": "#/definitions/EndpointResourceId",
-          "description": "The Cluster-scoped Endpoint target to apply for reader traffic. The target must be the Endpoint named cluster in the writer Cluster or one of its direct level-1 replica Clusters; indirect descendants are not valid targets.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        }
-      }
-    },
-    "VirtualEndpointReferenceRole": {
-      "type": "string",
-      "description": "The role of a HorizonDB cluster in a virtual endpoint reference.",
-      "enum": [
-        "Writer",
-        "Reader"
-      ],
-      "x-ms-enum": {
-        "name": "VirtualEndpointReferenceRole",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Writer",
-            "value": "Writer",
-            "description": "The virtual endpoint writer target belongs to this cluster."
-          },
-          {
-            "name": "Reader",
-            "value": "Reader",
-            "description": "The virtual endpoint reader target belongs to this cluster."
-          }
-        ]
-      }
-    },
     "WritableDescription": {
       "type": "string",
       "description": "A user-supplied description with a maximum length of 1024 characters.",
       "maxLength": 1024
-    },
-    "ZoneRedundancyState": {
-      "type": "string",
-      "description": "The readiness state for zone redundancy of the read-write node.",
-      "enum": [
-        "Ready",
-        "NotReady"
-      ],
-      "x-ms-enum": {
-        "name": "ZoneRedundancyState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Zone redundancy is ready."
-          },
-          {
-            "name": "NotReady",
-            "value": "NotReady",
-            "description": "Zone redundancy is not ready. Inspect unavailableReason for details."
-          }
-        ]
-      }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "CdcDestinationIfMatchParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The destination entity tag. The action proceeds only when this value matches the destination's current entity tag.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    }
+  }
 }

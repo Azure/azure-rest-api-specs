@@ -1,0 +1,95 @@
+{
+  "operationId": "Pools_CreateOrUpdate",
+  "title": "Create a minimum provisioned HorizonDB pool",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "poolName": "example-pool-01",
+    "api-version": "2027-03-01-preview",
+    "resource": {
+      "properties": {
+        "computeModel": {
+          "type": "Provisioned",
+          "vCores": 1
+        },
+        "parameterGroup": {
+          "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/parameterGroups/default-postgresql-17-provisioned",
+          "applyMethod": "Immediate"
+        },
+        "scheduledMaintenance": {
+          "maintenanceManagementType": "User",
+          "dayOfWeek": "Sunday",
+          "startHourUtc": 2,
+          "startMinuteUtc": 30
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+        "name": "example-pool-01",
+        "type": "Microsoft.HorizonDb/clusters/pools",
+        "properties": {
+          "state": "Ready",
+          "computeModel": {
+            "type": "Provisioned",
+            "computeProcessor": "AMD",
+            "computeGeneration": 3,
+            "vCores": 1
+          },
+          "desiredNodeCount": 1,
+          "allocatedNodeCount": 1,
+          "parameterGroup": {
+            "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/parameterGroups/default-postgresql-17-provisioned",
+            "applyMethod": "Immediate",
+            "syncStatus": "InSync"
+          },
+          "scheduledMaintenance": {
+            "maintenanceManagementType": "User",
+            "dayOfWeek": "Sunday",
+            "startHourUtc": 2,
+            "startMinuteUtc": 30
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/66666666-6666-6666-6666-666666666666?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+        "name": "example-pool-01",
+        "type": "Microsoft.HorizonDb/clusters/pools",
+        "properties": {
+          "state": "Provisioning",
+          "computeModel": {
+            "type": "Provisioned",
+            "computeProcessor": "AMD",
+            "computeGeneration": 3,
+            "vCores": 1
+          },
+          "desiredNodeCount": 1,
+          "allocatedNodeCount": 0,
+          "parameterGroup": {
+            "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/parameterGroups/default-postgresql-17-provisioned",
+            "applyMethod": "Immediate",
+            "syncStatus": "Applying"
+          },
+          "scheduledMaintenance": {
+            "maintenanceManagementType": "User",
+            "dayOfWeek": "Sunday",
+            "startHourUtc": 2,
+            "startMinuteUtc": 30
+          },
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}

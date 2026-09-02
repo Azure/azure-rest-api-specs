@@ -1,0 +1,33 @@
+{
+  "operationId": "CdcDestinations_List",
+  "title": "List Microsoft Fabric change data capture destinations",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2026-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring",
+            "name": "fabric-mirroring",
+            "type": "Microsoft.HorizonDb/clusters/cdcDestinations",
+            "eTag": "\"00000000-0000-0000-0000-000000000010\"",
+            "properties": {
+              "destination": { "destinationType": "Fabric", "protocol": "Native", "workspaceId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" },
+              "desiredState": "Enabled",
+              "effectiveState": "Enabled",
+              "provisioningState": "Succeeded",
+              "activeIdentityAssignmentResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring/identityAssignments/fabric-writer",
+              "configurationCount": 1,
+              "status": { "code": "Ready", "message": "The Microsoft Fabric destination is ready." }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

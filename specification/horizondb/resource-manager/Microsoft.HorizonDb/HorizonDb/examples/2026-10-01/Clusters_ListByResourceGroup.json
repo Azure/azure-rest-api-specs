@@ -18,12 +18,6 @@
             "properties": {
               "postgreSqlVersion": "17",
               "creationMode": "Create",
-              "replication": {
-                "roles": [
-                  "Source"
-                ],
-                "replicaLevel": 0
-              },
               "network": {
                 "publicAccess": "Disabled"
               },
@@ -32,21 +26,8 @@
                 "retentionDays": 14,
                 "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
               },
-              "deletion": {
-                "policy": "RetainUntilNoBackupsRemain"
-              },
               "state": "Ready",
-              "provisioningState": "Succeeded",
-              "readWritePool": {
-                "designatedPoolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
-                "zoneRedundancy": {
-                  "state": "NotReady",
-                  "unavailableReason": "The region does not support availability zones."
-                },
-                "failover": {
-                  "state": "Ready"
-                }
-              }
+              "provisioningState": "Succeeded"
             }
           }
         ]

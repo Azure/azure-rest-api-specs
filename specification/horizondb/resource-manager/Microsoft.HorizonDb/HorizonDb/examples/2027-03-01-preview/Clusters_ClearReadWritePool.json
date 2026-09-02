@@ -1,0 +1,57 @@
+{
+  "operationId": "Clusters_ClearReadWritePool",
+  "title": "Clear the HorizonDB read-write pool designation",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Enabled"
+          },
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 14,
+            "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
+          },
+          "deletion": {
+            "policy": "RetainUntilNoBackupsRemain"
+          },
+          "state": "Ready",
+          "provisioningState": "Succeeded",
+          "readWritePool": {
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2027-03-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      }
+    }
+  }
+}

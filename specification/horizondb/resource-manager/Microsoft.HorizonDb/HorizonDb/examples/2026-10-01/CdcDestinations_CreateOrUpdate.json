@@ -1,0 +1,55 @@
+{
+  "operationId": "CdcDestinations_CreateOrUpdate",
+  "title": "Create a Microsoft Fabric change data capture destination",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "destinationName": "fabric-mirroring",
+    "api-version": "2026-10-01",
+    "resource": {
+      "properties": {
+        "destination": { "destinationType": "Fabric", "protocol": "Native", "workspaceId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" },
+        "desiredState": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring",
+        "name": "fabric-mirroring",
+        "type": "Microsoft.HorizonDb/clusters/cdcDestinations",
+        "eTag": "\"00000000-0000-0000-0000-000000000010\"",
+        "properties": {
+          "destination": { "destinationType": "Fabric", "protocol": "Native", "workspaceId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" },
+          "desiredState": "Enabled",
+          "effectiveState": "WaitingForIdentity",
+          "provisioningState": "Succeeded",
+          "configurationCount": 0,
+          "status": { "code": "WaitingForIdentity", "message": "Create, validate, and activate an identity assignment." }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/10000000-0000-0000-0000-000000000010?api-version=2026-10-01",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring",
+        "name": "fabric-mirroring",
+        "type": "Microsoft.HorizonDb/clusters/cdcDestinations",
+        "eTag": "\"00000000-0000-0000-0000-000000000010\"",
+        "properties": {
+          "destination": { "destinationType": "Fabric", "protocol": "Native", "workspaceId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" },
+          "desiredState": "Enabled",
+          "effectiveState": "WaitingForIdentity",
+          "provisioningState": "Provisioning",
+          "configurationCount": 0,
+          "status": { "code": "WaitingForIdentity", "message": "Create, validate, and activate an identity assignment." }
+        }
+      }
+    }
+  }
+}

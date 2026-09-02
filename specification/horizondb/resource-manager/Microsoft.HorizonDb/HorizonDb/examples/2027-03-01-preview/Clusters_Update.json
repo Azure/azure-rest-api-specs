@@ -1,0 +1,75 @@
+{
+  "operationId": "Clusters_Update",
+  "title": "Rename the PostgreSQL administrator role and reset its password while updating a HorizonDB cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2027-03-01-preview",
+    "properties": {
+      "tags": {
+        "environment": "production",
+        "team": "data-platform"
+      },
+      "properties": {
+        "network": {
+          "publicAccess": "Disabled"
+        },
+        "deletion": {
+          "policy": "RetainUntilNoBackupsRemain"
+        },
+        "backup": {
+          "retentionDays": 21
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "tags": {
+          "environment": "production",
+          "team": "data-platform"
+        },
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Disabled"
+          },
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 21,
+            "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
+          },
+          "deletion": {
+            "policy": "RetainUntilNoBackupsRemain"
+          },
+          "state": "Ready",
+          "provisioningState": "Succeeded",
+          "readWritePool": {
+            "designatedPoolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "All nodes in the designated read-write pool are deployed in a single availability zone."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "The designated read-write pool is stopped."
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/22222222-2222-2222-2222-222222222222?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      }
+    }
+  }
+}

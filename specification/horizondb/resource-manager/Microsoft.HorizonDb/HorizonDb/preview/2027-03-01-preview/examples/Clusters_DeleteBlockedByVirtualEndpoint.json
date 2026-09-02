@@ -1,0 +1,20 @@
+{
+  "operationId": "Clusters_Delete",
+  "title": "Reject cluster deletion while a virtual endpoint references the cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "primary-cluster",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "409": {
+      "body": {
+        "error": {
+          "code": "ClusterReferencedByVirtualEndpoint",
+          "message": "The cluster is referenced by virtual endpoint global-orders as Writer. Retarget or delete the virtual endpoint before deleting the cluster."
+        }
+      }
+    }
+  }
+}

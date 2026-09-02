@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "poolName": "example-pool-01",
+    "maintenanceEventId": "ABCD-123",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "maintenanceEventId": "ABCD-123",
+          "maintenanceType": "PlannedMaintenance",
+          "description": "Scheduled platform maintenance for the HorizonDB pool.",
+          "originalStartTimeUtc": "2026-08-12T07:00:00Z",
+          "status": "Planned",
+          "startTimeUtc": "2026-08-12T07:00:00Z",
+          "endTimeUtc": "2026-08-12T08:00:00Z",
+          "estimatedDowntime": "PT3600S",
+          "deferrable": true,
+          "deferralDeadlineUtc": "2026-08-26T07:00:00Z",
+          "lastUpdatedTimeUtc": "2026-08-01T07:23:15Z"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01/maintenanceEvents/ABCD-123",
+        "name": "ABCD-123",
+        "type": "Microsoft.HorizonDb/clusters/pools/maintenanceEvents"
+      }
+    }
+  },
+  "operationId": "MaintenanceEvents_Get",
+  "title": "Get information about a maintenance event for a HorizonDB pool."
+}

@@ -1,0 +1,28 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Reject creating a third-level asynchronous replica",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "third-level-replica-cluster",
+    "api-version": "2027-03-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "postgreSqlVersion": "17",
+        "creationMode": "AsyncReplica",
+        "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/terminal-replica-cluster"
+      }
+    }
+  },
+  "responses": {
+    "409": {
+      "body": {
+        "error": {
+          "code": "ReplicaLevelLimitExceeded",
+          "message": "The source cluster is already at replica level 2 and cannot be used to create another asynchronous replica."
+        }
+      }
+    }
+  }
+}

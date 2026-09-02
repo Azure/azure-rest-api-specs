@@ -1,0 +1,32 @@
+{
+  "operationId": "IdentityAssignments_Get",
+  "title": "Get a change data capture identity assignment",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "destinationName": "fabric-mirroring",
+    "assignmentName": "fabric-writer",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring/identityAssignments/fabric-writer",
+        "name": "fabric-writer",
+        "type": "Microsoft.HorizonDb/clusters/cdcDestinations/identityAssignments",
+        "eTag": "\"00000000-0000-0000-0000-000000000020\"",
+        "properties": {
+          "identityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/fabric-writer",
+          "effectiveState": "Assigned",
+          "activationState": "Active",
+          "principalId": "11111111-2222-3333-4444-555555555555",
+          "tenantId": "66666666-7777-8888-9999-000000000000",
+          "provisioningState": "Succeeded",
+          "validation": { "state": "Succeeded", "validatedAtUtc": "2026-09-15T17:30:00Z" },
+          "status": { "code": "Ready", "message": "The identity assignment is active and valid." }
+        }
+      }
+    }
+  }
+}

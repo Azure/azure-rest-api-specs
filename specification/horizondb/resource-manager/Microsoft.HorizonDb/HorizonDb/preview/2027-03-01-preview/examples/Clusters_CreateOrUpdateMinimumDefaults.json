@@ -1,0 +1,59 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Create a HorizonDB cluster with minimum configuration and service defaults",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "minimum-defaults",
+    "api-version": "2027-03-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "postgreSqlVersion": "17",
+        "backup": {
+          "geoRedundancy": "Disabled"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/55555555-5555-5555-5555-555555555555?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/minimum-defaults",
+        "name": "minimum-defaults",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Disabled"
+          },
+          "backup": {
+            "geoRedundancy": "Disabled",
+            "retentionDays": 7
+          },
+          "deletion": {
+            "policy": "Immediate"
+          },
+          "state": "Provisioning",
+          "provisioningState": "Provisioning",
+          "readWritePool": {
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            }
+          }
+        }
+      }
+    }
+  }
+}

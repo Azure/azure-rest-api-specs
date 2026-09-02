@@ -1,0 +1,75 @@
+{
+  "operationId": "CdcConfigurations_CreateOrUpdate",
+  "title": "Enroll a database for Microsoft Fabric Mirroring",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "configurationName": "sales-database",
+    "api-version": "2027-03-01-preview",
+    "resource": {
+      "properties": {
+        "databaseName": "sales",
+        "usageProfile": "Mirroring",
+        "destinationResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring",
+        "desiredState": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcConfigurations/sales-database",
+        "name": "sales-database",
+        "type": "Microsoft.HorizonDb/clusters/cdcConfigurations",
+        "eTag": "\"00000000-0000-0000-0000-000000000030\"",
+        "properties": {
+          "databaseName": "sales",
+          "usageProfile": "Mirroring",
+          "destinationResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring",
+          "logicalStreamId": "aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb",
+          "desiredState": "Enabled",
+          "effectiveState": "Enabled",
+          "provisioningState": "Succeeded",
+          "extension": { "name": "horizondb_cdc", "version": "1.0", "state": "Ready" },
+          "replication": { "state": "Replicating", "externalArtifactId": "fabric-item-0123456789", "lastConnectedAtUtc": "2026-09-15T18:00:00Z" },
+          "topology": {
+            "state": "Active",
+            "generation": 1,
+            "activeClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster"
+          },
+          "status": { "code": "Replicating", "message": "Database changes are being published to Microsoft Fabric." }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/10000000-0000-0000-0000-000000000030?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcConfigurations/sales-database",
+        "name": "sales-database",
+        "type": "Microsoft.HorizonDb/clusters/cdcConfigurations",
+        "eTag": "\"00000000-0000-0000-0000-000000000030\"",
+        "properties": {
+          "databaseName": "sales",
+          "usageProfile": "Mirroring",
+          "destinationResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring",
+          "logicalStreamId": "aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb",
+          "desiredState": "Enabled",
+          "effectiveState": "Enabling",
+          "provisioningState": "Provisioning",
+          "extension": { "name": "horizondb_cdc", "version": "1.0", "state": "Installing" },
+          "replication": { "state": "NotConnected" },
+          "topology": {
+            "state": "Active",
+            "generation": 1,
+            "activeClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster"
+          },
+          "status": { "code": "Enabling", "message": "The database is being enrolled for Microsoft Fabric Mirroring." }
+        }
+      }
+    }
+  }
+}
