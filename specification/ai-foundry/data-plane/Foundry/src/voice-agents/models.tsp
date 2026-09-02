@@ -465,12 +465,27 @@ union TelephonyBindingStatus {
   suspended: "suspended",
 }
 
+@doc("The kind of telephony transfer destination. Known values are stable; additional values may be added over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyTransferDestinationKind {
+  string,
+
+  @doc("A public switched telephone network destination.")
+  pstn: "pstn",
+
+  @doc("A Microsoft Teams user or resource-account destination.")
+  teams: "teams",
+
+  @doc("A Session Initiation Protocol destination.")
+  sip: "sip",
+}
+
 @doc("A destination for a telephony transfer target.")
 @discriminator("kind")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyTransferDestination {
   @doc("The telephony transfer destination type.")
-  kind: string;
+  kind: TelephonyTransferDestinationKind;
 }
 
 @doc("A PSTN destination for a telephony transfer target.")

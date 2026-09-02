@@ -56372,7 +56372,7 @@ components:
                 contentEncoding: base64
           description: |-
             The image(s) to edit. Must be a supported image file or an array of images.
-              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`
+              For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`
               file less than 50MB. You can provide up to 16 images.
               `chatgpt-image-latest` follows the same input constraints as GPT image models.
               For `dall-e-2`, you can only provide one image, and it should be a square
@@ -56391,27 +56391,24 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Set the background of the generated image(s). This parameter is only
-              supported for the GPT image models. Must be one of `transparent`, `opaque`,
-              or `auto` (default value). When `auto` is used, the model will automatically
-              determine the best background for the image.
-              Transparent backgrounds are available for supported GPT Image models. For
-              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
-              using `transparent`, set the output format to `png` or `webp`.
+            Allows to set transparency for the background of the generated image(s).
+              This parameter is only supported for the GPT image models. Must be one of
+              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
+              model will automatically determine the best background for the image.
+              If `transparent`, the output format needs to support transparency, so it
+              should be set to either `png` (default value) or `webp`.
         model:
           anyOf:
             - type: string
             - type: string
               enum:
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.
+          description: The model to use for image generation. Defaults to `gpt-image-1.5`.
           x-oaiTypeLabel: string
         'n':
           anyOf:
@@ -56503,14 +56500,12 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
                 - dall-e-2
                 - dall-e-3
                 - gpt-image-1
                 - gpt-image-1-mini
             - type: 'null'
-          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
+          description: The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.
           x-oaiTypeLabel: string
           default: dall-e-2
         'n':
@@ -56608,13 +56603,12 @@ components:
                 - auto
             - type: 'null'
           description: |-
-            Set the background of the generated image(s). This parameter is only
-              supported for the GPT image models. Must be one of `transparent`, `opaque`,
-              or `auto` (default value). When `auto` is used, the model will automatically
-              determine the best background for the image.
-              Transparent backgrounds are available for supported GPT Image models. For
-              `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
-              using `transparent`, set the output format to `png` or `webp`.
+            Allows to set transparency for the background of the generated image(s).
+              This parameter is only supported for the GPT image models. Must be one of
+              `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
+              model will automatically determine the best background for the image.
+              If `transparent`, the output format needs to support transparency, so it
+              should be set to either `png` (default value) or `webp`.
           default: auto
         style:
           anyOf:
@@ -58539,13 +58533,11 @@ components:
             - type: string
               enum:
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
             - type: 'null'
-          description: The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.
+          description: The model to use for image editing.
           x-oaiTypeLabel: string
           default: gpt-image-1.5
         images:
@@ -58637,7 +58629,7 @@ components:
                 - opaque
                 - auto
             - type: 'null'
-          description: Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.
+          description: Background behavior for generated image output.
           default: auto
         stream:
           anyOf:
@@ -61193,8 +61185,6 @@ components:
                 - gpt-image-1
                 - gpt-image-1-mini
                 - gpt-image-1.5
-                - gpt-image-2
-                - gpt-image-2-2026-04-21
           default: gpt-image-1
         quality:
           type: string
@@ -61248,11 +61238,8 @@ components:
             - opaque
             - auto
           description: |-
-            Set the background of the generated image. One of `transparent`,
-              `opaque`, or `auto`. Transparent backgrounds are available for
-              supported GPT Image models. For `gpt-image-2` and
-              `gpt-image-2-2026-04-21`, this support is in preview. When using
-              `transparent`, set the output format to `png` or `webp`. Default: `auto`.
+            Background type for the generated image. One of `transparent`,
+              `opaque`, or `auto`. Default: `auto`.
           default: auto
         input_fidelity:
           anyOf:
@@ -61979,7 +61966,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 20971520
+          maxLength: 10485760
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
@@ -63123,7 +63110,7 @@ components:
           default: compaction
         encrypted_content:
           type: string
-          maxLength: 20971520
+          maxLength: 10485760
           description: The encrypted content of the compaction summary.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
@@ -81370,7 +81357,7 @@ components:
         - kind
       properties:
         kind:
-          type: string
+          $ref: '#/components/schemas/TelephonyTransferDestinationKind'
           description: The telephony transfer destination type.
       discriminator:
         propertyName: kind
@@ -81379,6 +81366,18 @@ components:
           teams: '#/components/schemas/TeamsTelephonyTransferDestination'
           sip: '#/components/schemas/SipTelephonyTransferDestination'
       description: A destination for a telephony transfer target.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyTransferDestinationKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - pstn
+            - teams
+            - sip
+      description: The kind of telephony transfer destination. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
