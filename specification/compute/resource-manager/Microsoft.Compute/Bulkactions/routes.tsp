@@ -255,12 +255,12 @@ interface VirtualMachineBulkOperations {
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
 
   /** BulkListOperationErrors: List bulk operation errors for a resource group */
-  @added(Versions.`2026-07-06-preview`)
+  @added(Versions.`2026-07-06-preview`)  
   @get
   @autoRoute
   @list
   @action("listBulkOperationErrors")
-  bulkListOperationErrors(
+  internal bulkListOperationErrors(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
     ...Extension.ResourceGroup,
     ...ProviderNamespace<Extension.ResourceGroup>,
@@ -277,7 +277,7 @@ interface VirtualMachineBulkOperations {
   @autoRoute
   @armResourceCollectionAction
   @action("acknowledgeBulkOperationErrors")
-  bulkAcknowledgeOperationErrors(
+  internal bulkAcknowledgeOperationErrors(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
     ...Extension.ResourceGroup,
     ...ProviderNamespace<Extension.ResourceGroup>,
