@@ -97,6 +97,15 @@ union SkuMigrationState {
   @doc("Complete network migration is in progress.")
   CompleteNetworkMigrationInProgress: "CompleteNetworkMigrationInProgress",
 
+  @doc("Waiting for network cut over from the source private cloud to the destination private cloud.")
+  WaitingForNetworkCutOverFromSourcePrivateCloudToDestinationPrivateCloud: "WaitingForNetworkCutOverFromSourcePrivateCloudToDestinationPrivateCloud",
+
+  @doc("Network cut over from the source private cloud to the destination private cloud is in progress.")
+  NetworkCutOverFromSourcePrivateCloudToDestinationPrivateCloudInProgress: "NetworkCutOverFromSourcePrivateCloudToDestinationPrivateCloudInProgress",
+
+  @doc("Network cut over from the source private cloud to the destination private cloud.")
+  NetworkCutOverFromSourcePrivateCloudToDestinationPrivateCloud: "NetworkCutOverFromSourcePrivateCloudToDestinationPrivateCloud",
+
   @doc("Migration has completed successfully.")
   MigrationCompleted: "MigrationCompleted",
 
