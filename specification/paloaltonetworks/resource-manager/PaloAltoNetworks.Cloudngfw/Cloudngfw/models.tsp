@@ -313,6 +313,42 @@ union EnableStatus {
 }
 
 /**
+ * Whether a TCP reset is sent when a session is terminated
+ */
+@added(Versions.v2026_08_27_preview)
+union TcpReset {
+  string,
+
+  /**
+   * A TCP reset is sent to the client and server
+   */
+  Enabled: "Enabled",
+
+  /**
+   * No TCP reset is sent
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * Hash algorithm used to distribute inbound traffic
+ */
+@added(Versions.v2026_08_27_preview)
+union LoadDistribution {
+  string,
+
+  /**
+   * Five-tuple hash: source IP, source port, destination IP, destination port and protocol
+   */
+  Default: "Default",
+
+  /**
+   * Two-tuple hash: source IP and destination IP
+   */
+  SourceIP: "SourceIP",
+}
+
+/**
  * Possible log types
  */
 union LogType {
@@ -1248,6 +1284,14 @@ model FirewallDeploymentProperties {
   firewallSku?: string = "STANDARD";
 
   /**
+   * Time in minutes to keep serving existing traffic during scale-in or upgrade events before removing a firewall instance. Can only be set on PUT, not updatable via PATCH, Default will be 15.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(15)
+  @maxValue(120)
+  sessionDrainTimeoutInMinutes?: int32 = 15;
+
+  /**
    * Network settings
    */
   networkProfile: NetworkProfile;
@@ -1350,6 +1394,20 @@ model NetworkProfile {
    * Array of ipv4 destination address for which source NAT is to be performed
    */
   privateSourceNatRulesDestination?: string[];
+
+  /**
+   * Time in minutes an outbound source NAT session can stay inactive before termination, Default will be 4.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(4)
+  @maxValue(120)
+  outboundIdleTimeoutInMinutes?: int32;
+
+  /**
+   * Send a TCP reset when an inactive outbound source NAT session is terminated, Default will be Enabled.
+   */
+  @added(Versions.v2026_08_27_preview)
+  outboundTcpReset?: TcpReset;
 }
 
 /**
@@ -1566,6 +1624,26 @@ model FrontendSetting {
    * Backend configurations
    */
   backendConfiguration: EndpointConfiguration;
+
+  /**
+   * Time in minutes an inbound session can stay inactive before termination, Default will be 4.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(4)
+  @maxValue(100)
+  idleTimeoutInMinutes?: int32;
+
+  /**
+   * Send a TCP reset when an inactive inbound session is terminated, Default will be Disabled.
+   */
+  @added(Versions.v2026_08_27_preview)
+  tcpReset?: TcpReset;
+
+  /**
+   * Hash algorithm used to distribute inbound traffic, Default will be a five-tuple hash.
+   */
+  @added(Versions.v2026_08_27_preview)
+  loadDistribution?: LoadDistribution;
 }
 
 /**
@@ -1997,6 +2075,97 @@ model MonitorLog {
 }
 
 /**
+ * Log collection using the Azure Monitor Log Ingestion API (Data Collection Rule based).
+ * This supersedes the legacy HTTP Data Collector `MonitorLog` for firewalls that have migrated
+ * to the modern DCR ingestion path. When this block is supplied, all four fields are required.
+ */
+@added(Versions.v2026_07_29_preview)
+model MonitorLogV2 {
+  /**
+   * ARM resource ID of the Data Collection Rule (DCR) that governs how these logs are transformed and routed.
+   */
+  dcrId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * HTTPS logs ingestion endpoint that receives the data (the DCR's logs ingestion endpoint or its Data Collection Endpoint).
+   */
+  logIngestionEndpoint: url;
+
+  /**
+   * Immutable ID of the Data Collection Rule (the value that begins with `dcr-`).
+   */
+  dcrImmutableId: string;
+
+  /**
+   * DCR input stream that receives the data. For a custom table this is typically `Custom-<TableName>`.
+   */
+  streamName: string;
+}
+
+/**
+ * Log Destination for the Azure Monitor Log Ingestion (Data Collection Rule) method. Carries the DCR-based `monitorConfigurationsV2`.
+ */
+@added(Versions.v2026_07_29_preview)
+model LogDestinationV2 {
+  /**
+   * Storage account configurations
+   */
+  storageConfigurations?: StorageAccount;
+
+  /**
+   * Event Hub configurations
+   */
+  eventHubConfigurations?: EventHub;
+
+  /**
+   * Azure Monitor Log Ingestion (Data Collection Rule) configuration for this destination.
+   */
+  monitorConfigurationsV2?: MonitorLogV2;
+}
+
+/**
+ * Log Ingestion Settings for a firewall (Azure Monitor Log Ingestion / Data Collection Rule based).
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Sync proxy resource: log ingestion settings are forwarded to the partner synchronously (no async provisioning), so there is intentionally no provisioningState field — consistent with the firewall's other sync child resources."
+@added(Versions.v2026_07_29_preview)
+model LogIngestionSettingsProperties {
+  /**
+   * One of possible log type
+   */
+  logType?: LogType;
+
+  /**
+   * Log option SAME/INDIVIDUAL
+   */
+  logOption?: LogOption;
+
+  /**
+   * Application Insight details
+   */
+  applicationInsights?: ApplicationInsights;
+
+  /**
+   * Common destination configurations
+   */
+  commonDestination?: LogDestinationV2;
+
+  /**
+   * Traffic destination configurations
+   */
+  trafficLogDestination?: LogDestinationV2;
+
+  /**
+   * Threat destination configurations
+   */
+  threatLogDestination?: LogDestinationV2;
+
+  /**
+   * Decrypt destination configurations
+   */
+  decryptLogDestination?: LogDestinationV2;
+}
+
+/**
  * Support information for the resource
  */
 model SupportInfo {
@@ -2286,6 +2455,7 @@ model CustomCaptureConfigurationsFilter {
   @doc("Network protocol — TCP or UDP.")
   protocol: CustomCaptureConfigurationsProtocol;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Source IPv4 address in dotted format (e.g., 10.0.0.5).")
   sourceIpAddress: string;
 
@@ -2294,6 +2464,7 @@ model CustomCaptureConfigurationsFilter {
   @maxValue(65535)
   sourcePort?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Destination IPv4 address in dotted format (e.g., 52.39.204.87).")
   destinationIpAddress: string;
 
