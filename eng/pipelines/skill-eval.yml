@@ -27,6 +27,9 @@ extends:
   template: /eng/common/pipelines/templates/stages/archetype-eval.yml
   parameters:
     mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
+    # Per-shard pre-eval hook: rewrites the MCP DLL paths in .vally.yaml to absolute so the mock
+    # server resolves regardless of the copilot-sdk temp workDir cwd (see the template for details).
+    preEvalTemplate: /eng/pipelines/templates/steps/eval-fix-mcp-paths.yml
     TestType: mock
     vallyRoot: .github/skills
     # All rooted at .github/skills, so one Prepare/Eval/Summary run covers every suite

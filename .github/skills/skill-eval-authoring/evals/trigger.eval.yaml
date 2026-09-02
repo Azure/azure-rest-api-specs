@@ -1,0 +1,83 @@
+name: skill-eval-authoring-trigger-eval
+description: Trigger and anti-trigger tests for the skill-eval-authoring skill
+type: capability
+
+environment: azsdk-mcp-mock
+
+tags:
+  area: skill-eval-authoring
+  type: ci-gate
+
+config:
+  runs: 1
+  timeout: "90s"
+  model: claude-opus-4.6
+  executor: copilot-sdk
+
+scoring:
+  threshold: 0.8
+
+stimuli:
+  # Should trigger
+  - name: trigger-add-eval-for-new-skill
+    prompt: "I just added a new skill under .github/skills, can you add a trigger eval for it?"
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["skill-eval-authoring"]
+  - name: trigger-where-should-this-eval-go
+    prompt: "where should the eval file for my new azure-powershell-design-review skill go?"
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["skill-eval-authoring"]
+  - name: trigger-add-eval-coverage-for-existing-skill
+    prompt: "add eval coverage for the azure-api-review skill's new suppression-file rule"
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["skill-eval-authoring"]
+  - name: trigger-write-a-workflow-eval
+    prompt: "write a workflow eval that covers the arm-api-reviewer agent driving multiple skills across a PR"
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["skill-eval-authoring"]
+  - name: trigger-create-anti-trigger-stimuli
+    prompt: "create anti-trigger stimuli for my new skill's trigger.eval.yaml so it doesn't false-positive on unrelated prompts"
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["skill-eval-authoring"]
+
+  # Should NOT trigger
+  - name: anti-trigger-write-a-typespec-definition
+    prompt: "write a TypeSpec definition for a new resource"
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["skill-eval-authoring"]
+  - name: anti-trigger-my-ci-pipeline-is-failing
+    prompt: "my Azure SDK CI pipeline build 6447834 is failing, can you help troubleshoot what went wrong?"
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["skill-eval-authoring"]
+  - name: anti-trigger-resolve-apiview-feedback
+    prompt: "resolve APIView feedback on my SDK PR"
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["skill-eval-authoring"]
+  - name: anti-trigger-debug-failing-eval-run
+    prompt: "this eval run just failed in CI, can you tell me why the stimulus didn't pass?"
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["skill-eval-authoring"]
+  - name: anti-trigger-release-sdk-package
+    prompt: "how do I release an SDK package"
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed: ["skill-eval-authoring"]

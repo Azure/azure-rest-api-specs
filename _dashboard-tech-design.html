@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tech Design: Multi-Repo Vally Eval Dashboard</title>
+<style>
+  :root {
+    --ink: #1b2430;
+    --ink-soft: #59636d;
+    --paper: #fbfaf7;
+    --surface: #ffffff;
+    --line: #dcdfe0;
+    --accent: #0b6e78;
+    --accent-soft: #e2f2f2;
+    --keep: #2c7a4b;
+    --keep-soft: #e4f3e9;
+    --new: #1e5fb3;
+    --new-soft: #e8eefb;
+    --change: #9b6400;
+    --change-soft: #fff2d8;
+    --decision: #b43e2e;
+    --decision-soft: #fbe7e3;
+    --mono: Consolas, "Courier New", monospace;
+    --maxw: 880px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: "Segoe UI", "Aptos", Arial, sans-serif;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  a { color: var(--new); }
+  code, pre { font-family: var(--mono); }
+  code {
+    padding: 1px 5px;
+    background: var(--accent-soft);
+    border-radius: 3px;
+    font-size: 0.88em;
+  }
+  pre {
+    margin: 0;
+    padding: 14px 16px;
+    overflow-x: auto;
+    color: #e8f0f1;
+    background: #16232a;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  pre code { padding: 0; color: inherit; background: none; }
+
+  header.doc-head {
+    color: #f2f6f6;
+    background: var(--ink);
+    border-bottom: 5px solid var(--accent);
+  }
+  .doc-head-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 34px 20px 26px;
+  }
+  .kicker {
+    margin: 0 0 8px;
+    color: #9fd8dc;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  h1 {
+    margin: 0 0 16px;
+    font-size: 30px;
+    line-height: 1.25;
+  }
+  .meta-table {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid #3a4650;
+    border-left: 1px solid #3a4650;
+  }
+  .meta-table div {
+    padding: 10px 14px;
+    border-right: 1px solid #3a4650;
+    border-bottom: 1px solid #3a4650;
+  }
+  .meta-table dt {
+    color: #9fb0b6;
+    font-size: 10.5px;
+    text-transform: uppercase;
+  }
+  .meta-table dd {
+    margin: 3px 0 0;
+    font-size: 13px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 36px;
+    max-width: calc(var(--maxw) + 190px + 36px);
+    margin: 0 auto;
+    padding: 30px 20px 90px;
+  }
+  nav.toc {
+    position: sticky;
+    top: 18px;
+    align-self: start;
+    font-size: 13px;
+  }
+  nav.toc div {
+    margin-bottom: 8px;
+    color: var(--ink-soft);
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  nav.toc a {
+    display: block;
+    padding: 5px 0;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding-left: 8px;
+  }
+  nav.toc a:hover { color: var(--ink); border-left-color: var(--line); }
+
+  main { min-width: 0; max-width: var(--maxw); }
+  section { margin-bottom: 46px; scroll-margin-top: 16px; }
+  h2 {
+    margin: 0 0 6px;
+    padding-bottom: 9px;
+    border-bottom: 2px solid var(--ink);
+    font-size: 22px;
+  }
+  h2 span.num {
+    display: inline-block;
+    width: 26px;
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  h3 { margin: 22px 0 8px; font-size: 16.5px; }
+  p { margin: 0 0 12px; }
+  ul, ol.plain { margin: 0 0 12px; padding-left: 22px; }
+  li { margin-bottom: 4px; }
+
+  .lede { color: var(--ink-soft); font-size: 14.5px; margin-top: 4px; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .panel {
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .panel h4 {
+    margin: 0 0 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .panel.goals h4 { color: var(--keep); }
+  .panel.nongoals h4 { color: var(--decision); }
+  .panel ul { margin-bottom: 0; padding-left: 18px; font-size: 14px; }
+
+  .diagram {
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .flow-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0;
+  }
+  .flow-box {
+    flex: 1 1 150px;
+    min-width: 130px;
+    padding: 10px 12px;
+    background: var(--paper);
+    border: 1px solid var(--line-strong, var(--line));
+    border-top: 3px solid var(--box-color, var(--accent));
+    border-radius: 5px;
+    font-size: 12.5px;
+  }
+  .flow-box strong { display: block; margin-bottom: 3px; font-size: 13px; }
+  .flow-box span { color: var(--ink-soft); }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+  .diagram-caption { margin-top: 10px; color: var(--ink-soft); font-size: 12.5px; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .tag.keep { color: var(--keep); background: var(--keep-soft); }
+  .tag.new { color: var(--new); background: var(--new-soft); }
+  .tag.change { color: var(--change); background: var(--change-soft); }
+  .tag.decision { color: var(--decision); background: var(--decision-soft); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 9px 12px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    background: var(--ink);
+    color: #fff;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  tr:last-child td { border-bottom: 0; }
+  td code { white-space: nowrap; }
+
+  .callout {
+    padding: 12px 14px;
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+    font-size: 13.5px;
+    margin: 12px 0;
+  }
+  .callout strong { display: block; margin-bottom: 3px; font-size: 11.5px; text-transform: uppercase; color: var(--accent); }
+
+  .question {
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    background: var(--decision-soft);
+    border-left: 4px solid var(--decision);
+    border-radius: 0 6px 6px 0;
+  }
+  .question strong { display: block; margin-bottom: 4px; font-size: 14px; }
+  .question p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+  .question .qnum {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    color: #fff;
+    background: var(--decision);
+    border-radius: 50%;
+    font-size: 11px;
+    text-align: center;
+    line-height: 20px;
+  }
+
+  ol.phases { margin: 0; padding: 0; list-style: none; counter-reset: phase; }
+  ol.phases li {
+    position: relative;
+    counter-increment: phase;
+    margin-bottom: 10px;
+    padding: 12px 14px 12px 44px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 13.5px;
+  }
+  ol.phases li::before {
+    content: counter(phase);
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: grid;
+    width: 22px;
+    height: 22px;
+    place-items: center;
+    color: #fff;
+    background: var(--ink);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  ol.phases li strong { display: block; margin-bottom: 2px; }
+  ol.phases li span { color: var(--ink-soft); }
+
+  footer {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 20px 20px 60px;
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.toc { position: static; margin-bottom: 24px; }
+    nav.toc ol { display: flex; flex-wrap: wrap; gap: 4px; }
+    nav.toc a { border: 1px solid var(--line); border-radius: 4px; padding: 4px 8px; }
+    .meta-table, .two-col { grid-template-columns: 1fr; }
+    .flow-row { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); min-height: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <div class="doc-head-inner">
+    <p class="kicker">Tech design &middot; for review</p>
+    <h1>Multi-repo, multi-pipeline Vally eval dashboard</h1>
+    <p class="lede" style="color:#c9d3d6;">Extends the existing <code style="background:#243138;color:#bfe9ec;">azure-typespec-author-dashboard</code> app service to index every eval pipeline across every repo, backed by Blob Storage instead of a manually-uploaded local disk.</p>
+    <dl class="meta-table">
+      <div><dt>Status</dt><dd>Draft &mdash; blocked on 4 open questions</dd></div>
+      <div><dt>Base repo</dt><dd>haolingdong-msft/azure-typespec-author-dashboard</dd></div>
+      <div><dt>Author</dt><dd>Drafted with GitHub Copilot</dd></div>
+      <div><dt>Date</dt><dd>2026-08-25</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="Table of contents">
+    <div>Contents</div>
+    <ol>
+      <li><a href="#goals">1. Goals &amp; non-goals</a></li>
+      <li><a href="#current">2. Current state</a></li>
+      <li><a href="#target">3. Target architecture</a></li>
+      <li><a href="#index-page">4. Index page</a></li>
+      <li><a href="#drilldown">5. Drill-down page</a></li>
+      <li><a href="#data-model">6. Data model</a></li>
+      <li><a href="#ingestion">7. Ingestion flow</a></li>
+      <li><a href="#routes">8. Route surface</a></li>
+      <li><a href="#file-map">9. File change map</a></li>
+      <li><a href="#rollout">10. Rollout phases</a></li>
+      <li><a href="#questions">11. Open questions</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section id="goals">
+      <h2><span class="num">1</span>Goals &amp; non-goals</h2>
+      <div class="two-col">
+        <div class="panel goals">
+          <h4>Goals</h4>
+          <ul>
+            <li>One dashboard, index page lists every <strong>repo &times; pipeline</strong> combination that has ever reported results.</li>
+            <li>Drilling into a pipeline reuses Vally's existing charts, run history, and comparison views &mdash; unmodified.</li>
+            <li>Artifacts persist durably in Blob Storage so nothing is re-downloaded or lost on redeploy/restart.</li>
+            <li>New repos/pipelines appear automatically once they publish once &mdash; no code change to onboard.</li>
+          </ul>
+        </div>
+        <div class="panel nongoals">
+          <h4>Non-goals</h4>
+          <ul>
+            <li>Forking or reimplementing <code>@microsoft/vally-server</code>'s API, schema, or UI.</li>
+            <li>Kusto, a data warehouse, or any ingestion pipeline beyond this app.</li>
+            <li>Building new charts &mdash; the existing Vally dashboard's charts are the ones we show.</li>
+            <li>Deleting <code>add-result.ps1</code> / local dev workflow &mdash; kept for ad-hoc/manual use.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="current">
+      <h2><span class="num">2</span>Current state</h2>
+      <p>Grounded in the real files in the repo today &mdash; nothing here is hypothetical.</p>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box" style="--box-color:var(--change)"><strong>add-result.ps1</strong><span>manual zip + Kudu VFS PUT</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="--box-color:var(--ink-soft)"><strong>results/ folder</strong><span>local disk, App Service /home</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="--box-color:var(--ink-soft)"><strong>ingest-watcher.js</strong><span>fs.watch + 30s poll</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="--box-color:var(--ink-soft)"><strong>eval.db (SQLite)</strong><span>derived cache</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="--box-color:var(--ink-soft)"><strong>categories.js</strong><span>4 hardcoded cards, string-match filter</span></div>
+        </div>
+        <p class="diagram-caption">Source of truth is already correctly modeled as "folder of run results, DB is disposable" &mdash; we keep that principle, just move the folder off one VM's disk and make "category" a real column instead of a substring match.</p>
+      </div>
+      <h3>What "category" actually is today</h3>
+      <p><code>categories.js</code> hardcodes 4 entries (<code>{slug, token, title, blurb}</code>). A category page works by proxying the inner Vally dashboard's HTML and injecting a <code>&lt;script&gt;</code> that patches <code>window.fetch</code> so <code>GET /api/runs</code> only returns rows whose <code>id</code> string <em>contains</em> the token. There is no <code>repo</code>/<code>pipeline</code> column anywhere in Vally-server's own schema.</p>
+    </section>
+
+    <section id="target">
+      <h2><span class="num">3</span>Target architecture</h2>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box" style="--box-color:var(--new)"><strong>CI, any repo</strong><span>eval pipeline uploads results + manifest</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="--box-color:var(--new)"><strong>Blob Storage</strong><span>&lt;repo&gt;/&lt;pipeline&gt;/&lt;run-id&gt;/</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="--box-color:var(--new)"><strong>blob-sync loop</strong><span>replaces fs.watch; downloads only unseen runs</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="--box-color:var(--keep)"><strong>ingestDirectory()</strong><span>unmodified Vally-server call</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="--box-color:var(--new)"><strong>eval.db + run_metadata</strong><span>sidecar table, still disposable</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="--box-color:var(--keep)"><strong>Vally dashboard UI</strong><span>unmodified, just pre-filtered</span></div>
+        </div>
+        <p class="diagram-caption">Blob Storage becomes the durable source of truth. <code>eval.db</code> and the local staging folder both stay fully rebuildable &mdash; delete either, re-sync from blob.</p>
+      </div>
+      <div class="callout">
+        <strong>What stays exactly the same</strong>
+        Hosting model (Azure App Service, Linux, Node &mdash; still needed for a live parameterized API + native <code>better-sqlite3</code>), Vally-server's package/schema/API/UI, and the "wrap the inner app with a thin outer Hono app" pattern.
+      </div>
+    </section>
+
+    <section id="index-page">
+      <h2><span class="num">4</span>Index page</h2>
+      <p>Replaces the 4 static cards with cards computed from ingested data, grouped by repo:</p>
+      <pre><code>SELECT repo, pipeline, COUNT(*) AS runs, MAX(ingested_at) AS last_run
+FROM run_metadata
+GROUP BY repo, pipeline
+ORDER BY repo, pipeline;</code></pre>
+      <p>Rendered as one section per <code>repo</code>, one card per <code>pipeline</code> within it, each linking to <code>/p/&lt;repo&gt;/&lt;pipeline&gt;</code>. A repo/pipeline appears the first time it successfully ingests &mdash; no code change needed to onboard a new one.</p>
+    </section>
+
+    <section id="drilldown">
+      <h2><span class="num">5</span>Drill-down page</h2>
+      <p>Same proxy-and-inject technique <code>categories.js</code> already uses, generalized:</p>
+      <table>
+        <thead><tr><th>Aspect</th><th>Today</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td>Route</td><td><code>/c/:slug</code></td><td><code>/p/:repo/:pipeline</code></td></tr>
+          <tr><td>Filter key</td><td>hardcoded <code>token</code> string</td><td>real <code>repo</code> + <code>pipeline</code> columns</td></tr>
+          <tr><td>Filter mechanism</td><td>substring match on run <code>id</code></td><td>exact match via <code>run_metadata</code> lookup</td></tr>
+          <tr><td>Charts / history / comparison</td><td>Vally's built-in UI</td><td>unchanged &mdash; same UI, same code</td></tr>
+        </tbody>
+      </table>
+      <p>Every existing Vally feature (pass-rate trend, per-run timing, run comparison, the "All" rollup) keeps working untouched, just scoped to one repo+pipeline before it reaches the browser.</p>
+    </section>
+
+    <section id="data-model">
+      <h2><span class="num">6</span>Data model</h2>
+      <p>Vally-server's schema is not forked. One small sidecar table, owned by this app, maps a <code>run_id</code> (Vally's own folder-name key) to the metadata it doesn't know about:</p>
+      <pre><code>CREATE TABLE IF NOT EXISTS run_metadata (
+  run_id      TEXT PRIMARY KEY,   -- matches vally-server's runs.id
+  repo        TEXT NOT NULL,
+  pipeline    TEXT NOT NULL,
+  branch      TEXT,
+  build_id    TEXT,
+  build_url   TEXT,
+  ingested_at TEXT NOT NULL
+);</code></pre>
+      <p>Populated from a small <code>manifest.json</code> sidecar file each CI pipeline uploads next to its <code>results.jsonl</code>:</p>
+      <pre><code>{
+  "schemaVersion": 1,
+  "repo": "azure-rest-api-specs",
+  "pipeline": "skill-eval",
+  "branch": "main",
+  "buildId": "20260825.3",
+  "buildUrl": "https://dev.azure.com/azure-sdk/internal/_build/results?buildId=..."
+}</code></pre>
+      <p>Runs with no manifest (old local test runs) fall back to <code>repo="unknown"</code>, <code>pipeline=&lt;folder name&gt;</code> so nothing breaks retroactively.</p>
+    </section>
+
+    <section id="ingestion">
+      <h2><span class="num">7</span>Ingestion flow</h2>
+      <ol class="plain">
+        <li>CI pipeline finishes its eval run, uploads <code>results.jsonl</code> + <code>manifest.json</code> to <code>vally-runs/&lt;repo&gt;/&lt;pipeline&gt;/&lt;run-id&gt;/</code>.</li>
+        <li>The dashboard's sync loop lists the container, diffs blob run-ids against what's already in <code>run_metadata</code>, and downloads only the new ones into the local staging folder.</li>
+        <li>Vally-server's own <code>ingestDirectory()</code> runs unmodified against the staging folder.</li>
+        <li>For each newly-ingested run, the sync loop reads its <code>manifest.json</code> and upserts a row into <code>run_metadata</code>.</li>
+      </ol>
+      <div class="callout">
+        <strong>Known v1 tradeoff</strong>
+        Listing the whole container on every poll is simplest and fine at current run volumes. If the container grows large enough for that to matter, a continuation-token-based incremental listing can be added later without changing the contract &mdash; not needed for v1.
+      </div>
+    </section>
+
+    <section id="routes">
+      <h2><span class="num">8</span>Route surface</h2>
+      <table>
+        <thead><tr><th>Route</th><th>Change</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>/</code></td><td><span class="tag change">changed</span></td><td>cards now generated from <code>run_metadata</code>, grouped by repo</td></tr>
+          <tr><td><code>/c/:slug</code></td><td><span class="tag decision">removed</span></td><td>replaced by <code>/p/:repo/:pipeline</code></td></tr>
+          <tr><td><code>/p/:repo/:pipeline</code></td><td><span class="tag new">new</span></td><td>generalized drill-down, same fetch-shim pattern</td></tr>
+          <tr><td><code>/all</code></td><td><span class="tag keep">unchanged</span></td><td>full unfiltered Vally dashboard</td></tr>
+          <tr><td><code>/api/*</code></td><td><span class="tag keep">unchanged</span></td><td>Vally-server's own routes, untouched</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="file-map">
+      <h2><span class="num">9</span>File change map</h2>
+      <table>
+        <thead><tr><th>File</th><th>Change</th><th>What</th></tr></thead>
+        <tbody>
+          <tr><td><code>categories.js</code></td><td><span class="tag change">rename + rewrite</span></td><td>&rarr; <code>pipelines.js</code>; static array replaced by a <code>run_metadata</code> query; filter script matches repo+pipeline instead of a substring token</td></tr>
+          <tr><td><code>ingest-watcher.js</code></td><td><span class="tag change">extended</span></td><td>local <code>fs.watch</code> path kept for dev; new blob-sync mode added alongside it</td></tr>
+          <tr><td><code>server.js</code></td><td><span class="tag change">extended</span></td><td>reads new storage env vars, starts blob-sync when configured, passes <code>db</code> into the new pipeline router</td></tr>
+          <tr><td><code>lib/run-metadata.js</code></td><td><span class="tag new">new</span></td><td>owns the sidecar table: schema, upsert, legacy fallback, group-by query</td></tr>
+          <tr><td><code>lib/blob-sync.js</code></td><td><span class="tag new">new</span></td><td>wraps <code>@azure/storage-blob</code>; list, diff, download, delegate to <code>ingestDirectory()</code></td></tr>
+          <tr><td><code>package.json</code></td><td><span class="tag change">dependency added</span></td><td><code>@azure/storage-blob</code></td></tr>
+          <tr><td><code>add-result.ps1</code>, <code>deploy.ps1</code></td><td><span class="tag keep">kept as-is</span></td><td>still useful for local/manual/ad-hoc sharing</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="rollout">
+      <h2><span class="num">10</span>Rollout phases</h2>
+      <ol class="phases">
+        <li><strong>Data model &amp; manifest contract</strong><span> &mdash; add <code>lib/run-metadata.js</code>, the sidecar table, manifest parsing, legacy fallback for existing runs.</span></li>
+        <li><strong>Blob ingestion</strong><span> &mdash; add <code>lib/blob-sync.js</code> + dependency; wire into <code>server.js</code> behind env vars; local <code>fs.watch</code> path keeps working side-by-side.</span></li>
+        <li><strong>UI</strong><span> &mdash; rename/rewrite to <code>pipelines.js</code>; data-driven index page; <code>/p/:repo/:pipeline</code> route.</span></li>
+        <li><strong>CI integration</strong><span> &mdash; add an "upload results + manifest.json to blob" step to azure-rest-api-specs' eval pipelines, then to language-repo pipelines as they onboard.</span></li>
+        <li><strong>Cutover</strong><span> &mdash; point the deployed App Service at the blob container; manual Kudu upload path remains available but is no longer required for CI-produced runs.</span></li>
+      </ol>
+    </section>
+
+    <section id="questions">
+      <h2><span class="num">11</span>Open questions &mdash; blocking implementation</h2>
+      <div class="question"><span class="qnum">1</span><strong>Storage account</strong><p>Use an existing storage account/subscription, or provision a new one? Which subscription owns it?</p></div>
+      <div class="question"><span class="qnum">2</span><strong>CI &rarr; Blob authentication</strong><p>Managed identity / workload identity federation from the ADO pipeline, a SAS token in a variable group, or a connection string secret?</p></div>
+      <div class="question"><span class="qnum">3</span><strong>Manifest contract completeness</strong><p>Is <code>{repo, pipeline, branch, buildId, buildUrl}</code> sufficient, or do we also need e.g. <code>tier</code>/<code>area</code> for filtering?</p></div>
+      <div class="question"><span class="qnum">4</span><strong>Legacy local results</strong><p>Keep ingesting the local <code>results/</code> folder indefinitely alongside blob, or is blob meant to fully replace it once live?</p></div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Draft for review &mdash; no code has been written against <code>azure-typespec-author-dashboard</code> for this design yet. Nothing here is committed or pushed.
+</footer>
+
+</body>
+</html>

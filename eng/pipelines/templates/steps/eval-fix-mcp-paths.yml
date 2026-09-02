@@ -1,0 +1,22 @@
+# Repo-local preEvalTemplate: runs per shard right before `vally eval`, rewriting the MCP server
+# DLL paths in .github/skills/.vally.yaml from repo-relative to absolute.
+#
+# Why this is needed: since ~2026-07-17 the pinned copilot-sdk spawns each MCP stdio server with its
+# cwd set to the per-stimulus temp workDir (/tmp/vally-eval-*), not the vally invocation dir
+# (.github/skills). `dotnet` then can't resolve the relative "../../artifacts/mcp/.../*.dll", the
+# server closes during `initialize`, and every stimulus aborts with
+# "MCP server 'azure-sdk-mcp' failed to load: ... connection closed". vally never resolves MCP paths
+# itself (verified across loader/run/plan/applyEnvironment), so the path must be absolute to be
+# cwd-independent.
+#
+# The checked-in .vally.yaml keeps relative paths to stay in sync with azure-sdk-tools' copy; this
+# rewrite is CI-only and ephemeral (operates on the checked-out working copy).
+
+steps:
+  - script: |
+      set -e
+      f="$(Build.SourcesDirectory)/.github/skills/.vally.yaml"
+      sed -i "s#\.\./\.\./artifacts/mcp/#$(Build.SourcesDirectory)/artifacts/mcp/#g" "$f"
+      echo "Rewrote MCP DLL paths to absolute:"
+      grep -n "artifacts/mcp/" "$f" || true
+    displayName: 'Rewrite MCP DLL paths to absolute (cwd-independent)'
