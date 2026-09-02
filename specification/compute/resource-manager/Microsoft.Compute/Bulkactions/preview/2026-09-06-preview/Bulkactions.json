@@ -473,62 +473,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/acknowledgeBulkOperationErrors": {
-      "post": {
-        "operationId": "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors",
-        "description": "BulkAcknowledgeOperationErrors: Acknowledge bulk operation errors for a resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The list of operation ids to acknowledge",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AcknowledgeBulkOperationErrorsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AcknowledgeBulkOperationErrorsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_Example": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MinimumSet_Gen": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreate": {
       "get": {
         "operationId": "BulkCreate_ListByResourceGroup",
@@ -1314,64 +1258,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
           "itemName": "results"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/listBulkOperationErrors": {
-      "get": {
-        "operationId": "VirtualMachineBulkOperations_BulkListOperationErrors",
-        "description": "BulkListOperationErrors: List bulk operation errors for a resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "lookbackInMinutes",
-            "in": "query",
-            "description": "The number of minutes to look back for errors.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ListBulkOperationErrorsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineBulkOperations_BulkListOperationErrors_Example": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2950,54 +2836,6 @@
     }
   },
   "definitions": {
-    "AcknowledgeBulkOperationErrorsRequest": {
-      "type": "object",
-      "description": "The request to acknowledge bulk operation errors",
-      "properties": {
-        "operationIds": {
-          "type": "array",
-          "description": "The set of operation ids to acknowledge.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "operationIds"
-      ]
-    },
-    "AcknowledgeBulkOperationErrorsResponse": {
-      "type": "object",
-      "description": "The response from acknowledging bulk operation errors",
-      "properties": {
-        "acknowledged": {
-          "type": "array",
-          "description": "The set of operation ids that were newly acknowledged",
-          "items": {
-            "type": "string"
-          }
-        },
-        "notFound": {
-          "type": "array",
-          "description": "The set of operation ids that were not found in the completed operations store",
-          "items": {
-            "type": "string"
-          }
-        },
-        "skipped": {
-          "type": "array",
-          "description": "The set of operation ids that were skipped because they were already acknowledged, not failed, or belong to a different scope",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "acknowledged",
-        "notFound",
-        "skipped"
-      ]
-    },
     "AdditionalCapabilities": {
       "type": "object",
       "description": "Enables or disables a capability on the virtual machine or virtual machine scale set.",
@@ -5175,28 +5013,6 @@
           }
         ]
       }
-    },
-    "ListBulkOperationErrorsResponse": {
-      "type": "object",
-      "description": "The response from listing bulk operation errors",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ResourceOperation items on this page",
-          "items": {
-            "$ref": "#/definitions/ResourceOperation"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "LocationBasedBulkCreate": {
       "type": "object",
