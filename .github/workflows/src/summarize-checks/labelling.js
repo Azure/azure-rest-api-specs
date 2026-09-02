@@ -856,9 +856,9 @@ const rulesPri0dataPlane = [
     anyRequiredLabels: ["data-plane-review-signoff"],
     troubleshootingGuide:
       `Your PR requires an API stewardship review as it introduces a new data-plane API version (label: <code>data-plane-review-requested</code>). ` +
-      `Email ${href("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")} with your PR link to request an ` +
-      `${href("offline REST API review", "https://eng.ms/docs/products/azure-developer-experience/design/api-review#requesting-an-offline-rest-api-review")}. ` +
-      `A data-plane API reviewer signs off by applying the protected <code>data-plane-review-signoff</code> label.`,
+      `A data-plane API reviewer is assigned from the pool and unblocks merge by applying the protected <code>data-plane-review-signoff</code> label. ` +
+      `To request or expedite the ${href("offline REST API review", "https://eng.ms/docs/products/azure-developer-experience/design/api-review#requesting-an-offline-rest-api-review")}, ` +
+      `email ${href("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")} with your PR link.`,
   },
 ];
 
