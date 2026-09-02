@@ -1343,7 +1343,7 @@ model ProviderRegistrationProperties
   /**
    * The resource provider lifecycle information.
    */
-  @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_09_01_preview)
   lifecycleInfo?: ResourceProviderLifecycleInfo;
 }
 
@@ -1893,7 +1893,7 @@ model ResourceProviderManagement {
   /**
    * List of claims to approve or reject feature registration.
    */
-  @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_09_01_preview)
   featureApprovalClaims?: string[];
 }
 
@@ -2379,7 +2379,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The resource type lifecycle information.
    */
-  @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_09_01_preview)
   lifecycleInfo?: ResourceTypeLifecycleInfo;
 
   /**
@@ -2602,6 +2602,7 @@ model ResourceTypeRegistrationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Endpoint registration operations complete synchronously and do not expose provisioning state."
 model ResourceTypeEndpoint {
   /**
    * Resource type endpoint kind. This Metadata is also used by portal/tooling/etc to render different UX experiences for resources of the same type.
@@ -2760,7 +2761,7 @@ model SwaggerSpecification {
   /**
    * The swagger specification lifecycle information.
    */
-  @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_09_01_preview)
   lifecycleInfo?: SwaggerSpecificationLifecycleInfo;
 }
 
@@ -3947,7 +3948,7 @@ model ResourceProviderManifest {
    * The token auth configuration.
    */
   @added(Versions.v2025_10_01)
-  @removed(Versions.v2026_02_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   tokenAuthConfiguration?: TokenAuthConfiguration;
 }
 
@@ -4223,6 +4224,20 @@ model CheckinManifestParams {
    * The baseline ARM manifest location supplied to the checkin manifest operation.
    */
   baselineArmManifestLocation: string;
+
+  /**
+   * The URI of the API specification to check in.
+   */
+  @added(Versions.v2026_09_01_preview)
+  swaggerLink?: url;
+
+  /**
+   * The comment associated with the manifest check-in.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @maxLength(200)
+  @pattern("^[\\u0020-\\u007E\\u00A0-\\uFFFF]*$")
+  checkinComment?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4271,6 +4286,24 @@ model NotificationEndpoint {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NotificationRegistrationArrayResponseWithContinuation
   is Azure.Core.Page<NotificationRegistration>;
+
+/**
+ * A page of endpoint registrations.
+ */
+@added(Versions.v2026_09_01_preview)
+model EndpointRegistrationArrayResponseWithContinuation {
+  /**
+   * The endpoint registrations in this page.
+   */
+  @pageItems
+  value?: EndpointRegistration[];
+
+  /**
+   * The link to the next page of endpoint registrations.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Properties of an Operation.
@@ -5105,6 +5138,12 @@ model AppliedManifestInfo {
    * Commit id of manifest being applied.
    */
   appliedCommitId?: string;
+
+  /**
+   * The root resource provider namespace.
+   */
+  @added(Versions.v2026_09_01_preview)
+  rootProviderNamespace?: string;
 }
 
 /**
@@ -5250,9 +5289,33 @@ model ManifestInfoProperties {
 }
 
 /**
+ * Properties supplied when creating or updating a manifest.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The manifest request is processed synchronously and does not expose provisioning state."
+@added(Versions.v2026_09_01_preview)
+model ManifestPutContentProperties {
+  /**
+   * The manifest content.
+   */
+  manifest?: string;
+
+  /**
+   * The URI from which the manifest content is read.
+   */
+  manifestUri?: url;
+
+  /**
+   * The comment associated with the manifest check-in.
+   */
+  @maxLength(200)
+  @pattern("^[\\u0020-\\u007E\\u00A0-\\uFFFF]*$")
+  checkinComment?: string;
+}
+
+/**
  * The isolation type.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 union IsolationType {
   string,
 
@@ -5270,7 +5333,7 @@ union IsolationType {
 /**
  * The partner category.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 union PartnerCategory {
   string,
 
@@ -5288,7 +5351,7 @@ union PartnerCategory {
 /**
  * The lifecycle stage.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 union LifecycleStage {
   string,
 
@@ -5321,7 +5384,7 @@ union LifecycleStage {
 /**
  * Resource provider lifecycle information.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ResourceProviderLifecycleInfo {
   /**
    * The isolation type.
@@ -5347,7 +5410,7 @@ model ResourceProviderLifecycleInfo {
 /**
  * Resource type lifecycle information.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 model ResourceTypeLifecycleInfo {
   /**
    * The lifecycle stage.
@@ -5358,7 +5421,7 @@ model ResourceTypeLifecycleInfo {
 /**
  * Swagger specification lifecycle information.
  */
-@added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_09_01_preview)
 model SwaggerSpecificationLifecycleInfo {
   /**
    * The lifecycle stage.

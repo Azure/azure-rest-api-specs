@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "resourceType": "employees",
+    "nestedResourceTypeFirst": "profiles",
+    "nestedResourceTypeSecond": "preferences",
+    "api-version": "2026-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "Lists endpoint registrations for a second-level nested resource type.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourcetypeRegistrations/employees/resourcetypeRegistrations/profiles/resourcetypeRegistrations/preferences/endpoints/primary",
+            "name": "primary",
+            "type": "Microsoft.ProviderHub/providerRegistrations/resourcetypeRegistrations/resourcetypeRegistrations/resourcetypeRegistrations/endpoints",
+            "properties": {
+              "kind": "Managed",
+              "apiVersions": [
+                "2026-01-01"
+              ],
+              "locations": [
+                "eastus"
+              ],
+              "endpointUri": "https://api.contoso.com/"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "EndpointRegistrations_ListByResourceTypeRegistrationsNestedResourceTypeSecond",
+  "title": "EndpointRegistrations_ListByResourceTypeRegistrationsNestedResourceTypeSecond"
+}
