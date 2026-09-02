@@ -51,6 +51,9 @@ model AdapterDeployment
 model AdapterDeploymentProperties {
   /**
    * The immutable Project Models version produced by Foundry fine-tuning.
+   * The identifier uses the
+   * `azureai://accounts/{account}/projects/{project}/models/{model}/versions/{version}`
+   * format.
    * The service validates LoRA weight type, protected status, provenance,
    * compatibility metadata, and registration state.
    */
