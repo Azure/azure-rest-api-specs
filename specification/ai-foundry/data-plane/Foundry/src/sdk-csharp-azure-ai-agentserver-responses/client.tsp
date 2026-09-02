@@ -11,7 +11,8 @@ namespace OpenAI {
   alias ItemResourceType = OutputItemType;
 
   @@withoutOmittedProperties(Item, "type");
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "The AgentServer input contract includes program replay items."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "The widened discriminator is deliberately anonymous; declaring it as a named union would add a schema to the emitted OpenAPI contract, changing the published wire shape."
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties widens the `type` discriminator to admit the `program` and `program_output` replay items that the AgentServer input contract accepts; without it the discriminator degrades to a plain string."
   @@copyProperties(
     Item,
     {
@@ -21,10 +22,11 @@ namespace OpenAI {
 }
 
 // Map Azure.AI.Projects augmentation types into our SDK namespace
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties is the sanctioned mechanism for augmenting an imported model from a client.tsp customization; used here to make `logprobs` optional, to stamp the `object` literal on DeleteResponseResult, and to add `id` to the Azure-specific tool call items."
 @clientNamespace("Azure.AI.AgentServer.Responses.Models")
 namespace Azure.AI.Projects {
   // Propagate "sequence_number" to base of stream events
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "`sequence_number` must stay OpenAI.integer: the upstream leaf events inherit that exact type, and int32 fails with override-property-mismatch."
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties propagates `sequence_number` onto the stream event base type; upstream OpenAI declares it only on the leaf events."
   @@copyProperties(
     OpenAI.ResponseStreamEvent,
     {
@@ -34,138 +36,161 @@ namespace Azure.AI.Projects {
 
   // Propagate "id" to Azure.AI.Projects OutputItem types that lack it.
   // The OpenAI base types already have id; these are Azure-specific extensions.
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.A2AToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.A2AToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.AzureAISearchToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.AzureAISearchToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.AzureFunctionToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.AzureFunctionToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.BingCustomSearchToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.BingCustomSearchToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.BingGroundingToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.BingGroundingToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.BrowserAutomationToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.BrowserAutomationToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.FabricDataAgentToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.FabricDataAgentToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.MemoryCommandToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.MemoryCommandToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.MemorySearchToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.OpenApiToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.OpenApiToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.SharepointGroundingToolCall,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.SharepointGroundingToolCallOutput,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.StructuredOutputsOutputItem,
     {
       id: string,
     }
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
   @@copyProperties(
     Azure.AI.Projects.WorkflowActionOutputItem,
     {
@@ -207,6 +232,8 @@ namespace Azure.AI.Projects {
   // string or an array of content parts (string | InputMessageContentList).
   // Remove the array-only content and replace with the union type.
   @@withoutOmittedProperties(OpenAI.ItemMessage, "content");
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "The string-or-array shorthand is deliberately anonymous; declaring it as a named union would add a schema to the emitted OpenAPI contract, changing the published wire shape."
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties widens `content` to `string | MessageContent[]`; the Responses wire protocol accepts the string shorthand that upstream OpenAI declares as array-only."
   @@copyProperties(
     OpenAI.ItemMessage,
     {
@@ -217,6 +244,7 @@ namespace Azure.AI.Projects {
   // Match the Responses API behavior, which accepts assistant output text
   // without token log probabilities.
   @@withoutOmittedProperties(OpenAI.OutputContentOutputTextContent, "logprobs");
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties re-adds `logprobs` as optional after @withoutOmittedProperties removed the required upstream declaration; without it `logprobs` becomes a required constructor parameter on the emitted model."
   @@copyProperties(
     OpenAI.OutputContentOutputTextContent,
     {
@@ -227,6 +255,7 @@ namespace Azure.AI.Projects {
     OpenAI.MessageContentOutputTextContent,
     "logprobs"
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties re-adds `logprobs` as optional after @withoutOmittedProperties removed the required upstream declaration; without it `logprobs` becomes a required constructor parameter on the emitted model."
   @@copyProperties(
     OpenAI.MessageContentOutputTextContent,
     {
@@ -237,6 +266,7 @@ namespace Azure.AI.Projects {
     OpenAI.OutputMessageContentOutputTextContent,
     "logprobs"
   );
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties re-adds `logprobs` as optional after @withoutOmittedProperties removed the required upstream declaration; without it `logprobs` becomes a required constructor parameter on the emitted model."
   @@copyProperties(
     OpenAI.OutputMessageContentOutputTextContent,
     {
@@ -259,6 +289,7 @@ namespace Azure.AI.Projects {
   // Remove "object" from DeleteResponseResult to work around codegen bug
   // (TypeSpec emitter generates `= "response"` string default for ResponseObjectType enum)
   @@withoutOmittedProperties(Azure.AI.Projects.DeleteResponseResult, "object");
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties stamps the `object: \"response\"` literal that the delete envelope must return; it is not declared on the upstream model."
   @@copyProperties(
     Azure.AI.Projects.DeleteResponseResult,
     {
