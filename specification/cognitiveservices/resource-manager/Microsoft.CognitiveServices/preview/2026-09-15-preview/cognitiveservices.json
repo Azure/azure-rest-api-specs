@@ -17054,6 +17054,19 @@
       ],
       "x-ms-discriminator-value": "FQDN"
     },
+    "GatedModelAccessProperties": {
+      "type": "object",
+      "description": "Gated model access configuration for a managed compute deployment.",
+      "properties": {
+        "connection": {
+          "type": "string",
+          "description": "The project-scoped connection used to authorize access to a gated model during deployment creation.\nThe expected format is projects/{projectName}/connections/{connectionName}."
+        }
+      },
+      "required": [
+        "connection"
+      ]
+    },
     "HostedAgentDeployment": {
       "type": "object",
       "description": "Represents a hosted agent deployment where the underlying infrastructure is owned by the platform.",
@@ -17593,6 +17606,14 @@
         "versionUpgradeOption": {
           "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
           "description": "Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "gatedModelAccess": {
+          "$ref": "#/definitions/GatedModelAccessProperties",
+          "description": "Configuration used to authorize access to a gated model during deployment creation.",
           "x-ms-mutability": [
             "read",
             "create"
