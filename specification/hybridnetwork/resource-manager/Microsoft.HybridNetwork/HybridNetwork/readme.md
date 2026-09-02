@@ -63,9 +63,9 @@ suppressions:
   - code: PatchIdentityProperty
     from: openapi.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}"].patch
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}"].patch
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/siteNetworkServices/{siteNetworkServiceName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}"].patch.parameters[*]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}"].patch.parameters[*]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/siteNetworkServices/{siteNetworkServiceName}"].patch.parameters[*]
     reason: >
       These PATCH operations are tags-only updates (TagsObject request body) carried forward
       unchanged from the API version 2024-04-15. Identity is not updatable through these
@@ -73,7 +73,7 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPatch
     from: openapi.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactVersions/{artifactVersionName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactVersions/{artifactVersionName}"].patch.responses["200"]
     reason: >
       Pre-existing. ProxyArtifact_UpdateState is carried forward unchanged from the API version
       2024-04-15. Its 200 response returns the artifact state overview, which has no

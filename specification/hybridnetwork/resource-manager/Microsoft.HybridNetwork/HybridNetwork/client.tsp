@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-namespace Microsoft.HybridNetwork;
+using Microsoft.HybridNetwork;
 using Azure.ResourceManager;
 using Azure.Core;
 using TypeSpec.Rest;
