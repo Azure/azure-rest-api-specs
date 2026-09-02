@@ -479,9 +479,16 @@ model HealthReportPayload {
   additionalContext?: string4096;
 }
 
-@doc("Health-report ingestion request was accepted.")
-model IngestHealthReportAcceptedResult {
-  ...Azure.Core.Foundations.AcceptedResponse;
+@doc("Confirmation that a health report was durably accepted for processing.")
+model IngestHealthReportResponse {}
+
+@doc("Health-report ingestion completed successfully.")
+model IngestHealthReportResult {
+  ...TypeSpec.Http.OkResponse;
+
+  @doc("Confirmation that the report was durably accepted into the ingestion pipeline.")
+  @body
+  body: IngestHealthReportResponse;
 }
 
 @error
@@ -530,11 +537,10 @@ model ServiceUnavailableError is Azure.Core.Foundations.ErrorResponse {
   retryAfter?: string;
 }
 
-@route("/api")
 interface Model {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the implemented data-plane contract ('status'); renaming would diverge from the deployed service."
   @doc("Return whether the health model exists and its current health state.")
-  @route("/status")
+  @route("/api")
   @get
   status is RpcOperation<
     {},
@@ -577,7 +583,6 @@ interface EntityTransitionHistory {
   >;
 }
 
-@route("/api")
 interface Entity {
   @doc("Return the current diagnostic snapshot for an entity.")
   get is EntityReadOperations.ResourceRead<EntityDiagnosticSnapshot>;
@@ -682,19 +687,35 @@ interface DataAnnotations {
   >;
 }
 
-@route("/api/entities/{entityName}/healthReports")
 interface HealthReportIngestion {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Health report ingestion is an asynchronous fire-and-forget submission endpoint under '/healthReports'; no resource-lifecycle template preserves this wire contract."
-  @doc("Ingest a health report for a specific signal on an entity.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Health report ingestion must keep the deployed '/healthReports' subpath and accepts a report into a durable asynchronous processing pipeline."
+  @doc("""
+    Durably accept a health report for asynchronous processing.
+    A successful response confirms that the report is safely queued, not that downstream health evaluation has completed.
+    Use the signal history and entity diagnostic operations to observe the resulting health state.
+    Retrying the same logical submission with the same repeatability headers does not ingest the report twice.
+    """)
+  @route("/api/entities/{entityName}/healthReports")
   @post
   ingestHealthReport is Operation<
     Azure.Core.Foundations.ItemKeysOf<EntityDiagnosticSnapshot> & {
+      ...Azure.Core.Traits.Private.TraitProperties<
+        Azure.Core.Traits.SupportsRepeatableRequests,
+        Azure.Core.Traits.TraitLocation.Parameters,
+        Azure.Core.Traits.TraitContext.Action
+      >;
+
       @doc("Health report payload. Must not exceed 32 KiB (32768 bytes).")
       @body
       body: HealthReportPayload;
     },
-    IngestHealthReportAcceptedResult,
-    {},
+    IngestHealthReportResult &
+      Azure.Core.Traits.Private.TraitProperties<
+        Azure.Core.Traits.SupportsRepeatableRequests,
+        Azure.Core.Traits.TraitLocation.Response,
+        Azure.Core.Traits.TraitContext.Action
+      >,
+    Azure.Core.Traits.SupportsRepeatableRequests,
     | BadRequestError
     | ModelNotFoundError
     | PayloadTooLargeError
