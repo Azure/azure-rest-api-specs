@@ -53,16 +53,17 @@ model EvaluatorDiagnosticMetric {
   @doc("Whether and how the metric can be interpreted.")
   status: EvaluatorDiagnosticMetricStatus;
 
-  @doc("The point estimate when the metric is estimable.")
+  @doc("The point estimate when the metric is estimable. Its valid range is defined by the owning statistic and documented on that property.")
   value?: float64;
 
-  @doc("The number of comparable evidence units.")
+  @doc("The non-negative number of comparable evidence units.")
+  @minValue(0)
   sample_count: int32;
 
-  @doc("The lower bound from the registered uncertainty procedure.")
+  @doc("The lower bound from the registered uncertainty procedure, in the same documented range as the point estimate.")
   lower_bound?: float64;
 
-  @doc("The upper bound from the registered uncertainty procedure.")
+  @doc("The upper bound from the registered uncertainty procedure, in the same documented range as the point estimate.")
   upper_bound?: float64;
 }
 
@@ -73,8 +74,7 @@ model EvaluatorDiagnosticVersionSnapshot {
   version: string;
 
   @doc("The verified lowercase 64-character SHA-256 functional content hash.")
-  @pattern("^[0-9a-f]{64}$")
-  content_hash: string;
+  content_hash: Sha256Hash;
 
   @doc("Whether the exact numbered version was a draft when the diagnostic was computed.")
   draft: boolean;
@@ -100,10 +100,10 @@ union HumanEvaluatorAgreementAnnotationSourceType {
   annotated_traces: "annotated_traces",
 }
 
-@doc("The base human annotation source for a human-evaluator agreement job.")
+@doc("A human annotation source for a human-evaluator agreement job.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model HumanEvaluatorAgreementAnnotationSourceBase {
+model HumanEvaluatorAgreementAnnotationSource {
   @doc("The annotation source type.")
   type: HumanEvaluatorAgreementAnnotationSourceType;
 }
@@ -111,7 +111,7 @@ model HumanEvaluatorAgreementAnnotationSourceBase {
 @doc("An immutable registered dataset containing human annotations.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model HumanEvaluatorAgreementDatasetSource
-  extends HumanEvaluatorAgreementAnnotationSourceBase {
+  extends HumanEvaluatorAgreementAnnotationSource {
   type: HumanEvaluatorAgreementAnnotationSourceType.dataset;
 
   @doc("The immutable registered annotation dataset.")
@@ -121,7 +121,7 @@ model HumanEvaluatorAgreementDatasetSource
 @doc("Human annotations associated with traces in the current project's configured Application Insights resource. Annotation time, not trace creation time, controls inclusion.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model HumanEvaluatorAgreementAnnotatedTracesSource
-  extends HumanEvaluatorAgreementAnnotationSourceBase {
+  extends HumanEvaluatorAgreementAnnotationSource {
   type: HumanEvaluatorAgreementAnnotationSourceType.annotated_traces;
 
   @doc("The unique agent ID used to filter annotated traces. Provide `agent_id` or `agent_name`; at least one is required. If both are supplied, they must identify the same agent.")
@@ -140,14 +140,6 @@ model HumanEvaluatorAgreementAnnotatedTracesSource
   annotation_end_time?: FoundryTimestamp;
 }
 
-@doc("A human annotation source for human-evaluator agreement.")
-@oneOf
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-union HumanEvaluatorAgreementAnnotationSource {
-  dataset: HumanEvaluatorAgreementDatasetSource,
-  annotated_traces: HumanEvaluatorAgreementAnnotatedTracesSource,
-}
-
 @doc("The registered dataset snapshot used by a completed evaluator diagnostic.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model EvaluatorDiagnosticDatasetSnapshot {
@@ -158,25 +150,22 @@ model EvaluatorDiagnosticDatasetSnapshot {
   version: string;
 
   @doc("The lowercase 64-character SHA-256 dataset content hash.")
-  @pattern("^[0-9a-f]{64}$")
-  content_hash: string;
+  content_hash: Sha256Hash;
 
   @doc("The registered dataset or annotation schema version.")
   schema_version: string;
 
   @doc("The lowercase 64-character SHA-256 hash of the stable item/data mapping.")
-  @pattern("^[0-9a-f]{64}$")
-  mapping_hash: string;
+  mapping_hash: Sha256Hash;
 
   @doc("The lowercase 64-character SHA-256 annotation-guidance content hash, when the dataset contains agreement labels.")
-  @pattern("^[0-9a-f]{64}$")
-  guidance_content_hash?: string;
+  guidance_content_hash?: Sha256Hash;
 }
 
-@doc("The base frozen human annotation source snapshot.")
+@doc("The frozen human annotation source used by a completed human-evaluator agreement diagnostic.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model HumanEvaluatorAgreementAnnotationSourceSnapshotBase {
+model HumanEvaluatorAgreementAnnotationSourceSnapshot {
   @doc("The annotation source type.")
   type: HumanEvaluatorAgreementAnnotationSourceType;
 }
@@ -184,7 +173,7 @@ model HumanEvaluatorAgreementAnnotationSourceSnapshotBase {
 @doc("The frozen registered-dataset source used for human-evaluator agreement.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model HumanEvaluatorAgreementDatasetSourceSnapshot
-  extends HumanEvaluatorAgreementAnnotationSourceSnapshotBase {
+  extends HumanEvaluatorAgreementAnnotationSourceSnapshot {
   type: HumanEvaluatorAgreementAnnotationSourceType.dataset;
 
   @doc("The frozen registered dataset identity.")
@@ -194,7 +183,7 @@ model HumanEvaluatorAgreementDatasetSourceSnapshot
 @doc("The frozen annotated-traces source used for human-evaluator agreement. It contains no trace, conversation, annotation, comment, or evidence identifiers or content.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model HumanEvaluatorAgreementAnnotatedTracesSourceSnapshot
-  extends HumanEvaluatorAgreementAnnotationSourceSnapshotBase {
+  extends HumanEvaluatorAgreementAnnotationSourceSnapshot {
   type: HumanEvaluatorAgreementAnnotationSourceType.annotated_traces;
 
   @doc("The resolved agent ID filter, when supplied.")
@@ -213,27 +202,16 @@ model HumanEvaluatorAgreementAnnotatedTracesSourceSnapshot
   annotation_end_time: FoundryTimestamp;
 
   @doc("The lowercase 64-character SHA-256 hash of the frozen effective annotation and trace evidence projection.")
-  @pattern("^[0-9a-f]{64}$")
-  content_hash: string;
+  content_hash: Sha256Hash;
 
   @doc("The canonical annotation schema version.")
   schema_version: string;
 
   @doc("The lowercase 64-character SHA-256 hash of the canonical annotation/trace mapping.")
-  @pattern("^[0-9a-f]{64}$")
-  mapping_hash: string;
+  mapping_hash: Sha256Hash;
 
   @doc("The lowercase 64-character SHA-256 annotation-guidance content hash.")
-  @pattern("^[0-9a-f]{64}$")
-  guidance_content_hash: string;
-}
-
-@doc("The frozen human annotation source used by a completed human-evaluator agreement diagnostic.")
-@oneOf
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-union HumanEvaluatorAgreementAnnotationSourceSnapshot {
-  dataset: HumanEvaluatorAgreementDatasetSourceSnapshot,
-  annotated_traces: HumanEvaluatorAgreementAnnotatedTracesSourceSnapshot,
+  guidance_content_hash: Sha256Hash;
 }
 
 @doc("An immutable evaluator or annotation scoring contract.")
@@ -246,8 +224,7 @@ model EvaluatorDiagnosticScoringContractReference {
   version: string;
 
   @doc("The lowercase 64-character SHA-256 contract content hash.")
-  @pattern("^[0-9a-f]{64}$")
-  content_hash: string;
+  content_hash: Sha256Hash;
 }
 
 @doc("A bounded reference to an evaluation run used by an evaluator diagnostic.")
@@ -263,8 +240,7 @@ model EvaluatorDiagnosticEvaluationRunReference {
   evaluator_version: string;
 
   @doc("The lowercase 64-character SHA-256 evaluator content hash executed by the run.")
-  @pattern("^[0-9a-f]{64}$")
-  evaluator_content_hash: string;
+  evaluator_content_hash: Sha256Hash;
 }
 
 @doc("The evidence sufficiency and compatibility outcome of a human-evaluator agreement diagnostic.")
@@ -354,9 +330,13 @@ model HumanEvaluatorApplicabilityAgreementSummary {
   @doc("Applicability-label support.")
   support: EvaluatorApplicabilitySupport;
 
-  @doc("Observed applicability agreement.")
+  @doc("Observed applicability agreement. The value must be between 0 and 1, inclusive.")
   observed_agreement: EvaluatorDiagnosticMetric;
 }
+
+@doc("Ordinal-score counts represented as a JSON object. Each key is the canonical decimal-string representation of a score allowed by the registered scoring contract, and each value is a non-negative item count.")
+@extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
+model EvaluatorOrdinalScoreDistribution is Record<int32>;
 
 @doc("Per-dimension ordinal-score agreement.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
@@ -370,26 +350,26 @@ model HumanEvaluatorDimensionAgreementSummary {
   @doc("Number of missing or abstained representations.")
   missing_or_abstained_count: int32;
 
-  @doc("Exact ordinal-score match rate.")
+  @doc("Exact ordinal-score match rate. The value must be between 0 and 1, inclusive.")
   exact_match: EvaluatorDiagnosticMetric;
 
-  @doc("Mean absolute ordinal-score error.")
+  @doc("Mean absolute ordinal-score error. The value must be between 0 and the registered ordinal-score span, inclusive.")
   mean_absolute_error: EvaluatorDiagnosticMetric;
 
-  @doc("Mean signed judge-minus-human score bias.")
+  @doc("Mean signed judge-minus-human score bias. The value must be between the negative and positive registered ordinal-score span, inclusive.")
   signed_bias: EvaluatorDiagnosticMetric;
 
-  @doc("Kendall tau-b rank agreement.")
+  @doc("Kendall tau-b rank agreement. The value must be between -1 and 1, inclusive.")
   kendall_tau_b: EvaluatorDiagnosticMetric;
 
-  @doc("Spearman rank agreement.")
+  @doc("Spearman rank agreement. The value must be between -1 and 1, inclusive.")
   spearman_rho: EvaluatorDiagnosticMetric;
 
-  @doc("Bounded human score counts keyed by score.")
-  human_score_distribution: Record<int32>;
+  @doc("Human annotation counts keyed by ordinal score.")
+  human_score_distribution: EvaluatorOrdinalScoreDistribution;
 
-  @doc("Bounded judge score counts keyed by score.")
-  judge_score_distribution: Record<int32>;
+  @doc("Evaluator counts keyed by ordinal score.")
+  judge_score_distribution: EvaluatorOrdinalScoreDistribution;
 }
 
 @doc("Centered rubric-profile agreement.")
@@ -398,16 +378,16 @@ model HumanEvaluatorProfileAgreementSummary {
   @doc("Number of common-applicable dimensions represented.")
   common_applicable_dimension_count: int32;
 
-  @doc("Centered weighted profile distance.")
+  @doc("Centered weighted profile distance. The value must be non-negative; its upper bound is derived from the registered scoring contract and dimension weights.")
   centered_weighted_profile_distance: EvaluatorDiagnosticMetric;
 
-  @doc("Judge-minus-human aggregate score difference.")
+  @doc("Judge-minus-human aggregate score difference. The valid signed range is derived from the registered aggregate-score span.")
   aggregate_score_difference: EvaluatorDiagnosticMetric;
 
   @doc("Number of aggregate-score collisions hiding profile divergence.")
   aggregate_collision_count: int32;
 
-  @doc("Aggregate-score collision rate.")
+  @doc("Aggregate-score collision rate. The value must be between 0 and 1, inclusive.")
   aggregate_collision_rate: EvaluatorDiagnosticMetric;
 }
 
@@ -420,10 +400,10 @@ model HumanEvaluatorDecisionDriverAgreementSummary {
   @doc("Why decision-driver agreement was not assessed.")
   reason?: string;
 
-  @doc("Exact primary-driver match rate.")
+  @doc("Exact primary-driver match rate. The value must be between 0 and 1, inclusive.")
   primary_driver_exact_match?: EvaluatorDiagnosticMetric;
 
-  @doc("Registered top-k driver overlap.")
+  @doc("Registered top-k driver overlap. The value must be between 0 and 1, inclusive.")
   top_k_overlap?: EvaluatorDiagnosticMetric;
 }
 
@@ -449,16 +429,16 @@ model HumanEvaluatorVerdictAgreementSummary {
   @doc("Pass/fail confusion counts.")
   confusion: EvaluatorVerdictConfusion;
 
-  @doc("Observed pass/fail agreement.")
+  @doc("Observed pass/fail agreement. The value must be between 0 and 1, inclusive.")
   observed_agreement: EvaluatorDiagnosticMetric;
 
-  @doc("Gwet AC1 when both classes have estimable support.")
+  @doc("Gwet AC1 when both classes have estimable support. The value must be between -1 and 1, inclusive.")
   gwet_ac1: EvaluatorDiagnosticMetric;
 
-  @doc("Judge-pass rate on human-fail cases.")
+  @doc("Judge-pass rate on human-fail cases. The value must be between 0 and 1, inclusive.")
   false_pass_rate: EvaluatorDiagnosticMetric;
 
-  @doc("Judge-fail rate on human-pass cases.")
+  @doc("Judge-fail rate on human-pass cases. The value must be between 0 and 1, inclusive.")
   false_fail_rate: EvaluatorDiagnosticMetric;
 }
 
@@ -471,7 +451,7 @@ model HumanEvaluatorAgreementRepeatabilitySummary {
   @doc("Whether the repeat used the exact registered configuration.")
   configuration_match: boolean;
 
-  @doc("Final-verdict agreement between the primary and repeat.")
+  @doc("Final-verdict agreement between the primary and repeat. The value must be between 0 and 1, inclusive.")
   final_verdict_agreement: EvaluatorDiagnosticMetric;
 
   @doc("Bounded limitations.")
@@ -645,7 +625,7 @@ union EvaluatorDiagnosticEvidenceScope {
 
 @doc("A completed human-evaluator agreement diagnostic.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model HumanEvaluatorAgreementDiagnostic extends EvaluatorDiagnosticBase {
+model HumanEvaluatorAgreementDiagnostic extends EvaluatorDiagnostic {
   type: EvaluatorDiagnosticType.human_evaluator_agreement;
 
   @doc("The exact evaluator version analyzed.")
@@ -693,7 +673,7 @@ model HumanEvaluatorAgreementDiagnostic extends EvaluatorDiagnosticBase {
 
 @doc("A completed comparison between two evaluator versions.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model RubricComparisonEvaluatorDiagnostic extends EvaluatorDiagnosticBase {
+model RubricComparisonEvaluatorDiagnostic extends EvaluatorDiagnostic {
   type: EvaluatorDiagnosticType.rubric_comparison;
 
   @doc("The exact baseline evaluator version.")
@@ -718,22 +698,6 @@ model RubricComparisonEvaluatorDiagnostic extends EvaluatorDiagnosticBase {
   limitations: string[];
 }
 
-@doc("A completed evaluator diagnostic.")
-@oneOf
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-union EvaluatorDiagnostic {
-  version_created: VersionCreatedDiagnosticChange,
-  dimension_added: DimensionAddedDiagnosticChange,
-  dimension_updated: DimensionUpdatedDiagnosticChange,
-  dimension_removed: DimensionRemovedDiagnosticChange,
-  definition_updated: DefinitionUpdatedDiagnosticChange,
-  health_computed: HealthComputedDiagnosticChange,
-  health_invalidated: HealthInvalidatedDiagnosticChange,
-  draft_status_updated: DraftStatusUpdatedDiagnostic,
-  human_evaluator_agreement: HumanEvaluatorAgreementDiagnostic,
-  rubric_comparison: RubricComparisonEvaluatorDiagnostic,
-}
-
 @doc("A flat page of completed evaluator diagnostics.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model CompletedEvaluatorDiagnosticsPage {
@@ -755,18 +719,15 @@ model CompletedEvaluatorDiagnosticsPage {
 @doc("Caller-supplied inputs for an evaluator diagnostic job.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model EvaluatorDiagnosticJobInputBase {
+model EvaluatorDiagnosticJobInputs {
   @doc("The requested diagnostic calculation.")
   type: EvaluatorDiagnosticJobType;
-
-  @doc("The evaluator name that owns the completed diagnostic.")
-  evaluator_name: string;
 }
 
 @doc("Inputs for a human-evaluator agreement diagnostic job.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model HumanEvaluatorAgreementDiagnosticJobInputs
-  extends EvaluatorDiagnosticJobInputBase {
+  extends EvaluatorDiagnosticJobInputs {
   type: EvaluatorDiagnosticJobType.human_evaluator_agreement;
 
   @doc("The exact immutable evaluator version to compare with human annotations.")
@@ -781,8 +742,7 @@ model HumanEvaluatorAgreementDiagnosticJobInputs
 
 @doc("Inputs for a rubric-comparison diagnostic job.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model RubricComparisonDiagnosticJobInputs
-  extends EvaluatorDiagnosticJobInputBase {
+model RubricComparisonDiagnosticJobInputs extends EvaluatorDiagnosticJobInputs {
   type: EvaluatorDiagnosticJobType.rubric_comparison;
 
   @doc("The exact immutable baseline evaluator version.")
@@ -796,14 +756,6 @@ model RubricComparisonDiagnosticJobInputs
 
   @doc("The evaluation granularity. Required only when evaluator and dataset metadata do not resolve one unique shared level.")
   evaluation_level?: EvaluationLevel;
-}
-
-@doc("Caller-supplied inputs for an evaluator diagnostic job.")
-@oneOf
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-union EvaluatorDiagnosticJobInputs {
-  human_evaluator_agreement: HumanEvaluatorAgreementDiagnosticJobInputs,
-  rubric_comparison: RubricComparisonDiagnosticJobInputs,
 }
 
 @doc("The completed diagnostic published by a successful evaluator diagnostic job.")

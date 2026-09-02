@@ -14,6 +14,10 @@ const EvaluatorsRequiredPreviews = #{
   required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
 };
 
+@doc("A lowercase 64-character SHA-256 hexadecimal digest.")
+@pattern("^[0-9a-f]{64}$")
+scalar Sha256Hash extends string;
+
 @doc("The category of the evaluator")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorCategory {
@@ -393,7 +397,7 @@ union EvaluatorDiagnosticType {
 @doc("The shared fields for every completed evaluator diagnostic.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model EvaluatorDiagnosticBase {
+model EvaluatorDiagnostic {
   @doc("The stable server-assigned diagnostic identifier.")
   id: string;
 
@@ -410,8 +414,7 @@ model EvaluatorDiagnosticBase {
   explanation?: string;
 
   @doc("The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.")
-  @pattern("^[0-9a-f]{64}$")
-  content_hash: string;
+  content_hash: Sha256Hash;
 
   @doc("The diagnostic job that published this diagnostic. Omitted for service-produced lineage and health diagnostics.")
   source_job_id?: string;
@@ -423,7 +426,7 @@ model EvaluatorDiagnosticBase {
 @doc("The shared fields for completed evaluator lineage diagnostics.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model EvaluatorLineageDiagnosticBase extends EvaluatorDiagnosticBase {
+model EvaluatorLineageDiagnosticBase extends EvaluatorDiagnostic {
   @doc("The authenticated user or service responsible for the lineage event.")
   actor: EvaluatorDiagnosticActor;
 }
@@ -482,8 +485,7 @@ model EvaluatorGenerationSourceSnapshot {
   source_type: string;
 
   @doc("The lowercase 64-character SHA-256 source content hash.")
-  @pattern("^[0-9a-f]{64}$")
-  content_hash: string;
+  content_hash: Sha256Hash;
 
   @doc("How the source was used.")
   status: EvaluatorGenerationSourceUseStatus;
@@ -645,7 +647,7 @@ model DraftStatusUpdatedDiagnostic extends EvaluatorLineageDiagnosticBase {
 
 @doc("A diagnostic change recording a rubric health computation.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model HealthComputedDiagnosticChange extends EvaluatorDiagnosticBase {
+model HealthComputedDiagnosticChange extends EvaluatorDiagnostic {
   type: EvaluatorDiagnosticType.health_computed;
 
   @doc("The computed rubric health snapshot.")
@@ -663,7 +665,7 @@ model HealthComputedDiagnosticChange extends EvaluatorDiagnosticBase {
 
 @doc("A diagnostic change recording that a prior rubric health snapshot no longer applies.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model HealthInvalidatedDiagnosticChange extends EvaluatorDiagnosticBase {
+model HealthInvalidatedDiagnosticChange extends EvaluatorDiagnostic {
   type: EvaluatorDiagnosticType.health_invalidated;
 
   @doc("Component-level diagnostic details associated with the invalidation.")
@@ -960,8 +962,7 @@ model EvaluatorVersion {
 
   @doc("The stable lowercase 64-character SHA-256 digest of this immutable version's canonical functional content. Equal values indicate canonical functional-content equality, not semantic equivalence. Catalog metadata and `draft` are excluded. This value is not an HTTP ETag or authenticity proof.")
   @visibility(Lifecycle.Read)
-  @pattern("^[0-9a-f]{64}$")
-  content_hash: string;
+  content_hash: Sha256Hash;
 
   @visibility(Lifecycle.Read)
   @doc("Creator of the evaluator")

@@ -5501,354 +5501,6 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluationTaxonomyUpdate'
         description: The evaluation taxonomy.
-  /evaluator_diagnostic_jobs:
-    post:
-      operationId: EvaluatorDiagnosticJobs_create
-      summary: Create an evaluator diagnostic job
-      description: Creates an evaluator diagnostic job and returns the queued job.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: Operation-Id
-          in: header
-          required: false
-          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          headers:
-            Operation-Location:
-              required: true
-              description: URL to poll for the job status.
-              schema:
-                type: string
-            Location:
-              required: true
-              description: URL of the created job resource.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluatorDiagnosticJob'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorDiagnosticJobs
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EvaluatorDiagnosticJob'
-        description: The job to create.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    get:
-      operationId: EvaluatorDiagnosticJobs_list
-      summary: List evaluator diagnostic jobs
-      description: Lists evaluator diagnostic jobs, including non-terminal and failed jobs.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: evaluator_name
-          in: query
-          required: false
-          description: Filter jobs for one evaluator name.
-          schema:
-            type: string
-          explode: false
-        - name: status
-          in: query
-          required: false
-          description: Filter jobs by lifecycle status.
-          schema:
-            $ref: '#/components/schemas/JobStatus'
-          explode: false
-        - name: type
-          in: query
-          required: false
-          description: Filter jobs by requested diagnostic type.
-          schema:
-            $ref: '#/components/schemas/EvaluatorDiagnosticJobType'
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/EvaluatorDiagnosticJob'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorDiagnosticJobs
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-  /evaluator_diagnostic_jobs/{jobId}:
-    get:
-      operationId: EvaluatorDiagnosticJobs_get
-      summary: Get an evaluator diagnostic job
-      description: Gets one evaluator diagnostic job by its identifier.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            Retry-After:
-              required: false
-              description: Recommended number of seconds to wait before polling again.
-              schema:
-                type: integer
-                format: int32
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluatorDiagnosticJob'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorDiagnosticJobs
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    delete:
-      operationId: EvaluatorDiagnosticJobs_delete
-      summary: Delete an evaluator diagnostic job
-      description: Deletes an evaluator diagnostic job and job-owned temporary artifacts. A completed diagnostic published by the job is retained.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job to delete.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorDiagnosticJobs
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-  /evaluator_diagnostic_jobs/{jobId}:cancel:
-    post:
-      operationId: EvaluatorDiagnosticJobs_cancel
-      summary: Cancel an evaluator diagnostic job
-      description: Cancels a queued or running evaluator diagnostic job.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job to cancel.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluatorDiagnosticJob'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorDiagnosticJobs
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluator_generation_jobs:
     post:
       operationId: EvaluatorGenerationJobs_create
@@ -6252,6 +5904,377 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Evaluators
+  /evaluators/{name}/diagnostic_jobs:
+    post:
+      operationId: EvaluatorDiagnosticJobs_create
+      summary: Create an evaluator diagnostic job
+      description: Creates an evaluator diagnostic job and returns the queued job.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorDiagnosticJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorDiagnosticJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluatorDiagnosticJob'
+        description: The evaluator diagnostic job to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: EvaluatorDiagnosticJobs_list
+      summary: List evaluator diagnostic jobs
+      description: Lists evaluator diagnostic jobs, including non-terminal and failed jobs.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter jobs by lifecycle status.
+          schema:
+            $ref: '#/components/schemas/JobStatus'
+          explode: false
+        - name: type
+          in: query
+          required: false
+          description: Filter jobs by requested diagnostic type.
+          schema:
+            $ref: '#/components/schemas/EvaluatorDiagnosticJobType'
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluatorDiagnosticJob'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorDiagnosticJobs
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+  /evaluators/{name}/diagnostic_jobs/{jobId}:
+    get:
+      operationId: EvaluatorDiagnosticJobs_get
+      summary: Get an evaluator diagnostic job
+      description: Gets one evaluator diagnostic job by its identifier.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: jobId
+          in: path
+          required: true
+          description: The evaluator diagnostic job identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorDiagnosticJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorDiagnosticJobs
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    delete:
+      operationId: EvaluatorDiagnosticJobs_delete
+      summary: Delete an evaluator diagnostic job
+      description: Deletes an evaluator diagnostic job and job-owned temporary artifacts. A completed diagnostic published by the job is retained.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: jobId
+          in: path
+          required: true
+          description: The evaluator diagnostic job identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorDiagnosticJobs
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+  /evaluators/{name}/diagnostic_jobs/{jobId}:cancel:
+    post:
+      operationId: EvaluatorDiagnosticJobs_cancel
+      summary: Cancel an evaluator diagnostic job
+      description: Cancels a queued or running evaluator diagnostic job.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The evaluator name.
+          schema:
+            type: string
+        - name: jobId
+          in: path
+          required: true
+          description: The evaluator diagnostic job identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatorDiagnosticJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluatorDiagnosticJobs
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
   /evaluators/{name}/diagnostics:
     get:
       operationId: Evaluators_listDiagnostics
@@ -6352,8 +6375,7 @@ paths:
           required: false
           description: Filter diagnostics associated with one lowercase 64-character SHA-256 functional evaluator content hash. A rubric comparison matches either baseline or target.
           schema:
-            type: string
-            pattern: ^[0-9a-f]{64}$
+            $ref: '#/components/schemas/Sha256Hash'
           explode: false
         - name: type
           in: query
@@ -46416,48 +46438,6 @@ components:
         required_previews:
           - Evaluations=V1Preview
     EvaluatorDiagnostic:
-      oneOf:
-        - $ref: '#/components/schemas/VersionCreatedDiagnosticChange'
-        - $ref: '#/components/schemas/DimensionAddedDiagnosticChange'
-        - $ref: '#/components/schemas/DimensionUpdatedDiagnosticChange'
-        - $ref: '#/components/schemas/DimensionRemovedDiagnosticChange'
-        - $ref: '#/components/schemas/DefinitionUpdatedDiagnosticChange'
-        - $ref: '#/components/schemas/HealthComputedDiagnosticChange'
-        - $ref: '#/components/schemas/HealthInvalidatedDiagnosticChange'
-        - $ref: '#/components/schemas/DraftStatusUpdatedDiagnostic'
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementDiagnostic'
-        - $ref: '#/components/schemas/RubricComparisonEvaluatorDiagnostic'
-      description: A completed evaluator diagnostic.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorDiagnosticActor:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/EvaluatorDiagnosticActorType'
-          description: The type of actor.
-        id:
-          type: string
-          description: A stable opaque principal or service identifier, when available.
-      description: The actor responsible for an evaluator lineage diagnostic.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorDiagnosticActorType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - user
-            - service
-      description: The type of actor responsible for an evaluator lineage diagnostic.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorDiagnosticBase:
       type: object
       required:
         - id
@@ -46484,8 +46464,7 @@ components:
           type: string
           description: A bounded deterministic summary of the change.
         content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase SHA-256 hexadecimal digest of the canonical functional evaluator content to which the change applies.
         source_job_id:
           type: string
@@ -46496,6 +46475,9 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          human_evaluator_agreement: '#/components/schemas/HumanEvaluatorAgreementDiagnostic'
+          rubric_comparison: '#/components/schemas/RubricComparisonEvaluatorDiagnostic'
+          version_created: '#/components/schemas/VersionCreatedDiagnosticChange'
           dimension_added: '#/components/schemas/DimensionAddedDiagnosticChange'
           dimension_updated: '#/components/schemas/DimensionUpdatedDiagnosticChange'
           dimension_removed: '#/components/schemas/DimensionRemovedDiagnosticChange'
@@ -46503,10 +46485,33 @@ components:
           draft_status_updated: '#/components/schemas/DraftStatusUpdatedDiagnostic'
           health_computed: '#/components/schemas/HealthComputedDiagnosticChange'
           health_invalidated: '#/components/schemas/HealthInvalidatedDiagnosticChange'
-          human_evaluator_agreement: '#/components/schemas/HumanEvaluatorAgreementDiagnostic'
-          rubric_comparison: '#/components/schemas/RubricComparisonEvaluatorDiagnostic'
-          version_created: '#/components/schemas/VersionCreatedDiagnosticChange'
       description: The shared fields for every completed evaluator diagnostic.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorDiagnosticActor:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/EvaluatorDiagnosticActorType'
+          description: The type of actor.
+        id:
+          type: string
+          description: A stable opaque principal or service identifier, when available.
+      description: The actor responsible for an evaluator lineage diagnostic.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorDiagnosticActorType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - user
+            - service
+      description: The type of actor responsible for an evaluator lineage diagnostic.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -46547,19 +46552,16 @@ components:
           type: string
           description: The exact immutable dataset version.
         content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase 64-character SHA-256 dataset content hash.
         schema_version:
           type: string
           description: The registered dataset or annotation schema version.
         mapping_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase 64-character SHA-256 hash of the stable item/data mapping.
         guidance_content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase 64-character SHA-256 annotation-guidance content hash, when the dataset contains agreement labels.
       description: The registered dataset snapshot used by a completed evaluator diagnostic.
       x-ms-foundry-meta:
@@ -46583,8 +46585,7 @@ components:
           type: string
           description: The exact evaluator version executed by the run.
         evaluator_content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase 64-character SHA-256 evaluator content hash executed by the run.
       description: A bounded reference to an evaluation run used by an evaluator diagnostic.
       x-ms-foundry-meta:
@@ -46635,31 +46636,19 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    EvaluatorDiagnosticJobInputBase:
+    EvaluatorDiagnosticJobInputs:
       type: object
       required:
         - type
-        - evaluator_name
       properties:
         type:
           $ref: '#/components/schemas/EvaluatorDiagnosticJobType'
           description: The requested diagnostic calculation.
-        evaluator_name:
-          type: string
-          description: The evaluator name that owns the completed diagnostic.
       discriminator:
         propertyName: type
         mapping:
-          rubric_comparison: '#/components/schemas/RubricComparisonDiagnosticJobInputs'
           human_evaluator_agreement: '#/components/schemas/HumanEvaluatorAgreementDiagnosticJobInputs'
-      description: Caller-supplied inputs for an evaluator diagnostic job.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorDiagnosticJobInputs:
-      oneOf:
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementDiagnosticJobInputs'
-        - $ref: '#/components/schemas/RubricComparisonDiagnosticJobInputs'
+          rubric_comparison: '#/components/schemas/RubricComparisonDiagnosticJobInputs'
       description: Caller-supplied inputs for an evaluator diagnostic job.
       x-ms-foundry-meta:
         required_previews:
@@ -46747,19 +46736,20 @@ components:
         value:
           type: number
           format: double
-          description: The point estimate when the metric is estimable.
+          description: The point estimate when the metric is estimable. Its valid range is defined by the owning statistic and documented on that property.
         sample_count:
           type: integer
           format: int32
-          description: The number of comparable evidence units.
+          minimum: 0
+          description: The non-negative number of comparable evidence units.
         lower_bound:
           type: number
           format: double
-          description: The lower bound from the registered uncertainty procedure.
+          description: The lower bound from the registered uncertainty procedure, in the same documented range as the point estimate.
         upper_bound:
           type: number
           format: double
-          description: The upper bound from the registered uncertainty procedure.
+          description: The upper bound from the registered uncertainty procedure, in the same documented range as the point estimate.
       description: One bounded evaluator diagnostic metric.
       x-ms-foundry-meta:
         required_previews:
@@ -46793,8 +46783,7 @@ components:
           type: string
           description: The immutable scoring contract version.
         content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase 64-character SHA-256 contract content hash.
       description: An immutable evaluator or annotation scoring contract.
       x-ms-foundry-meta:
@@ -46830,8 +46819,7 @@ components:
           type: string
           description: The exact numbered evaluator version.
         content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The verified lowercase 64-character SHA-256 functional content hash.
         draft:
           type: boolean
@@ -47050,8 +47038,7 @@ components:
           type: string
           description: The source type.
         content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase 64-character SHA-256 source content hash.
         status:
           $ref: '#/components/schemas/EvaluatorGenerationSourceUseStatus'
@@ -47110,14 +47097,14 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          version_created: '#/components/schemas/VersionCreatedDiagnosticChange'
           dimension_added: '#/components/schemas/DimensionAddedDiagnosticChange'
           dimension_updated: '#/components/schemas/DimensionUpdatedDiagnosticChange'
           dimension_removed: '#/components/schemas/DimensionRemovedDiagnosticChange'
           definition_updated: '#/components/schemas/DefinitionUpdatedDiagnosticChange'
           draft_status_updated: '#/components/schemas/DraftStatusUpdatedDiagnostic'
-          version_created: '#/components/schemas/VersionCreatedDiagnosticChange'
       allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: The shared fields for completed evaluator lineage diagnostics.
       x-ms-foundry-meta:
         required_previews:
@@ -47171,6 +47158,15 @@ components:
             - continuous
             - boolean
       description: The type of the evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorOrdinalScoreDistribution:
+      type: object
+      unevaluatedProperties:
+        type: integer
+        format: int32
+      description: Ordinal-score counts represented as a JSON object. Each key is the canonical decimal-string representation of a score allowed by the registered scoring contract, and each value is a non-negative item count.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -47329,8 +47325,7 @@ components:
           description: Whether this exact numbered evaluator version is excluded from implicit latest resolution. The functional content is immutable regardless of draft status. Draft and non-draft versions are returned by the named versions list; latest-per-evaluator and unversioned eval resolution exclude drafts. The service defaults to `false` when omitted. Updating only this lifecycle flag does not change `content_hash`.
           default: false
         content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The stable lowercase 64-character SHA-256 digest of this immutable version's canonical functional content. Equal values indicate canonical functional-content equality, not semantic equivalence. Catalog metadata and `draft` are excluded. This value is not an HTTP ETag or authenticity proof.
           readOnly: true
         created_by:
@@ -47954,7 +47949,7 @@ components:
             $ref: '#/components/schemas/EvaluatorDiagnosticMessage'
           description: Component-level diagnostic details associated with the computation.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording a rubric health computation.
       x-ms-foundry-meta:
         required_previews:
@@ -47974,7 +47969,7 @@ components:
             $ref: '#/components/schemas/EvaluatorDiagnosticMessage'
           description: Component-level diagnostic details associated with the invalidation.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording that a prior rubric health snapshot no longer applies.
       x-ms-foundry-meta:
         required_previews:
@@ -48106,7 +48101,7 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The exclusive annotation-time upper bound, represented in Unix time. When omitted, the service freezes job acceptance time as the upper bound.
       allOf:
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotationSourceBase'
+        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotationSource'
       description: Human annotations associated with traces in the current project's configured Application Insights resource. Annotation time, not trace creation time, controls inclusion.
       x-ms-foundry-meta:
         required_previews:
@@ -48142,35 +48137,24 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The exclusive annotation-time upper bound frozen at job acceptance, represented in Unix time.
         content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase 64-character SHA-256 hash of the frozen effective annotation and trace evidence projection.
         schema_version:
           type: string
           description: The canonical annotation schema version.
         mapping_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase 64-character SHA-256 hash of the canonical annotation/trace mapping.
         guidance_content_hash:
-          type: string
-          pattern: ^[0-9a-f]{64}$
+          $ref: '#/components/schemas/Sha256Hash'
           description: The lowercase 64-character SHA-256 annotation-guidance content hash.
       allOf:
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotationSourceSnapshotBase'
+        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotationSourceSnapshot'
       description: The frozen annotated-traces source used for human-evaluator agreement. It contains no trace, conversation, annotation, comment, or evidence identifiers or content.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
     HumanEvaluatorAgreementAnnotationSource:
-      oneOf:
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementDatasetSource'
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotatedTracesSource'
-      description: A human annotation source for human-evaluator agreement.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    HumanEvaluatorAgreementAnnotationSourceBase:
       type: object
       required:
         - type
@@ -48181,21 +48165,13 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          annotated_traces: '#/components/schemas/HumanEvaluatorAgreementAnnotatedTracesSource'
           dataset: '#/components/schemas/HumanEvaluatorAgreementDatasetSource'
-      description: The base human annotation source for a human-evaluator agreement job.
+          annotated_traces: '#/components/schemas/HumanEvaluatorAgreementAnnotatedTracesSource'
+      description: A human annotation source for a human-evaluator agreement job.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
     HumanEvaluatorAgreementAnnotationSourceSnapshot:
-      oneOf:
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementDatasetSourceSnapshot'
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotatedTracesSourceSnapshot'
-      description: The frozen human annotation source used by a completed human-evaluator agreement diagnostic.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    HumanEvaluatorAgreementAnnotationSourceSnapshotBase:
       type: object
       required:
         - type
@@ -48206,9 +48182,9 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          annotated_traces: '#/components/schemas/HumanEvaluatorAgreementAnnotatedTracesSourceSnapshot'
           dataset: '#/components/schemas/HumanEvaluatorAgreementDatasetSourceSnapshot'
-      description: The base frozen human annotation source snapshot.
+          annotated_traces: '#/components/schemas/HumanEvaluatorAgreementAnnotatedTracesSourceSnapshot'
+      description: The frozen human annotation source used by a completed human-evaluator agreement diagnostic.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -48235,7 +48211,7 @@ components:
           $ref: '#/components/schemas/ImmutableDatasetReference'
           description: The immutable registered annotation dataset.
       allOf:
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotationSourceBase'
+        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotationSource'
       description: An immutable registered dataset containing human annotations.
       x-ms-foundry-meta:
         required_previews:
@@ -48254,7 +48230,7 @@ components:
           $ref: '#/components/schemas/EvaluatorDiagnosticDatasetSnapshot'
           description: The frozen registered dataset identity.
       allOf:
-        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotationSourceSnapshotBase'
+        - $ref: '#/components/schemas/HumanEvaluatorAgreementAnnotationSourceSnapshot'
       description: The frozen registered-dataset source used for human-evaluator agreement.
       x-ms-foundry-meta:
         required_previews:
@@ -48330,7 +48306,7 @@ components:
             type: string
           description: Bounded interpretation limitations.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A completed human-evaluator agreement diagnostic.
       x-ms-foundry-meta:
         required_previews:
@@ -48356,7 +48332,7 @@ components:
           $ref: '#/components/schemas/EvaluationLevel'
           description: The evaluation granularity. Required only when evaluator and dataset metadata do not resolve one unique shared level.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnosticJobInputBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnosticJobInputs'
       description: Inputs for a human-evaluator agreement diagnostic job.
       x-ms-foundry-meta:
         required_previews:
@@ -48390,7 +48366,7 @@ components:
           description: Whether the repeat used the exact registered configuration.
         final_verdict_agreement:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Final-verdict agreement between the primary and repeat.
+          description: Final-verdict agreement between the primary and repeat. The value must be between 0 and 1, inclusive.
         limitations:
           type: array
           items:
@@ -48476,7 +48452,7 @@ components:
           description: Applicability-label support.
         observed_agreement:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Observed applicability agreement.
+          description: Observed applicability agreement. The value must be between 0 and 1, inclusive.
       description: Applicability agreement.
       x-ms-foundry-meta:
         required_previews:
@@ -48494,10 +48470,10 @@ components:
           description: Why decision-driver agreement was not assessed.
         primary_driver_exact_match:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Exact primary-driver match rate.
+          description: Exact primary-driver match rate. The value must be between 0 and 1, inclusive.
         top_k_overlap:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Registered top-k driver overlap.
+          description: Registered top-k driver overlap. The value must be between 0 and 1, inclusive.
       description: Structured decision-driver agreement.
       x-ms-foundry-meta:
         required_previews:
@@ -48529,31 +48505,25 @@ components:
           description: Number of missing or abstained representations.
         exact_match:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Exact ordinal-score match rate.
+          description: Exact ordinal-score match rate. The value must be between 0 and 1, inclusive.
         mean_absolute_error:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Mean absolute ordinal-score error.
+          description: Mean absolute ordinal-score error. The value must be between 0 and the registered ordinal-score span, inclusive.
         signed_bias:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Mean signed judge-minus-human score bias.
+          description: Mean signed judge-minus-human score bias. The value must be between the negative and positive registered ordinal-score span, inclusive.
         kendall_tau_b:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Kendall tau-b rank agreement.
+          description: Kendall tau-b rank agreement. The value must be between -1 and 1, inclusive.
         spearman_rho:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Spearman rank agreement.
+          description: Spearman rank agreement. The value must be between -1 and 1, inclusive.
         human_score_distribution:
-          type: object
-          unevaluatedProperties:
-            type: integer
-            format: int32
-          description: Bounded human score counts keyed by score.
+          $ref: '#/components/schemas/EvaluatorOrdinalScoreDistribution'
+          description: Human annotation counts keyed by ordinal score.
         judge_score_distribution:
-          type: object
-          unevaluatedProperties:
-            type: integer
-            format: int32
-          description: Bounded judge score counts keyed by score.
+          $ref: '#/components/schemas/EvaluatorOrdinalScoreDistribution'
+          description: Evaluator counts keyed by ordinal score.
       description: Per-dimension ordinal-score agreement.
       x-ms-foundry-meta:
         required_previews:
@@ -48573,17 +48543,17 @@ components:
           description: Number of common-applicable dimensions represented.
         centered_weighted_profile_distance:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Centered weighted profile distance.
+          description: Centered weighted profile distance. The value must be non-negative; its upper bound is derived from the registered scoring contract and dimension weights.
         aggregate_score_difference:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Judge-minus-human aggregate score difference.
+          description: Judge-minus-human aggregate score difference. The valid signed range is derived from the registered aggregate-score span.
         aggregate_collision_count:
           type: integer
           format: int32
           description: Number of aggregate-score collisions hiding profile divergence.
         aggregate_collision_rate:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Aggregate-score collision rate.
+          description: Aggregate-score collision rate. The value must be between 0 and 1, inclusive.
       description: Centered rubric-profile agreement.
       x-ms-foundry-meta:
         required_previews:
@@ -48602,16 +48572,16 @@ components:
           description: Pass/fail confusion counts.
         observed_agreement:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Observed pass/fail agreement.
+          description: Observed pass/fail agreement. The value must be between 0 and 1, inclusive.
         gwet_ac1:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Gwet AC1 when both classes have estimable support.
+          description: Gwet AC1 when both classes have estimable support. The value must be between -1 and 1, inclusive.
         false_pass_rate:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Judge-pass rate on human-fail cases.
+          description: Judge-pass rate on human-fail cases. The value must be between 0 and 1, inclusive.
         false_fail_rate:
           $ref: '#/components/schemas/EvaluatorDiagnosticMetric'
-          description: Judge-fail rate on human-pass cases.
+          description: Judge-fail rate on human-pass cases. The value must be between 0 and 1, inclusive.
       description: Final-verdict agreement.
       x-ms-foundry-meta:
         required_previews:
@@ -78664,7 +78634,7 @@ components:
           $ref: '#/components/schemas/EvaluationLevel'
           description: The evaluation granularity. Required only when evaluator and dataset metadata do not resolve one unique shared level.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnosticJobInputBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnosticJobInputs'
       description: Inputs for a rubric-comparison diagnostic job.
       x-ms-foundry-meta:
         required_previews:
@@ -78709,7 +78679,7 @@ components:
             type: string
           description: Bounded interpretation limitations.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A completed comparison between two evaluator versions.
       x-ms-foundry-meta:
         required_previews:
@@ -79411,6 +79381,10 @@ components:
       description: |-
         Known SSE event types emitted by the hosted agent session log stream.
         Additional event types may be introduced in future versions.
+    Sha256Hash:
+      type: string
+      pattern: ^[0-9a-f]{64}$
+      description: A lowercase 64-character SHA-256 hexadecimal digest.
     SharepointGroundingToolCall:
       type: object
       required:

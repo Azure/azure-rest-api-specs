@@ -46,8 +46,7 @@ alias ListEvaluatorDiagnosticsParameters = {
 
   @doc("Filter diagnostics associated with one lowercase 64-character SHA-256 functional evaluator content hash. A rubric comparison matches either baseline or target.")
   @query
-  @pattern("^[0-9a-f]{64}$")
-  content_hash?: string;
+  content_hash?: Sha256Hash;
 
   @doc("Filter by one or more completed diagnostic types by repeating the query parameter.")
   @query(#{ explode: true })
@@ -55,10 +54,6 @@ alias ListEvaluatorDiagnosticsParameters = {
 };
 
 alias ListEvaluatorDiagnosticJobsParameters = {
-  @doc("Filter jobs for one evaluator name.")
-  @query
-  evaluator_name?: string;
-
   @doc("Filter jobs by lifecycle status.")
   @query
   status?: JobStatus;
@@ -66,6 +61,18 @@ alias ListEvaluatorDiagnosticJobsParameters = {
   @doc("Filter jobs by requested diagnostic type.")
   @query
   type?: EvaluatorDiagnosticJobType;
+};
+
+alias EvaluatorDiagnosticJobScopeParameters = {
+  @doc("The evaluator name.")
+  @path
+  name: string;
+};
+
+alias EvaluatorDiagnosticJobIdentifierParameter = {
+  @doc("The evaluator diagnostic job identifier.")
+  @path
+  jobId: string;
 };
 
 @tag("Evaluators")
@@ -292,47 +299,72 @@ interface Evaluators {
 interface EvaluatorDiagnosticJobs {
   /** Creates an evaluator diagnostic job and returns the queued job. */
   @summary("Create an evaluator diagnostic job")
-  @route("evaluator_diagnostic_jobs")
+  @post
+  @route("/evaluators/{name}/diagnostic_jobs")
   @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
   @pollingOperation(EvaluatorDiagnosticJobs.get)
-  create is postJobPreview<
+  create is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorDiagnosticJob
+    {
+      ...EvaluatorDiagnosticJobScopeParameters;
+      ...WithOperationId;
+
+      @doc("The evaluator diagnostic job to create.")
+      @body
+      job: EvaluatorDiagnosticJob;
+    },
+    JobCreatedResponse<EvaluatorDiagnosticJob>
   >;
 
   /** Gets one evaluator diagnostic job by its identifier. */
   @summary("Get an evaluator diagnostic job")
-  @route("evaluator_diagnostic_jobs/{jobId}")
+  @get
+  @route("/evaluators/{name}/diagnostic_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-  get is queryJobStatusPreview<
+  get is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorDiagnosticJob
+    EvaluatorDiagnosticJobScopeParameters &
+      EvaluatorDiagnosticJobIdentifierParameter,
+    JobStatusResponse<EvaluatorDiagnosticJob>
   >;
 
   /** Lists evaluator diagnostic jobs, including non-terminal and failed jobs. */
   @summary("List evaluator diagnostic jobs")
-  @route("evaluator_diagnostic_jobs")
+  @get
+  @list
+  @route("/evaluators/{name}/diagnostic_jobs")
   @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-  list is listJobsPreview<
+  list is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorDiagnosticJob,
-    ListEvaluatorDiagnosticJobsParameters
+    EvaluatorDiagnosticJobScopeParameters &
+      CommonPageQueryParameters &
+      ListEvaluatorDiagnosticJobsParameters,
+    AgentsPagedResult<EvaluatorDiagnosticJob>
   >;
 
   /** Cancels a queued or running evaluator diagnostic job. */
   @summary("Cancel an evaluator diagnostic job")
-  @route("evaluator_diagnostic_jobs/{jobId}:cancel")
+  @post
+  @route("/evaluators/{name}/diagnostic_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-  cancel is cancelJobPreview<
+  cancel is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorDiagnosticJob
+    EvaluatorDiagnosticJobScopeParameters &
+      EvaluatorDiagnosticJobIdentifierParameter,
+    OkResponse & EvaluatorDiagnosticJob
   >;
 
   /** Deletes an evaluator diagnostic job and job-owned temporary artifacts. A completed diagnostic published by the job is retained. */
   @summary("Delete an evaluator diagnostic job")
-  @route("evaluator_diagnostic_jobs/{jobId}")
+  @delete
+  @route("/evaluators/{name}/diagnostic_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-  delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+  delete is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorDiagnosticJobScopeParameters &
+      EvaluatorDiagnosticJobIdentifierParameter,
+    NoContentResponse
+  >;
 }
 
 // ============================================================================
