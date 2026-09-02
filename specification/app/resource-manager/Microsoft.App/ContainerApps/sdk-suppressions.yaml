@@ -2,15 +2,29 @@ suppressions:
   azure-sdk-for-go:
     - package: 'sdk/resourcemanager/appcontainers/armappcontainers'
       breaking-changes:
-        - Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed
-        - Function `*ConnectedEnvironmentsClient.Update` parameter(s) have been changed from `(context.Context, string, string, *ConnectedEnvironmentsClientUpdateOptions)` to `(context.Context, string, string, ConnectedEnvironmentPatchResource, *ConnectedEnvironmentsClientUpdateOptions)`
-        - Operation `*ConnectedEnvironmentsCertificatesClient.CreateOrUpdate` has been changed to LRO, use `*ConnectedEnvironmentsCertificatesClient.BeginCreateOrUpdate` instead.
-        - Operation `*ConnectedEnvironmentsCertificatesClient.Delete` has been changed to LRO, use `*ConnectedEnvironmentsCertificatesClient.BeginDelete` instead.
-        - Operation `*ConnectedEnvironmentsCertificatesClient.Update` has been changed to LRO, use `*ConnectedEnvironmentsCertificatesClient.BeginUpdate` instead.
-        - Operation `*ConnectedEnvironmentsDaprComponentsClient.CreateOrUpdate` has been changed to LRO, use `*ConnectedEnvironmentsDaprComponentsClient.BeginCreateOrUpdate` instead.
-        - Operation `*ConnectedEnvironmentsDaprComponentsClient.Delete` has been changed to LRO, use `*ConnectedEnvironmentsDaprComponentsClient.BeginDelete` instead.
-        - Operation `*ConnectedEnvironmentsStoragesClient.CreateOrUpdate` has been changed to LRO, use `*ConnectedEnvironmentsStoragesClient.BeginCreateOrUpdate` instead.
-        - Operation `*ConnectedEnvironmentsStoragesClient.Delete` has been changed to LRO, use `*ConnectedEnvironmentsStoragesClient.BeginDelete` instead.
+        - Function `*CertificatesClient.CreateOrUpdate` parameter(s) have been changed from `(ctx context.Context, resourceGroupName string, environmentName string, certificateName string, options *CertificatesClientCreateOrUpdateOptions)` to `(ctx context.Context, resourceGroupName string, environmentName string, certificateName string, certificateEnvelope Certificate, options *CertificatesClientCreateOrUpdateOptions)`
+        - Function `*ConnectedEnvironmentsCertificatesClient.BeginCreateOrUpdate` parameter(s) have been changed from `(ctx context.Context, resourceGroupName string, connectedEnvironmentName string, certificateName string, options *ConnectedEnvironmentsCertificatesClientBeginCreateOrUpdateOptions)` to `(ctx context.Context, resourceGroupName string, connectedEnvironmentName string, certificateName string, certificateEnvelope Certificate, options *ConnectedEnvironmentsCertificatesClientBeginCreateOrUpdateOptions)`
+        - Function `*HTTPRouteConfigClient.CreateOrUpdate` parameter(s) have been changed from `(ctx context.Context, resourceGroupName string, environmentName string, httpRouteName string, options *HTTPRouteConfigClientCreateOrUpdateOptions)` to `(ctx context.Context, resourceGroupName string, environmentName string, httpRouteName string, httpRouteConfigEnvelope HTTPRouteConfig, options *HTTPRouteConfigClientCreateOrUpdateOptions)`
+        - Function `*LogicAppsClient.CreateOrUpdate` parameter(s) have been changed from `(ctx context.Context, resourceGroupName string, containerAppName string, logicAppName string, options *LogicAppsClientCreateOrUpdateOptions)` to `(ctx context.Context, resourceGroupName string, containerAppName string, logicAppName string, resource LogicApp, options *LogicAppsClientCreateOrUpdateOptions)`
+        - Function `*ManagedCertificatesClient.BeginCreateOrUpdate` parameter(s) have been changed from `(ctx context.Context, resourceGroupName string, environmentName string, managedCertificateName string, options *ManagedCertificatesClientBeginCreateOrUpdateOptions)` to `(ctx context.Context, resourceGroupName string, environmentName string, managedCertificateName string, managedCertificateEnvelope ManagedCertificate, options *ManagedCertificatesClientBeginCreateOrUpdateOptions)`
+        - Type of `ManagedIdentitySetting.Lifecycle` has been changed from `*IdentitySettingsLifeCycle` to `*SessionPoolIdentityLifeCycle`
+        - Struct `BaseContainer` has been removed
+        - Struct `DefaultErrorResponse` has been removed
+        - Struct `DefaultErrorResponseError` has been removed
+        - Struct `DefaultErrorResponseErrorDetailsItem` has been removed
+        - Struct `ErrorAdditionalInfo` has been removed
+        - Struct `ErrorDetail` has been removed
+        - Struct `ErrorResponse` has been removed
+        - Struct `JobExecutionNamesCollection` has been removed
+        - Struct `ProxyResource` has been removed
+        - Struct `Resource` has been removed
+        - Struct `ResourceTags` has been removed
+        - Struct `TrackedResource` has been removed
+        - Field `CertificateEnvelope` of struct `CertificatesClientCreateOrUpdateOptions` has been removed
+        - Field `CertificateEnvelope` of struct `ConnectedEnvironmentsCertificatesClientBeginCreateOrUpdateOptions` has been removed
+        - Field `HTTPRouteConfigEnvelope` of struct `HTTPRouteConfigClientCreateOrUpdateOptions` has been removed
+        - Field `Resource` of struct `LogicAppsClientCreateOrUpdateOptions` has been removed
+        - Field `ManagedCertificateEnvelope` of struct `ManagedCertificatesClientBeginCreateOrUpdateOptions` has been removed
   azure-sdk-for-python:
     - package: azure-mgmt-appcontainers
       breaking-changes:
@@ -28,3 +42,44 @@ suppressions:
         - Deleted or renamed method `ConnectedEnvironmentsDaprComponentsOperations.delete`
         - Deleted or renamed method `ConnectedEnvironmentsStoragesOperations.create_or_update`
         - Deleted or renamed method `ConnectedEnvironmentsStoragesOperations.delete`
+  azure-sdk-for-js:
+    - package: '@azure/arm-appcontainers'
+      breaking-changes:
+        - Removed Interface AuthConfigCollection
+        - Removed Interface AvailableOperations
+        - Removed Interface AvailableWorkloadProfilesCollection
+        - Removed Interface AvailableWorkloadProfilesGetOptionalParams
+        - Removed Interface CertificateCollection
+        - Removed Interface ConnectedEnvironmentCollection
+        - Removed Interface ContainerAppCollection
+        - Removed Interface DaprComponentsCollection
+        - Removed Interface HttpRouteConfigCollection
+        - Removed Interface JavaComponentsCollection
+        - Removed Interface JobExecutionNamesCollection
+        - Removed Interface JobsCollection
+        - Removed Interface MaintenanceConfigurationCollection
+        - Removed Interface ManagedCertificateCollection
+        - Removed Interface ManagedEnvironmentsCollection
+        - Removed Interface RevisionCollection
+        - Removed Interface SessionPoolCollection
+        - Removed Interface SourceControlCollection
+        - Removed Interface WorkflowEnvelopeCollection
+        - Removed Interface WorkloadProfileStatesCollection
+        - Parameter sasUrlSettingName of interface BlobStorageTokenStore is now optional
+        - Operation ConnectedEnvironmentsCertificates.beginDeleteAndWait has a new signature
+        - Operation ConnectedEnvironmentsDaprComponents.beginDeleteAndWait has a new signature
+        - Operation ConnectedEnvironmentsStorages.beginDeleteAndWait has a new signature
+        - Operation ContainerAppsAuthConfigs.createOrUpdate has a new signature
+        - Operation ContainerAppsAuthConfigs.get has a new signature
+        - Operation ContainerAppsSessionPools.beginDeleteAndWait has a new signature
+        - Operation HttpRouteConfig.beginDeleteAndWait has a new signature
+        - Operation JavaComponents.beginCreateOrUpdate has a new signature
+        - Operation JavaComponents.beginCreateOrUpdateAndWait has a new signature
+        - Operation JavaComponents.beginDeleteAndWait has a new signature
+        - Operation JavaComponents.beginUpdate has a new signature
+        - Operation JavaComponents.beginUpdateAndWait has a new signature
+        - Operation JavaComponents.get has a new signature
+        - Operation ManagedEnvironmentPrivateEndpointConnections.beginDeleteAndWait has a new signature
+        - Type of parameter componentType of interface JavaComponentProperties is changed from "SpringBootAdmin" | "SpringCloudEureka" | "SpringCloudConfig" to JavaComponentType
+        - Class ContainerAppsAPIClient no longer has parameter httpRouteConfigOperations
+        - Type alias "JavaComponentPropertiesUnion" has been changed
