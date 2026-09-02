@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_01)
 interface SkuMigrations {
   list is ArmResourceListByParent<SkuMigration>;
 

@@ -67,9 +67,9 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_09_01: "2025-09-01",
 
-  @doc("Azure VMware Solution API version 2026-03-01-preview.")
+  @doc("Azure VMware Solution API version 2026-03-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2026_03_01_preview: "2026-03-01-preview",
+  v2026_03_01: "2026-03-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

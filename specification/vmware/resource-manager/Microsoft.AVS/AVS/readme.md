@@ -21,16 +21,16 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-03-01-preview
+tag: package-2026-03-01
 ```
 
-### Tag: package-2026-03-01-preview
+### Tag: package-2026-03-01
 
-These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2026-03-01-preview'
+``` yaml $(tag) == 'package-2026-03-01'
 input-file:
-- preview/2026-03-01-preview/vmware.json
+- preview/2026-03-01/vmware.json
 ```
 
 ### Tag: package-2025-09-01

@@ -13,7 +13,7 @@ interface Hosts {
   @added(Versions.v2024_09_01)
   get is ArmResourceRead<Host>;
 
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_01)
   update is ArmCustomPatchSync<Host, HostUpdate>;
 }
 
@@ -69,12 +69,12 @@ model HostProperties {
   faultDomain?: string;
 
   @doc("The licenses assigned to the host.")
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_01)
   @identifiers(#[])
   licenses?: HostLicense[];
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_01)
 @doc("The properties of a host to update.")
 model HostUpdate {
   @doc("The properties of a host resource that may be updated")
@@ -84,7 +84,7 @@ model HostUpdate {
 @doc("The properties for updating a host.")
 model HostUpdateProperties {
   @doc("The licenses assigned to the host.")
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_01)
   @identifiers(#[])
   licenses?: HostLicense[];
 }
@@ -118,7 +118,7 @@ union HostProvisioningState {
   ResourceProvisioningState,
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_01)
 @doc("The kind of host license.")
 union HostLicenseKind {
   string,
@@ -127,7 +127,7 @@ union HostLicenseKind {
   WindowsServer: "WindowsServer",
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_01)
 @doc("A license assigned to a host.")
 @discriminator("kind")
 model HostLicense {
@@ -135,7 +135,7 @@ model HostLicense {
   kind: HostLicenseKind;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_01)
 @doc("The host is to be used with Azure Hybrid Benefit for Windows Server.")
 model WindowsServerLicense extends HostLicense {
   @doc("License kind")
