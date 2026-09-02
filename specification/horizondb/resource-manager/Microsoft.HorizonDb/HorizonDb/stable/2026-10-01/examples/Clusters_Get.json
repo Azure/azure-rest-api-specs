@@ -1,0 +1,49 @@
+{
+  "operationId": "Clusters_Get",
+  "title": "Get a HorizonDB cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2026-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Enabled"
+          },
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 14,
+            "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
+          },
+          "deletion": {
+            "policy": "RetainUntilNoBackupsRemain"
+          },
+          "state": "Ready",
+          "provisioningState": "Succeeded",
+          "readWritePool": {
+            "designatedPoolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+            "zoneRedundancy": {
+              "state": "Ready"
+            },
+            "failover": {
+              "state": "Ready"
+            }
+          }
+        }
+      }
+    }
+  }
+}

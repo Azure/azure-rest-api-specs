@@ -1,0 +1,27 @@
+{
+  "operationId": "VirtualEndpoints_CreateOrUpdate",
+  "title": "Reject a virtual endpoint whose writer is not the root read-write endpoint",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "virtualEndpointName": "global-orders",
+    "api-version": "2026-10-01",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "writerEndpointResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/replica-cluster/endpoints/pool-01",
+        "readerEndpointResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/replica-cluster/endpoints/cluster"
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidVirtualEndpointWriterTarget",
+          "message": "The writer target must be the Cluster-scoped ReadWrite Endpoint of the current level-0 root cluster."
+        }
+      }
+    }
+  }
+}

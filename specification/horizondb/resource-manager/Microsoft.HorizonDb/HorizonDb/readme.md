@@ -26,12 +26,21 @@ These are the global settings for the HorizonDb API.
 
 ```yaml
 title: HorizonDbManagementClient
-description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, replicas, and firewall rules.
+description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, nodes, endpoints, firewall rules, and parameter groups.
 openapi-type: arm
-tag: package-horizondb-2026-05-01-preview
+tag: package-horizondb-2026-10-01
 ```
 
-### Tag: package-horizondb-2026-05-01-preview
+### Tag: package-horizondb-2026-10-01 (Latest)
+
+These settings apply only when `--tag=package-horizondb-2026-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-horizondb-2026-10-01'
+input-file:
+  - stable/2026-10-01/openapi.json
+```
+
+### Tag: package-horizondb-2026-05-01-preview (Previous)
 
 These settings apply only when `--tag=package-horizondb-2026-05-01-preview` is specified on the command line.
 
@@ -49,7 +58,7 @@ suppressions:
       The resource has no updatable fields beyond create, so no PATCH operation is provided.
 ```
 
-### Tag: package-horizondb-2026-01-20-preview
+### Tag: package-horizondb-2026-01-20-preview (Previous)
 
 These settings apply only when `--tag=package-horizondb-2026-01-20-preview` is specified on the command line.
 

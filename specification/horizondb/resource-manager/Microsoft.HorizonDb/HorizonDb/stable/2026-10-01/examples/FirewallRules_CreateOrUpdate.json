@@ -1,0 +1,51 @@
+{
+  "operationId": "FirewallRules_CreateOrUpdate",
+  "title": "Create or update a firewall rule on a HorizonDB endpoint",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "endpointName": "pool-01",
+    "firewallRuleName": "example-firewall-rule-01",
+    "api-version": "2026-10-01",
+    "resource": {
+      "properties": {
+        "startIpAddress": "10.0.0.1",
+        "endIpAddress": "10.0.0.254",
+        "description": "Allow access from the corporate network"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/endpoints/pool-01/firewallRules/example-firewall-rule-01",
+        "name": "example-firewall-rule-01",
+        "type": "Microsoft.HorizonDb/clusters/endpoints/firewallRules",
+        "properties": {
+          "startIpAddress": "10.0.0.1",
+          "endIpAddress": "10.0.0.254",
+          "description": "Allow access from the corporate network",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/44444444-4444-4444-4444-444444444444?api-version=2026-10-01",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/endpoints/pool-01/firewallRules/example-firewall-rule-01",
+        "name": "example-firewall-rule-01",
+        "type": "Microsoft.HorizonDb/clusters/endpoints/firewallRules",
+        "properties": {
+          "startIpAddress": "10.0.0.1",
+          "endIpAddress": "10.0.0.254",
+          "description": "Allow access from the corporate network",
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}

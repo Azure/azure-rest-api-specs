@@ -1,0 +1,67 @@
+{
+  "operationId": "ParameterGroups_Update",
+  "title": "Update a HorizonDB parameter group",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "parameterGroupName": "production-parameters",
+    "api-version": "2026-10-01",
+    "properties": {
+      "tags": {
+        "environment": "production",
+        "team": "data-platform"
+      },
+      "properties": {
+        "parameters": [
+          {
+            "name": "max_connections",
+            "value": "750"
+          },
+          {
+            "name": "shared_buffers",
+            "value": "8192MB"
+          }
+        ],
+        "description": "Updated parameters for production transactional workloads",
+        "applyMethod": "Immediate"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
+        "name": "production-parameters",
+        "type": "Microsoft.HorizonDb/parameterGroups",
+        "location": "eastus2",
+        "tags": {
+          "environment": "production",
+          "team": "data-platform"
+        },
+        "properties": {
+          "parameters": [
+            {
+              "name": "max_connections",
+              "value": "750"
+            },
+            {
+              "name": "shared_buffers",
+              "value": "8192MB"
+            }
+          ],
+          "description": "Updated parameters for production transactional workloads",
+          "postgreSqlVersion": "17",
+          "applyMethod": "Immediate",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/cccccccc-cccc-cccc-cccc-cccccccccccc?api-version=2026-10-01",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/cccccccc-cccc-cccc-cccc-cccccccccccc",
+        "Retry-After": "30"
+      }
+    }
+  }
+}

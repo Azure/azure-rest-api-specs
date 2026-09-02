@@ -1,0 +1,68 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Restore a HorizonDB cluster to a point in time",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "restored-cluster",
+    "api-version": "2026-10-01",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "postgreSqlVersion": "17",
+        "creationMode": "PointInTimeRestore",
+        "pointInTimeUtc": "2026-07-27T12:00:00Z",
+        "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/source-cluster",
+        "network": {
+          "publicAccess": "Disabled"
+        },
+        "backup": {
+          "geoRedundancy": "Enabled",
+          "retentionDays": 14
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/33333333-3333-3333-3333-333333333333?api-version=2026-10-01",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/restored-cluster",
+        "name": "restored-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "PointInTimeRestore",
+          "pointInTimeUtc": "2026-07-27T12:00:00Z",
+          "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/source-cluster",
+          "network": {
+            "publicAccess": "Disabled"
+          },
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 14
+          },
+          "deletion": {
+            "policy": "Immediate"
+          },
+          "state": "Provisioning",
+          "provisioningState": "Provisioning",
+          "readWritePool": {
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "operationId": "Backups_Delete",
+  "title": "Reject deletion of an automatic backup",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "backupName": "system-2026-08-10-0200",
+    "api-version": "2026-10-01"
+  },
+  "responses": {
+    "409": {
+      "body": {
+        "error": {
+          "code": "AutomaticBackupDeletionNotAllowed",
+          "message": "Automatic backups cannot be deleted explicitly and are removed when they reach their expiry date."
+        }
+      }
+    }
+  }
+}

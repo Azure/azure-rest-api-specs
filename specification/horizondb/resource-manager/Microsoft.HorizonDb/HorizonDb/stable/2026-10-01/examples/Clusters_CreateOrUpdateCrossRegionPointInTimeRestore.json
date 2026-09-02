@@ -1,0 +1,29 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Reject cross-region point-in-time restore until it is supported",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "cross-region-restored-cluster",
+    "api-version": "2026-10-01",
+    "resource": {
+      "location": "westus2",
+      "properties": {
+        "postgreSqlVersion": "17",
+        "creationMode": "PointInTimeRestore",
+        "pointInTimeUtc": "2026-07-27T12:00:00Z",
+        "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/source-cluster-eastus2"
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "CrossRegionPointInTimeRestoreNotSupported",
+          "message": "Point-in-time restore currently requires the target cluster location 'westus2' to match the source cluster location 'eastus2'. Use a target location of 'eastus2' and retry the request. No resource was created or modified."
+        }
+      }
+    }
+  }
+}

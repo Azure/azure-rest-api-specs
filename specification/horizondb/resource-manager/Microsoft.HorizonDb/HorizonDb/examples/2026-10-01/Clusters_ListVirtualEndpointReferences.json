@@ -1,0 +1,26 @@
+{
+  "operationId": "Clusters_ListVirtualEndpointReferences",
+  "title": "List virtual endpoint references to a HorizonDB cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "primary-cluster",
+    "api-version": "2026-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "virtualEndpointResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/virtualEndpoints/global-orders",
+            "role": "Writer"
+          },
+          {
+            "virtualEndpointResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/virtualEndpoints/local-analytics",
+            "role": "Reader"
+          }
+        ]
+      }
+    }
+  }
+}
