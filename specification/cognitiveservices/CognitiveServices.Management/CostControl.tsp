@@ -93,24 +93,28 @@ model CostControlPatch {
 @added(Versions.v2026_09_15_preview)
 model CostControlConnections {
   /**
-   * The full resource ID of the Application Insights connection.
+   * The full resource ID of the Application Insights connection used for cost control telemetry. This connection must be configured before a cost control can be attached and cannot be removed while any cost control remains attached.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted appInsightsConnectionId from an explicit null in PATCH so callers can clear the value."
-  appInsightsConnectionId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.MachineLearningServices/workspaces/connections";
-    }
-  ]> | null;
+  appInsightsConnectionId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.MachineLearningServices/workspaces/connections";
+        }
+      ]>
+    | null;
 
   /**
-   * The full resource ID of the optional Event Grid connection.
+   * The full resource ID of the Event Grid connection used for cost control alerts. This connection must be configured when an attached cost control contains an alert threshold action and cannot be removed while such an action remains attached.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted eventGridConnectionId from an explicit null in PATCH so callers can clear the value."
-  eventGridConnectionId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.MachineLearningServices/workspaces/connections";
-    }
-  ]> | null;
+  eventGridConnectionId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.MachineLearningServices/workspaces/connections";
+        }
+      ]>
+    | null;
 }
 
 /**
