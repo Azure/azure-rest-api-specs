@@ -30,7 +30,7 @@ These settings apply only when `--tag=package-2026-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2026-03-01'
 input-file:
-- preview/2026-03-01/vmware.json
+- stable/2026-03-01/vmware.json
 ```
 
 ### Tag: package-2025-09-01
@@ -336,6 +336,5 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
 
 
