@@ -185,6 +185,8 @@ interface ProxyArtifact {
    * Change artifact state defined in artifact store.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Brownfield conversion of API version 2024-04-15: this custom PATCH shape, including its artifactName query parameter, is part of the existing contract. Converting it to a standard ARM resource operation would change the request URI and is breaking."
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Brownfield conversion: legacyResourceOperation is the supported way to keep a non-standard PATCH route on an existing ARM resource without changing the wire contract."
+  @Azure.ResourceManager.Private.legacyResourceOperation(ArtifactStore, "update")
   @patch(#{ implicitOptionality: false })
   updateState(
     ...ApiVersionParameter,

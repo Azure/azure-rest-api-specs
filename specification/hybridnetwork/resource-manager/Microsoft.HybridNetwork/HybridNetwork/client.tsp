@@ -252,6 +252,7 @@ using TypeSpec.Http;
 @@clientName(NfviType, "NFVIType", "go");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client customization signature used only as the target of @@override for go and javascript. It is not a service operation and is not emitted to the OpenAPI document."
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op proxyArtifactUpdateState(
   ...ApiVersionParameter,
