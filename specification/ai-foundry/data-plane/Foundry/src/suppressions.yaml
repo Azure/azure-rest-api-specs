@@ -27,9 +27,10 @@
     - "./sdk-java-azure-ai-projects/tspconfig.yaml"
 - tool: TypeSpecValidation
   reason: >
-    TS/Python client library config does not include Java config.
+    TS/Python and JavaScript client library configs do not include Java config.
   rules: [SdkTspConfigValidation]
   sub-rules:
     - "options.@azure-tools/typespec-java.emitter-output-dir"
   paths:
+    - "./sdk-js-azure-ai-projects/tspconfig.yaml"
     - "./sdk-python-js-azure-ai-projects/tspconfig.yaml"
