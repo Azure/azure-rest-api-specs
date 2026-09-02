@@ -345,6 +345,10 @@ model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
 
   @doc("The managed runtime and agent loop used to execute this prompt agent.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+  )
   harness?: AgentHarness;
 
   @doc("The model deployment to use for this agent.")
@@ -354,6 +358,10 @@ model PromptAgentDefinition extends AgentDefinition {
   instructions?: string | null;
 
   @doc("The Foundry skills available to this prompt agent. An omitted skill version is resolved and pinned when the agent version is created.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.skills_v1_preview] }
+  )
   skills?: SkillReference[];
 
   @doc("""
@@ -414,25 +422,10 @@ model AgentHarness {
 model GitHubCopilotHarness extends AgentHarness {
   @doc("The type of managed harness. Always `github_copilot_preview`.")
   type: "github_copilot_preview";
-<<<<<<< HEAD
-
-  @doc("The Foundry skills to provision into the managed harness environment.")
-  skills?: SkillReference[];
-
-  @doc("The managed compute environment configuration for the harness.")
-  environment?: HarnessEnvironment;
-
-  @doc("Controls access to customer-configurable GitHub Copilot built-in capabilities.")
-  builtin_capabilities?: BuiltInCapabilitiesConfiguration;
-}
-
-@doc("A reference to a versioned Foundry skill.")
-=======
 }
 
 @doc("A reference to a versioned Foundry skill.")
 @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
->>>>>>> 97b5312b686 (Align Copilot harness API with review decisions)
 model SkillReference {
   @doc("The name of the skill.")
   name: SkillName;
@@ -441,52 +434,6 @@ model SkillReference {
   version?: string;
 }
 
-<<<<<<< HEAD
-@doc("Managed compute environment settings for a harness.")
-model HarnessEnvironment {
-  @doc("The CPU allocated to the harness environment. CPU and memory must be specified together.")
-  @example("1")
-  cpu?: string;
-
-  @doc("The memory allocated to the harness environment. CPU and memory must be specified together.")
-  @example("2Gi")
-  memory?: string;
-
-  @doc("The number of seconds without agent activity before the harness environment is suspended.")
-  idle_timeout_seconds?: int32;
-}
-
-@doc("Configuration that allows or denies GitHub Copilot built-in capabilities.")
-model BuiltInCapabilitiesConfiguration {
-  @doc("The built-in capabilities that may be used. If omitted, all capabilities permitted by service and organizational policy are allowed.")
-  allowed?: BuiltInCapability[];
-
-  @doc("The built-in capabilities that may not be used. Denied capabilities take precedence over allowed capabilities.")
-  denied?: BuiltInCapability[];
-}
-
-@doc("A customer-configurable GitHub Copilot built-in capability.")
-union BuiltInCapability {
-  string,
-
-  @doc("Read and search files in the harness workspace.")
-  filesystem_read: "filesystem_read",
-
-  @doc("Create and modify files in the harness workspace.")
-  filesystem_write: "filesystem_write",
-
-  @doc("Execute operating-system commands.")
-  shell: "shell",
-
-  @doc("Fetch content and search external network resources.")
-  web: "web",
-
-  @doc("Delegate work to additional agents.")
-  subagents: "subagents",
-}
-
-=======
->>>>>>> 97b5312b686 (Align Copilot harness API with review decisions)
 /**
  * Configuration options for a text response from the model. Can be plain text or structured JSON data.
  */

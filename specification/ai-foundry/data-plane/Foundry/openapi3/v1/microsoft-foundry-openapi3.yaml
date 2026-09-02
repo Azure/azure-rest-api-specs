@@ -1391,6 +1391,8 @@ paths:
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
           - DigitalWorker=V1Preview
+          - GitHubCopilot=V1Preview
+          - Skills=V1Preview
       tags:
         - Agents
       requestBody:
@@ -2883,6 +2885,8 @@ paths:
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
           - DigitalWorker=V1Preview
+          - GitHubCopilot=V1Preview
+          - Skills=V1Preview
       tags:
         - Agent Versions
       requestBody:
@@ -39696,7 +39700,9 @@ components:
         - DraftAgents=V1Preview
         - VoiceAgents=V1Preview
         - DigitalWorker=V1Preview
-      description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
+        - GitHubCopilot=V1Preview
+        - Skills=V1Preview
+      description: Feature opt-in keys for agent definition operations supporting conditional preview features.
     AgentEndpointAuthorizationScheme:
       type: object
       required:
@@ -39824,6 +39830,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/TraceSource'
       description: A trace source that selects traces by agent reference with time-based filtering.
+    AgentHarness:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The type of managed harness.
+      discriminator:
+        propertyName: type
+        mapping:
+          github_copilot_preview: '#/components/schemas/GitHubCopilotHarness'
+      description: A managed runtime and agent loop used to execute a prompt agent.
     AgentIdentity:
       type: object
       required:
@@ -43304,6 +43323,8 @@ components:
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
               - DigitalWorker=V1Preview
+              - GitHubCopilot=V1Preview
+              - Skills=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -43333,6 +43354,8 @@ components:
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
           - DigitalWorker=V1Preview
+          - GitHubCopilot=V1Preview
+          - Skills=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -43446,6 +43469,8 @@ components:
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
               - DigitalWorker=V1Preview
+              - GitHubCopilot=V1Preview
+              - Skills=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -46428,6 +46453,75 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    GitHubCopilotBuiltInTool:
+      type: string
+      enum:
+        - filesystem_read
+        - filesystem_write
+        - shell
+        - web
+        - subagents
+      description: A customer-configurable GitHub Copilot built-in tool.
+    GitHubCopilotHarness:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - github_copilot_preview
+          description: The type of managed harness. Always `github_copilot_preview`.
+      allOf:
+        - $ref: '#/components/schemas/AgentHarness'
+      description: The GitHub Copilot managed harness for prompt agents.
+      x-ms-foundry-meta:
+        required_previews:
+          - GitHubCopilot=V1Preview
+    GitHubCopilotToolsetConfig:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/GitHubCopilotBuiltInTool'
+          description: The built-in tool to configure.
+        enabled:
+          type: boolean
+          description: Whether the built-in tool is enabled. If omitted, the toolset default applies.
+      description: An enablement override for a GitHub Copilot built-in tool.
+    GitHubCopilotToolsetDefaultConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether built-in tools are enabled by default. Defaults to true.
+          default: true
+      description: The default enablement setting for GitHub Copilot built-in tools.
+    GitHubCopilotToolsetPreview:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - github_copilot_toolset_preview
+          description: The type of the toolset. Always `github_copilot_toolset_preview`.
+        default_config:
+          $ref: '#/components/schemas/GitHubCopilotToolsetDefaultConfig'
+          description: The default configuration for built-in tools. If omitted, built-in tools are enabled by default.
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitHubCopilotToolsetConfig'
+          description: Per-tool configuration overrides. Duplicate built-in tool names are not allowed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: Configuration overrides for GitHub Copilot built-in tools.
+      x-ms-foundry-meta:
+        required_previews:
+          - GitHubCopilot=V1Preview
     GitHubIssueEvent:
       anyOf:
         - type: string
@@ -73537,6 +73631,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          github_copilot_toolset_preview: '#/components/schemas/GitHubCopilotToolsetPreview'
           bing_grounding: '#/components/schemas/BingGroundingTool'
           fabric_dataagent_preview: '#/components/schemas/MicrosoftFabricPreviewTool'
           sharepoint_grounding_preview: '#/components/schemas/SharepointPreviewTool'
@@ -73948,6 +74043,7 @@ components:
             - fabric_iq_preview
             - toolbox_search_preview
             - web_iq_preview
+            - github_copilot_toolset_preview
             - a2a
             - azure_ai_search
             - azure_function
@@ -75925,6 +76021,12 @@ components:
           type: string
           enum:
             - prompt
+        harness:
+          $ref: '#/components/schemas/AgentHarness'
+          description: The managed runtime and agent loop used to execute this prompt agent.
+          x-ms-foundry-meta:
+            required_previews:
+              - GitHubCopilot=V1Preview
         model:
           type: string
           description: The model deployment to use for this agent.
@@ -75933,6 +76035,14 @@ components:
             - type: string
             - type: 'null'
           description: A system (or developer) message inserted into the model's context.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkillReference'
+          description: The Foundry skills available to this prompt agent. An omitted skill version is resolved and pinned when the agent version is created.
+          x-ms-foundry-meta:
+            required_previews:
+              - Skills=V1Preview
         temperature:
           anyOf:
             - type: number
@@ -77383,6 +77493,21 @@ components:
       maxLength: 64
       pattern: ^[a-z0-9]([a-z0-9\-]*[a-z0-9])?$
       description: 'A skill name following the agentskills.io spec: lowercase letters, numbers, and hyphens only. Must not start or end with a hyphen or contain consecutive hyphens.'
+    SkillReference:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/SkillName'
+          description: The name of the skill.
+        version:
+          type: string
+          description: The skill version. If omitted, the current default version is resolved and pinned when the agent version is created.
+      description: A reference to a versioned Foundry skill.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     SkillVersion:
       type: object
       required:
@@ -78477,6 +78602,8 @@ components:
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
               - DigitalWorker=V1Preview
+              - GitHubCopilot=V1Preview
+              - Skills=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -78487,6 +78614,8 @@ components:
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
           - DigitalWorker=V1Preview
+          - GitHubCopilot=V1Preview
+          - Skills=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
