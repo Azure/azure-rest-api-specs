@@ -1734,7 +1734,7 @@ model AzureStorageAccountContainerCredential {
   containerName?: string;
 
   /**
-   * The storage account container sas uri
+   * The storage account container sas uri. This value is a credential: it is issued only by the explicit ArtifactManifests_ListCredential POST action, is never returned on a resource GET, and is short-lived. Callers must treat it as a secret and must not log or persist it.
    */
   containerSasUri?: string;
 }

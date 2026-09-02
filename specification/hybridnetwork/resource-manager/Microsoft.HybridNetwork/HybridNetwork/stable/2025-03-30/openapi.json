@@ -153,9 +153,19 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -6494,7 +6504,7 @@
         },
         "containerSasUri": {
           "type": "string",
-          "description": "The storage account container sas uri"
+          "description": "The storage account container sas uri. This value is a credential: it is issued only by the explicit ArtifactManifests_ListCredential POST action, is never returned on a resource GET, and is short-lived. Callers must treat it as a secret and must not log or persist it."
         }
       }
     },

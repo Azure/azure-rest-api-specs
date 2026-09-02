@@ -20,13 +20,11 @@ interface SiteNetworkServicesOperationGroup {
   @action("cancelSiteNetworkServiceOperation")
   cancelOperation is ArmProviderActionAsync<
     Request = CancelInformation,
-    Response = ArmAcceptedLroResponse<
-      "Accepted. The header contains Location URL to check the status of the asynchronous operation",
-      ArmLroLocationHeader
-    > | ArmNoContentResponse<"Cancellation completed successfully.">,
+    Response = ArmNoContentResponse<"Cancellation completed successfully.">,
     Scope = SubscriptionActionScope,
     Parameters = {},
-    LroHeaders = ArmLroLocationHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
