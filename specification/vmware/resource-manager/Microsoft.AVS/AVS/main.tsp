@@ -28,6 +28,7 @@ import "./scriptExecutions.tsp";
 import "./scriptPackages.tsp";
 import "./serviceComponents.tsp";
 import "./skus.tsp";
+import "./skuMigrations.tsp";
 import "./virtualMachines.tsp";
 import "./workloadNetworks-dhcpConfigurations.tsp";
 import "./workloadNetworks-dnsServices.tsp";
