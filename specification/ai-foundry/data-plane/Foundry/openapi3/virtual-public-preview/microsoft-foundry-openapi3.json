@@ -40812,7 +40812,6 @@
         "type": "object",
         "required": [
           "provider",
-          "connection",
           "resource_account_object_id"
         ],
         "properties": {
@@ -40823,27 +40822,21 @@
             ],
             "description": "The Microsoft Teams Phone Extension provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Teams Phone Extension provider."
-          },
           "phone_number": {
             "type": "string",
             "maxLength": 64,
             "description": "The optional display phone number for the Teams resource account."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "An optional display label for the binding."
           },
           "resource_account_object_id": {
             "$ref": "#/components/schemas/Azure.Core.uuid",
             "description": "The Microsoft Teams resource-account object identifier as a GUID."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
         "description": "The request to create a Microsoft Teams Phone Extension binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -40853,14 +40846,27 @@
       },
       "CreateTelephonyBindingRequest": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/CreateTeamsPhoneExtensionTelephonyBindingRequest"
-          },
-          {
-            "$ref": "#/components/schemas/CreateTwilioTelephonyBindingRequest"
-          }
+        "required": [
+          "provider",
+          "connection"
         ],
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "An optional display label for the binding."
+          }
+        },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
@@ -40879,7 +40885,6 @@
         "type": "object",
         "required": [
           "provider",
-          "connection",
           "phone_number"
         ],
         "properties": {
@@ -40890,23 +40895,17 @@
             ],
             "description": "The Twilio provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Twilio provider."
-          },
           "phone_number": {
             "type": "string",
             "pattern": "^\\+[1-9]\\d{6,14}$",
             "description": "The Twilio E.164 phone number."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "An optional display label for the binding."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
         "description": "The request to create a Twilio binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -56602,7 +56601,7 @@
                 }
               }
             ],
-            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, and `gpt-image-2-2026-04-21`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
+            "description": "The image(s) to edit. Must be a supported image file or an array of images.\n  For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, and `gpt-image-1.5`), each image should be a `png`, `webp`, or `jpg`\n  file less than 50MB. You can provide up to 16 images.\n  `chatgpt-image-latest` follows the same input constraints as GPT image models.\n  For `dall-e-2`, you can only provide one image, and it should be a square\n  `png` file less than 4MB."
           },
           "prompt": {
             "type": "string",
@@ -56625,7 +56624,7 @@
                 "type": "null"
               }
             ],
-            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`."
+            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`."
           },
           "model": {
             "anyOf": [
@@ -56636,8 +56635,6 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "gpt-image-1",
                   "gpt-image-1-mini",
@@ -56648,7 +56645,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. One of `dall-e-2` or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, or `chatgpt-image-latest`). Defaults to `gpt-image-1.5`.",
+            "description": "The model to use for image generation. Defaults to `gpt-image-1.5`.",
             "x-oaiTypeLabel": "string"
           },
           "n": {
@@ -56797,8 +56794,6 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21",
                   "dall-e-2",
                   "dall-e-3",
                   "gpt-image-1",
@@ -56809,7 +56804,7 @@
                 "type": "null"
               }
             ],
-            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
+            "description": "The model to use for image generation. One of `dall-e-2`, `dall-e-3`, or a GPT image model (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`). Defaults to `dall-e-2` unless a parameter specific to the GPT image models is used.",
             "x-oaiTypeLabel": "string",
             "default": "dall-e-2"
           },
@@ -56961,7 +56956,7 @@
                 "type": "null"
               }
             ],
-            "description": "Set the background of the generated image(s). This parameter is only\n  supported for the GPT image models. Must be one of `transparent`, `opaque`,\n  or `auto` (default value). When `auto` is used, the model will automatically\n  determine the best background for the image.\n  Transparent backgrounds are available for supported GPT Image models. For\n  `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When\n  using `transparent`, set the output format to `png` or `webp`.",
+            "description": "Allows to set transparency for the background of the generated image(s).\n  This parameter is only supported for the GPT image models. Must be one of\n  `transparent`, `opaque` or `auto` (default value). When `auto` is used, the\n  model will automatically determine the best background for the image.\n  If `transparent`, the output format needs to support transparency, so it\n  should be set to either `png` (default value) or `webp`.",
             "default": "auto"
           },
           "style": {
@@ -59717,8 +59712,6 @@
                 "type": "string",
                 "enum": [
                   "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21",
                   "gpt-image-1",
                   "gpt-image-1-mini",
                   "chatgpt-image-latest"
@@ -59728,7 +59721,7 @@
                 "type": "null"
               }
             ],
-            "description": "The GPT image model to use for image editing, including `gpt-image-2` and its dated snapshot `gpt-image-2-2026-04-21`.",
+            "description": "The model to use for image editing.",
             "x-oaiTypeLabel": "string",
             "default": "gpt-image-1.5"
           },
@@ -59875,7 +59868,7 @@
                 "type": "null"
               }
             ],
-            "description": "Set the background of the generated image output. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.",
+            "description": "Background behavior for generated image output.",
             "default": "auto"
           },
           "stream": {
@@ -63417,9 +63410,7 @@
                 "enum": [
                   "gpt-image-1",
                   "gpt-image-1-mini",
-                  "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21"
+                  "gpt-image-1.5"
                 ]
               }
             ],
@@ -63487,7 +63478,7 @@
               "opaque",
               "auto"
             ],
-            "description": "Set the background of the generated image. One of `transparent`,\n  `opaque`, or `auto`. Transparent backgrounds are available for\n  supported GPT Image models. For `gpt-image-2` and\n  `gpt-image-2-2026-04-21`, this support is in preview. When using\n  `transparent`, set the output format to `png` or `webp`. Default: `auto`.",
+            "description": "Background type for the generated image. One of `transparent`,\n  `opaque`, or `auto`. Default: `auto`.",
             "default": "auto"
           },
           "input_fidelity": {
@@ -64557,7 +64548,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 20971520,
+            "maxLength": 10485760,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -66314,7 +66305,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 20971520,
+            "maxLength": 10485760,
             "description": "The encrypted content of the compaction summary."
           }
         },
@@ -87082,6 +87073,11 @@
             "description": "The E.164 phone number to call."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyTransferDestination"
+          }
+        ],
         "description": "A PSTN destination for a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -89613,6 +89609,11 @@
             "description": "The SIP or SIPS URI to call."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyTransferDestination"
+          }
+        ],
         "description": "A SIP destination for a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -90194,18 +90195,10 @@
       "TeamsPhoneExtensionTelephonyBinding": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "resource_account_object_id",
-          "status",
-          "incoming_call_url"
+          "resource_account_object_id"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -90213,36 +90206,21 @@
             ],
             "description": "The Microsoft Teams Phone Extension provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Teams Phone Extension provider."
-          },
           "phone_number": {
             "type": "string",
             "maxLength": 64,
             "description": "The optional display phone number for the Teams resource account."
           },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
           "resource_account_object_id": {
             "$ref": "#/components/schemas/Azure.Core.uuid",
             "description": "The Microsoft Teams resource-account object identifier as a GUID."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBinding"
+          }
+        ],
         "description": "A Microsoft Teams Phone Extension binding owned by a voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -90253,19 +90231,10 @@
       "TeamsPhoneExtensionTelephonyBindingListItem": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "resource_account_object_id",
-          "status",
-          "incoming_call_url",
-          "etag"
+          "resource_account_object_id"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -90273,41 +90242,21 @@
             ],
             "description": "The Microsoft Teams Phone Extension provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Teams Phone Extension provider."
-          },
           "phone_number": {
             "type": "string",
             "maxLength": 64,
             "description": "The optional display phone number for the Teams resource account."
           },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
           "resource_account_object_id": {
             "$ref": "#/components/schemas/Azure.Core.uuid",
             "description": "The Microsoft Teams resource-account object identifier as a GUID."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
-          },
-          "etag": {
-            "$ref": "#/components/schemas/Azure.Core.eTag",
-            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
-            "readOnly": true
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingListItem"
+          }
+        ],
         "description": "A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -90336,6 +90285,11 @@
             "description": "The Microsoft Teams user or resource-account identifier."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyTransferDestination"
+          }
+        ],
         "description": "A Microsoft Teams destination for a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -90479,14 +90433,43 @@
       },
       "TelephonyBinding": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TeamsPhoneExtensionTelephonyBinding"
-          },
-          {
-            "$ref": "#/components/schemas/TwilioTelephonyBinding"
-          }
+        "required": [
+          "id",
+          "provider",
+          "connection",
+          "status",
+          "incoming_call_url"
         ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The service-generated binding identifier."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated webhook URL to configure with the telephony provider."
+          }
+        },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
@@ -90509,14 +90492,49 @@
       },
       "TelephonyBindingListItem": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TeamsPhoneExtensionTelephonyBindingListItem"
-          },
-          {
-            "$ref": "#/components/schemas/TwilioTelephonyBindingListItem"
-          }
+        "required": [
+          "id",
+          "provider",
+          "connection",
+          "status",
+          "incoming_call_url",
+          "etag"
         ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The service-generated binding identifier."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated webhook URL to configure with the telephony provider."
+          },
+          "etag": {
+            "$ref": "#/components/schemas/Azure.Core.eTag",
+            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
+            "readOnly": true
+          }
+        },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
@@ -91197,17 +91215,15 @@
       },
       "TelephonyTransferDestination": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/PSTNTelephonyTransferDestination"
-          },
-          {
-            "$ref": "#/components/schemas/TeamsTelephonyTransferDestination"
-          },
-          {
-            "$ref": "#/components/schemas/SipTelephonyTransferDestination"
-          }
+        "required": [
+          "kind"
         ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/TelephonyTransferDestinationKind",
+            "description": "The telephony transfer destination type."
+          }
+        },
         "discriminator": {
           "propertyName": "kind",
           "mapping": {
@@ -91217,6 +91233,27 @@
           }
         },
         "description": "A destination for a telephony transfer target.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyTransferDestinationKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "pstn",
+              "teams",
+              "sip"
+            ]
+          }
+        ],
+        "description": "The kind of telephony transfer destination. Known values are stable; additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -92244,18 +92281,10 @@
       "TwilioTelephonyBinding": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "phone_number",
-          "status",
-          "incoming_call_url"
+          "phone_number"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -92263,32 +92292,17 @@
             ],
             "description": "The Twilio provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Twilio provider."
-          },
           "phone_number": {
             "type": "string",
             "pattern": "^\\+[1-9]\\d{6,14}$",
             "description": "The Twilio E.164 phone number."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with Twilio."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBinding"
+          }
+        ],
         "description": "A Twilio binding owned by a voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -92299,19 +92313,10 @@
       "TwilioTelephonyBindingListItem": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "phone_number",
-          "status",
-          "incoming_call_url",
-          "etag"
+          "phone_number"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -92319,37 +92324,17 @@
             ],
             "description": "The Twilio provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Twilio provider."
-          },
           "phone_number": {
             "type": "string",
             "pattern": "^\\+[1-9]\\d{6,14}$",
             "description": "The Twilio E.164 phone number."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with Twilio."
-          },
-          "etag": {
-            "$ref": "#/components/schemas/Azure.Core.eTag",
-            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
-            "readOnly": true
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingListItem"
+          }
+        ],
         "description": "A Twilio binding returned in a list, including its entity tag.",
         "x-ms-foundry-meta": {
           "required_previews": [
