@@ -192,9 +192,6 @@ model VoiceAgentSubAgent {
   @doc("Policy for acknowledging forwarded requests and filling gaps while waiting for this subagent's response.")
   response_policy?: VoiceAgentSubagentResponsePolicy;
 
-  @doc("Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.")
-  enable_delta_progress?: boolean = false;
-
   @doc("The wall-clock timeout, in seconds, for each invocation of this subagent. When omitted, the service timeout is used.")
   @encode(DurationKnownEncoding.seconds, int32)
   @minValue(duration.fromISO("PT5S"))
@@ -219,6 +216,9 @@ model VoiceAgentSubagentResponsePolicy {
 
   @doc("Instructions used to generate gap-filling speech while waiting for progress.")
   gap_filling_instructions?: string;
+
+  @doc("Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.")
+  enable_delta_progress?: boolean = false;
 
   @doc("Instructions used to summarize streamed subagent progress for speech.")
   progress_instructions?: string;
