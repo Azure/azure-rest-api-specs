@@ -205,7 +205,7 @@ interface EndpointRegistrations {
   delete is EndpointRegistrationOps.DeleteSync<EndpointRegistration>;
 
   /** Lists endpoint registrations for a resource type registration. */
-  listByResourceTypeRegistrations is EndpointRegistrationOps.List<
+  listByResourceTypeRegistration is EndpointRegistrationOps.List<
     EndpointRegistration,
     Response = ArmResponse<EndpointRegistrationArrayResponseWithContinuation>
   >;
@@ -220,7 +220,7 @@ interface EndpointRegistrations {
   deleteNestedResourceTypeFirst is NestedResourceTypeFirstEndpointRegistrationOps.DeleteSync<EndpointRegistration>;
 
   /** Lists endpoint registrations for a first-level nested resource type. */
-  listByResourceTypeRegistrationsNestedResourceTypeFirst is NestedResourceTypeFirstEndpointRegistrationOps.List<
+  listByResourceTypeRegistrationNestedResourceTypeFirst is NestedResourceTypeFirstEndpointRegistrationOps.List<
     EndpointRegistration,
     Response = ArmResponse<EndpointRegistrationArrayResponseWithContinuation>
   >;
@@ -235,7 +235,7 @@ interface EndpointRegistrations {
   deleteNestedResourceTypeSecond is NestedResourceTypeSecondEndpointRegistrationOps.DeleteSync<EndpointRegistration>;
 
   /** Lists endpoint registrations for a second-level nested resource type. */
-  listByResourceTypeRegistrationsNestedResourceTypeSecond is NestedResourceTypeSecondEndpointRegistrationOps.List<
+  listByResourceTypeRegistrationNestedResourceTypeSecond is NestedResourceTypeSecondEndpointRegistrationOps.List<
     EndpointRegistration,
     Response = ArmResponse<EndpointRegistrationArrayResponseWithContinuation>
   >;
@@ -250,7 +250,7 @@ interface EndpointRegistrations {
   deleteNestedResourceTypeThird is NestedResourceTypeThirdEndpointRegistrationOps.DeleteSync<EndpointRegistration>;
 
   /** Lists endpoint registrations for a third-level nested resource type. */
-  listByResourceTypeRegistrationsNestedResourceTypeThird is NestedResourceTypeThirdEndpointRegistrationOps.List<
+  listByResourceTypeRegistrationNestedResourceTypeThird is NestedResourceTypeThirdEndpointRegistrationOps.List<
     EndpointRegistration,
     Response = ArmResponse<EndpointRegistrationArrayResponseWithContinuation>
   >;
