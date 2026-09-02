@@ -14,7 +14,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Deployment setting resource for an Edge Machine.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 @parentResource(EdgeMachine)
 model EdgeMachineDeploymentSetting
   is Azure.ResourceManager.ProxyResource<EdgeMachineDeploymentSettingProperties> {
@@ -33,24 +33,24 @@ interface EdgeMachineDeploymentSettings {
   /**
    * Get an Edge Machine Deployment Setting.
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   get is ArmResourceRead<EdgeMachineDeploymentSetting>;
 
   /**
    * Create or update an Edge Machine Deployment Setting.
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeMachineDeploymentSetting>;
 
   /**
    * Delete an Edge Machine Deployment Setting.
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   delete is ArmResourceDeleteWithoutOkAsync<EdgeMachineDeploymentSetting>;
 
   /**
    * List Edge Machine Deployment Setting resources by Edge Machine.
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   listByEdgeMachine is ArmResourceListByParent<EdgeMachineDeploymentSetting>;
 }

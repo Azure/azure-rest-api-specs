@@ -855,13 +855,13 @@ union EceSecrets {
   /**
    * chapCredential used for iSCSI CHAP authentication during edge machine node preparation.
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   chapCredential: "chapCredential",
 
   /**
    * mutualChapCredential used for iSCSI mutual (bidirectional) CHAP authentication during edge machine node preparation.
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   mutualChapCredential: "mutualChapCredential",
 }
 
@@ -3817,7 +3817,7 @@ model EceDeploymentSecrets {
 /**
  * The properties of an Edge Machine Deployment Setting.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model EdgeMachineDeploymentSettingProperties {
   /**
    * The provisioning state of the deployment setting resource.
@@ -3840,7 +3840,7 @@ model EdgeMachineDeploymentSettingProperties {
 /**
  * Edge Machine Deployment Configuration.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model EdgeMachineDeploymentConfiguration {
   /**
    * Deployment template version.
@@ -3857,7 +3857,7 @@ model EdgeMachineDeploymentConfiguration {
 /**
  * A scale unit containing deployment data.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model EdgeMachineScaleUnits {
   /**
    * Deployment data to configure the edge machine.
@@ -3868,7 +3868,7 @@ model EdgeMachineScaleUnits {
 /**
  * The deployment data of an edge machine.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model EdgeMachineDeploymentData {
   /**
    * Storage type for the edge machine node.
@@ -3890,7 +3890,7 @@ model EdgeMachineDeploymentData {
 /**
  * Node storage type for an edge machine.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 union NodeStorageType {
   string,
 
@@ -3907,7 +3907,7 @@ union NodeStorageType {
 /**
  * iSCSI configuration.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model IscsiConfig {
   /**
    * iSCSI network configuration.
@@ -3928,7 +3928,7 @@ model IscsiConfig {
 /**
  * iSCSI network configuration.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model IscsiNetworkConfig {
   /**
    * Common adapter properties applied to all iSCSI network adapters.
@@ -3946,7 +3946,7 @@ model IscsiNetworkConfig {
 /**
  * Common properties applied to iSCSI network adapters.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model IscsiAdapterProperties {
   /**
    * 802.1p priority value for iSCSI traffic.
@@ -3967,7 +3967,7 @@ model IscsiAdapterProperties {
 /**
  * IP configuration for a single iSCSI network adapter.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model IscsiAdapterIPConfig {
   /**
    * Name of the iSCSI network adapter.
@@ -3994,7 +3994,7 @@ model IscsiAdapterIPConfig {
 /**
  * iSCSI target portal address.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model IscsiTargetPortalAddress {
   /**
    * IP address of the iSCSI target portal.
@@ -4010,7 +4010,7 @@ model IscsiTargetPortalAddress {
 /**
  * CHAP authentication settings for an iSCSI connection.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model IscsiChapSettings {
   /**
    * The CHAP authentication mode to use.
@@ -4021,7 +4021,7 @@ model IscsiChapSettings {
 /**
  * The CHAP authentication mode for an iSCSI connection.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 union IscsiChapType {
   string,
 
@@ -6936,16 +6936,6 @@ model HciAddServerJobProperties extends ClusterJobProperties {
   /** List of protected parameters to pass to trigger the job for the cluster. */
   @Azure.ResourceManager.identifiers(#["secretName"])
   secrets?: EceDeploymentSecrets[];
-
-  /** Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. */
-  @added(Versions.v2026_10_15_preview)
-  witnessType?: WitnessType;
-
-  /** Specify the fileshare path for the local witness for your Azure Stack HCI cluster. */
-  witnessPath?: string;
-
-  /** Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster. */
-  cloudAccountName?: string;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -8958,6 +8948,12 @@ model TargetDeviceConfiguration {
    * Storage configuration.
    */
   storage?: StorageConfiguration;
+
+  /**
+   * Volume configuration.
+   */
+  @added(Versions.v2026_10_15_preview)
+  volume?: ProvisionOsVolumeConfiguration;
 }
 
 /**
@@ -8981,6 +8977,49 @@ model StorageConfiguration {
    * Partition size.
    */
   partitionSize?: string;
+}
+
+/**
+ * Volume configuration for device provisioning.
+ */
+@added(Versions.v2026_10_15_preview)
+model ProvisionOsVolumeConfiguration {
+  /**
+   * List of volume details.
+   */
+  @Azure.ResourceManager.identifiers(#[])
+  configuration?: VolumeDetails[];
+}
+
+/**
+ * Details of a volume to be configured on the device.
+ */
+@added(Versions.v2026_10_15_preview)
+model VolumeDetails {
+  /**
+   * Size of the volume in bytes.
+   */
+  sizeInBytes?: string;
+
+  /**
+   * Mount path for the volume.
+   */
+  path?: string;
+
+  /**
+   * File system type to format the volume with.
+   */
+  fileSystem?: DiskFileSystemType;
+
+  /**
+   * Name of the volume.
+   */
+  name?: string;
+
+  /**
+   * Name of the disk on which the volume resides.
+   */
+  diskName?: string;
 }
 
 /**

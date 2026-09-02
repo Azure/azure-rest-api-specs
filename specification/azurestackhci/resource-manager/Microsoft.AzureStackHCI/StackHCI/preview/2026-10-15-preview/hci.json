@@ -16989,18 +16989,6 @@
           "x-ms-identifiers": [
             "secretName"
           ]
-        },
-        "witnessType": {
-          "$ref": "#/definitions/WitnessType",
-          "description": "Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution."
-        },
-        "witnessPath": {
-          "type": "string",
-          "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
-        },
-        "cloudAccountName": {
-          "type": "string",
-          "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
         }
       },
       "required": [
@@ -20906,6 +20894,20 @@
         }
       }
     },
+    "ProvisionOsVolumeConfiguration": {
+      "type": "object",
+      "description": "Volume configuration for device provisioning.",
+      "properties": {
+        "configuration": {
+          "type": "array",
+          "description": "List of volume details.",
+          "items": {
+            "$ref": "#/definitions/VolumeDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "ProvisioningDetails": {
       "type": "object",
       "description": "Details for device provisioning.",
@@ -23337,6 +23339,10 @@
         "storage": {
           "$ref": "#/definitions/StorageConfiguration",
           "description": "Storage configuration."
+        },
+        "volume": {
+          "$ref": "#/definitions/ProvisionOsVolumeConfiguration",
+          "description": "Volume configuration."
         }
       }
     },
@@ -24374,6 +24380,32 @@
         "reserved": {
           "type": "string",
           "description": "Reserved for future volume configuration options."
+        }
+      }
+    },
+    "VolumeDetails": {
+      "type": "object",
+      "description": "Details of a volume to be configured on the device.",
+      "properties": {
+        "sizeInBytes": {
+          "type": "string",
+          "description": "Size of the volume in bytes."
+        },
+        "path": {
+          "type": "string",
+          "description": "Mount path for the volume."
+        },
+        "fileSystem": {
+          "$ref": "#/definitions/DiskFileSystemType",
+          "description": "File system type to format the volume with."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the volume."
+        },
+        "diskName": {
+          "type": "string",
+          "description": "Name of the disk on which the volume resides."
         }
       }
     },
