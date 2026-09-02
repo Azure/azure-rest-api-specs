@@ -32,12 +32,4 @@ These settings apply only when `--tag=package-2026-06-01-preview` is specified o
 ``` yaml $(tag) == 'package-2026-06-01-preview'
 input-file:
   - preview/2026-06-01-preview/cloudhealth.json
-suppressions:
-  - code: LroExtension
-    from: cloudhealth.json
-    where: $.paths["/api/entities/{entityName}/healthReports"].post
-    reason: >
-      This operation is asynchronous fire-and-forget; 202 means accepted for
-      processing, and the service exposes no polling endpoint or operation
-      status resource, so marking it as an LRO would misrepresent the contract.
 ```

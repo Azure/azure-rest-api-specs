@@ -53,7 +53,73 @@
   },
   "tags": [],
   "paths": {
-    "/api/api/entities/{entityName}": {
+    "/api": {
+      "get": {
+        "operationId": "Model_Status",
+        "description": "Return whether the health model exists and its current health state.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryEchoResult"
+            }
+          },
+          "400": {
+            "description": "Returned when the request is malformed, or a query parameter is invalid.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Returned when the requested health model does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ModelNotFoundError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/EntityDiagnosticDefaultError"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get health model status": {
+            "$ref": "./examples/Model_Status.json"
+          }
+        }
+      }
+    },
+    "/api/entities/{entityName}": {
       "get": {
         "operationId": "Entity_Get",
         "description": "Return the current diagnostic snapshot for an entity.",
@@ -244,7 +310,7 @@
     "/api/entities/{entityName}/healthReports": {
       "post": {
         "operationId": "HealthReportIngestion_IngestHealthReport",
-        "description": "Ingest a health report for a specific signal on an entity.",
+        "description": "Durably accept a health report for asynchronous processing.\nA successful response confirms that the report is safely queued, not that downstream health evaluation has completed.\nUse the signal history and entity diagnostic operations to observe the resulting health state.\nRetrying the same logical submission with the same repeatability headers does not ingest the report twice.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -259,6 +325,12 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "Health report payload. Must not exceed 32 KiB (32768 bytes).",
@@ -269,8 +341,37 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Health-report ingestion request was accepted."
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/IngestHealthReportResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
           },
           "400": {
             "description": "Returned when the request is malformed, or a query parameter is invalid.",
@@ -727,72 +828,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/api/status": {
-      "get": {
-        "operationId": "Model_Status",
-        "description": "Return whether the health model exists and its current health state.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryEchoResult"
-            }
-          },
-          "400": {
-            "description": "Returned when the request is malformed, or a query parameter is invalid.",
-            "schema": {
-              "$ref": "#/definitions/BadRequestError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Returned when the requested health model does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ModelNotFoundError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/EntityDiagnosticDefaultError"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "string",
-                "description": "Retry guidance supplied by the service as an HTTP date or delay in seconds."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get health model status": {
-            "$ref": "./examples/Model_Status.json"
-          }
         }
       }
     }
@@ -1481,9 +1516,22 @@
         "occurredAt"
       ]
     },
-    "IngestHealthReportAcceptedResult": {
+    "IngestHealthReportResponse": {
       "type": "object",
-      "description": "Health-report ingestion request was accepted."
+      "description": "Confirmation that a health report was durably accepted for processing."
+    },
+    "IngestHealthReportResult": {
+      "type": "object",
+      "description": "Health-report ingestion completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/IngestHealthReportResponse",
+          "description": "Confirmation that the report was durably accepted into the ingestion pipeline."
+        }
+      },
+      "required": [
+        "body"
+      ]
     },
     "ModelNotFoundError": {
       "type": "object",
@@ -1734,6 +1782,25 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
+      "name": "Repeatability-First-Sent",
+      "in": "header",
+      "description": "Specifies the date and time at which the request was first created.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityFirstSent"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
+      "name": "Repeatability-Request-ID",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityRequestId"
     }
   }
 }
