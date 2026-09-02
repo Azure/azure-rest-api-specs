@@ -53,6 +53,11 @@ directive:
     where:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
     reason: The manifest is checked in to the manifest repository rather than persisted as an ARM resource, so the service only ever returns 200. Declaring a 201 would document a response the service never sends.
+  - suppress: PutRequestResponseSchemeArm
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
+    reason: The request accepts manifest input and an optional check-in comment, while the response includes read-only commit information. The service does not expose a PATCH operation for manifests.
   - suppress: DeleteResponseCodes
     from: providerhub.json
     where:
@@ -209,7 +214,7 @@ directive:
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: AvoidAdditionalProperties
     from: providerhub.json
