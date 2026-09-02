@@ -64,6 +64,10 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 input-file:
   - stable/2025-09-01/storageDiscoveryWorkspace.json
 suppressions:
+  - code: ArmResourcePropertiesBag
+    from: storageDiscoveryWorkspace.json
+    where: $.definitions["StorageDiscoveryWorkspace"]
+    reason: The sku property name is critical. Present in already approved version.
   - code: PatchBodyParametersSchema
     from: storageDiscoveryWorkspace.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch.parameters[4].schema.properties.properties
@@ -84,6 +88,10 @@ These settings apply only when `--tag=package-2026-10-01-preview` is specified o
 input-file:
   - preview/2026-10-01-preview/storageDiscoveryWorkspace.json
 suppressions:
+  - code: ArmResourcePropertiesBag
+    from: storageDiscoveryWorkspace.json
+    where: $.definitions["StorageDiscoveryWorkspace"]
+    reason: The sku property name is critical. Present in already approved version.
   - code: PatchBodyParametersSchema
     from: storageDiscoveryWorkspace.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch.parameters[4].schema.properties.properties
