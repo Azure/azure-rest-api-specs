@@ -10,27 +10,6 @@ namespace Sample.API.Models
         Sample.API.Models.IAzureResilienceManagementIdentityInternal
     {
 
-        /// <summary>Backing field for <see cref="ChaosJobChildJobName" /> property.</summary>
-        private string _chaosJobChildJobName;
-
-        /// <summary>The unique name (Guid) of the Chaos job child job</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ChaosJobChildJobName { get => this._chaosJobChildJobName; set => this._chaosJobChildJobName = value; }
-
-        /// <summary>Backing field for <see cref="ChaosJobName" /> property.</summary>
-        private string _chaosJobName;
-
-        /// <summary>The unique name of the chaos job (GUID).</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ChaosJobName { get => this._chaosJobName; set => this._chaosJobName = value; }
-
-        /// <summary>Backing field for <see cref="ChaosJobResourceName" /> property.</summary>
-        private string _chaosJobResourceName;
-
-        /// <summary>The unique name (GUID) of the chaos job resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ChaosJobResourceName { get => this._chaosJobResourceName; set => this._chaosJobResourceName = value; }
-
         /// <summary>Backing field for <see cref="DrillName" /> property.</summary>
         private string _drillName;
 
@@ -44,13 +23,6 @@ namespace Sample.API.Models
         /// <summary>The name of the DrillResource (GUID).</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string DrillResourceName { get => this._drillResourceName; set => this._drillResourceName = value; }
-
-        /// <summary>Backing field for <see cref="DrillRunChildJobName" /> property.</summary>
-        private string _drillRunChildJobName;
-
-        /// <summary>The unique name (Guid) of the DrillRun child job</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string DrillRunChildJobName { get => this._drillRunChildJobName; set => this._drillRunChildJobName = value; }
 
         /// <summary>Backing field for <see cref="DrillRunName" /> property.</summary>
         private string _drillRunName;
@@ -114,13 +86,6 @@ namespace Sample.API.Models
         /// <summary>The ID of an ongoing async operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string OperationId { get => this._operationId; set => this._operationId = value; }
-
-        /// <summary>Backing field for <see cref="RecoveryChildJobName" /> property.</summary>
-        private string _recoveryChildJobName;
-
-        /// <summary>The unique name (Guid) of the recovery child job</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string RecoveryChildJobName { get => this._recoveryChildJobName; set => this._recoveryChildJobName = value; }
 
         /// <summary>Backing field for <see cref="RecoveryJobName" /> property.</summary>
         private string _recoveryJobName;
@@ -194,39 +159,6 @@ namespace Sample.API.Models
     public partial interface IAzureResilienceManagementIdentity :
         Sample.API.Runtime.IJsonSerializable
     {
-        /// <summary>The unique name (Guid) of the Chaos job child job</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"The unique name (Guid) of the Chaos job child job",
-        SerializedName = @"chaosJobChildJobName",
-        PossibleTypes = new [] { typeof(string) })]
-        string ChaosJobChildJobName { get; set; }
-        /// <summary>The unique name of the chaos job (GUID).</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"The unique name of the chaos job (GUID).",
-        SerializedName = @"chaosJobName",
-        PossibleTypes = new [] { typeof(string) })]
-        string ChaosJobName { get; set; }
-        /// <summary>The unique name (GUID) of the chaos job resource.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"The unique name (GUID) of the chaos job resource.",
-        SerializedName = @"chaosJobResourceName",
-        PossibleTypes = new [] { typeof(string) })]
-        string ChaosJobResourceName { get; set; }
         /// <summary>The name of the Drill</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -249,17 +181,6 @@ namespace Sample.API.Models
         SerializedName = @"drillResourceName",
         PossibleTypes = new [] { typeof(string) })]
         string DrillResourceName { get; set; }
-        /// <summary>The unique name (Guid) of the DrillRun child job</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"The unique name (Guid) of the DrillRun child job",
-        SerializedName = @"drillRunChildJobName",
-        PossibleTypes = new [] { typeof(string) })]
-        string DrillRunChildJobName { get; set; }
         /// <summary>The name of the DrillRun (GUID).</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -359,17 +280,6 @@ namespace Sample.API.Models
         SerializedName = @"operationId",
         PossibleTypes = new [] { typeof(string) })]
         string OperationId { get; set; }
-        /// <summary>The unique name (Guid) of the recovery child job</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"The unique name (Guid) of the recovery child job",
-        SerializedName = @"recoveryChildJobName",
-        PossibleTypes = new [] { typeof(string) })]
-        string RecoveryChildJobName { get; set; }
         /// <summary>The unique name (GUID) of the recovery job.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -474,18 +384,10 @@ namespace Sample.API.Models
     internal partial interface IAzureResilienceManagementIdentityInternal
 
     {
-        /// <summary>The unique name (Guid) of the Chaos job child job</summary>
-        string ChaosJobChildJobName { get; set; }
-        /// <summary>The unique name of the chaos job (GUID).</summary>
-        string ChaosJobName { get; set; }
-        /// <summary>The unique name (GUID) of the chaos job resource.</summary>
-        string ChaosJobResourceName { get; set; }
         /// <summary>The name of the Drill</summary>
         string DrillName { get; set; }
         /// <summary>The name of the DrillResource (GUID).</summary>
         string DrillResourceName { get; set; }
-        /// <summary>The unique name (Guid) of the DrillRun child job</summary>
-        string DrillRunChildJobName { get; set; }
         /// <summary>The name of the DrillRun (GUID).</summary>
         string DrillRunName { get; set; }
         /// <summary>The unique name (GUID) of the recovery job resource.</summary>
@@ -504,8 +406,6 @@ namespace Sample.API.Models
         string Location { get; set; }
         /// <summary>The ID of an ongoing async operation.</summary>
         string OperationId { get; set; }
-        /// <summary>The unique name (Guid) of the recovery child job</summary>
-        string RecoveryChildJobName { get; set; }
         /// <summary>The unique name (GUID) of the recovery job.</summary>
         string RecoveryJobName { get; set; }
         /// <summary>The unique name (GUID) of the recovery job resource.</summary>

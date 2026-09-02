@@ -74,14 +74,6 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("DrillRbacOnExperiment"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnExperiment = (string) content.GetValueForProperty("DrillRbacOnExperiment",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnExperiment, global::System.Convert.ToString);
-            }
-            if (content.Contains("RbacNeededForDrillOnExperiment"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnExperiment = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnExperiment",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnExperiment, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
             if (content.Contains("DrillRbacOnChaosResource"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnChaosResource = (string) content.GetValueForProperty("DrillRbacOnChaosResource",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnChaosResource, global::System.Convert.ToString);
@@ -98,37 +90,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnRecoveryPlan = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnRecoveryPlan",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnRecoveryPlan, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("DrillRbacOnAzureMonitoringWorkspace"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnAzureMonitoringWorkspace = (string) content.GetValueForProperty("DrillRbacOnAzureMonitoringWorkspace",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnAzureMonitoringWorkspace, global::System.Convert.ToString);
-            }
-            if (content.Contains("RbacNeededForDrillOnAzureMonitoringWorkspace"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnAzureMonitoringWorkspace = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnAzureMonitoringWorkspace",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnAzureMonitoringWorkspace, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("DrillRbacOnSlo"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnSlo = (string) content.GetValueForProperty("DrillRbacOnSlo",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnSlo, global::System.Convert.ToString);
-            }
-            if (content.Contains("RbacNeededForDrillOnSlo"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnSlo = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnSlo",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnSlo, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("DrillRbacOnAzureHealthModel"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnAzureHealthModel = (string) content.GetValueForProperty("DrillRbacOnAzureHealthModel",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnAzureHealthModel, global::System.Convert.ToString);
-            }
-            if (content.Contains("RbacNeededForDrillOnAzureHealthModel"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnAzureHealthModel = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnAzureHealthModel",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnAzureHealthModel, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
             if (content.Contains("RoReadiness"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).RoReadiness = (string) content.GetValueForProperty("RoReadiness",((Sample.API.Models.IAttentionReasonInternal)this).RoReadiness, global::System.Convert.ToString);
-            }
-            if (content.Contains("FaultRbacOnTarget"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).FaultRbacOnTarget = (string) content.GetValueForProperty("FaultRbacOnTarget",((Sample.API.Models.IAttentionReasonInternal)this).FaultRbacOnTarget, global::System.Convert.ToString);
             }
             if (content.Contains("RbacOnTargetResource"))
             {
@@ -137,10 +101,6 @@ namespace Sample.API.Models
             if (content.Contains("RunbookFaultRbacOnTarget"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).RunbookFaultRbacOnTarget = (string) content.GetValueForProperty("RunbookFaultRbacOnTarget",((Sample.API.Models.IAttentionReasonInternal)this).RunbookFaultRbacOnTarget, global::System.Convert.ToString);
-            }
-            if (content.Contains("Target"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).Target = (string) content.GetValueForProperty("Target",((Sample.API.Models.IAttentionReasonInternal)this).Target, global::System.Convert.ToString);
             }
             if (content.Contains("ChaosResource"))
             {
@@ -161,10 +121,6 @@ namespace Sample.API.Models
             if (content.Contains("DrillUserMsi"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).DrillUserMsi = (string) content.GetValueForProperty("DrillUserMsi",((Sample.API.Models.IAttentionReasonInternal)this).DrillUserMsi, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentUserMsi"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).ChaosExperimentUserMsi = (string) content.GetValueForProperty("ChaosExperimentUserMsi",((Sample.API.Models.IAttentionReasonInternal)this).ChaosExperimentUserMsi, global::System.Convert.ToString);
             }
             if (content.Contains("ChaosResourceUserMsi"))
             {
@@ -201,6 +157,34 @@ namespace Sample.API.Models
             if (content.Contains("MissingRequiredResourceProvider"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).MissingRequiredResourceProvider = (System.Collections.Generic.List<string>) content.GetValueForProperty("MissingRequiredResourceProvider",((Sample.API.Models.IAttentionReasonInternal)this).MissingRequiredResourceProvider, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+            }
+            if (content.Contains("MonitoringSourceNotConfigured"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).MonitoringSourceNotConfigured = (bool?) content.GetValueForProperty("MonitoringSourceNotConfigured",((Sample.API.Models.IAttentionReasonInternal)this).MonitoringSourceNotConfigured, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
+            }
+            if (content.Contains("HealthModelExist"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).HealthModelExist = (string) content.GetValueForProperty("HealthModelExist",((Sample.API.Models.IAttentionReasonInternal)this).HealthModelExist, global::System.Convert.ToString);
+            }
+            if (content.Contains("DiscoveryRuleExist"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).DiscoveryRuleExist = (string) content.GetValueForProperty("DiscoveryRuleExist",((Sample.API.Models.IAttentionReasonInternal)this).DiscoveryRuleExist, global::System.Convert.ToString);
+            }
+            if (content.Contains("DrillRbacOnHealthModel"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnHealthModel = (string) content.GetValueForProperty("DrillRbacOnHealthModel",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnHealthModel, global::System.Convert.ToString);
+            }
+            if (content.Contains("RbacNeededForDrillOnHealthModel"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnHealthModel = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnHealthModel",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnHealthModel, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+            }
+            if (content.Contains("DrillRbacOnSli"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnSli = (string) content.GetValueForProperty("DrillRbacOnSli",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnSli, global::System.Convert.ToString);
+            }
+            if (content.Contains("SliAttentionStatuses"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).SliAttentionStatuses = (System.Collections.Generic.List<Sample.API.Models.ISliAttentionStatus>) content.GetValueForProperty("SliAttentionStatuses",((Sample.API.Models.IAttentionReasonInternal)this).SliAttentionStatuses, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliAttentionStatus>(__y, Sample.API.Models.SliAttentionStatusTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -219,14 +203,6 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("DrillRbacOnExperiment"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnExperiment = (string) content.GetValueForProperty("DrillRbacOnExperiment",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnExperiment, global::System.Convert.ToString);
-            }
-            if (content.Contains("RbacNeededForDrillOnExperiment"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnExperiment = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnExperiment",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnExperiment, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
             if (content.Contains("DrillRbacOnChaosResource"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnChaosResource = (string) content.GetValueForProperty("DrillRbacOnChaosResource",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnChaosResource, global::System.Convert.ToString);
@@ -243,37 +219,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnRecoveryPlan = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnRecoveryPlan",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnRecoveryPlan, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("DrillRbacOnAzureMonitoringWorkspace"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnAzureMonitoringWorkspace = (string) content.GetValueForProperty("DrillRbacOnAzureMonitoringWorkspace",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnAzureMonitoringWorkspace, global::System.Convert.ToString);
-            }
-            if (content.Contains("RbacNeededForDrillOnAzureMonitoringWorkspace"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnAzureMonitoringWorkspace = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnAzureMonitoringWorkspace",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnAzureMonitoringWorkspace, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("DrillRbacOnSlo"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnSlo = (string) content.GetValueForProperty("DrillRbacOnSlo",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnSlo, global::System.Convert.ToString);
-            }
-            if (content.Contains("RbacNeededForDrillOnSlo"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnSlo = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnSlo",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnSlo, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("DrillRbacOnAzureHealthModel"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnAzureHealthModel = (string) content.GetValueForProperty("DrillRbacOnAzureHealthModel",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnAzureHealthModel, global::System.Convert.ToString);
-            }
-            if (content.Contains("RbacNeededForDrillOnAzureHealthModel"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnAzureHealthModel = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnAzureHealthModel",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnAzureHealthModel, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
             if (content.Contains("RoReadiness"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).RoReadiness = (string) content.GetValueForProperty("RoReadiness",((Sample.API.Models.IAttentionReasonInternal)this).RoReadiness, global::System.Convert.ToString);
-            }
-            if (content.Contains("FaultRbacOnTarget"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).FaultRbacOnTarget = (string) content.GetValueForProperty("FaultRbacOnTarget",((Sample.API.Models.IAttentionReasonInternal)this).FaultRbacOnTarget, global::System.Convert.ToString);
             }
             if (content.Contains("RbacOnTargetResource"))
             {
@@ -282,10 +230,6 @@ namespace Sample.API.Models
             if (content.Contains("RunbookFaultRbacOnTarget"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).RunbookFaultRbacOnTarget = (string) content.GetValueForProperty("RunbookFaultRbacOnTarget",((Sample.API.Models.IAttentionReasonInternal)this).RunbookFaultRbacOnTarget, global::System.Convert.ToString);
-            }
-            if (content.Contains("Target"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).Target = (string) content.GetValueForProperty("Target",((Sample.API.Models.IAttentionReasonInternal)this).Target, global::System.Convert.ToString);
             }
             if (content.Contains("ChaosResource"))
             {
@@ -306,10 +250,6 @@ namespace Sample.API.Models
             if (content.Contains("DrillUserMsi"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).DrillUserMsi = (string) content.GetValueForProperty("DrillUserMsi",((Sample.API.Models.IAttentionReasonInternal)this).DrillUserMsi, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentUserMsi"))
-            {
-                ((Sample.API.Models.IAttentionReasonInternal)this).ChaosExperimentUserMsi = (string) content.GetValueForProperty("ChaosExperimentUserMsi",((Sample.API.Models.IAttentionReasonInternal)this).ChaosExperimentUserMsi, global::System.Convert.ToString);
             }
             if (content.Contains("ChaosResourceUserMsi"))
             {
@@ -346,6 +286,34 @@ namespace Sample.API.Models
             if (content.Contains("MissingRequiredResourceProvider"))
             {
                 ((Sample.API.Models.IAttentionReasonInternal)this).MissingRequiredResourceProvider = (System.Collections.Generic.List<string>) content.GetValueForProperty("MissingRequiredResourceProvider",((Sample.API.Models.IAttentionReasonInternal)this).MissingRequiredResourceProvider, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+            }
+            if (content.Contains("MonitoringSourceNotConfigured"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).MonitoringSourceNotConfigured = (bool?) content.GetValueForProperty("MonitoringSourceNotConfigured",((Sample.API.Models.IAttentionReasonInternal)this).MonitoringSourceNotConfigured, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
+            }
+            if (content.Contains("HealthModelExist"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).HealthModelExist = (string) content.GetValueForProperty("HealthModelExist",((Sample.API.Models.IAttentionReasonInternal)this).HealthModelExist, global::System.Convert.ToString);
+            }
+            if (content.Contains("DiscoveryRuleExist"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).DiscoveryRuleExist = (string) content.GetValueForProperty("DiscoveryRuleExist",((Sample.API.Models.IAttentionReasonInternal)this).DiscoveryRuleExist, global::System.Convert.ToString);
+            }
+            if (content.Contains("DrillRbacOnHealthModel"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnHealthModel = (string) content.GetValueForProperty("DrillRbacOnHealthModel",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnHealthModel, global::System.Convert.ToString);
+            }
+            if (content.Contains("RbacNeededForDrillOnHealthModel"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnHealthModel = (System.Collections.Generic.List<string>) content.GetValueForProperty("RbacNeededForDrillOnHealthModel",((Sample.API.Models.IAttentionReasonInternal)this).RbacNeededForDrillOnHealthModel, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+            }
+            if (content.Contains("DrillRbacOnSli"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnSli = (string) content.GetValueForProperty("DrillRbacOnSli",((Sample.API.Models.IAttentionReasonInternal)this).DrillRbacOnSli, global::System.Convert.ToString);
+            }
+            if (content.Contains("SliAttentionStatuses"))
+            {
+                ((Sample.API.Models.IAttentionReasonInternal)this).SliAttentionStatuses = (System.Collections.Generic.List<Sample.API.Models.ISliAttentionStatus>) content.GetValueForProperty("SliAttentionStatuses",((Sample.API.Models.IAttentionReasonInternal)this).SliAttentionStatuses, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliAttentionStatus>(__y, Sample.API.Models.SliAttentionStatusTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }

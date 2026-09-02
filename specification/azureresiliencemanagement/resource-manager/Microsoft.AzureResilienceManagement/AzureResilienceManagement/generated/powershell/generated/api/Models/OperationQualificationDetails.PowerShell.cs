@@ -111,6 +111,10 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("NotQualifiedReason",((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
+            if (content.Contains("ResourceFeasibilityReview"))
+            {
+                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReview = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("ResourceFeasibilityReview",((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReview, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
+            }
             AfterDeserializeDictionary(content);
         }
 
@@ -135,6 +139,10 @@ namespace Sample.API.Models
             if (content.Contains("NotQualifiedReason"))
             {
                 ((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("NotQualifiedReason",((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+            }
+            if (content.Contains("ResourceFeasibilityReview"))
+            {
+                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReview = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("ResourceFeasibilityReview",((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReview, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }

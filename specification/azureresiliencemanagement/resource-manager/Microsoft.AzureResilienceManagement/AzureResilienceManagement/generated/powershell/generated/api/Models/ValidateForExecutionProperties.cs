@@ -11,6 +11,16 @@ namespace Sample.API.Models
         Sample.API.Models.IValidateForExecutionPropertiesInternal
     {
 
+        /// <summary>Backing field for <see cref="OperationName" /> property.</summary>
+        private string _operationName;
+
+        /// <summary>
+        /// Operation name for which the validation is being done. This is needed to determine the set of validations to be done for
+        /// the operation.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        public string OperationName { get => this._operationName; set => this._operationName = value; }
+
         /// <summary>Backing field for <see cref="SourceLocation" /> property.</summary>
         private System.Collections.Generic.List<string> _sourceLocation;
 
@@ -28,9 +38,24 @@ namespace Sample.API.Models
     public partial interface IValidateForExecutionProperties :
         Sample.API.Runtime.IJsonSerializable
     {
+        /// <summary>
+        /// Operation name for which the validation is being done. This is needed to determine the set of validations to be done for
+        /// the operation.
+        /// </summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Operation name for which the validation is being done. This is needed to determine the set of validations to be done for the operation.",
+        SerializedName = @"operationName",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        string OperationName { get; set; }
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
         [Sample.API.Runtime.Info(
-        Required = true,
+        Required = false,
         ReadOnly = false,
         Read = true,
         Create = true,
@@ -45,6 +70,12 @@ namespace Sample.API.Models
     internal partial interface IValidateForExecutionPropertiesInternal
 
     {
+        /// <summary>
+        /// Operation name for which the validation is being done. This is needed to determine the set of validations to be done for
+        /// the operation.
+        /// </summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        string OperationName { get; set; }
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
         System.Collections.Generic.List<string> SourceLocation { get; set; }
 

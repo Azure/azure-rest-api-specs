@@ -19,7 +19,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IErrorResponse))]
     [global::Sample.API.Description(@"This action checks if the recovery orchestration plan is eligible for operations like failover and reprotect, ensuring it meets the necessary criteria.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForOperation", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForOperation", ApiVersion = "2026-08-31-preview")]
     public partial class TestAzureResilienceManagementRecoveryPlanAction_ValidateViaIdentityServiceGroup2 : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext

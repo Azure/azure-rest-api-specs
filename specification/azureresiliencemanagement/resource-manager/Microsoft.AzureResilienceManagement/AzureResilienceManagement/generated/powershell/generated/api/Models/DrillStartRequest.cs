@@ -12,25 +12,14 @@ namespace Sample.API.Models
     {
 
         /// <summary>Backing field for <see cref="Mode" /> property.</summary>
-        private string _mode;
+        private string _mode= @"Failover";
 
         /// <summary>Mode of starting the Drill</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string Mode { get => this._mode; set => this._mode = value; }
+        public string Mode { get => this._mode; }
 
-        /// <summary>Backing field for <see cref="RecoveryPlanInput" /> property.</summary>
-        private Sample.API.Models.IDrillStartRequestRecoveryPlanInputs _recoveryPlanInput;
-
-        /// <summary>Inputs needed for the Recovery Orchestration Plan</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IDrillStartRequestRecoveryPlanInputs RecoveryPlanInput { get => (this._recoveryPlanInput = this._recoveryPlanInput ?? new Sample.API.Models.DrillStartRequestRecoveryPlanInputs()); set => this._recoveryPlanInput = value; }
-
-        /// <summary>Direction of the failover</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RecoveryPlanInputFailoverDirection { get => ((Sample.API.Models.IDrillStartRequestRecoveryPlanInputsInternal)RecoveryPlanInput).FailoverDirection; set => ((Sample.API.Models.IDrillStartRequestRecoveryPlanInputsInternal)RecoveryPlanInput).FailoverDirection = value ; }
-
-        /// <summary>Internal Acessors for RecoveryPlanInput</summary>
-        Sample.API.Models.IDrillStartRequestRecoveryPlanInputs Sample.API.Models.IDrillStartRequestInternal.RecoveryPlanInput { get => (this._recoveryPlanInput = this._recoveryPlanInput ?? new Sample.API.Models.DrillStartRequestRecoveryPlanInputs()); set { {_recoveryPlanInput = value;} } }
+        /// <summary>Internal Acessors for Mode</summary>
+        string Sample.API.Models.IDrillStartRequestInternal.Mode { get => this._mode; set { {_mode = value;} } }
 
         /// <summary>Creates an new <see cref="DrillStartRequest" /> instance.</summary>
         public DrillStartRequest()
@@ -45,26 +34,15 @@ namespace Sample.API.Models
         /// <summary>Mode of starting the Drill</summary>
         [Sample.API.Runtime.Info(
         Required = true,
-        ReadOnly = false,
+        ReadOnly = true,
         Read = true,
         Create = true,
         Update = true,
         Description = @"Mode of starting the Drill",
         SerializedName = @"mode",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "TestFailover")]
-        string Mode { get; set; }
-        /// <summary>Direction of the failover</summary>
-        [Sample.API.Runtime.Info(
-        Required = true,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Direction of the failover",
-        SerializedName = @"failoverDirection",
-        PossibleTypes = new [] { typeof(string) })]
-        string RecoveryPlanInputFailoverDirection { get; set; }
+        [global::Sample.API.PSArgumentCompleterAttribute("Failover")]
+        string Mode { get;  }
 
     }
     /// Request body of the Start Action of Drill.
@@ -72,12 +50,8 @@ namespace Sample.API.Models
 
     {
         /// <summary>Mode of starting the Drill</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "TestFailover")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Failover")]
         string Mode { get; set; }
-        /// <summary>Inputs needed for the Recovery Orchestration Plan</summary>
-        Sample.API.Models.IDrillStartRequestRecoveryPlanInputs RecoveryPlanInput { get; set; }
-        /// <summary>Direction of the failover</summary>
-        string RecoveryPlanInputFailoverDirection { get; set; }
 
     }
 }

@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IDrillRunActionResponse))]
     [global::Sample.API.Description(@"This initiates a new Failover operation on this Drill Run.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/failOver", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/failOver", ApiVersion = "2026-08-31-preview")]
     public partial class InvokeAzureResilienceManagementFailDrillRunOver_FailExpanded : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext
@@ -47,10 +47,10 @@ namespace Sample.API.Cmdlets
         public global::System.Management.Automation.SwitchParameter AsJob { get; set; }
 
         /// <summary>AutoFailover - whether to pause between Fault and Failover for manual input.</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "AutoFailover - whether to pause between Fault and Failover for manual input.")]
+        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "AutoFailover - whether to pause between Fault and Failover for manual input.")]
         [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
         [Sample.API.Runtime.Info(
-        Required = true,
+        Required = false,
         ReadOnly = false,
         Description = @"AutoFailover - whether to pause between Fault and Failover for manual input.",
         SerializedName = @"autoFailover",

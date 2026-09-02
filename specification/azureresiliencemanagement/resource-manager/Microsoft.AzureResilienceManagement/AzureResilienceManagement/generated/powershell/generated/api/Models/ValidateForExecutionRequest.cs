@@ -21,6 +21,13 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         internal Sample.API.Models.IValidateForExecutionProperties ValidateForExecutionProperty { get => (this._validateForExecutionProperty = this._validateForExecutionProperty ?? new Sample.API.Models.ValidateForExecutionProperties()); set => this._validateForExecutionProperty = value; }
 
+        /// <summary>
+        /// Operation name for which the validation is being done. This is needed to determine the set of validations to be done for
+        /// the operation.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ValidateForExecutionPropertyOperationName { get => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperty).OperationName; set => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperty).OperationName = value ?? null; }
+
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
         public System.Collections.Generic.List<string> ValidateForExecutionPropertySourceLocation { get => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperty).SourceLocation; set => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperty).SourceLocation = value ?? null /* arrayOf */; }
@@ -35,6 +42,21 @@ namespace Sample.API.Models
     public partial interface IValidateForExecutionRequest :
         Sample.API.Runtime.IJsonSerializable
     {
+        /// <summary>
+        /// Operation name for which the validation is being done. This is needed to determine the set of validations to be done for
+        /// the operation.
+        /// </summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Operation name for which the validation is being done. This is needed to determine the set of validations to be done for the operation.",
+        SerializedName = @"operationName",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        string ValidateForExecutionPropertyOperationName { get; set; }
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -54,6 +76,12 @@ namespace Sample.API.Models
     {
         /// <summary>Additional properties for Validate for execute.</summary>
         Sample.API.Models.IValidateForExecutionProperties ValidateForExecutionProperty { get; set; }
+        /// <summary>
+        /// Operation name for which the validation is being done. This is needed to determine the set of validations to be done for
+        /// the operation.
+        /// </summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        string ValidateForExecutionPropertyOperationName { get; set; }
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
         System.Collections.Generic.List<string> ValidateForExecutionPropertySourceLocation { get; set; }
 

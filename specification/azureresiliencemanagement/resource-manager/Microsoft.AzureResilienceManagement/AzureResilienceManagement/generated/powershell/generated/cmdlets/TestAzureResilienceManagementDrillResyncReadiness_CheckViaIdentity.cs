@@ -18,7 +18,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(bool))]
     [global::Sample.API.Description(@"This triggers detection of any drifts from the desired state of Resources and RBAC.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/resyncReadinessCheck", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/resyncReadinessCheck", ApiVersion = "2026-08-31-preview")]
     public partial class TestAzureResilienceManagementDrillResyncReadiness_CheckViaIdentity : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext

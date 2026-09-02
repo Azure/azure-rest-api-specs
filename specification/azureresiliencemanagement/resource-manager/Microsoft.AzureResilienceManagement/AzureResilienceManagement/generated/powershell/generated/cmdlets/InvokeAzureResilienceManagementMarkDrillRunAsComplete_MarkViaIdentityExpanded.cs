@@ -18,7 +18,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IMarkAsCompleteResponse))]
     [global::Sample.API.Description(@"This enables the user to mark this stage as complete, disabling further retries on it.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/markAsComplete", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/markAsComplete", ApiVersion = "2026-08-31-preview")]
     public partial class InvokeAzureResilienceManagementMarkDrillRunAsComplete_MarkViaIdentityExpanded : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext
@@ -78,7 +78,7 @@ namespace Sample.API.Cmdlets
         Description = @"State of the Drill Run.",
         SerializedName = @"drillRunStage",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "TestFailover", "TestFailoverCleanup", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        [global::Sample.API.PSArgumentCompleterAttribute("FaultInjection", "Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
         public string DrillRunStage { get => _body.DrillRunStage ?? null; set => _body.DrillRunStage = value; }
 
         /// <summary>Accessor for extensibleParameters.</summary>

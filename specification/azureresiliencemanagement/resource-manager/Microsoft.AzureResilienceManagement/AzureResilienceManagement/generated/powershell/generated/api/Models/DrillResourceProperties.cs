@@ -46,10 +46,6 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         internal Sample.API.Models.IDrillResourceAttentionReason AttentionReason { get => (this._attentionReason = this._attentionReason ?? new Sample.API.Models.DrillResourceAttentionReason()); }
 
-        /// <summary>Experiment MSI does not have the desired RBAC on the resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string AttentionReasonFaultRbacOnTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).FaultRbacOnTarget; }
-
         /// <summary>Chaos Resource MSI does not have the desired RBAC on the resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
         public string AttentionReasonFaultRbacOnTargetResource { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).FaultRbacOnTargetResource; }
@@ -67,10 +63,6 @@ namespace Sample.API.Models
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
         public string AttentionReasonRunbookFaultRbacOnTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).RunbookFaultRbacOnTarget; }
-
-        /// <summary>Target extension resource is missing on the resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string AttentionReasonTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).Target; }
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
@@ -265,9 +257,6 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for AttentionReason</summary>
         Sample.API.Models.IDrillResourceAttentionReason Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReason { get => (this._attentionReason = this._attentionReason ?? new Sample.API.Models.DrillResourceAttentionReason()); set { {_attentionReason = value;} } }
 
-        /// <summary>Internal Acessors for AttentionReasonFaultRbacOnTarget</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonFaultRbacOnTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).FaultRbacOnTarget; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).FaultRbacOnTarget = value ?? null; }
-
         /// <summary>Internal Acessors for AttentionReasonFaultRbacOnTargetResource</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonFaultRbacOnTargetResource { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).FaultRbacOnTargetResource; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).FaultRbacOnTargetResource = value ?? null; }
 
@@ -279,9 +268,6 @@ namespace Sample.API.Models
 
         /// <summary>Internal Acessors for AttentionReasonRunbookFaultRbacOnTarget</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonRunbookFaultRbacOnTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).RunbookFaultRbacOnTarget; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).RunbookFaultRbacOnTarget = value ?? null; }
-
-        /// <summary>Internal Acessors for AttentionReasonTarget</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).Target; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).Target = value ?? null; }
 
         /// <summary>Internal Acessors for CustomFaultName</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName = value ?? null; }
@@ -376,68 +362,6 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for ResourceProtectionSolutionType</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.ResourceProtectionSolutionType { get => this._resourceProtectionSolutionType; set { {_resourceProtectionSolutionType = value;} } }
 
-        /// <summary>Internal Acessors for TargetAndCapabilityAssignmentError</summary>
-        Sample.API.Models.IErrorDetails Sample.API.Models.IDrillResourcePropertiesInternal.TargetAndCapabilityAssignmentError { get => (this._targetAndCapabilityAssignmentError = this._targetAndCapabilityAssignmentError ?? new Sample.API.Models.ErrorDetails()); set { {_targetAndCapabilityAssignmentError = value;} } }
-
-        /// <summary>Internal Acessors for TargetAndCapabilityAssignmentErrorCode</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.TargetAndCapabilityAssignmentErrorCode { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Code; set => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Code = value ?? null; }
-
-        /// <summary>Internal Acessors for TargetAndCapabilityAssignmentErrorMessage</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.TargetAndCapabilityAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Message; set => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Message = value ?? null; }
-
-        /// <summary>Internal Acessors for TargetAndCapabilityAssignmentErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.TargetAndCapabilityAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Recommendation = value ?? null /* arrayOf */; }
-
-        /// <summary>Internal Acessors for TargetResourceAssignmentError</summary>
-        Sample.API.Models.IErrorDetails Sample.API.Models.IDrillResourcePropertiesInternal.TargetResourceAssignmentError { get => (this._targetResourceAssignmentError = this._targetResourceAssignmentError ?? new Sample.API.Models.ErrorDetails()); set { {_targetResourceAssignmentError = value;} } }
-
-        /// <summary>Internal Acessors for TargetResourceAssignmentErrorCode</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.TargetResourceAssignmentErrorCode { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Code; set => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Code = value ?? null; }
-
-        /// <summary>Internal Acessors for TargetResourceAssignmentErrorMessage</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.TargetResourceAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Message; set => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Message = value ?? null; }
-
-        /// <summary>Internal Acessors for TargetResourceAssignmentErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.TargetResourceAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Recommendation = value ?? null /* arrayOf */; }
-
-        /// <summary>Backing field for <see cref="TargetAndCapabilityAssignmentError" /> property.</summary>
-        private Sample.API.Models.IErrorDetails _targetAndCapabilityAssignmentError;
-
-        /// <summary>Last Target and Capability assignment error, if any.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IErrorDetails TargetAndCapabilityAssignmentError { get => (this._targetAndCapabilityAssignmentError = this._targetAndCapabilityAssignmentError ?? new Sample.API.Models.ErrorDetails()); }
-
-        /// <summary>Error code.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TargetAndCapabilityAssignmentErrorCode { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Code; }
-
-        /// <summary>Error message.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TargetAndCapabilityAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Message; }
-
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> TargetAndCapabilityAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)TargetAndCapabilityAssignmentError).Recommendation; }
-
-        /// <summary>Backing field for <see cref="TargetResourceAssignmentError" /> property.</summary>
-        private Sample.API.Models.IErrorDetails _targetResourceAssignmentError;
-
-        /// <summary>Last Target Resource RBAC assignment error, if any.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IErrorDetails TargetResourceAssignmentError { get => (this._targetResourceAssignmentError = this._targetResourceAssignmentError ?? new Sample.API.Models.ErrorDetails()); }
-
-        /// <summary>Error code.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TargetResourceAssignmentErrorCode { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Code; }
-
-        /// <summary>Error message.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TargetResourceAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Message; }
-
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> TargetResourceAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)TargetResourceAssignmentError).Recommendation; }
-
         /// <summary>Creates an new <see cref="DrillResourceProperties" /> instance.</summary>
         public DrillResourceProperties()
         {
@@ -492,18 +416,6 @@ namespace Sample.API.Models
         SerializedName = @"advisorRecommendationTypeId",
         PossibleTypes = new [] { typeof(string) })]
         string AdvisorRecommendationTypeId { get;  }
-        /// <summary>Experiment MSI does not have the desired RBAC on the resource.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Experiment MSI does not have the desired RBAC on the resource.",
-        SerializedName = @"faultRbacOnTarget",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string AttentionReasonFaultRbacOnTarget { get;  }
         /// <summary>Chaos Resource MSI does not have the desired RBAC on the resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -554,18 +466,6 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string AttentionReasonRunbookFaultRbacOnTarget { get;  }
-        /// <summary>Target extension resource is missing on the resource.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Target extension resource is missing on the resource.",
-        SerializedName = @"target",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string AttentionReasonTarget { get;  }
         /// <summary>fault name</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -762,7 +662,7 @@ namespace Sample.API.Models
         Description = @"Provisioning state",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>Error code.</summary>
         [Sample.API.Runtime.Info(
@@ -889,72 +789,6 @@ namespace Sample.API.Models
         SerializedName = @"resourceType",
         PossibleTypes = new [] { typeof(string) })]
         string ResourceType { get; set; }
-        /// <summary>Error code.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Error code.",
-        SerializedName = @"code",
-        PossibleTypes = new [] { typeof(string) })]
-        string TargetAndCapabilityAssignmentErrorCode { get;  }
-        /// <summary>Error message.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Error message.",
-        SerializedName = @"message",
-        PossibleTypes = new [] { typeof(string) })]
-        string TargetAndCapabilityAssignmentErrorMessage { get;  }
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"A list of recommendations to resolve the error.",
-        SerializedName = @"recommendations",
-        PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> TargetAndCapabilityAssignmentErrorRecommendation { get;  }
-        /// <summary>Error code.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Error code.",
-        SerializedName = @"code",
-        PossibleTypes = new [] { typeof(string) })]
-        string TargetResourceAssignmentErrorCode { get;  }
-        /// <summary>Error message.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"Error message.",
-        SerializedName = @"message",
-        PossibleTypes = new [] { typeof(string) })]
-        string TargetResourceAssignmentErrorMessage { get;  }
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"A list of recommendations to resolve the error.",
-        SerializedName = @"recommendations",
-        PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> TargetResourceAssignmentErrorRecommendation { get;  }
 
     }
     /// Properties of the Resiliency Drill Resource
@@ -971,9 +805,6 @@ namespace Sample.API.Models
         string AdvisorRecommendationTypeId { get; set; }
         /// <summary>Attention reason if the Status is 'NeedsAttention'.</summary>
         Sample.API.Models.IDrillResourceAttentionReason AttentionReason { get; set; }
-        /// <summary>Experiment MSI does not have the desired RBAC on the resource.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string AttentionReasonFaultRbacOnTarget { get; set; }
         /// <summary>Chaos Resource MSI does not have the desired RBAC on the resource.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string AttentionReasonFaultRbacOnTargetResource { get; set; }
@@ -988,9 +819,6 @@ namespace Sample.API.Models
         /// </summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string AttentionReasonRunbookFaultRbacOnTarget { get; set; }
-        /// <summary>Target extension resource is missing on the resource.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string AttentionReasonTarget { get; set; }
         /// <summary>fault name</summary>
         string CustomFaultName { get; set; }
         /// <summary>ID of ARM resource used for automation (e.g. Automation runbook URL).</summary>
@@ -1044,7 +872,7 @@ namespace Sample.API.Models
         /// <summary>fault urn.</summary>
         string OverriddenDefaultFaultUrn { get; set; }
         /// <summary>Provisioning state</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>Last RBAC assignment error, if any.</summary>
         Sample.API.Models.IErrorDetails RbacAssignmentError { get; set; }
@@ -1074,22 +902,6 @@ namespace Sample.API.Models
         string ResourceProtectionSolutionType { get; set; }
         /// <summary>Type of the Drill resource.</summary>
         string ResourceType { get; set; }
-        /// <summary>Last Target and Capability assignment error, if any.</summary>
-        Sample.API.Models.IErrorDetails TargetAndCapabilityAssignmentError { get; set; }
-        /// <summary>Error code.</summary>
-        string TargetAndCapabilityAssignmentErrorCode { get; set; }
-        /// <summary>Error message.</summary>
-        string TargetAndCapabilityAssignmentErrorMessage { get; set; }
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> TargetAndCapabilityAssignmentErrorRecommendation { get; set; }
-        /// <summary>Last Target Resource RBAC assignment error, if any.</summary>
-        Sample.API.Models.IErrorDetails TargetResourceAssignmentError { get; set; }
-        /// <summary>Error code.</summary>
-        string TargetResourceAssignmentErrorCode { get; set; }
-        /// <summary>Error message.</summary>
-        string TargetResourceAssignmentErrorMessage { get; set; }
-        /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> TargetResourceAssignmentErrorRecommendation { get; set; }
 
     }
 }

@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IOperation))]
     [global::Sample.API.Description(@"List the operations for the provider")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.AzureResilienceManagement/operations", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.AzureResilienceManagement/operations", ApiVersion = "2026-08-31-preview")]
     public partial class GetAzureResilienceManagementOperation_List : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext

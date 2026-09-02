@@ -92,6 +92,12 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for ServiceGroupMembership</summary>
         System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> Sample.API.Models.IGoalResourceInternal.ServiceGroupMembership { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ServiceGroupMembership; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ServiceGroupMembership = value ?? null /* arrayOf */; }
 
+        /// <summary>Internal Acessors for ZonalResiliency</summary>
+        Sample.API.Models.IResiliencyProperties Sample.API.Models.IGoalResourceInternal.ZonalResiliency { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliency; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliency = value ?? null /* model class */; }
+
+        /// <summary>Internal Acessors for ZonalResiliencyExclusionReason</summary>
+        string Sample.API.Models.IGoalResourceInternal.ZonalResiliencyExclusionReason { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyExclusionReason; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyExclusionReason = value ?? null; }
+
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
 
@@ -164,7 +170,27 @@ namespace Sample.API.Models
 
         /// <summary>List of user confirmations for high availability solutions.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IUserConfirmationForHighAvailabilityItem> UserConfirmationForHighAvailability { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).UserConfirmationForHighAvailability; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).UserConfirmationForHighAvailability = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> UserConfirmationForHighAvailability { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).UserConfirmationForHighAvailability; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).UserConfirmationForHighAvailability = value ?? null /* arrayOf */; }
+
+        /// <summary>
+        /// Flag which depicts whether the Arm resource is manually attested for resiliency recommendation.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ZonalResiliencyAttestationStatus { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyAttestationStatus; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyAttestationStatus = value ?? null; }
+
+        /// <summary>Reason for exclusion from resiliency goals.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ZonalResiliencyExclusionReason { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyExclusionReason; }
+
+        /// <summary>
+        /// Flag which depicts whether the Arm resource is excluded for resiliency recommendation.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string ZonalResiliencyGoalParticipation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyGoalParticipation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyGoalParticipation = value ?? null; }
+
+        /// <summary>List of user confirmations for resiliency solutions.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> ZonalResiliencyUserConfirmation { get => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyUserConfirmation; set => ((Sample.API.Models.IGoalResourcePropertiesInternal)Property).ZonalResiliencyUserConfirmation = value ?? null /* arrayOf */; }
 
         /// <summary>Creates an new <see cref="GoalResource" /> instance.</summary>
         public GoalResource()
@@ -279,7 +305,7 @@ namespace Sample.API.Models
         Description = @"Provisioning state",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>Arm Id of resource under the SG for which the extension resource is maintained.</summary>
         [Sample.API.Runtime.Info(
@@ -312,8 +338,59 @@ namespace Sample.API.Models
         Update = true,
         Description = @"List of user confirmations for high availability solutions.",
         SerializedName = @"userConfirmationForHighAvailability",
-        PossibleTypes = new [] { typeof(Sample.API.Models.IUserConfirmationForHighAvailabilityItem) })]
-        System.Collections.Generic.List<Sample.API.Models.IUserConfirmationForHighAvailabilityItem> UserConfirmationForHighAvailability { get; set; }
+        PossibleTypes = new [] { typeof(Sample.API.Models.IUserConfirmationItem) })]
+        System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> UserConfirmationForHighAvailability { get; set; }
+        /// <summary>
+        /// Flag which depicts whether the Arm resource is manually attested for resiliency recommendation.
+        /// </summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Flag which depicts whether the Arm resource is manually attested for resiliency recommendation.",
+        SerializedName = @"attestationStatus",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("NotAttested", "ManuallyAttested")]
+        string ZonalResiliencyAttestationStatus { get; set; }
+        /// <summary>Reason for exclusion from resiliency goals.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"Reason for exclusion from resiliency goals.",
+        SerializedName = @"exclusionReason",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
+        string ZonalResiliencyExclusionReason { get;  }
+        /// <summary>
+        /// Flag which depicts whether the Arm resource is excluded for resiliency recommendation.
+        /// </summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Flag which depicts whether the Arm resource is excluded for resiliency recommendation.",
+        SerializedName = @"goalParticipation",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("Excluded", "Included")]
+        string ZonalResiliencyGoalParticipation { get; set; }
+        /// <summary>List of user confirmations for resiliency solutions.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"List of user confirmations for resiliency solutions.",
+        SerializedName = @"userConfirmation",
+        PossibleTypes = new [] { typeof(Sample.API.Models.IUserConfirmationItem) })]
+        System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> ZonalResiliencyUserConfirmation { get; set; }
 
     }
     /// Goal Resource a AzureResilienceProviderHub resource
@@ -349,14 +426,33 @@ namespace Sample.API.Models
         /// <summary>The resource-specific properties for this resource.</summary>
         Sample.API.Models.IGoalResourceProperties Property { get; set; }
         /// <summary>Provisioning state</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>Arm Id of resource under the SG for which the extension resource is maintained.</summary>
         string ResourceArmId { get; set; }
         /// <summary>List of service groups of which this resource is memberof.</summary>
         System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMembership { get; set; }
         /// <summary>List of user confirmations for high availability solutions.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IUserConfirmationForHighAvailabilityItem> UserConfirmationForHighAvailability { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> UserConfirmationForHighAvailability { get; set; }
+        /// <summary>
+        /// Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource.
+        /// </summary>
+        Sample.API.Models.IResiliencyProperties ZonalResiliency { get; set; }
+        /// <summary>
+        /// Flag which depicts whether the Arm resource is manually attested for resiliency recommendation.
+        /// </summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("NotAttested", "ManuallyAttested")]
+        string ZonalResiliencyAttestationStatus { get; set; }
+        /// <summary>Reason for exclusion from resiliency goals.</summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
+        string ZonalResiliencyExclusionReason { get; set; }
+        /// <summary>
+        /// Flag which depicts whether the Arm resource is excluded for resiliency recommendation.
+        /// </summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("Excluded", "Included")]
+        string ZonalResiliencyGoalParticipation { get; set; }
+        /// <summary>List of user confirmations for resiliency solutions.</summary>
+        System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> ZonalResiliencyUserConfirmation { get; set; }
 
     }
 }

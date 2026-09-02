@@ -975,7 +975,7 @@ namespace Sample.API.Models
         Description = @"The provisioning state of the recovery orchestration plan.",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>Additional recovery orchestration group settings.</summary>
         [Sample.API.Runtime.Info(
@@ -1132,7 +1132,7 @@ namespace Sample.API.Models
         /// <summary>The resource-specific properties for this resource.</summary>
         Sample.API.Models.IRecoveryPlanProperties Property { get; set; }
         /// <summary>The provisioning state of the recovery orchestration plan.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>Additional recovery orchestration group settings.</summary>
         System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> RecoveryGroupSettingAdditionalGroup { get; set; }

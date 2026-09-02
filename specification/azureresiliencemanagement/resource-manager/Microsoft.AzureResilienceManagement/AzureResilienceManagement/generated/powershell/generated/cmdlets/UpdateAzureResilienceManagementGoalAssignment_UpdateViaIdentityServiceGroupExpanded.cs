@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IGoalAssignment))]
     [global::Sample.API.Description(@"update a GoalAssignment")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}", ApiVersion = "2026-08-31-preview")]
     public partial class UpdateAzureResilienceManagementGoalAssignment_UpdateViaIdentityServiceGroupExpanded : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext
@@ -159,6 +159,17 @@ namespace Sample.API.Cmdlets
         [global::System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Use the default credentials for the proxy")]
         [global::Sample.API.Category(global::Sample.API.ParameterCategory.Runtime)]
         public global::System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials { get; set; }
+
+        /// <summary>Whether zonal resiliency is required for this goal assignment.</summary>
+        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Whether zonal resiliency is required for this goal assignment.")]
+        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"Whether zonal resiliency is required for this goal assignment.",
+        SerializedName = @"requireZonalResiliency",
+        PossibleTypes = new [] { typeof(global::System.Management.Automation.SwitchParameter) })]
+        public global::System.Management.Automation.SwitchParameter RequireZonalResiliency { get => _propertiesBody.RequireZonalResiliency ?? default(global::System.Management.Automation.SwitchParameter); set => _propertiesBody.RequireZonalResiliency = value; }
 
         /// <summary>Backing field for <see cref="ServiceGroupInputObject" /> property.</summary>
         private Sample.API.Models.IAzureResilienceManagementIdentity _serviceGroupInputObject;

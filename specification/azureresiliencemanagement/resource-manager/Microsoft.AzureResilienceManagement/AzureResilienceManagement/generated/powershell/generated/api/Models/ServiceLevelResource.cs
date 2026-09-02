@@ -48,7 +48,7 @@ namespace Sample.API.Models
         string ServiceLevelIndicatorResourceId { get; set; }
         /// <summary>The arm id of the service level object resource</summary>
         [Sample.API.Runtime.Info(
-        Required = true,
+        Required = false,
         ReadOnly = false,
         Read = true,
         Create = true,

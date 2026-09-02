@@ -74,7 +74,7 @@ namespace Sample.API.Models
                 return;
             }
             __proxyResource = new Sample.API.Models.ProxyResource(json);
-            {_property = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("properties"), out var __jsonProperties) ? Sample.API.Models.GoalAssignmentPropertiesUpdate.FromJson(__jsonProperties) : _property;}
+            {_property = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("properties"), out var __jsonProperties) ? Sample.API.Models.GoalAssignmentProperties.FromJson(__jsonProperties) : _property;}
             AfterFromJson(json);
         }
 

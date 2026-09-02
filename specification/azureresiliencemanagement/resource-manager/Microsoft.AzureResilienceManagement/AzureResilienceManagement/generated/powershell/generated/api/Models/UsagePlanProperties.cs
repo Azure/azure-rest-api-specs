@@ -160,7 +160,7 @@ namespace Sample.API.Models
         Description = @"Provisioning state of the usage plan.",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
 
     }
@@ -184,7 +184,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Basic", "Standard")]
         string PlanType { get; set; }
         /// <summary>Provisioning state of the usage plan.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
 
     }

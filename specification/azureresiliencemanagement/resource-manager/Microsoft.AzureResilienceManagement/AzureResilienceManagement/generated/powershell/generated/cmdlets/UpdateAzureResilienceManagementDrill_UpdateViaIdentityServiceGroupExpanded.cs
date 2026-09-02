@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IDrill))]
     [global::Sample.API.Description(@"update a Drill")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}", ApiVersion = "2026-08-31-preview")]
     public partial class UpdateAzureResilienceManagementDrill_UpdateViaIdentityServiceGroupExpanded : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext
@@ -53,74 +53,6 @@ namespace Sample.API.Cmdlets
 
         /// <summary>Accessor for cancellationTokenSource.</summary>
         public global::System.Threading.CancellationTokenSource CancellationTokenSource { get => _cancellationTokenSource ; set { _cancellationTokenSource = value; } }
-
-        /// <summary>Identity type linked with the resource</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Identity type linked with the resource")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"Identity type linked with the resource",
-        SerializedName = @"type",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        public string ChaosExperimentIdentityForFaultType { get => _propertiesBody.ChaosExperimentIdentityForFaultType ?? null; set => _propertiesBody.ChaosExperimentIdentityForFaultType = value; }
-
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "User assigned identity id linked with the resource")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"User assigned identity id linked with the resource",
-        SerializedName = @"userAssignedIdentity",
-        PossibleTypes = new [] { typeof(string) })]
-        public string ChaosExperimentIdentityForFaultUserAssignedIdentity { get => _propertiesBody.ChaosExperimentIdentityForFaultUserAssignedIdentity ?? null; set => _propertiesBody.ChaosExperimentIdentityForFaultUserAssignedIdentity = value; }
-
-        /// <summary>Identity type linked with the resource</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Identity type linked with the resource")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"Identity type linked with the resource",
-        SerializedName = @"type",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        public string ChaosExperimentPropertiesIdentityType { get => _propertiesBody.ChaosExperimentPropertiesIdentityType ?? null; set => _propertiesBody.ChaosExperimentPropertiesIdentityType = value; }
-
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "User assigned identity id linked with the resource")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"User assigned identity id linked with the resource",
-        SerializedName = @"userAssignedIdentity",
-        PossibleTypes = new [] { typeof(string) })]
-        public string ChaosExperimentPropertiesIdentityUserAssignedIdentity { get => _propertiesBody.ChaosExperimentPropertiesIdentityUserAssignedIdentity ?? null; set => _propertiesBody.ChaosExperimentPropertiesIdentityUserAssignedIdentity = value; }
-
-        /// <summary>Region for chaosExperiment resource.</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Region for chaosExperiment resource.")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"Region for chaosExperiment resource.",
-        SerializedName = @"region",
-        PossibleTypes = new [] { typeof(string) })]
-        public string ChaosExperimentPropertyRegion { get => _propertiesBody.ChaosExperimentPropertyRegion ?? null; set => _propertiesBody.ChaosExperimentPropertyRegion = value; }
-
-        /// <summary>Subscription for chaosExperiment resource.</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Subscription for chaosExperiment resource.")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"Subscription for chaosExperiment resource.",
-        SerializedName = @"subscription",
-        PossibleTypes = new [] { typeof(string) })]
-        public string ChaosExperimentPropertySubscription { get => _propertiesBody.ChaosExperimentPropertySubscription ?? null; set => _propertiesBody.ChaosExperimentPropertySubscription = value; }
 
         /// <summary>Identity type linked with the resource</summary>
         [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Identity type linked with the resource")]
@@ -216,7 +148,7 @@ namespace Sample.API.Cmdlets
         SerializedName = @"type",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        public string HealthModelPropertiesIdentityType { get => _propertiesBody.HealthModelPropertiesIdentityType ?? null; set => _propertiesBody.HealthModelPropertiesIdentityType = value; }
+        public string HealthModelMonitoringPropertiesIdentityType { get => _propertiesBody.HealthModelMonitoringPropertiesIdentityType ?? null; set => _propertiesBody.HealthModelMonitoringPropertiesIdentityType = value; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "User assigned identity id linked with the resource")]
@@ -227,18 +159,21 @@ namespace Sample.API.Cmdlets
         Description = @"User assigned identity id linked with the resource",
         SerializedName = @"userAssignedIdentity",
         PossibleTypes = new [] { typeof(string) })]
-        public string HealthModelPropertiesIdentityUserAssignedIdentity { get => _propertiesBody.HealthModelPropertiesIdentityUserAssignedIdentity ?? null; set => _propertiesBody.HealthModelPropertiesIdentityUserAssignedIdentity = value; }
+        public string HealthModelMonitoringPropertiesIdentityUserAssignedIdentity { get => _propertiesBody.HealthModelMonitoringPropertiesIdentityUserAssignedIdentity ?? null; set => _propertiesBody.HealthModelMonitoringPropertiesIdentityUserAssignedIdentity = value; }
 
-        /// <summary>Full ARM Id of the Health Model.</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Full ARM Id of the Health Model.")]
+        /// <summary>
+        /// Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is
+        /// the only identifier accepted on the wire.
+        /// </summary>
+        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.")]
         [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
         [Sample.API.Runtime.Info(
         Required = false,
         ReadOnly = false,
-        Description = @"Full ARM Id of the Health Model.",
-        SerializedName = @"healthModelId",
+        Description = @"Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.",
+        SerializedName = @"discoveryRuleId",
         PossibleTypes = new [] { typeof(string) })]
-        public string HealthModelPropertyHealthModelId { get => _propertiesBody.HealthModelPropertyHealthModelId ?? null; set => _propertiesBody.HealthModelPropertyHealthModelId = value; }
+        public string HealthModelMonitoringPropertyDiscoveryRuleId { get => _propertiesBody.HealthModelMonitoringPropertyDiscoveryRuleId ?? null; set => _propertiesBody.HealthModelMonitoringPropertyDiscoveryRuleId = value; }
 
         /// <summary>SendAsync Pipeline Steps to be appended to the front of the pipeline</summary>
         [global::System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "SendAsync Pipeline Steps to be appended to the front of the pipeline")]
@@ -266,43 +201,6 @@ namespace Sample.API.Cmdlets
 
         /// <summary>Accessor for our copy of the InvocationInfo.</summary>
         public global::System.Management.Automation.InvocationInfo InvocationInformation { get => __invocationInfo = __invocationInfo ?? this.MyInvocation ; set { __invocationInfo = value; } }
-
-        /// <summary>
-        /// Metrics associated with this Drill. These will be tracked through the Drill Run.
-        /// </summary>
-        [global::System.Management.Automation.AllowEmptyCollection]
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Metrics associated with this Drill. These will be tracked through the Drill Run.")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"Metrics associated with this Drill. These will be tracked through the Drill Run.",
-        SerializedName = @"metricsToTrack",
-        PossibleTypes = new [] { typeof(Sample.API.Models.IMetricsToTrack) })]
-        public Sample.API.Models.IMetricsToTrack[] MetricPropertyMetricsToTrack { get => _propertiesBody.MetricPropertyMetricsToTrack?.ToArray() ?? null /* fixedArrayOf */; set => _propertiesBody.MetricPropertyMetricsToTrack = (value != null ? new System.Collections.Generic.List<Sample.API.Models.IMetricsToTrack>(value) : null); }
-
-        /// <summary>Identity type linked with the resource</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Identity type linked with the resource")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"Identity type linked with the resource",
-        SerializedName = @"type",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        public string MetricsPropertiesIdentityType { get => _propertiesBody.MetricsPropertiesIdentityType ?? null; set => _propertiesBody.MetricsPropertiesIdentityType = value; }
-
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "User assigned identity id linked with the resource")]
-        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"User assigned identity id linked with the resource",
-        SerializedName = @"userAssignedIdentity",
-        PossibleTypes = new [] { typeof(string) })]
-        public string MetricsPropertiesIdentityUserAssignedIdentity { get => _propertiesBody.MetricsPropertiesIdentityUserAssignedIdentity ?? null; set => _propertiesBody.MetricsPropertiesIdentityUserAssignedIdentity = value; }
 
         /// <summary>
         /// <see cref="Sample.API.Runtime.IEventListener" /> cancellation delegate. Stops the cmdlet when called.
@@ -421,6 +319,44 @@ namespace Sample.API.Cmdlets
         [global::System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Identity Parameter", ValueFromPipeline = true)]
         [global::Sample.API.Category(global::Sample.API.ParameterCategory.Path)]
         public Sample.API.Models.IAzureResilienceManagementIdentity ServiceGroupInputObject { get => this._serviceGroupInputObject; set => this._serviceGroupInputObject = value; }
+
+        /// <summary>Identity type linked with the resource</summary>
+        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Identity type linked with the resource")]
+        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"Identity type linked with the resource",
+        SerializedName = @"type",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
+        public string SliMonitoringPropertiesIdentityType { get => _propertiesBody.SliMonitoringPropertiesIdentityType ?? null; set => _propertiesBody.SliMonitoringPropertiesIdentityType = value; }
+
+        /// <summary>User assigned identity id linked with the resource</summary>
+        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "User assigned identity id linked with the resource")]
+        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"User assigned identity id linked with the resource",
+        SerializedName = @"userAssignedIdentity",
+        PossibleTypes = new [] { typeof(string) })]
+        public string SliMonitoringPropertiesIdentityUserAssignedIdentity { get => _propertiesBody.SliMonitoringPropertiesIdentityUserAssignedIdentity ?? null; set => _propertiesBody.SliMonitoringPropertiesIdentityUserAssignedIdentity = value; }
+
+        /// <summary>
+        /// The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types
+        /// or duplicate SLI Ids are rejected.
+        /// </summary>
+        [global::System.Management.Automation.AllowEmptyCollection]
+        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types or duplicate SLI Ids are rejected.")]
+        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types or duplicate SLI Ids are rejected.",
+        SerializedName = @"slis",
+        PossibleTypes = new [] { typeof(Sample.API.Models.ISliSelection) })]
+        public Sample.API.Models.ISliSelection[] SliMonitoringPropertySli { get => _propertiesBody.SliMonitoringPropertySli?.ToArray() ?? null /* fixedArrayOf */; set => _propertiesBody.SliMonitoringPropertySli = (value != null ? new System.Collections.Generic.List<Sample.API.Models.ISliSelection>(value) : null); }
 
         /// <summary>
         /// The array of user assigned identities associated with the resource. The elements in array will be ARM resource ids in

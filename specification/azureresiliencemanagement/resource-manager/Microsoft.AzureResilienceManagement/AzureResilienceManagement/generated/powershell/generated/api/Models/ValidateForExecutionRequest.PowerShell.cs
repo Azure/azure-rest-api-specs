@@ -128,6 +128,10 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IValidateForExecutionRequestInternal)this).ValidateForExecutionPropertySourceLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ValidateForExecutionPropertySourceLocation",((Sample.API.Models.IValidateForExecutionRequestInternal)this).ValidateForExecutionPropertySourceLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
+            if (content.Contains("ValidateForExecutionPropertyOperationName"))
+            {
+                ((Sample.API.Models.IValidateForExecutionRequestInternal)this).ValidateForExecutionPropertyOperationName = (string) content.GetValueForProperty("ValidateForExecutionPropertyOperationName",((Sample.API.Models.IValidateForExecutionRequestInternal)this).ValidateForExecutionPropertyOperationName, global::System.Convert.ToString);
+            }
             AfterDeserializeDictionary(content);
         }
 
@@ -152,6 +156,10 @@ namespace Sample.API.Models
             if (content.Contains("ValidateForExecutionPropertySourceLocation"))
             {
                 ((Sample.API.Models.IValidateForExecutionRequestInternal)this).ValidateForExecutionPropertySourceLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ValidateForExecutionPropertySourceLocation",((Sample.API.Models.IValidateForExecutionRequestInternal)this).ValidateForExecutionPropertySourceLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+            }
+            if (content.Contains("ValidateForExecutionPropertyOperationName"))
+            {
+                ((Sample.API.Models.IValidateForExecutionRequestInternal)this).ValidateForExecutionPropertyOperationName = (string) content.GetValueForProperty("ValidateForExecutionPropertyOperationName",((Sample.API.Models.IValidateForExecutionRequestInternal)this).ValidateForExecutionPropertyOperationName, global::System.Convert.ToString);
             }
             AfterDeserializePSObject(content);
         }

@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IUsagePlan))]
     [global::Sample.API.Description(@"List UsagePlan resources by resource group")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureResilienceManagement/usagePlans", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureResilienceManagement/usagePlans", ApiVersion = "2026-08-31-preview")]
     public partial class GetAzureResilienceManagementUsagePlan_List1 : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext

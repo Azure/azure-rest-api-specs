@@ -63,16 +63,14 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_metricsProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("metricsProperties"), out var __jsonMetricsProperties) ? Sample.API.Models.MetricsPropertiesOfDrill.FromJson(__jsonMetricsProperties) : _metricsProperty;}
-            {_healthModelProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("healthModelProperties"), out var __jsonHealthModelProperties) ? Sample.API.Models.HealthModelPropertiesOfDrill.FromJson(__jsonHealthModelProperties) : _healthModelProperty;}
             {_recoveryPlanProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("recoveryPlanProperties"), out var __jsonRecoveryPlanProperties) ? Sample.API.Models.RecoveryPlanPropertiesOfDrill.FromJson(__jsonRecoveryPlanProperties) : _recoveryPlanProperty;}
             {_drillAssetProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("drillAssetProperties"), out var __jsonDrillAssetProperties) ? Sample.API.Models.AssetPropertiesOfDrill.FromJson(__jsonDrillAssetProperties) : _drillAssetProperty;}
             {_chaosResourceProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("chaosResourceProperties"), out var __jsonChaosResourceProperties) ? Sample.API.Models.ChaosResourcePropertiesOfDrill.FromJson(__jsonChaosResourceProperties) : _chaosResourceProperty;}
-            {_chaosExperimentProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("chaosExperimentProperties"), out var __jsonChaosExperimentProperties) ? Sample.API.Models.ChaosExperimentPropertiesOfDrill.FromJson(__jsonChaosExperimentProperties) : _chaosExperimentProperty;}
             {_systemMetadata = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("systemMetadata"), out var __jsonSystemMetadata) ? Sample.API.Models.SystemMetadata.FromJson(__jsonSystemMetadata) : _systemMetadata;}
             {_lastRunProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("lastRunProperties"), out var __jsonLastRunProperties) ? Sample.API.Models.LastRunProperties.FromJson(__jsonLastRunProperties) : _lastRunProperty;}
-            {_managedOnBehalfOfConfiguration = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("managedOnBehalfOfConfiguration"), out var __jsonManagedOnBehalfOfConfiguration) ? Sample.API.Models.ManagedOnBehalfOfConfiguration.FromJson(__jsonManagedOnBehalfOfConfiguration) : _managedOnBehalfOfConfiguration;}
             {_monitoringProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("monitoringProperties"), out var __jsonMonitoringProperties) ? Sample.API.Models.MonitoringPropertiesOfDrill.FromJson(__jsonMonitoringProperties) : _monitoringProperty;}
+            {_healthModelMonitoringProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("healthModelMonitoringProperties"), out var __jsonHealthModelMonitoringProperties) ? Sample.API.Models.HealthModelMonitoringProperties.FromJson(__jsonHealthModelMonitoringProperties) : _healthModelMonitoringProperty;}
+            {_sliMonitoringProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("sliMonitoringProperties"), out var __jsonSliMonitoringProperties) ? Sample.API.Models.SliMonitoringProperties.FromJson(__jsonSliMonitoringProperties) : _sliMonitoringProperty;}
             {_errorDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.ErrorDetail.FromJson(__jsonErrorDetails) : _errorDetail;}
             {_provisioningState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("provisioningState"), out var __jsonProvisioningState) ? (string)__jsonProvisioningState : (string)_provisioningState;}
             {_serviceGroupId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("serviceGroupId"), out var __jsonServiceGroupId) ? (string)__jsonServiceGroupId : (string)_serviceGroupId;}
@@ -133,12 +131,9 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._metricsProperty ? (Sample.API.Runtime.Json.JsonNode) this._metricsProperty.ToJson(null,serializationMode) : null, "metricsProperties" ,container.Add );
-            AddIf( null != this._healthModelProperty ? (Sample.API.Runtime.Json.JsonNode) this._healthModelProperty.ToJson(null,serializationMode) : null, "healthModelProperties" ,container.Add );
             AddIf( null != this._recoveryPlanProperty ? (Sample.API.Runtime.Json.JsonNode) this._recoveryPlanProperty.ToJson(null,serializationMode) : null, "recoveryPlanProperties" ,container.Add );
             AddIf( null != this._drillAssetProperty ? (Sample.API.Runtime.Json.JsonNode) this._drillAssetProperty.ToJson(null,serializationMode) : null, "drillAssetProperties" ,container.Add );
             AddIf( null != this._chaosResourceProperty ? (Sample.API.Runtime.Json.JsonNode) this._chaosResourceProperty.ToJson(null,serializationMode) : null, "chaosResourceProperties" ,container.Add );
-            AddIf( null != this._chaosExperimentProperty ? (Sample.API.Runtime.Json.JsonNode) this._chaosExperimentProperty.ToJson(null,serializationMode) : null, "chaosExperimentProperties" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
                 AddIf( null != this._systemMetadata ? (Sample.API.Runtime.Json.JsonNode) this._systemMetadata.ToJson(null,serializationMode) : null, "systemMetadata" ,container.Add );
@@ -147,11 +142,9 @@ namespace Sample.API.Models
             {
                 AddIf( null != this._lastRunProperty ? (Sample.API.Runtime.Json.JsonNode) this._lastRunProperty.ToJson(null,serializationMode) : null, "lastRunProperties" ,container.Add );
             }
-            if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
-            {
-                AddIf( null != this._managedOnBehalfOfConfiguration ? (Sample.API.Runtime.Json.JsonNode) this._managedOnBehalfOfConfiguration.ToJson(null,serializationMode) : null, "managedOnBehalfOfConfiguration" ,container.Add );
-            }
             AddIf( null != this._monitoringProperty ? (Sample.API.Runtime.Json.JsonNode) this._monitoringProperty.ToJson(null,serializationMode) : null, "monitoringProperties" ,container.Add );
+            AddIf( null != this._healthModelMonitoringProperty ? (Sample.API.Runtime.Json.JsonNode) this._healthModelMonitoringProperty.ToJson(null,serializationMode) : null, "healthModelMonitoringProperties" ,container.Add );
+            AddIf( null != this._sliMonitoringProperty ? (Sample.API.Runtime.Json.JsonNode) this._sliMonitoringProperty.ToJson(null,serializationMode) : null, "sliMonitoringProperties" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
                 AddIf( null != this._errorDetail ? (Sample.API.Runtime.Json.JsonNode) this._errorDetail.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );

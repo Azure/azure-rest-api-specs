@@ -195,7 +195,7 @@ namespace Sample.API.Models
         Description = @"Provisioning state",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>
         /// Regional recovery point objective specified by customer. eg, PT15M for 15 minutes
@@ -269,7 +269,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Resiliency")]
         string GoalType { get; set; }
         /// <summary>Provisioning state</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>
         /// Regional recovery point objective specified by customer. eg, PT15M for 15 minutes

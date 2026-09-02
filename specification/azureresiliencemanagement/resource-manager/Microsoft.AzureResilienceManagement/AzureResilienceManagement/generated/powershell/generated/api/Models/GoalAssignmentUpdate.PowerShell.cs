@@ -105,7 +105,7 @@ namespace Sample.API.Models
             // actually deserialize
             if (content.Contains("Property"))
             {
-                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property = (Sample.API.Models.IGoalAssignmentPropertiesUpdate) content.GetValueForProperty("Property",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property, Sample.API.Models.GoalAssignmentPropertiesUpdateTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property = (Sample.API.Models.IGoalAssignmentProperties) content.GetValueForProperty("Property",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property, Sample.API.Models.GoalAssignmentPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -147,6 +147,14 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceInternal)this).Type = (string) content.GetValueForProperty("Type",((Sample.API.Models.IResourceInternal)this).Type, global::System.Convert.ToString);
             }
+            if (content.Contains("ProvisioningState"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ProvisioningState, global::System.Convert.ToString);
+            }
+            if (content.Contains("ErrorDetail"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+            }
             if (content.Contains("GoalTemplateId"))
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).GoalTemplateId = (string) content.GetValueForProperty("GoalTemplateId",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).GoalTemplateId, global::System.Convert.ToString);
@@ -155,9 +163,33 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).GoalAssignmentType = (string) content.GetValueForProperty("GoalAssignmentType",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).GoalAssignmentType, global::System.Convert.ToString);
             }
+            if (content.Contains("RequireZonalResiliency"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).RequireZonalResiliency = (bool?) content.GetValueForProperty("RequireZonalResiliency",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).RequireZonalResiliency, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
+            }
             if (content.Contains("ServiceLevelResource"))
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResource = (System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource>) content.GetValueForProperty("ServiceLevelResource",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceLevelResource>(__y, Sample.API.Models.ServiceLevelResourceTypeConverter.ConvertFrom));
+            }
+            if (content.Contains("ErrorDetailCode"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailCode = (string) content.GetValueForProperty("ErrorDetailCode",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailCode, global::System.Convert.ToString);
+            }
+            if (content.Contains("ErrorDetailMessage"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailMessage = (string) content.GetValueForProperty("ErrorDetailMessage",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailMessage, global::System.Convert.ToString);
+            }
+            if (content.Contains("ErrorDetailTarget"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailTarget = (string) content.GetValueForProperty("ErrorDetailTarget",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailTarget, global::System.Convert.ToString);
+            }
+            if (content.Contains("ErrorDetailDetails"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailDetails = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("ErrorDetailDetails",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+            }
+            if (content.Contains("ErrorDetailAdditionalInfo"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailAdditionalInfo = (System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo>) content.GetValueForProperty("ErrorDetailAdditionalInfo",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailAdditionalInfo, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorAdditionalInfo>(__y, Sample.API.Models.ErrorAdditionalInfoTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -178,7 +210,7 @@ namespace Sample.API.Models
             // actually deserialize
             if (content.Contains("Property"))
             {
-                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property = (Sample.API.Models.IGoalAssignmentPropertiesUpdate) content.GetValueForProperty("Property",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property, Sample.API.Models.GoalAssignmentPropertiesUpdateTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property = (Sample.API.Models.IGoalAssignmentProperties) content.GetValueForProperty("Property",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property, Sample.API.Models.GoalAssignmentPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -220,6 +252,14 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceInternal)this).Type = (string) content.GetValueForProperty("Type",((Sample.API.Models.IResourceInternal)this).Type, global::System.Convert.ToString);
             }
+            if (content.Contains("ProvisioningState"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ProvisioningState, global::System.Convert.ToString);
+            }
+            if (content.Contains("ErrorDetail"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+            }
             if (content.Contains("GoalTemplateId"))
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).GoalTemplateId = (string) content.GetValueForProperty("GoalTemplateId",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).GoalTemplateId, global::System.Convert.ToString);
@@ -228,9 +268,33 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).GoalAssignmentType = (string) content.GetValueForProperty("GoalAssignmentType",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).GoalAssignmentType, global::System.Convert.ToString);
             }
+            if (content.Contains("RequireZonalResiliency"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).RequireZonalResiliency = (bool?) content.GetValueForProperty("RequireZonalResiliency",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).RequireZonalResiliency, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
+            }
             if (content.Contains("ServiceLevelResource"))
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResource = (System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource>) content.GetValueForProperty("ServiceLevelResource",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceLevelResource>(__y, Sample.API.Models.ServiceLevelResourceTypeConverter.ConvertFrom));
+            }
+            if (content.Contains("ErrorDetailCode"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailCode = (string) content.GetValueForProperty("ErrorDetailCode",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailCode, global::System.Convert.ToString);
+            }
+            if (content.Contains("ErrorDetailMessage"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailMessage = (string) content.GetValueForProperty("ErrorDetailMessage",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailMessage, global::System.Convert.ToString);
+            }
+            if (content.Contains("ErrorDetailTarget"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailTarget = (string) content.GetValueForProperty("ErrorDetailTarget",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailTarget, global::System.Convert.ToString);
+            }
+            if (content.Contains("ErrorDetailDetails"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailDetails = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("ErrorDetailDetails",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+            }
+            if (content.Contains("ErrorDetailAdditionalInfo"))
+            {
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailAdditionalInfo = (System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo>) content.GetValueForProperty("ErrorDetailAdditionalInfo",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetailAdditionalInfo, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorAdditionalInfo>(__y, Sample.API.Models.ErrorAdditionalInfoTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }

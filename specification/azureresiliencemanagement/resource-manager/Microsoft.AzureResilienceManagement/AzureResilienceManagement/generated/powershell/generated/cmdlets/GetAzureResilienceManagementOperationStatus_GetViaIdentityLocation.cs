@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IOperationStatusResult))]
     [global::Sample.API.Description(@"Returns the current status of an async operation.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.AzureResilienceManagement/locations/{location}/operationStatuses/{operationId}", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.AzureResilienceManagement/locations/{location}/operationStatuses/{operationId}", ApiVersion = "2026-08-31-preview")]
     public partial class GetAzureResilienceManagementOperationStatus_GetViaIdentityLocation : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext

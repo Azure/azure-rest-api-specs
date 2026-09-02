@@ -124,6 +124,10 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
+            if (content.Contains("OperationName"))
+            {
+                ((Sample.API.Models.IValidateForExecutionPropertiesInternal)this).OperationName = (string) content.GetValueForProperty("OperationName",((Sample.API.Models.IValidateForExecutionPropertiesInternal)this).OperationName, global::System.Convert.ToString);
+            }
             if (content.Contains("SourceLocation"))
             {
                 ((Sample.API.Models.IValidateForExecutionPropertiesInternal)this).SourceLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("SourceLocation",((Sample.API.Models.IValidateForExecutionPropertiesInternal)this).SourceLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
@@ -145,6 +149,10 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
+            if (content.Contains("OperationName"))
+            {
+                ((Sample.API.Models.IValidateForExecutionPropertiesInternal)this).OperationName = (string) content.GetValueForProperty("OperationName",((Sample.API.Models.IValidateForExecutionPropertiesInternal)this).OperationName, global::System.Convert.ToString);
+            }
             if (content.Contains("SourceLocation"))
             {
                 ((Sample.API.Models.IValidateForExecutionPropertiesInternal)this).SourceLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("SourceLocation",((Sample.API.Models.IValidateForExecutionPropertiesInternal)this).SourceLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));

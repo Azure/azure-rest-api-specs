@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IValidateForExecutionResponse))]
     [global::Sample.API.Description(@"This returns eligible resource to be faulted or failed over.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/validateForExecution", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/validateForExecution", ApiVersion = "2026-08-31-preview")]
     public partial class TestAzureResilienceManagementDrill_ValidateViaIdentityServiceGroupExpanded : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext
@@ -158,6 +158,21 @@ namespace Sample.API.Cmdlets
         [global::System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Identity Parameter", ValueFromPipeline = true)]
         [global::Sample.API.Category(global::Sample.API.ParameterCategory.Path)]
         public Sample.API.Models.IAzureResilienceManagementIdentity ServiceGroupInputObject { get => this._serviceGroupInputObject; set => this._serviceGroupInputObject = value; }
+
+        /// <summary>
+        /// Operation name for which the validation is being done. This is needed to determine the set of validations to be done for
+        /// the operation.
+        /// </summary>
+        [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Operation name for which the validation is being done. This is needed to determine the set of validations to be done for the operation.")]
+        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"Operation name for which the validation is being done. This is needed to determine the set of validations to be done for the operation.",
+        SerializedName = @"operationName",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
+        public string ValidateForExecutionPropertyOperationName { get => _body.ValidateForExecutionPropertyOperationName ?? null; set => _body.ValidateForExecutionPropertyOperationName = value; }
 
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
         [global::System.Management.Automation.AllowEmptyCollection]

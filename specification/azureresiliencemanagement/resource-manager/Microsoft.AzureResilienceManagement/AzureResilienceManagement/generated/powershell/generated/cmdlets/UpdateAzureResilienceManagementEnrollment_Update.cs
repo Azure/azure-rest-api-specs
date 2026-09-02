@@ -401,7 +401,7 @@ namespace Sample.API.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'EnrollmentsCreateOrUpdate1' operation"))
+                if (ShouldProcess($"Call remote 'EnrollmentsCreateOrUpdate' operation"))
                 {
                     if (true == MyInvocation?.BoundParameters?.ContainsKey("AsJob"))
                     {
@@ -467,7 +467,7 @@ namespace Sample.API.Cmdlets
                     await ((Sample.API.Runtime.IEventListener)this).Signal(Sample.API.Runtime.Events.CmdletBeforeAPICall); if( ((Sample.API.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                     Resource = await this.Client.EnrollmentsGetWithResult(SubscriptionId, ResourceGroupName, UsagePlanName, Name, this, Pipeline);
                     this.UpdateResource();
-                    await this.Client.EnrollmentsCreateOrUpdate1(SubscriptionId, ResourceGroupName, UsagePlanName, Name, Resource, onOk, onDefault, this, Pipeline, Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate);
+                    await this.Client.EnrollmentsCreateOrUpdate(SubscriptionId, ResourceGroupName, UsagePlanName, Name, Resource, onOk, onDefault, this, Pipeline, Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate);
                     await ((Sample.API.Runtime.IEventListener)this).Signal(Sample.API.Runtime.Events.CmdletAfterAPICall); if( ((Sample.API.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (Sample.API.Runtime.UndeclaredResponseException urexception)

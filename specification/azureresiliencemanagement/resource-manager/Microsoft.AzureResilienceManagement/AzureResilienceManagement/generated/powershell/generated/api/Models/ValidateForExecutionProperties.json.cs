@@ -80,6 +80,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
+            AddIf( null != (((object)this._operationName)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._operationName.ToString()) : null, "operationName" ,container.Add );
             if (null != this._sourceLocation)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
@@ -105,6 +106,7 @@ namespace Sample.API.Models
             {
                 return;
             }
+            {_operationName = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("operationName"), out var __jsonOperationName) ? (string)__jsonOperationName : (string)_operationName;}
             {_sourceLocation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("sourceLocations"), out var __jsonSourceLocations) ? If( __jsonSourceLocations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _sourceLocation;}
             AfterFromJson(json);
         }

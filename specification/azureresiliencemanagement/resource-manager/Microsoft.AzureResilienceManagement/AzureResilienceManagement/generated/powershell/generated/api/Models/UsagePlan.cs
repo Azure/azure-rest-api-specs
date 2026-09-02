@@ -299,7 +299,7 @@ namespace Sample.API.Models
         Description = @"Provisioning state of the usage plan.",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
 
         [Sample.API.Runtime.Info(
@@ -337,7 +337,7 @@ namespace Sample.API.Models
         /// <summary>The resource-specific properties for this resource.</summary>
         Sample.API.Models.IUsagePlanProperties Property { get; set; }
         /// <summary>Provisioning state of the usage plan.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
 
         int? RetryAfter { get; set; }

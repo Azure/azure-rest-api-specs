@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IDrillRunActionResponse))]
     [global::Sample.API.Description(@"This initiates a new Reprotect operation on this Drill Run.")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/reprotect", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/reprotect", ApiVersion = "2026-08-31-preview")]
     public partial class InvokeAzureResilienceManagementReprotectDrillRun_ReprotectViaIdentityServiceGroup : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,
         Sample.API.Runtime.IContext
@@ -42,6 +42,20 @@ namespace Sample.API.Cmdlets
         [global::System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Run the command as a job")]
         [global::Sample.API.Category(global::Sample.API.ParameterCategory.Runtime)]
         public global::System.Management.Automation.SwitchParameter AsJob { get; set; }
+
+        /// <summary>Backing field for <see cref="Body" /> property.</summary>
+        private Sample.API.Models.IDrillRunReprotectRequest _body;
+
+        /// <summary>Request body for Reprotect API.</summary>
+        [global::System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Request body for Reprotect API.", ValueFromPipeline = true)]
+        [Sample.API.Runtime.Info(
+        Required = true,
+        ReadOnly = false,
+        Description = @"Request body for Reprotect API.",
+        SerializedName = @"body",
+        PossibleTypes = new [] { typeof(Sample.API.Models.IDrillRunReprotectRequest) })]
+        [global::Sample.API.Category(global::Sample.API.ParameterCategory.Body)]
+        public Sample.API.Models.IDrillRunReprotectRequest Body { get => this._body; set => this._body = value; }
 
         /// <summary>Wait for .NET debugger to attach</summary>
         [global::System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Wait for .NET debugger to attach")]
@@ -233,6 +247,7 @@ namespace Sample.API.Cmdlets
             clone.OperationId = this.OperationId;
             clone.DrillName = this.DrillName;
             clone.DrillRunName = this.DrillRunName;
+            clone.Body = this.Body;
             return clone;
         }
 
@@ -456,7 +471,7 @@ namespace Sample.API.Cmdlets
                     if (ServiceGroupInputObject?.Id != null)
                     {
                         this.ServiceGroupInputObject.Id += $"/drills/{(global::System.Uri.EscapeDataString(this.DrillName.ToString()))}/drillRuns/{(global::System.Uri.EscapeDataString(this.DrillRunName.ToString()))}";
-                        await this.Client.DrillRunsReprotectViaIdentity(ServiceGroupInputObject.Id, OperationId, onOk, onDefault, this, Pipeline);
+                        await this.Client.DrillRunsReprotectViaIdentity(ServiceGroupInputObject.Id, OperationId, Body, onOk, onDefault, this, Pipeline);
                     }
                     else
                     {
@@ -465,7 +480,7 @@ namespace Sample.API.Cmdlets
                         {
                             ThrowTerminatingError( new global::System.Management.Automation.ErrorRecord(new global::System.Exception("ServiceGroupInputObject has null value for ServiceGroupInputObject.ServiceGroupName"),string.Empty, global::System.Management.Automation.ErrorCategory.InvalidArgument, ServiceGroupInputObject) );
                         }
-                        await this.Client.DrillRunsReprotect(ServiceGroupInputObject.ServiceGroupName ?? null, DrillName, DrillRunName, OperationId, onOk, onDefault, this, Pipeline);
+                        await this.Client.DrillRunsReprotect(ServiceGroupInputObject.ServiceGroupName ?? null, DrillName, DrillRunName, OperationId, Body, onOk, onDefault, this, Pipeline);
                     }
                     await ((Sample.API.Runtime.IEventListener)this).Signal(Sample.API.Runtime.Events.CmdletAfterAPICall); if( ((Sample.API.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }

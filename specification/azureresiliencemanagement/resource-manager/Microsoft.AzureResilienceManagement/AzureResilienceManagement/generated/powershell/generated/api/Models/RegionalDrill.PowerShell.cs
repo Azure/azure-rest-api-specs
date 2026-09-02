@@ -175,13 +175,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).SystemMetadataInitialConfig = (string) content.GetValueForProperty("SystemMetadataInitialConfig",((Sample.API.Models.IRegionalDrillInternal)this).SystemMetadataInitialConfig, global::System.Convert.ToString);
             }
-            if (content.Contains("MetricsProperty"))
+            if (content.Contains("SliMonitoringPropertySli"))
             {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricsProperty = (Sample.API.Models.IMetricsPropertiesOfDrill) content.GetValueForProperty("MetricsProperty",((Sample.API.Models.IRegionalDrillInternal)this).MetricsProperty, Sample.API.Models.MetricsPropertiesOfDrillTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("HealthModelProperty"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelProperty = (Sample.API.Models.IHealthModelPropertiesOfDrill) content.GetValueForProperty("HealthModelProperty",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelProperty, Sample.API.Models.HealthModelPropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertySli = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("SliMonitoringPropertySli",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertySli, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
             }
             if (content.Contains("RecoveryPlanProperty"))
             {
@@ -195,21 +191,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourceProperty = (Sample.API.Models.IChaosResourcePropertiesOfDrill) content.GetValueForProperty("ChaosResourceProperty",((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourceProperty, Sample.API.Models.ChaosResourcePropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ChaosExperimentProperty"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentProperty = (Sample.API.Models.IChaosExperimentPropertiesOfDrill) content.GetValueForProperty("ChaosExperimentProperty",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentProperty, Sample.API.Models.ChaosExperimentPropertiesOfDrillTypeConverter.ConvertFrom);
-            }
             if (content.Contains("LastRunProperty"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).LastRunProperty = (Sample.API.Models.ILastRunProperties) content.GetValueForProperty("LastRunProperty",((Sample.API.Models.IRegionalDrillInternal)this).LastRunProperty, Sample.API.Models.LastRunPropertiesTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ManagedOnBehalfOfConfiguration"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ManagedOnBehalfOfConfiguration = (Sample.API.Models.IManagedOnBehalfOfConfiguration) content.GetValueForProperty("ManagedOnBehalfOfConfiguration",((Sample.API.Models.IRegionalDrillInternal)this).ManagedOnBehalfOfConfiguration, Sample.API.Models.ManagedOnBehalfOfConfigurationTypeConverter.ConvertFrom);
-            }
             if (content.Contains("MonitoringProperty"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).MonitoringProperty = (Sample.API.Models.IMonitoringPropertiesOfDrill) content.GetValueForProperty("MonitoringProperty",((Sample.API.Models.IRegionalDrillInternal)this).MonitoringProperty, Sample.API.Models.MonitoringPropertiesOfDrillTypeConverter.ConvertFrom);
+            }
+            if (content.Contains("HealthModelMonitoringProperty"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringProperty = (Sample.API.Models.IHealthModelMonitoringProperties) content.GetValueForProperty("HealthModelMonitoringProperty",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringProperty, Sample.API.Models.HealthModelMonitoringPropertiesTypeConverter.ConvertFrom);
+            }
+            if (content.Contains("SliMonitoringProperty"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringProperty = (Sample.API.Models.ISliMonitoringProperties) content.GetValueForProperty("SliMonitoringProperty",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringProperty, Sample.API.Models.SliMonitoringPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("ErrorDetail"))
             {
@@ -251,22 +247,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).IdentityUserAssignedIdentity = (Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities) content.GetValueForProperty("IdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).IdentityUserAssignedIdentity, Sample.API.Models.ManagedServiceIdentityUserAssignedIdentitiesTypeConverter.ConvertFrom);
             }
-            if (content.Contains("MetricPropertyIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("MetricPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).MetricPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("MetricPropertyMetricsToTrack"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricPropertyMetricsToTrack = (System.Collections.Generic.List<Sample.API.Models.IMetricsToTrack>) content.GetValueForProperty("MetricPropertyMetricsToTrack",((Sample.API.Models.IRegionalDrillInternal)this).MetricPropertyMetricsToTrack, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IMetricsToTrack>(__y, Sample.API.Models.MetricsToTrackTypeConverter.ConvertFrom));
-            }
-            if (content.Contains("HealthModelPropertyIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("HealthModelPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("HealthModelPropertyHealthModelId"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertyHealthModelId = (string) content.GetValueForProperty("HealthModelPropertyHealthModelId",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertyHealthModelId, global::System.Convert.ToString);
-            }
             if (content.Contains("RecoveryPlanPropertyIdentity"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).RecoveryPlanPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("RecoveryPlanPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).RecoveryPlanPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
@@ -307,30 +287,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourcePropertyFaultDurationInMin = (int?) content.GetValueForProperty("ChaosResourcePropertyFaultDurationInMin",((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourcePropertyFaultDurationInMin, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             }
-            if (content.Contains("ChaosExperimentPropertyIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosExperimentPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("ChaosExperimentPropertyChaosExperimentIdentityForFault"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyChaosExperimentIdentityForFault = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosExperimentPropertyChaosExperimentIdentityForFault",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyChaosExperimentIdentityForFault, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("ChaosExperimentPropertySubscription"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertySubscription = (string) content.GetValueForProperty("ChaosExperimentPropertySubscription",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertySubscription, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentPropertyRegion"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyRegion = (string) content.GetValueForProperty("ChaosExperimentPropertyRegion",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyRegion, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentPropertyChaosExperimentId"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyChaosExperimentId = (string) content.GetValueForProperty("ChaosExperimentPropertyChaosExperimentId",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyChaosExperimentId, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentPropertyFaultDurationInMin"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyFaultDurationInMin = (int?) content.GetValueForProperty("ChaosExperimentPropertyFaultDurationInMin",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyFaultDurationInMin, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
-            }
             if (content.Contains("SystemMetadataResourceTypeCategory"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).SystemMetadataResourceTypeCategory = (System.Collections.Generic.List<string>) content.GetValueForProperty("SystemMetadataResourceTypeCategory",((Sample.API.Models.IRegionalDrillInternal)this).SystemMetadataResourceTypeCategory, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
@@ -350,10 +306,6 @@ namespace Sample.API.Models
             if (content.Contains("LastRunPropertyLastRunAttestation"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).LastRunPropertyLastRunAttestation = (string) content.GetValueForProperty("LastRunPropertyLastRunAttestation",((Sample.API.Models.IRegionalDrillInternal)this).LastRunPropertyLastRunAttestation, global::System.Convert.ToString);
-            }
-            if (content.Contains("ManagedOnBehalfOfConfigurationMoboBrokerResource"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ManagedOnBehalfOfConfigurationMoboBrokerResource = (System.Collections.Generic.List<Sample.API.Models.IMoboBrokerResource>) content.GetValueForProperty("ManagedOnBehalfOfConfigurationMoboBrokerResource",((Sample.API.Models.IRegionalDrillInternal)this).ManagedOnBehalfOfConfigurationMoboBrokerResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IMoboBrokerResource>(__y, Sample.API.Models.MoboBrokerResourceTypeConverter.ConvertFrom));
             }
             if (content.Contains("MonitoringPropertyIdentity"))
             {
@@ -375,6 +327,18 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertyDataCollectionEndpointId = (string) content.GetValueForProperty("MonitoringPropertyDataCollectionEndpointId",((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertyDataCollectionEndpointId, global::System.Convert.ToString);
             }
+            if (content.Contains("HealthModelMonitoringPropertyIdentity"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("HealthModelMonitoringPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
+            }
+            if (content.Contains("HealthModelMonitoringPropertyDiscoveryRuleId"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertyDiscoveryRuleId = (string) content.GetValueForProperty("HealthModelMonitoringPropertyDiscoveryRuleId",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertyDiscoveryRuleId, global::System.Convert.ToString);
+            }
+            if (content.Contains("SliMonitoringPropertyIdentity"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("SliMonitoringPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
+            }
             if (content.Contains("ErrorDetailCode"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ErrorDetailCode = (string) content.GetValueForProperty("ErrorDetailCode",((Sample.API.Models.IRegionalDrillInternal)this).ErrorDetailCode, global::System.Convert.ToString);
@@ -394,22 +358,6 @@ namespace Sample.API.Models
             if (content.Contains("ErrorDetailAdditionalInfo"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ErrorDetailAdditionalInfo = (System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo>) content.GetValueForProperty("ErrorDetailAdditionalInfo",((Sample.API.Models.IRegionalDrillInternal)this).ErrorDetailAdditionalInfo, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorAdditionalInfo>(__y, Sample.API.Models.ErrorAdditionalInfoTypeConverter.ConvertFrom));
-            }
-            if (content.Contains("MetricsPropertiesIdentityType"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricsPropertiesIdentityType = (string) content.GetValueForProperty("MetricsPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).MetricsPropertiesIdentityType, global::System.Convert.ToString);
-            }
-            if (content.Contains("MetricsPropertiesIdentityUserAssignedIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricsPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("MetricsPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).MetricsPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
-            }
-            if (content.Contains("HealthModelPropertiesIdentityType"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertiesIdentityType = (string) content.GetValueForProperty("HealthModelPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertiesIdentityType, global::System.Convert.ToString);
-            }
-            if (content.Contains("HealthModelPropertiesIdentityUserAssignedIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("HealthModelPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
             }
             if (content.Contains("RecoveryPlanPropertiesIdentityType"))
             {
@@ -435,22 +383,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourceIdentityForFaultUserAssignedIdentity = (string) content.GetValueForProperty("ChaosResourceIdentityForFaultUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourceIdentityForFaultUserAssignedIdentity, global::System.Convert.ToString);
             }
-            if (content.Contains("ChaosExperimentPropertiesIdentityType"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertiesIdentityType = (string) content.GetValueForProperty("ChaosExperimentPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertiesIdentityType, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentPropertiesIdentityUserAssignedIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("ChaosExperimentPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentIdentityForFaultType"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentIdentityForFaultType = (string) content.GetValueForProperty("ChaosExperimentIdentityForFaultType",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentIdentityForFaultType, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentIdentityForFaultUserAssignedIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentIdentityForFaultUserAssignedIdentity = (string) content.GetValueForProperty("ChaosExperimentIdentityForFaultUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentIdentityForFaultUserAssignedIdentity, global::System.Convert.ToString);
-            }
             if (content.Contains("MonitoringPropertiesIdentityType"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertiesIdentityType = (string) content.GetValueForProperty("MonitoringPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertiesIdentityType, global::System.Convert.ToString);
@@ -458,6 +390,22 @@ namespace Sample.API.Models
             if (content.Contains("MonitoringPropertiesIdentityUserAssignedIdentity"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("MonitoringPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
+            }
+            if (content.Contains("HealthModelMonitoringPropertiesIdentityType"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertiesIdentityType = (string) content.GetValueForProperty("HealthModelMonitoringPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertiesIdentityType, global::System.Convert.ToString);
+            }
+            if (content.Contains("HealthModelMonitoringPropertiesIdentityUserAssignedIdentity"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("HealthModelMonitoringPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
+            }
+            if (content.Contains("SliMonitoringPropertiesIdentityType"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertiesIdentityType = (string) content.GetValueForProperty("SliMonitoringPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertiesIdentityType, global::System.Convert.ToString);
+            }
+            if (content.Contains("SliMonitoringPropertiesIdentityUserAssignedIdentity"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("SliMonitoringPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
             }
             AfterDeserializeDictionary(content);
         }
@@ -548,13 +496,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).SystemMetadataInitialConfig = (string) content.GetValueForProperty("SystemMetadataInitialConfig",((Sample.API.Models.IRegionalDrillInternal)this).SystemMetadataInitialConfig, global::System.Convert.ToString);
             }
-            if (content.Contains("MetricsProperty"))
+            if (content.Contains("SliMonitoringPropertySli"))
             {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricsProperty = (Sample.API.Models.IMetricsPropertiesOfDrill) content.GetValueForProperty("MetricsProperty",((Sample.API.Models.IRegionalDrillInternal)this).MetricsProperty, Sample.API.Models.MetricsPropertiesOfDrillTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("HealthModelProperty"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelProperty = (Sample.API.Models.IHealthModelPropertiesOfDrill) content.GetValueForProperty("HealthModelProperty",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelProperty, Sample.API.Models.HealthModelPropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertySli = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("SliMonitoringPropertySli",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertySli, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
             }
             if (content.Contains("RecoveryPlanProperty"))
             {
@@ -568,21 +512,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourceProperty = (Sample.API.Models.IChaosResourcePropertiesOfDrill) content.GetValueForProperty("ChaosResourceProperty",((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourceProperty, Sample.API.Models.ChaosResourcePropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ChaosExperimentProperty"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentProperty = (Sample.API.Models.IChaosExperimentPropertiesOfDrill) content.GetValueForProperty("ChaosExperimentProperty",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentProperty, Sample.API.Models.ChaosExperimentPropertiesOfDrillTypeConverter.ConvertFrom);
-            }
             if (content.Contains("LastRunProperty"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).LastRunProperty = (Sample.API.Models.ILastRunProperties) content.GetValueForProperty("LastRunProperty",((Sample.API.Models.IRegionalDrillInternal)this).LastRunProperty, Sample.API.Models.LastRunPropertiesTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ManagedOnBehalfOfConfiguration"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ManagedOnBehalfOfConfiguration = (Sample.API.Models.IManagedOnBehalfOfConfiguration) content.GetValueForProperty("ManagedOnBehalfOfConfiguration",((Sample.API.Models.IRegionalDrillInternal)this).ManagedOnBehalfOfConfiguration, Sample.API.Models.ManagedOnBehalfOfConfigurationTypeConverter.ConvertFrom);
-            }
             if (content.Contains("MonitoringProperty"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).MonitoringProperty = (Sample.API.Models.IMonitoringPropertiesOfDrill) content.GetValueForProperty("MonitoringProperty",((Sample.API.Models.IRegionalDrillInternal)this).MonitoringProperty, Sample.API.Models.MonitoringPropertiesOfDrillTypeConverter.ConvertFrom);
+            }
+            if (content.Contains("HealthModelMonitoringProperty"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringProperty = (Sample.API.Models.IHealthModelMonitoringProperties) content.GetValueForProperty("HealthModelMonitoringProperty",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringProperty, Sample.API.Models.HealthModelMonitoringPropertiesTypeConverter.ConvertFrom);
+            }
+            if (content.Contains("SliMonitoringProperty"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringProperty = (Sample.API.Models.ISliMonitoringProperties) content.GetValueForProperty("SliMonitoringProperty",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringProperty, Sample.API.Models.SliMonitoringPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("ErrorDetail"))
             {
@@ -624,22 +568,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).IdentityUserAssignedIdentity = (Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities) content.GetValueForProperty("IdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).IdentityUserAssignedIdentity, Sample.API.Models.ManagedServiceIdentityUserAssignedIdentitiesTypeConverter.ConvertFrom);
             }
-            if (content.Contains("MetricPropertyIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("MetricPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).MetricPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("MetricPropertyMetricsToTrack"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricPropertyMetricsToTrack = (System.Collections.Generic.List<Sample.API.Models.IMetricsToTrack>) content.GetValueForProperty("MetricPropertyMetricsToTrack",((Sample.API.Models.IRegionalDrillInternal)this).MetricPropertyMetricsToTrack, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IMetricsToTrack>(__y, Sample.API.Models.MetricsToTrackTypeConverter.ConvertFrom));
-            }
-            if (content.Contains("HealthModelPropertyIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("HealthModelPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("HealthModelPropertyHealthModelId"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertyHealthModelId = (string) content.GetValueForProperty("HealthModelPropertyHealthModelId",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertyHealthModelId, global::System.Convert.ToString);
-            }
             if (content.Contains("RecoveryPlanPropertyIdentity"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).RecoveryPlanPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("RecoveryPlanPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).RecoveryPlanPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
@@ -680,30 +608,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourcePropertyFaultDurationInMin = (int?) content.GetValueForProperty("ChaosResourcePropertyFaultDurationInMin",((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourcePropertyFaultDurationInMin, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             }
-            if (content.Contains("ChaosExperimentPropertyIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosExperimentPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("ChaosExperimentPropertyChaosExperimentIdentityForFault"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyChaosExperimentIdentityForFault = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosExperimentPropertyChaosExperimentIdentityForFault",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyChaosExperimentIdentityForFault, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("ChaosExperimentPropertySubscription"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertySubscription = (string) content.GetValueForProperty("ChaosExperimentPropertySubscription",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertySubscription, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentPropertyRegion"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyRegion = (string) content.GetValueForProperty("ChaosExperimentPropertyRegion",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyRegion, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentPropertyChaosExperimentId"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyChaosExperimentId = (string) content.GetValueForProperty("ChaosExperimentPropertyChaosExperimentId",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyChaosExperimentId, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentPropertyFaultDurationInMin"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyFaultDurationInMin = (int?) content.GetValueForProperty("ChaosExperimentPropertyFaultDurationInMin",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertyFaultDurationInMin, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
-            }
             if (content.Contains("SystemMetadataResourceTypeCategory"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).SystemMetadataResourceTypeCategory = (System.Collections.Generic.List<string>) content.GetValueForProperty("SystemMetadataResourceTypeCategory",((Sample.API.Models.IRegionalDrillInternal)this).SystemMetadataResourceTypeCategory, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
@@ -723,10 +627,6 @@ namespace Sample.API.Models
             if (content.Contains("LastRunPropertyLastRunAttestation"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).LastRunPropertyLastRunAttestation = (string) content.GetValueForProperty("LastRunPropertyLastRunAttestation",((Sample.API.Models.IRegionalDrillInternal)this).LastRunPropertyLastRunAttestation, global::System.Convert.ToString);
-            }
-            if (content.Contains("ManagedOnBehalfOfConfigurationMoboBrokerResource"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ManagedOnBehalfOfConfigurationMoboBrokerResource = (System.Collections.Generic.List<Sample.API.Models.IMoboBrokerResource>) content.GetValueForProperty("ManagedOnBehalfOfConfigurationMoboBrokerResource",((Sample.API.Models.IRegionalDrillInternal)this).ManagedOnBehalfOfConfigurationMoboBrokerResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IMoboBrokerResource>(__y, Sample.API.Models.MoboBrokerResourceTypeConverter.ConvertFrom));
             }
             if (content.Contains("MonitoringPropertyIdentity"))
             {
@@ -748,6 +648,18 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertyDataCollectionEndpointId = (string) content.GetValueForProperty("MonitoringPropertyDataCollectionEndpointId",((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertyDataCollectionEndpointId, global::System.Convert.ToString);
             }
+            if (content.Contains("HealthModelMonitoringPropertyIdentity"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("HealthModelMonitoringPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
+            }
+            if (content.Contains("HealthModelMonitoringPropertyDiscoveryRuleId"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertyDiscoveryRuleId = (string) content.GetValueForProperty("HealthModelMonitoringPropertyDiscoveryRuleId",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertyDiscoveryRuleId, global::System.Convert.ToString);
+            }
+            if (content.Contains("SliMonitoringPropertyIdentity"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("SliMonitoringPropertyIdentity",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
+            }
             if (content.Contains("ErrorDetailCode"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ErrorDetailCode = (string) content.GetValueForProperty("ErrorDetailCode",((Sample.API.Models.IRegionalDrillInternal)this).ErrorDetailCode, global::System.Convert.ToString);
@@ -767,22 +679,6 @@ namespace Sample.API.Models
             if (content.Contains("ErrorDetailAdditionalInfo"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ErrorDetailAdditionalInfo = (System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo>) content.GetValueForProperty("ErrorDetailAdditionalInfo",((Sample.API.Models.IRegionalDrillInternal)this).ErrorDetailAdditionalInfo, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorAdditionalInfo>(__y, Sample.API.Models.ErrorAdditionalInfoTypeConverter.ConvertFrom));
-            }
-            if (content.Contains("MetricsPropertiesIdentityType"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricsPropertiesIdentityType = (string) content.GetValueForProperty("MetricsPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).MetricsPropertiesIdentityType, global::System.Convert.ToString);
-            }
-            if (content.Contains("MetricsPropertiesIdentityUserAssignedIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).MetricsPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("MetricsPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).MetricsPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
-            }
-            if (content.Contains("HealthModelPropertiesIdentityType"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertiesIdentityType = (string) content.GetValueForProperty("HealthModelPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertiesIdentityType, global::System.Convert.ToString);
-            }
-            if (content.Contains("HealthModelPropertiesIdentityUserAssignedIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("HealthModelPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
             }
             if (content.Contains("RecoveryPlanPropertiesIdentityType"))
             {
@@ -808,22 +704,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourceIdentityForFaultUserAssignedIdentity = (string) content.GetValueForProperty("ChaosResourceIdentityForFaultUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).ChaosResourceIdentityForFaultUserAssignedIdentity, global::System.Convert.ToString);
             }
-            if (content.Contains("ChaosExperimentPropertiesIdentityType"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertiesIdentityType = (string) content.GetValueForProperty("ChaosExperimentPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertiesIdentityType, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentPropertiesIdentityUserAssignedIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("ChaosExperimentPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentIdentityForFaultType"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentIdentityForFaultType = (string) content.GetValueForProperty("ChaosExperimentIdentityForFaultType",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentIdentityForFaultType, global::System.Convert.ToString);
-            }
-            if (content.Contains("ChaosExperimentIdentityForFaultUserAssignedIdentity"))
-            {
-                ((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentIdentityForFaultUserAssignedIdentity = (string) content.GetValueForProperty("ChaosExperimentIdentityForFaultUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).ChaosExperimentIdentityForFaultUserAssignedIdentity, global::System.Convert.ToString);
-            }
             if (content.Contains("MonitoringPropertiesIdentityType"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertiesIdentityType = (string) content.GetValueForProperty("MonitoringPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertiesIdentityType, global::System.Convert.ToString);
@@ -831,6 +711,22 @@ namespace Sample.API.Models
             if (content.Contains("MonitoringPropertiesIdentityUserAssignedIdentity"))
             {
                 ((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("MonitoringPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).MonitoringPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
+            }
+            if (content.Contains("HealthModelMonitoringPropertiesIdentityType"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertiesIdentityType = (string) content.GetValueForProperty("HealthModelMonitoringPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertiesIdentityType, global::System.Convert.ToString);
+            }
+            if (content.Contains("HealthModelMonitoringPropertiesIdentityUserAssignedIdentity"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("HealthModelMonitoringPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).HealthModelMonitoringPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
+            }
+            if (content.Contains("SliMonitoringPropertiesIdentityType"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertiesIdentityType = (string) content.GetValueForProperty("SliMonitoringPropertiesIdentityType",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertiesIdentityType, global::System.Convert.ToString);
+            }
+            if (content.Contains("SliMonitoringPropertiesIdentityUserAssignedIdentity"))
+            {
+                ((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertiesIdentityUserAssignedIdentity = (string) content.GetValueForProperty("SliMonitoringPropertiesIdentityUserAssignedIdentity",((Sample.API.Models.IRegionalDrillInternal)this).SliMonitoringPropertiesIdentityUserAssignedIdentity, global::System.Convert.ToString);
             }
             AfterDeserializePSObject(content);
         }

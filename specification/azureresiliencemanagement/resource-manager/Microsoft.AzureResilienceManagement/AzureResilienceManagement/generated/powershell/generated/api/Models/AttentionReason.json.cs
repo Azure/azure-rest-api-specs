@@ -63,38 +63,34 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_drillRbacOnExperiment = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnExperiment"), out var __jsonDrillRbacOnExperiment) ? (string)__jsonDrillRbacOnExperiment : (string)_drillRbacOnExperiment;}
-            {_rbacNeededForDrillOnExperiment = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnExperiment"), out var __jsonRbacNeededForDrillOnExperiment) ? If( __jsonRbacNeededForDrillOnExperiment as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _rbacNeededForDrillOnExperiment;}
             {_drillRbacOnChaosResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnChaosResource"), out var __jsonDrillRbacOnChaosResource) ? (string)__jsonDrillRbacOnChaosResource : (string)_drillRbacOnChaosResource;}
-            {_rbacNeededForDrillOnChaosResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnChaosResource"), out var __jsonRbacNeededForDrillOnChaosResource) ? If( __jsonRbacNeededForDrillOnChaosResource as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _rbacNeededForDrillOnChaosResource;}
+            {_rbacNeededForDrillOnChaosResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnChaosResource"), out var __jsonRbacNeededForDrillOnChaosResource) ? If( __jsonRbacNeededForDrillOnChaosResource as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _rbacNeededForDrillOnChaosResource;}
             {_drillRbacOnRecoveryPlan = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnRecoveryPlan"), out var __jsonDrillRbacOnRecoveryPlan) ? (string)__jsonDrillRbacOnRecoveryPlan : (string)_drillRbacOnRecoveryPlan;}
-            {_rbacNeededForDrillOnRecoveryPlan = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnRecoveryPlan"), out var __jsonRbacNeededForDrillOnRecoveryPlan) ? If( __jsonRbacNeededForDrillOnRecoveryPlan as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(string) (__k is Sample.API.Runtime.Json.JsonString __j ? (string)(__j.ToString()) : null)) ))() : null : _rbacNeededForDrillOnRecoveryPlan;}
-            {_drillRbacOnAzureMonitoringWorkspace = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnAzureMonitoringWorkspace"), out var __jsonDrillRbacOnAzureMonitoringWorkspace) ? (string)__jsonDrillRbacOnAzureMonitoringWorkspace : (string)_drillRbacOnAzureMonitoringWorkspace;}
-            {_rbacNeededForDrillOnAzureMonitoringWorkspace = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnAzureMonitoringWorkspace"), out var __jsonRbacNeededForDrillOnAzureMonitoringWorkspace) ? If( __jsonRbacNeededForDrillOnAzureMonitoringWorkspace as Sample.API.Runtime.Json.JsonArray, out var __g) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__g, (__f)=>(string) (__f is Sample.API.Runtime.Json.JsonString __e ? (string)(__e.ToString()) : null)) ))() : null : _rbacNeededForDrillOnAzureMonitoringWorkspace;}
-            {_drillRbacOnSlo = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnSlo"), out var __jsonDrillRbacOnSlo) ? (string)__jsonDrillRbacOnSlo : (string)_drillRbacOnSlo;}
-            {_rbacNeededForDrillOnSlo = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnSlo"), out var __jsonRbacNeededForDrillOnSlo) ? If( __jsonRbacNeededForDrillOnSlo as Sample.API.Runtime.Json.JsonArray, out var __b) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__b, (__a)=>(string) (__a is Sample.API.Runtime.Json.JsonString ___z ? (string)(___z.ToString()) : null)) ))() : null : _rbacNeededForDrillOnSlo;}
-            {_drillRbacOnAzureHealthModel = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnAzureHealthModel"), out var __jsonDrillRbacOnAzureHealthModel) ? (string)__jsonDrillRbacOnAzureHealthModel : (string)_drillRbacOnAzureHealthModel;}
-            {_rbacNeededForDrillOnAzureHealthModel = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnAzureHealthModel"), out var __jsonRbacNeededForDrillOnAzureHealthModel) ? If( __jsonRbacNeededForDrillOnAzureHealthModel as Sample.API.Runtime.Json.JsonArray, out var ___w) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(___w, (___v)=>(string) (___v is Sample.API.Runtime.Json.JsonString ___u ? (string)(___u.ToString()) : null)) ))() : null : _rbacNeededForDrillOnAzureHealthModel;}
+            {_rbacNeededForDrillOnRecoveryPlan = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnRecoveryPlan"), out var __jsonRbacNeededForDrillOnRecoveryPlan) ? If( __jsonRbacNeededForDrillOnRecoveryPlan as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _rbacNeededForDrillOnRecoveryPlan;}
             {_roReadiness = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("roReadiness"), out var __jsonRoReadiness) ? (string)__jsonRoReadiness : (string)_roReadiness;}
-            {_faultRbacOnTarget = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("faultRbacOnTargets"), out var __jsonFaultRbacOnTargets) ? (string)__jsonFaultRbacOnTargets : (string)_faultRbacOnTarget;}
             {_rbacOnTargetResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("rbacOnTargetResources"), out var __jsonRbacOnTargetResources) ? (string)__jsonRbacOnTargetResources : (string)_rbacOnTargetResource;}
             {_runbookFaultRbacOnTarget = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("runbookFaultRbacOnTargets"), out var __jsonRunbookFaultRbacOnTargets) ? (string)__jsonRunbookFaultRbacOnTargets : (string)_runbookFaultRbacOnTarget;}
-            {_target = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("targets"), out var __jsonTargets) ? (string)__jsonTargets : (string)_target;}
             {_chaosResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("chaosResource"), out var __jsonChaosResource) ? (string)__jsonChaosResource : (string)_chaosResource;}
-            {_chaosResourceCreationFailureReason = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("chaosResourceCreationFailureReasons"), out var __jsonChaosResourceCreationFailureReasons) ? If( __jsonChaosResourceCreationFailureReasons as Sample.API.Runtime.Json.JsonArray, out var ___r) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(___r, (___q)=>(string) (___q is Sample.API.Runtime.Json.JsonString ___p ? (string)(___p.ToString()) : null)) ))() : null : _chaosResourceCreationFailureReason;}
+            {_chaosResourceCreationFailureReason = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("chaosResourceCreationFailureReasons"), out var __jsonChaosResourceCreationFailureReasons) ? If( __jsonChaosResourceCreationFailureReasons as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(string) (__k is Sample.API.Runtime.Json.JsonString __j ? (string)(__j.ToString()) : null)) ))() : null : _chaosResourceCreationFailureReason;}
             {_recoveryPlanAndDrillResourcesState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("recoveryPlanAndDrillResourcesState"), out var __jsonRecoveryPlanAndDrillResourcesState) ? (string)__jsonRecoveryPlanAndDrillResourcesState : (string)_recoveryPlanAndDrillResourcesState;}
             {_serviceGroupAndDrillResourcesState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("serviceGroupAndDrillResourcesState"), out var __jsonServiceGroupAndDrillResourcesState) ? (string)__jsonServiceGroupAndDrillResourcesState : (string)_serviceGroupAndDrillResourcesState;}
             {_drillUserMsi = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillUserMsi"), out var __jsonDrillUserMsi) ? (string)__jsonDrillUserMsi : (string)_drillUserMsi;}
-            {_chaosExperimentUserMsi = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("chaosExperimentUserMsi"), out var __jsonChaosExperimentUserMsi) ? (string)__jsonChaosExperimentUserMsi : (string)_chaosExperimentUserMsi;}
             {_chaosResourceUserMsi = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("chaosResourceUserMsi"), out var __jsonChaosResourceUserMsi) ? (string)__jsonChaosResourceUserMsi : (string)_chaosResourceUserMsi;}
             {_includedResourceInDrill = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("includedResourceInDrill"), out var __jsonIncludedResourceInDrill) ? (string)__jsonIncludedResourceInDrill : (string)_includedResourceInDrill;}
             {_drillRbacOnMonitoringResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnMonitoringResources"), out var __jsonDrillRbacOnMonitoringResources) ? (string)__jsonDrillRbacOnMonitoringResources : (string)_drillRbacOnMonitoringResource;}
-            {_drillMonitoringError = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("drillMonitoringErrors"), out var __jsonDrillMonitoringErrors) ? If( __jsonDrillMonitoringErrors as Sample.API.Runtime.Json.JsonArray, out var ___m) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IErrorDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(___m, (___l)=>(Sample.API.Models.IErrorDetails) (Sample.API.Models.ErrorDetails.FromJson(___l) )) ))() : null : _drillMonitoringError;}
+            {_drillMonitoringError = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("drillMonitoringErrors"), out var __jsonDrillMonitoringErrors) ? If( __jsonDrillMonitoringErrors as Sample.API.Runtime.Json.JsonArray, out var __g) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IErrorDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__g, (__f)=>(Sample.API.Models.IErrorDetails) (Sample.API.Models.ErrorDetails.FromJson(__f) )) ))() : null : _drillMonitoringError;}
             {_drillMonitoringResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillMonitoringResources"), out var __jsonDrillMonitoringResources) ? (string)__jsonDrillMonitoringResources : (string)_drillMonitoringResource;}
             {_monitoringRbacOnDrillResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("monitoringRbacOnDrillResources"), out var __jsonMonitoringRbacOnDrillResources) ? (string)__jsonMonitoringRbacOnDrillResources : (string)_monitoringRbacOnDrillResource;}
-            {_rbacNeededForDrillOnDrillMonitoringResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnDrillMonitoringResources"), out var __jsonRbacNeededForDrillOnDrillMonitoringResources) ? If( __jsonRbacNeededForDrillOnDrillMonitoringResources as Sample.API.Runtime.Json.JsonArray, out var ___h) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(___h, (___g)=>(string) (___g is Sample.API.Runtime.Json.JsonString ___f ? (string)(___f.ToString()) : null)) ))() : null : _rbacNeededForDrillOnDrillMonitoringResource;}
-            {_rbacNeededForDrillOnDrillResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnDrillResources"), out var __jsonRbacNeededForDrillOnDrillResources) ? If( __jsonRbacNeededForDrillOnDrillResources as Sample.API.Runtime.Json.JsonArray, out var ___c) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(___c, (___b)=>(string) (___b is Sample.API.Runtime.Json.JsonString ___a ? (string)(___a.ToString()) : null)) ))() : null : _rbacNeededForDrillOnDrillResource;}
-            {_missingRequiredResourceProvider = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("missingRequiredResourceProviders"), out var __jsonMissingRequiredResourceProviders) ? If( __jsonMissingRequiredResourceProviders as Sample.API.Runtime.Json.JsonArray, out var ____x) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(____x, (____w)=>(string) (____w is Sample.API.Runtime.Json.JsonString ____v ? (string)(____v.ToString()) : null)) ))() : null : _missingRequiredResourceProvider;}
+            {_rbacNeededForDrillOnDrillMonitoringResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnDrillMonitoringResources"), out var __jsonRbacNeededForDrillOnDrillMonitoringResources) ? If( __jsonRbacNeededForDrillOnDrillMonitoringResources as Sample.API.Runtime.Json.JsonArray, out var __b) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__b, (__a)=>(string) (__a is Sample.API.Runtime.Json.JsonString ___z ? (string)(___z.ToString()) : null)) ))() : null : _rbacNeededForDrillOnDrillMonitoringResource;}
+            {_rbacNeededForDrillOnDrillResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnDrillResources"), out var __jsonRbacNeededForDrillOnDrillResources) ? If( __jsonRbacNeededForDrillOnDrillResources as Sample.API.Runtime.Json.JsonArray, out var ___w) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(___w, (___v)=>(string) (___v is Sample.API.Runtime.Json.JsonString ___u ? (string)(___u.ToString()) : null)) ))() : null : _rbacNeededForDrillOnDrillResource;}
+            {_missingRequiredResourceProvider = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("missingRequiredResourceProviders"), out var __jsonMissingRequiredResourceProviders) ? If( __jsonMissingRequiredResourceProviders as Sample.API.Runtime.Json.JsonArray, out var ___r) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(___r, (___q)=>(string) (___q is Sample.API.Runtime.Json.JsonString ___p ? (string)(___p.ToString()) : null)) ))() : null : _missingRequiredResourceProvider;}
+            {_monitoringSourceNotConfigured = If( json?.PropertyT<Sample.API.Runtime.Json.JsonBoolean>("monitoringSourceNotConfigured"), out var __jsonMonitoringSourceNotConfigured) ? (bool?)__jsonMonitoringSourceNotConfigured : _monitoringSourceNotConfigured;}
+            {_healthModelExist = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("healthModelExists"), out var __jsonHealthModelExists) ? (string)__jsonHealthModelExists : (string)_healthModelExist;}
+            {_discoveryRuleExist = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("discoveryRuleExists"), out var __jsonDiscoveryRuleExists) ? (string)__jsonDiscoveryRuleExists : (string)_discoveryRuleExist;}
+            {_drillRbacOnHealthModel = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnHealthModel"), out var __jsonDrillRbacOnHealthModel) ? (string)__jsonDrillRbacOnHealthModel : (string)_drillRbacOnHealthModel;}
+            {_rbacNeededForDrillOnHealthModel = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededForDrillOnHealthModel"), out var __jsonRbacNeededForDrillOnHealthModel) ? If( __jsonRbacNeededForDrillOnHealthModel as Sample.API.Runtime.Json.JsonArray, out var ___m) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(___m, (___l)=>(string) (___l is Sample.API.Runtime.Json.JsonString ___k ? (string)(___k.ToString()) : null)) ))() : null : _rbacNeededForDrillOnHealthModel;}
+            {_drillRbacOnSli = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnSli"), out var __jsonDrillRbacOnSli) ? (string)__jsonDrillRbacOnSli : (string)_drillRbacOnSli;}
+            {_sliAttentionStatuses = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("sliAttentionStatuses"), out var __jsonSliAttentionStatuses) ? If( __jsonSliAttentionStatuses as Sample.API.Runtime.Json.JsonArray, out var ___h) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.ISliAttentionStatus>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(___h, (___g)=>(Sample.API.Models.ISliAttentionStatus) (Sample.API.Models.SliAttentionStatus.FromJson(___g) )) ))() : null : _sliAttentionStatuses;}
             AfterFromJson(json);
         }
 
@@ -127,96 +123,53 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != (((object)this._drillRbacOnExperiment)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillRbacOnExperiment.ToString()) : null, "drillRbacOnExperiment" ,container.Add );
-            if (null != this._rbacNeededForDrillOnExperiment)
-            {
-                var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._rbacNeededForDrillOnExperiment )
-                {
-                    AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
-                }
-                container.Add("rbacNeededForDrillOnExperiment",__w);
-            }
             AddIf( null != (((object)this._drillRbacOnChaosResource)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillRbacOnChaosResource.ToString()) : null, "drillRbacOnChaosResource" ,container.Add );
             if (null != this._rbacNeededForDrillOnChaosResource)
             {
-                var __r = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __s in this._rbacNeededForDrillOnChaosResource )
+                var __w = new Sample.API.Runtime.Json.XNodeArray();
+                foreach( var __x in this._rbacNeededForDrillOnChaosResource )
                 {
-                    AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
+                    AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                 }
-                container.Add("rbacNeededForDrillOnChaosResource",__r);
+                container.Add("rbacNeededForDrillOnChaosResource",__w);
             }
             AddIf( null != (((object)this._drillRbacOnRecoveryPlan)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillRbacOnRecoveryPlan.ToString()) : null, "drillRbacOnRecoveryPlan" ,container.Add );
             if (null != this._rbacNeededForDrillOnRecoveryPlan)
             {
-                var __m = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __n in this._rbacNeededForDrillOnRecoveryPlan )
+                var __r = new Sample.API.Runtime.Json.XNodeArray();
+                foreach( var __s in this._rbacNeededForDrillOnRecoveryPlan )
                 {
-                    AddIf(null != (((object)__n)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__n.ToString()) : null ,__m.Add);
+                    AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
                 }
-                container.Add("rbacNeededForDrillOnRecoveryPlan",__m);
-            }
-            AddIf( null != (((object)this._drillRbacOnAzureMonitoringWorkspace)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillRbacOnAzureMonitoringWorkspace.ToString()) : null, "drillRbacOnAzureMonitoringWorkspace" ,container.Add );
-            if (null != this._rbacNeededForDrillOnAzureMonitoringWorkspace)
-            {
-                var __h = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __i in this._rbacNeededForDrillOnAzureMonitoringWorkspace )
-                {
-                    AddIf(null != (((object)__i)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__i.ToString()) : null ,__h.Add);
-                }
-                container.Add("rbacNeededForDrillOnAzureMonitoringWorkspace",__h);
-            }
-            AddIf( null != (((object)this._drillRbacOnSlo)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillRbacOnSlo.ToString()) : null, "drillRbacOnSlo" ,container.Add );
-            if (null != this._rbacNeededForDrillOnSlo)
-            {
-                var __c = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __d in this._rbacNeededForDrillOnSlo )
-                {
-                    AddIf(null != (((object)__d)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__d.ToString()) : null ,__c.Add);
-                }
-                container.Add("rbacNeededForDrillOnSlo",__c);
-            }
-            AddIf( null != (((object)this._drillRbacOnAzureHealthModel)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillRbacOnAzureHealthModel.ToString()) : null, "drillRbacOnAzureHealthModel" ,container.Add );
-            if (null != this._rbacNeededForDrillOnAzureHealthModel)
-            {
-                var ___x = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var ___y in this._rbacNeededForDrillOnAzureHealthModel )
-                {
-                    AddIf(null != (((object)___y)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(___y.ToString()) : null ,___x.Add);
-                }
-                container.Add("rbacNeededForDrillOnAzureHealthModel",___x);
+                container.Add("rbacNeededForDrillOnRecoveryPlan",__r);
             }
             AddIf( null != (((object)this._roReadiness)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._roReadiness.ToString()) : null, "roReadiness" ,container.Add );
-            AddIf( null != (((object)this._faultRbacOnTarget)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._faultRbacOnTarget.ToString()) : null, "faultRbacOnTargets" ,container.Add );
             AddIf( null != (((object)this._rbacOnTargetResource)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._rbacOnTargetResource.ToString()) : null, "rbacOnTargetResources" ,container.Add );
             AddIf( null != (((object)this._runbookFaultRbacOnTarget)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._runbookFaultRbacOnTarget.ToString()) : null, "runbookFaultRbacOnTargets" ,container.Add );
-            AddIf( null != (((object)this._target)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._target.ToString()) : null, "targets" ,container.Add );
             AddIf( null != (((object)this._chaosResource)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._chaosResource.ToString()) : null, "chaosResource" ,container.Add );
             if (null != this._chaosResourceCreationFailureReason)
             {
-                var ___s = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var ___t in this._chaosResourceCreationFailureReason )
+                var __m = new Sample.API.Runtime.Json.XNodeArray();
+                foreach( var __n in this._chaosResourceCreationFailureReason )
                 {
-                    AddIf(null != (((object)___t)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(___t.ToString()) : null ,___s.Add);
+                    AddIf(null != (((object)__n)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__n.ToString()) : null ,__m.Add);
                 }
-                container.Add("chaosResourceCreationFailureReasons",___s);
+                container.Add("chaosResourceCreationFailureReasons",__m);
             }
             AddIf( null != (((object)this._recoveryPlanAndDrillResourcesState)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._recoveryPlanAndDrillResourcesState.ToString()) : null, "recoveryPlanAndDrillResourcesState" ,container.Add );
             AddIf( null != (((object)this._serviceGroupAndDrillResourcesState)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._serviceGroupAndDrillResourcesState.ToString()) : null, "serviceGroupAndDrillResourcesState" ,container.Add );
             AddIf( null != (((object)this._drillUserMsi)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillUserMsi.ToString()) : null, "drillUserMsi" ,container.Add );
-            AddIf( null != (((object)this._chaosExperimentUserMsi)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._chaosExperimentUserMsi.ToString()) : null, "chaosExperimentUserMsi" ,container.Add );
             AddIf( null != (((object)this._chaosResourceUserMsi)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._chaosResourceUserMsi.ToString()) : null, "chaosResourceUserMsi" ,container.Add );
             AddIf( null != (((object)this._includedResourceInDrill)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._includedResourceInDrill.ToString()) : null, "includedResourceInDrill" ,container.Add );
             AddIf( null != (((object)this._drillRbacOnMonitoringResource)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillRbacOnMonitoringResource.ToString()) : null, "drillRbacOnMonitoringResources" ,container.Add );
             if (null != this._drillMonitoringError)
             {
-                var ___n = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var ___o in this._drillMonitoringError )
+                var __h = new Sample.API.Runtime.Json.XNodeArray();
+                foreach( var __i in this._drillMonitoringError )
                 {
-                    AddIf(___o?.ToJson(null, serializationMode) ,___n.Add);
+                    AddIf(__i?.ToJson(null, serializationMode) ,__h.Add);
                 }
-                container.Add("drillMonitoringErrors",___n);
+                container.Add("drillMonitoringErrors",__h);
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
@@ -225,30 +178,53 @@ namespace Sample.API.Models
             AddIf( null != (((object)this._monitoringRbacOnDrillResource)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._monitoringRbacOnDrillResource.ToString()) : null, "monitoringRbacOnDrillResources" ,container.Add );
             if (null != this._rbacNeededForDrillOnDrillMonitoringResource)
             {
-                var ___i = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var ___j in this._rbacNeededForDrillOnDrillMonitoringResource )
+                var __c = new Sample.API.Runtime.Json.XNodeArray();
+                foreach( var __d in this._rbacNeededForDrillOnDrillMonitoringResource )
                 {
-                    AddIf(null != (((object)___j)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(___j.ToString()) : null ,___i.Add);
+                    AddIf(null != (((object)__d)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__d.ToString()) : null ,__c.Add);
                 }
-                container.Add("rbacNeededForDrillOnDrillMonitoringResources",___i);
+                container.Add("rbacNeededForDrillOnDrillMonitoringResources",__c);
             }
             if (null != this._rbacNeededForDrillOnDrillResource)
             {
-                var ___d = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var ___e in this._rbacNeededForDrillOnDrillResource )
+                var ___x = new Sample.API.Runtime.Json.XNodeArray();
+                foreach( var ___y in this._rbacNeededForDrillOnDrillResource )
                 {
-                    AddIf(null != (((object)___e)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(___e.ToString()) : null ,___d.Add);
+                    AddIf(null != (((object)___y)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(___y.ToString()) : null ,___x.Add);
                 }
-                container.Add("rbacNeededForDrillOnDrillResources",___d);
+                container.Add("rbacNeededForDrillOnDrillResources",___x);
             }
             if (null != this._missingRequiredResourceProvider)
             {
-                var ____y = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var ____z in this._missingRequiredResourceProvider )
+                var ___s = new Sample.API.Runtime.Json.XNodeArray();
+                foreach( var ___t in this._missingRequiredResourceProvider )
                 {
-                    AddIf(null != (((object)____z)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(____z.ToString()) : null ,____y.Add);
+                    AddIf(null != (((object)___t)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(___t.ToString()) : null ,___s.Add);
                 }
-                container.Add("missingRequiredResourceProviders",____y);
+                container.Add("missingRequiredResourceProviders",___s);
+            }
+            AddIf( null != this._monitoringSourceNotConfigured ? (Sample.API.Runtime.Json.JsonNode)new Sample.API.Runtime.Json.JsonBoolean((bool)this._monitoringSourceNotConfigured) : null, "monitoringSourceNotConfigured" ,container.Add );
+            AddIf( null != (((object)this._healthModelExist)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._healthModelExist.ToString()) : null, "healthModelExists" ,container.Add );
+            AddIf( null != (((object)this._discoveryRuleExist)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._discoveryRuleExist.ToString()) : null, "discoveryRuleExists" ,container.Add );
+            AddIf( null != (((object)this._drillRbacOnHealthModel)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillRbacOnHealthModel.ToString()) : null, "drillRbacOnHealthModel" ,container.Add );
+            if (null != this._rbacNeededForDrillOnHealthModel)
+            {
+                var ___n = new Sample.API.Runtime.Json.XNodeArray();
+                foreach( var ___o in this._rbacNeededForDrillOnHealthModel )
+                {
+                    AddIf(null != (((object)___o)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(___o.ToString()) : null ,___n.Add);
+                }
+                container.Add("rbacNeededForDrillOnHealthModel",___n);
+            }
+            AddIf( null != (((object)this._drillRbacOnSli)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillRbacOnSli.ToString()) : null, "drillRbacOnSli" ,container.Add );
+            if (null != this._sliAttentionStatuses)
+            {
+                var ___i = new Sample.API.Runtime.Json.XNodeArray();
+                foreach( var ___j in this._sliAttentionStatuses )
+                {
+                    AddIf(___j?.ToJson(null, serializationMode) ,___i.Add);
+                }
+                container.Add("sliAttentionStatuses",___i);
             }
             AfterToJson(ref container);
             return container;

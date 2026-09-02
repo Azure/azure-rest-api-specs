@@ -11,13 +11,6 @@ namespace Sample.API.Models
         Sample.API.Models.IDrillResourceAttentionReasonInternal
     {
 
-        /// <summary>Backing field for <see cref="FaultRbacOnTarget" /> property.</summary>
-        private string _faultRbacOnTarget;
-
-        /// <summary>Experiment MSI does not have the desired RBAC on the resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string FaultRbacOnTarget { get => this._faultRbacOnTarget; set => this._faultRbacOnTarget = value; }
-
         /// <summary>Backing field for <see cref="FaultRbacOnTargetResource" /> property.</summary>
         private string _faultRbacOnTargetResource;
 
@@ -48,13 +41,6 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string RunbookFaultRbacOnTarget { get => this._runbookFaultRbacOnTarget; set => this._runbookFaultRbacOnTarget = value; }
 
-        /// <summary>Backing field for <see cref="Target" /> property.</summary>
-        private string _target;
-
-        /// <summary>Target extension resource is missing on the resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string Target { get => this._target; set => this._target = value; }
-
         /// <summary>Creates an new <see cref="DrillResourceAttentionReason" /> instance.</summary>
         public DrillResourceAttentionReason()
         {
@@ -65,18 +51,6 @@ namespace Sample.API.Models
     public partial interface IDrillResourceAttentionReason :
         Sample.API.Runtime.IJsonSerializable
     {
-        /// <summary>Experiment MSI does not have the desired RBAC on the resource.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Experiment MSI does not have the desired RBAC on the resource.",
-        SerializedName = @"faultRbacOnTarget",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string FaultRbacOnTarget { get; set; }
         /// <summary>Chaos Resource MSI does not have the desired RBAC on the resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -127,27 +101,12 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string RunbookFaultRbacOnTarget { get; set; }
-        /// <summary>Target extension resource is missing on the resource.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Target extension resource is missing on the resource.",
-        SerializedName = @"target",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string Target { get; set; }
 
     }
     /// Reason why the Drill resource is in NeedsAttention state.
     internal partial interface IDrillResourceAttentionReasonInternal
 
     {
-        /// <summary>Experiment MSI does not have the desired RBAC on the resource.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string FaultRbacOnTarget { get; set; }
         /// <summary>Chaos Resource MSI does not have the desired RBAC on the resource.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string FaultRbacOnTargetResource { get; set; }
@@ -162,9 +121,6 @@ namespace Sample.API.Models
         /// </summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
         string RunbookFaultRbacOnTarget { get; set; }
-        /// <summary>Target extension resource is missing on the resource.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string Target { get; set; }
 
     }
 }

@@ -148,10 +148,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunInternal)this).JobType = (string) content.GetValueForProperty("JobType",((Sample.API.Models.IDrillRunInternal)this).JobType, global::System.Convert.ToString);
             }
-            if (content.Contains("HealthStatus"))
-            {
-                ((Sample.API.Models.IDrillRunInternal)this).HealthStatus = (string) content.GetValueForProperty("HealthStatus",((Sample.API.Models.IDrillRunInternal)this).HealthStatus, global::System.Convert.ToString);
-            }
             if (content.Contains("DrillMode"))
             {
                 ((Sample.API.Models.IDrillRunInternal)this).DrillMode = (string) content.GetValueForProperty("DrillMode",((Sample.API.Models.IDrillRunInternal)this).DrillMode, global::System.Convert.ToString);
@@ -208,13 +204,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunInternal)this).TriggeredBy = (string) content.GetValueForProperty("TriggeredBy",((Sample.API.Models.IDrillRunInternal)this).TriggeredBy, global::System.Convert.ToString);
             }
+            if (content.Contains("Report"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).Report = (Sample.API.Models.IDrillReportSummary) content.GetValueForProperty("Report",((Sample.API.Models.IDrillRunInternal)this).Report, Sample.API.Models.DrillReportSummaryTypeConverter.ConvertFrom);
+            }
             if (content.Contains("DrillId"))
             {
                 ((Sample.API.Models.IDrillRunInternal)this).DrillId = (string) content.GetValueForProperty("DrillId",((Sample.API.Models.IDrillRunInternal)this).DrillId, global::System.Convert.ToString);
-            }
-            if (content.Contains("MetricValue"))
-            {
-                ((Sample.API.Models.IDrillRunInternal)this).MetricValue = (string) content.GetValueForProperty("MetricValue",((Sample.API.Models.IDrillRunInternal)this).MetricValue, global::System.Convert.ToString);
             }
             if (content.Contains("Attestation"))
             {
@@ -247,6 +243,46 @@ namespace Sample.API.Models
             if (content.Contains("JobExtendedInfoDynamicErrorMessage"))
             {
                 ((Sample.API.Models.IDrillRunInternal)this).JobExtendedInfoDynamicErrorMessage = (string) content.GetValueForProperty("JobExtendedInfoDynamicErrorMessage",((Sample.API.Models.IDrillRunInternal)this).JobExtendedInfoDynamicErrorMessage, global::System.Convert.ToString);
+            }
+            if (content.Contains("ReportLastError"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportLastError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("ReportLastError",((Sample.API.Models.IDrillRunInternal)this).ReportLastError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
+            }
+            if (content.Contains("ReportGenerationStatus"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportGenerationStatus = (string) content.GetValueForProperty("ReportGenerationStatus",((Sample.API.Models.IDrillRunInternal)this).ReportGenerationStatus, global::System.Convert.ToString);
+            }
+            if (content.Contains("ReportStageStatuses"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportStageStatuses = (System.Collections.Generic.List<Sample.API.Models.IReportStageStatus>) content.GetValueForProperty("ReportStageStatuses",((Sample.API.Models.IDrillRunInternal)this).ReportStageStatuses, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IReportStageStatus>(__y, Sample.API.Models.ReportStageStatusTypeConverter.ConvertFrom));
+            }
+            if (content.Contains("ReportAvailableFormat"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportAvailableFormat = (System.Collections.Generic.List<string>) content.GetValueForProperty("ReportAvailableFormat",((Sample.API.Models.IDrillRunInternal)this).ReportAvailableFormat, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+            }
+            if (content.Contains("ReportLastGeneratedTimestamp"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportLastGeneratedTimestamp = (global::System.DateTime?) content.GetValueForProperty("ReportLastGeneratedTimestamp",((Sample.API.Models.IDrillRunInternal)this).ReportLastGeneratedTimestamp, (v) => v is global::System.DateTime _v ? _v : global::System.Xml.XmlConvert.ToDateTime( v.ToString() , global::System.Xml.XmlDateTimeSerializationMode.Unspecified));
+            }
+            if (content.Contains("ReportSchemaVersion"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportSchemaVersion = (string) content.GetValueForProperty("ReportSchemaVersion",((Sample.API.Models.IDrillRunInternal)this).ReportSchemaVersion, global::System.Convert.ToString);
+            }
+            if (content.Contains("ReportFinalizationState"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportFinalizationState = (string) content.GetValueForProperty("ReportFinalizationState",((Sample.API.Models.IDrillRunInternal)this).ReportFinalizationState, global::System.Convert.ToString);
+            }
+            if (content.Contains("LastErrorCode"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).LastErrorCode = (string) content.GetValueForProperty("LastErrorCode",((Sample.API.Models.IDrillRunInternal)this).LastErrorCode, global::System.Convert.ToString);
+            }
+            if (content.Contains("LastErrorMessage"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).LastErrorMessage = (string) content.GetValueForProperty("LastErrorMessage",((Sample.API.Models.IDrillRunInternal)this).LastErrorMessage, global::System.Convert.ToString);
+            }
+            if (content.Contains("LastErrorRecommendation"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).LastErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("LastErrorRecommendation",((Sample.API.Models.IDrillRunInternal)this).LastErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializeDictionary(content);
         }
@@ -317,10 +353,6 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunInternal)this).JobType = (string) content.GetValueForProperty("JobType",((Sample.API.Models.IDrillRunInternal)this).JobType, global::System.Convert.ToString);
             }
-            if (content.Contains("HealthStatus"))
-            {
-                ((Sample.API.Models.IDrillRunInternal)this).HealthStatus = (string) content.GetValueForProperty("HealthStatus",((Sample.API.Models.IDrillRunInternal)this).HealthStatus, global::System.Convert.ToString);
-            }
             if (content.Contains("DrillMode"))
             {
                 ((Sample.API.Models.IDrillRunInternal)this).DrillMode = (string) content.GetValueForProperty("DrillMode",((Sample.API.Models.IDrillRunInternal)this).DrillMode, global::System.Convert.ToString);
@@ -377,13 +409,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunInternal)this).TriggeredBy = (string) content.GetValueForProperty("TriggeredBy",((Sample.API.Models.IDrillRunInternal)this).TriggeredBy, global::System.Convert.ToString);
             }
+            if (content.Contains("Report"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).Report = (Sample.API.Models.IDrillReportSummary) content.GetValueForProperty("Report",((Sample.API.Models.IDrillRunInternal)this).Report, Sample.API.Models.DrillReportSummaryTypeConverter.ConvertFrom);
+            }
             if (content.Contains("DrillId"))
             {
                 ((Sample.API.Models.IDrillRunInternal)this).DrillId = (string) content.GetValueForProperty("DrillId",((Sample.API.Models.IDrillRunInternal)this).DrillId, global::System.Convert.ToString);
-            }
-            if (content.Contains("MetricValue"))
-            {
-                ((Sample.API.Models.IDrillRunInternal)this).MetricValue = (string) content.GetValueForProperty("MetricValue",((Sample.API.Models.IDrillRunInternal)this).MetricValue, global::System.Convert.ToString);
             }
             if (content.Contains("Attestation"))
             {
@@ -416,6 +448,46 @@ namespace Sample.API.Models
             if (content.Contains("JobExtendedInfoDynamicErrorMessage"))
             {
                 ((Sample.API.Models.IDrillRunInternal)this).JobExtendedInfoDynamicErrorMessage = (string) content.GetValueForProperty("JobExtendedInfoDynamicErrorMessage",((Sample.API.Models.IDrillRunInternal)this).JobExtendedInfoDynamicErrorMessage, global::System.Convert.ToString);
+            }
+            if (content.Contains("ReportLastError"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportLastError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("ReportLastError",((Sample.API.Models.IDrillRunInternal)this).ReportLastError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
+            }
+            if (content.Contains("ReportGenerationStatus"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportGenerationStatus = (string) content.GetValueForProperty("ReportGenerationStatus",((Sample.API.Models.IDrillRunInternal)this).ReportGenerationStatus, global::System.Convert.ToString);
+            }
+            if (content.Contains("ReportStageStatuses"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportStageStatuses = (System.Collections.Generic.List<Sample.API.Models.IReportStageStatus>) content.GetValueForProperty("ReportStageStatuses",((Sample.API.Models.IDrillRunInternal)this).ReportStageStatuses, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IReportStageStatus>(__y, Sample.API.Models.ReportStageStatusTypeConverter.ConvertFrom));
+            }
+            if (content.Contains("ReportAvailableFormat"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportAvailableFormat = (System.Collections.Generic.List<string>) content.GetValueForProperty("ReportAvailableFormat",((Sample.API.Models.IDrillRunInternal)this).ReportAvailableFormat, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+            }
+            if (content.Contains("ReportLastGeneratedTimestamp"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportLastGeneratedTimestamp = (global::System.DateTime?) content.GetValueForProperty("ReportLastGeneratedTimestamp",((Sample.API.Models.IDrillRunInternal)this).ReportLastGeneratedTimestamp, (v) => v is global::System.DateTime _v ? _v : global::System.Xml.XmlConvert.ToDateTime( v.ToString() , global::System.Xml.XmlDateTimeSerializationMode.Unspecified));
+            }
+            if (content.Contains("ReportSchemaVersion"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportSchemaVersion = (string) content.GetValueForProperty("ReportSchemaVersion",((Sample.API.Models.IDrillRunInternal)this).ReportSchemaVersion, global::System.Convert.ToString);
+            }
+            if (content.Contains("ReportFinalizationState"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).ReportFinalizationState = (string) content.GetValueForProperty("ReportFinalizationState",((Sample.API.Models.IDrillRunInternal)this).ReportFinalizationState, global::System.Convert.ToString);
+            }
+            if (content.Contains("LastErrorCode"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).LastErrorCode = (string) content.GetValueForProperty("LastErrorCode",((Sample.API.Models.IDrillRunInternal)this).LastErrorCode, global::System.Convert.ToString);
+            }
+            if (content.Contains("LastErrorMessage"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).LastErrorMessage = (string) content.GetValueForProperty("LastErrorMessage",((Sample.API.Models.IDrillRunInternal)this).LastErrorMessage, global::System.Convert.ToString);
+            }
+            if (content.Contains("LastErrorRecommendation"))
+            {
+                ((Sample.API.Models.IDrillRunInternal)this).LastErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("LastErrorRecommendation",((Sample.API.Models.IDrillRunInternal)this).LastErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializePSObject(content);
         }

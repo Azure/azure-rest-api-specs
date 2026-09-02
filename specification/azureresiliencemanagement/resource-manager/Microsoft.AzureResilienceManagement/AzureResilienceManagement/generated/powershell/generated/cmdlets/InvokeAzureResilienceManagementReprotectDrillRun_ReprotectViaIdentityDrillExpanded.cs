@@ -392,7 +392,7 @@ namespace Sample.API.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'DrillRunsReprotect1' operation"))
+                if (ShouldProcess($"Call remote 'DrillRunsReprotect' operation"))
                 {
                     if (true == MyInvocation?.BoundParameters?.ContainsKey("AsJob"))
                     {
@@ -459,7 +459,7 @@ namespace Sample.API.Cmdlets
                     if (DrillInputObject?.Id != null)
                     {
                         this.DrillInputObject.Id += $"/drillRuns/{(global::System.Uri.EscapeDataString(this.DrillRunName.ToString()))}";
-                        await this.Client.DrillRunsReprotect1ViaIdentity(DrillInputObject.Id, OperationId, _body, onOk, onDefault, this, Pipeline);
+                        await this.Client.DrillRunsReprotectViaIdentity(DrillInputObject.Id, OperationId, _body, onOk, onDefault, this, Pipeline);
                     }
                     else
                     {
@@ -472,7 +472,7 @@ namespace Sample.API.Cmdlets
                         {
                             ThrowTerminatingError( new global::System.Management.Automation.ErrorRecord(new global::System.Exception("DrillInputObject has null value for DrillInputObject.DrillName"),string.Empty, global::System.Management.Automation.ErrorCategory.InvalidArgument, DrillInputObject) );
                         }
-                        await this.Client.DrillRunsReprotect1(DrillInputObject.ServiceGroupName ?? null, DrillInputObject.DrillName ?? null, DrillRunName, OperationId, _body, onOk, onDefault, this, Pipeline);
+                        await this.Client.DrillRunsReprotect(DrillInputObject.ServiceGroupName ?? null, DrillInputObject.DrillName ?? null, DrillRunName, OperationId, _body, onOk, onDefault, this, Pipeline);
                     }
                     await ((Sample.API.Runtime.IEventListener)this).Signal(Sample.API.Runtime.Events.CmdletAfterAPICall); if( ((Sample.API.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }

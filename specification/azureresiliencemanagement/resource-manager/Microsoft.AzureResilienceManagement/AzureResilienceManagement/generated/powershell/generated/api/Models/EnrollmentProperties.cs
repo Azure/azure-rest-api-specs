@@ -148,7 +148,7 @@ namespace Sample.API.Models
         Description = @"Provisioning state of the enrollment.",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>ARM resource identifier of the service group associated with this usage plan.</summary>
         [Sample.API.Runtime.Info(
@@ -180,7 +180,7 @@ namespace Sample.API.Models
         /// <summary>The error target.</summary>
         string ErrorDetailTarget { get; set; }
         /// <summary>Provisioning state of the enrollment.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>ARM resource identifier of the service group associated with this usage plan.</summary>
         string ServiceGroupId { get; set; }

@@ -13,37 +13,6 @@ namespace Sample.API.Models
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosExperimentIdentityForFaultType { get => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).ChaosExperimentIdentityForFaultType; set => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).ChaosExperimentIdentityForFaultType = value ?? null; }
-
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosExperimentIdentityForFaultUserAssignedIdentity { get => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).ChaosExperimentIdentityForFaultUserAssignedIdentity; set => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).ChaosExperimentIdentityForFaultUserAssignedIdentity = value ?? null; }
-
-        /// <summary>Identity type linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosExperimentPropertiesIdentityType { get => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).IdentityType; set => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).IdentityType = value ?? null; }
-
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosExperimentPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).IdentityUserAssignedIdentity; set => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).IdentityUserAssignedIdentity = value ?? null; }
-
-        /// <summary>Backing field for <see cref="ChaosExperimentProperty" /> property.</summary>
-        private Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdate _chaosExperimentProperty;
-
-        /// <summary>Chaos Experiment properties.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdate ChaosExperimentProperty { get => (this._chaosExperimentProperty = this._chaosExperimentProperty ?? new Sample.API.Models.ChaosExperimentPropertiesOfDrillUpdate()); set => this._chaosExperimentProperty = value; }
-
-        /// <summary>Region for chaosExperiment resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosExperimentPropertyRegion { get => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).Region; set => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).Region = value ?? null; }
-
-        /// <summary>Subscription for chaosExperiment resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ChaosExperimentPropertySubscription { get => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).Subscription; set => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).Subscription = value ?? null; }
-
-        /// <summary>Identity type linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
         public string ChaosResourceIdentityForFaultType { get => ((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)ChaosResourceProperty).ChaosResourceIdentityForFaultType; set => ((Sample.API.Models.IChaosResourcePropertiesOfDrillUpdateInternal)ChaosResourceProperty).ChaosResourceIdentityForFaultType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
@@ -82,43 +51,27 @@ namespace Sample.API.Models
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string HealthModelPropertiesIdentityType { get => ((Sample.API.Models.IHealthModelPropertiesOfDrillUpdateInternal)HealthModelProperty).IdentityType; set => ((Sample.API.Models.IHealthModelPropertiesOfDrillUpdateInternal)HealthModelProperty).IdentityType = value ?? null; }
+        public string HealthModelMonitoringPropertiesIdentityType { get => ((Sample.API.Models.IHealthModelMonitoringPropertiesUpdateInternal)HealthModelMonitoringProperty).IdentityType; set => ((Sample.API.Models.IHealthModelMonitoringPropertiesUpdateInternal)HealthModelMonitoringProperty).IdentityType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string HealthModelPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IHealthModelPropertiesOfDrillUpdateInternal)HealthModelProperty).IdentityUserAssignedIdentity; set => ((Sample.API.Models.IHealthModelPropertiesOfDrillUpdateInternal)HealthModelProperty).IdentityUserAssignedIdentity = value ?? null; }
+        public string HealthModelMonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IHealthModelMonitoringPropertiesUpdateInternal)HealthModelMonitoringProperty).IdentityUserAssignedIdentity; set => ((Sample.API.Models.IHealthModelMonitoringPropertiesUpdateInternal)HealthModelMonitoringProperty).IdentityUserAssignedIdentity = value ?? null; }
 
-        /// <summary>Backing field for <see cref="HealthModelProperty" /> property.</summary>
-        private Sample.API.Models.IHealthModelPropertiesOfDrillUpdate _healthModelProperty;
-
-        /// <summary>HealthModel properties.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IHealthModelPropertiesOfDrillUpdate HealthModelProperty { get => (this._healthModelProperty = this._healthModelProperty ?? new Sample.API.Models.HealthModelPropertiesOfDrillUpdate()); set => this._healthModelProperty = value; }
-
-        /// <summary>Full ARM Id of the Health Model.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string HealthModelPropertyHealthModelId { get => ((Sample.API.Models.IHealthModelPropertiesOfDrillUpdateInternal)HealthModelProperty).HealthModelId; set => ((Sample.API.Models.IHealthModelPropertiesOfDrillUpdateInternal)HealthModelProperty).HealthModelId = value ?? null; }
+        /// <summary>Backing field for <see cref="HealthModelMonitoringProperty" /> property.</summary>
+        private Sample.API.Models.IHealthModelMonitoringPropertiesUpdate _healthModelMonitoringProperty;
 
         /// <summary>
-        /// Metrics associated with this Drill. These will be tracked through the Drill Run.
+        /// Azure Health Model monitoring properties of the Drill. Send null to clear the selection.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IHealthModelMonitoringPropertiesUpdate HealthModelMonitoringProperty { get => (this._healthModelMonitoringProperty = this._healthModelMonitoringProperty ?? new Sample.API.Models.HealthModelMonitoringPropertiesUpdate()); set => this._healthModelMonitoringProperty = value; }
+
+        /// <summary>
+        /// Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is
+        /// the only identifier accepted on the wire.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IMetricsToTrack> MetricPropertyMetricsToTrack { get => ((Sample.API.Models.IMetricsPropertiesOfDrillUpdateInternal)MetricsProperty).MetricsToTrack; set => ((Sample.API.Models.IMetricsPropertiesOfDrillUpdateInternal)MetricsProperty).MetricsToTrack = value ?? null /* arrayOf */; }
-
-        /// <summary>Identity type linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string MetricsPropertiesIdentityType { get => ((Sample.API.Models.IMetricsPropertiesOfDrillUpdateInternal)MetricsProperty).IdentityType; set => ((Sample.API.Models.IMetricsPropertiesOfDrillUpdateInternal)MetricsProperty).IdentityType = value ?? null; }
-
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string MetricsPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.IMetricsPropertiesOfDrillUpdateInternal)MetricsProperty).IdentityUserAssignedIdentity; set => ((Sample.API.Models.IMetricsPropertiesOfDrillUpdateInternal)MetricsProperty).IdentityUserAssignedIdentity = value ?? null; }
-
-        /// <summary>Backing field for <see cref="MetricsProperty" /> property.</summary>
-        private Sample.API.Models.IMetricsPropertiesOfDrillUpdate _metricsProperty;
-
-        /// <summary>Metric properties.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IMetricsPropertiesOfDrillUpdate MetricsProperty { get => (this._metricsProperty = this._metricsProperty ?? new Sample.API.Models.MetricsPropertiesOfDrillUpdate()); set => this._metricsProperty = value; }
+        public string HealthModelMonitoringPropertyDiscoveryRuleId { get => ((Sample.API.Models.IHealthModelMonitoringPropertiesUpdateInternal)HealthModelMonitoringProperty).DiscoveryRuleId; set => ((Sample.API.Models.IHealthModelMonitoringPropertiesUpdateInternal)HealthModelMonitoringProperty).DiscoveryRuleId = value ?? null; }
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
@@ -157,15 +110,6 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         internal Sample.API.Models.IRecoveryPlanPropertiesOfDrillUpdate RecoveryPlanProperty { get => (this._recoveryPlanProperty = this._recoveryPlanProperty ?? new Sample.API.Models.RecoveryPlanPropertiesOfDrillUpdate()); set => this._recoveryPlanProperty = value; }
 
-        /// <summary>Internal Acessors for ChaosExperimentProperty</summary>
-        Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.ChaosExperimentProperty { get => (this._chaosExperimentProperty = this._chaosExperimentProperty ?? new Sample.API.Models.ChaosExperimentPropertiesOfDrillUpdate()); set { {_chaosExperimentProperty = value;} } }
-
-        /// <summary>Internal Acessors for ChaosExperimentPropertyChaosExperimentIdentityForFault</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.ChaosExperimentPropertyChaosExperimentIdentityForFault { get => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).ChaosExperimentIdentityForFault; set => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).ChaosExperimentIdentityForFault = value ?? null /* model class */; }
-
-        /// <summary>Internal Acessors for ChaosExperimentPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.ChaosExperimentPropertyIdentity { get => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).Identity; set => ((Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdateInternal)ChaosExperimentProperty).Identity = value ?? null /* model class */; }
-
         /// <summary>Internal Acessors for ChaosResourceProperty</summary>
         Sample.API.Models.IChaosResourcePropertiesOfDrillUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.ChaosResourceProperty { get => (this._chaosResourceProperty = this._chaosResourceProperty ?? new Sample.API.Models.ChaosResourcePropertiesOfDrillUpdate()); set { {_chaosResourceProperty = value;} } }
 
@@ -178,17 +122,11 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for DrillAssetProperty</summary>
         Sample.API.Models.IAssetPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.DrillAssetProperty { get => (this._drillAssetProperty = this._drillAssetProperty ?? new Sample.API.Models.AssetPropertiesOfDrillUpdate()); set { {_drillAssetProperty = value;} } }
 
-        /// <summary>Internal Acessors for HealthModelProperty</summary>
-        Sample.API.Models.IHealthModelPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.HealthModelProperty { get => (this._healthModelProperty = this._healthModelProperty ?? new Sample.API.Models.HealthModelPropertiesOfDrillUpdate()); set { {_healthModelProperty = value;} } }
+        /// <summary>Internal Acessors for HealthModelMonitoringProperty</summary>
+        Sample.API.Models.IHealthModelMonitoringPropertiesUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.HealthModelMonitoringProperty { get => (this._healthModelMonitoringProperty = this._healthModelMonitoringProperty ?? new Sample.API.Models.HealthModelMonitoringPropertiesUpdate()); set { {_healthModelMonitoringProperty = value;} } }
 
-        /// <summary>Internal Acessors for HealthModelPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.HealthModelPropertyIdentity { get => ((Sample.API.Models.IHealthModelPropertiesOfDrillUpdateInternal)HealthModelProperty).Identity; set => ((Sample.API.Models.IHealthModelPropertiesOfDrillUpdateInternal)HealthModelProperty).Identity = value ?? null /* model class */; }
-
-        /// <summary>Internal Acessors for MetricPropertyIdentity</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.MetricPropertyIdentity { get => ((Sample.API.Models.IMetricsPropertiesOfDrillUpdateInternal)MetricsProperty).Identity; set => ((Sample.API.Models.IMetricsPropertiesOfDrillUpdateInternal)MetricsProperty).Identity = value ?? null /* model class */; }
-
-        /// <summary>Internal Acessors for MetricsProperty</summary>
-        Sample.API.Models.IMetricsPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.MetricsProperty { get => (this._metricsProperty = this._metricsProperty ?? new Sample.API.Models.MetricsPropertiesOfDrillUpdate()); set { {_metricsProperty = value;} } }
+        /// <summary>Internal Acessors for HealthModelMonitoringPropertyIdentity</summary>
+        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.HealthModelMonitoringPropertyIdentity { get => ((Sample.API.Models.IHealthModelMonitoringPropertiesUpdateInternal)HealthModelMonitoringProperty).Identity; set => ((Sample.API.Models.IHealthModelMonitoringPropertiesUpdateInternal)HealthModelMonitoringProperty).Identity = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for MonitoringProperty</summary>
         Sample.API.Models.IMonitoringPropertiesOfDrillUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.MonitoringProperty { get => (this._monitoringProperty = this._monitoringProperty ?? new Sample.API.Models.MonitoringPropertiesOfDrillUpdate()); set { {_monitoringProperty = value;} } }
@@ -202,6 +140,37 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for RecoveryPlanPropertyIdentity</summary>
         Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.RecoveryPlanPropertyIdentity { get => ((Sample.API.Models.IRecoveryPlanPropertiesOfDrillUpdateInternal)RecoveryPlanProperty).Identity; set => ((Sample.API.Models.IRecoveryPlanPropertiesOfDrillUpdateInternal)RecoveryPlanProperty).Identity = value ?? null /* model class */; }
 
+        /// <summary>Internal Acessors for SliMonitoringProperty</summary>
+        Sample.API.Models.ISliMonitoringPropertiesUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.SliMonitoringProperty { get => (this._sliMonitoringProperty = this._sliMonitoringProperty ?? new Sample.API.Models.SliMonitoringPropertiesUpdate()); set { {_sliMonitoringProperty = value;} } }
+
+        /// <summary>Internal Acessors for SliMonitoringPropertyIdentity</summary>
+        Sample.API.Models.IAssociatedIdentityUpdate Sample.API.Models.IDrillUpdatePropertiesInternal.SliMonitoringPropertyIdentity { get => ((Sample.API.Models.ISliMonitoringPropertiesUpdateInternal)SliMonitoringProperty).Identity; set => ((Sample.API.Models.ISliMonitoringPropertiesUpdateInternal)SliMonitoringProperty).Identity = value ?? null /* model class */; }
+
+        /// <summary>Identity type linked with the resource</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string SliMonitoringPropertiesIdentityType { get => ((Sample.API.Models.ISliMonitoringPropertiesUpdateInternal)SliMonitoringProperty).IdentityType; set => ((Sample.API.Models.ISliMonitoringPropertiesUpdateInternal)SliMonitoringProperty).IdentityType = value ?? null; }
+
+        /// <summary>User assigned identity id linked with the resource</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string SliMonitoringPropertiesIdentityUserAssignedIdentity { get => ((Sample.API.Models.ISliMonitoringPropertiesUpdateInternal)SliMonitoringProperty).IdentityUserAssignedIdentity; set => ((Sample.API.Models.ISliMonitoringPropertiesUpdateInternal)SliMonitoringProperty).IdentityUserAssignedIdentity = value ?? null; }
+
+        /// <summary>Backing field for <see cref="SliMonitoringProperty" /> property.</summary>
+        private Sample.API.Models.ISliMonitoringPropertiesUpdate _sliMonitoringProperty;
+
+        /// <summary>
+        /// SLI monitoring properties of the Drill. Send null to clear the selection; the submitted slis array is the new desired
+        /// state.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.ISliMonitoringPropertiesUpdate SliMonitoringProperty { get => (this._sliMonitoringProperty = this._sliMonitoringProperty ?? new Sample.API.Models.SliMonitoringPropertiesUpdate()); set => this._sliMonitoringProperty = value; }
+
+        /// <summary>
+        /// The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types
+        /// or duplicate SLI Ids are rejected.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySli { get => ((Sample.API.Models.ISliMonitoringPropertiesUpdateInternal)SliMonitoringProperty).Sli; set => ((Sample.API.Models.ISliMonitoringPropertiesUpdateInternal)SliMonitoringProperty).Sli = value ?? null /* arrayOf */; }
+
         /// <summary>Creates an new <see cref="DrillUpdateProperties" /> instance.</summary>
         public DrillUpdateProperties()
         {
@@ -212,74 +181,6 @@ namespace Sample.API.Models
     public partial interface IDrillUpdateProperties :
         Sample.API.Runtime.IJsonSerializable
     {
-        /// <summary>Identity type linked with the resource</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Identity type linked with the resource",
-        SerializedName = @"type",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        string ChaosExperimentIdentityForFaultType { get; set; }
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"User assigned identity id linked with the resource",
-        SerializedName = @"userAssignedIdentity",
-        PossibleTypes = new [] { typeof(string) })]
-        string ChaosExperimentIdentityForFaultUserAssignedIdentity { get; set; }
-        /// <summary>Identity type linked with the resource</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Identity type linked with the resource",
-        SerializedName = @"type",
-        PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        string ChaosExperimentPropertiesIdentityType { get; set; }
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"User assigned identity id linked with the resource",
-        SerializedName = @"userAssignedIdentity",
-        PossibleTypes = new [] { typeof(string) })]
-        string ChaosExperimentPropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>Region for chaosExperiment resource.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Region for chaosExperiment resource.",
-        SerializedName = @"region",
-        PossibleTypes = new [] { typeof(string) })]
-        string ChaosExperimentPropertyRegion { get; set; }
-        /// <summary>Subscription for chaosExperiment resource.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Subscription for chaosExperiment resource.",
-        SerializedName = @"subscription",
-        PossibleTypes = new [] { typeof(string) })]
-        string ChaosExperimentPropertySubscription { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -359,7 +260,7 @@ namespace Sample.API.Models
         SerializedName = @"type",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        string HealthModelPropertiesIdentityType { get; set; }
+        string HealthModelMonitoringPropertiesIdentityType { get; set; }
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -370,20 +271,10 @@ namespace Sample.API.Models
         Description = @"User assigned identity id linked with the resource",
         SerializedName = @"userAssignedIdentity",
         PossibleTypes = new [] { typeof(string) })]
-        string HealthModelPropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>Full ARM Id of the Health Model.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Full ARM Id of the Health Model.",
-        SerializedName = @"healthModelId",
-        PossibleTypes = new [] { typeof(string) })]
-        string HealthModelPropertyHealthModelId { get; set; }
+        string HealthModelMonitoringPropertiesIdentityUserAssignedIdentity { get; set; }
         /// <summary>
-        /// Metrics associated with this Drill. These will be tracked through the Drill Run.
+        /// Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is
+        /// the only identifier accepted on the wire.
         /// </summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -391,33 +282,10 @@ namespace Sample.API.Models
         Read = true,
         Create = true,
         Update = true,
-        Description = @"Metrics associated with this Drill. These will be tracked through the Drill Run.",
-        SerializedName = @"metricsToTrack",
-        PossibleTypes = new [] { typeof(Sample.API.Models.IMetricsToTrack) })]
-        System.Collections.Generic.List<Sample.API.Models.IMetricsToTrack> MetricPropertyMetricsToTrack { get; set; }
-        /// <summary>Identity type linked with the resource</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"Identity type linked with the resource",
-        SerializedName = @"type",
+        Description = @"Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.",
+        SerializedName = @"discoveryRuleId",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        string MetricsPropertiesIdentityType { get; set; }
-        /// <summary>User assigned identity id linked with the resource</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"User assigned identity id linked with the resource",
-        SerializedName = @"userAssignedIdentity",
-        PossibleTypes = new [] { typeof(string) })]
-        string MetricsPropertiesIdentityUserAssignedIdentity { get; set; }
+        string HealthModelMonitoringPropertyDiscoveryRuleId { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -476,32 +344,49 @@ namespace Sample.API.Models
         SerializedName = @"userAssignedIdentity",
         PossibleTypes = new [] { typeof(string) })]
         string RecoveryPlanPropertiesIdentityUserAssignedIdentity { get; set; }
+        /// <summary>Identity type linked with the resource</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Identity type linked with the resource",
+        SerializedName = @"type",
+        PossibleTypes = new [] { typeof(string) })]
+        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
+        string SliMonitoringPropertiesIdentityType { get; set; }
+        /// <summary>User assigned identity id linked with the resource</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"User assigned identity id linked with the resource",
+        SerializedName = @"userAssignedIdentity",
+        PossibleTypes = new [] { typeof(string) })]
+        string SliMonitoringPropertiesIdentityUserAssignedIdentity { get; set; }
+        /// <summary>
+        /// The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types
+        /// or duplicate SLI Ids are rejected.
+        /// </summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types or duplicate SLI Ids are rejected.",
+        SerializedName = @"slis",
+        PossibleTypes = new [] { typeof(Sample.API.Models.ISliSelection) })]
+        System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySli { get; set; }
 
     }
     /// The updatable properties of the Drill.
     internal partial interface IDrillUpdatePropertiesInternal
 
     {
-        /// <summary>Identity type linked with the resource</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        string ChaosExperimentIdentityForFaultType { get; set; }
-        /// <summary>User assigned identity id linked with the resource</summary>
-        string ChaosExperimentIdentityForFaultUserAssignedIdentity { get; set; }
-        /// <summary>Identity type linked with the resource</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        string ChaosExperimentPropertiesIdentityType { get; set; }
-        /// <summary>User assigned identity id linked with the resource</summary>
-        string ChaosExperimentPropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>Chaos Experiment properties.</summary>
-        Sample.API.Models.IChaosExperimentPropertiesOfDrillUpdate ChaosExperimentProperty { get; set; }
-        /// <summary>Identity to be used by the Chaos Experiment for invoking faults on resources.</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate ChaosExperimentPropertyChaosExperimentIdentityForFault { get; set; }
-        /// <summary>Identity to use for Chaos Experiment operations.</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate ChaosExperimentPropertyIdentity { get; set; }
-        /// <summary>Region for chaosExperiment resource.</summary>
-        string ChaosExperimentPropertyRegion { get; set; }
-        /// <summary>Subscription for chaosExperiment resource.</summary>
-        string ChaosExperimentPropertySubscription { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string ChaosResourceIdentityForFaultType { get; set; }
@@ -526,28 +411,23 @@ namespace Sample.API.Models
         string DrillAssetPropertySubscription { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        string HealthModelPropertiesIdentityType { get; set; }
+        string HealthModelMonitoringPropertiesIdentityType { get; set; }
         /// <summary>User assigned identity id linked with the resource</summary>
-        string HealthModelPropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>HealthModel properties.</summary>
-        Sample.API.Models.IHealthModelPropertiesOfDrillUpdate HealthModelProperty { get; set; }
-        /// <summary>Full ARM Id of the Health Model.</summary>
-        string HealthModelPropertyHealthModelId { get; set; }
-        /// <summary>Identity to use for Health Model operations.</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate HealthModelPropertyIdentity { get; set; }
-        /// <summary>Identity to use for metrics operations.</summary>
-        Sample.API.Models.IAssociatedIdentityUpdate MetricPropertyIdentity { get; set; }
+        string HealthModelMonitoringPropertiesIdentityUserAssignedIdentity { get; set; }
         /// <summary>
-        /// Metrics associated with this Drill. These will be tracked through the Drill Run.
+        /// Azure Health Model monitoring properties of the Drill. Send null to clear the selection.
         /// </summary>
-        System.Collections.Generic.List<Sample.API.Models.IMetricsToTrack> MetricPropertyMetricsToTrack { get; set; }
-        /// <summary>Identity type linked with the resource</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
-        string MetricsPropertiesIdentityType { get; set; }
-        /// <summary>User assigned identity id linked with the resource</summary>
-        string MetricsPropertiesIdentityUserAssignedIdentity { get; set; }
-        /// <summary>Metric properties.</summary>
-        Sample.API.Models.IMetricsPropertiesOfDrillUpdate MetricsProperty { get; set; }
+        Sample.API.Models.IHealthModelMonitoringPropertiesUpdate HealthModelMonitoringProperty { get; set; }
+        /// <summary>
+        /// Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is
+        /// the only identifier accepted on the wire.
+        /// </summary>
+        string HealthModelMonitoringPropertyDiscoveryRuleId { get; set; }
+        /// <summary>
+        /// Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this
+        /// identity.
+        /// </summary>
+        Sample.API.Models.IAssociatedIdentityUpdate HealthModelMonitoringPropertyIdentity { get; set; }
         /// <summary>Identity type linked with the resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string MonitoringPropertiesIdentityType { get; set; }
@@ -569,6 +449,26 @@ namespace Sample.API.Models
         Sample.API.Models.IRecoveryPlanPropertiesOfDrillUpdate RecoveryPlanProperty { get; set; }
         /// <summary>Identity to use for RecoveryPlan operations.</summary>
         Sample.API.Models.IAssociatedIdentityUpdate RecoveryPlanPropertyIdentity { get; set; }
+        /// <summary>Identity type linked with the resource</summary>
+        [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
+        string SliMonitoringPropertiesIdentityType { get; set; }
+        /// <summary>User assigned identity id linked with the resource</summary>
+        string SliMonitoringPropertiesIdentityUserAssignedIdentity { get; set; }
+        /// <summary>
+        /// SLI monitoring properties of the Drill. Send null to clear the selection; the submitted slis array is the new desired
+        /// state.
+        /// </summary>
+        Sample.API.Models.ISliMonitoringPropertiesUpdate SliMonitoringProperty { get; set; }
+        /// <summary>
+        /// Identity that the Drill uses to read evaluated SLI results from each SLI's destination Azure Monitor Workspace. The Drill
+        /// is granted Monitoring Reader on every destination AMW of every selected SLI for this identity.
+        /// </summary>
+        Sample.API.Models.IAssociatedIdentityUpdate SliMonitoringPropertyIdentity { get; set; }
+        /// <summary>
+        /// The SLIs selected for Drill monitoring. Maximum of two entries: at most one Availability and one Latency. Duplicate types
+        /// or duplicate SLI Ids are rejected.
+        /// </summary>
+        System.Collections.Generic.List<Sample.API.Models.ISliSelection> SliMonitoringPropertySli { get; set; }
 
     }
 }

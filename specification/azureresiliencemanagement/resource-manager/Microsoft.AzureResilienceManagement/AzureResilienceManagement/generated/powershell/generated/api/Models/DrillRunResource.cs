@@ -358,7 +358,7 @@ namespace Sample.API.Models
         Description = @"Discriminator for the JobResource object hierarchy.",
         SerializedName = @"jobResourceType",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "RecoveryPlanChild", "DrillRun", "ChaosExperiment")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "DrillRun")]
         string JobResourceType { get; set; }
         /// <summary>The operation that this job is intended to perform.</summary>
         [Sample.API.Runtime.Info(
@@ -381,7 +381,7 @@ namespace Sample.API.Models
         Description = @"The provisioning state of the Drill Run Resource.",
         SerializedName = @"provisioningState",
         PossibleTypes = new [] { typeof(string) })]
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get;  }
         /// <summary>
         /// The resource for which this job was created. This is typically the resource that the job is intended to manage or operate
@@ -491,14 +491,14 @@ namespace Sample.API.Models
         /// <summary>Id of the Job under which this job-resource exists.</summary>
         string JobId { get; set; }
         /// <summary>Discriminator for the JobResource object hierarchy.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "RecoveryPlanChild", "DrillRun", "ChaosExperiment")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Invalid", "RecoveryPlan", "DrillRun")]
         string JobResourceType { get; set; }
         /// <summary>The operation that this job is intended to perform.</summary>
         string Operation { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
         Sample.API.Models.IDrillRunResourceProperties Property { get; set; }
         /// <summary>The provisioning state of the Drill Run Resource.</summary>
-        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted")]
+        [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }
         /// <summary>
         /// The resource for which this job was created. This is typically the resource that the job is intended to manage or operate

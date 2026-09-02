@@ -96,17 +96,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("RecoveryPlanInput"))
-            {
-                ((Sample.API.Models.IDrillStartRequestInternal)this).RecoveryPlanInput = (Sample.API.Models.IDrillStartRequestRecoveryPlanInputs) content.GetValueForProperty("RecoveryPlanInput",((Sample.API.Models.IDrillStartRequestInternal)this).RecoveryPlanInput, Sample.API.Models.DrillStartRequestRecoveryPlanInputsTypeConverter.ConvertFrom);
-            }
             if (content.Contains("Mode"))
             {
                 ((Sample.API.Models.IDrillStartRequestInternal)this).Mode = (string) content.GetValueForProperty("Mode",((Sample.API.Models.IDrillStartRequestInternal)this).Mode, global::System.Convert.ToString);
-            }
-            if (content.Contains("RecoveryPlanInputFailoverDirection"))
-            {
-                ((Sample.API.Models.IDrillStartRequestInternal)this).RecoveryPlanInputFailoverDirection = (string) content.GetValueForProperty("RecoveryPlanInputFailoverDirection",((Sample.API.Models.IDrillStartRequestInternal)this).RecoveryPlanInputFailoverDirection, global::System.Convert.ToString);
             }
             AfterDeserializeDictionary(content);
         }
@@ -125,17 +117,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("RecoveryPlanInput"))
-            {
-                ((Sample.API.Models.IDrillStartRequestInternal)this).RecoveryPlanInput = (Sample.API.Models.IDrillStartRequestRecoveryPlanInputs) content.GetValueForProperty("RecoveryPlanInput",((Sample.API.Models.IDrillStartRequestInternal)this).RecoveryPlanInput, Sample.API.Models.DrillStartRequestRecoveryPlanInputsTypeConverter.ConvertFrom);
-            }
             if (content.Contains("Mode"))
             {
                 ((Sample.API.Models.IDrillStartRequestInternal)this).Mode = (string) content.GetValueForProperty("Mode",((Sample.API.Models.IDrillStartRequestInternal)this).Mode, global::System.Convert.ToString);
-            }
-            if (content.Contains("RecoveryPlanInputFailoverDirection"))
-            {
-                ((Sample.API.Models.IDrillStartRequestInternal)this).RecoveryPlanInputFailoverDirection = (string) content.GetValueForProperty("RecoveryPlanInputFailoverDirection",((Sample.API.Models.IDrillStartRequestInternal)this).RecoveryPlanInputFailoverDirection, global::System.Convert.ToString);
             }
             AfterDeserializePSObject(content);
         }

@@ -64,9 +64,8 @@ namespace Sample.API.Models
                 return;
             }
             __jobProperties = new Sample.API.Models.JobProperties(json);
+            {_report = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("report"), out var __jsonReport) ? Sample.API.Models.DrillReportSummary.FromJson(__jsonReport) : _report;}
             {_drillId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillId"), out var __jsonDrillId) ? (string)__jsonDrillId : (string)_drillId;}
-            {_metricValue = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("metricValue"), out var __jsonMetricValue) ? (string)__jsonMetricValue : (string)_metricValue;}
-            {_healthStatus = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("healthStatus"), out var __jsonHealthStatus) ? (string)__jsonHealthStatus : (string)_healthStatus;}
             {_drillMode = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillMode"), out var __jsonDrillMode) ? (string)__jsonDrillMode : (string)_drillMode;}
             {_attestation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("attestation"), out var __jsonAttestation) ? (string)__jsonAttestation : (string)_attestation;}
             {_note = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("notes"), out var __jsonNotes) ? If( __jsonNotes as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _note;}
@@ -107,15 +106,11 @@ namespace Sample.API.Models
             __jobProperties?.ToJson(container, serializationMode);
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
+                AddIf( null != this._report ? (Sample.API.Runtime.Json.JsonNode) this._report.ToJson(null,serializationMode) : null, "report" ,container.Add );
+            }
+            if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
+            {
                 AddIf( null != (((object)this._drillId)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._drillId.ToString()) : null, "drillId" ,container.Add );
-            }
-            if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
-            {
-                AddIf( null != (((object)this._metricValue)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._metricValue.ToString()) : null, "metricValue" ,container.Add );
-            }
-            if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
-            {
-                AddIf( null != (((object)this._healthStatus)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._healthStatus.ToString()) : null, "healthStatus" ,container.Add );
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {

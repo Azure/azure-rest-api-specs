@@ -377,7 +377,7 @@ namespace Sample.API.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'DrillRunsReprotect1' operation"))
+                if (ShouldProcess($"Call remote 'DrillRunsReprotect' operation"))
                 {
                     if (true == MyInvocation?.BoundParameters?.ContainsKey("AsJob"))
                     {
@@ -443,7 +443,7 @@ namespace Sample.API.Cmdlets
                     await ((Sample.API.Runtime.IEventListener)this).Signal(Sample.API.Runtime.Events.CmdletBeforeAPICall); if( ((Sample.API.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                     if (InputObject?.Id != null)
                     {
-                        await this.Client.DrillRunsReprotect1ViaIdentity(InputObject.Id, OperationId, _body, onOk, onDefault, this, Pipeline);
+                        await this.Client.DrillRunsReprotectViaIdentity(InputObject.Id, OperationId, _body, onOk, onDefault, this, Pipeline);
                     }
                     else
                     {
@@ -460,7 +460,7 @@ namespace Sample.API.Cmdlets
                         {
                             ThrowTerminatingError( new global::System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.DrillRunName"),string.Empty, global::System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                         }
-                        await this.Client.DrillRunsReprotect1(InputObject.ServiceGroupName ?? null, InputObject.DrillName ?? null, InputObject.DrillRunName ?? null, OperationId, _body, onOk, onDefault, this, Pipeline);
+                        await this.Client.DrillRunsReprotect(InputObject.ServiceGroupName ?? null, InputObject.DrillName ?? null, InputObject.DrillRunName ?? null, OperationId, _body, onOk, onDefault, this, Pipeline);
                     }
                     await ((Sample.API.Runtime.IEventListener)this).Signal(Sample.API.Runtime.Events.CmdletAfterAPICall); if( ((Sample.API.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }

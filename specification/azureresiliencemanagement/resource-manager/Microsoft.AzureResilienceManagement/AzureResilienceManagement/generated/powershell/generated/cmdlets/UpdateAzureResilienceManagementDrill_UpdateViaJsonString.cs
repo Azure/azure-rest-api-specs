@@ -16,7 +16,7 @@ namespace Sample.API.Cmdlets
     [global::System.Management.Automation.OutputType(typeof(Sample.API.Models.IDrill))]
     [global::Sample.API.Description(@"update a Drill")]
     [global::Sample.API.Generated]
-    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}", ApiVersion = "2026-03-01-preview")]
+    [global::Sample.API.HttpPath(Path = "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}", ApiVersion = "2026-08-31-preview")]
     [global::Sample.API.NotSuggestDefaultParameterSet]
     public partial class UpdateAzureResilienceManagementDrill_UpdateViaJsonString : global::System.Management.Automation.PSCmdlet,
         Sample.API.Runtime.IEventListener,

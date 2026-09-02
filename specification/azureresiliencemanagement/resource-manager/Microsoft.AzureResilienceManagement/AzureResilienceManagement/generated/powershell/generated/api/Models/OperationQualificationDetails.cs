@@ -25,6 +25,15 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string QualificationState { get => this._qualificationState; set => this._qualificationState = value; }
 
+        /// <summary>Backing field for <see cref="ResourceFeasibilityReview" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> _resourceFeasibilityReview;
+
+        /// <summary>
+        /// Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.
+        /// </summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        public System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> ResourceFeasibilityReview { get => this._resourceFeasibilityReview; set => this._resourceFeasibilityReview = value; }
+
         /// <summary>Creates an new <see cref="OperationQualificationDetails" /> instance.</summary>
         public OperationQualificationDetails()
         {
@@ -58,6 +67,19 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Qualified", "NotQualified", "Excluded")]
         string QualificationState { get; set; }
+        /// <summary>
+        /// Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.
+        /// </summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.",
+        SerializedName = @"resourceFeasibilityReviews",
+        PossibleTypes = new [] { typeof(Sample.API.Models.IResourceFeasibilityReview) })]
+        System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> ResourceFeasibilityReview { get; set; }
 
     }
     /// Details of qualification for an operation.
@@ -69,6 +91,10 @@ namespace Sample.API.Models
         /// <summary>Resource qualification state for the operation.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Unknown", "Qualified", "NotQualified", "Excluded")]
         string QualificationState { get; set; }
+        /// <summary>
+        /// Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.
+        /// </summary>
+        System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview> ResourceFeasibilityReview { get; set; }
 
     }
 }

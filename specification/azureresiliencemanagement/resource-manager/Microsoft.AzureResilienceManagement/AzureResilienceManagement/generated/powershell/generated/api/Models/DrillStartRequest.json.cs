@@ -63,7 +63,6 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_recoveryPlanInput = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("recoveryPlanInputs"), out var __jsonRecoveryPlanInputs) ? Sample.API.Models.DrillStartRequestRecoveryPlanInputs.FromJson(__jsonRecoveryPlanInputs) : _recoveryPlanInput;}
             {_mode = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("mode"), out var __jsonMode) ? (string)__jsonMode : (string)_mode;}
             AfterFromJson(json);
         }
@@ -97,7 +96,6 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._recoveryPlanInput ? (Sample.API.Runtime.Json.JsonNode) this._recoveryPlanInput.ToJson(null,serializationMode) : null, "recoveryPlanInputs" ,container.Add );
             AddIf( null != (((object)this._mode)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._mode.ToString()) : null, "mode" ,container.Add );
             AfterToJson(ref container);
             return container;

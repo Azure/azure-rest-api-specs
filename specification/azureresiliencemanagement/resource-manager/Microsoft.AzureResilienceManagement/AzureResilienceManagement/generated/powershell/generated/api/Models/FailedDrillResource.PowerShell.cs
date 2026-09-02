@@ -96,14 +96,6 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("TargetAndCapabilityAssignmentError"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("TargetAndCapabilityAssignmentError",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("TargetResourceAssignmentError"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("TargetResourceAssignmentError",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
-            }
             if (content.Contains("RbacAssignmentError"))
             {
                 ((Sample.API.Models.IFailedDrillResourceInternal)this).RbacAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("RbacAssignmentError",((Sample.API.Models.IFailedDrillResourceInternal)this).RbacAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
@@ -115,30 +107,6 @@ namespace Sample.API.Models
             if (content.Contains("ResourceId"))
             {
                 ((Sample.API.Models.IFailedDrillResourceInternal)this).ResourceId = (string) content.GetValueForProperty("ResourceId",((Sample.API.Models.IFailedDrillResourceInternal)this).ResourceId, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorCode"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorCode = (string) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorCode",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorCode, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorMessage"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorMessage = (string) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorMessage",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorMessage, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorRecommendation"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorRecommendation",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("TargetResourceAssignmentErrorCode"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorCode = (string) content.GetValueForProperty("TargetResourceAssignmentErrorCode",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorCode, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetResourceAssignmentErrorMessage"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorMessage = (string) content.GetValueForProperty("TargetResourceAssignmentErrorMessage",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorMessage, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetResourceAssignmentErrorRecommendation"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("TargetResourceAssignmentErrorRecommendation",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("RbacAssignmentErrorCode"))
             {
@@ -169,14 +137,6 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("TargetAndCapabilityAssignmentError"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("TargetAndCapabilityAssignmentError",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
-            }
-            if (content.Contains("TargetResourceAssignmentError"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("TargetResourceAssignmentError",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
-            }
             if (content.Contains("RbacAssignmentError"))
             {
                 ((Sample.API.Models.IFailedDrillResourceInternal)this).RbacAssignmentError = (Sample.API.Models.IErrorDetails) content.GetValueForProperty("RbacAssignmentError",((Sample.API.Models.IFailedDrillResourceInternal)this).RbacAssignmentError, Sample.API.Models.ErrorDetailsTypeConverter.ConvertFrom);
@@ -188,30 +148,6 @@ namespace Sample.API.Models
             if (content.Contains("ResourceId"))
             {
                 ((Sample.API.Models.IFailedDrillResourceInternal)this).ResourceId = (string) content.GetValueForProperty("ResourceId",((Sample.API.Models.IFailedDrillResourceInternal)this).ResourceId, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorCode"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorCode = (string) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorCode",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorCode, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorMessage"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorMessage = (string) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorMessage",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorMessage, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetAndCapabilityAssignmentErrorRecommendation"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("TargetAndCapabilityAssignmentErrorRecommendation",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetAndCapabilityAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
-            }
-            if (content.Contains("TargetResourceAssignmentErrorCode"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorCode = (string) content.GetValueForProperty("TargetResourceAssignmentErrorCode",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorCode, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetResourceAssignmentErrorMessage"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorMessage = (string) content.GetValueForProperty("TargetResourceAssignmentErrorMessage",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorMessage, global::System.Convert.ToString);
-            }
-            if (content.Contains("TargetResourceAssignmentErrorRecommendation"))
-            {
-                ((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("TargetResourceAssignmentErrorRecommendation",((Sample.API.Models.IFailedDrillResourceInternal)this).TargetResourceAssignmentErrorRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("RbacAssignmentErrorCode"))
             {
