@@ -92,6 +92,28 @@ suppressions:
     reason: The only consumers of this shared uuid definition are FirewallPolicyPurviewVendorSettings.tenantId and .userObjectIds, which are Microsoft Entra tenant and object identifiers. Customers already obtain these values as GUIDs from the Entra portal, Azure CLI and ARM templates and paste them directly into this payload, so surfacing them as format:uuid matches what the customer already holds. These are not opaque platform-assigned identifiers or resource names.
     where:
       - $.definitions.uuid.format
+  # --- stable/2026-01-01/firewallPolicy.json ---
+  - code: ResourceNameRestriction
+    from: firewallPolicy.json
+    reason: firewallPolicyName is an existing parent resource path parameter established in prior stable API versions. Adding a pattern constraint to the parent resource would alter every firewall policy operation and impose a new client-side restriction on the published contract.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}"]
+  - code: ProvisioningStateMustBeReadOnly
+    from: firewallPolicy.json
+    reason: provisioningState is read-only in the TypeSpec source through @visibility(Lifecycle.Read). The lint rule does not follow the referenced properties schema to detect the emitted readOnly constraint.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}"].put.responses["201"].schema
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: firewallPolicy.json
+    reason: The Network TypeSpec project currently targets ARM common types v5. These child resources follow the same project-wide common-types version to avoid unrelated contract churn across the 2026-01-01 package.
   # --- stable/2026-01-01/networkGateway.json ---
   - code: ResourceNameRestriction
     from: networkGateway.json
