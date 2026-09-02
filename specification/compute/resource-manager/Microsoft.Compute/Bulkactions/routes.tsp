@@ -172,6 +172,7 @@ interface VirtualMachineBulkOperations {
   /** BulkVdiFlexCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
   @removed(Versions.`2026-06-06`)
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @post
   @autoRoute
   @armResourceCollectionAction
