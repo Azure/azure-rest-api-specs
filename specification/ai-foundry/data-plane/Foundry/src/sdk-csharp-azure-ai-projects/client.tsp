@@ -307,4 +307,3 @@ namespace Azure.AI.Projects;
 );
 @@clientName(RoutineActionType, "RoutineActionKind");
 @@clientName(RoutineTriggerType, "RoutineTriggerKind");
-
