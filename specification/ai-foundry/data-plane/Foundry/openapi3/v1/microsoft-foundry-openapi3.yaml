@@ -83467,10 +83467,6 @@ components:
         response_policy:
           $ref: '#/components/schemas/VoiceAgentSubagentResponsePolicy'
           description: Policy for acknowledging forwarded requests and filling gaps while waiting for this subagent's response.
-        enable_delta_progress:
-          type: boolean
-          description: Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.
-          default: false
         invoke_timeout_seconds:
           type: integer
           format: int32
@@ -83514,6 +83510,10 @@ components:
         gap_filling_instructions:
           type: string
           description: Instructions used to generate gap-filling speech while waiting for progress.
+        enable_delta_progress:
+          type: boolean
+          description: Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.
+          default: false
         progress_instructions:
           type: string
           description: Instructions used to summarize streamed subagent progress for speech.
