@@ -4290,6 +4290,30 @@
       "minimum": 1,
       "maximum": 31
     },
+    "DeadlineType": {
+      "type": "string",
+      "description": "The types of deadlines supported by Bulkactions",
+      "enum": [
+        "InitiateAt",
+        "CompleteBy"
+      ],
+      "x-ms-enum": {
+        "name": "DeadlineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InitiateAt",
+            "value": "InitiateAt",
+            "description": "Initiate the operation at the given deadline."
+          },
+          {
+            "name": "CompleteBy",
+            "value": "CompleteBy",
+            "description": "Complete the operation by the given deadline."
+          }
+        ]
+      }
+    },
     "DeallocateResourceOperationResponse": {
       "type": "object",
       "description": "The response from a deallocate request",
@@ -4872,10 +4896,6 @@
       "type": "object",
       "description": "Extra details needed to run the user's request",
       "properties": {
-        "optimizationPreference": {
-          "$ref": "#/definitions/OptimizationPreference",
-          "description": "Details that could optimize the user's request"
-        },
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
           "description": "Retry policy the user can pass"
@@ -6291,6 +6311,55 @@
         ]
       }
     },
+    "OperationState": {
+      "type": "string",
+      "description": "Values that define the states of operations in Bulkactions",
+      "enum": [
+        "Scheduled",
+        "Executing",
+        "Succeeded",
+        "Failed",
+        "Cancelled",
+        "Blocked"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "Operations that have been scheduled"
+          },
+          {
+            "name": "Executing",
+            "value": "Executing",
+            "description": "Operations that are in the process of being executed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Operations that succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Operations that have failed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Operations that have been Cancelled by the user"
+          },
+          {
+            "name": "Blocked",
+            "value": "Blocked",
+            "description": "Operations that are blocked"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "OptimizationPreference": {
       "type": "string",
       "description": "The preferred optimization goal for scheduled action operations.",
@@ -6873,59 +6942,8 @@
           "description": "Unique identifier for the resource involved in the operation, for example Azure resource ID"
         },
         "opType": {
-          "type": "string",
-          "description": "Type of operation performed on the resources",
-          "default": "Unknown",
-          "enum": [
-            "Unknown",
-            "Start",
-            "Deallocate",
-            "Hibernate",
-            "Create",
-            "Delete",
-            "GetInstanceView"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceOperationType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Unknown",
-                "value": "Unknown",
-                "description": "The default value for this enum type"
-              },
-              {
-                "name": "Start",
-                "value": "Start",
-                "description": "Start operations on the resources"
-              },
-              {
-                "name": "Deallocate",
-                "value": "Deallocate",
-                "description": "Deallocate operations on the resources"
-              },
-              {
-                "name": "Hibernate",
-                "value": "Hibernate",
-                "description": "Hibernate operations on the resources"
-              },
-              {
-                "name": "Create",
-                "value": "Create",
-                "description": "Create operations on the resources"
-              },
-              {
-                "name": "Delete",
-                "value": "Delete",
-                "description": "Delete operations on the resources"
-              },
-              {
-                "name": "GetInstanceView",
-                "value": "GetInstanceView",
-                "description": "Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request"
-              }
-            ]
-          }
+          "$ref": "#/definitions/ResourceOperationType",
+          "description": "Type of operation performed on the resources"
         },
         "subscriptionId": {
           "type": "string",
@@ -6937,103 +6955,12 @@
           "description": "Deadline for the operation"
         },
         "deadlineType": {
-          "type": "string",
-          "description": "Type of deadline of the operation",
-          "default": "Unknown",
-          "enum": [
-            "Unknown",
-            "InitiateAt",
-            "CompleteBy"
-          ],
-          "x-ms-enum": {
-            "name": "DeadlineType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Unknown",
-                "value": "Unknown",
-                "description": "Default value of Unknown."
-              },
-              {
-                "name": "InitiateAt",
-                "value": "InitiateAt",
-                "description": "Initiate the operation at the given deadline."
-              },
-              {
-                "name": "CompleteBy",
-                "value": "CompleteBy",
-                "description": "Complete the operation by the given deadline."
-              }
-            ]
-          }
+          "$ref": "#/definitions/DeadlineType",
+          "description": "Type of deadline of the operation"
         },
         "state": {
-          "type": "string",
-          "description": "Current state of the operation",
-          "default": "Unknown",
-          "enum": [
-            "Unknown",
-            "PendingScheduling",
-            "Scheduled",
-            "PendingExecution",
-            "Executing",
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Blocked"
-          ],
-          "x-ms-enum": {
-            "name": "OperationState",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Unknown",
-                "value": "Unknown",
-                "description": "The default value for the operation state enum"
-              },
-              {
-                "name": "PendingScheduling",
-                "value": "PendingScheduling",
-                "description": "Operations that are pending scheduling"
-              },
-              {
-                "name": "Scheduled",
-                "value": "Scheduled",
-                "description": "Operations that have been scheduled"
-              },
-              {
-                "name": "PendingExecution",
-                "value": "PendingExecution",
-                "description": "Operations that are waiting to be executed"
-              },
-              {
-                "name": "Executing",
-                "value": "Executing",
-                "description": "Operations that are in the process of being executed"
-              },
-              {
-                "name": "Succeeded",
-                "value": "Succeeded",
-                "description": "Operations that succeeded"
-              },
-              {
-                "name": "Failed",
-                "value": "Failed",
-                "description": "Operations that have failed"
-              },
-              {
-                "name": "Cancelled",
-                "value": "Cancelled",
-                "description": "Operations that have been Cancelled by the user"
-              },
-              {
-                "name": "Blocked",
-                "value": "Blocked",
-                "description": "Operations that are blocked"
-              }
-            ]
-          },
-          "readOnly": true
+          "$ref": "#/definitions/OperationState",
+          "description": "Current state of the operation"
         },
         "timezone": {
           "type": "string",
@@ -7141,23 +7068,16 @@
       "type": "string",
       "description": "The kind of bulk operation that can be performed on resources using Bulkactions API",
       "enum": [
-        "Unknown",
         "Start",
         "Deallocate",
         "Hibernate",
         "Create",
-        "Delete",
-        "GetInstanceView"
+        "Delete"
       ],
       "x-ms-enum": {
         "name": "ResourceOperationType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The default value for this enum type"
-          },
           {
             "name": "Start",
             "value": "Start",
@@ -7182,11 +7102,6 @@
             "name": "Delete",
             "value": "Delete",
             "description": "Delete operations on the resources"
-          },
-          {
-            "name": "GetInstanceView",
-            "value": "GetInstanceView",
-            "description": "Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request"
           }
         ]
       }
