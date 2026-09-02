@@ -227,6 +227,8 @@ union ActiveDirectoryStatus {
  * Indicates the secure LDAP mode for encrypting communication between ANF storage and customer LDAP servers.
  */
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union SecureLdapType {
   string,
 
@@ -272,6 +274,8 @@ union KeySource {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union ElasticKeySource {
   string,
 
