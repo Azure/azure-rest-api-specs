@@ -23,6 +23,7 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
 op connectVoiceAgentJava(
   @path agent_name: string,
   @query("foundry_features") foundry_features_query?: string,
