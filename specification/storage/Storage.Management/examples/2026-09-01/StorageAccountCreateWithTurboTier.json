@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "accountName": "staturbocontoso01",
+    "api-version": "2026-09-01",
+    "parameters": {
+      "kind": "StorageV2",
+      "location": "eastus2",
+      "properties": {
+        "accessTier": "Hot",
+        "turboTier": {
+          "status": "Enabled",
+          "targetPercent": 10
+        }
+      },
+      "sku": {
+        "name": "Standard_LRS"
+      }
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/staturbocontoso01",
+        "kind": "StorageV2",
+        "location": "eastus2",
+        "name": "staturbocontoso01",
+        "properties": {
+          "accessTier": "Hot",
+          "provisioningState": "Succeeded",
+          "turboTier": {
+            "status": "Enabled",
+            "targetPercent": 10
+          }
+        },
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "type": "Microsoft.Storage/storageAccounts"
+      }
+    },
+    "202": {}
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreateWithTurboTier"
+}

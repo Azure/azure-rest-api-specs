@@ -1312,6 +1312,9 @@
           "StorageAccountCreateWithSmartAccessTier": {
             "$ref": "./examples/StorageAccountCreateWithSmartAccessTier.json"
           },
+          "StorageAccountCreateWithTurboTier": {
+            "$ref": "./examples/StorageAccountCreateWithTurboTier.json"
+          },
           "StorageAccountCreate_placement": {
             "$ref": "./examples/StorageAccountCreate_placement.json"
           },
@@ -1396,6 +1399,9 @@
           },
           "StorageAccountUpdateDisablePublicNetworkAccess": {
             "$ref": "./examples/StorageAccountUpdateDisablePublicNetworkAccess.json"
+          },
+          "StorageAccountUpdateDisableTurboTier": {
+            "$ref": "./examples/StorageAccountUpdateDisableTurboTier.json"
           },
           "StorageAccountUpdateEnableIpv6Features": {
             "$ref": "./examples/StorageAccountLeverageIPv6Ability.json"
@@ -15839,6 +15845,10 @@
           "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.",
           "readOnly": true
         },
+        "turboTier": {
+          "$ref": "#/definitions/TurboTier",
+          "description": "Configures Turbo Tier for the storage account."
+        },
         "azureFilesIdentityBasedAuthentication": {
           "$ref": "#/definitions/AzureFilesIdentityBasedAuthentication",
           "description": "Provides the identity based authentication settings for Azure Files."
@@ -16028,6 +16038,10 @@
           "$ref": "#/definitions/AccessTier",
           "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type."
         },
+        "turboTier": {
+          "$ref": "#/definitions/TurboTier",
+          "description": "Configures Turbo Tier for the storage account."
+        },
         "azureFilesIdentityBasedAuthentication": {
           "$ref": "#/definitions/AzureFilesIdentityBasedAuthentication",
           "description": "Provides the identity based authentication settings for Azure Files."
@@ -16146,6 +16160,10 @@
         "accessTier": {
           "$ref": "#/definitions/AccessTier",
           "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type."
+        },
+        "turboTier": {
+          "$ref": "#/definitions/TurboTier",
+          "description": "Configures Turbo Tier for the storage account."
         },
         "azureFilesIdentityBasedAuthentication": {
           "$ref": "#/definitions/AzureFilesIdentityBasedAuthentication",
@@ -17478,6 +17496,47 @@
             "name": "MockRun",
             "value": "MockRun",
             "description": "Run the task as a mock for testing"
+          }
+        ]
+      }
+    },
+    "TurboTier": {
+      "type": "object",
+      "description": "Configures Turbo Tier for a storage account.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/TurboTierStatus",
+          "description": "Indicates whether Turbo Tier is enabled or disabled."
+        },
+        "targetPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target fill percentage used for placement. The valid range is 10 to 100. When status is Enabled and this property is omitted, the default value is 20.",
+          "minimum": 10,
+          "maximum": 100
+        }
+      }
+    },
+    "TurboTierStatus": {
+      "type": "string",
+      "description": "Indicates whether Turbo Tier is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "TurboTierStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Turbo Tier is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Turbo Tier is disabled."
           }
         ]
       }
