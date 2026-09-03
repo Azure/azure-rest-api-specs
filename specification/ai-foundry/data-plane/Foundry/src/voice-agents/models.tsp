@@ -1176,17 +1176,6 @@ model TelephonyOutboundDestination {
   value: string;
 }
 
-@doc("Evidence that the caller has consent to contact the destination.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyOutboundConsent {
-  @doc("The consent evidence type.")
-  type: "reference";
-
-  @doc("A customer-controlled reference to the consent record. The service stores the reference, not the consent artifact.")
-  @minLength(1)
-  reference_id: string;
-}
-
 @doc("The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyOutboundRetryPolicy {
@@ -1196,9 +1185,7 @@ model TelephonyOutboundRetryPolicy {
   max_attempts?: int32 = 1;
 
   @doc("The delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.")
-  @minValue(0)
-  @maxValue(86400)
-  interval_seconds?: int32 = 0;
+  interval_seconds?: FoundryDurationSeconds;
 }
 
 @doc("The frozen retry policy returned for an outbound call or campaign.")
@@ -1211,9 +1198,7 @@ model TelephonyOutboundRetryPolicyResponse {
   max_attempts: int32;
 
   @doc("The delay in seconds between attempts.")
-  @minValue(0)
-  @maxValue(86400)
-  interval_seconds: int32;
+  interval_seconds: FoundryDurationSeconds;
 }
 
 @doc("The optional execution window for a direct outbound call.")
@@ -1221,10 +1206,10 @@ model TelephonyOutboundRetryPolicyResponse {
 @clientName("TelephonyCallJobScheduleContent", "csharp")
 model TelephonyCallJobScheduleRequest {
   @doc("The earliest instant at which dispatch may begin.")
-  not_before?: utcDateTime;
+  not_before?: FoundryTimestamp;
 
   @doc("The instant after which the call job expires without dispatch.")
-  expires_at?: utcDateTime;
+  expires_at?: FoundryTimestamp;
 
   @doc("The IANA time-zone name associated with the schedule. Required when either timestamp is supplied.")
   @minLength(1)
@@ -1257,9 +1242,6 @@ model CreateTelephonyCallJobRequest {
   @doc("The customer-declared purpose for placing the call.")
   @minLength(1)
   purpose: string;
-
-  @doc("A reference to the consent evidence authorizing the call.")
-  consent: TelephonyOutboundConsent;
 
   @doc("Structured input values available to the agent and greeting for this call.")
   structured_inputs?: Record<unknown>;
@@ -1336,9 +1318,6 @@ model TelephonyCallJob {
   @doc("The declared purpose for the call.")
   purpose: string;
 
-  @doc("The consent evidence reference.")
-  consent: TelephonyOutboundConsent;
-
   @doc("Structured input values available to the agent and greeting.")
   structured_inputs?: Record<unknown>;
 
@@ -1386,7 +1365,7 @@ alias TelephonyCallJobResponse = {
 alias TelephonyCallJobAcceptedResponse = TypeSpec.Http.Response<202> &
   TelephonyCallJobResponse & {
     @header("Location") location: string;
-    @header("Retry-After") retry_after: int32;
+    @header("Retry-After") retry_after: FoundryDurationSeconds;
   };
 
 @doc("A field definition in an outbound campaign recipient schema.")
@@ -1434,7 +1413,7 @@ model TelephonyCampaignScheduleRequest {
   type: TelephonyCampaignScheduleType;
 
   @doc("The scheduled start instant. Required only when `type` is `scheduled`.")
-  start_at?: utcDateTime;
+  start_at?: FoundryTimestamp;
 }
 
 @doc("The frozen schedule returned for an outbound campaign.")
@@ -1461,9 +1440,6 @@ model CreateTelephonyCampaignRequest {
   @doc("The customer-declared purpose for campaign calls.")
   @minLength(1)
   purpose: string;
-
-  @doc("A reference to the consent evidence authorizing campaign calls.")
-  consent: TelephonyOutboundConsent;
 
   @doc("The optional schema for structured inputs imported for each recipient.")
   recipient_schema?: Record<TelephonyCampaignRecipientSchemaFieldDefinition>;
@@ -1524,7 +1500,6 @@ model TelephonyCampaign {
   execution_status: TelephonyCampaignExecutionStatus;
   telephony_binding_id: TelephonyBindingId;
   purpose: string;
-  consent: TelephonyOutboundConsent;
   recipient_schema?: Record<TelephonyCampaignRecipientSchemaFieldDefinition>;
   schedule?: TelephonyCampaignSchedule;
   retry_policy: TelephonyOutboundRetryPolicyResponse;
@@ -1682,7 +1657,7 @@ model TelephonyCampaignOperation {
 alias TelephonyCampaignOperationAcceptedResponse = TypeSpec.Http.Response<202> & {
   @bodyRoot body: TelephonyCampaignOperation;
   @header("Operation-Location") operation_location: string;
-  @header("Retry-After") retry_after: int32;
+  @header("Retry-After") retry_after: FoundryDurationSeconds;
 };
 
 @doc("A resource produced by a successful outbound telephony operation.")

@@ -4109,8 +4109,7 @@ paths:
             Retry-After:
               required: true
               schema:
-                type: integer
-                format: int32
+                $ref: '#/components/schemas/FoundryDurationSeconds'
           content:
             application/json:
               schema:
@@ -4262,8 +4261,7 @@ paths:
             Retry-After:
               required: true
               schema:
-                type: integer
-                format: int32
+                $ref: '#/components/schemas/FoundryDurationSeconds'
           content:
             application/json:
               schema:
@@ -4524,8 +4522,7 @@ paths:
             Retry-After:
               required: true
               schema:
-                type: integer
-                format: int32
+                $ref: '#/components/schemas/FoundryDurationSeconds'
           content:
             application/json:
               schema:
@@ -4727,8 +4724,7 @@ paths:
             Retry-After:
               required: true
               schema:
-                type: integer
-                format: int32
+                $ref: '#/components/schemas/FoundryDurationSeconds'
           content:
             application/json:
               schema:
@@ -4864,8 +4860,7 @@ paths:
             Retry-After:
               required: true
               schema:
-                type: integer
-                format: int32
+                $ref: '#/components/schemas/FoundryDurationSeconds'
           content:
             application/json:
               schema:
@@ -46631,7 +46626,6 @@ components:
         - destination
         - telephony_binding_id
         - purpose
-        - consent
       properties:
         destination:
           $ref: '#/components/schemas/TelephonyOutboundDestination'
@@ -46643,9 +46637,6 @@ components:
           type: string
           minLength: 1
           description: The customer-declared purpose for placing the call.
-        consent:
-          $ref: '#/components/schemas/TelephonyOutboundConsent'
-          description: A reference to the consent evidence authorizing the call.
         structured_inputs:
           type: object
           unevaluatedProperties: {}
@@ -46673,7 +46664,6 @@ components:
         - display_name
         - telephony_binding_id
         - purpose
-        - consent
       properties:
         display_name:
           type: string
@@ -46686,9 +46676,6 @@ components:
           type: string
           minLength: 1
           description: The customer-declared purpose for campaign calls.
-        consent:
-          $ref: '#/components/schemas/TelephonyOutboundConsent'
-          description: A reference to the consent evidence authorizing campaign calls.
         recipient_schema:
           type: object
           unevaluatedProperties:
@@ -49516,6 +49503,10 @@ components:
       type: integer
       format: int32
       description: A duration encoded as an integer number of milliseconds.
+    FoundryDurationSeconds:
+      type: integer
+      format: int32
+      description: A duration encoded as an integer number of seconds.
     FoundryModelArtifactProfileCategory:
       anyOf:
         - type: string
@@ -81901,7 +81892,6 @@ components:
         - destination
         - telephony_binding_id
         - purpose
-        - consent
         - retry_policy
         - attempt_count
         - revision
@@ -81931,9 +81921,6 @@ components:
         purpose:
           type: string
           description: The declared purpose for the call.
-        consent:
-          $ref: '#/components/schemas/TelephonyOutboundConsent'
-          description: The consent evidence reference.
         structured_inputs:
           type: object
           unevaluatedProperties: {}
@@ -82032,12 +82019,10 @@ components:
       type: object
       properties:
         not_before:
-          type: string
-          format: date-time
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The earliest instant at which dispatch may begin.
         expires_at:
-          type: string
-          format: date-time
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The instant after which the call job expires without dispatch.
         time_zone:
           type: string
@@ -82506,7 +82491,6 @@ components:
         - execution_status
         - telephony_binding_id
         - purpose
-        - consent
         - retry_policy
         - revision
         - execution_revision
@@ -82532,8 +82516,6 @@ components:
           $ref: '#/components/schemas/TelephonyBindingId'
         purpose:
           type: string
-        consent:
-          $ref: '#/components/schemas/TelephonyOutboundConsent'
         recipient_schema:
           type: object
           unevaluatedProperties:
@@ -82901,8 +82883,7 @@ components:
           $ref: '#/components/schemas/TelephonyCampaignScheduleType'
           description: Whether calls are eligible immediately after publication or at a future instant.
         start_at:
-          type: string
-          format: date-time
+          $ref: '#/components/schemas/FoundryTimestamp'
           description: The scheduled start instant. Required only when `type` is `scheduled`.
       description: The schedule for an outbound campaign.
       x-ms-foundry-meta:
@@ -82974,25 +82955,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TelephonyOutboundConsent:
-      type: object
-      required:
-        - type
-        - reference_id
-      properties:
-        type:
-          type: string
-          enum:
-            - reference
-          description: The consent evidence type.
-        reference_id:
-          type: string
-          minLength: 1
-          description: A customer-controlled reference to the consent record. The service stores the reference, not the consent artifact.
-      description: Evidence that the caller has consent to contact the destination.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyOutboundDestination:
       type: object
       required:
@@ -83023,12 +82985,8 @@ components:
           description: The maximum number of provider attempts, including the first attempt. Defaults to 1.
           default: 1
         interval_seconds:
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 86400
+          $ref: '#/components/schemas/FoundryDurationSeconds'
           description: The delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.
-          default: 0
       description: The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt.
       x-ms-foundry-meta:
         required_previews:
@@ -83046,10 +83004,7 @@ components:
           maximum: 5
           description: The maximum number of provider attempts, including the first attempt.
         interval_seconds:
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 86400
+          $ref: '#/components/schemas/FoundryDurationSeconds'
           description: The delay in seconds between attempts.
       description: The frozen retry policy returned for an outbound call or campaign.
       x-ms-foundry-meta:
