@@ -20938,6 +20938,30 @@
         ]
       }
     },
+    "SmbOplocks": {
+      "type": "string",
+      "description": "Specifies whether SMB opportunistic locks (Oplocks) are enabled or disabled on the volume. Only applicable for SMB/DualProtocol volume. Can be omitted or set to null.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "SmbOplocks",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "SMB opportunistic locks share setting is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "SMB opportunistic locks share setting is enabled."
+          }
+        ]
+      }
+    },
     "SmbSettings": {
       "type": "object",
       "description": "SMB settings for the cache",
@@ -22485,6 +22509,10 @@
         "smbNonBrowsable": {
           "$ref": "#/definitions/SmbNonBrowsable",
           "description": "Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume"
+        },
+        "smbOplocks": {
+          "$ref": "#/definitions/SmbOplocks",
+          "description": "Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume"
         }
       }
     },
@@ -22846,6 +22874,10 @@
           "type": "boolean",
           "description": "Enables continuously available share property for smb volume. Only applicable for SMB volume",
           "default": false
+        },
+        "smbOplocks": {
+          "$ref": "#/definitions/SmbOplocks",
+          "description": "Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume"
         },
         "throughputMibps": {
           "type": "number",

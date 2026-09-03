@@ -5,6 +5,17 @@
     "body": {
       "tags": {
         "Tag1": "Value1"
+      },
+      "properties": {
+        "ldapConfiguration": {
+          "domain": "example.com",
+          "ldapServers": [
+            "192.0.2.1",
+            "192.0.2.2"
+          ],
+          "secureLdapType": "LdapOverTLS",
+          "ldapPort": 636
+        }
       }
     },
     "resourceGroupName": "myRG",
@@ -18,7 +29,16 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1",
         "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "ldapConfiguration": {
+            "domain": "example.com",
+            "ldapServers": [
+              "192.0.2.1",
+              "192.0.2.2"
+            ],
+            "secureLdapType": "LdapOverTLS",
+            "ldapPort": 636
+          }
         }
       }
     },
@@ -32,7 +52,16 @@
           "encryption": {
             "keySource": "Microsoft.NetApp"
           },
-          "provisioningState": "Patching"
+          "provisioningState": "Patching",
+          "ldapConfiguration": {
+            "domain": "example.com",
+            "ldapServers": [
+              "192.0.2.1",
+              "192.0.2.2"
+            ],
+            "secureLdapType": "LdapOverTLS",
+            "ldapPort": 636
+          }
         },
         "tags": {
           "Tag1": "Value1"
