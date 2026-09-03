@@ -133,6 +133,19 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 @@clientName(RetryPolicy, "EventSubscriptionRetryPolicy", "csharp");
 @@clientName(EventType, "EventTypeUnderTopic", "csharp");
 @@clientName(Microsoft.EventGrid.Topic, "EventGridTopic", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  Microsoft.EventGrid.Topic,
+  "resource-rbac-roles",
+  #{
+    EventGridContributor: "1e241071-0855-49ea-94dc-649edcd759de",
+    EventGridDataSender: "d5a91429-5739-47e2-a06b-3470a27159e7",
+    EventGridEventSubscriptionContributor: "428e0ff0-5e57-4d9c-a221-2c70d0e0a443",
+    EventGridEventSubscriptionReader: "2414bbcf-6497-4faf-8c65-045460748405",
+  },
+  "csharp"
+);
 @@clientName(
   TopicProvisioningState,
   "EventGridTopicProvisioningState",
