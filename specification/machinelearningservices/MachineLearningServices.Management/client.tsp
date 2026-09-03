@@ -777,6 +777,7 @@ using Microsoft.MachineLearningServices;
 );
 @@alternateType(WorkspaceProperties.mlFlowTrackingUri, url, "csharp");
 @@alternateType(WorkspaceProperties.tenantId, Azure.Core.uuid, "csharp");
+@@clientName(WorkspaceProperties.encryption, "EncryptionProperty", "csharp");
 @@alternateType(RegistryProperties.discoveryUrl, url, "csharp");
 @@alternateType(RegistryProperties.mlFlowRegistryUri, url, "csharp");
 @@alternateType(
@@ -1344,6 +1345,8 @@ using Microsoft.MachineLearningServices;
   "MachineLearningEarlyTerminationPolicy",
   "csharp"
 );
+@@clientName(EncryptionProperty, "MachineLearningEncryptionProperty", "csharp");
+@@clientName(KeyVaultProperties, "MachineLearningKeyVaultProperties", "csharp");
 @@clientName(EncryptionStatus, "MachineLearningEncryptionStatus", "csharp");
 @@clientName(
   EndpointComputeType,
