@@ -42263,8 +42263,7 @@
         "type": "object",
         "required": [
           "destination",
-          "telephony_binding_id",
-          "purpose"
+          "telephony_binding_id"
         ],
         "properties": {
           "destination": {
@@ -42278,7 +42277,7 @@
           "purpose": {
             "type": "string",
             "minLength": 1,
-            "description": "The customer-declared purpose for placing the call."
+            "description": "An optional customer-declared purpose for placing the call."
           },
           "structured_inputs": {
             "type": "object",
@@ -42314,8 +42313,7 @@
         "type": "object",
         "required": [
           "display_name",
-          "telephony_binding_id",
-          "purpose"
+          "telephony_binding_id"
         ],
         "properties": {
           "display_name": {
@@ -42330,7 +42328,7 @@
           "purpose": {
             "type": "string",
             "minLength": 1,
-            "description": "The customer-declared purpose for campaign calls."
+            "description": "An optional customer-declared purpose for campaign calls."
           },
           "recipient_schema": {
             "type": "object",
@@ -92106,7 +92104,6 @@
           "status",
           "destination",
           "telephony_binding_id",
-          "purpose",
           "retry_policy",
           "attempt_count",
           "revision",
@@ -92143,7 +92140,7 @@
           },
           "purpose": {
             "type": "string",
-            "description": "The declared purpose for the call."
+            "description": "The optional declared purpose for the call."
           },
           "structured_inputs": {
             "type": "object",
@@ -92288,7 +92285,7 @@
           "time_zone": {
             "type": "string",
             "minLength": 1,
-            "description": "The IANA time-zone name associated with the schedule. Required when either timestamp is supplied."
+            "description": "The optional IANA time-zone name associated with the schedule."
           }
         },
         "description": "The optional execution window for a direct outbound call.",
@@ -92936,7 +92933,6 @@
           "configuration_status",
           "execution_status",
           "telephony_binding_id",
-          "purpose",
           "retry_policy",
           "revision",
           "execution_revision",
@@ -93275,7 +93271,6 @@
           "rows_processed",
           "eligible_recipient_count",
           "invalid_recipient_count",
-          "suppressed_recipient_count",
           "revision",
           "created_at",
           "updated_at"
@@ -93316,11 +93311,6 @@
             "minimum": 0
           },
           "invalid_recipient_count": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          },
-          "suppressed_recipient_count": {
             "type": "integer",
             "format": "int64",
             "minimum": 0

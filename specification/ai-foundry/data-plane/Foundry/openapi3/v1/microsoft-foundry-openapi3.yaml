@@ -46625,7 +46625,6 @@ components:
       required:
         - destination
         - telephony_binding_id
-        - purpose
       properties:
         destination:
           $ref: '#/components/schemas/TelephonyOutboundDestination'
@@ -46636,7 +46635,7 @@ components:
         purpose:
           type: string
           minLength: 1
-          description: The customer-declared purpose for placing the call.
+          description: An optional customer-declared purpose for placing the call.
         structured_inputs:
           type: object
           unevaluatedProperties: {}
@@ -46663,7 +46662,6 @@ components:
       required:
         - display_name
         - telephony_binding_id
-        - purpose
       properties:
         display_name:
           type: string
@@ -46675,7 +46673,7 @@ components:
         purpose:
           type: string
           minLength: 1
-          description: The customer-declared purpose for campaign calls.
+          description: An optional customer-declared purpose for campaign calls.
         recipient_schema:
           type: object
           unevaluatedProperties:
@@ -81891,7 +81889,6 @@ components:
         - status
         - destination
         - telephony_binding_id
-        - purpose
         - retry_policy
         - attempt_count
         - revision
@@ -81920,7 +81917,7 @@ components:
           description: The telephony binding used for origination.
         purpose:
           type: string
-          description: The declared purpose for the call.
+          description: The optional declared purpose for the call.
         structured_inputs:
           type: object
           unevaluatedProperties: {}
@@ -82027,7 +82024,7 @@ components:
         time_zone:
           type: string
           minLength: 1
-          description: The IANA time-zone name associated with the schedule. Required when either timestamp is supplied.
+          description: The optional IANA time-zone name associated with the schedule.
       description: The optional execution window for a direct outbound call.
       x-ms-foundry-meta:
         required_previews:
@@ -82490,7 +82487,6 @@ components:
         - configuration_status
         - execution_status
         - telephony_binding_id
-        - purpose
         - retry_policy
         - revision
         - execution_revision
@@ -82727,7 +82723,6 @@ components:
         - rows_processed
         - eligible_recipient_count
         - invalid_recipient_count
-        - suppressed_recipient_count
         - revision
         - created_at
         - updated_at
@@ -82757,10 +82752,6 @@ components:
           format: int64
           minimum: 0
         invalid_recipient_count:
-          type: integer
-          format: int64
-          minimum: 0
-        suppressed_recipient_count:
           type: integer
           format: int64
           minimum: 0

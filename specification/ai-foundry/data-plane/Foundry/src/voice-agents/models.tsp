@@ -1211,7 +1211,7 @@ model TelephonyCallJobScheduleRequest {
   @doc("The instant after which the call job expires without dispatch.")
   expires_at?: FoundryTimestamp;
 
-  @doc("The IANA time-zone name associated with the schedule. Required when either timestamp is supplied.")
+  @doc("The optional IANA time-zone name associated with the schedule.")
   @minLength(1)
   time_zone?: string;
 }
@@ -1239,9 +1239,9 @@ model CreateTelephonyCallJobRequest {
   @doc("The active agent telephony binding used to originate the call.")
   telephony_binding_id: TelephonyBindingId;
 
-  @doc("The customer-declared purpose for placing the call.")
+  @doc("An optional customer-declared purpose for placing the call.")
   @minLength(1)
-  purpose: string;
+  purpose?: string;
 
   @doc("Structured input values available to the agent and greeting for this call.")
   structured_inputs?: Record<unknown>;
@@ -1315,8 +1315,8 @@ model TelephonyCallJob {
   @doc("The telephony binding used for origination.")
   telephony_binding_id: TelephonyBindingId;
 
-  @doc("The declared purpose for the call.")
-  purpose: string;
+  @doc("The optional declared purpose for the call.")
+  purpose?: string;
 
   @doc("Structured input values available to the agent and greeting.")
   structured_inputs?: Record<unknown>;
@@ -1437,9 +1437,9 @@ model CreateTelephonyCampaignRequest {
   @doc("The active agent telephony binding used to originate campaign calls.")
   telephony_binding_id: TelephonyBindingId;
 
-  @doc("The customer-declared purpose for campaign calls.")
+  @doc("An optional customer-declared purpose for campaign calls.")
   @minLength(1)
-  purpose: string;
+  purpose?: string;
 
   @doc("The optional schema for structured inputs imported for each recipient.")
   recipient_schema?: Record<TelephonyCampaignRecipientSchemaFieldDefinition>;
@@ -1499,7 +1499,7 @@ model TelephonyCampaign {
   configuration_status: TelephonyCampaignConfigurationStatus;
   execution_status: TelephonyCampaignExecutionStatus;
   telephony_binding_id: TelephonyBindingId;
-  purpose: string;
+  purpose?: string;
   recipient_schema?: Record<TelephonyCampaignRecipientSchemaFieldDefinition>;
   schedule?: TelephonyCampaignSchedule;
   retry_policy: TelephonyOutboundRetryPolicyResponse;
@@ -1593,7 +1593,6 @@ model TelephonyCampaignRecipientImport {
   @minValue(0) rows_processed: int64;
   @minValue(0) eligible_recipient_count: int64;
   @minValue(0) invalid_recipient_count: int64;
-  @minValue(0) suppressed_recipient_count: int64;
   error_code?: string;
   error_message?: string;
   @minValue(0) revision: int64;
