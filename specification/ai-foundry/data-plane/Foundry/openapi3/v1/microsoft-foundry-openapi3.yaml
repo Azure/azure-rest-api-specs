@@ -46002,9 +46002,6 @@ components:
           unevaluatedProperties:
             $ref: '#/components/schemas/TelephonyStructuredInputValue'
           description: Flat scalar structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
-        greeting:
-          $ref: '#/components/schemas/VoiceAgentGreetingConfig'
-          description: A per-call greeting override. Omit it to use the latest agent definition's greeting.
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobScheduleRequest'
           description: The optional execution window.
@@ -81356,9 +81353,6 @@ components:
           unevaluatedProperties:
             $ref: '#/components/schemas/TelephonyStructuredInputValue'
           description: The flat scalar structured input values available to the agent and greeting. Agent-declared inputs follow their schema, required, and default-value semantics; additional inputs remain available as dynamic template variables.
-        greeting:
-          $ref: '#/components/schemas/VoiceAgentGreetingConfig'
-          description: The per-call greeting override, when supplied.
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobSchedule'
           description: The frozen execution window, when supplied.

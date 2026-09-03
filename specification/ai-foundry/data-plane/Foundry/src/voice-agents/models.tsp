@@ -1259,9 +1259,6 @@ model CreateTelephonyCallJobRequest {
   @doc("Flat scalar structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.")
   structured_inputs?: Record<TelephonyStructuredInputValue>;
 
-  @doc("A per-call greeting override. Omit it to use the latest agent definition's greeting.")
-  greeting?: VoiceAgentGreetingConfig;
-
   @doc("The optional execution window.")
   schedule?: TelephonyCallJobScheduleRequest;
 
@@ -1330,9 +1327,6 @@ model TelephonyCallJob {
 
   @doc("The flat scalar structured input values available to the agent and greeting. Agent-declared inputs follow their schema, required, and default-value semantics; additional inputs remain available as dynamic template variables.")
   structured_inputs?: Record<TelephonyStructuredInputValue>;
-
-  @doc("The per-call greeting override, when supplied.")
-  greeting?: VoiceAgentGreetingConfig;
 
   @doc("The frozen execution window, when supplied.")
   schedule?: TelephonyCallJobSchedule;
