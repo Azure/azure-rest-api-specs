@@ -3163,7 +3163,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BackupInstanceResourceList"
+              "$ref": "#/definitions/CrossTenantBackupInstanceResourceList"
             }
           },
           "default": {
@@ -3226,7 +3226,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BackupInstanceResource"
+              "$ref": "#/definitions/CrossTenantBackupInstanceResource"
             }
           },
           "default": {
@@ -7192,6 +7192,162 @@
           }
         ]
       }
+    },
+    "CrossTenantAuthCredentials": {
+      "type": "object",
+      "description": "Cross-tenant projection of the authentication-credentials discriminated base,\nforked so its secret-store subtype references the value-less\nCrossTenantSecretStoreResource. Mirror any new AuthCredentials subtype here.",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "Type of the specific object - used for deserializing."
+        }
+      },
+      "discriminator": "objectType",
+      "required": [
+        "objectType"
+      ]
+    },
+    "CrossTenantBackupInstance": {
+      "type": "object",
+      "description": "Cross-tenant read projection of BackupInstance. Spreads the shared model so new\nfields flow through automatically; only datasourceAuthCredentials is re-typed to\nthe value-less CrossTenantAuthCredentials chain.",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "Gets or sets the Backup Instance friendly name."
+        },
+        "dataSourceInfo": {
+          "$ref": "#/definitions/Datasource",
+          "description": "Gets or sets the data source information."
+        },
+        "dataSourceSetInfo": {
+          "$ref": "#/definitions/DatasourceSet",
+          "description": "Gets or sets the data source set information."
+        },
+        "policyInfo": {
+          "$ref": "#/definitions/PolicyInfo",
+          "description": "Gets or sets the policy information."
+        },
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "description": "ResourceGuardOperationRequests on which LAC check will be performed",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protectionStatus": {
+          "$ref": "#/definitions/ProtectionStatusDetails",
+          "description": "Specifies the protection status of the resource",
+          "readOnly": true
+        },
+        "currentProtectionState": {
+          "$ref": "#/definitions/CurrentProtectionState",
+          "description": "Specifies the current protection state of the resource",
+          "readOnly": true
+        },
+        "protectionErrorDetails": {
+          "$ref": "#/definitions/UserFacingError",
+          "description": "Specifies the protection error of the resource",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Specifies the provisioning state of the resource i.e. provisioning/updating/Succeeded/Failed",
+          "readOnly": true
+        },
+        "validationType": {
+          "$ref": "#/definitions/ValidationType",
+          "description": "Specifies the type of validation. In case of DeepValidation, all validations from /validateForBackup API will run again."
+        },
+        "identityDetails": {
+          "$ref": "#/definitions/IdentityDetails",
+          "description": "Contains information of the Identity Details for the BI.\nIf it is null, default will be considered as System Assigned."
+        },
+        "objectType": {
+          "type": "string"
+        },
+        "datasourceAuthCredentials": {
+          "$ref": "#/definitions/CrossTenantAuthCredentials",
+          "description": "Credentials to use to authenticate with data source provider."
+        }
+      },
+      "required": [
+        "dataSourceInfo",
+        "policyInfo",
+        "objectType"
+      ]
+    },
+    "CrossTenantBackupInstanceResource": {
+      "type": "object",
+      "description": "BackupInstance resource as returned by the cross-tenant read surface; its\nproperties exclude SecretStoreResource.value.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CrossTenantBackupInstance",
+          "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Proxy Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CrossTenantBackupInstanceResourceList": {
+      "type": "object",
+      "description": "Cross-tenant BackupInstance resource list response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of resources.",
+          "items": {
+            "$ref": "#/definitions/CrossTenantBackupInstanceResource"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResourceList"
+        }
+      ]
+    },
+    "CrossTenantSecretStoreBasedAuthCredentials": {
+      "type": "object",
+      "description": "Cross-tenant projection of SecretStoreBasedAuthCredentials whose secret store\nomits `value`.",
+      "properties": {
+        "secretStoreResource": {
+          "$ref": "#/definitions/CrossTenantSecretStoreResource",
+          "description": "Secret store resource (cross-tenant read projection, without `value`)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CrossTenantAuthCredentials"
+        }
+      ],
+      "x-ms-discriminator-value": "SecretStoreBasedAuthCredentials"
+    },
+    "CrossTenantSecretStoreResource": {
+      "type": "object",
+      "description": "Cross-tenant projection of SecretStoreResource used only by the cross-tenant\nbackup-instance read surface: the shared model minus `value` (a write-time\ncredential the service never returns). Spread keeps uri/secretStoreType in sync.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Uri to get to the resource"
+        },
+        "secretStoreType": {
+          "$ref": "#/definitions/SecretStoreType",
+          "description": "Gets or sets the type of secret store"
+        }
+      },
+      "required": [
+        "secretStoreType"
+      ]
     },
     "CrossTenantVaultMapping": {
       "type": "object",

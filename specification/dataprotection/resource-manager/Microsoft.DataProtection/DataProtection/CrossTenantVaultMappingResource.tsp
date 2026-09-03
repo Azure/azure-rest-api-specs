@@ -238,6 +238,109 @@ interface BackupInstanceFromCrossTenantVaultOps
       >>
     > {}
 
+// ---------------------------------------------------------------------------
+// Cross-tenant READ projection (GET/LIST of backup instances under a mapping).
+// SecretStoreResource.value is a write-time credential the service never
+// populates or consumes (auth resolves from the Key Vault uri); it is excluded
+// from the cross-tenant read surface per ARM API review (SEC-SECRET-DETECT).
+// These variants SPREAD the shared models via OmitProperties, so future field
+// additions to BackupInstance/SecretStoreResource flow through automatically;
+// only the re-typed datasourceAuthCredentials leg is maintained by hand.
+// This is purely additive — the shared in-tenant models are unchanged.
+// ---------------------------------------------------------------------------
+
+/**
+ * Cross-tenant projection of SecretStoreResource used only by the cross-tenant
+ * backup-instance read surface: the shared model minus `value` (a write-time
+ * credential the service never returns). Spread keeps uri/secretStoreType in sync.
+ */
+@added(Versions.v2026_08_31_preview)
+model CrossTenantSecretStoreResource {
+  ...OmitProperties<SecretStoreResource, "value">;
+}
+
+/**
+ * Cross-tenant projection of the authentication-credentials discriminated base,
+ * forked so its secret-store subtype references the value-less
+ * CrossTenantSecretStoreResource. Mirror any new AuthCredentials subtype here.
+ */
+@added(Versions.v2026_08_31_preview)
+@discriminator("objectType")
+model CrossTenantAuthCredentials {
+  /**
+   * Type of the specific object - used for deserializing.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Mirrors the shared AuthCredentials discriminator, which uses a string objectType."
+  objectType: string;
+}
+
+/**
+ * Cross-tenant projection of SecretStoreBasedAuthCredentials whose secret store
+ * omits `value`.
+ */
+@added(Versions.v2026_08_31_preview)
+model CrossTenantSecretStoreBasedAuthCredentials
+  extends CrossTenantAuthCredentials {
+  /**
+   * Secret store resource (cross-tenant read projection, without `value`).
+   */
+  secretStoreResource?: CrossTenantSecretStoreResource;
+
+  /**
+   * Type of the specific object - used for deserializing.
+   */
+  objectType: "SecretStoreBasedAuthCredentials";
+}
+
+/**
+ * Cross-tenant read projection of BackupInstance. Spreads the shared model so new
+ * fields flow through automatically; only datasourceAuthCredentials is re-typed to
+ * the value-less CrossTenantAuthCredentials chain.
+ */
+@added(Versions.v2026_08_31_preview)
+model CrossTenantBackupInstance {
+  ...OmitProperties<BackupInstance, "datasourceAuthCredentials">;
+
+  /**
+   * Credentials to use to authenticate with data source provider.
+   */
+  datasourceAuthCredentials?: CrossTenantAuthCredentials;
+}
+
+/**
+ * BackupInstance resource as returned by the cross-tenant read surface; its
+ * properties exclude SecretStoreResource.value.
+ */
+@added(Versions.v2026_08_31_preview)
+@parentResource(BackupVaultResource)
+model CrossTenantBackupInstanceResource
+  is Azure.ResourceManager.ProxyResource<CrossTenantBackupInstance> {
+  ...ResourceNameParameter<
+    Resource = CrossTenantBackupInstanceResource,
+    KeyName = "backupInstanceName",
+    SegmentName = "backupInstances",
+    NamePattern = ""
+  >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("Proxy Resource tags.")
+  tags?: Record<string>;
+}
+
+/**
+ * Cross-tenant BackupInstance resource list response.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition is used here to reuse the common DppResourceList paging model."
+@added(Versions.v2026_08_31_preview)
+model CrossTenantBackupInstanceResourceList extends DppResourceList {
+  /**
+   * List of resources.
+   */
+  @pageItems
+  value?: CrossTenantBackupInstanceResource[];
+}
+
 @added(Versions.v2026_08_31_preview)
 @armResourceOperations
 interface BackupInstancesFromDppCrossTenantVault {
@@ -245,8 +348,8 @@ interface BackupInstancesFromDppCrossTenantVault {
    * Lists the backup instances of the mapped source vault in a different tenant.
    */
   list is BackupInstanceFromCrossTenantVaultOps.List<
-    BackupInstanceResource,
-    Response = ArmResponse<BackupInstanceResourceList>,
+    CrossTenantBackupInstanceResource,
+    Response = ArmResponse<CrossTenantBackupInstanceResourceList>,
     OverrideErrorType = CloudError
   >;
 }
@@ -258,7 +361,7 @@ interface BackupInstanceFromDppCrossTenantVault {
    * Gets a backup instance of the mapped source vault in a different tenant.
    */
   get is BackupInstanceFromCrossTenantVaultOps.Read<
-    BackupInstanceResource,
+    CrossTenantBackupInstanceResource,
     OverrideErrorType = CloudError
   >;
 }
