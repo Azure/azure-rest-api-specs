@@ -14,6 +14,7 @@ import "../schedules/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../routines/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
+import "../jobs/routes.tsp";
 import "../toolboxes/models.tsp";
 import "../agents/models.tsp";
 import "../skills/models.tsp";
@@ -306,3 +307,9 @@ namespace Azure.AI.Projects;
 );
 @@clientName(RoutineActionType, "RoutineActionKind");
 @@clientName(RoutineTriggerType, "RoutineTriggerKind");
+
+// --------------------------------------------------------------------------------
+// Jobs (Foundry training jobs) sub-client
+// --------------------------------------------------------------------------------
+// C# model-suffix renames are declared inline in ../jobs/models.tsp via
+// @clientName(..., "csharp") so that the root main.tsp compile is also clean.
