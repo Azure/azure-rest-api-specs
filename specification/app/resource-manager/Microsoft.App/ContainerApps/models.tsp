@@ -2515,6 +2515,7 @@ model AzureFileProperties {
    * Resource ID of a managed identity to authenticate with Azure File, or System to use a system-assigned identity.
    */
   @added(Versions.v2026_03_02_preview)
+  @removed(Versions.v2026_07_01)
   identity?: string;
 
   /**
@@ -6176,9 +6177,9 @@ model SessionPoolProperties {
    */
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_03_02_preview)
-   @removed(Versions.v2026_07_01)
-   @visibility(Lifecycle.Read)
-   templateUpdateStatus?: TemplateUpdateStatus;
+  @removed(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  templateUpdateStatus?: TemplateUpdateStatus;
 
   /**
    * The endpoint to manage the pool.
