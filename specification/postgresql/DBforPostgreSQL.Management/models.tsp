@@ -4285,6 +4285,20 @@ model DbAgentProperties {
   lastModifiedTime?: utcDateTime | null;
 }
 
+@doc("A request to enable or disable the database agent.")
+@added(Versions.v2026_07_01)
+model DbAgentForUpdate {
+  @doc("The requested database agent properties.")
+  properties: DbAgentForUpdateProperties;
+}
+
+@doc("Writable properties of the database agent configuration.")
+@added(Versions.v2026_07_01)
+model DbAgentForUpdateProperties {
+  @doc("The requested state of the database agent.")
+  state: DbAgentForUpdateState;
+}
+
 @doc("The state of the database agent.")
 @added(Versions.v2026_07_01)
 union DbAgentState {
@@ -4313,6 +4327,29 @@ union DbAgentProvisioningState {
 
   @doc("The database agent lifecycle operation is in progress.")
   InProgress: "InProgress",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PUT requests accept only Enabled or Disabled; additional values must be rejected."
+@doc("The database agent states accepted in a write request.")
+@added(Versions.v2026_07_01)
+union DbAgentForUpdateState {
+  @doc("Enable the database agent.")
+  Enabled: "Enabled",
+
+  @doc("Disable the database agent.")
+  Disabled: "Disabled",
+}
+
+@doc("The response returned when a database agent write is accepted.")
+@added(Versions.v2026_07_01)
+model DbAgentAcceptedResponse {
+  ...AcceptedResponse;
+  ...ArmCombinedLroHeaders<FinalResult = DbAgent>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+
+  @doc("The database agent resource while the lifecycle operation is in progress.")
+  @bodyRoot
+  resource: DbAgent;
 }
 
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);
