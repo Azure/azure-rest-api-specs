@@ -1,0 +1,60 @@
+{
+  "title": "Update resource-specific notification settings for a recurring scheduled action",
+  "description": "Configures different notification destinations for two virtual machines associated with a recurring scheduled action.",
+  "operationId": "ScheduledActions_PatchResources",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start",
+    "body": {
+      "resources": [
+        {
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+          "notificationSettings": [
+            {
+              "destination": "web-operations@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+          "notificationSettings": [
+            {
+              "destination": "service-owners@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": false
+            },
+            {
+              "destination": "audit@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalResources": 2,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+            "status": "Succeeded"
+          }
+        ]
+      }
+    }
+  }
+}
