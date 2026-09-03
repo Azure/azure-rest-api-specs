@@ -1634,6 +1634,12 @@ model RouteProperties {
   condition?: string;
 
   /**
+   * The data schema reference that is used to interpret the message body.
+   */
+  @added(Versions.v2026_10_01_preview)
+  dataSchema?: string;
+
+  /**
    * The list of endpoints to which messages that satisfy the condition are routed. Currently only one endpoint is allowed.
    */
   @minItems(1)
