@@ -2137,7 +2137,7 @@
         "tags": [
           "AdapterDeployments"
         ],
-        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable.",
+        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable. Create\nrequests use `If-None-Match: *`; re-target requests use `If-Match`.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2194,9 +2194,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AdapterDeployment' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AdapterDeployment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "201": {
@@ -13343,10 +13354,8 @@
       "description": "Provisioning states for an adapter deployment resource.",
       "enum": [
         "accepted",
-        "loading",
         "updating",
         "succeeded",
-        "detaching",
         "failed"
       ],
       "x-ms-enum": {
@@ -13359,11 +13368,6 @@
             "description": "The create request was accepted."
           },
           {
-            "name": "Loading",
-            "value": "loading",
-            "description": "The initial adapter is loading across serving replicas."
-          },
-          {
             "name": "Updating",
             "value": "updating",
             "description": "The adapter is being staged on a new target while the prior target\ncontinues serving requests."
@@ -13372,11 +13376,6 @@
             "name": "Succeeded",
             "value": "succeeded",
             "description": "The adapter is ready across every healthy serving replica."
-          },
-          {
-            "name": "Detaching",
-            "value": "detaching",
-            "description": "New admissions have stopped and existing requests are draining."
           },
           {
             "name": "Failed",

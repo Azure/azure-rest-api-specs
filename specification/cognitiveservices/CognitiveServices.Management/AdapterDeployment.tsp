@@ -97,9 +97,6 @@ union AdapterDeploymentProvisioningState {
   /** The create request was accepted. */
   Accepted: "accepted",
 
-  /** The initial adapter is loading across serving replicas. */
-  Loading: "loading",
-
   /**
    * The adapter is being staged on a new target while the prior target
    * continues serving requests.
@@ -108,9 +105,6 @@ union AdapterDeploymentProvisioningState {
 
   /** The adapter is ready across every healthy serving replica. */
   Succeeded: "succeeded",
-
-  /** New admissions have stopped and existing requests are draining. */
-  Detaching: "detaching",
 
   /** No globally consistent adapter target is available. */
   Failed: "failed",
@@ -375,6 +369,9 @@ alias AdapterDeploymentDeleteConditions = {
   ifMatch: string;
 };
 
+alias AdapterDeploymentLroHeaders = ArmAsyncOperationHeader<FinalResult = AdapterDeployment> &
+  Azure.Core.Foundations.RetryAfterHeader;
+
 @added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface AdapterDeployments {
@@ -385,11 +382,20 @@ interface AdapterDeployments {
 
   /**
    * Creates an adapter deployment or re-targets it to another compatible
-   * managed compute deployment. The source model ID is immutable.
+   * managed compute deployment. The source model ID is immutable. Create
+   * requests use `If-None-Match: *`; re-target requests use `If-Match`.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AdapterDeployment,
-    Parameters = AdapterDeploymentPutConditions
+    LroHeaders = AdapterDeploymentLroHeaders,
+    Parameters = AdapterDeploymentPutConditions,
+    Response =
+      | (ArmResourceUpdatedResponse<AdapterDeployment> &
+          AdapterDeploymentLroHeaders)
+      | ArmResourceCreatedResponse<
+          AdapterDeployment,
+          AdapterDeploymentLroHeaders
+        >
   >;
 
   /**
