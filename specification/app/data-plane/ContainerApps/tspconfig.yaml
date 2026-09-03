@@ -1,0 +1,24 @@
+parameters:
+  "service-dir":
+    default: "sdk/containerappssandbox"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/containerappssandbox.json"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.ContainerApps.Sandbox
+    model-namespace: false
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-containerapps-sandbox"
+    namespace: com.azure.containerapps.sandbox
+    flavor: azure
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
