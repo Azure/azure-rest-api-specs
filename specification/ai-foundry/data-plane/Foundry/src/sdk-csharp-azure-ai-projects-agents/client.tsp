@@ -247,7 +247,7 @@ namespace Azure.AI.Projects {
   );
   @@clientName(BingGroundingTool.bing_grounding, "SearchToolOptions", "csharp");
   @@clientName(
-    BrowserAutomationPreviewTool.browser_automation_preview,
+    BrowserAutomationTool.browser_automation,
     "ToolParameters",
     "csharp"
   );

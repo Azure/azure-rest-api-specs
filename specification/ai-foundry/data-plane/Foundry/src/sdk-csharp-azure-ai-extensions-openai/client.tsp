@@ -850,7 +850,7 @@ namespace Azure.AI.Projects {
   @@usage(BingGroundingSearchConfiguration, Usage.input | Usage.output);
 
   @@usage(BingGroundingTool, Usage.input | Usage.output);
-  @@usage(BrowserAutomationPreviewTool, Usage.input | Usage.output);
+  @@usage(BrowserAutomationTool, Usage.input | Usage.output);
   @@usage(
     BrowserAutomationToolConnectionParameters,
     Usage.input | Usage.output

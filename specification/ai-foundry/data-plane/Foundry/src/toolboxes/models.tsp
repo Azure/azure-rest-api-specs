@@ -78,7 +78,7 @@ alias ToolboxAzureAISearchToolType = "azure_ai_search";
 alias ToolboxOpenApiToolType = "openapi";
 alias ToolboxA2AToolType = "a2a";
 alias ToolboxA2APreviewToolType = "a2a_preview";
-alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
+alias ToolboxBrowserAutomationToolType = "browser_automation";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
 alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
@@ -97,7 +97,7 @@ union ToolboxToolType {
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
-  browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
+  browser_automation: ToolboxBrowserAutomationToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
@@ -272,10 +272,9 @@ model A2APreviewToolboxTool extends ToolboxTool {
 /**
  * A browser automation tool stored in a toolbox.
  */
-@extension("x-ms-foundry-meta", PreviewTool)
-model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
-  type: ToolboxBrowserAutomationPreviewToolType;
-  ...ToolFields<BrowserAutomationPreviewTool>;
+model BrowserAutomationToolboxTool extends ToolboxTool {
+  type: ToolboxBrowserAutomationToolType;
+  ...ToolFields<BrowserAutomationTool>;
 }
 
 /**
