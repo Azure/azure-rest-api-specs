@@ -279,11 +279,15 @@ using Microsoft.Confluent;
   "csharp"
 );
 
+@@clientName(AccessPointResource, "ConfluentAccessPoint", "csharp");
+@@clientName(AccessPointProperties, "ConfluentAccessPointProperties", "csharp");
+@@clientName(NetworkGatewayResource, "ConfluentNetworkGateway", "csharp");
 @@clientName(
-  LatestLinkedSaaSResponse,
-  "LatestLinkedSaaSResult",
+  NetworkGatewayProperties,
+  "ConfluentNetworkGatewayProperties",
   "csharp"
 );
+@@clientName(LatestLinkedSaaSResponse, "LatestLinkedSaaSResult", "csharp");
 @@clientName(
   ActivateSaaSParameterRequest,
   "ActivateSaaSParameterContent",
@@ -296,11 +300,7 @@ using Microsoft.Confluent;
 );
 @@clientName(SaaSData, "ConfluentSaaSInfo", "csharp");
 @@clientName(KeyValuePair, "ConfluentKeyValuePair", "csharp");
-@@clientName(
-  LiftrBase.VnetInjectionDetails,
-  "VNetInjectionDetails",
-  "csharp"
-);
+@@clientName(LiftrBase.VnetInjectionDetails, "VNetInjectionDetails", "csharp");
 @@alternateType(
   LiftrBase.VnetInjectionDetails.virtualNetworkResourceId,
   armResourceIdentifier,
