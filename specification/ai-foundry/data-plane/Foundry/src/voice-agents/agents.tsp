@@ -164,7 +164,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   structured_inputs?: Record<StructuredInputDefinition>;
 
   @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
-  subagent_config?: VoiceAgentSubAgentConfig;
+  subagent_config?: VoiceAgentSubagentConfig;
 
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
@@ -179,15 +179,15 @@ model VoiceAgentDefinition extends AgentDefinition {
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentSubAgentConfig {
+model VoiceAgentSubagentConfig {
   @doc("The sibling Foundry text agents, in the same project, that this voice agent may consult.")
   @minItems(1)
-  subagents: VoiceAgentSubAgent[];
+  subagents: VoiceAgentSubagent[];
 }
 
 @doc("A sibling Foundry text agent that a voice agent may consult as a background specialist.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentSubAgent {
+model VoiceAgentSubagent {
   @doc("The name of the subagent. The subagent must be in the same project as the voice agent.")
   agent_name: string;
 

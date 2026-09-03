@@ -86283,7 +86283,7 @@ components:
             $ref: '#/components/schemas/StructuredInputDefinition'
           description: Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.
         subagent_config:
-          $ref: '#/components/schemas/VoiceAgentSubAgentConfig'
+          $ref: '#/components/schemas/VoiceAgentSubagentConfig'
           description: Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.
         store:
           type: boolean
@@ -86798,7 +86798,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
       description: A static interim response selected from configured text.
-    VoiceAgentSubAgent:
+    VoiceAgentSubagent:
       type: object
       required:
         - agent_name
@@ -86826,7 +86826,7 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentSubAgentConfig:
+    VoiceAgentSubagentConfig:
       type: object
       required:
         - subagents
@@ -86834,7 +86834,7 @@ components:
         subagents:
           type: array
           items:
-            $ref: '#/components/schemas/VoiceAgentSubAgent'
+            $ref: '#/components/schemas/VoiceAgentSubagent'
           minItems: 1
           description: The sibling Foundry text agents, in the same project, that this voice agent may consult.
       description: Configuration for sibling Foundry text agents that a voice agent may consult.
