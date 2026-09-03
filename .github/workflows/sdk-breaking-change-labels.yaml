@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: read
+  copilot-requests: write
   pull-requests: read
   id-token: write
 
@@ -74,3 +75,9 @@ jobs:
         with:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-and-action.outputs.result).issueNumber }}"
+
+  sdk-breaking-change-analysis:
+    needs: sdk-breaking-change-labels
+    uses: ./.github/workflows/sdk-breaking-change-analysis.lock.yml
+    with:
+      details_url: ${{ github.event.check_run.details_url }}

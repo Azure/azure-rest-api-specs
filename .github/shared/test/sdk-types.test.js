@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { sdkLabels, SpecGenSdkArtifactInfoSchema } from "../src/sdk-types.js";
+import { sdkLabels, SdkChangeSchema, SpecGenSdkArtifactInfoSchema } from "../src/sdk-types.js";
 import { createMockSpecGenSdkArtifactInfo } from "./sdk-types.js";
 
 describe("sdk-types", () => {
@@ -18,5 +18,13 @@ describe("sdk-types", () => {
 
     const parsed = SpecGenSdkArtifactInfoSchema.parse(JSON.parse(json));
     expect(parsed).toEqual(artifactInfo);
+  });
+
+  it("requires SDK change Markdown and breaking-change status", () => {
+    const sdkChange = { changes: "Removed operation", hasBreakingChange: true };
+
+    expect(SdkChangeSchema.parse(sdkChange)).toEqual(sdkChange);
+    expect(SdkChangeSchema.safeParse({ changes: sdkChange.changes }).success).toBe(false);
+    expect(SdkChangeSchema.safeParse({ hasBreakingChange: true }).success).toBe(false);
   });
 });
