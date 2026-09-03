@@ -17,48 +17,79 @@ global-approvers:
   - samvaity
   - praveenkuttappan
 
-# Namespace approval labels (plane-aware)
-namespace-dotnet-approved:
+# Data-plane REST stewardship reviewers. Gated here as the only users who may apply the
+# sign-off label, the approval that clears the merge gate.
+#
+# This list manually mirrors the GitHub team `azure-data-plane-api-reviewers`
+# (https://github.com/orgs/Azure/teams/azure-data-plane-api-reviewers/members). Finding
+# (#45487): the default Actions GITHUB_TOKEN cannot read org membership, so resolving the
+# team live would mean building up a purpose-built GitHub App with org Members:Read.
+# Since this low cost effort and the list changes rarely, the simpler path
+# fits better for now, so we mirror the members by hand. Keep this in sync when team
+# membership changes.
+data-plane-review-signoff:
+  - JonathanGiles
+  - heaths
+  - weidongxu-microsoft
+
+# Package name approval labels (plane-aware)
+package-name-dotnet-approved:
   management-plane:
     - ArthurMa1978
     - m-nash
+    - JoshLove-msft
   data-plane:
     - jsquire
     - m-nash
-namespace-java-approved:
+    - JoshLove-msft
+package-name-java-approved:
   management-plane:
     - ArthurMa1978
     - m-nash
   data-plane:
     - JonathanGiles
     - alzimmermsft
-namespace-python-approved:
+package-name-python-approved:
   management-plane:
     - ArthurMa1978
     - m-nash
   data-plane:
     - xirzec
     - kashifkhan
-namespace-typescript-approved:
+package-name-typescript-approved:
   management-plane:
     - ArthurMa1978
     - m-nash
   data-plane:
     - xirzec
     - maorleger
-namespace-go-approved:
+package-name-go-approved:
   management-plane:
     - ArthurMa1978
     - m-nash
   data-plane:
     - jhendrixMSFT
-namespace-rust-approved:
+package-name-rust-approved:
   management-plane:
     - ArthurMa1978
     - m-nash
   data-plane:
     - heaths
-namespace-approved-all:
+package-name-approved-all:
   management-plane:
     - ArthurMa1978
     - m-nash
+
+# Tier 1 languages: all must approve package names for cross-language alignment.
+tier1:
+  data-plane:
+    - dotnet
+    - java
+    - python
+    - typescript
+  management-plane:
+    - dotnet
+    - java
+    - python
+    - typescript
+    - go
