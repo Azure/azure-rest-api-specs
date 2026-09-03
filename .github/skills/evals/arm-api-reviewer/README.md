@@ -48,7 +48,7 @@ arm-api-reviewer/
 | 04xxxx | Breaking changes              | 4     | Removed property, type change, enum narrowing, added required                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | 05xxxx | Suppression analysis (readme) | 2     | Missing reason, security rule suppressions                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | 06xxxx | Example file validation       | 6     | Bad resource ID, realistic secrets, and four unknown-enum payload severity cases                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 07xxxx | TypeSpec review               | 4     | Segment casing, secrets, anti-patterns, x-ms-identifiers                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 07xxxx | TypeSpec review               | 5     | Segment casing, secrets, anti-patterns, x-ms-identifiers, operation-template alignment                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | 08xxxx | Check Name Availability       | 1     | Custom CNA models, missing input validation                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | 09xxxx | True negatives                | 4     | Clean spec, clean example, clean proxy resource, RPC collection paging parameters                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | 10xxxx | Classification                | 1     | NEW vs EXISTING issue tagging                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -61,7 +61,7 @@ arm-api-reviewer/
 | 17xxxx | Pattern constraint validation | 3     | Denylist `[^...]` pattern on path param (blocking); denylist on existing vs new property (warning vs blocking); TypeSpec `@pattern` denylist (blocking)                                                                                                                                                                                                                                                                                                                                                                  |
 | 18xxxx | API version lifecycle         | 6     | Private preview repository and folder placement, release-branch development, public preview folder mismatch, private-to-public promotion, and unknown target branch                                                                                                                                                                                                                                                                                                                                                      |
 
-Total: 87 stimuli across 18 eval files.
+Total: 88 stimuli across 18 eval files.
 
 ## Fixtures
 
@@ -91,7 +91,7 @@ on `PATH`. The runner is headless and does not require Visual Studio Code.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (85 stimuli, sequential -- safest)
+# Run the full suite (88 stimuli, sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing vally clone instead of re-cloning
@@ -193,7 +193,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (vally is a monorepo; the CLI binary lives under packages/cli)
 export VALLY_CLI="/path/to/vally/packages/cli/dist/index.js"
 
-# Run the full suite (all 85 stimuli, 5 concurrent workers)
+# Run the full suite (all 88 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category

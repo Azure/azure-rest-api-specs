@@ -211,12 +211,15 @@ responses.
 
 Use the ARM operation templates from `@azure-tools/typespec-azure-resource-manager`:
 
+The example uses asynchronous PUT and DELETE with synchronous PATCH; choose each
+sync or async variant to match actual runtime behavior.
+
 ```tsp
 @armResourceOperations
 interface MyResources {
   get is ArmResourceRead<MyResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MyResource>;
-  update is ArmResourcePatchAsync<MyResource, MyResourceProperties>;
+  update is ArmCustomPatchSync<MyResource, MyResourcePatch>;
   delete is ArmResourceDeleteWithoutOkAsync<MyResource>;
   listByResourceGroup is ArmResourceListByParent<MyResource>;
   listBySubscription is ArmListBySubscription<MyResource>;

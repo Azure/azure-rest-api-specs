@@ -1520,7 +1520,7 @@ describe("ARM paging and example enum calibration", () => {
     }
   });
 
-  it("keeps the eval catalog counts aligned with 87 scenarios and 57 fixtures", async () => {
+  it("keeps the eval catalog counts aligned with 88 scenarios and 57 fixtures", async () => {
     const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
     let stimulusCount = 0;
@@ -1541,11 +1541,11 @@ describe("ARM paging and example enum calibration", () => {
       { recursive: true, withFileTypes: true },
     );
     expect(evalFiles).toHaveLength(18);
-    expect(stimulusCount).toBe(87);
+    expect(stimulusCount).toBe(88);
     expect(
       fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
     ).toHaveLength(57);
-    expect(readme).toContain("Total: 87 stimuli across 18 eval files.");
+    expect(readme).toContain("Total: 88 stimuli across 18 eval files.");
     expect(readme).toContain("All 57 fixture data files");
     expect(readme).toContain("`--timeout <duration>`");
     expect(readme).toContain("`defaults.timeout`");
@@ -2088,10 +2088,15 @@ describe("Archived RPC contract reconciliation", () => {
     expect(arm).not.toContain("RPC-LIST-VERSIONS");
   });
 
-  it("uses current synchronous and asynchronous TypeSpec operation templates", async () => {
-    const instructions = collapseWhitespace(
-      await readFile(join(ROOT, ".github/instructions/typespec-project.instructions.md"), "utf8"),
-    );
+  it("keeps TypeSpec authoring and review operation guidance aligned", async () => {
+    const [instructions, intake, lifecycle] = await Promise.all([
+      readFile(join(ROOT, ".github/instructions/typespec-project.instructions.md"), "utf8"),
+      readFile(join(ROOT, ".github/skills/azure-typespec-author/references/intake.md"), "utf8"),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/tracked-resource-lifecycle.md"),
+        "utf8",
+      ),
+    ]).then((documents) => documents.map(collapseWhitespace));
 
     expect(instructions).toContain("ArmResourceCreateOrReplaceSync<Resource>");
     expect(instructions).toContain("ArmResourceCreateOrReplaceAsync<Resource>");
@@ -2099,6 +2104,11 @@ describe("Archived RPC contract reconciliation", () => {
     expect(instructions).toContain("ArmCustomPatchAsync<Resource, PatchRequest>");
     expect(instructions).toContain("ArmResourceDeleteWithoutOkAsync<Resource>");
     expect(instructions).toContain("do not use deprecated `ArmResourceDeleteAsync`");
+    expect(intake).toContain("`createOrUpdate` as the operation name");
+    expect(intake).toContain("match actual runtime behavior");
+    expect(intake).not.toContain("Use `createOrReplace` (not `createOrUpdate`)");
+    expect(lifecycle).toContain("update is ArmCustomPatchSync<MyResource, MyResourcePatch>");
+    expect(lifecycle).not.toContain("update is ArmResourcePatchAsync");
   });
 
   it("keeps TSP-REQUIRED scoped without claiming active CI enforcement", async () => {
