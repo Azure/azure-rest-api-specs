@@ -213,6 +213,7 @@ model ResourceSkuZoneDetails {
    * The set of zones that the SKU is available in with the specified capabilities.
    */
   @visibility(Lifecycle.Read)
+  @encodedName("application/json", "Name")
   name?: string[];
 
   /**
