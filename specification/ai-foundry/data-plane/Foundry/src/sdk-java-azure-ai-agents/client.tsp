@@ -112,26 +112,70 @@ namespace Azure.AI.Projects.Beta {
 
 // OpenAI realtime metadata is a string map. Project it directly instead of generating a misplaced root model.
 @@alternateType(OpenAI.Metadata, Record<string>, "java");
-@@clientName(OpenAI.RealtimeServerEventError, "RealtimeServerEventError", "java");
+@@clientName(
+  OpenAI.RealtimeServerEventError,
+  "RealtimeServerEventError",
+  "java"
+);
 
 // The imported realtime item hierarchy has a second role discriminator below `type: message`.
 // Mark each message leaf and content shape explicitly so Java emits constructors usable by session clients.
-@@usage(OpenAI.RealtimeConversationItem, Usage.input | Usage.output | Usage.json);
+@@usage(
+  OpenAI.RealtimeConversationItem,
+  Usage.input | Usage.output | Usage.json
+);
 @@access(OpenAI.RealtimeConversationItem, Access.public, "java");
-@@usage(OpenAI.RealtimeConversationItemMessage, Usage.input | Usage.output | Usage.json);
+@@usage(
+  OpenAI.RealtimeConversationItemMessage,
+  Usage.input | Usage.output | Usage.json
+);
 @@access(OpenAI.RealtimeConversationItemMessage, Access.public, "java");
-@@usage(OpenAI.RealtimeConversationItemMessageSystem, Usage.input | Usage.output | Usage.json);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageSystem,
+  Usage.input | Usage.output | Usage.json
+);
 @@access(OpenAI.RealtimeConversationItemMessageSystem, Access.public, "java");
-@@usage(OpenAI.RealtimeConversationItemMessageSystemContent, Usage.input | Usage.output | Usage.json);
-@@access(OpenAI.RealtimeConversationItemMessageSystemContent, Access.public, "java");
-@@usage(OpenAI.RealtimeConversationItemMessageUser, Usage.input | Usage.output | Usage.json);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageSystemContent,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageSystemContent,
+  Access.public,
+  "java"
+);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageUser,
+  Usage.input | Usage.output | Usage.json
+);
 @@access(OpenAI.RealtimeConversationItemMessageUser, Access.public, "java");
-@@usage(OpenAI.RealtimeConversationItemMessageUserContent, Usage.input | Usage.output | Usage.json);
-@@access(OpenAI.RealtimeConversationItemMessageUserContent, Access.public, "java");
-@@usage(OpenAI.RealtimeConversationItemMessageAssistant, Usage.input | Usage.output | Usage.json);
-@@access(OpenAI.RealtimeConversationItemMessageAssistant, Access.public, "java");
-@@usage(OpenAI.RealtimeConversationItemMessageAssistantContent, Usage.input | Usage.output | Usage.json);
-@@access(OpenAI.RealtimeConversationItemMessageAssistantContent, Access.public, "java");
+@@usage(
+  OpenAI.RealtimeConversationItemMessageUserContent,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageUserContent,
+  Access.public,
+  "java"
+);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageAssistant,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageAssistant,
+  Access.public,
+  "java"
+);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageAssistantContent,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageAssistantContent,
+  Access.public,
+  "java"
+);
 
 @@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!java");
 @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
