@@ -75,6 +75,16 @@ suppressions:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"]
     reason: Default is the fixed singleton resource name, not a resource type. The actual resource type segment, dbAgents, follows camel-case naming.
+  - code: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put.responses["202"].schema
+    reason: The provisioningState property is marked readOnly in the generated OpenAPI, but the validator does not recognize readOnly when it is a sibling of $ref. See https://github.com/Azure/azure-openapi-validator/issues/637.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: openapi.json
+    where: $.definitions.DbAgent
+    reason: The singleton database agent resource is enabled or disabled through PUT and is not deleted. A configured resource remains present when its state is Disabled.
   - code: ProvisioningStateSpecifiedForLROPut
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put
