@@ -208,6 +208,8 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(BuildToken.expires, "ExpiresOn", "csharp");
 
+@@clientName(Header, "ContainerAppOtlpHeader", "csharp");
+
 @@clientName(
   ManagedEnvironments.list,
   "GetManagedEnvironmentPrivateLinkResources",
