@@ -314,8 +314,7 @@ model RoleAssignmentSummary {
   /**
    * The identifier of the parent role, if this role has a parent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service contract permits parentRoleId to be omitted or explicitly returned as null when the role has no parent."
-  parentRoleId?: string | null;
+  parentRoleId?: string;
 
   /**
    * Azure role definition id (full path).
@@ -534,7 +533,7 @@ model ScheduleExpiration {
    * Duration of the schedule as an ISO-8601 TimeSpan. Set when `type` is
    * `AfterDuration`.
    */
-  duration?: string;
+  duration?: duration;
 }
 
 /**
