@@ -1,0 +1,29 @@
+{
+  "title": "List scheduled action occurrences for a virtual machine",
+  "description": "Lists the scheduled action occurrences associated with a virtual machine. This example returns one scheduled occurrence.",
+  "operationId": "OccurrenceExtension_ListOccurrenceByVms",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+              "notificationSettings": [],
+              "scheduledTime": "2026-09-15T14:00:00Z",
+              "provisioningState": "Scheduled",
+              "scheduledActionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01/providers/Microsoft.Compute/associatedOccurrences/77777777-7777-7777-7777-777777777777",
+            "name": "77777777-7777-7777-7777-777777777777",
+            "type": "microsoft.compute/associatedOccurrences"
+          }
+        ]
+      }
+    }
+  }
+}

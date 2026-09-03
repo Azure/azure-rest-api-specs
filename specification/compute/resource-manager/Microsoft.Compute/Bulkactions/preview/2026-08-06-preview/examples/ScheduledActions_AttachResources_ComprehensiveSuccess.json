@@ -1,0 +1,67 @@
+{
+  "title": "Attach resources to a recurring scheduled action with individual notification settings",
+  "description": "Attaches two virtual machines to a recurring scheduled action and configures a different notification destinations for each resource.",
+  "operationId": "ScheduledActions_AttachResources",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start",
+    "body": {
+      "resources": [
+        {
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+          "notificationSettings": [
+            {
+              "destination": "web-operations@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+          "notificationSettings": [
+            {
+              "destination": "service-owners@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": false
+            },
+            {
+              "destination": "audit@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/55555555-5555-5555-5555-555555555555?api-version=2026-08-06-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/55555555-5555-5555-5555-555555555555?api-version=2026-08-06-preview&monitor=true",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "totalResources": 2,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+            "status": "Succeeded"
+          }
+        ]
+      }
+    }
+  }
+}

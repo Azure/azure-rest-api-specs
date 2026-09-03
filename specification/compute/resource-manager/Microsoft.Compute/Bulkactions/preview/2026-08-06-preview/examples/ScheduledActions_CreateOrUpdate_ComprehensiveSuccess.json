@@ -1,0 +1,149 @@
+{
+  "title": "Create a recurring scheduled action with comprehensive settings",
+  "description": "Creates a recurring scheduled action that runs on the first and the fifteenth of each month, with calendar filters, notifications, and tags.",
+  "operationId": "ScheduledActions_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "first-and-fifteenth-start",
+    "resource": {
+      "properties": {
+        "resourceType": "VirtualMachine",
+        "actionType": "Start",
+        "startTime": "2026-09-01T19:00:00-07:00",
+        "endTime": "2027-09-01T19:00:00-07:00",
+        "schedule": {
+          "scheduledTime": "19:00:00",
+          "timeZone": "America/Los_Angeles",
+          "requestedWeekDays": [
+            "All"
+          ],
+          "requestedMonths": [
+            "All"
+          ],
+          "requestedDaysOfTheMonth": [
+            1,
+            15
+          ]         
+        },
+        "notificationSettings": [
+          {
+            "destination": "admin@contoso.com",
+            "type": "Email",
+            "language": "en-us",
+            "disabled": true
+          }
+        ],
+        "disabled": false
+      },
+      "tags": {
+        "environment": "production"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "resourceType": "VirtualMachine",
+          "actionType": "Start",
+          "startTime": "2026-09-01T19:00:00-07:00",
+          "endTime": "2027-09-01T19:00:00-07:00",
+          "schedule": {
+            "scheduledTime": "19:00:00",
+            "timeZone": "America/Los_Angeles",
+            "requestedWeekDays": [
+              "All"
+            ],
+            "requestedMonths": [
+              "All"
+            ],
+            "requestedDaysOfTheMonth": [
+              1,
+              15
+            ]          
+          },
+          "notificationSettings": [
+            {
+              "destination": "admin@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": true
+            }
+          ],
+          "disabled": false,
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start",
+        "name": "weekday-start",
+        "type": "Microsoft.Compute/scheduledActions",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-04-17T00:23:55.288Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-04-17T00:23:55.288Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-08-06-preview"
+      },
+      "body": {
+        "properties": {
+          "resourceType": "VirtualMachine",
+          "actionType": "Start",
+          "startTime": "2026-09-01T19:00:00-07:00",
+          "endTime": "2027-09-01T19:00:00-07:00",
+          "schedule": {
+            "scheduledTime": "19:00:00",
+            "timeZone": "America/Los_Angeles",
+            "requestedWeekDays": [
+              "All"
+            ],
+            "requestedMonths": [
+              "All"
+            ],
+            "requestedDaysOfTheMonth": [
+              1,
+              15
+            ]           
+          },
+          "notificationSettings": [
+            {
+              "destination": "admin@contoso.com",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": true
+            }
+          ],
+          "disabled": false,
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start",
+        "name": "weekday-start",
+        "type": "Microsoft.Compute/scheduledActions",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-04-17T00:23:55.288Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-04-17T00:23:55.288Z"
+        }
+      }
+    }
+  }
+}

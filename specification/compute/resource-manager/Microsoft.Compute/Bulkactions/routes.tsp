@@ -218,7 +218,7 @@ interface VirtualMachineBulkOperations {
     body: GetOperationStatusRequest,
   ): ArmResponse<GetOperationStatusResponse> | ErrorResponse;
 
-  /** Cancels eligible start, deallocate, or hibernate operations identified by their Bulk Action Operation Ids. Work that has already completed is not reversed. */
+  /** Cancel one or more Bulk Actions operations by Bulk Action Operation Ids. Cancellation is best effort and work that has already completed is not reversed. */
   @post
   @autoRoute
   @armResourceCollectionAction

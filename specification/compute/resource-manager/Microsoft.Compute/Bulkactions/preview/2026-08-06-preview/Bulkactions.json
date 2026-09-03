@@ -94,8 +94,8 @@
           }
         },
         "x-ms-examples": {
-          "List scheduled action occurrences for a compute resource": {
-            "$ref": "./examples/OccurrenceExtension_ListOccurrenceByVms_MaximumSet_Gen.json"
+          "List scheduled action occurrences for a virtual machine": {
+            "$ref": "./examples/OccurrenceExtension_ListOccurrenceByVms_BasicSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -133,7 +133,7 @@
           }
         },
         "x-ms-examples": {
-          "List scheduled actions for a compute resource": {
+          "List scheduled actions for a VM": {
             "$ref": "./examples/ScheduledActionExtension_ListByVms_MaximumSet_Gen.json"
           }
         },
@@ -467,8 +467,8 @@
           }
         },
         "x-ms-examples": {
-          "List scheduled actions in a subscription": {
-            "$ref": "./examples/ScheduledActions_ListBySubscription_MaximumSet_Gen.json"
+          "List a page of recurring scheduled actions in a subscription": {
+            "$ref": "./examples/ScheduledActions_ListBySubscription_PagedSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -524,13 +524,13 @@
         },
         "x-ms-examples": {
           "Acknowledge multiple operation errors": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MinimumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_BasicSuccess.json"
+          },
+          "Acknowledge operation errors with an unknown operationId resulting in not found": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_OperationNotFoundError.json"
           },
           "Acknowledge operation errors with mixed results": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MaximumSet_Gen.json"
-          },
-          "Response with an unknown operation error during error acknowledgment": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_CommonError_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MixedResults.json"
           }
         }
       }
@@ -1385,14 +1385,14 @@
           }
         },
         "x-ms-examples": {
-          "List paged failed operation errors": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MaximumSet_Gen.json"
+          "List failed operation errors with paginated response": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_PaginatedSuccess.json"
           },
           "List recent failed operation errors": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_BasicSuccess.json"
           },
           "Response with an invalid lookback window error": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_CommonError_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_InvalidLookbackWindowError.json"
           }
         },
         "x-ms-pageable": {
@@ -1403,7 +1403,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkCancel",
-        "description": "Cancels eligible start, deallocate, or hibernate operations identified by their Bulk Action Operation Ids. Work that has already completed is not reversed.",
+        "description": "Cancel one or more Bulk Actions operations by Bulk Action Operation Ids. Cancellation is best effort and work that has already completed is not reversed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1447,14 +1447,14 @@
           }
         },
         "x-ms-examples": {
-          "Cancel a start operation with detailed status": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MaximumSet_Gen.json"
-          },
           "Cancel multiple operations": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_MinimumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_BasicSuccess.json"
           },
           "Response with an unknown operation error during cancellation": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_CommonError_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_OperationNotFoundError.json"
+          },
+          "Response with partially successful result": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCancel_PartialSuccess.json"
           }
         }
       }
@@ -1506,14 +1506,14 @@
           }
         },
         "x-ms-examples": {
-          "Create multiple Linux virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MaximumSet_Gen.json"
+          "Create two VMs using a base profile and prefix": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_BaseProfileWithPrefixSuccess.json"
           },
-          "Create multiple virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_MinimumSet_Gen.json"
+          "Create two VMs using per-VM overrides and retry policy": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_PerVmOverridesSuccess.json"
           },
           "Response when a resource prefix is missing": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_CommonError_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkCreate_PrefixMissingError.json"
           }
         }
       }
@@ -1566,13 +1566,10 @@
         },
         "x-ms-examples": {
           "Deallocate multiple virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MinimumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_BasicSuccess.json"
           },
-          "Deallocate multiple virtual machines with retries": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_MaximumSet_Gen.json"
-          },
-          "Response with an out-of-region virtual machine error during deallocation": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_CommonError_Gen.json"
+          "Response when VM is not in the requested location": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDeallocate_ResourceNotInLocationError.json"
           }
         }
       }
@@ -1625,13 +1622,13 @@
         },
         "x-ms-examples": {
           "Delete multiple virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MinimumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_BasicSuccess.json"
           },
-          "Force-delete multiple worker virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_MaximumSet_Gen.json"
+          "Delete multiple virtual machines (comprehensive)": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_ComprehensiveSuccess.json"
           },
-          "Response with an out-of-region virtual machine error during deletion": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_CommonError_Gen.json"
+          "Response when VM is not in the requested location": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkDelete_ResourceNotInLocation.json"
           }
         }
       }
@@ -1684,16 +1681,13 @@
         },
         "x-ms-examples": {
           "Get multiple operation statuses": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_MinimumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_BasicSuccess.json"
           },
-          "Get the status of an in-progress start operation": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_MaximumSet_Gen.json"
-          },
-          "Response with an unknown operation status error": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_CommonError_Gen.json"
+          "Response with an operation not found error": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_OperationNotFoundError.json"
           },
           "Show a successful deallocation fallback after hibernation fails": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_HibernateFallback_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkGetOperationsStatus_DeallocateFallbackAfterHibernateFail.json"
           }
         }
       }
@@ -1746,13 +1740,13 @@
         },
         "x-ms-examples": {
           "Hibernate multiple virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MinimumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_Basic.json"
           },
           "Hibernate virtual machines with a deallocation fallback": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_MaximumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_WithFallback.json"
           },
-          "Response with an out-of-region virtual machine error during hibernation": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_CommonError_Gen.json"
+          "Response when VM is not in the requested location": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkHibernate_ResourceNotInLocationError.json"
           }
         }
       }
@@ -1805,13 +1799,13 @@
         },
         "x-ms-examples": {
           "Reimage multiple virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_MinimumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_BasicSuccess.json"
           },
-          "Reimage multiple virtual machines with an override": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_MaximumSet_Gen.json"
+          "Reimage virtual machines with shared settings and a per-VM override": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_ComprehensiveSuccess.json"
           },
           "Response with a resource group mismatch error during reimage": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_CommonError_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_InvalidResourceGroupError.json"
           }
         }
       }
@@ -1864,13 +1858,13 @@
         },
         "x-ms-examples": {
           "Response with an out-of-region virtual machine error during start": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_CommonError_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_ResourceNotInLocationError.json"
           },
           "Start multiple virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MinimumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_BasicSuccess.json"
           },
           "Start virtual machines with retries, health verification, and capacity recommendations": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_MaximumSet_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkStart_ComprehensiveSuccess.json"
           }
         }
       }
@@ -1922,14 +1916,14 @@
           }
         },
         "x-ms-examples": {
-          "Create VDI virtual machines with ranked allocation preferences": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MaximumSet_Gen.json"
+          "Create VDI virtual machines with ranked size and zone preferences": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_ComprehensiveSuccess.json"
           },
-          "Create multiple VDI virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_MinimumSet_Gen.json"
+          "Create two VDI virtual machines with lowest-price allocation": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_BasicSuccess.json"
           },
           "Response when the base virtual machine profile is missing": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_CommonError_Gen.json"
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkVdiFlexCreate_BaseProfileMissingError.json"
           }
         }
       }
@@ -1967,8 +1961,8 @@
           }
         },
         "x-ms-examples": {
-          "List scheduled actions in a resource group": {
-            "$ref": "./examples/ScheduledActions_ListByResourceGroup_MaximumSet_Gen.json"
+          "List a page of recurring scheduled actions in a resource group": {
+            "$ref": "./examples/ScheduledActions_ListByResourceGroup_PagedSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -2017,8 +2011,11 @@
           }
         },
         "x-ms-examples": {
-          "Get a scheduled action": {
-            "$ref": "./examples/ScheduledActions_Get_MaximumSet_Gen.json"
+          "Get a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_Get_BasicSuccess.json"
+          },
+          "Get a recurring scheduled action with complete configuration": {
+            "$ref": "./examples/ScheduledActions_Get_ComprehensiveSuccess.json"
           }
         }
       },
@@ -2088,8 +2085,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a scheduled action": {
-            "$ref": "./examples/ScheduledActions_CreateOrUpdate_MaximumSet_Gen.json"
+          "Create a new recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_CreateOrUpdate_BasicSuccess.json"
+          },
+          "Create a recurring scheduled action with comprehensive settings": {
+            "$ref": "./examples/ScheduledActions_CreateOrUpdate_ComprehensiveSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2165,8 +2165,11 @@
           }
         },
         "x-ms-examples": {
-          "Update a scheduled action": {
-            "$ref": "./examples/ScheduledActions_Update_MaximumSet_Gen.json"
+          "Update a recurring scheduled action schedule": {
+            "$ref": "./examples/ScheduledActions_Update_ComprehensiveSuccess.json"
+          },
+          "Update the action type of a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_Update_BasicSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2230,8 +2233,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete a scheduled action": {
-            "$ref": "./examples/ScheduledActions_Delete_MaximumSet_Gen.json"
+          "Delete a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_Delete_BasicSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2309,8 +2312,14 @@
           }
         },
         "x-ms-examples": {
-          "Add resources to a scheduled action": {
-            "$ref": "./examples/ScheduledActions_AttachResources_MaximumSet_Gen.json"
+          "Attach resources to a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_AttachResources_BasicSuccess.json"
+          },
+          "Attach resources to a recurring scheduled action with individual notification settings": {
+            "$ref": "./examples/ScheduledActions_AttachResources_ComprehensiveSuccess.json"
+          },
+          "Response with partial results when attaching resources to a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_AttachResources_PartialSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2388,8 +2397,14 @@
           }
         },
         "x-ms-examples": {
-          "Cancel the next scheduled action occurrence": {
-            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_MaximumSet_Gen.json"
+          "Cancel all operations in the next recurring scheduled action occurrence": {
+            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_EntireOccurrenceSuccess.json"
+          },
+          "Cancel the next recurring scheduled action occurrence for multiple resources": {
+            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_BasicSuccess.json"
+          },
+          "Response with partial results when canceling the next recurring scheduled action occurrence": {
+            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_PartialSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2467,8 +2482,11 @@
           }
         },
         "x-ms-examples": {
-          "Remove resources from a scheduled action": {
-            "$ref": "./examples/ScheduledActions_DetachResources_MaximumSet_Gen.json"
+          "Detach resources from a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_DetachResources_BasicSuccess.json"
+          },
+          "Detach resources from a recurring scheduled action with partial success": {
+            "$ref": "./examples/ScheduledActions_DetachResources_PartialSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2531,8 +2549,8 @@
           }
         },
         "x-ms-examples": {
-          "Disable a scheduled action": {
-            "$ref": "./examples/ScheduledActions_Disable_MaximumSet_Gen.json"
+          "Disable a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_Disable_BasicSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2595,8 +2613,8 @@
           }
         },
         "x-ms-examples": {
-          "Enable a scheduled action": {
-            "$ref": "./examples/ScheduledActions_Enable_MaximumSet_Gen.json"
+          "Enable a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_Enable_BasicSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2646,8 +2664,11 @@
           }
         },
         "x-ms-examples": {
-          "List occurrences for a scheduled action": {
-            "$ref": "./examples/Occurrences_ListByScheduledAction_MaximumSet_Gen.json"
+          "List a page of recurring scheduled action occurrences": {
+            "$ref": "./examples/Occurrences_ListByScheduledAction_PagedSuccess.json"
+          },
+          "List recurring scheduled action occurrences": {
+            "$ref": "./examples/Occurrences_ListByScheduledAction_BasicSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -2704,8 +2725,11 @@
           }
         },
         "x-ms-examples": {
-          "Get a scheduled action occurrence": {
-            "$ref": "./examples/Occurrences_Get_MaximumSet_Gen.json"
+          "Get a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_Get_BasicSuccess.json"
+          },
+          "Get a recurring scheduled action occurrence with mixed results": {
+            "$ref": "./examples/Occurrences_Get_ComprehensiveSuccess.json"
           }
         }
       }
@@ -2787,8 +2811,11 @@
           }
         },
         "x-ms-examples": {
-          "Cancel resources in a scheduled action occurrence": {
-            "$ref": "./examples/Occurrences_Cancel_MaximumSet_Gen.json"
+          "Cancel operations in a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_Cancel_BasicSuccess.json"
+          },
+          "Response with partial results when canceling resources in a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_Cancel_PartialSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2874,8 +2901,11 @@
           }
         },
         "x-ms-examples": {
-          "Delay resources in a scheduled action occurrence": {
-            "$ref": "./examples/Occurrences_Delay_MaximumSet_Gen.json"
+          "Delay resources in a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_Delay_BasicSuccess.json"
+          },
+          "Response with partial results when delaying resources in a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_Delay_PartialSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2933,8 +2963,11 @@
           }
         },
         "x-ms-examples": {
-          "List resources in a scheduled action occurrence": {
-            "$ref": "./examples/Occurrences_ListResources_MaximumSet_Gen.json"
+          "List a page of resources in a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_ListResources_PagedSuccess.json"
+          },
+          "List resources in a recurring scheduled action occurrence": {
+            "$ref": "./examples/Occurrences_ListResources_BasicSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -2992,8 +3025,14 @@
           }
         },
         "x-ms-examples": {
-          "Update resource settings for a scheduled action": {
-            "$ref": "./examples/ScheduledActions_PatchResources_MaximumSet_Gen.json"
+          "Response with partial results when updating recurring scheduled action resources": {
+            "$ref": "./examples/ScheduledActions_PatchResources_PartialSuccess.json"
+          },
+          "Update resource-specific notification settings for a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_PatchResources_ComprehensiveSuccess.json"
+          },
+          "Update settings for recurring scheduled action resources": {
+            "$ref": "./examples/ScheduledActions_PatchResources_BasicSuccess.json"
           }
         }
       }
@@ -3039,8 +3078,8 @@
           }
         },
         "x-ms-examples": {
-          "List resources associated with a scheduled action": {
-            "$ref": "./examples/ScheduledActions_ListResources_MaximumSet_Gen.json"
+          "List a page of resources associated with a recurring scheduled action": {
+            "$ref": "./examples/ScheduledActions_ListResources_PagedSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -3108,8 +3147,8 @@
           }
         },
         "x-ms-examples": {
-          "Run a scheduled action immediately": {
-            "$ref": "./examples/ScheduledActions_TriggerManualOccurrence_MaximumSet_Gen.json"
+          "Run a recurring scheduled action immediately": {
+            "$ref": "./examples/ScheduledActions_TriggerManualOccurrence_BasicSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {

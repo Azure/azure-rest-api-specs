@@ -1,0 +1,48 @@
+{
+  "title": "List a page of resources associated with a recurring scheduled action",
+  "description": "Lists two resources associated with a recurring scheduled action and returns a link to the next page.",
+  "operationId": "ScheduledActions_ListResources",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+            "notificationSettings": [
+              {
+                "destination": "admin@contoso.com",
+                "type": "Email",
+                "language": "en-us",
+                "disabled": true
+              }
+            ],
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/resources/web-vm-01",
+            "name": "web-vm-01",
+            "type": "Microsoft.Compute/virtualMachines"
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+            "notificationSettings": [
+              {
+                "destination": "operations@contoso.com",
+                "type": "Email",
+                "language": "en-us",
+                "disabled": false
+              }
+            ],
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/resources/web-vm-02",
+            "name": "web-vm-02",
+            "type": "Microsoft.Compute/virtualMachines"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/resources?api-version=2026-08-06-preview&$skiptoken=page2"
+      }
+    }
+  }
+}

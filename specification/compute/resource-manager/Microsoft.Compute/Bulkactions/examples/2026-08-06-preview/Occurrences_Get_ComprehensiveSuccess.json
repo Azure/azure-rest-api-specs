@@ -1,0 +1,51 @@
+{
+  "title": "Get a recurring scheduled action occurrence with mixed results",
+  "description": "Gets a completed recurring scheduled action occurrence in which one virtual machine succeeded and one could not be started.",
+  "operationId": "Occurrences_Get",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start",
+    "occurrenceId": "88888888-8888-8888-8888-888888888888"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "scheduledTime": "2026-09-16T14:00:00Z",
+          "resultSummary": {
+            "total": 2,
+            "statuses": [
+              {
+                "code": "Success",
+                "count": 1
+              },
+              {
+                "code": "OperationNotAllowed",
+                "count": 1,
+                "errorDetails": {
+                  "code": "OperationNotAllowed",
+                  "message": "The virtual machine cannot be started while it is being deallocated.",
+                  "target": "virtualMachines"
+                }
+              }
+            ]
+          },
+          "provisioningState": "Failed"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/occurrences/88888888-8888-8888-8888-888888888888",
+        "name": "88888888-8888-8888-8888-888888888888",
+        "type": "Microsoft.Compute/scheduledActions/occurrences",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-09-15T14:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-09-16T14:05:00Z"
+        }
+      }
+    }
+  }
+}
