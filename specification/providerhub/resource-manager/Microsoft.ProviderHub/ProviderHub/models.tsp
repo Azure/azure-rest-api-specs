@@ -1261,10 +1261,38 @@ model CustomRolloutSpecification {
   rolloutId?: string;
 
   /**
+   * Immutable execution metadata associated with the rollout.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  rolloutExecutionMetadata?: RolloutExecutionMetadata;
+
+  /**
    * The manifest checkin specification.
    */
   @added(Versions.v2025_10_01)
   manifestCheckinSpecification?: ManifestCheckinSpecification;
+}
+
+/**
+ * Immutable execution metadata associated with a rollout.
+ */
+@added(Versions.v2026_09_01_preview)
+model RolloutExecutionMetadata {
+  /**
+   * Whether the rollout is used for manifest buildout.
+   */
+  isForManifestBuildout?: boolean;
+
+  /**
+   * The deployment type associated with the rollout.
+   */
+  deploymentType?: string;
+
+  /**
+   * The service group associated with the rollout.
+   */
+  serviceGroup?: string;
 }
 
 /**

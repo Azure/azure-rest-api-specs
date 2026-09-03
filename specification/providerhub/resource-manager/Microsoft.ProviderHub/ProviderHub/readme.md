@@ -58,6 +58,11 @@ directive:
     where:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
     reason: The request accepts manifest input and an optional check-in comment, while the response includes read-only commit information. The service does not expose a PATCH operation for manifests.
+  - suppress: EnumInsteadOfBoolean
+    from: providerhub.json
+    where:
+      - $.definitions.RolloutExecutionMetadata.properties.isForManifestBuildout
+    reason: The property records an immutable binary fact about whether manifest buildout applies to the rollout; no additional states are supported.
   - suppress: DeleteResponseCodes
     from: providerhub.json
     where:
