@@ -67,6 +67,32 @@ suppressions:
     from: openapi.json
     where: $.definitions.MaintenanceEventActionResponse.properties.appliedNow
     reason: This is a binary status indicator.
+  - code: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"]
+    reason: The path represents a singleton resource whose fixed resource name is Default. The validator does not recognize the literal singleton name as a resource-name segment. See https://github.com/Azure/azure-openapi-validator/issues/646.
+  - code: PathResourceTypeNameCamelCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"]
+    reason: Default is the fixed singleton resource name, not a resource type. The actual resource type segment, dbAgents, follows camel-case naming.
+  - code: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put.responses["202"].schema
+    reason: The provisioningState property is marked readOnly in the generated OpenAPI, but the validator does not recognize readOnly when it is a sibling of $ref. See https://github.com/Azure/azure-openapi-validator/issues/637.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: openapi.json
+    where: $.definitions.DbAgent
+    reason: The singleton database agent resource is enabled or disabled through PUT and is not deleted. A configured resource remains present when its state is Disabled.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put
+    reason: The implemented database agent PUT operation returns only HTTP 202. The rule reports missing provisioningState schemas for HTTP 200 and 201 responses that are not part of the service contract.
+  - code: PutResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put
+    reason: The implemented database agent PUT operation is long-running and returns HTTP 202 for both initial configuration and subsequent state changes.
 ```
 
 ### Tag: package-flexibleserver-2026-04-01-preview

@@ -4255,6 +4255,103 @@ model MajorVersionUpgradePrecheckResource
   >;
 }
 
+@doc("The database agent configuration for a PostgreSQL flexible server.")
+@added(Versions.v2026_07_01)
+@singleton("Default")
+@parentResource(Server)
+model DbAgent is Azure.ResourceManager.ProxyResource<DbAgentProperties> {
+  ...ResourceNameParameter<
+    Resource = DbAgent,
+    KeyName = "dbAgentName",
+    SegmentName = "dbAgents",
+    NamePattern = "^Default$"
+  >;
+}
+
+@doc("Properties of the database agent configuration.")
+@added(Versions.v2026_07_01)
+model DbAgentProperties {
+  @doc("The state of the database agent.")
+  @visibility(Lifecycle.Read)
+  state: DbAgentState;
+
+  @doc("The provisioning state of the database agent resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: DbAgentProvisioningState;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service returns null while an enable or disable operation is in progress."
+  @doc("The time when the database agent configuration was last modified.")
+  @visibility(Lifecycle.Read)
+  lastModifiedTime?: utcDateTime | null;
+}
+
+@doc("A request to enable or disable the database agent.")
+@added(Versions.v2026_07_01)
+model DbAgentForUpdate {
+  @doc("The requested database agent properties.")
+  properties: DbAgentForUpdateProperties;
+}
+
+@doc("Writable properties of the database agent configuration.")
+@added(Versions.v2026_07_01)
+model DbAgentForUpdateProperties {
+  @doc("The requested state of the database agent.")
+  state: DbAgentForUpdateState;
+}
+
+@doc("The state of the database agent.")
+@added(Versions.v2026_07_01)
+union DbAgentState {
+  string,
+
+  @doc("The database agent is being enabled.")
+  Enabling: "Enabling",
+
+  @doc("The database agent is enabled.")
+  Enabled: "Enabled",
+
+  @doc("The database agent is being disabled.")
+  Disabling: "Disabling",
+
+  @doc("The database agent is disabled.")
+  Disabled: "Disabled",
+
+  @doc("The database agent lifecycle operation failed.")
+  Failed: "Failed",
+}
+
+@doc("The provisioning state of the database agent resource.")
+@added(Versions.v2026_07_01)
+union DbAgentProvisioningState {
+  ResourceProvisioningState,
+
+  @doc("The database agent lifecycle operation is in progress.")
+  InProgress: "InProgress",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PUT requests accept only Enabled or Disabled; additional values must be rejected."
+@doc("The database agent states accepted in a write request.")
+@added(Versions.v2026_07_01)
+union DbAgentForUpdateState {
+  @doc("Enable the database agent.")
+  Enabled: "Enabled",
+
+  @doc("Disable the database agent.")
+  Disabled: "Disabled",
+}
+
+@doc("The response returned when a database agent write is accepted.")
+@added(Versions.v2026_07_01)
+model DbAgentAcceptedResponse {
+  ...AcceptedResponse;
+  ...ArmCombinedLroHeaders<FinalResult = DbAgent>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+
+  @doc("The database agent resource while the lifecycle operation is in progress.")
+  @bodyRoot
+  resource: DbAgent;
+}
+
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);
 @@visibility(CapabilityList.value, Lifecycle.Read);
 @@visibility(MigrationList.value, Lifecycle.Read);
