@@ -1,6 +1,6 @@
 {
-  "title": "List scheduled action occurrences for a virtual machine",
-  "description": "Lists the scheduled action occurrences associated with a virtual machine. This example returns one scheduled occurrence.",
+  "title": "List recurring scheduled action occurrences for a virtual machine",
+  "description": "Lists two recurring scheduled action occurrences associated with a virtual machine.",
   "operationId": "OccurrenceExtension_ListOccurrenceByVms",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -20,7 +20,19 @@
             },
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01/providers/Microsoft.Compute/associatedOccurrences/77777777-7777-7777-7777-777777777777",
             "name": "77777777-7777-7777-7777-777777777777",
-            "type": "microsoft.compute/associatedOccurrences"
+            "type": "Microsoft.Compute/associatedOccurrences"
+          },
+          {
+            "properties": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+              "notificationSettings": [],
+              "scheduledTime": "2026-09-15T19:00:00Z",
+              "provisioningState": "Succeeded",
+              "scheduledActionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-deallocate"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01/providers/Microsoft.Compute/associatedOccurrences/88888888-8888-8888-8888-888888888888",
+            "name": "88888888-8888-8888-8888-888888888888",
+            "type": "Microsoft.Compute/associatedOccurrences"
           }
         ]
       }
