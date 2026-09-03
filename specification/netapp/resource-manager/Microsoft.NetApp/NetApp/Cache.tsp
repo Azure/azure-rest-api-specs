@@ -225,6 +225,12 @@ model SmbSettings {
    * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
   smbNonBrowsable?: SmbNonBrowsable;
+
+  /**
+   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   */
+  @added(Versions.v2026_07_15_preview)
+  smbOplocks?: SmbOplocks;
 }
 
 /**
