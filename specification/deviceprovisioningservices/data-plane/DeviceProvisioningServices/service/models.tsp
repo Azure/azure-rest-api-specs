@@ -255,6 +255,13 @@ model IndividualEnrollment {
   certificatePolicyName?: string;
 
   /**
+   * Pointers to type metadata about this device, for example the WoT Thing Model.
+   */
+  @added(Versions.v2026_11_02_preview)
+  @maxItems(1)
+  deviceTypeRefs?: string[];
+
+  /**
    * Current registration status.
    */
   @visibility(Lifecycle.Read)
@@ -870,6 +877,13 @@ model EnrollmentGroup {
   @maxLength(63)
   @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
   certificatePolicyName?: string;
+
+  /**
+   * Pointers to type metadata about this device, for example the WoT Thing Model.
+   */
+  @added(Versions.v2026_11_02_preview)
+  @maxItems(1)
+  deviceTypeRefs?: string[];
 
   /**
    * Initial device twin.

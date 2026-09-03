@@ -1367,6 +1367,14 @@
           "maxLength": 63,
           "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
         },
+        "deviceTypeRefs": {
+          "type": "array",
+          "description": "Pointers to type metadata about this device, for example the WoT Thing Model.",
+          "maxItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
         "initialTwin": {
           "$ref": "#/definitions/InitialTwin",
           "description": "Initial device twin."
@@ -1528,6 +1536,14 @@
           "minLength": 3,
           "maxLength": 63,
           "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+        },
+        "deviceTypeRefs": {
+          "type": "array",
+          "description": "Pointers to type metadata about this device, for example the WoT Thing Model.",
+          "maxItems": 1,
+          "items": {
+            "type": "string"
+          }
         },
         "registrationState": {
           "$ref": "#/definitions/DeviceRegistrationState",
