@@ -272,6 +272,12 @@ model VolumeProperties {
   smbContinuouslyAvailable?: boolean = false;
 
   /**
+   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   */
+  @added(Versions.v2026_07_15_preview)
+  smbOplocks?: SmbOplocks;
+
+  /**
    * Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
@@ -1478,6 +1484,12 @@ model VolumePatchProperties {
    * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
   smbNonBrowsable?: SmbNonBrowsable;
+
+  /**
+   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   */
+  @added(Versions.v2026_07_15_preview)
+  smbOplocks?: SmbOplocks;
 }
 
 /**
@@ -2092,6 +2104,24 @@ union SmbNonBrowsable {
 
   /**
    * smbNonBrowsable share setting is enabled
+   */
+  Enabled: "Enabled",
+}
+
+/**
+ * Specifies whether SMB opportunistic locks (Oplocks) are enabled or disabled on the volume. Only applicable for SMB/DualProtocol volume. Can be omitted or set to null.
+ */
+@added(Versions.v2026_07_15_preview)
+union SmbOplocks {
+  string,
+
+  /**
+   * SMB opportunistic locks share setting is disabled.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * SMB opportunistic locks share setting is enabled.
    */
   Enabled: "Enabled",
 }
