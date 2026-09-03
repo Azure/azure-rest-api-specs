@@ -38144,21 +38144,21 @@
           }
         ]
       },
-      "BrowserAutomationPreviewTool": {
+      "BrowserAutomationTool": {
         "type": "object",
         "required": [
           "type",
-          "browser_automation_preview"
+          "browser_automation"
         ],
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "browser_automation_preview"
+              "browser_automation"
             ],
-            "description": "The object type, which is always 'browser_automation_preview'."
+            "description": "The object type, which is always 'browser_automation'."
           },
-          "browser_automation_preview": {
+          "browser_automation": {
             "$ref": "#/components/schemas/BrowserAutomationToolParameters",
             "description": "The Browser Automation Tool parameters."
           }
@@ -38168,42 +38168,7 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "BrowserAutomationPreviewToolboxTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "browser_automation_preview"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "browser_automation_preview"
-            ]
-          },
-          "browser_automation_preview": {
-            "$ref": "#/components/schemas/BrowserAutomationToolParameters",
-            "description": "The Browser Automation Tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ToolboxTool"
-          }
-        ],
-        "description": "A browser automation tool stored in a toolbox.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
+        "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent."
       },
       "BrowserAutomationToolCall": {
         "type": "object",
@@ -38217,7 +38182,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "browser_automation_preview_call"
+              "browser_automation_call"
             ]
           },
           "call_id": {
@@ -38238,12 +38203,7 @@
             "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ],
-        "description": "A browser automation tool call.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
+        "description": "A browser automation tool call."
       },
       "BrowserAutomationToolCallOutput": {
         "type": "object",
@@ -38256,7 +38216,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "browser_automation_preview_call_output"
+              "browser_automation_call_output"
             ]
           },
           "call_id": {
@@ -38277,12 +38237,7 @@
             "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ],
-        "description": "The output of a browser automation tool call.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
+        "description": "The output of a browser automation tool call."
       },
       "BrowserAutomationToolConnectionParameters": {
         "type": "object",
@@ -38295,12 +38250,7 @@
             "description": "The ID of the project connection to your Azure Playwright resource."
           }
         },
-        "description": "Definition of input parameters for the connection used by the Browser Automation Tool.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
+        "description": "Definition of input parameters for the connection used by the Browser Automation Tool."
       },
       "BrowserAutomationToolParameters": {
         "type": "object",
@@ -38313,12 +38263,32 @@
             "description": "The project connection parameters associated with the Browser Automation Tool."
           }
         },
-        "description": "Definition of input parameters for the Browser Automation Tool.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
+        "description": "Definition of input parameters for the Browser Automation Tool."
+      },
+      "BrowserAutomationToolboxTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "browser_automation"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "browser_automation"
+            ]
+          },
+          "browser_automation": {
+            "$ref": "#/components/schemas/BrowserAutomationToolParameters",
+            "description": "The Browser Automation Tool parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ToolboxTool"
+          }
+        ],
+        "description": "A browser automation tool stored in a toolbox."
       },
       "CaptureStructuredOutputsTool": {
         "type": "object",
@@ -69497,8 +69467,8 @@
               "bing_custom_search_preview_call_output",
               "openapi_call",
               "openapi_call_output",
-              "browser_automation_preview_call",
-              "browser_automation_preview_call_output",
+              "browser_automation_call",
+              "browser_automation_call_output",
               "fabric_dataagent_preview_call",
               "fabric_dataagent_preview_call_output",
               "azure_function_call",
@@ -69740,8 +69710,8 @@
               "bing_custom_search_preview_call_output",
               "openapi_call",
               "openapi_call_output",
-              "browser_automation_preview_call",
-              "browser_automation_preview_call_output",
+              "browser_automation_call",
+              "browser_automation_call_output",
               "fabric_dataagent_preview_call",
               "fabric_dataagent_preview_call_output",
               "azure_function_call",
@@ -72528,8 +72498,8 @@
             "bing_custom_search_preview_call_output": "#/components/schemas/BingCustomSearchToolCallOutput",
             "openapi_call": "#/components/schemas/OpenApiToolCall",
             "openapi_call_output": "#/components/schemas/OpenApiToolCallOutput",
-            "browser_automation_preview_call": "#/components/schemas/BrowserAutomationToolCall",
-            "browser_automation_preview_call_output": "#/components/schemas/BrowserAutomationToolCallOutput",
+            "browser_automation_call": "#/components/schemas/BrowserAutomationToolCall",
+            "browser_automation_call_output": "#/components/schemas/BrowserAutomationToolCallOutput",
             "fabric_dataagent_preview_call": "#/components/schemas/FabricDataAgentToolCall",
             "fabric_dataagent_preview_call_output": "#/components/schemas/FabricDataAgentToolCallOutput",
             "azure_function_call": "#/components/schemas/AzureFunctionToolCall",
@@ -74166,8 +74136,8 @@
               "bing_custom_search_preview_call_output",
               "openapi_call",
               "openapi_call_output",
-              "browser_automation_preview_call",
-              "browser_automation_preview_call_output",
+              "browser_automation_call",
+              "browser_automation_call_output",
               "fabric_dataagent_preview_call",
               "fabric_dataagent_preview_call_output",
               "azure_function_call",
@@ -82638,7 +82608,7 @@
             "azure_ai_search": "#/components/schemas/AzureAISearchTool",
             "openapi": "#/components/schemas/OpenApiTool",
             "bing_custom_search_preview": "#/components/schemas/BingCustomSearchPreviewTool",
-            "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewTool",
+            "browser_automation": "#/components/schemas/BrowserAutomationTool",
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
@@ -83178,7 +83148,6 @@
               "apply_patch",
               "a2a_preview",
               "bing_custom_search_preview",
-              "browser_automation_preview",
               "fabric_dataagent_preview",
               "sharepoint_grounding_preview",
               "memory_search_preview",
@@ -83190,6 +83159,7 @@
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
+              "browser_automation",
               "capture_structured_outputs",
               "openapi",
               "memory_search"
@@ -89323,7 +89293,7 @@
             "openapi": "#/components/schemas/OpenApiToolboxTool",
             "a2a": "#/components/schemas/A2AToolboxTool",
             "a2a_preview": "#/components/schemas/A2APreviewToolboxTool",
-            "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewToolboxTool",
+            "browser_automation": "#/components/schemas/BrowserAutomationToolboxTool",
             "reminder_preview": "#/components/schemas/ReminderPreviewToolboxTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewToolboxTool",
@@ -89344,7 +89314,7 @@
           "azure_ai_search",
           "openapi",
           "a2a_preview",
-          "browser_automation_preview",
+          "browser_automation",
           "reminder_preview",
           "work_iq_preview",
           "fabric_iq_preview",
