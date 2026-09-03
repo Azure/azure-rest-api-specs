@@ -130,6 +130,21 @@ namespace Azure.AI.Projects;
 //Routines
 @@clientName(Routines.dispatchRoutineAsync, "dispatchRoutine");
 
+//Agent insights
+@@clientName(AgentInsightMonitors.list, "listAgentInsightMonitors");
+@@clientName(AgentInsightMonitors.create, "createAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.update, "updateAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.delete, "deleteAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.get, "getAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.reset, "resetAgentInsightMonitor");
+@@clientName(AgentInsightMonitors.createRun, "createAgentInsightRun");
+@@clientName(AgentInsightMonitors.listRuns, "listAgentInsightRuns");
+@@clientName(AgentInsightMonitors.getRun, "getAgentInsightRun");
+@@clientName(AgentInsightMonitors.cancelRun, "cancelAgentInsightRun");
+@@clientName(AgentInsightMonitors.listInsights, "listAgentInsights");
+@@clientName(AgentInsightMonitors.getInsight, "getAgentInsight");
+@@clientName(AgentInsightMonitors.updateInsight, "updateAgentInsight");
+
 // --------------------------------------------------------------------------------
 // Renames - models
 // --------------------------------------------------------------------------------

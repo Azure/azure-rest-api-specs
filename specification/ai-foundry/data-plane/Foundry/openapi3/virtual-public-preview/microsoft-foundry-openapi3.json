@@ -245,7 +245,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -380,7 +380,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "post": {
         "operationId": "AgentInsightMonitors_create",
@@ -389,7 +394,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -463,6 +468,11 @@
             }
           },
           "description": "The monitor to create."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       }
     },
@@ -474,7 +484,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -537,7 +547,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "delete": {
         "operationId": "AgentInsightMonitors_delete",
@@ -546,7 +561,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -602,7 +617,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "patch": {
         "operationId": "AgentInsightMonitors_update",
@@ -611,7 +631,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -685,6 +705,11 @@
             }
           },
           "description": "The monitor fields to update."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       }
     },
@@ -696,7 +721,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -871,7 +896,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}/insights/{insight_id}": {
@@ -882,7 +912,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -965,7 +995,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "patch": {
         "operationId": "AgentInsightMonitors_updateInsight",
@@ -974,7 +1009,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1057,6 +1092,11 @@
             }
           },
           "description": "The insight fields to update."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       }
     },
@@ -1068,13 +1108,22 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
                 "AgentInsights=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -1158,6 +1207,11 @@
             }
           },
           "description": "Run inputs. Send an empty object to use the default 168-hour lookback window."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       },
       "get": {
@@ -1167,7 +1221,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1321,7 +1375,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}/runs/{run_id}": {
@@ -1332,7 +1391,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1404,7 +1463,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel": {
@@ -1415,7 +1479,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1487,7 +1551,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}:reset": {
@@ -1498,7 +1567,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1554,7 +1623,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_optimization_jobs": {
@@ -36821,7 +36895,12 @@
             "readOnly": true
           }
         },
-        "description": "A persisted issue discovered from an agent's traces."
+        "description": "A persisted issue discovered from an agent's traces.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightDetails": {
         "type": "object",
@@ -36852,7 +36931,12 @@
             "description": "The recommended remediation for this insight."
           }
         },
-        "description": "Additional insight details. Omitted unless details are requested."
+        "description": "Additional insight details. Omitted unless details are requested.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightEstimatedCost": {
         "type": "object",
@@ -36874,7 +36958,12 @@
             "description": "Currency for the estimated cost amount. Agent Insights estimates are reported in US dollars."
           }
         },
-        "description": "Estimated Agent Insights cost."
+        "description": "Estimated Agent Insights cost.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightHighlightedTrace": {
         "type": "object",
@@ -36908,7 +36997,12 @@
             "description": "The time when the trace was recorded."
           }
         },
-        "description": "A highlighted trace that provides evidence for an agent insight."
+        "description": "A highlighted trace that provides evidence for an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightLinkedTrace": {
         "type": "object",
@@ -36928,7 +37022,12 @@
             "readOnly": true
           }
         },
-        "description": "A lightweight trace reference linked to an agent insight as supporting evidence."
+        "description": "A lightweight trace reference linked to an agent insight as supporting evidence.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitor": {
         "type": "object",
@@ -37011,7 +37110,12 @@
             "readOnly": true
           }
         },
-        "description": "A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights."
+        "description": "A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitorCreate": {
         "type": "object",
@@ -37042,7 +37146,12 @@
             "description": "The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
           }
         },
-        "description": "Fields accepted when creating an Agent Insights monitor for an agent."
+        "description": "Fields accepted when creating an Agent Insights monitor for an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitorListItem": {
         "type": "object",
@@ -37112,7 +37221,12 @@
             "readOnly": true
           }
         },
-        "description": "An Agent Insights monitor summary returned by list operations."
+        "description": "An Agent Insights monitor summary returned by list operations.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitorUpdate": {
         "type": "object",
@@ -37144,7 +37258,12 @@
             "description": "Sets the effective user overview, or clears it when explicitly set to null. Omission leaves\nthe overview unchanged. This field cannot be combined with other monitor updates."
           }
         },
-        "description": "Fields that can be updated on an Agent Insights monitor."
+        "description": "Fields that can be updated on an Agent Insights monitor.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightOverviewSource": {
         "anyOf": [
@@ -37159,7 +37278,12 @@
             ]
           }
         ],
-        "description": "Identifies where an Agent Insights overview came from."
+        "description": "Identifies where an Agent Insights overview came from.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightPromptSurface": {
         "anyOf": [
@@ -37174,7 +37298,12 @@
             ]
           }
         ],
-        "description": "The Prompt surface changed by a proposed fix."
+        "description": "The Prompt surface changed by a proposed fix.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightProposedFix": {
         "type": "object",
@@ -37199,7 +37328,12 @@
             "description": "The concrete changes. Omitted for a prose-only fix."
           }
         },
-        "description": "A recommended fix for an agent insight."
+        "description": "A recommended fix for an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightProposedFixChange": {
         "type": "object",
@@ -37243,7 +37377,12 @@
             "description": "The bounded Prompt value after the change. Present for Prompt changes, including when null."
           }
         },
-        "description": "A customer-renderable change in a proposed fix."
+        "description": "A customer-renderable change in a proposed fix.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightProposedFixKind": {
         "anyOf": [
@@ -37259,7 +37398,12 @@
             ]
           }
         ],
-        "description": "The customer-renderable kind of an agent insight's proposed fix."
+        "description": "The customer-renderable kind of an agent insight's proposed fix.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRecommendedAction": {
         "type": "object",
@@ -37272,7 +37416,12 @@
             "description": "The single recommended fix for the issue represented by the insight."
           }
         },
-        "description": "The recommended remediation for an agent insight."
+        "description": "The recommended remediation for an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRun": {
         "type": "object",
@@ -37364,7 +37513,12 @@
             "readOnly": true
           }
         },
-        "description": "A long-running run that analyzes one agent's traces and updates that agent's insights."
+        "description": "A long-running run that analyzes one agent's traces and updates that agent's insights.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRunCreate": {
         "type": "object",
@@ -37378,7 +37532,12 @@
             "default": 168
           }
         },
-        "description": "Inputs used when creating an agent insight run."
+        "description": "Inputs used when creating an agent insight run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRunResult": {
         "type": "object",
@@ -37421,7 +37580,12 @@
             "description": "Token usage for the run's insight-generation analysis."
           }
         },
-        "description": "Result statistics produced when an agent insight run succeeds."
+        "description": "Result statistics produced when an agent insight run succeeds.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRunTrigger": {
         "anyOf": [
@@ -37436,7 +37600,12 @@
             ]
           }
         ],
-        "description": "The trigger that started an agent insight run."
+        "description": "The trigger that started an agent insight run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightSeverity": {
         "anyOf": [
@@ -37452,7 +37621,12 @@
             ]
           }
         ],
-        "description": "The severity of an agent insight."
+        "description": "The severity of an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightStatus": {
         "anyOf": [
@@ -37468,7 +37642,12 @@
             ]
           }
         ],
-        "description": "The lifecycle status of an agent insight."
+        "description": "The lifecycle status of an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightSuspension": {
         "type": "object",
@@ -37496,7 +37675,12 @@
             "description": "Additional reason-specific suspension details."
           }
         },
-        "description": "Structured reason why scheduled generation is suspended for a monitor."
+        "description": "Structured reason why scheduled generation is suspended for a monitor.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightTokenUsage": {
         "type": "object",
@@ -37527,7 +37711,12 @@
             "description": "The total number of tokens used by the run."
           }
         },
-        "description": "Token usage for an Agent Insights run."
+        "description": "Token usage for an Agent Insights run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightUpdate": {
         "type": "object",
@@ -37537,7 +37726,12 @@
             "description": "The lifecycle status to apply to the insight."
           }
         },
-        "description": "Fields that can be updated on an agent insight."
+        "description": "Fields that can be updated on an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightsOverview": {
         "type": "object",
@@ -37560,7 +37754,12 @@
             "description": "The time when this overview was last updated."
           }
         },
-        "description": "The effective overview for an Agent Insights monitor."
+        "description": "The effective overview for an Agent Insights monitor.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightsOverviewOverride": {
         "type": "object",
@@ -37573,7 +37772,12 @@
             "description": "The nonblank overview content, limited to 64 KiB when encoded as UTF-8."
           }
         },
-        "description": "A user-provided overview that becomes effective immediately and seeds the next generation."
+        "description": "A user-provided overview that becomes effective immediately and seeds the next generation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentKind": {
         "anyOf": [
@@ -42123,7 +42327,6 @@
         "type": "object",
         "required": [
           "provider",
-          "connection",
           "resource_account_object_id"
         ],
         "properties": {
@@ -42134,27 +42337,21 @@
             ],
             "description": "The Microsoft Teams Phone Extension provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Teams Phone Extension provider."
-          },
           "phone_number": {
             "type": "string",
             "maxLength": 64,
             "description": "The optional display phone number for the Teams resource account."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "An optional display label for the binding."
           },
           "resource_account_object_id": {
             "$ref": "#/components/schemas/Azure.Core.uuid",
             "description": "The Microsoft Teams resource-account object identifier as a GUID."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
         "description": "The request to create a Microsoft Teams Phone Extension binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -42164,14 +42361,27 @@
       },
       "CreateTelephonyBindingRequest": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/CreateTeamsPhoneExtensionTelephonyBindingRequest"
-          },
-          {
-            "$ref": "#/components/schemas/CreateTwilioTelephonyBindingRequest"
-          }
+        "required": [
+          "provider",
+          "connection"
         ],
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "An optional display label for the binding."
+          }
+        },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
@@ -42279,7 +42489,6 @@
         "type": "object",
         "required": [
           "provider",
-          "connection",
           "phone_number"
         ],
         "properties": {
@@ -42290,23 +42499,17 @@
             ],
             "description": "The Twilio provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Twilio provider."
-          },
           "phone_number": {
             "type": "string",
             "pattern": "^\\+[1-9]\\d{6,14}$",
             "description": "The Twilio E.164 phone number."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "An optional display label for the binding."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+          }
+        ],
         "description": "The request to create a Twilio binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -77756,7 +77959,12 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemMessageAssistant": {
         "type": "object",
@@ -88504,6 +88712,11 @@
             "description": "The E.164 phone number to call."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyTransferDestination"
+          }
+        ],
         "description": "A PSTN destination for a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -89296,9 +89509,106 @@
           "rai_policy_name": {
             "type": "string",
             "description": "The name of the RAI policy to apply."
+          },
+          "invocations_moderation": {
+            "$ref": "#/components/schemas/RaiInvocationModeration",
+            "description": "Author-declared configuration telling the platform where user/agent text lives in the\nagent-defined invocations request/response bodies, so content-safety guardrails can extract\nand moderate it. Optional; a rai_config without it leaves the invocations path without\ncontent-safety moderation."
           }
         },
         "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+      },
+      "RaiInvocationContentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "json",
+              "text"
+            ]
+          }
+        ],
+        "description": "How an invocations request/response body is parsed to locate text for content-safety moderation."
+      },
+      "RaiInvocationMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "non_streaming",
+              "streaming",
+              "both"
+            ]
+          }
+        ],
+        "description": "Author-declared response shape for the invocations protocol."
+      },
+      "RaiInvocationModeration": {
+        "type": "object",
+        "required": [
+          "response_mode"
+        ],
+        "properties": {
+          "input_content_type": {
+            "$ref": "#/components/schemas/RaiInvocationContentType",
+            "description": "How the REQUEST body is parsed. When omitted, the service defaults to `json`.",
+            "default": "json"
+          },
+          "output_content_type": {
+            "$ref": "#/components/schemas/RaiInvocationContentType",
+            "description": "How the RESPONSE body is parsed. When omitted, the service defaults to `json`.",
+            "default": "json"
+          },
+          "response_mode": {
+            "$ref": "#/components/schemas/RaiInvocationMode",
+            "description": "Author-declared response shape; drives which output gate runs and which fields are required."
+          },
+          "input_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Path(s) to user text in the REQUEST body. Required when input_content_type is `json`."
+          },
+          "output_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Path(s) to agent text in a NON-STREAMING response body. Required when response_mode is non_streaming/both and output_content_type is `json`."
+          },
+          "stream_selectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RaiSseTextSelector"
+            },
+            "description": "One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`."
+          }
+        },
+        "description": "Declares where request/response text lives so content-safety guardrails can extract it."
+      },
+      "RaiSseTextSelector": {
+        "type": "object",
+        "required": [
+          "event_type"
+        ],
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "description": "The SSE event `type` value that carries text."
+          },
+          "text_field": {
+            "type": "string",
+            "description": "The field on a matched event holding the text delta. When omitted, the service defaults to `delta`.",
+            "default": "delta"
+          }
+        },
+        "description": "An SSE event-type to text-field selector for streaming invocation output."
       },
       "RecurrenceSchedule": {
         "type": "object",
@@ -91053,6 +91363,11 @@
             "description": "The SIP or SIPS URI to call."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyTransferDestination"
+          }
+        ],
         "description": "A SIP destination for a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -91634,18 +91949,10 @@
       "TeamsPhoneExtensionTelephonyBinding": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "resource_account_object_id",
-          "status",
-          "incoming_call_url"
+          "resource_account_object_id"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -91653,36 +91960,21 @@
             ],
             "description": "The Microsoft Teams Phone Extension provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Teams Phone Extension provider."
-          },
           "phone_number": {
             "type": "string",
             "maxLength": 64,
             "description": "The optional display phone number for the Teams resource account."
           },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
           "resource_account_object_id": {
             "$ref": "#/components/schemas/Azure.Core.uuid",
             "description": "The Microsoft Teams resource-account object identifier as a GUID."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBinding"
+          }
+        ],
         "description": "A Microsoft Teams Phone Extension binding owned by a voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -91693,19 +91985,10 @@
       "TeamsPhoneExtensionTelephonyBindingListItem": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "resource_account_object_id",
-          "status",
-          "incoming_call_url",
-          "etag"
+          "resource_account_object_id"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -91713,41 +91996,21 @@
             ],
             "description": "The Microsoft Teams Phone Extension provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Teams Phone Extension provider."
-          },
           "phone_number": {
             "type": "string",
             "maxLength": 64,
             "description": "The optional display phone number for the Teams resource account."
           },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
           "resource_account_object_id": {
             "$ref": "#/components/schemas/Azure.Core.uuid",
             "description": "The Microsoft Teams resource-account object identifier as a GUID."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
-          },
-          "etag": {
-            "$ref": "#/components/schemas/Azure.Core.eTag",
-            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
-            "readOnly": true
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingListItem"
+          }
+        ],
         "description": "A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -91776,6 +92039,11 @@
             "description": "The Microsoft Teams user or resource-account identifier."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyTransferDestination"
+          }
+        ],
         "description": "A Microsoft Teams destination for a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -91919,14 +92187,43 @@
       },
       "TelephonyBinding": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TeamsPhoneExtensionTelephonyBinding"
-          },
-          {
-            "$ref": "#/components/schemas/TwilioTelephonyBinding"
-          }
+        "required": [
+          "id",
+          "provider",
+          "connection",
+          "status",
+          "incoming_call_url"
         ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The service-generated binding identifier."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated webhook URL to configure with the telephony provider."
+          }
+        },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
@@ -91949,14 +92246,49 @@
       },
       "TelephonyBindingListItem": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TeamsPhoneExtensionTelephonyBindingListItem"
-          },
-          {
-            "$ref": "#/components/schemas/TwilioTelephonyBindingListItem"
-          }
+        "required": [
+          "id",
+          "provider",
+          "connection",
+          "status",
+          "incoming_call_url",
+          "etag"
         ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The service-generated binding identifier."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated webhook URL to configure with the telephony provider."
+          },
+          "etag": {
+            "$ref": "#/components/schemas/Azure.Core.eTag",
+            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
+            "readOnly": true
+          }
+        },
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
@@ -93576,17 +93908,15 @@
       },
       "TelephonyTransferDestination": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/PSTNTelephonyTransferDestination"
-          },
-          {
-            "$ref": "#/components/schemas/TeamsTelephonyTransferDestination"
-          },
-          {
-            "$ref": "#/components/schemas/SipTelephonyTransferDestination"
-          }
+        "required": [
+          "kind"
         ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/TelephonyTransferDestinationKind",
+            "description": "The telephony transfer destination type."
+          }
+        },
         "discriminator": {
           "propertyName": "kind",
           "mapping": {
@@ -93596,6 +93926,27 @@
           }
         },
         "description": "A destination for a telephony transfer target.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyTransferDestinationKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "pstn",
+              "teams",
+              "sip"
+            ]
+          }
+        ],
+        "description": "The kind of telephony transfer destination. Known values are stable; additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -94623,18 +94974,10 @@
       "TwilioTelephonyBinding": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "phone_number",
-          "status",
-          "incoming_call_url"
+          "phone_number"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -94642,32 +94985,17 @@
             ],
             "description": "The Twilio provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Twilio provider."
-          },
           "phone_number": {
             "type": "string",
             "pattern": "^\\+[1-9]\\d{6,14}$",
             "description": "The Twilio E.164 phone number."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with Twilio."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBinding"
+          }
+        ],
         "description": "A Twilio binding owned by a voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -94678,19 +95006,10 @@
       "TwilioTelephonyBindingListItem": {
         "type": "object",
         "required": [
-          "id",
           "provider",
-          "connection",
-          "phone_number",
-          "status",
-          "incoming_call_url",
-          "etag"
+          "phone_number"
         ],
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The service-generated binding identifier."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -94698,37 +95017,17 @@
             ],
             "description": "The Twilio provider."
           },
-          "connection": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "description": "The Foundry connection name for the Twilio provider."
-          },
           "phone_number": {
             "type": "string",
             "pattern": "^\\+[1-9]\\d{6,14}$",
             "description": "The Twilio E.164 phone number."
-          },
-          "label": {
-            "type": "string",
-            "maxLength": 128,
-            "description": "The optional display label for the binding."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with Twilio."
-          },
-          "etag": {
-            "$ref": "#/components/schemas/Azure.Core.eTag",
-            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
-            "readOnly": true
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingListItem"
+          }
+        ],
         "description": "A Twilio binding returned in a list, including its entity tag.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -95865,7 +96164,7 @@
             "description": "Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts."
           },
           "subagent_config": {
-            "$ref": "#/components/schemas/VoiceAgentSubAgentConfig",
+            "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
             "description": "Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists."
           },
           "store": {
@@ -96620,7 +96919,7 @@
         ],
         "description": "A static interim response selected from configured text."
       },
-      "VoiceAgentSubAgent": {
+      "VoiceAgentSubagent": {
         "type": "object",
         "required": [
           "agent_name",
@@ -96658,7 +96957,7 @@
           ]
         }
       },
-      "VoiceAgentSubAgentConfig": {
+      "VoiceAgentSubagentConfig": {
         "type": "object",
         "required": [
           "subagents"
@@ -96667,7 +96966,7 @@
           "subagents": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/VoiceAgentSubAgent"
+              "$ref": "#/components/schemas/VoiceAgentSubagent"
             },
             "minItems": 1,
             "description": "The sibling Foundry text agents, in the same project, that this voice agent may consult."
