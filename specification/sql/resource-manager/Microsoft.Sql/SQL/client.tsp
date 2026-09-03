@@ -664,6 +664,27 @@ using Microsoft.Sql;
   "csharp"
 );
 
+@@alternateType(
+  DatabaseIdentity.userAssignedIdentities,
+  Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>,
+  "csharp"
+);
+@@alternateType(
+  JobAgentIdentity.userAssignedIdentities,
+  Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>,
+  "csharp"
+);
+@@alternateType(
+  ManagedInstance.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  Server.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
 @@alternateType(Advisor.location, azureLocation, "csharp");
 @@alternateType(EncryptionProtector.location, azureLocation, "csharp");
 @@alternateType(PartnerRegionInfo.location, azureLocation, "csharp");
