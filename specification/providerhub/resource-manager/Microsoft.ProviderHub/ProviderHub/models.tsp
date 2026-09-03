@@ -1261,11 +1261,11 @@ model CustomRolloutSpecification {
   rolloutId?: string;
 
   /**
-   * Immutable execution metadata associated with the rollout.
+   * Immutable orchestration metadata associated with the rollout.
    */
   @added(Versions.v2026_09_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  rolloutExecutionMetadata?: RolloutExecutionMetadata;
+  rolloutOrchestrationMetadata?: RolloutOrchestrationMetadata;
 
   /**
    * The manifest checkin specification.
@@ -1275,10 +1275,10 @@ model CustomRolloutSpecification {
 }
 
 /**
- * Immutable execution metadata associated with a rollout.
+ * Immutable orchestration metadata associated with a rollout.
  */
 @added(Versions.v2026_09_01_preview)
-model RolloutExecutionMetadata {
+model RolloutOrchestrationMetadata {
   /**
    * Whether the rollout is used for manifest buildout.
    */
@@ -1293,6 +1293,11 @@ model RolloutExecutionMetadata {
    * The service group associated with the rollout.
    */
   serviceGroup?: string;
+
+  /**
+   * The identifier of the service associated with the rollout.
+   */
+  serviceIdentifier?: string;
 }
 
 /**
@@ -4254,10 +4259,11 @@ model CheckinManifestParams {
   baselineArmManifestLocation: string;
 
   /**
-   * The URI of the API specification to check in.
+   * The URI of the signed-off OpenAPI specification pull request associated with the manifest check-in.
    */
   @added(Versions.v2026_09_01_preview)
-  swaggerLink?: url;
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  swaggerUri?: url;
 
   /**
    * The comment associated with the manifest check-in.
@@ -5171,6 +5177,7 @@ model AppliedManifestInfo {
    * The root resource provider namespace.
    */
   @added(Versions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
   rootProviderNamespace?: string;
 }
 
@@ -5306,38 +5313,24 @@ model ManifestInfoProperties {
   /**
    * The URI the manifest content is read from when the manifest is not supplied inline.
    */
+  @removed(Versions.v2026_09_01_preview)
+  @renamedFrom(Versions.v2026_09_01_preview, "manifestUri")
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  manifestUri?: string;
+  oldManifestUri?: string;
+
+  /**
+   * The URI the manifest content is read from when the manifest is not supplied inline.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  manifestUri?: url;
 
   /**
    * The manifest commit identifier.
    */
   @visibility(Lifecycle.Read)
   commitId?: string;
-}
-
-/**
- * Properties supplied when creating or updating a manifest.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The manifest request is processed synchronously and does not expose provisioning state."
-@added(Versions.v2026_09_01_preview)
-model ManifestPutContentProperties {
-  /**
-   * The manifest content.
-   */
-  manifest?: string;
-
-  /**
-   * The URI from which the manifest content is read.
-   */
-  manifestUri?: url;
-
-  /**
-   * The comment associated with the manifest check-in.
-   */
-  @maxLength(200)
-  @pattern("^[\\u0020-\\u007E\\u00A0-\\uFFFF]*$")
-  checkinComment?: string;
 }
 
 /**
