@@ -451,7 +451,7 @@ enum Versions {
   /**
    * The 2026-08-01-preview API version.
    */
-  v2026_08_01_preview: "2026-08-01-preview"
+  v2026_08_01_preview: "2026-08-01-preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
