@@ -659,6 +659,13 @@ using Microsoft.DataProtection;
 );
 @@clientName(SecretStoreResource, "SecretStoreResourceInfo", "csharp");
 @@alternateType(SecretStoreResource.uri, url, "csharp");
+// Cross-tenant read-projection variants (parity with the shared models above).
+@@alternateType(CrossTenantSecretStoreResource.uri, url, "csharp");
+@@clientName(
+  CrossTenantBackupInstance.datasourceAuthCredentials,
+  "DataSourceAuthCredentials",
+  "csharp"
+);
 @@clientName(SecureScoreLevel, "BackupVaultSecureScoreLevel", "csharp");
 @@clientName(SecuritySettings, "BackupVaultSecuritySettings", "csharp");
 @@clientName(SoftDeleteSettings, "BackupVaultSoftDeleteSettings", "csharp");
@@ -1007,3 +1014,22 @@ model BackupFindRestorableTimeRangesResponse
 @@usage(JobExtendedInfo, Usage.input, "csharp");
 @@usage(JobSubTask, Usage.input, "csharp");
 @@usage(RestoreJobRecoveryPointDetails, Usage.input, "csharp");
+
+// CSharp SDK: cross-tenant restore response models — satisfy csharp-model-suffix (Response -> Result)
+@@clientName(
+  CrossTenantVaultMappingStatusResponse,
+  "CrossTenantVaultMappingStatusResult",
+  "csharp"
+);
+@@clientName(
+  CrossTenantOperationResultAcceptedResponse,
+  "CrossTenantOperationResultAcceptedResult",
+  "csharp"
+);
+
+// CSharp SDK: cross-tenant restore request models — satisfy csharp-model-suffix (Request -> Content)
+@@clientName(
+  CrossTenantVaultMappingRemoveRequest,
+  "CrossTenantVaultMappingRemoveContent",
+  "csharp"
+);
