@@ -4400,20 +4400,11 @@
       "type": "object",
       "description": "Request payload for adding an approval runbook step.",
       "properties": {
-        "migrationEntityIds": {
+        "entities": {
           "type": "array",
-          "description": "Migration entity Azure resource identifiers associated with this approval step.",
+          "description": "Migration entity resource names associated with this approval step.",
           "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
-                }
-              ]
-            }
+            "type": "string"
           }
         }
       },
@@ -4533,20 +4524,11 @@
           "type": "string",
           "description": "Target identifier for the action."
         },
-        "migrationEntityIds": {
+        "entities": {
           "type": "array",
-          "description": "Migration entity ARM IDs in scope for this action.",
+          "description": "Migration entity resource names in scope for this action.",
           "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Migrate/migrateProjects/migrationEntities"
-                }
-              ]
-            }
+            "type": "string"
           }
         }
       },
