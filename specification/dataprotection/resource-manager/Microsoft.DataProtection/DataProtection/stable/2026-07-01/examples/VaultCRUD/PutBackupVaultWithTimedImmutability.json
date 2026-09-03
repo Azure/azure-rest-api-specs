@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01",
+    "parameters": {
+      "location": "WestUS",
+      "properties": {
+        "securitySettings": {
+          "immutabilitySettings": {
+            "state": "Unlocked",
+            "configuration": {
+              "type": "TimeBased",
+              "durationInDays": 30
+            }
+          },
+          "softDeleteSettings": {
+            "retentionDurationInDays": 14,
+            "state": "On"
+          }
+        },
+        "storageSettings": [
+          {
+            "type": "LocallyRedundant",
+            "datastoreType": "VaultStore"
+          }
+        ]
+      },
+      "tags": {
+        "key1": "val1"
+      },
+      "identity": {
+        "type": "None"
+      }
+    },
+    "resourceGroupName": "SampleResourceGroup",
+    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b",
+    "vaultName": "swaggerExample"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/SampleResourceGroup/providers/Microsoft.DataProtection/backupVaults/swaggerExample",
+        "name": "swaggerExample",
+        "type": "Microsoft.DataProtection/backupVaults",
+        "location": "WestUS",
+        "tags": {
+          "key1": "val1"
+        },
+        "identity": {
+          "type": "None"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "securitySettings": {
+            "immutabilitySettings": {
+              "state": "Unlocked",
+              "configuration": {
+                "type": "TimeBased",
+                "durationInDays": 30
+              }
+            },
+            "softDeleteSettings": {
+              "retentionDurationInDays": 14,
+              "state": "On"
+            }
+          },
+          "storageSettings": [
+            {
+              "type": "LocallyRedundant",
+              "datastoreType": "VaultStore"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/SampleResourceGroup/providers/Microsoft.DataProtection/backupVaults/swaggerExample",
+        "name": "swaggerExample",
+        "type": "Microsoft.DataProtection/backupVaults",
+        "location": "WestUS",
+        "tags": {
+          "key1": "val1"
+        },
+        "identity": {
+          "type": "None"
+        },
+        "properties": {
+          "provisioningState": "Provisioning",
+          "securitySettings": {
+            "immutabilitySettings": {
+              "state": "Unlocked",
+              "configuration": {
+                "type": "TimeBased",
+                "durationInDays": 30
+              }
+            },
+            "softDeleteSettings": {
+              "retentionDurationInDays": 14,
+              "state": "On"
+            }
+          },
+          "storageSettings": [
+            {
+              "type": "LocallyRedundant",
+              "datastoreType": "VaultStore"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "BackupVaults_CreateOrUpdate",
+  "title": "Create BackupVault With Timed Immutability"
+}
