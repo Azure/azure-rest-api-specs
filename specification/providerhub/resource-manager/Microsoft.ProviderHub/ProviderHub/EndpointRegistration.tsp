@@ -14,6 +14,9 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ProviderHub;
 
+/**
+ * An independently managed endpoint definition for a Resource Type Registration.
+ */
 @added(Versions.v2026_09_01_preview)
 @parentResource(ResourceTypeRegistration)
 model EndpointRegistration is Azure.ResourceManager.ProxyResource<

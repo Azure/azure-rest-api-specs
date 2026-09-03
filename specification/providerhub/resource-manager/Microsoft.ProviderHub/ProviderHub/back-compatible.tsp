@@ -21,7 +21,6 @@ using Microsoft.ProviderHub;
 
 @@clientName(CustomRollouts.createOrUpdate::parameters.resource, "properties");
 
-@@clientName(Manifests.createOrUpdateV1::parameters.resource, "properties");
 @@clientName(Manifests.createOrUpdate::parameters.resource, "properties");
 
 @@clientName(
