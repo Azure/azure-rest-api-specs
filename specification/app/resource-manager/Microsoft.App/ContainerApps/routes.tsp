@@ -42,6 +42,26 @@ interface AvailableWorkloadProfilesOperationGroup {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface exposes a subscription-level provider operation rather than operations on an ARM resource."
+@added(Versions.v2026_07_01)
+interface AvailableEnvironmentModesOperationGroup {
+  /**
+   * Gets the environment modes available to a subscription in a location.
+   */
+  @summary("Get available environment modes by location.")
+  @autoRoute
+  @get
+  @list
+  @action("availableManagedEnvironmentsModes")
+  @tag("AvailableEnvironmentModes")
+  list is ArmProviderActionSync<
+    Response = AvailableEnvironmentModesCollection,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationResourceParameter,
+    Error = DefaultErrorResponse
+  >;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BillingMetersOperationGroup {
   /**
