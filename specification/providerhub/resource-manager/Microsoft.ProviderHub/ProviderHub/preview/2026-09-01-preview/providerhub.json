@@ -5445,6 +5445,14 @@
           "type": "string",
           "description": "The rollout id."
         },
+        "rolloutExecutionMetadata": {
+          "$ref": "#/definitions/RolloutExecutionMetadata",
+          "description": "Immutable execution metadata associated with the rollout.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "manifestCheckinSpecification": {
           "$ref": "#/definitions/ManifestCheckinSpecification",
           "description": "The manifest checkin specification."
@@ -11286,6 +11294,24 @@
             "value": "LimitedOwner"
           }
         ]
+      }
+    },
+    "RolloutExecutionMetadata": {
+      "type": "object",
+      "description": "Immutable execution metadata associated with a rollout.",
+      "properties": {
+        "isForManifestBuildout": {
+          "type": "boolean",
+          "description": "Whether the rollout is used for manifest buildout."
+        },
+        "deploymentType": {
+          "type": "string",
+          "description": "The deployment type associated with the rollout."
+        },
+        "serviceGroup": {
+          "type": "string",
+          "description": "The service group associated with the rollout."
+        }
       }
     },
     "RolloutStatusBase": {
