@@ -662,49 +662,9 @@ namespace Azure.AI.Projects {
   );
 
   @@alternateType(
-    OpenAI.ImageGenTool.background,
+    OpenAI.ImageGenToolInputImageMask,
     {
-      identity: "OpenAI.ImageGenerationToolBackground",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.ImageGenTool.input_image_mask,
-    {
-      identity: "OpenAI.ImageGenToolInputImageMask",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.ImageGenTool.moderation,
-    {
-      identity: "OpenAI.ImageGenToolModeration",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.ImageGenTool.quality,
-    {
-      identity: "OpenAI.ImageGenToolQuality",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.ImageGenTool.size,
-    {
-      identity: "OpenAI.ImageGenToolSize",
+      identity: "OpenAI.Responses.ImageGenerationToolInputImageMask",
       package: "OpenAI",
       minVersion: "2.12.0",
     },
@@ -847,15 +807,6 @@ namespace Azure.AI.Projects {
     OpenAI.ResponseErrorCode,
     {
       identity: "OpenAI.Responses.ResponseErrorCode",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.WebSearchTool.search_context_size,
-    {
-      identity: "OpenAI.Responses.WebSearchToolContextSize",
       package: "OpenAI",
       minVersion: "2.12.0",
     },

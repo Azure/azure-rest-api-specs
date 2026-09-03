@@ -1032,56 +1032,17 @@ namespace Azure.AI.Projects;
   },
   "csharp"
 );
+
 @@alternateType(
-  OpenAI.ImageGenTool.background,
+  OpenAI.ImageGenToolInputImageMask,
   {
-    identity: "OpenAI.ImageGenerationToolBackground",
+    identity: "OpenAI.Responses.ImageGenerationToolInputImageMask",
     package: "OpenAI",
     minVersion: "2.12.0",
   },
   "csharp"
 );
 
-@@alternateType(
-  OpenAI.ImageGenTool.input_image_mask,
-  {
-    identity: "OpenAI.ImageGenToolInputImageMask",
-    package: "OpenAI",
-    minVersion: "2.12.0",
-  },
-  "csharp"
-);
-
-@@alternateType(
-  OpenAI.ImageGenTool.moderation,
-  {
-    identity: "OpenAI.ImageGenToolModeration",
-    package: "OpenAI",
-    minVersion: "2.12.0",
-  },
-  "csharp"
-);
-
-@@alternateType(
-  OpenAI.ImageGenTool.quality,
-  {
-    identity: "OpenAI.ImageGenToolQuality",
-    package: "OpenAI",
-    minVersion: "2.12.0",
-  },
-  "csharp"
-);
-
-@@alternateType(
-  OpenAI.ImageGenTool.size,
-  {
-    identity: "OpenAI.ImageGenToolSize",
-    package: "OpenAI",
-    minVersion: "2.12.0",
-  },
-  "csharp"
-);
-//-
 @@alternateType(
   OpenAI.LogProb,
   {
