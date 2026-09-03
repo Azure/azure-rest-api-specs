@@ -248,9 +248,7 @@ using Http;
 @@clientName(UpstreamAuthSettings.type, "AuthType", "csharp");
 @@alternateType(SignalRServiceUsage.id, armResourceIdentifier, "csharp");
 @@clientName(LiveTraceCategory.enabled, "IsEnabled", "csharp");
-@@alternateType(LiveTraceCategory.enabled, boolean, "csharp");
 @@clientName(LiveTraceConfiguration.enabled, "IsEnabled", "csharp");
-@@alternateType(LiveTraceConfiguration.enabled, boolean, "csharp");
 @@clientName(
   WebPubSubResources.list,
   "GetWebPubSubPrivateLinkResources",
