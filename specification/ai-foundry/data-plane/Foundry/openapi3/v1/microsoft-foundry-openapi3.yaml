@@ -122,7 +122,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -215,13 +215,16 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     post:
       operationId: AgentInsightMonitors_create
       description: Create an Agent Insights monitor for an agent.
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -268,6 +271,9 @@ paths:
             schema:
               $ref: '#/components/schemas/AgentInsightMonitorCreate'
         description: The monitor to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
   /agent_insight_monitors/{monitor_id}:
     get:
       operationId: AgentInsightMonitors_get
@@ -275,7 +281,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -315,13 +321,16 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     delete:
       operationId: AgentInsightMonitors_delete
       description: Delete an Agent Insights monitor and all of its runs, insights, and state.
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -357,13 +366,16 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     patch:
       operationId: AgentInsightMonitors_update
       description: Update an Agent Insights monitor.
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -410,6 +422,9 @@ paths:
             schema:
               $ref: '#/components/schemas/AgentInsightMonitorUpdate'
         description: The monitor fields to update.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
   /agent_insight_monitors/{monitor_id}/insights:
     get:
       operationId: AgentInsightMonitors_listInsights
@@ -417,7 +432,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -538,6 +553,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
   /agent_insight_monitors/{monitor_id}/insights/{insight_id}:
     get:
       operationId: AgentInsightMonitors_getInsight
@@ -545,7 +563,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -599,13 +617,16 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     patch:
       operationId: AgentInsightMonitors_updateInsight
       description: Update the lifecycle status of an insight.
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -658,6 +679,9 @@ paths:
             schema:
               $ref: '#/components/schemas/AgentInsightUpdate'
         description: The insight fields to update.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
   /agent_insight_monitors/{monitor_id}/runs:
     post:
       operationId: AgentInsightMonitors_createRun
@@ -665,12 +689,18 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
             enum:
               - AgentInsights=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
         - name: monitor_id
           in: path
           required: true
@@ -723,13 +753,16 @@ paths:
             schema:
               $ref: '#/components/schemas/AgentInsightRunCreate'
         description: Run inputs. Send an empty object to use the default 168-hour lookback window.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     get:
       operationId: AgentInsightMonitors_listRuns
       description: List Agent Insights runs for a monitor.
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -835,6 +868,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
   /agent_insight_monitors/{monitor_id}/runs/{run_id}:
     get:
       operationId: AgentInsightMonitors_getRun
@@ -842,7 +878,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -888,6 +924,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
   /agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel:
     post:
       operationId: AgentInsightMonitors_cancelRun
@@ -895,7 +934,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -941,6 +980,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
   /agent_insight_monitors/{monitor_id}:reset:
     post:
       operationId: AgentInsightMonitors_reset
@@ -948,7 +990,7 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -984,6 +1026,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Insight Monitors
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
   /agent_optimization_jobs:
     post:
       operationId: AgentOptimizationJobs_create
@@ -39489,6 +39534,9 @@ components:
           description: Additional insight details. Omitted unless details are requested.
           readOnly: true
       description: A persisted issue discovered from an agent's traces.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightDetails:
       type: object
       required:
@@ -39512,6 +39560,9 @@ components:
           $ref: '#/components/schemas/AgentInsightRecommendedAction'
           description: The recommended remediation for this insight.
       description: Additional insight details. Omitted unless details are requested.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightEstimatedCost:
       type: object
       required:
@@ -39528,6 +39579,9 @@ components:
             - USD
           description: Currency for the estimated cost amount. Agent Insights estimates are reported in US dollars.
       description: Estimated Agent Insights cost.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightHighlightedTrace:
       type: object
       required:
@@ -39554,6 +39608,9 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when the trace was recorded.
       description: A highlighted trace that provides evidence for an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightLinkedTrace:
       type: object
       required:
@@ -39569,6 +39626,9 @@ components:
           description: The time when the trace was recorded.
           readOnly: true
       description: A lightweight trace reference linked to an agent insight as supporting evidence.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightMonitor:
       type: object
       required:
@@ -39629,6 +39689,9 @@ components:
           description: The time when this monitor was last updated.
           readOnly: true
       description: A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightMonitorCreate:
       type: object
       required:
@@ -39653,6 +39716,9 @@ components:
           type: string
           description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
       description: Fields accepted when creating an Agent Insights monitor for an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightMonitorListItem:
       type: object
       required:
@@ -39706,6 +39772,9 @@ components:
           description: The time when this monitor was last updated.
           readOnly: true
       description: An Agent Insights monitor summary returned by list operations.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightMonitorUpdate:
       type: object
       properties:
@@ -39729,6 +39798,9 @@ components:
             Sets the effective user overview, or clears it when explicitly set to null. Omission leaves
             the overview unchanged. This field cannot be combined with other monitor updates.
       description: Fields that can be updated on an Agent Insights monitor.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightOverviewSource:
       anyOf:
         - type: string
@@ -39737,6 +39809,9 @@ components:
             - generated
             - user_override
       description: Identifies where an Agent Insights overview came from.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightPromptSurface:
       anyOf:
         - type: string
@@ -39745,6 +39820,9 @@ components:
             - instructions
             - tool
       description: The Prompt surface changed by a proposed fix.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightProposedFix:
       type: object
       required:
@@ -39763,6 +39841,9 @@ components:
             $ref: '#/components/schemas/AgentInsightProposedFixChange'
           description: The concrete changes. Omitted for a prose-only fix.
       description: A recommended fix for an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightProposedFixChange:
       type: object
       properties:
@@ -39792,6 +39873,9 @@ components:
             - type: 'null'
           description: The bounded Prompt value after the change. Present for Prompt changes, including when null.
       description: A customer-renderable change in a proposed fix.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightProposedFixKind:
       anyOf:
         - type: string
@@ -39801,6 +39885,9 @@ components:
             - code_change
             - prompt_change
       description: The customer-renderable kind of an agent insight's proposed fix.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightRecommendedAction:
       type: object
       required:
@@ -39810,6 +39897,9 @@ components:
           $ref: '#/components/schemas/AgentInsightProposedFix'
           description: The single recommended fix for the issue represented by the insight.
       description: The recommended remediation for an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightRun:
       type: object
       required:
@@ -39884,6 +39974,9 @@ components:
           description: The model deployment used to analyze traces for this run.
           readOnly: true
       description: A long-running run that analyzes one agent's traces and updates that agent's insights.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightRunCreate:
       type: object
       properties:
@@ -39895,6 +39988,9 @@ components:
           exclusiveMinimum: 0
           default: 168
       description: Inputs used when creating an agent insight run.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightRunResult:
       type: object
       required:
@@ -39929,6 +40025,9 @@ components:
           $ref: '#/components/schemas/AgentInsightTokenUsage'
           description: Token usage for the run's insight-generation analysis.
       description: Result statistics produced when an agent insight run succeeds.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightRunTrigger:
       anyOf:
         - type: string
@@ -39937,6 +40036,9 @@ components:
             - on_demand
             - scheduled
       description: The trigger that started an agent insight run.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightSeverity:
       anyOf:
         - type: string
@@ -39946,6 +40048,9 @@ components:
             - medium
             - low
       description: The severity of an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightStatus:
       anyOf:
         - type: string
@@ -39955,6 +40060,9 @@ components:
             - resolved
             - ignored
       description: The lifecycle status of an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightSuspension:
       type: object
       required:
@@ -39976,6 +40084,9 @@ components:
           unevaluatedProperties: {}
           description: Additional reason-specific suspension details.
       description: Structured reason why scheduled generation is suspended for a monitor.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightTokenUsage:
       type: object
       required:
@@ -40000,6 +40111,9 @@ components:
           format: int32
           description: The total number of tokens used by the run.
       description: Token usage for an Agent Insights run.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightUpdate:
       type: object
       properties:
@@ -40007,6 +40121,9 @@ components:
           $ref: '#/components/schemas/AgentInsightStatus'
           description: The lifecycle status to apply to the insight.
       description: Fields that can be updated on an agent insight.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightsOverview:
       type: object
       required:
@@ -40024,6 +40141,9 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this overview was last updated.
       description: The effective overview for an Agent Insights monitor.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightsOverviewOverride:
       type: object
       required:
@@ -40033,6 +40153,9 @@ components:
           type: string
           description: The nonblank overview content, limited to 64 KiB when encoded as UTF-8.
       description: A user-provided overview that becomes effective immediately and seeds the next generation.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentKind:
       anyOf:
         - type: string
@@ -75392,7 +75515,76 @@ components:
         rai_policy_name:
           type: string
           description: The name of the RAI policy to apply.
+        invocations_moderation:
+          $ref: '#/components/schemas/RaiInvocationModeration'
+          description: |-
+            Author-declared configuration telling the platform where user/agent text lives in the
+            agent-defined invocations request/response bodies, so content-safety guardrails can extract
+            and moderate it. Optional; a rai_config without it leaves the invocations path without
+            content-safety moderation.
       description: Configuration for Responsible AI (RAI) content filtering and safety features.
+    RaiInvocationContentType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - json
+            - text
+      description: How an invocations request/response body is parsed to locate text for content-safety moderation.
+    RaiInvocationMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - non_streaming
+            - streaming
+            - both
+      description: Author-declared response shape for the invocations protocol.
+    RaiInvocationModeration:
+      type: object
+      required:
+        - response_mode
+      properties:
+        input_content_type:
+          $ref: '#/components/schemas/RaiInvocationContentType'
+          description: How the REQUEST body is parsed. When omitted, the service defaults to `json`.
+          default: json
+        output_content_type:
+          $ref: '#/components/schemas/RaiInvocationContentType'
+          description: How the RESPONSE body is parsed. When omitted, the service defaults to `json`.
+          default: json
+        response_mode:
+          $ref: '#/components/schemas/RaiInvocationMode'
+          description: Author-declared response shape; drives which output gate runs and which fields are required.
+        input_paths:
+          type: array
+          items:
+            type: string
+          description: Path(s) to user text in the REQUEST body. Required when input_content_type is `json`.
+        output_paths:
+          type: array
+          items:
+            type: string
+          description: Path(s) to agent text in a NON-STREAMING response body. Required when response_mode is non_streaming/both and output_content_type is `json`.
+        stream_selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/RaiSseTextSelector'
+          description: One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`.
+      description: Declares where request/response text lives so content-safety guardrails can extract it.
+    RaiSseTextSelector:
+      type: object
+      required:
+        - event_type
+      properties:
+        event_type:
+          type: string
+          description: The SSE event `type` value that carries text.
+        text_field:
+          type: string
+          description: The field on a matched event holding the text delta. When omitted, the service defaults to `delta`.
+          default: delta
+      description: An SSE event-type to text-field selector for streaming invocation output.
     RecurrenceSchedule:
       type: object
       required:
