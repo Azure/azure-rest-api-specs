@@ -75,7 +75,7 @@ interface EdgeMachines {
    * Creates the default security settings child resource if it does not already exist.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   refreshSecuritySettings is ArmResourceActionNoContentAsync<EdgeMachine, void>;
 
   /**
