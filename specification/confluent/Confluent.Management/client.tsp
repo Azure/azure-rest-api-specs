@@ -278,3 +278,36 @@ using Microsoft.Confluent;
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
+
+@@clientName(
+  LatestLinkedSaaSResponse,
+  "LatestLinkedSaaSResult",
+  "csharp"
+);
+@@clientName(
+  ActivateSaaSParameterRequest,
+  "ActivateSaaSParameterContent",
+  "csharp"
+);
+@@clientName(
+  SaaSResourceDetailsResponse,
+  "SaaSResourceDetailsResult",
+  "csharp"
+);
+@@clientName(SaaSData, "ConfluentSaaSInfo", "csharp");
+@@clientName(KeyValuePair, "ConfluentKeyValuePair", "csharp");
+@@clientName(
+  LiftrBase.VnetInjectionDetails,
+  "VNetInjectionDetails",
+  "csharp"
+);
+@@alternateType(
+  LiftrBase.VnetInjectionDetails.virtualNetworkResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LiftrBase.VnetInjectionDetails.subnetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
