@@ -67,6 +67,21 @@
             "description": "The name of the server.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -84,6 +99,9 @@
           }
         },
         "x-ms-examples": {
+          "Gets a list of restorable dropped databases with OData filtering.": {
+            "$ref": "./examples/ListRestorableDroppedDatabasesByServerWithOdata.json"
+          },
           "Gets a list of restorable dropped databases.": {
             "$ref": "./examples/ListRestorableDroppedDatabasesByServer.json"
           }
