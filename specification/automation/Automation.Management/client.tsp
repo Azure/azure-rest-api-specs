@@ -174,6 +174,11 @@ using TypeSpec.Rest;
   "csharp"
 );
 @@clientName(Webhook, "AutomationWebhook", "csharp");
+@@clientName(
+  softwareUpdateConfiguration,
+  "SoftwareUpdateConfiguration",
+  "csharp"
+);
 
 @@clientName(
   updateConfiguration,
