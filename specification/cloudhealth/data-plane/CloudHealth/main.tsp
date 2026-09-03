@@ -456,18 +456,18 @@ model HealthReportEvaluationRule {
   ...EvaluationRule;
 }
 
-@doc("Health report submitted for a specific signal.")
+@doc("Current health observation submitted for a specific signal.")
 model HealthReportPayload {
-  @doc("Name of the entity signal to report health for.")
+  @doc("Name of the entity signal to report health for. An unknown name creates an external signal instance.")
   signalName: signalName;
 
-  @doc("Health state to report for the signal.")
+  @doc("Authoritative health state reported by the submitter. The service does not recalculate it from the reported value or evaluation rules.")
   healthState: HealthState;
 
   @doc("Reported value of the signal.")
   value?: float64;
 
-  @doc("Evaluation rules that were used to determine the reported health state.")
+  @doc("Optional snapshot of the evaluation rules used by the submitter to determine the reported health state. These rules are provenance and do not modify configured signal rules.")
   evaluationRules?: HealthReportEvaluationRule;
 
   @doc("Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.")
@@ -696,6 +696,7 @@ interface HealthReportIngestion {
     Durably accept a health report for asynchronous processing.
     A successful response confirms that the report is safely queued, not that downstream health evaluation has completed.
     Use the signal history and entity diagnostic operations to observe the resulting health state.
+    A later report for the same signal replaces its current observation while previous values and health states remain available in signal history.
     Retrying the same logical submission with the same repeatability headers does not ingest the report twice.
     """)
   @route("/api/entities/{entityName}/healthReports")

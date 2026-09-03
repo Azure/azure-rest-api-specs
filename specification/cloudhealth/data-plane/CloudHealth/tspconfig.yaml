@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/cloudhealth"
+    default: "sdk/monitor"
   "dependencies":
     default: ""
 emit:
@@ -18,8 +18,8 @@ options:
     examples-dir: "{project-root}/examples"
     omit-unreachable-types: false
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-cloudhealth-healthintelligence-dataplane"
-    namespace: "azure.cloudhealth.healthintelligence.dataplane"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-cloudhealth-data"
+    namespace: "azure.monitor.cloudhealth.data"
     generate-test: true
     generate-sample: true
     flavor: azure
@@ -28,12 +28,12 @@ options:
     namespace: "{package-name}"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/cloudhealth-health-intelligence"
+    emitter-output-dir: "{output-dir}/{service-dir}/monitor-cloudhealth-data"
     package-details:
-      name: "@azure/cloudhealth-health-intelligence"
+      name: "@azure/monitor-cloudhealth-data"
     experimental-extensible-enums: true
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-cloudhealth-healthintelligence-dataplane"
-    namespace: com.azure.cloudhealth.healthintelligence.dataplane
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-cloudhealth-data"
+    namespace: com.azure.monitor.cloudhealth.data
     flavor: azure
