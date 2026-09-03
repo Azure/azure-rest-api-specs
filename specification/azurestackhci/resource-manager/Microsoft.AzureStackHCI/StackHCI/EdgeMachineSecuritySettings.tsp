@@ -16,7 +16,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Edge Machine Security Settings proxy resource
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 @parentResource(EdgeMachine)
 model EdgeMachineSecuritySettings
   is Azure.ResourceManager.ProxyResource<EdgeMachineSecurityProperties> {
@@ -35,24 +35,24 @@ interface EdgeMachineSecuritySettingsOperations {
   /**
    * Get an EdgeMachineSecuritySettings
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   get is ArmResourceRead<EdgeMachineSecuritySettings>;
 
   /**
    * Create or update an EdgeMachineSecuritySettings
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeMachineSecuritySettings>;
 
   /**
    * Delete an EdgeMachineSecuritySettings
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   delete is ArmResourceDeleteWithoutOkAsync<EdgeMachineSecuritySettings>;
 
   /**
    * List EdgeMachineSecuritySettings by EdgeMachine
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_10_01)
   listByEdgeMachine is ArmResourceListByParent<EdgeMachineSecuritySettings>;
 }

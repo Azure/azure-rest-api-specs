@@ -11238,7 +11238,7 @@ model EdgeMachineDiskPrivilegedJobListResult
 /**
  * Properties of an Edge Machine Security Settings resource.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model EdgeMachineSecurityProperties {
   /**
    * The provisioning state of the resource.
@@ -11268,7 +11268,7 @@ model EdgeMachineSecurityProperties {
 /**
  * Compliance status payload for edge machine security settings.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_10_01)
 model EdgeMachineSecurityComplianceStatus {
   /**
    * FIPS compliance status.
