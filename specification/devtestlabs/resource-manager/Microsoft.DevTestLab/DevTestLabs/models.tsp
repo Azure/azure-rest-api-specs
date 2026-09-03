@@ -1525,10 +1525,13 @@ model FormulaList is Azure.Core.Page<Formula>;
  */
 union FormulaCredentialState {
   string,
+
   /** No credential is configured. */
   NotConfigured: "NotConfigured",
+
   /** A password credential is configured. */
   PasswordConfigured: "PasswordConfigured",
+
   /** An SSH key credential is configured. */
   SshKeyConfigured: "SshKeyConfigured",
 }
