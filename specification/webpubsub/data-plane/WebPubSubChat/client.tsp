@@ -77,7 +77,11 @@ interface WebPubSubChatServiceClient
   "java"
 );
 
-@@access(GenerateClientTokenResponse, Access.internal, "csharp, java, python, javascript");
+@@access(
+  GenerateClientTokenResponse,
+  Access.internal,
+  "csharp, java, python, javascript"
+);
 
 @@clientName(
   WebPubSubChat.ChatConversation,
