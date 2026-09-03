@@ -11034,6 +11034,29 @@ model MaintenanceWindowsProperties {
 }
 
 /**
+ * The immutability status of the backups governed by this short term retention policy.
+ */
+@added(Versions.v2026_08_01_preview)
+union ImmutabilityStatus {
+  string,
+
+  /**
+   * Disabled
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Locked
+   */
+  Locked: "Locked",
+}
+
+/**
  * Properties of a short term retention policy
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -11042,6 +11065,20 @@ model ManagedBackupShortTermRetentionPolicyProperties {
    * The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
    */
   retentionDays?: int32;
+
+  /**
+   * Whether to lock the immutability of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  lockImmutability?: boolean;
+
+  /**
+   * The immutability status of the backups governed by this short term retention policy.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  immutabilityStatus?: ImmutabilityStatus;
 }
 
 /**
