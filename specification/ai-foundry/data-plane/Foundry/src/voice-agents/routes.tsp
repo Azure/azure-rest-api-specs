@@ -756,10 +756,10 @@ interface AgentTelephony {
       @path agent_name: string;
       @path campaign_id: TelephonyCampaignId;
     },
-    TelephonyCampaignResponse
+    TelephonyCampaign
   >;
 
-  /** Starts an asynchronous import of campaign recipients from a Dataset CSV file. */
+  /** Starts an asynchronous import of campaign recipients from a Dataset CSV, JSON array, or JSONL file. */
   @summary("Import outbound telephony campaign recipients")
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}/recipients:import")
@@ -793,7 +793,7 @@ interface AgentTelephony {
       @path campaign_id: TelephonyCampaignId;
       @path import_id: TelephonyCampaignRecipientImportId;
     },
-    TelephonyCampaignRecipientImportResponse
+    TelephonyCampaignRecipientImport
   >;
 
   /** Starts asynchronous validation of the current campaign draft and imported recipient snapshot. */
@@ -837,9 +837,8 @@ interface AgentTelephony {
     {
       @path agent_name: string;
       @path campaign_id: TelephonyCampaignId;
-      ...TelephonyIfMatchHeader;
     },
-    TelephonyCampaignResponse
+    TelephonyCampaign
   >;
 
   /** Resumes dispatch of call jobs owned by a paused campaign. */
@@ -852,9 +851,8 @@ interface AgentTelephony {
     {
       @path agent_name: string;
       @path campaign_id: TelephonyCampaignId;
-      ...TelephonyIfMatchHeader;
     },
-    TelephonyCampaignResponse
+    TelephonyCampaign
   >;
 
   /** Cancels a campaign and prevents any further call-job dispatch. */
@@ -867,9 +865,8 @@ interface AgentTelephony {
     {
       @path agent_name: string;
       @path campaign_id: TelephonyCampaignId;
-      ...TelephonyIfMatchHeader;
     },
-    TelephonyCampaignResponse
+    TelephonyCampaign
   >;
 
   /** Retrieves an asynchronous outbound campaign operation. */

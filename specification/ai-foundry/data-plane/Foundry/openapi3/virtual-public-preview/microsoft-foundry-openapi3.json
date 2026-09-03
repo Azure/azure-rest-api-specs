@@ -6527,12 +6527,6 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
-              "ETag": {
-                "required": true,
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.eTag"
-                }
-              },
               "Location": {
                 "required": true,
                 "schema": {
@@ -6637,14 +6631,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "ETag": {
-                "required": true,
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.eTag"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -6740,14 +6726,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "ETag": {
-                "required": true,
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.eTag"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -6791,7 +6769,7 @@
       "post": {
         "operationId": "AgentTelephony_importTelephonyCampaignRecipients",
         "summary": "Import outbound telephony campaign recipients",
-        "description": "Starts an asynchronous import of campaign recipients from a Dataset CSV file.",
+        "description": "Starts an asynchronous import of campaign recipients from a Dataset CSV, JSON array, or JSONL file.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6943,15 +6921,6 @@
             }
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity tag returned by the latest read. The request fails if the resource changed since that read.",
-            "schema": {
-              "$ref": "#/components/schemas/Azure.Core.eTag"
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -6965,14 +6934,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "ETag": {
-                "required": true,
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.eTag"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -7047,15 +7008,6 @@
             }
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity tag returned by the latest read. The request fails if the resource changed since that read.",
-            "schema": {
-              "$ref": "#/components/schemas/Azure.Core.eTag"
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -7069,14 +7021,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "ETag": {
-                "required": true,
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.eTag"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -7262,15 +7206,6 @@
             }
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity tag returned by the latest read. The request fails if the resource changed since that read.",
-            "schema": {
-              "$ref": "#/components/schemas/Azure.Core.eTag"
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -7284,14 +7219,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "ETag": {
-                "required": true,
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.eTag"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -42281,7 +42208,9 @@
           },
           "structured_inputs": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/TelephonyStructuredInputValue"
+            },
             "description": "Structured input values available to the agent and greeting for this call."
           },
           "greeting": {
@@ -42329,13 +42258,6 @@
             "type": "string",
             "minLength": 1,
             "description": "An optional customer-declared purpose for campaign calls."
-          },
-          "recipient_schema": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/TelephonyCampaignRecipientSchemaFieldDefinition"
-            },
-            "description": "The optional schema for structured inputs imported for each recipient."
           },
           "schedule": {
             "$ref": "#/components/schemas/TelephonyCampaignScheduleRequest",
@@ -47443,14 +47365,14 @@
             "$ref": "#/components/schemas/TelephonyCampaignRecipientImportSource"
           },
           "mapping": {
-            "$ref": "#/components/schemas/TelephonyCampaignRecipientCsvMapping"
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientMapping"
           },
           "duplicate_handling": {
             "$ref": "#/components/schemas/TelephonyCampaignDuplicateHandling",
             "default": "reject"
           }
         },
-        "description": "A request to import campaign recipients from a Dataset CSV file.",
+        "description": "A request to import campaign recipients from a Dataset CSV, JSON array, or JSONL file.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -92144,7 +92066,9 @@
           },
           "structured_inputs": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/TelephonyStructuredInputValue"
+            },
             "description": "Structured input values available to the agent and greeting."
           },
           "greeting": {
@@ -92934,8 +92858,6 @@
           "execution_status",
           "telephony_binding_id",
           "retry_policy",
-          "revision",
-          "execution_revision",
           "call_job_counts",
           "created_at",
           "updated_at"
@@ -92968,12 +92890,6 @@
           "purpose": {
             "type": "string"
           },
-          "recipient_schema": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/TelephonyCampaignRecipientSchemaFieldDefinition"
-            }
-          },
           "schedule": {
             "$ref": "#/components/schemas/TelephonyCampaignSchedule"
           },
@@ -92991,16 +92907,6 @@
           },
           "published_at": {
             "$ref": "#/components/schemas/FoundryTimestamp"
-          },
-          "revision": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          },
-          "execution_revision": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
           },
           "call_job_counts": {
             "$ref": "#/components/schemas/TelephonyCampaignCallJobCounts"
@@ -93207,58 +93113,6 @@
           ]
         }
       },
-      "TelephonyCampaignRecipientCsvMapping": {
-        "type": "object",
-        "required": [
-          "destination",
-          "recipient_key"
-        ],
-        "properties": {
-          "destination": {
-            "type": "string",
-            "minLength": 1
-          },
-          "recipient_key": {
-            "type": "string",
-            "minLength": 1
-          },
-          "recipient_item_key": {
-            "type": "string",
-            "description": "Required when `duplicate_handling` is `keep_each`."
-          },
-          "structured_inputs": {
-            "type": "string"
-          },
-          "metadata": {
-            "type": "string"
-          },
-          "time_zone": {
-            "type": "string"
-          },
-          "not_before": {
-            "type": "string"
-          },
-          "expires_at": {
-            "type": "string"
-          }
-        },
-        "description": "The CSV columns mapped into each campaign recipient.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "TelephonyCampaignRecipientFieldType": {
-        "type": "string",
-        "enum": [
-          "string",
-          "number",
-          "integer",
-          "boolean"
-        ],
-        "description": "A scalar type accepted by a campaign recipient structured-input field."
-      },
       "TelephonyCampaignRecipientImport": {
         "type": "object",
         "required": [
@@ -93271,7 +93125,6 @@
           "rows_processed",
           "eligible_recipient_count",
           "invalid_recipient_count",
-          "revision",
           "created_at",
           "updated_at"
         ],
@@ -93295,7 +93148,7 @@
             "$ref": "#/components/schemas/TelephonyCampaignRecipientImportSource"
           },
           "mapping": {
-            "$ref": "#/components/schemas/TelephonyCampaignRecipientCsvMapping"
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientMapping"
           },
           "duplicate_handling": {
             "$ref": "#/components/schemas/TelephonyCampaignDuplicateHandling"
@@ -93321,11 +93174,6 @@
           "error_message": {
             "type": "string"
           },
-          "revision": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          },
           "created_at": {
             "$ref": "#/components/schemas/FoundryTimestamp"
           },
@@ -93334,6 +93182,20 @@
           }
         },
         "description": "A durable campaign recipient-import record.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyCampaignRecipientImportFormat": {
+        "type": "string",
+        "enum": [
+          "csv",
+          "json",
+          "jsonl"
+        ],
+        "description": "A supported Dataset recipient file format.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -93376,16 +93238,13 @@
           "file_name": {
             "type": "string",
             "minLength": 1,
-            "description": "A relative path to a CSV file in the Dataset version."
+            "description": "A relative path to a CSV, JSON array, or JSONL file in the Dataset version."
           },
           "format": {
-            "type": "string",
-            "enum": [
-              "csv"
-            ]
+            "$ref": "#/components/schemas/TelephonyCampaignRecipientImportFormat"
           }
         },
-        "description": "A Dataset CSV source for campaign recipient import.",
+        "description": "A Dataset source for campaign recipient import.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -93413,50 +93272,44 @@
           ]
         }
       },
-      "TelephonyCampaignRecipientSchemaField": {
+      "TelephonyCampaignRecipientMapping": {
         "type": "object",
         "required": [
-          "type"
+          "destination",
+          "recipient_key"
         ],
         "properties": {
-          "type": {
-            "$ref": "#/components/schemas/TelephonyCampaignRecipientFieldType",
-            "description": "The scalar type accepted for this structured input."
-          },
-          "required": {
-            "type": "boolean",
-            "description": "Whether every imported recipient must provide the field. Defaults to true.",
-            "default": true
-          },
-          "description": {
+          "destination": {
             "type": "string",
-            "maxLength": 512,
-            "description": "A description of the structured input field."
+            "minLength": 1
+          },
+          "recipient_key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "recipient_item_key": {
+            "type": "string",
+            "description": "Required when `duplicate_handling` is `keep_each`."
+          },
+          "metadata": {
+            "type": "string"
+          },
+          "time_zone": {
+            "type": "string"
+          },
+          "not_before": {
+            "type": "string"
+          },
+          "expires_at": {
+            "type": "string"
           }
         },
-        "description": "A field definition in an outbound campaign recipient schema.",
+        "description": "Source fields or CSV columns mapped into each campaign recipient.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
           ]
         }
-      },
-      "TelephonyCampaignRecipientSchemaFieldDefinition": {
-        "anyOf": [
-          {
-            "type": "string",
-            "enum": [
-              "string",
-              "number",
-              "integer",
-              "boolean"
-            ]
-          },
-          {
-            "$ref": "#/components/schemas/TelephonyCampaignRecipientSchemaField"
-          }
-        ],
-        "description": "A shorthand scalar type or expanded campaign recipient field definition."
       },
       "TelephonyCampaignSchedule": {
         "type": "object",
@@ -93691,6 +93544,30 @@
           }
         ],
         "description": "A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyStructuredInputValue": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "type": "boolean"
+          }
+        ],
+        "description": "A scalar structured-input value supplied for one outbound call. Nested objects, arrays, and null are not accepted.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

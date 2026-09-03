@@ -1201,6 +1201,15 @@ model TelephonyOutboundRetryPolicyResponse {
   interval_seconds: FoundryDurationSeconds;
 }
 
+@doc("A scalar structured-input value supplied for one outbound call. Nested objects, arrays, and null are not accepted.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyStructuredInputValue {
+  string_value: string,
+  number_value: float64,
+  integer_value: int64,
+  boolean_value: boolean,
+}
+
 @doc("The optional execution window for a direct outbound call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("TelephonyCallJobScheduleContent", "csharp")
@@ -1244,7 +1253,7 @@ model CreateTelephonyCallJobRequest {
   purpose?: string;
 
   @doc("Structured input values available to the agent and greeting for this call.")
-  structured_inputs?: Record<unknown>;
+  structured_inputs?: Record<TelephonyStructuredInputValue>;
 
   @doc("A per-call greeting override. Omit it to use the latest agent definition's greeting.")
   greeting?: VoiceAgentGreetingConfig;
@@ -1319,7 +1328,7 @@ model TelephonyCallJob {
   purpose?: string;
 
   @doc("Structured input values available to the agent and greeting.")
-  structured_inputs?: Record<unknown>;
+  structured_inputs?: Record<TelephonyStructuredInputValue>;
 
   @doc("The per-call greeting override, when supplied.")
   greeting?: VoiceAgentGreetingConfig;
@@ -1368,37 +1377,6 @@ alias TelephonyCallJobAcceptedResponse = TypeSpec.Http.Response<202> &
     @header("Retry-After") retry_after: FoundryDurationSeconds;
   };
 
-@doc("A field definition in an outbound campaign recipient schema.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignRecipientSchemaField {
-  @doc("The scalar type accepted for this structured input.")
-  type: TelephonyCampaignRecipientFieldType;
-
-  @doc("Whether every imported recipient must provide the field. Defaults to true.")
-  required?: boolean = true;
-
-  @doc("A description of the structured input field.")
-  @maxLength(512)
-  description?: string;
-}
-
-@doc("A scalar type accepted by a campaign recipient structured-input field.")
-union TelephonyCampaignRecipientFieldType {
-  string_type: "string",
-  number: "number",
-  integer: "integer",
-  boolean: "boolean",
-}
-
-@doc("A shorthand scalar type or expanded campaign recipient field definition.")
-union TelephonyCampaignRecipientSchemaFieldDefinition {
-  string_type: "string",
-  number: "number",
-  integer: "integer",
-  boolean: "boolean",
-  field: TelephonyCampaignRecipientSchemaField,
-}
-
 @doc("When a published outbound campaign becomes eligible to dispatch calls.")
 union TelephonyCampaignScheduleType {
   immediate: "immediate",
@@ -1440,9 +1418,6 @@ model CreateTelephonyCampaignRequest {
   @doc("An optional customer-declared purpose for campaign calls.")
   @minLength(1)
   purpose?: string;
-
-  @doc("The optional schema for structured inputs imported for each recipient.")
-  recipient_schema?: Record<TelephonyCampaignRecipientSchemaFieldDefinition>;
 
   @doc("When the published campaign becomes eligible to dispatch calls.")
   schedule?: TelephonyCampaignScheduleRequest;
@@ -1500,54 +1475,53 @@ model TelephonyCampaign {
   execution_status: TelephonyCampaignExecutionStatus;
   telephony_binding_id: TelephonyBindingId;
   purpose?: string;
-  recipient_schema?: Record<TelephonyCampaignRecipientSchemaFieldDefinition>;
   schedule?: TelephonyCampaignSchedule;
   retry_policy: TelephonyOutboundRetryPolicyResponse;
   latest_successful_validation_id?: string;
   active_validation_id?: string;
   active_recipient_import_id?: TelephonyCampaignRecipientImportId;
   published_at?: FoundryTimestamp;
-  @minValue(0) revision: int64;
-  @minValue(0) execution_revision: int64;
   call_job_counts: TelephonyCampaignCallJobCounts;
   created_at: FoundryTimestamp;
   updated_at: FoundryTimestamp;
 }
 
-alias TelephonyCampaignResponse = {
-  @bodyRoot body: TelephonyCampaign;
-  @header("ETag") etag: Azure.Core.eTag;
-};
-
 alias TelephonyCampaignCreatedResponse = TypeSpec.Http.Response<201> &
-  TelephonyCampaignResponse & {
+  TelephonyCampaign & {
     @header("Location") location: string;
   };
 
-@doc("A Dataset CSV source for campaign recipient import.")
+@doc("A Dataset source for campaign recipient import.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignRecipientImportSource {
   type: "dataset";
   @minLength(1) dataset_name: string;
   @minLength(1) dataset_version: string;
 
-  @doc("A relative path to a CSV file in the Dataset version.")
+  @doc("A relative path to a CSV, JSON array, or JSONL file in the Dataset version.")
   @minLength(1)
   file_name: string;
 
-  format: "csv";
+  format: TelephonyCampaignRecipientImportFormat;
 }
 
-@doc("The CSV columns mapped into each campaign recipient.")
+@doc("A supported Dataset recipient file format.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignRecipientCsvMapping {
+union TelephonyCampaignRecipientImportFormat {
+  csv: "csv",
+  json: "json",
+  jsonl: "jsonl",
+}
+
+@doc("Source fields or CSV columns mapped into each campaign recipient.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignRecipientMapping {
   @minLength(1) destination: string;
   @minLength(1) recipient_key: string;
 
   @doc("Required when `duplicate_handling` is `keep_each`.")
   recipient_item_key?: string;
 
-  structured_inputs?: string;
   metadata?: string;
   time_zone?: string;
   not_before?: string;
@@ -1562,12 +1536,12 @@ union TelephonyCampaignDuplicateHandling {
   merge: "merge",
 }
 
-@doc("A request to import campaign recipients from a Dataset CSV file.")
+@doc("A request to import campaign recipients from a Dataset CSV, JSON array, or JSONL file.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("ImportTelephonyCampaignRecipientsContent", "csharp")
 model ImportTelephonyCampaignRecipientsRequest {
   source: TelephonyCampaignRecipientImportSource;
-  mapping: TelephonyCampaignRecipientCsvMapping;
+  mapping: TelephonyCampaignRecipientMapping;
   duplicate_handling?: TelephonyCampaignDuplicateHandling = TelephonyCampaignDuplicateHandling.reject;
 }
 
@@ -1588,22 +1562,16 @@ model TelephonyCampaignRecipientImport {
   campaign_id: TelephonyCampaignId;
   status: TelephonyCampaignRecipientImportStatus;
   source: TelephonyCampaignRecipientImportSource;
-  mapping?: TelephonyCampaignRecipientCsvMapping;
+  mapping?: TelephonyCampaignRecipientMapping;
   duplicate_handling: TelephonyCampaignDuplicateHandling;
   @minValue(0) rows_processed: int64;
   @minValue(0) eligible_recipient_count: int64;
   @minValue(0) invalid_recipient_count: int64;
   error_code?: string;
   error_message?: string;
-  @minValue(0) revision: int64;
   created_at: FoundryTimestamp;
   updated_at: FoundryTimestamp;
 }
-
-alias TelephonyCampaignRecipientImportResponse = {
-  @bodyRoot body: TelephonyCampaignRecipientImport;
-  @header("ETag") etag: Azure.Core.eTag;
-};
 
 @doc("A request to publish a validated outbound campaign draft.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
