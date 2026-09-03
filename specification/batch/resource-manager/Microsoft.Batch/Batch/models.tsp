@@ -1615,7 +1615,9 @@ model ActivateApplicationPackageParameters {
  * Properties of an application package
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
-model ApplicationPackageProperties {
+@removed(Versions.v2026_10_01)
+@renamedFrom(Versions.v2026_10_01, "ApplicationPackageProperties")
+model ApplicationPackagePropertiesPrev {
   /**
    * The current state of the application package.
    */
@@ -1637,6 +1639,43 @@ model ApplicationPackageProperties {
 
   /**
    * The UTC time at which the Azure Storage URL will expire.
+   */
+  @visibility(Lifecycle.Read)
+  storageUrlExpiry?: utcDateTime;
+
+  /**
+   * The time at which the package was last activated, if the package is active.
+   */
+  @visibility(Lifecycle.Read)
+  lastActivationTime?: utcDateTime;
+}
+
+/**
+ * Properties of an application package
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
+@added(Versions.v2026_10_01)
+model ApplicationPackageProperties {
+  /**
+   * The current state of the application package.
+   */
+  @visibility(Lifecycle.Read)
+  state?: PackageState;
+
+  /**
+   * The format of the application package, if the package is active.
+   */
+  @visibility(Lifecycle.Read)
+  format?: string;
+
+  /**
+   * The URL for the application package in Azure Storage. This property is only returned for the PUT (create or update) operation. For the GET and POST (activate) operations, this property is not populated for API versions newer than 2025-06-01.
+   */
+  @visibility(Lifecycle.Read)
+  storageUrl?: string;
+
+  /**
+   * The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT (create or update) operation. For the GET and POST (activate) operations, this property is not populated for API versions newer than 2025-06-01.
    */
   @visibility(Lifecycle.Read)
   storageUrlExpiry?: utcDateTime;
@@ -1677,6 +1716,15 @@ model ListApplicationsResult is Azure.Core.Page<Application>;
 /**
  * The result of performing list application packages.
  */
+@removed(Versions.v2026_10_01)
+@renamedFrom(Versions.v2026_10_01, "ListApplicationPackagesResult")
+model ListApplicationPackagesResultPrev
+  is Azure.Core.Page<ApplicationPackagePrev>;
+
+/**
+ * The result of performing list application packages.
+ */
+@added(Versions.v2026_10_01)
 model ListApplicationPackagesResult is Azure.Core.Page<ApplicationPackage>;
 
 /**
