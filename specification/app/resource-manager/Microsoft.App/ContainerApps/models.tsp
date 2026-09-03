@@ -524,17 +524,17 @@ union JobRunningState {
   string,
 
   /**
-   * Ready
+   * The job is ready to run.
    */
   Ready: "Ready",
 
   /**
-   * Progressing
+   * The job is transitioning to its target state.
    */
   Progressing: "Progressing",
 
   /**
-   * Suspended
+   * The job is suspended.
    */
   Suspended: "Suspended",
 }
@@ -1623,25 +1623,27 @@ model BlobStorageTokenStore {
   /**
    * The name of the app secrets containing the SAS URL of the blob storage containing the tokens.
    */
-  @madeRequired(Versions.v2026_01_01)
-  sasUrlSettingName: string;
+  sasUrlSettingName?: string;
 
   /**
    * The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName.
    */
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   blobContainerUri?: string;
 
   /**
    * The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId.
    */
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   clientId?: string;
 
   /**
    * The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId.
    */
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   managedIdentityResourceId?: string;
 }
 
@@ -1796,6 +1798,50 @@ model AvailableWorkloadProfileProperties {
    * The everyday name of the workload profile.
    */
   displayName?: string;
+}
+
+/**
+ * Collection of environment modes available in the location.
+ */
+@added(Versions.v2026_07_01)
+model AvailableEnvironmentModesCollection
+  is Azure.Core.Page<AvailableEnvironmentMode>;
+
+/**
+ * An environment mode available to the subscription.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The service returns the standard proxy resource envelope for each available environment mode."
+@added(Versions.v2026_07_01)
+model AvailableEnvironmentMode
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * The Azure region in which the environment mode is available.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
+   * The environment mode details.
+   */
+  properties?: AvailableEnvironmentModeProperties;
+}
+
+/**
+ * Details that describe an available environment mode.
+ */
+@added(Versions.v2026_07_01)
+model AvailableEnvironmentModeProperties {
+  /**
+   * The display name of the environment mode.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The description of the environment mode.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**
@@ -2246,6 +2292,7 @@ model CertificateProperties {
    * The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   certificateType?: CertificateType;
 }
 
@@ -2315,6 +2362,7 @@ model DaprComponentProperties {
    * List of container app services that are bound to the Dapr component
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @identifiers(#["name"])
   serviceComponentBind?: DaprComponentServiceBinding[];
 
@@ -2452,6 +2500,7 @@ model ConnectedEnvironmentStorageProperties {
    * SMB storage properties
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   smb?: SmbStorage;
 }
 
@@ -2544,6 +2593,85 @@ model SmbStorage {
 model ManagedEnvironmentsCollection is Azure.Core.Page<ManagedEnvironment>;
 
 /**
+ * Mode of the managed environment.
+ */
+@added(Versions.v2026_07_01)
+union ManagedEnvironmentMode {
+  string,
+
+  /** The environment supports consumption-only workloads. */
+  ConsumptionOnly: "ConsumptionOnly",
+
+  /** The environment supports workload profiles. */
+  WorkloadProfiles: "WorkloadProfiles",
+
+  /** The environment uses the Express mode. */
+  Express: "Express",
+
+  /** The environment is archived. */
+  Archived: "Archived",
+}
+
+/**
+ * Request body for checking whether a managed environment can migrate to a target mode.
+ */
+@added(Versions.v2026_07_01)
+model CheckMigrationEligibilityRequest {
+  /**
+   * The target environment mode to check migration eligibility against.
+   */
+  targetMode: string;
+}
+
+/**
+ * A blocking reason that prevents a managed environment migration.
+ */
+@added(Versions.v2026_07_01)
+model MigrationEligibilityFailureReason {
+  /**
+   * The error code identifying the blocker.
+   */
+  code: string;
+
+  /**
+   * A human-readable description of the blocker.
+   */
+  message: string;
+}
+
+/**
+ * Result of a read-only managed environment migration eligibility check.
+ */
+@added(Versions.v2026_07_01)
+model CheckMigrationEligibilityResponse {
+  /**
+   * Whether the managed environment can migrate to the requested target mode.
+   */
+  isEligible: boolean;
+
+  /**
+   * The name of the managed environment that was checked.
+   */
+  environmentName: string;
+
+  /**
+   * The current mode of the managed environment.
+   */
+  currentMode: string;
+
+  /**
+   * The requested target mode.
+   */
+  targetMode: string;
+
+  /**
+   * The blocking reasons preventing migration. Empty when the managed environment is eligible.
+   */
+  @identifiers(#["code"])
+  failureReasons: MigrationEligibilityFailureReason[];
+}
+
+/**
  * Managed environment resource specific properties
  */
 model ManagedEnvironmentProperties {
@@ -2589,6 +2717,7 @@ model ManagedEnvironmentProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   privateLinkDefaultDomain?: string;
 
   /**
@@ -2606,12 +2735,14 @@ model ManagedEnvironmentProperties {
    * Environment level Application Insights configuration
    */
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   appInsightsConfiguration?: AppInsightsConfiguration;
 
   /**
    * Environment Open Telemetry configuration
    */
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   openTelemetryConfiguration?: OpenTelemetryConfiguration;
 
   /**
@@ -2624,6 +2755,7 @@ model ManagedEnvironmentProperties {
    * The list of availability zones to use for managed environment
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   availabilityZones?: string[];
 
   /**
@@ -2675,6 +2807,12 @@ model ManagedEnvironmentProperties {
   ingressConfiguration?: IngressConfiguration;
 
   /**
+   * Mode of the environment. Allowed Values: 'ConsumptionOnly', 'WorkloadProfiles', 'Express', 'Archived'.
+   */
+  @added(Versions.v2026_07_01)
+  environmentMode?: ManagedEnvironmentMode;
+
+  /**
    * Private endpoint connections to the resource.
    */
   @visibility(Lifecycle.Read)
@@ -2689,6 +2827,7 @@ model ManagedEnvironmentProperties {
    * Disk encryption configuration for the Managed Environment.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   diskEncryptionConfiguration?: DiskEncryptionConfiguration;
 }
 
@@ -2763,6 +2902,7 @@ model LogAnalyticsConfiguration {
    * Boolean indicating whether to parse json string log into dynamic json columns
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   dynamicJsonColumns?: boolean;
 }
 
@@ -2928,6 +3068,7 @@ model WorkloadProfile {
    * Whether to use a FIPS-enabled OS. Supported only for dedicated workload profiles.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   enableFips?: boolean = false;
 
   /**
@@ -3595,6 +3736,7 @@ model HttpRouteTarget {
    * Weighted routing
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @minValue(0)
   @maxValue(100)
   weight?: int32;
@@ -3761,6 +3903,7 @@ model JobProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   runningState?: JobRunningState;
 
   /**
@@ -4115,6 +4258,7 @@ model JobPatchProperties {
    * The complex type of the extended location.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   extendedLocation?: ExtendedLocation;
 
   /**
@@ -4267,6 +4411,7 @@ model JobExecutionProperties {
    * Detailed status of the job execution.
    */
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   detailedStatus?: ExecutionStatus;
 
   /**
@@ -4274,6 +4419,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   reason?: string;
 
   /**
@@ -4281,6 +4427,7 @@ model JobExecutionProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   message?: string;
 }
 
@@ -4738,12 +4885,14 @@ union ContainerType {
    * Shell
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   Shell: "Shell",
 
   /**
    * NodeLTS
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   NodeLTS: "NodeLTS",
 }
 
@@ -4788,12 +4937,12 @@ union SessionProbeType {
   string,
 
   /**
-   * Liveness
+   * Checks whether the session is still running and healthy.
    */
   Liveness: "Liveness",
 
   /**
-   * Startup
+   * Checks whether the session has started successfully.
    */
   Startup: "Startup",
 }
@@ -5098,6 +5247,7 @@ union ActiveRevisionsMode {
    * Labels
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   Labels: "Labels",
 }
 
@@ -5373,6 +5523,7 @@ union StorageType {
    * Smb
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   Smb: "Smb",
 }
 
@@ -5452,17 +5603,17 @@ union Status {
   string,
 
   /**
-   * Succeeded
+   * The label operation completed successfully.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The label operation failed.
    */
   Failed: "Failed",
 
   /**
-   * Starting
+   * The label operation is starting.
    */
   Starting: "Starting",
 }
@@ -5711,7 +5862,7 @@ union DotNetComponentType {
   string,
 
   /**
-   * AspireDashboard
+   * An Aspire dashboard component.
    */
   AspireDashboard: "AspireDashboard",
 }
@@ -5723,27 +5874,27 @@ union DotNetComponentProvisioningState {
   string,
 
   /**
-   * Succeeded
+   * The .NET component was provisioned successfully.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The .NET component failed to provision.
    */
   Failed: "Failed",
 
   /**
-   * Canceled
+   * Provisioning of the .NET component was canceled.
    */
   Canceled: "Canceled",
 
   /**
-   * Deleting
+   * The .NET component is being deleted.
    */
   Deleting: "Deleting",
 
   /**
-   * InProgress
+   * The .NET component is being provisioned.
    */
   InProgress: "InProgress",
 }
@@ -5773,12 +5924,14 @@ union JavaComponentType {
    * SpringCloudGateway
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   SpringCloudGateway: "SpringCloudGateway",
 
   /**
    * Nacos
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   Nacos: "Nacos",
 }
 
@@ -6025,6 +6178,7 @@ model SessionPoolProperties {
    * The MCP (Model Context Protocol) server settings of the session pool.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   mcpServerSettings?: McpServerSettings;
 }
 
@@ -6176,6 +6330,7 @@ model SessionContainer {
    */
   @identifiers(#["type"])
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   probes?: SessionProbe[];
 }
 
@@ -6585,6 +6740,7 @@ model GithubActionConfiguration {
    * Dockerfile path
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   dockerfilePath?: string;
 
   /**
@@ -6623,6 +6779,7 @@ model GithubActionConfiguration {
    * List of environment variables to be passed to the build.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @identifiers(#["name"])
   buildEnvironmentVariables?: EnvironmentVariable[];
 }
@@ -6823,6 +6980,7 @@ model ContainerAppProperties {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   deploymentErrors?: string;
 
   /**
@@ -6838,6 +6996,12 @@ model ContainerAppProperties {
   environmentId?: string;
 
   /**
+   * Networking configuration for the Container App.
+   */
+  @added(Versions.v2026_07_01)
+  networking?: ContainerAppNetworkingConfiguration;
+
+  /**
    * Workload profile name to pin for container app execution.
    */
   workloadProfileName?: string;
@@ -6846,6 +7010,7 @@ model ContainerAppProperties {
    * Container App auto patch configuration.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   patchingConfiguration?: ContainerAppPropertiesPatchingConfiguration;
 
   /**
@@ -6896,6 +7061,18 @@ model ContainerAppProperties {
 }
 
 /**
+ * Networking configuration for a Container App. Only supported for Container Apps deployed into an Express managed environment.
+ */
+@added(Versions.v2026_07_01)
+model ContainerAppNetworkingConfiguration {
+  /**
+   * Resource ID of a subnet used for outbound (egress) traffic from this Container App. Only supported for Container Apps in an Express managed environment. Mutually exclusive with the environment-level VNet configuration and immutable after the Container App is created.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  outboundVnetSubnetId?: string;
+}
+
+/**
  * Container App auto patch configuration.
  */
 model ContainerAppPropertiesPatchingConfiguration {
@@ -6925,6 +7102,7 @@ model Configuration {
    * Required in labels revisions mode. Label to apply to newly created revision.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   targetLabel?: string;
 
   /**
@@ -6957,6 +7135,7 @@ model Configuration {
    * Optional. The percent of the total number of replicas that must be brought up before revision transition occurs. Defaults to 100 when none is given. Value must be greater than 0 and less than or equal to 100.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @maxValue(100)
   @minValue(1)
   revisionTransitionThreshold?: int32;
@@ -7079,6 +7258,7 @@ model Ingress {
    * Whether an http app listens on http or https
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   targetPortHttpScheme?: IngressTargetPortHttpScheme;
 }
 
@@ -7318,6 +7498,7 @@ model Runtime {
    * .NET app configuration
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   dotnet?: RuntimeDotnet;
 }
 
@@ -7334,6 +7515,7 @@ model RuntimeJava {
    * Diagnostic capabilities achieved by java agent
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   javaAgent?: RuntimeJavaJavaAgent;
 }
 
@@ -7433,6 +7615,7 @@ model BaseContainer {
    * The type of the image. Set to CloudBuild to let the system manages the image, where user will not be able to update image through image field. Set to ContainerImage for user provided image.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   imageType?: ImageType;
 
   /**
@@ -7492,6 +7675,7 @@ model ContainerResources {
    * Required GPU in cores for GPU based app, e.g. 1.0
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   gpu?: float64;
 }
 
@@ -7596,6 +7780,12 @@ model Scale {
    * Optional. KEDA Polling Interval in seconds. Defaults to 30 seconds if not set.
    */
   pollingInterval?: int32;
+
+  /**
+   * Optional. Whether custom scale rules can override the automatic scale rules. This property is only applicable to Function Apps.
+   */
+  @added(Versions.v2026_07_01)
+  allowScalingRuleOverride?: boolean;
 
   /**
    * Scaling rules.
@@ -7704,6 +7894,7 @@ model ServiceBind {
    * Type of the client to be used to connect to the service
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   clientType?: string;
 
   /**
@@ -7711,6 +7902,7 @@ model ServiceBind {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   customizedKeys?: Record<string>;
 }
 
@@ -8053,6 +8245,24 @@ model HttpGet {
 model ContainerAppsFunctionCollection is Azure.Core.Page<ContainerAppsFunction>;
 
 /**
+ * The state of a Container App function.
+ */
+@added(Versions.v2026_07_01)
+union ContainerAppsFunctionState {
+  string,
+
+  /**
+   * The function is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The function is disabled.
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * Function resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8078,13 +8288,38 @@ model ContainerAppsFunctionProperties {
   /**
    * Indicates whether the function is disabled.
    */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "isDisabled")
+  @visibility(Lifecycle.Read)
+  isDisabledLegacy?: boolean;
+
+  /**
+   * Indicates whether the function is disabled. This property is deprecated; use `state` instead.
+   */
+  #deprecated "Use `state` instead."
+  @added(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
+
+  /**
+   * The state of the function.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  state?: ContainerAppsFunctionState;
 }
 
 /**
  * Container App Label History collection ARM resource.
  */
+@removed(Versions.v2026_01_01)
+@renamedFrom(Versions.v2026_01_01, "LabelHistoryCollection")
+model LabelHistoryPreviewCollection is Azure.Core.Page<LabelHistoryPreview>;
+
+/**
+ * Container App Label History collection ARM resource.
+ */
+@added(Versions.v2026_07_01)
 model LabelHistoryCollection is Azure.Core.Page<LabelHistory>;
 
 /**
@@ -8095,9 +8330,8 @@ model LabelHistoryProperties {
   /**
    * List of label history records.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @identifiers(#["label"])
+  @identifiers(#[])
   records?: LabelHistoryRecordItem[];
 }
 
@@ -8351,6 +8585,7 @@ model RevisionProperties {
    * List of labels assigned to this revision.
    */
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   labels?: string[];
 
@@ -8474,6 +8709,7 @@ model ReplicaContainer {
    */
   @visibility(Lifecycle.Read)
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   debugEndpoint?: string;
 }
 
@@ -8818,6 +9054,7 @@ model WorkflowArtifacts {
  * Spring Cloud Gateway route definition
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 model ScgRoute {
   /**
    * Id of the route
@@ -8860,6 +9097,7 @@ model JavaComponentIngress {
  * Spring Cloud Gateway properties.
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 model SpringCloudGatewayComponent extends JavaComponentProperties {
   /**
    * Java Component Ingress configurations.
@@ -8897,6 +9135,7 @@ model SpringBootAdminComponent extends JavaComponentProperties {
  * Nacos properties.
  */
 @removed(Versions.v2026_01_01)
+@removed(Versions.v2026_07_01)
 model NacosComponent extends JavaComponentProperties {
   /**
    * Java Component Ingress configurations.
