@@ -93777,7 +93777,7 @@
             "description": "Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts."
           },
           "subagent_config": {
-            "$ref": "#/components/schemas/VoiceAgentSubAgentConfig",
+            "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
             "description": "Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists."
           },
           "store": {
@@ -94532,7 +94532,7 @@
         ],
         "description": "A static interim response selected from configured text."
       },
-      "VoiceAgentSubAgent": {
+      "VoiceAgentSubagent": {
         "type": "object",
         "required": [
           "agent_name",
@@ -94570,7 +94570,7 @@
           ]
         }
       },
-      "VoiceAgentSubAgentConfig": {
+      "VoiceAgentSubagentConfig": {
         "type": "object",
         "required": [
           "subagents"
@@ -94579,7 +94579,7 @@
           "subagents": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/VoiceAgentSubAgent"
+              "$ref": "#/components/schemas/VoiceAgentSubagent"
             },
             "minItems": 1,
             "description": "The sibling Foundry text agents, in the same project, that this voice agent may consult."
