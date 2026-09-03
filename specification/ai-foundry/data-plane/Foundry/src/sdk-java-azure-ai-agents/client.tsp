@@ -3,6 +3,8 @@ import "../common/custom-types.tsp";
 import "../sdk-common/error.default.tsp";
 import "../sdk-common/ops-relocation-agents.tsp";
 
+import "@typespec/http";
+
 import "../agents/routes.tsp";
 import "../voice-agents/routes.tsp";
 import "../memory-stores/routes.tsp";
@@ -17,9 +19,167 @@ import "../openai/conversations/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
-using TypeSpec.OpenAPI;
+using TypeSpec.Http;
 
 using Azure.AI.Projects;
+
+namespace Azure.AI.Projects.Beta {
+  interface AgentEndpointConversations {}
+
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversation,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.deleteAgentConversation,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponses,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationResponse,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationResponseItems,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.listAgentConversationItems,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItem,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudio,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemAudioContent,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudio,
+    AgentEndpointConversations,
+    "java"
+  );
+  @@clientLocation(
+    Azure.AI.Projects.AgentEndpointConversations.getAgentConversationAudioContent,
+    AgentEndpointConversations,
+    "java"
+  );
+}
+
+// Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
+// Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
+@@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
+
+// Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
+@@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
+@@access(OpenAI.RealtimeClientEvent, Access.public, "java");
+@@usage(OpenAI.RealtimeServerEvent, Usage.output | Usage.json);
+@@access(OpenAI.RealtimeServerEvent, Access.public, "java");
+@@usage(VoiceAgentTransport, Usage.input | Usage.json);
+@@access(VoiceAgentTransport, Access.public, "java");
+
+// OpenAI realtime metadata is a string map. Project it directly instead of generating a misplaced root model.
+@@alternateType(OpenAI.Metadata, Record<string>, "java");
+@@clientName(
+  OpenAI.RealtimeServerEventError,
+  "RealtimeServerEventError",
+  "java"
+);
+
+// The imported realtime item hierarchy has a second role discriminator below `type: message`.
+// Mark each message leaf and content shape explicitly so Java emits constructors usable by session clients.
+@@usage(
+  OpenAI.RealtimeConversationItem,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(OpenAI.RealtimeConversationItem, Access.public, "java");
+@@usage(
+  OpenAI.RealtimeConversationItemMessage,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(OpenAI.RealtimeConversationItemMessage, Access.public, "java");
+@@usage(
+  OpenAI.RealtimeConversationItemMessageSystem,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(OpenAI.RealtimeConversationItemMessageSystem, Access.public, "java");
+@@usage(
+  OpenAI.RealtimeConversationItemMessageSystemContent,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageSystemContent,
+  Access.public,
+  "java"
+);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageUser,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(OpenAI.RealtimeConversationItemMessageUser, Access.public, "java");
+@@usage(
+  OpenAI.RealtimeConversationItemMessageUserContent,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageUserContent,
+  Access.public,
+  "java"
+);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageAssistant,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageAssistant,
+  Access.public,
+  "java"
+);
+@@usage(
+  OpenAI.RealtimeConversationItemMessageAssistantContent,
+  Usage.input | Usage.output | Usage.json
+);
+@@access(
+  OpenAI.RealtimeConversationItemMessageAssistantContent,
+  Access.public,
+  "java"
+);
+
+@@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
+@@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
 
 // Java promotes the shared Foundry-Features header with @@clientLocation, not @@scope/@@clientInitialization.
 // @@scope(..., "!java") removes the header from Java entirely, including REST-interface @HeaderParam wiring.
@@ -109,15 +269,6 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
 @@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
 @@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
-@@clientName(
-  AgentOptimizationDatasetItem.desired_num_turns,
-  "desiredNumberTurns"
-);
-@@clientName(
-  AgentOptimizationEvaluatorRef,
-  "AgentOptimizationEvaluatorReference"
-);
-@@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 @@clientName(Microsoft365PublishResponse, "Microsoft365PublishResult");
@@ -235,10 +386,6 @@ using Azure.AI.Projects;
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
 
-// Java's HTTP pipeline cannot expose the upgraded WebSocket connection or exchange frames.
-// Exclude this operation until the Java SDK has a supported WebSocket transport implementation.
-@@scope(Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent, "!java");
-
 @@access(Agents.createAgent, Access.internal);
 @@access(Agents.updateAgent, Access.internal);
 @@access(Agents.createAgentFromManifest, Access.internal);
@@ -342,10 +489,14 @@ using Azure.AI.Projects;
 
 @@usage(FoundryFeaturesOptInKeys, Usage.input);
 @@access(FoundryFeaturesOptInKeys, Access.internal, "java");
-@@usage(AgentDefinitionOptInKeys, Usage.input);
+@@usage(AgentDefinitionOptInKeys, Usage.input, "java");
 @@access(AgentDefinitionOptInKeys, Access.internal, "java");
 
-@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMcpHttpError", "java");
+@@usage(OpenAI.ApproximateLocation, Usage.input, "java");
+@@access(OpenAI.ApproximateLocation, Access.public, "java");
+@@usage(OpenAI.WebSearchApproximateLocation, Usage.input, "java");
+@@access(OpenAI.WebSearchApproximateLocation, Access.public, "java");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "java");
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
@@ -394,6 +545,11 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
+
+// Keep persisted voice-item Unix timestamps as Java longs. Treating the encoded
+// utcDateTime as OffsetDateTime conflicts with the generated integer JSON reader
+// across the polymorphic item hierarchy.
+@@alternateType(VoiceConversationItemPersistence.created_at, int64, "java");
 
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
@@ -474,17 +630,6 @@ model TimeZoneType {}
 @@alternateType(
   OpenAI.WebSearchApproximateLocation.timezone,
   TimeZoneType,
-  "java"
-);
-
-// Java-only helper scalar so `elapsed_seconds` (wire = fractional seconds as float64)
-// is exposed to callers as java.time.Duration while keeping the wire format unchanged.
-@encode(DurationKnownEncoding.seconds, float64)
-scalar DurationInFloatSeconds extends duration;
-
-@@alternateType(
-  AgentOptimizationJobProgress.elapsed_seconds,
-  DurationInFloatSeconds,
   "java"
 );
 
