@@ -35111,6 +35111,14 @@
             "$ref": "#/components/schemas/EvaluationLevel",
             "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
             "default": "turn"
+          },
+          "latency": {
+            "$ref": "#/components/schemas/EvalRunLatency",
+            "description": "Latency measurements observed during the evaluation run."
+          },
+          "estimated_cost": {
+            "$ref": "#/components/schemas/EvalRunCost",
+            "description": "Estimated costs observed during the evaluation run."
           }
         },
         "description": "A schema representing an evaluation run.",
@@ -35120,6 +35128,16 @@
           "group": "evals",
           "example": "{\n  \"object\": \"eval.run\",\n  \"id\": \"evalrun_67e57965b480819094274e3a32235e4c\",\n  \"eval_id\": \"eval_67e579652b548190aaa83ada4b125f47\",\n  \"report_url\": \"https://platform.openai.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c\",\n  \"status\": \"queued\",\n  \"model\": \"gpt-4o-mini\",\n  \"name\": \"gpt-4o-mini\",\n  \"created_at\": 1743092069,\n  \"result_counts\": {\n    \"total\": 0,\n    \"errored\": 0,\n    \"failed\": 0,\n    \"passed\": 0\n  },\n  \"per_model_usage\": null,\n  \"per_testing_criteria_results\": null,\n  \"data_source\": {\n    \"type\": \"completions\",\n    \"source\": {\n      \"type\": \"file_content\",\n      \"content\": [\n        {\n          \"item\": {\n            \"input\": \"Tech Company Launches Advanced Artificial Intelligence Platform\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Central Bank Increases Interest Rates Amid Inflation Concerns\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Summit Addresses Climate Change Strategies\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Major Retailer Reports Record-Breaking Holiday Sales\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"National Team Qualifies for World Championship Finals\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Stock Markets Rally After Positive Economic Data Released\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Manufacturer Announces Merger with Competitor\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Breakthrough in Renewable Energy Technology Unveiled\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"World Leaders Sign Historic Climate Agreement\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Professional Athlete Sets New Record in Championship Event\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Financial Institutions Adapt to New Regulatory Requirements\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Tech Conference Showcases Advances in Artificial Intelligence\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Markets Respond to Oil Price Fluctuations\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Cooperation Strengthened Through New Treaty\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Sports League Announces Revised Schedule for Upcoming Season\",\n            \"ground_truth\": \"Sports\"\n          }\n        }\n      ]\n    },\n    \"input_messages\": {\n      \"type\": \"template\",\n      \"template\": [\n        {\n          \"type\": \"message\",\n          \"role\": \"developer\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"Categorize a given news headline into one of the following topics: Technology, Markets, World, Business, or Sports.\n\n# Steps\n\n1. Analyze the content of the news headline to understand its primary focus.\n2. Extract the subject matter, identifying any key indicators or keywords.\n3. Use the identified indicators to determine the most suitable category out of the five options: Technology, Markets, World, Business, or Sports.\n4. Ensure only one category is selected per headline.\n\n# Output Format\n\nRespond with the chosen category as a single word. For instance: \"Technology\", \"Markets\", \"World\", \"Business\", or \"Sports\".\n\n# Examples\n\n**Input**: \"Apple Unveils New iPhone Model, Featuring Advanced AI Features\"\n**Output**: \"Technology\"\n\n**Input**: \"Global Stocks Mixed as Investors Await Central Bank Decisions\"\n**Output**: \"Markets\"\n\n**Input**: \"War in Ukraine: Latest Updates on Negotiation Status\"\n**Output**: \"World\"\n\n**Input**: \"Microsoft in Talks to Acquire Gaming Company for $2 Billion\"\n**Output**: \"Business\"\n\n**Input**: \"Manchester United Secures Win in Premier League Football Match\"\n**Output**: \"Sports\"\n\n# Notes\n\n- If the headline appears to fit into more than one category, choose the most dominant theme.\n- Keywords or phrases such as \"stocks\", \"company acquisition\", \"match\", or technological brands can be good indicators for classification.\n\"\n          }\n        },\n        {\n          \"type\": \"message\",\n          \"role\": \"user\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"{{item.input}}\"\n          }\n        }\n      ]\n    },\n    \"model\": \"gpt-4o-mini\",\n    \"sampling_params\": {\n      \"seed\": 42,\n      \"temperature\": 1.0,\n      \"top_p\": 1.0,\n      \"max_completions_tokens\": 2048\n    }\n  },\n  \"error\": null,\n  \"metadata\": {}\n}\n"
         }
+      },
+      "EvalRunCost": {
+        "type": "object",
+        "properties": {
+          "target": {
+            "$ref": "#/components/schemas/InferenceCostSummary",
+            "description": "Estimated inference cost for the evaluation target."
+          }
+        },
+        "description": "Estimated costs reported for an evaluation run."
       },
       "EvalRunDataSource": {
         "type": "object",
@@ -35146,6 +35164,16 @@
           }
         },
         "description": "Base class for run data sources with discriminator support."
+      },
+      "EvalRunLatency": {
+        "type": "object",
+        "properties": {
+          "target": {
+            "$ref": "#/components/schemas/LatencySummary",
+            "description": "End-to-end latency percentiles for the evaluation target."
+          }
+        },
+        "description": "Latency measurements reported for an evaluation run."
       },
       "EvalRunOutputItem": {
         "type": "object",
@@ -37667,6 +37695,64 @@
         },
         "description": "Index resource Definition"
       },
+      "InferenceCostCompleteness": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "complete",
+              "partial"
+            ]
+          }
+        ],
+        "description": "Indicates whether all target models attributed to the evaluation run were priced."
+      },
+      "InferenceCostSummary": {
+        "type": "object",
+        "required": [
+          "estimated_cost",
+          "currency",
+          "completeness",
+          "model_costs"
+        ],
+        "properties": {
+          "estimated_cost": {
+            "type": "number",
+            "format": "decimal128",
+            "description": "Estimated target inference cost in the specified currency."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code for the estimate."
+          },
+          "completeness": {
+            "$ref": "#/components/schemas/InferenceCostCompleteness",
+            "description": "Whether all attributed target models were priced."
+          },
+          "pricing_version": {
+            "type": "string",
+            "description": "Identifier of the price-list snapshot used for the estimate."
+          },
+          "model_costs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelCost"
+            },
+            "description": "Estimated cost and token usage for each priced target model."
+          },
+          "unpriced_models": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Target models for which no reliable price was available."
+          }
+        },
+        "description": "Run-wide estimated inference cost for the evaluation target.\n\nThe estimate is derived from reported token counts and list prices. It excludes evaluator\nand runtime usage and does not account for negotiated pricing, commitments, or discounts."
+      },
       "Insight": {
         "type": "object",
         "required": [
@@ -38216,6 +38302,32 @@
           }
         ],
         "description": "Extensible status values shared by Foundry jobs."
+      },
+      "LatencySummary": {
+        "type": "object",
+        "required": [
+          "p50_ms",
+          "p95_ms",
+          "sample_count"
+        ],
+        "properties": {
+          "p50_ms": {
+            "type": "number",
+            "format": "double",
+            "description": "Median target latency in milliseconds."
+          },
+          "p95_ms": {
+            "type": "number",
+            "format": "double",
+            "description": "95th percentile target latency in milliseconds."
+          },
+          "sample_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of evaluation rows that contributed a usable latency measurement."
+          }
+        },
+        "description": "Run-wide end-to-end latency percentiles for the evaluation target."
       },
       "LoraConfig": {
         "type": "object",
@@ -39364,6 +39476,43 @@
             "preview_tool"
           ]
         }
+      },
+      "ModelCost": {
+        "type": "object",
+        "required": [
+          "model_name",
+          "estimated_cost",
+          "prompt_tokens",
+          "cached_tokens",
+          "completion_tokens"
+        ],
+        "properties": {
+          "model_name": {
+            "type": "string",
+            "description": "Backing model name used for pricing. For a model-router target, this is the model\nattributed by the runtime. For a direct deployment, this is resolved from deployment metadata."
+          },
+          "estimated_cost": {
+            "type": "number",
+            "format": "decimal128",
+            "description": "Estimated inference cost for this model."
+          },
+          "prompt_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of non-cached input tokens."
+          },
+          "cached_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of cached input tokens."
+          },
+          "completion_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of output tokens."
+          }
+        },
+        "description": "Estimated inference cost and token usage for one target model."
       },
       "ModelCredentialRequest": {
         "type": "object",
