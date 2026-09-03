@@ -747,11 +747,11 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
 /** Latency measurements reported for an evaluation run. */
 model EvalRunLatency {
   /** End-to-end latency percentiles for the evaluation target. */
-  target?: TargetLatencySummary;
+  target?: LatencySummary;
 }
 
 /** Run-wide end-to-end latency percentiles for the evaluation target. */
-model TargetLatencySummary {
+model LatencySummary {
   /** Median target latency in milliseconds. */
   p50_ms: float64;
 
@@ -765,11 +765,11 @@ model TargetLatencySummary {
 /** Estimated costs reported for an evaluation run. */
 model EvalRunCost {
   /** Estimated inference cost for the evaluation target. */
-  target?: TargetInferenceCostSummary;
+  target?: InferenceCostSummary;
 }
 
 /** Indicates whether all target models attributed to the evaluation run were priced. */
-union TargetInferenceCostCompleteness {
+union InferenceCostCompleteness {
   string,
 
   /** All attributed target models were priced. */
@@ -785,7 +785,7 @@ union TargetInferenceCostCompleteness {
  * The estimate is derived from reported token counts and list prices. It excludes evaluator
  * and runtime usage and does not account for negotiated pricing, commitments, or discounts.
  */
-model TargetInferenceCostSummary {
+model InferenceCostSummary {
   /** Estimated target inference cost in the specified currency. */
   estimated_cost: decimal128;
 
@@ -793,20 +793,20 @@ model TargetInferenceCostSummary {
   currency: string;
 
   /** Whether all attributed target models were priced. */
-  completeness: TargetInferenceCostCompleteness;
+  completeness: InferenceCostCompleteness;
 
   /** Identifier of the price-list snapshot used for the estimate. */
   pricing_version?: string;
 
   /** Estimated cost and token usage for each priced target model. */
-  model_costs: TargetModelCost[];
+  model_costs: ModelCost[];
 
   /** Target models for which no reliable price was available. */
   unpriced_models?: string[];
 }
 
 /** Estimated inference cost and token usage for one target model. */
-model TargetModelCost {
+model ModelCost {
   /**
    * Backing model name used for pricing. For a model-router target, this is the model
    * attributed by the runtime. For a direct deployment, this is resolved from deployment metadata.

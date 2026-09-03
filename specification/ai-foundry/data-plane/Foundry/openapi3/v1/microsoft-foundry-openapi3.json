@@ -34929,7 +34929,7 @@
         "type": "object",
         "properties": {
           "target": {
-            "$ref": "#/components/schemas/TargetInferenceCostSummary",
+            "$ref": "#/components/schemas/InferenceCostSummary",
             "description": "Estimated inference cost for the evaluation target."
           }
         },
@@ -34965,7 +34965,7 @@
         "type": "object",
         "properties": {
           "target": {
-            "$ref": "#/components/schemas/TargetLatencySummary",
+            "$ref": "#/components/schemas/LatencySummary",
             "description": "End-to-end latency percentiles for the evaluation target."
           }
         },
@@ -37491,6 +37491,64 @@
         },
         "description": "Index resource Definition"
       },
+      "InferenceCostCompleteness": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "complete",
+              "partial"
+            ]
+          }
+        ],
+        "description": "Indicates whether all target models attributed to the evaluation run were priced."
+      },
+      "InferenceCostSummary": {
+        "type": "object",
+        "required": [
+          "estimated_cost",
+          "currency",
+          "completeness",
+          "model_costs"
+        ],
+        "properties": {
+          "estimated_cost": {
+            "type": "number",
+            "format": "decimal128",
+            "description": "Estimated target inference cost in the specified currency."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code for the estimate."
+          },
+          "completeness": {
+            "$ref": "#/components/schemas/InferenceCostCompleteness",
+            "description": "Whether all attributed target models were priced."
+          },
+          "pricing_version": {
+            "type": "string",
+            "description": "Identifier of the price-list snapshot used for the estimate."
+          },
+          "model_costs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelCost"
+            },
+            "description": "Estimated cost and token usage for each priced target model."
+          },
+          "unpriced_models": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Target models for which no reliable price was available."
+          }
+        },
+        "description": "Run-wide estimated inference cost for the evaluation target.\n\nThe estimate is derived from reported token counts and list prices. It excludes evaluator\nand runtime usage and does not account for negotiated pricing, commitments, or discounts."
+      },
       "Insight": {
         "type": "object",
         "required": [
@@ -38040,6 +38098,32 @@
           }
         ],
         "description": "Extensible status values shared by Foundry jobs."
+      },
+      "LatencySummary": {
+        "type": "object",
+        "required": [
+          "p50_ms",
+          "p95_ms",
+          "sample_count"
+        ],
+        "properties": {
+          "p50_ms": {
+            "type": "number",
+            "format": "double",
+            "description": "Median target latency in milliseconds."
+          },
+          "p95_ms": {
+            "type": "number",
+            "format": "double",
+            "description": "95th percentile target latency in milliseconds."
+          },
+          "sample_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of evaluation rows that contributed a usable latency measurement."
+          }
+        },
+        "description": "Run-wide end-to-end latency percentiles for the evaluation target."
       },
       "LoraConfig": {
         "type": "object",
@@ -39188,6 +39272,43 @@
             "preview_tool"
           ]
         }
+      },
+      "ModelCost": {
+        "type": "object",
+        "required": [
+          "model_name",
+          "estimated_cost",
+          "prompt_tokens",
+          "cached_tokens",
+          "completion_tokens"
+        ],
+        "properties": {
+          "model_name": {
+            "type": "string",
+            "description": "Backing model name used for pricing. For a model-router target, this is the model\nattributed by the runtime. For a direct deployment, this is resolved from deployment metadata."
+          },
+          "estimated_cost": {
+            "type": "number",
+            "format": "decimal128",
+            "description": "Estimated inference cost for this model."
+          },
+          "prompt_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of non-cached input tokens."
+          },
+          "cached_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of cached input tokens."
+          },
+          "completion_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of output tokens."
+          }
+        },
+        "description": "Estimated inference cost and token usage for one target model."
       },
       "ModelCredentialRequest": {
         "type": "object",
@@ -80304,127 +80425,6 @@
           }
         ],
         "description": "Represents the parameters for target completion item generation."
-      },
-      "TargetInferenceCostCompleteness": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "complete",
-              "partial"
-            ]
-          }
-        ],
-        "description": "Indicates whether all target models attributed to the evaluation run were priced."
-      },
-      "TargetInferenceCostSummary": {
-        "type": "object",
-        "required": [
-          "estimated_cost",
-          "currency",
-          "completeness",
-          "model_costs"
-        ],
-        "properties": {
-          "estimated_cost": {
-            "type": "number",
-            "format": "decimal128",
-            "description": "Estimated target inference cost in the specified currency."
-          },
-          "currency": {
-            "type": "string",
-            "description": "ISO 4217 currency code for the estimate."
-          },
-          "completeness": {
-            "$ref": "#/components/schemas/TargetInferenceCostCompleteness",
-            "description": "Whether all attributed target models were priced."
-          },
-          "pricing_version": {
-            "type": "string",
-            "description": "Identifier of the price-list snapshot used for the estimate."
-          },
-          "model_costs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TargetModelCost"
-            },
-            "description": "Estimated cost and token usage for each priced target model."
-          },
-          "unpriced_models": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Target models for which no reliable price was available."
-          }
-        },
-        "description": "Run-wide estimated inference cost for the evaluation target.\n\nThe estimate is derived from reported token counts and list prices. It excludes evaluator\nand runtime usage and does not account for negotiated pricing, commitments, or discounts."
-      },
-      "TargetLatencySummary": {
-        "type": "object",
-        "required": [
-          "p50_ms",
-          "p95_ms",
-          "sample_count"
-        ],
-        "properties": {
-          "p50_ms": {
-            "type": "number",
-            "format": "double",
-            "description": "Median target latency in milliseconds."
-          },
-          "p95_ms": {
-            "type": "number",
-            "format": "double",
-            "description": "95th percentile target latency in milliseconds."
-          },
-          "sample_count": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Number of evaluation rows that contributed a usable latency measurement."
-          }
-        },
-        "description": "Run-wide end-to-end latency percentiles for the evaluation target."
-      },
-      "TargetModelCost": {
-        "type": "object",
-        "required": [
-          "model_name",
-          "estimated_cost",
-          "prompt_tokens",
-          "cached_tokens",
-          "completion_tokens"
-        ],
-        "properties": {
-          "model_name": {
-            "type": "string",
-            "description": "Backing model name used for pricing. For a model-router target, this is the model\nattributed by the runtime. For a direct deployment, this is resolved from deployment metadata."
-          },
-          "estimated_cost": {
-            "type": "number",
-            "format": "decimal128",
-            "description": "Estimated inference cost for this model."
-          },
-          "prompt_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Number of non-cached input tokens."
-          },
-          "cached_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Number of cached input tokens."
-          },
-          "completion_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Number of output tokens."
-          }
-        },
-        "description": "Estimated inference cost and token usage for one target model."
       },
       "TargetUpdate": {
         "type": "object",
