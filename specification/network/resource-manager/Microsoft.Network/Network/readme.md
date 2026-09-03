@@ -95,14 +95,6 @@ suppressions:
     where:
       - $.definitions.uuid.format
   # --- stable/2026-01-01/firewallPolicy.json ---
-  - code: ResourceNameRestriction
-    from: firewallPolicy.json
-    reason: firewallPolicyName is an existing parent resource path parameter established in prior stable API versions. Adding a pattern constraint to the parent resource would alter every firewall policy operation and impose a new client-side restriction on the published contract.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}"]
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: firewallPolicy.json
     reason: The Network TypeSpec project currently targets ARM common types v5. These child resources follow the same project-wide common-types version to avoid unrelated contract churn across the 2026-01-01 package.

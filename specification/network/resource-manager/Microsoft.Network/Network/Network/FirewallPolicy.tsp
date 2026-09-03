@@ -44,6 +44,11 @@ model FirewallPolicy extends Common.Resource {
   identity?: Common.ManagedServiceIdentity;
 }
 
+@@pattern(
+  FirewallPolicy.name,
+  "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_])?$"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 @armResourceOperations(#{ omitTags: true })
