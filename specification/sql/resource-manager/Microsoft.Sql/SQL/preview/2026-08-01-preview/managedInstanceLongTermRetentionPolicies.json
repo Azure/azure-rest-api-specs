@@ -407,6 +407,14 @@
           "$ref": "./common.json#/definitions/BackupStorageAccessTier",
           "description": "The BackupStorageAccessTier for the LTR backups"
         },
+        "timeBasedImmutability": {
+          "$ref": "./common.json#/definitions/TimeBasedImmutability",
+          "description": "The setting for whether to enable time-based immutability for future backups. When set, future backups will have TimeBasedImmutability enabled."
+        },
+        "timeBasedImmutabilityMode": {
+          "$ref": "./common.json#/definitions/TimeBasedImmutabilityMode",
+          "description": "The setting for time-based immutability mode for future backup (Value can be either Locked or UnLocked. Only effective if TimeBasedImmutability is enabled). Caution: Immutability of LTR backup cannot be removed if TimeBasedImmutabilityMode is Locked."
+        },
         "weeklyRetention": {
           "type": "string",
           "description": "The weekly retention policy for an LTR backup in an ISO 8601 format."
