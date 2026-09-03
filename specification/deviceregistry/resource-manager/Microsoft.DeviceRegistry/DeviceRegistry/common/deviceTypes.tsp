@@ -17,6 +17,7 @@ union RegistryDeviceEnablementState {
 }
 
 /** Reference to type metadata about a device (e.g., the WoT Thing Model for the device). */
+@added(Versions.v2026_11_02_preview)
 @maxLength(512)
 scalar RegistryDeviceTypeRef extends string;
 

@@ -687,6 +687,7 @@ interface Namespaces {
 
   @doc("Generate a report for a namespace.")
   @added(Versions.v2026_11_02_preview)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   generateReport is ArmResourceActionAsync<
     Namespace,
     ReportSelector,
