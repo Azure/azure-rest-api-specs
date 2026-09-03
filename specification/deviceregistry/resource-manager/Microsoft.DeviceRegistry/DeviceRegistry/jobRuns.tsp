@@ -30,6 +30,12 @@ model JobRun is ProxyResource<JobRunProperties> {
 }
 
 @added(Versions.v2026_11_02_preview)
+@doc("Defines the error details for a job run.")
+model JobRunError {
+  ...Error;
+}
+
+@added(Versions.v2026_11_02_preview)
 @doc("The job run properties.")
 model JobRunProperties {
   @doc("Globally unique, immutable, non-reusable ID.")
@@ -43,6 +49,10 @@ model JobRunProperties {
   @doc("The reason the run was canceled. Present only when status is Canceled.")
   @visibility(Lifecycle.Read)
   cancellationReason?: JobRunCancellationReason;
+
+  @doc("The error details explaining why the job run failed. Present only when status is Failed.")
+  @visibility(Lifecycle.Read)
+  error?: JobRunError;
 
   @doc("The scheduled time for the job run.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -68,9 +78,6 @@ union JobRunStatus {
 
   @doc("The job run is scheduled.")
   Scheduled: "Scheduled",
-
-  @doc("The job run is queued for dispatch and is consuming concurrency quota.")
-  Queued: "Queued",
 
   @doc("The job run is actively executing.")
   Active: "Active",

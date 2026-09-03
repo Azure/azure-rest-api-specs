@@ -26,7 +26,13 @@ model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   @maxLength(64)
   name: string;
 
-  ...ManagedSystemAssignedIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Explicit identity property required for @typeChangedFrom versioning"
+  @doc("The managed service identities assigned to this resource.")
+  @typeChangedFrom(
+    Versions.v2026_11_01,
+    Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
+  )
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @added(Versions.v2024_09_01_preview)
@@ -124,6 +130,10 @@ union Format {
   @doc("Delta format")
   Delta_1_0: "Delta/1.0",
 
+  @added(Versions.v2026_11_01)
+  @doc("W3C Web of Things JSON-LD format")
+  JsonLD_1_1: "JsonLD/1.1",
+
   string,
 }
 
@@ -134,6 +144,14 @@ union Format {
 union SchemaType {
   @doc("Message Schema schema type")
   MessageSchema: "MessageSchema",
+
+  @added(Versions.v2026_11_01)
+  @doc("W3C Web of Things Thing Model document")
+  ThingModel: "ThingModel",
+
+  @added(Versions.v2026_11_01)
+  @doc("W3C Web of Things Thing Description document")
+  ThingDescription: "ThingDescription",
 
   string,
 }
