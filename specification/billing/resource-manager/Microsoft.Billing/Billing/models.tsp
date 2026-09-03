@@ -5940,12 +5940,6 @@ model BillingSubscriptionAliasProperties extends BillingSubscriptionProperties {
    */
   @visibility(Lifecycle.Read)
   billingSubscriptionId?: string;
-
-  /**
-   * The provisioning state of the resource during a long-running operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
 }
 
 /**
