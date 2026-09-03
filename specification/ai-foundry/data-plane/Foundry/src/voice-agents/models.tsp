@@ -1252,7 +1252,7 @@ model CreateTelephonyCallJobRequest {
   @minLength(1)
   purpose?: string;
 
-  @doc("Structured input values available to the agent and greeting for this call.")
+  @doc("Flat scalar structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.")
   structured_inputs?: Record<TelephonyStructuredInputValue>;
 
   @doc("A per-call greeting override. Omit it to use the latest agent definition's greeting.")
@@ -1327,7 +1327,7 @@ model TelephonyCallJob {
   @doc("The optional declared purpose for the call.")
   purpose?: string;
 
-  @doc("Structured input values available to the agent and greeting.")
+  @doc("The flat scalar structured input values available to the agent and greeting. Agent-declared inputs follow their schema, required, and default-value semantics; additional inputs remain available as dynamic template variables.")
   structured_inputs?: Record<TelephonyStructuredInputValue>;
 
   @doc("The per-call greeting override, when supplied.")
@@ -1513,7 +1513,7 @@ union TelephonyCampaignRecipientImportFormat {
   jsonl: "jsonl",
 }
 
-@doc("Source fields or CSV columns mapped into each campaign recipient.")
+@doc("Source fields or CSV columns mapped into each campaign recipient. Every unmapped CSV column or JSON/JSONL top-level property becomes a same-named structured input. CSV cells are preserved as strings until Agent-declared inputs are parsed according to their schemas; additional inputs remain strings.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignRecipientMapping {
   @minLength(1) destination: string;
@@ -1536,7 +1536,7 @@ union TelephonyCampaignDuplicateHandling {
   merge: "merge",
 }
 
-@doc("A request to import campaign recipients from a Dataset CSV, JSON array, or JSONL file.")
+@doc("A request to import campaign recipients from a Dataset CSV, JSON array, or JSONL file. Imported Agent-declared structured inputs follow the Agent definition's schema, required, and default-value semantics.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("ImportTelephonyCampaignRecipientsContent", "csharp")
 model ImportTelephonyCampaignRecipientsRequest {

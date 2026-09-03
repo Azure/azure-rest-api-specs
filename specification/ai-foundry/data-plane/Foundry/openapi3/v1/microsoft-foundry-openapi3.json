@@ -38791,7 +38791,7 @@
             "unevaluatedProperties": {
               "$ref": "#/components/schemas/TelephonyStructuredInputValue"
             },
-            "description": "Structured input values available to the agent and greeting for this call."
+            "description": "Flat scalar structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
           },
           "greeting": {
             "$ref": "#/components/schemas/VoiceAgentGreetingConfig",
@@ -43071,7 +43071,7 @@
             "default": "reject"
           }
         },
-        "description": "A request to import campaign recipients from a Dataset CSV, JSON array, or JSONL file.",
+        "description": "A request to import campaign recipients from a Dataset CSV, JSON array, or JSONL file. Imported Agent-declared structured inputs follow the Agent definition's schema, required, and default-value semantics.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -87491,7 +87491,7 @@
             "unevaluatedProperties": {
               "$ref": "#/components/schemas/TelephonyStructuredInputValue"
             },
-            "description": "Structured input values available to the agent and greeting."
+            "description": "The flat scalar structured input values available to the agent and greeting. Agent-declared inputs follow their schema, required, and default-value semantics; additional inputs remain available as dynamic template variables."
           },
           "greeting": {
             "$ref": "#/components/schemas/VoiceAgentGreetingConfig",
@@ -88726,7 +88726,7 @@
             "type": "string"
           }
         },
-        "description": "Source fields or CSV columns mapped into each campaign recipient.",
+        "description": "Source fields or CSV columns mapped into each campaign recipient. Every unmapped CSV column or JSON/JSONL top-level property becomes a same-named structured input. CSV cells are preserved as strings until Agent-declared inputs are parsed according to their schemas; additional inputs remain strings.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
