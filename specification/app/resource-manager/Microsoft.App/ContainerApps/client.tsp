@@ -184,11 +184,7 @@ union OpenIdConnectClientCredentialMethod {
 // C# @@clientName customizations.
 @@clientName(Affinity, "StickySessionAffinity", "csharp");
 
-@@clientName(
-  IngressStickySessions.affinity,
-  "StickySessionAffinity",
-  "csharp"
-);
+@@clientName(IngressStickySessions.affinity, "StickySessionAffinity", "csharp");
 
 @@clientName(
   AvailableWorkloadProfilesOperationGroup.get,
