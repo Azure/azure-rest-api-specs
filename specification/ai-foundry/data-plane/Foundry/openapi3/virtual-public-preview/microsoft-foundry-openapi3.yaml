@@ -86234,7 +86234,7 @@ components:
           maximum: 5
           description: The maximum number of provider attempts, including the first attempt. Defaults to 1.
           default: 1
-        interval_seconds:
+        interval:
           $ref: '#/components/schemas/FoundryDurationSeconds'
           description: The delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.
       description: The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt.
@@ -86245,7 +86245,7 @@ components:
       type: object
       required:
         - max_attempts
-        - interval_seconds
+        - interval
       properties:
         max_attempts:
           type: integer
@@ -86253,7 +86253,7 @@ components:
           minimum: 1
           maximum: 5
           description: The maximum number of provider attempts, including the first attempt.
-        interval_seconds:
+        interval:
           $ref: '#/components/schemas/FoundryDurationSeconds'
           description: The delay in seconds between attempts.
       description: The frozen retry policy returned for an outbound call or campaign.

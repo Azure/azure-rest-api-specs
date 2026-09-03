@@ -1189,7 +1189,7 @@ model TelephonyOutboundRetryPolicy {
   max_attempts?: int32 = 1;
 
   @doc("The delay in seconds between attempts. It must be 0 when `max_attempts` is 1, and from 60 through 86400 when retries are enabled.")
-  interval_seconds?: FoundryDurationSeconds;
+  interval?: FoundryDurationSeconds;
 }
 
 @doc("The frozen retry policy returned for an outbound call or campaign.")
@@ -1202,7 +1202,7 @@ model TelephonyOutboundRetryPolicyResponse {
   max_attempts: int32;
 
   @doc("The delay in seconds between attempts.")
-  interval_seconds: FoundryDurationSeconds;
+  interval: FoundryDurationSeconds;
 }
 
 @doc("A scalar structured-input value supplied for one outbound call. Nested objects, arrays, and null are not accepted.")
