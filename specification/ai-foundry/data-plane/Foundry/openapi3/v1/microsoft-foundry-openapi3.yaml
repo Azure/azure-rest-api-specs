@@ -46008,9 +46008,6 @@ components:
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobScheduleRequest'
           description: The optional execution window.
-        metadata:
-          $ref: '#/components/schemas/TelephonyOutboundMetadata'
-          description: Customer-controlled metadata attached to the call job.
         retry_policy:
           $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
           description: The provider-attempt retry policy. Omit it for one attempt with no retry delay.
@@ -81365,9 +81362,6 @@ components:
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobSchedule'
           description: The frozen execution window, when supplied.
-        metadata:
-          $ref: '#/components/schemas/TelephonyOutboundMetadata'
-          description: Customer-controlled metadata attached to the call job.
         cancellation:
           $ref: '#/components/schemas/TelephonyCallJobCancellation'
           description: The recorded cancellation request, when cancellation was requested.
@@ -82223,8 +82217,6 @@ components:
         recipient_item_key:
           type: string
           description: Required when `duplicate_handling` is `keep_each`.
-        metadata:
-          type: string
         time_zone:
           type: string
         not_before:
@@ -82347,31 +82339,6 @@ components:
           pattern: ^\+[1-9]\d{1,14}$
           description: The destination E.164 phone number.
       description: The destination of an outbound call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyOutboundMetadata:
-      type: object
-      unevaluatedProperties:
-        $ref: '#/components/schemas/TelephonyOutboundMetadataValue'
-      description: Customer-controlled JSON metadata attached to an outbound call job.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyOutboundMetadataValue:
-      anyOf:
-        - type: string
-        - type: number
-          format: double
-        - type: integer
-          format: int64
-        - type: boolean
-        - $ref: '#/components/schemas/TelephonyOutboundMetadata'
-        - type: array
-          items:
-            $ref: '#/components/schemas/TelephonyOutboundMetadataValue'
-        - type: 'null'
-      description: A JSON value stored in outbound call metadata. Metadata may contain nested objects and arrays, unlike structured inputs.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
