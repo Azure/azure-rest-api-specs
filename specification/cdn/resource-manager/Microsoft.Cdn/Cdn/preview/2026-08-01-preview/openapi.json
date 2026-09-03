@@ -6521,6 +6521,15 @@
         "x-ms-examples": {
           "AFDOrigins_Create": {
             "$ref": "./examples/AFDOrigins_Create.json"
+          },
+          "AFDOrigins_Create_CustomCertificateSubject": {
+            "$ref": "./examples/AFDOrigins_Create_CustomCertificateSubject.json"
+          },
+          "AFDOrigins_Create_IncomingHostHeaderValidation": {
+            "$ref": "./examples/AFDOrigins_CreateWithIncomingHostHeaderValidation.json"
+          },
+          "AFDOrigins_Create_OriginHostname": {
+            "$ref": "./examples/AFDOrigins_Create_OriginHostname.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6612,6 +6621,12 @@
         "x-ms-examples": {
           "AFDOrigins_Update": {
             "$ref": "./examples/AFDOrigins_Update.json"
+          },
+          "AFDOrigins_Update_CustomCertificateSubject": {
+            "$ref": "./examples/AFDOrigins_Update_CustomCertificateSubject.json"
+          },
+          "AFDOrigins_Update_OriginHostname": {
+            "$ref": "./examples/AFDOrigins_Update_OriginHostname.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8396,6 +8411,17 @@
           "$ref": "#/definitions/AFDDomainHttpsCustomizedCipherSuiteSet",
           "description": "Customized cipher suites object that will be used for Https when cipherSuiteSetType is Customized."
         },
+        "serverTlsGroupPolicy": {
+          "$ref": "#/definitions/AfdServerTlsGroupPolicy",
+          "description": "Server TLS group policy that will be used for Https."
+        },
+        "serverTlsGroups": {
+          "type": "array",
+          "description": "Server TLS groups that will be used for Https when serverTlsGroupPolicy is Custom.",
+          "items": {
+            "$ref": "#/definitions/AfdServerTlsGroup"
+          }
+        },
         "secret": {
           "$ref": "#/definitions/ResourceReference",
           "description": "Resource reference to the secret. ie. subs/rg/profile/secret"
@@ -8897,6 +8923,19 @@
           "description": "Whether to enable certificate name check at origin level",
           "default": true
         },
+        "certificateNameCheckValidationMode": {
+          "$ref": "#/definitions/CertificateNameCheckValidationMode",
+          "description": "The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true."
+        },
+        "customCertificateSubjects": {
+          "type": "array",
+          "description": "The list of custom certificate subjects to validate against. Only applicable when certificateNameCheckValidationMode is 'CustomCertificateSubject'. Must contain 1 or 2 entries.",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "string"
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/AfdProvisioningState",
           "description": "Provisioning status",
@@ -8982,6 +9021,19 @@
           "type": "boolean",
           "description": "Whether to enable certificate name check at origin level",
           "default": true
+        },
+        "certificateNameCheckValidationMode": {
+          "$ref": "#/definitions/CertificateNameCheckValidationMode",
+          "description": "The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true."
+        },
+        "customCertificateSubjects": {
+          "type": "array",
+          "description": "The list of custom certificate subjects to validate against. Only applicable when certificateNameCheckValidationMode is 'CustomCertificateSubject'. Must contain 1 or 2 entries.",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -9342,6 +9394,90 @@
         }
       ],
       "x-ms-discriminator-value": "MtlsCertificateChain"
+    },
+    "AfdServerTlsGroup": {
+      "type": "string",
+      "description": "Supported key-exchange groups and curves. The ML-KEM groups are hybrid post-quantum groups.",
+      "enum": [
+        "SecP256r1MLKEM768",
+        "SecP384r1MLKEM1024",
+        "X25519MLKEM768",
+        "prime256v1",
+        "X25519",
+        "secp384r1",
+        "secp521r1"
+      ],
+      "x-ms-enum": {
+        "name": "AfdServerTlsGroup",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SecP256r1MLKEM768",
+            "value": "SecP256r1MLKEM768",
+            "description": "Hybrid post-quantum group combining secp256r1 with ML-KEM-768."
+          },
+          {
+            "name": "SecP384r1MLKEM1024",
+            "value": "SecP384r1MLKEM1024",
+            "description": "Hybrid post-quantum group combining secp384r1 with ML-KEM-1024."
+          },
+          {
+            "name": "X25519MLKEM768",
+            "value": "X25519MLKEM768",
+            "description": "Hybrid post-quantum group combining X25519 with ML-KEM-768."
+          },
+          {
+            "name": "prime256v1",
+            "value": "prime256v1",
+            "description": "The prime256v1 elliptic curve group."
+          },
+          {
+            "name": "X25519",
+            "value": "X25519",
+            "description": "The X25519 elliptic curve group."
+          },
+          {
+            "name": "secp384r1",
+            "value": "secp384r1",
+            "description": "The secp384r1 elliptic curve group."
+          },
+          {
+            "name": "secp521r1",
+            "value": "secp521r1",
+            "description": "The secp521r1 elliptic curve group."
+          }
+        ]
+      }
+    },
+    "AfdServerTlsGroupPolicy": {
+      "type": "string",
+      "description": "Server TLS group policy that will be used for Https. Standard and Enhanced are service-managed sets; Custom allows specifying serverTlsGroups explicitly.",
+      "enum": [
+        "Standard",
+        "Enhanced",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "AfdServerTlsGroupPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Uses the standard service-managed set of server TLS groups."
+          },
+          {
+            "name": "Enhanced",
+            "value": "Enhanced",
+            "description": "Uses the enhanced service-managed set of server TLS groups."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Uses the server TLS groups specified by serverTlsGroups."
+          }
+        ]
+      }
     },
     "AfdUrlSigningAction": {
       "type": "object",
@@ -9952,6 +10088,36 @@
           "description": "Resource status of the policy.",
           "readOnly": true
         }
+      }
+    },
+    "CertificateNameCheckValidationMode": {
+      "type": "string",
+      "description": "The validation mode for certificate name check at origin level. Only applicable when enforceCertificateNameCheck is true.",
+      "enum": [
+        "OriginHostname",
+        "CustomCertificateSubject",
+        "IncomingHostHeader"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateNameCheckValidationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OriginHostname",
+            "value": "OriginHostname",
+            "description": "Validate the certificate against the origin hostname."
+          },
+          {
+            "name": "CustomCertificateSubject",
+            "value": "CustomCertificateSubject",
+            "description": "Validate the certificate against custom certificate subjects."
+          },
+          {
+            "name": "IncomingHostHeader",
+            "value": "IncomingHostHeader",
+            "description": "Validate the certificate against the incoming host header."
+          }
+        ]
       }
     },
     "CertificateRevocationCheckEnabledState": {
