@@ -203,6 +203,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/contextCacheCheckNameAvailability": {
+      "post": {
+        "operationId": "ContextCaches_CheckNameAvailability",
+        "tags": [
+          "ContextCaches"
+        ],
+        "description": "Check the availability of a context cache resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContextCacheCheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ContextCacheCheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContextCacheCheckNameAvailability": {
+            "$ref": "./examples/StorageContextCacheCRUD/ContextCaches_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/contextCaches": {
       "get": {
         "operationId": "ContextCaches_ListBySubscription",
@@ -602,6 +647,12 @@
           },
           "Create a Context Cache": {
             "$ref": "./examples/StorageContextCacheCRUD/ContextCaches_CreateOrUpdate.json"
+          },
+          "Create a Context Cache with system-assigned and user-assigned identity": {
+            "$ref": "./examples/StorageContextCacheCRUD/ContextCaches_CreateOrUpdate_SystemAssignedUserAssigned.json"
+          },
+          "Create a Context Cache with user-assigned identity": {
+            "$ref": "./examples/StorageContextCacheCRUD/ContextCaches_CreateOrUpdate_UserAssignedIdentity.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -10004,7 +10055,7 @@
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -10046,6 +10097,79 @@
           }
         ]
       }
+    },
+    "ContextCacheCheckNameAvailabilityFailureReason": {
+      "type": "string",
+      "description": "The reason why the context cache name is not available. The Reason element is only returned if NameAvailable is false.",
+      "enum": [
+        "AlreadyExists",
+        "ContextCacheNameInvalid"
+      ],
+      "x-ms-enum": {
+        "name": "ContextCacheCheckNameAvailabilityFailureReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "The context cache name is already in use."
+          },
+          {
+            "name": "ContextCacheNameInvalid",
+            "value": "ContextCacheNameInvalid",
+            "description": "The context cache name is invalid."
+          }
+        ]
+      }
+    },
+    "ContextCacheCheckNameAvailabilityParameters": {
+      "type": "object",
+      "description": "The parameters used to check the availability of the context cache resource name.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the context cache resource to check for availability.",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the context cache resource to check for availability.",
+          "enum": [
+            "Microsoft.Storage/contextCaches"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ContextCacheCheckNameAvailabilityResult": {
+      "type": "object",
+      "description": "The result of the context cache name availability check.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "A boolean value that indicates whether the context cache name is available to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/ContextCacheCheckNameAvailabilityFailureReason",
+          "description": "The reason why the context cache name is not available. The Reason element is only returned if NameAvailable is false",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message providing additional information about the context cache name availability check failure.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "nameAvailable"
+      ]
     },
     "ContextCacheContainer": {
       "type": "object",
@@ -10291,7 +10415,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identity."
         },
         "properties": {
