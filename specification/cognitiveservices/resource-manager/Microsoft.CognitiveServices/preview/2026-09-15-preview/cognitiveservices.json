@@ -13334,7 +13334,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/AdapterDeploymentProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the adapter deployment.",
           "readOnly": true
         },
@@ -13348,43 +13348,6 @@
         "sourceModelId",
         "targetDeploymentName"
       ]
-    },
-    "AdapterDeploymentProvisioningState": {
-      "type": "string",
-      "description": "Provisioning states for an adapter deployment resource.",
-      "enum": [
-        "accepted",
-        "updating",
-        "succeeded",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "AdapterDeploymentProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "accepted",
-            "description": "The create request was accepted."
-          },
-          {
-            "name": "Updating",
-            "value": "updating",
-            "description": "The adapter is being staged on a new target while the prior target\ncontinues serving requests."
-          },
-          {
-            "name": "Succeeded",
-            "value": "succeeded",
-            "description": "The adapter is ready across every healthy serving replica."
-          },
-          {
-            "name": "Failed",
-            "value": "failed",
-            "description": "No globally consistent adapter target is available."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "AdapterDeploymentRollbackResult": {
       "type": "string",
