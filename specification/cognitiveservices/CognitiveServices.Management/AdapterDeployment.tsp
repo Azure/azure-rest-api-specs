@@ -58,42 +58,26 @@ model AdapterDeploymentProperties {
   sourceModelId: string;
 
   /**
-   * The immutable name of the compatible managed compute parent deployment.
+   * The name of the compatible managed compute parent deployment.
    * The service resolves this name within the adapter's owning account; full
    * ARM resource IDs and cross-account references are not accepted. It cannot
-   * equal the adapter deployment's resource name.
+   * equal the adapter deployment's resource name. Updating this value
+   * re-targets the adapter while its source model remains unchanged.
    */
   targetDeploymentName: string;
 
   /**
-   * The source model version currently admitted for inference.
+   * The managed compute deployment currently serving the adapter.
+   * During re-targeting this remains the prior deployment until atomic cutover.
    */
   @visibility(Lifecycle.Read)
-  activeSourceModelId?: string;
+  activeTargetDeploymentName?: string;
 
   /**
    * The provisioning state of the adapter deployment.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: AdapterDeploymentProvisioningState;
-
-  /**
-   * Whether the adapter route can currently serve inference requests.
-   */
-  @visibility(Lifecycle.Read)
-  servingState?: AdapterDeploymentServingState;
-
-  /**
-   * Service-authenticated compatibility and capacity validation results.
-   */
-  @visibility(Lifecycle.Read)
-  validation?: AdapterDeploymentValidation;
-
-  /**
-   * Revocation details when security policy has disabled this adapter.
-   */
-  @visibility(Lifecycle.Read)
-  revocation?: AdapterDeploymentRevocation;
 
   /**
    * Information about the most recently requested lifecycle operation.
@@ -105,159 +89,31 @@ model AdapterDeploymentProperties {
 /**
  * Provisioning states for an adapter deployment resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Canceled operations leave the resource in failed or its prior succeeded state; the resource contract does not expose a canceled state."
 @added(Versions.v2026_09_15_preview)
 union AdapterDeploymentProvisioningState {
   string,
 
   /** The create request was accepted. */
-  Accepted: "Accepted",
+  Accepted: "accepted",
 
-  /** The initial adapter generation is being prepared. */
-  Creating: "Creating",
-
-  /** A replacement generation is being prepared. */
-  Updating: "Updating",
-
-  /** The active generation is ready across every healthy parent replica. */
-  Succeeded: "Succeeded",
-
-  /** The latest lifecycle operation failed. */
-  Failed: "Failed",
-
-  /** The latest lifecycle operation was canceled. */
-  Canceled: "Canceled",
-
-  /** The adapter is draining and being removed. */
-  Deleting: "Deleting",
-}
-
-/**
- * Serving availability independent of the latest management operation.
- */
-@added(Versions.v2026_09_15_preview)
-union AdapterDeploymentServingState {
-  string,
-
-  /** No generation has been admitted for inference. */
-  NotReady: "NotReady",
-
-  /** The active generation is available for inference. */
-  Ready: "Ready",
-
-  /** The service is restoring the active generation on one or more replicas. */
-  Reconciling: "Reconciling",
-
-  /** Security policy has removed the adapter from routing. */
-  Revoked: "Revoked",
-}
-
-/**
- * Adapter format values validated by the serving runtime.
- */
-@added(Versions.v2026_09_15_preview)
-union AdapterDeploymentFormat {
-  string,
-
-  /** Hugging Face PEFT LoRA adapter format. */
-  PeftLora: "PeftLora",
-}
-
-/**
- * Service-authenticated validation results for the active adapter generation.
- */
-@added(Versions.v2026_09_15_preview)
-model AdapterDeploymentValidation {
-  /**
-   * Source model version for which these values were validated.
-   */
-  sourceModelId: string;
+  /** The initial adapter is loading across serving replicas. */
+  Loading: "loading",
 
   /**
-   * Exact base-model asset ID recorded on the adapter source.
+   * The adapter is being staged on a new target while the prior target
+   * continues serving requests.
    */
-  sourceBaseModelId: string;
+  Updating: "updating",
 
-  /**
-   * Exact base-model asset ID served by the parent deployment.
-   */
-  targetBaseModelId: string;
+  /** The adapter is ready across every healthy serving replica. */
+  Succeeded: "succeeded",
 
-  /**
-   * Adapter serialization and runtime format.
-   */
-  adapterFormat: AdapterDeploymentFormat;
+  /** New admissions have stopped and existing requests are draining. */
+  Detaching: "detaching",
 
-  /**
-   * Validated LoRA rank.
-   */
-  rank: int32;
-
-  /**
-   * Validated base-model modules modified by the adapter.
-   */
-  targetModules: string[];
-
-  /**
-   * Capacity values evaluated when admitting this generation.
-   */
-  capacity: AdapterDeploymentCapacityValidation;
-
-  /**
-   * Time at which the service completed this validation.
-   */
-  validatedAt: utcDateTime;
-}
-
-/**
- * Capacity values evaluated for adapter admission.
- */
-@added(Versions.v2026_09_15_preview)
-model AdapterDeploymentCapacityValidation {
-  /**
-   * Maximum active adapters supported by the target runtime and fleet.
-   */
-  adapterCountLimit: int32;
-
-  /**
-   * Number of active adapters after admitting this generation.
-   */
-  adapterCountAfterAdmission: int32;
-
-  /**
-   * Maximum LoRA rank supported by the target runtime.
-   */
-  rankLimit: int32;
-
-  /**
-   * Service-estimated memory required by this adapter, in bytes.
-   */
-  estimatedAdapterMemoryBytes: int64;
-
-  /**
-   * Adapter memory available before this generation was admitted, in bytes.
-   */
-  availableAdapterMemoryBytes: int64;
-}
-
-/**
- * Safe customer-visible details for an administrative revocation.
- */
-@added(Versions.v2026_09_15_preview)
-model AdapterDeploymentRevocation {
-  /**
-   * Stable policy or security reason code.
-   */
-  reasonCode: string;
-
-  /**
-   * Time at which the adapter was removed from routing.
-   */
-  revokedAt: utcDateTime;
-
-  /**
-   * Safe support and audit correlation identifier.
-   */
-  correlationId: string;
+  /** No globally consistent adapter target is available. */
+  Failed: "failed",
 }
 
 /**
@@ -267,14 +123,14 @@ model AdapterDeploymentRevocation {
 union AdapterDeploymentOperationType {
   string,
 
-  /** Creates the initial adapter generation. */
-  Create: "Create",
+  /** Creates the adapter deployment. */
+  Create: "create",
 
-  /** Replaces the active adapter generation. */
-  Replace: "Replace",
+  /** Re-targets the adapter deployment. */
+  Update: "update",
 
   /** Deletes the adapter deployment. */
-  Delete: "Delete",
+  Delete: "delete",
 }
 
 /**
@@ -285,36 +141,33 @@ union AdapterDeploymentOperationState {
   string,
 
   /** The operation was accepted. */
-  Accepted: "Accepted",
+  Accepted: "accepted",
 
   /** The operation is running. */
-  Running: "Running",
+  Running: "running",
 
   /** The operation completed successfully. */
-  Succeeded: "Succeeded",
+  Succeeded: "succeeded",
 
   /** The operation failed. */
-  Failed: "Failed",
-
-  /** The operation was canceled. */
-  Canceled: "Canceled",
+  Failed: "failed",
 }
 
 /**
- * Rollback outcomes for a failed or canceled replacement.
+ * Rollback outcomes for a failed re-target operation.
  */
 @added(Versions.v2026_09_15_preview)
 union AdapterDeploymentRollbackResult {
   string,
 
   /** No rollback was required. */
-  NotRequired: "NotRequired",
+  NotRequired: "not_required",
 
   /** Rollback completed successfully. */
-  Succeeded: "Succeeded",
+  Succeeded: "succeeded",
 
   /** Rollback failed. */
-  Failed: "Failed",
+  Failed: "failed",
 }
 
 /**
@@ -325,67 +178,67 @@ union AdapterDeploymentErrorCode {
   string,
 
   /** The adapter source is invalid. */
-  InvalidAdapterSource: "InvalidAdapterSource",
+  InvalidAdapterSource: "invalid_adapter_source",
 
   /** The adapter format is unsupported. */
-  AdapterFormatNotSupported: "AdapterFormatNotSupported",
+  AdapterFormatNotSupported: "adapter_format_not_supported",
 
   /** The base-model provenance is missing. */
-  BaseModelProvenanceMissing: "BaseModelProvenanceMissing",
+  BaseModelProvenanceMissing: "base_model_provenance_missing",
 
   /** The source and target base models do not match. */
-  BaseModelMismatch: "BaseModelMismatch",
+  BaseModelMismatch: "base_model_mismatch",
 
   /** The target deployment is invalid. */
-  InvalidTargetDeployment: "InvalidTargetDeployment",
+  InvalidTargetDeployment: "invalid_target_deployment",
+
+  /** The adapter deployment name is invalid. */
+  InvalidAdapterDeploymentName: "invalid_adapter_deployment_name",
 
   /** The source model was not found. */
-  ModelNotFound: "ModelNotFound",
+  ModelNotFound: "model_not_found",
 
   /** The adapter deployment was not found. */
-  AdapterDeploymentNotFound: "AdapterDeploymentNotFound",
+  AdapterDeploymentNotFound: "adapter_deployment_not_found",
 
   /** The target deployment is not ready. */
-  TargetDeploymentNotReady: "TargetDeploymentNotReady",
+  TargetDeploymentNotReady: "target_deployment_not_ready",
 
   /** The adapter deployment already exists. */
-  AdapterDeploymentAlreadyExists: "AdapterDeploymentAlreadyExists",
+  AdapterDeploymentAlreadyExists: "adapter_deployment_already_exists",
 
   /** Adapter deployments prevent the requested parent operation. */
-  AdapterDeploymentsExist: "AdapterDeploymentsExist",
+  AdapterDeploymentsExist: "adapter_deployments_exist",
 
   /** The adapter source is already in use. */
-  AdapterDeploymentSourceInUse: "AdapterDeploymentSourceInUse",
+  AdapterDeploymentSourceInUse: "adapter_deployment_source_in_use",
 
   /** The target deployment's adapter limit was exceeded. */
-  AdapterLimitExceeded: "AdapterLimitExceeded",
-
-  /** The current operation cannot be canceled. */
-  OperationNotCancellable: "OperationNotCancellable",
+  AdapterLimitExceeded: "adapter_limit_exceeded",
 
   /** A conditional request precondition failed. */
-  PreconditionFailed: "PreconditionFailed",
+  PreconditionFailed: "precondition_failed",
 
   /** Loading the adapter failed. */
-  AdapterLoadFailed: "AdapterLoadFailed",
+  AdapterLoadFailed: "adapter_load_failed",
 
   /** Rolling back the adapter failed. */
-  AdapterRollbackFailed: "AdapterRollbackFailed",
+  AdapterRollbackFailed: "adapter_rollback_failed",
 
   /** Replica convergence timed out. */
-  ConvergenceTimedOut: "ConvergenceTimedOut",
+  ConvergenceTimedOut: "convergence_timed_out",
 
   /** Request draining timed out. */
-  DrainTimedOut: "DrainTimedOut",
+  DrainTimedOut: "drain_timed_out",
 
   /** Security policy revoked the adapter. */
-  AdapterRevoked: "AdapterRevoked",
+  AdapterRevoked: "adapter_revoked",
 
   /** The request rate is too high. */
-  TooManyRequests: "TooManyRequests",
+  TooManyRequests: "too_many_requests",
 
   /** The service is temporarily unavailable. */
-  ServiceUnavailable: "ServiceUnavailable",
+  ServiceUnavailable: "service_unavailable",
 }
 
 /**
@@ -431,9 +284,9 @@ model AdapterDeploymentLastOperation {
   status: AdapterDeploymentOperationState;
 
   /**
-   * The source requested by a create or replacement operation.
+   * The target deployment requested by a create or re-target operation.
    */
-  requestedSourceModelId?: string;
+  requestedTargetDeploymentName?: string;
 
   /**
    * A safe identifier used to correlate logs and support requests.
@@ -451,7 +304,7 @@ model AdapterDeploymentLastOperation {
   completedAt?: utcDateTime;
 
   /**
-   * The rollback result when a replacement does not complete successfully.
+   * The rollback result when a re-target operation does not complete.
    */
   rollbackResult?: AdapterDeploymentRollbackResult;
 
@@ -494,42 +347,12 @@ model AdapterDeploymentListResult {
 }
 
 /**
- * The result of requesting cancellation of an adapter operation.
- */
-@added(Versions.v2026_09_15_preview)
-model AdapterDeploymentCancelResult {
-  /**
-   * The resulting state of the operation targeted by cancellation.
-   */
-  status: AdapterDeploymentOperationState;
-
-  /**
-   * The operation type targeted by cancellation.
-   */
-  operationType: AdapterDeploymentOperationType;
-
-  /**
-   * The source generation that remains active after cancellation.
-   */
-  activeSourceModelId?: string;
-
-  /**
-   * The staged source generation removed by cancellation.
-   */
-  canceledSourceModelId?: string;
-
-  /**
-   * A safe identifier used to correlate logs and support requests.
-   */
-  correlationId: string;
-}
-
-/**
  * Standard conditional headers accepted by adapter PUT operations.
  */
 alias AdapterDeploymentPutConditions = {
   /**
-   * Applies the replacement only when the current resource ETag matches.
+   * Applies the re-target operation only when the current resource ETag
+   * matches.
    */
   @header("If-Match")
   ifMatch?: string;
@@ -561,7 +384,8 @@ interface AdapterDeployments {
   get is ArmResourceRead<AdapterDeployment>;
 
   /**
-   * Creates an adapter deployment or replaces its immutable source model version.
+   * Creates an adapter deployment or re-targets it to another compatible
+   * managed compute deployment. The source model ID is immutable.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AdapterDeployment,
@@ -575,21 +399,6 @@ interface AdapterDeployments {
     AdapterDeployment,
     Parameters = AdapterDeploymentListParameters,
     Response = ArmResponse<AdapterDeploymentListResult>
-  >;
-
-  /**
-   * Cancels an in-progress create or replacement before atomic cutover.
-   */
-  cancel is ArmResourceActionAsync<
-    AdapterDeployment,
-    void,
-    Response = ArmResponse<AdapterDeploymentCancelResult>,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<
-        Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-        AdapterDeploymentCancelResult,
-        string
-      >
   >;
 
   /**
@@ -614,5 +423,5 @@ interface AdapterDeployments {
 @@encodedName(AdapterDeployment.etag, "application/json", "etag");
 @@doc(
   AdapterDeployments.createOrUpdate::parameters.resource,
-  "The complete adapter deployment resource to create or replace."
+  "The complete adapter deployment resource to create or re-target."
 );
