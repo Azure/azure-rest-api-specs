@@ -12,6 +12,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Common;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
 
@@ -42,6 +43,25 @@ model AuthenticationPolicy extends Common.Resource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is an established read-only envelope property across Network RP resources"
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  /** The user-assigned identity used by a user sign-in policy to access its Key Vault client secret. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AuthenticationPolicy requires this user-assigned identity in the resource envelope so a user sign-in policy can read its client secret from Key Vault; the property uses the standard ManagedServiceIdentity shape and is an envelope-level credential of the resource rather than a routing/authentication setting, so it cannot move under properties."
+  identity?: Common.ManagedServiceIdentity;
+}
+
+/**
+ * Parameters supplied to update an authentication policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP property models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
+model AuthenticationPolicyUpdateParameters {
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Resource tags are an open string map, consistent with the tags property on the Network RP Resource base type"
+  tags?: Record<string>;
+
+  /** The user-assigned identity used by a user sign-in policy to access its Key Vault client secret. */
+  identity?: Common.ManagedServiceIdentity;
 }
 
 /**
@@ -51,7 +71,7 @@ model AuthenticationPolicy extends Common.Resource {
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 model AuthenticationPolicyPropertiesFormat {
-  /** The type of the user trust provider. Only Microsoft Entra is supported. */
+  /** The type of the user trust provider. Only Microsoft Entra is supported, using the serialized value `entra`. */
   userTrustProviderType: UserTrustProviderType;
 
   /** The action to take when a request is unauthenticated. When omitted, user sign-in policies default to `authenticate` and JWT validation policies default to `deny`. */
@@ -74,45 +94,63 @@ model AuthenticationPolicyPropertiesFormat {
 }
 
 /**
- * Properties for authentication provider configuration.
+ * Properties for authentication provider configuration. A policy must configure either JWT validation fields or user sign-in fields; the two configurations are mutually exclusive and cannot be combined.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP property models"
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 model AuthenticationProviderProperties {
-  /** The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/ */
-  issuer: string;
+  /** The absolute HTTPS URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/ */
+  @maxLength(2048)
+  @pattern("^[Hh][Tt][Tt][Pp][Ss]://")
+  issuer: url;
 
   /** The JSON Web Key Set (JWKS) URI used to retrieve the public keys for JWT validation. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/discovery/v2.0/keys */
-  jwksUri?: string;
+  @maxLength(2048)
+  @pattern("^[Hh][Tt][Tt][Pp][Ss]://")
+  jwksUri?: url;
 
   /** The intended audience for the JWT. Only a single audience value is supported in this API version. Example: https://audience.com/{application-id} */
+  @maxLength(2048)
   audience?: string;
 
-  /** The Application (client) ID for the related application registered in Microsoft Entra ID. */
+  /** The Application (client) ID for the related application registered in Microsoft Entra ID, formatted as a GUID. */
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   clientId: string;
 
-  /** The Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. Example: https://myvault.vault.azure.net/secrets/mysecret */
+  /** The absolute HTTPS Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. The secret value retrieved from Key Vault can contain up to 4096 characters. Example: https://myvault.vault.azure.net/secrets/mysecret */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This property holds a Key Vault secret URL reference (not the secret value itself), so it is not sensitive data."
-  clientSecret?: string;
+  @pattern("^[Hh][Tt][Tt][Pp][Ss]://")
+  clientSecret?: url;
 
-  /** The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported. */
+  /** The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported, each scope can contain up to 128 characters, and all scopes can contain up to 256 characters combined. */
   @maxItems(10)
-  scope?: string[];
+  scope?: AuthenticationScope[];
 
-  /** The timeout of the session cookie used for user authentication, in seconds. Applicable to the Application Gateway post-OIDC workflow. */
+  /** The timeout of the session cookie used for user authentication. The service accepts and returns this value as a string containing a base-10 unsigned integer number of seconds with no sign, decimal point, unit suffix, or whitespace (for example `86400`). The supported range is 1 to 604800 seconds, and the default is 86400 seconds. Applicable to the Application Gateway post-OIDC workflow. */
+  @maxLength(6)
+  @pattern("^[1-9][0-9]{0,5}$")
   sessionTimeout?: string;
 
   /** The name of the session cookie used for user authentication. Applicable to the Application Gateway post-OIDC workflow. */
+  @maxLength(256)
+  @pattern("^[A-Za-z0-9_-]+$")
   sessionCookieName?: string;
 }
 
+/** An authentication scope value. */
+@maxLength(128)
+@minLength(1)
+@pattern("^[A-Za-z0-9_.:/-]+$")
+scalar AuthenticationScope extends string;
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP enums"
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service accepts only the Microsoft Entra provider in this API version, so the union is intentionally closed."
 @doc("Type of the user trust provider.")
 @added(Versions.v2026_01_01)
 @Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
 union UserTrustProviderType {
+  string,
+
   /** Microsoft Entra trust provider type. */
   Entra: "entra",
 }
@@ -157,14 +195,13 @@ interface AuthenticationPolicies {
   >;
 
   /**
-   * Updates an authentication policy's tags.
+   * Updates the tags and identity of an authentication policy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "AuthenticationPolicy supports the established Network RP tags-only PATCH operation."
   @tag("AuthenticationPolicies")
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<
+  update is ArmCustomPatchSync<
     AuthenticationPolicy,
-    PatchModel = TagsObject,
+    PatchModel = AuthenticationPolicyUpdateParameters,
     Error = CloudError
   >;
 
@@ -199,4 +236,12 @@ interface AuthenticationPolicies {
 @@doc(
   AuthenticationPolicies.createOrUpdate::parameters.resource,
   "Authentication policy to be created or updated."
+);
+@@doc(
+  AuthenticationPolicies.update::parameters.properties,
+  "Parameters supplied to update the authentication policy."
+);
+@@clientName(
+  AuthenticationPolicies.update::parameters.properties,
+  "parameters"
 );

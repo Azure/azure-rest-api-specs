@@ -239,6 +239,9 @@
           }
         },
         "x-ms-examples": {
+          "Creates or updates a JWT validation authentication policy within a resource group": {
+            "$ref": "./examples/AuthenticationPolicyCreateOrUpdateJwtValidation.json"
+          },
           "Creates or updates a user sign-in authentication policy within a resource group": {
             "$ref": "./examples/AuthenticationPolicyCreateOrUpdate.json"
           }
@@ -250,11 +253,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "AuthenticationPolicies_UpdateTags",
+        "operationId": "AuthenticationPolicies_Update",
         "tags": [
           "AuthenticationPolicies"
         ],
-        "description": "Updates an authentication policy's tags.",
+        "description": "Updates the tags and identity of an authentication policy.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -275,12 +278,12 @@
             "pattern": "^[A-Za-z0-9_-]{1,80}$"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Parameters supplied to update the authentication policy.",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/TagsObject"
+              "$ref": "#/definitions/AuthenticationPolicyUpdateParameters"
             }
           }
         ],
@@ -299,8 +302,8 @@
           }
         },
         "x-ms-examples": {
-          "Update authentication policy tags": {
-            "$ref": "./examples/AuthenticationPolicyUpdateTags.json"
+          "Updates authentication policy tags and identity": {
+            "$ref": "./examples/AuthenticationPolicyUpdate.json"
           }
         }
       },
@@ -362,6 +365,10 @@
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The user-assigned identity used by a user sign-in policy to access its Key Vault client secret."
         }
       },
       "allOf": [
@@ -397,7 +404,7 @@
       "properties": {
         "userTrustProviderType": {
           "$ref": "./common.json#/definitions/UserTrustProviderType",
-          "description": "The type of the user trust provider. Only Microsoft Entra is supported."
+          "description": "The type of the user trust provider. Only Microsoft Entra is supported, using the serialized value `entra`."
         },
         "onUnauthenticatedRequest": {
           "$ref": "./common.json#/definitions/OnUnauthenticatedRequest",
@@ -431,45 +438,76 @@
         "authenticationProperties"
       ]
     },
+    "AuthenticationPolicyUpdateParameters": {
+      "type": "object",
+      "description": "Parameters supplied to update an authentication policy.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The user-assigned identity used by a user sign-in policy to access its Key Vault client secret."
+        }
+      }
+    },
     "AuthenticationProviderProperties": {
       "type": "object",
-      "description": "Properties for authentication provider configuration.",
+      "description": "Properties for authentication provider configuration. A policy must configure either JWT validation fields or user sign-in fields; the two configurations are mutually exclusive and cannot be combined.",
       "properties": {
         "issuer": {
           "type": "string",
-          "description": "The URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/"
+          "format": "uri",
+          "description": "The absolute HTTPS URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/",
+          "maxLength": 2048,
+          "pattern": "^[Hh][Tt][Tt][Pp][Ss]://"
         },
         "jwksUri": {
           "type": "string",
-          "description": "The JSON Web Key Set (JWKS) URI used to retrieve the public keys for JWT validation. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/discovery/v2.0/keys"
+          "format": "uri",
+          "description": "The JSON Web Key Set (JWKS) URI used to retrieve the public keys for JWT validation. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/discovery/v2.0/keys",
+          "maxLength": 2048,
+          "pattern": "^[Hh][Tt][Tt][Pp][Ss]://"
         },
         "audience": {
           "type": "string",
-          "description": "The intended audience for the JWT. Only a single audience value is supported in this API version. Example: https://audience.com/{application-id}"
+          "description": "The intended audience for the JWT. Only a single audience value is supported in this API version. Example: https://audience.com/{application-id}",
+          "maxLength": 2048
         },
         "clientId": {
           "type": "string",
-          "description": "The Application (client) ID for the related application registered in Microsoft Entra ID."
+          "description": "The Application (client) ID for the related application registered in Microsoft Entra ID, formatted as a GUID.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "clientSecret": {
           "type": "string",
-          "description": "The Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. Example: https://myvault.vault.azure.net/secrets/mysecret"
+          "format": "uri",
+          "description": "The absolute HTTPS Key Vault secret URL containing the client secret for authentication. This property is required for user sign-in policies. The secret value retrieved from Key Vault can contain up to 4096 characters. Example: https://myvault.vault.azure.net/secrets/mysecret",
+          "pattern": "^[Hh][Tt][Tt][Pp][Ss]://"
         },
         "scope": {
           "type": "array",
-          "description": "The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported.",
+          "description": "The scopes used by an application during authentication to authorize access to a user's details. A maximum of 10 scopes is supported, each scope can contain up to 128 characters, and all scopes can contain up to 256 characters combined.",
           "maxItems": 10,
           "items": {
-            "type": "string"
+            "$ref": "./common.json#/definitions/AuthenticationScope"
           }
         },
         "sessionTimeout": {
           "type": "string",
-          "description": "The timeout of the session cookie used for user authentication, in seconds. Applicable to the Application Gateway post-OIDC workflow."
+          "description": "The timeout of the session cookie used for user authentication. The service accepts and returns this value as a string containing a base-10 unsigned integer number of seconds with no sign, decimal point, unit suffix, or whitespace (for example `86400`). The supported range is 1 to 604800 seconds, and the default is 86400 seconds. Applicable to the Application Gateway post-OIDC workflow.",
+          "maxLength": 6,
+          "pattern": "^[1-9][0-9]{0,5}$"
         },
         "sessionCookieName": {
           "type": "string",
-          "description": "The name of the session cookie used for user authentication. Applicable to the Application Gateway post-OIDC workflow."
+          "description": "The name of the session cookie used for user authentication. Applicable to the Application Gateway post-OIDC workflow.",
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9_-]+$"
         }
       },
       "required": [

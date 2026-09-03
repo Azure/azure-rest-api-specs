@@ -1600,6 +1600,13 @@
         ]
       }
     },
+    "AuthenticationScope": {
+      "type": "string",
+      "description": "An authentication scope value.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_.:/-]+$"
+    },
     "AuthorizationUseStatus": {
       "type": "string",
       "description": "The authorization use status.",
@@ -9309,13 +9316,21 @@
     },
     "UserTrustProviderType": {
       "type": "string",
+      "description": "Type of the user trust provider.",
       "enum": [
         "entra"
       ],
       "x-ms-enum": {
-        "modelAsString": false
-      },
-      "x-nullable": false
+        "name": "UserTrustProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Entra",
+            "value": "entra",
+            "description": "Microsoft Entra trust provider type."
+          }
+        ]
+      }
     },
     "VerbosityLevel": {
       "type": "string",

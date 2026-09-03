@@ -300,6 +300,11 @@ suppressions:
       as a $ref to the shared ProvisioningState enum. The linter does not recognize readOnly next to
       $ref, so this suppression is needed.
       See: https://github.com/Azure/typespec-azure/issues/4611
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/authenticationPolicies/{authenticationPolicyName}"].patch.responses["200"].schema
   - code: RequiredPropertiesMissingInResourceModel
     from: authenticationPolicy.json
     reason: AuthenticationPolicy extends the local Network RP Resource base type (common.json#/definitions/Resource), the established envelope for all Network RP resources. Its id/name/type read-only properties are defined on the shared base and referenced via allOf, consistent with every other Network RP resource.
@@ -315,10 +320,6 @@ suppressions:
   - code: RequiredReadOnlySystemData
     from: authenticationPolicy.json
     reason: Network RP resources in this package intentionally use the legacy shared Resource envelope, which does not expose systemData.
-  - code: SchemaDescriptionOrTitle
-    from: common.json
-    where: $.definitions.UserTrustProviderType
-    reason: The TypeSpec union is documented, but the Swagger 2.0 emitter does not carry that documentation to this closed single-value union in the shared common.json file.
   - code: XMSSecretInResponse
     from: authenticationPolicy.json
     reason: clientSecret holds a Key Vault secret URL reference (e.g. https://myvault.vault.azure.net/secrets/mysecret), not the secret value itself, so it is safe to return in responses and is not marked x-ms-secret.
