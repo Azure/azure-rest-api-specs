@@ -1,6 +1,6 @@
 {
-  "title": "Response with partial results when delaying resources in a recurring scheduled action occurrence",
-  "description": "Delays one pending virtual machine operation and reports that the other operation already reached a final state.",
+  "title": "Response with partial success results when delaying operations in a recurring scheduled action occurrence",
+  "description": "Delays one pending virtual machine operation and reports that the other operation already reached a terminal state.",
   "operationId": "Occurrences_Delay",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -28,6 +28,10 @@
       "body": {
         "totalResources": 2,
         "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+            "status": "Succeeded"
+          },
           {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
             "status": "Failed",

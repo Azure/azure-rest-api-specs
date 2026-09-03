@@ -11,10 +11,10 @@
         "resourceCount": 1,
         "resourcePrefix": "flex-vm-",
         "flexProperties": {
-          "capacityType": "VM",
           "vmSizeProfiles": [
             {
-              "name": "Standard_D2s_v5"
+              "name": "Standard_D2s_v5",
+              "rank": 1
             }
           ],
           "osType": "Linux",
@@ -28,7 +28,15 @@
     }
   },
   "responses": {
-    "400": {
+    "200": {
+      "body": {
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "description": "Flex Create Resource request",
+        "results": []
+      }
+    },
+    "default": {
       "body": {
         "error": {
           "code": "BadRequestException",
