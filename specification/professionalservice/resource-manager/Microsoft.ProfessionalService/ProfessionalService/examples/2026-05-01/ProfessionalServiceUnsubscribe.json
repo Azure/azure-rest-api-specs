@@ -1,0 +1,61 @@
+{
+  "operationId": "ProfessionalServiceSubscriptionLevel_Unsubscribe",
+  "title": "Unsubscribe from a Professional Service subscription level resource",
+  "parameters": {
+    "subscriptionId": "1a950b42-75c2-44a6-ab02-fc0f840997aa",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myPsResource",
+    "api-version": "2026-05-01",
+    "body": {
+      "unsubscribeOnly": true,
+      "reasonCode": 4,
+      "feedback": "Engagement complete",
+      "deletionSource": "CustomerCancellation"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/1a950b42-75c2-44a6-ab02-fc0f840997aa/providers/Microsoft.ProfessionalService/operationStatuses/e24b5b6b-2dfc-41ea-c457-46d0c42494af?api-version=2026-05-01",
+        "Location": "https://management.azure.com/subscriptions/1a950b42-75c2-44a6-ab02-fc0f840997aa/resourceGroups/myResourceGroup/providers/Microsoft.ProfessionalService/resources/myPsResource?api-version=2026-05-01",
+        "Retry-After": "10"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/1a950b42-75c2-44a6-ab02-fc0f840997aa/resourceGroups/myResourceGroup/providers/Microsoft.ProfessionalService/resources/myPsResource",
+        "name": "myPsResource",
+        "type": "Microsoft.ProfessionalService/resources",
+        "location": "global",
+        "tags": {},
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-01T10:30:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-01T10:30:00Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "assetId": "e24b5b6b-2dfc-41ea-c457-46d0c42494af",
+          "description": "Contoso consulting engagement",
+          "status": "Unsubscribed",
+          "statusReason": "None",
+          "quantity": 1,
+          "publisherName": "Contoso",
+          "planName": "Professional Service Plan",
+          "offerName": "Contoso Consulting Offer",
+          "termUnit": "P1M",
+          "billingPeriod": "P1M",
+          "termStartDate": "2026-04-01T00:00:00Z",
+          "termEndDate": "2026-05-01T00:00:00Z",
+          "autoRenew": false,
+          "isFreeTrial": false,
+          "storefront": "AzurePortal",
+          "productCode": "0007150b-0000-0160-2654-64a36bcef7ba"
+        }
+      }
+    }
+  }
+}
