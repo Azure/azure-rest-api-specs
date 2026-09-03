@@ -101,12 +101,8 @@ model RunbookApprovalStepAddRequest extends RunbookStepAddRequest {
   @doc("Discriminator for an approval runbook step.")
   stepRef: RunbookStepRef.Approval;
 
-  @doc("Migration entity Azure resource identifiers associated with this approval step.")
-  migrationEntityIds?: armResourceIdentifier<[
-    {
-      type: "Microsoft.Migrate/migrateProjects/migrationEntities";
-    }
-  ]>[];
+  @doc("Migration entity resource names associated with this approval step.")
+  entities?: string[];
 }
 
 @doc("Request payload for updating a runbook step.")

@@ -74,10 +74,6 @@ model RunbookExecutionActionRequest {
   @doc("Target identifier for the action.")
   targetId?: string;
 
-  @doc("Migration entity ARM IDs in scope for this action.")
-  migrationEntityIds?: armResourceIdentifier<[
-    {
-      type: "Microsoft.Migrate/migrateProjects/migrationEntities";
-    }
-  ]>[];
+  @doc("Migration entity resource names in scope for this action.")
+  entities?: string[];
 }
