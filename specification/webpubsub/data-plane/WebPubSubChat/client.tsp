@@ -22,8 +22,8 @@ model GenerateClientTokenResponse {
 @summary("Generate a token for connecting a client to Azure Web PubSub.")
 @route("/api/hubs/{hub}/:generateToken")
 @post
-@scope("csharp")
-@access(Access.internal, "csharp")
+@scope("csharp, java, python, javascript")
+@access(Access.internal, "csharp, java, python, javascript")
 op generateClientToken(
   /** Target hub name. */
   @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
@@ -45,7 +45,7 @@ op generateClientToken(
   minutesToExpire?: int32 = 60,
 
   /** API version of the Web PubSub token service operation. */
-  @apiVersion(false, "csharp")
+  @apiVersion(false, "csharp, java, python, javascript")
   @query("api-version")
   apiVersion: "2024-12-01",
 
@@ -71,7 +71,13 @@ interface WebPubSubChatServiceClient
   generateClientToken is Customizations.generateClientToken;
 }
 
-@@access(GenerateClientTokenResponse, Access.internal, "csharp");
+@@clientLocation(
+  Customizations.generateClientToken::parameters.hub,
+  WebPubSubChatServiceClient.generateClientToken,
+  "java"
+);
+
+@@access(GenerateClientTokenResponse, Access.internal, "csharp, java, python, javascript");
 
 @@clientName(
   WebPubSubChat.ChatConversation,
