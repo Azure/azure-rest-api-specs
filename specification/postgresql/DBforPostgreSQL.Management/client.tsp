@@ -62,6 +62,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(PostgresMajorVersion.`18`, "Eighteen", "go");
 
 // C# configuration
+@@clientName(DbAgentAcceptedResponse, "DbAgentAcceptedResult", "csharp");
 @@clientName(Cluster, "PostgreSqlFlexibleServerClusterProperties", "csharp");
 @@clientName(Configuration, "PostgreSqlFlexibleServerConfiguration", "csharp");
 @@clientName(
