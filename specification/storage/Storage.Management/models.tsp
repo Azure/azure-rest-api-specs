@@ -6905,7 +6905,11 @@ model ContextCacheUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** The managed service identity. */
-  identity?: Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity;
+  @typeChangedFrom(
+    Versions.v2026_09_01,
+    Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
+  )
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /** The updatable properties of the Context Cache. */
   properties?: ContextCachePropertiesUpdate;
@@ -6960,4 +6964,49 @@ model ContextCacheContainerPropertiesUpdate {
 model ContextCacheContainerUpdate {
   /** The updatable properties of the Context Cache Container. */
   properties?: ContextCacheContainerPropertiesUpdate;
+}
+
+/**
+ * The parameters used to check the availability of the context cache resource name.
+ */
+@added(Versions.v2026_09_01)
+model ContextCacheCheckNameAvailabilityParameters {
+  /** The name of the context cache resource to check for availability. */
+  @pattern("^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$")
+  name: string;
+
+  /** The type of the context cache resource to check for availability. */
+  type: "Microsoft.Storage/contextCaches";
+}
+
+/**
+ * The result of the context cache name availability check.
+ */
+@added(Versions.v2026_09_01)
+model ContextCacheCheckNameAvailabilityResult {
+  /** A boolean value that indicates whether the context cache name is available to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used. */
+  @visibility(Lifecycle.Read)
+  nameAvailable: boolean;
+
+  /** The reason why the context cache name is not available. The Reason element is only returned if NameAvailable is false */
+  @visibility(Lifecycle.Read)
+  reason?: ContextCacheCheckNameAvailabilityFailureReason;
+
+  /** The error message providing additional information about the context cache name availability check failure. */
+  @visibility(Lifecycle.Read)
+  message?: string;
+}
+
+/**
+ * The reason why the context cache name is not available. The Reason element is only returned if NameAvailable is false.
+ */
+@added(Versions.v2026_09_01)
+union ContextCacheCheckNameAvailabilityFailureReason {
+  /** The context cache name is already in use. */
+  AlreadyExists: "AlreadyExists",
+
+  /** The context cache name is invalid. */
+  ContextCacheNameInvalid: "ContextCacheNameInvalid",
+
+  string,
 }
