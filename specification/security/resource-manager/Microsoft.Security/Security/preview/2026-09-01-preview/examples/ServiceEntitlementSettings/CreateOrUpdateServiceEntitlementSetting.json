@@ -1,0 +1,54 @@
+{
+  "operationId": "ServiceEntitlementSettings_CreateOrUpdate",
+  "title": "Creates or updates a service entitlement setting",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "myResourceGroup",
+    "serviceEntitlementSettingName": "default",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "environment": "test"
+      },
+      "properties": {
+        "isDefault": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlementSettings/default",
+        "name": "default",
+        "type": "Microsoft.Security/serviceEntitlementSettings",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "isDefault": true,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlementSettings/default",
+        "name": "default",
+        "type": "Microsoft.Security/serviceEntitlementSettings",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "isDefault": true,
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlementSettings/default/operationResults/11111111-1111-1111-1111-111111111111?api-version=2026-09-01-preview"
+      }
+    }
+  }
+}
