@@ -120,6 +120,7 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
+@@clientName(Microsoft365PublishResponse, "Microsoft365PublishResult");
 
 @@clientName(
   OpenAI.ResponseFormatJsonSchemaSchema,
