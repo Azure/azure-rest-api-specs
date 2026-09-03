@@ -4073,6 +4073,5 @@ model SecretStoreResource {
   /**
    * Gets or sets value stored in secret store resource
    */
-  @removed(Versions.v2026_08_31_preview)
   value?: string;
 }
