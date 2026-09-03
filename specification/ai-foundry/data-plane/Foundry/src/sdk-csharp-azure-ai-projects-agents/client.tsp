@@ -63,8 +63,8 @@ namespace Azure.AI.Projects {
     "!autorest"
   );
   @@clientName(RaiConfig, "ContentFilterConfiguration", "!autorest");
-  
-  // The renamings denoted here are attributed to ToolBox tool,
+
+  // The renaming denoted here are attributed to ToolBox tool,
   // because its class is not reusing tool, defined in OpenAI or Azure.AI.Projects.OpenAI
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
@@ -92,9 +92,9 @@ namespace Azure.AI.Projects {
   @@clientName(AgentObjectType, "InternalAgentObjectType", "!autorest");
   @@clientName(HostedAgentDefinition.protocol_versions, "versions", "csharp");
 
-  // The renamings denoted here are attributed to ToolBox tool,
+  // The renaming denoted here are attributed to ToolBox tool,
   // because its class is not reusing tool, defined in OpenAI or Azure.AI.Projects.OpenAI
-  
+
   @@clientName(AgentEndpointConfig, "AgentEndpointConfiguration");
   @@clientName(TelemetryEndpointAuth, "TelemetryEndpointAuthentication");
   @@clientName(TelemetryEndpoint.auth, "Authentication");
