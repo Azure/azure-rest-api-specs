@@ -5,6 +5,7 @@ import yaml from "js-yaml";
  * @typedef {Object} ApproversConfig
  * @property {Record<string, string[]>} [data-plane]
  * @property {{ all?: string[] }} [management-plane]
+ * @property {{ "data-plane"?: string[], "management-plane"?: string[] }} [tier1]
  */
 
 const PROTECTED_LABELS_PATH = ".github/protected-labels.yml";
@@ -83,10 +84,16 @@ export async function loadApproversConfig(path = PROTECTED_LABELS_PATH) {
     dataPlane.global = [...new Set([...(dataPlane.global ?? []), ...globalApprovers])];
   }
 
+  // Parse tier1 configuration
+  const tier1Config = /** @type {{ "data-plane"?: string[], "management-plane"?: string[] }} */ (
+    config["tier1"] ?? {}
+  );
+
   return {
     "data-plane": dataPlane,
     // Intentionally unions all mgmt approvers into one list - any mgmt approver
     // for any language can approve any other language on mgmt plane.
     "management-plane": { all: mgmtAll },
+    tier1: tier1Config,
   };
 }
