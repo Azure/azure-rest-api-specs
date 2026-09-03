@@ -1214,6 +1214,24 @@ union TelephonyStructuredInputValue {
   boolean_value: boolean,
 }
 
+@doc("A JSON value stored in outbound call metadata. Metadata may contain nested objects and arrays, unlike structured inputs.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyOutboundMetadataValue {
+  string_value: string,
+  number_value: float64,
+  integer_value: int64,
+  boolean_value: boolean,
+  object_value: TelephonyOutboundMetadata,
+  array_value: TelephonyOutboundMetadataValue[],
+  null_value: null,
+}
+
+@doc("Customer-controlled JSON metadata attached to an outbound call job.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyOutboundMetadata {
+  ...Record<TelephonyOutboundMetadataValue>;
+}
+
 @doc("The optional execution window for a direct outbound call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("TelephonyCallJobScheduleContent", "csharp")
@@ -1266,7 +1284,7 @@ model CreateTelephonyCallJobRequest {
   schedule?: TelephonyCallJobScheduleRequest;
 
   @doc("Customer-controlled metadata attached to the call job.")
-  metadata?: Record<unknown>;
+  metadata?: TelephonyOutboundMetadata;
 
   @doc("The provider-attempt retry policy. Omit it for one attempt with no retry delay.")
   retry_policy?: TelephonyOutboundRetryPolicy;
@@ -1341,7 +1359,7 @@ model TelephonyCallJob {
   schedule?: TelephonyCallJobSchedule;
 
   @doc("Customer-controlled metadata attached to the call job.")
-  metadata?: Record<unknown>;
+  metadata?: TelephonyOutboundMetadata;
 
   @doc("The recorded cancellation request, when cancellation was requested.")
   cancellation?: TelephonyCallJobCancellation;
