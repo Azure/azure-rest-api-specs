@@ -21,26 +21,29 @@ model EtagConditionalRequestHeaders {
 }
 
 /** Provides ETag conditional request headers and ETag response headers. */
+model EtagConditionalRequestProperties {
+  /** ETag conditional request headers. */
+  @traitContext(
+
+      | TraitContext.Read
+      | TraitContext.Update
+      | TraitContext.Delete
+      | TraitContext.Create
+  )
+  @traitLocation(TraitLocation.Parameters)
+  parameters: EtagConditionalRequestHeaders;
+
+  /** ETag response headers. */
+  @traitContext(TraitContext.Read | TraitContext.Create | TraitContext.Update)
+  @traitLocation(TraitLocation.Response)
+  response: Azure.Core.EtagResponseEnvelope;
+}
+
+/** Provides ETag conditional request headers and ETag response headers. */
 @trait("ConditionalRequests")
 model SupportsEtagConditionalRequests {
   /** ETag conditional request and response headers. */
-  conditionalRequests: {
-    /** ETag conditional request headers. */
-    @traitContext(
-
-        | TraitContext.Read
-        | TraitContext.Update
-        | TraitContext.Delete
-        | TraitContext.Create
-    )
-    @traitLocation(TraitLocation.Parameters)
-    parameters: EtagConditionalRequestHeaders;
-
-    /** ETag response headers. */
-    @traitContext(TraitContext.Read | TraitContext.Create | TraitContext.Update)
-    @traitLocation(TraitLocation.Response)
-    response: Azure.Core.EtagResponseEnvelope;
-  };
+  conditionalRequests: EtagConditionalRequestProperties;
 }
 
 alias Operations = Azure.Core.ResourceOperations<NoConditionalRequests &

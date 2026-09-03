@@ -1677,6 +1677,24 @@
       "type": "object",
       "description": "Conditional request headers supported by the service."
     },
+    "EtagConditionalRequestProperties": {
+      "type": "object",
+      "description": "Provides ETag conditional request headers and ETag response headers.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/EtagConditionalRequestHeaders",
+          "description": "ETag conditional request headers."
+        },
+        "response": {
+          "$ref": "#/definitions/Azure.Core.EtagResponseEnvelope",
+          "description": "ETag response headers."
+        }
+      },
+      "required": [
+        "parameters",
+        "response"
+      ]
+    },
     "Hub": {
       "type": "object",
       "description": "Represents a hub (virtual parent resource for URL routing).",
@@ -1799,22 +1817,8 @@
       "description": "Provides ETag conditional request headers and ETag response headers.",
       "properties": {
         "conditionalRequests": {
-          "type": "object",
-          "description": "ETag conditional request and response headers.",
-          "properties": {
-            "parameters": {
-              "$ref": "#/definitions/EtagConditionalRequestHeaders",
-              "description": "ETag conditional request headers."
-            },
-            "response": {
-              "$ref": "#/definitions/Azure.Core.EtagResponseEnvelope",
-              "description": "ETag response headers."
-            }
-          },
-          "required": [
-            "parameters",
-            "response"
-          ]
+          "$ref": "#/definitions/EtagConditionalRequestProperties",
+          "description": "ETag conditional request and response headers."
         }
       },
       "required": [
