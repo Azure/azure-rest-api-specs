@@ -1,5 +1,6 @@
 import "../openai/responses/models.tsp";
 import "../common/servicepatterns.tsp";
+import "../skills/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -13,7 +14,9 @@ const AllConditionalAgentDefinitionPreviews = #{
     AgentDefinitionOptInKeys.external_agents_v1_preview,
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     AgentDefinitionOptInKeys.draft_agents_v1_preview,
-    AgentDefinitionOptInKeys.digital_worker_v1_preview
+    AgentDefinitionOptInKeys.digital_worker_v1_preview,
+    AgentDefinitionOptInKeys.github_copilot_v1_preview,
+    AgentDefinitionOptInKeys.skills_v1_preview
   ],
 };
 
@@ -404,11 +407,25 @@ model AgentDefinition {
 model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
 
+  @doc("The managed runtime and agent loop used to execute this prompt agent.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+  )
+  harness?: AgentHarness;
+
   @doc("The model deployment to use for this agent.")
   `model`: string;
 
   @doc("A system (or developer) message inserted into the model's context.")
   instructions?: string | null;
+
+  @doc("The Foundry skills available to this prompt agent. An omitted skill version is resolved and pinned when the agent version is created.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.skills_v1_preview] }
+  )
+  skills?: SkillReference[];
 
   @doc("""
     What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -451,6 +468,33 @@ model PromptAgentDefinition extends AgentDefinition {
 
   @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
   structured_inputs?: Record<StructuredInputDefinition>;
+}
+
+@doc("A managed runtime and agent loop used to execute a prompt agent.")
+@discriminator("type")
+model AgentHarness {
+  @doc("The type of managed harness.")
+  type: string;
+}
+
+@doc("The GitHub Copilot managed harness for prompt agents.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+)
+model GitHubCopilotHarness extends AgentHarness {
+  @doc("The type of managed harness. Always `github_copilot_preview`.")
+  type: "github_copilot_preview";
+}
+
+@doc("A reference to a versioned Foundry skill.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+model SkillReference {
+  @doc("The name of the skill.")
+  name: SkillName;
+
+  @doc("The skill version. If omitted, the current default version is resolved and pinned when the agent version is created.")
+  version?: string;
 }
 
 /**
