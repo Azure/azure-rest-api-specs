@@ -465,7 +465,7 @@ interface AgentTelephony {
   /** Creates a telephony binding for the voice agent named in the path. */
   @summary("Create an agent telephony binding")
   @post
-  @route("/agents/{agent_name}/telephony_bindings")
+  @route("/agents/{agent_name}/telephony/bindings")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   createTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -485,7 +485,7 @@ interface AgentTelephony {
   @summary("List agent telephony bindings")
   @get
   @list
-  @route("/agents/{agent_name}/telephony_bindings")
+  @route("/agents/{agent_name}/telephony/bindings")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   listTelephonyBindings is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -507,7 +507,7 @@ interface AgentTelephony {
   /** Retrieves a telephony binding owned by the voice agent named in the path. */
   @summary("Get an agent telephony binding")
   @get
-  @route("/agents/{agent_name}/telephony_bindings/{binding_id}")
+  @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -524,7 +524,7 @@ interface AgentTelephony {
   /** Updates a telephony binding owned by the voice agent named in the path. */
   @summary("Update an agent telephony binding")
   @patch
-  @route("/agents/{agent_name}/telephony_bindings/{binding_id}")
+  @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   updateTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -549,7 +549,7 @@ interface AgentTelephony {
   /** Deletes a telephony binding owned by the voice agent named in the path. */
   @summary("Delete an agent telephony binding")
   @delete
-  @route("/agents/{agent_name}/telephony_bindings/{binding_id}")
+  @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   deleteTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -569,7 +569,7 @@ interface AgentTelephony {
   @summary("List agent telephony calls")
   @get
   @list
-  @route("/agents/{agent_name}/telephony_calls")
+  @route("/agents/{agent_name}/telephony/calls")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   listTelephonyCalls is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -597,7 +597,7 @@ interface AgentTelephony {
   /** Retrieves a durable inbound call record owned by the voice agent named in the path. */
   @summary("Get an agent telephony call")
   @get
-  @route("/agents/{agent_name}/telephony_calls/{call_id}")
+  @route("/agents/{agent_name}/telephony/calls/{call_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -614,7 +614,7 @@ interface AgentTelephony {
   /** Transfers an active inbound call to a configured target for the voice agent named in the path. */
   @summary("Transfer an active agent telephony call")
   @post
-  @route("/agents/{agent_name}/telephony_calls/{call_id}:transfer")
+  @route("/agents/{agent_name}/telephony/calls/{call_id}:transfer")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   transferTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -633,7 +633,7 @@ interface AgentTelephony {
   /** Ends an active inbound call owned by the voice agent named in the path. */
   @summary("End an active agent telephony call")
   @post
-  @route("/agents/{agent_name}/telephony_calls/{call_id}:end")
+  @route("/agents/{agent_name}/telephony/calls/{call_id}:end")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   endTelephonyCall is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -650,7 +650,7 @@ interface AgentTelephony {
   /** Returns all transfer targets configured for the voice agent named in the path. */
   @summary("Get agent telephony transfer targets")
   @get
-  @route("/agents/{agent_name}/telephony_transfer_targets")
+  @route("/agents/{agent_name}/telephony/transfer_targets")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   getTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
@@ -664,7 +664,7 @@ interface AgentTelephony {
   /** Replaces all transfer targets configured for the voice agent named in the path. */
   @summary("Replace agent telephony transfer targets")
   @put
-  @route("/agents/{agent_name}/telephony_transfer_targets")
+  @route("/agents/{agent_name}/telephony/transfer_targets")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   replaceTelephonyTransferTargets is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
