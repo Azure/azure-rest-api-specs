@@ -9641,7 +9641,8 @@
       "description": "Defines the schema format.",
       "enum": [
         "JsonSchema/draft-07",
-        "Delta/1.0"
+        "Delta/1.0",
+        "JsonLD/1.1"
       ],
       "x-ms-enum": {
         "name": "Format",
@@ -9656,6 +9657,11 @@
             "name": "Delta_1_0",
             "value": "Delta/1.0",
             "description": "Delta format"
+          },
+          {
+            "name": "JsonLD_1_1",
+            "value": "JsonLD/1.1",
+            "description": "W3C Web of Things JSON-LD format"
           }
         ]
       }
@@ -10683,6 +10689,31 @@
         ]
       }
     },
+    "JobRunError": {
+      "type": "object",
+      "description": "Defines the error details for a job run.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code for classification of errors (ex: '400', '404', '500', etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable helpful error message to provide additional context for error (e.g.,: “Capability ID 'foo' does not exist”).",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Array of error details that describe the status of each error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "JobRunListResult": {
       "type": "object",
       "description": "The response of a JobRun list operation.",
@@ -10721,6 +10752,11 @@
         "cancellationReason": {
           "$ref": "#/definitions/JobRunCancellationReason",
           "description": "The reason the run was canceled. Present only when status is Canceled.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/JobRunError",
+          "description": "The error details explaining why the job run failed. Present only when status is Failed.",
           "readOnly": true
         },
         "scheduledTime": {
@@ -10896,7 +10932,6 @@
       "description": "The status of a job run.",
       "enum": [
         "Scheduled",
-        "Queued",
         "Active",
         "Succeeded",
         "Failed",
@@ -10911,11 +10946,6 @@
             "name": "Scheduled",
             "value": "Scheduled",
             "description": "The job run is scheduled."
-          },
-          {
-            "name": "Queued",
-            "value": "Queued",
-            "description": "The job run is queued for dispatch and is consuming concurrency quota."
           },
           {
             "name": "Active",
@@ -11537,7 +11567,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -13592,7 +13622,7 @@
       "description": "The type used for update operations of the Namespace.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -14569,7 +14599,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -14655,7 +14685,7 @@
       "description": "The type used for update operations of the SchemaRegistry.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -14694,7 +14724,9 @@
       "type": "string",
       "description": "Defines the schema type.",
       "enum": [
-        "MessageSchema"
+        "MessageSchema",
+        "ThingModel",
+        "ThingDescription"
       ],
       "x-ms-enum": {
         "name": "SchemaType",
@@ -14704,6 +14736,16 @@
             "name": "MessageSchema",
             "value": "MessageSchema",
             "description": "Message Schema schema type"
+          },
+          {
+            "name": "ThingModel",
+            "value": "ThingModel",
+            "description": "W3C Web of Things Thing Model document"
+          },
+          {
+            "name": "ThingDescription",
+            "value": "ThingDescription",
+            "description": "W3C Web of Things Thing Description document"
           }
         ]
       }
