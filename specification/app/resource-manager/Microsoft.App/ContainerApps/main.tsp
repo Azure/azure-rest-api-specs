@@ -15,6 +15,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./ContainerAppsSessionPool.tsp";
+import "./SandboxGroup.tsp";
+import "./VnetConnection.tsp";
 import "./SourceControl.tsp";
 import "./ContainerApp.tsp";
 import "./ContainerAppsBuild.tsp";
@@ -76,6 +78,11 @@ enum Versions {
    * The 2026-01-01 API version.
    */
   v2026_01_01: "2026-01-01",
+
+  /**
+   * The 2026-07-01 API version.
+   */
+  v2026_07_01: "2026-07-01",
 }
 
 interface Operations
