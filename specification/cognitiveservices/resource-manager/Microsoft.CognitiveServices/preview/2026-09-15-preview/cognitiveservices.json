@@ -133,6 +133,9 @@
       "name": "ManagedComputeDeployments"
     },
     {
+      "name": "AdapterDeployments"
+    },
+    {
       "name": "ComputeOperations"
     },
     {
@@ -2010,6 +2013,317 @@
         "x-ms-examples": {
           "Delete Account": {
             "$ref": "./examples/DeleteAccount.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/adapterDeployments": {
+      "get": {
+        "operationId": "AdapterDeployments_List",
+        "tags": [
+          "AdapterDeployments"
+        ],
+        "description": "Lists adapter deployments associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "$ref": "#/parameters/AdapterDeploymentListParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AdapterDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAdapterDeployments": {
+            "$ref": "./examples/ListAdapterDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/adapterDeployments/{adapterDeploymentName}": {
+      "get": {
+        "operationId": "AdapterDeployments_Get",
+        "tags": [
+          "AdapterDeployments"
+        ],
+        "description": "Gets an adapter deployment by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "adapterDeploymentName",
+            "in": "path",
+            "description": "The account-unique adapter deployment name and inference identity.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AdapterDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAdapterDeployment": {
+            "$ref": "./examples/GetAdapterDeployment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AdapterDeployments_CreateOrUpdate",
+        "tags": [
+          "AdapterDeployments"
+        ],
+        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable. Create\nrequests use `If-None-Match: *`; re-target requests use `If-Match`.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "adapterDeploymentName",
+            "in": "path",
+            "description": "The account-unique adapter deployment name and inference identity.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Applies the re-target operation only when the current resource ETag\nmatches.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Use `*` for create-only behavior.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The complete adapter deployment resource to create or re-target.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdapterDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AdapterDeployment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "201": {
+            "description": "Resource 'AdapterDeployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AdapterDeployment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateAdapterDeployment": {
+            "$ref": "./examples/CreateOrUpdateAdapterDeployment.json"
+          },
+          "UpdateAdapterDeployment": {
+            "$ref": "./examples/UpdateAdapterDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AdapterDeployment"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AdapterDeployments_Delete",
+        "tags": [
+          "AdapterDeployments"
+        ],
+        "description": "Drains requests and deletes an adapter deployment and its serving snapshot.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "adapterDeploymentName",
+            "in": "path",
+            "description": "The account-unique adapter deployment name and inference identity.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Applies deletion only when the current resource ETag matches.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAdapterDeployment": {
+            "$ref": "./examples/DeleteAdapterDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -12670,6 +12984,402 @@
         ]
       }
     },
+    "AdapterDeployment": {
+      "type": "object",
+      "description": "An independently managed LoRA adapter attached to a managed compute deployment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdapterDeploymentProperties",
+          "description": "Properties of the Cognitive Services adapter deployment."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags used for organization and governance.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "The concurrency token for this adapter deployment.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AdapterDeploymentErrorCode": {
+      "type": "string",
+      "description": "Domain error codes returned by adapter deployment operations.",
+      "enum": [
+        "invalid_adapter_source",
+        "adapter_format_not_supported",
+        "base_model_provenance_missing",
+        "base_model_mismatch",
+        "invalid_target_deployment",
+        "invalid_adapter_deployment_name",
+        "model_not_found",
+        "adapter_deployment_not_found",
+        "target_deployment_not_ready",
+        "adapter_deployment_already_exists",
+        "adapter_deployments_exist",
+        "adapter_deployment_source_in_use",
+        "adapter_limit_exceeded",
+        "precondition_failed",
+        "adapter_load_failed",
+        "adapter_rollback_failed",
+        "convergence_timed_out",
+        "drain_timed_out",
+        "adapter_revoked",
+        "too_many_requests",
+        "service_unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "AdapterDeploymentErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidAdapterSource",
+            "value": "invalid_adapter_source",
+            "description": "The adapter source is invalid."
+          },
+          {
+            "name": "AdapterFormatNotSupported",
+            "value": "adapter_format_not_supported",
+            "description": "The adapter format is unsupported."
+          },
+          {
+            "name": "BaseModelProvenanceMissing",
+            "value": "base_model_provenance_missing",
+            "description": "The base-model provenance is missing."
+          },
+          {
+            "name": "BaseModelMismatch",
+            "value": "base_model_mismatch",
+            "description": "The source and target base models do not match."
+          },
+          {
+            "name": "InvalidTargetDeployment",
+            "value": "invalid_target_deployment",
+            "description": "The target deployment is invalid."
+          },
+          {
+            "name": "InvalidAdapterDeploymentName",
+            "value": "invalid_adapter_deployment_name",
+            "description": "The adapter deployment name is invalid."
+          },
+          {
+            "name": "ModelNotFound",
+            "value": "model_not_found",
+            "description": "The source model was not found."
+          },
+          {
+            "name": "AdapterDeploymentNotFound",
+            "value": "adapter_deployment_not_found",
+            "description": "The adapter deployment was not found."
+          },
+          {
+            "name": "TargetDeploymentNotReady",
+            "value": "target_deployment_not_ready",
+            "description": "The target deployment is not ready."
+          },
+          {
+            "name": "AdapterDeploymentAlreadyExists",
+            "value": "adapter_deployment_already_exists",
+            "description": "The adapter deployment already exists."
+          },
+          {
+            "name": "AdapterDeploymentsExist",
+            "value": "adapter_deployments_exist",
+            "description": "Adapter deployments prevent the requested parent operation."
+          },
+          {
+            "name": "AdapterDeploymentSourceInUse",
+            "value": "adapter_deployment_source_in_use",
+            "description": "The adapter source is already in use."
+          },
+          {
+            "name": "AdapterLimitExceeded",
+            "value": "adapter_limit_exceeded",
+            "description": "The target deployment's adapter limit was exceeded."
+          },
+          {
+            "name": "PreconditionFailed",
+            "value": "precondition_failed",
+            "description": "A conditional request precondition failed."
+          },
+          {
+            "name": "AdapterLoadFailed",
+            "value": "adapter_load_failed",
+            "description": "Loading the adapter failed."
+          },
+          {
+            "name": "AdapterRollbackFailed",
+            "value": "adapter_rollback_failed",
+            "description": "Rolling back the adapter failed."
+          },
+          {
+            "name": "ConvergenceTimedOut",
+            "value": "convergence_timed_out",
+            "description": "Replica convergence timed out."
+          },
+          {
+            "name": "DrainTimedOut",
+            "value": "drain_timed_out",
+            "description": "Request draining timed out."
+          },
+          {
+            "name": "AdapterRevoked",
+            "value": "adapter_revoked",
+            "description": "Security policy revoked the adapter."
+          },
+          {
+            "name": "TooManyRequests",
+            "value": "too_many_requests",
+            "description": "The request rate is too high."
+          },
+          {
+            "name": "ServiceUnavailable",
+            "value": "service_unavailable",
+            "description": "The service is temporarily unavailable."
+          }
+        ]
+      }
+    },
+    "AdapterDeploymentErrorDetail": {
+      "type": "object",
+      "description": "Safe domain error details returned for adapter deployment failures.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/AdapterDeploymentErrorCode",
+          "description": "Stable machine-readable error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Safe customer-facing error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Request property or resource targeted by the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "Nested safe error details.",
+          "items": {
+            "$ref": "#/definitions/AdapterDeploymentErrorDetail"
+          },
+          "x-ms-identifiers": [
+            "code",
+            "target"
+          ]
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "AdapterDeploymentLastOperation": {
+      "type": "object",
+      "description": "The most recently requested adapter lifecycle operation.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AdapterDeploymentOperationType",
+          "description": "The type of lifecycle operation."
+        },
+        "status": {
+          "$ref": "#/definitions/AdapterDeploymentOperationState",
+          "description": "The current or terminal operation state."
+        },
+        "requestedTargetDeploymentName": {
+          "type": "string",
+          "description": "The target deployment requested by a create or re-target operation."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "A safe identifier used to correlate logs and support requests."
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation started."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state."
+        },
+        "rollbackResult": {
+          "$ref": "#/definitions/AdapterDeploymentRollbackResult",
+          "description": "The rollback result when a re-target operation does not complete."
+        },
+        "error": {
+          "$ref": "#/definitions/AdapterDeploymentErrorDetail",
+          "description": "Safe error details when the operation failed."
+        }
+      },
+      "required": [
+        "type",
+        "status",
+        "correlationId",
+        "startedAt"
+      ]
+    },
+    "AdapterDeploymentListResult": {
+      "type": "object",
+      "description": "A paginated collection of adapter deployments.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Adapter deployments in this page.",
+          "items": {
+            "$ref": "#/definitions/AdapterDeployment"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL used to retrieve the next page, when one exists."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AdapterDeploymentOperationState": {
+      "type": "string",
+      "description": "Lifecycle operation states reported by an adapter deployment.",
+      "enum": [
+        "accepted",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "AdapterDeploymentOperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "accepted",
+            "description": "The operation was accepted."
+          },
+          {
+            "name": "Running",
+            "value": "running",
+            "description": "The operation is running."
+          },
+          {
+            "name": "Succeeded",
+            "value": "succeeded",
+            "description": "The operation completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "The operation failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AdapterDeploymentOperationType": {
+      "type": "string",
+      "description": "Lifecycle operation types reported by an adapter deployment.",
+      "enum": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "x-ms-enum": {
+        "name": "AdapterDeploymentOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "create",
+            "description": "Creates the adapter deployment."
+          },
+          {
+            "name": "Update",
+            "value": "update",
+            "description": "Re-targets the adapter deployment."
+          },
+          {
+            "name": "Delete",
+            "value": "delete",
+            "description": "Deletes the adapter deployment."
+          }
+        ]
+      }
+    },
+    "AdapterDeploymentProperties": {
+      "type": "object",
+      "description": "Properties of an adapter deployment.",
+      "properties": {
+        "sourceModelId": {
+          "type": "string",
+          "description": "The immutable Project Models version produced by Foundry fine-tuning.\nThe identifier uses the Azure AI project model URI format.\nThe service validates LoRA weight type, protected status, provenance,\ncompatibility metadata, and registration state."
+        },
+        "targetDeploymentName": {
+          "type": "string",
+          "description": "The name of the compatible managed compute parent deployment.\nThe service resolves this name within the adapter's owning account; full\nARM resource IDs and cross-account references are not accepted. It cannot\nequal the adapter deployment's resource name. Updating this value\nre-targets the adapter while its source model remains unchanged."
+        },
+        "activeTargetDeploymentName": {
+          "type": "string",
+          "description": "The managed compute deployment currently serving the adapter.\nDuring re-targeting this remains the prior deployment until atomic cutover.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the adapter deployment.",
+          "readOnly": true
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/AdapterDeploymentLastOperation",
+          "description": "Information about the most recently requested lifecycle operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceModelId",
+        "targetDeploymentName"
+      ]
+    },
+    "AdapterDeploymentRollbackResult": {
+      "type": "string",
+      "description": "Rollback outcomes for a failed re-target operation.",
+      "enum": [
+        "not_required",
+        "succeeded",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "AdapterDeploymentRollbackResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotRequired",
+            "value": "not_required",
+            "description": "No rollback was required."
+          },
+          {
+            "name": "Succeeded",
+            "value": "succeeded",
+            "description": "Rollback completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "Rollback failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "AgentApplication": {
       "type": "object",
       "description": "Agent Application resource",
@@ -22694,6 +23404,15 @@
     }
   },
   "parameters": {
+    "AdapterDeploymentListParameters": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filters by target deployment, source model version, provisioning state,\nor a supported conjunction of those predicates.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
     "RaiBindingListParameters": {
       "name": "$top",
       "in": "query",

@@ -1,0 +1,38 @@
+{
+  "operationId": "AdapterDeployments_Get",
+  "title": "GetAdapterDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "adapterDeploymentName": "adapterDeploymentName",
+    "api-version": "2026-09-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/adapterDeployments/adapterDeploymentName",
+        "name": "adapterDeploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/adapterDeployments",
+        "etag": "\"0x8D1234567890ABC\"",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "sourceModelId": "azureai://accounts/accountName/projects/projectName/models/modelName/versions/1",
+          "targetDeploymentName": "managedComputeDeploymentName",
+          "activeTargetDeploymentName": "managedComputeDeploymentName",
+          "provisioningState": "Succeeded",
+          "lastOperation": {
+            "type": "create",
+            "status": "succeeded",
+            "requestedTargetDeploymentName": "managedComputeDeploymentName",
+            "correlationId": "00000000-0000-0000-0000-000000000002",
+            "startedAt": "2026-08-31T18:30:00Z",
+            "completedAt": "2026-08-31T18:34:00Z"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "operationId": "AdapterDeployments_CreateOrUpdate",
+  "title": "UpdateAdapterDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "adapterDeploymentName": "adapterDeploymentName",
+    "api-version": "2026-09-15-preview",
+    "If-Match": "etag",
+    "resource": {
+      "properties": {
+        "sourceModelId": "azureai://accounts/accountName/projects/projectName/models/modelName/versions/1",
+        "targetDeploymentName": "newManagedComputeDeploymentName"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000005?api-version=2026-09-15-preview",
+        "retry-after": "30"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/adapterDeployments/adapterDeploymentName",
+        "name": "adapterDeploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/adapterDeployments",
+        "etag": "\"0x8D1234567890ABD\"",
+        "properties": {
+          "sourceModelId": "azureai://accounts/accountName/projects/projectName/models/modelName/versions/1",
+          "targetDeploymentName": "newManagedComputeDeploymentName",
+          "activeTargetDeploymentName": "managedComputeDeploymentName",
+          "provisioningState": "Accepted",
+          "lastOperation": {
+            "type": "update",
+            "status": "running",
+            "requestedTargetDeploymentName": "newManagedComputeDeploymentName",
+            "correlationId": "00000000-0000-0000-0000-000000000005",
+            "startedAt": "2026-09-01T18:30:00Z"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000005?api-version=2026-09-15-preview",
+        "retry-after": "30"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/adapterDeployments/adapterDeploymentName",
+        "name": "adapterDeploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/adapterDeployments",
+        "properties": {
+          "sourceModelId": "azureai://accounts/accountName/projects/projectName/models/modelName/versions/1",
+          "targetDeploymentName": "newManagedComputeDeploymentName",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}
