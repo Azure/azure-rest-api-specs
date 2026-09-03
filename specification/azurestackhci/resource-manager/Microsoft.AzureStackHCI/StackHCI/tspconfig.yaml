@@ -8,7 +8,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-go":
     service-dir: sdk/resourcemanager/azurestackhci
-    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armazurestackhci/v3
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armazurestackhci
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
@@ -34,6 +34,7 @@ options:
     namespace: "Azure.ResourceManager.Hci"
     emitter-output-dir: "{output-dir}/sdk/azurestackhci/{namespace}"
     enable-wire-path-attribute: true
+    api-version: "2026-04-30"
   "@azure-tools/typespec-ts":
     service-dir: "sdk/azurestackhci"
     package-dir: "arm-azurestackhci"

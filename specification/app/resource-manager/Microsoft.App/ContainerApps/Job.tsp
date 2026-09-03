@@ -28,6 +28,7 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2026_01_01)
+  @removed(Versions.v2026_07_01)
   extendedLocation?: ExtendedLocation;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -172,12 +173,13 @@ interface Jobs {
   >;
 
   /**
-   * Resumes a suspended job
+   * Resumes execution for a suspended Container Apps job.
    */
   @tag("Jobs")
   @summary("Resumes a suspended job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   resume is ArmResourceActionAsyncBase<
     Job,
     void,
@@ -189,12 +191,13 @@ interface Jobs {
   >;
 
   /**
-   * Suspends a job
+   * Suspends execution for a running Container Apps job.
    */
   @tag("Jobs")
   @summary("Suspends a job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_07_01)
   suspend is ArmResourceActionAsyncBase<
     Job,
     void,
@@ -254,18 +257,7 @@ interface Jobs {
   @tag("Jobs")
   @tag("Diagnostics")
   @summary("Get the properties of a Container App Job.")
-  proxyGet is ArmResourceRead<
-    Job,
-    Parameters = {
-      /** Proxy API Name for Container App Job. */
-      @path
-      @segment("detectorProperties")
-      @key
-      @pattern("^[-\\w\\._]+$")
-      apiName: string;
-    },
-    Error = DefaultErrorResponse
-  >;
+  proxyGet is JobDetectorPropertyOps.Read<Job, Response = ArmResponse<Job>>;
 
   /**
    * Get the list of diagnostics for a Container App Job.
