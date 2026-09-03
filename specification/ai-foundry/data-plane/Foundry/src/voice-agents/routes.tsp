@@ -89,6 +89,14 @@ interface VoiceAgentWebSocket {
        */
       @query store?: boolean;
 
+      /**
+       * Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and
+       * URL-encoded as this query parameter. Supplied values override definition defaults when rendering the
+       * agent's instructions and session-start greeting for this session only. The decoded value must be a JSON
+       * object no larger than 32 KiB with a maximum nesting depth of 16.
+       */
+      @query structured_input?: string;
+
       /** Selects a specific version of the voice agent for this session. */
       @query("x-agent-version-override") agent_version_override?: string;
 

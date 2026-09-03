@@ -3266,6 +3266,16 @@
             "explode": false
           },
           {
+            "name": "structured_input",
+            "in": "query",
+            "required": false,
+            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
             "name": "x-agent-version-override",
             "in": "query",
             "required": false,
