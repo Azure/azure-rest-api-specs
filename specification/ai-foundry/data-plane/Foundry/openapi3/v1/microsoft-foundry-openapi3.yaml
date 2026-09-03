@@ -38717,6 +38717,53 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
+  /toolboxes/{name}:invoke_mcp:
+    post:
+      operationId: invokeLatestToolboxMcp
+      summary: Invoke the latest toolbox version through MCP
+      description: Invokes the latest version of the specified toolbox through its MCP endpoint.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the toolbox.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            '*/*':
+              schema: {}
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolboxes
+      requestBody:
+        required: true
+        content:
+          '*/*':
+            schema:
+              type: object
+              unevaluatedProperties: {}
+        description: The MCP request body.
 security:
   - OAuth2Auth:
       - https://ai.azure.com/.default
@@ -77387,6 +77434,8 @@ components:
       required:
         - id
         - name
+        - updated_at
+        - versions
         - default_version
       properties:
         id:
@@ -77396,6 +77445,12 @@ components:
           type: string
           maxLength: 256
           description: The name of the toolbox.
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the toolbox was last updated. This value changes when a new toolbox version is created or the toolbox is updated.
+        versions:
+          $ref: '#/components/schemas/ToolboxVersions'
+          description: The versions associated with the toolbox.
         default_version:
           type: string
           description: The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.
@@ -77663,6 +77718,15 @@ components:
           $ref: '#/components/schemas/ToolboxPolicies'
           description: Policy configuration for the toolbox version.
       description: A specific version of a toolbox.
+    ToolboxVersions:
+      type: object
+      required:
+        - latest
+      properties:
+        latest:
+          $ref: '#/components/schemas/ToolboxVersionObject'
+          description: The latest version of the toolbox.
+      description: The versions associated with a toolbox.
     TraceIdTraceSource:
       type: object
       required:

@@ -67,6 +67,32 @@ interface Toolboxes {
     ToolboxVersionObject
   >;
 
+  /** Invokes the latest version of the specified toolbox through its MCP endpoint. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Invoke the latest toolbox version through MCP")
+  @operationId("invokeLatestToolboxMcp")
+  @post
+  @route("/toolboxes/{name}:invoke_mcp")
+  invokeLatestToolboxMcp is FoundryDataPlaneOperation<
+    {
+      /** The name of the toolbox. */
+      @path name: string;
+
+      /** The content type of the MCP request body. */
+      @header contentType: string;
+
+      /** The MCP request body. */
+      @body request: Record<unknown>;
+    },
+    {
+      /** The content type of the MCP response body. */
+      @header contentType: string;
+
+      /** The MCP response body. */
+      @body response: unknown;
+    }
+  >;
+
   /** Updates the toolbox's default version pointer to the specified version. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Update a toolbox to point to a specific version")
