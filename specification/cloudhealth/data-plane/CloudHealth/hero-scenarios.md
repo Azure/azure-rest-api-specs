@@ -57,6 +57,8 @@ Repeatability-Result: accepted
 
 The response confirms that the report was durably accepted into the ingestion pipeline. The operation is not long-running and exposes no polling resource. If the client loses the response, it retries with the same repeatability headers to avoid duplicate ingestion.
 
+The submitted `healthState` is the authoritative observation. The optional `value` and `evaluationRules` record the inputs and rules the telemetry producer used; the service does not recalculate the state or change management-plane signal definitions from them. If the signal name is not configured, the report creates an external signal instance. A later report replaces the signal's current observation, while earlier values and health states remain available through signal history.
+
 ```http
 GET /api/entities/frontend-web-app/signals/request-latency-p95/history?api-version=2026-06-01-preview&startAt=2026-09-02T10:55:00Z&endAt=2026-09-02T11:05:00Z&maxpagesize=100
 Accept: application/json

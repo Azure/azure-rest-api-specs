@@ -310,7 +310,7 @@
     "/api/entities/{entityName}/healthReports": {
       "post": {
         "operationId": "HealthReportIngestion_IngestHealthReport",
-        "description": "Durably accept a health report for asynchronous processing.\nA successful response confirms that the report is safely queued, not that downstream health evaluation has completed.\nUse the signal history and entity diagnostic operations to observe the resulting health state.\nRetrying the same logical submission with the same repeatability headers does not ingest the report twice.",
+        "description": "Durably accept a health report for asynchronous processing.\nA successful response confirms that the report is safely queued, not that downstream health evaluation has completed.\nUse the signal history and entity diagnostic operations to observe the resulting health state.\nA later report for the same signal replaces its current observation while previous values and health states remain available in signal history.\nRetrying the same logical submission with the same repeatability headers does not ingest the report twice.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1415,15 +1415,15 @@
     },
     "HealthReportPayload": {
       "type": "object",
-      "description": "Health report submitted for a specific signal.",
+      "description": "Current health observation submitted for a specific signal.",
       "properties": {
         "signalName": {
           "$ref": "#/definitions/signalName",
-          "description": "Name of the entity signal to report health for."
+          "description": "Name of the entity signal to report health for. An unknown name creates an external signal instance."
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Health state to report for the signal."
+          "description": "Authoritative health state reported by the submitter. The service does not recalculate it from the reported value or evaluation rules."
         },
         "value": {
           "type": "number",
@@ -1432,7 +1432,7 @@
         },
         "evaluationRules": {
           "$ref": "#/definitions/HealthReportEvaluationRule",
-          "description": "Evaluation rules that were used to determine the reported health state."
+          "description": "Optional snapshot of the evaluation rules used by the submitter to determine the reported health state. These rules are provenance and do not modify configured signal rules."
         },
         "expiresInMinutes": {
           "type": "integer",
