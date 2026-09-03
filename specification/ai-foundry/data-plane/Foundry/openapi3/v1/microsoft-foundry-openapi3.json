@@ -14226,7 +14226,7 @@
     },
     "/openai/v1/chat/completions": {
       "get": {
-        "operationId": "Chat_listChatCompletions",
+        "operationId": "ChatGenerated_listChatCompletions",
         "summary": "List chat completions",
         "description": "Lists chat completions matching the request filters.",
         "parameters": [
@@ -14486,7 +14486,7 @@
     },
     "/openai/v1/chat/completions/{completion_id}": {
       "delete": {
-        "operationId": "Chat_deleteChatCompletion",
+        "operationId": "ChatGenerated_deleteChatCompletion",
         "summary": "Delete a chat completion",
         "description": "Deletes a chat completion by its identifier.",
         "parameters": [
@@ -14552,7 +14552,7 @@
         }
       },
       "get": {
-        "operationId": "Chat_getChatCompletion",
+        "operationId": "ChatGenerated_getChatCompletion",
         "summary": "Get a chat completion",
         "description": "Retrieves a chat completion by its identifier.",
         "parameters": [
@@ -14618,7 +14618,7 @@
         }
       },
       "post": {
-        "operationId": "Chat_updateChatCompletion",
+        "operationId": "ChatGenerated_updateChatCompletion",
         "summary": "Update a chat completion",
         "description": "Updates a chat completion with the supplied changes.",
         "parameters": [
@@ -14697,7 +14697,7 @@
     },
     "/openai/v1/chat/completions/{completion_id}/messages": {
       "get": {
-        "operationId": "Chat_getChatCompletionMessages",
+        "operationId": "ChatGenerated_getChatCompletionMessages",
         "summary": "Get chat completion messages",
         "description": "Retrieves chat completion messages by its identifier.",
         "parameters": [
@@ -44991,10 +44991,10 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "image_url": "#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartImage",
             "input_audio": "#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartAudio",
             "file": "#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartFile",
-            "text": "#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPartChatCompletionRequestMessageContentPartText"
+            "text": "#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPartChatCompletionRequestMessageContentPartText",
+            "image_url": "#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartImage"
           }
         }
       },

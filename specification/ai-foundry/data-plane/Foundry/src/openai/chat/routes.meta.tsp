@@ -10,7 +10,7 @@ import "@typespec/openapi";
 using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @@extension(
-  Azure.AI.Projects.Chat.listChatCompletions,
+  Azure.AI.Projects.ChatGenerated.listChatCompletions,
   "x-oaiMeta",
   #{
     name: "List Chat Completions",
@@ -153,7 +153,11 @@ namespace Azure.AI.Projects;
   }
 );
 
-@@extension(Azure.AI.Projects.Chat.listChatCompletions, "x-ms-list", true);
+@@extension(
+  Azure.AI.Projects.ChatGenerated.listChatCompletions,
+  "x-ms-list",
+  true
+);
 
 @@extension(
   Azure.AI.Projects.Chat.createChatCompletion,
@@ -1398,7 +1402,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Chat.deleteChatCompletion,
+  Azure.AI.Projects.ChatGenerated.deleteChatCompletion,
   "x-oaiMeta",
   #{
     name: "Delete chat completion",
@@ -1499,7 +1503,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Chat.getChatCompletion,
+  Azure.AI.Projects.ChatGenerated.getChatCompletion,
   "x-oaiMeta",
   #{
     name: "Get chat completion",
@@ -1634,7 +1638,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Chat.updateChatCompletion,
+  Azure.AI.Projects.ChatGenerated.updateChatCompletion,
   "x-oaiMeta",
   #{
     name: "Update chat completion",
@@ -1793,7 +1797,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Chat.getChatCompletionMessages,
+  Azure.AI.Projects.ChatGenerated.getChatCompletionMessages,
   "x-oaiMeta",
   #{
     name: "Get chat messages",
@@ -1912,7 +1916,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Chat.getChatCompletionMessages,
+  Azure.AI.Projects.ChatGenerated.getChatCompletionMessages,
   "x-ms-list",
   true
 );
