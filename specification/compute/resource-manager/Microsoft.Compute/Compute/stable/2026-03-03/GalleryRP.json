@@ -2969,6 +2969,13 @@
             "description": "The name of the gallery image version to be retrieved.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "bypassSoftDelete",
+            "in": "query",
+            "description": "Specifies whether to bypass the gallery's soft-delete policy and permanently delete the gallery image version. If true, the version is not retained in the recycle bin and cannot be restored. If false or omitted, the version is soft-deleted when the gallery's soft-delete policy is enabled and permanently deleted when the policy is disabled.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -3002,6 +3009,9 @@
         "x-ms-examples": {
           "Delete a gallery image version.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Delete.json"
+          },
+          "Permanently delete a gallery image version by bypassing soft delete.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Delete_BypassSoftDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
