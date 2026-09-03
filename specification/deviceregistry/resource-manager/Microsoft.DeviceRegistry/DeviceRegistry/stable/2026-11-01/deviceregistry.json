@@ -6891,7 +6891,8 @@
       "description": "Defines the schema format.",
       "enum": [
         "JsonSchema/draft-07",
-        "Delta/1.0"
+        "Delta/1.0",
+        "JsonLD/1.1"
       ],
       "x-ms-enum": {
         "name": "Format",
@@ -6906,6 +6907,11 @@
             "name": "Delta_1_0",
             "value": "Delta/1.0",
             "description": "Delta format"
+          },
+          {
+            "name": "JsonLD_1_1",
+            "value": "JsonLD/1.1",
+            "description": "W3C Web of Things JSON-LD format"
           }
         ]
       }
@@ -10350,7 +10356,9 @@
       "type": "string",
       "description": "Defines the schema type.",
       "enum": [
-        "MessageSchema"
+        "MessageSchema",
+        "ThingModel",
+        "ThingDescription"
       ],
       "x-ms-enum": {
         "name": "SchemaType",
@@ -10360,6 +10368,16 @@
             "name": "MessageSchema",
             "value": "MessageSchema",
             "description": "Message Schema schema type"
+          },
+          {
+            "name": "ThingModel",
+            "value": "ThingModel",
+            "description": "W3C Web of Things Thing Model document"
+          },
+          {
+            "name": "ThingDescription",
+            "value": "ThingDescription",
+            "description": "W3C Web of Things Thing Description document"
           }
         ]
       }
