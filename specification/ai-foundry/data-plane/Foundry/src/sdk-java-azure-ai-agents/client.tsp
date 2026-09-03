@@ -24,14 +24,7 @@ using TypeSpec.Http;
 using Azure.AI.Projects;
 
 namespace Azure.AI.Projects.Beta {
-  interface VoiceAgentWebSocket {}
   interface AgentEndpointConversations {}
-
-  @@clientLocation(
-    Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent,
-    VoiceAgentWebSocket,
-    "java"
-  );
 
   @@clientLocation(
     Azure.AI.Projects.AgentEndpointConversations.listAgentConversations,
@@ -105,26 +98,41 @@ namespace Azure.AI.Projects.Beta {
   );
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
-op connectVoiceAgentJava(
-  @path agent_name: string,
-  @query("foundry_features") foundry_features_query?: string,
-  @query store?: boolean,
-  @query("x-agent-version-override") agent_version_override?: string,
+// Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
+// Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
+@@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
 
-  @header("Sec-WebSocket-Protocol")
-  websocket_subprotocol?: VoiceAgentWebSocketSubprotocol,
+// Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
+@@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
+@@access(OpenAI.RealtimeClientEvent, Access.public, "java");
+@@usage(OpenAI.RealtimeServerEvent, Usage.output | Usage.json);
+@@access(OpenAI.RealtimeServerEvent, Access.public, "java");
+@@usage(VoiceAgentTransport, Usage.input | Usage.json);
+@@access(VoiceAgentTransport, Access.public, "java");
 
-  ...FoundryDataPlaneApiVersionParameter,
-): VoiceAgentWebSocketUpgradeResponse;
+// OpenAI realtime metadata is a string map. Project it directly instead of generating a misplaced root model.
+@@alternateType(OpenAI.Metadata, Record<string>, "java");
+@@clientName(OpenAI.RealtimeServerEventError, "RealtimeServerEventError", "java");
 
-@@override(
-  VoiceAgentWebSocket.connectVoiceAgent,
-  connectVoiceAgentJava,
-  "java"
-);
+// The imported realtime item hierarchy has a second role discriminator below `type: message`.
+// Mark each message leaf and content shape explicitly so Java emits constructors usable by session clients.
+@@usage(OpenAI.RealtimeConversationItem, Usage.input | Usage.output | Usage.json);
+@@access(OpenAI.RealtimeConversationItem, Access.public, "java");
+@@usage(OpenAI.RealtimeConversationItemMessage, Usage.input | Usage.output | Usage.json);
+@@access(OpenAI.RealtimeConversationItemMessage, Access.public, "java");
+@@usage(OpenAI.RealtimeConversationItemMessageSystem, Usage.input | Usage.output | Usage.json);
+@@access(OpenAI.RealtimeConversationItemMessageSystem, Access.public, "java");
+@@usage(OpenAI.RealtimeConversationItemMessageSystemContent, Usage.input | Usage.output | Usage.json);
+@@access(OpenAI.RealtimeConversationItemMessageSystemContent, Access.public, "java");
+@@usage(OpenAI.RealtimeConversationItemMessageUser, Usage.input | Usage.output | Usage.json);
+@@access(OpenAI.RealtimeConversationItemMessageUser, Access.public, "java");
+@@usage(OpenAI.RealtimeConversationItemMessageUserContent, Usage.input | Usage.output | Usage.json);
+@@access(OpenAI.RealtimeConversationItemMessageUserContent, Access.public, "java");
+@@usage(OpenAI.RealtimeConversationItemMessageAssistant, Usage.input | Usage.output | Usage.json);
+@@access(OpenAI.RealtimeConversationItemMessageAssistant, Access.public, "java");
+@@usage(OpenAI.RealtimeConversationItemMessageAssistantContent, Usage.input | Usage.output | Usage.json);
+@@access(OpenAI.RealtimeConversationItemMessageAssistantContent, Access.public, "java");
 
-@@scope(OpenAI.RealtimeConversationItemMessage.type, "!java");
 @@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!java");
 @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
 @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
