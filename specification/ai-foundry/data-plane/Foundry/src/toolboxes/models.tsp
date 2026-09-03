@@ -93,7 +93,6 @@ union ToolboxToolType {
   code_interpreter: ToolboxCodeInterpreterToolType,
   file_search: ToolboxFileSearchToolType,
   web_search: ToolboxWebSearchToolType,
-  shell: ToolboxShellToolType,
   mcp: ToolboxMCPToolType,
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
@@ -104,8 +103,9 @@ union ToolboxToolType {
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
   toolbox_search: ToolboxSearchToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
-  web_iq_preview: ToolboxWebIQPreviewToolType,
   a2a: ToolboxA2AToolType,
+  shell: ToolboxShellToolType,
+  web_iq_preview: ToolboxWebIQPreviewToolType,
 }
 
 /**
