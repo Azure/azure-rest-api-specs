@@ -186,7 +186,7 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(
   IngressStickySessions.affinity,
-  "StickySessionsAffinityValue",
+  "StickySessionAffinity",
   "csharp"
 );
 
