@@ -15,7 +15,7 @@ import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
-// import "../voice-agents/routes.tsp";
+import "../voice-agents/routes.tsp";
 import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
