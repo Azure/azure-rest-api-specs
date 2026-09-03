@@ -111,6 +111,42 @@ suppressions:
     where: $.definitions.BatchPricingResult.properties.success
     reason: The success property is a simple success/failure indicator for batch results that will not need additional states.
   - code: ResourceNameRestriction
+    from: Microsoft.Security\stable\2026-07-01\pricings.json
+    where: $.parameters.PricingName
+    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
+  - code: PutRequestResponseSchemeArm
+    from: Microsoft.Security\stable\2026-07-01\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].put
+    reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configurations.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Microsoft.Security\stable\2026-07-01\pricings.json
+    where: $.definitions.PricingList
+    reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: PathForResourceAction
+    from: Microsoft.Security\stable\2026-07-01\pricingBatch.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricingBatch/{pricingBatchName}"].put
+    reason: The pricing batch API uses a {scopeId} parameter instead of the standard path pattern. This is by design as the endpoint supports subscription-level scopes. The pricingBatch resource is used for updating multiple pricing plans in a single ARM resource operation.
+  - code: ParameterNotDefinedInGlobalParameters
+    from: Microsoft.Security\stable\2026-07-01\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].get.parameters[0]
+    reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
+  - code: EnumInsteadOfBoolean
+    from: Microsoft.Security\stable\2026-07-01\pricingBatch.json
+    where: $.definitions.PricingBatchResult.properties.success
+    reason: The success property is a simple success/failure indicator for pricing batch results that will not need additional states.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: Microsoft.Security\stable\2026-07-01\pricingBatch.json
+    where: $.definitions.PricingBatch
+    reason: The pricingBatch resource represents a batch update operation on pricing plans. There is no meaningful delete semantics — you cannot delete a batch configuration, only update it.
+  - code: ResourceNameRestriction
+    from: Microsoft.Security\stable\2026-07-01\pricingBatch.json
+    where: $.parameters.PricingBatchName
+    reason: The pricingBatch resource name is always "global". A pattern restriction is not needed as the resource is a singleton.
+  - code: ParameterNotDefinedInGlobalParameters
+    from: Microsoft.Security\stable\2026-07-01\pricingBatch.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricingBatch/{pricingBatchName}"].get.parameters[0]
+    reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
+  - code: ResourceNameRestriction
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
   - code: PatchBodyParametersSchema
@@ -191,13 +227,52 @@ suppressions:
     reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
 ```
 
-### Tag: package-2026-08
+### Tag: package-2026-07
 
-These settings apply only when `--tag=package-2026-08` is specified on the command line.
+These settings apply only when `--tag=package-2026-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-08'
+```yaml $(tag) == 'package-2026-07'
 input-file:
-  - stable/2026-08-01/datascanners.json
+  - stable/2026-07-01/pricings.json
+  - stable/2026-07-01/pricingBatch.json
+
+suppressions:
+  - code: ResourceNameRestriction
+    from: pricings.json
+    where: $.parameters.PricingName
+    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
+  - code: PutRequestResponseSchemeArm
+    from: pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].put
+    reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configurations.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: pricings.json
+    where: $.definitions.PricingList
+    reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: PathForResourceAction
+    from: pricingBatch.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricingBatch/{pricingBatchName}"].put
+    reason: The pricing batch API uses a {scopeId} parameter instead of the standard path pattern. This is by design as the endpoint supports subscription-level scopes. The pricingBatch resource is used for updating multiple pricing plans in a single ARM resource operation.
+  - code: ParameterNotDefinedInGlobalParameters
+    from: pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].get.parameters[0]
+    reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
+  - code: EnumInsteadOfBoolean
+    from: pricingBatch.json
+    where: $.definitions.PricingBatchResult.properties.success
+    reason: The success property is a simple success/failure indicator for pricing batch results that will not need additional states.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: pricingBatch.json
+    where: $.definitions.PricingBatch
+    reason: The pricingBatch resource represents a batch update operation on pricing plans. There is no meaningful delete semantics — you cannot delete a batch configuration, only update it.
+  - code: ResourceNameRestriction
+    from: pricingBatch.json
+    where: $.parameters.PricingBatchName
+    reason: The pricingBatch resource name is always "global". A pattern restriction is not needed as the resource is a singleton.
+  - code: ParameterNotDefinedInGlobalParameters
+    from: pricingBatch.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricingBatch/{pricingBatchName}"].get.parameters[0]
+    reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
 ```
 
 ### Tag: package-2026-01
@@ -753,7 +828,8 @@ input-file:
 - stable/2022-05-01/settings.json
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
-- preview/2025-10-01-preview/pricings.json
+- stable/2026-07-01/pricings.json
+- stable/2026-07-01/pricingBatch.json
 - stable/2024-08-01/security-SecurityStandards.json
 - stable/2026-01-01/privateLinks.json
 - stable/2026-08-01/datascanners.json
