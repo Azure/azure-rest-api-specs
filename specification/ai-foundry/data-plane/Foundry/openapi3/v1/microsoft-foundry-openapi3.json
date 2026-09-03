@@ -18,9 +18,6 @@
       "name": "Agent Telephony"
     },
     {
-      "name": "AgentServer Task Storage"
-    },
-    {
       "name": "Responses Root",
       "description": "Responses"
     },
@@ -242,7 +239,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -377,7 +374,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "post": {
         "operationId": "AgentInsightMonitors_create",
@@ -386,7 +388,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -460,6 +462,11 @@
             }
           },
           "description": "The monitor to create."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       }
     },
@@ -471,7 +478,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -534,7 +541,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "delete": {
         "operationId": "AgentInsightMonitors_delete",
@@ -543,7 +555,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -599,7 +611,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "patch": {
         "operationId": "AgentInsightMonitors_update",
@@ -608,7 +625,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -682,6 +699,11 @@
             }
           },
           "description": "The monitor fields to update."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       }
     },
@@ -693,7 +715,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -868,7 +890,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}/insights/{insight_id}": {
@@ -879,7 +906,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -962,7 +989,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "patch": {
         "operationId": "AgentInsightMonitors_updateInsight",
@@ -971,7 +1003,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1054,6 +1086,11 @@
             }
           },
           "description": "The insight fields to update."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       }
     },
@@ -1065,13 +1102,22 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
                 "AgentInsights=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -1155,6 +1201,11 @@
             }
           },
           "description": "Run inputs. Send an empty object to use the default 168-hour lookback window."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
         }
       },
       "get": {
@@ -1164,7 +1215,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1318,7 +1369,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}/runs/{run_id}": {
@@ -1329,7 +1385,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1401,7 +1457,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel": {
@@ -1412,7 +1473,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1484,7 +1545,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_insight_monitors/{monitor_id}:reset": {
@@ -1495,7 +1561,7 @@
           {
             "name": "Foundry-Features",
             "in": "header",
-            "required": false,
+            "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
@@ -1551,7 +1617,12 @@
         },
         "tags": [
           "Agent Insight Monitors"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       }
     },
     "/agent_optimization_jobs": {
@@ -29860,623 +29931,6 @@
         }
       }
     },
-    "/tasks": {
-      "post": {
-        "operationId": "createAgentServerTask",
-        "summary": "Create a task",
-        "description": "Creates a durable task record.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Routines=V2Preview"
-              ]
-            }
-          },
-          {
-            "name": "lease_owner",
-            "in": "query",
-            "required": false,
-            "description": "Stable lease owner. Must be supplied together with `lease_instance_id` and\n`lease_duration_seconds`. Lease parameters are query parameters, never body fields.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "lease_instance_id",
-            "in": "query",
-            "required": false,
-            "description": "Ephemeral worker instance id. Must be supplied together with `lease_owner`\nand `lease_duration_seconds`.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "lease_duration_seconds",
-            "in": "query",
-            "required": false,
-            "description": "Lease duration in seconds. `0` force-expires the current lease; otherwise\nvalues are bounded by the task-storage service.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentServerTaskRecord"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "AgentServer Task Storage"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AgentServerTaskCreateRequest"
-              }
-            }
-          },
-          "description": "Task creation body."
-        },
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence",
-          "required_previews": [
-            "Routines=V2Preview"
-          ]
-        }
-      },
-      "get": {
-        "operationId": "listAgentServerTasks",
-        "summary": "List tasks",
-        "description": "Lists durable task records that match the supplied filters.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Routines=V2Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "query",
-            "required": false,
-            "description": "Filter by agent name.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "session_id",
-            "in": "query",
-            "required": false,
-            "description": "Filter by session id.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "description": "Filter by task status.",
-            "schema": {
-              "$ref": "#/components/schemas/AgentServerTaskStatus"
-            },
-            "explode": false
-          },
-          {
-            "name": "has_error",
-            "in": "query",
-            "required": false,
-            "description": "Filter by whether the task has a recorded error.",
-            "schema": {
-              "type": "boolean"
-            },
-            "explode": false
-          },
-          {
-            "name": "lease_expired",
-            "in": "query",
-            "required": false,
-            "description": "Filter by whether the current lease is expired.",
-            "schema": {
-              "type": "boolean"
-            },
-            "explode": false
-          },
-          {
-            "name": "lease_owner",
-            "in": "query",
-            "required": false,
-            "description": "Filter by lease owner.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "tag",
-            "in": "query",
-            "required": false,
-            "description": "Tag equality filters in `key:value` form. Repeat for AND filtering.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "explode": false
-          },
-          {
-            "name": "source_type",
-            "in": "query",
-            "required": false,
-            "description": "Filter by source type, for example `routine_action_delivery`.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "description": "Cursor for the next page.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of records to return. Default 20, maximum 100.",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 20
-            },
-            "explode": false
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "description": "Sort order.",
-            "schema": {
-              "$ref": "#/components/schemas/AgentServerTaskListOrder",
-              "default": "desc"
-            },
-            "explode": false
-          },
-          {
-            "name": "omit_attachment_values",
-            "in": "query",
-            "required": false,
-            "description": "When true, omit attachment values from returned task records.",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentServerTaskListResponse"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "AgentServer Task Storage"
-        ],
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence",
-          "required_previews": [
-            "Routines=V2Preview"
-          ]
-        }
-      }
-    },
-    "/tasks/{task_id}": {
-      "get": {
-        "operationId": "getAgentServerTask",
-        "summary": "Get a task",
-        "description": "Retrieves a durable task record by id.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Routines=V2Preview"
-              ]
-            }
-          },
-          {
-            "name": "task_id",
-            "in": "path",
-            "required": true,
-            "description": "The task id.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentServerTaskRecord"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "AgentServer Task Storage"
-        ],
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence",
-          "required_previews": [
-            "Routines=V2Preview"
-          ]
-        }
-      },
-      "patch": {
-        "operationId": "patchAgentServerTask",
-        "summary": "Patch a task",
-        "description": "Patches a durable task record, including status, payload, tags, attachments, and lease operations.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Routines=V2Preview"
-              ]
-            }
-          },
-          {
-            "name": "task_id",
-            "in": "path",
-            "required": true,
-            "description": "The task id.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "lease_owner",
-            "in": "query",
-            "required": false,
-            "description": "Stable lease owner. Must be supplied together with `lease_instance_id` and\n`lease_duration_seconds`. Lease parameters are query parameters, never body fields.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "lease_instance_id",
-            "in": "query",
-            "required": false,
-            "description": "Ephemeral worker instance id. Must be supplied together with `lease_owner`\nand `lease_duration_seconds`.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "lease_duration_seconds",
-            "in": "query",
-            "required": false,
-            "description": "Lease duration in seconds. `0` force-expires the current lease; otherwise\nvalues are bounded by the task-storage service.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "Optimistic-concurrency precondition for patch/delete operations.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentServerTaskRecord"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "AgentServer Task Storage"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {}
-            }
-          },
-          "description": "Arbitrary JSON patch document. Supported top-level fields include status,\npayload, tags, attachments, error, and suspension_reason."
-        },
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence",
-          "required_previews": [
-            "Routines=V2Preview"
-          ]
-        }
-      },
-      "delete": {
-        "operationId": "deleteAgentServerTask",
-        "summary": "Delete a task",
-        "description": "Deletes a durable task record.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Routines=V2Preview"
-              ]
-            }
-          },
-          {
-            "name": "task_id",
-            "in": "path",
-            "required": true,
-            "description": "The task id.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "Optimistic-concurrency precondition for patch/delete operations.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "force",
-            "in": "query",
-            "required": false,
-            "description": "Force deletion of a non-terminal task and release any active lease. Defaults to false.",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "AgentServer Task Storage"
-        ],
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence",
-          "required_previews": [
-            "Routines=V2Preview"
-          ]
-        }
-      }
-    },
     "/toolboxes": {
       "get": {
         "operationId": "listToolboxes",
@@ -32281,7 +31735,12 @@
             "readOnly": true
           }
         },
-        "description": "A persisted issue discovered from an agent's traces."
+        "description": "A persisted issue discovered from an agent's traces.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightDetails": {
         "type": "object",
@@ -32312,7 +31771,12 @@
             "description": "The recommended remediation for this insight."
           }
         },
-        "description": "Additional insight details. Omitted unless details are requested."
+        "description": "Additional insight details. Omitted unless details are requested.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightEstimatedCost": {
         "type": "object",
@@ -32334,7 +31798,12 @@
             "description": "Currency for the estimated cost amount. Agent Insights estimates are reported in US dollars."
           }
         },
-        "description": "Estimated Agent Insights cost."
+        "description": "Estimated Agent Insights cost.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightHighlightedTrace": {
         "type": "object",
@@ -32368,7 +31837,12 @@
             "description": "The time when the trace was recorded."
           }
         },
-        "description": "A highlighted trace that provides evidence for an agent insight."
+        "description": "A highlighted trace that provides evidence for an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightLinkedTrace": {
         "type": "object",
@@ -32388,7 +31862,12 @@
             "readOnly": true
           }
         },
-        "description": "A lightweight trace reference linked to an agent insight as supporting evidence."
+        "description": "A lightweight trace reference linked to an agent insight as supporting evidence.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitor": {
         "type": "object",
@@ -32471,7 +31950,12 @@
             "readOnly": true
           }
         },
-        "description": "A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights."
+        "description": "A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitorCreate": {
         "type": "object",
@@ -32502,7 +31986,12 @@
             "description": "The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
           }
         },
-        "description": "Fields accepted when creating an Agent Insights monitor for an agent."
+        "description": "Fields accepted when creating an Agent Insights monitor for an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitorListItem": {
         "type": "object",
@@ -32572,7 +32061,12 @@
             "readOnly": true
           }
         },
-        "description": "An Agent Insights monitor summary returned by list operations."
+        "description": "An Agent Insights monitor summary returned by list operations.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightMonitorUpdate": {
         "type": "object",
@@ -32604,7 +32098,12 @@
             "description": "Sets the effective user overview, or clears it when explicitly set to null. Omission leaves\nthe overview unchanged. This field cannot be combined with other monitor updates."
           }
         },
-        "description": "Fields that can be updated on an Agent Insights monitor."
+        "description": "Fields that can be updated on an Agent Insights monitor.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightOverviewSource": {
         "anyOf": [
@@ -32619,7 +32118,12 @@
             ]
           }
         ],
-        "description": "Identifies where an Agent Insights overview came from."
+        "description": "Identifies where an Agent Insights overview came from.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightPromptSurface": {
         "anyOf": [
@@ -32634,7 +32138,12 @@
             ]
           }
         ],
-        "description": "The Prompt surface changed by a proposed fix."
+        "description": "The Prompt surface changed by a proposed fix.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightProposedFix": {
         "type": "object",
@@ -32659,7 +32168,12 @@
             "description": "The concrete changes. Omitted for a prose-only fix."
           }
         },
-        "description": "A recommended fix for an agent insight."
+        "description": "A recommended fix for an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightProposedFixChange": {
         "type": "object",
@@ -32703,7 +32217,12 @@
             "description": "The bounded Prompt value after the change. Present for Prompt changes, including when null."
           }
         },
-        "description": "A customer-renderable change in a proposed fix."
+        "description": "A customer-renderable change in a proposed fix.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightProposedFixKind": {
         "anyOf": [
@@ -32719,7 +32238,12 @@
             ]
           }
         ],
-        "description": "The customer-renderable kind of an agent insight's proposed fix."
+        "description": "The customer-renderable kind of an agent insight's proposed fix.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRecommendedAction": {
         "type": "object",
@@ -32732,7 +32256,12 @@
             "description": "The single recommended fix for the issue represented by the insight."
           }
         },
-        "description": "The recommended remediation for an agent insight."
+        "description": "The recommended remediation for an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRun": {
         "type": "object",
@@ -32824,7 +32353,12 @@
             "readOnly": true
           }
         },
-        "description": "A long-running run that analyzes one agent's traces and updates that agent's insights."
+        "description": "A long-running run that analyzes one agent's traces and updates that agent's insights.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRunCreate": {
         "type": "object",
@@ -32838,7 +32372,12 @@
             "default": 168
           }
         },
-        "description": "Inputs used when creating an agent insight run."
+        "description": "Inputs used when creating an agent insight run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRunResult": {
         "type": "object",
@@ -32881,7 +32420,12 @@
             "description": "Token usage for the run's insight-generation analysis."
           }
         },
-        "description": "Result statistics produced when an agent insight run succeeds."
+        "description": "Result statistics produced when an agent insight run succeeds.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightRunTrigger": {
         "anyOf": [
@@ -32896,7 +32440,12 @@
             ]
           }
         ],
-        "description": "The trigger that started an agent insight run."
+        "description": "The trigger that started an agent insight run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightSeverity": {
         "anyOf": [
@@ -32912,7 +32461,12 @@
             ]
           }
         ],
-        "description": "The severity of an agent insight."
+        "description": "The severity of an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightStatus": {
         "anyOf": [
@@ -32928,7 +32482,12 @@
             ]
           }
         ],
-        "description": "The lifecycle status of an agent insight."
+        "description": "The lifecycle status of an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightSuspension": {
         "type": "object",
@@ -32956,7 +32515,12 @@
             "description": "Additional reason-specific suspension details."
           }
         },
-        "description": "Structured reason why scheduled generation is suspended for a monitor."
+        "description": "Structured reason why scheduled generation is suspended for a monitor.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightTokenUsage": {
         "type": "object",
@@ -32987,7 +32551,12 @@
             "description": "The total number of tokens used by the run."
           }
         },
-        "description": "Token usage for an Agent Insights run."
+        "description": "Token usage for an Agent Insights run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightUpdate": {
         "type": "object",
@@ -32997,7 +32566,12 @@
             "description": "The lifecycle status to apply to the insight."
           }
         },
-        "description": "Fields that can be updated on an agent insight."
+        "description": "Fields that can be updated on an agent insight.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightsOverview": {
         "type": "object",
@@ -33020,7 +32594,12 @@
             "description": "The time when this overview was last updated."
           }
         },
-        "description": "The effective overview for an Agent Insights monitor."
+        "description": "The effective overview for an Agent Insights monitor.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentInsightsOverviewOverride": {
         "type": "object",
@@ -33033,7 +32612,12 @@
             "description": "The nonblank overview content, limited to 64 KiB when encoded as UTF-8."
           }
         },
-        "description": "A user-provided overview that becomes effective immediately and seeds the next generation."
+        "description": "A user-provided overview that becomes effective immediately and seeds the next generation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
       },
       "AgentKind": {
         "anyOf": [
@@ -33652,432 +33236,6 @@
             "type": "string",
             "description": "The version identifier of the agent."
           }
-        }
-      },
-      "AgentServerTaskCreateRequest": {
-        "type": "object",
-        "required": [
-          "agent_name",
-          "session_id",
-          "title"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Optional caller-supplied task identifier. If omitted, the provider generates one."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "Agent scope that owns this task."
-          },
-          "session_id": {
-            "type": "string",
-            "description": "Session scope that owns this task."
-          },
-          "title": {
-            "type": "string",
-            "maxLength": 256,
-            "description": "Human-readable title."
-          },
-          "description": {
-            "type": "string",
-            "maxLength": 1024,
-            "description": "Optional human-readable description."
-          },
-          "status": {
-            "$ref": "#/components/schemas/AgentServerTaskStatus",
-            "description": "Initial task status. Defaults to `pending`.",
-            "default": "pending"
-          },
-          "payload": {
-            "description": "Initial arbitrary JSON task payload."
-          },
-          "tags": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "Initial string tags."
-          },
-          "source": {
-            "$ref": "#/components/schemas/AgentServerTaskSource",
-            "description": "Source/provenance metadata that identifies the task producer."
-          },
-          "attachments": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "Initial JSON-serializable attachment values keyed by attachment name."
-          }
-        },
-        "description": "Request body for creating an AgentServer durable task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskError": {
-        "type": "object",
-        "required": [
-          "type",
-          "message"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Error type discriminator, such as `timeout` or `retries_exhausted`."
-          },
-          "message": {
-            "type": "string",
-            "description": "Human-readable error message."
-          },
-          "code": {
-            "type": "string",
-            "description": "Optional machine-readable error code. Defaults to `error` when omitted by the caller.",
-            "default": "error"
-          }
-        },
-        "unevaluatedProperties": {},
-        "description": "Structured error persisted on a task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskLease": {
-        "type": "object",
-        "required": [
-          "owner",
-          "instance_id",
-          "generation",
-          "expires_at",
-          "expiry_count"
-        ],
-        "properties": {
-          "owner": {
-            "type": "string",
-            "description": "Stable lease owner, typically scoped to the agent and session."
-          },
-          "instance_id": {
-            "type": "string",
-            "description": "Ephemeral worker instance identifier."
-          },
-          "generation": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Fencing generation. Increments whenever a different instance re-acquires the lease.",
-            "default": 0
-          },
-          "expires_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC instant after which the lease is expired."
-          },
-          "expiry_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of times ownership changed via expiry.",
-            "default": 0
-          }
-        },
-        "description": "Lease details on an AgentServer durable task record.\nThe lease is the optimistic ownership/fencing token for a single worker instance.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskListOrder": {
-        "type": "string",
-        "enum": [
-          "asc",
-          "desc"
-        ]
-      },
-      "AgentServerTaskListResponse": {
-        "type": "object",
-        "required": [
-          "object",
-          "data",
-          "has_more"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "list"
-            ],
-            "description": "Object discriminator. Always `list`."
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentServerTaskRecord"
-            },
-            "description": "Page of matching task records."
-          },
-          "first_id": {
-            "type": "string",
-            "description": "First task id represented in this page."
-          },
-          "has_more": {
-            "type": "boolean",
-            "description": "Whether more records are available."
-          },
-          "last_id": {
-            "type": "string",
-            "description": "Cursor to pass as `after` for the next page when `has_more` is true."
-          }
-        },
-        "description": "Cursor-paged list response for AgentServer durable task records.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskRecord": {
-        "type": "object",
-        "required": [
-          "object",
-          "id",
-          "agent_name",
-          "session_id",
-          "status",
-          "title",
-          "description",
-          "lease",
-          "payload",
-          "tags",
-          "source",
-          "attachments",
-          "error",
-          "suspension_reason",
-          "created_at",
-          "updated_at",
-          "started_at",
-          "completed_at",
-          "etag"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "task"
-            ],
-            "description": "Envelope discriminator. Always `task`."
-          },
-          "id": {
-            "type": "string",
-            "description": "Stable task identifier."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "Agent scope that owns this task."
-          },
-          "session_id": {
-            "type": "string",
-            "description": "Session scope that owns this task."
-          },
-          "status": {
-            "$ref": "#/components/schemas/AgentServerTaskStatus",
-            "description": "Current task status."
-          },
-          "title": {
-            "type": "string",
-            "maxLength": 256,
-            "description": "Human-readable title."
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "maxLength": 1024,
-            "description": "Optional human-readable description."
-          },
-          "lease": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentServerTaskLease"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Active lease details, or null when no lease is held."
-          },
-          "payload": {
-            "anyOf": [
-              {},
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Arbitrary JSON payload used by the agent as task input or mutable task state."
-          },
-          "tags": {
-            "anyOf": [
-              {
-                "type": "object",
-                "unevaluatedProperties": {
-                  "type": "string"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "String tags associated with this task."
-          },
-          "source": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentServerTaskSource"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Source/provenance metadata that identifies the task producer."
-          },
-          "attachments": {
-            "anyOf": [
-              {
-                "type": "object",
-                "unevaluatedProperties": {}
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "JSON-serializable attachment values keyed by attachment name."
-          },
-          "error": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentServerTaskError"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Structured terminal error details."
-          },
-          "suspension_reason": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "maxLength": 256,
-            "description": "Reason the task was suspended."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC creation timestamp."
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC last-update timestamp."
-          },
-          "started_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "ISO 8601 UTC timestamp of the first transition to `in_progress`, or null."
-          },
-          "completed_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "ISO 8601 UTC completion timestamp, or null."
-          },
-          "etag": {
-            "type": "string",
-            "description": "Optimistic-concurrency token."
-          }
-        },
-        "description": "Client-facing representation of an AgentServer durable task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskSource": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Source system or producer type."
-          },
-          "routine_name": {
-            "type": "string",
-            "description": "Routine name that produced the task, when applicable."
-          },
-          "routine_run_id": {
-            "type": "string",
-            "description": "Routine run identifier that produced the task, when available."
-          },
-          "dispatch_id": {
-            "type": "string",
-            "description": "Dispatch identifier associated with the source event."
-          },
-          "action_correlation_id": {
-            "type": "string",
-            "description": "Correlation identifier for the source action that created the task."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC instant when the source object was created."
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "ISO 8601 UTC instant when the source object was last updated."
-          }
-        },
-        "unevaluatedProperties": {},
-        "description": "Provenance and recovery-routing metadata for an AgentServer durable task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
-        }
-      },
-      "AgentServerTaskStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "pending",
-              "in_progress",
-              "suspended",
-              "completed"
-            ]
-          }
-        ],
-        "description": "Status values persisted on an AgentServer durable task record.",
-        "x-ms-foundry-meta": {
-          "contract": "agentserver-persistence",
-          "usage": "cross-language-sdk-persistence"
         }
       },
       "AgentSessionResource": {
@@ -71881,7 +71039,12 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemMessageAssistant": {
         "type": "object",
@@ -83300,9 +82463,106 @@
           "rai_policy_name": {
             "type": "string",
             "description": "The name of the RAI policy to apply."
+          },
+          "invocations_moderation": {
+            "$ref": "#/components/schemas/RaiInvocationModeration",
+            "description": "Author-declared configuration telling the platform where user/agent text lives in the\nagent-defined invocations request/response bodies, so content-safety guardrails can extract\nand moderate it. Optional; a rai_config without it leaves the invocations path without\ncontent-safety moderation."
           }
         },
         "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+      },
+      "RaiInvocationContentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "json",
+              "text"
+            ]
+          }
+        ],
+        "description": "How an invocations request/response body is parsed to locate text for content-safety moderation."
+      },
+      "RaiInvocationMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "non_streaming",
+              "streaming",
+              "both"
+            ]
+          }
+        ],
+        "description": "Author-declared response shape for the invocations protocol."
+      },
+      "RaiInvocationModeration": {
+        "type": "object",
+        "required": [
+          "response_mode"
+        ],
+        "properties": {
+          "input_content_type": {
+            "$ref": "#/components/schemas/RaiInvocationContentType",
+            "description": "How the REQUEST body is parsed. When omitted, the service defaults to `json`.",
+            "default": "json"
+          },
+          "output_content_type": {
+            "$ref": "#/components/schemas/RaiInvocationContentType",
+            "description": "How the RESPONSE body is parsed. When omitted, the service defaults to `json`.",
+            "default": "json"
+          },
+          "response_mode": {
+            "$ref": "#/components/schemas/RaiInvocationMode",
+            "description": "Author-declared response shape; drives which output gate runs and which fields are required."
+          },
+          "input_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Path(s) to user text in the REQUEST body. Required when input_content_type is `json`."
+          },
+          "output_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Path(s) to agent text in a NON-STREAMING response body. Required when response_mode is non_streaming/both and output_content_type is `json`."
+          },
+          "stream_selectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RaiSseTextSelector"
+            },
+            "description": "One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`."
+          }
+        },
+        "description": "Declares where request/response text lives so content-safety guardrails can extract it."
+      },
+      "RaiSseTextSelector": {
+        "type": "object",
+        "required": [
+          "event_type"
+        ],
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "description": "The SSE event `type` value that carries text."
+          },
+          "text_field": {
+            "type": "string",
+            "description": "The field on a matched event holding the text delta. When omitted, the service defaults to `delta`.",
+            "default": "delta"
+          }
+        },
+        "description": "An SSE event-type to text-field selector for streaming invocation output."
       },
       "RecurrenceSchedule": {
         "type": "object",
