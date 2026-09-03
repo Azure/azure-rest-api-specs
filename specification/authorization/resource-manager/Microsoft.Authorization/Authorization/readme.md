@@ -142,6 +142,7 @@ directive:
       items (`ResourceProjection`), not on the envelope itself.
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: authorization-PrivilegedAccess.json
+    where: $.paths['/providers/Microsoft.Authorization/privilegedResources'].get.responses['200'].schema.properties
     reason: |
       The optional `count` property is returned only when the caller requests
       `$count=true`. It reports the complete post-filter cardinality before
