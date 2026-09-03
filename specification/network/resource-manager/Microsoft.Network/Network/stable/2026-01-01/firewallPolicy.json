@@ -1565,7 +1565,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/FirewallPolicySecurityProfileGroup"
         },
         "x-ms-long-running-operation": true
@@ -1816,12 +1816,18 @@
           "Create FirewallPolicySecurityProfile": {
             "$ref": "./examples/FirewallPolicySecurityProfilePut.json"
           },
+          "Create FirewallPolicySecurityProfile of kind AdvancedApplicationThreatProtection": {
+            "$ref": "./examples/FirewallPolicySecurityProfileAdvancedApplicationThreatProtectionPut.json"
+          },
+          "Create FirewallPolicySecurityProfile of kind DataLossPrevention": {
+            "$ref": "./examples/FirewallPolicySecurityProfileDataLossPreventionPut.json"
+          },
           "Create FirewallPolicySecurityProfile of kind PromptThreatProtection": {
             "$ref": "./examples/FirewallPolicySecurityProfilePromptInjectionPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/FirewallPolicySecurityProfile"
         },
         "x-ms-long-running-operation": true
@@ -2932,7 +2938,10 @@
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "securityProfileGroups": {
           "type": "array",
@@ -2940,7 +2949,10 @@
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "globalSecurityProfileGroup": {
           "$ref": "./common.json#/definitions/SubResource",
@@ -3333,7 +3345,10 @@
           "description": "References to the firewall policy security profiles included in this group. At most one profile of each kind may be referenced.",
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",

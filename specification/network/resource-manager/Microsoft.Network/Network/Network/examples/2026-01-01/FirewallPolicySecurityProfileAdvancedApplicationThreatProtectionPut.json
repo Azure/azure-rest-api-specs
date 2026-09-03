@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "firewallPolicyName": "firewallPolicy",
+    "resource": {
+      "properties": {
+        "confidenceLevelByAction": {
+          "alert": 30,
+          "deny": 60
+        },
+        "kind": "AdvancedApplicationThreatProtection",
+        "mode": "AlertAndDeny"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "securityProfileName": "applicationThreatProtection",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "applicationThreatProtection",
+        "etag": "W/\"3b9ac1de-7f42-4e15-8c93-2d6e5f0a1b7c\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/applicationThreatProtection",
+        "properties": {
+          "confidenceLevelByAction": {
+            "alert": 30,
+            "deny": 60
+          },
+          "kind": "AdvancedApplicationThreatProtection",
+          "mode": "AlertAndDeny",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "applicationThreatProtection",
+        "etag": "W/\"3b9ac1de-7f42-4e15-8c93-2d6e5f0a1b7c\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/securityProfiles/applicationThreatProtection",
+        "properties": {
+          "confidenceLevelByAction": {
+            "alert": 30,
+            "deny": 60
+          },
+          "kind": "AdvancedApplicationThreatProtection",
+          "mode": "AlertAndDeny",
+          "provisioningState": "Updating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "FirewallPolicySecurityProfiles_CreateOrUpdate",
+  "title": "Create FirewallPolicySecurityProfile of kind AdvancedApplicationThreatProtection"
+}

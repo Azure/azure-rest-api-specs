@@ -13237,6 +13237,7 @@ model FirewallPolicyPropertiesFormat {
    */
   @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["id"])
   securityProfiles?: SubResource[];
 
   /**
@@ -13244,6 +13245,7 @@ model FirewallPolicyPropertiesFormat {
    */
   @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["id"])
   securityProfileGroups?: SubResource[];
 
   /**
@@ -14267,6 +14269,7 @@ model FirewallPolicySecurityProfileGroupProperties {
   /**
    * References to the firewall policy security profiles included in this group. At most one profile of each kind may be referenced.
    */
+  @Azure.ResourceManager.identifiers(#["id"])
   securityProfileIds: SubResource[];
 
   /**

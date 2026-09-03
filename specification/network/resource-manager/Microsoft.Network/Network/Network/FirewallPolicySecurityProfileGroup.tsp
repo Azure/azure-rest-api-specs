@@ -61,6 +61,7 @@ interface FirewallPolicySecurityProfileGroups {
   /**
    * Creates or updates the specified FirewallPolicySecurityProfileGroup.
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallPolicySecurityProfileGroup,
     Error = CloudError
