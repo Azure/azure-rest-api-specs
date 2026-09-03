@@ -42,6 +42,16 @@ namespace Customizations;
 );
 @@clientName(RuntimeJavaJavaAgent, "ContainerAppRuntimeJavaAgent", "csharp");
 @@clientName(
+  CheckMigrationEligibilityRequest,
+  "CheckMigrationEligibilityContent",
+  "csharp"
+);
+@@clientName(
+  CheckMigrationEligibilityResponse,
+  "CheckMigrationEligibilityResult",
+  "csharp"
+);
+@@clientName(
   RuntimeJavaJavaAgentLogging.loggerSettings,
   "LoggerSettings",
   "csharp"
@@ -206,6 +216,11 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(
   ContainerAppsLabelHistory.listLabelHistory,
+  "ListLabelHistory",
+  "csharp"
+);
+@@clientName(
+  ContainerAppsLabelHistoryPreview.listLabelHistory,
   "ListLabelHistory",
   "csharp"
 );
@@ -1207,6 +1222,7 @@ union OpenIdConnectClientCredentialMethod {
 
 // C# @@scope customizations.
 @@scope(ContainerAppsLabelHistory.listLabelHistory, "!csharp");
+@@scope(ContainerAppsLabelHistoryPreview.listLabelHistory, "!csharp");
 
 // C# @@usage customizations.
 @@usage(LogicAppProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
