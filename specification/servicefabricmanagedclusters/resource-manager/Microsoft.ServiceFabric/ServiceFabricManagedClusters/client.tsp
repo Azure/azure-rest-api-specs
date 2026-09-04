@@ -75,6 +75,12 @@ namespace Azure.ResourceManager.Models {
 @@clientName(Services.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Services.update::parameters.properties, "parameters");
 @@clientName(Services.restartReplica::parameters.body, "parameters");
+@@clientDoc(
+  Services.restartReplica,
+  "Restarts a replica of the Service Fabric managed service.",
+  DocumentationMode.replace,
+  "csharp"
+);
 
 @@clientName(ManagedClusters.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ManagedClusters.update::parameters.properties, "parameters");
