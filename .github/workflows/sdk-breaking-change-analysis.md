@@ -38,6 +38,9 @@ mcp-servers:
     entrypointArgs: ["mcp"]
     allowed: ["azsdk_package_detect_breaking_changes"]
 pre-agent-steps:
+  - name: Install dependencies for github-script actions
+    uses: ./.github/actions/install-deps-github-script
+
   - name: Resolve repositories
     id: resolve-source
     uses: actions/github-script@v8
@@ -65,9 +68,6 @@ pre-agent-steps:
         core.setOutput("repository", pull.head.repo.full_name);
         core.setOutput("ref", pull.head.sha);
         core.setOutput("sdk-repository", sdkRepository);
-
-  - name: Install dependencies for github-script actions
-    uses: ./.github/actions/install-deps-github-script
 
   - name: Checkout specification PR source
     uses: actions/checkout@v7
