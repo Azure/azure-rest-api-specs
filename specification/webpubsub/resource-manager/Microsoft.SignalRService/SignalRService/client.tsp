@@ -93,7 +93,11 @@ using Http;
   "WebPubSubSharedPrivateLinkStatus",
   "csharp"
 );
-
+@@clientName(
+  PrivateLinkServiceConnectionState,
+  "WebPubSubPrivateLinkServiceConnectionState",
+  "csharp"
+);
 @@clientName(WebPubSubResource, "WebPubSub", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
@@ -132,11 +136,6 @@ using Http;
 @@clientName(
   PrivateEndpointConnection,
   "WebPubSubPrivateEndpointConnection",
-  "csharp"
-);
-@@clientName(
-  PrivateLinkServiceConnectionState,
-  "WebPubSubPrivateLinkServiceConnectionState",
   "csharp"
 );
 @@clientName(

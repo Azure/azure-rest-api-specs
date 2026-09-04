@@ -2987,7 +2987,6 @@ op protectionPolicyOperationStatusesGet(
 );
 @@clientName(ResourceGuardProxyBaseResource, "ResourceGuardProxy", "csharp");
 @@clientName(ResourceGuardProxyBase, "ResourceGuardProxyProperties", "csharp");
-@@clientName(ResourceGuardProxyBase.lastUpdatedTime, "LastUpdatedOn", "csharp");
 @@alternateType(ResourceGuardProxyBase.lastUpdatedTime, utcDateTime, "csharp");
 @@alternateType(
   ResourceGuardProxyBase.resourceGuardResourceId,
@@ -3205,21 +3204,6 @@ op protectionPolicyOperationStatusesGet(
 @@alternateType(
   UnlockDeleteResponse.unlockDeleteExpiryTime,
   utcDateTime,
-  "csharp"
-);
-@@clientName(
-  AzureFileShareRecoveryPoint.recoveryPointTime,
-  "RecoveryPointOn",
-  "csharp"
-);
-@@clientName(
-  GenericRecoveryPoint.recoveryPointTime,
-  "RecoveryPointOn",
-  "csharp"
-);
-@@clientName(
-  IaasVMRecoveryPoint.recoveryPointTime,
-  "RecoveryPointOn",
   "csharp"
 );
 @@clientName(
