@@ -209,12 +209,12 @@ union JobRunResultResourceType {
 // body (not a query parameter) because ARM forbids POST/action operations
 // from declaring query parameters other than `api-version`.
 //
-// NOTE (for review): accepted `status` values mirror `JobRunResultItemStatus`
-// (Succeeded, Failed, InProgress, Canceled, NotApplied) and are validated by ADU.
+// NOTE (for review): accepted `status` filter values are Succeeded, Failed,
+// InProgress, and Canceled. NotApplied is rejected with InvalidFilter.
 @added(Versions.v2026_11_02_preview)
 @doc("Optional request body for browsing job run results.")
 model JobRunResultsRequest {
-  @doc("An OData-style filter expression that selects which device result entries to return, aligned with the Azure API Guidelines `filter` convention. Currently supports equality on the result status, e.g. \"status eq 'Failed'\". Accepted status values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied. When omitted, all device results are returned.")
+  @doc("An OData-style filter expression that selects which device result entries to return, aligned with the Azure API Guidelines `filter` convention. Currently supports equality on the result status, e.g. \"status eq 'Failed'\". Supported status values are Succeeded, Failed, InProgress, and Canceled. NotApplied is rejected with InvalidFilter. When omitted, all device results are returned.")
   filter?: string;
 
   @doc("An OData order by expression to sort the results. For example, \"status asc\" or \"status desc\".")
@@ -250,7 +250,7 @@ interface JobRuns {
     "",
     "",
     {
-      @doc("An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Queued, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.")
+      @doc("An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.")
       @query("$filter")
       filter?: string;
 
@@ -305,7 +305,7 @@ interface JobRunsByNamespace {
     @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
     namespaceName: string,
 
-    @doc("An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Queued, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.")
+    @doc("An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.")
     @query("$filter")
     filter?: string,
 

@@ -2737,7 +2737,7 @@
         "tags": [
           "CertificateAuthorities"
         ],
-        "description": "Revokes a Certificate Authority of type `ICA` and issuer type `External`. If the Certificate Authority is an invalid type, the API responds with HTTP 400.",
+        "description": "Revokes a Certificate Authority of type `ICA` and issuer type `Microsoft`. If the Certificate Authority is an invalid type, the API responds with HTTP 400.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4583,7 +4583,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Queued, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.",
+            "description": "An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "filter"
@@ -5003,7 +5003,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Queued, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.",
+            "description": "An OData filter expression to restrict results by job run status. Supports equality on the status property, e.g. \"status eq 'Active'\", and the \"in\" operator for multiple statuses, e.g. \"status in ('Active', 'Scheduled')\". Accepted status values: Scheduled, Active, Succeeded, Failed, TimedOut, Canceled. When omitted, all job runs are returned.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "filter"
@@ -5104,6 +5104,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a Failed Job Run": {
+            "$ref": "./examples/Get_JobRun_Status_Failed.json"
+          },
           "Get a Job Run": {
             "$ref": "./examples/Get_JobRun.json"
           }
@@ -10915,7 +10918,7 @@
       "properties": {
         "filter": {
           "type": "string",
-          "description": "An OData-style filter expression that selects which device result entries to return, aligned with the Azure API Guidelines `filter` convention. Currently supports equality on the result status, e.g. \"status eq 'Failed'\". Accepted status values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied. When omitted, all device results are returned."
+          "description": "An OData-style filter expression that selects which device result entries to return, aligned with the Azure API Guidelines `filter` convention. Currently supports equality on the result status, e.g. \"status eq 'Failed'\". Supported status values are Succeeded, Failed, InProgress, and Canceled. NotApplied is rejected with InvalidFilter. When omitted, all device results are returned."
         },
         "orderBy": {
           "type": "string",
