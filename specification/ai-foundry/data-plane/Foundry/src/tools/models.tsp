@@ -31,6 +31,7 @@ namespace Azure.AI.Projects {
     azure_function: "azure_function",
     bing_grounding: "bing_grounding",
     capture_structured_outputs: "capture_structured_outputs",
+    knowledge_base: "knowledge_base",
     openapi: "openapi",
 
     @removed(Versions.v1)
@@ -181,6 +182,31 @@ namespace Azure.AI.Projects {
      * The bing grounding search tool parameters.
      */
     bing_grounding: BingGroundingSearchToolParameters;
+  }
+
+  /**
+   * The parameters for a knowledge base tool.
+   */
+  model KnowledgeBaseToolParameters {
+    /**
+     * The name of the knowledge base.
+     */
+    name: string;
+  }
+
+  /**
+   * The input definition information for a knowledge base tool as used to configure an agent.
+   */
+  model KnowledgeBaseTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'knowledge_base'.
+     */
+    type: "knowledge_base";
+
+    /**
+     * The knowledge base tool parameters.
+     */
+    knowledge_base: KnowledgeBaseToolParameters;
   }
 
   /**

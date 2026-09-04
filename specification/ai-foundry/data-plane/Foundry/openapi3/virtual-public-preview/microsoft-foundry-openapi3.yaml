@@ -51348,6 +51348,32 @@ components:
             - failed
             - cancelled
       description: Extensible status values shared by Foundry jobs.
+    KnowledgeBaseTool:
+      type: object
+      required:
+        - type
+        - knowledge_base
+      properties:
+        type:
+          type: string
+          enum:
+            - knowledge_base
+          description: The object type, which is always 'knowledge_base'.
+        knowledge_base:
+          $ref: '#/components/schemas/KnowledgeBaseToolParameters'
+          description: The knowledge base tool parameters.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: The input definition information for a knowledge base tool as used to configure an agent.
+    KnowledgeBaseToolParameters:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the knowledge base.
+      description: The parameters for a knowledge base tool.
     LoraConfig:
       type: object
       properties:
@@ -78451,6 +78477,7 @@ components:
         propertyName: type
         mapping:
           bing_grounding: '#/components/schemas/BingGroundingTool'
+          knowledge_base: '#/components/schemas/KnowledgeBaseTool'
           fabric_dataagent_preview: '#/components/schemas/MicrosoftFabricPreviewTool'
           sharepoint_grounding_preview: '#/components/schemas/SharepointPreviewTool'
           azure_ai_search: '#/components/schemas/AzureAISearchTool'
@@ -78867,6 +78894,7 @@ components:
             - azure_function
             - bing_grounding
             - capture_structured_outputs
+            - knowledge_base
             - openapi
             - memory_search
     OpenAI.ToolsArray:
