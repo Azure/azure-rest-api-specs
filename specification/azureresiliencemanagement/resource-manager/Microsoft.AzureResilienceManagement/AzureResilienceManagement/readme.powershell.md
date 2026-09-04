@@ -35,10 +35,19 @@ self-explanatory.
 
 ``` yaml $(powershell)
 directive:
-# --- UsagePlans: two `List` endpoints (by-subscription vs by-resource-group)
-- from: swagger-document
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureResilienceManagement/usagePlans"].get
-  transform: $.operationId = "UsagePlans_ListByResourceGroup";
+# --- UsagePlans: two `List` endpoints (by-subscription vs by-resource-group).
+#      AutoRest strips trailing PascalCase words from operationIds when computing
+#      the variant name, so `ListBySubscription` / `ListByResourceGroup` /
+#      `ListInResourceGroup` all collapse to `_List`, forcing an ugly `_List1`
+#      suffix on the second one. Rename the resulting cmdlet variant directly:
+#        Get-AzResilienceManagementUsagePlan_List                 (subscription)
+#        Get-AzResilienceManagementUsagePlan_ListByResourceGroup  (resource-group)
+- where:
+    verb: Get
+    subject: UsagePlan
+    variant: List1
+  set:
+    variant: ListByResourceGroup
 
 # --- RecoveryPlanActions: six `Validate*` endpoints normalize to just `Validate`.
 #      Rename them so each has its own subject, producing distinct cmdlets:
