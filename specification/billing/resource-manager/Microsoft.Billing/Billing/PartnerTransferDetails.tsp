@@ -1,14 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Customer.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -22,46 +22,85 @@ model PartnerTransferDetails
     Resource = PartnerTransferDetails,
     KeyName = "transferName",
     SegmentName = "transfers",
-    NamePattern = "^[a-z0-9]*$"
+    NamePattern = LowerAlphaNumericPattern
   >;
 
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+alias PartnerTransferOperations = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The resource provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    @pattern(BillingAccountNamePattern)
+    billingAccountName: string;
+
+    /** The ID that uniquely identifies a billing profile. */
+    @removed(Versions.v2024_08_01_preview)
+    @path
+    @segment("billingProfiles")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    billingProfileName: string;
+
+    /** The ID that uniquely identifies a customer. */
+    @path
+    @segment("customers")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    customerName: string;
+  },
+  {},
+  {
+    /** The ID that uniquely identifies a transfer request. */
+    @path
+    @segment("transfers")
+    @key
+    @pattern(LowerAlphaNumericPattern)
+    transferName: string;
+  },
+  "BillingCustomerTransfer"
+>;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "A transfer is not a living resource, so it does not support delete operation."
 @armResourceOperations(#{ omitTags: true })
 interface PartnerTransfers {
   /**
    * Gets a transfer request by ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   @tag("Transfers")
-  get is ArmResourceRead<
-    PartnerTransferDetails,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
-  >;
+  get is PartnerTransferOperations.Read<PartnerTransferDetails>;
 
   /**
    * Sends a request to a user in a customer's billing account to transfer billing ownership of their subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   @tag("Transfers")
-  initiate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+  initiate is PartnerTransferOperations.CreateOrUpdateSync<
     PartnerTransferDetails,
-    Request = PartnerInitiateTransferRequest,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    Request = PartnerTransferDetails
   >;
 
   /**
    * Lists the transfer requests sent to a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   @tag("Transfers")
-  list is ArmResourceListByParent<
+  list is PartnerTransferOperations.List<
     PartnerTransferDetails,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Response = ArmResponse<PartnerTransferDetailsListResult>
   >;
 
@@ -69,11 +108,57 @@ interface PartnerTransfers {
    * Cancels a transfer request. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   @tag("Transfers")
-  cancel is ArmResourceActionSync<
+  @action("cancel")
+  cancel is PartnerTransferOperations.ActionSync<
     PartnerTransferDetails,
     void,
-    ArmResponse<PartnerTransferDetails>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    ArmResponse<PartnerTransferDetails>
+  >;
+}
+
+alias TransferSupportedAccountOperations = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The resource provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    @pattern(BillingAccountNamePattern)
+    billingAccountName: string;
+  },
+  {},
+  {
+    /** The ID that uniquely identifies a customer. */
+    @path
+    @segment("customers")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    customerName: string;
+  },
+  "BillingCustomer"
+>;
+
+@added(Versions.v2024_08_01_preview)
+@armResourceOperations(#{ omitTags: true })
+interface TransferSupportedAccounts {
+  /**
+   * Gets the accounts that support transfers for a customer.
+   */
+  @tag("Transfers")
+  @get
+  @list
+  @action("transferSupportedAccounts")
+  get is TransferSupportedAccountOperations.ActionSync<
+    Customer,
+    void,
+    ArmResponse<SupportedAccountsDetailsListResult>
   >;
 }
 
@@ -82,6 +167,11 @@ interface PartnerTransfers {
   "The ID that uniquely identifies a transfer request."
 );
 @@doc(PartnerTransferDetails.properties, "Details of the transfer.");
+@@typeChangedFrom(
+  PartnerTransfers.initiate::parameters.resource,
+  Versions.v2024_08_01_preview,
+  PartnerInitiateTransferRequest
+);
 @@doc(
   PartnerTransfers.initiate::parameters.resource,
   "Request parameters that are provided to the initiate transfer operation."
