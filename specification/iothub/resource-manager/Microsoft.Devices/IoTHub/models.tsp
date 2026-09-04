@@ -742,6 +742,52 @@ model ErrorDetails {
 }
 
 /**
+ * The connection profile that the IoT hub uses for device connections.
+ */
+@added(Versions.v2026_10_01_preview)
+union ConnectionProfile {
+  string,
+
+  /**
+   * Classic connection profile.
+   */
+  Classic: "Classic",
+
+  /**
+   * MQTT v5 connection profile.
+   */
+  MqttV5: "MqttV5",
+}
+
+/**
+ * Settings for an Event Grid-backed MQTT v5 IoT hub.
+ */
+@added(Versions.v2026_10_01_preview)
+model MqttV5Settings {
+  /**
+   * The customer-defined groups of topic templates that devices publish to.
+   */
+  @identifiers(#["topicGroupId"])
+  topicGroups?: TopicGroup[];
+}
+
+/**
+ * A named set of topic templates for an Event Grid-backed MQTT v5 IoT hub.
+ */
+@added(Versions.v2026_10_01_preview)
+model TopicGroup {
+  /**
+   * The customer-supplied identifier used to reconcile the topic group during updates.
+   */
+  topicGroupId?: string;
+
+  /**
+   * The topic templates in this group.
+   */
+  topicTemplates?: string[];
+}
+
+/**
  * The properties of an IoT hub.
  */
 model IotHubProperties {
@@ -911,8 +957,29 @@ model IotHubProperties {
   ipVersion?: IpVersion;
 
   /**
+   * The connection profile that the IoT hub uses for device connections. Defaults to 'Classic'.
+   */
+  @added(Versions.v2026_10_01_preview)
+  connectionProfile?: ConnectionProfile = ConnectionProfile.Classic;
+
+  /**
+   * The custom topic configuration for an Event Grid-backed MQTT v5 IoT hub. This property is valid only when connectionProfile is 'MqttV5'.
+   */
+  @added(Versions.v2026_10_01_preview)
+  mqttV5Settings?: MqttV5Settings;
+
+  /**
    * Represents properties related to the Azure Device Registry (ADR).
    */
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "deviceRegistry")
+  deviceRegistryV1?: DeviceRegistry;
+
+  /**
+   * Represents properties related to the Azure Device Registry (ADR).
+   */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Read)
   deviceRegistry?: DeviceRegistry;
 
   /**
@@ -1567,6 +1634,12 @@ model RouteProperties {
   condition?: string;
 
   /**
+   * The data schema reference that is used to interpret the message body.
+   */
+  @added(Versions.v2026_10_01_preview)
+  dataSchema?: string;
+
+  /**
    * The list of endpoints to which messages that satisfy the condition are routed. Currently only one endpoint is allowed.
    */
   @minItems(1)
@@ -1812,9 +1885,115 @@ model DeviceRegistry {
   namespaceResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
+   * The UUID of the associated Azure Device Registry namespace.
+   */
+  @added(Versions.v2026_10_01_preview)
+  namespaceUuid?: string;
+
+  /**
+   * The host name for the data plane endpoint of the associated Azure Device Registry.
+   */
+  @added(Versions.v2026_10_01_preview)
+  dataPlaneHostName?: string;
+
+  /**
    * The identity used to manage the ADR namespace from the data plane.
    */
+  @removed(Versions.v2026_10_01_preview)
   identityResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The identity used to manage the ADR namespace from the data plane.
+   */
+  @added(Versions.v2026_10_01_preview)
+  identity?: DeviceRegistryIdentity;
+
+  /**
+   * The properties related to linking the IoT Hub with the Azure Device Registry.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Read)
+  linkingProperties?: DeviceRegistryLinkingProperties;
+}
+
+/**
+ * The identity used to manage the ADR namespace from the data plane.
+ */
+@added(Versions.v2026_10_01_preview)
+model DeviceRegistryIdentity {
+  /**
+   * The type of the identity.
+   */
+  type?: DeviceRegistryIdentityType;
+
+  /**
+   * The user assigned identity if the identity type is 'UserAssigned'.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * The type of the identity.
+ */
+@added(Versions.v2026_10_01_preview)
+union DeviceRegistryIdentityType {
+  string,
+
+  /**
+   * Use a system-assigned managed identity to manage the ADR namespace.
+   */
+  SystemAssigned: "SystemAssigned",
+
+  /**
+   * Use a user-assigned managed identity to manage the ADR namespace.
+   */
+  UserAssigned: "UserAssigned",
+}
+
+/**
+ * The properties related to linking the IoT Hub with the Azure Device Registry.
+ */
+@added(Versions.v2026_10_01_preview)
+model DeviceRegistryLinkingProperties {
+  /**
+   * Indicates whether the IoT Hub is linked with an Azure Device Registry.
+   */
+  @visibility(Lifecycle.Read)
+  state?: DeviceRegistryLinkingState;
+
+  /**
+   * The last error encountered when linking the IoT Hub with an Azure Device Registry.
+   */
+  @visibility(Lifecycle.Read)
+  error?: ErrorDetails;
+}
+
+/**
+ * Indicates whether the IoT Hub is linked with an Azure Device Registry.
+ */
+@added(Versions.v2026_10_01_preview)
+union DeviceRegistryLinkingState {
+  string,
+
+  /**
+   * The IoT Hub linking with an Azure Device Registry is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The IoT Hub is successfully linked with an Azure Device Registry.
+   */
+  Success: "Success",
+
+  /**
+   * The linked Azure Device Registry is no longer associated with the IoT Hub.
+   */
+  Orphaned: "Orphaned",
+
+  /**
+   * The IoT Hub failed to link with an Azure Device Registry.
+   */
+  Failed: "Failed",
 }
 
 /**
@@ -2638,7 +2817,14 @@ model CertificateProperties {
   /**
    * The reference to policy stored in Azure Device Registry (ADR).
    */
+  @removed(Versions.v2026_10_01_preview)
   policyResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Full certificate authority resource ID for ADR linked standard SKU hubs.
+   */
+  @added(Versions.v2026_10_01_preview)
+  certificateAuthorityResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -2737,7 +2923,14 @@ model CertificatePropertiesWithNonce {
   /**
    * The reference to policy stored in Azure Device Registry (ADR).
    */
+  @removed(Versions.v2026_10_01_preview)
   policyResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Full certificate authority resource ID for ADR linked standard SKU hubs.
+   */
+  @added(Versions.v2026_10_01_preview)
+  certificateAuthorityResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
