@@ -2291,26 +2291,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceConversation'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/PagedVoiceConversation'
         4XX:
           description: Client error
           content:
@@ -2656,26 +2637,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/PagedRealtimeConversationItem'
         4XX:
           description: Client error
           content:
@@ -2980,26 +2942,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceResponse'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/PagedVoiceResponse'
         4XX:
           description: Client error
           content:
@@ -3171,26 +3114,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/PagedRealtimeConversationItem'
         4XX:
           description: Client error
           content:
@@ -80746,6 +80670,21 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of ModelVersion items
+    PagedRealtimeConversationItem:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
+          description: The RealtimeConversationItem items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of RealtimeConversationItem items
     PagedRedTeam:
       type: object
       required:
@@ -80791,6 +80730,36 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of ScheduleRun items
+    PagedVoiceConversation:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceConversation'
+          description: The VoiceConversation items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of VoiceConversation items
+    PagedVoiceResponse:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceResponse'
+          description: The VoiceResponse items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of VoiceResponse items
     PatchAgentRequest:
       type: object
       properties:
