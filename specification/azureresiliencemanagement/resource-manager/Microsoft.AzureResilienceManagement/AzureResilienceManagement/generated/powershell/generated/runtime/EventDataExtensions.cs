@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-namespace Sample.API.Runtime
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime
 {
     using System;
 

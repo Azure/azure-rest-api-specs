@@ -19,6 +19,22 @@ Describe 'Stop-AzResilienceManagementDrill' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'EndViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'EndViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'EndViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'EndViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'End' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

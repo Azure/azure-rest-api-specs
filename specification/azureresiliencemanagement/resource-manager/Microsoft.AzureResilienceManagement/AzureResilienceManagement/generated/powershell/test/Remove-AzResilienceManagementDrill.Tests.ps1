@@ -19,6 +19,10 @@ Describe 'Remove-AzResilienceManagementDrill' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'DeleteViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'DeleteViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

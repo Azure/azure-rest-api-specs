@@ -14,30 +14,60 @@ Update a GoalTemplate
 
 ### UpdateExpanded (Default)
 ```
-Update-AzResilienceManagementGoalTemplate -GoalTemplateName <String> -ServiceGroupName <String>
- [-GoalType <String>] [-RegionalRecoveryPointObjective <String>] [-RegionalRecoveryTimeObjective <String>]
- [-RequireDisasterRecovery <String>] [-RequireHighAvailability <String>] [-AsJob] [-NoWait] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Update-AzResilienceManagementGoalTemplate -Name <String> -ServiceGroupName <String> [-GoalType <String>]
+ [-RegionalRecoveryPointObjective <String>] [-RegionalRecoveryTimeObjective <String>]
+ [-RequireDisasterRecovery <String>] [-RequireHighAvailability <String>] [-DefaultProfile <PSObject>] [-AsJob]
+ [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
-Update-AzResilienceManagementGoalTemplate -GoalTemplateName <String> -ServiceGroupName <String>
- -Properties <IGoalTemplateUpdate> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-AzResilienceManagementGoalTemplate -Name <String> -ServiceGroupName <String>
+ -Property <IGoalTemplateUpdate> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
 Update-AzResilienceManagementGoalTemplate -InputObject <IResilienceManagementIdentity>
- -Properties <IGoalTemplateUpdate> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Property <IGoalTemplateUpdate> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
 Update-AzResilienceManagementGoalTemplate -InputObject <IResilienceManagementIdentity> [-GoalType <String>]
  [-RegionalRecoveryPointObjective <String>] [-RegionalRecoveryTimeObjective <String>]
- [-RequireDisasterRecovery <String>] [-RequireHighAvailability <String>] [-AsJob] [-NoWait] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-RequireDisasterRecovery <String>] [-RequireHighAvailability <String>] [-DefaultProfile <PSObject>] [-AsJob]
+ [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroup
+```
+Update-AzResilienceManagementGoalTemplate -Name <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -Property <IGoalTemplateUpdate>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroupExpanded
+```
+Update-AzResilienceManagementGoalTemplate -Name <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> [-GoalType <String>]
+ [-RegionalRecoveryPointObjective <String>] [-RegionalRecoveryTimeObjective <String>]
+ [-RequireDisasterRecovery <String>] [-RequireHighAvailability <String>] [-DefaultProfile <PSObject>] [-AsJob]
+ [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonFilePath
+```
+Update-AzResilienceManagementGoalTemplate -Name <String> -ServiceGroupName <String> -JsonFilePath <String>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonString
+```
+Update-AzResilienceManagementGoalTemplate -Name <String> -ServiceGroupName <String> -JsonString <String>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -84,15 +114,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -GoalTemplateName
-The name of the goalTemplate
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
 
 ```yaml
-Type: System.String
-Parameter Sets: Update, UpdateExpanded
-Aliases:
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -104,7 +135,7 @@ Type of Goal Template created by customer
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -116,9 +147,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -126,6 +158,51 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+The name of the goalTemplate
+
+```yaml
+Type: System.String
+Parameter Sets: Update, UpdateExpanded, UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
+Aliases: GoalTemplateName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -144,12 +221,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Properties
+### -Property
 Goal template a AzureResilienceProviderHub resource
+To construct, see NOTES section for PROPERTY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IGoalTemplateUpdate
-Parameter Sets: Update, UpdateViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IGoalTemplateUpdate
+Parameter Sets: Update, UpdateViaIdentity, UpdateViaIdentityServiceGroup
 Aliases:
 
 Required: True
@@ -165,7 +243,7 @@ eg, PT15M for 15 minutes
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -181,7 +259,7 @@ eg, PT15M for 15 minutes
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -196,7 +274,7 @@ Option specified by customer under disaster recovery section of goal template
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -211,7 +289,7 @@ Option specified by customer under high availability section of goal template
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -221,12 +299,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -ServiceGroupName
 The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -272,48 +366,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IGoalTemplateUpdate
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IGoalTemplateUpdate
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
 ## OUTPUTS
 
-### Sample.API.Models.IGoalTemplate
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IGoalTemplate
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
-
-`PROPERTIES <IGoalTemplateUpdate>`: Goal template a AzureResilienceProviderHub resource
-  - `[GoalType <String>]`: Type of Goal Template created by customer
-  - `[RegionalRecoveryPointObjective <String>]`: Regional recovery point objective specified by customer. eg, PT15M for 15 minutes
-  - `[RegionalRecoveryTimeObjective <String>]`: Regional recovery time objective specified by customer. eg, PT15M for 15 minutes
-  - `[RequireDisasterRecovery <String>]`: Option specified by customer under disaster recovery section of goal template
-  - `[RequireHighAvailability <String>]`: Option specified by customer under high availability section of goal template
 
 ## RELATED LINKS
 

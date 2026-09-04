@@ -19,6 +19,10 @@ Describe 'Invoke-AzResilienceManagementFinalizeRecoveryPlanAction' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'FinalizeViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'FinalizeViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

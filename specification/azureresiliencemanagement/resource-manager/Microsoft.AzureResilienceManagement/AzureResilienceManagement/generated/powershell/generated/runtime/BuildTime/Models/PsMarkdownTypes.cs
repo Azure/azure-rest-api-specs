@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
-using static Sample.API.Runtime.PowerShell.MarkdownTypesExtensions;
-using static Sample.API.Runtime.PowerShell.PsHelpOutputExtensions;
+using static Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.PowerShell.MarkdownTypesExtensions;
+using static Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.PowerShell.PsHelpOutputExtensions;
 
-namespace Sample.API.Runtime.PowerShell
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.PowerShell
 {
     internal class MarkdownHelpInfo
     {

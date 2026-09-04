@@ -19,6 +19,22 @@ Describe 'Invoke-AzResilienceManagementRecommendGoalAssignmentCapacity' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'RecommendViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'RecommendViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'RecommendViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'RecommendViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Recommend' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

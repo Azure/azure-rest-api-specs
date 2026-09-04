@@ -14,30 +14,59 @@ Update a GoalAssignment
 
 ### UpdateExpanded (Default)
 ```
-Update-AzResilienceManagementGoalAssignment -GoalAssignmentName <String> -ServiceGroupName <String>
+Update-AzResilienceManagementGoalAssignment -Name <String> -ServiceGroupName <String>
  [-GoalAssignmentType <String>] [-GoalTemplateId <String>] [-RequireZonalResiliency]
- [-ServiceLevelResources <IServiceLevelResource[]>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-ServiceLevelResource <IServiceLevelResource[]>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
-Update-AzResilienceManagementGoalAssignment -GoalAssignmentName <String> -ServiceGroupName <String>
- -Properties <IGoalAssignmentUpdate> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-AzResilienceManagementGoalAssignment -Name <String> -ServiceGroupName <String>
+ -Property <IGoalAssignmentUpdate> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
 Update-AzResilienceManagementGoalAssignment -InputObject <IResilienceManagementIdentity>
- -Properties <IGoalAssignmentUpdate> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Property <IGoalAssignmentUpdate> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
 Update-AzResilienceManagementGoalAssignment -InputObject <IResilienceManagementIdentity>
  [-GoalAssignmentType <String>] [-GoalTemplateId <String>] [-RequireZonalResiliency]
- [-ServiceLevelResources <IServiceLevelResource[]>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-ServiceLevelResource <IServiceLevelResource[]>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroup
+```
+Update-AzResilienceManagementGoalAssignment -Name <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -Property <IGoalAssignmentUpdate>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroupExpanded
+```
+Update-AzResilienceManagementGoalAssignment -Name <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> [-GoalAssignmentType <String>]
+ [-GoalTemplateId <String>] [-RequireZonalResiliency] [-ServiceLevelResource <IServiceLevelResource[]>]
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonFilePath
+```
+Update-AzResilienceManagementGoalAssignment -Name <String> -ServiceGroupName <String> -JsonFilePath <String>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonString
+```
+Update-AzResilienceManagementGoalAssignment -Name <String> -ServiceGroupName <String> -JsonString <String>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -84,15 +113,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -GoalAssignmentName
-The name of the GoalAssignment
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
 
 ```yaml
-Type: System.String
-Parameter Sets: Update, UpdateExpanded
-Aliases:
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -104,7 +134,7 @@ The type of goal assignment.
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -119,7 +149,7 @@ Arm id of the goal template.
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -131,9 +161,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -141,6 +172,51 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+The name of the GoalAssignment
+
+```yaml
+Type: System.String
+Parameter Sets: Update, UpdateExpanded, UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
+Aliases: GoalAssignmentName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -159,12 +235,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Properties
+### -Property
 Goal assignment a AzureResilienceProviderHub resource
+To construct, see NOTES section for PROPERTY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IGoalAssignmentUpdate
-Parameter Sets: Update, UpdateViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IGoalAssignmentUpdate
+Parameter Sets: Update, UpdateViaIdentity, UpdateViaIdentityServiceGroup
 Aliases:
 
 Required: True
@@ -179,7 +256,7 @@ Whether zonal resiliency is required for this goal assignment.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -189,12 +266,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -ServiceGroupName
 The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -204,12 +297,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ServiceLevelResources
+### -ServiceLevelResource
 List of service level resources.
+To construct, see NOTES section for SERVICELEVELRESOURCE properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IServiceLevelResource[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IServiceLevelResource[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -255,53 +349,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IGoalAssignmentUpdate
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IGoalAssignmentUpdate
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
 ## OUTPUTS
 
-### Sample.API.Models.IGoalAssignment
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IGoalAssignment
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
-
-`PROPERTIES <IGoalAssignmentUpdate>`: Goal assignment a AzureResilienceProviderHub resource
-  - `[GoalAssignmentType <String>]`: The type of goal assignment.
-  - `[GoalTemplateId <String>]`: Arm id of the goal template.
-  - `[RequireZonalResiliency <Boolean?>]`: Whether zonal resiliency is required for this goal assignment.
-  - `[ServiceLevelResources <List<IServiceLevelResource>>]`: List of service level resources.
-    - `ServiceLevelIndicatorResourceId <String>`: The arm id of the service level indicator resource
-    - `[ServiceLevelObjectiveResourceId <String>]`: The arm id of the service level object resource
-
-`SERVICELEVELRESOURCES <IServiceLevelResource[]>`: List of service level resources.
-  - `ServiceLevelIndicatorResourceId <String>`: The arm id of the service level indicator resource
-  - `[ServiceLevelObjectiveResourceId <String>]`: The arm id of the service level object resource
 
 ## RELATED LINKS
 

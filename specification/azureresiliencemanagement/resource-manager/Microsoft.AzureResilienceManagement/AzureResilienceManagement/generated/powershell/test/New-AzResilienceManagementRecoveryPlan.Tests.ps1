@@ -19,6 +19,22 @@ Describe 'New-AzResilienceManagementRecoveryPlan' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'CreateViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CreateViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CreateViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CreateViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Create' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

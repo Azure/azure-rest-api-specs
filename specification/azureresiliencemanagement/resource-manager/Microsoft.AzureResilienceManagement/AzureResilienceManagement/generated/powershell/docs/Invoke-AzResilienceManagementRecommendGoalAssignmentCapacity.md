@@ -16,27 +16,57 @@ Returns AI-powered capacity assessments and recommendations.
 ### RecommendExpanded (Default)
 ```
 Invoke-AzResilienceManagementRecommendGoalAssignmentCapacity -GoalAssignmentName <String>
- -ServiceGroupName <String> -ResourceIds <String[]> [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -ServiceGroupName <String> -ResourceId <String[]> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Recommend
 ```
 Invoke-AzResilienceManagementRecommendGoalAssignmentCapacity -GoalAssignmentName <String>
- -ServiceGroupName <String> -Body <IRecommendCapacityRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -ServiceGroupName <String> -Body <IRecommendCapacityRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### RecommendViaIdentity
 ```
 Invoke-AzResilienceManagementRecommendGoalAssignmentCapacity -InputObject <IResilienceManagementIdentity>
- -Body <IRecommendCapacityRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IRecommendCapacityRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### RecommendViaIdentityExpanded
 ```
 Invoke-AzResilienceManagementRecommendGoalAssignmentCapacity -InputObject <IResilienceManagementIdentity>
- -ResourceIds <String[]> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -ResourceId <String[]> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### RecommendViaIdentityServiceGroup
+```
+Invoke-AzResilienceManagementRecommendGoalAssignmentCapacity -GoalAssignmentName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -Body <IRecommendCapacityRequest>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### RecommendViaIdentityServiceGroupExpanded
+```
+Invoke-AzResilienceManagementRecommendGoalAssignmentCapacity -GoalAssignmentName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -ResourceId <String[]> [-DefaultProfile <PSObject>]
+ [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### RecommendViaJsonFilePath
+```
+Invoke-AzResilienceManagementRecommendGoalAssignmentCapacity -GoalAssignmentName <String>
+ -ServiceGroupName <String> -JsonFilePath <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### RecommendViaJsonString
+```
+Invoke-AzResilienceManagementRecommendGoalAssignmentCapacity -GoalAssignmentName <String>
+ -ServiceGroupName <String> -JsonString <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -87,10 +117,11 @@ Accept wildcard characters: False
 ### -Body
 Request body for the recommend capacity action.
 Provide specific resource IDs to evaluate, or pass an empty array to let the service automatically select non-resilient resources from the goal assignment.
+To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IRecommendCapacityRequest
-Parameter Sets: Recommend, RecommendViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecommendCapacityRequest
+Parameter Sets: Recommend, RecommendViaIdentity, RecommendViaIdentityServiceGroup
 Aliases:
 
 Required: True
@@ -100,12 +131,28 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
+
+```yaml
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -GoalAssignmentName
 The name of the GoalAssignment
 
 ```yaml
 Type: System.String
-Parameter Sets: Recommend, RecommendExpanded
+Parameter Sets: Recommend, RecommendExpanded, RecommendViaIdentityServiceGroup, RecommendViaIdentityServiceGroupExpanded, RecommendViaJsonFilePath, RecommendViaJsonString
 Aliases:
 
 Required: True
@@ -117,9 +164,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: RecommendViaIdentity, RecommendViaIdentityExpanded
 Aliases:
 
@@ -127,6 +175,36 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Recommend operation
+
+```yaml
+Type: System.String
+Parameter Sets: RecommendViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Recommend operation
+
+```yaml
+Type: System.String
+Parameter Sets: RecommendViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -145,14 +223,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ResourceIds
+### -ResourceId
 Azure resource IDs to evaluate for resiliency.
 Pass an empty array to automatically discover and evaluate non-resilient resources in the service group.
 Maximum 50 resources per request.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: RecommendExpanded, RecommendViaIdentityExpanded
+Parameter Sets: RecommendExpanded, RecommendViaIdentityExpanded, RecommendViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: True
@@ -162,12 +240,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: RecommendViaIdentityServiceGroup, RecommendViaIdentityServiceGroupExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -ServiceGroupName
 The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Recommend, RecommendExpanded
+Parameter Sets: Recommend, RecommendExpanded, RecommendViaJsonFilePath, RecommendViaJsonString
 Aliases:
 
 Required: True
@@ -213,44 +307,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IRecommendCapacityRequest
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecommendCapacityRequest
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
 ## OUTPUTS
 
-### Sample.API.Models.IRecommendCapacityResult
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecommendCapacityResult
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`BODY <IRecommendCapacityRequest>`: Request body for the recommend capacity action. Provide specific resource IDs to evaluate, or pass an empty array to let the service automatically select non-resilient resources from the goal assignment.
-  - `ResourceIds <List<String>>`: Azure resource IDs to evaluate for resiliency. Pass an empty array to automatically discover and evaluate non-resilient resources in the service group. Maximum 50 resources per request.
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
 
 ## RELATED LINKS
 

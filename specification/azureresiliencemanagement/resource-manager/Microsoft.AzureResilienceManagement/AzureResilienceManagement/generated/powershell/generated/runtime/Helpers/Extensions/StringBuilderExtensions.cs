@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 ﻿using System.Text;
 
-namespace Sample.API.Runtime.Json
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.Json
 {
     internal static class StringBuilderExtensions
     {

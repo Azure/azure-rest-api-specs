@@ -19,7 +19,31 @@ Describe 'Invoke-AzResilienceManagementMarkDrillRunAsComplete' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'MarkViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'MarkViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'MarkViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'MarkViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Mark' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'MarkViaIdentityDrillExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'MarkViaIdentityDrill' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

@@ -14,28 +14,72 @@ This action attempts to cancel the ongoing recovery orchestration job.
 
 ### CancelExpanded (Default)
 ```
-Stop-AzResilienceManagementRecoveryJob -RecoveryJobName <String> -RecoveryPlanName <String>
- -ServiceGroupName <String> -OperationId <String> [-Description <String>] [-AsJob] [-NoWait] [-Confirm]
+Stop-AzResilienceManagementRecoveryJob -Name <String> -RecoveryPlanName <String> -ServiceGroupName <String>
+ -OperationId <String> [-Description <String>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### Cancel
 ```
-Stop-AzResilienceManagementRecoveryJob -RecoveryJobName <String> -RecoveryPlanName <String>
- -ServiceGroupName <String> -OperationId <String> -Body <IRecoveryActionRequest> [-AsJob] [-NoWait] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Stop-AzResilienceManagementRecoveryJob -Name <String> -RecoveryPlanName <String> -ServiceGroupName <String>
+ -OperationId <String> -Body <IRecoveryActionRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CancelViaIdentity
 ```
 Stop-AzResilienceManagementRecoveryJob -InputObject <IResilienceManagementIdentity> -OperationId <String>
- -Body <IRecoveryActionRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IRecoveryActionRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### CancelViaIdentityExpanded
 ```
 Stop-AzResilienceManagementRecoveryJob -InputObject <IResilienceManagementIdentity> -OperationId <String>
- [-Description <String>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Description <String>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### CancelViaIdentityRecoveryPlan
+```
+Stop-AzResilienceManagementRecoveryJob -Name <String> -RecoveryPlanInputObject <IResilienceManagementIdentity>
+ -OperationId <String> -Body <IRecoveryActionRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### CancelViaIdentityRecoveryPlanExpanded
+```
+Stop-AzResilienceManagementRecoveryJob -Name <String> -RecoveryPlanInputObject <IResilienceManagementIdentity>
+ -OperationId <String> [-Description <String>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### CancelViaIdentityServiceGroup
+```
+Stop-AzResilienceManagementRecoveryJob -Name <String> -RecoveryPlanName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String> -Body <IRecoveryActionRequest>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### CancelViaIdentityServiceGroupExpanded
+```
+Stop-AzResilienceManagementRecoveryJob -Name <String> -RecoveryPlanName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String> [-Description <String>]
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### CancelViaJsonFilePath
+```
+Stop-AzResilienceManagementRecoveryJob -Name <String> -RecoveryPlanName <String> -ServiceGroupName <String>
+ -OperationId <String> -JsonFilePath <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### CancelViaJsonString
+```
+Stop-AzResilienceManagementRecoveryJob -Name <String> -RecoveryPlanName <String> -ServiceGroupName <String>
+ -OperationId <String> -JsonString <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -84,10 +128,11 @@ Accept wildcard characters: False
 
 ### -Body
 Request body for providing user input for a recovery action.
+To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IRecoveryActionRequest
-Parameter Sets: Cancel, CancelViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecoveryActionRequest
+Parameter Sets: Cancel, CancelViaIdentity, CancelViaIdentityRecoveryPlan, CancelViaIdentityServiceGroup
 Aliases:
 
 Required: True
@@ -97,12 +142,28 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
+
+```yaml
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Description
 User-provided input for the action.
 
 ```yaml
 Type: System.String
-Parameter Sets: CancelExpanded, CancelViaIdentityExpanded
+Parameter Sets: CancelExpanded, CancelViaIdentityExpanded, CancelViaIdentityRecoveryPlanExpanded, CancelViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -114,9 +175,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: CancelViaIdentity, CancelViaIdentityExpanded
 Aliases:
 
@@ -124,6 +186,51 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Cancel operation
+
+```yaml
+Type: System.String
+Parameter Sets: CancelViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Cancel operation
+
+```yaml
+Type: System.String
+Parameter Sets: CancelViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+The unique name (GUID) of the recovery job.
+
+```yaml
+Type: System.String
+Parameter Sets: Cancel, CancelExpanded, CancelViaIdentityRecoveryPlan, CancelViaIdentityRecoveryPlanExpanded, CancelViaIdentityServiceGroup, CancelViaIdentityServiceGroupExpanded, CancelViaJsonFilePath, CancelViaJsonString
+Aliases: RecoveryJobName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -157,18 +264,19 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -RecoveryJobName
-The unique name (GUID) of the recovery job.
+### -RecoveryPlanInputObject
+Identity Parameter
+To construct, see NOTES section for RECOVERYPLANINPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: System.String
-Parameter Sets: Cancel, CancelExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: CancelViaIdentityRecoveryPlan, CancelViaIdentityRecoveryPlanExpanded
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -177,7 +285,7 @@ The name of the recovery orchestration plan.
 
 ```yaml
 Type: System.String
-Parameter Sets: Cancel, CancelExpanded
+Parameter Sets: Cancel, CancelExpanded, CancelViaIdentityServiceGroup, CancelViaIdentityServiceGroupExpanded, CancelViaJsonFilePath, CancelViaJsonString
 Aliases:
 
 Required: True
@@ -187,12 +295,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: CancelViaIdentityServiceGroup, CancelViaIdentityServiceGroupExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -ServiceGroupName
 The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Cancel, CancelExpanded
+Parameter Sets: Cancel, CancelExpanded, CancelViaJsonFilePath, CancelViaJsonString
 Aliases:
 
 Required: True
@@ -238,44 +362,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IRecoveryActionRequest
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecoveryActionRequest
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
 ## OUTPUTS
 
-### Sample.API.Models.IErrorResponse
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IErrorResponse
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`BODY <IRecoveryActionRequest>`: Request body for providing user input for a recovery action.
-  - `[Description <String>]`: User-provided input for the action.
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
 
 ## RELATED LINKS
 

@@ -19,6 +19,22 @@ Describe 'New-AzResilienceManagementEnrollment' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'CreateViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CreateViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CreateViaIdentityUsagePlanExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CreateViaIdentityUsagePlan' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Create' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

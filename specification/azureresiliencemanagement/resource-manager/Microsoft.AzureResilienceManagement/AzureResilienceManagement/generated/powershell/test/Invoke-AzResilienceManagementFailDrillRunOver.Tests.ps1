@@ -19,7 +19,31 @@ Describe 'Invoke-AzResilienceManagementFailDrillRunOver' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'FailViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'FailViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'FailViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'FailViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Fail' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'FailViaIdentityDrillExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'FailViaIdentityDrill' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

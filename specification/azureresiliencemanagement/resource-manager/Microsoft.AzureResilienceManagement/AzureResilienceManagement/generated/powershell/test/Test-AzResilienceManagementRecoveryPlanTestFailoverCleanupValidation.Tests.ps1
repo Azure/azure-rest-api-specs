@@ -19,6 +19,10 @@ Describe 'Test-AzResilienceManagementRecoveryPlanTestFailoverCleanupValidation' 
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'ValidateViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'ValidateViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

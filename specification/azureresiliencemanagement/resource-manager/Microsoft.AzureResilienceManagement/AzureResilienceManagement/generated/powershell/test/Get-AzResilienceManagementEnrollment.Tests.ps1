@@ -19,6 +19,10 @@ Describe 'Get-AzResilienceManagementEnrollment' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'GetViaIdentityUsagePlan' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Get' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

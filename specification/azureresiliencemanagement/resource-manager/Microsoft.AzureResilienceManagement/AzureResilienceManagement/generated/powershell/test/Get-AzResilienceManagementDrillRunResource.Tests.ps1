@@ -19,7 +19,19 @@ Describe 'Get-AzResilienceManagementDrillRunResource' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'GetViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Get' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentityDrill' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentityDrillRun' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

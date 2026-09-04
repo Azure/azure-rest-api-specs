@@ -23,11 +23,11 @@ Describe 'Set-AzResilienceManagementRecoveryPlanAction' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'FailoverViaIdentityExpanded' -skip {
+    It 'FailoverViaJsonFilePath' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'FailoverViaIdentity' -skip {
+    It 'FailoverViaJsonString' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

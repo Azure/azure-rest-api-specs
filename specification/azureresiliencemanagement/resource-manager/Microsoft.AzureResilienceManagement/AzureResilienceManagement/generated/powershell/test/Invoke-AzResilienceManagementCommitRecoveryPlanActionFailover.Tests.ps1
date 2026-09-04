@@ -19,6 +19,10 @@ Describe 'Invoke-AzResilienceManagementCommitRecoveryPlanActionFailover' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'CommitViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'CommitViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

@@ -19,11 +19,31 @@ Describe 'Update-AzResilienceManagementGoalAssignmentGoalResource' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'UpdateViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'UpdateViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'UpdateViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'UpdateViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'UpdateExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'Update' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'RefreshViaIdentityServiceGroup' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

@@ -19,6 +19,30 @@ Describe 'Resume-AzResilienceManagementRecoveryJob' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'ResumeViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ResumeViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ResumeViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ResumeViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ResumeViaIdentityRecoveryPlanExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ResumeViaIdentityRecoveryPlan' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Resume' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

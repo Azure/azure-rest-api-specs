@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using static Sample.API.Runtime.PowerShell.MarkdownTypesExtensions;
-using static Sample.API.Runtime.PowerShell.PsProxyOutputExtensions;
+using static Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.PowerShell.MarkdownTypesExtensions;
+using static Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.PowerShell.PsProxyOutputExtensions;
 
-namespace Sample.API.Runtime.PowerShell
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.PowerShell
 {
     internal static class MarkdownRenderer
     {
@@ -94,7 +94,7 @@ namespace Sample.API.Runtime.PowerShell
                 sb.Append($"## RELATED LINKS{Environment.NewLine}{Environment.NewLine}");
                 foreach (var relatedLink in markdownInfo.RelatedLinks)
                 {
-                    sb.Append($"[{relatedLink}]({relatedLink}){Environment.NewLine}{Environment.NewLine}");
+                    sb.Append($"{relatedLink}{Environment.NewLine}{Environment.NewLine}");
                 }
 
                 File.WriteAllText(Path.Combine(docsFolder, $"{markdownInfo.CmdletName}.md"), sb.ToString());

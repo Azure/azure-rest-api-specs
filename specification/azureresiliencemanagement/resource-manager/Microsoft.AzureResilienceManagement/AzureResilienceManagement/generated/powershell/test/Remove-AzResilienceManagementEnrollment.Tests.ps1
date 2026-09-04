@@ -19,6 +19,10 @@ Describe 'Remove-AzResilienceManagementEnrollment' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'DeleteViaIdentityUsagePlan' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'DeleteViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

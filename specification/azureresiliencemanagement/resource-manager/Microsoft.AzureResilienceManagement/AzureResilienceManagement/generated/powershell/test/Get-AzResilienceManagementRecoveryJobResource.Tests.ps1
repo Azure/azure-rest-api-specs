@@ -19,6 +19,18 @@ Describe 'Get-AzResilienceManagementRecoveryJobResource' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'GetViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentityRecoveryPlan' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentityRecoveryJob' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Get' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

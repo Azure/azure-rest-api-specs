@@ -14,33 +14,63 @@ Update a RecoveryPlan
 
 ### UpdateExpanded (Default)
 ```
-Update-AzResilienceManagementRecoveryPlan -RecoveryPlanName <String> -ServiceGroupName <String>
- [-Description <String>] [-GroupUniqueId <String>] [-IdentityType <String>]
- [-IdentityUserAssignedIdentities <Hashtable>] [-OrderId <Int32>] [-PlanDescription <String>]
- [-PostActions <IRecoveryGroupBaseAction[]>] [-PreActions <IRecoveryGroupBaseAction[]>]
- [-RecoveryGroupSettingAdditionalGroups <IRecoveryGroup[]>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Update-AzResilienceManagementRecoveryPlan -Name <String> -ServiceGroupName <String> [-Description <String>]
+ [-GroupUniqueId <String>] [-IdentityType <String>] [-IdentityUserAssignedIdentity <Hashtable>]
+ [-OrderId <Int32>] [-PlanDescription <String>] [-PostAction <IRecoveryGroupBaseAction[]>]
+ [-PreAction <IRecoveryGroupBaseAction[]>] [-RecoveryGroupSettingAdditionalGroup <IRecoveryGroup[]>]
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
-Update-AzResilienceManagementRecoveryPlan -RecoveryPlanName <String> -ServiceGroupName <String>
- -Properties <IRecoveryPlanUpdate> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-AzResilienceManagementRecoveryPlan -Name <String> -ServiceGroupName <String>
+ -Property <IRecoveryPlanUpdate> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
 Update-AzResilienceManagementRecoveryPlan -InputObject <IResilienceManagementIdentity>
- -Properties <IRecoveryPlanUpdate> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Property <IRecoveryPlanUpdate> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
 Update-AzResilienceManagementRecoveryPlan -InputObject <IResilienceManagementIdentity> [-Description <String>]
- [-GroupUniqueId <String>] [-IdentityType <String>] [-IdentityUserAssignedIdentities <Hashtable>]
- [-OrderId <Int32>] [-PlanDescription <String>] [-PostActions <IRecoveryGroupBaseAction[]>]
- [-PreActions <IRecoveryGroupBaseAction[]>] [-RecoveryGroupSettingAdditionalGroups <IRecoveryGroup[]>]
- [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-GroupUniqueId <String>] [-IdentityType <String>] [-IdentityUserAssignedIdentity <Hashtable>]
+ [-OrderId <Int32>] [-PlanDescription <String>] [-PostAction <IRecoveryGroupBaseAction[]>]
+ [-PreAction <IRecoveryGroupBaseAction[]>] [-RecoveryGroupSettingAdditionalGroup <IRecoveryGroup[]>]
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroup
+```
+Update-AzResilienceManagementRecoveryPlan -Name <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -Property <IRecoveryPlanUpdate>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroupExpanded
+```
+Update-AzResilienceManagementRecoveryPlan -Name <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> [-Description <String>] [-GroupUniqueId <String>]
+ [-IdentityType <String>] [-IdentityUserAssignedIdentity <Hashtable>] [-OrderId <Int32>]
+ [-PlanDescription <String>] [-PostAction <IRecoveryGroupBaseAction[]>]
+ [-PreAction <IRecoveryGroupBaseAction[]>] [-RecoveryGroupSettingAdditionalGroup <IRecoveryGroup[]>]
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonFilePath
+```
+Update-AzResilienceManagementRecoveryPlan -Name <String> -ServiceGroupName <String> -JsonFilePath <String>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonString
+```
+Update-AzResilienceManagementRecoveryPlan -Name <String> -ServiceGroupName <String> -JsonString <String>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -87,12 +117,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
+
+```yaml
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Description
 A description of the recovery orchestration group.
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -107,7 +153,7 @@ A unique id for the recovery orchestration group, which is a GUID.
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -122,7 +168,7 @@ The type of managed identity assigned to this resource.
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -132,12 +178,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -IdentityUserAssignedIdentities
+### -IdentityUserAssignedIdentity
 The identities assigned to this resource by the user.
 
 ```yaml
 Type: System.Collections.Hashtable
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -149,9 +195,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -159,6 +206,51 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+The name of the recovery orchestration plan.
+
+```yaml
+Type: System.String
+Parameter Sets: Update, UpdateExpanded, UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
+Aliases: RecoveryPlanName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -182,7 +274,7 @@ The order ID of the recovery orchestration group.
 
 ```yaml
 Type: System.Int32
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -197,7 +289,7 @@ A description of the recovery orchestration plan.
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -207,12 +299,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PostActions
+### -PostAction
 Post-actions for the recovery orchestration group.
+To construct, see NOTES section for POSTACTION properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IRecoveryGroupBaseAction[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecoveryGroupBaseAction[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -222,12 +315,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PreActions
+### -PreAction
 Pre-actions for the recovery orchestration group.
+To construct, see NOTES section for PREACTION properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IRecoveryGroupBaseAction[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecoveryGroupBaseAction[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -237,12 +331,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Properties
+### -Property
 Represents a recovery orchestration plan resource in the Azure Resilience Management provider namespace.
+To construct, see NOTES section for PROPERTY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IRecoveryPlanUpdate
-Parameter Sets: Update, UpdateViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecoveryPlanUpdate
+Parameter Sets: Update, UpdateViaIdentity, UpdateViaIdentityServiceGroup
 Aliases:
 
 Required: True
@@ -252,12 +347,13 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -RecoveryGroupSettingAdditionalGroups
+### -RecoveryGroupSettingAdditionalGroup
 Additional recovery orchestration group settings.
+To construct, see NOTES section for RECOVERYGROUPSETTINGADDITIONALGROUP properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IRecoveryGroup[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecoveryGroup[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -267,18 +363,19 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -RecoveryPlanName
-The name of the recovery orchestration plan.
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -287,7 +384,7 @@ The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -333,85 +430,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IRecoveryPlanUpdate
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecoveryPlanUpdate
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
 ## OUTPUTS
 
-### Sample.API.Models.IRecoveryPlan
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecoveryPlan
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
-
-`POSTACTIONS <IRecoveryGroupBaseAction[]>`: Post-actions for the recovery orchestration group.
-  - `Name <String>`: The name of the recovery orchestration group action.
-  - `TimeoutInMinutes <Int32>`: The maximum amount of time, in minutes, allowed for the action to complete before it times out.
-  - `Type <String>`: The type of the recovery orchestration group action.
-  - `[Description <String>]`: A description of the recovery orchestration group action, containing the instructions to be performed during this action.
-
-`PREACTIONS <IRecoveryGroupBaseAction[]>`: Pre-actions for the recovery orchestration group.
-  - `Name <String>`: The name of the recovery orchestration group action.
-  - `TimeoutInMinutes <Int32>`: The maximum amount of time, in minutes, allowed for the action to complete before it times out.
-  - `Type <String>`: The type of the recovery orchestration group action.
-  - `[Description <String>]`: A description of the recovery orchestration group action, containing the instructions to be performed during this action.
-
-`PROPERTIES <IRecoveryPlanUpdate>`: Represents a recovery orchestration plan resource in the Azure Resilience Management provider namespace.
-  - `[Description <String>]`: A description of the recovery orchestration group.
-  - `[GroupUniqueId <String>]`: A unique id for the recovery orchestration group, which is a GUID.
-  - `[IdentityType <String>]`: The type of managed identity assigned to this resource.
-  - `[IdentityUserAssignedIdentities <IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities>]`: The identities assigned to this resource by the user.
-    - `[(Any) <IUserAssignedIdentity>]`: This indicates any property can be added to this object.
-  - `[OrderId <Int32?>]`: The order ID of the recovery orchestration group.
-  - `[PlanDescription <String>]`: A description of the recovery orchestration plan.
-  - `[PostActions <List<IRecoveryGroupBaseAction>>]`: Post-actions for the recovery orchestration group.
-    - `Name <String>`: The name of the recovery orchestration group action.
-    - `TimeoutInMinutes <Int32>`: The maximum amount of time, in minutes, allowed for the action to complete before it times out.
-    - `Type <String>`: The type of the recovery orchestration group action.
-    - `[Description <String>]`: A description of the recovery orchestration group action, containing the instructions to be performed during this action.
-  - `[PreActions <List<IRecoveryGroupBaseAction>>]`: Pre-actions for the recovery orchestration group.
-  - `[RecoveryGroupSettingAdditionalGroups <List<IRecoveryGroup>>]`: Additional recovery orchestration group settings.
-    - `[Description <String>]`: A description of the recovery orchestration group.
-    - `[GroupUniqueId <String>]`: A unique id for the recovery orchestration group, which is a GUID.
-    - `[OrderId <Int32?>]`: The order ID of the recovery orchestration group.
-    - `[PostActions <List<IRecoveryGroupBaseAction>>]`: Post-actions for the recovery orchestration group.
-    - `[PreActions <List<IRecoveryGroupBaseAction>>]`: Pre-actions for the recovery orchestration group.
-
-`RECOVERYGROUPSETTINGADDITIONALGROUPS <IRecoveryGroup[]>`: Additional recovery orchestration group settings.
-  - `[Description <String>]`: A description of the recovery orchestration group.
-  - `[GroupUniqueId <String>]`: A unique id for the recovery orchestration group, which is a GUID.
-  - `[OrderId <Int32?>]`: The order ID of the recovery orchestration group.
-  - `[PostActions <List<IRecoveryGroupBaseAction>>]`: Post-actions for the recovery orchestration group.
-    - `Name <String>`: The name of the recovery orchestration group action.
-    - `TimeoutInMinutes <Int32>`: The maximum amount of time, in minutes, allowed for the action to complete before it times out.
-    - `Type <String>`: The type of the recovery orchestration group action.
-    - `[Description <String>]`: A description of the recovery orchestration group action, containing the instructions to be performed during this action.
-  - `[PreActions <List<IRecoveryGroupBaseAction>>]`: Pre-actions for the recovery orchestration group.
 
 ## RELATED LINKS
 

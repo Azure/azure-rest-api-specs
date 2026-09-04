@@ -19,6 +19,22 @@ Describe 'Invoke-AzResilienceManagementReprotectRecoveryPlanAction' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'ReprotectViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ReprotectViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ReprotectViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ReprotectViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Reprotect' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
