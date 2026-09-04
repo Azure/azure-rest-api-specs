@@ -21,6 +21,7 @@ model ServiceLevelResource {
 
   @doc("The arm id of the service level object resource")
   @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   serviceLevelObjectiveResourceId?: armResourceIdentifier;
 }
 
@@ -29,15 +30,18 @@ model ServiceLevelResource {
 model GoalAssignmentProperties {
   @doc("Arm id of the goal template.")
   @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   goalTemplateId?: armResourceIdentifier;
 
   @doc("The type of goal assignment.")
   @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   goalAssignmentType?: GoalAssignmentType;
 
   @doc("Whether zonal resiliency is required for this goal assignment.")
   @added(Versions.v2026_06_01_preview)
-  requireZonalResiliency?: boolean;
+  @madeRequired(Versions.v2026_09_01_preview)
+  requireZonalResiliency: boolean;
 
   @doc("List of service level resources.")
   @identifiers(#[])

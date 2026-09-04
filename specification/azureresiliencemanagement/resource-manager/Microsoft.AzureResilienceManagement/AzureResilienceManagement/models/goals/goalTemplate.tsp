@@ -15,6 +15,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureResilienceManagement;
 
 @doc("Definition of goal template property.")
+@removed(Versions.v2026_09_01_preview)
 model GoalTemplateProperties {
   @removed(Versions.v2026_03_01_preview)
   @doc("Description string provided by customer.")
@@ -46,6 +47,7 @@ model GoalTemplateProperties {
 
 @tenantResource
 @doc("Goal template a AzureResilienceProviderHub resource")
+@removed(Versions.v2026_09_01_preview)
 model GoalTemplate
   is Azure.ResourceManager.ProxyResource<GoalTemplateProperties> {
   @doc("The name of the goalTemplate")

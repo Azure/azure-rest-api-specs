@@ -11,6 +11,7 @@ union UsagePlanType {
   string,
 
   @added(Versions.v2026_03_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   @doc("Basic usage plan with restricted functionality without any charges.")
   Basic: "Basic",
 

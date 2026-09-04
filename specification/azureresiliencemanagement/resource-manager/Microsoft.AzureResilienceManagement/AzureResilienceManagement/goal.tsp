@@ -98,16 +98,20 @@ interface GoalAssignments {
 }
 
 @armResourceOperations
+@removed(Versions.v2026_09_01_preview)
 interface GoalTemplates {
+  #deprecated "GoalTemplate is deprecated and removed in 2026-09-01-preview."
   @route(ServiceGroupRoute)
   get is ArmResourceRead<GoalTemplate, ServiceGroupParameters>;
 
+  #deprecated "GoalTemplate is deprecated and removed in 2026-09-01-preview."
   @route(ServiceGroupRoute)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GoalTemplate,
     ServiceGroupParameters
   >;
 
+  #deprecated "GoalTemplate is deprecated and removed in 2026-09-01-preview."
   @route(ServiceGroupRoute)
   update is ArmResourcePatchAsync<
     GoalTemplate,
@@ -118,12 +122,14 @@ interface GoalTemplates {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "GoalTemplate is deprecated and removed in 2026-09-01-preview."
   @route(ServiceGroupRoute)
   delete is ArmResourceDeleteWithoutOkAsync<
     GoalTemplate,
     ServiceGroupParameters
   >;
 
+  #deprecated "GoalTemplate is deprecated and removed in 2026-09-01-preview."
   @route(ServiceGroupRoute)
   list is ArmResourceListByParent<GoalTemplate, ServiceGroupTenantParameters>;
 }

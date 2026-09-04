@@ -42,31 +42,39 @@ model GoalResourceProperties {
 
   @doc("Flag which depicts whether the Arm resource is excluded for high availability recommendation.")
   @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   highAvailabilityGoalParticipation?: ExclusionState;
 
   @doc("Flag which depicts whether the Arm resource is manually attested for high availability recommendation.")
   @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   highAvailabilityAttestationStatus?: AttestationState;
 
   @doc("Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource.")
   @added(Versions.v2026_06_01_preview)
-  zonalResiliency?: ResiliencyProperties;
+  @madeRequired(Versions.v2026_09_01_preview)
+  zonalResiliency: ResiliencyProperties;
 
   @doc("Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.")
+  @removed(Versions.v2026_09_01_preview)
   disasterRecoveryGoalParticipation?: ExclusionState;
 
   @doc("Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation.")
+  @removed(Versions.v2026_09_01_preview)
   disasterRecoveryAttestationStatus?: AttestationState;
 
   @doc("Reason for exclusion from high availability goals.")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_09_01_preview)
   exclusionReasonForHighAvailabilityGoals?: ExclusionReason;
 
   @doc("Reason for exclusion from disaster recovery goals.")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_09_01_preview)
   exclusionReasonForDisasterRecoveryGoals?: ExclusionReason;
 
   @added(Versions.v2026_03_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   @doc("List of user confirmations for high availability solutions.")
   @identifiers(#["solutionDisplayName"])
   userConfirmationForHighAvailability?: UserConfirmationItem[];
@@ -74,6 +82,7 @@ model GoalResourceProperties {
   @doc("List of service groups of which this resource is memberof.")
   @visibility(Lifecycle.Read)
   @identifiers(#["serviceGroupId"])
+  @removed(Versions.v2026_09_01_preview)
   serviceGroupMemberships?: ServiceGroupMembership[];
 
   @doc("Provisioning state")
