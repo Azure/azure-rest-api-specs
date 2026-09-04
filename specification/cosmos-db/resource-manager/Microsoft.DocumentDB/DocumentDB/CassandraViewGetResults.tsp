@@ -17,7 +17,7 @@ namespace Microsoft.DocumentDB;
  * An Azure Cosmos DB Cassandra view.
  */
 @parentResource(CassandraKeyspaceGetResults)
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model CassandraViewGetResults
   is Azure.ResourceManager.ProxyResource<CassandraViewGetProperties> {
   ...ResourceNameParameter<
@@ -43,7 +43,7 @@ model CassandraViewGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 @armResourceOperations(#{ omitTags: true })
 interface CassandraViewGetResultsOperationGroup {
   /**
