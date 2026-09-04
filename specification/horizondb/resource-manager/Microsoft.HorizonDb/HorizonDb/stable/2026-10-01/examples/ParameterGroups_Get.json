@@ -1,0 +1,39 @@
+{
+  "operationId": "ParameterGroups_Get",
+  "title": "Get a HorizonDB parameter group",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "parameterGroupName": "production-parameters",
+    "api-version": "2026-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
+        "name": "production-parameters",
+        "type": "Microsoft.HorizonDb/parameterGroups",
+        "location": "eastus2",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "parameters": [
+            {
+              "name": "max_connections",
+              "value": "500"
+            },
+            {
+              "name": "shared_buffers",
+              "value": "4096MB"
+            }
+          ],
+          "description": "Parameters for production transactional workloads",
+          "postgreSqlVersion": "17",
+          "applyMethod": "Immediate",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Replace a cluster while omitting deletion configuration",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2026-10-01",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "postgreSqlVersion": "17",
+        "network": {
+          "publicAccess": "Disabled"
+        },
+        "backup": {
+          "geoRedundancy": "Enabled",
+          "retentionDays": 14
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Disabled"
+          },
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 14,
+            "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
+          },
+          "deletion": {
+            "policy": "RetainUntilNoBackupsRemain"
+          },
+          "state": "Updating",
+          "provisioningState": "InProgress",
+          "readWritePool": {
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            }
+          }
+        }
+      }
+    }
+  }
+}

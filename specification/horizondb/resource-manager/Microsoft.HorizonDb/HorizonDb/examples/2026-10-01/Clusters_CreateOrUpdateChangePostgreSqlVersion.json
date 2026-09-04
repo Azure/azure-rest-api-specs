@@ -1,0 +1,26 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Reject changing the PostgreSQL major version during replacement",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2026-10-01",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "postgreSqlVersion": "18"
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "PropertyChangeNotAllowed",
+          "message": "The postgreSqlVersion property is immutable and cannot be changed from 17 to 18."
+        }
+      }
+    }
+  }
+}

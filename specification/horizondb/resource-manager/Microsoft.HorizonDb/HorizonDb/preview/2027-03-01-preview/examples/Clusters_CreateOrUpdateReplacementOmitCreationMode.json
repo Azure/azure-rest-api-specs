@@ -1,0 +1,70 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Replace an asynchronous replica while omitting creation mode",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "async-replica-cluster",
+    "api-version": "2027-03-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "postgreSqlVersion": "17",
+        "network": {
+          "publicAccess": "Disabled"
+        },
+        "backup": {
+          "geoRedundancy": "Enabled",
+          "retentionDays": 21
+        },
+        "deletion": {
+          "policy": "RetainUntilNoBackupsRemain"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/async-replica-cluster",
+        "name": "async-replica-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "AsyncReplica",
+          "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-westus3-resource-group/providers/Microsoft.HorizonDb/clusters/intermediate-replica-cluster",
+          "replication": {
+            "roles": [
+              "Target"
+            ],
+            "replicaLevel": 2,
+            "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-westus3-resource-group/providers/Microsoft.HorizonDb/clusters/intermediate-replica-cluster"
+          },
+          "network": {
+            "publicAccess": "Disabled"
+          },
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 21
+          },
+          "deletion": {
+            "policy": "RetainUntilNoBackupsRemain"
+          },
+          "state": "Updating",
+          "provisioningState": "InProgress",
+          "readWritePool": {
+            "zoneRedundancy": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            },
+            "failover": {
+              "state": "NotReady",
+              "unavailableReason": "No read-write pool is designated."
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "operationId": "SystemAiModels_List",
+  "title": "List system-managed AI models for a HorizonDB cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/systemAiModels/model-1",
+            "name": "model-1",
+            "type": "Microsoft.HorizonDb/clusters/systemAiModels",
+            "properties": {
+              "id": "svc-model-1",
+              "modelName": "gpt-4o-mini",
+              "alias": "default-chat",
+              "version": "2026-07-15",
+              "deploymentName": "chat-prod",
+              "format": "OpenAI",
+              "createdAtUtc": "2026-07-20T18:42:31Z",
+              "status": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

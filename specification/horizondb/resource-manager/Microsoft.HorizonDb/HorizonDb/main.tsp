@@ -2,16 +2,28 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
-import "./routes.tsp";
+import "./common.tsp";
+import "./clusters.tsp";
+import "./pools.tsp";
+import "./replication.tsp";
+import "./endpoints.tsp";
+import "./authentication.tsp";
+import "./administrators.tsp";
+import "./maintenance.tsp";
+import "./backups.tsp";
+import "./system-ai-models.tsp";
+import "./firewall-rules.tsp";
+import "./private-link.tsp";
+import "./parameter-groups.tsp";
+import "./cdc.tsp";
 import "./client.tsp";
 
 using TypeSpec.Versioning;
-using Azure.ResourceManager;
 using Azure.Core;
+using Azure.ResourceManager;
 
 /**
- * Azure Resource Provider API for managing HorizonDB clusters, pools, replicas, and firewall rules
+ * Azure Resource Provider API for managing HorizonDB clusters, pools, endpoints, nodes, and firewall rules
  */
 @armProviderNamespace
 @service(#{ title: "Microsoft HorizonDB Management API" })
@@ -25,8 +37,18 @@ enum Versions {
   v2026_01_20_preview: "2026-01-20-preview",
 
   @doc("The 2026-05-01-preview API version.")
-  @previewVersion
   v2026_05_01_preview: "2026-05-01-preview",
+
+  /**
+   * The 2026-10-01 API version.
+   */
+  v2026_10_01: "2026-10-01",
+
+  /**
+   * The 2027-03-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2027_03_01_preview: "2027-03-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

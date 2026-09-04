@@ -1,0 +1,28 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Reject point-in-time restore without a creation source",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "invalid-restore-cluster",
+    "api-version": "2026-10-01",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "postgreSqlVersion": "17",
+        "creationMode": "PointInTimeRestore",
+        "pointInTimeUtc": "2026-07-27T12:00:00Z"
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidCreationModeProperties",
+          "message": "creationSourceClusterResourceId is required when creationMode is PointInTimeRestore."
+        }
+      }
+    }
+  }
+}

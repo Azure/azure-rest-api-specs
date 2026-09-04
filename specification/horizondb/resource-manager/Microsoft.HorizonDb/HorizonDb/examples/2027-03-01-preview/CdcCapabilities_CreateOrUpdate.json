@@ -1,0 +1,59 @@
+{
+  "operationId": "CdcCapabilities_CreateOrUpdate",
+  "title": "Enable the cluster change data capture capability",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2027-03-01-preview",
+    "resource": {
+      "properties": { "desiredState": "Enabled", "autoUpgradeExtension": true }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdc/default",
+        "name": "default",
+        "type": "Microsoft.HorizonDb/clusters/cdc",
+        "eTag": "\"00000000-0000-0000-0000-000000000001\"",
+        "properties": {
+          "desiredState": "Enabled",
+          "effectiveState": "Enabled",
+          "provisioningState": "Succeeded",
+          "autoUpgradeExtension": true,
+          "replicationArchitecture": "Hybrid",
+          "extension": { "name": "horizondb_cdc", "version": "1.0", "state": "Ready" },
+          "prerequisites": { "engineConfigurationState": "Ready", "readWriteEndpointState": "Ready" },
+          "destinationCount": 0,
+          "configurationCount": 0,
+          "status": { "code": "Ready", "message": "Change data capture is ready." }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/10000000-0000-0000-0000-000000000001?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdc/default",
+        "name": "default",
+        "type": "Microsoft.HorizonDb/clusters/cdc",
+        "eTag": "\"00000000-0000-0000-0000-000000000001\"",
+        "properties": {
+          "desiredState": "Enabled",
+          "effectiveState": "Enabling",
+          "provisioningState": "Provisioning",
+          "autoUpgradeExtension": true,
+          "replicationArchitecture": "Hybrid",
+          "extension": { "name": "horizondb_cdc", "version": "1.0", "state": "Installing" },
+          "prerequisites": { "engineConfigurationState": "Reconciling", "readWriteEndpointState": "Ready" },
+          "destinationCount": 0,
+          "configurationCount": 0,
+          "status": { "code": "Enabling", "message": "Change data capture is being enabled." }
+        }
+      }
+    }
+  }
+}

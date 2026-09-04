@@ -1,0 +1,91 @@
+{
+  "operationId": "ParameterGroups_CreateOrUpdate",
+  "title": "Create or update a HorizonDB parameter group for a PostgreSQL version",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "parameterGroupName": "production-parameters",
+    "api-version": "2026-10-01",
+    "resource": {
+      "location": "eastus2",
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "postgreSqlVersion": "17",
+        "parameters": [
+          {
+            "name": "max_connections",
+            "value": "500"
+          },
+          {
+            "name": "shared_buffers",
+            "value": "4096MB"
+          }
+        ],
+        "description": "Parameters for production transactional workloads",
+        "applyMethod": "Immediate"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
+        "name": "production-parameters",
+        "type": "Microsoft.HorizonDb/parameterGroups",
+        "location": "eastus2",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "parameters": [
+            {
+              "name": "max_connections",
+              "value": "500"
+            },
+            {
+              "name": "shared_buffers",
+              "value": "4096MB"
+            }
+          ],
+          "description": "Parameters for production transactional workloads",
+          "postgreSqlVersion": "17",
+          "applyMethod": "Immediate",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2026-10-01",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
+        "name": "production-parameters",
+        "type": "Microsoft.HorizonDb/parameterGroups",
+        "location": "eastus2",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "parameters": [
+            {
+              "name": "max_connections",
+              "value": "500"
+            },
+            {
+              "name": "shared_buffers",
+              "value": "4096MB"
+            }
+          ],
+          "description": "Parameters for production transactional workloads",
+          "postgreSqlVersion": "17",
+          "applyMethod": "Immediate",
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}

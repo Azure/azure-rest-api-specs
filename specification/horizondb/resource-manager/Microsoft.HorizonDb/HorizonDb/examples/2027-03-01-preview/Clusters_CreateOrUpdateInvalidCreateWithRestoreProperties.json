@@ -1,0 +1,29 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Reject Create mode with restore properties",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "invalid-create-cluster",
+    "api-version": "2027-03-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "postgreSqlVersion": "17",
+        "creationMode": "Create",
+        "pointInTimeUtc": "2026-07-27T12:00:00Z",
+        "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/source-cluster"
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidCreationModeProperties",
+          "message": "pointInTimeUtc and creationSourceClusterResourceId must be absent when creationMode is Create."
+        }
+      }
+    }
+  }
+}

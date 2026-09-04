@@ -1,0 +1,42 @@
+{
+  "operationId": "MicrosoftEntraAdministrators_List",
+  "title": "List Microsoft Entra administrators for a HorizonDB cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2026-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/microsoftEntraAdministrators/33333333-3333-3333-3333-333333333333",
+            "name": "33333333-3333-3333-3333-333333333333",
+            "type": "Microsoft.HorizonDb/clusters/microsoftEntraAdministrators",
+            "properties": {
+              "principalName": "admin@contoso.com",
+              "principalType": "User",
+              "objectId": "33333333-3333-3333-3333-333333333333",
+              "tenantId": "22222222-2222-2222-2222-222222222222",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/microsoftEntraAdministrators/44444444-4444-4444-4444-444444444444",
+            "name": "44444444-4444-4444-4444-444444444444",
+            "type": "Microsoft.HorizonDb/clusters/microsoftEntraAdministrators",
+            "properties": {
+              "principalName": "horizondb-automation",
+              "principalType": "ServicePrincipal",
+              "objectId": "44444444-4444-4444-4444-444444444444",
+              "tenantId": "22222222-2222-2222-2222-222222222222",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "poolName": "example-pool-01",
+    "maintenanceEventId": "ABCD-123",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "maintenanceEventId": "ABCD-123",
+        "poolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+        "status": "InProgress",
+        "plannedStartTimeUtc": "2026-08-05T10:00:00Z",
+        "plannedEndTimeUtc": "2026-08-05T11:00:00Z",
+        "appliedNow": true,
+        "lastUpdatedTimeUtc": "2026-08-05T10:00:00Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/1d3fb8f8-c018-4809-b875-299e9e99892a?api-version=2027-03-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/azureAsyncOperation/1d3fb8f8-c018-4809-b875-299e9e99892a?api-version=2027-03-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "MaintenanceEvents_ApplyNow",
+  "title": "Apply a maintenance event immediately for a HorizonDB pool."
+}

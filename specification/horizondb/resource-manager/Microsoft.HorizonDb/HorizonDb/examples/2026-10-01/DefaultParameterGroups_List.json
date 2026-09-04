@@ -1,0 +1,35 @@
+{
+  "operationId": "DefaultParameterGroups_ListDefaultParameterGroupsBySubscriptionAndRegion",
+  "title": "List default HorizonDB parameter groups by subscription and region",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "location": "eastus2",
+    "api-version": "2026-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default-postgresql-17-provisioned",
+            "description": "Default parameters for PostgreSQL 17 provisioned pools",
+            "postgreSqlVersion": "17",
+            "parameters": [
+              {
+                "name": "max_connections",
+                "description": "Sets the maximum number of concurrent connections",
+                "value": "200",
+                "dataType": "integer",
+                "allowedValues": "100-1000",
+                "isDynamic": true,
+                "isReadOnly": false,
+                "documentationLink": "https://www.postgresql.org/docs/17/runtime-config-connection.html",
+                "unit": "connections"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

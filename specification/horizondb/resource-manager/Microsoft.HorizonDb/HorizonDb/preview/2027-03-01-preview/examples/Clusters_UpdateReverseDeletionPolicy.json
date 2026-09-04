@@ -1,0 +1,27 @@
+{
+  "operationId": "Clusters_Update",
+  "title": "Reject reversing the retained-backup deletion policy",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2027-03-01-preview",
+    "properties": {
+      "properties": {
+        "deletion": {
+          "policy": "Immediate"
+        }
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidDeletionPolicyTransition",
+          "message": "The deletion policy cannot change from RetainUntilNoBackupsRemain to Immediate."
+        }
+      }
+    }
+  }
+}

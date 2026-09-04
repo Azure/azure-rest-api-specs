@@ -1,0 +1,32 @@
+{
+  "operationId": "CdcDestinations_ActivateIdentity",
+  "title": "Activate a validated identity assignment for a change data capture destination",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "destinationName": "fabric-mirroring",
+    "If-Match": "\"00000000-0000-0000-0000-000000000010\"",
+    "api-version": "2026-10-01",
+    "body": {
+      "identityAssignmentResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring/identityAssignments/fabric-writer",
+      "drainExistingSessions": true
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "targetIdentityAssignmentResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring/identityAssignments/fabric-writer",
+        "previousIdentityAssignmentResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/cdcDestinations/fabric-mirroring/identityAssignments/previous-writer"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/10000000-0000-0000-0000-000000000013?api-version=2026-10-01",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/10000000-0000-0000-0000-000000000013?api-version=2026-10-01",
+        "Retry-After": "30"
+      }
+    }
+  }
+}

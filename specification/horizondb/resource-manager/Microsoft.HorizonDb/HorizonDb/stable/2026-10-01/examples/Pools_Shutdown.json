@@ -1,0 +1,37 @@
+{
+  "operationId": "Pools_Shutdown",
+  "title": "Shut down and deallocate a HorizonDB pool",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "poolName": "example-pool-01",
+    "api-version": "2026-10-01"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationStatuses/44444444-4444-4444-4444-444444444444",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationResults/44444444-4444-4444-4444-444444444444",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01",
+        "name": "example-pool-01",
+        "type": "Microsoft.HorizonDb/clusters/pools",
+        "properties": {
+          "state": "Shutdown",
+          "allocatedNodeCount": 0,
+          "parameterGroup": {
+            "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
+            "applyMethod": "Immediate",
+            "syncStatus": "InSync"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

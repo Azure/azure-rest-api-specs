@@ -1,0 +1,56 @@
+{
+  "operationId": "Pools_CreateOrUpdate",
+  "title": "Create a serverless HorizonDB pool",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "poolName": "example-pool-01",
+    "api-version": "2026-10-01",
+    "resource": {
+      "properties": {
+        "computeModel": {
+          "type": "Serverless",
+          "minVCores": 0.5,
+          "maxVCores": 16
+        },
+        "desiredNodeCount": 2,
+        "parameterGroup": {
+          "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/parameterGroups/default-postgresql-17-serverless",
+          "applyMethod": "Immediate"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/12121212-1212-1212-1212-121212121212?api-version=2026-10-01",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+        "name": "example-pool-01",
+        "type": "Microsoft.HorizonDb/clusters/pools",
+        "properties": {
+          "state": "Provisioning",
+          "computeModel": {
+            "type": "Serverless",
+            "computeProcessor": "AMD",
+            "computeGeneration": 3,
+            "minVCores": 0.5,
+            "maxVCores": 16
+          },
+          "desiredNodeCount": 2,
+          "allocatedNodeCount": 0,
+          "parameterGroup": {
+            "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/parameterGroups/default-postgresql-17-serverless",
+            "applyMethod": "Immediate",
+            "syncStatus": "Applying"
+          },
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}

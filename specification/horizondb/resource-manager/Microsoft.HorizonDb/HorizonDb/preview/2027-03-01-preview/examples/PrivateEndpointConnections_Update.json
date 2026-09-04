@@ -1,0 +1,45 @@
+{
+  "operationId": "PrivateEndpointConnections_Update",
+  "title": "Approve a private endpoint connection",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "privateEndpointConnectionName": "example-private-endpoint-connection",
+    "api-version": "2027-03-01-preview",
+    "properties": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Approved for the production database network"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/privateEndpointConnections/example-private-endpoint-connection",
+        "name": "example-private-endpoint-connection",
+        "type": "Microsoft.HorizonDb/clusters/privateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/network-resource-group/providers/Microsoft.Network/privateEndpoints/example-private-endpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved for the production database network",
+            "actionsRequired": "None"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/dddddddd-dddd-dddd-dddd-dddddddddddd?api-version=2027-03-01-preview",
+        "Retry-After": "30"
+      }
+    }
+  }
+}

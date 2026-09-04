@@ -1,0 +1,28 @@
+{
+  "operationId": "MicrosoftEntraAuthentications_Update",
+  "title": "Disable Microsoft Entra authentication without modifying existing database roles",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2027-03-01-preview",
+    "properties": {
+      "properties": {
+        "state": "Disabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/authentications/microsoftEntra",
+        "name": "microsoftEntra",
+        "type": "Microsoft.HorizonDb/clusters/authentications",
+        "properties": {
+          "state": "Disabled",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

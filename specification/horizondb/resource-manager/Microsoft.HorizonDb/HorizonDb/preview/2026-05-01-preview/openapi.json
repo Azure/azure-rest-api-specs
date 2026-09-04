@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft HorizonDB Management API",
     "version": "2026-05-01-preview",
-    "description": "Azure Resource Provider API for managing HorizonDB clusters, pools, replicas, and firewall rules",
+    "description": "Azure Resource Provider API for managing HorizonDB clusters, pools, endpoints, nodes, and firewall rules",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -52,6 +52,9 @@
       "name": "HorizonDbReplicas"
     },
     {
+      "name": "HorizonDbAdministrators"
+    },
+    {
       "name": "HorizonDbFirewallRules"
     },
     {
@@ -62,9 +65,6 @@
     },
     {
       "name": "HorizonDbParameterGroups"
-    },
-    {
-      "name": "HorizonDbAdministrators"
     }
   ],
   "paths": {
@@ -355,7 +355,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Updates an existing HorizonDB cluster (e.g., tags, virtual cores, replica count).",
+        "description": "Updates an existing HorizonDB cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2340,7 +2340,7 @@
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Updates an existing HorizonDB parameter group.",
+        "description": "Updates an existing HorizonDB parameter group. A request-wide applyMethod is required and controls when dynamic parameter changes become effective on connected pools. Static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. The operation fails with a conflict while a previous update to this parameter group is still being applied to connected pools.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2415,7 +2415,7 @@
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Deletes a HorizonDB parameter group.",
+        "description": "Deletes a HorizonDB parameter group. Deletion fails with a conflict when the parameter group is associated with one or more pools.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2951,7 +2951,7 @@
         },
         "version": {
           "type": "string",
-          "description": "The version of the HorizonDB cluster."
+          "description": "The version of PostgreSQL used by the HorizonDB cluster."
         },
         "createMode": {
           "$ref": "#/definitions/CreateModeCluster",
@@ -2965,11 +2965,11 @@
         "sourceClusterResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The source cluster resource ID for restore or replica creation."
+          "description": "The source cluster resource ID for restore or node creation."
         },
         "poolName": {
           "type": "string",
-          "description": "The pool name for restore or replica operations."
+          "description": "The pool name for restore or node operations."
         },
         "replicaCount": {
           "type": "integer",
@@ -3711,7 +3711,7 @@
     },
     "PrincipalTypes": {
       "type": "string",
-      "description": "The type of the Entra ID principal.",
+      "description": "The type of Microsoft Entra principal mapped to a PostgreSQL role.",
       "enum": [
         "Unknown",
         "User",
@@ -3725,22 +3725,22 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "Unknown or unrecognized type (internal only, not accepted in requests)."
+            "description": "An unknown or unrecognized type. This value is for internal use and is not accepted in requests."
           },
           {
             "name": "User",
             "value": "User",
-            "description": "An Entra ID user account (UPN-based principal)."
+            "description": "A Microsoft Entra ID user account."
           },
           {
             "name": "Group",
             "value": "Group",
-            "description": "An Entra ID security group. All members of the group inherit admin privileges."
+            "description": "A Microsoft Entra ID security group. All members of the group inherit administrator privileges."
           },
           {
             "name": "ServicePrincipal",
             "value": "ServicePrincipal",
-            "description": "An Entra ID application / service principal (used for automated workloads)."
+            "description": "A Microsoft Entra ID application or service principal used for automated workloads."
           }
         ]
       }
@@ -3783,27 +3783,27 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Provisioning completed successfully"
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Provisioning failed"
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Provisioning was canceled"
+            "description": "Resource creation was canceled."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "Provisioning is in progress"
+            "description": "The HorizonDB resource operation is actively running."
           },
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "Provisioning is in progress"
+            "description": "The HorizonDB resource is still provisioning."
           }
         ]
       },
@@ -3931,7 +3931,7 @@
     },
     "ZonePlacementPolicy": {
       "type": "string",
-      "description": "The zone redundancy option for the cluster.",
+      "description": "The zone placement enforcement option.",
       "enum": [
         "Strict",
         "BestEffort"

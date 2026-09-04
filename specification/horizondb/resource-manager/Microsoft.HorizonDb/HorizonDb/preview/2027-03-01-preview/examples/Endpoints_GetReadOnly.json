@@ -1,0 +1,28 @@
+{
+  "operationId": "Endpoints_Get",
+  "title": "Get a read-only HorizonDB pool endpoint",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "endpointName": "pool-01",
+    "api-version": "2027-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/endpoints/pool-01",
+        "name": "pool-01",
+        "type": "Microsoft.HorizonDb/clusters/endpoints",
+        "properties": {
+          "scope": "Pool",
+          "associatedResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01",
+          "fullyQualifiedDomainName": "primary.example-cluster.ffffffffffff.eastus2.horizondb.azure.com",
+          "role": "ReadOnly",
+          "aliases": [],
+          "aliasFullyQualifiedDomainNames": []
+        }
+      }
+    }
+  }
+}
