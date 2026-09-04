@@ -1216,8 +1216,7 @@ union TelephonyStructuredInputValue {
 
 @doc("The optional execution window for a direct outbound call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("TelephonyCallJobScheduleContent", "csharp")
-model TelephonyCallJobScheduleRequest {
+model TelephonyCallJobSchedule {
   @doc("The earliest instant at which dispatch may begin.")
   not_before?: FoundryTimestamp;
 
@@ -1229,23 +1228,9 @@ model TelephonyCallJobScheduleRequest {
   time_zone?: string;
 }
 
-@doc("The frozen execution window returned for a direct outbound call.")
+@doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCallJobSchedule {
-  @doc("The earliest Unix timestamp in seconds at which dispatch may begin.")
-  not_before?: FoundryTimestamp;
-
-  @doc("The Unix timestamp in seconds after which the call job expires without dispatch.")
-  expires_at?: FoundryTimestamp;
-
-  @doc("The IANA time-zone name associated with the schedule.")
-  time_zone?: string;
-}
-
-@doc("A request to create one durable direct outbound call job.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTelephonyCallJobContent", "csharp")
-model CreateTelephonyCallJobRequest {
+model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyOutboundDestination;
 
@@ -1260,7 +1245,14 @@ model CreateTelephonyCallJobRequest {
   structured_inputs?: Record<TelephonyStructuredInputValue>;
 
   @doc("The optional execution window.")
-  schedule?: TelephonyCallJobScheduleRequest;
+  schedule?: TelephonyCallJobSchedule;
+}
+
+@doc("A request to create one durable direct outbound call job.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTelephonyCallJobContent", "csharp")
+model CreateTelephonyCallJobRequest {
+  ...TelephonyCallJobConfiguration;
 
   @doc("The provider-attempt retry policy. Omit it for one attempt with no retry delay.")
   retry_policy?: TelephonyOutboundRetryPolicy;
@@ -1304,6 +1296,8 @@ model TelephonyCallJobCancellation {
 @doc("A durable direct or campaign-created outbound call intent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJob {
+  ...TelephonyCallJobConfiguration;
+
   @doc("The service-generated call-job identifier.")
   id: TelephonyCallJobId;
 
@@ -1315,21 +1309,6 @@ model TelephonyCallJob {
 
   @doc("The current call-job lifecycle status.")
   status: TelephonyCallJobStatus;
-
-  @doc("The phone destination.")
-  destination: TelephonyOutboundDestination;
-
-  @doc("The telephony binding used for origination.")
-  telephony_binding_id: TelephonyBindingId;
-
-  @doc("The optional declared purpose for the call.")
-  purpose?: string;
-
-  @doc("The flat scalar structured input values available to the agent and greeting. Agent-declared inputs follow their schema, required, and default-value semantics; additional inputs remain available as dynamic template variables.")
-  structured_inputs?: Record<TelephonyStructuredInputValue>;
-
-  @doc("The frozen execution window, when supplied.")
-  schedule?: TelephonyCallJobSchedule;
 
   @doc("The recorded cancellation request, when cancellation was requested.")
   cancellation?: TelephonyCallJobCancellation;
@@ -1377,8 +1356,7 @@ union TelephonyCampaignScheduleType {
 
 @doc("The schedule for an outbound campaign.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("TelephonyCampaignScheduleContent", "csharp")
-model TelephonyCampaignScheduleRequest {
+model TelephonyCampaignSchedule {
   @doc("Whether calls are eligible immediately after publication or at a future instant.")
   type: TelephonyCampaignScheduleType;
 
@@ -1386,20 +1364,9 @@ model TelephonyCampaignScheduleRequest {
   start_at?: FoundryTimestamp;
 }
 
-@doc("The frozen schedule returned for an outbound campaign.")
+@doc("Customer-controlled configuration for an outbound campaign.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignSchedule {
-  @doc("Whether calls are eligible immediately after publication or at a future instant.")
-  type: TelephonyCampaignScheduleType;
-
-  @doc("The scheduled start Unix timestamp in seconds.")
-  start_at?: FoundryTimestamp;
-}
-
-@doc("A request to create a draft outbound campaign.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTelephonyCampaignContent", "csharp")
-model CreateTelephonyCampaignRequest {
+model TelephonyCampaignConfiguration {
   @doc("A customer-visible name for the campaign.")
   @minLength(1)
   display_name: string;
@@ -1412,7 +1379,14 @@ model CreateTelephonyCampaignRequest {
   purpose?: string;
 
   @doc("When the published campaign becomes eligible to dispatch calls.")
-  schedule?: TelephonyCampaignScheduleRequest;
+  schedule?: TelephonyCampaignSchedule;
+}
+
+@doc("A request to create a draft outbound campaign.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTelephonyCampaignContent", "csharp")
+model CreateTelephonyCampaignRequest {
+  ...TelephonyCampaignConfiguration;
 
   @doc("The provider-attempt retry policy inherited by every materialized call job.")
   retry_policy?: TelephonyOutboundRetryPolicy;
@@ -1459,15 +1433,12 @@ model TelephonyCampaignCallJobCounts {
 @doc("A durable outbound campaign owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaign {
+  ...TelephonyCampaignConfiguration;
   id: TelephonyCampaignId;
   object: "telephony.campaign";
   agent_name: string;
-  display_name: string;
   configuration_status: TelephonyCampaignConfigurationStatus;
   execution_status: TelephonyCampaignExecutionStatus;
-  telephony_binding_id: TelephonyBindingId;
-  purpose?: string;
-  schedule?: TelephonyCampaignSchedule;
   retry_policy: TelephonyOutboundRetryPolicyResponse;
   latest_successful_validation_id?: string;
   active_validation_id?: string;

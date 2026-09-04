@@ -37968,7 +37968,7 @@
             "description": "Flat scalar structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
           },
           "schedule": {
-            "$ref": "#/components/schemas/TelephonyCallJobScheduleRequest",
+            "$ref": "#/components/schemas/TelephonyCallJobSchedule",
             "description": "The optional execution window."
           },
           "retry_policy": {
@@ -38005,7 +38005,7 @@
             "description": "An optional customer-declared purpose for campaign calls."
           },
           "schedule": {
-            "$ref": "#/components/schemas/TelephonyCampaignScheduleRequest",
+            "$ref": "#/components/schemas/TelephonyCampaignSchedule",
             "description": "When the published campaign becomes eligible to dispatch calls."
           },
           "retry_policy": {
@@ -86729,12 +86729,12 @@
       "TelephonyCallJob": {
         "type": "object",
         "required": [
+          "destination",
+          "telephony_binding_id",
           "id",
           "object",
           "agent_name",
           "status",
-          "destination",
-          "telephony_binding_id",
           "retry_policy",
           "attempt_count",
           "revision",
@@ -86742,6 +86742,30 @@
           "updated_at"
         ],
         "properties": {
+          "destination": {
+            "$ref": "#/components/schemas/TelephonyOutboundDestination",
+            "description": "The phone destination to call."
+          },
+          "telephony_binding_id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The active agent telephony binding used to originate the call."
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "description": "An optional customer-declared purpose for placing the call."
+          },
+          "structured_inputs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/TelephonyStructuredInputValue"
+            },
+            "description": "Flat scalar structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/TelephonyCallJobSchedule",
+            "description": "The optional execution window."
+          },
           "id": {
             "$ref": "#/components/schemas/TelephonyCallJobId",
             "description": "The service-generated call-job identifier."
@@ -86760,29 +86784,6 @@
           "status": {
             "$ref": "#/components/schemas/TelephonyCallJobStatus",
             "description": "The current call-job lifecycle status."
-          },
-          "destination": {
-            "$ref": "#/components/schemas/TelephonyOutboundDestination",
-            "description": "The phone destination."
-          },
-          "telephony_binding_id": {
-            "$ref": "#/components/schemas/TelephonyBindingId",
-            "description": "The telephony binding used for origination."
-          },
-          "purpose": {
-            "type": "string",
-            "description": "The optional declared purpose for the call."
-          },
-          "structured_inputs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/TelephonyStructuredInputValue"
-            },
-            "description": "The flat scalar structured input values available to the agent and greeting. Agent-declared inputs follow their schema, required, and default-value semantics; additional inputs remain available as dynamic template variables."
-          },
-          "schedule": {
-            "$ref": "#/components/schemas/TelephonyCallJobSchedule",
-            "description": "The frozen execution window, when supplied."
           },
           "cancellation": {
             "$ref": "#/components/schemas/TelephonyCallJobCancellation",
@@ -86873,29 +86874,6 @@
         }
       },
       "TelephonyCallJobSchedule": {
-        "type": "object",
-        "properties": {
-          "not_before": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The earliest Unix timestamp in seconds at which dispatch may begin."
-          },
-          "expires_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp in seconds after which the call job expires without dispatch."
-          },
-          "time_zone": {
-            "type": "string",
-            "description": "The IANA time-zone name associated with the schedule."
-          }
-        },
-        "description": "The frozen execution window returned for a direct outbound call.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "TelephonyCallJobScheduleRequest": {
         "type": "object",
         "properties": {
           "not_before": {
@@ -87550,19 +87528,37 @@
       "TelephonyCampaign": {
         "type": "object",
         "required": [
+          "display_name",
+          "telephony_binding_id",
           "id",
           "object",
           "agent_name",
-          "display_name",
           "configuration_status",
           "execution_status",
-          "telephony_binding_id",
           "retry_policy",
           "call_job_counts",
           "created_at",
           "updated_at"
         ],
         "properties": {
+          "display_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A customer-visible name for the campaign."
+          },
+          "telephony_binding_id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The active agent telephony binding used to originate campaign calls."
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "description": "An optional customer-declared purpose for campaign calls."
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/TelephonyCampaignSchedule",
+            "description": "When the published campaign becomes eligible to dispatch calls."
+          },
           "id": {
             "$ref": "#/components/schemas/TelephonyCampaignId"
           },
@@ -87575,23 +87571,11 @@
           "agent_name": {
             "type": "string"
           },
-          "display_name": {
-            "type": "string"
-          },
           "configuration_status": {
             "$ref": "#/components/schemas/TelephonyCampaignConfigurationStatus"
           },
           "execution_status": {
             "$ref": "#/components/schemas/TelephonyCampaignExecutionStatus"
-          },
-          "telephony_binding_id": {
-            "$ref": "#/components/schemas/TelephonyBindingId"
-          },
-          "purpose": {
-            "type": "string"
-          },
-          "schedule": {
-            "$ref": "#/components/schemas/TelephonyCampaignSchedule"
           },
           "retry_policy": {
             "$ref": "#/components/schemas/TelephonyOutboundRetryPolicyResponse"
@@ -88009,28 +87993,6 @@
         }
       },
       "TelephonyCampaignSchedule": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/TelephonyCampaignScheduleType",
-            "description": "Whether calls are eligible immediately after publication or at a future instant."
-          },
-          "start_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The scheduled start Unix timestamp in seconds."
-          }
-        },
-        "description": "The frozen schedule returned for an outbound campaign.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "TelephonyCampaignScheduleRequest": {
         "type": "object",
         "required": [
           "type"
