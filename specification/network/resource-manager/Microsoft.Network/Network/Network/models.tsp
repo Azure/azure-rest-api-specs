@@ -62,6 +62,18 @@ union ApplicationGatewaySkuName {
    * Basic
    */
   Basic: "Basic",
+
+  /**
+   * Basic tier Application Gateway.
+   */
+  @added(Versions.v2026_01_01)
+  Basic_v2: "Basic_v2",
+
+  /**
+   * Basic tier Application Gateway with WAF enabled.
+   */
+  @added(Versions.v2026_01_01)
+  Basic_WAF_v2: "Basic_WAF_v2",
 }
 
 /**
@@ -96,6 +108,18 @@ union ApplicationGatewayTier {
    * Basic
    */
   Basic: "Basic",
+
+  /**
+   * Basic tier Application Gateway.
+   */
+  @added(Versions.v2026_01_01)
+  Basic_v2: "Basic_v2",
+
+  /**
+   * Basic tier Application Gateway with WAF enabled.
+   */
+  @added(Versions.v2026_01_01)
+  Basic_WAF_v2: "Basic_WAF_v2",
 }
 
 /**
@@ -539,6 +563,45 @@ union ApplicationGatewayRequestRoutingRuleType {
    * PathBasedRouting
    */
   PathBasedRouting: "PathBasedRouting",
+
+  /**
+   * AdvancedRouting
+   */
+  @added(Versions.v2026_01_01)
+  AdvancedRouting: "AdvancedRouting",
+}
+
+/**
+ * The type of request property that an advanced routing condition is evaluated against.
+ */
+@added(Versions.v2026_01_01)
+union ApplicationGatewayAdvancedRoutingConditionType {
+  string,
+
+  /**
+   * The condition is evaluated against an HTTP request header identified by propertyName.
+   */
+  Header: "Header",
+
+  /**
+   * The condition is evaluated against a query string argument identified by propertyName.
+   */
+  QueryString: "QueryString",
+
+  /**
+   * The condition is evaluated against the request path. propertyName is not applicable.
+   */
+  Path: "Path",
+
+  /**
+   * The condition is evaluated against the client IP address. propertyName and propertyValueMatcher are not applicable.
+   */
+  ClientIP: "ClientIP",
+
+  /**
+   * The condition is evaluated against the HTTP method. propertyName and propertyValueMatcher are not applicable.
+   */
+  Method: "Method",
 }
 
 /**
@@ -741,6 +804,34 @@ union ApplicationGatewayWafRuleSensitivityTypes {
    * High
    */
   High: "High",
+}
+
+/**
+ * OWASP CRS paranoia level of a managed rule. Applicable only for DRS and OWASP rules.
+ */
+@added(Versions.v2026_01_01)
+union ApplicationGatewayWafRuleParanoiaLevel {
+  string,
+
+  /**
+   * Baseline detection rules.
+   */
+  PL1: "PL1",
+
+  /**
+   * Adds stricter detection rules.
+   */
+  PL2: "PL2",
+
+  /**
+   * Adds aggressive detection rules.
+   */
+  PL3: "PL3",
+
+  /**
+   * Strictest detection rules.
+   */
+  PL4: "PL4",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4848,6 +4939,18 @@ union VirtualNetworkGatewayMigrationType {
    * Indicates that it is a migration process from basic IP CSES to standard IP VMSS.
    */
   UpgradeDeploymentToStandardIP: "UpgradeDeploymentToStandardIP",
+
+  /**
+   * Indicates a migration process to upgrade the virtual network gateway to dual stack (IPv4 and IPv6).
+   */
+  @added(Versions.v2026_01_01)
+  UpgradeGatewayToDualStack: "UpgradeGatewayToDualStack",
+
+  /**
+   * Indicates a migration process for the virtual network gateway's point-to-site profile.
+   */
+  @added(Versions.v2026_01_01)
+  MigrateGatewayForPointToSiteProfile: "MigrateGatewayForPointToSiteProfile",
 }
 
 /**
@@ -6342,6 +6445,12 @@ model ApplicationGatewayPropertiesFormat {
   urlPathMaps?: ApplicationGatewayUrlPathMap[];
 
   /**
+   * Advanced routing maps of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
+   */
+  @added(Versions.v2026_01_01)
+  advancedRoutingMaps?: ApplicationGatewayAdvancedRoutingMap[];
+
+  /**
    * Request routing rules of the application gateway resource.
    */
   requestRoutingRules?: ApplicationGatewayRequestRoutingRule[];
@@ -6355,6 +6464,12 @@ model ApplicationGatewayPropertiesFormat {
    * Rewrite rules for the application gateway resource.
    */
   rewriteRuleSets?: ApplicationGatewayRewriteRuleSet[];
+
+  /**
+   * Advanced routing condition sets of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
+   */
+  @added(Versions.v2026_01_01)
+  advancedRoutingConditionSets?: ApplicationGatewayAdvancedRoutingConditionSet[];
 
   /**
    * Redirect configurations of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
@@ -6385,6 +6500,12 @@ model ApplicationGatewayPropertiesFormat {
    * Autoscale Configuration.
    */
   autoscaleConfiguration?: ApplicationGatewayAutoscaleConfiguration;
+
+  /**
+   * The reserved capacity of the application gateway resource. Applicable to the Basic_v2 and Basic_WAF_v2 SKU tiers.
+   */
+  @added(Versions.v2026_01_01)
+  reservedCapacity?: int32;
 
   /**
    * PrivateLink configurations on application gateway.
@@ -7804,6 +7925,271 @@ model ApplicationGatewayPathRulePropertiesFormat {
 }
 
 /**
+ * Advanced routing map of an application gateway. Holds the advanced routing rules evaluated for requests handled by an AdvancedRouting request routing rule, along with the configuration applied when no rule matches.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Application Gateway child resources extend SubResource for consistency with the existing resource shape"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingMap extends SubResource {
+  /**
+   * Properties of the application gateway advanced routing map.
+   */
+  properties?: ApplicationGatewayAdvancedRoutingMapPropertiesFormat;
+
+  /**
+   * Name of the advanced routing map that is unique within an Application Gateway.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Properties of advanced routing map of the application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingMapPropertiesFormat {
+  /**
+   * Default backend address pool resource of the advanced routing map. Required unless defaultRedirectConfiguration is specified.
+   */
+  defaultBackendAddressPool?: SubResource;
+
+  /**
+   * Default backend http settings resource of the advanced routing map. Required unless defaultRedirectConfiguration is specified.
+   */
+  defaultBackendHttpSettings?: SubResource;
+
+  /**
+   * Default redirect configuration resource of the advanced routing map. Cannot be combined with defaultBackendAddressPool or defaultBackendHttpSettings.
+   */
+  defaultRedirectConfiguration?: SubResource;
+
+  /**
+   * Default rewrite rule set resource of the advanced routing map.
+   */
+  defaultRewriteRuleSet?: SubResource;
+
+  /**
+   * Default authentication configuration bindings of the advanced routing map. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using the Standard_v2 or WAF_v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+  @maxItems(1)
+  defaultAuthConfigs?: ApplicationGatewayAuthConfig[];
+
+  /**
+   * Advanced routing rules of the advanced routing map. Each rule must specify a priority that is unique within the map.
+   */
+  advancedRoutingRules: ApplicationGatewayAdvancedRoutingRule[];
+
+  /**
+   * The provisioning state of the advanced routing map resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Advanced routing rule of an application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Application Gateway child resources extend SubResource for consistency with the existing resource shape"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingRule extends SubResource {
+  /**
+   * Properties of the application gateway advanced routing rule.
+   */
+  properties?: ApplicationGatewayAdvancedRoutingRulePropertiesFormat;
+
+  /**
+   * Name of the advanced routing rule that is unique within an advanced routing map.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Properties of advanced routing rule of the application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingRulePropertiesFormat {
+  /**
+   * Priority of the advanced routing rule. Must be unique within the containing advanced routing map. Rules are evaluated in ascending priority order.
+   */
+  @maxValue(1000)
+  @minValue(1)
+  priority: int32;
+
+  /**
+   * Advanced routing condition set resource evaluated by this rule.
+   */
+  advancedRoutingConditionSet?: SubResource;
+
+  /**
+   * Backend address pool resource of the advanced routing rule. Required unless redirectConfiguration is specified.
+   */
+  backendAddressPool?: SubResource;
+
+  /**
+   * Backend http settings resource of the advanced routing rule. Required unless redirectConfiguration is specified.
+   */
+  backendHttpSettings?: SubResource;
+
+  /**
+   * Redirect configuration resource of the advanced routing rule. Cannot be combined with backendAddressPool or backendHttpSettings.
+   */
+  redirectConfiguration?: SubResource;
+
+  /**
+   * Rewrite rule set resource of the advanced routing rule.
+   */
+  rewriteRuleSet?: SubResource;
+
+  /**
+   * Authentication configuration bindings of the advanced routing rule. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using the Standard_v2 or WAF_v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+  @maxItems(1)
+  authConfigs?: ApplicationGatewayAuthConfig[];
+
+  /**
+   * The provisioning state of the advanced routing rule resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Advanced routing condition set of an application gateway. Referenced by advanced routing rules to determine whether a request matches.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Application Gateway child resources extend SubResource for consistency with the existing resource shape"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingConditionSet extends SubResource {
+  /**
+   * Properties of the application gateway advanced routing condition set.
+   */
+  properties?: ApplicationGatewayAdvancedRoutingConditionSetPropertiesFormat;
+
+  /**
+   * Name of the advanced routing condition set that is unique within an Application Gateway.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Properties of advanced routing condition set of the application gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingConditionSetPropertiesFormat {
+  /**
+   * Routing conditions of the condition set. All conditions must be satisfied for the referencing advanced routing rule to match.
+   */
+  @identifiers(#[])
+  routingConditions: ApplicationGatewayAdvancedRoutingCondition[];
+
+  /**
+   * The provisioning state of the advanced routing condition set resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * A condition evaluated as part of an advanced routing condition set.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingCondition {
+  /**
+   * The type of request property the condition is evaluated against.
+   */
+  conditionType: ApplicationGatewayAdvancedRoutingConditionType;
+
+  /**
+   * Name of the request property the condition is evaluated against. Required when conditionType is Header or QueryString, and not applicable when conditionType is Path, ClientIP or Method.
+   */
+  propertyName?: string;
+
+  /**
+   * Values the request property is matched against. Exactly one of propertyValues or propertyValueMatcher must be specified.
+   */
+  propertyValues?: string[];
+
+  /**
+   * Pattern the request property is matched against. Exactly one of propertyValues or propertyValueMatcher must be specified. Not applicable when conditionType is ClientIP or Method.
+   */
+  propertyValueMatcher?: ApplicationGatewayAdvancedRoutingPropertyValueMatcher;
+}
+
+/**
+ * Matches the value of a request property against a fixed string or regular expression.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+model ApplicationGatewayAdvancedRoutingPropertyValueMatcher {
+  /**
+   * The pattern, either fixed string or regular expression, that the request property value is evaluated against.
+   */
+  pattern: string;
+
+  /**
+   * Setting this parameter to truth value with force the pattern to do a case in-sensitive comparison.
+   */
+  ignoreCase?: boolean = true;
+
+  /**
+   * Setting this value as truth will force to check the negation of the condition given by the user in the pattern field.
+   */
+  negate?: boolean;
+}
+
+/**
  * Request routing rule of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -7872,6 +8258,12 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
   urlPathMap?: SubResource;
 
   /**
+   * Advanced routing map resource of the application gateway.
+   */
+  @added(Versions.v2026_01_01)
+  advancedRoutingMap?: SubResource;
+
+  /**
    * Rewrite Rule Set resource in Basic rule of the application gateway.
    */
   rewriteRuleSet?: SubResource;
@@ -7891,6 +8283,14 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   entraJWTValidationConfig?: SubResource;
+
+  /**
+   * Authentication configuration bindings of the request routing rule. Only one authentication configuration is supported. Authentication configuration names must be unique across the Application Gateway, and an Application Gateway can reference at most 100 distinct authentication policies. Authentication policies can only be bound to Application Gateways using the Standard_v2 or WAF_v2 SKU.
+   */
+  @added(Versions.v2026_01_01)
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+  @maxItems(1)
+  authConfigs?: ApplicationGatewayAuthConfig[];
 
   /**
    * The provisioning state of the request routing rule resource.
@@ -8660,6 +9060,24 @@ model ApplicationGatewayEntraJWTValidationConfigPropertiesFormat {
 }
 
 /**
+ * An authentication configuration binding for an Application Gateway routing rule or routing map.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other application gateway models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+model ApplicationGatewayAuthConfig {
+  /**
+   * The name of the auth configuration.
+   */
+  name: string;
+
+  /**
+   * Reference to the authentication policy (Microsoft.Network/authenticationPolicies) resource.
+   */
+  authenticationPolicy: SubResource;
+}
+
+/**
  * Application Gateway global configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8995,6 +9413,12 @@ model ApplicationGatewayFirewallRuleSetPropertiesFormat {
   ruleSetVersion: string;
 
   /**
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
+   */
+  @added(Versions.v2026_01_01)
+  displayName?: string;
+
+  /**
    * The rule groups of the web application firewall rule set.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -9059,6 +9483,12 @@ model ApplicationGatewayFirewallRule {
    * The string representation of the web application firewall rule sensitivity.
    */
   sensitivity?: ApplicationGatewayWafRuleSensitivityTypes;
+
+  /**
+   * OWASP CRS paranoia level of a managed rule. Applicable only for DRS and OWASP rules.
+   */
+  @added(Versions.v2026_01_01)
+  paranoiaLevel?: ApplicationGatewayWafRuleParanoiaLevel;
 
   /**
    * The description of the web application firewall rule.
@@ -9171,6 +9601,12 @@ model DefaultRuleSetPropertyFormat {
    * The version of the web application firewall rule set type.
    */
   ruleSetVersion?: string;
+
+  /**
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
+   */
+  @added(Versions.v2026_01_01)
+  displayName?: string;
 }
 
 /**
@@ -9193,6 +9629,12 @@ model ApplicationGatewayFirewallManifestRuleSet {
    * The rule set status
    */
   status?: ApplicationGatewayRuleSetStatusOptions;
+
+  /**
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
+   */
+  @added(Versions.v2026_01_01)
+  displayName?: string;
 
   /**
    * Tier of an application gateway that support the rule set.
@@ -9373,6 +9815,12 @@ model AzureFirewallPropertiesFormat {
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   afcConfiguration?: AfcConfiguration;
+
+  /**
+   * Indicates whether the AI security add-on is enabled for the Azure Firewall.
+   */
+  @added(Versions.v2026_01_01)
+  aiSecurityAddOn?: boolean;
 }
 
 /**
@@ -10171,6 +10619,12 @@ model BastionHostPropertiesFormat {
    * Enable/Disable Private Only feature of the Bastion Host resource.
    */
   enablePrivateOnlyBastion?: boolean = false;
+
+  /**
+   * The storage account and identity to use for session recording
+   */
+  @added(Versions.v2026_01_01)
+  sessionRecordingConfiguration?: BastionSessionRecordingConfiguration;
 }
 
 /**
@@ -10308,6 +10762,66 @@ model BastionShareableLink {
    */
   @visibility(Lifecycle.Read)
   message?: string;
+}
+
+/** The type of identity to use */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_01_01)
+union SessionRecordingIdentityType {
+  string,
+
+  /** System assigned identity */
+  SystemAssigned: "SystemAssigned",
+
+  /** User assigned identity */
+  UserAssigned: "UserAssigned",
+}
+
+/** The identity to use for accessing the blob container where recordings will be stored */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_01_01)
+model SessionRecordingIdentity {
+  /** The type of identity to use */
+  type: SessionRecordingIdentityType;
+
+  /** User assigned identity to use for accessing blob container Uri. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identity type systemAssigned. */
+  userAssignedIdentityId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/**
+ * Bastion Session Recording Configuration.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_01_01)
+model BastionSessionRecordingConfiguration {
+  /** The identity to use for accessing the blob container where recordings will be stored */
+  identity: SessionRecordingIdentity;
+
+  /** The blob container to store the recordings. Ex: https://contosostorage.blob.core.windows.net/contosorecordings. */
+  blobContainerUri: url;
+}
+
+/**
+ * Parameters supplied to update the Bastion Host identity or tags.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_01_01)
+model BastionHostUpdate {
+  /**
+   * The identity of the BastionHost, if configured.
+   */
+  @added(Versions.v2026_01_01)
+  identity?: Common.ManagedServiceIdentity;
+
+  ...TagsObject;
 }
 
 /**
@@ -10914,7 +11428,7 @@ model AuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pre-existing GA property; changing its schema (e.g. adding format: password / x-ms-secret) would be a breaking change. Whether GET/LIST returns this authorization key unmasked or masked is enforced at runtime by the backend based on the caller's privileges, not by the API schema, so @secret is intentionally not applied. The dedicated listKeys POST action returns the unmasked key via the @secret ExpressRouteAuthorizationKey response model."
   authorizationKey?: string;
 
   /**
@@ -10933,6 +11447,18 @@ model AuthorizationPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * The authorization key.
+ */
+@added(Versions.v2026_01_01)
+model ExpressRouteAuthorizationKey {
+  /**
+   * The authorization key used to establish connection between resources in different subscriptions.
+   */
+  @secret
+  authorizationKey?: string;
 }
 
 /**
@@ -11375,6 +11901,12 @@ model ExpressRouteCircuitPropertiesFormat {
    * The reference to the ExpressRoutePort resource when the circuit is provisioned on an ExpressRoutePort resource.
    */
   expressRoutePort?: SubResource;
+
+  /**
+   * The reference to the ExpressRouteLag resource when the circuit is provisioned on an ExpressRouteLag resource.
+   */
+  @added(Versions.v2026_01_01)
+  expressRouteLag?: SubResource;
 
   /**
    * The bandwidth of the circuit when the circuit is provisioned on an ExpressRoutePort resource.
@@ -11846,6 +12378,203 @@ model ExpressRouteCrossConnectionsRoutesTableSummaryListResult
 );
 
 /**
+ * Request model used by validate and health check circuit migration operations.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitValidateAndHealthCheckRequest {
+  /** The target peering location for circuit migration. */
+  targetPeeringLocation: string;
+
+  /** The source-to-target port mappings for circuit migration. */
+  @identifiers(#["sourcePortId"])
+  targetPortMapping: PortMapping[];
+}
+
+/**
+ * Response for express route circuit migration validation operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitValidateResponse {
+  /** The validation status. */
+  status?: string;
+}
+
+/**
+ * Request model for express route circuit migration operations.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitRequest {
+  /** The target peering location for circuit migration. */
+  targetPeeringLocation?: string;
+
+  /** The source-to-target port mappings for circuit migration. */
+  @identifiers(#["sourcePortId"])
+  targetPortMapping?: PortMapping[];
+
+  /** The port identifier used for shutDownBgp, migrate, restoreBgp, and rollback operations. */
+  portId?: string;
+}
+
+/**
+ * Response for express route circuit migration health check and migration operations.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitHealthCheckResponse {
+  /** The overall status of the migration operation. */
+  status?: string;
+
+  /** The current phase of the migration operation. */
+  phase?: string;
+
+  /** The failure reason if the migration operation failed. */
+  failureReason?: string;
+
+  /** The new service tag assigned after migration. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The wire property name newSTag is required to match the approved provider-led circuit migration contract."
+  newSTag?: string;
+
+  /** The timestamp when the migration was prepared. */
+  preparedAt?: utcDateTime;
+
+  /** The expiry time for the prepare phase. */
+  prepareExpiryTime?: utcDateTime;
+
+  /** The URL of the new cross connection after migration. */
+  newCrossConnectionUrl?: url;
+
+  /** Indicates whether rollback should be performed. */
+  shouldRollback?: boolean;
+
+  /** Detailed health check information for migration. */
+  details?: MigrateExpressRouteCircuitHealthCheckDetails;
+}
+
+/**
+ * Detailed migration health information.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model MigrateExpressRouteCircuitHealthCheckDetails {
+  /** Per-port migration details. */
+  @identifiers(#["portId"])
+  portMigrationInfos?: PortMigrationInfo[];
+}
+
+/**
+ * A mapping between source and target ports for migration.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model PortMapping {
+  /** The source port identifier. */
+  sourcePortId: string;
+
+  /** The target port identifier. */
+  targetPortId: string;
+}
+
+/**
+ * Information about a port migration status.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model PortMigrationInfo {
+  /** The identifier of the port being migrated. */
+  portId?: string;
+
+  /** The migration status for the port. */
+  status?: string;
+
+  /** The current migration phase for the port. */
+  phase?: string;
+
+  /** The reason for failure if migration failed for the port. */
+  failureReason?: string;
+
+  /** The peering health details for the port. */
+  @identifiers(#["type"])
+  peerings?: PeeringHealth[];
+
+  /** The source port identifier before migration. */
+  sourcePortId?: string;
+
+  /** The source port statistics before migration. */
+  sourcePortStats?: SourcePortStats;
+}
+
+/**
+ * Statistics from the source port before migration.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model SourcePortStats {
+  /** The peering health information from the source port. */
+  @identifiers(#["type"])
+  peerings?: PeeringHealth[];
+}
+
+/**
+ * Health information for a peering connection.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model PeeringHealth {
+  /** The type of peering (for example, Private, Microsoft, Public). */
+  type?: string;
+
+  /** The current peering statistics. */
+  statsCurrent?: PeeringStats;
+
+  /** The peering statistics captured at prepare phase. */
+  statsAtPrepare?: PeeringStats;
+}
+
+/**
+ * Statistical information for a peering connection.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model PeeringStats {
+  /** The timestamp when these statistics were captured. */
+  timestamp?: utcDateTime;
+
+  /** The collection of peering metrics. */
+  @identifiers(#["name"])
+  metrics?: Metric[];
+}
+
+/**
+ * Metric entry for migration peering statistics.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+model Metric {
+  /** The metric name. */
+  name?: string;
+
+  /** The metric value. */
+  value?: float64;
+
+  /** The metric unit. */
+  unit?: string;
+}
+
+/**
  * Response for ListExpressRouteProviderPort API service call.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -12166,7 +12895,7 @@ model ExpressRoutePortAuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pre-existing GA property; changing its schema (e.g. adding format: password / x-ms-secret) would be a breaking change. Whether GET/LIST returns this authorization key unmasked or masked is enforced at runtime by the backend based on the caller's privileges, not by the API schema, so @secret is intentionally not applied. The dedicated listKeys POST action returns the unmasked key via the @secret ExpressRouteAuthorizationKey response model."
   @visibility(Lifecycle.Read)
   authorizationKey?: string;
 
@@ -12303,6 +13032,13 @@ model ExpressRouteLagPropertiesFormat {
    */
   @summary("ExpressRouteLagLink Sub-Resources")
   links?: ExpressRouteLagLink[];
+
+  /**
+   * Reference the ExpressRoute circuit(s) that are provisioned on this ExpressRouteLag resource.
+   */
+  @added(Versions.v2026_01_01)
+  @visibility(Lifecycle.Read)
+  circuits?: SubResource[];
 
   /**
    * The date and time when the ExpressRouteLag was allocated.
@@ -13441,6 +14177,18 @@ model IpamPoolProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * Minimum number of IP addresses required for allocations from this IpamPool to be compliant. Must be less than or equal to the maximum allocation size. If not specified or empty, no minimum is enforced.
+   */
+  @added(Versions.v2026_01_01)
+  minAllocationSize?: string;
+
+  /**
+   * Maximum number of IP addresses allowed for allocations from this IpamPool to be compliant. Must be greater than or equal to the minimum allocation size. If not specified or empty, no maximum is enforced.
+   */
+  @added(Versions.v2026_01_01)
+  maxAllocationSize?: string;
 }
 
 /**
@@ -13596,6 +14344,18 @@ model IpamPoolUpdateProperties {
    * String representing a friendly name for the resource.
    */
   displayName?: string;
+
+  /**
+   * Minimum number of IP addresses required for allocations from this IpamPool to be compliant. Must be less than or equal to the maximum allocation size. Omit to leave the current value unchanged; set to an empty string to clear it.
+   */
+  @added(Versions.v2026_01_01)
+  minAllocationSize?: string;
+
+  /**
+   * Maximum number of IP addresses allowed for allocations from this IpamPool to be compliant. Must be greater than or equal to the minimum allocation size. Omit to leave the current value unchanged; set to an empty string to clear it.
+   */
+  @added(Versions.v2026_01_01)
+  maxAllocationSize?: string;
 }
 
 /**
@@ -24223,32 +24983,16 @@ model HubVirtualNetworkConnectionProperties {
   /**
    * Enable Only IPv6 Peering for this connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the NRP wire contract property casing."
   @added(Versions.v2025_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  enableOnlyIpv6Peering?: EnableOnlyIpv6PeeringState;
+  enableOnlyIPv6Peering?: boolean;
 
   /**
    * The provisioning state of the hub virtual network connection resource.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-/**
- * The state of IPv6 peering.
- */
-union EnableOnlyIpv6PeeringState {
-  string,
-
-  /**
-   * IPv6 peering is enabled.
-   */
-  Enabled: "Enabled",
-
-  /**
-   * IPv6 peering is disabled.
-   */
-  Disabled: "Disabled",
 }
 
 /**
@@ -25554,6 +26298,26 @@ model ConnectionPolicyProperties {
 model ListConnectionPoliciesResult is Azure.Core.Page<ConnectionPolicy>;
 
 /**
+ * Tier of a web application firewall policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_01_01)
+union WebApplicationFirewallPolicyTier {
+  string,
+
+  /**
+   * Standard tier web application firewall policy.
+   */
+  Standard: "Standard",
+
+  /**
+   * Basic tier web application firewall policy.
+   */
+  Basic: "Basic",
+}
+
+/**
  * Defines web application firewall policy properties.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -25610,6 +26374,12 @@ model WebApplicationFirewallPolicyPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   applicationGatewayForContainers?: ApplicationGatewayForContainersReferenceDefinition[];
+
+  /**
+   * Tier of a web application firewall policy.
+   */
+  @added(Versions.v2026_01_01)
+  tier?: WebApplicationFirewallPolicyTier;
 }
 
 /**
@@ -26117,7 +26887,8 @@ model ManagedRuleSetRuleGroup {
   /**
    * List of rules within the rule group
    */
-  rules?: string[];
+  @typeChangedFrom(Versions.v2026_01_01, string[])
+  rules?: int32[];
 }
 
 /**
@@ -26434,6 +27205,18 @@ model NetworkRule extends FirewallPolicyRule {
    */
   @added(Versions.v2025_09_01)
   sourceKubeSelectorGroups?: string[];
+
+  /**
+   * List of source geographic location filters (ISO 3166-1 alpha-2 country codes, e.g. "US", "CA") for this rule.
+   */
+  @added(Versions.v2026_01_01)
+  sourceGeoLocations?: string[];
+
+  /**
+   * List of destination geographic location filters (ISO 3166-1 alpha-2 country codes, e.g. "US", "CA") for this rule.
+   */
+  @added(Versions.v2026_01_01)
+  destinationGeoLocations?: string[];
 
   /**
    * Rule Type.
@@ -27884,6 +28667,595 @@ model ConnectionAnalyzerQueryStatusResult {
   diagnosticOperationResults?: DiagnosticOperationResult[];
 }
 
+/**
+ * Provisioning states of a resource.
+ */
+@added(Versions.v2026_01_01)
+union ProvisioningStateNeuroShield {
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /**
+   * Resource is being created.
+   */
+  Creating: "Creating",
+
+  /**
+   * Resource is being updated.
+   */
+  Updating: "Updating",
+
+  /**
+   * Resource is being deleted.
+   */
+  Deleting: "Deleting",
+}
+
+/**
+ * Properties of the NeuroShield resource.
+ */
+@added(Versions.v2026_01_01)
+model NeuroShieldProperties {
+  /**
+   * Provisioning state of the NeuroShield resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateNeuroShield;
+
+  /**
+   * System-generated GUID for the NeuroShield resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceGuid?: string;
+
+  /**
+   * Response mode that controls mitigation serving behavior.
+   */
+  responseMode: NeuroShieldResponseMode;
+
+  /**
+   * Minimum severity level for mitigation generation.
+   */
+  severityThreshold?: NeuroShieldSeverityThreshold;
+
+  /**
+   * Human-readable description of the NeuroShield resource.
+   */
+  description?: string;
+}
+
+/**
+ * Response modes for mitigation serving behavior.
+ */
+@added(Versions.v2026_01_01)
+union NeuroShieldResponseMode {
+  string,
+
+  /**
+   * Automatically queues and serves mitigations.
+   */
+  Auto: "Auto",
+
+  /**
+   * Requires explicit customer approval before serving mitigations.
+   */
+  Manual: "Manual",
+}
+
+/**
+ * Severity threshold used for finding and mitigation generation.
+ */
+@added(Versions.v2026_01_01)
+union NeuroShieldSeverityThreshold {
+  string,
+
+  /**
+   * Critical severity threshold.
+   */
+  Critical: "Critical",
+
+  /**
+   * High severity threshold.
+   */
+  High: "High",
+
+  /**
+   * Medium severity threshold.
+   */
+  Medium: "Medium",
+
+  /**
+   * Low severity threshold.
+   */
+  Low: "Low",
+}
+
+/**
+ * Properties to patch on a NeuroShield resource.
+ */
+@added(Versions.v2026_01_01)
+model NeuroShieldPatchProperties {
+  /**
+   * Response mode that controls mitigation serving behavior.
+   */
+  responseMode?: NeuroShieldResponseMode;
+
+  /**
+   * Minimum severity level for mitigation generation.
+   */
+  severityThreshold?: NeuroShieldSeverityThreshold;
+
+  /**
+   * Human-readable description of the NeuroShield resource.
+   */
+  description?: string;
+}
+
+/**
+ * Patch request body for updating a NeuroShield resource.
+ */
+@added(Versions.v2026_01_01)
+model NeuroShieldPatch {
+  ...TagsObject;
+
+  /**
+   * Patch properties for the NeuroShield resource.
+   */
+  properties?: NeuroShieldPatchProperties;
+}
+
+/**
+ * ARM tracked resource representing a NeuroShield instance.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network uses Azure.ResourceManager.Legacy feature templates to emit feature-specific Swagger files from the shared project."
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.neuroShield)
+model NeuroShieldResource is Azure.ResourceManager.TrackedResource<
+  NeuroShieldProperties,
+  false
+> {
+  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("neuroShieldName")
+  @segment("neuroShields")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+  name: string;
+}
+
+@@encodedName(NeuroShieldResource.eTag, "application/json", "etag");
+
+/**
+ * Extension deployment status for a protected resource.
+ */
+@added(Versions.v2026_01_01)
+union NeuroShieldExtensionStatus {
+  string,
+
+  /**
+   * Extension is not installed.
+   */
+  NotInstalled: "NotInstalled",
+
+  /**
+   * Extension installation is in progress.
+   */
+  Installing: "Installing",
+
+  /**
+   * Extension is installed and running.
+   */
+  Installed: "Installed",
+
+  /**
+   * Extension installation failed.
+   */
+  Failed: "Failed",
+}
+
+/**
+ * Runtime health status of the Neuron agent.
+ */
+@added(Versions.v2026_01_01)
+union NeuroShieldAgentHealthStatus {
+  string,
+
+  /**
+   * Agent has never sent a heartbeat.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * Agent heartbeat is within the expected interval.
+   */
+  Healthy: "Healthy",
+
+  /**
+   * VMSS aggregate status where some agents are healthy and others are not.
+   */
+  PartiallyHealthy: "PartiallyHealthy",
+
+  /**
+   * Agent heartbeat is stale beyond the expected interval.
+   */
+  Unhealthy: "Unhealthy",
+}
+
+/**
+ * Properties of a protected resource.
+ */
+@added(Versions.v2026_01_01)
+model NeuroShieldProtectedResourceProperties {
+  /**
+   * Provisioning state of the protected resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateNeuroShield;
+
+  /**
+   * ARM resource ID of the target virtual machine or virtual machine scale set.
+   */
+  targetResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    },
+    {
+      type: "Microsoft.Compute/virtualMachineScaleSets";
+    }
+  ]>;
+
+  /**
+   * Deployment status of the Neuron VM extension.
+   */
+  @visibility(Lifecycle.Read)
+  extensionStatus?: NeuroShieldExtensionStatus;
+
+  /**
+   * Runtime health status of the Neuron agent.
+   */
+  @visibility(Lifecycle.Read)
+  agentHealthStatus?: NeuroShieldAgentHealthStatus;
+
+  /**
+   * Last successful heartbeat timestamp from the Neuron agent.
+   */
+  @visibility(Lifecycle.Read)
+  lastHeartbeatTime?: utcDateTime;
+}
+
+/**
+ * ARM proxy child resource representing a protected resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-01-01 follows this project-wide convention."
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.neuroShield)
+@parentResource(NeuroShieldResource)
+model NeuroShieldProtectedResource is Azure.ResourceManager.ProxyResource<
+  NeuroShieldProtectedResourceProperties,
+  false
+> {
+  /**
+   * The name of the protected resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("protectedResourceName")
+  @segment("protectedResources")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+  name: string;
+}
+
+/**
+ * Paged list of protected resources.
+ */
+@added(Versions.v2026_01_01)
+model NeuroShieldProtectedResourceListResult {
+  /**
+   * List of protected resources in the current page.
+   */
+  @pageItems
+  value?: NeuroShieldProtectedResource[];
+
+  /**
+   * URL to the next page of results.
+   */
+  nextLink?: url;
+}
+
+/**
+ * Runtime operational status for findings.
+ */
+@added(Versions.v2026_01_01)
+union NeuroShieldFindingStatus {
+  string,
+
+  /**
+   * No mitigation has resolved the finding yet.
+   */
+  Active: "Active",
+
+  /**
+   * One or more mitigation actions are currently running.
+   */
+  MitigationInProgress: "MitigationInProgress",
+
+  /**
+   * The finding has at least one successful mitigation.
+   */
+  Mitigated: "Mitigated",
+
+  /**
+   * All mitigations were attempted without successful resolution.
+   */
+  MitigationsExhausted: "MitigationsExhausted",
+
+  /**
+   * Mitigation execution is blocked by communication failure.
+   */
+  Unreachable: "Unreachable",
+}
+
+/**
+ * Provisioning states for system-generated child resources.
+ */
+@added(Versions.v2026_01_01)
+union NeuroShieldSystemChildProvisioningState {
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /**
+   * Child resource is being deleted.
+   */
+  Deleting: "Deleting",
+}
+
+/**
+ * Properties of a finding resource.
+ */
+@added(Versions.v2026_01_01)
+model NeuroShieldFindingProperties {
+  /**
+   * Provisioning state of the finding resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NeuroShieldSystemChildProvisioningState;
+
+  /**
+   * CVE identifier associated with this finding.
+   */
+  @visibility(Lifecycle.Read)
+  cveId?: string;
+
+  /**
+   * Severity of the finding.
+   */
+  @visibility(Lifecycle.Read)
+  severity?: NeuroShieldSeverityThreshold;
+
+  /**
+   * Description of the finding.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /**
+   * Detection timestamp for the finding.
+   */
+  @visibility(Lifecycle.Read)
+  detectedTime?: utcDateTime;
+
+  /**
+   * Runtime operational status of the finding.
+   */
+  @visibility(Lifecycle.Read)
+  status?: NeuroShieldFindingStatus;
+}
+
+/**
+ * ARM proxy child resource representing a finding.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-01-01 follows this project-wide convention."
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.neuroShield)
+@parentResource(NeuroShieldProtectedResource)
+model NeuroShieldFinding
+  is Azure.ResourceManager.ProxyResource<NeuroShieldFindingProperties> {
+  /**
+   * The system-generated identifier of the finding.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("findingId")
+  @segment("findings")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$")
+  name: string;
+}
+
+/**
+ * Paged list of finding resources.
+ */
+@added(Versions.v2026_01_01)
+model NeuroShieldFindingListResult {
+  /**
+   * List of finding resources in the current page.
+   */
+  @pageItems
+  value?: NeuroShieldFinding[];
+
+  /**
+   * URL to the next page of results.
+   */
+  nextLink?: url;
+}
+
+/**
+ * Runtime operational status for mitigations.
+ */
+@added(Versions.v2026_01_01)
+union NeuroShieldMitigationStatus {
+  string,
+
+  /**
+   * Mitigation is queued for execution.
+   */
+  Queued: "Queued",
+
+  /**
+   * Mitigation is waiting for explicit approval.
+   */
+  AwaitingApproval: "AwaitingApproval",
+
+  /**
+   * Mitigation execution is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Mitigation completed successfully.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Mitigation was not applied because validation determined it was unnecessary.
+   */
+  Skipped: "Skipped",
+
+  /**
+   * Mitigation execution failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * Rollback execution is in progress.
+   */
+  RollbackInProgress: "RollbackInProgress",
+
+  /**
+   * Mitigation rollback completed successfully.
+   */
+  RolledBack: "RolledBack",
+
+  /**
+   * Mitigation rollback failed.
+   */
+  RollbackFailed: "RollbackFailed",
+
+  /**
+   * Mitigation execution was canceled.
+   */
+  Canceled: "Canceled",
+}
+
+/**
+ * Properties of a mitigation resource.
+ */
+@added(Versions.v2026_01_01)
+model NeuroShieldMitigationProperties {
+  /**
+   * Provisioning state of the mitigation resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NeuroShieldSystemChildProvisioningState;
+
+  /**
+   * Resource identifier of the associated finding.
+   */
+  @visibility(Lifecycle.Read)
+  findingId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * CVE identifier addressed by this mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  cveId: string;
+
+  /**
+   * ARM resource ID of the virtual machine targeted by this mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  virtualMachineArmId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Safety and completeness score from 0 to 100.
+   */
+  @minValue(0)
+  @maxValue(100)
+  @visibility(Lifecycle.Read)
+  score: int32;
+
+  /**
+   * User-friendly summary of the commands run by this mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  commandsSummary: string;
+
+  /**
+   * Indicates whether rollback is available for this mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  isRollbackable: boolean;
+
+  /**
+   * Runtime operational status of the mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  status: NeuroShieldMitigationStatus;
+
+  /**
+   * Human-readable details for the current mitigation status.
+   */
+  @visibility(Lifecycle.Read)
+  statusDetails?: string;
+
+  /**
+   * Timestamp when the mitigation was applied.
+   */
+  @visibility(Lifecycle.Read)
+  appliedTime?: utcDateTime;
+}
+
+/**
+ * ARM proxy child resource representing a mitigation.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Microsoft.Network/Network currently uses Azure.ResourceManager.Legacy templates to keep a single generated swagger surface across tags; NeuroShield 2026-01-01 follows this project-wide convention."
+@added(Versions.v2026_01_01)
+@Azure.ResourceManager.Legacy.feature(Features.neuroShield)
+@parentResource(NeuroShieldProtectedResource)
+model NeuroShieldMitigation
+  is Azure.ResourceManager.ProxyResource<NeuroShieldMitigationProperties> {
+  /**
+   * The system-generated identifier of the mitigation.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("mitigationId")
+  @segment("mitigations")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,126}[0-9a-zA-Z_])?$")
+  name: string;
+}
+
+/**
+ * Paged list of mitigation resources.
+ */
+@added(Versions.v2026_01_01)
+model NeuroShieldMitigationListResult {
+  /**
+   * List of mitigation resources in the current page.
+   */
+  @pageItems
+  value?: NeuroShieldMitigation[];
+
+  /**
+   * URL to the next page of results.
+   */
+  nextLink?: url;
+}
+
+@@identifiers(NeuroShieldProtectedResourceListResult.value, #["id"]);
+@@identifiers(NeuroShieldFindingListResult.value, #["id"]);
+@@identifiers(NeuroShieldMitigationListResult.value, #["id"]);
 @@added(DisablePeeringRoute, Versions.v2025_07_01);
 @@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);
 

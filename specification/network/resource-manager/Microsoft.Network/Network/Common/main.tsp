@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./NetworkInterface.tsp";
 import "./NetworkInterfaceIPConfiguration.tsp";
@@ -60,6 +61,11 @@ enum Versions {
    * The 2025-09-01 API version.
    */
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-01-01 API version.
+   */
+  v2026_01_01: "2026-01-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -96,6 +102,10 @@ enum Features {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   virtualNetworkAppliance,
 
+  /** NeuroShield resource types. */
+  @added(Versions.v2026_01_01)
+  neuroShield,
+
   /** Interconnect group resource type for managing interconnect groups. */
   @added(Versions.v2025_07_01)
   interconnectGroup,
@@ -103,6 +113,10 @@ enum Features {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2025_09_01)
   firstPartyServiceTag,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2026_01_01)
+  authenticationPolicy,
 }
 
 /**
@@ -3785,6 +3799,27 @@ model PrivateLinkServiceConnectionProperties {
    * A collection of read-only information about the state of the connection to the remote resource.
    */
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+
+  /**
+   * A reference to an existing approved private endpoint whose connection approval state should be inherited by this connection at creation time.
+   */
+  @added(Versions.v2026_01_01)
+  approvalReference?: ApprovalReference;
+}
+
+/**
+ * Reference to an existing approved private endpoint used to inherit its connection approval state.
+ */
+@added(Versions.v2026_01_01)
+model ApprovalReference {
+  /**
+   * The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection.
+   */
+  privateEndpointId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/privateEndpoints";
+    }
+  ]>;
 }
 
 /**

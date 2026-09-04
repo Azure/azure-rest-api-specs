@@ -18,6 +18,7 @@ import "./ApplicationGatewayAvailableSslOptions.tsp";
 import "./ApplicationGatewayPrivateEndpointConnection.tsp";
 import "./ApplicationGatewayWafDynamicManifestResult.tsp";
 import "./ApplicationSecurityGroup.tsp";
+import "./AuthenticationPolicy.tsp";
 import "./AzureFirewall.tsp";
 import "./AzureWebCategory.tsp";
 import "./BastionHost.tsp";
@@ -85,6 +86,10 @@ import "./NspAssociation.tsp";
 import "./NspLink.tsp";
 import "./NspLinkReference.tsp";
 import "./NspLoggingConfiguration.tsp";
+import "./NeuroShield.tsp";
+import "./NeuroShieldProtectedResource.tsp";
+import "./NeuroShieldFinding.tsp";
+import "./NeuroShieldMitigation.tsp";
 import "./ReachabilityAnalysisIntent.tsp";
 import "./ReachabilityAnalysisRun.tsp";
 import "./VerifierWorkspace.tsp";
@@ -180,6 +185,12 @@ enum Versions {
    */
   @useDependency(Common.Versions.v2025_09_01)
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-01-01 API version.
+   */
+  @useDependency(Common.Versions.v2026_01_01)
+  v2026_01_01: "2026-01-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
