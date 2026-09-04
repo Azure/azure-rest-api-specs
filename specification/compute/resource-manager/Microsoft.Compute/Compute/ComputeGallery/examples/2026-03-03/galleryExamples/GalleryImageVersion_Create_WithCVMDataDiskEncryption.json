@@ -1,0 +1,200 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-03-03",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "1.0.0",
+    "galleryImageVersion": {
+      "location": "eastus",
+      "properties": {
+        "publishingProfile": {
+          "targetRegions": [
+            {
+              "name": "eastus",
+              "regionalReplicaCount": 1,
+              "storageAccountType": "Standard_ZRS",
+              "encryption": {
+                "osDiskImage": {
+                  "securityProfile": {
+                    "confidentialVMEncryptionType": "EncryptedWithPmk"
+                  }
+                },
+                "dataDiskImages": [
+                  {
+                    "lun": 0,
+                    "securityProfile": {
+                      "confidentialVMEncryptionType": "DataDiskEncryptedWithCmk",
+                      "secureVMDiskEncryptionSetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet"
+                    }
+                  }
+                ]
+              },
+              "excludeFromLatest": false
+            }
+          ],
+          "replicaCount": 1,
+          "excludeFromLatest": false,
+          "replicationMode": "Full"
+        },
+        "storageProfile": {
+          "source": {
+            "virtualMachineId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Compute/locations/eastus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "eastus",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_ZRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "securityProfile": {
+                      "confidentialVMEncryptionType": "EncryptedWithPmk"
+                    }
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 0,
+                      "securityProfile": {
+                        "confidentialVMEncryptionType": "DataDiskEncryptedWithCmk",
+                        "secureVMDiskEncryptionSetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet"
+                      }
+                    }
+                  ]
+                },
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "excludeFromLatest": false,
+            "replicationMode": "Full"
+          },
+          "storageProfile": {
+            "source": {
+              "virtualMachineId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+            }
+          },
+          "safetyProfile": {
+            "reportedForPolicyViolation": false,
+            "allowDeletionOfReplicatedLocations": false
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "eastus",
+        "name": "1.0.0"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Compute/locations/eastus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "eastus",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_ZRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "securityProfile": {
+                      "confidentialVMEncryptionType": "EncryptedWithPmk"
+                    }
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 0,
+                      "securityProfile": {
+                        "confidentialVMEncryptionType": "DataDiskEncryptedWithCmk",
+                        "secureVMDiskEncryptionSetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet"
+                      }
+                    }
+                  ]
+                },
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "excludeFromLatest": false,
+            "replicationMode": "Full"
+          },
+          "storageProfile": {
+            "source": {
+              "virtualMachineId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+            }
+          },
+          "safetyProfile": {
+            "reportedForPolicyViolation": false,
+            "allowDeletionOfReplicatedLocations": false
+          },
+          "provisioningState": "Creating"
+        },
+        "location": "eastus",
+        "name": "1.0.0"
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/providers/Microsoft.Compute/locations/eastus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "eastus",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_ZRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "securityProfile": {
+                      "confidentialVMEncryptionType": "EncryptedWithPmk"
+                    }
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 0,
+                      "securityProfile": {
+                        "confidentialVMEncryptionType": "DataDiskEncryptedWithCmk",
+                        "secureVMDiskEncryptionSetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet"
+                      }
+                    }
+                  ]
+                },
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "excludeFromLatest": false,
+            "replicationMode": "Full"
+          },
+          "storageProfile": {
+            "source": {
+              "virtualMachineId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+            }
+          },
+          "safetyProfile": {
+            "reportedForPolicyViolation": false,
+            "allowDeletionOfReplicatedLocations": false
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "eastus",
+        "name": "1.0.0"
+      }
+    }
+  },
+  "operationId": "GalleryImageVersions_CreateOrUpdate",
+  "title": "Create or update a Gallery Image Version with CVM Data Disk Encryption using customer-managed key."
+}
