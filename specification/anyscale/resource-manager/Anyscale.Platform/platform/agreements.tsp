@@ -46,10 +46,6 @@ model AgreementProperties {
   @visibility(Lifecycle.Read)
   effectiveDate?: utcDateTime;
 
-  /** Identities that accepted the agreement. Present once accepted. */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["email"])
-  participants?: Participant[];
 }
 
 /** The current status of the agreement. */
@@ -61,15 +57,6 @@ union AgreementStatus {
 
   /** The agreement has been accepted and is currently in effect. */
   Active: "Active",
-}
-
-/** An identity that accepted the agreement. */
-model Participant {
-  /** Email/UPN of the participant who accepted. */
-  email: string;
-
-  /** When the participant accepted (UTC). */
-  statusDate: utcDateTime;
 }
 
 @armResourceOperations

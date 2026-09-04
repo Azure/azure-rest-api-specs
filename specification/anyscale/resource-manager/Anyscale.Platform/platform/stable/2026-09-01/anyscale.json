@@ -3351,17 +3351,6 @@
           "format": "date-time",
           "description": "Date from which the agreement is effective (UTC). Present once accepted.",
           "readOnly": true
-        },
-        "participants": {
-          "type": "array",
-          "description": "Identities that accepted the agreement. Present once accepted.",
-          "items": {
-            "$ref": "#/definitions/Participant"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "email"
-          ]
         }
       }
     },
@@ -4199,25 +4188,6 @@
       },
       "required": [
         "name"
-      ]
-    },
-    "Participant": {
-      "type": "object",
-      "description": "An identity that accepted the agreement.",
-      "properties": {
-        "email": {
-          "type": "string",
-          "description": "Email/UPN of the participant who accepted."
-        },
-        "statusDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "When the participant accepted (UTC)."
-        }
-      },
-      "required": [
-        "email",
-        "statusDate"
       ]
     },
     "PhysicalResources": {
