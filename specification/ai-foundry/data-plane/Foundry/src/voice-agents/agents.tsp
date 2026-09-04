@@ -377,6 +377,7 @@ model VoiceAgentMcpTool extends VoiceAgentTool {
 }
 
 @doc("A service-managed control that acts on the active voice session without customer code or external authentication.")
+@discriminator("name")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSystemTool extends VoiceAgentTool {
   @doc("The type of the tool. Always `system`.")
@@ -387,6 +388,13 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
 
   @doc("An optional description of the system tool.")
   description?: string;
+}
+
+@doc("A service-managed control that ends the active conversation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentEndConversationSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `end_conversation`.")
+  name: "end_conversation";
 }
 
 @doc("A service-managed voice-session control action. Known values are stable; additional values may be added over time.")

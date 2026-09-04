@@ -86355,6 +86355,22 @@ components:
         - server
         - client
       description: The source of reference audio used for echo cancellation.
+    VoiceAgentEndConversationSystemTool:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          enum:
+            - end_conversation
+          description: The service-managed control action. Always `end_conversation`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentSystemTool'
+      description: A service-managed control that ends the active conversation.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentEndOfUtteranceDetection:
       type: object
       required:
@@ -86916,6 +86932,10 @@ components:
         description:
           type: string
           description: An optional description of the system tool.
+      discriminator:
+        propertyName: name
+        mapping:
+          end_conversation: '#/components/schemas/VoiceAgentEndConversationSystemTool'
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A service-managed control that acts on the active voice session without customer code or external authentication.
