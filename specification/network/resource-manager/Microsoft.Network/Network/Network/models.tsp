@@ -14121,12 +14121,12 @@ model FirewallPolicyPurviewVendorSettings {
   /**
    * The Microsoft Entra tenant that owns the Microsoft Purview account.
    */
-  tenantId: Azure.Core.uuid;
+  tenantId: string;
 
   /**
    * The Microsoft Entra object IDs of the users whose Microsoft Purview policies are applied.
    */
-  userObjectIds: Azure.Core.uuid[];
+  userObjectIds: string[];
 }
 
 /**
