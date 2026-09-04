@@ -1,0 +1,56 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReportsByBillingAccount",
+  "title": "QueryCarbonEmission By BillingAccount Monthly Summary Report",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345678",
+    "queryParameters": {
+      "reportType": "MonthlySummaryReport",
+      "carbonScopeList": [
+        "Scope1",
+        "Scope2",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2024-03-01",
+        "end": "2024-05-01"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for monthly summary report scoped to a billing account.",
+      "body": {
+        "value": [
+          {
+            "dataType": "MonthlySummaryData",
+            "latestMonthEmissions": 5.25,
+            "previousMonthEmissions": 4.8,
+            "monthOverMonthEmissionsChangeRatio": 0.09375,
+            "monthlyEmissionsChangeValue": 0.45,
+            "date": "2024-05-01",
+            "carbonIntensity": 22
+          },
+          {
+            "dataType": "MonthlySummaryData",
+            "latestMonthEmissions": 5.1,
+            "previousMonthEmissions": 4.7,
+            "monthOverMonthEmissionsChangeRatio": 0.0851,
+            "monthlyEmissionsChangeValue": 0.4,
+            "date": "2024-04-01",
+            "carbonIntensity": 21
+          },
+          {
+            "dataType": "MonthlySummaryData",
+            "latestMonthEmissions": 4.95,
+            "previousMonthEmissions": 4.6,
+            "monthOverMonthEmissionsChangeRatio": 0.0761,
+            "monthlyEmissionsChangeValue": 0.35,
+            "date": "2024-03-01",
+            "carbonIntensity": 20
+          }
+        ]
+      }
+    }
+  }
+}
