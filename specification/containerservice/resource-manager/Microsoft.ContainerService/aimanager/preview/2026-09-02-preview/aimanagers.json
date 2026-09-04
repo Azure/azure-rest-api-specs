@@ -940,15 +940,6 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CalculateCostRequest"
-            }
           }
         ],
         "responses": {
@@ -2529,9 +2520,10 @@
             "create"
           ]
         },
-        "totalWeightSize": {
-          "type": "string",
-          "description": "The total size of the model weights. eg `28.7Gi`. Required if the base model is not publicly accessible on HuggingFace.",
+        "totalWeightSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total size of the model weights in bytes. eg `28000000000`. Required if the base model is not publicly accessible on HuggingFace.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3338,11 +3330,7 @@
         },
         "credential": {
           "$ref": "#/definitions/CredentialValue",
-          "description": "Credential the platform uses to authenticate to the source. Optional for public sources (e.g. ungated Hugging Face models).",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
+          "description": "Credential the platform uses to authenticate to the source. Optional for public sources (e.g. ungated Hugging Face models)."
         },
         "microsoftFoundry": {
           "$ref": "#/definitions/MicrosoftFoundrySource",

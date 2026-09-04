@@ -73,8 +73,8 @@ model BaseModelReference {
   id: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The total size of the model weights. eg `28.7Gi`. Required if the base model is not publicly accessible on HuggingFace.")
-  totalWeightSize?: string;
+  @doc("The total size of the model weights in bytes. eg `28000000000`. Required if the base model is not publicly accessible on HuggingFace.")
+  totalWeightSizeBytes?: int64;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "config.json is opaque upstream JSON"
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -124,7 +124,7 @@ interface CustomAIModels {
   @action("calculateCost")
   calculateCost is ArmResourceActionSync<
     CustomAIModel,
-    CalculateCostRequest,
+    void,
     ArmResponse<CalculateCostResponse>
   >;
 }

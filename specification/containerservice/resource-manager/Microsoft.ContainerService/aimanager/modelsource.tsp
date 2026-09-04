@@ -54,7 +54,6 @@ model ModelSourceProperties {
   @doc("An optional, free-form description of the source.")
   description?: string;
 
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("Credential the platform uses to authenticate to the source. Optional for public sources (e.g. ungated Hugging Face models).")
   credential?: CredentialValue;
 
