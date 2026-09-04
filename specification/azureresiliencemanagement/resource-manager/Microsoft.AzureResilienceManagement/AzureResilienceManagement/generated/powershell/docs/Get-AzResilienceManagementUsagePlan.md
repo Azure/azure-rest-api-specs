@@ -28,7 +28,7 @@ Get-AzResilienceManagementUsagePlan -ResourceGroupName <String> -SubscriptionId 
 Get-AzResilienceManagementUsagePlan -InputObject <IResilienceManagementIdentity> [<CommonParameters>]
 ```
 
-### List1
+### ListByResourceGroup
 ```
 Get-AzResilienceManagementUsagePlan -ResourceGroupName <String> -SubscriptionId <String> [<CommonParameters>]
 ```
@@ -83,7 +83,7 @@ The name is case insensitive.
 
 ```yaml
 Type: System.String
-Parameter Sets: Get, List1
+Parameter Sets: Get, ListByResourceGroup
 Aliases:
 
 Required: True
@@ -99,7 +99,7 @@ The value must be an UUID.
 
 ```yaml
 Type: System.String
-Parameter Sets: Get, List, List1
+Parameter Sets: Get, List, ListByResourceGroup
 Aliases:
 
 Required: True
