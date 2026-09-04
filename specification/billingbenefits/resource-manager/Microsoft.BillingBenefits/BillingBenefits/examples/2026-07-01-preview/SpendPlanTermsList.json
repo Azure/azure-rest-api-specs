@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "spendPlanName": "sampleSpendPlan",
+    "resourceGroupName": "Test-Finance",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+            "type": "Microsoft.BillingBenefits/spendPlans/terms",
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/Test-Finance/providers/Microsoft.BillingBenefits/spendPlans/sampleSpendPlan/terms/a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+            "properties": {
+              "systemId": "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+              "term": "P1Y",
+              "commitment": {
+                "grain": "FullTerm",
+                "currencyCode": "USD",
+                "amount": 12000.0
+              },
+              "billingPlan": "P1M",
+              "productCode": "e5f2c8a1-3b9d-4c6e-8f1a-9d2b4e6f8a01",
+              "startAt": "2025-06-04T00:00:00Z",
+              "endAt": "2026-06-04T00:00:00Z"
+            },
+            "systemData": {
+              "createdAt": "2025-06-04T01:01:01.1075056Z",
+              "createdByType": "User",
+              "lastModifiedAt": "2026-06-04T01:01:01.1075056Z",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "f4a2c9e1-7b3d-4a6f-8e1c-2d5b4f6a8c03",
+            "type": "Microsoft.BillingBenefits/spendPlans/terms",
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/Test-Finance/providers/Microsoft.BillingBenefits/spendPlans/sampleSpendPlan/terms/f4a2c9e1-7b3d-4a6f-8e1c-2d5b4f6a8c03",
+            "properties": {
+              "systemId": "f4a2c9e1-7b3d-4a6f-8e1c-2d5b4f6a8c03",
+              "term": "P3Y",
+              "commitment": {
+                "grain": "FullTerm",
+                "currencyCode": "USD",
+                "amount": 36000.0
+              },
+              "billingPlan": "P1M",
+              "productCode": "e5f2c8a1-3b9d-4c6e-8f1a-9d2b4e6f8a01",
+              "startAt": "2026-06-04T00:00:00Z",
+              "endAt": "2029-06-04T00:00:00Z"
+            },
+            "systemData": {
+              "createdAt": "2026-06-04T01:01:01.1075056Z",
+              "createdByType": "User",
+              "lastModifiedAt": "2026-06-04T01:01:01.1075056Z",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SpendPlanTerms_ListByParent",
+  "title": "SpendPlanTermsList"
+}
