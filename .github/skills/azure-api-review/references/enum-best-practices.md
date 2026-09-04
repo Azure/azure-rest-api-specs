@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - Azure REST API Guidelines (vNext) — Enums
        - ARM Wiki: api_contracts/guidelines/api_best_practices_and_design_choices.md (RPC-BestPractice-10, RPC-BestPractice-12)
@@ -17,7 +17,6 @@ Enums Over Booleans" below.
 **Authoritative references:**
 
 - [Azure REST API Guidelines -- Enums & SDKs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#enums--sdks-client-libraries)
-- [Azure Resource Provider Contract -- Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
 - [TypeSpec Azure -- no-enum rule](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum)
 
 ---

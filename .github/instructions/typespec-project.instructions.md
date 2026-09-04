@@ -2,6 +2,8 @@
 applyTo: "specification/**/*.tsp"
 ---
 
+<!-- Upstream alignment: 2026-08-15 -->
+
 # TypeSpec Project Instructions
 
 Before creating or initializing a TypeSpec project, you must know your
@@ -98,12 +100,13 @@ A TypeSpec project **MUST NOT** contain:
 
 - Every service **MUST** have a security definition (`@useAuth`). See:
   [Security definitions in TypeSpec][security-definitions]. The
-  `@useAuth` decorator **MUST** be defined exactly ONCE, above the
-  `@server` definition. ARM services use Azure AD OAuth2; data-plane
-  services may use OAuth2, API keys, or both.
-- All models, enums, unions, and operations **MUST** be declared under
-  the main namespace in `main.tsp`. The namespace **MUST** follow the
-  pattern `<Organization>.<ServiceName>` (e.g., `Azure.Compute`,
+  `@useAuth` decorator **MUST** be defined exactly once on the service
+  namespace. Its order relative to `@server` is not significant. ARM services
+  use Azure AD OAuth2; data-plane services may use OAuth2, API keys, or both.
+- All models, enums, unions, and operations **MUST** be declared under the main
+  service namespace. They may live in `main.tsp` or files such as `models.tsp`
+  and `operations.tsp` that `main.tsp` imports. The namespace **MUST** follow
+  the pattern `<Organization>.<ServiceName>` (e.g., `Azure.Compute`,
   `Microsoft.Storage`).
 - **DO NOT** declare types outside of a namespace.
 - **AVOID** adding new namespaces beyond the main service namespace.
@@ -258,14 +261,24 @@ model Widget {
 - **DO NOT** manually define `id`, `name`, `type`, `location`, `tags`,
   or `systemData` -- these come from the base types.
 - ARM tracked resources **MUST** define all standard CRUD operations
-  using ARM operation templates:
+  using ARM operation templates. Choose synchronous or asynchronous templates
+  to match actual runtime behavior:
   - `get` -- `ArmResourceRead<Resource>`
-  - `createOrUpdate` -- `ArmResourceCreateOrReplaceAsync<Resource>`
-  - `update` -- `ArmResourcePatchAsync<Resource, ResourceProperties>`
-    (or `ArmTagsPatchAsync`)
-  - `delete` -- `ArmResourceDeleteAsync<Resource>`
-  - `listByResourceGroup` -- `ArmResourceListByParent<Resource>`
-  - `listBySubscription` -- `ArmListBySubscription<Resource>`
+  - `createOrUpdate` -- `ArmResourceCreateOrReplaceSync<Resource>` or
+    `ArmResourceCreateOrReplaceAsync<Resource>`
+  - `update` -- preferably `ArmCustomPatchSync<Resource, PatchRequest>` or
+    `ArmCustomPatchAsync<Resource, PatchRequest>`; tags-only PATCH may use the
+    corresponding `ArmTagsPatch*` template
+  - `delete` -- `ArmResourceDeleteSync<Resource>` or
+    `ArmResourceDeleteWithoutOkAsync<Resource>`; do not use deprecated
+    `ArmResourceDeleteAsync`
+  - top-level tracked list by resource group --
+    `ArmResourceListByParent<Resource>`
+  - top-level tracked list by subscription --
+    `ArmListBySubscription<Resource>`
+  - nested resource list -- `ArmResourceListByParent<Resource>` under the
+    immediate parent; do not require additional resource-group/subscription
+    lists for the nested type
 - Every ARM resource provider **MUST** expose an `Operations` interface:
 
 ```tsp

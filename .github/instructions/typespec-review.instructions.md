@@ -2,7 +2,7 @@
 applyTo: "specification/**/*.tsp"
 ---
 
-<!-- Upstream alignment: 2026-04-15
+<!-- Upstream alignment: 2026-08-15
      This date is for maintainers of this file only -- it records when
      rules were last verified against upstream docs. No action is needed
      by spec authors or PR reviewers. The upstream documents always take
@@ -10,7 +10,7 @@ applyTo: "specification/**/*.tsp"
 
      Rules derived from:
        - Azure Resource Provider Contract (RPC) v1.0
-         https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0
+         https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10
        - Azure REST API Guidelines (vNext)
          https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
        - TypeSpec Azure library docs
@@ -185,6 +185,19 @@ See the canonical contract in [`.github/skills/azure-api-review/references/revie
 - Nested resources **MUST** define a list operation under their parent.
 - **DO NOT** embed nested resource data inline in the parent resource
   model.
+
+### 2.5a Check Name Availability (CNA-002, CNA-003, CNA-004)
+
+- Prefer the standard `checkGlobalNameAvailability`,
+  `checkLocalNameAvailability`, or `checkNameAvailability` ARM templates.
+- The request contract includes `name` and fully qualified resource `type`; the
+  response includes `nameAvailable`, with `reason` and `message` when the name
+  is unavailable.
+- Standard template/common-type reuse is a Suggestion, not a requirement, when
+  a custom request and response are shape-compatible (CNA-003).
+- A custom request `name` string must carry validation equivalent to the target
+  resource name rules, including an allowlist pattern and maximum length
+  (CNA-004).
 
 ### 2.6 ARM POST Actions
 
@@ -393,8 +406,11 @@ When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifie
 
 - TypeSpec with the Azure TypeSpec libraries (`@azure-tools/typespec-azure-core`, `@azure-tools/typespec-azure-resource-manager`, and related packages) is **required** for all new API versions, both control plane and data plane. The full rule definition is in [`openapi-review.instructions.md` §2A](./openapi-review.instructions.md) (rule ID `TSP-REQUIRED-V1`).
 - Brownfield services were required to complete migration to TypeSpec by March 30, 2026.
-- Updates to handwritten OpenAPI inside **existing** API version directories remain permitted; only new API versions must use TypeSpec.
-- A deterministic CI check to block non-compliant PRs is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, this rule is enforced by the ARM API Reviewer agent.
+- Existing handwritten OpenAPI directories are out of scope for
+  `TSP-REQUIRED-V1`, but remain subject to published-version immutability and
+  compatibility rules.
+- Current CI does not deterministically enforce this exact new-version
+  condition, so the ARM API Reviewer applies it directly.
 
 ---
 
@@ -436,7 +452,7 @@ When reviewing TypeSpec files, verify:
 - ✅ `@added` version targeting is correct — features don't leak into earlier API version outputs
 - ✅ TypeSpec conversion PRs: no API changes (horizontal only); generated OpenAPI matches original
 - ✅ TypeSpec conversion PRs: `swagger-to-sdk` entries removed; `readme.{language}.md` files deleted
-- ✅ New API versions use TypeSpec source (TSP-REQUIRED-V1) — updates to existing handwritten OpenAPI remain permitted
+- ✅ New API versions use TypeSpec source (TSP-REQUIRED-V1); existing handwritten directories remain subject to normal immutability and compatibility rules
 - ✅ No polymorphic-format properties — use separate typed properties or discriminated unions
 - ✅ Numeric properties use numeric types, not string (TSP-NUMERIC-TYPE)
 - ✅ No `Record<>` usage when typed models can be defined

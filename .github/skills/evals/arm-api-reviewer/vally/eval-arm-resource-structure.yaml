@@ -10,6 +10,15 @@ description: |
 environment:
   skills:
     - "../../../azure-api-review"
+  files:
+    - src: "../../../../instructions/arm-api-review.instructions.md"
+      dest: ".github/instructions/arm-api-review.instructions.md"
+    - src: "../../../../instructions/openapi-review.instructions.md"
+      dest: ".github/instructions/openapi-review.instructions.md"
+    - src: "../../../azure-api-review/references/tracked-resource-lifecycle.md"
+      dest: ".github/skills/azure-api-review/references/tracked-resource-lifecycle.md"
+    - src: "../../../../../specification/common-types/resource-management/v5/types.json"
+      dest: "specification/common-types/resource-management/v5/types.json"
 
 tags:
   area: arm-api-reviewer
@@ -17,8 +26,8 @@ tags:
 defaults:
   runs: 1
   timeout: "300s"
-  model: gpt-5.4
-  judge_model: gpt-5.4
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -111,3 +120,111 @@ stimuli:
       - Flagged the inline Widget definition (id, name, type, location, tags) — should use allOf with common-types TrackedResource $ref instead of redefining envelope properties
       - Flagged the custom ErrorResponse/ErrorDetail — should reference common-types ErrorResponse
       - Flagged the inline SubscriptionIdParameter, ResourceGroupNameParameter, and ApiVersionParameter — should reference common-types parameters
+
+  # 010004 — Custom collection GET parameter is Warning, not Blocking
+  - name: collection-custom-query-parameter-warning
+    tags:
+      issue: "45675"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/collection-custom-query-parameter.json"
+          dest: "specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json"
+    prompt: >
+      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and
+      `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`.
+      Do not edit any file. Review only the `Widgets_List` collection GET query
+      parameters in this ARM OpenAPI file. Classify the custom `region` query
+      parameter under the applicable ARM RPC rule. Return the standard review
+      finding with its rule ID and severity.
+
+      File: specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "custom collection parameter is Warning"
+        config:
+          pattern: '(?is)(?:🟠\s*Warning|\bWarning\b).{0,500}(?:region|RPC-Uri-V1-09)|(?:region|RPC-Uri-V1-09).{0,500}(?:🟠\s*Warning|\bWarning\b)'
+      - type: output-not-matches
+        name: "custom collection parameter is not a Blocking finding"
+        config:
+          pattern: '(?is)\*\*\[(?:NEW|EXISTING)\]\s*🔴\s*Blocking.{0,500}(?:region|RPC-Uri-V1-09)'
+      - type: output-contains
+        name: "suggests standard filter"
+        config:
+          substring: "$filter"
+      - type: prompt
+    rubric:
+      - The custom `region` collection GET parameter is reported as Warning, never Blocking
+      - The finding cites Recommended rule `RPC-Uri-V1-09`
+      - The suggested fix uses `$filter` when it can express the same filtering operation
+
+  # 010005 — Point GET custom parameter remains Blocking
+  - name: point-get-custom-query-parameter-blocking
+    tags:
+      issue: "45675"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/point-custom-query-parameter.json"
+          dest: "specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json"
+    prompt: >
+      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and
+      `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`.
+      Do not edit any file. Review only the `Widgets_Get` point GET query
+      parameters in this ARM OpenAPI file. Classify the custom `expandDetails`
+      query parameter under the applicable ARM RPC rule. Return the standard
+      review finding with its rule ID and severity.
+
+      File: specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "point GET parameter is Blocking"
+        config:
+          pattern: '(?is)(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:expandDetails|RPC-Get-V1-08)|(?:expandDetails|RPC-Get-V1-08).{0,500}(?:🔴\s*Blocking|\bBlocking\b)'
+      - type: output-contains
+        name: "point GET rule cited"
+        config:
+          substring: "RPC-Get-V1-08"
+      - type: prompt
+    rubric:
+      - The `expandDetails` parameter is a Blocking point GET violation
+      - The finding cites `RPC-Get-V1-08`
+      - The allowance for collection paging parameters is not applied to point GET
+
+  # 010006 — Incomplete inline systemData shape is Blocking
+  - name: incomplete-inline-systemdata-blocking
+    tags:
+      audit: "2026-08-15"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/inline-systemdata.json"
+          dest: "specification/systemdatasvc/resource-manager/Microsoft.SystemDataTest/stable/2025-01-01/systemdata.json"
+    prompt: >
+      Review only the `systemData` property and `InlineSystemData` definition in
+      this ARM resource OpenAPI file. Determine whether its shape matches the
+      canonical ARM systemData contract. Common-types reuse is recommended but
+      not mandatory when an inline shape is fully compatible. Do not edit the
+      file; return the standard finding with severity and fix.
+
+      File: specification/systemdatasvc/resource-manager/Microsoft.SystemDataTest/stable/2025-01-01/systemdata.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "incomplete systemData shape is Blocking"
+        config:
+          pattern: '(?is)(?:systemData|InlineSystemData).{0,500}(?:🔴\s*Blocking|\bBlocking\b)|(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:systemData|InlineSystemData)'
+      - type: output-matches
+        name: "canonical systemData shape required"
+        config:
+          pattern: "(?is)(?:systemData).{0,400}(?:createdByType|lastModifiedBy|canonical|common.?types)|(?:createdByType|lastModifiedBy|canonical|common.?types).{0,400}(?:systemData)"
+      - type: prompt
+    rubric:
+      - The incomplete inline `systemData` shape is Blocking because it does not match the canonical ARM contract
+      - The fix adds the missing canonical fields or uses the recommended common-types definition
+      - The finding does not claim that every compatible inline definition is forbidden

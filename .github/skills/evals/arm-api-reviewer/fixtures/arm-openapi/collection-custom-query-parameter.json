@@ -1,0 +1,78 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Custom Collection Parameter Test",
+    "version": "2025-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "produces": ["application/json"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PagingTest/widgets": {
+      "get": {
+        "operationId": "Widgets_List",
+        "description": "Lists widgets with a custom collection query parameter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filters widgets to one Azure region."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The widget collection.",
+            "schema": { "$ref": "#/definitions/WidgetListResult" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "description": "A widget summary.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The widget name."
+        }
+      }
+    },
+    "WidgetListResult": {
+      "type": "object",
+      "description": "A page of widgets.",
+      "required": ["value"],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The widgets in this page.",
+          "items": { "$ref": "#/definitions/Widget" },
+          "x-ms-identifiers": ["name"]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL for the next page."
+        }
+      }
+    }
+  }
+}

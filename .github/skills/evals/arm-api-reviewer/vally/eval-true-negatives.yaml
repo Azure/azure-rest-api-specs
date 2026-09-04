@@ -11,6 +11,11 @@ description: |
 environment:
   skills:
     - "../../../azure-api-review"
+  files:
+    - src: "../../../../instructions/arm-api-review.instructions.md"
+      dest: ".github/instructions/arm-api-review.instructions.md"
+    - src: "../../../azure-api-review/references/tracked-resource-lifecycle.md"
+      dest: ".github/skills/azure-api-review/references/tracked-resource-lifecycle.md"
 
 tags:
   area: arm-api-reviewer
@@ -18,8 +23,8 @@ tags:
 defaults:
   runs: 1
   timeout: "300s"
-  model: gpt-5.4
-  judge_model: gpt-5.4
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -33,6 +38,18 @@ stimuli:
           dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
         - src: "../fixtures/examples/example-clean.json"
           dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
+        - src: "../fixtures/examples/example-clean-create-or-update.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json"
+        - src: "../fixtures/examples/example-clean-update.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Update.json"
+        - src: "../fixtures/examples/example-clean-delete.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Delete.json"
+        - src: "../fixtures/examples/example-clean-list-by-resource-group.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_ListByResourceGroup.json"
+        - src: "../fixtures/examples/example-clean-list-by-subscription.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_ListBySubscription.json"
+        - src: "../fixtures/examples/example-clean-operations-list.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Operations_List.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification file for
       compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
@@ -106,3 +123,38 @@ stimuli:
       - The agent MUST NOT flag missing location, missing tags, missing ListBySubscription, missing ListByResourceGroup, or missing resource move as violations — these rules apply only to tracked resources, not proxy resources
       - The proxy resource correctly implements PUT, GET, DELETE, and a list-by-parent operation with x-ms-pageable
       - Minor suggestions are acceptable and do not affect the grade
+
+  # 090004 — RPC paging parameters on collection GET are valid
+  - name: collection-paging-parameters-no-finding
+    tags:
+      issue: "45675"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/collection-paging-parameters.json"
+          dest: "specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json"
+    prompt: >
+      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and
+      `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`.
+      Do not edit any file. Review only the `Widgets_List` collection GET query
+      parameters in this ARM OpenAPI file. Report any ARM RPC violation
+      involving `$top` or `$skipToken`; otherwise state that these paging
+      parameters are allowed.
+
+      File: specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no finding against RPC paging parameters"
+        config:
+          pattern: '(?is)\*\*\[(?:NEW|EXISTING)\]\s*(?:🔴|🟠|🔵|🟡).{0,500}(?:\$top|\$skipToken)'
+      - type: output-matches
+        name: "paging parameters recognized as allowed"
+        config:
+          pattern: '(?is)(?:\$top|\$skipToken).{0,200}(?:allow|valid|permitted|RPC.*paging)'
+      - type: prompt
+    rubric:
+      - "`$top` and `$skipToken` are recognized as RPC-defined collection paging parameters"
+      - No finding is emitted against either parameter at any severity
+      - The response does not cite the nonexistent `RPC-Get-V1-15`

@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - ARM Wiki: WhatIf.md, WhatIfNoise.md, WhatIfNoiseFix.md
        - ARM Wiki: preflight.md, PreflightFAQ.md, PreflightImplementation.md
@@ -18,7 +18,7 @@ deployments, noisy "what would change" output, and preflight failures.
 - [ARM Wiki — What-If](https://armwiki.azurewebsites.net/api_contracts/WhatIf.html)
 - [ARM Wiki — What-If Noise](https://armwiki.azurewebsites.net/api_contracts/WhatIfNoise.html)
 - [ARM Wiki — Preflight](https://armwiki.azurewebsites.net/api_contracts/preflight.html)
-- [Azure Resource Provider Contract — PUT Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/put-resource.md)
+- [Azure Resource Provider Contract — PUT Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/put-resource)
 
 ---
 
@@ -83,7 +83,7 @@ discontinue it in new API versions.
 ### WHATIF-005: Service Must Reject Unknown Properties
 
 > This rule is defined as **OAPI018** in
-> `arm-api-review.instructions.md` §8.18. It is listed here because
+> `arm-api-review.instructions.md` §8.17. It is listed here because
 > silently discarding unknown properties is a common source of What-If
 > noise (the GET response differs from the PUT request).
 
@@ -93,10 +93,10 @@ The following existing rules also prevent What-If noise:
 
 | Rule    | Reference File         | What-If Impact                          |
 | ------- | ---------------------- | --------------------------------------- |
-| OAPI026 | arm-api-review §8.17   | Value normalization → false differences |
-| OAPI024 | arm-api-review §8.16   | Array reordering → false differences    |
-| OAPI025 | arm-api-review §8.14   | Type normalization → false differences  |
-| OAPI022 | arm-api-review §8.15   | Non-static defaults → false diffs       |
+| OAPI026 | arm-api-review §8.16   | Value normalization → false differences |
+| OAPI024 | arm-api-review §8.15   | Array reordering → false differences    |
+| OAPI025 | field-ownership.md     | Type normalization → false differences  |
+| OAPI022 | arm-api-review §8.14   | Non-static defaults → false diffs       |
 | OAPI027 | property-mutability.md | Write-only properties → false creates   |
 
 ---
