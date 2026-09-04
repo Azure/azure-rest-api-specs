@@ -309,9 +309,9 @@ interface EvaluatorDiagnosticJobs {
       ...EvaluatorDiagnosticJobScopeParameters;
       ...WithOperationId;
 
-      @doc("The evaluator diagnostic job to create.")
+      @doc("The evaluator diagnostic job request.")
       @body
-      job: EvaluatorDiagnosticJob;
+      request: EvaluatorDiagnosticJobRequest;
     },
     JobCreatedResponse<EvaluatorDiagnosticJob>
   >;

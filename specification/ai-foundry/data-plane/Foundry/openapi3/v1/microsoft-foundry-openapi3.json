@@ -6423,11 +6423,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluatorDiagnosticJob"
+                "$ref": "#/components/schemas/EvaluatorDiagnosticJobRequest"
               }
             }
           },
-          "description": "The evaluator diagnostic job to create."
+          "description": "The evaluator diagnostic job request."
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -34141,8 +34141,7 @@
         "type": "object",
         "required": [
           "id",
-          "status",
-          "inputs"
+          "status"
         ],
         "properties": {
           "id": {
@@ -34164,10 +34163,6 @@
             "$ref": "#/components/schemas/OpenAI.Error",
             "description": "Error details — populated only on failure.",
             "readOnly": true
-          },
-          "inputs": {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticJobInputs",
-            "description": "The immutable caller-supplied diagnostic job inputs."
           }
         },
         "description": "A long-running evaluator diagnostic job.",
@@ -34177,7 +34172,7 @@
           ]
         }
       },
-      "EvaluatorDiagnosticJobInputs": {
+      "EvaluatorDiagnosticJobRequest": {
         "type": "object",
         "required": [
           "type"
@@ -34191,11 +34186,11 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "human_evaluator_agreement": "#/components/schemas/HumanEvaluatorAgreementDiagnosticJobInputs",
-            "rubric_comparison": "#/components/schemas/RubricComparisonDiagnosticJobInputs"
+            "human_evaluator_agreement": "#/components/schemas/HumanEvaluatorAgreementDiagnosticJobRequest",
+            "rubric_comparison": "#/components/schemas/RubricComparisonDiagnosticJobRequest"
           }
         },
-        "description": "Caller-supplied inputs for an evaluator diagnostic job.",
+        "description": "The request for an evaluator diagnostic job.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -36625,7 +36620,7 @@
           ]
         }
       },
-      "HumanEvaluatorAgreementDiagnosticJobInputs": {
+      "HumanEvaluatorAgreementDiagnosticJobRequest": {
         "type": "object",
         "required": [
           "type",
@@ -36654,10 +36649,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticJobInputs"
+            "$ref": "#/components/schemas/EvaluatorDiagnosticJobRequest"
           }
         ],
-        "description": "Inputs for a human-evaluator agreement diagnostic job.",
+        "description": "The request for a human-evaluator agreement diagnostic job.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -78237,7 +78232,7 @@
           ]
         }
       },
-      "RubricComparisonDiagnosticJobInputs": {
+      "RubricComparisonDiagnosticJobRequest": {
         "type": "object",
         "required": [
           "type",
@@ -78271,10 +78266,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/EvaluatorDiagnosticJobInputs"
+            "$ref": "#/components/schemas/EvaluatorDiagnosticJobRequest"
           }
         ],
-        "description": "Inputs for a rubric-comparison diagnostic job.",
+        "description": "The request for a rubric-comparison diagnostic job.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"

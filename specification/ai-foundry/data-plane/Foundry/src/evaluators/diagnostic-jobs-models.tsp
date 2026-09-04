@@ -716,18 +716,18 @@ model CompletedEvaluatorDiagnosticsPage {
   has_more: boolean;
 }
 
-@doc("Caller-supplied inputs for an evaluator diagnostic job.")
+@doc("The request for an evaluator diagnostic job.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model EvaluatorDiagnosticJobInputs {
+model EvaluatorDiagnosticJobRequest {
   @doc("The requested diagnostic calculation.")
   type: EvaluatorDiagnosticJobType;
 }
 
-@doc("Inputs for a human-evaluator agreement diagnostic job.")
+@doc("The request for a human-evaluator agreement diagnostic job.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model HumanEvaluatorAgreementDiagnosticJobInputs
-  extends EvaluatorDiagnosticJobInputs {
+model HumanEvaluatorAgreementDiagnosticJobRequest
+  extends EvaluatorDiagnosticJobRequest {
   type: EvaluatorDiagnosticJobType.human_evaluator_agreement;
 
   @doc("The exact immutable evaluator version to compare with human annotations.")
@@ -740,9 +740,10 @@ model HumanEvaluatorAgreementDiagnosticJobInputs
   evaluation_level?: EvaluationLevel;
 }
 
-@doc("Inputs for a rubric-comparison diagnostic job.")
+@doc("The request for a rubric-comparison diagnostic job.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-model RubricComparisonDiagnosticJobInputs extends EvaluatorDiagnosticJobInputs {
+model RubricComparisonDiagnosticJobRequest
+  extends EvaluatorDiagnosticJobRequest {
   type: EvaluatorDiagnosticJobType.rubric_comparison;
 
   @doc("The exact immutable baseline evaluator version.")
@@ -768,11 +769,5 @@ model EvaluatorDiagnosticJobResult {
 @doc("A long-running evaluator diagnostic job.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model EvaluatorDiagnosticJob {
-  ...OmitProperties<
-    JobLike<EvaluatorDiagnosticJobResult, EvaluatorDiagnosticJobInputs>,
-    "inputs"
-  >;
-
-  @doc("The immutable caller-supplied diagnostic job inputs.")
-  inputs: EvaluatorDiagnosticJobInputs;
+  ...OmitProperties<JobLike<EvaluatorDiagnosticJobResult>, "inputs">;
 }

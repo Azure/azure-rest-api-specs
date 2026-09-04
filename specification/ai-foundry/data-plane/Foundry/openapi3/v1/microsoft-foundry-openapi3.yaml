@@ -4299,8 +4299,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EvaluatorDiagnosticJob'
-        description: The evaluator diagnostic job to create.
+              $ref: '#/components/schemas/EvaluatorDiagnosticJobRequest'
+        description: The evaluator diagnostic job request.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -43671,7 +43671,6 @@ components:
       required:
         - id
         - status
-        - inputs
       properties:
         id:
           type: string
@@ -43689,14 +43688,11 @@ components:
           $ref: '#/components/schemas/OpenAI.Error'
           description: Error details — populated only on failure.
           readOnly: true
-        inputs:
-          $ref: '#/components/schemas/EvaluatorDiagnosticJobInputs'
-          description: The immutable caller-supplied diagnostic job inputs.
       description: A long-running evaluator diagnostic job.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    EvaluatorDiagnosticJobInputs:
+    EvaluatorDiagnosticJobRequest:
       type: object
       required:
         - type
@@ -43707,9 +43703,9 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          human_evaluator_agreement: '#/components/schemas/HumanEvaluatorAgreementDiagnosticJobInputs'
-          rubric_comparison: '#/components/schemas/RubricComparisonDiagnosticJobInputs'
-      description: Caller-supplied inputs for an evaluator diagnostic job.
+          human_evaluator_agreement: '#/components/schemas/HumanEvaluatorAgreementDiagnosticJobRequest'
+          rubric_comparison: '#/components/schemas/RubricComparisonDiagnosticJobRequest'
+      description: The request for an evaluator diagnostic job.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -45355,7 +45351,7 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    HumanEvaluatorAgreementDiagnosticJobInputs:
+    HumanEvaluatorAgreementDiagnosticJobRequest:
       type: object
       required:
         - type
@@ -45376,8 +45372,8 @@ components:
           $ref: '#/components/schemas/EvaluationLevel'
           description: The evaluation granularity. Required only when evaluator and dataset metadata do not resolve one unique shared level.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnosticJobInputs'
-      description: Inputs for a human-evaluator agreement diagnostic job.
+        - $ref: '#/components/schemas/EvaluatorDiagnosticJobRequest'
+      description: The request for a human-evaluator agreement diagnostic job.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -75472,7 +75468,7 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    RubricComparisonDiagnosticJobInputs:
+    RubricComparisonDiagnosticJobRequest:
       type: object
       required:
         - type
@@ -75497,8 +75493,8 @@ components:
           $ref: '#/components/schemas/EvaluationLevel'
           description: The evaluation granularity. Required only when evaluator and dataset metadata do not resolve one unique shared level.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnosticJobInputs'
-      description: Inputs for a rubric-comparison diagnostic job.
+        - $ref: '#/components/schemas/EvaluatorDiagnosticJobRequest'
+      description: The request for a rubric-comparison diagnostic job.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
