@@ -28,7 +28,7 @@ model ContainerImageProperties {
   /** Containerfile content to use to build the container image. Mutually exclusive with containerImageUri. */
   containerfile?: string;
 
-  /** The URI of a pre-built container image from an external registry. Mutually exclusive with containerfile. */
+  /** A pre-built container image reference from an external registry, such as registry/repository:tag or registry/repository\@sha256:digest. Mutually exclusive with containerfile. */
   containerImageUri?: string;
 
   /** The URL link of the container image to the Anyscale console. */

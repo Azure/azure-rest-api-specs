@@ -64,7 +64,7 @@ union JobState {
 
 /** The configuration of the job. */
 model JobConfig {
-  /** The URI of the Ray image to use for the job. */
+  /** The Ray container image reference to use for the job, such as registry/repository:tag or registry/repository\@sha256:digest. */
   imageUri?: string;
 
   /** The compute configuration for the job, either the name of predefined compute config or an inline compute configs object. */
@@ -73,13 +73,13 @@ model JobConfig {
   /** Command that will be run to execute the job, e.g. 'python main.py'. */
   entrypoint?: string;
 
-  /** The working directory that your code will run in. Must be a remote URI like an Azure blob object or git path. */
+  /** The remote archive location where your code will run, such as an abfss://, s3://, gs://, or https:// path. */
   workingDir?: string;
 
-  /** Python modules that will be installed along with your runtime env. These must be remote URIs. */
+  /** Remote locations of Python modules to install along with the runtime environment. */
   pyModules?: string[];
 
-  /** A list of pip requirements to install on top of the image. */
+  /** Pip package requirements to install on top of the image, such as package names, version specifiers, or requirements-file arguments. */
   pipRequirements?: string[];
 
   /** Environment variables to set. */

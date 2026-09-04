@@ -72,7 +72,7 @@ model ServiceDeploymentConfig {
   /** The compute config to use for the service. */
   computeConfig?: ComputeConfigSpecOrReference;
 
-  /** The URI of the container image to use for the service. */
+  /** The container image reference to use for the service, such as registry/repository:tag or registry/repository\@sha256:digest. */
   imageUri?: string;
 
   /** List of Ray Serve applications to run. At least one application must be specified. Each application must include an 'importPath'. See https://docs.ray.io/en/latest/serve/production-guide/config.html for the Ray Serve config format. */
@@ -228,7 +228,7 @@ model ServiceVersionDetail {
   /** The current state of this version. */
   currentState: ServiceVersionState;
 
-  /** The URI of the container image used by this version. */
+  /** The container image reference used by this version, such as registry/repository:tag or registry/repository\@sha256:digest. */
   imageUri: string;
 
   /** The ID of the compute configuration used by this version. */

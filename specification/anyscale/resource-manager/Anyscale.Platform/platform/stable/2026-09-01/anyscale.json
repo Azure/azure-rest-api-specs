@@ -3491,10 +3491,12 @@
         },
         "cloudStorageBucketName": {
           "type": "string",
+          "format": "uri",
           "description": "A fully qualified storage bucket name for cloud storage,\ne.g. s3://bucket-name, gs://bucket-name, or\nabfss://bucket-name"
         },
         "cloudStorageBucketEndpoint": {
           "type": "string",
+          "format": "uri",
           "description": "The cloud storage bucket endpoint"
         },
         "region": {
@@ -3565,10 +3567,12 @@
         },
         "cloudStorageBucketName": {
           "type": "string",
+          "format": "uri",
           "description": "A fully qualified storage bucket name for cloud storage,\ne.g. s3://bucket-name, gs://bucket-name, or\nabfss://bucket-name"
         },
         "cloudStorageBucketEndpoint": {
           "type": "string",
+          "format": "uri",
           "description": "The cloud storage bucket endpoint"
         },
         "anyscaleOperatorIamIdentity": {
@@ -3861,7 +3865,7 @@
         },
         "containerImageUri": {
           "type": "string",
-          "description": "The URI of a pre-built container image from an external registry. Mutually exclusive with containerfile."
+          "description": "A pre-built container image reference from an external registry, such as registry/repository:tag or registry/repository@sha256:digest. Mutually exclusive with containerfile."
         },
         "url": {
           "type": "string",
@@ -3907,7 +3911,7 @@
         },
         "containerImageUri": {
           "type": "string",
-          "description": "The URI of a pre-built container image from an external registry. Mutually exclusive with containerfile."
+          "description": "A pre-built container image reference from an external registry, such as registry/repository:tag or registry/repository@sha256:digest. Mutually exclusive with containerfile."
         }
       }
     },
@@ -3932,7 +3936,7 @@
       "properties": {
         "imageUri": {
           "type": "string",
-          "description": "The URI of the Ray image to use for the job."
+          "description": "The Ray container image reference to use for the job, such as registry/repository:tag or registry/repository@sha256:digest."
         },
         "computeConfig": {
           "$ref": "#/definitions/ComputeConfigSpecOrReference",
@@ -3944,18 +3948,18 @@
         },
         "workingDir": {
           "type": "string",
-          "description": "The working directory that your code will run in. Must be a remote URI like an Azure blob object or git path."
+          "description": "The remote archive location where your code will run, such as an abfss://, s3://, gs://, or https:// path."
         },
         "pyModules": {
           "type": "array",
-          "description": "Python modules that will be installed along with your runtime env. These must be remote URIs.",
+          "description": "Remote locations of Python modules to install along with the runtime environment.",
           "items": {
             "type": "string"
           }
         },
         "pipRequirements": {
           "type": "array",
-          "description": "A list of pip requirements to install on top of the image.",
+          "description": "Pip package requirements to install on top of the image, such as package names, version specifiers, or requirements-file arguments.",
           "items": {
             "type": "string"
           }
@@ -4489,7 +4493,7 @@
         },
         "imageUri": {
           "type": "string",
-          "description": "The URI of the container image to use for the service."
+          "description": "The container image reference to use for the service, such as registry/repository:tag or registry/repository@sha256:digest."
         },
         "applications": {
           "type": "array",
@@ -4688,7 +4692,7 @@
         },
         "imageUri": {
           "type": "string",
-          "description": "The URI of the container image used by this version."
+          "description": "The container image reference used by this version, such as registry/repository:tag or registry/repository@sha256:digest."
         },
         "computeConfig": {
           "$ref": "#/definitions/ComputeConfigSpecOrReference",
@@ -4876,7 +4880,7 @@
         },
         "imageUri": {
           "type": "string",
-          "description": "The URI of the Ray image to use for the workspace."
+          "description": "The Ray container image reference to use for the workspace, such as registry/repository:tag or registry/repository@sha256:digest."
         },
         "idleTerminationMinutes": {
           "type": "integer",
@@ -4967,7 +4971,7 @@
         },
         "imageUri": {
           "type": "string",
-          "description": "The URI of the Ray image to use for the workspace."
+          "description": "The Ray container image reference to use for the workspace, such as registry/repository:tag or registry/repository@sha256:digest."
         },
         "idleTerminationMinutes": {
           "type": "integer",

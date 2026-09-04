@@ -44,10 +44,10 @@ model CloudResourceProperties {
    * e.g. s3://bucket-name, gs://bucket-name, or
    * abfss://bucket-name@account.dfs.core.windows.net.
    */
-  cloudStorageBucketName: string;
+  cloudStorageBucketName: url;
 
   /** The cloud storage bucket endpoint */
-  cloudStorageBucketEndpoint: string;
+  cloudStorageBucketEndpoint: url;
 
   /**
    * The cloud provider region of this cloud resource, e.g. us-west-2. For Generic clouds this is a
