@@ -45,7 +45,6 @@ model AgreementProperties {
   /** Date from which the agreement is effective (UTC). Present once accepted. */
   @visibility(Lifecycle.Read)
   effectiveDate?: utcDateTime;
-
 }
 
 /** The current status of the agreement. */
