@@ -158,7 +158,7 @@ model ConsolePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  ...Foundations.ArmTagsProperty;
+  ...TagsParameter;
 }
 
 /**
