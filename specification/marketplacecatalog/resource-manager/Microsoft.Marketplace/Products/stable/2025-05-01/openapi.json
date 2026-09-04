@@ -910,6 +910,18 @@
           "type": "integer",
           "format": "int32",
           "description": "Display rank"
+        },
+        "prerequisiteConstraints": {
+          "$ref": "#/definitions/PrerequisiteConstraints",
+          "description": "Prerequisite constraints for the availability"
+        },
+        "subscriptionStatusConstraints": {
+          "$ref": "#/definitions/SubscriptionStatusConstraints",
+          "description": "Subscription status eligibility constraints for the availability"
+        },
+        "pricingBenefit": {
+          "$ref": "#/definitions/PricingBenefit",
+          "description": "Pricing benefit applicable to the availability (e.g. percent discounts)"
         }
       },
       "required": [
@@ -937,6 +949,14 @@
         "termDuration": {
           "type": "string",
           "description": "Term duration. Examples: 'P1M' (1 month), 'P30D' (30 days)"
+        },
+        "meterType": {
+          "type": "string",
+          "description": "Meter type"
+        },
+        "baseProductCode": {
+          "type": "string",
+          "description": "Base product code"
         }
       }
     },
@@ -1196,6 +1216,20 @@
         }
       }
     },
+    "LookbackWindow": {
+      "type": "object",
+      "description": "Lookback window for a prerequisite constraint",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Lookback window type"
+        },
+        "period": {
+          "type": "string",
+          "description": "Lookback window period"
+        }
+      }
+    },
     "MarketingMaterial": {
       "type": "object",
       "description": "Includes links to the learning and marketing materials as configured by the publisher",
@@ -1395,7 +1429,7 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing\n- `ContactPublisher` - Pricing is not listed and the customer must contact the publisher to obtain pricing details\n- `Freemium` - Free base tier with paid upgrades, applies to Microsoft managed products\n- `RequestPrivateOffer` - Customer must request a private offer to obtain pricing, applies to Marketplace products\n- `PrivateOffer` - Indicates the plan is a promo plan tied to a private offer",
           "items": {
             "type": "string"
           }
@@ -1721,7 +1755,7 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing\n- `ContactPublisher` - Pricing is not listed and the customer must contact the publisher to obtain pricing details\n- `Freemium` - Free base tier with paid upgrades, applies to Microsoft managed products\n- `RequestPrivateOffer` - Customer must request a private offer to obtain pricing, applies to Marketplace products\n- `PrivateOffer` - Indicates the plan is a promo plan tied to a private offer",
           "items": {
             "type": "string"
           }
@@ -1765,6 +1799,66 @@
       "required": [
         "planType"
       ]
+    },
+    "PrerequisiteConstraint": {
+      "type": "object",
+      "description": "A single prerequisite constraint",
+      "properties": {
+        "products": {
+          "type": "array",
+          "description": "Prerequisite products",
+          "items": {
+            "$ref": "#/definitions/PrerequisiteProduct"
+          },
+          "x-ms-identifiers": []
+        },
+        "seatConstraint": {
+          "$ref": "#/definitions/MinMaxSeatsConstraint",
+          "description": "Seat constraint"
+        },
+        "lookbackWindow": {
+          "$ref": "#/definitions/LookbackWindow",
+          "description": "Lookback window"
+        }
+      }
+    },
+    "PrerequisiteConstraints": {
+      "type": "object",
+      "description": "Prerequisite constraints for the availability",
+      "properties": {
+        "mustHaveAll": {
+          "$ref": "#/definitions/PrerequisiteConstraint",
+          "description": "Constraint requiring all of the specified prerequisites to be met"
+        },
+        "mustHaveAny": {
+          "$ref": "#/definitions/PrerequisiteConstraint",
+          "description": "Constraint requiring any of the specified prerequisites to be met"
+        },
+        "mustHaveNone": {
+          "$ref": "#/definitions/PrerequisiteConstraint",
+          "description": "Constraint requiring none of the specified prerequisites to be met"
+        }
+      }
+    },
+    "PrerequisiteProduct": {
+      "type": "object",
+      "description": "A prerequisite product",
+      "properties": {
+        "basePlanId": {
+          "type": "string",
+          "description": "Base plan id"
+        },
+        "minSeats": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum seats"
+        },
+        "maxSeats": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum seats"
+        }
+      }
     },
     "PrerequisiteSet": {
       "type": "object",
@@ -1860,6 +1954,26 @@
         "msrp"
       ]
     },
+    "PricingBenefit": {
+      "type": "object",
+      "description": "Pricing benefit applicable to the availability (e.g. percent discounts)",
+      "properties": {
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Rank of the pricing benefit"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the pricing benefit (e.g. PercentDiscount)"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Value of the pricing benefit (e.g. 0.2 for a 20% discount)"
+        }
+      }
+    },
     "ProductBase": {
       "type": "object",
       "description": "Base model containing common product attributes shared between ProductSummary and ProductDetails",
@@ -1936,7 +2050,7 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing\n- `ContactPublisher` - Pricing is not listed and the customer must contact the publisher to obtain pricing details\n- `Freemium` - Free base tier with paid upgrades, applies to Microsoft managed products\n- `RequestPrivateOffer` - Customer must request a private offer to obtain pricing, applies to Marketplace products\n- `PrivateOffer` - Indicates the plan is a promo plan tied to a private offer",
           "items": {
             "type": "string"
           }
@@ -2038,6 +2152,10 @@
             "$ref": "#/definitions/Attribute"
           },
           "x-ms-identifiers": []
+        },
+        "offeringType": {
+          "type": "string",
+          "description": "Offering type of product family Offers"
         }
       },
       "required": [
@@ -2121,7 +2239,7 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing\n- `ContactPublisher` - Pricing is not listed and the customer must contact the publisher to obtain pricing details\n- `Freemium` - Free base tier with paid upgrades, applies to Microsoft managed products\n- `RequestPrivateOffer` - Customer must request a private offer to obtain pricing, applies to Marketplace products\n- `PrivateOffer` - Indicates the plan is a promo plan tied to a private offer",
           "items": {
             "type": "string"
           }
@@ -2223,6 +2341,10 @@
             "$ref": "#/definitions/Attribute"
           },
           "x-ms-identifiers": []
+        },
+        "offeringType": {
+          "type": "string",
+          "description": "Offering type of product family Offers"
         },
         "videos": {
           "type": "array",
@@ -2363,6 +2485,10 @@
         "hasAddOns": {
           "type": "boolean",
           "description": "Indicates that the SKU has add-ons"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code"
         }
       },
       "required": [
@@ -2478,7 +2604,7 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing\n- `ContactPublisher` - Pricing is not listed and the customer must contact the publisher to obtain pricing details\n- `Freemium` - Free base tier with paid upgrades, applies to Microsoft managed products\n- `RequestPrivateOffer` - Customer must request a private offer to obtain pricing, applies to Marketplace products\n- `PrivateOffer` - Indicates the plan is a promo plan tied to a private offer",
           "items": {
             "type": "string"
           }
@@ -2580,6 +2706,10 @@
             "$ref": "#/definitions/Attribute"
           },
           "x-ms-identifiers": []
+        },
+        "offeringType": {
+          "type": "string",
+          "description": "Offering type of product family Offers"
         },
         "plans": {
           "type": "array",
@@ -2741,6 +2871,19 @@
         "alternativePlanId": {
           "type": "string",
           "description": "A value indicating an ID of an alternative plan of the same offer"
+        }
+      }
+    },
+    "SubscriptionStatusConstraints": {
+      "type": "object",
+      "description": "Subscription status eligibility constraints for the availability",
+      "properties": {
+        "requireAnyOf": {
+          "type": "array",
+          "description": "List of subscription statuses of which any must be satisfied",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
