@@ -1238,6 +1238,18 @@ alias ContentMD5ResponseHeader = {
   contentMD5?: bytes;
 };
 
+// ContentMD5ResponseHeaderBytes is to keep compat with Go.
+// see client.tsp @@alternateType(ContentMD5ResponseHeader.contentMD5, string, "go");
+// NOTE: replace with an override once it supports response types
+
+/** The Content-MD5 response header. */
+alias ContentMD5ResponseHeaderBytes = {
+  /** The MD5 hash of the content. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
+  @header("Content-MD5")
+  contentMD5?: bytes;
+};
+
 /** The x-ms-content-md5 response header (full file MD5). */
 alias XMsContentMD5ResponseHeader = {
   /** The MD5 hash of complete file stored in storage. */
