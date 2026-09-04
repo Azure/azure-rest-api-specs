@@ -126,6 +126,21 @@ using Microsoft.Storage;
   "csharp"
 );
 @@clientName(
+  BlobAccessPointConnectionTestResponse,
+  "BlobAccessPointConnectionTestResult",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointProposedConnectionTestRequest,
+  "BlobAccessPointProposedConnectionTestContent",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointConnectionTestRequest,
+  "BlobAccessPointConnectionTestContent",
+  "csharp"
+);
+@@clientName(
   ActiveDirectoryProperties,
   "StorageActiveDirectoryProperties",
   "csharp"

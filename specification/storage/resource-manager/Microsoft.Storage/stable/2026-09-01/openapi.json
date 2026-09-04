@@ -118,6 +118,12 @@
       "name": "ContextCacheContainers"
     },
     {
+      "name": "BlobAccessPointConfigurations"
+    },
+    {
+      "name": "BlobAccessPointConnectionTests"
+    },
+    {
       "name": "AdvancedPlatformMetrics"
     }
   ],
@@ -149,6 +155,9 @@
           }
         },
         "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          },
           "OperationsList": {
             "$ref": "./examples/OperationsList.json"
           }
@@ -1884,6 +1893,457 @@
             "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_Delete.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobAccessPointConfigurations": {
+      "get": {
+        "operationId": "BlobAccessPointConfigurations_ListByStorageAccount",
+        "tags": [
+          "BlobAccessPointConfigurations"
+        ],
+        "description": "List all Blob Access Point configurations in a Storage Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBlobAccessPointConfigurationsByStorageAccount": {
+            "$ref": "./examples/BlobAccessPointConfigurations_ListByStorageAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobAccessPointConfigurations/{blobAccessPointConfigurationName}": {
+      "get": {
+        "operationId": "BlobAccessPointConfigurations_Get",
+        "tags": [
+          "BlobAccessPointConfigurations"
+        ],
+        "description": "Get the specified Blob Access Point configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "blobAccessPointConfigurationName",
+            "in": "path",
+            "description": "The name of the Blob Access Point configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetBlobAccessPointConfiguration": {
+            "$ref": "./examples/BlobAccessPointConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BlobAccessPointConfigurations_Create",
+        "tags": [
+          "BlobAccessPointConfigurations"
+        ],
+        "description": "Creates or updates a Blob Access Point configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "blobAccessPointConfigurationName",
+            "in": "path",
+            "description": "The name of the Blob Access Point configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BlobAccessPointConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'BlobAccessPointConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateBlobAccessPointConfiguration": {
+            "$ref": "./examples/BlobAccessPointConfigurations_Create.json"
+          },
+          "CreateBlobAccessPointConfigurationWithAzureNetAppFilesPrivateLink": {
+            "$ref": "./examples/BlobAccessPointConfigurations_Create_AzureNetAppFilesPrivateLink.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/BlobAccessPointConfiguration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BlobAccessPointConfigurations_Update",
+        "tags": [
+          "BlobAccessPointConfigurations"
+        ],
+        "description": "Update a Blob Access Point configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "blobAccessPointConfigurationName",
+            "in": "path",
+            "description": "The name of the Blob Access Point configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConfigurationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateBlobAccessPointConfiguration": {
+            "$ref": "./examples/BlobAccessPointConfigurations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BlobAccessPointConfiguration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BlobAccessPointConfigurations_Delete",
+        "tags": [
+          "BlobAccessPointConfigurations"
+        ],
+        "description": "Delete a Blob Access Point configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "blobAccessPointConfigurationName",
+            "in": "path",
+            "description": "The name of the Blob Access Point configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteBlobAccessPointConfiguration": {
+            "$ref": "./examples/BlobAccessPointConfigurations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobAccessPointConfigurations/{blobAccessPointConfigurationName}/testExistingConnection": {
+      "post": {
+        "operationId": "BlobAccessPointConfigurations_TestExistingConnection",
+        "tags": [
+          "BlobAccessPointConfigurations"
+        ],
+        "description": "Test the connection configured on an existing Blob Access Point configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "blobAccessPointConfigurationName",
+            "in": "path",
+            "description": "The name of the Blob Access Point configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConnectionTestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConnectionTestResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BlobAccessPointConfigurationTestExistingConnection": {
+            "$ref": "./examples/BlobAccessPointConfigurations_TestExistingConnection.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BlobAccessPointConnectionTestResponse"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices": {
@@ -8678,6 +9138,88 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/testBlobAccessPointConfigurationProposedConnection": {
+      "post": {
+        "operationId": "BlobAccessPointConnectionTests_TestProposedConnection",
+        "tags": [
+          "BlobAccessPointConnectionTests"
+        ],
+        "description": "Test a proposed Blob Access Point connection before the configuration is created. The connection is validated in the context of the storage account in the request path, so no Blob Access Point configuration needs to exist beforehand.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointProposedConnectionTestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlobAccessPointConnectionTestResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BlobAccessPointTestProposedConnection": {
+            "$ref": "./examples/BlobAccessPointConnectionTests_TestProposedConnection.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BlobAccessPointConnectionTestResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -9315,6 +9857,37 @@
         ]
       }
     },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "AzureEntityResource": {
       "type": "object",
       "title": "Entity Resource",
@@ -9356,6 +9929,975 @@
       "required": [
         "directoryServiceOptions"
       ]
+    },
+    "BlobAccessPointAccessKeyAuthProperties": {
+      "type": "object",
+      "description": "S3 access-key authentication properties.",
+      "properties": {
+        "accessKeyId": {
+          "type": "string",
+          "description": "The access key ID.",
+          "minLength": 3
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The secret access key. This value is never returned by read or list operations.",
+          "minLength": 3,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "signingRegion": {
+          "type": "string",
+          "description": "The region used by the request-signing algorithm. Defaults to 'us-east-1' when not specified."
+        },
+        "hostOverride": {
+          "type": "string",
+          "description": "The host used when computing request signatures. The endpoint host is used by default."
+        }
+      },
+      "required": [
+        "accessKeyId",
+        "secretAccessKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessKey"
+    },
+    "BlobAccessPointAccessKeyAuthPropertiesUpdate": {
+      "type": "object",
+      "description": "S3 access-key authentication properties.",
+      "properties": {
+        "accessKeyId": {
+          "type": "string",
+          "description": "The access key ID.",
+          "minLength": 3
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The secret access key. This value is never returned by read or list operations.",
+          "minLength": 3,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "signingRegion": {
+          "type": "string",
+          "description": "The region used by the request-signing algorithm. Defaults to 'us-east-1' when not specified."
+        },
+        "hostOverride": {
+          "type": "string",
+          "description": "The host used when computing request signatures. The endpoint host is used by default."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessKey"
+    },
+    "BlobAccessPointAzureNetAppFilesSourceProperties": {
+      "type": "object",
+      "description": "An Azure NetApp Files backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionProperties",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthProperties",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "required": [
+        "connection",
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureNetAppFiles"
+    },
+    "BlobAccessPointAzureNetAppFilesSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "An Azure NetApp Files backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionPropertiesUpdate",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthPropertiesUpdate",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureNetAppFiles"
+    },
+    "BlobAccessPointCommvaultSourceProperties": {
+      "type": "object",
+      "description": "A Commvault backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionProperties",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthProperties",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "required": [
+        "connection",
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Commvault"
+    },
+    "BlobAccessPointCommvaultSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "A Commvault backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionPropertiesUpdate",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthPropertiesUpdate",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Commvault"
+    },
+    "BlobAccessPointConfiguration": {
+      "type": "object",
+      "description": "A BlobAccessPointConfiguration is a tracked Azure resource modeled as a sub-resource of a Storage Account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobAccessPointConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BlobAccessPointConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a BlobAccessPointConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BlobAccessPointConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/BlobAccessPointConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BlobAccessPointConfigurationProperties": {
+      "type": "object",
+      "description": "Details of a Blob Access Point configuration.",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "The system-generated unique identifier of the configuration.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/BlobAccessPointConfigurationState",
+          "description": "The configuration state. A configuration is created in the Active state when this value is not specified."
+        },
+        "description": {
+          "type": "string",
+          "description": "An arbitrary description of the Blob Access Point configuration.",
+          "maxLength": 250
+        },
+        "lastConnectionTestStatus": {
+          "$ref": "#/definitions/BlobAccessPointConnectionTestStatus",
+          "description": "The status of the most recent connection test.",
+          "readOnly": true
+        },
+        "lastConnectionTestTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the most recent connection test.",
+          "readOnly": true
+        },
+        "lastConnectionTestErrorMessage": {
+          "type": "string",
+          "description": "The normalized and redacted error from the most recent failed connection test.",
+          "readOnly": true
+        },
+        "source": {
+          "$ref": "#/definitions/BlobAccessPointSourceProperties",
+          "description": "Information about the backing data source."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    "BlobAccessPointConfigurationPropertiesUpdate": {
+      "type": "object",
+      "description": "Details of a Blob Access Point configuration.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/BlobAccessPointConfigurationState",
+          "description": "The configuration state. A configuration is created in the Active state when this value is not specified."
+        },
+        "description": {
+          "type": "string",
+          "description": "An arbitrary description of the Blob Access Point configuration.",
+          "maxLength": 250
+        },
+        "source": {
+          "$ref": "#/definitions/BlobAccessPointSourcePropertiesUpdate",
+          "description": "Information about the backing data source."
+        }
+      }
+    },
+    "BlobAccessPointConfigurationState": {
+      "type": "string",
+      "description": "The state of a Blob Access Point configuration.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "BlobAccessPointConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The Blob Access Point configuration is active."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "The Blob Access Point configuration is inactive."
+          }
+        ]
+      }
+    },
+    "BlobAccessPointConfigurationUpdate": {
+      "type": "object",
+      "description": "A BlobAccessPointConfiguration is a tracked Azure resource modeled as a sub-resource of a Storage Account.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/BlobAccessPointConfigurationPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "BlobAccessPointConnectionProperties": {
+      "type": "object",
+      "description": "Details for connecting to a backing data source.",
+      "properties": {
+        "connectionType": {
+          "$ref": "#/definitions/BlobAccessPointConnectionType",
+          "description": "The connection type. This value determines the remaining shape of the connection object."
+        }
+      },
+      "discriminator": "connectionType",
+      "required": [
+        "connectionType"
+      ]
+    },
+    "BlobAccessPointConnectionPropertiesUpdate": {
+      "type": "object",
+      "description": "Details for connecting to a backing data source.",
+      "properties": {
+        "connectionType": {
+          "$ref": "#/definitions/BlobAccessPointConnectionType",
+          "description": "The connection type. This value determines the remaining shape of the connection object."
+        }
+      },
+      "discriminator": "connectionType",
+      "required": [
+        "connectionType"
+      ]
+    },
+    "BlobAccessPointConnectionTestRequest": {
+      "type": "object",
+      "description": "The request used to test an existing Blob Access Point configuration.",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "The system-generated unique identifier of the Blob Access Point configuration, as returned by a read operation. This value must match the configuration named in the request path, and is required so that a configuration which was deleted and recreated under the same name is not tested by mistake.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        }
+      },
+      "required": [
+        "uniqueId"
+      ]
+    },
+    "BlobAccessPointConnectionTestResponse": {
+      "type": "object",
+      "description": "The result of testing a Blob Access Point configuration connection.",
+      "properties": {
+        "methodName": {
+          "type": "string",
+          "description": "The name of the request attempted against the backing data source.",
+          "minLength": 1
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "A normalized and redacted error message received from the backing data source. This value is empty when the connection test succeeds."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request ID associated with the request sent to the backing data source for validation.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "methodName",
+        "requestId"
+      ]
+    },
+    "BlobAccessPointConnectionTestStatus": {
+      "type": "string",
+      "description": "The status of the most recent connection test.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "BlobAccessPointConnectionTestStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The connection test succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The connection test failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "BlobAccessPointConnectionType": {
+      "type": "string",
+      "description": "The connection type used to reach a non-Azure backing data source.",
+      "enum": [
+        "Endpoint",
+        "PrivateLink"
+      ],
+      "x-ms-enum": {
+        "name": "BlobAccessPointConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Endpoint",
+            "value": "Endpoint",
+            "description": "Connect directly to a public or otherwise routable endpoint."
+          },
+          {
+            "name": "PrivateLink",
+            "value": "PrivateLink",
+            "description": "Connect through Azure Private Link."
+          }
+        ]
+      }
+    },
+    "BlobAccessPointDellOneFsSourceProperties": {
+      "type": "object",
+      "description": "A Dell OneFS backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionProperties",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthProperties",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "required": [
+        "connection",
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DellOneFs"
+    },
+    "BlobAccessPointDellOneFsSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "A Dell OneFS backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionPropertiesUpdate",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthPropertiesUpdate",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "DellOneFs"
+    },
+    "BlobAccessPointEndpointConnectionProperties": {
+      "type": "object",
+      "description": "A direct endpoint connection.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The backing endpoint, including its protocol, host, optional port, and optional path.",
+          "minLength": 4,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tlsVerification": {
+          "$ref": "#/definitions/BlobAccessPointTlsVerification",
+          "description": "TLS certificate verification behavior. Defaults to Perform when not specified."
+        }
+      },
+      "required": [
+        "endpoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointConnectionProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Endpoint"
+    },
+    "BlobAccessPointEndpointConnectionPropertiesUpdate": {
+      "type": "object",
+      "description": "A direct endpoint connection.",
+      "properties": {
+        "tlsVerification": {
+          "$ref": "#/definitions/BlobAccessPointTlsVerification",
+          "description": "TLS certificate verification behavior. Defaults to Perform when not specified."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointConnectionPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Endpoint"
+    },
+    "BlobAccessPointGenericS3SourceProperties": {
+      "type": "object",
+      "description": "Another S3-compatible backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionProperties",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthProperties",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "required": [
+        "connection",
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "S3Compatible"
+    },
+    "BlobAccessPointGenericS3SourcePropertiesUpdate": {
+      "type": "object",
+      "description": "Another S3-compatible backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionPropertiesUpdate",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthPropertiesUpdate",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "S3Compatible"
+    },
+    "BlobAccessPointNasuniSourceProperties": {
+      "type": "object",
+      "description": "A Nasuni backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionProperties",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthProperties",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "required": [
+        "connection",
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Nasuni"
+    },
+    "BlobAccessPointNasuniSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "A Nasuni backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionPropertiesUpdate",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthPropertiesUpdate",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Nasuni"
+    },
+    "BlobAccessPointNetAppOntapSourceProperties": {
+      "type": "object",
+      "description": "A NetApp ONTAP backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionProperties",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthProperties",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "required": [
+        "connection",
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "NetAppOntap"
+    },
+    "BlobAccessPointNetAppOntapSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "A NetApp ONTAP backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionPropertiesUpdate",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthPropertiesUpdate",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "NetAppOntap"
+    },
+    "BlobAccessPointPrivateLinkConnectionProperties": {
+      "type": "object",
+      "description": "A connection established through Azure Private Link.",
+      "properties": {
+        "privateLinkIdType": {
+          "$ref": "#/definitions/BlobAccessPointPrivateLinkIdType",
+          "description": "Indicates that privateLinkId contains an Azure resource ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "privateLinkId": {
+          "type": "string",
+          "description": "The Azure resource ID of the backing Private Link resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "privateLinkGroupId": {
+          "type": "string",
+          "description": "The Private Link group ID, when required by the backing resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "privateLinkLocation": {
+          "type": "string",
+          "description": "The Azure region in which the private endpoint is provisioned.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "The connection request message sent to the Private Link owner.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The backing endpoint as seen by the target of the Private Link.",
+          "minLength": 4,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tlsVerification": {
+          "$ref": "#/definitions/BlobAccessPointTlsVerification",
+          "description": "TLS certificate verification behavior. Defaults to Perform when not specified."
+        },
+        "privateEndpointName": {
+          "type": "string",
+          "description": "The name of the private endpoint created by Azure Storage.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "privateLinkIdType",
+        "privateLinkId",
+        "privateLinkLocation",
+        "requestMessage",
+        "endpoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointConnectionProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PrivateLink"
+    },
+    "BlobAccessPointPrivateLinkConnectionPropertiesUpdate": {
+      "type": "object",
+      "description": "A connection established through Azure Private Link.",
+      "properties": {
+        "tlsVerification": {
+          "$ref": "#/definitions/BlobAccessPointTlsVerification",
+          "description": "TLS certificate verification behavior. Defaults to Perform when not specified."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointConnectionPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "PrivateLink"
+    },
+    "BlobAccessPointPrivateLinkIdType": {
+      "type": "string",
+      "description": "The format used by a Private Link identifier.",
+      "enum": [
+        "ResourceId"
+      ],
+      "x-ms-enum": {
+        "name": "BlobAccessPointPrivateLinkIdType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceId",
+            "value": "ResourceId",
+            "description": "The identifier is an Azure resource ID."
+          }
+        ]
+      }
+    },
+    "BlobAccessPointProposedConnectionTestRequest": {
+      "type": "object",
+      "description": "The request used to test a proposed Blob Access Point configuration.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/BlobAccessPointSourceProperties",
+          "description": "Information about the backing data source whose connection is tested."
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    "BlobAccessPointQumuloSourceProperties": {
+      "type": "object",
+      "description": "A Qumulo backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionProperties",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthProperties",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "required": [
+        "connection",
+        "auth"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Qumulo"
+    },
+    "BlobAccessPointQumuloSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "A Qumulo backing source.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BlobAccessPointConnectionPropertiesUpdate",
+          "description": "Details for connecting to the backing data source. The connection target is fixed when the configuration is created; only the TLS verification behavior can be changed afterwards."
+        },
+        "auth": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthPropertiesUpdate",
+          "description": "Details for authenticating to the backing data source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobAccessPointSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Qumulo"
+    },
+    "BlobAccessPointRemoteAuthProperties": {
+      "type": "object",
+      "description": "Authentication properties for a non-Azure S3-compatible source.",
+      "properties": {
+        "authType": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthType",
+          "description": "The authentication type. This value determines the remaining shape of the authentication object."
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
+    },
+    "BlobAccessPointRemoteAuthPropertiesUpdate": {
+      "type": "object",
+      "description": "Authentication properties for a non-Azure S3-compatible source.",
+      "properties": {
+        "authType": {
+          "$ref": "#/definitions/BlobAccessPointRemoteAuthType",
+          "description": "The authentication type. This value determines the remaining shape of the authentication object."
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
+    },
+    "BlobAccessPointRemoteAuthType": {
+      "type": "string",
+      "description": "How Azure Storage authenticates to a non-Azure S3-compatible source.",
+      "enum": [
+        "AccessKey"
+      ],
+      "x-ms-enum": {
+        "name": "BlobAccessPointRemoteAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AccessKey",
+            "value": "AccessKey",
+            "description": "Authenticate with an S3 access key and secret access key."
+          }
+        ]
+      }
+    },
+    "BlobAccessPointSourceProperties": {
+      "type": "object",
+      "description": "Information about the data source exposed through a Blob Access Point.",
+      "properties": {
+        "sourceType": {
+          "$ref": "#/definitions/BlobAccessPointSourceType",
+          "description": "The source type. This value determines the remaining shape of the source object."
+        }
+      },
+      "discriminator": "sourceType",
+      "required": [
+        "sourceType"
+      ]
+    },
+    "BlobAccessPointSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "Information about the data source exposed through a Blob Access Point.",
+      "properties": {
+        "sourceType": {
+          "$ref": "#/definitions/BlobAccessPointSourceType",
+          "description": "The source type. This value determines the remaining shape of the source object."
+        }
+      },
+      "discriminator": "sourceType",
+      "required": [
+        "sourceType"
+      ]
+    },
+    "BlobAccessPointSourceType": {
+      "type": "string",
+      "description": "The type of the non-Azure S3-compatible data source exposed through the Blob Access Point.",
+      "enum": [
+        "NetAppOntap",
+        "AzureNetAppFiles",
+        "DellOneFs",
+        "Qumulo",
+        "Commvault",
+        "Nasuni",
+        "S3Compatible"
+      ],
+      "x-ms-enum": {
+        "name": "BlobAccessPointSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NetAppOntap",
+            "value": "NetAppOntap",
+            "description": "NetApp ONTAP."
+          },
+          {
+            "name": "AzureNetAppFiles",
+            "value": "AzureNetAppFiles",
+            "description": "Azure NetApp Files."
+          },
+          {
+            "name": "DellOneFs",
+            "value": "DellOneFs",
+            "description": "Dell OneFS."
+          },
+          {
+            "name": "Qumulo",
+            "value": "Qumulo",
+            "description": "Qumulo S3-compatible data source."
+          },
+          {
+            "name": "Commvault",
+            "value": "Commvault",
+            "description": "Commvault S3-compatible data source."
+          },
+          {
+            "name": "Nasuni",
+            "value": "Nasuni",
+            "description": "Nasuni S3-compatible data source."
+          },
+          {
+            "name": "S3Compatible",
+            "value": "S3Compatible",
+            "description": "Another S3-compatible data source."
+          }
+        ]
+      }
+    },
+    "BlobAccessPointTlsVerification": {
+      "type": "string",
+      "description": "TLS certificate verification behavior.",
+      "enum": [
+        "Perform",
+        "Skip"
+      ],
+      "x-ms-enum": {
+        "name": "BlobAccessPointTlsVerification",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Perform",
+            "value": "Perform",
+            "description": "Verify the TLS certificate chain."
+          },
+          {
+            "name": "Skip",
+            "value": "Skip",
+            "description": "Skip TLS certificate-chain verification. Use only when the backing source uses a certificate that cannot be validated against a trusted root. Skipping verification exposes credentials and data to an on-path attacker."
+          }
+        ]
+      }
     },
     "BlobContainer": {
       "type": "object",
@@ -16620,6 +18162,10 @@
         "allowStorageConnectors": {
           "type": "boolean",
           "description": "Indicates whether storage connectors are allowed to created or managed on the storage account."
+        },
+        "allowStorageBlobAccessPointConfigurations": {
+          "type": "boolean",
+          "description": "Indicates whether Blob Access Point configurations are allowed to be created or managed on the storage account."
         },
         "allowStorageDataShares": {
           "type": "boolean",
