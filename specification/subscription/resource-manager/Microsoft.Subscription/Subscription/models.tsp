@@ -2,9 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -372,6 +374,14 @@ model PutAliasRequestAdditionalProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
+
+  /**
+   * When set to true, no owner is assigned to the subscription during creation and the caller is
+   * responsible for assigning ownership afterwards. When set to true, subscriptionOwnerId is
+   * ignored. Defaults to false.
+   */
+  @added(Versions.v2026_08_01_preview)
+  skipSettingSubscriptionOwner?: boolean;
 }
 
 /**
