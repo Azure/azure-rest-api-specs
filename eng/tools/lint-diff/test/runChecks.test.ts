@@ -4,7 +4,7 @@ vi.mock(import("@azure-tools/specs-shared/exec"), async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...actual,
-    execNpmExec: vi.fn(),
+    execPnpmExec: vi.fn(),
   };
 });
 
@@ -24,7 +24,7 @@ vi.mock(import("../src/markdown-utils.ts"), async (importOriginal) => {
   };
 });
 
-import { execNpmExec } from "@azure-tools/specs-shared/exec";
+import { execPnpmExec } from "@azure-tools/specs-shared/exec";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { type AutorestRunResult, type ReadmeAffectedTags } from "../src/lintdiff-types.ts";
 import { getAutorestErrors, runChecks } from "../src/runChecks.ts";
@@ -35,7 +35,7 @@ describe("runChecks", () => {
   });
 
   test("sets outputs properly on tag", async () => {
-    (execNpmExec as Mock).mockResolvedValue({ stdout: "out", stderr: "err" });
+    (execPnpmExec as Mock).mockResolvedValue({ stdout: "out", stderr: "err" });
     const runList = new Map<string, ReadmeAffectedTags>([
       ["readme.md", { readme: new Readme(""), changedTags: new Set<string>(["tag1"]) }],
     ]);
@@ -46,14 +46,14 @@ describe("runChecks", () => {
     expect(actual[0].stdout).toBe("out");
     expect(actual[0].stderr).toBe("err");
 
-    expect(execNpmExec).toHaveBeenCalledWith(
+    expect(execPnpmExec).toHaveBeenCalledWith(
       expect.arrayContaining([expect.stringContaining("--tag=tag1")]),
       expect.anything(),
     );
   });
 
   test("throws when no tags specified", async () => {
-    (execNpmExec as Mock).mockResolvedValue({ stdout: "", stderr: "" });
+    (execPnpmExec as Mock).mockResolvedValue({ stdout: "", stderr: "" });
     const runList = new Map<string, ReadmeAffectedTags>([
       ["readme.md", { readme: new Readme(""), changedTags: new Set<string>() }],
     ]);
@@ -69,7 +69,7 @@ describe("runChecks", () => {
     err.stderr = "e";
     err.code = 1;
 
-    (execNpmExec as Mock).mockRejectedValue(err);
+    (execPnpmExec as Mock).mockRejectedValue(err);
     const runList = new Map<string, ReadmeAffectedTags>([
       ["readme.md", { readme: new Readme(""), changedTags: new Set<string>(["tag1", "tag2"]) }],
     ]);
@@ -84,7 +84,7 @@ describe("runChecks", () => {
   });
 
   test("error path throws an error that isn't an ExecError", async () => {
-    (execNpmExec as Mock).mockRejectedValue({
+    (execPnpmExec as Mock).mockRejectedValue({
       message: "some error for which isExecError returns false",
     });
     const runList = new Map<string, ReadmeAffectedTags>([

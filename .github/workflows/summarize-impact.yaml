@@ -35,13 +35,15 @@ jobs:
       - name: Setup Node and install deps
         uses: ./after/.github/actions/setup-node-install-deps
         with:
+          # The repository is checked out into "after/", so that is the workspace
+          # root (and where the root package.json with "packageManager" lives).
           working-directory: after
 
       - name: Run Summarize Impact
         id: summarize-impact
         working-directory: after
         run: |
-          npm exec --no -- summarize-impact --sourceDirectory . --targetDirectory ../before \
+          pnpm exec summarize-impact --sourceDirectory . --targetDirectory ../before \
             --number "${{ github.event.pull_request.number }}" \
             --sourceBranch "$HEAD_REF" \
             --targetBranch "${{ github.event.pull_request.base.ref }}" \
