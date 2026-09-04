@@ -2844,6 +2844,12 @@ model ManagedEnvironmentProperties {
   diskEncryptionConfiguration?: DiskEncryptionConfiguration;
 }
 
+@@added(ManagedEnvironmentMode, Versions.v2026_03_02_preview);
+@@added(
+  ManagedEnvironmentProperties.environmentMode,
+  Versions.v2026_03_02_preview
+);
+
 /**
  * Configuration properties for apps environment to join a Virtual Network
  */
