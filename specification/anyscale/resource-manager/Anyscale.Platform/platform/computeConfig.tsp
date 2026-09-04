@@ -156,13 +156,13 @@ model NodeType {
 /** Market type of instances to use (on-demand vs spot). */
 union MarketType {
   /** Use on-demand instances only. */
-  ON_DEMAND: "ON_DEMAND",
+  OnDemand: "OnDemand",
 
   /** Use spot instances only. */
-  SPOT: "SPOT",
+  Spot: "Spot",
 
   /** Prefer to use spot instances but fall back to on-demand if necessary. */
-  PREFER_SPOT: "PREFER_SPOT",
+  PreferSpot: "PreferSpot",
 
   string,
 }
@@ -177,7 +177,7 @@ model WorkerNode extends NodeType {
   maxNodes?: int32;
 
   /** Market type of the instances. */
-  marketType?: MarketType = MarketType.ON_DEMAND;
+  marketType?: MarketType = MarketType.OnDemand;
 }
 
 @armResourceOperations

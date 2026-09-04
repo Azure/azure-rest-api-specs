@@ -3765,15 +3765,15 @@
       "type": "string",
       "description": "Compute stack associated with the cloud resource",
       "enum": [
-        "K8S"
+        "K8s"
       ],
       "x-ms-enum": {
         "name": "ComputeStack",
         "modelAsString": true,
         "values": [
           {
-            "name": "K8S",
-            "value": "K8S",
+            "name": "K8s",
+            "value": "K8s",
             "description": "Kubernetes"
           }
         ]
@@ -4123,27 +4123,27 @@
       "type": "string",
       "description": "Market type of instances to use (on-demand vs spot).",
       "enum": [
-        "ON_DEMAND",
-        "SPOT",
-        "PREFER_SPOT"
+        "OnDemand",
+        "Spot",
+        "PreferSpot"
       ],
       "x-ms-enum": {
         "name": "MarketType",
         "modelAsString": true,
         "values": [
           {
-            "name": "ON_DEMAND",
-            "value": "ON_DEMAND",
+            "name": "OnDemand",
+            "value": "OnDemand",
             "description": "Use on-demand instances only."
           },
           {
-            "name": "SPOT",
-            "value": "SPOT",
+            "name": "Spot",
+            "value": "Spot",
             "description": "Use spot instances only."
           },
           {
-            "name": "PREFER_SPOT",
-            "value": "PREFER_SPOT",
+            "name": "PreferSpot",
+            "value": "PreferSpot",
             "description": "Prefer to use spot instances but fall back to on-demand if necessary."
           }
         ]
@@ -4283,8 +4283,8 @@
       "enum": [
         "Azure",
         "Generic",
-        "AWS",
-        "GCP"
+        "Aws",
+        "Gcp"
       ],
       "x-ms-enum": {
         "name": "Provider",
@@ -4301,13 +4301,13 @@
             "description": "Generic Kubernetes"
           },
           {
-            "name": "AWS",
-            "value": "AWS",
+            "name": "Aws",
+            "value": "Aws",
             "description": "Amazon Web Services"
           },
           {
-            "name": "GCP",
-            "value": "GCP",
+            "name": "Gcp",
+            "value": "Gcp",
             "description": "Google Cloud Platform"
           }
         ]
@@ -4822,29 +4822,29 @@
         "marketType": {
           "type": "string",
           "description": "Market type of the instances.",
-          "default": "ON_DEMAND",
+          "default": "OnDemand",
           "enum": [
-            "ON_DEMAND",
-            "SPOT",
-            "PREFER_SPOT"
+            "OnDemand",
+            "Spot",
+            "PreferSpot"
           ],
           "x-ms-enum": {
             "name": "MarketType",
             "modelAsString": true,
             "values": [
               {
-                "name": "ON_DEMAND",
-                "value": "ON_DEMAND",
+                "name": "OnDemand",
+                "value": "OnDemand",
                 "description": "Use on-demand instances only."
               },
               {
-                "name": "SPOT",
-                "value": "SPOT",
+                "name": "Spot",
+                "value": "Spot",
                 "description": "Use spot instances only."
               },
               {
-                "name": "PREFER_SPOT",
-                "value": "PREFER_SPOT",
+                "name": "PreferSpot",
+                "value": "PreferSpot",
                 "description": "Prefer to use spot instances but fall back to on-demand if necessary."
               }
             ]
