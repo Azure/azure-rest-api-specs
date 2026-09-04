@@ -716,6 +716,7 @@ model CompletedEvaluatorDiagnosticsPage {
   has_more: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "The approved public API uses the Request suffix."
 @doc("The request for an evaluator diagnostic job.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
@@ -724,6 +725,7 @@ model EvaluatorDiagnosticJobRequest {
   type: EvaluatorDiagnosticJobType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "The approved public API uses the Request suffix."
 @doc("The request for a human-evaluator agreement diagnostic job.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model HumanEvaluatorAgreementDiagnosticJobRequest
@@ -740,6 +742,7 @@ model HumanEvaluatorAgreementDiagnosticJobRequest
   evaluation_level?: EvaluationLevel;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "The approved public API uses the Request suffix."
 @doc("The request for a rubric-comparison diagnostic job.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
 model RubricComparisonDiagnosticJobRequest

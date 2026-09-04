@@ -1,5 +1,6 @@
 import "../common/service.tsp";
 import "../sdk-common/error.default.tsp";
+import "../agent-insights/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../indexes/routes.tsp";
@@ -293,6 +294,8 @@ namespace Azure.AI.Projects;
 @@clientName(Routines.deleteRoutine, "Delete");
 @@clientName(Routines.dispatchRoutineAsync, "Dispatch", "csharp");
 @@access(Routines.dispatchRoutineAsync, Access.internal);
+@@access(Routines.listRoutines, Access.internal);
+@@access(Routines.listRoutineRuns, Access.internal);
 
 @@clientName(Routine, "ProjectsRoutine");
 @@clientName(Routine.enabled, "IsEnabled");

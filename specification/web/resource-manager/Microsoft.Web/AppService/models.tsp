@@ -3617,7 +3617,7 @@ model FunctionsScaleAndConcurrency {
   alwaysReady?: FunctionsAlwaysReadyConfig[];
 
   /**
-   * The maximum number of instances for the function app.
+   * The maximum number of on demand instances per function group.
    */
   maximumInstanceCount?: int32;
 
@@ -8624,6 +8624,7 @@ model StaticSite {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using x-ms-secret without format:password to match existing swagger."
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension directly to avoid format:password from @secret."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-secret' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to the @secret decorator."
   @extension("x-ms-secret", true)
   repositoryToken?: string;
 
