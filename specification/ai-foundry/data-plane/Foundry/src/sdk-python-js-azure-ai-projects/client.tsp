@@ -77,6 +77,7 @@ using Azure.AI.Projects;
 @@clientName(Agents.listAgentVersions, "listVersions");
 @@clientName(Agents.enableAgent, "enable");
 @@clientName(Agents.disableAgent, "disable");
+@@clientName(Agents.generateAgent, "generate");
 @@clientName(
   Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
@@ -271,6 +272,94 @@ using Azure.AI.Projects;
 // ********************************************************************************
 // ********************************************************************************
 // ********************************************************************************
+
+// --------------------------------------------------------------------------------
+// Beta Voice Agent WebSocket sub-client
+// --------------------------------------------------------------------------------
+
+// Drop redundant prefixes; the operation group already supplies that context.
+@@clientName(VoiceAgentWebSocket.connectVoiceAgent, "connect", "python");
+
+// --------------------------------------------------------------------------------
+// Beta Agent Endpoint Conversations sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(
+  AgentEndpointConversations.listAgentConversations,
+  "list",
+  "python"
+);
+@@clientName(AgentEndpointConversations.getAgentConversation, "get", "python");
+@@clientName(
+  AgentEndpointConversations.deleteAgentConversation,
+  "delete",
+  "python"
+);
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponses,
+  "list_responses",
+  "python"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationResponse,
+  "get_response",
+  "python"
+);
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponseItems,
+  "list_response_items",
+  "python"
+);
+@@clientName(
+  AgentEndpointConversations.listAgentConversationItems,
+  "list_items",
+  "python"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItem,
+  "get_item",
+  "python"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemAudio,
+  "get_item_recording",
+  "python"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationItemAudioContent,
+  "download_item_recording",
+  "python"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudio,
+  "get_recording",
+  "python"
+);
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioContent,
+  "download_recording",
+  "python"
+);
+
+// --------------------------------------------------------------------------------
+// Single-member union workarounds
+// --------------------------------------------------------------------------------
+
+// The Python emitter degenerates a one-member union into a bare string alias in
+// `_unions.py` rather than a real Union, which also yields an invalid
+// single-`@overload` set for body parameters. Point Python at the sole variant
+// until these unions gain a second member, then delete these lines.
+@@alternateType(GenerateAgentRequest, GenerateVoiceAgentRequest, "python");
+@@alternateType(
+  VoiceAgentSessionUpdate,
+  VoiceAgentSessionUpdateConfig,
+  "python"
+);
+@@alternateType(
+  VoiceAgentSessionResponse,
+  VoiceAgentSessionResponseConfig,
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Beta Agents sub-client
