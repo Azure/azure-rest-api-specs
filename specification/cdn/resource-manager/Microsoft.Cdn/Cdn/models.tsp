@@ -557,6 +557,7 @@ union HttpsRedirect {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_08_01_preview)
 union AFDRouteGrpcState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2341,6 +2342,7 @@ enum ProbeProtocol {
 
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_08_01_preview)
   Grpc,
 }
 
@@ -3074,6 +3076,48 @@ model LoadBalancingSettingsParameters {
    * The additional latency in milliseconds for probes to fall into the lowest latency bucket
    */
   additionalLatencyInMilliseconds?: int32;
+
+  /**
+   * Capacity based round-robin load balancing settings
+   */
+  @added(Versions.v2026_08_01_preview)
+  capacityDistributionSettings?: CapacityDistributionSettingsParameters;
+}
+
+/**
+ * Capacity based round-robin load balancing settings for a backend pool
+ */
+@added(Versions.v2026_08_01_preview)
+model CapacityDistributionSettingsParameters {
+  /**
+   * Threshold at which additional backends are added for capacity based load balancing. Default is 80 percent.
+   */
+  @maxValue(100)
+  @minValue(20)
+  capacityConsciousThreshold?: int32;
+
+  /**
+   * Type of distribution used in capacity based load balancing.
+   */
+  distributionType?: DistributionType;
+}
+
+/**
+ * Type of distribution used in capacity based load balancing.
+ */
+@added(Versions.v2026_08_01_preview)
+union DistributionType {
+  string,
+
+  /**
+   * Uses static backend weights for load balancing.
+   */
+  StaticWeights: "StaticWeights",
+
+  /**
+   * Dynamically adjusts weights based on backend capacity.
+   */
+  DynamicWeights: "DynamicWeights",
 }
 
 /**
@@ -3397,6 +3441,7 @@ model RouteUpdatePropertiesParameters {
    */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_08_01_preview)
   grpcState?: AFDRouteGrpcState;
 }
 
