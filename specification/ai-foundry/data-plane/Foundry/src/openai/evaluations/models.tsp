@@ -59,7 +59,13 @@ model GraderAzureAIEvaluator {
   /** The name of the evaluator. */
   evaluator_name: string;
 
-  /** The version of the evaluator. Latest version if not specified. */
+  /**
+   * The exact evaluator version. When omitted, each eval run resolves the
+   * latest non-draft version at execution start and persists that resolved
+   * version. The service never falls back to a draft; it returns an error when
+   * no non-draft version exists. An explicit version may reference a draft.
+   * Scheduled runs repeat this resolution for every run.
+   */
   evaluator_version?: string;
 
   /** The initialization parameters for the evaluation. Must support structured outputs. */

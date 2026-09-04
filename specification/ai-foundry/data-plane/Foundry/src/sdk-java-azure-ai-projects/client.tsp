@@ -84,6 +84,13 @@ namespace Azure.AI.Projects;
 @@clientName(Evaluators.deleteVersion, "deleteEvaluatorVersion");
 @@clientName(Evaluators.listLatestVersions, "listLatestEvaluatorVersions");
 @@clientName(Evaluators.updateVersion, "updateEvaluatorVersion");
+@@clientName(Evaluators.listDiagnostics, "listEvaluatorDiagnostics");
+@@clientName(Evaluators.getDiagnostic, "getEvaluatorDiagnostic");
+@@clientName(EvaluatorDiagnosticJobs.create, "createEvaluatorDiagnosticJob");
+@@clientName(EvaluatorDiagnosticJobs.get, "getEvaluatorDiagnosticJob");
+@@clientName(EvaluatorDiagnosticJobs.list, "listEvaluatorDiagnosticJobs");
+@@clientName(EvaluatorDiagnosticJobs.cancel, "cancelEvaluatorDiagnosticJob");
+@@clientName(EvaluatorDiagnosticJobs.delete, "deleteEvaluatorDiagnosticJob");
 
 // Indexes
 @@clientName(Indexes.createOrUpdateVersion, "createOrUpdateIndexVersion");

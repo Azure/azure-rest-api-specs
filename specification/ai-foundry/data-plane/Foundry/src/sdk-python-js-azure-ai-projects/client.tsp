@@ -392,6 +392,21 @@ using Azure.AI.Projects;
 // Need to explicitly mention both languages to avoid compile error
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
 
+// Keep completed diagnostics and diagnostic jobs public on the beta Evaluators sub-client.
+@@access(Evaluators.listDiagnostics, Access.public);
+@@access(Evaluators.getDiagnostic, Access.public);
+@@access(EvaluatorDiagnosticJobs.create, Access.public);
+@@access(EvaluatorDiagnosticJobs.get, Access.public);
+@@access(EvaluatorDiagnosticJobs.list, Access.public);
+@@access(EvaluatorDiagnosticJobs.cancel, Access.public);
+@@access(EvaluatorDiagnosticJobs.delete, Access.public);
+
+@@clientName(EvaluatorDiagnosticJobs.create, "createDiagnosticJob");
+@@clientName(EvaluatorDiagnosticJobs.get, "getDiagnosticJob");
+@@clientName(EvaluatorDiagnosticJobs.list, "listDiagnosticJobs");
+@@clientName(EvaluatorDiagnosticJobs.cancel, "cancelDiagnosticJob");
+@@clientName(EvaluatorDiagnosticJobs.delete, "deleteDiagnosticJob");
+
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
 
