@@ -18,6 +18,7 @@ namespace PaloAltoNetworks.Cloudngfw;
 @singleton("default")
 @parentResource(FirewallResource)
 @added(Versions.v2026_07_29_preview)
+@removed(Versions.v2026_09_01)
 model LogIngestionSettingsResource is Azure.ResourceManager.ProxyResource<
   LogIngestionSettingsProperties,
   false
@@ -31,6 +32,7 @@ model LogIngestionSettingsResource is Azure.ResourceManager.ProxyResource<
 }
 
 @added(Versions.v2026_07_29_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface LogIngestionSettingsResources {
   @doc("Get the Log Ingestion Settings for a firewall. Live read from the partner. Returns 200 OK with the current settings, or 404 when log ingestion has not been configured.")
