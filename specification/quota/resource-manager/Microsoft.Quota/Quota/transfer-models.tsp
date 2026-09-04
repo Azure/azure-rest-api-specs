@@ -194,6 +194,7 @@ model QuotaTransferProperties {
   /**
    * Billing account id both donor and recipient subscriptions must roll up to.
    */
+  @visibility(Lifecycle.Read)
   billingAccountId: string;
 
   /**
