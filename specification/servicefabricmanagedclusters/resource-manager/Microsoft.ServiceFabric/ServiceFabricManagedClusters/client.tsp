@@ -32,11 +32,7 @@ namespace Azure.ResourceManager.Models {
   "javascript"
 );
 
-@@clientName(
-  HostEndpointSettings,
-  "ProxyAgentHostEndpointSettings",
-  "csharp"
-);
+@@clientName(HostEndpointSettings, "ProxyAgentHostEndpointSettings", "csharp");
 @@clientName(
   SfmcOperationStatus,
   "ServiceFabricManagedClusterOperationStatus",
@@ -47,26 +43,14 @@ namespace Azure.ResourceManager.Models {
   "StartFaultSimulationContent",
   "csharp"
 );
-@@clientName(
-  SkuProfile,
-  "ServiceFabricManagedNodeTypeSkuProfile",
-  "csharp"
-);
-@@clientName(
-  SkuProfileVmSize,
-  "ServiceFabricManagedNodeTypeVmSize",
-  "csharp"
-);
+@@clientName(SkuProfile, "ServiceFabricManagedNodeTypeSkuProfile", "csharp");
+@@clientName(SkuProfileVmSize, "ServiceFabricManagedNodeTypeVmSize", "csharp");
 @@clientName(
   AllocationStrategy,
   "ServiceFabricManagedNodeTypeAllocationStrategy",
   "csharp"
 );
-@@clientName(
-  DiskCachingType,
-  "ServiceFabricManagedDiskCachingType",
-  "csharp"
-);
+@@clientName(DiskCachingType, "ServiceFabricManagedDiskCachingType", "csharp");
 @@clientName(
   NodeTypeProperties.dataDiskIOPSReadWrite,
   "DataDiskIopsReadWrite",
