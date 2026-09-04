@@ -68,6 +68,7 @@ model FleetMemberProperties {
 
   @added(Versions.v2026_03_02_preview)
   @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_02_preview)
   @visibility(Lifecycle.Read)
   @doc("The Mesh Member Properties associated with this Fleet Member.")
   meshProperties?: MeshProperties;
