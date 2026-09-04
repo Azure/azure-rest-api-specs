@@ -4123,17 +4123,8 @@
       "description": "Request body for calling post-action",
       "properties": {
         "resourceRequestAction": {
-          "type": "string",
-          "description": "Resource request action indicating action which needed to be performed upon calling approval-callback post action",
-          "enum": [
-            "Create",
-            "Delete",
-            "Update",
-            "Reset"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApprovalCallbackResourceRequestAction",
+          "description": "Resource request action indicating action which needed to be performed upon calling approval-callback post action"
         },
         "approvalStatus": {
           "type": "string",
@@ -4156,26 +4147,84 @@
         "approvalStatus"
       ]
     },
+    "ApprovalCallbackResourceRequestAction": {
+      "type": "string",
+      "description": "The resource action for an approval callback.",
+      "enum": [
+        "Create",
+        "Delete",
+        "Update",
+        "Reset"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalCallbackResourceRequestAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create the resource."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete the resource."
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Update the resource."
+          },
+          {
+            "name": "Reset",
+            "value": "Reset",
+            "description": "Reset the resource."
+          }
+        ]
+      }
+    },
     "ApprovalDeletionCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
       "properties": {
         "resourceRequestAction": {
-          "type": "string",
-          "description": "Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action",
-          "enum": [
-            "Create",
-            "Delete",
-            "Update"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApprovalDeletionCallbackResourceRequestAction",
+          "description": "Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action"
         }
       },
       "required": [
         "resourceRequestAction"
       ]
+    },
+    "ApprovalDeletionCallbackResourceRequestAction": {
+      "type": "string",
+      "description": "The resource action for an approval deletion callback.",
+      "enum": [
+        "Create",
+        "Delete",
+        "Update"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalDeletionCallbackResourceRequestAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create the resource."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete the resource."
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Update the resource."
+          }
+        ]
+      }
     },
     "ApprovalPatchModel": {
       "type": "object",
@@ -5828,40 +5877,16 @@
           "readOnly": true
         },
         "option": {
-          "type": "string",
-          "description": "Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).",
-          "enum": [
-            "Allow",
-            "Deny",
-            "ExceptionOnly",
-            "NotApplicable"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GovernedServiceItemOption",
+          "description": "Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable)."
         },
         "enforcement": {
-          "type": "string",
-          "description": "Initiative enforcement (Enabled or Disabled).",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GovernedServiceItemEnforcement",
+          "description": "Initiative enforcement (Enabled or Disabled)."
         },
         "policyAction": {
-          "type": "string",
-          "description": "Enforcement mode for policy. AuditOnly, Enforce, or None.",
-          "enum": [
-            "AuditOnly",
-            "Enforce",
-            "None"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GovernedServiceItemPolicyAction",
+          "description": "Enforcement mode for policy. AuditOnly, Enforce, or None."
         },
         "initiatives": {
           "type": "array",
@@ -5875,6 +5900,96 @@
       "required": [
         "serviceId"
       ]
+    },
+    "GovernedServiceItemEnforcement": {
+      "type": "string",
+      "description": "The enforcement state for a governed service.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "GovernedServiceItemEnforcement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enforcement is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Enforcement is disabled."
+          }
+        ]
+      }
+    },
+    "GovernedServiceItemOption": {
+      "type": "string",
+      "description": "The governance option for a governed service.",
+      "enum": [
+        "Allow",
+        "Deny",
+        "ExceptionOnly",
+        "NotApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "GovernedServiceItemOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the governed service."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny the governed service."
+          },
+          {
+            "name": "ExceptionOnly",
+            "value": "ExceptionOnly",
+            "description": "Allow only configured exceptions for the governed service."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The governance option does not apply to the governed service."
+          }
+        ]
+      }
+    },
+    "GovernedServiceItemPolicyAction": {
+      "type": "string",
+      "description": "The policy action for a governed service.",
+      "enum": [
+        "AuditOnly",
+        "Enforce",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "GovernedServiceItemPolicyAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AuditOnly",
+            "value": "AuditOnly",
+            "description": "Audit policy violations without enforcing the policy."
+          },
+          {
+            "name": "Enforce",
+            "value": "Enforce",
+            "description": "Enforce the policy."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Do not apply a policy action."
+          }
+        ]
+      }
     },
     "KeyVaultResourceId": {
       "type": "string",
@@ -5900,6 +6015,78 @@
         ]
       }
     },
+    "MaintenanceModeConfigurationJustification": {
+      "type": "string",
+      "description": "The justification for entering or exiting virtual enclave maintenance mode.",
+      "enum": [
+        "Networking",
+        "Governance",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceModeConfigurationJustification",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Networking",
+            "value": "Networking",
+            "description": "Maintenance mode is required for networking changes."
+          },
+          {
+            "name": "Governance",
+            "value": "Governance",
+            "description": "Maintenance mode is required for governance changes."
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "No maintenance mode justification applies."
+          }
+        ]
+      }
+    },
+    "MaintenanceModeConfigurationMode": {
+      "type": "string",
+      "description": "The maintenance mode for a virtual enclave.",
+      "enum": [
+        "On",
+        "CanNotDelete",
+        "Off",
+        "General",
+        "Advanced"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceModeConfigurationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Maintenance mode is on."
+          },
+          {
+            "name": "CannotDelete",
+            "value": "CanNotDelete",
+            "description": "Resources cannot be deleted while maintenance mode is active."
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Maintenance mode is off."
+          },
+          {
+            "name": "General",
+            "value": "General",
+            "description": "General maintenance mode is active."
+          },
+          {
+            "name": "Advanced",
+            "value": "Advanced",
+            "description": "Advanced maintenance mode is active."
+          }
+        ]
+      }
+    },
     "MaintenanceModeConfigurationModel": {
       "type": "object",
       "description": "Maintenance Mode",
@@ -5916,7 +6103,35 @@
             "Advanced"
           ],
           "x-ms-enum": {
-            "modelAsString": true
+            "name": "MaintenanceModeConfigurationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "On",
+                "value": "On",
+                "description": "Maintenance mode is on."
+              },
+              {
+                "name": "CannotDelete",
+                "value": "CanNotDelete",
+                "description": "Resources cannot be deleted while maintenance mode is active."
+              },
+              {
+                "name": "Off",
+                "value": "Off",
+                "description": "Maintenance mode is off."
+              },
+              {
+                "name": "General",
+                "value": "General",
+                "description": "General maintenance mode is active."
+              },
+              {
+                "name": "Advanced",
+                "value": "Advanced",
+                "description": "Advanced maintenance mode is active."
+              }
+            ]
           }
         },
         "principals": {
@@ -5937,7 +6152,25 @@
             "Off"
           ],
           "x-ms-enum": {
-            "modelAsString": true
+            "name": "MaintenanceModeConfigurationJustification",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Networking",
+                "value": "Networking",
+                "description": "Maintenance mode is required for networking changes."
+              },
+              {
+                "name": "Governance",
+                "value": "Governance",
+                "description": "Maintenance mode is required for governance changes."
+              },
+              {
+                "name": "Off",
+                "value": "Off",
+                "description": "No maintenance mode justification applies."
+              }
+            ]
           }
         }
       },
@@ -5950,18 +6183,8 @@
       "description": "Maintenance Mode Patch Model",
       "properties": {
         "mode": {
-          "type": "string",
-          "description": "Current mode of Maintenance Mode Configuration",
-          "enum": [
-            "On",
-            "CanNotDelete",
-            "Off",
-            "General",
-            "Advanced"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/MaintenanceModeConfigurationMode",
+          "description": "Current mode of Maintenance Mode Configuration"
         },
         "principals": {
           "type": "array",
@@ -5971,16 +6194,8 @@
           }
         },
         "justification": {
-          "type": "string",
-          "description": "Justification for entering or exiting Maintenance Mode",
-          "enum": [
-            "Networking",
-            "Governance",
-            "Off"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/MaintenanceModeConfigurationJustification",
+          "description": "Justification for entering or exiting Maintenance Mode"
         }
       }
     },
@@ -6018,22 +6233,44 @@
           "description": "The object id associated with the principal"
         },
         "type": {
-          "type": "string",
-          "description": "The type of the object id. We currently allow users, groups, and service principals",
-          "enum": [
-            "User",
-            "Group",
-            "ServicePrincipal"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PrincipalType",
+          "description": "The type of the object id. We currently allow users, groups, and service principals"
         }
       },
       "required": [
         "id",
         "type"
       ]
+    },
+    "PrincipalType": {
+      "type": "string",
+      "description": "The type of a virtual enclave principal.",
+      "enum": [
+        "User",
+        "Group",
+        "ServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "PrincipalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A user principal."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "A group principal."
+          },
+          {
+            "name": "ServicePrincipal",
+            "value": "ServicePrincipal",
+            "description": "A service principal."
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
