@@ -88,16 +88,10 @@ suppressions:
   - code: ParametersInPointGet
     from: vmssNetwork.json
     reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
-  # --- stable/2026-01-01/common.json ---
-  - code: GuidUsage
-    from: common.json
-    reason: The only consumers of this shared uuid definition are FirewallPolicyPurviewVendorSettings.tenantId and .userObjectIds, which are Microsoft Entra tenant and object identifiers. Customers already obtain these values as GUIDs from the Entra portal, Azure CLI and ARM templates and paste them directly into this payload, so surfacing them as format:uuid matches what the customer already holds. These are not opaque platform-assigned identifiers or resource names.
-    where:
-      - $.definitions.uuid.format
   # --- stable/2026-01-01/firewallPolicy.json ---
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: firewallPolicy.json
-    reason: The Network TypeSpec project currently targets ARM common types v5. These child resources follow the same project-wide common-types version to avoid unrelated contract churn across the 2026-01-01 package.
+    reason: The Network TypeSpec project targets ARM common types v5. Firewall Policy follows the same project-wide common-types version to avoid unrelated contract churn across the 2026-01-01 package.
   # --- stable/2026-01-01/networkGateway.json ---
   - code: ResourceNameRestriction
     from: networkGateway.json
