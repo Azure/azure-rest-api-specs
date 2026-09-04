@@ -78,6 +78,7 @@ alias BulkCreateSubscriptionParams = {
 @doc("Envelope properties shared by BulkCreate. Used as the @listsResource target to avoid collision with the interface name.")
 model BulkCreateEnvelope {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Zones in which the BulkCreate is available")
   zones?: Array<string>;
 
