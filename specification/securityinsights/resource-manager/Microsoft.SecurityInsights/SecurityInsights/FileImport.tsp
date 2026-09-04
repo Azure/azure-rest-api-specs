@@ -93,5 +93,5 @@ interface FileImports {
 @@doc(FileImport.properties, "File import properties");
 @@doc(FileImports.create::parameters.resource, "The file import");
 
-@@added(FileImport, Versions.v2025_10_01_preview);
-@@added(FileImports, Versions.v2025_10_01_preview);
+@@added(FileImport, Versions.v2026_08_01_preview);
+@@added(FileImports, Versions.v2026_08_01_preview);
