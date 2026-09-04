@@ -83,7 +83,7 @@ namespace Sample.API.Models
                 return container;
             }
             __resource?.ToJson(container, serializationMode);
-            AddIf( null != this._tag ? (Sample.API.Runtime.Json.JsonNode) this._tag.ToJson(null,serializationMode) : null, "tags" ,container.Add );
+            AddIf( null != this._tags ? (Sample.API.Runtime.Json.JsonNode) this._tags.ToJson(null,serializationMode) : null, "tags" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead)||serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeCreate))
             {
                 AddIf( null != (((object)this._location)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._location.ToString()) : null, "location" ,container.Add );
@@ -105,7 +105,7 @@ namespace Sample.API.Models
                 return;
             }
             __resource = new Sample.API.Models.Resource(json);
-            {_tag = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("tags"), out var __jsonTags) ? Sample.API.Models.TrackedResourceTags.FromJson(__jsonTags) : _tag;}
+            {_tags = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("tags"), out var __jsonTags) ? Sample.API.Models.TrackedResourceTags.FromJson(__jsonTags) : _tags;}
             {_location = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("location"), out var __jsonLocation) ? (string)__jsonLocation : (string)_location;}
             AfterFromJson(json);
         }

@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.FailoverRequestProperties"
         /// />.
         /// </summary>
@@ -96,17 +88,17 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ExecutionConfiguration"))
+            if (content.Contains("ExecutionConfigurations"))
             {
-                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).ExecutionConfiguration = (Sample.API.Models.IExecutionConfigurations) content.GetValueForProperty("ExecutionConfiguration",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).ExecutionConfiguration, Sample.API.Models.ExecutionConfigurationsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).ExecutionConfigurations = (Sample.API.Models.IExecutionConfigurations) content.GetValueForProperty("ExecutionConfigurations",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).ExecutionConfigurations, Sample.API.Models.ExecutionConfigurationsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("SourceLocation"))
+            if (content.Contains("SourceLocations"))
             {
-                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SourceLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("SourceLocation",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SourceLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SourceLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("SourceLocations",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SourceLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("SelectedResourceId"))
+            if (content.Contains("SelectedResourceIds"))
             {
-                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SelectedResourceId = (System.Collections.Generic.List<string>) content.GetValueForProperty("SelectedResourceId",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SelectedResourceId, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SelectedResourceIds = (System.Collections.Generic.List<string>) content.GetValueForProperty("SelectedResourceIds",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SelectedResourceIds, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("ExecutionConfigurationUserConsent"))
             {
@@ -129,17 +121,17 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ExecutionConfiguration"))
+            if (content.Contains("ExecutionConfigurations"))
             {
-                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).ExecutionConfiguration = (Sample.API.Models.IExecutionConfigurations) content.GetValueForProperty("ExecutionConfiguration",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).ExecutionConfiguration, Sample.API.Models.ExecutionConfigurationsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).ExecutionConfigurations = (Sample.API.Models.IExecutionConfigurations) content.GetValueForProperty("ExecutionConfigurations",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).ExecutionConfigurations, Sample.API.Models.ExecutionConfigurationsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("SourceLocation"))
+            if (content.Contains("SourceLocations"))
             {
-                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SourceLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("SourceLocation",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SourceLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SourceLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("SourceLocations",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SourceLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("SelectedResourceId"))
+            if (content.Contains("SelectedResourceIds"))
             {
-                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SelectedResourceId = (System.Collections.Generic.List<string>) content.GetValueForProperty("SelectedResourceId",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SelectedResourceId, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SelectedResourceIds = (System.Collections.Generic.List<string>) content.GetValueForProperty("SelectedResourceIds",((Sample.API.Models.IFailoverRequestPropertiesInternal)this).SelectedResourceIds, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("ExecutionConfigurationUserConsent"))
             {
@@ -159,18 +151,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Additional properties for Failover.
     [System.ComponentModel.TypeConverter(typeof(FailoverRequestPropertiesTypeConverter))]

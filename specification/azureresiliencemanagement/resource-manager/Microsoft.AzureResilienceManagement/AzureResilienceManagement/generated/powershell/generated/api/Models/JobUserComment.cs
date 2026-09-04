@@ -11,13 +11,6 @@ namespace Sample.API.Models
         Sample.API.Models.IJobUserCommentInternal
     {
 
-        /// <summary>Backing field for <see cref="Comment" /> property.</summary>
-        private string _comment;
-
-        /// <summary>User Comment</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string Comment { get => this._comment; }
-
         /// <summary>Backing field for <see cref="CommentTime" /> property.</summary>
         private global::System.DateTime? _commentTime;
 
@@ -32,14 +25,21 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string CommentType { get => this._commentType; }
 
-        /// <summary>Internal Acessors for Comment</summary>
-        string Sample.API.Models.IJobUserCommentInternal.Comment { get => this._comment; set { {_comment = value;} } }
+        /// <summary>Backing field for <see cref="Comments" /> property.</summary>
+        private string _comments;
+
+        /// <summary>User Comment</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        public string Comments { get => this._comments; }
 
         /// <summary>Internal Acessors for CommentTime</summary>
         global::System.DateTime? Sample.API.Models.IJobUserCommentInternal.CommentTime { get => this._commentTime; set { {_commentTime = value;} } }
 
         /// <summary>Internal Acessors for CommentType</summary>
         string Sample.API.Models.IJobUserCommentInternal.CommentType { get => this._commentType; set { {_commentType = value;} } }
+
+        /// <summary>Internal Acessors for Comments</summary>
+        string Sample.API.Models.IJobUserCommentInternal.Comments { get => this._comments; set { {_comments = value;} } }
 
         /// <summary>Creates an new <see cref="JobUserComment" /> instance.</summary>
         public JobUserComment()
@@ -51,17 +51,6 @@ namespace Sample.API.Models
     public partial interface IJobUserComment :
         Sample.API.Runtime.IJsonSerializable
     {
-        /// <summary>User Comment</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = true,
-        Read = true,
-        Create = false,
-        Update = false,
-        Description = @"User Comment",
-        SerializedName = @"comments",
-        PossibleTypes = new [] { typeof(string) })]
-        string Comment { get;  }
         /// <summary>The time of user comment.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -85,19 +74,30 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Description", "ResumeReason")]
         string CommentType { get;  }
+        /// <summary>User Comment</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = true,
+        Read = true,
+        Create = false,
+        Update = false,
+        Description = @"User Comment",
+        SerializedName = @"comments",
+        PossibleTypes = new [] { typeof(string) })]
+        string Comments { get;  }
 
     }
     /// Job User's Comment.
     internal partial interface IJobUserCommentInternal
 
     {
-        /// <summary>User Comment</summary>
-        string Comment { get; set; }
         /// <summary>The time of user comment.</summary>
         global::System.DateTime? CommentTime { get; set; }
         /// <summary>The type of the user comment.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Description", "ResumeReason")]
         string CommentType { get; set; }
+        /// <summary>User Comment</summary>
+        string Comments { get; set; }
 
     }
 }

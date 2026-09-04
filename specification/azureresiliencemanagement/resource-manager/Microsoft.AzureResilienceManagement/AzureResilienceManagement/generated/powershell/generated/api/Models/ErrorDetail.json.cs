@@ -66,7 +66,7 @@ namespace Sample.API.Models
             {_code = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("code"), out var __jsonCode) ? (string)__jsonCode : (string)_code;}
             {_message = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("message"), out var __jsonMessage) ? (string)__jsonMessage : (string)_message;}
             {_target = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("target"), out var __jsonTarget) ? (string)__jsonTarget : (string)_target;}
-            {_detail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("details"), out var __jsonDetails) ? If( __jsonDetails as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IErrorDetail>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IErrorDetail) (Sample.API.Models.ErrorDetail.FromJson(__u) )) ))() : null : _detail;}
+            {_details = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("details"), out var __jsonDetails) ? If( __jsonDetails as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IErrorDetail>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IErrorDetail) (Sample.API.Models.ErrorDetail.FromJson(__u) )) ))() : null : _details;}
             {_additionalInfo = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("additionalInfo"), out var __jsonAdditionalInfo) ? If( __jsonAdditionalInfo as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IErrorAdditionalInfo) (Sample.API.Models.ErrorAdditionalInfo.FromJson(__p) )) ))() : null : _additionalInfo;}
             AfterFromJson(json);
         }
@@ -114,10 +114,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._detail)
+                if (null != this._details)
                 {
                     var __w = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __x in this._detail )
+                    foreach( var __x in this._details )
                     {
                         AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                     }

@@ -25,27 +25,27 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ForceInclusionAndUpdate { get => this._forceInclusionAndUpdate; set => this._forceInclusionAndUpdate = value; }
 
-        /// <summary>Backing field for <see cref="ResourceList" /> property.</summary>
-        private Sample.API.Models.IResourceLists _resourceList;
-
-        /// <summary>Add, Update, Delete resource lists</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IResourceLists ResourceList { get => (this._resourceList = this._resourceList ?? new Sample.API.Models.ResourceLists()); set => this._resourceList = value; }
-
         /// <summary>Excluded resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ResourceListExcludeResource { get => ((Sample.API.Models.IResourceListsInternal)ResourceList).ExcludeResource; set => ((Sample.API.Models.IResourceListsInternal)ResourceList).ExcludeResource = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<string> ResourceListExcludeResources { get => ((Sample.API.Models.IResourceListsInternal)ResourceLists).ExcludeResources; set => ((Sample.API.Models.IResourceListsInternal)ResourceLists).ExcludeResources = value ?? null /* arrayOf */; }
 
         /// <summary>Include resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListIncludeResource { get => ((Sample.API.Models.IResourceListsInternal)ResourceList).IncludeResource; set => ((Sample.API.Models.IResourceListsInternal)ResourceList).IncludeResource = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListIncludeResources { get => ((Sample.API.Models.IResourceListsInternal)ResourceLists).IncludeResources; set => ((Sample.API.Models.IResourceListsInternal)ResourceLists).IncludeResources = value ?? null /* arrayOf */; }
 
         /// <summary>Update resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListUpdateResource { get => ((Sample.API.Models.IResourceListsInternal)ResourceList).UpdateResource; set => ((Sample.API.Models.IResourceListsInternal)ResourceList).UpdateResource = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListUpdateResources { get => ((Sample.API.Models.IResourceListsInternal)ResourceLists).UpdateResources; set => ((Sample.API.Models.IResourceListsInternal)ResourceLists).UpdateResources = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for ResourceList</summary>
-        Sample.API.Models.IResourceLists Sample.API.Models.IAddOrUpdateResourcesRequestInternal.ResourceList { get => (this._resourceList = this._resourceList ?? new Sample.API.Models.ResourceLists()); set { {_resourceList = value;} } }
+        /// <summary>Backing field for <see cref="ResourceLists" /> property.</summary>
+        private Sample.API.Models.IResourceLists _resourceLists;
+
+        /// <summary>Add, Update, Delete resource lists</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IResourceLists ResourceLists { get => (this._resourceLists = this._resourceLists ?? new Sample.API.Models.ResourceLists()); set => this._resourceLists = value; }
+
+        /// <summary>Internal Acessors for ResourceLists</summary>
+        Sample.API.Models.IResourceLists Sample.API.Models.IAddOrUpdateResourcesRequestInternal.ResourceLists { get => (this._resourceLists = this._resourceLists ?? new Sample.API.Models.ResourceLists()); set { {_resourceLists = value;} } }
 
         /// <summary>Creates an new <see cref="AddOrUpdateResourcesRequest" /> instance.</summary>
         public AddOrUpdateResourcesRequest()
@@ -90,7 +90,7 @@ namespace Sample.API.Models
         Description = @"Excluded resource",
         SerializedName = @"excludeResources",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ResourceListExcludeResource { get; set; }
+        System.Collections.Generic.List<string> ResourceListExcludeResources { get; set; }
         /// <summary>Include resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -101,7 +101,7 @@ namespace Sample.API.Models
         Description = @"Include resource",
         SerializedName = @"includeResources",
         PossibleTypes = new [] { typeof(Sample.API.Models.IIncludeOrUpdateResource) })]
-        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListIncludeResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListIncludeResources { get; set; }
         /// <summary>Update resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -112,7 +112,7 @@ namespace Sample.API.Models
         Description = @"Update resource",
         SerializedName = @"updateResources",
         PossibleTypes = new [] { typeof(Sample.API.Models.IIncludeOrUpdateResource) })]
-        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListUpdateResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListUpdateResources { get; set; }
 
     }
     /// Request body of the AddOrUpdateResources API.
@@ -124,14 +124,14 @@ namespace Sample.API.Models
         /// <summary>Whether to allow inclusion and update despite attention reasons.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Enable", "Disable")]
         string ForceInclusionAndUpdate { get; set; }
-        /// <summary>Add, Update, Delete resource lists</summary>
-        Sample.API.Models.IResourceLists ResourceList { get; set; }
         /// <summary>Excluded resource</summary>
-        System.Collections.Generic.List<string> ResourceListExcludeResource { get; set; }
+        System.Collections.Generic.List<string> ResourceListExcludeResources { get; set; }
         /// <summary>Include resource</summary>
-        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListIncludeResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListIncludeResources { get; set; }
         /// <summary>Update resource</summary>
-        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListUpdateResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> ResourceListUpdateResources { get; set; }
+        /// <summary>Add, Update, Delete resource lists</summary>
+        Sample.API.Models.IResourceLists ResourceLists { get; set; }
 
     }
 }

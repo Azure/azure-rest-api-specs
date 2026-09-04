@@ -18,12 +18,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Type { get => this._type; set => this._type = value; }
 
-        /// <summary>Backing field for <see cref="UserAssignedIdentity" /> property.</summary>
-        private Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities _userAssignedIdentity;
+        /// <summary>Backing field for <see cref="UserAssignedIdentities" /> property.</summary>
+        private Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities _userAssignedIdentities;
 
         /// <summary>The identities assigned to this resource by the user.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities UserAssignedIdentity { get => (this._userAssignedIdentity = this._userAssignedIdentity ?? new Sample.API.Models.AzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities()); set => this._userAssignedIdentity = value; }
+        public Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities UserAssignedIdentities { get => (this._userAssignedIdentities = this._userAssignedIdentities ?? new Sample.API.Models.AzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities()); set => this._userAssignedIdentities = value; }
 
         /// <summary>
         /// Creates an new <see cref="AzureResourceManagerCommonTypesManagedServiceIdentityUpdate" /> instance.
@@ -59,7 +59,7 @@ namespace Sample.API.Models
         Description = @"The identities assigned to this resource by the user.",
         SerializedName = @"userAssignedIdentities",
         PossibleTypes = new [] { typeof(Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities) })]
-        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities UserAssignedIdentity { get; set; }
+        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities UserAssignedIdentities { get; set; }
 
     }
     /// Managed service identity (system assigned and/or user assigned identities)
@@ -70,7 +70,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned")]
         string Type { get; set; }
         /// <summary>The identities assigned to this resource by the user.</summary>
-        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities UserAssignedIdentity { get; set; }
+        Sample.API.Models.IAzureResourceManagerCommonTypesManagedServiceIdentityUpdateUserAssignedIdentities UserAssignedIdentities { get; set; }
 
     }
 }

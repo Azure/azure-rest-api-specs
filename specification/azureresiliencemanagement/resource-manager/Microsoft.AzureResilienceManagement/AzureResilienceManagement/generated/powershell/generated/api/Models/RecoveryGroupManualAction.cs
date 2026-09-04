@@ -30,7 +30,7 @@ namespace Sample.API.Models
         /// The maximum amount of time, in minutes, allowed for the action to complete before it times out.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public int TimeoutInMinute { get => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).TimeoutInMinute; set => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).TimeoutInMinute = value ; }
+        public int TimeoutInMinutes { get => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).TimeoutInMinutes; set => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).TimeoutInMinutes = value ; }
 
         /// <summary>The type of the recovery orchestration group action.</summary>
         [Sample.API.Constant]

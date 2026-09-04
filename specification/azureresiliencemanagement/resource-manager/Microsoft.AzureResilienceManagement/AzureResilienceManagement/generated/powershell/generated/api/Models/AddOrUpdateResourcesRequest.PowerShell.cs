@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="Sample.API.Models.AddOrUpdateResourcesRequest"
         /// />.
         /// </summary>
@@ -74,9 +66,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ResourceList"))
+            if (content.Contains("ResourceLists"))
             {
-                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceList = (Sample.API.Models.IResourceLists) content.GetValueForProperty("ResourceList",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceList, Sample.API.Models.ResourceListsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceLists = (Sample.API.Models.IResourceLists) content.GetValueForProperty("ResourceLists",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceLists, Sample.API.Models.ResourceListsTypeConverter.ConvertFrom);
             }
             if (content.Contains("FaultDurationInMin"))
             {
@@ -86,17 +78,17 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ForceInclusionAndUpdate = (string) content.GetValueForProperty("ForceInclusionAndUpdate",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ForceInclusionAndUpdate, global::System.Convert.ToString);
             }
-            if (content.Contains("ResourceListIncludeResource"))
+            if (content.Contains("ResourceListIncludeResources"))
             {
-                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListIncludeResource = (System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>) content.GetValueForProperty("ResourceListIncludeResource",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListIncludeResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IIncludeOrUpdateResource>(__y, Sample.API.Models.IncludeOrUpdateResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListIncludeResources = (System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>) content.GetValueForProperty("ResourceListIncludeResources",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListIncludeResources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IIncludeOrUpdateResource>(__y, Sample.API.Models.IncludeOrUpdateResourceTypeConverter.ConvertFrom));
             }
-            if (content.Contains("ResourceListExcludeResource"))
+            if (content.Contains("ResourceListExcludeResources"))
             {
-                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListExcludeResource = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourceListExcludeResource",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListExcludeResource, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListExcludeResources = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourceListExcludeResources",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListExcludeResources, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ResourceListUpdateResource"))
+            if (content.Contains("ResourceListUpdateResources"))
             {
-                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListUpdateResource = (System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>) content.GetValueForProperty("ResourceListUpdateResource",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListUpdateResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IIncludeOrUpdateResource>(__y, Sample.API.Models.IncludeOrUpdateResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListUpdateResources = (System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>) content.GetValueForProperty("ResourceListUpdateResources",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListUpdateResources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IIncludeOrUpdateResource>(__y, Sample.API.Models.IncludeOrUpdateResourceTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -115,9 +107,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ResourceList"))
+            if (content.Contains("ResourceLists"))
             {
-                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceList = (Sample.API.Models.IResourceLists) content.GetValueForProperty("ResourceList",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceList, Sample.API.Models.ResourceListsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceLists = (Sample.API.Models.IResourceLists) content.GetValueForProperty("ResourceLists",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceLists, Sample.API.Models.ResourceListsTypeConverter.ConvertFrom);
             }
             if (content.Contains("FaultDurationInMin"))
             {
@@ -127,17 +119,17 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ForceInclusionAndUpdate = (string) content.GetValueForProperty("ForceInclusionAndUpdate",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ForceInclusionAndUpdate, global::System.Convert.ToString);
             }
-            if (content.Contains("ResourceListIncludeResource"))
+            if (content.Contains("ResourceListIncludeResources"))
             {
-                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListIncludeResource = (System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>) content.GetValueForProperty("ResourceListIncludeResource",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListIncludeResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IIncludeOrUpdateResource>(__y, Sample.API.Models.IncludeOrUpdateResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListIncludeResources = (System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>) content.GetValueForProperty("ResourceListIncludeResources",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListIncludeResources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IIncludeOrUpdateResource>(__y, Sample.API.Models.IncludeOrUpdateResourceTypeConverter.ConvertFrom));
             }
-            if (content.Contains("ResourceListExcludeResource"))
+            if (content.Contains("ResourceListExcludeResources"))
             {
-                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListExcludeResource = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourceListExcludeResource",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListExcludeResource, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListExcludeResources = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourceListExcludeResources",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListExcludeResources, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ResourceListUpdateResource"))
+            if (content.Contains("ResourceListUpdateResources"))
             {
-                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListUpdateResource = (System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>) content.GetValueForProperty("ResourceListUpdateResource",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListUpdateResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IIncludeOrUpdateResource>(__y, Sample.API.Models.IncludeOrUpdateResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListUpdateResources = (System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>) content.GetValueForProperty("ResourceListUpdateResources",((Sample.API.Models.IAddOrUpdateResourcesRequestInternal)this).ResourceListUpdateResources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IIncludeOrUpdateResource>(__y, Sample.API.Models.IncludeOrUpdateResourceTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }
@@ -175,18 +167,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Request body of the AddOrUpdateResources API.
     [System.ComponentModel.TypeConverter(typeof(AddOrUpdateResourcesRequestTypeConverter))]

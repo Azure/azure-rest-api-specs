@@ -43,12 +43,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Error { get => this._error; set => this._error = value; }
 
-        /// <summary>Backing field for <see cref="Link" /> property.</summary>
-        private System.Collections.Generic.List<string> _link;
+        /// <summary>Backing field for <see cref="Links" /> property.</summary>
+        private System.Collections.Generic.List<string> _links;
 
         /// <summary>Links to relevant Azure documentation for configuring resiliency.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> Link { get => this._link; set => this._link = value; }
+        public System.Collections.Generic.List<string> Links { get => this._links; set => this._links = value; }
 
         /// <summary>Backing field for <see cref="Location" /> property.</summary>
         private string _location;
@@ -82,32 +82,32 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string SkuName { get => this._skuName; set => this._skuName = value; }
 
-        /// <summary>Backing field for <see cref="Step" /> property.</summary>
-        private System.Collections.Generic.List<string> _step;
+        /// <summary>Backing field for <see cref="Steps" /> property.</summary>
+        private System.Collections.Generic.List<string> _steps;
 
         /// <summary>Ordered list of actions to enable or improve resiliency for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> Step { get => this._step; set => this._step = value; }
+        public System.Collections.Generic.List<string> Steps { get => this._steps; set => this._steps = value; }
 
-        /// <summary>Backing field for <see cref="SuggestedRegion" /> property.</summary>
-        private System.Collections.Generic.List<string> _suggestedRegion;
+        /// <summary>Backing field for <see cref="SuggestedRegions" /> property.</summary>
+        private System.Collections.Generic.List<string> _suggestedRegions;
 
         /// <summary>
         /// Alternative Azure regions that support resiliency for this resource type. Populated when the current region does not support
         /// the required redundancy.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> SuggestedRegion { get => this._suggestedRegion; set => this._suggestedRegion = value; }
+        public System.Collections.Generic.List<string> SuggestedRegions { get => this._suggestedRegions; set => this._suggestedRegions = value; }
 
-        /// <summary>Backing field for <see cref="SuggestedSku" /> property.</summary>
-        private System.Collections.Generic.List<string> _suggestedSku;
+        /// <summary>Backing field for <see cref="SuggestedSkus" /> property.</summary>
+        private System.Collections.Generic.List<string> _suggestedSkus;
 
         /// <summary>
         /// Alternative SKUs that support redundancy for this resource type in the current region. Populated when the current SKU
         /// is not eligible for resiliency.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> SuggestedSku { get => this._suggestedSku; set => this._suggestedSku = value; }
+        public System.Collections.Generic.List<string> SuggestedSkus { get => this._suggestedSkus; set => this._suggestedSkus = value; }
 
         /// <summary>Creates an new <see cref="RecommendCapacityResourceResult" /> instance.</summary>
         public RecommendCapacityResourceResult()
@@ -172,7 +172,7 @@ namespace Sample.API.Models
         Description = @"Links to relevant Azure documentation for configuring resiliency.",
         SerializedName = @"links",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> Link { get; set; }
+        System.Collections.Generic.List<string> Links { get; set; }
         /// <summary>Azure region where the resource is deployed (e.g., 'eastus', 'westeurope').</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -231,7 +231,7 @@ namespace Sample.API.Models
         Description = @"Ordered list of actions to enable or improve resiliency for this resource.",
         SerializedName = @"steps",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> Step { get; set; }
+        System.Collections.Generic.List<string> Steps { get; set; }
         /// <summary>
         /// Alternative Azure regions that support resiliency for this resource type. Populated when the current region does not support
         /// the required redundancy.
@@ -245,7 +245,7 @@ namespace Sample.API.Models
         Description = @"Alternative Azure regions that support resiliency for this resource type. Populated when the current region does not support the required redundancy.",
         SerializedName = @"suggestedRegions",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> SuggestedRegion { get; set; }
+        System.Collections.Generic.List<string> SuggestedRegions { get; set; }
         /// <summary>
         /// Alternative SKUs that support redundancy for this resource type in the current region. Populated when the current SKU
         /// is not eligible for resiliency.
@@ -259,7 +259,7 @@ namespace Sample.API.Models
         Description = @"Alternative SKUs that support redundancy for this resource type in the current region. Populated when the current SKU is not eligible for resiliency.",
         SerializedName = @"suggestedSkus",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> SuggestedSku { get; set; }
+        System.Collections.Generic.List<string> SuggestedSkus { get; set; }
 
     }
     /// Resiliency assessment for a single Azure resource, including eligibility category, actionable guidance, and alternate
@@ -283,7 +283,7 @@ namespace Sample.API.Models
         /// </summary>
         string Error { get; set; }
         /// <summary>Links to relevant Azure documentation for configuring resiliency.</summary>
-        System.Collections.Generic.List<string> Link { get; set; }
+        System.Collections.Generic.List<string> Links { get; set; }
         /// <summary>Azure region where the resource is deployed (e.g., 'eastus', 'westeurope').</summary>
         string Location { get; set; }
         /// <summary>Fully qualified ARM resource ID of the evaluated resource.</summary>
@@ -297,17 +297,17 @@ namespace Sample.API.Models
         /// </summary>
         string SkuName { get; set; }
         /// <summary>Ordered list of actions to enable or improve resiliency for this resource.</summary>
-        System.Collections.Generic.List<string> Step { get; set; }
+        System.Collections.Generic.List<string> Steps { get; set; }
         /// <summary>
         /// Alternative Azure regions that support resiliency for this resource type. Populated when the current region does not support
         /// the required redundancy.
         /// </summary>
-        System.Collections.Generic.List<string> SuggestedRegion { get; set; }
+        System.Collections.Generic.List<string> SuggestedRegions { get; set; }
         /// <summary>
         /// Alternative SKUs that support redundancy for this resource type in the current region. Populated when the current SKU
         /// is not eligible for resiliency.
         /// </summary>
-        System.Collections.Generic.List<string> SuggestedSku { get; set; }
+        System.Collections.Generic.List<string> SuggestedSkus { get; set; }
 
     }
 }

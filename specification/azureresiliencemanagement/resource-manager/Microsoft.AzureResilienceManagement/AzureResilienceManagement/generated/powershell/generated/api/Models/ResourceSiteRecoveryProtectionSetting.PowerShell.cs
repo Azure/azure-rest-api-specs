@@ -55,14 +55,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.ResourceSiteRecoveryProtectionSetting"
         /// />.
         /// </summary>
@@ -112,17 +104,17 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("TestFailoverParam"))
+            if (content.Contains("TestFailoverParams"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParam = (Sample.API.Models.IResourceSiteRecoveryTestFailoverParams) content.GetValueForProperty("TestFailoverParam",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParam, Sample.API.Models.ResourceSiteRecoveryTestFailoverParamsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParams = (Sample.API.Models.IResourceSiteRecoveryTestFailoverParams) content.GetValueForProperty("TestFailoverParams",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParams, Sample.API.Models.ResourceSiteRecoveryTestFailoverParamsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("TestFailoverCleanupParam"))
+            if (content.Contains("TestFailoverCleanupParams"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParam = (Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams) content.GetValueForProperty("TestFailoverCleanupParam",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParam, Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParamsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParams = (Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams) content.GetValueForProperty("TestFailoverCleanupParams",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParams, Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParamsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ReprotectParam"))
+            if (content.Contains("ReprotectParams"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParam = (Sample.API.Models.IResourceSiteRecoveryReprotectParams) content.GetValueForProperty("ReprotectParam",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParam, Sample.API.Models.ResourceSiteRecoveryReprotectParamsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParams = (Sample.API.Models.IResourceSiteRecoveryReprotectParams) content.GetValueForProperty("ReprotectParams",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParams, Sample.API.Models.ResourceSiteRecoveryReprotectParamsTypeConverter.ConvertFrom);
             }
             if (content.Contains("ProtectionSolutionType"))
             {
@@ -132,13 +124,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParamNetworkResourceId = (string) content.GetValueForProperty("TestFailoverParamNetworkResourceId",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParamNetworkResourceId, global::System.Convert.ToString);
             }
-            if (content.Contains("TestFailoverCleanupParamComment"))
+            if (content.Contains("TestFailoverCleanupParamComments"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParamComment = (string) content.GetValueForProperty("TestFailoverCleanupParamComment",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParamComment, global::System.Convert.ToString);
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParamComments = (string) content.GetValueForProperty("TestFailoverCleanupParamComments",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParamComments, global::System.Convert.ToString);
             }
-            if (content.Contains("ReprotectParamDiskReprotectInputDetail"))
+            if (content.Contains("ReprotectParamDiskReprotectInputDetails"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParamDiskReprotectInputDetail = (System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails>) content.GetValueForProperty("ReprotectParamDiskReprotectInputDetail",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParamDiskReprotectInputDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IDiskReprotectInputDetails>(__y, Sample.API.Models.DiskReprotectInputDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParamDiskReprotectInputDetails = (System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails>) content.GetValueForProperty("ReprotectParamDiskReprotectInputDetails",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParamDiskReprotectInputDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IDiskReprotectInputDetails>(__y, Sample.API.Models.DiskReprotectInputDetailsTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -157,17 +149,17 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("TestFailoverParam"))
+            if (content.Contains("TestFailoverParams"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParam = (Sample.API.Models.IResourceSiteRecoveryTestFailoverParams) content.GetValueForProperty("TestFailoverParam",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParam, Sample.API.Models.ResourceSiteRecoveryTestFailoverParamsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParams = (Sample.API.Models.IResourceSiteRecoveryTestFailoverParams) content.GetValueForProperty("TestFailoverParams",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParams, Sample.API.Models.ResourceSiteRecoveryTestFailoverParamsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("TestFailoverCleanupParam"))
+            if (content.Contains("TestFailoverCleanupParams"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParam = (Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams) content.GetValueForProperty("TestFailoverCleanupParam",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParam, Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParamsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParams = (Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams) content.GetValueForProperty("TestFailoverCleanupParams",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParams, Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParamsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ReprotectParam"))
+            if (content.Contains("ReprotectParams"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParam = (Sample.API.Models.IResourceSiteRecoveryReprotectParams) content.GetValueForProperty("ReprotectParam",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParam, Sample.API.Models.ResourceSiteRecoveryReprotectParamsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParams = (Sample.API.Models.IResourceSiteRecoveryReprotectParams) content.GetValueForProperty("ReprotectParams",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParams, Sample.API.Models.ResourceSiteRecoveryReprotectParamsTypeConverter.ConvertFrom);
             }
             if (content.Contains("ProtectionSolutionType"))
             {
@@ -177,13 +169,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParamNetworkResourceId = (string) content.GetValueForProperty("TestFailoverParamNetworkResourceId",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverParamNetworkResourceId, global::System.Convert.ToString);
             }
-            if (content.Contains("TestFailoverCleanupParamComment"))
+            if (content.Contains("TestFailoverCleanupParamComments"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParamComment = (string) content.GetValueForProperty("TestFailoverCleanupParamComment",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParamComment, global::System.Convert.ToString);
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParamComments = (string) content.GetValueForProperty("TestFailoverCleanupParamComments",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).TestFailoverCleanupParamComments, global::System.Convert.ToString);
             }
-            if (content.Contains("ReprotectParamDiskReprotectInputDetail"))
+            if (content.Contains("ReprotectParamDiskReprotectInputDetails"))
             {
-                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParamDiskReprotectInputDetail = (System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails>) content.GetValueForProperty("ReprotectParamDiskReprotectInputDetail",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParamDiskReprotectInputDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IDiskReprotectInputDetails>(__y, Sample.API.Models.DiskReprotectInputDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParamDiskReprotectInputDetails = (System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails>) content.GetValueForProperty("ReprotectParamDiskReprotectInputDetails",((Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal)this).ReprotectParamDiskReprotectInputDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IDiskReprotectInputDetails>(__y, Sample.API.Models.DiskReprotectInputDetailsTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }
@@ -192,18 +184,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Definition of recovery orchestration resource protection with azure site recovery.
     [System.ComponentModel.TypeConverter(typeof(ResourceSiteRecoveryProtectionSettingTypeConverter))]

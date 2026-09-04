@@ -11,12 +11,12 @@ namespace Sample.API.Models
         Sample.API.Models.IRecoveryGroupsSettingInternal
     {
 
-        /// <summary>Backing field for <see cref="AdditionalGroup" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> _additionalGroup;
+        /// <summary>Backing field for <see cref="AdditionalGroups" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> _additionalGroups;
 
         /// <summary>Additional recovery orchestration group settings.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> AdditionalGroup { get => this._additionalGroup; set => this._additionalGroup = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> AdditionalGroups { get => this._additionalGroups; set => this._additionalGroups = value; }
 
         /// <summary>Backing field for <see cref="DefaultGroup" /> property.</summary>
         private Sample.API.Models.IRecoveryGroup _defaultGroup;
@@ -82,11 +82,11 @@ namespace Sample.API.Models
 
         /// <summary>Post-actions for the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).PostAction; set => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).PostAction = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).PostActions; set => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).PostActions = value ?? null /* arrayOf */; }
 
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).PreAction; set => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).PreAction = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).PreActions; set => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).PreActions = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for DefaultGroup</summary>
         Sample.API.Models.IRecoveryGroup Sample.API.Models.IRecoveryGroupsSettingInternal.DefaultGroup { get => (this._defaultGroup = this._defaultGroup ?? new Sample.API.Models.RecoveryGroup()); set { {_defaultGroup = value;} } }
@@ -97,8 +97,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for DefaultGroupName</summary>
         string Sample.API.Models.IRecoveryGroupsSettingInternal.DefaultGroupName { get => ((Sample.API.Models.IResourceInternal)DefaultGroup).Name; set => ((Sample.API.Models.IResourceInternal)DefaultGroup).Name = value ?? null; }
 
-        /// <summary>Internal Acessors for DefaultGroupProperty</summary>
-        Sample.API.Models.IRecoveryGroupProperties Sample.API.Models.IRecoveryGroupsSettingInternal.DefaultGroupProperty { get => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).Property; set => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).Property = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for DefaultGroupProperties</summary>
+        Sample.API.Models.IRecoveryGroupProperties Sample.API.Models.IRecoveryGroupsSettingInternal.DefaultGroupProperties { get => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).Properties; set => ((Sample.API.Models.IRecoveryGroupInternal)DefaultGroup).Properties = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for DefaultGroupSystemData</summary>
         Sample.API.Models.ISystemData Sample.API.Models.IRecoveryGroupsSettingInternal.DefaultGroupSystemData { get => ((Sample.API.Models.IResourceInternal)DefaultGroup).SystemData; set => ((Sample.API.Models.IResourceInternal)DefaultGroup).SystemData = value ?? null /* model class */; }
@@ -144,7 +144,7 @@ namespace Sample.API.Models
         Description = @"Additional recovery orchestration group settings.",
         SerializedName = @"additionalGroups",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroup) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> AdditionalGroup { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> AdditionalGroups { get; set; }
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         /// </summary>
@@ -155,7 +155,7 @@ namespace Sample.API.Models
         Create = false,
         Update = false,
         Description = @"Fully qualified resource ID for the resource. E.g. ""/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}""",
-        SerializedName = @"ResourceGroupName",
+        SerializedName = @"id",
         PossibleTypes = new [] { typeof(string) })]
         string DefaultGroupId { get;  }
         /// <summary>The name of the resource</summary>
@@ -293,7 +293,7 @@ namespace Sample.API.Models
         Description = @"Post-actions for the recovery orchestration group.",
         SerializedName = @"postActions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroupBaseAction) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get; set; }
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -304,7 +304,7 @@ namespace Sample.API.Models
         Description = @"Pre-actions for the recovery orchestration group.",
         SerializedName = @"preActions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroupBaseAction) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get; set; }
 
     }
     /// Settings for the recovery orchestration groups.
@@ -312,7 +312,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Additional recovery orchestration group settings.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> AdditionalGroup { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup> AdditionalGroups { get; set; }
         /// <summary>
         /// The default recovery orchestration group setting. Every recovery orchestration plan has a default recovery orchestration
         /// group.
@@ -325,7 +325,7 @@ namespace Sample.API.Models
         /// <summary>The name of the resource</summary>
         string DefaultGroupName { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IRecoveryGroupProperties DefaultGroupProperty { get; set; }
+        Sample.API.Models.IRecoveryGroupProperties DefaultGroupProperties { get; set; }
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
         /// </summary>
@@ -355,9 +355,9 @@ namespace Sample.API.Models
         /// <summary>The order ID of the recovery orchestration group.</summary>
         int? OrderId { get; set; }
         /// <summary>Post-actions for the recovery orchestration group.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get; set; }
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get; set; }
 
     }
 }

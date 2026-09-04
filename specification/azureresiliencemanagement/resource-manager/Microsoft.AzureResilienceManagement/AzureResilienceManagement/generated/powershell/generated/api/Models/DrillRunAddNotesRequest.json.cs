@@ -63,7 +63,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_note = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("notes"), out var __jsonNotes) ? (string)__jsonNotes : (string)_note;}
+            {_notes = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("notes"), out var __jsonNotes) ? (string)__jsonNotes : (string)_notes;}
             {_timestamp = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("timestamp"), out var __jsonTimestamp) ? global::System.DateTime.TryParse((string)__jsonTimestamp, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonTimestampValue) ? __jsonTimestampValue : _timestamp : _timestamp;}
             {_author = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("author"), out var __jsonAuthor) ? (string)__jsonAuthor : (string)_author;}
             AfterFromJson(json);
@@ -98,7 +98,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != (((object)this._note)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._note.ToString()) : null, "notes" ,container.Add );
+            AddIf( null != (((object)this._notes)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._notes.ToString()) : null, "notes" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
                 AddIf( null != this._timestamp ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._timestamp?.ToString(@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK",global::System.Globalization.CultureInfo.InvariantCulture)) : null, "timestamp" ,container.Add );

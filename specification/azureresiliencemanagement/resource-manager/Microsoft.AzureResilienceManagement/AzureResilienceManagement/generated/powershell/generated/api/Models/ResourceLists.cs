@@ -11,26 +11,26 @@ namespace Sample.API.Models
         Sample.API.Models.IResourceListsInternal
     {
 
-        /// <summary>Backing field for <see cref="ExcludeResource" /> property.</summary>
-        private System.Collections.Generic.List<string> _excludeResource;
+        /// <summary>Backing field for <see cref="ExcludeResources" /> property.</summary>
+        private System.Collections.Generic.List<string> _excludeResources;
 
         /// <summary>Excluded resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ExcludeResource { get => this._excludeResource; set => this._excludeResource = value; }
+        public System.Collections.Generic.List<string> ExcludeResources { get => this._excludeResources; set => this._excludeResources = value; }
 
-        /// <summary>Backing field for <see cref="IncludeResource" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> _includeResource;
+        /// <summary>Backing field for <see cref="IncludeResources" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> _includeResources;
 
         /// <summary>Include resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> IncludeResource { get => this._includeResource; set => this._includeResource = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> IncludeResources { get => this._includeResources; set => this._includeResources = value; }
 
-        /// <summary>Backing field for <see cref="UpdateResource" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> _updateResource;
+        /// <summary>Backing field for <see cref="UpdateResources" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> _updateResources;
 
         /// <summary>Update resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> UpdateResource { get => this._updateResource; set => this._updateResource = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> UpdateResources { get => this._updateResources; set => this._updateResources = value; }
 
         /// <summary>Creates an new <see cref="ResourceLists" /> instance.</summary>
         public ResourceLists()
@@ -52,7 +52,7 @@ namespace Sample.API.Models
         Description = @"Excluded resource",
         SerializedName = @"excludeResources",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ExcludeResource { get; set; }
+        System.Collections.Generic.List<string> ExcludeResources { get; set; }
         /// <summary>Include resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -63,7 +63,7 @@ namespace Sample.API.Models
         Description = @"Include resource",
         SerializedName = @"includeResources",
         PossibleTypes = new [] { typeof(Sample.API.Models.IIncludeOrUpdateResource) })]
-        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> IncludeResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> IncludeResources { get; set; }
         /// <summary>Update resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -74,7 +74,7 @@ namespace Sample.API.Models
         Description = @"Update resource",
         SerializedName = @"updateResources",
         PossibleTypes = new [] { typeof(Sample.API.Models.IIncludeOrUpdateResource) })]
-        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> UpdateResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> UpdateResources { get; set; }
 
     }
     /// Add, Update, Delete resource lists
@@ -82,11 +82,11 @@ namespace Sample.API.Models
 
     {
         /// <summary>Excluded resource</summary>
-        System.Collections.Generic.List<string> ExcludeResource { get; set; }
+        System.Collections.Generic.List<string> ExcludeResources { get; set; }
         /// <summary>Include resource</summary>
-        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> IncludeResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> IncludeResources { get; set; }
         /// <summary>Update resource</summary>
-        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> UpdateResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource> UpdateResources { get; set; }
 
     }
 }

@@ -55,14 +55,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.DrillRunResource"
         /// />.
         /// </summary>
@@ -98,9 +90,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).Property = (Sample.API.Models.IDrillRunResourceProperties) content.GetValueForProperty("Property",((Sample.API.Models.IDrillRunResourceInternal)this).Property, Sample.API.Models.DrillRunResourcePropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunResourceInternal)this).Properties = (Sample.API.Models.IDrillRunResourceProperties) content.GetValueForProperty("Properties",((Sample.API.Models.IDrillRunResourceInternal)this).Properties, Sample.API.Models.DrillRunResourcePropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -150,9 +142,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunResourceInternal)this).JobExtendedInfoTasksList = (System.Collections.Generic.List<Sample.API.Models.IJobTaskDetail>) content.GetValueForProperty("JobExtendedInfoTasksList",((Sample.API.Models.IDrillRunResourceInternal)this).JobExtendedInfoTasksList, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobTaskDetail>(__y, Sample.API.Models.JobTaskDetailTypeConverter.ConvertFrom));
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetail = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetail, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetails = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetails, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
             }
             if (content.Contains("JobExtendedInfo"))
             {
@@ -182,13 +174,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunResourceInternal)this).Operation = (string) content.GetValueForProperty("Operation",((Sample.API.Models.IDrillRunResourceInternal)this).Operation, global::System.Convert.ToString);
             }
-            if (content.Contains("RetryDetail"))
+            if (content.Contains("RetryDetails"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).RetryDetail = (System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>) content.GetValueForProperty("RetryDetail",((Sample.API.Models.IDrillRunResourceInternal)this).RetryDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobRetryDetails>(__y, Sample.API.Models.JobRetryDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillRunResourceInternal)this).RetryDetails = (System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>) content.GetValueForProperty("RetryDetails",((Sample.API.Models.IDrillRunResourceInternal)this).RetryDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobRetryDetails>(__y, Sample.API.Models.JobRetryDetailsTypeConverter.ConvertFrom));
             }
-            if (content.Contains("UserComment"))
+            if (content.Contains("UserComments"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).UserComment = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComment",((Sample.API.Models.IDrillRunResourceInternal)this).UserComment, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillRunResourceInternal)this).UserComments = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComments",((Sample.API.Models.IDrillRunResourceInternal)this).UserComments, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
             }
             if (content.Contains("JobId"))
             {
@@ -214,9 +206,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailErrorMessage = (string) content.GetValueForProperty("ErrorDetailErrorMessage",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailRecommendation"))
+            if (content.Contains("ErrorDetailRecommendations"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendation",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendations",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("JobExtendedInfoDynamicErrorMessage"))
             {
@@ -239,9 +231,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).Property = (Sample.API.Models.IDrillRunResourceProperties) content.GetValueForProperty("Property",((Sample.API.Models.IDrillRunResourceInternal)this).Property, Sample.API.Models.DrillRunResourcePropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunResourceInternal)this).Properties = (Sample.API.Models.IDrillRunResourceProperties) content.GetValueForProperty("Properties",((Sample.API.Models.IDrillRunResourceInternal)this).Properties, Sample.API.Models.DrillRunResourcePropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -291,9 +283,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunResourceInternal)this).JobExtendedInfoTasksList = (System.Collections.Generic.List<Sample.API.Models.IJobTaskDetail>) content.GetValueForProperty("JobExtendedInfoTasksList",((Sample.API.Models.IDrillRunResourceInternal)this).JobExtendedInfoTasksList, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobTaskDetail>(__y, Sample.API.Models.JobTaskDetailTypeConverter.ConvertFrom));
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetail = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetail, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetails = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetails, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
             }
             if (content.Contains("JobExtendedInfo"))
             {
@@ -323,13 +315,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunResourceInternal)this).Operation = (string) content.GetValueForProperty("Operation",((Sample.API.Models.IDrillRunResourceInternal)this).Operation, global::System.Convert.ToString);
             }
-            if (content.Contains("RetryDetail"))
+            if (content.Contains("RetryDetails"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).RetryDetail = (System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>) content.GetValueForProperty("RetryDetail",((Sample.API.Models.IDrillRunResourceInternal)this).RetryDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobRetryDetails>(__y, Sample.API.Models.JobRetryDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillRunResourceInternal)this).RetryDetails = (System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>) content.GetValueForProperty("RetryDetails",((Sample.API.Models.IDrillRunResourceInternal)this).RetryDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobRetryDetails>(__y, Sample.API.Models.JobRetryDetailsTypeConverter.ConvertFrom));
             }
-            if (content.Contains("UserComment"))
+            if (content.Contains("UserComments"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).UserComment = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComment",((Sample.API.Models.IDrillRunResourceInternal)this).UserComment, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillRunResourceInternal)this).UserComments = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComments",((Sample.API.Models.IDrillRunResourceInternal)this).UserComments, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
             }
             if (content.Contains("JobId"))
             {
@@ -355,9 +347,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailErrorMessage = (string) content.GetValueForProperty("ErrorDetailErrorMessage",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailRecommendation"))
+            if (content.Contains("ErrorDetailRecommendations"))
             {
-                ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendation",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendations",((Sample.API.Models.IDrillRunResourceInternal)this).ErrorDetailRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("JobExtendedInfoDynamicErrorMessage"))
             {
@@ -377,18 +369,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Represents a Drill Run job resource in the Azure Resilience Management provider namespace.
     [System.ComponentModel.TypeConverter(typeof(DrillRunResourceTypeConverter))]

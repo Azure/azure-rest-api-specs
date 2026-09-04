@@ -25,23 +25,23 @@ namespace Sample.API.Models
 
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailAdditionalInfo; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailAdditionalInfo; }
 
         /// <summary>The error code.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailCode { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailCode; }
+        public string ErrorDetailCode { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailCode; }
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailDetails; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailDetails; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailMessage { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailMessage; }
+        public string ErrorDetailMessage { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailMessage; }
 
         /// <summary>The error target.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailTarget { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailTarget; }
+        public string ErrorDetailTarget { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailTarget; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -59,22 +59,18 @@ namespace Sample.API.Models
 
         /// <summary>The type of the usage plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string PlanType { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).PlanType; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).PlanType = value ?? null; }
+        public string PlanType { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).PlanType; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).PlanType = value ?? null; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IUsagePlanProperties _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IUsagePlanProperties _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IUsagePlanProperties Property { get => (this._property = this._property ?? new Sample.API.Models.UsagePlanProperties()); set => this._property = value; }
+        internal Sample.API.Models.IUsagePlanProperties Properties { get => (this._properties = this._properties ?? new Sample.API.Models.UsagePlanProperties()); set => this._properties = value; }
 
         /// <summary>Provisioning state of the usage plan.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ProvisioningState { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ProvisioningState; }
-
-        /// <summary>Gets the resource group name</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
+        public string ProvisioningState { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ProvisioningState; }
 
         /// <summary>Backing field for <see cref="RetryAfter" /> property.</summary>
         private int? _retryAfter;
@@ -112,29 +108,29 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for Type</summary>
         string Sample.API.Models.IResourceInternal.Type { get => ((Sample.API.Models.IResourceInternal)__trackedResource).Type; set => ((Sample.API.Models.IResourceInternal)__trackedResource).Type = value ?? null; }
 
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IUsagePlanInternal.ErrorDetail { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetail; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetail = value ?? null /* model class */; }
-
         /// <summary>Internal Acessors for ErrorDetailAdditionalInfo</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IUsagePlanInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IUsagePlanInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailCode</summary>
-        string Sample.API.Models.IUsagePlanInternal.ErrorDetailCode { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailCode; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailCode = value ?? null; }
+        string Sample.API.Models.IUsagePlanInternal.ErrorDetailCode { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailCode; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailDetails</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IUsagePlanInternal.ErrorDetailDetails { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailDetails; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailDetails = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IUsagePlanInternal.ErrorDetailDetails { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailDetails; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailDetails = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailMessage</summary>
-        string Sample.API.Models.IUsagePlanInternal.ErrorDetailMessage { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailMessage; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailMessage = value ?? null; }
+        string Sample.API.Models.IUsagePlanInternal.ErrorDetailMessage { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailMessage; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailMessage = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailTarget</summary>
-        string Sample.API.Models.IUsagePlanInternal.ErrorDetailTarget { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailTarget; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ErrorDetailTarget = value ?? null; }
+        string Sample.API.Models.IUsagePlanInternal.ErrorDetailTarget { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailTarget; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetailTarget = value ?? null; }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IUsagePlanProperties Sample.API.Models.IUsagePlanInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.UsagePlanProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IUsagePlanInternal.ErrorDetails { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetails; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ErrorDetails = value ?? null /* model class */; }
+
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IUsagePlanProperties Sample.API.Models.IUsagePlanInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.UsagePlanProperties()); set { {_properties = value;} } }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
-        string Sample.API.Models.IUsagePlanInternal.ProvisioningState { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ProvisioningState; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Property).ProvisioningState = value ?? null; }
+        string Sample.API.Models.IUsagePlanInternal.ProvisioningState { get => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ProvisioningState; set => ((Sample.API.Models.IUsagePlanPropertiesInternal)Properties).ProvisioningState = value ?? null; }
 
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -168,7 +164,7 @@ namespace Sample.API.Models
 
         /// <summary>Resource tags.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public Sample.API.Models.ITrackedResourceTags Tag { get => ((Sample.API.Models.ITrackedResourceInternal)__trackedResource).Tag; set => ((Sample.API.Models.ITrackedResourceInternal)__trackedResource).Tag = value ?? null /* model class */; }
+        public Sample.API.Models.ITrackedResourceTags Tags { get => ((Sample.API.Models.ITrackedResourceInternal)__trackedResource).Tags; set => ((Sample.API.Models.ITrackedResourceInternal)__trackedResource).Tags = value ?? null /* model class */; }
 
         /// <summary>
         /// The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
@@ -319,8 +315,6 @@ namespace Sample.API.Models
         Sample.API.Models.ITrackedResourceInternal
     {
         string AzureAsyncOperation { get; set; }
-        /// <summary>Details of any errors encountered during Usage Plan create or update.</summary>
-        Sample.API.Models.IErrorDetail ErrorDetail { get; set; }
         /// <summary>The error additional info.</summary>
         System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get; set; }
         /// <summary>The error code.</summary>
@@ -331,11 +325,13 @@ namespace Sample.API.Models
         string ErrorDetailMessage { get; set; }
         /// <summary>The error target.</summary>
         string ErrorDetailTarget { get; set; }
+        /// <summary>Details of any errors encountered during Usage Plan create or update.</summary>
+        Sample.API.Models.IErrorDetail ErrorDetails { get; set; }
         /// <summary>The type of the usage plan.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Basic", "Standard")]
         string PlanType { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IUsagePlanProperties Property { get; set; }
+        Sample.API.Models.IUsagePlanProperties Properties { get; set; }
         /// <summary>Provisioning state of the usage plan.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted", "NeedsAttention")]
         string ProvisioningState { get; set; }

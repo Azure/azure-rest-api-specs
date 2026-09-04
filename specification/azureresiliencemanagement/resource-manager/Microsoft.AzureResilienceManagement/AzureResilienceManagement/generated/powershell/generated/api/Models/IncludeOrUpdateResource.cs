@@ -13,37 +13,37 @@ namespace Sample.API.Models
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName = value ?? null; }
+        public string CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultName = value ?? null; }
 
         /// <summary>ID of ARM resource used for automation (e.g. Automation runbook URL).</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultScriptResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultScriptResourceId = value ?? null; }
+        public string CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultScriptResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultScriptResourceId = value ?? null; }
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultName; }
+        public string DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultName; }
 
         /// <summary>
         /// ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource
         /// and not the actual resource which is to be simulated for faulting.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultTargetResourceId; }
+        public string DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultTargetResourceId; }
 
         /// <summary>fault urn.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultUrn; }
+        public string DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultUrn; }
 
-        /// <summary>Backing field for <see cref="FaultProperty" /> property.</summary>
-        private Sample.API.Models.IFaultProperties _faultProperty;
+        /// <summary>Backing field for <see cref="FaultProperties" /> property.</summary>
+        private Sample.API.Models.IFaultProperties _faultProperties;
 
         /// <summary>Fault properties.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IFaultProperties FaultProperty { get => (this._faultProperty = this._faultProperty ?? new Sample.API.Models.FaultProperties()); set => this._faultProperty = value; }
+        internal Sample.API.Models.IFaultProperties FaultProperties { get => (this._faultProperties = this._faultProperties ?? new Sample.API.Models.FaultProperties()); set => this._faultProperties = value; }
 
         /// <summary>Available faults for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).AvailableFault; }
+        public System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFaults { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).AvailableFaults; }
 
         /// <summary>Backing field for <see cref="Id" /> property.</summary>
         private string _id;
@@ -56,42 +56,42 @@ namespace Sample.API.Models
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultName = value ?? null; }
+        public string OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultName = value ?? null; }
 
         /// <summary>
         /// ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource
         /// and not the actual resource which is to be simulated for faulting.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultTargetResourceId = value ?? null; }
+        public string OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultTargetResourceId = value ?? null; }
 
         /// <summary>fault urn.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultUrn = value ?? null; }
+        public string OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultUrn = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultFaultName</summary>
-        string Sample.API.Models.IIncludeOrUpdateResourceInternal.DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultName = value ?? null; }
+        string Sample.API.Models.IIncludeOrUpdateResourceInternal.DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultName = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultFaultTargetResourceId</summary>
-        string Sample.API.Models.IIncludeOrUpdateResourceInternal.DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultTargetResourceId = value ?? null; }
+        string Sample.API.Models.IIncludeOrUpdateResourceInternal.DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultTargetResourceId = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultFaultUrn</summary>
-        string Sample.API.Models.IIncludeOrUpdateResourceInternal.DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultUrn = value ?? null; }
+        string Sample.API.Models.IIncludeOrUpdateResourceInternal.DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultUrn = value ?? null; }
 
-        /// <summary>Internal Acessors for FaultProperty</summary>
-        Sample.API.Models.IFaultProperties Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultProperty { get => (this._faultProperty = this._faultProperty ?? new Sample.API.Models.FaultProperties()); set { {_faultProperty = value;} } }
+        /// <summary>Internal Acessors for FaultProperties</summary>
+        Sample.API.Models.IFaultProperties Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultProperties { get => (this._faultProperties = this._faultProperties ?? new Sample.API.Models.FaultProperties()); set { {_faultProperties = value;} } }
 
-        /// <summary>Internal Acessors for FaultPropertyAvailableFault</summary>
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultPropertyAvailableFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).AvailableFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).AvailableFault = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for FaultPropertyAvailableFaults</summary>
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultPropertyAvailableFaults { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).AvailableFaults; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).AvailableFaults = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for FaultPropertyCustomFault</summary>
-        Sample.API.Models.ICustomFaultDetails Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultPropertyCustomFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFault = value ?? null /* model class */; }
+        Sample.API.Models.ICustomFaultDetails Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultPropertyCustomFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFault = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for FaultPropertyDefaultFault</summary>
-        Sample.API.Models.IFaultDetails Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultPropertyDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFault = value ?? null /* model class */; }
+        Sample.API.Models.IFaultDetails Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultPropertyDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFault = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for FaultPropertyOverriddenDefaultFault</summary>
-        Sample.API.Models.IFaultDetails Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultPropertyOverriddenDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFault = value ?? null /* model class */; }
+        Sample.API.Models.IFaultDetails Sample.API.Models.IIncludeOrUpdateResourceInternal.FaultPropertyOverriddenDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFault = value ?? null /* model class */; }
 
         /// <summary>Creates an new <see cref="IncludeOrUpdateResource" /> instance.</summary>
         public IncludeOrUpdateResource()
@@ -171,7 +171,7 @@ namespace Sample.API.Models
         Description = @"Available faults for this resource.",
         SerializedName = @"availableFaults",
         PossibleTypes = new [] { typeof(Sample.API.Models.IFaultDetails) })]
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFault { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFaults { get;  }
         /// <summary>
         /// Id of the DrillResource to be included (NOT the ARM Id of the underlying resource).
         /// </summary>
@@ -241,9 +241,9 @@ namespace Sample.API.Models
         /// <summary>fault urn.</summary>
         string DefaultFaultUrn { get; set; }
         /// <summary>Fault properties.</summary>
-        Sample.API.Models.IFaultProperties FaultProperty { get; set; }
+        Sample.API.Models.IFaultProperties FaultProperties { get; set; }
         /// <summary>Available faults for this resource.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFault { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFaults { get; set; }
         /// <summary>Custom Fault Details selected by user</summary>
         Sample.API.Models.ICustomFaultDetails FaultPropertyCustomFault { get; set; }
         /// <summary>Default fault provided by the system.</summary>

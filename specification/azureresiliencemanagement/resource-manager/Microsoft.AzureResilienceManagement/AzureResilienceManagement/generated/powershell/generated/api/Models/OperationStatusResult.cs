@@ -21,7 +21,7 @@ namespace Sample.API.Models
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Detail { get => ((Sample.API.Models.IErrorDetailInternal)Error).Detail; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Details { get => ((Sample.API.Models.IErrorDetailInternal)Error).Details; }
 
         /// <summary>Backing field for <see cref="EndTime" /> property.</summary>
         private global::System.DateTime? _endTime;
@@ -55,12 +55,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Name { get => this._name; set => this._name = value; }
 
-        /// <summary>Backing field for <see cref="Operation" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult> _operation;
+        /// <summary>Backing field for <see cref="Operations" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult> _operations;
 
         /// <summary>The operations list.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult> Operation { get => this._operation; set => this._operation = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult> Operations { get => this._operations; set => this._operations = value; }
 
         /// <summary>Backing field for <see cref="PercentComplete" /> property.</summary>
         private float? _percentComplete;
@@ -68,10 +68,6 @@ namespace Sample.API.Models
         /// <summary>Percent of the operation that is complete.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public float? PercentComplete { get => this._percentComplete; set => this._percentComplete = value; }
-
-        /// <summary>Gets the resource group name</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
 
         /// <summary>Backing field for <see cref="ResourceId" /> property.</summary>
         private string _resourceId;
@@ -88,8 +84,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for Code</summary>
         string Sample.API.Models.IOperationStatusResultInternal.Code { get => ((Sample.API.Models.IErrorDetailInternal)Error).Code; set => ((Sample.API.Models.IErrorDetailInternal)Error).Code = value ?? null; }
 
-        /// <summary>Internal Acessors for Detail</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IOperationStatusResultInternal.Detail { get => ((Sample.API.Models.IErrorDetailInternal)Error).Detail; set => ((Sample.API.Models.IErrorDetailInternal)Error).Detail = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for Details</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IOperationStatusResultInternal.Details { get => ((Sample.API.Models.IErrorDetailInternal)Error).Details; set => ((Sample.API.Models.IErrorDetailInternal)Error).Details = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for Error</summary>
         Sample.API.Models.IErrorDetail Sample.API.Models.IOperationStatusResultInternal.Error { get => (this._error = this._error ?? new Sample.API.Models.ErrorDetail()); set { {_error = value;} } }
@@ -163,7 +159,7 @@ namespace Sample.API.Models
         Description = @"The error details.",
         SerializedName = @"details",
         PossibleTypes = new [] { typeof(Sample.API.Models.IErrorDetail) })]
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Detail { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Details { get;  }
         /// <summary>The end time of the operation.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -218,7 +214,7 @@ namespace Sample.API.Models
         Description = @"The operations list.",
         SerializedName = @"operations",
         PossibleTypes = new [] { typeof(Sample.API.Models.IOperationStatusResult) })]
-        System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult> Operation { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult> Operations { get; set; }
         /// <summary>Percent of the operation that is complete.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -287,7 +283,7 @@ namespace Sample.API.Models
         /// <summary>The error code.</summary>
         string Code { get; set; }
         /// <summary>The error details.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Detail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Details { get; set; }
         /// <summary>The end time of the operation.</summary>
         global::System.DateTime? EndTime { get; set; }
         /// <summary>If present, details of the operation error.</summary>
@@ -299,7 +295,7 @@ namespace Sample.API.Models
         /// <summary>Name of the async operation.</summary>
         string Name { get; set; }
         /// <summary>The operations list.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult> Operation { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IOperationStatusResult> Operations { get; set; }
         /// <summary>Percent of the operation that is complete.</summary>
         float? PercentComplete { get; set; }
         /// <summary>

@@ -11,32 +11,32 @@ namespace Sample.API.Models
         Sample.API.Models.IGoalAssignmentPropertiesInternal
     {
 
-        /// <summary>Backing field for <see cref="ErrorDetail" /> property.</summary>
-        private Sample.API.Models.IErrorDetail _errorDetail;
-
-        /// <summary>Details of any errors encountered during the operation.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IErrorDetail ErrorDetail { get => (this._errorDetail = this._errorDetail ?? new Sample.API.Models.ErrorDetail()); }
-
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).AdditionalInfo; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).AdditionalInfo; }
 
         /// <summary>The error code.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailCode { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Code; }
+        public string ErrorDetailCode { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Code; }
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Detail; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Details; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailMessage { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Message; }
+        public string ErrorDetailMessage { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Message; }
 
         /// <summary>The error target.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailTarget { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Target; }
+        public string ErrorDetailTarget { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Target; }
+
+        /// <summary>Backing field for <see cref="ErrorDetails" /> property.</summary>
+        private Sample.API.Models.IErrorDetail _errorDetails;
+
+        /// <summary>Details of any errors encountered during the operation.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IErrorDetail ErrorDetails { get => (this._errorDetails = this._errorDetails ?? new Sample.API.Models.ErrorDetail()); }
 
         /// <summary>Backing field for <see cref="GoalAssignmentType" /> property.</summary>
         private string _goalAssignmentType;
@@ -66,33 +66,33 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public bool? RequireZonalResiliency { get => this._requireZonalResiliency; set => this._requireZonalResiliency = value; }
 
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetail { get => (this._errorDetail = this._errorDetail ?? new Sample.API.Models.ErrorDetail()); set { {_errorDetail = value;} } }
-
         /// <summary>Internal Acessors for ErrorDetailAdditionalInfo</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).AdditionalInfo; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).AdditionalInfo = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).AdditionalInfo; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).AdditionalInfo = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailCode</summary>
-        string Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailCode { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Code; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Code = value ?? null; }
+        string Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailCode { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Code; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Code = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailDetails</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailDetails { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Detail; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Detail = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailDetails { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Details; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Details = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailMessage</summary>
-        string Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailMessage { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Message; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Message = value ?? null; }
+        string Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailMessage { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Message; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Message = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailTarget</summary>
-        string Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailTarget { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Target; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Target = value ?? null; }
+        string Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetailTarget { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Target; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Target = value ?? null; }
+
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IGoalAssignmentPropertiesInternal.ErrorDetails { get => (this._errorDetails = this._errorDetails ?? new Sample.API.Models.ErrorDetail()); set { {_errorDetails = value;} } }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
         string Sample.API.Models.IGoalAssignmentPropertiesInternal.ProvisioningState { get => this._provisioningState; set { {_provisioningState = value;} } }
 
-        /// <summary>Backing field for <see cref="ServiceLevelResource" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> _serviceLevelResource;
+        /// <summary>Backing field for <see cref="ServiceLevelResources" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> _serviceLevelResources;
 
         /// <summary>List of service level resources.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> ServiceLevelResource { get => this._serviceLevelResource; set => this._serviceLevelResource = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> ServiceLevelResources { get => this._serviceLevelResources; set => this._serviceLevelResources = value; }
 
         /// <summary>Creates an new <see cref="GoalAssignmentProperties" /> instance.</summary>
         public GoalAssignmentProperties()
@@ -215,15 +215,13 @@ namespace Sample.API.Models
         Description = @"List of service level resources.",
         SerializedName = @"serviceLevelResources",
         PossibleTypes = new [] { typeof(Sample.API.Models.IServiceLevelResource) })]
-        System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> ServiceLevelResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> ServiceLevelResources { get; set; }
 
     }
     /// Definition of goal assignment property.
     internal partial interface IGoalAssignmentPropertiesInternal
 
     {
-        /// <summary>Details of any errors encountered during the operation.</summary>
-        Sample.API.Models.IErrorDetail ErrorDetail { get; set; }
         /// <summary>The error additional info.</summary>
         System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get; set; }
         /// <summary>The error code.</summary>
@@ -234,6 +232,8 @@ namespace Sample.API.Models
         string ErrorDetailMessage { get; set; }
         /// <summary>The error target.</summary>
         string ErrorDetailTarget { get; set; }
+        /// <summary>Details of any errors encountered during the operation.</summary>
+        Sample.API.Models.IErrorDetail ErrorDetails { get; set; }
         /// <summary>The type of goal assignment.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Resiliency")]
         string GoalAssignmentType { get; set; }
@@ -245,7 +245,7 @@ namespace Sample.API.Models
         /// <summary>Whether zonal resiliency is required for this goal assignment.</summary>
         bool? RequireZonalResiliency { get; set; }
         /// <summary>List of service level resources.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> ServiceLevelResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource> ServiceLevelResources { get; set; }
 
     }
 }

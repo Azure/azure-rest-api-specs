@@ -79,10 +79,10 @@ namespace Sample.API.Models
             {_highAvailabilityAttestationStatus = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("highAvailabilityAttestationStatus"), out var __jsonHighAvailabilityAttestationStatus) ? (string)__jsonHighAvailabilityAttestationStatus : (string)_highAvailabilityAttestationStatus;}
             {_disasterRecoveryGoalParticipation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("disasterRecoveryGoalParticipation"), out var __jsonDisasterRecoveryGoalParticipation) ? (string)__jsonDisasterRecoveryGoalParticipation : (string)_disasterRecoveryGoalParticipation;}
             {_disasterRecoveryAttestationStatus = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("disasterRecoveryAttestationStatus"), out var __jsonDisasterRecoveryAttestationStatus) ? (string)__jsonDisasterRecoveryAttestationStatus : (string)_disasterRecoveryAttestationStatus;}
-            {_exclusionReasonForHighAvailabilityGoal = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("exclusionReasonForHighAvailabilityGoals"), out var __jsonExclusionReasonForHighAvailabilityGoals) ? (string)__jsonExclusionReasonForHighAvailabilityGoals : (string)_exclusionReasonForHighAvailabilityGoal;}
-            {_exclusionReasonForDisasterRecoveryGoal = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("exclusionReasonForDisasterRecoveryGoals"), out var __jsonExclusionReasonForDisasterRecoveryGoals) ? (string)__jsonExclusionReasonForDisasterRecoveryGoals : (string)_exclusionReasonForDisasterRecoveryGoal;}
+            {_exclusionReasonForHighAvailabilityGoals = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("exclusionReasonForHighAvailabilityGoals"), out var __jsonExclusionReasonForHighAvailabilityGoals) ? (string)__jsonExclusionReasonForHighAvailabilityGoals : (string)_exclusionReasonForHighAvailabilityGoals;}
+            {_exclusionReasonForDisasterRecoveryGoals = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("exclusionReasonForDisasterRecoveryGoals"), out var __jsonExclusionReasonForDisasterRecoveryGoals) ? (string)__jsonExclusionReasonForDisasterRecoveryGoals : (string)_exclusionReasonForDisasterRecoveryGoals;}
             {_userConfirmationForHighAvailability = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("userConfirmationForHighAvailability"), out var __jsonUserConfirmationForHighAvailability) ? If( __jsonUserConfirmationForHighAvailability as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IUserConfirmationItem) (Sample.API.Models.UserConfirmationItem.FromJson(__u) )) ))() : null : _userConfirmationForHighAvailability;}
-            {_serviceGroupMembership = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("serviceGroupMemberships"), out var __jsonServiceGroupMemberships) ? If( __jsonServiceGroupMemberships as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IServiceGroupMembership) (Sample.API.Models.ServiceGroupMembership.FromJson(__p) )) ))() : null : _serviceGroupMembership;}
+            {_serviceGroupMemberships = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("serviceGroupMemberships"), out var __jsonServiceGroupMemberships) ? If( __jsonServiceGroupMemberships as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IServiceGroupMembership) (Sample.API.Models.ServiceGroupMembership.FromJson(__p) )) ))() : null : _serviceGroupMemberships;}
             {_provisioningState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("provisioningState"), out var __jsonProvisioningState) ? (string)__jsonProvisioningState : (string)_provisioningState;}
             AfterFromJson(json);
         }
@@ -114,11 +114,11 @@ namespace Sample.API.Models
             AddIf( null != (((object)this._disasterRecoveryAttestationStatus)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._disasterRecoveryAttestationStatus.ToString()) : null, "disasterRecoveryAttestationStatus" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != (((object)this._exclusionReasonForHighAvailabilityGoal)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._exclusionReasonForHighAvailabilityGoal.ToString()) : null, "exclusionReasonForHighAvailabilityGoals" ,container.Add );
+                AddIf( null != (((object)this._exclusionReasonForHighAvailabilityGoals)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._exclusionReasonForHighAvailabilityGoals.ToString()) : null, "exclusionReasonForHighAvailabilityGoals" ,container.Add );
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != (((object)this._exclusionReasonForDisasterRecoveryGoal)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._exclusionReasonForDisasterRecoveryGoal.ToString()) : null, "exclusionReasonForDisasterRecoveryGoals" ,container.Add );
+                AddIf( null != (((object)this._exclusionReasonForDisasterRecoveryGoals)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._exclusionReasonForDisasterRecoveryGoals.ToString()) : null, "exclusionReasonForDisasterRecoveryGoals" ,container.Add );
             }
             if (null != this._userConfirmationForHighAvailability)
             {
@@ -131,10 +131,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._serviceGroupMembership)
+                if (null != this._serviceGroupMemberships)
                 {
                     var __r = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __s in this._serviceGroupMembership )
+                    foreach( var __s in this._serviceGroupMemberships )
                     {
                         AddIf(__s?.ToJson(null, serializationMode) ,__r.Add);
                     }

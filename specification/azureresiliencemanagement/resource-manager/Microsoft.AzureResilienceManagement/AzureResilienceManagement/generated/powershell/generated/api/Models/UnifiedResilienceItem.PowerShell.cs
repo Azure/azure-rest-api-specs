@@ -55,14 +55,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.UnifiedResilienceItem"
         /// />.
         /// </summary>
@@ -96,18 +88,6 @@ namespace Sample.API.Models
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
 
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
-
         /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="Sample.API.Models.UnifiedResilienceItem"
         /// />.
@@ -122,9 +102,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Property = (Sample.API.Models.IUnifiedResilienceItemProperties) content.GetValueForProperty("Property",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Property, Sample.API.Models.UnifiedResilienceItemPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Properties = (Sample.API.Models.IUnifiedResilienceItemProperties) content.GetValueForProperty("Properties",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Properties, Sample.API.Models.UnifiedResilienceItemPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -170,13 +150,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IUnifiedResilienceItemInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IUnifiedResilienceItemInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
-            if (content.Contains("Goal"))
+            if (content.Contains("Goals"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Goal = (Sample.API.Models.IGoalsData) content.GetValueForProperty("Goal",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Goal, Sample.API.Models.GoalsDataTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Goals = (Sample.API.Models.IGoalsData) content.GetValueForProperty("Goals",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Goals, Sample.API.Models.GoalsDataTypeConverter.ConvertFrom);
             }
-            if (content.Contains("Recommendation"))
+            if (content.Contains("Recommendations"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Recommendation = (Sample.API.Models.IRecommendationsData) content.GetValueForProperty("Recommendation",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Recommendation, Sample.API.Models.RecommendationsDataTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Recommendations = (Sample.API.Models.IRecommendationsData) content.GetValueForProperty("Recommendations",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Recommendations, Sample.API.Models.RecommendationsDataTypeConverter.ConvertFrom);
             }
             if (content.Contains("LastModifiedTime"))
             {
@@ -190,25 +170,25 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalAssignmentId = (string) content.GetValueForProperty("GoalAssignmentId",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalAssignmentId, global::System.Convert.ToString);
             }
-            if (content.Contains("GoalRegionalRecoveryPointObjectiveInMinute"))
+            if (content.Contains("GoalRegionalRecoveryPointObjectiveInMinutes"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveInMinute = (string) content.GetValueForProperty("GoalRegionalRecoveryPointObjectiveInMinute",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveInMinutes = (string) content.GetValueForProperty("GoalRegionalRecoveryPointObjectiveInMinutes",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveInMinutes, global::System.Convert.ToString);
             }
-            if (content.Contains("GoalRegionalRecoveryPointEstimatedInMinute"))
+            if (content.Contains("GoalRegionalRecoveryPointEstimatedInMinutes"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointEstimatedInMinute = (string) content.GetValueForProperty("GoalRegionalRecoveryPointEstimatedInMinute",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointEstimatedInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointEstimatedInMinutes = (string) content.GetValueForProperty("GoalRegionalRecoveryPointEstimatedInMinutes",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointEstimatedInMinutes, global::System.Convert.ToString);
             }
             if (content.Contains("GoalRegionalRecoveryPointObjectiveStatus"))
             {
                 ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveStatus = (string) content.GetValueForProperty("GoalRegionalRecoveryPointObjectiveStatus",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveStatus, global::System.Convert.ToString);
             }
-            if (content.Contains("GoalRegionalRecoveryTimeObjectiveInMinute"))
+            if (content.Contains("GoalRegionalRecoveryTimeObjectiveInMinutes"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeObjectiveInMinute = (string) content.GetValueForProperty("GoalRegionalRecoveryTimeObjectiveInMinute",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeObjectiveInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeObjectiveInMinutes = (string) content.GetValueForProperty("GoalRegionalRecoveryTimeObjectiveInMinutes",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeObjectiveInMinutes, global::System.Convert.ToString);
             }
-            if (content.Contains("GoalRegionalRecoveryTimeActualInMinute"))
+            if (content.Contains("GoalRegionalRecoveryTimeActualInMinutes"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeActualInMinute = (string) content.GetValueForProperty("GoalRegionalRecoveryTimeActualInMinute",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeActualInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeActualInMinutes = (string) content.GetValueForProperty("GoalRegionalRecoveryTimeActualInMinutes",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeActualInMinutes, global::System.Convert.ToString);
             }
             if (content.Contains("GoalRegionalRecoveryTimeObjectiveStatus"))
             {
@@ -259,9 +239,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Property = (Sample.API.Models.IUnifiedResilienceItemProperties) content.GetValueForProperty("Property",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Property, Sample.API.Models.UnifiedResilienceItemPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Properties = (Sample.API.Models.IUnifiedResilienceItemProperties) content.GetValueForProperty("Properties",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Properties, Sample.API.Models.UnifiedResilienceItemPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -307,13 +287,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IUnifiedResilienceItemInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IUnifiedResilienceItemInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
-            if (content.Contains("Goal"))
+            if (content.Contains("Goals"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Goal = (Sample.API.Models.IGoalsData) content.GetValueForProperty("Goal",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Goal, Sample.API.Models.GoalsDataTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Goals = (Sample.API.Models.IGoalsData) content.GetValueForProperty("Goals",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Goals, Sample.API.Models.GoalsDataTypeConverter.ConvertFrom);
             }
-            if (content.Contains("Recommendation"))
+            if (content.Contains("Recommendations"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Recommendation = (Sample.API.Models.IRecommendationsData) content.GetValueForProperty("Recommendation",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Recommendation, Sample.API.Models.RecommendationsDataTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).Recommendations = (Sample.API.Models.IRecommendationsData) content.GetValueForProperty("Recommendations",((Sample.API.Models.IUnifiedResilienceItemInternal)this).Recommendations, Sample.API.Models.RecommendationsDataTypeConverter.ConvertFrom);
             }
             if (content.Contains("LastModifiedTime"))
             {
@@ -327,25 +307,25 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalAssignmentId = (string) content.GetValueForProperty("GoalAssignmentId",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalAssignmentId, global::System.Convert.ToString);
             }
-            if (content.Contains("GoalRegionalRecoveryPointObjectiveInMinute"))
+            if (content.Contains("GoalRegionalRecoveryPointObjectiveInMinutes"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveInMinute = (string) content.GetValueForProperty("GoalRegionalRecoveryPointObjectiveInMinute",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveInMinutes = (string) content.GetValueForProperty("GoalRegionalRecoveryPointObjectiveInMinutes",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveInMinutes, global::System.Convert.ToString);
             }
-            if (content.Contains("GoalRegionalRecoveryPointEstimatedInMinute"))
+            if (content.Contains("GoalRegionalRecoveryPointEstimatedInMinutes"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointEstimatedInMinute = (string) content.GetValueForProperty("GoalRegionalRecoveryPointEstimatedInMinute",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointEstimatedInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointEstimatedInMinutes = (string) content.GetValueForProperty("GoalRegionalRecoveryPointEstimatedInMinutes",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointEstimatedInMinutes, global::System.Convert.ToString);
             }
             if (content.Contains("GoalRegionalRecoveryPointObjectiveStatus"))
             {
                 ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveStatus = (string) content.GetValueForProperty("GoalRegionalRecoveryPointObjectiveStatus",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryPointObjectiveStatus, global::System.Convert.ToString);
             }
-            if (content.Contains("GoalRegionalRecoveryTimeObjectiveInMinute"))
+            if (content.Contains("GoalRegionalRecoveryTimeObjectiveInMinutes"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeObjectiveInMinute = (string) content.GetValueForProperty("GoalRegionalRecoveryTimeObjectiveInMinute",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeObjectiveInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeObjectiveInMinutes = (string) content.GetValueForProperty("GoalRegionalRecoveryTimeObjectiveInMinutes",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeObjectiveInMinutes, global::System.Convert.ToString);
             }
-            if (content.Contains("GoalRegionalRecoveryTimeActualInMinute"))
+            if (content.Contains("GoalRegionalRecoveryTimeActualInMinutes"))
             {
-                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeActualInMinute = (string) content.GetValueForProperty("GoalRegionalRecoveryTimeActualInMinute",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeActualInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeActualInMinutes = (string) content.GetValueForProperty("GoalRegionalRecoveryTimeActualInMinutes",((Sample.API.Models.IUnifiedResilienceItemInternal)this).GoalRegionalRecoveryTimeActualInMinutes, global::System.Convert.ToString);
             }
             if (content.Contains("GoalRegionalRecoveryTimeObjectiveStatus"))
             {

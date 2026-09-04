@@ -75,7 +75,7 @@ namespace Sample.API.Models
             }
             {_errorCode = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("errorCode"), out var __jsonErrorCode) ? (string)__jsonErrorCode : (string)_errorCode;}
             {_errorMessage = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("errorMessage"), out var __jsonErrorMessage) ? (string)__jsonErrorMessage : (string)_errorMessage;}
-            {_recommendation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recommendations"), out var __jsonRecommendations) ? If( __jsonRecommendations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _recommendation;}
+            {_recommendations = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recommendations"), out var __jsonRecommendations) ? If( __jsonRecommendations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _recommendations;}
             AfterFromJson(json);
         }
 
@@ -108,10 +108,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._recommendation)
+                if (null != this._recommendations)
                 {
                     var __w = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __x in this._recommendation )
+                    foreach( var __x in this._recommendations )
                     {
                         AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                     }

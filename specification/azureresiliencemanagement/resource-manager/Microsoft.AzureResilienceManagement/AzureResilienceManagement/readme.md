@@ -31,6 +31,15 @@ openapi-subtype: rpaas
 tag: package-2026-08-31-preview
 ```
 
+### Included configuration files
+
+The flavor-specific readmes below must be loaded when their flavor flag is passed.
+
+```yaml $(powershell)
+require:
+  - ./readme.powershell.md
+```
+
 ### Tag: package-2026-08-31-preview
 
 These settings apply only when `--tag=package-2026-08-31-preview` is specified on the command line.

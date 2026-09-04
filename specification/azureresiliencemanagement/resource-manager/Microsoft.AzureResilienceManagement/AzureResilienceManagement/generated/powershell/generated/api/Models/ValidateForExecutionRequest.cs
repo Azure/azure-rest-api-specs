@@ -11,26 +11,26 @@ namespace Sample.API.Models
         Sample.API.Models.IValidateForExecutionRequestInternal
     {
 
-        /// <summary>Internal Acessors for ValidateForExecutionProperty</summary>
-        Sample.API.Models.IValidateForExecutionProperties Sample.API.Models.IValidateForExecutionRequestInternal.ValidateForExecutionProperty { get => (this._validateForExecutionProperty = this._validateForExecutionProperty ?? new Sample.API.Models.ValidateForExecutionProperties()); set { {_validateForExecutionProperty = value;} } }
+        /// <summary>Internal Acessors for ValidateForExecutionProperties</summary>
+        Sample.API.Models.IValidateForExecutionProperties Sample.API.Models.IValidateForExecutionRequestInternal.ValidateForExecutionProperties { get => (this._validateForExecutionProperties = this._validateForExecutionProperties ?? new Sample.API.Models.ValidateForExecutionProperties()); set { {_validateForExecutionProperties = value;} } }
 
-        /// <summary>Backing field for <see cref="ValidateForExecutionProperty" /> property.</summary>
-        private Sample.API.Models.IValidateForExecutionProperties _validateForExecutionProperty;
+        /// <summary>Backing field for <see cref="ValidateForExecutionProperties" /> property.</summary>
+        private Sample.API.Models.IValidateForExecutionProperties _validateForExecutionProperties;
 
         /// <summary>Additional properties for Validate for execute.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IValidateForExecutionProperties ValidateForExecutionProperty { get => (this._validateForExecutionProperty = this._validateForExecutionProperty ?? new Sample.API.Models.ValidateForExecutionProperties()); set => this._validateForExecutionProperty = value; }
+        internal Sample.API.Models.IValidateForExecutionProperties ValidateForExecutionProperties { get => (this._validateForExecutionProperties = this._validateForExecutionProperties ?? new Sample.API.Models.ValidateForExecutionProperties()); set => this._validateForExecutionProperties = value; }
 
         /// <summary>
         /// Operation name for which the validation is being done. This is needed to determine the set of validations to be done for
         /// the operation.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ValidateForExecutionPropertyOperationName { get => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperty).OperationName; set => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperty).OperationName = value ?? null; }
+        public string ValidateForExecutionPropertyOperationName { get => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperties).OperationName; set => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperties).OperationName = value ?? null; }
 
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ValidateForExecutionPropertySourceLocation { get => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperty).SourceLocation; set => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperty).SourceLocation = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<string> ValidateForExecutionPropertySourceLocations { get => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperties).SourceLocations; set => ((Sample.API.Models.IValidateForExecutionPropertiesInternal)ValidateForExecutionProperties).SourceLocations = value ?? null /* arrayOf */; }
 
         /// <summary>Creates an new <see cref="ValidateForExecutionRequest" /> instance.</summary>
         public ValidateForExecutionRequest()
@@ -67,7 +67,7 @@ namespace Sample.API.Models
         Description = @"Physiscal Source locations from where resources to be failed-over or faulted.",
         SerializedName = @"sourceLocations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ValidateForExecutionPropertySourceLocation { get; set; }
+        System.Collections.Generic.List<string> ValidateForExecutionPropertySourceLocations { get; set; }
 
     }
     /// Request body of the Validate For Execute Action of Drill.
@@ -75,7 +75,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Additional properties for Validate for execute.</summary>
-        Sample.API.Models.IValidateForExecutionProperties ValidateForExecutionProperty { get; set; }
+        Sample.API.Models.IValidateForExecutionProperties ValidateForExecutionProperties { get; set; }
         /// <summary>
         /// Operation name for which the validation is being done. This is needed to determine the set of validations to be done for
         /// the operation.
@@ -83,7 +83,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
         string ValidateForExecutionPropertyOperationName { get; set; }
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
-        System.Collections.Generic.List<string> ValidateForExecutionPropertySourceLocation { get; set; }
+        System.Collections.Generic.List<string> ValidateForExecutionPropertySourceLocations { get; set; }
 
     }
 }

@@ -28,7 +28,7 @@ namespace Sample.API.Models
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Detail { get => ((Sample.API.Models.IErrorResponseInternal)Body).Detail; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Details { get => ((Sample.API.Models.IErrorResponseInternal)Body).Details; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
@@ -46,8 +46,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for Code</summary>
         string Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal.Code { get => ((Sample.API.Models.IErrorResponseInternal)Body).Code; set => ((Sample.API.Models.IErrorResponseInternal)Body).Code = value ?? null; }
 
-        /// <summary>Internal Acessors for Detail</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal.Detail { get => ((Sample.API.Models.IErrorResponseInternal)Body).Detail; set => ((Sample.API.Models.IErrorResponseInternal)Body).Detail = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for Details</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal.Details { get => ((Sample.API.Models.IErrorResponseInternal)Body).Details; set => ((Sample.API.Models.IErrorResponseInternal)Body).Details = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for Message</summary>
         string Sample.API.Models.IAzureResourceManagerArmResponseAzureResourceManagerCommonTypesErrorResponseInternal.Message { get => ((Sample.API.Models.IErrorResponseInternal)Body).Message; set => ((Sample.API.Models.IErrorResponseInternal)Body).Message = value ?? null; }
@@ -103,7 +103,7 @@ namespace Sample.API.Models
         Description = @"The error details.",
         SerializedName = @"details",
         PossibleTypes = new [] { typeof(Sample.API.Models.IErrorDetail) })]
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Detail { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Details { get;  }
         /// <summary>The error message.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -141,7 +141,7 @@ namespace Sample.API.Models
         /// <summary>The error code.</summary>
         string Code { get; set; }
         /// <summary>The error details.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Detail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Details { get; set; }
         /// <summary>The error message.</summary>
         string Message { get; set; }
         /// <summary>The error target.</summary>

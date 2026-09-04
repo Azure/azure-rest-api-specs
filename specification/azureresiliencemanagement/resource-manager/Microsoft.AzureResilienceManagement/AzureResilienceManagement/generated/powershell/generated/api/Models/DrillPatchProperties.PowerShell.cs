@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.DrillPatchProperties"
         /// />.
         /// </summary>
@@ -96,37 +88,37 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("RecoveryPlanProperty"))
+            if (content.Contains("RecoveryPlanProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).RecoveryPlanProperty = (Sample.API.Models.IRecoveryPlanPropertiesOfDrill) content.GetValueForProperty("RecoveryPlanProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).RecoveryPlanProperty, Sample.API.Models.RecoveryPlanPropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).RecoveryPlanProperties = (Sample.API.Models.IRecoveryPlanPropertiesOfDrill) content.GetValueForProperty("RecoveryPlanProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).RecoveryPlanProperties, Sample.API.Models.RecoveryPlanPropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("DrillAssetProperty"))
+            if (content.Contains("DrillAssetProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).DrillAssetProperty = (Sample.API.Models.IAssetPropertiesOfDrill) content.GetValueForProperty("DrillAssetProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).DrillAssetProperty, Sample.API.Models.AssetPropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).DrillAssetProperties = (Sample.API.Models.IAssetPropertiesOfDrill) content.GetValueForProperty("DrillAssetProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).DrillAssetProperties, Sample.API.Models.AssetPropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ChaosResourceProperty"))
+            if (content.Contains("ChaosResourceProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourceProperty = (Sample.API.Models.IChaosResourcePropertiesOfDrill) content.GetValueForProperty("ChaosResourceProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourceProperty, Sample.API.Models.ChaosResourcePropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourceProperties = (Sample.API.Models.IChaosResourcePropertiesOfDrill) content.GetValueForProperty("ChaosResourceProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourceProperties, Sample.API.Models.ChaosResourcePropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("MonitoringProperty"))
+            if (content.Contains("MonitoringProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).MonitoringProperty = (Sample.API.Models.IMonitoringPropertiesOfDrill) content.GetValueForProperty("MonitoringProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).MonitoringProperty, Sample.API.Models.MonitoringPropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).MonitoringProperties = (Sample.API.Models.IMonitoringPropertiesOfDrill) content.GetValueForProperty("MonitoringProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).MonitoringProperties, Sample.API.Models.MonitoringPropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("HealthModelMonitoringProperty"))
+            if (content.Contains("HealthModelMonitoringProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).HealthModelMonitoringProperty = (Sample.API.Models.IHealthModelMonitoringProperties) content.GetValueForProperty("HealthModelMonitoringProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).HealthModelMonitoringProperty, Sample.API.Models.HealthModelMonitoringPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).HealthModelMonitoringProperties = (Sample.API.Models.IHealthModelMonitoringProperties) content.GetValueForProperty("HealthModelMonitoringProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).HealthModelMonitoringProperties, Sample.API.Models.HealthModelMonitoringPropertiesTypeConverter.ConvertFrom);
             }
-            if (content.Contains("SliMonitoringProperty"))
+            if (content.Contains("SliMonitoringProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringProperty = (Sample.API.Models.ISliMonitoringProperties) content.GetValueForProperty("SliMonitoringProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringProperty, Sample.API.Models.SliMonitoringPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringProperties = (Sample.API.Models.ISliMonitoringProperties) content.GetValueForProperty("SliMonitoringProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringProperties, Sample.API.Models.SliMonitoringPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("RbacSetupMode"))
             {
                 ((Sample.API.Models.IDrillPatchPropertiesInternal)this).RbacSetupMode = (string) content.GetValueForProperty("RbacSetupMode",((Sample.API.Models.IDrillPatchPropertiesInternal)this).RbacSetupMode, global::System.Convert.ToString);
             }
-            if (content.Contains("SliMonitoringPropertySli"))
+            if (content.Contains("SliMonitoringPropertySlis"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringPropertySli = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("SliMonitoringPropertySli",((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringPropertySli, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringPropertySlis = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("SliMonitoringPropertySlis",((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringPropertySlis, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
             }
             if (content.Contains("RecoveryPlanPropertyIdentity"))
             {
@@ -156,9 +148,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosResourcePropertyIdentity",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ChaosResourcePropertyChaosResourceIdentityForFault"))
+            if (content.Contains("ChaosResourcePropertyChaosResourceIdentityForFaults"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyChaosResourceIdentityForFault = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosResourcePropertyChaosResourceIdentityForFault",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyChaosResourceIdentityForFault, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyChaosResourceIdentityForFaults = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosResourcePropertyChaosResourceIdentityForFaults",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyChaosResourceIdentityForFaults, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
             }
             if (content.Contains("ChaosResourcePropertyChaosResourceId"))
             {
@@ -265,37 +257,37 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("RecoveryPlanProperty"))
+            if (content.Contains("RecoveryPlanProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).RecoveryPlanProperty = (Sample.API.Models.IRecoveryPlanPropertiesOfDrill) content.GetValueForProperty("RecoveryPlanProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).RecoveryPlanProperty, Sample.API.Models.RecoveryPlanPropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).RecoveryPlanProperties = (Sample.API.Models.IRecoveryPlanPropertiesOfDrill) content.GetValueForProperty("RecoveryPlanProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).RecoveryPlanProperties, Sample.API.Models.RecoveryPlanPropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("DrillAssetProperty"))
+            if (content.Contains("DrillAssetProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).DrillAssetProperty = (Sample.API.Models.IAssetPropertiesOfDrill) content.GetValueForProperty("DrillAssetProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).DrillAssetProperty, Sample.API.Models.AssetPropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).DrillAssetProperties = (Sample.API.Models.IAssetPropertiesOfDrill) content.GetValueForProperty("DrillAssetProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).DrillAssetProperties, Sample.API.Models.AssetPropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ChaosResourceProperty"))
+            if (content.Contains("ChaosResourceProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourceProperty = (Sample.API.Models.IChaosResourcePropertiesOfDrill) content.GetValueForProperty("ChaosResourceProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourceProperty, Sample.API.Models.ChaosResourcePropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourceProperties = (Sample.API.Models.IChaosResourcePropertiesOfDrill) content.GetValueForProperty("ChaosResourceProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourceProperties, Sample.API.Models.ChaosResourcePropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("MonitoringProperty"))
+            if (content.Contains("MonitoringProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).MonitoringProperty = (Sample.API.Models.IMonitoringPropertiesOfDrill) content.GetValueForProperty("MonitoringProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).MonitoringProperty, Sample.API.Models.MonitoringPropertiesOfDrillTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).MonitoringProperties = (Sample.API.Models.IMonitoringPropertiesOfDrill) content.GetValueForProperty("MonitoringProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).MonitoringProperties, Sample.API.Models.MonitoringPropertiesOfDrillTypeConverter.ConvertFrom);
             }
-            if (content.Contains("HealthModelMonitoringProperty"))
+            if (content.Contains("HealthModelMonitoringProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).HealthModelMonitoringProperty = (Sample.API.Models.IHealthModelMonitoringProperties) content.GetValueForProperty("HealthModelMonitoringProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).HealthModelMonitoringProperty, Sample.API.Models.HealthModelMonitoringPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).HealthModelMonitoringProperties = (Sample.API.Models.IHealthModelMonitoringProperties) content.GetValueForProperty("HealthModelMonitoringProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).HealthModelMonitoringProperties, Sample.API.Models.HealthModelMonitoringPropertiesTypeConverter.ConvertFrom);
             }
-            if (content.Contains("SliMonitoringProperty"))
+            if (content.Contains("SliMonitoringProperties"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringProperty = (Sample.API.Models.ISliMonitoringProperties) content.GetValueForProperty("SliMonitoringProperty",((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringProperty, Sample.API.Models.SliMonitoringPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringProperties = (Sample.API.Models.ISliMonitoringProperties) content.GetValueForProperty("SliMonitoringProperties",((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringProperties, Sample.API.Models.SliMonitoringPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("RbacSetupMode"))
             {
                 ((Sample.API.Models.IDrillPatchPropertiesInternal)this).RbacSetupMode = (string) content.GetValueForProperty("RbacSetupMode",((Sample.API.Models.IDrillPatchPropertiesInternal)this).RbacSetupMode, global::System.Convert.ToString);
             }
-            if (content.Contains("SliMonitoringPropertySli"))
+            if (content.Contains("SliMonitoringPropertySlis"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringPropertySli = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("SliMonitoringPropertySli",((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringPropertySli, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringPropertySlis = (System.Collections.Generic.List<Sample.API.Models.ISliSelection>) content.GetValueForProperty("SliMonitoringPropertySlis",((Sample.API.Models.IDrillPatchPropertiesInternal)this).SliMonitoringPropertySlis, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.ISliSelection>(__y, Sample.API.Models.SliSelectionTypeConverter.ConvertFrom));
             }
             if (content.Contains("RecoveryPlanPropertyIdentity"))
             {
@@ -325,9 +317,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosResourcePropertyIdentity",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ChaosResourcePropertyChaosResourceIdentityForFault"))
+            if (content.Contains("ChaosResourcePropertyChaosResourceIdentityForFaults"))
             {
-                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyChaosResourceIdentityForFault = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosResourcePropertyChaosResourceIdentityForFault",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyChaosResourceIdentityForFault, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyChaosResourceIdentityForFaults = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("ChaosResourcePropertyChaosResourceIdentityForFaults",((Sample.API.Models.IDrillPatchPropertiesInternal)this).ChaosResourcePropertyChaosResourceIdentityForFaults, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
             }
             if (content.Contains("ChaosResourcePropertyChaosResourceId"))
             {
@@ -431,18 +423,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// PATCH properties for Drill.
     [System.ComponentModel.TypeConverter(typeof(DrillPatchPropertiesTypeConverter))]

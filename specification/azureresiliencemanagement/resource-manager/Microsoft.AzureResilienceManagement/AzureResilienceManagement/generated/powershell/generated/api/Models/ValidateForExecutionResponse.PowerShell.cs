@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.ValidateForExecutionResponse"
         /// />.
         /// </summary>
@@ -94,18 +86,6 @@ namespace Sample.API.Models
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
 
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
-
         /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="Sample.API.Models.ValidateForExecutionResponse"
         /// />.
@@ -120,9 +100,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("DrillResourceQualification"))
+            if (content.Contains("DrillResourceQualifications"))
             {
-                ((Sample.API.Models.IValidateForExecutionResponseInternal)this).DrillResourceQualification = (System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification>) content.GetValueForProperty("DrillResourceQualification",((Sample.API.Models.IValidateForExecutionResponseInternal)this).DrillResourceQualification, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IDrillResourceQualification>(__y, Sample.API.Models.DrillResourceQualificationTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IValidateForExecutionResponseInternal)this).DrillResourceQualifications = (System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification>) content.GetValueForProperty("DrillResourceQualifications",((Sample.API.Models.IValidateForExecutionResponseInternal)this).DrillResourceQualifications, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IDrillResourceQualification>(__y, Sample.API.Models.DrillResourceQualificationTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -141,9 +121,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("DrillResourceQualification"))
+            if (content.Contains("DrillResourceQualifications"))
             {
-                ((Sample.API.Models.IValidateForExecutionResponseInternal)this).DrillResourceQualification = (System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification>) content.GetValueForProperty("DrillResourceQualification",((Sample.API.Models.IValidateForExecutionResponseInternal)this).DrillResourceQualification, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IDrillResourceQualification>(__y, Sample.API.Models.DrillResourceQualificationTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IValidateForExecutionResponseInternal)this).DrillResourceQualifications = (System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification>) content.GetValueForProperty("DrillResourceQualifications",((Sample.API.Models.IValidateForExecutionResponseInternal)this).DrillResourceQualifications, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IDrillResourceQualification>(__y, Sample.API.Models.DrillResourceQualificationTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }

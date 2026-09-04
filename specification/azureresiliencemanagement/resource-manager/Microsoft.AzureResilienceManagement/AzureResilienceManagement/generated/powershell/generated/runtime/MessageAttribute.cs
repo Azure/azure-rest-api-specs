@@ -20,7 +20,7 @@ namespace Sample.API.Runtime
         public string ChangeDescription { get; set; } = null;
 
         //Name of the module that is being deprecated
-        public string moduleName { get; set; } = String.IsNullOrEmpty(@"") ? @"Az.AzureResilienceManagement" : @"";
+        public string moduleName { get; set; } = String.IsNullOrEmpty(@"") ? @"Az.ResilienceManagement" : @"";
 
         //The version the change is effective from, non mandatory
         public string DeprecateByVersion { get; }

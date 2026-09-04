@@ -63,7 +63,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_reprotectProperty = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("reprotectProperties"), out var __jsonReprotectProperties) ? Sample.API.Models.ReprotectRequest.FromJson(__jsonReprotectProperties) : _reprotectProperty;}
+            {_reprotectProperties = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("reprotectProperties"), out var __jsonReprotectProperties) ? Sample.API.Models.ReprotectRequest.FromJson(__jsonReprotectProperties) : _reprotectProperties;}
             AfterFromJson(json);
         }
 
@@ -96,7 +96,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._reprotectProperty ? (Sample.API.Runtime.Json.JsonNode) this._reprotectProperty.ToJson(null,serializationMode) : null, "reprotectProperties" ,container.Add );
+            AddIf( null != this._reprotectProperties ? (Sample.API.Runtime.Json.JsonNode) this._reprotectProperties.ToJson(null,serializationMode) : null, "reprotectProperties" ,container.Add );
             AfterToJson(ref container);
             return container;
         }

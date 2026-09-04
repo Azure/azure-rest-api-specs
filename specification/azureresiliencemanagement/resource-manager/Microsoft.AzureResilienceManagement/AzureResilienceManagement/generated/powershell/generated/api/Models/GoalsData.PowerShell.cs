@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.GoalsData"
         /// />.
         /// </summary>
@@ -111,25 +103,25 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalsDataInternal)this).AssignmentId = (string) content.GetValueForProperty("AssignmentId",((Sample.API.Models.IGoalsDataInternal)this).AssignmentId, global::System.Convert.ToString);
             }
-            if (content.Contains("RegionalRecoveryPointObjectiveInMinute"))
+            if (content.Contains("RegionalRecoveryPointObjectiveInMinutes"))
             {
-                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveInMinute = (string) content.GetValueForProperty("RegionalRecoveryPointObjectiveInMinute",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveInMinutes = (string) content.GetValueForProperty("RegionalRecoveryPointObjectiveInMinutes",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveInMinutes, global::System.Convert.ToString);
             }
-            if (content.Contains("RegionalRecoveryPointEstimatedInMinute"))
+            if (content.Contains("RegionalRecoveryPointEstimatedInMinutes"))
             {
-                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointEstimatedInMinute = (string) content.GetValueForProperty("RegionalRecoveryPointEstimatedInMinute",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointEstimatedInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointEstimatedInMinutes = (string) content.GetValueForProperty("RegionalRecoveryPointEstimatedInMinutes",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointEstimatedInMinutes, global::System.Convert.ToString);
             }
             if (content.Contains("RegionalRecoveryPointObjectiveStatus"))
             {
                 ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveStatus = (string) content.GetValueForProperty("RegionalRecoveryPointObjectiveStatus",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveStatus, global::System.Convert.ToString);
             }
-            if (content.Contains("RegionalRecoveryTimeObjectiveInMinute"))
+            if (content.Contains("RegionalRecoveryTimeObjectiveInMinutes"))
             {
-                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeObjectiveInMinute = (string) content.GetValueForProperty("RegionalRecoveryTimeObjectiveInMinute",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeObjectiveInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeObjectiveInMinutes = (string) content.GetValueForProperty("RegionalRecoveryTimeObjectiveInMinutes",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeObjectiveInMinutes, global::System.Convert.ToString);
             }
-            if (content.Contains("RegionalRecoveryTimeActualInMinute"))
+            if (content.Contains("RegionalRecoveryTimeActualInMinutes"))
             {
-                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeActualInMinute = (string) content.GetValueForProperty("RegionalRecoveryTimeActualInMinute",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeActualInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeActualInMinutes = (string) content.GetValueForProperty("RegionalRecoveryTimeActualInMinutes",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeActualInMinutes, global::System.Convert.ToString);
             }
             if (content.Contains("RegionalRecoveryTimeObjectiveStatus"))
             {
@@ -168,25 +160,25 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalsDataInternal)this).AssignmentId = (string) content.GetValueForProperty("AssignmentId",((Sample.API.Models.IGoalsDataInternal)this).AssignmentId, global::System.Convert.ToString);
             }
-            if (content.Contains("RegionalRecoveryPointObjectiveInMinute"))
+            if (content.Contains("RegionalRecoveryPointObjectiveInMinutes"))
             {
-                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveInMinute = (string) content.GetValueForProperty("RegionalRecoveryPointObjectiveInMinute",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveInMinutes = (string) content.GetValueForProperty("RegionalRecoveryPointObjectiveInMinutes",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveInMinutes, global::System.Convert.ToString);
             }
-            if (content.Contains("RegionalRecoveryPointEstimatedInMinute"))
+            if (content.Contains("RegionalRecoveryPointEstimatedInMinutes"))
             {
-                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointEstimatedInMinute = (string) content.GetValueForProperty("RegionalRecoveryPointEstimatedInMinute",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointEstimatedInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointEstimatedInMinutes = (string) content.GetValueForProperty("RegionalRecoveryPointEstimatedInMinutes",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointEstimatedInMinutes, global::System.Convert.ToString);
             }
             if (content.Contains("RegionalRecoveryPointObjectiveStatus"))
             {
                 ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveStatus = (string) content.GetValueForProperty("RegionalRecoveryPointObjectiveStatus",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryPointObjectiveStatus, global::System.Convert.ToString);
             }
-            if (content.Contains("RegionalRecoveryTimeObjectiveInMinute"))
+            if (content.Contains("RegionalRecoveryTimeObjectiveInMinutes"))
             {
-                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeObjectiveInMinute = (string) content.GetValueForProperty("RegionalRecoveryTimeObjectiveInMinute",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeObjectiveInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeObjectiveInMinutes = (string) content.GetValueForProperty("RegionalRecoveryTimeObjectiveInMinutes",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeObjectiveInMinutes, global::System.Convert.ToString);
             }
-            if (content.Contains("RegionalRecoveryTimeActualInMinute"))
+            if (content.Contains("RegionalRecoveryTimeActualInMinutes"))
             {
-                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeActualInMinute = (string) content.GetValueForProperty("RegionalRecoveryTimeActualInMinute",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeActualInMinute, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeActualInMinutes = (string) content.GetValueForProperty("RegionalRecoveryTimeActualInMinutes",((Sample.API.Models.IGoalsDataInternal)this).RegionalRecoveryTimeActualInMinutes, global::System.Convert.ToString);
             }
             if (content.Contains("RegionalRecoveryTimeObjectiveStatus"))
             {
@@ -207,18 +199,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Definition of goals data in unified resilience item.
     [System.ComponentModel.TypeConverter(typeof(GoalsDataTypeConverter))]

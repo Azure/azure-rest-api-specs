@@ -64,7 +64,7 @@ namespace Sample.API.Models
                 return;
             }
             {_identity = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("identity"), out var __jsonIdentity) ? Sample.API.Models.AssociatedIdentity.FromJson(__jsonIdentity) : _identity;}
-            {_chaosResourceIdentityForFault = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("chaosResourceIdentityForFaults"), out var __jsonChaosResourceIdentityForFaults) ? Sample.API.Models.AssociatedIdentity.FromJson(__jsonChaosResourceIdentityForFaults) : _chaosResourceIdentityForFault;}
+            {_chaosResourceIdentityForFaults = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("chaosResourceIdentityForFaults"), out var __jsonChaosResourceIdentityForFaults) ? Sample.API.Models.AssociatedIdentity.FromJson(__jsonChaosResourceIdentityForFaults) : _chaosResourceIdentityForFaults;}
             {_chaosResourceId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("chaosResourceId"), out var __jsonChaosResourceId) ? (string)__jsonChaosResourceId : (string)_chaosResourceId;}
             {_faultDurationInMin = If( json?.PropertyT<Sample.API.Runtime.Json.JsonNumber>("faultDurationInMin"), out var __jsonFaultDurationInMin) ? (int?)__jsonFaultDurationInMin : _faultDurationInMin;}
             AfterFromJson(json);
@@ -100,7 +100,7 @@ namespace Sample.API.Models
                 return container;
             }
             AddIf( null != this._identity ? (Sample.API.Runtime.Json.JsonNode) this._identity.ToJson(null,serializationMode) : null, "identity" ,container.Add );
-            AddIf( null != this._chaosResourceIdentityForFault ? (Sample.API.Runtime.Json.JsonNode) this._chaosResourceIdentityForFault.ToJson(null,serializationMode) : null, "chaosResourceIdentityForFaults" ,container.Add );
+            AddIf( null != this._chaosResourceIdentityForFaults ? (Sample.API.Runtime.Json.JsonNode) this._chaosResourceIdentityForFaults.ToJson(null,serializationMode) : null, "chaosResourceIdentityForFaults" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
                 AddIf( null != (((object)this._chaosResourceId)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._chaosResourceId.ToString()) : null, "chaosResourceId" ,container.Add );

@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.RecoveryGroupsSettingUpdate"
         /// />.
         /// </summary>
@@ -107,9 +99,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroup = (Sample.API.Models.IRecoveryGroupUpdate) content.GetValueForProperty("DefaultGroup",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroup, Sample.API.Models.RecoveryGroupUpdateTypeConverter.ConvertFrom);
             }
-            if (content.Contains("AdditionalGroup"))
+            if (content.Contains("AdditionalGroups"))
             {
-                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).AdditionalGroup = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>) content.GetValueForProperty("AdditionalGroup",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).AdditionalGroup, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroup>(__y, Sample.API.Models.RecoveryGroupTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).AdditionalGroups = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>) content.GetValueForProperty("AdditionalGroups",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).AdditionalGroups, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroup>(__y, Sample.API.Models.RecoveryGroupTypeConverter.ConvertFrom));
             }
             if (content.Contains("DefaultGroupSystemData"))
             {
@@ -135,9 +127,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupType = (string) content.GetValueForProperty("DefaultGroupType",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupType, global::System.Convert.ToString);
             }
-            if (content.Contains("DefaultGroupProperty"))
+            if (content.Contains("DefaultGroupProperties"))
             {
-                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupProperty = (Sample.API.Models.IRecoveryGroupPropertiesUpdate) content.GetValueForProperty("DefaultGroupProperty",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupProperty, Sample.API.Models.RecoveryGroupPropertiesUpdateTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupProperties = (Sample.API.Models.IRecoveryGroupPropertiesUpdate) content.GetValueForProperty("DefaultGroupProperties",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupProperties, Sample.API.Models.RecoveryGroupPropertiesUpdateTypeConverter.ConvertFrom);
             }
             if (content.Contains("DefaultGroupSystemDataCreatedByType"))
             {
@@ -167,13 +159,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).Description = (string) content.GetValueForProperty("Description",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).Description, global::System.Convert.ToString);
             }
-            if (content.Contains("PreAction"))
+            if (content.Contains("PreActions"))
             {
-                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PreAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreAction",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PreAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PreActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreActions",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PreActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
-            if (content.Contains("PostAction"))
+            if (content.Contains("PostActions"))
             {
-                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PostAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostAction",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PostAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PostActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostActions",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PostActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -196,9 +188,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroup = (Sample.API.Models.IRecoveryGroupUpdate) content.GetValueForProperty("DefaultGroup",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroup, Sample.API.Models.RecoveryGroupUpdateTypeConverter.ConvertFrom);
             }
-            if (content.Contains("AdditionalGroup"))
+            if (content.Contains("AdditionalGroups"))
             {
-                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).AdditionalGroup = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>) content.GetValueForProperty("AdditionalGroup",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).AdditionalGroup, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroup>(__y, Sample.API.Models.RecoveryGroupTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).AdditionalGroups = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>) content.GetValueForProperty("AdditionalGroups",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).AdditionalGroups, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroup>(__y, Sample.API.Models.RecoveryGroupTypeConverter.ConvertFrom));
             }
             if (content.Contains("DefaultGroupSystemData"))
             {
@@ -224,9 +216,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupType = (string) content.GetValueForProperty("DefaultGroupType",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupType, global::System.Convert.ToString);
             }
-            if (content.Contains("DefaultGroupProperty"))
+            if (content.Contains("DefaultGroupProperties"))
             {
-                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupProperty = (Sample.API.Models.IRecoveryGroupPropertiesUpdate) content.GetValueForProperty("DefaultGroupProperty",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupProperty, Sample.API.Models.RecoveryGroupPropertiesUpdateTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupProperties = (Sample.API.Models.IRecoveryGroupPropertiesUpdate) content.GetValueForProperty("DefaultGroupProperties",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).DefaultGroupProperties, Sample.API.Models.RecoveryGroupPropertiesUpdateTypeConverter.ConvertFrom);
             }
             if (content.Contains("DefaultGroupSystemDataCreatedByType"))
             {
@@ -256,13 +248,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).Description = (string) content.GetValueForProperty("Description",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).Description, global::System.Convert.ToString);
             }
-            if (content.Contains("PreAction"))
+            if (content.Contains("PreActions"))
             {
-                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PreAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreAction",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PreAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PreActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreActions",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PreActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
-            if (content.Contains("PostAction"))
+            if (content.Contains("PostActions"))
             {
-                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PostAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostAction",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PostAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PostActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostActions",((Sample.API.Models.IRecoveryGroupsSettingUpdateInternal)this).PostActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }
@@ -271,18 +263,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Settings for the recovery orchestration groups.
     [System.ComponentModel.TypeConverter(typeof(RecoveryGroupsSettingUpdateTypeConverter))]

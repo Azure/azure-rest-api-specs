@@ -73,9 +73,9 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_includeResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("includeResources"), out var __jsonIncludeResources) ? If( __jsonIncludeResources as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IIncludeOrUpdateResource) (Sample.API.Models.IncludeOrUpdateResource.FromJson(__u) )) ))() : null : _includeResource;}
-            {_excludeResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("excludeResources"), out var __jsonExcludeResources) ? If( __jsonExcludeResources as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _excludeResource;}
-            {_updateResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("updateResources"), out var __jsonUpdateResources) ? If( __jsonUpdateResources as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(Sample.API.Models.IIncludeOrUpdateResource) (Sample.API.Models.IncludeOrUpdateResource.FromJson(__k) )) ))() : null : _updateResource;}
+            {_includeResources = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("includeResources"), out var __jsonIncludeResources) ? If( __jsonIncludeResources as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IIncludeOrUpdateResource) (Sample.API.Models.IncludeOrUpdateResource.FromJson(__u) )) ))() : null : _includeResources;}
+            {_excludeResources = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("excludeResources"), out var __jsonExcludeResources) ? If( __jsonExcludeResources as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _excludeResources;}
+            {_updateResources = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("updateResources"), out var __jsonUpdateResources) ? If( __jsonUpdateResources as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IIncludeOrUpdateResource>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(Sample.API.Models.IIncludeOrUpdateResource) (Sample.API.Models.IncludeOrUpdateResource.FromJson(__k) )) ))() : null : _updateResources;}
             AfterFromJson(json);
         }
 
@@ -98,28 +98,28 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            if (null != this._includeResource)
+            if (null != this._includeResources)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._includeResource )
+                foreach( var __x in this._includeResources )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }
                 container.Add("includeResources",__w);
             }
-            if (null != this._excludeResource)
+            if (null != this._excludeResources)
             {
                 var __r = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __s in this._excludeResource )
+                foreach( var __s in this._excludeResources )
                 {
                     AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
                 }
                 container.Add("excludeResources",__r);
             }
-            if (null != this._updateResource)
+            if (null != this._updateResources)
             {
                 var __m = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __n in this._updateResource )
+                foreach( var __n in this._updateResources )
                 {
                     AddIf(__n?.ToJson(null, serializationMode) ,__m.Add);
                 }

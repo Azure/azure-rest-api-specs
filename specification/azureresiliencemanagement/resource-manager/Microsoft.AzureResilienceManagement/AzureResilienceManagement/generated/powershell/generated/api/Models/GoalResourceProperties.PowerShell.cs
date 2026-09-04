@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.GoalResourceProperties"
         /// />.
         /// </summary>
@@ -127,21 +119,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalResourcePropertiesInternal)this).DisasterRecoveryAttestationStatus = (string) content.GetValueForProperty("DisasterRecoveryAttestationStatus",((Sample.API.Models.IGoalResourcePropertiesInternal)this).DisasterRecoveryAttestationStatus, global::System.Convert.ToString);
             }
-            if (content.Contains("ExclusionReasonForHighAvailabilityGoal"))
+            if (content.Contains("ExclusionReasonForHighAvailabilityGoals"))
             {
-                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForHighAvailabilityGoal = (string) content.GetValueForProperty("ExclusionReasonForHighAvailabilityGoal",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForHighAvailabilityGoal, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForHighAvailabilityGoals = (string) content.GetValueForProperty("ExclusionReasonForHighAvailabilityGoals",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForHighAvailabilityGoals, global::System.Convert.ToString);
             }
-            if (content.Contains("ExclusionReasonForDisasterRecoveryGoal"))
+            if (content.Contains("ExclusionReasonForDisasterRecoveryGoals"))
             {
-                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForDisasterRecoveryGoal = (string) content.GetValueForProperty("ExclusionReasonForDisasterRecoveryGoal",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForDisasterRecoveryGoal, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForDisasterRecoveryGoals = (string) content.GetValueForProperty("ExclusionReasonForDisasterRecoveryGoals",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForDisasterRecoveryGoals, global::System.Convert.ToString);
             }
             if (content.Contains("UserConfirmationForHighAvailability"))
             {
                 ((Sample.API.Models.IGoalResourcePropertiesInternal)this).UserConfirmationForHighAvailability = (System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem>) content.GetValueForProperty("UserConfirmationForHighAvailability",((Sample.API.Models.IGoalResourcePropertiesInternal)this).UserConfirmationForHighAvailability, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IUserConfirmationItem>(__y, Sample.API.Models.UserConfirmationItemTypeConverter.ConvertFrom));
             }
-            if (content.Contains("ServiceGroupMembership"))
+            if (content.Contains("ServiceGroupMemberships"))
             {
-                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ServiceGroupMembership = (System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership>) content.GetValueForProperty("ServiceGroupMembership",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ServiceGroupMembership, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceGroupMembership>(__y, Sample.API.Models.ServiceGroupMembershipTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ServiceGroupMemberships = (System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership>) content.GetValueForProperty("ServiceGroupMemberships",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ServiceGroupMemberships, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceGroupMembership>(__y, Sample.API.Models.ServiceGroupMembershipTypeConverter.ConvertFrom));
             }
             if (content.Contains("ProvisioningState"))
             {
@@ -204,21 +196,21 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalResourcePropertiesInternal)this).DisasterRecoveryAttestationStatus = (string) content.GetValueForProperty("DisasterRecoveryAttestationStatus",((Sample.API.Models.IGoalResourcePropertiesInternal)this).DisasterRecoveryAttestationStatus, global::System.Convert.ToString);
             }
-            if (content.Contains("ExclusionReasonForHighAvailabilityGoal"))
+            if (content.Contains("ExclusionReasonForHighAvailabilityGoals"))
             {
-                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForHighAvailabilityGoal = (string) content.GetValueForProperty("ExclusionReasonForHighAvailabilityGoal",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForHighAvailabilityGoal, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForHighAvailabilityGoals = (string) content.GetValueForProperty("ExclusionReasonForHighAvailabilityGoals",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForHighAvailabilityGoals, global::System.Convert.ToString);
             }
-            if (content.Contains("ExclusionReasonForDisasterRecoveryGoal"))
+            if (content.Contains("ExclusionReasonForDisasterRecoveryGoals"))
             {
-                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForDisasterRecoveryGoal = (string) content.GetValueForProperty("ExclusionReasonForDisasterRecoveryGoal",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForDisasterRecoveryGoal, global::System.Convert.ToString);
+                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForDisasterRecoveryGoals = (string) content.GetValueForProperty("ExclusionReasonForDisasterRecoveryGoals",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ExclusionReasonForDisasterRecoveryGoals, global::System.Convert.ToString);
             }
             if (content.Contains("UserConfirmationForHighAvailability"))
             {
                 ((Sample.API.Models.IGoalResourcePropertiesInternal)this).UserConfirmationForHighAvailability = (System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem>) content.GetValueForProperty("UserConfirmationForHighAvailability",((Sample.API.Models.IGoalResourcePropertiesInternal)this).UserConfirmationForHighAvailability, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IUserConfirmationItem>(__y, Sample.API.Models.UserConfirmationItemTypeConverter.ConvertFrom));
             }
-            if (content.Contains("ServiceGroupMembership"))
+            if (content.Contains("ServiceGroupMemberships"))
             {
-                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ServiceGroupMembership = (System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership>) content.GetValueForProperty("ServiceGroupMembership",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ServiceGroupMembership, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceGroupMembership>(__y, Sample.API.Models.ServiceGroupMembershipTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IGoalResourcePropertiesInternal)this).ServiceGroupMemberships = (System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership>) content.GetValueForProperty("ServiceGroupMemberships",((Sample.API.Models.IGoalResourcePropertiesInternal)this).ServiceGroupMemberships, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceGroupMembership>(__y, Sample.API.Models.ServiceGroupMembershipTypeConverter.ConvertFrom));
             }
             if (content.Contains("ProvisioningState"))
             {
@@ -247,18 +239,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Definition of goal assignment property.
     [System.ComponentModel.TypeConverter(typeof(GoalResourcePropertiesTypeConverter))]

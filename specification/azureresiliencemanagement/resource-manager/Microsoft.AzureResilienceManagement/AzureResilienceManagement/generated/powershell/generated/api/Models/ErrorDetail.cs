@@ -25,12 +25,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Code { get => this._code; }
 
-        /// <summary>Backing field for <see cref="Detail" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IErrorDetail> _detail;
+        /// <summary>Backing field for <see cref="Details" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IErrorDetail> _details;
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Detail { get => this._detail; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Details { get => this._details; }
 
         /// <summary>Backing field for <see cref="Message" /> property.</summary>
         private string _message;
@@ -45,8 +45,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for Code</summary>
         string Sample.API.Models.IErrorDetailInternal.Code { get => this._code; set { {_code = value;} } }
 
-        /// <summary>Internal Acessors for Detail</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IErrorDetailInternal.Detail { get => this._detail; set { {_detail = value;} } }
+        /// <summary>Internal Acessors for Details</summary>
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IErrorDetailInternal.Details { get => this._details; set { {_details = value;} } }
 
         /// <summary>Internal Acessors for Message</summary>
         string Sample.API.Models.IErrorDetailInternal.Message { get => this._message; set { {_message = value;} } }
@@ -103,7 +103,7 @@ namespace Sample.API.Models
         Description = @"The error details.",
         SerializedName = @"details",
         PossibleTypes = new [] { typeof(Sample.API.Models.IErrorDetail) })]
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Detail { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Details { get;  }
         /// <summary>The error message.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -137,7 +137,7 @@ namespace Sample.API.Models
         /// <summary>The error code.</summary>
         string Code { get; set; }
         /// <summary>The error details.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Detail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Details { get; set; }
         /// <summary>The error message.</summary>
         string Message { get; set; }
         /// <summary>The error target.</summary>

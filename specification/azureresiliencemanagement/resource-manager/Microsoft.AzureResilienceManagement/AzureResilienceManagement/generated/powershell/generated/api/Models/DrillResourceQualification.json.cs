@@ -63,7 +63,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_resourceQualificationDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("resourceQualificationDetails"), out var __jsonResourceQualificationDetails) ? Sample.API.Models.ResourceQualificationDetails.FromJson(__jsonResourceQualificationDetails) : _resourceQualificationDetail;}
+            {_resourceQualificationDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("resourceQualificationDetails"), out var __jsonResourceQualificationDetails) ? Sample.API.Models.ResourceQualificationDetails.FromJson(__jsonResourceQualificationDetails) : _resourceQualificationDetails;}
             {_drillsQualifiedResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("drillsQualifiedResource"), out var __jsonDrillsQualifiedResource) ? Sample.API.Models.DrillsQualifiedResource.FromJson(__jsonDrillsQualifiedResource) : _drillsQualifiedResource;}
             AfterFromJson(json);
         }
@@ -99,7 +99,7 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != this._resourceQualificationDetail ? (Sample.API.Runtime.Json.JsonNode) this._resourceQualificationDetail.ToJson(null,serializationMode) : null, "resourceQualificationDetails" ,container.Add );
+                AddIf( null != this._resourceQualificationDetails ? (Sample.API.Runtime.Json.JsonNode) this._resourceQualificationDetails.ToJson(null,serializationMode) : null, "resourceQualificationDetails" ,container.Add );
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {

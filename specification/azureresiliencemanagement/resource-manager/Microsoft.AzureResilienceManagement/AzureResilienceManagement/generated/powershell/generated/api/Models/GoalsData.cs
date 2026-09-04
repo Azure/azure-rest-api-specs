@@ -19,22 +19,22 @@ namespace Sample.API.Models
         public string AssignmentId { get => this._assignmentId; set => this._assignmentId = value; }
 
         /// <summary>
-        /// Backing field for <see cref="RegionalRecoveryPointEstimatedInMinute" /> property.
+        /// Backing field for <see cref="RegionalRecoveryPointEstimatedInMinutes" /> property.
         /// </summary>
-        private string _regionalRecoveryPointEstimatedInMinute;
+        private string _regionalRecoveryPointEstimatedInMinutes;
 
         /// <summary>Computed recovery point estimated for the service group in minutes.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string RegionalRecoveryPointEstimatedInMinute { get => this._regionalRecoveryPointEstimatedInMinute; set => this._regionalRecoveryPointEstimatedInMinute = value; }
+        public string RegionalRecoveryPointEstimatedInMinutes { get => this._regionalRecoveryPointEstimatedInMinutes; set => this._regionalRecoveryPointEstimatedInMinutes = value; }
 
         /// <summary>
-        /// Backing field for <see cref="RegionalRecoveryPointObjectiveInMinute" /> property.
+        /// Backing field for <see cref="RegionalRecoveryPointObjectiveInMinutes" /> property.
         /// </summary>
-        private string _regionalRecoveryPointObjectiveInMinute;
+        private string _regionalRecoveryPointObjectiveInMinutes;
 
         /// <summary>Regional RPO set in resilience goal in minutes.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string RegionalRecoveryPointObjectiveInMinute { get => this._regionalRecoveryPointObjectiveInMinute; set => this._regionalRecoveryPointObjectiveInMinute = value; }
+        public string RegionalRecoveryPointObjectiveInMinutes { get => this._regionalRecoveryPointObjectiveInMinutes; set => this._regionalRecoveryPointObjectiveInMinutes = value; }
 
         /// <summary>Backing field for <see cref="RegionalRecoveryPointObjectiveStatus" /> property.</summary>
         private string _regionalRecoveryPointObjectiveStatus;
@@ -43,21 +43,21 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string RegionalRecoveryPointObjectiveStatus { get => this._regionalRecoveryPointObjectiveStatus; set => this._regionalRecoveryPointObjectiveStatus = value; }
 
-        /// <summary>Backing field for <see cref="RegionalRecoveryTimeActualInMinute" /> property.</summary>
-        private string _regionalRecoveryTimeActualInMinute;
+        /// <summary>Backing field for <see cref="RegionalRecoveryTimeActualInMinutes" /> property.</summary>
+        private string _regionalRecoveryTimeActualInMinutes;
 
         /// <summary>Computed RTA for the service group in minutes.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string RegionalRecoveryTimeActualInMinute { get => this._regionalRecoveryTimeActualInMinute; set => this._regionalRecoveryTimeActualInMinute = value; }
+        public string RegionalRecoveryTimeActualInMinutes { get => this._regionalRecoveryTimeActualInMinutes; set => this._regionalRecoveryTimeActualInMinutes = value; }
 
         /// <summary>
-        /// Backing field for <see cref="RegionalRecoveryTimeObjectiveInMinute" /> property.
+        /// Backing field for <see cref="RegionalRecoveryTimeObjectiveInMinutes" /> property.
         /// </summary>
-        private string _regionalRecoveryTimeObjectiveInMinute;
+        private string _regionalRecoveryTimeObjectiveInMinutes;
 
         /// <summary>Regional RTO set in resilience goal in minutes.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string RegionalRecoveryTimeObjectiveInMinute { get => this._regionalRecoveryTimeObjectiveInMinute; set => this._regionalRecoveryTimeObjectiveInMinute = value; }
+        public string RegionalRecoveryTimeObjectiveInMinutes { get => this._regionalRecoveryTimeObjectiveInMinutes; set => this._regionalRecoveryTimeObjectiveInMinutes = value; }
 
         /// <summary>Backing field for <see cref="RegionalRecoveryTimeObjectiveStatus" /> property.</summary>
         private string _regionalRecoveryTimeObjectiveStatus;
@@ -119,7 +119,7 @@ namespace Sample.API.Models
         SerializedName = @"regionalRecoveryPointEstimatedInMinutes",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string RegionalRecoveryPointEstimatedInMinute { get; set; }
+        string RegionalRecoveryPointEstimatedInMinutes { get; set; }
         /// <summary>Regional RPO set in resilience goal in minutes.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -131,7 +131,7 @@ namespace Sample.API.Models
         SerializedName = @"regionalRecoveryPointObjectiveInMinutes",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string RegionalRecoveryPointObjectiveInMinute { get; set; }
+        string RegionalRecoveryPointObjectiveInMinutes { get; set; }
         /// <summary>Regional RPO status of the service group.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -155,7 +155,7 @@ namespace Sample.API.Models
         SerializedName = @"regionalRecoveryTimeActualInMinutes",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string RegionalRecoveryTimeActualInMinute { get; set; }
+        string RegionalRecoveryTimeActualInMinutes { get; set; }
         /// <summary>Regional RTO set in resilience goal in minutes.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -167,7 +167,7 @@ namespace Sample.API.Models
         SerializedName = @"regionalRecoveryTimeObjectiveInMinutes",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string RegionalRecoveryTimeObjectiveInMinute { get; set; }
+        string RegionalRecoveryTimeObjectiveInMinutes { get; set; }
         /// <summary>Regional RTO status of the service group.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -225,19 +225,19 @@ namespace Sample.API.Models
         string AssignmentId { get; set; }
         /// <summary>Computed recovery point estimated for the service group in minutes.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string RegionalRecoveryPointEstimatedInMinute { get; set; }
+        string RegionalRecoveryPointEstimatedInMinutes { get; set; }
         /// <summary>Regional RPO set in resilience goal in minutes.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string RegionalRecoveryPointObjectiveInMinute { get; set; }
+        string RegionalRecoveryPointObjectiveInMinutes { get; set; }
         /// <summary>Regional RPO status of the service group.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("NotEvaluated", "Unhealthy", "Healthy")]
         string RegionalRecoveryPointObjectiveStatus { get; set; }
         /// <summary>Computed RTA for the service group in minutes.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string RegionalRecoveryTimeActualInMinute { get; set; }
+        string RegionalRecoveryTimeActualInMinutes { get; set; }
         /// <summary>Regional RTO set in resilience goal in minutes.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("PT15M", "PT1H", "PT4H", "PT24H")]
-        string RegionalRecoveryTimeObjectiveInMinute { get; set; }
+        string RegionalRecoveryTimeObjectiveInMinutes { get; set; }
         /// <summary>Regional RTO status of the service group.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("NotEvaluated", "Unhealthy", "Healthy")]
         string RegionalRecoveryTimeObjectiveStatus { get; set; }

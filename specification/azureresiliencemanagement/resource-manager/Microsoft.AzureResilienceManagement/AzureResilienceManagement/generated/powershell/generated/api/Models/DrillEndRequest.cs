@@ -18,12 +18,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Attestation { get => this._attestation; set => this._attestation = value; }
 
-        /// <summary>Backing field for <see cref="AttestationNote" /> property.</summary>
-        private string _attestationNote;
+        /// <summary>Backing field for <see cref="AttestationNotes" /> property.</summary>
+        private string _attestationNotes;
 
         /// <summary>Notes</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string AttestationNote { get => this._attestationNote; set => this._attestationNote = value; }
+        public string AttestationNotes { get => this._attestationNotes; set => this._attestationNotes = value; }
 
         /// <summary>Creates an new <see cref="DrillEndRequest" /> instance.</summary>
         public DrillEndRequest()
@@ -57,7 +57,7 @@ namespace Sample.API.Models
         Description = @"Notes",
         SerializedName = @"attestationNotes",
         PossibleTypes = new [] { typeof(string) })]
-        string AttestationNote { get; set; }
+        string AttestationNotes { get; set; }
 
     }
     /// Request body of the End Action of Drill.
@@ -68,7 +68,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Success", "Failed")]
         string Attestation { get; set; }
         /// <summary>Notes</summary>
-        string AttestationNote { get; set; }
+        string AttestationNotes { get; set; }
 
     }
 }

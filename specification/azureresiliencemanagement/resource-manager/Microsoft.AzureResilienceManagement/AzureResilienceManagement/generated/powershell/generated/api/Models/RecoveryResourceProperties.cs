@@ -30,39 +30,39 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
         public string AssociatedIdentityUserAssignedIdentity { get => ((Sample.API.Models.IAssociatedIdentityInternal)AssociatedIdentity).UserAssignedIdentity; set => ((Sample.API.Models.IAssociatedIdentityInternal)AssociatedIdentity).UserAssignedIdentity = value ?? null; }
 
-        /// <summary>Backing field for <see cref="AttentionReason" /> property.</summary>
-        private System.Collections.Generic.List<string> _attentionReason;
+        /// <summary>Backing field for <see cref="AttentionReasons" /> property.</summary>
+        private System.Collections.Generic.List<string> _attentionReasons;
 
         /// <summary>Reason for the resource to be in need of attention</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> AttentionReason { get => this._attentionReason; }
-
-        /// <summary>Backing field for <see cref="ErrorDetail" /> property.</summary>
-        private Sample.API.Models.IErrorDetail _errorDetail;
-
-        /// <summary>Error details associated with the resource.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IErrorDetail ErrorDetail { get => (this._errorDetail = this._errorDetail ?? new Sample.API.Models.ErrorDetail()); }
+        public System.Collections.Generic.List<string> AttentionReasons { get => this._attentionReasons; }
 
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).AdditionalInfo; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).AdditionalInfo; }
 
         /// <summary>The error code.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailCode { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Code; }
+        public string ErrorDetailCode { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Code; }
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Detail; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Details; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailMessage { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Message; }
+        public string ErrorDetailMessage { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Message; }
 
         /// <summary>The error target.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailTarget { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Target; }
+        public string ErrorDetailTarget { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Target; }
+
+        /// <summary>Backing field for <see cref="ErrorDetails" /> property.</summary>
+        private Sample.API.Models.IErrorDetail _errorDetails;
+
+        /// <summary>Error details associated with the resource.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IErrorDetail ErrorDetails { get => (this._errorDetails = this._errorDetails ?? new Sample.API.Models.ErrorDetail()); }
 
         /// <summary>Backing field for <see cref="InclusionState" /> property.</summary>
         private string _inclusionState;
@@ -130,47 +130,47 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ResourceLocation { get => this._resourceLocation; }
 
-        /// <summary>Backing field for <see cref="ResourcePhysicalZone" /> property.</summary>
-        private System.Collections.Generic.List<string> _resourcePhysicalZone;
+        /// <summary>Backing field for <see cref="ResourcePhysicalZones" /> property.</summary>
+        private System.Collections.Generic.List<string> _resourcePhysicalZones;
 
         /// <summary>
         /// Physical zones of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ResourcePhysicalZone { get => this._resourcePhysicalZone; }
+        public System.Collections.Generic.List<string> ResourcePhysicalZones { get => this._resourcePhysicalZones; }
 
-        /// <summary>Backing field for <see cref="ResourceProtectionSolution" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> _resourceProtectionSolution;
+        /// <summary>Backing field for <see cref="ResourceProtectionSolutions" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> _resourceProtectionSolutions;
 
         /// <summary>
         /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolution { get => this._resourceProtectionSolution; }
+        public System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolutions { get => this._resourceProtectionSolutions; }
 
         /// <summary>Internal Acessors for AssociatedIdentity</summary>
         Sample.API.Models.IAssociatedIdentity Sample.API.Models.IRecoveryResourcePropertiesInternal.AssociatedIdentity { get => (this._associatedIdentity = this._associatedIdentity ?? new Sample.API.Models.AssociatedIdentity()); set { {_associatedIdentity = value;} } }
 
-        /// <summary>Internal Acessors for AttentionReason</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryResourcePropertiesInternal.AttentionReason { get => this._attentionReason; set { {_attentionReason = value;} } }
-
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetail { get => (this._errorDetail = this._errorDetail ?? new Sample.API.Models.ErrorDetail()); set { {_errorDetail = value;} } }
+        /// <summary>Internal Acessors for AttentionReasons</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryResourcePropertiesInternal.AttentionReasons { get => this._attentionReasons; set { {_attentionReasons = value;} } }
 
         /// <summary>Internal Acessors for ErrorDetailAdditionalInfo</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).AdditionalInfo; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).AdditionalInfo = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).AdditionalInfo; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).AdditionalInfo = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailCode</summary>
-        string Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailCode { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Code; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Code = value ?? null; }
+        string Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailCode { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Code; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Code = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailDetails</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailDetails { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Detail; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Detail = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailDetails { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Details; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Details = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailMessage</summary>
-        string Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailMessage { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Message; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Message = value ?? null; }
+        string Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailMessage { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Message; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Message = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailTarget</summary>
-        string Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailTarget { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Target; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetail).Target = value ?? null; }
+        string Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetailTarget { get => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Target; set => ((Sample.API.Models.IErrorDetailInternal)ErrorDetails).Target = value ?? null; }
+
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryResourcePropertiesInternal.ErrorDetails { get => (this._errorDetails = this._errorDetails ?? new Sample.API.Models.ErrorDetail()); set { {_errorDetails = value;} } }
 
         /// <summary>Internal Acessors for NeedsAttention</summary>
         bool? Sample.API.Models.IRecoveryResourcePropertiesInternal.NeedsAttention { get => this._needsAttention; set { {_needsAttention = value;} } }
@@ -187,11 +187,11 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for ResourceLocation</summary>
         string Sample.API.Models.IRecoveryResourcePropertiesInternal.ResourceLocation { get => this._resourceLocation; set { {_resourceLocation = value;} } }
 
-        /// <summary>Internal Acessors for ResourcePhysicalZone</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryResourcePropertiesInternal.ResourcePhysicalZone { get => this._resourcePhysicalZone; set { {_resourcePhysicalZone = value;} } }
+        /// <summary>Internal Acessors for ResourcePhysicalZones</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryResourcePropertiesInternal.ResourcePhysicalZones { get => this._resourcePhysicalZones; set { {_resourcePhysicalZones = value;} } }
 
-        /// <summary>Internal Acessors for ResourceProtectionSolution</summary>
-        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> Sample.API.Models.IRecoveryResourcePropertiesInternal.ResourceProtectionSolution { get => this._resourceProtectionSolution; set { {_resourceProtectionSolution = value;} } }
+        /// <summary>Internal Acessors for ResourceProtectionSolutions</summary>
+        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> Sample.API.Models.IRecoveryResourcePropertiesInternal.ResourceProtectionSolutions { get => this._resourceProtectionSolutions; set { {_resourceProtectionSolutions = value;} } }
 
         /// <summary>Internal Acessors for SelectedProtectionSolutionSetting</summary>
         Sample.API.Models.IResourceBaseProtectionSolutionSetting Sample.API.Models.IRecoveryResourcePropertiesInternal.SelectedProtectionSolutionSetting { get => (this._selectedProtectionSolutionSetting = this._selectedProtectionSolutionSetting ?? new Sample.API.Models.ResourceBaseProtectionSolutionSetting()); set { {_selectedProtectionSolutionSetting = value;} } }
@@ -259,7 +259,7 @@ namespace Sample.API.Models
         Description = @"Reason for the resource to be in need of attention",
         SerializedName = @"attentionReasons",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> AttentionReason { get;  }
+        System.Collections.Generic.List<string> AttentionReasons { get;  }
         /// <summary>The error additional info.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -428,7 +428,7 @@ namespace Sample.API.Models
         Description = @"Physical zones of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
         SerializedName = @"resourcePhysicalZones",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ResourcePhysicalZone { get;  }
+        System.Collections.Generic.List<string> ResourcePhysicalZones { get;  }
         /// <summary>
         /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
         /// </summary>
@@ -441,7 +441,7 @@ namespace Sample.API.Models
         Description = @"A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.",
         SerializedName = @"resourceProtectionSolutions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IResourceProtectionSolutionSettings) })]
-        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolution { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolutions { get;  }
         /// <summary>A setting that indicates the resource protected with which recovery solution.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -482,9 +482,7 @@ namespace Sample.API.Models
         /// <summary>User assigned identity id linked with the resource</summary>
         string AssociatedIdentityUserAssignedIdentity { get; set; }
         /// <summary>Reason for the resource to be in need of attention</summary>
-        System.Collections.Generic.List<string> AttentionReason { get; set; }
-        /// <summary>Error details associated with the resource.</summary>
-        Sample.API.Models.IErrorDetail ErrorDetail { get; set; }
+        System.Collections.Generic.List<string> AttentionReasons { get; set; }
         /// <summary>The error additional info.</summary>
         System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get; set; }
         /// <summary>The error code.</summary>
@@ -495,6 +493,8 @@ namespace Sample.API.Models
         string ErrorDetailMessage { get; set; }
         /// <summary>The error target.</summary>
         string ErrorDetailTarget { get; set; }
+        /// <summary>Error details associated with the resource.</summary>
+        Sample.API.Models.IErrorDetail ErrorDetails { get; set; }
         /// <summary>
         /// A state that indicates the resource status with respect to the recovery orchestration plan.
         /// </summary>
@@ -527,11 +527,11 @@ namespace Sample.API.Models
         /// <summary>
         /// Physical zones of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.
         /// </summary>
-        System.Collections.Generic.List<string> ResourcePhysicalZone { get; set; }
+        System.Collections.Generic.List<string> ResourcePhysicalZones { get; set; }
         /// <summary>
         /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
         /// </summary>
-        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolution { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolutions { get; set; }
         /// <summary>
         /// Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.
         /// </summary>

@@ -95,7 +95,7 @@ namespace Sample.API.Models
             {_name = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("name"), out var __jsonName) ? (string)__jsonName : (string)_name;}
             {_description = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("description"), out var __jsonDescription) ? (string)__jsonDescription : (string)_description;}
             {_type = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("type"), out var __jsonType) ? (string)__jsonType : (string)_type;}
-            {_timeoutInMinute = If( json?.PropertyT<Sample.API.Runtime.Json.JsonNumber>("timeoutInMinutes"), out var __jsonTimeoutInMinutes) ? (int)__jsonTimeoutInMinutes : _timeoutInMinute;}
+            {_timeoutInMinutes = If( json?.PropertyT<Sample.API.Runtime.Json.JsonNumber>("timeoutInMinutes"), out var __jsonTimeoutInMinutes) ? (int)__jsonTimeoutInMinutes : _timeoutInMinutes;}
             AfterFromJson(json);
         }
 
@@ -121,7 +121,7 @@ namespace Sample.API.Models
             AddIf( null != (((object)this._name)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._name.ToString()) : null, "name" ,container.Add );
             AddIf( null != (((object)this._description)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._description.ToString()) : null, "description" ,container.Add );
             AddIf( null != (((object)this._type)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._type.ToString()) : null, "type" ,container.Add );
-            AddIf( (Sample.API.Runtime.Json.JsonNode)new Sample.API.Runtime.Json.JsonNumber(this._timeoutInMinute), "timeoutInMinutes" ,container.Add );
+            AddIf( (Sample.API.Runtime.Json.JsonNode)new Sample.API.Runtime.Json.JsonNumber(this._timeoutInMinutes), "timeoutInMinutes" ,container.Add );
             AfterToJson(ref container);
             return container;
         }

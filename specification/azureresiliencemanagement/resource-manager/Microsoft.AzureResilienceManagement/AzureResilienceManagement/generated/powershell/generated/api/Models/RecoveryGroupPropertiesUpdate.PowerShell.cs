@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.RecoveryGroupPropertiesUpdate"
         /// />.
         /// </summary>
@@ -115,13 +107,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).Description = (string) content.GetValueForProperty("Description",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).Description, global::System.Convert.ToString);
             }
-            if (content.Contains("PreAction"))
+            if (content.Contains("PreActions"))
             {
-                ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PreAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreAction",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PreAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PreActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreActions",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PreActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
-            if (content.Contains("PostAction"))
+            if (content.Contains("PostActions"))
             {
-                ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PostAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostAction",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PostAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PostActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostActions",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PostActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -152,13 +144,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).Description = (string) content.GetValueForProperty("Description",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).Description, global::System.Convert.ToString);
             }
-            if (content.Contains("PreAction"))
+            if (content.Contains("PreActions"))
             {
-                ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PreAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreAction",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PreAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PreActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreActions",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PreActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
-            if (content.Contains("PostAction"))
+            if (content.Contains("PostActions"))
             {
-                ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PostAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostAction",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PostAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PostActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostActions",((Sample.API.Models.IRecoveryGroupPropertiesUpdateInternal)this).PostActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }
@@ -167,18 +159,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Properties of the recovery orchestration group.
     [System.ComponentModel.TypeConverter(typeof(RecoveryGroupPropertiesUpdateTypeConverter))]

@@ -73,7 +73,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_operationQualificationDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("operationQualificationDetails"), out var __jsonOperationQualificationDetails) ? Sample.API.Models.OperationQualificationDetails.FromJson(__jsonOperationQualificationDetails) : _operationQualificationDetail;}
+            {_operationQualificationDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("operationQualificationDetails"), out var __jsonOperationQualificationDetails) ? Sample.API.Models.OperationQualificationDetails.FromJson(__jsonOperationQualificationDetails) : _operationQualificationDetails;}
             {_recoveryResource = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("recoveryResource"), out var __jsonRecoveryResource) ? Sample.API.Models.RecoveryResource.FromJson(__jsonRecoveryResource) : _recoveryResource;}
             AfterFromJson(json);
         }
@@ -97,7 +97,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._operationQualificationDetail ? (Sample.API.Runtime.Json.JsonNode) this._operationQualificationDetail.ToJson(null,serializationMode) : null, "operationQualificationDetails" ,container.Add );
+            AddIf( null != this._operationQualificationDetails ? (Sample.API.Runtime.Json.JsonNode) this._operationQualificationDetails.ToJson(null,serializationMode) : null, "operationQualificationDetails" ,container.Add );
             AddIf( null != this._recoveryResource ? (Sample.API.Runtime.Json.JsonNode) this._recoveryResource.ToJson(null,serializationMode) : null, "recoveryResource" ,container.Add );
             AfterToJson(ref container);
             return container;

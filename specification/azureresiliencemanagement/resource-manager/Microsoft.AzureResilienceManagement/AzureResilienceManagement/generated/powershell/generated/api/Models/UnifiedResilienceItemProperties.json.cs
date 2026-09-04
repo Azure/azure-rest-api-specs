@@ -80,8 +80,8 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._goal ? (Sample.API.Runtime.Json.JsonNode) this._goal.ToJson(null,serializationMode) : null, "goals" ,container.Add );
-            AddIf( null != this._recommendation ? (Sample.API.Runtime.Json.JsonNode) this._recommendation.ToJson(null,serializationMode) : null, "recommendations" ,container.Add );
+            AddIf( null != this._goals ? (Sample.API.Runtime.Json.JsonNode) this._goals.ToJson(null,serializationMode) : null, "goals" ,container.Add );
+            AddIf( null != this._recommendations ? (Sample.API.Runtime.Json.JsonNode) this._recommendations.ToJson(null,serializationMode) : null, "recommendations" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
                 AddIf( null != (((object)this._provisioningState)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._provisioningState.ToString()) : null, "provisioningState" ,container.Add );
@@ -103,8 +103,8 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_goal = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("goals"), out var __jsonGoals) ? Sample.API.Models.GoalsData.FromJson(__jsonGoals) : _goal;}
-            {_recommendation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("recommendations"), out var __jsonRecommendations) ? Sample.API.Models.RecommendationsData.FromJson(__jsonRecommendations) : _recommendation;}
+            {_goals = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("goals"), out var __jsonGoals) ? Sample.API.Models.GoalsData.FromJson(__jsonGoals) : _goals;}
+            {_recommendations = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("recommendations"), out var __jsonRecommendations) ? Sample.API.Models.RecommendationsData.FromJson(__jsonRecommendations) : _recommendations;}
             {_provisioningState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("provisioningState"), out var __jsonProvisioningState) ? (string)__jsonProvisioningState : (string)_provisioningState;}
             {_lastModifiedTime = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("lastModifiedTime"), out var __jsonLastModifiedTime) ? global::System.DateTime.TryParse((string)__jsonLastModifiedTime, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonLastModifiedTimeValue) ? __jsonLastModifiedTimeValue : _lastModifiedTime : _lastModifiedTime;}
             AfterFromJson(json);

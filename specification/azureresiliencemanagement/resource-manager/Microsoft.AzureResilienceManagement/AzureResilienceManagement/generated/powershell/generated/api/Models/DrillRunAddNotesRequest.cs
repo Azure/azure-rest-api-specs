@@ -18,12 +18,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Author { get => this._author; }
 
-        /// <summary>Backing field for <see cref="Note" /> property.</summary>
-        private string _note;
+        /// <summary>Backing field for <see cref="Notes" /> property.</summary>
+        private string _notes;
 
         /// <summary>The notes string.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string Note { get => this._note; set => this._note = value; }
+        public string Notes { get => this._notes; set => this._notes = value; }
 
         /// <summary>Internal Acessors for Author</summary>
         string Sample.API.Models.IDrillRunAddNotesRequestInternal.Author { get => this._author; set { {_author = value;} } }
@@ -69,7 +69,7 @@ namespace Sample.API.Models
         Description = @"The notes string.",
         SerializedName = @"notes",
         PossibleTypes = new [] { typeof(string) })]
-        string Note { get; set; }
+        string Notes { get; set; }
         /// <summary>System generated current Timestamp.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -90,7 +90,7 @@ namespace Sample.API.Models
         /// <summary>System generated Object Id of the notes author.</summary>
         string Author { get; set; }
         /// <summary>The notes string.</summary>
-        string Note { get; set; }
+        string Notes { get; set; }
         /// <summary>System generated current Timestamp.</summary>
         global::System.DateTime? Timestamp { get; set; }
 

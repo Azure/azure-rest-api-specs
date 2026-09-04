@@ -11,12 +11,12 @@ namespace Sample.API.Models
         Sample.API.Models.IUpdateGoalResourceResponseInternal
     {
 
-        /// <summary>Backing field for <see cref="Resource" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IGoalResource> _resource;
+        /// <summary>Backing field for <see cref="Resources" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IGoalResource> _resources;
 
         /// <summary>List of update goal resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IGoalResource> Resource { get => this._resource; set => this._resource = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IGoalResource> Resources { get => this._resources; set => this._resources = value; }
 
         /// <summary>Creates an new <see cref="UpdateGoalResourceResponse" /> instance.</summary>
         public UpdateGoalResourceResponse()
@@ -38,7 +38,7 @@ namespace Sample.API.Models
         Description = @"List of update goal resource.",
         SerializedName = @"resources",
         PossibleTypes = new [] { typeof(Sample.API.Models.IGoalResource) })]
-        System.Collections.Generic.List<Sample.API.Models.IGoalResource> Resource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IGoalResource> Resources { get; set; }
 
     }
     /// Response model for update goal resource.
@@ -46,7 +46,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>List of update goal resource.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IGoalResource> Resource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IGoalResource> Resources { get; set; }
 
     }
 }

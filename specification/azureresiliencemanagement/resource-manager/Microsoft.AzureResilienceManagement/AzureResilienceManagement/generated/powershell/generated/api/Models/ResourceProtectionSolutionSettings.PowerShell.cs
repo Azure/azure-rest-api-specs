@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.ResourceProtectionSolutionSettings"
         /// />.
         /// </summary>
@@ -129,13 +121,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActiveLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocations",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActiveLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ActivePhysicalZone"))
+            if (content.Contains("ActivePhysicalZones"))
             {
-                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActivePhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZone",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActivePhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActivePhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZones",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActivePhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryLocation"))
+            if (content.Contains("RecoveryLocations"))
             {
-                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).RecoveryLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocation",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).RecoveryLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).RecoveryLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocations",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).RecoveryLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("ReplicationRole"))
             {
@@ -145,9 +137,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).PrimaryResource = (string) content.GetValueForProperty("PrimaryResource",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).PrimaryResource, global::System.Convert.ToString);
             }
-            if (content.Contains("ReplicaResource"))
+            if (content.Contains("ReplicaResources"))
             {
-                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ReplicaResource = (System.Collections.Generic.List<string>) content.GetValueForProperty("ReplicaResource",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ReplicaResource, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ReplicaResources = (System.Collections.Generic.List<string>) content.GetValueForProperty("ReplicaResources",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ReplicaResources, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("IsAutoFailover"))
             {
@@ -198,13 +190,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActiveLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActiveLocations",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActiveLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ActivePhysicalZone"))
+            if (content.Contains("ActivePhysicalZones"))
             {
-                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActivePhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZone",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActivePhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActivePhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("ActivePhysicalZones",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ActivePhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("RecoveryLocation"))
+            if (content.Contains("RecoveryLocations"))
             {
-                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).RecoveryLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocation",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).RecoveryLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).RecoveryLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("RecoveryLocations",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).RecoveryLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("ReplicationRole"))
             {
@@ -214,9 +206,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).PrimaryResource = (string) content.GetValueForProperty("PrimaryResource",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).PrimaryResource, global::System.Convert.ToString);
             }
-            if (content.Contains("ReplicaResource"))
+            if (content.Contains("ReplicaResources"))
             {
-                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ReplicaResource = (System.Collections.Generic.List<string>) content.GetValueForProperty("ReplicaResource",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ReplicaResource, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ReplicaResources = (System.Collections.Generic.List<string>) content.GetValueForProperty("ReplicaResources",((Sample.API.Models.IResourceProtectionSolutionSettingsInternal)this).ReplicaResources, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("IsAutoFailover"))
             {
@@ -237,18 +229,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Definition of recovery resource resource protection solution settings.
     [System.ComponentModel.TypeConverter(typeof(ResourceProtectionSolutionSettingsTypeConverter))]

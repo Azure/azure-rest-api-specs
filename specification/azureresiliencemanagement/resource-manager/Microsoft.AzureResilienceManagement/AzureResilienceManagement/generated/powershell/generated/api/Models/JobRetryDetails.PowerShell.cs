@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.JobRetryDetails"
         /// />.
         /// </summary>
@@ -103,9 +95,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetail = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetail, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetails = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetails, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
             }
             if (content.Contains("Status"))
             {
@@ -127,9 +119,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobRetryDetailsInternal)this).RetryAttempt = (int) content.GetValueForProperty("RetryAttempt",((Sample.API.Models.IJobRetryDetailsInternal)this).RetryAttempt, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             }
-            if (content.Contains("UserComment"))
+            if (content.Contains("UserComments"))
             {
-                ((Sample.API.Models.IJobRetryDetailsInternal)this).UserComment = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComment",((Sample.API.Models.IJobRetryDetailsInternal)this).UserComment, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IJobRetryDetailsInternal)this).UserComments = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComments",((Sample.API.Models.IJobRetryDetailsInternal)this).UserComments, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
             }
             if (content.Contains("ErrorDetailErrorCode"))
             {
@@ -139,9 +131,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailErrorMessage = (string) content.GetValueForProperty("ErrorDetailErrorMessage",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailRecommendation"))
+            if (content.Contains("ErrorDetailRecommendations"))
             {
-                ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendation",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendations",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializeDictionary(content);
         }
@@ -160,9 +152,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetail = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetail, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetails = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetails, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
             }
             if (content.Contains("Status"))
             {
@@ -184,9 +176,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobRetryDetailsInternal)this).RetryAttempt = (int) content.GetValueForProperty("RetryAttempt",((Sample.API.Models.IJobRetryDetailsInternal)this).RetryAttempt, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             }
-            if (content.Contains("UserComment"))
+            if (content.Contains("UserComments"))
             {
-                ((Sample.API.Models.IJobRetryDetailsInternal)this).UserComment = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComment",((Sample.API.Models.IJobRetryDetailsInternal)this).UserComment, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IJobRetryDetailsInternal)this).UserComments = (System.Collections.Generic.List<Sample.API.Models.IJobUserComment>) content.GetValueForProperty("UserComments",((Sample.API.Models.IJobRetryDetailsInternal)this).UserComments, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IJobUserComment>(__y, Sample.API.Models.JobUserCommentTypeConverter.ConvertFrom));
             }
             if (content.Contains("ErrorDetailErrorCode"))
             {
@@ -196,9 +188,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailErrorMessage = (string) content.GetValueForProperty("ErrorDetailErrorMessage",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailRecommendation"))
+            if (content.Contains("ErrorDetailRecommendations"))
             {
-                ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendation",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendations",((Sample.API.Models.IJobRetryDetailsInternal)this).ErrorDetailRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializePSObject(content);
         }
@@ -207,18 +199,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Job Retry Details.
     [System.ComponentModel.TypeConverter(typeof(JobRetryDetailsTypeConverter))]

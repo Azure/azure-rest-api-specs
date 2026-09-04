@@ -30,13 +30,13 @@ if(Test-Path $docsFolder) {
 $null = New-Item -ItemType Directory -Force -Path $docsFolder -ErrorAction SilentlyContinue
 $examplesFolder = Join-Path $PSScriptRoot 'examples'
 
-$modulePsd1 = Get-Item -Path (Join-Path $PSScriptRoot './Az.AzureResilienceManagement.psd1')
+$modulePsd1 = Get-Item -Path (Join-Path $PSScriptRoot './Az.ResilienceManagement.psd1')
 $modulePath = $modulePsd1.FullName
 $moduleName = $modulePsd1.BaseName
 
 # Load DLL to use build-time cmdlets
 Import-Module -Name $modulePath
-Import-Module -Name (Join-Path $PSScriptRoot './bin/Az.AzureResilienceManagement.private.dll')
+Import-Module -Name (Join-Path $PSScriptRoot './bin/Az.ResilienceManagement.private.dll')
 $instance = [Sample.API.Module]::Instance
 # Module info is shared per profile
 $moduleInfo = Get-Module -Name $moduleName
@@ -56,7 +56,7 @@ foreach($directory in $directories)
   $docsPath = Join-Path $docsFolder $directory.Name
   $null = New-Item -ItemType Directory -Force -Path $docsPath -ErrorAction SilentlyContinue
   $examplesPath = Join-Path $examplesFolder $directory.Name
-  $addComplexInterfaceInfo = ![System.Convert]::ToBoolean('true')
+  $addComplexInterfaceInfo = ![System.Convert]::ToBoolean('false')
   Export-HelpMarkdown -ModuleInfo $moduleInfo -FunctionInfo $cmdletFunctionInfo -HelpInfo $cmdletHelpInfo -DocsFolder $docsPath -ExamplesFolder $examplesPath -AddComplexInterfaceInfo:$addComplexInterfaceInfo
   Write-Host -ForegroundColor Green "Created documentation in '$docsPath'"
 }

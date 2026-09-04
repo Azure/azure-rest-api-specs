@@ -188,7 +188,7 @@ namespace Sample.API.Runtime.PowerShell
     {
         public VariantGroup VariantGroup { get; }
 
-        protected static readonly bool IsAzure = Convert.ToBoolean(@"true");
+        protected static readonly bool IsAzure = Convert.ToBoolean(@"false");
 
         public BaseOutput(VariantGroup variantGroup)
         {

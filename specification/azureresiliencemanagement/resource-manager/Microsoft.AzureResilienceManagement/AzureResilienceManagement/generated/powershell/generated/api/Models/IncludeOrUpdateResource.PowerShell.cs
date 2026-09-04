@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.IncludeOrUpdateResource"
         /// />.
         /// </summary>
@@ -103,17 +95,17 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FaultProperty"))
+            if (content.Contains("FaultProperties"))
             {
-                ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultProperty = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperty",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultProperty, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultProperties = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperties",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultProperties, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("Id"))
             {
                 ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).Id = (string) content.GetValueForProperty("Id",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).Id, global::System.Convert.ToString);
             }
-            if (content.Contains("FaultPropertyAvailableFault"))
+            if (content.Contains("FaultPropertyAvailableFaults"))
             {
-                ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultPropertyAvailableFault = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFault",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultPropertyAvailableFault, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultPropertyAvailableFaults = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFaults",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultPropertyAvailableFaults, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("FaultPropertyDefaultFault"))
             {
@@ -176,17 +168,17 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FaultProperty"))
+            if (content.Contains("FaultProperties"))
             {
-                ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultProperty = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperty",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultProperty, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultProperties = (Sample.API.Models.IFaultProperties) content.GetValueForProperty("FaultProperties",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultProperties, Sample.API.Models.FaultPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("Id"))
             {
                 ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).Id = (string) content.GetValueForProperty("Id",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).Id, global::System.Convert.ToString);
             }
-            if (content.Contains("FaultPropertyAvailableFault"))
+            if (content.Contains("FaultPropertyAvailableFaults"))
             {
-                ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultPropertyAvailableFault = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFault",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultPropertyAvailableFault, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultPropertyAvailableFaults = (System.Collections.Generic.List<Sample.API.Models.IFaultDetails>) content.GetValueForProperty("FaultPropertyAvailableFaults",((Sample.API.Models.IIncludeOrUpdateResourceInternal)this).FaultPropertyAvailableFaults, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IFaultDetails>(__y, Sample.API.Models.FaultDetailsTypeConverter.ConvertFrom));
             }
             if (content.Contains("FaultPropertyDefaultFault"))
             {
@@ -239,18 +231,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Include or Update resource
     [System.ComponentModel.TypeConverter(typeof(IncludeOrUpdateResourceTypeConverter))]

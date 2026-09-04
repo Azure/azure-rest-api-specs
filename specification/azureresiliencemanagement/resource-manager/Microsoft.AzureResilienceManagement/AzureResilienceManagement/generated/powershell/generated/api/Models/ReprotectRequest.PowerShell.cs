@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.ReprotectRequest"
         /// />.
         /// </summary>
@@ -103,13 +95,13 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("ReprotectRequestProperties"))
             {
-                ((Sample.API.Models.IReprotectRequestInternal)this).Property = (Sample.API.Models.IReprotectRequestProperties) content.GetValueForProperty("Property",((Sample.API.Models.IReprotectRequestInternal)this).Property, Sample.API.Models.ReprotectRequestPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IReprotectRequestInternal)this).ReprotectRequestProperties = (Sample.API.Models.IReprotectRequestProperties) content.GetValueForProperty("ReprotectRequestProperties",((Sample.API.Models.IReprotectRequestInternal)this).ReprotectRequestProperties, Sample.API.Models.ReprotectRequestPropertiesTypeConverter.ConvertFrom);
             }
-            if (content.Contains("PropertySelectedResourceId"))
+            if (content.Contains("ReprotectRequestPropertySelectedResourceIds"))
             {
-                ((Sample.API.Models.IReprotectRequestInternal)this).PropertySelectedResourceId = (System.Collections.Generic.List<string>) content.GetValueForProperty("PropertySelectedResourceId",((Sample.API.Models.IReprotectRequestInternal)this).PropertySelectedResourceId, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IReprotectRequestInternal)this).ReprotectRequestPropertySelectedResourceIds = (System.Collections.Generic.List<string>) content.GetValueForProperty("ReprotectRequestPropertySelectedResourceIds",((Sample.API.Models.IReprotectRequestInternal)this).ReprotectRequestPropertySelectedResourceIds, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializeDictionary(content);
         }
@@ -128,13 +120,13 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("ReprotectRequestProperties"))
             {
-                ((Sample.API.Models.IReprotectRequestInternal)this).Property = (Sample.API.Models.IReprotectRequestProperties) content.GetValueForProperty("Property",((Sample.API.Models.IReprotectRequestInternal)this).Property, Sample.API.Models.ReprotectRequestPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IReprotectRequestInternal)this).ReprotectRequestProperties = (Sample.API.Models.IReprotectRequestProperties) content.GetValueForProperty("ReprotectRequestProperties",((Sample.API.Models.IReprotectRequestInternal)this).ReprotectRequestProperties, Sample.API.Models.ReprotectRequestPropertiesTypeConverter.ConvertFrom);
             }
-            if (content.Contains("PropertySelectedResourceId"))
+            if (content.Contains("ReprotectRequestPropertySelectedResourceIds"))
             {
-                ((Sample.API.Models.IReprotectRequestInternal)this).PropertySelectedResourceId = (System.Collections.Generic.List<string>) content.GetValueForProperty("PropertySelectedResourceId",((Sample.API.Models.IReprotectRequestInternal)this).PropertySelectedResourceId, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IReprotectRequestInternal)this).ReprotectRequestPropertySelectedResourceIds = (System.Collections.Generic.List<string>) content.GetValueForProperty("ReprotectRequestPropertySelectedResourceIds",((Sample.API.Models.IReprotectRequestInternal)this).ReprotectRequestPropertySelectedResourceIds, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializePSObject(content);
         }
@@ -143,18 +135,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Reprotect post action request.
     [System.ComponentModel.TypeConverter(typeof(ReprotectRequestTypeConverter))]

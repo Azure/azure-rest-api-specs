@@ -44,8 +44,8 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Type { get => this._type; set => this._type = value; }
 
-        /// <summary>Backing field for <see cref="UserAssignedIdentity" /> property.</summary>
-        private Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities _userAssignedIdentity;
+        /// <summary>Backing field for <see cref="UserAssignedIdentities" /> property.</summary>
+        private Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities _userAssignedIdentities;
 
         /// <summary>
         /// The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM
@@ -53,7 +53,7 @@ namespace Sample.API.Models
         /// The dictionary values can be empty objects ({}) in requests.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities UserAssignedIdentity { get => (this._userAssignedIdentity = this._userAssignedIdentity ?? new Sample.API.Models.ManagedServiceIdentityUserAssignedIdentities()); set => this._userAssignedIdentity = value; }
+        public Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities UserAssignedIdentities { get => (this._userAssignedIdentities = this._userAssignedIdentities ?? new Sample.API.Models.ManagedServiceIdentityUserAssignedIdentities()); set => this._userAssignedIdentities = value; }
 
         /// <summary>Creates an new <see cref="ManagedServiceIdentity" /> instance.</summary>
         public ManagedServiceIdentity()
@@ -119,7 +119,7 @@ namespace Sample.API.Models
         Description = @"The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
         SerializedName = @"userAssignedIdentities",
         PossibleTypes = new [] { typeof(Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities) })]
-        Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities UserAssignedIdentity { get; set; }
+        Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities UserAssignedIdentities { get; set; }
 
     }
     /// Managed service identity (system assigned and/or user assigned identities)
@@ -144,7 +144,7 @@ namespace Sample.API.Models
         /// resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
         /// The dictionary values can be empty objects ({}) in requests.
         /// </summary>
-        Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities UserAssignedIdentity { get; set; }
+        Sample.API.Models.IManagedServiceIdentityUserAssignedIdentities UserAssignedIdentities { get; set; }
 
     }
 }

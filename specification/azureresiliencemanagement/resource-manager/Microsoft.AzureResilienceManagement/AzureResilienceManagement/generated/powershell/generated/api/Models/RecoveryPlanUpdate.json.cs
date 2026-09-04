@@ -76,7 +76,7 @@ namespace Sample.API.Models
                 return;
             }
             __proxyResource = new Sample.API.Models.ProxyResource(json);
-            {_property = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("properties"), out var __jsonProperties) ? Sample.API.Models.RecoveryPlanPropertiesUpdate.FromJson(__jsonProperties) : _property;}
+            {_properties = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("properties"), out var __jsonProperties) ? Sample.API.Models.RecoveryPlanPropertiesUpdate.FromJson(__jsonProperties) : _properties;}
             {_identity = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("identity"), out var __jsonIdentity) ? Sample.API.Models.AzureResourceManagerCommonTypesManagedServiceIdentityUpdate.FromJson(__jsonIdentity) : _identity;}
             AfterFromJson(json);
         }
@@ -101,7 +101,7 @@ namespace Sample.API.Models
                 return container;
             }
             __proxyResource?.ToJson(container, serializationMode);
-            AddIf( null != this._property ? (Sample.API.Runtime.Json.JsonNode) this._property.ToJson(null,serializationMode) : null, "properties" ,container.Add );
+            AddIf( null != this._properties ? (Sample.API.Runtime.Json.JsonNode) this._properties.ToJson(null,serializationMode) : null, "properties" ,container.Add );
             AddIf( null != this._identity ? (Sample.API.Runtime.Json.JsonNode) this._identity.ToJson(null,serializationMode) : null, "identity" ,container.Add );
             AfterToJson(ref container);
             return container;

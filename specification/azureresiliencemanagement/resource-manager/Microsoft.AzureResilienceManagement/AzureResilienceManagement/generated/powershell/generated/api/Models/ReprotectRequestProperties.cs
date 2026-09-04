@@ -11,14 +11,14 @@ namespace Sample.API.Models
         Sample.API.Models.IReprotectRequestPropertiesInternal
     {
 
-        /// <summary>Backing field for <see cref="SelectedResourceId" /> property.</summary>
-        private System.Collections.Generic.List<string> _selectedResourceId;
+        /// <summary>Backing field for <see cref="SelectedResourceIds" /> property.</summary>
+        private System.Collections.Generic.List<string> _selectedResourceIds;
 
         /// <summary>
         /// Selected recovery resource Ids to be processed. If not provided, all qualified resources will be processed.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> SelectedResourceId { get => this._selectedResourceId; set => this._selectedResourceId = value; }
+        public System.Collections.Generic.List<string> SelectedResourceIds { get => this._selectedResourceIds; set => this._selectedResourceIds = value; }
 
         /// <summary>Creates an new <see cref="ReprotectRequestProperties" /> instance.</summary>
         public ReprotectRequestProperties()
@@ -42,7 +42,7 @@ namespace Sample.API.Models
         Description = @"Selected recovery resource Ids to be processed. If not provided, all qualified resources will be processed.",
         SerializedName = @"selectedResourceIds",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> SelectedResourceId { get; set; }
+        System.Collections.Generic.List<string> SelectedResourceIds { get; set; }
 
     }
     /// Additional properties for Reprotect.
@@ -52,7 +52,7 @@ namespace Sample.API.Models
         /// <summary>
         /// Selected recovery resource Ids to be processed. If not provided, all qualified resources will be processed.
         /// </summary>
-        System.Collections.Generic.List<string> SelectedResourceId { get; set; }
+        System.Collections.Generic.List<string> SelectedResourceIds { get; set; }
 
     }
 }

@@ -63,9 +63,9 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_executionConfiguration = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("executionConfigurations"), out var __jsonExecutionConfigurations) ? Sample.API.Models.ExecutionConfigurations.FromJson(__jsonExecutionConfigurations) : _executionConfiguration;}
-            {_sourceLocation = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("sourceLocations"), out var __jsonSourceLocations) ? If( __jsonSourceLocations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _sourceLocation;}
-            {_selectedResourceId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("selectedResourceIds"), out var __jsonSelectedResourceIds) ? If( __jsonSelectedResourceIds as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _selectedResourceId;}
+            {_executionConfigurations = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("executionConfigurations"), out var __jsonExecutionConfigurations) ? Sample.API.Models.ExecutionConfigurations.FromJson(__jsonExecutionConfigurations) : _executionConfigurations;}
+            {_sourceLocations = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("sourceLocations"), out var __jsonSourceLocations) ? If( __jsonSourceLocations as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _sourceLocations;}
+            {_selectedResourceIds = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("selectedResourceIds"), out var __jsonSelectedResourceIds) ? If( __jsonSelectedResourceIds as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _selectedResourceIds;}
             AfterFromJson(json);
         }
 
@@ -98,20 +98,20 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._executionConfiguration ? (Sample.API.Runtime.Json.JsonNode) this._executionConfiguration.ToJson(null,serializationMode) : null, "executionConfigurations" ,container.Add );
-            if (null != this._sourceLocation)
+            AddIf( null != this._executionConfigurations ? (Sample.API.Runtime.Json.JsonNode) this._executionConfigurations.ToJson(null,serializationMode) : null, "executionConfigurations" ,container.Add );
+            if (null != this._sourceLocations)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._sourceLocation )
+                foreach( var __x in this._sourceLocations )
                 {
                     AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                 }
                 container.Add("sourceLocations",__w);
             }
-            if (null != this._selectedResourceId)
+            if (null != this._selectedResourceIds)
             {
                 var __r = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __s in this._selectedResourceId )
+                foreach( var __s in this._selectedResourceIds )
                 {
                     AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
                 }

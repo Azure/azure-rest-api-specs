@@ -63,7 +63,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_property = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("failoverRequestProperties"), out var __jsonFailoverRequestProperties) ? Sample.API.Models.FailoverRequestProperties.FromJson(__jsonFailoverRequestProperties) : _property;}
+            {_failoverRequestProperties = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("failoverRequestProperties"), out var __jsonFailoverRequestProperties) ? Sample.API.Models.FailoverRequestProperties.FromJson(__jsonFailoverRequestProperties) : _failoverRequestProperties;}
             {_failoverDirection = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("failoverDirection"), out var __jsonFailoverDirection) ? (string)__jsonFailoverDirection : (string)_failoverDirection;}
             AfterFromJson(json);
         }
@@ -97,7 +97,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._property ? (Sample.API.Runtime.Json.JsonNode) this._property.ToJson(null,serializationMode) : null, "failoverRequestProperties" ,container.Add );
+            AddIf( null != this._failoverRequestProperties ? (Sample.API.Runtime.Json.JsonNode) this._failoverRequestProperties.ToJson(null,serializationMode) : null, "failoverRequestProperties" ,container.Add );
             AddIf( null != (((object)this._failoverDirection)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._failoverDirection.ToString()) : null, "failoverDirection" ,container.Add );
             AfterToJson(ref container);
             return container;

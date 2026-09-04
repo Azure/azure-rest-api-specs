@@ -56,14 +56,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.RecommendCapacityRequest"
         /// />.
         /// </summary>
@@ -106,9 +98,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ResourceId"))
+            if (content.Contains("ResourceIds"))
             {
-                ((Sample.API.Models.IRecommendCapacityRequestInternal)this).ResourceId = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourceId",((Sample.API.Models.IRecommendCapacityRequestInternal)this).ResourceId, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityRequestInternal)this).ResourceIds = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourceIds",((Sample.API.Models.IRecommendCapacityRequestInternal)this).ResourceIds, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializeDictionary(content);
         }
@@ -127,9 +119,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ResourceId"))
+            if (content.Contains("ResourceIds"))
             {
-                ((Sample.API.Models.IRecommendCapacityRequestInternal)this).ResourceId = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourceId",((Sample.API.Models.IRecommendCapacityRequestInternal)this).ResourceId, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecommendCapacityRequestInternal)this).ResourceIds = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourceIds",((Sample.API.Models.IRecommendCapacityRequestInternal)this).ResourceIds, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializePSObject(content);
         }
@@ -138,18 +130,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Request body for the recommend capacity action. Provide specific resource IDs to evaluate, or pass an empty array to let
     /// the service automatically select non-resilient resources from the goal assignment.

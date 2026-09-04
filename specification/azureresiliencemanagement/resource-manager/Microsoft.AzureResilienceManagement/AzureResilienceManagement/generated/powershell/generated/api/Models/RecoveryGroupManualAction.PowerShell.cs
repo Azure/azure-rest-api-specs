@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.RecoveryGroupManualAction"
         /// />.
         /// </summary>
@@ -115,9 +107,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).Type = (string) content.GetValueForProperty("Type",((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).Type, global::System.Convert.ToString);
             }
-            if (content.Contains("TimeoutInMinute"))
+            if (content.Contains("TimeoutInMinutes"))
             {
-                ((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).TimeoutInMinute = (int) content.GetValueForProperty("TimeoutInMinute",((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).TimeoutInMinute, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
+                ((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).TimeoutInMinutes = (int) content.GetValueForProperty("TimeoutInMinutes",((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).TimeoutInMinutes, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             }
             AfterDeserializeDictionary(content);
         }
@@ -148,9 +140,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).Type = (string) content.GetValueForProperty("Type",((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).Type, global::System.Convert.ToString);
             }
-            if (content.Contains("TimeoutInMinute"))
+            if (content.Contains("TimeoutInMinutes"))
             {
-                ((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).TimeoutInMinute = (int) content.GetValueForProperty("TimeoutInMinute",((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).TimeoutInMinute, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
+                ((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).TimeoutInMinutes = (int) content.GetValueForProperty("TimeoutInMinutes",((Sample.API.Models.IRecoveryGroupBaseActionInternal)this).TimeoutInMinutes, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             }
             AfterDeserializePSObject(content);
         }
@@ -159,18 +151,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Defines a manual action for the recovery orchestration group.
     [System.ComponentModel.TypeConverter(typeof(RecoveryGroupManualActionTypeConverter))]

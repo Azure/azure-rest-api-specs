@@ -69,7 +69,7 @@ namespace Sample.API.Models
             {_lastError = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("lastError"), out var __jsonLastError) ? Sample.API.Models.ErrorDetails.FromJson(__jsonLastError) : _lastError;}
             {_generationStatus = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("generationStatus"), out var __jsonGenerationStatus) ? (string)__jsonGenerationStatus : (string)_generationStatus;}
             {_stageStatuses = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("stageStatuses"), out var __jsonStageStatuses) ? If( __jsonStageStatuses as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IReportStageStatus>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.IReportStageStatus) (Sample.API.Models.ReportStageStatus.FromJson(__u) )) ))() : null : _stageStatuses;}
-            {_availableFormat = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("availableFormats"), out var __jsonAvailableFormats) ? If( __jsonAvailableFormats as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _availableFormat;}
+            {_availableFormats = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("availableFormats"), out var __jsonAvailableFormats) ? If( __jsonAvailableFormats as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _availableFormats;}
             {_lastGeneratedTimestamp = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("lastGeneratedTimestamp"), out var __jsonLastGeneratedTimestamp) ? global::System.DateTime.TryParse((string)__jsonLastGeneratedTimestamp, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonLastGeneratedTimestampValue) ? __jsonLastGeneratedTimestampValue : _lastGeneratedTimestamp : _lastGeneratedTimestamp;}
             {_schemaVersion = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("schemaVersion"), out var __jsonSchemaVersion) ? (string)__jsonSchemaVersion : (string)_schemaVersion;}
             {_finalizationState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("finalizationState"), out var __jsonFinalizationState) ? (string)__jsonFinalizationState : (string)_finalizationState;}
@@ -127,10 +127,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._availableFormat)
+                if (null != this._availableFormats)
                 {
                     var __r = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __s in this._availableFormat )
+                    foreach( var __s in this._availableFormats )
                     {
                         AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
                     }

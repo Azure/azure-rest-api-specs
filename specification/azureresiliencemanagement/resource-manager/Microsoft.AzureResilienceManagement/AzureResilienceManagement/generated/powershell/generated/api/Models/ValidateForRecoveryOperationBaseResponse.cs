@@ -11,12 +11,12 @@ namespace Sample.API.Models
         Sample.API.Models.IValidateForRecoveryOperationBaseResponseInternal
     {
 
-        /// <summary>Backing field for <see cref="RecoveryResourceQualification" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification> _recoveryResourceQualification;
+        /// <summary>Backing field for <see cref="RecoveryResourceQualifications" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification> _recoveryResourceQualifications;
 
         /// <summary>Qualification details of resources for the operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification> RecoveryResourceQualification { get => this._recoveryResourceQualification; set => this._recoveryResourceQualification = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification> RecoveryResourceQualifications { get => this._recoveryResourceQualifications; set => this._recoveryResourceQualifications = value; }
 
         /// <summary>
         /// Creates an new <see cref="ValidateForRecoveryOperationBaseResponse" /> instance.
@@ -40,7 +40,7 @@ namespace Sample.API.Models
         Description = @"Qualification details of resources for the operation.",
         SerializedName = @"recoveryResourceQualifications",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryResourceQualification) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification> RecoveryResourceQualification { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification> RecoveryResourceQualifications { get; set; }
 
     }
     /// ValidateForRecoveryOperation post action response.
@@ -48,7 +48,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Qualification details of resources for the operation.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification> RecoveryResourceQualification { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryResourceQualification> RecoveryResourceQualifications { get; set; }
 
     }
 }

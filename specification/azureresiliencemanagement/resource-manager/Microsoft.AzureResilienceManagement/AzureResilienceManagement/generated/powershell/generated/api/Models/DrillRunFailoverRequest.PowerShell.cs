@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.DrillRunFailoverRequest"
         /// />.
         /// </summary>
@@ -96,33 +88,33 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FailoverProperty"))
+            if (content.Contains("FailoverProperties"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverProperty = (Sample.API.Models.IFailoverRequest) content.GetValueForProperty("FailoverProperty",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverProperty, Sample.API.Models.FailoverRequestTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverProperties = (Sample.API.Models.IFailoverRequest) content.GetValueForProperty("FailoverProperties",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverProperties, Sample.API.Models.FailoverRequestTypeConverter.ConvertFrom);
             }
             if (content.Contains("AutoFailover"))
             {
                 ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).AutoFailover = (string) content.GetValueForProperty("AutoFailover",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).AutoFailover, global::System.Convert.ToString);
             }
-            if (content.Contains("FailoverPropertyFailoverRequestProperty"))
+            if (content.Contains("FailoverPropertyFailoverRequestProperties"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverRequestProperty = (Sample.API.Models.IFailoverRequestProperties) content.GetValueForProperty("FailoverPropertyFailoverRequestProperty",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverRequestProperty, Sample.API.Models.FailoverRequestPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverRequestProperties = (Sample.API.Models.IFailoverRequestProperties) content.GetValueForProperty("FailoverPropertyFailoverRequestProperties",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverRequestProperties, Sample.API.Models.FailoverRequestPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("FailoverPropertyFailoverDirection"))
             {
                 ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverDirection = (string) content.GetValueForProperty("FailoverPropertyFailoverDirection",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverDirection, global::System.Convert.ToString);
             }
-            if (content.Contains("FailoverRequestPropertyExecutionConfiguration"))
+            if (content.Contains("FailoverRequestPropertyExecutionConfigurations"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertyExecutionConfiguration = (Sample.API.Models.IExecutionConfigurations) content.GetValueForProperty("FailoverRequestPropertyExecutionConfiguration",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertyExecutionConfiguration, Sample.API.Models.ExecutionConfigurationsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertyExecutionConfigurations = (Sample.API.Models.IExecutionConfigurations) content.GetValueForProperty("FailoverRequestPropertyExecutionConfigurations",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertyExecutionConfigurations, Sample.API.Models.ExecutionConfigurationsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("FailoverRequestPropertySourceLocation"))
+            if (content.Contains("FailoverRequestPropertySourceLocations"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySourceLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("FailoverRequestPropertySourceLocation",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySourceLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySourceLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("FailoverRequestPropertySourceLocations",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySourceLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("FailoverRequestPropertySelectedResourceId"))
+            if (content.Contains("FailoverRequestPropertySelectedResourceIds"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySelectedResourceId = (System.Collections.Generic.List<string>) content.GetValueForProperty("FailoverRequestPropertySelectedResourceId",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySelectedResourceId, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySelectedResourceIds = (System.Collections.Generic.List<string>) content.GetValueForProperty("FailoverRequestPropertySelectedResourceIds",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySelectedResourceIds, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("ExecutionConfigurationUserConsent"))
             {
@@ -145,33 +137,33 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("FailoverProperty"))
+            if (content.Contains("FailoverProperties"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverProperty = (Sample.API.Models.IFailoverRequest) content.GetValueForProperty("FailoverProperty",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverProperty, Sample.API.Models.FailoverRequestTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverProperties = (Sample.API.Models.IFailoverRequest) content.GetValueForProperty("FailoverProperties",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverProperties, Sample.API.Models.FailoverRequestTypeConverter.ConvertFrom);
             }
             if (content.Contains("AutoFailover"))
             {
                 ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).AutoFailover = (string) content.GetValueForProperty("AutoFailover",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).AutoFailover, global::System.Convert.ToString);
             }
-            if (content.Contains("FailoverPropertyFailoverRequestProperty"))
+            if (content.Contains("FailoverPropertyFailoverRequestProperties"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverRequestProperty = (Sample.API.Models.IFailoverRequestProperties) content.GetValueForProperty("FailoverPropertyFailoverRequestProperty",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverRequestProperty, Sample.API.Models.FailoverRequestPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverRequestProperties = (Sample.API.Models.IFailoverRequestProperties) content.GetValueForProperty("FailoverPropertyFailoverRequestProperties",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverRequestProperties, Sample.API.Models.FailoverRequestPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("FailoverPropertyFailoverDirection"))
             {
                 ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverDirection = (string) content.GetValueForProperty("FailoverPropertyFailoverDirection",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverPropertyFailoverDirection, global::System.Convert.ToString);
             }
-            if (content.Contains("FailoverRequestPropertyExecutionConfiguration"))
+            if (content.Contains("FailoverRequestPropertyExecutionConfigurations"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertyExecutionConfiguration = (Sample.API.Models.IExecutionConfigurations) content.GetValueForProperty("FailoverRequestPropertyExecutionConfiguration",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertyExecutionConfiguration, Sample.API.Models.ExecutionConfigurationsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertyExecutionConfigurations = (Sample.API.Models.IExecutionConfigurations) content.GetValueForProperty("FailoverRequestPropertyExecutionConfigurations",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertyExecutionConfigurations, Sample.API.Models.ExecutionConfigurationsTypeConverter.ConvertFrom);
             }
-            if (content.Contains("FailoverRequestPropertySourceLocation"))
+            if (content.Contains("FailoverRequestPropertySourceLocations"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySourceLocation = (System.Collections.Generic.List<string>) content.GetValueForProperty("FailoverRequestPropertySourceLocation",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySourceLocation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySourceLocations = (System.Collections.Generic.List<string>) content.GetValueForProperty("FailoverRequestPropertySourceLocations",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySourceLocations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("FailoverRequestPropertySelectedResourceId"))
+            if (content.Contains("FailoverRequestPropertySelectedResourceIds"))
             {
-                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySelectedResourceId = (System.Collections.Generic.List<string>) content.GetValueForProperty("FailoverRequestPropertySelectedResourceId",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySelectedResourceId, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySelectedResourceIds = (System.Collections.Generic.List<string>) content.GetValueForProperty("FailoverRequestPropertySelectedResourceIds",((Sample.API.Models.IDrillRunFailoverRequestInternal)this).FailoverRequestPropertySelectedResourceIds, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("ExecutionConfigurationUserConsent"))
             {
@@ -191,18 +183,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Request body for Failover API.
     [System.ComponentModel.TypeConverter(typeof(DrillRunFailoverRequestTypeConverter))]

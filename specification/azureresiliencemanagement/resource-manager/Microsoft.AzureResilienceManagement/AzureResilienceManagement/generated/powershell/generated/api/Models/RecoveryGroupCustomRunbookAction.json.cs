@@ -76,7 +76,7 @@ namespace Sample.API.Models
             __recoveryGroupBaseAction = new Sample.API.Models.RecoveryGroupBaseAction(json);
             {_associatedIdentity = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("associatedIdentity"), out var __jsonAssociatedIdentity) ? Sample.API.Models.AssociatedIdentity.FromJson(__jsonAssociatedIdentity) : _associatedIdentity;}
             {_actionResourceId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("actionResourceId"), out var __jsonActionResourceId) ? (string)__jsonActionResourceId : (string)_actionResourceId;}
-            {_parameter = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("parameters"), out var __jsonParameters) ? Sample.API.Models.RecoveryGroupCustomRunbookActionParameters.FromJson(__jsonParameters) : _parameter;}
+            {_parameters = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("parameters"), out var __jsonParameters) ? Sample.API.Models.RecoveryGroupCustomRunbookActionParameters.FromJson(__jsonParameters) : _parameters;}
             AfterFromJson(json);
         }
 
@@ -102,7 +102,7 @@ namespace Sample.API.Models
             __recoveryGroupBaseAction?.ToJson(container, serializationMode);
             AddIf( null != this._associatedIdentity ? (Sample.API.Runtime.Json.JsonNode) this._associatedIdentity.ToJson(null,serializationMode) : null, "associatedIdentity" ,container.Add );
             AddIf( null != (((object)this._actionResourceId)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._actionResourceId.ToString()) : null, "actionResourceId" ,container.Add );
-            AddIf( null != this._parameter ? (Sample.API.Runtime.Json.JsonNode) this._parameter.ToJson(null,serializationMode) : null, "parameters" ,container.Add );
+            AddIf( null != this._parameters ? (Sample.API.Runtime.Json.JsonNode) this._parameters.ToJson(null,serializationMode) : null, "parameters" ,container.Add );
             AfterToJson(ref container);
             return container;
         }

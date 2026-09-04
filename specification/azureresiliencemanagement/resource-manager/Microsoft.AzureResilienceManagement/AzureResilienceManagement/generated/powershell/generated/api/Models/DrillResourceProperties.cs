@@ -11,19 +11,19 @@ namespace Sample.API.Models
         Sample.API.Models.IDrillResourcePropertiesInternal
     {
 
-        /// <summary>Backing field for <see cref="ActiveLocation" /> property.</summary>
-        private System.Collections.Generic.List<string> _activeLocation;
+        /// <summary>Backing field for <see cref="ActiveLocations" /> property.</summary>
+        private System.Collections.Generic.List<string> _activeLocations;
 
         /// <summary>Active location and zones of the Azure resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ActiveLocation { get => this._activeLocation; }
+        public System.Collections.Generic.List<string> ActiveLocations { get => this._activeLocations; }
 
-        /// <summary>Backing field for <see cref="ActivePhysicalZone" /> property.</summary>
-        private System.Collections.Generic.List<string> _activePhysicalZone;
+        /// <summary>Backing field for <see cref="ActivePhysicalZones" /> property.</summary>
+        private System.Collections.Generic.List<string> _activePhysicalZones;
 
         /// <summary>Active Resource location and physical zones of Azure Resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> ActivePhysicalZone { get => this._activePhysicalZone; }
+        public System.Collections.Generic.List<string> ActivePhysicalZones { get => this._activePhysicalZones; }
 
         /// <summary>Backing field for <see cref="AdvisorHaRecommendationId" /> property.</summary>
         private string _advisorHaRecommendationId;
@@ -52,7 +52,7 @@ namespace Sample.API.Models
 
         /// <summary>RBAC required by Drill MSI on the target resource for monitoring.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string AttentionReasonMonitoringRbacOnTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).MonitoringRbacOnTarget; }
+        public string AttentionReasonMonitoringRbacOnTargets { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).MonitoringRbacOnTargets; }
 
         /// <summary>Drill Resource State (wrt SG and RO).</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
@@ -62,41 +62,41 @@ namespace Sample.API.Models
         /// RBAC required by AutomationAccount for runbook MSI not setup on the target resources.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string AttentionReasonRunbookFaultRbacOnTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).RunbookFaultRbacOnTarget; }
+        public string AttentionReasonRunbookFaultRbacOnTargets { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).RunbookFaultRbacOnTargets; }
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName; }
+        public string CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultName; }
 
         /// <summary>ID of ARM resource used for automation (e.g. Automation runbook URL).</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultScriptResourceId; }
+        public string CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultScriptResourceId; }
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultName; }
+        public string DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultName; }
 
         /// <summary>
         /// ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource
         /// and not the actual resource which is to be simulated for faulting.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultTargetResourceId; }
+        public string DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultTargetResourceId; }
 
         /// <summary>fault urn.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultUrn; }
+        public string DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultUrn; }
 
-        /// <summary>Backing field for <see cref="FaultProperty" /> property.</summary>
-        private Sample.API.Models.IFaultProperties _faultProperty;
+        /// <summary>Backing field for <see cref="FaultProperties" /> property.</summary>
+        private Sample.API.Models.IFaultProperties _faultProperties;
 
         /// <summary>Fault Properties</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IFaultProperties FaultProperty { get => (this._faultProperty = this._faultProperty ?? new Sample.API.Models.FaultProperties()); }
+        internal Sample.API.Models.IFaultProperties FaultProperties { get => (this._faultProperties = this._faultProperties ?? new Sample.API.Models.FaultProperties()); }
 
         /// <summary>Available faults for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).AvailableFault; }
+        public System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFaults { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).AvailableFaults; }
 
         /// <summary>Backing field for <see cref="FaultState" /> property.</summary>
         private string _faultState;
@@ -143,22 +143,22 @@ namespace Sample.API.Models
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> MonitoringRbacAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)MonitoringRbacAssignmentError).Recommendation; }
+        public System.Collections.Generic.List<string> MonitoringRbacAssignmentErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)MonitoringRbacAssignmentError).Recommendations; }
 
         /// <summary>fault name</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultName; }
+        public string OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultName; }
 
         /// <summary>
         /// ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource
         /// and not the actual resource which is to be simulated for faulting.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultTargetResourceId; }
+        public string OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultTargetResourceId; }
 
         /// <summary>fault urn.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultUrn; }
+        public string OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultUrn; }
 
         /// <summary>Backing field for <see cref="ProvisioningState" /> property.</summary>
         private string _provisioningState;
@@ -184,7 +184,7 @@ namespace Sample.API.Models
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> RbacAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendation; }
+        public System.Collections.Generic.List<string> RbacAssignmentErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendations; }
 
         /// <summary>Backing field for <see cref="ReadinessState" /> property.</summary>
         private string _readinessState;
@@ -193,19 +193,19 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ReadinessState { get => this._readinessState; }
 
-        /// <summary>Backing field for <see cref="RecoveryLocation" /> property.</summary>
-        private System.Collections.Generic.List<string> _recoveryLocation;
+        /// <summary>Backing field for <see cref="RecoveryLocations" /> property.</summary>
+        private System.Collections.Generic.List<string> _recoveryLocations;
 
         /// <summary>List of recovery locations and zones of the Azure resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RecoveryLocation { get => this._recoveryLocation; }
+        public System.Collections.Generic.List<string> RecoveryLocations { get => this._recoveryLocations; }
 
-        /// <summary>Backing field for <see cref="RecoveryPhysicalZone" /> property.</summary>
-        private System.Collections.Generic.List<string> _recoveryPhysicalZone;
+        /// <summary>Backing field for <see cref="RecoveryPhysicalZones" /> property.</summary>
+        private System.Collections.Generic.List<string> _recoveryPhysicalZones;
 
         /// <summary>Recovery Resource location and physical zones of HA Azure Resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RecoveryPhysicalZone { get => this._recoveryPhysicalZone; }
+        public System.Collections.Generic.List<string> RecoveryPhysicalZones { get => this._recoveryPhysicalZones; }
 
         /// <summary>Backing field for <see cref="RecoveryPlanExclusionReason" /> property.</summary>
         private string _recoveryPlanExclusionReason;
@@ -242,11 +242,11 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ResourceType { get => this._resourceType; set => this._resourceType = value; }
 
-        /// <summary>Internal Acessors for ActiveLocation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.ActiveLocation { get => this._activeLocation; set { {_activeLocation = value;} } }
+        /// <summary>Internal Acessors for ActiveLocations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.ActiveLocations { get => this._activeLocations; set { {_activeLocations = value;} } }
 
-        /// <summary>Internal Acessors for ActivePhysicalZone</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.ActivePhysicalZone { get => this._activePhysicalZone; set { {_activePhysicalZone = value;} } }
+        /// <summary>Internal Acessors for ActivePhysicalZones</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.ActivePhysicalZones { get => this._activePhysicalZones; set { {_activePhysicalZones = value;} } }
 
         /// <summary>Internal Acessors for AdvisorHaRecommendationId</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.AdvisorHaRecommendationId { get => this._advisorHaRecommendationId; set { {_advisorHaRecommendationId = value;} } }
@@ -260,44 +260,44 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for AttentionReasonFaultRbacOnTargetResource</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonFaultRbacOnTargetResource { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).FaultRbacOnTargetResource; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).FaultRbacOnTargetResource = value ?? null; }
 
-        /// <summary>Internal Acessors for AttentionReasonMonitoringRbacOnTarget</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonMonitoringRbacOnTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).MonitoringRbacOnTarget; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).MonitoringRbacOnTarget = value ?? null; }
+        /// <summary>Internal Acessors for AttentionReasonMonitoringRbacOnTargets</summary>
+        string Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonMonitoringRbacOnTargets { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).MonitoringRbacOnTargets; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).MonitoringRbacOnTargets = value ?? null; }
 
         /// <summary>Internal Acessors for AttentionReasonResourceState</summary>
         System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonResourceState { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).ResourceState; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).ResourceState = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for AttentionReasonRunbookFaultRbacOnTarget</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonRunbookFaultRbacOnTarget { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).RunbookFaultRbacOnTarget; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).RunbookFaultRbacOnTarget = value ?? null; }
+        /// <summary>Internal Acessors for AttentionReasonRunbookFaultRbacOnTargets</summary>
+        string Sample.API.Models.IDrillResourcePropertiesInternal.AttentionReasonRunbookFaultRbacOnTargets { get => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).RunbookFaultRbacOnTargets; set => ((Sample.API.Models.IDrillResourceAttentionReasonInternal)AttentionReason).RunbookFaultRbacOnTargets = value ?? null; }
 
         /// <summary>Internal Acessors for CustomFaultName</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultName = value ?? null; }
+        string Sample.API.Models.IDrillResourcePropertiesInternal.CustomFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultName = value ?? null; }
 
         /// <summary>Internal Acessors for CustomFaultScriptResourceId</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultScriptResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFaultScriptResourceId = value ?? null; }
+        string Sample.API.Models.IDrillResourcePropertiesInternal.CustomFaultScriptResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultScriptResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFaultScriptResourceId = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultFaultName</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultName = value ?? null; }
+        string Sample.API.Models.IDrillResourcePropertiesInternal.DefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultName = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultFaultTargetResourceId</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultTargetResourceId = value ?? null; }
+        string Sample.API.Models.IDrillResourcePropertiesInternal.DefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultTargetResourceId = value ?? null; }
 
         /// <summary>Internal Acessors for DefaultFaultUrn</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFaultUrn = value ?? null; }
+        string Sample.API.Models.IDrillResourcePropertiesInternal.DefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFaultUrn = value ?? null; }
 
-        /// <summary>Internal Acessors for FaultProperty</summary>
-        Sample.API.Models.IFaultProperties Sample.API.Models.IDrillResourcePropertiesInternal.FaultProperty { get => (this._faultProperty = this._faultProperty ?? new Sample.API.Models.FaultProperties()); set { {_faultProperty = value;} } }
+        /// <summary>Internal Acessors for FaultProperties</summary>
+        Sample.API.Models.IFaultProperties Sample.API.Models.IDrillResourcePropertiesInternal.FaultProperties { get => (this._faultProperties = this._faultProperties ?? new Sample.API.Models.FaultProperties()); set { {_faultProperties = value;} } }
 
-        /// <summary>Internal Acessors for FaultPropertyAvailableFault</summary>
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> Sample.API.Models.IDrillResourcePropertiesInternal.FaultPropertyAvailableFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).AvailableFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).AvailableFault = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for FaultPropertyAvailableFaults</summary>
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> Sample.API.Models.IDrillResourcePropertiesInternal.FaultPropertyAvailableFaults { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).AvailableFaults; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).AvailableFaults = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for FaultPropertyCustomFault</summary>
-        Sample.API.Models.ICustomFaultDetails Sample.API.Models.IDrillResourcePropertiesInternal.FaultPropertyCustomFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).CustomFault = value ?? null /* model class */; }
+        Sample.API.Models.ICustomFaultDetails Sample.API.Models.IDrillResourcePropertiesInternal.FaultPropertyCustomFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).CustomFault = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for FaultPropertyDefaultFault</summary>
-        Sample.API.Models.IFaultDetails Sample.API.Models.IDrillResourcePropertiesInternal.FaultPropertyDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).DefaultFault = value ?? null /* model class */; }
+        Sample.API.Models.IFaultDetails Sample.API.Models.IDrillResourcePropertiesInternal.FaultPropertyDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).DefaultFault = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for FaultPropertyOverriddenDefaultFault</summary>
-        Sample.API.Models.IFaultDetails Sample.API.Models.IDrillResourcePropertiesInternal.FaultPropertyOverriddenDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFault = value ?? null /* model class */; }
+        Sample.API.Models.IFaultDetails Sample.API.Models.IDrillResourcePropertiesInternal.FaultPropertyOverriddenDefaultFault { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFault; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFault = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for FaultState</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.FaultState { get => this._faultState; set { {_faultState = value;} } }
@@ -317,17 +317,17 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for MonitoringRbacAssignmentErrorMessage</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.MonitoringRbacAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)MonitoringRbacAssignmentError).Message; set => ((Sample.API.Models.IErrorDetailsInternal)MonitoringRbacAssignmentError).Message = value ?? null; }
 
-        /// <summary>Internal Acessors for MonitoringRbacAssignmentErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.MonitoringRbacAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)MonitoringRbacAssignmentError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)MonitoringRbacAssignmentError).Recommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for MonitoringRbacAssignmentErrorRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.MonitoringRbacAssignmentErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)MonitoringRbacAssignmentError).Recommendations; set => ((Sample.API.Models.IErrorDetailsInternal)MonitoringRbacAssignmentError).Recommendations = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for OverriddenDefaultFaultName</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultName = value ?? null; }
+        string Sample.API.Models.IDrillResourcePropertiesInternal.OverriddenDefaultFaultName { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultName; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultName = value ?? null; }
 
         /// <summary>Internal Acessors for OverriddenDefaultFaultTargetResourceId</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultTargetResourceId = value ?? null; }
+        string Sample.API.Models.IDrillResourcePropertiesInternal.OverriddenDefaultFaultTargetResourceId { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultTargetResourceId; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultTargetResourceId = value ?? null; }
 
         /// <summary>Internal Acessors for OverriddenDefaultFaultUrn</summary>
-        string Sample.API.Models.IDrillResourcePropertiesInternal.OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperty).OverriddenDefaultFaultUrn = value ?? null; }
+        string Sample.API.Models.IDrillResourcePropertiesInternal.OverriddenDefaultFaultUrn { get => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultUrn; set => ((Sample.API.Models.IFaultPropertiesInternal)FaultProperties).OverriddenDefaultFaultUrn = value ?? null; }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.ProvisioningState { get => this._provisioningState; set { {_provisioningState = value;} } }
@@ -341,17 +341,17 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for RbacAssignmentErrorMessage</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.RbacAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Message; set => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Message = value ?? null; }
 
-        /// <summary>Internal Acessors for RbacAssignmentErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.RbacAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for RbacAssignmentErrorRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.RbacAssignmentErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendations; set => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendations = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ReadinessState</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.ReadinessState { get => this._readinessState; set { {_readinessState = value;} } }
 
-        /// <summary>Internal Acessors for RecoveryLocation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.RecoveryLocation { get => this._recoveryLocation; set { {_recoveryLocation = value;} } }
+        /// <summary>Internal Acessors for RecoveryLocations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.RecoveryLocations { get => this._recoveryLocations; set { {_recoveryLocations = value;} } }
 
-        /// <summary>Internal Acessors for RecoveryPhysicalZone</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.RecoveryPhysicalZone { get => this._recoveryPhysicalZone; set { {_recoveryPhysicalZone = value;} } }
+        /// <summary>Internal Acessors for RecoveryPhysicalZones</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillResourcePropertiesInternal.RecoveryPhysicalZones { get => this._recoveryPhysicalZones; set { {_recoveryPhysicalZones = value;} } }
 
         /// <summary>Internal Acessors for RecoveryPlanExclusionReason</summary>
         string Sample.API.Models.IDrillResourcePropertiesInternal.RecoveryPlanExclusionReason { get => this._recoveryPlanExclusionReason; set { {_recoveryPlanExclusionReason = value;} } }
@@ -382,7 +382,7 @@ namespace Sample.API.Models
         Description = @"Active location and zones of the Azure resource.",
         SerializedName = @"activeLocations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ActiveLocation { get;  }
+        System.Collections.Generic.List<string> ActiveLocations { get;  }
         /// <summary>Active Resource location and physical zones of Azure Resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -393,7 +393,7 @@ namespace Sample.API.Models
         Description = @"Active Resource location and physical zones of Azure Resource.",
         SerializedName = @"activePhysicalZones",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ActivePhysicalZone { get;  }
+        System.Collections.Generic.List<string> ActivePhysicalZones { get;  }
         /// <summary>Associated Advisor Recommendation link, if HA is not enabled on this resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -439,7 +439,7 @@ namespace Sample.API.Models
         SerializedName = @"monitoringRbacOnTargets",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string AttentionReasonMonitoringRbacOnTarget { get;  }
+        string AttentionReasonMonitoringRbacOnTargets { get;  }
         /// <summary>Drill Resource State (wrt SG and RO).</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -465,7 +465,7 @@ namespace Sample.API.Models
         SerializedName = @"runbookFaultRbacOnTargets",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string AttentionReasonRunbookFaultRbacOnTarget { get;  }
+        string AttentionReasonRunbookFaultRbacOnTargets { get;  }
         /// <summary>fault name</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -534,7 +534,7 @@ namespace Sample.API.Models
         Description = @"Available faults for this resource.",
         SerializedName = @"availableFaults",
         PossibleTypes = new [] { typeof(Sample.API.Models.IFaultDetails) })]
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFault { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFaults { get;  }
         /// <summary>Fault State of the Drill resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -615,7 +615,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> MonitoringRbacAssignmentErrorRecommendation { get;  }
+        System.Collections.Generic.List<string> MonitoringRbacAssignmentErrorRecommendations { get;  }
         /// <summary>fault name</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -696,7 +696,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RbacAssignmentErrorRecommendation { get;  }
+        System.Collections.Generic.List<string> RbacAssignmentErrorRecommendations { get;  }
         /// <summary>Readiness State of the Drill resource</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -719,7 +719,7 @@ namespace Sample.API.Models
         Description = @"List of recovery locations and zones of the Azure resource.",
         SerializedName = @"recoveryLocations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RecoveryLocation { get;  }
+        System.Collections.Generic.List<string> RecoveryLocations { get;  }
         /// <summary>Recovery Resource location and physical zones of HA Azure Resource.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -730,7 +730,7 @@ namespace Sample.API.Models
         Description = @"Recovery Resource location and physical zones of HA Azure Resource.",
         SerializedName = @"recoveryPhysicalZones",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RecoveryPhysicalZone { get;  }
+        System.Collections.Generic.List<string> RecoveryPhysicalZones { get;  }
         /// <summary>Exclusion reason of the Drill resource in Recovery Plan</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -796,9 +796,9 @@ namespace Sample.API.Models
 
     {
         /// <summary>Active location and zones of the Azure resource.</summary>
-        System.Collections.Generic.List<string> ActiveLocation { get; set; }
+        System.Collections.Generic.List<string> ActiveLocations { get; set; }
         /// <summary>Active Resource location and physical zones of Azure Resource.</summary>
-        System.Collections.Generic.List<string> ActivePhysicalZone { get; set; }
+        System.Collections.Generic.List<string> ActivePhysicalZones { get; set; }
         /// <summary>Associated Advisor Recommendation link, if HA is not enabled on this resource.</summary>
         string AdvisorHaRecommendationId { get; set; }
         /// <summary>Recommendation Type Id for the recommendation.</summary>
@@ -810,7 +810,7 @@ namespace Sample.API.Models
         string AttentionReasonFaultRbacOnTargetResource { get; set; }
         /// <summary>RBAC required by Drill MSI on the target resource for monitoring.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string AttentionReasonMonitoringRbacOnTarget { get; set; }
+        string AttentionReasonMonitoringRbacOnTargets { get; set; }
         /// <summary>Drill Resource State (wrt SG and RO).</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("InServiceGroupNotInDrill", "InDrillNotInServiceGroup", "InRecoveryPlanNotInDrill", "InDrillNotInRecoveryPlan", "ResourceStateIncompatibleWithFault")]
         System.Collections.Generic.List<string> AttentionReasonResourceState { get; set; }
@@ -818,7 +818,7 @@ namespace Sample.API.Models
         /// RBAC required by AutomationAccount for runbook MSI not setup on the target resources.
         /// </summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string AttentionReasonRunbookFaultRbacOnTarget { get; set; }
+        string AttentionReasonRunbookFaultRbacOnTargets { get; set; }
         /// <summary>fault name</summary>
         string CustomFaultName { get; set; }
         /// <summary>ID of ARM resource used for automation (e.g. Automation runbook URL).</summary>
@@ -833,9 +833,9 @@ namespace Sample.API.Models
         /// <summary>fault urn.</summary>
         string DefaultFaultUrn { get; set; }
         /// <summary>Fault Properties</summary>
-        Sample.API.Models.IFaultProperties FaultProperty { get; set; }
+        Sample.API.Models.IFaultProperties FaultProperties { get; set; }
         /// <summary>Available faults for this resource.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFault { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IFaultDetails> FaultPropertyAvailableFaults { get; set; }
         /// <summary>Custom Fault Details selected by user</summary>
         Sample.API.Models.ICustomFaultDetails FaultPropertyCustomFault { get; set; }
         /// <summary>Default fault provided by the system.</summary>
@@ -861,7 +861,7 @@ namespace Sample.API.Models
         /// <summary>Error message.</summary>
         string MonitoringRbacAssignmentErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> MonitoringRbacAssignmentErrorRecommendation { get; set; }
+        System.Collections.Generic.List<string> MonitoringRbacAssignmentErrorRecommendations { get; set; }
         /// <summary>fault name</summary>
         string OverriddenDefaultFaultName { get; set; }
         /// <summary>
@@ -881,14 +881,14 @@ namespace Sample.API.Models
         /// <summary>Error message.</summary>
         string RbacAssignmentErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> RbacAssignmentErrorRecommendation { get; set; }
+        System.Collections.Generic.List<string> RbacAssignmentErrorRecommendations { get; set; }
         /// <summary>Readiness State of the Drill resource</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Ready", "NeedsAttention")]
         string ReadinessState { get; set; }
         /// <summary>List of recovery locations and zones of the Azure resource.</summary>
-        System.Collections.Generic.List<string> RecoveryLocation { get; set; }
+        System.Collections.Generic.List<string> RecoveryLocations { get; set; }
         /// <summary>Recovery Resource location and physical zones of HA Azure Resource.</summary>
-        System.Collections.Generic.List<string> RecoveryPhysicalZone { get; set; }
+        System.Collections.Generic.List<string> RecoveryPhysicalZones { get; set; }
         /// <summary>Exclusion reason of the Drill resource in Recovery Plan</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("ExcludedFromRecoveryPlan", "ProtectionStatus")]
         string RecoveryPlanExclusionReason { get; set; }

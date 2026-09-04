@@ -21,12 +21,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string OperationName { get => this._operationName; set => this._operationName = value; }
 
-        /// <summary>Backing field for <see cref="SourceLocation" /> property.</summary>
-        private System.Collections.Generic.List<string> _sourceLocation;
+        /// <summary>Backing field for <see cref="SourceLocations" /> property.</summary>
+        private System.Collections.Generic.List<string> _sourceLocations;
 
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> SourceLocation { get => this._sourceLocation; set => this._sourceLocation = value; }
+        public System.Collections.Generic.List<string> SourceLocations { get => this._sourceLocations; set => this._sourceLocations = value; }
 
         /// <summary>Creates an new <see cref="ValidateForExecutionProperties" /> instance.</summary>
         public ValidateForExecutionProperties()
@@ -63,7 +63,7 @@ namespace Sample.API.Models
         Description = @"Physiscal Source locations from where resources to be failed-over or faulted.",
         SerializedName = @"sourceLocations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> SourceLocation { get; set; }
+        System.Collections.Generic.List<string> SourceLocations { get; set; }
 
     }
     /// Additional properties for Failover.
@@ -77,7 +77,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("Failover", "Reprotect", "FailoverReverse", "ReprotectReverse")]
         string OperationName { get; set; }
         /// <summary>Physiscal Source locations from where resources to be failed-over or faulted.</summary>
-        System.Collections.Generic.List<string> SourceLocation { get; set; }
+        System.Collections.Generic.List<string> SourceLocations { get; set; }
 
     }
 }

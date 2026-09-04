@@ -50,12 +50,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string Name { get => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).Name; set => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).Name = value ; }
 
-        /// <summary>Backing field for <see cref="Parameter" /> property.</summary>
-        private Sample.API.Models.IRecoveryGroupCustomRunbookActionParameters _parameter;
+        /// <summary>Backing field for <see cref="Parameters" /> property.</summary>
+        private Sample.API.Models.IRecoveryGroupCustomRunbookActionParameters _parameters;
 
         /// <summary>Key-value parameters for the operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public Sample.API.Models.IRecoveryGroupCustomRunbookActionParameters Parameter { get => (this._parameter = this._parameter ?? new Sample.API.Models.RecoveryGroupCustomRunbookActionParameters()); set => this._parameter = value; }
+        public Sample.API.Models.IRecoveryGroupCustomRunbookActionParameters Parameters { get => (this._parameters = this._parameters ?? new Sample.API.Models.RecoveryGroupCustomRunbookActionParameters()); set => this._parameters = value; }
 
         /// <summary>Internal Acessors for AssociatedIdentity</summary>
         Sample.API.Models.IAssociatedIdentity Sample.API.Models.IRecoveryGroupCustomRunbookActionInternal.AssociatedIdentity { get => (this._associatedIdentity = this._associatedIdentity ?? new Sample.API.Models.AssociatedIdentity()); set { {_associatedIdentity = value;} } }
@@ -64,7 +64,7 @@ namespace Sample.API.Models
         /// The maximum amount of time, in minutes, allowed for the action to complete before it times out.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
-        public int TimeoutInMinute { get => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).TimeoutInMinute; set => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).TimeoutInMinute = value ; }
+        public int TimeoutInMinutes { get => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).TimeoutInMinutes; set => ((Sample.API.Models.IRecoveryGroupBaseActionInternal)__recoveryGroupBaseAction).TimeoutInMinutes = value ; }
 
         /// <summary>The type of the recovery orchestration group action.</summary>
         [Sample.API.Constant]
@@ -140,7 +140,7 @@ namespace Sample.API.Models
         Description = @"Key-value parameters for the operation.",
         SerializedName = @"parameters",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroupCustomRunbookActionParameters) })]
-        Sample.API.Models.IRecoveryGroupCustomRunbookActionParameters Parameter { get; set; }
+        Sample.API.Models.IRecoveryGroupCustomRunbookActionParameters Parameters { get; set; }
 
     }
     /// Defines a custom runbook action for the recovery orchestration group.
@@ -159,7 +159,7 @@ namespace Sample.API.Models
         /// <summary>User assigned identity id linked with the resource</summary>
         string AssociatedIdentityUserAssignedIdentity { get; set; }
         /// <summary>Key-value parameters for the operation.</summary>
-        Sample.API.Models.IRecoveryGroupCustomRunbookActionParameters Parameter { get; set; }
+        Sample.API.Models.IRecoveryGroupCustomRunbookActionParameters Parameters { get; set; }
 
     }
 }

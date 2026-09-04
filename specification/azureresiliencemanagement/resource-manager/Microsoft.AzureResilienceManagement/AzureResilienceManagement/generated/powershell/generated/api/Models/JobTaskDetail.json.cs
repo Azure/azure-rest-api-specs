@@ -73,17 +73,17 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_errorDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.JobErrorInfo.FromJson(__jsonErrorDetails) : _errorDetail;}
+            {_errorDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("errorDetails"), out var __jsonErrorDetails) ? Sample.API.Models.JobErrorInfo.FromJson(__jsonErrorDetails) : _errorDetails;}
             {_status = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("status"), out var __jsonStatus) ? (string)__jsonStatus : (string)_status;}
             {_startTime = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("startTime"), out var __jsonStartTime) ? global::System.DateTime.TryParse((string)__jsonStartTime, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonStartTimeValue) ? __jsonStartTimeValue : _startTime : _startTime;}
             {_endTime = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("endTime"), out var __jsonEndTime) ? global::System.DateTime.TryParse((string)__jsonEndTime, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonEndTimeValue) ? __jsonEndTimeValue : _endTime : _endTime;}
             {_duration = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("duration"), out var __jsonDuration) ? global::System.Xml.XmlConvert.ToTimeSpan( __jsonDuration ) : _duration;}
             {_taskId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("taskId"), out var __jsonTaskId) ? (string)__jsonTaskId : (string)_taskId;}
             {_taskName = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("taskName"), out var __jsonTaskName) ? (string)__jsonTaskName : (string)_taskName;}
-            {_linkedJobId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("linkedJobIds"), out var __jsonLinkedJobIds) ? If( __jsonLinkedJobIds as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _linkedJobId;}
-            {_userComment = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("userComments"), out var __jsonUserComments) ? If( __jsonUserComments as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IJobUserComment>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IJobUserComment) (Sample.API.Models.JobUserComment.FromJson(__p) )) ))() : null : _userComment;}
+            {_linkedJobIds = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("linkedJobIds"), out var __jsonLinkedJobIds) ? If( __jsonLinkedJobIds as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _linkedJobIds;}
+            {_userComments = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("userComments"), out var __jsonUserComments) ? If( __jsonUserComments as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IJobUserComment>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(Sample.API.Models.IJobUserComment) (Sample.API.Models.JobUserComment.FromJson(__p) )) ))() : null : _userComments;}
             {_subTasksList = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("subTasksList"), out var __jsonSubTasksList) ? If( __jsonSubTasksList as Sample.API.Runtime.Json.JsonArray, out var __l) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IJobTaskDetail>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__l, (__k)=>(Sample.API.Models.IJobTaskDetail) (Sample.API.Models.JobTaskDetail.FromJson(__k) )) ))() : null : _subTasksList;}
-            {_retryDetail = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("retryDetails"), out var __jsonRetryDetails) ? If( __jsonRetryDetails as Sample.API.Runtime.Json.JsonArray, out var __g) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__g, (__f)=>(Sample.API.Models.IJobRetryDetails) (Sample.API.Models.JobRetryDetails.FromJson(__f) )) ))() : null : _retryDetail;}
+            {_retryDetails = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("retryDetails"), out var __jsonRetryDetails) ? If( __jsonRetryDetails as Sample.API.Runtime.Json.JsonArray, out var __g) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.IJobRetryDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__g, (__f)=>(Sample.API.Models.IJobRetryDetails) (Sample.API.Models.JobRetryDetails.FromJson(__f) )) ))() : null : _retryDetails;}
             AfterFromJson(json);
         }
 
@@ -106,7 +106,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._errorDetail ? (Sample.API.Runtime.Json.JsonNode) this._errorDetail.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
+            AddIf( null != this._errorDetails ? (Sample.API.Runtime.Json.JsonNode) this._errorDetails.ToJson(null,serializationMode) : null, "errorDetails" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
                 AddIf( null != (((object)this._status)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._status.ToString()) : null, "status" ,container.Add );
@@ -133,10 +133,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._linkedJobId)
+                if (null != this._linkedJobIds)
                 {
                     var __w = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __x in this._linkedJobId )
+                    foreach( var __x in this._linkedJobIds )
                     {
                         AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                     }
@@ -145,10 +145,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._userComment)
+                if (null != this._userComments)
                 {
                     var __r = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __s in this._userComment )
+                    foreach( var __s in this._userComments )
                     {
                         AddIf(__s?.ToJson(null, serializationMode) ,__r.Add);
                     }
@@ -169,10 +169,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._retryDetail)
+                if (null != this._retryDetails)
                 {
                     var __h = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __i in this._retryDetail )
+                    foreach( var __i in this._retryDetails )
                     {
                         AddIf(__i?.ToJson(null, serializationMode) ,__h.Add);
                     }

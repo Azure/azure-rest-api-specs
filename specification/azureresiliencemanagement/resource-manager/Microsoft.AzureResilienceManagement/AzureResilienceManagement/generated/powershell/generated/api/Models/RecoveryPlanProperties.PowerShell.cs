@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.RecoveryPlanProperties"
         /// />.
         /// </summary>
@@ -115,9 +107,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatus = (Sample.API.Models.IRecoveryPlanOperationStatus) content.GetValueForProperty("LatestValidationStatus",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatus, Sample.API.Models.RecoveryPlanOperationStatusTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("ProvisioningState"))
             {
@@ -135,9 +127,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PlanDescription = (string) content.GetValueForProperty("PlanDescription",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PlanDescription, global::System.Convert.ToString);
             }
-            if (content.Contains("RecoveryGroupSettingAdditionalGroup"))
+            if (content.Contains("RecoveryGroupSettingAdditionalGroups"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).RecoveryGroupSettingAdditionalGroup = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>) content.GetValueForProperty("RecoveryGroupSettingAdditionalGroup",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).RecoveryGroupSettingAdditionalGroup, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroup>(__y, Sample.API.Models.RecoveryGroupTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).RecoveryGroupSettingAdditionalGroups = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>) content.GetValueForProperty("RecoveryGroupSettingAdditionalGroups",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).RecoveryGroupSettingAdditionalGroups, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroup>(__y, Sample.API.Models.RecoveryGroupTypeConverter.ConvertFrom));
             }
             if (content.Contains("RecoveryGroupSettingDefaultGroup"))
             {
@@ -147,9 +139,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupSystemData = (Sample.API.Models.ISystemData) content.GetValueForProperty("DefaultGroupSystemData",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupSystemData, Sample.API.Models.SystemDataTypeConverter.ConvertFrom);
             }
-            if (content.Contains("LatestFailoverStatusErrorDetail"))
+            if (content.Contains("LatestFailoverStatusErrorDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("LatestFailoverStatusErrorDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("LatestFailoverStatusErrorDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("LatestFailoverStatusLastExecutedAt"))
             {
@@ -163,9 +155,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusRecoveryTimeActual = (global::System.TimeSpan?) content.GetValueForProperty("LatestFailoverStatusRecoveryTimeActual",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusRecoveryTimeActual, (v) => v is global::System.TimeSpan _v ? _v : global::System.Xml.XmlConvert.ToTimeSpan( v.ToString() ));
             }
-            if (content.Contains("LatestValidationStatusErrorDetail"))
+            if (content.Contains("LatestValidationStatusErrorDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("LatestValidationStatusErrorDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("LatestValidationStatusErrorDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("LatestValidationStatusLastExecutedAt"))
             {
@@ -187,9 +179,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsTarget = (string) content.GetValueForProperty("ErrorDetailsTarget",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsTarget, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailsDetail"))
+            if (content.Contains("ErrorDetailsDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsDetail = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("ErrorDetailsDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsDetails = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("ErrorDetailsDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
             }
             if (content.Contains("ErrorDetailsAdditionalInfo"))
             {
@@ -215,9 +207,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupType = (string) content.GetValueForProperty("DefaultGroupType",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupType, global::System.Convert.ToString);
             }
-            if (content.Contains("DefaultGroupProperty"))
+            if (content.Contains("DefaultGroupProperties"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupProperty = (Sample.API.Models.IRecoveryGroupProperties) content.GetValueForProperty("DefaultGroupProperty",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupProperty, Sample.API.Models.RecoveryGroupPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupProperties = (Sample.API.Models.IRecoveryGroupProperties) content.GetValueForProperty("DefaultGroupProperties",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupProperties, Sample.API.Models.RecoveryGroupPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("LatestFailoverStatusErrorDetailsCode"))
             {
@@ -231,9 +223,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsTarget = (string) content.GetValueForProperty("LatestFailoverStatusErrorDetailsTarget",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsTarget, global::System.Convert.ToString);
             }
-            if (content.Contains("LatestFailoverStatusErrorDetailsDetail"))
+            if (content.Contains("LatestFailoverStatusErrorDetailsDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsDetail = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("LatestFailoverStatusErrorDetailsDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsDetails = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("LatestFailoverStatusErrorDetailsDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
             }
             if (content.Contains("LatestFailoverStatusErrorDetailsAdditionalInfo"))
             {
@@ -251,9 +243,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsTarget = (string) content.GetValueForProperty("LatestValidationStatusErrorDetailsTarget",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsTarget, global::System.Convert.ToString);
             }
-            if (content.Contains("LatestValidationStatusErrorDetailsDetail"))
+            if (content.Contains("LatestValidationStatusErrorDetailsDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsDetail = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("LatestValidationStatusErrorDetailsDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsDetails = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("LatestValidationStatusErrorDetailsDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
             }
             if (content.Contains("LatestValidationStatusErrorDetailsAdditionalInfo"))
             {
@@ -287,13 +279,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).Description = (string) content.GetValueForProperty("Description",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).Description, global::System.Convert.ToString);
             }
-            if (content.Contains("PreAction"))
+            if (content.Contains("PreActions"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PreAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreAction",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PreAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PreActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreActions",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PreActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
-            if (content.Contains("PostAction"))
+            if (content.Contains("PostActions"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PostAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostAction",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PostAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PostActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostActions",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PostActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -324,9 +316,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatus = (Sample.API.Models.IRecoveryPlanOperationStatus) content.GetValueForProperty("LatestValidationStatus",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatus, Sample.API.Models.RecoveryPlanOperationStatusTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("ProvisioningState"))
             {
@@ -344,9 +336,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PlanDescription = (string) content.GetValueForProperty("PlanDescription",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PlanDescription, global::System.Convert.ToString);
             }
-            if (content.Contains("RecoveryGroupSettingAdditionalGroup"))
+            if (content.Contains("RecoveryGroupSettingAdditionalGroups"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).RecoveryGroupSettingAdditionalGroup = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>) content.GetValueForProperty("RecoveryGroupSettingAdditionalGroup",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).RecoveryGroupSettingAdditionalGroup, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroup>(__y, Sample.API.Models.RecoveryGroupTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).RecoveryGroupSettingAdditionalGroups = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroup>) content.GetValueForProperty("RecoveryGroupSettingAdditionalGroups",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).RecoveryGroupSettingAdditionalGroups, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroup>(__y, Sample.API.Models.RecoveryGroupTypeConverter.ConvertFrom));
             }
             if (content.Contains("RecoveryGroupSettingDefaultGroup"))
             {
@@ -356,9 +348,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupSystemData = (Sample.API.Models.ISystemData) content.GetValueForProperty("DefaultGroupSystemData",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupSystemData, Sample.API.Models.SystemDataTypeConverter.ConvertFrom);
             }
-            if (content.Contains("LatestFailoverStatusErrorDetail"))
+            if (content.Contains("LatestFailoverStatusErrorDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("LatestFailoverStatusErrorDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("LatestFailoverStatusErrorDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("LatestFailoverStatusLastExecutedAt"))
             {
@@ -372,9 +364,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusRecoveryTimeActual = (global::System.TimeSpan?) content.GetValueForProperty("LatestFailoverStatusRecoveryTimeActual",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusRecoveryTimeActual, (v) => v is global::System.TimeSpan _v ? _v : global::System.Xml.XmlConvert.ToTimeSpan( v.ToString() ));
             }
-            if (content.Contains("LatestValidationStatusErrorDetail"))
+            if (content.Contains("LatestValidationStatusErrorDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("LatestValidationStatusErrorDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("LatestValidationStatusErrorDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("LatestValidationStatusLastExecutedAt"))
             {
@@ -396,9 +388,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsTarget = (string) content.GetValueForProperty("ErrorDetailsTarget",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsTarget, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailsDetail"))
+            if (content.Contains("ErrorDetailsDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsDetail = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("ErrorDetailsDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsDetails = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("ErrorDetailsDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).ErrorDetailsDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
             }
             if (content.Contains("ErrorDetailsAdditionalInfo"))
             {
@@ -424,9 +416,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupType = (string) content.GetValueForProperty("DefaultGroupType",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupType, global::System.Convert.ToString);
             }
-            if (content.Contains("DefaultGroupProperty"))
+            if (content.Contains("DefaultGroupProperties"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupProperty = (Sample.API.Models.IRecoveryGroupProperties) content.GetValueForProperty("DefaultGroupProperty",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupProperty, Sample.API.Models.RecoveryGroupPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupProperties = (Sample.API.Models.IRecoveryGroupProperties) content.GetValueForProperty("DefaultGroupProperties",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).DefaultGroupProperties, Sample.API.Models.RecoveryGroupPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("LatestFailoverStatusErrorDetailsCode"))
             {
@@ -440,9 +432,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsTarget = (string) content.GetValueForProperty("LatestFailoverStatusErrorDetailsTarget",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsTarget, global::System.Convert.ToString);
             }
-            if (content.Contains("LatestFailoverStatusErrorDetailsDetail"))
+            if (content.Contains("LatestFailoverStatusErrorDetailsDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsDetail = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("LatestFailoverStatusErrorDetailsDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsDetails = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("LatestFailoverStatusErrorDetailsDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestFailoverStatusErrorDetailsDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
             }
             if (content.Contains("LatestFailoverStatusErrorDetailsAdditionalInfo"))
             {
@@ -460,9 +452,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsTarget = (string) content.GetValueForProperty("LatestValidationStatusErrorDetailsTarget",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsTarget, global::System.Convert.ToString);
             }
-            if (content.Contains("LatestValidationStatusErrorDetailsDetail"))
+            if (content.Contains("LatestValidationStatusErrorDetailsDetails"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsDetail = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("LatestValidationStatusErrorDetailsDetail",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsDetail, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsDetails = (System.Collections.Generic.List<Sample.API.Models.IErrorDetail>) content.GetValueForProperty("LatestValidationStatusErrorDetailsDetails",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).LatestValidationStatusErrorDetailsDetails, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IErrorDetail>(__y, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom));
             }
             if (content.Contains("LatestValidationStatusErrorDetailsAdditionalInfo"))
             {
@@ -496,13 +488,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).Description = (string) content.GetValueForProperty("Description",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).Description, global::System.Convert.ToString);
             }
-            if (content.Contains("PreAction"))
+            if (content.Contains("PreActions"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PreAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreAction",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PreAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PreActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PreActions",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PreActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
-            if (content.Contains("PostAction"))
+            if (content.Contains("PostActions"))
             {
-                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PostAction = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostAction",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PostAction, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PostActions = (System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction>) content.GetValueForProperty("PostActions",((Sample.API.Models.IRecoveryPlanPropertiesInternal)this).PostActions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IRecoveryGroupBaseAction>(__y, Sample.API.Models.RecoveryGroupBaseActionTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }
@@ -511,18 +503,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Properties of the recovery orchestration plan.
     [System.ComponentModel.TypeConverter(typeof(RecoveryPlanPropertiesTypeConverter))]

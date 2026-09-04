@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.UsagePlan"
         /// />.
         /// </summary>
@@ -94,18 +86,6 @@ namespace Sample.API.Models
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
 
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
-
         /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="Sample.API.Models.UsagePlan"
         /// />.
@@ -120,9 +100,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IUsagePlanInternal)this).Property = (Sample.API.Models.IUsagePlanProperties) content.GetValueForProperty("Property",((Sample.API.Models.IUsagePlanInternal)this).Property, Sample.API.Models.UsagePlanPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUsagePlanInternal)this).Properties = (Sample.API.Models.IUsagePlanProperties) content.GetValueForProperty("Properties",((Sample.API.Models.IUsagePlanInternal)this).Properties, Sample.API.Models.UsagePlanPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("AzureAsyncOperation"))
             {
@@ -172,9 +152,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceInternal)this).Type = (string) content.GetValueForProperty("Type",((Sample.API.Models.IResourceInternal)this).Type, global::System.Convert.ToString);
             }
-            if (content.Contains("Tag"))
+            if (content.Contains("Tags"))
             {
-                ((Sample.API.Models.ITrackedResourceInternal)this).Tag = (Sample.API.Models.ITrackedResourceTags) content.GetValueForProperty("Tag",((Sample.API.Models.ITrackedResourceInternal)this).Tag, Sample.API.Models.TrackedResourceTagsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.ITrackedResourceInternal)this).Tags = (Sample.API.Models.ITrackedResourceTags) content.GetValueForProperty("Tags",((Sample.API.Models.ITrackedResourceInternal)this).Tags, Sample.API.Models.TrackedResourceTagsTypeConverter.ConvertFrom);
             }
             if (content.Contains("Location"))
             {
@@ -184,9 +164,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IUsagePlanInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IUsagePlanInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IUsagePlanInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IUsagePlanInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUsagePlanInternal)this).ErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IUsagePlanInternal)this).ErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("PlanType"))
             {
@@ -229,9 +209,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IUsagePlanInternal)this).Property = (Sample.API.Models.IUsagePlanProperties) content.GetValueForProperty("Property",((Sample.API.Models.IUsagePlanInternal)this).Property, Sample.API.Models.UsagePlanPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUsagePlanInternal)this).Properties = (Sample.API.Models.IUsagePlanProperties) content.GetValueForProperty("Properties",((Sample.API.Models.IUsagePlanInternal)this).Properties, Sample.API.Models.UsagePlanPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("AzureAsyncOperation"))
             {
@@ -281,9 +261,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IResourceInternal)this).Type = (string) content.GetValueForProperty("Type",((Sample.API.Models.IResourceInternal)this).Type, global::System.Convert.ToString);
             }
-            if (content.Contains("Tag"))
+            if (content.Contains("Tags"))
             {
-                ((Sample.API.Models.ITrackedResourceInternal)this).Tag = (Sample.API.Models.ITrackedResourceTags) content.GetValueForProperty("Tag",((Sample.API.Models.ITrackedResourceInternal)this).Tag, Sample.API.Models.TrackedResourceTagsTypeConverter.ConvertFrom);
+                ((Sample.API.Models.ITrackedResourceInternal)this).Tags = (Sample.API.Models.ITrackedResourceTags) content.GetValueForProperty("Tags",((Sample.API.Models.ITrackedResourceInternal)this).Tags, Sample.API.Models.TrackedResourceTagsTypeConverter.ConvertFrom);
             }
             if (content.Contains("Location"))
             {
@@ -293,9 +273,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IUsagePlanInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IUsagePlanInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IUsagePlanInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IUsagePlanInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IUsagePlanInternal)this).ErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IUsagePlanInternal)this).ErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("PlanType"))
             {

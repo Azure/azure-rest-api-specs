@@ -18,12 +18,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string DrillRunStage { get => this._drillRunStage; set => this._drillRunStage = value; }
 
-        /// <summary>Backing field for <see cref="SupportedVerb" /> property.</summary>
-        private System.Collections.Generic.List<string> _supportedVerb;
+        /// <summary>Backing field for <see cref="SupportedVerbs" /> property.</summary>
+        private System.Collections.Generic.List<string> _supportedVerbs;
 
         /// <summary>Supported Verbs for stage.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> SupportedVerb { get => this._supportedVerb; set => this._supportedVerb = value; }
+        public System.Collections.Generic.List<string> SupportedVerbs { get => this._supportedVerbs; set => this._supportedVerbs = value; }
 
         /// <summary>Creates an new <see cref="SupportedVerbsForStage" /> instance.</summary>
         public SupportedVerbsForStage()
@@ -58,7 +58,7 @@ namespace Sample.API.Models
         SerializedName = @"supportedVerbs",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Start", "Retry", "MarkAsComplete", "Cancel")]
-        System.Collections.Generic.List<string> SupportedVerb { get; set; }
+        System.Collections.Generic.List<string> SupportedVerbs { get; set; }
 
     }
     /// Model for supported verbs for stage.
@@ -70,7 +70,7 @@ namespace Sample.API.Models
         string DrillRunStage { get; set; }
         /// <summary>Supported Verbs for stage.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Start", "Retry", "MarkAsComplete", "Cancel")]
-        System.Collections.Generic.List<string> SupportedVerb { get; set; }
+        System.Collections.Generic.List<string> SupportedVerbs { get; set; }
 
     }
 }

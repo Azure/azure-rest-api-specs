@@ -63,7 +63,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            {_resourceList = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("resourceLists"), out var __jsonResourceLists) ? Sample.API.Models.ResourceLists.FromJson(__jsonResourceLists) : _resourceList;}
+            {_resourceLists = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("resourceLists"), out var __jsonResourceLists) ? Sample.API.Models.ResourceLists.FromJson(__jsonResourceLists) : _resourceLists;}
             {_faultDurationInMin = If( json?.PropertyT<Sample.API.Runtime.Json.JsonNumber>("faultDurationInMin"), out var __jsonFaultDurationInMin) ? (int)__jsonFaultDurationInMin : _faultDurationInMin;}
             {_forceInclusionAndUpdate = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("forceInclusionAndUpdate"), out var __jsonForceInclusionAndUpdate) ? (string)__jsonForceInclusionAndUpdate : (string)_forceInclusionAndUpdate;}
             AfterFromJson(json);
@@ -98,7 +98,7 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != this._resourceList ? (Sample.API.Runtime.Json.JsonNode) this._resourceList.ToJson(null,serializationMode) : null, "resourceLists" ,container.Add );
+            AddIf( null != this._resourceLists ? (Sample.API.Runtime.Json.JsonNode) this._resourceLists.ToJson(null,serializationMode) : null, "resourceLists" ,container.Add );
             AddIf( (Sample.API.Runtime.Json.JsonNode)new Sample.API.Runtime.Json.JsonNumber(this._faultDurationInMin), "faultDurationInMin" ,container.Add );
             AddIf( null != (((object)this._forceInclusionAndUpdate)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._forceInclusionAndUpdate.ToString()) : null, "forceInclusionAndUpdate" ,container.Add );
             AfterToJson(ref container);

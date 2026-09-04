@@ -13,7 +13,7 @@ namespace Sample.API.Models
 
         /// <summary>User consent for performing recovery action.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IFailoverRequestPropertiesInternal)Property).ExecutionConfigurationUserConsent; set => ((Sample.API.Models.IFailoverRequestPropertiesInternal)Property).ExecutionConfigurationUserConsent = value ?? null; }
+        public string ExecutionConfigurationUserConsent { get => ((Sample.API.Models.IFailoverRequestPropertiesInternal)FailoverRequestProperties).ExecutionConfigurationUserConsent; set => ((Sample.API.Models.IFailoverRequestPropertiesInternal)FailoverRequestProperties).ExecutionConfigurationUserConsent = value ?? null; }
 
         /// <summary>Backing field for <see cref="FailoverDirection" /> property.</summary>
         private string _failoverDirection= @"FromSpecificLocations";
@@ -22,32 +22,32 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string FailoverDirection { get => this._failoverDirection; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IFailoverRequestProperties _property;
+        /// <summary>Backing field for <see cref="FailoverRequestProperties" /> property.</summary>
+        private Sample.API.Models.IFailoverRequestProperties _failoverRequestProperties;
 
         /// <summary>Additional properties for Failover.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IFailoverRequestProperties Property { get => (this._property = this._property ?? new Sample.API.Models.FailoverRequestProperties()); set => this._property = value; }
+        internal Sample.API.Models.IFailoverRequestProperties FailoverRequestProperties { get => (this._failoverRequestProperties = this._failoverRequestProperties ?? new Sample.API.Models.FailoverRequestProperties()); set => this._failoverRequestProperties = value; }
 
         /// <summary>
         /// Selected recovery resource Ids to be processed. If not provided, all qualified resources based on the source location(s)
         /// will be processed.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> PropertySelectedResourceId { get => ((Sample.API.Models.IFailoverRequestPropertiesInternal)Property).SelectedResourceId; set => ((Sample.API.Models.IFailoverRequestPropertiesInternal)Property).SelectedResourceId = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<string> FailoverRequestPropertySelectedResourceIds { get => ((Sample.API.Models.IFailoverRequestPropertiesInternal)FailoverRequestProperties).SelectedResourceIds; set => ((Sample.API.Models.IFailoverRequestPropertiesInternal)FailoverRequestProperties).SelectedResourceIds = value ?? null /* arrayOf */; }
 
         /// <summary>Source locations from where resources to be failed-over.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> PropertySourceLocation { get => ((Sample.API.Models.IFailoverRequestPropertiesInternal)Property).SourceLocation; set => ((Sample.API.Models.IFailoverRequestPropertiesInternal)Property).SourceLocation = value ?? null /* arrayOf */; }
+        public System.Collections.Generic.List<string> FailoverRequestPropertySourceLocations { get => ((Sample.API.Models.IFailoverRequestPropertiesInternal)FailoverRequestProperties).SourceLocations; set => ((Sample.API.Models.IFailoverRequestPropertiesInternal)FailoverRequestProperties).SourceLocations = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for FailoverDirection</summary>
         string Sample.API.Models.IFailoverRequestInternal.FailoverDirection { get => this._failoverDirection; set { {_failoverDirection = value;} } }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IFailoverRequestProperties Sample.API.Models.IFailoverRequestInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.FailoverRequestProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for FailoverRequestProperties</summary>
+        Sample.API.Models.IFailoverRequestProperties Sample.API.Models.IFailoverRequestInternal.FailoverRequestProperties { get => (this._failoverRequestProperties = this._failoverRequestProperties ?? new Sample.API.Models.FailoverRequestProperties()); set { {_failoverRequestProperties = value;} } }
 
-        /// <summary>Internal Acessors for PropertyExecutionConfiguration</summary>
-        Sample.API.Models.IExecutionConfigurations Sample.API.Models.IFailoverRequestInternal.PropertyExecutionConfiguration { get => ((Sample.API.Models.IFailoverRequestPropertiesInternal)Property).ExecutionConfiguration; set => ((Sample.API.Models.IFailoverRequestPropertiesInternal)Property).ExecutionConfiguration = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for FailoverRequestPropertyExecutionConfigurations</summary>
+        Sample.API.Models.IExecutionConfigurations Sample.API.Models.IFailoverRequestInternal.FailoverRequestPropertyExecutionConfigurations { get => ((Sample.API.Models.IFailoverRequestPropertiesInternal)FailoverRequestProperties).ExecutionConfigurations; set => ((Sample.API.Models.IFailoverRequestPropertiesInternal)FailoverRequestProperties).ExecutionConfigurations = value ?? null /* model class */; }
 
         /// <summary>Creates an new <see cref="FailoverRequest" /> instance.</summary>
         public FailoverRequest()
@@ -95,7 +95,7 @@ namespace Sample.API.Models
         Description = @"Selected recovery resource Ids to be processed. If not provided, all qualified resources based on the source location(s) will be processed.",
         SerializedName = @"selectedResourceIds",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> PropertySelectedResourceId { get; set; }
+        System.Collections.Generic.List<string> FailoverRequestPropertySelectedResourceIds { get; set; }
         /// <summary>Source locations from where resources to be failed-over.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -106,7 +106,7 @@ namespace Sample.API.Models
         Description = @"Source locations from where resources to be failed-over.",
         SerializedName = @"sourceLocations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> PropertySourceLocation { get; set; }
+        System.Collections.Generic.List<string> FailoverRequestPropertySourceLocations { get; set; }
 
     }
     /// Failover post action request.
@@ -119,16 +119,16 @@ namespace Sample.API.Models
         /// <summary>Type of Failover direction.</summary>
         string FailoverDirection { get; set; }
         /// <summary>Additional properties for Failover.</summary>
-        Sample.API.Models.IFailoverRequestProperties Property { get; set; }
+        Sample.API.Models.IFailoverRequestProperties FailoverRequestProperties { get; set; }
         /// <summary>Execution configurations for the recovery action.</summary>
-        Sample.API.Models.IExecutionConfigurations PropertyExecutionConfiguration { get; set; }
+        Sample.API.Models.IExecutionConfigurations FailoverRequestPropertyExecutionConfigurations { get; set; }
         /// <summary>
         /// Selected recovery resource Ids to be processed. If not provided, all qualified resources based on the source location(s)
         /// will be processed.
         /// </summary>
-        System.Collections.Generic.List<string> PropertySelectedResourceId { get; set; }
+        System.Collections.Generic.List<string> FailoverRequestPropertySelectedResourceIds { get; set; }
         /// <summary>Source locations from where resources to be failed-over.</summary>
-        System.Collections.Generic.List<string> PropertySourceLocation { get; set; }
+        System.Collections.Generic.List<string> FailoverRequestPropertySourceLocations { get; set; }
 
     }
 }

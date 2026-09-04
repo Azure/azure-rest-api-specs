@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.JobExecutionDetails"
         /// />.
         /// </summary>
@@ -103,9 +95,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetail = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetail, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetails = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetails, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
             }
             if (content.Contains("Status"))
             {
@@ -131,9 +123,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailErrorMessage = (string) content.GetValueForProperty("ErrorDetailErrorMessage",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailRecommendation"))
+            if (content.Contains("ErrorDetailRecommendations"))
             {
-                ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendation",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendations",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializeDictionary(content);
         }
@@ -152,9 +144,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetail = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetail, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetails = (Sample.API.Models.IJobErrorInfo) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetails, Sample.API.Models.JobErrorInfoTypeConverter.ConvertFrom);
             }
             if (content.Contains("Status"))
             {
@@ -180,9 +172,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailErrorMessage = (string) content.GetValueForProperty("ErrorDetailErrorMessage",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailErrorMessage, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetailRecommendation"))
+            if (content.Contains("ErrorDetailRecommendations"))
             {
-                ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailRecommendation = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendation",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailRecommendation, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailRecommendations = (System.Collections.Generic.List<string>) content.GetValueForProperty("ErrorDetailRecommendations",((Sample.API.Models.IJobExecutionDetailsInternal)this).ErrorDetailRecommendations, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             AfterDeserializePSObject(content);
         }
@@ -191,18 +183,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Job Execution Details.
     [System.ComponentModel.TypeConverter(typeof(JobExecutionDetailsTypeConverter))]

@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.GoalAssignmentUpdate"
         /// />.
         /// </summary>
@@ -103,9 +95,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property = (Sample.API.Models.IGoalAssignmentProperties) content.GetValueForProperty("Property",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property, Sample.API.Models.GoalAssignmentPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Properties = (Sample.API.Models.IGoalAssignmentProperties) content.GetValueForProperty("Properties",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Properties, Sample.API.Models.GoalAssignmentPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -151,9 +143,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("GoalTemplateId"))
             {
@@ -167,9 +159,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).RequireZonalResiliency = (bool?) content.GetValueForProperty("RequireZonalResiliency",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).RequireZonalResiliency, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
             }
-            if (content.Contains("ServiceLevelResource"))
+            if (content.Contains("ServiceLevelResources"))
             {
-                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResource = (System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource>) content.GetValueForProperty("ServiceLevelResource",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceLevelResource>(__y, Sample.API.Models.ServiceLevelResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResources = (System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource>) content.GetValueForProperty("ServiceLevelResources",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceLevelResource>(__y, Sample.API.Models.ServiceLevelResourceTypeConverter.ConvertFrom));
             }
             if (content.Contains("ErrorDetailCode"))
             {
@@ -208,9 +200,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Property"))
+            if (content.Contains("Properties"))
             {
-                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property = (Sample.API.Models.IGoalAssignmentProperties) content.GetValueForProperty("Property",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Property, Sample.API.Models.GoalAssignmentPropertiesTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Properties = (Sample.API.Models.IGoalAssignmentProperties) content.GetValueForProperty("Properties",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).Properties, Sample.API.Models.GoalAssignmentPropertiesTypeConverter.ConvertFrom);
             }
             if (content.Contains("SystemDataCreatedBy"))
             {
@@ -256,9 +248,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ProvisioningState = (string) content.GetValueForProperty("ProvisioningState",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ProvisioningState, global::System.Convert.ToString);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("GoalTemplateId"))
             {
@@ -272,9 +264,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).RequireZonalResiliency = (bool?) content.GetValueForProperty("RequireZonalResiliency",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).RequireZonalResiliency, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
             }
-            if (content.Contains("ServiceLevelResource"))
+            if (content.Contains("ServiceLevelResources"))
             {
-                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResource = (System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource>) content.GetValueForProperty("ServiceLevelResource",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceLevelResource>(__y, Sample.API.Models.ServiceLevelResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResources = (System.Collections.Generic.List<Sample.API.Models.IServiceLevelResource>) content.GetValueForProperty("ServiceLevelResources",((Sample.API.Models.IGoalAssignmentUpdateInternal)this).ServiceLevelResources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IServiceLevelResource>(__y, Sample.API.Models.ServiceLevelResourceTypeConverter.ConvertFrom));
             }
             if (content.Contains("ErrorDetailCode"))
             {
@@ -303,18 +295,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Goal assignment a AzureResilienceProviderHub resource
     [System.ComponentModel.TypeConverter(typeof(GoalAssignmentUpdateTypeConverter))]

@@ -2,14 +2,26 @@
 
 These settings apply only when `--powershell` is specified on the command line.
 
+<!--
+Naming conventions (aligned with https://github.com/Azure/azure-powershell
+best-practice: module `Az.<Service>`, cmdlets `Verb-Az<Service><Noun>`,
+`Azure` prefix dropped from the service name to avoid `Az.AzureXxx` /
+`Get-AzureXxx` redundancy).
+
+Result:
+  Module   : Az.ResilienceManagement
+  Cmdlets  : Get-AzResilienceManagementGoalTemplate,
+             Remove-AzResilienceManagementGoalAssignment, ...
+-->
+
 ``` yaml $(powershell)
 azure-powershell-sdk-type: management-sdk
-powershell:
-  preview-chk: true
-  service-name: AzureResilienceManagement
-  root-namespace: Microsoft.Azure.PowerShell.Cmdlets.AzureResilienceManagement
-  module-name: Az.AzureResilienceManagement
-  subject-prefix: $(service-name)
+service-name: ResilienceManagement
+subject-prefix: AzResilienceManagement
+root-namespace: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement
+module-name: Az.ResilienceManagement
+output-folder: $(this-folder)/generated/powershell
+preview-chk: true
 ```
 
 ### Directives to disambiguate colliding cmdlet names
@@ -30,12 +42,12 @@ directive:
 
 # --- RecoveryPlanActions: six `Validate*` endpoints normalize to just `Validate`.
 #      Rename them so each has its own subject, producing distinct cmdlets:
-#        Test-AzureResilienceManagementRecoveryPlanFailoverValidation_Validate
-#        Test-AzureResilienceManagementRecoveryPlanFailoverCommitValidation_Validate
-#        Test-AzureResilienceManagementRecoveryPlanOperationValidation_Validate
-#        Test-AzureResilienceManagementRecoveryPlanReprotectValidation_Validate
-#        Test-AzureResilienceManagementRecoveryPlanTestFailoverValidation_Validate
-#        Test-AzureResilienceManagementRecoveryPlanTestFailoverCleanupValidation_Validate
+#        Test-AzResilienceManagementRecoveryPlanFailoverValidation_Validate
+#        Test-AzResilienceManagementRecoveryPlanFailoverCommitValidation_Validate
+#        Test-AzResilienceManagementRecoveryPlanOperationValidation_Validate
+#        Test-AzResilienceManagementRecoveryPlanReprotectValidation_Validate
+#        Test-AzResilienceManagementRecoveryPlanTestFailoverValidation_Validate
+#        Test-AzResilienceManagementRecoveryPlanTestFailoverCleanupValidation_Validate
 - from: swagger-document
   where: $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForFailover"].post
   transform: $.operationId = "RecoveryPlanFailoverValidation_Validate";

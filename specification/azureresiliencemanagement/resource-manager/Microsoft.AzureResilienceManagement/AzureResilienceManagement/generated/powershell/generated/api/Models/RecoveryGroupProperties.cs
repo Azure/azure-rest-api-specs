@@ -32,19 +32,19 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public int OrderId { get => this._orderId; set => this._orderId = value; }
 
-        /// <summary>Backing field for <see cref="PostAction" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> _postAction;
+        /// <summary>Backing field for <see cref="PostActions" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> _postActions;
 
         /// <summary>Post-actions for the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get => this._postAction; set => this._postAction = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get => this._postActions; set => this._postActions = value; }
 
-        /// <summary>Backing field for <see cref="PreAction" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> _preAction;
+        /// <summary>Backing field for <see cref="PreActions" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> _preActions;
 
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get => this._preAction; set => this._preAction = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get => this._preActions; set => this._preActions = value; }
 
         /// <summary>Creates an new <see cref="RecoveryGroupProperties" /> instance.</summary>
         public RecoveryGroupProperties()
@@ -99,7 +99,7 @@ namespace Sample.API.Models
         Description = @"Post-actions for the recovery orchestration group.",
         SerializedName = @"postActions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroupBaseAction) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get; set; }
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -110,7 +110,7 @@ namespace Sample.API.Models
         Description = @"Pre-actions for the recovery orchestration group.",
         SerializedName = @"preActions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryGroupBaseAction) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get; set; }
 
     }
     /// Properties of the recovery orchestration group.
@@ -124,9 +124,9 @@ namespace Sample.API.Models
         /// <summary>The order ID of the recovery orchestration group.</summary>
         int OrderId { get; set; }
         /// <summary>Post-actions for the recovery orchestration group.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PostActions { get; set; }
         /// <summary>Pre-actions for the recovery orchestration group.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreAction { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryGroupBaseAction> PreActions { get; set; }
 
     }
 }

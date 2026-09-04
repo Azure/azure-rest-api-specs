@@ -75,10 +75,10 @@ namespace Sample.API.Models
             }
             {_sliId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("sliId"), out var __jsonSliId) ? (string)__jsonSliId : (string)_sliId;}
             {_type = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("type"), out var __jsonType) ? (string)__jsonType : (string)_type;}
-            {_exist = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("exists"), out var __jsonExists) ? (string)__jsonExists : (string)_exist;}
+            {_exists = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("exists"), out var __jsonExists) ? (string)__jsonExists : (string)_exists;}
             {_typeMatch = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("typeMatch"), out var __jsonTypeMatch) ? (string)__jsonTypeMatch : (string)_typeMatch;}
             {_drillRbacOnDestinationAmw = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillRbacOnDestinationAmw"), out var __jsonDrillRbacOnDestinationAmw) ? (string)__jsonDrillRbacOnDestinationAmw : (string)_drillRbacOnDestinationAmw;}
-            {_rbacNeededOnDestinationAmw = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededOnDestinationAmws"), out var __jsonRbacNeededOnDestinationAmws) ? If( __jsonRbacNeededOnDestinationAmws as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _rbacNeededOnDestinationAmw;}
+            {_rbacNeededOnDestinationAmws = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("rbacNeededOnDestinationAmws"), out var __jsonRbacNeededOnDestinationAmws) ? If( __jsonRbacNeededOnDestinationAmws as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _rbacNeededOnDestinationAmws;}
             AfterFromJson(json);
         }
 
@@ -105,7 +105,7 @@ namespace Sample.API.Models
             AddIf( null != (((object)this._type)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._type.ToString()) : null, "type" ,container.Add );
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                AddIf( null != (((object)this._exist)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._exist.ToString()) : null, "exists" ,container.Add );
+                AddIf( null != (((object)this._exists)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._exists.ToString()) : null, "exists" ,container.Add );
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
@@ -117,10 +117,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._rbacNeededOnDestinationAmw)
+                if (null != this._rbacNeededOnDestinationAmws)
                 {
                     var __w = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __x in this._rbacNeededOnDestinationAmw )
+                    foreach( var __x in this._rbacNeededOnDestinationAmws )
                     {
                         AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                     }

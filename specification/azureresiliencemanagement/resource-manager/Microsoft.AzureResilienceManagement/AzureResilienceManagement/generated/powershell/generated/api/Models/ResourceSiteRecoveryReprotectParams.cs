@@ -11,12 +11,12 @@ namespace Sample.API.Models
         Sample.API.Models.IResourceSiteRecoveryReprotectParamsInternal
     {
 
-        /// <summary>Backing field for <see cref="DiskReprotectInputDetail" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> _diskReprotectInputDetail;
+        /// <summary>Backing field for <see cref="DiskReprotectInputDetails" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> _diskReprotectInputDetails;
 
         /// <summary>Disk Reprotect Input Details</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> DiskReprotectInputDetail { get => this._diskReprotectInputDetail; set => this._diskReprotectInputDetail = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> DiskReprotectInputDetails { get => this._diskReprotectInputDetails; set => this._diskReprotectInputDetails = value; }
 
         /// <summary>Creates an new <see cref="ResourceSiteRecoveryReprotectParams" /> instance.</summary>
         public ResourceSiteRecoveryReprotectParams()
@@ -38,7 +38,7 @@ namespace Sample.API.Models
         Description = @"Disk Reprotect Input Details",
         SerializedName = @"diskReprotectInputDetails",
         PossibleTypes = new [] { typeof(Sample.API.Models.IDiskReprotectInputDetails) })]
-        System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> DiskReprotectInputDetail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> DiskReprotectInputDetails { get; set; }
 
     }
     /// Definition of recovery resource reprotect params for site recovery solution.
@@ -46,7 +46,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Disk Reprotect Input Details</summary>
-        System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> DiskReprotectInputDetail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> DiskReprotectInputDetails { get; set; }
 
     }
 }

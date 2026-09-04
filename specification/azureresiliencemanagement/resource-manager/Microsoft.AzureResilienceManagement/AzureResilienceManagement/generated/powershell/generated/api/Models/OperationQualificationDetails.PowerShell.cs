@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.OperationQualificationDetails"
         /// />.
         /// </summary>
@@ -107,13 +99,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IOperationQualificationDetailsInternal)this).QualificationState = (string) content.GetValueForProperty("QualificationState",((Sample.API.Models.IOperationQualificationDetailsInternal)this).QualificationState, global::System.Convert.ToString);
             }
-            if (content.Contains("NotQualifiedReason"))
+            if (content.Contains("NotQualifiedReasons"))
             {
-                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("NotQualifiedReason",((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReasons = (System.Collections.Generic.List<string>) content.GetValueForProperty("NotQualifiedReasons",((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReasons, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ResourceFeasibilityReview"))
+            if (content.Contains("ResourceFeasibilityReviews"))
             {
-                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReview = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("ResourceFeasibilityReview",((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReview, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReviews = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("ResourceFeasibilityReviews",((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReviews, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -136,13 +128,13 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IOperationQualificationDetailsInternal)this).QualificationState = (string) content.GetValueForProperty("QualificationState",((Sample.API.Models.IOperationQualificationDetailsInternal)this).QualificationState, global::System.Convert.ToString);
             }
-            if (content.Contains("NotQualifiedReason"))
+            if (content.Contains("NotQualifiedReasons"))
             {
-                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("NotQualifiedReason",((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReasons = (System.Collections.Generic.List<string>) content.GetValueForProperty("NotQualifiedReasons",((Sample.API.Models.IOperationQualificationDetailsInternal)this).NotQualifiedReasons, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
-            if (content.Contains("ResourceFeasibilityReview"))
+            if (content.Contains("ResourceFeasibilityReviews"))
             {
-                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReview = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("ResourceFeasibilityReview",((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReview, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReviews = (System.Collections.Generic.List<Sample.API.Models.IResourceFeasibilityReview>) content.GetValueForProperty("ResourceFeasibilityReviews",((Sample.API.Models.IOperationQualificationDetailsInternal)this).ResourceFeasibilityReviews, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceFeasibilityReview>(__y, Sample.API.Models.ResourceFeasibilityReviewTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }
@@ -151,18 +143,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Details of qualification for an operation.
     [System.ComponentModel.TypeConverter(typeof(OperationQualificationDetailsTypeConverter))]

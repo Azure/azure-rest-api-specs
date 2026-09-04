@@ -18,12 +18,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string FaultRbacOnTargetResource { get => this._faultRbacOnTargetResource; set => this._faultRbacOnTargetResource = value; }
 
-        /// <summary>Backing field for <see cref="MonitoringRbacOnTarget" /> property.</summary>
-        private string _monitoringRbacOnTarget;
+        /// <summary>Backing field for <see cref="MonitoringRbacOnTargets" /> property.</summary>
+        private string _monitoringRbacOnTargets;
 
         /// <summary>RBAC required by Drill MSI on the target resource for monitoring.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string MonitoringRbacOnTarget { get => this._monitoringRbacOnTarget; set => this._monitoringRbacOnTarget = value; }
+        public string MonitoringRbacOnTargets { get => this._monitoringRbacOnTargets; set => this._monitoringRbacOnTargets = value; }
 
         /// <summary>Backing field for <see cref="ResourceState" /> property.</summary>
         private System.Collections.Generic.List<string> _resourceState;
@@ -32,14 +32,14 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public System.Collections.Generic.List<string> ResourceState { get => this._resourceState; set => this._resourceState = value; }
 
-        /// <summary>Backing field for <see cref="RunbookFaultRbacOnTarget" /> property.</summary>
-        private string _runbookFaultRbacOnTarget;
+        /// <summary>Backing field for <see cref="RunbookFaultRbacOnTargets" /> property.</summary>
+        private string _runbookFaultRbacOnTargets;
 
         /// <summary>
         /// RBAC required by AutomationAccount for runbook MSI not setup on the target resources.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string RunbookFaultRbacOnTarget { get => this._runbookFaultRbacOnTarget; set => this._runbookFaultRbacOnTarget = value; }
+        public string RunbookFaultRbacOnTargets { get => this._runbookFaultRbacOnTargets; set => this._runbookFaultRbacOnTargets = value; }
 
         /// <summary>Creates an new <see cref="DrillResourceAttentionReason" /> instance.</summary>
         public DrillResourceAttentionReason()
@@ -74,7 +74,7 @@ namespace Sample.API.Models
         SerializedName = @"monitoringRbacOnTargets",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string MonitoringRbacOnTarget { get; set; }
+        string MonitoringRbacOnTargets { get; set; }
         /// <summary>Drill Resource State (wrt SG and RO).</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -100,7 +100,7 @@ namespace Sample.API.Models
         SerializedName = @"runbookFaultRbacOnTargets",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string RunbookFaultRbacOnTarget { get; set; }
+        string RunbookFaultRbacOnTargets { get; set; }
 
     }
     /// Reason why the Drill resource is in NeedsAttention state.
@@ -112,7 +112,7 @@ namespace Sample.API.Models
         string FaultRbacOnTargetResource { get; set; }
         /// <summary>RBAC required by Drill MSI on the target resource for monitoring.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string MonitoringRbacOnTarget { get; set; }
+        string MonitoringRbacOnTargets { get; set; }
         /// <summary>Drill Resource State (wrt SG and RO).</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("InServiceGroupNotInDrill", "InDrillNotInServiceGroup", "InRecoveryPlanNotInDrill", "InDrillNotInRecoveryPlan", "ResourceStateIncompatibleWithFault")]
         System.Collections.Generic.List<string> ResourceState { get; set; }
@@ -120,7 +120,7 @@ namespace Sample.API.Models
         /// RBAC required by AutomationAccount for runbook MSI not setup on the target resources.
         /// </summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Set", "NotSet")]
-        string RunbookFaultRbacOnTarget { get; set; }
+        string RunbookFaultRbacOnTargets { get; set; }
 
     }
 }

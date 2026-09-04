@@ -11,14 +11,14 @@ namespace Sample.API.Models
         Sample.API.Models.IUpdateRecoveryResourcesResponseInternal
     {
 
-        /// <summary>Backing field for <see cref="FailedResource" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IRecoveryResource> _failedResource;
+        /// <summary>Backing field for <see cref="FailedResources" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IRecoveryResource> _failedResources;
 
         /// <summary>
         /// A list of error details associated with resources for which the update has failed.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IRecoveryResource> FailedResource { get => this._failedResource; set => this._failedResource = value; }
+        public System.Collections.Generic.List<Sample.API.Models.IRecoveryResource> FailedResources { get => this._failedResources; set => this._failedResources = value; }
 
         /// <summary>Creates an new <see cref="UpdateRecoveryResourcesResponse" /> instance.</summary>
         public UpdateRecoveryResourcesResponse()
@@ -42,7 +42,7 @@ namespace Sample.API.Models
         Description = @"A list of error details associated with resources for which the update has failed.",
         SerializedName = @"failedResources",
         PossibleTypes = new [] { typeof(Sample.API.Models.IRecoveryResource) })]
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryResource> FailedResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryResource> FailedResources { get; set; }
 
     }
     /// RecoveryResources post action request to update in batch.
@@ -52,7 +52,7 @@ namespace Sample.API.Models
         /// <summary>
         /// A list of error details associated with resources for which the update has failed.
         /// </summary>
-        System.Collections.Generic.List<Sample.API.Models.IRecoveryResource> FailedResource { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IRecoveryResource> FailedResources { get; set; }
 
     }
 }

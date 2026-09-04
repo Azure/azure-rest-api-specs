@@ -25,24 +25,24 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public global::System.DateTime? EndTime { get => this._endTime; }
 
-        /// <summary>Backing field for <see cref="ErrorDetail" /> property.</summary>
-        private Sample.API.Models.IJobErrorInfo _errorDetail;
-
-        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IJobErrorInfo ErrorDetail { get => (this._errorDetail = this._errorDetail ?? new Sample.API.Models.JobErrorInfo()); set => this._errorDetail = value; }
-
         /// <summary>A code representing the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailErrorCode { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorCode; }
+        public string ErrorDetailErrorCode { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorCode; }
 
         /// <summary>A detailed message explaining the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorMessage; }
+        public string ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorMessage; }
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ErrorDetailRecommendation { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).Recommendation; }
+        public System.Collections.Generic.List<string> ErrorDetailRecommendations { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).Recommendations; }
+
+        /// <summary>Backing field for <see cref="ErrorDetails" /> property.</summary>
+        private Sample.API.Models.IJobErrorInfo _errorDetails;
+
+        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IJobErrorInfo ErrorDetails { get => (this._errorDetails = this._errorDetails ?? new Sample.API.Models.JobErrorInfo()); set => this._errorDetails = value; }
 
         /// <summary>Backing field for <see cref="RetryAttempt" /> property.</summary>
         private int _retryAttempt;
@@ -57,17 +57,17 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for EndTime</summary>
         global::System.DateTime? Sample.API.Models.IJobRetryDetailsInternal.EndTime { get => this._endTime; set { {_endTime = value;} } }
 
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IJobErrorInfo Sample.API.Models.IJobRetryDetailsInternal.ErrorDetail { get => (this._errorDetail = this._errorDetail ?? new Sample.API.Models.JobErrorInfo()); set { {_errorDetail = value;} } }
-
         /// <summary>Internal Acessors for ErrorDetailErrorCode</summary>
-        string Sample.API.Models.IJobRetryDetailsInternal.ErrorDetailErrorCode { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorCode; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorCode = value ?? null; }
+        string Sample.API.Models.IJobRetryDetailsInternal.ErrorDetailErrorCode { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorCode; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailErrorMessage</summary>
-        string Sample.API.Models.IJobRetryDetailsInternal.ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorMessage; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).ErrorMessage = value ?? null; }
+        string Sample.API.Models.IJobRetryDetailsInternal.ErrorDetailErrorMessage { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorMessage; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).ErrorMessage = value ?? null; }
 
-        /// <summary>Internal Acessors for ErrorDetailRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IJobRetryDetailsInternal.ErrorDetailRecommendation { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).Recommendation; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetail).Recommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ErrorDetailRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IJobRetryDetailsInternal.ErrorDetailRecommendations { get => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).Recommendations; set => ((Sample.API.Models.IJobErrorInfoInternal)ErrorDetails).Recommendations = value ?? null /* arrayOf */; }
+
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IJobErrorInfo Sample.API.Models.IJobRetryDetailsInternal.ErrorDetails { get => (this._errorDetails = this._errorDetails ?? new Sample.API.Models.JobErrorInfo()); set { {_errorDetails = value;} } }
 
         /// <summary>Internal Acessors for StartTime</summary>
         global::System.DateTime? Sample.API.Models.IJobRetryDetailsInternal.StartTime { get => this._startTime; set { {_startTime = value;} } }
@@ -75,8 +75,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for Status</summary>
         string Sample.API.Models.IJobRetryDetailsInternal.Status { get => this._status; set { {_status = value;} } }
 
-        /// <summary>Internal Acessors for UserComment</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IJobRetryDetailsInternal.UserComment { get => this._userComment; set { {_userComment = value;} } }
+        /// <summary>Internal Acessors for UserComments</summary>
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> Sample.API.Models.IJobRetryDetailsInternal.UserComments { get => this._userComments; set { {_userComments = value;} } }
 
         /// <summary>Backing field for <see cref="StartTime" /> property.</summary>
         private global::System.DateTime? _startTime;
@@ -92,12 +92,12 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string Status { get => this._status; }
 
-        /// <summary>Backing field for <see cref="UserComment" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IJobUserComment> _userComment;
+        /// <summary>Backing field for <see cref="UserComments" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IJobUserComment> _userComments;
 
         /// <summary>User Comments.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get => this._userComment; }
+        public System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get => this._userComments; }
 
         /// <summary>Creates an new <see cref="JobRetryDetails" /> instance.</summary>
         public JobRetryDetails()
@@ -163,7 +163,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ErrorDetailRecommendation { get;  }
+        System.Collections.Generic.List<string> ErrorDetailRecommendations { get;  }
         /// <summary>The retry attempt number of the job.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -208,7 +208,7 @@ namespace Sample.API.Models
         Description = @"User Comments.",
         SerializedName = @"userComments",
         PossibleTypes = new [] { typeof(Sample.API.Models.IJobUserComment) })]
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get;  }
 
     }
     /// Job Retry Details.
@@ -219,14 +219,14 @@ namespace Sample.API.Models
         global::System.TimeSpan? Duration { get; set; }
         /// <summary>The end time of the job execution.</summary>
         global::System.DateTime? EndTime { get; set; }
-        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
-        Sample.API.Models.IJobErrorInfo ErrorDetail { get; set; }
         /// <summary>A code representing the error.</summary>
         string ErrorDetailErrorCode { get; set; }
         /// <summary>A detailed message explaining the error.</summary>
         string ErrorDetailErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> ErrorDetailRecommendation { get; set; }
+        System.Collections.Generic.List<string> ErrorDetailRecommendations { get; set; }
+        /// <summary>Details of any errors that occurred during the execution of this job.</summary>
+        Sample.API.Models.IJobErrorInfo ErrorDetails { get; set; }
         /// <summary>The retry attempt number of the job.</summary>
         int RetryAttempt { get; set; }
         /// <summary>The start time of the job execution.</summary>
@@ -235,7 +235,7 @@ namespace Sample.API.Models
         [global::Sample.API.PSArgumentCompleterAttribute("NotApplicable", "NotStarted", "Pending", "InProgress", "Completed", "CompletedWithWarnings", "Failed", "Skipped", "Cancelling", "Cancelled", "Paused")]
         string Status { get; set; }
         /// <summary>User Comments.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComment { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IJobUserComment> UserComments { get; set; }
 
     }
 }

@@ -30,22 +30,22 @@ namespace Sample.API.Models
         public string DisasterRecoveryGoalParticipation { get => this._disasterRecoveryGoalParticipation; set => this._disasterRecoveryGoalParticipation = value; }
 
         /// <summary>
-        /// Backing field for <see cref="ExclusionReasonForDisasterRecoveryGoal" /> property.
+        /// Backing field for <see cref="ExclusionReasonForDisasterRecoveryGoals" /> property.
         /// </summary>
-        private string _exclusionReasonForDisasterRecoveryGoal;
+        private string _exclusionReasonForDisasterRecoveryGoals;
 
         /// <summary>Reason for exclusion from disaster recovery goals.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ExclusionReasonForDisasterRecoveryGoal { get => this._exclusionReasonForDisasterRecoveryGoal; }
+        public string ExclusionReasonForDisasterRecoveryGoals { get => this._exclusionReasonForDisasterRecoveryGoals; }
 
         /// <summary>
-        /// Backing field for <see cref="ExclusionReasonForHighAvailabilityGoal" /> property.
+        /// Backing field for <see cref="ExclusionReasonForHighAvailabilityGoals" /> property.
         /// </summary>
-        private string _exclusionReasonForHighAvailabilityGoal;
+        private string _exclusionReasonForHighAvailabilityGoals;
 
         /// <summary>Reason for exclusion from high availability goals.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ExclusionReasonForHighAvailabilityGoal { get => this._exclusionReasonForHighAvailabilityGoal; }
+        public string ExclusionReasonForHighAvailabilityGoals { get => this._exclusionReasonForHighAvailabilityGoals; }
 
         /// <summary>Backing field for <see cref="HighAvailabilityAttestationStatus" /> property.</summary>
         private string _highAvailabilityAttestationStatus;
@@ -79,17 +79,17 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string ResourceArmId { get => this._resourceArmId; set => this._resourceArmId = value; }
 
-        /// <summary>Internal Acessors for ExclusionReasonForDisasterRecoveryGoal</summary>
-        string Sample.API.Models.IGoalResourcePropertiesInternal.ExclusionReasonForDisasterRecoveryGoal { get => this._exclusionReasonForDisasterRecoveryGoal; set { {_exclusionReasonForDisasterRecoveryGoal = value;} } }
+        /// <summary>Internal Acessors for ExclusionReasonForDisasterRecoveryGoals</summary>
+        string Sample.API.Models.IGoalResourcePropertiesInternal.ExclusionReasonForDisasterRecoveryGoals { get => this._exclusionReasonForDisasterRecoveryGoals; set { {_exclusionReasonForDisasterRecoveryGoals = value;} } }
 
-        /// <summary>Internal Acessors for ExclusionReasonForHighAvailabilityGoal</summary>
-        string Sample.API.Models.IGoalResourcePropertiesInternal.ExclusionReasonForHighAvailabilityGoal { get => this._exclusionReasonForHighAvailabilityGoal; set { {_exclusionReasonForHighAvailabilityGoal = value;} } }
+        /// <summary>Internal Acessors for ExclusionReasonForHighAvailabilityGoals</summary>
+        string Sample.API.Models.IGoalResourcePropertiesInternal.ExclusionReasonForHighAvailabilityGoals { get => this._exclusionReasonForHighAvailabilityGoals; set { {_exclusionReasonForHighAvailabilityGoals = value;} } }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
         string Sample.API.Models.IGoalResourcePropertiesInternal.ProvisioningState { get => this._provisioningState; set { {_provisioningState = value;} } }
 
-        /// <summary>Internal Acessors for ServiceGroupMembership</summary>
-        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> Sample.API.Models.IGoalResourcePropertiesInternal.ServiceGroupMembership { get => this._serviceGroupMembership; set { {_serviceGroupMembership = value;} } }
+        /// <summary>Internal Acessors for ServiceGroupMemberships</summary>
+        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> Sample.API.Models.IGoalResourcePropertiesInternal.ServiceGroupMemberships { get => this._serviceGroupMemberships; set { {_serviceGroupMemberships = value;} } }
 
         /// <summary>Internal Acessors for ZonalResiliency</summary>
         Sample.API.Models.IResiliencyProperties Sample.API.Models.IGoalResourcePropertiesInternal.ZonalResiliency { get => (this._zonalResiliency = this._zonalResiliency ?? new Sample.API.Models.ResiliencyProperties()); set { {_zonalResiliency = value;} } }
@@ -97,12 +97,12 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for ZonalResiliencyExclusionReason</summary>
         string Sample.API.Models.IGoalResourcePropertiesInternal.ZonalResiliencyExclusionReason { get => ((Sample.API.Models.IResiliencyPropertiesInternal)ZonalResiliency).ExclusionReason; set => ((Sample.API.Models.IResiliencyPropertiesInternal)ZonalResiliency).ExclusionReason = value ?? null; }
 
-        /// <summary>Backing field for <see cref="ServiceGroupMembership" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> _serviceGroupMembership;
+        /// <summary>Backing field for <see cref="ServiceGroupMemberships" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> _serviceGroupMemberships;
 
         /// <summary>List of service groups of which this resource is memberof.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMembership { get => this._serviceGroupMembership; }
+        public System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMemberships { get => this._serviceGroupMemberships; }
 
         /// <summary>Backing field for <see cref="UserConfirmationForHighAvailability" /> property.</summary>
         private System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> _userConfirmationForHighAvailability;
@@ -189,7 +189,7 @@ namespace Sample.API.Models
         SerializedName = @"exclusionReasonForDisasterRecoveryGoals",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
-        string ExclusionReasonForDisasterRecoveryGoal { get;  }
+        string ExclusionReasonForDisasterRecoveryGoals { get;  }
         /// <summary>Reason for exclusion from high availability goals.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -201,7 +201,7 @@ namespace Sample.API.Models
         SerializedName = @"exclusionReasonForHighAvailabilityGoals",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
-        string ExclusionReasonForHighAvailabilityGoal { get;  }
+        string ExclusionReasonForHighAvailabilityGoals { get;  }
         /// <summary>
         /// Flag which depicts whether the Arm resource is manually attested for high availability recommendation.
         /// </summary>
@@ -263,7 +263,7 @@ namespace Sample.API.Models
         Description = @"List of service groups of which this resource is memberof.",
         SerializedName = @"serviceGroupMemberships",
         PossibleTypes = new [] { typeof(Sample.API.Models.IServiceGroupMembership) })]
-        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMembership { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMemberships { get;  }
         /// <summary>List of user confirmations for high availability solutions.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -344,10 +344,10 @@ namespace Sample.API.Models
         string DisasterRecoveryGoalParticipation { get; set; }
         /// <summary>Reason for exclusion from disaster recovery goals.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
-        string ExclusionReasonForDisasterRecoveryGoal { get; set; }
+        string ExclusionReasonForDisasterRecoveryGoals { get; set; }
         /// <summary>Reason for exclusion from high availability goals.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("UserSelectedExclusion", "FailedOverResource", "UnsupportedResource")]
-        string ExclusionReasonForHighAvailabilityGoal { get; set; }
+        string ExclusionReasonForHighAvailabilityGoals { get; set; }
         /// <summary>
         /// Flag which depicts whether the Arm resource is manually attested for high availability recommendation.
         /// </summary>
@@ -364,7 +364,7 @@ namespace Sample.API.Models
         /// <summary>Arm Id of resource under the SG for which the extension resource is maintained.</summary>
         string ResourceArmId { get; set; }
         /// <summary>List of service groups of which this resource is memberof.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMembership { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IServiceGroupMembership> ServiceGroupMemberships { get; set; }
         /// <summary>List of user confirmations for high availability solutions.</summary>
         System.Collections.Generic.List<Sample.API.Models.IUserConfirmationItem> UserConfirmationForHighAvailability { get; set; }
         /// <summary>

@@ -53,14 +53,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.UpdateGoalResourceRequest"
         /// />.
         /// </summary>
@@ -94,18 +86,6 @@ namespace Sample.API.Models
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
 
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
-
         /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="Sample.API.Models.UpdateGoalResourceRequest"
         /// />.
@@ -120,9 +100,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Resource"))
+            if (content.Contains("Resources"))
             {
-                ((Sample.API.Models.IUpdateGoalResourceRequestInternal)this).Resource = (System.Collections.Generic.List<Sample.API.Models.IGoalResource>) content.GetValueForProperty("Resource",((Sample.API.Models.IUpdateGoalResourceRequestInternal)this).Resource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IGoalResource>(__y, Sample.API.Models.GoalResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IUpdateGoalResourceRequestInternal)this).Resources = (System.Collections.Generic.List<Sample.API.Models.IGoalResource>) content.GetValueForProperty("Resources",((Sample.API.Models.IUpdateGoalResourceRequestInternal)this).Resources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IGoalResource>(__y, Sample.API.Models.GoalResourceTypeConverter.ConvertFrom));
             }
             AfterDeserializeDictionary(content);
         }
@@ -141,9 +121,9 @@ namespace Sample.API.Models
                 return;
             }
             // actually deserialize
-            if (content.Contains("Resource"))
+            if (content.Contains("Resources"))
             {
-                ((Sample.API.Models.IUpdateGoalResourceRequestInternal)this).Resource = (System.Collections.Generic.List<Sample.API.Models.IGoalResource>) content.GetValueForProperty("Resource",((Sample.API.Models.IUpdateGoalResourceRequestInternal)this).Resource, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IGoalResource>(__y, Sample.API.Models.GoalResourceTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IUpdateGoalResourceRequestInternal)this).Resources = (System.Collections.Generic.List<Sample.API.Models.IGoalResource>) content.GetValueForProperty("Resources",((Sample.API.Models.IUpdateGoalResourceRequestInternal)this).Resources, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IGoalResource>(__y, Sample.API.Models.GoalResourceTypeConverter.ConvertFrom));
             }
             AfterDeserializePSObject(content);
         }

@@ -1411,10 +1411,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/addNotes$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/addNotes'");
                 }
 
                 // replace URI parameters with values from identity
@@ -1473,10 +1473,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/addNotes$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/addNotes'");
                 }
 
                 // replace URI parameters with values from identity
@@ -1509,110 +1509,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillRunsAddNotesWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>This enables the user to add notes on this Drill Run.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsAddNotes operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillRunsAddNotesViaJsonString(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IDrillRunActionResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/addNotes"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillRunsAddNotes_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>This enables the user to add notes on this Drill Run.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsAddNotes operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IDrillRunActionResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IDrillRunActionResponse> DrillRunsAddNotesViaJsonStringWithResult(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/addNotes"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -2072,10 +1968,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/failOver$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/failOver'");
                 }
 
                 // replace URI parameters with values from identity
@@ -2134,10 +2030,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/failOver$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/failOver'");
                 }
 
                 // replace URI parameters with values from identity
@@ -2170,110 +2066,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillRunsFailOverWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>This initiates a new Failover operation on this Drill Run.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsFailOver operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillRunsFailOverViaJsonString(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IDrillRunActionResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/failOver"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillRunsFailOver_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>This initiates a new Failover operation on this Drill Run.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsFailOver operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IDrillRunActionResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IDrillRunActionResponse> DrillRunsFailOverViaJsonStringWithResult(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/failOver"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -2733,10 +2525,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/generateReport$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/generateReport'");
                 }
 
                 // replace URI parameters with values from identity
@@ -2793,10 +2585,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/generateReport$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/generateReport'");
                 }
 
                 // replace URI parameters with values from identity
@@ -3648,10 +3440,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/listReportDownloadUrl$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/listReportDownloadUrl'");
                 }
 
                 // replace URI parameters with values from identity
@@ -3713,10 +3505,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/listReportDownloadUrl$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/listReportDownloadUrl'");
                 }
 
                 // replace URI parameters with values from identity
@@ -3749,116 +3541,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillRunsListReportDownloadUrlWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This returns a short-lived, read-only URL to download the report for this Drill Run. The URL expires at the returned expiryTimestamp
-        /// and grants access to that single report only.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsListReportDownloadUrl operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillRunsListReportDownloadUrlViaJsonString(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IListReportDownloadUrlResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/listReportDownloadUrl"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillRunsListReportDownloadUrl_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This returns a short-lived, read-only URL to download the report for this Drill Run. The URL expires at the returned expiryTimestamp
-        /// and grants access to that single report only.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsListReportDownloadUrl operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IListReportDownloadUrlResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IListReportDownloadUrlResponse> DrillRunsListReportDownloadUrlViaJsonStringWithResult(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/listReportDownloadUrl"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -4597,10 +4279,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/markAsComplete$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/markAsComplete'");
                 }
 
                 // replace URI parameters with values from identity
@@ -4661,10 +4343,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/markAsComplete$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/markAsComplete'");
                 }
 
                 // replace URI parameters with values from identity
@@ -4697,114 +4379,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillRunsMarkAsCompleteWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This enables the user to mark this stage as complete, disabling further retries on it.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsMarkAsComplete operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillRunsMarkAsCompleteViaJsonString(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IMarkAsCompleteResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/markAsComplete"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillRunsMarkAsComplete_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This enables the user to mark this stage as complete, disabling further retries on it.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsMarkAsComplete operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IMarkAsCompleteResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IMarkAsCompleteResponse> DrillRunsMarkAsCompleteViaJsonStringWithResult(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/markAsComplete"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -5266,10 +4840,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/reprotect$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/reprotect'");
                 }
 
                 // replace URI parameters with values from identity
@@ -5328,10 +4902,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/reprotect$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/reprotect'");
                 }
 
                 // replace URI parameters with values from identity
@@ -5364,110 +4938,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillRunsReprotectWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>This initiates a new Reprotect operation on this Drill Run.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsReprotect operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillRunsReprotectViaJsonString(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IDrillRunActionResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/reprotect"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillRunsReprotect_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>This initiates a new Reprotect operation on this Drill Run.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="drillRunName">The name of the DrillRun (GUID).</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillRunsReprotect operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IDrillRunActionResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IDrillRunActionResponse> DrillRunsReprotectViaJsonStringWithResult(string serviceGroupName, string drillName, string drillRunName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/drillRuns/"
-                        + global::System.Uri.EscapeDataString(drillRunName)
-                        + "/reprotect"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -5923,10 +5393,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/resume$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/resume'");
                 }
 
                 // replace URI parameters with values from identity
@@ -5981,10 +5451,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/drillRuns/(?<drillRunName>[^/]+)/resume$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/drillRuns/{drillRunName}/resume'");
                 }
 
                 // replace URI parameters with values from identity
@@ -6464,10 +5934,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/addOrUpdateResources$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/addOrUpdateResources'");
                 }
 
                 // replace URI parameters with values from identity
@@ -6497,57 +5967,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillsAddOrUpdateResources_Call (request, onNoContent,onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>This enables the user to include, exclude or add resources from their Drill.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillsAddOrUpdateResources operation</param>
-        /// <param name="onNoContent">a delegate that is called when the remote service returns 204 (NoContent).</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillsAddOrUpdateResourcesViaJsonString(string serviceGroupName, string drillName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/addOrUpdateResources"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
@@ -6880,94 +6299,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillsCreateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>create a Drill</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="jsonString">Json string supplied to the DrillsCreate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillsCreateViaJsonString(string serviceGroupName, string drillName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IDrill>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillsCreate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>create a Drill</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="jsonString">Json string supplied to the DrillsCreate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IDrill>" /> that will be complete when handling of
-        /// the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IDrill> DrillsCreateViaJsonStringWithResult(string serviceGroupName, string drillName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -7672,10 +7003,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/end$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/end'");
                 }
 
                 // replace URI parameters with values from identity
@@ -7731,10 +7062,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/end$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/end'");
                 }
 
                 // replace URI parameters with values from identity
@@ -7764,104 +7095,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillsEndWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>This ends the currently running instance of the Drill.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillsEnd operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillsEndViaJsonString(string serviceGroupName, string drillName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IDrillActionResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/end"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillsEnd_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>This ends the currently running instance of the Drill.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillsEnd operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IDrillActionResponse>" /> that will be complete when
-        /// handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IDrillActionResponse> DrillsEndViaJsonStringWithResult(string serviceGroupName, string drillName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/end"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -8942,10 +8175,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/resyncReadinessCheck$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/resyncReadinessCheck'");
                 }
 
                 // replace URI parameters with values from identity
@@ -9223,10 +8456,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/start$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/start'");
                 }
 
                 // replace URI parameters with values from identity
@@ -9282,10 +8515,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/start$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/start'");
                 }
 
                 // replace URI parameters with values from identity
@@ -9315,104 +8548,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillsStartWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>This starts a new running instance of the Drill.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillsStart operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillsStartViaJsonString(string serviceGroupName, string drillName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IDrillActionResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/start"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillsStart_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>This starts a new running instance of the Drill.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillsStart operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IDrillActionResponse>" /> that will be complete when
-        /// handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IDrillActionResponse> DrillsStartViaJsonStringWithResult(string serviceGroupName, string drillName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/start"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -9950,94 +9085,6 @@ namespace Sample.API
         /// <summary>update a Drill</summary>
         /// <param name="serviceGroupName">The name of the service group.</param>
         /// <param name="drillName">The name of the Drill</param>
-        /// <param name="jsonString">Json string supplied to the DrillsUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillsUpdateViaJsonString(string serviceGroupName, string drillName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IDrill>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillsUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update a Drill</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="jsonString">Json string supplied to the DrillsUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IDrill>" /> that will be complete when handling of
-        /// the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IDrill> DrillsUpdateViaJsonStringWithResult(string serviceGroupName, string drillName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillsUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update a Drill</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
         /// <param name="body">The resource properties to be updated.</param>
         /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
@@ -10471,10 +9518,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/validateForExecution$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/validateForExecution'");
                 }
 
                 // replace URI parameters with values from identity
@@ -10530,10 +9577,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/drills/(?<drillName>[^/]+)/validateForExecution$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/validateForExecution'");
                 }
 
                 // replace URI parameters with values from identity
@@ -10563,104 +9610,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.DrillsValidateForExecutionWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>This returns eligible resource to be faulted or failed over.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillsValidateForExecution operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task DrillsValidateForExecutionViaJsonString(string serviceGroupName, string drillName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForExecutionResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/validateForExecution"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.DrillsValidateForExecution_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>This returns eligible resource to be faulted or failed over.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="drillName">The name of the Drill</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the DrillsValidateForExecution operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForExecutionResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForExecutionResponse> DrillsValidateForExecutionViaJsonStringWithResult(string serviceGroupName, string drillName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/drills/"
-                        + global::System.Uri.EscapeDataString(drillName)
-                        + "/validateForExecution"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -11208,106 +10157,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.EnrollmentsCreateOrUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update an Enrollment.</summary>
-        /// <param name="subscriptionId">The ID of the target subscription. The value must be an UUID.</param>
-        /// <param name="resourceGroupName">The name of the resource group. The name is case insensitive.</param>
-        /// <param name="usagePlanName">The name of the usage plan.</param>
-        /// <param name="enrollmentName">The name of the enrollment.</param>
-        /// <param name="jsonString">Json string supplied to the EnrollmentsCreateOrUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task EnrollmentsCreateOrUpdateViaJsonString(string subscriptionId, string resourceGroupName, string usagePlanName, string enrollmentName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IEnrollment>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/subscriptions/"
-                        + global::System.Uri.EscapeDataString(subscriptionId)
-                        + "/resourceGroups/"
-                        + global::System.Uri.EscapeDataString(resourceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/usagePlans/"
-                        + global::System.Uri.EscapeDataString(usagePlanName)
-                        + "/enrollments/"
-                        + global::System.Uri.EscapeDataString(enrollmentName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.EnrollmentsCreateOrUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update an Enrollment.</summary>
-        /// <param name="subscriptionId">The ID of the target subscription. The value must be an UUID.</param>
-        /// <param name="resourceGroupName">The name of the resource group. The name is case insensitive.</param>
-        /// <param name="usagePlanName">The name of the usage plan.</param>
-        /// <param name="enrollmentName">The name of the enrollment.</param>
-        /// <param name="jsonString">Json string supplied to the EnrollmentsCreateOrUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IEnrollment>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IEnrollment> EnrollmentsCreateOrUpdateViaJsonStringWithResult(string subscriptionId, string resourceGroupName, string usagePlanName, string enrollmentName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/subscriptions/"
-                        + global::System.Uri.EscapeDataString(subscriptionId)
-                        + "/resourceGroups/"
-                        + global::System.Uri.EscapeDataString(resourceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/usagePlans/"
-                        + global::System.Uri.EscapeDataString(usagePlanName)
-                        + "/enrollments/"
-                        + global::System.Uri.EscapeDataString(enrollmentName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -12798,94 +11647,6 @@ namespace Sample.API
         /// <summary>update a GoalAssignment</summary>
         /// <param name="serviceGroupName">The name of the service group.</param>
         /// <param name="goalAssignmentName">The name of the GoalAssignment</param>
-        /// <param name="jsonString">Json string supplied to the GoalAssignmentsCreateOrUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task GoalAssignmentsCreateOrUpdateViaJsonString(string serviceGroupName, string goalAssignmentName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IGoalAssignment>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalAssignments/"
-                        + global::System.Uri.EscapeDataString(goalAssignmentName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.GoalAssignmentsCreateOrUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update a GoalAssignment</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalAssignmentName">The name of the GoalAssignment</param>
-        /// <param name="jsonString">Json string supplied to the GoalAssignmentsCreateOrUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IGoalAssignment>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IGoalAssignment> GoalAssignmentsCreateOrUpdateViaJsonStringWithResult(string serviceGroupName, string goalAssignmentName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalAssignments/"
-                        + global::System.Uri.EscapeDataString(goalAssignmentName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.GoalAssignmentsCreateOrUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update a GoalAssignment</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalAssignmentName">The name of the GoalAssignment</param>
         /// <param name="body">Resource create parameters.</param>
         /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
@@ -14217,10 +12978,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)/recommendCapacity$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/recommendCapacity'");
                 }
 
                 // replace URI parameters with values from identity
@@ -14275,10 +13036,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)/recommendCapacity$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/recommendCapacity'");
                 }
 
                 // replace URI parameters with values from identity
@@ -14305,102 +13066,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.GoalAssignmentsRecommendCapacityWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments
-        /// and recommendations.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalAssignmentName">The name of the GoalAssignment</param>
-        /// <param name="jsonString">Json string supplied to the GoalAssignmentsRecommendCapacity operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task GoalAssignmentsRecommendCapacityViaJsonString(string serviceGroupName, string goalAssignmentName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IRecommendCapacityResult>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalAssignments/"
-                        + global::System.Uri.EscapeDataString(goalAssignmentName)
-                        + "/recommendCapacity"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.GoalAssignmentsRecommendCapacity_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments
-        /// and recommendations.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalAssignmentName">The name of the GoalAssignment</param>
-        /// <param name="jsonString">Json string supplied to the GoalAssignmentsRecommendCapacity operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IRecommendCapacityResult>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IRecommendCapacityResult> GoalAssignmentsRecommendCapacityViaJsonStringWithResult(string serviceGroupName, string goalAssignmentName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalAssignments/"
-                        + global::System.Uri.EscapeDataString(goalAssignmentName)
-                        + "/recommendCapacity"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -14841,10 +13506,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)/refreshGoalResources$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/refreshGoalResources'");
                 }
 
                 // replace URI parameters with values from identity
@@ -14892,10 +13557,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)/refreshGoalResources$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/refreshGoalResources'");
                 }
 
                 // replace URI parameters with values from identity
@@ -15400,10 +14065,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)/updateGoalResources$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/updateGoalResources'");
                 }
 
                 // replace URI parameters with values from identity
@@ -15455,10 +14120,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/goalAssignments/(?<goalAssignmentName>[^/]+)/updateGoalResources$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/updateGoalResources'");
                 }
 
                 // replace URI parameters with values from identity
@@ -15485,96 +14150,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.GoalAssignmentsUpdateGoalResourcesWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>Action to exclude a resource from goal assignment.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalAssignmentName">The name of the GoalAssignment</param>
-        /// <param name="jsonString">Json string supplied to the GoalAssignmentsUpdateGoalResources operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task GoalAssignmentsUpdateGoalResourcesViaJsonString(string serviceGroupName, string goalAssignmentName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IUpdateGoalResourceResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalAssignments/"
-                        + global::System.Uri.EscapeDataString(goalAssignmentName)
-                        + "/updateGoalResources"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.GoalAssignmentsUpdateGoalResources_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>Action to exclude a resource from goal assignment.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalAssignmentName">The name of the GoalAssignment</param>
-        /// <param name="jsonString">Json string supplied to the GoalAssignmentsUpdateGoalResources operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IUpdateGoalResourceResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IUpdateGoalResourceResponse> GoalAssignmentsUpdateGoalResourcesViaJsonStringWithResult(string serviceGroupName, string goalAssignmentName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalAssignments/"
-                        + global::System.Uri.EscapeDataString(goalAssignmentName)
-                        + "/updateGoalResources"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -16052,94 +14627,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.GoalAssignmentsUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update a GoalAssignment</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalAssignmentName">The name of the GoalAssignment</param>
-        /// <param name="jsonString">Json string supplied to the GoalAssignmentsUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task GoalAssignmentsUpdateViaJsonString(string serviceGroupName, string goalAssignmentName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IGoalAssignment>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalAssignments/"
-                        + global::System.Uri.EscapeDataString(goalAssignmentName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.GoalAssignmentsUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update a GoalAssignment</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalAssignmentName">The name of the GoalAssignment</param>
-        /// <param name="jsonString">Json string supplied to the GoalAssignmentsUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IGoalAssignment>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IGoalAssignment> GoalAssignmentsUpdateViaJsonStringWithResult(string serviceGroupName, string goalAssignmentName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalAssignments/"
-                        + global::System.Uri.EscapeDataString(goalAssignmentName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -17322,94 +15809,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.GoalTemplatesCreateOrUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update a GoalTemplate</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalTemplateName">The name of the goalTemplate</param>
-        /// <param name="jsonString">Json string supplied to the GoalTemplatesCreateOrUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task GoalTemplatesCreateOrUpdateViaJsonString(string serviceGroupName, string goalTemplateName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IGoalTemplate>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalTemplates/"
-                        + global::System.Uri.EscapeDataString(goalTemplateName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.GoalTemplatesCreateOrUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update a GoalTemplate</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalTemplateName">The name of the goalTemplate</param>
-        /// <param name="jsonString">Json string supplied to the GoalTemplatesCreateOrUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IGoalTemplate>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IGoalTemplate> GoalTemplatesCreateOrUpdateViaJsonStringWithResult(string serviceGroupName, string goalTemplateName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalTemplates/"
-                        + global::System.Uri.EscapeDataString(goalTemplateName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -18825,94 +17224,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.GoalTemplatesUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update a GoalTemplate</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalTemplateName">The name of the goalTemplate</param>
-        /// <param name="jsonString">Json string supplied to the GoalTemplatesUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task GoalTemplatesUpdateViaJsonString(string serviceGroupName, string goalTemplateName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IGoalTemplate>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalTemplates/"
-                        + global::System.Uri.EscapeDataString(goalTemplateName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.GoalTemplatesUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update a GoalTemplate</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="goalTemplateName">The name of the goalTemplate</param>
-        /// <param name="jsonString">Json string supplied to the GoalTemplatesUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IGoalTemplate>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IGoalTemplate> GoalTemplatesUpdateViaJsonStringWithResult(string serviceGroupName, string goalTemplateName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/goalTemplates/"
-                        + global::System.Uri.EscapeDataString(goalTemplateName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -20611,10 +18922,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)/cancel$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}/cancel'");
                 }
 
                 // replace URI parameters with values from identity
@@ -20673,10 +18984,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)/cancel$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}/cancel'");
                 }
 
                 // replace URI parameters with values from identity
@@ -20709,110 +19020,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryJobsCancelWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>This action attempts to cancel the ongoing recovery orchestration job.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="recoveryJobName">The unique name (GUID) of the recovery job.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryJobsCancel operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryJobsCancelViaJsonString(string serviceGroupName, string recoveryPlanName, string recoveryJobName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/recoveryJobs/"
-                        + global::System.Uri.EscapeDataString(recoveryJobName)
-                        + "/cancel"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryJobsCancel_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>This action attempts to cancel the ongoing recovery orchestration job.</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="recoveryJobName">The unique name (GUID) of the recovery job.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryJobsCancel operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse> RecoveryJobsCancelViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string recoveryJobName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/recoveryJobs/"
-                        + global::System.Uri.EscapeDataString(recoveryJobName)
-                        + "/cancel"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -21909,10 +20116,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)/resume$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}/resume'");
                 }
 
                 // replace URI parameters with values from identity
@@ -21973,10 +20180,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)/resume$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}/resume'");
                 }
 
                 // replace URI parameters with values from identity
@@ -22009,114 +20216,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryJobsResumeWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action resumes the ongoing recovery orchestration job that was paused for required user intervention.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="recoveryJobName">The unique name (GUID) of the recovery job.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryJobsResume operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryJobsResumeViaJsonString(string serviceGroupName, string recoveryPlanName, string recoveryJobName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/recoveryJobs/"
-                        + global::System.Uri.EscapeDataString(recoveryJobName)
-                        + "/resume"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryJobsResume_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action resumes the ongoing recovery orchestration job that was paused for required user intervention.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="recoveryJobName">The unique name (GUID) of the recovery job.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryJobsResume operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse> RecoveryJobsResumeViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string recoveryJobName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/recoveryJobs/"
-                        + global::System.Uri.EscapeDataString(recoveryJobName)
-                        + "/resume"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -22574,10 +20673,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)/retry$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}/retry'");
                 }
 
                 // replace URI parameters with values from identity
@@ -22632,10 +20731,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/recoveryJobs/(?<recoveryJobName>[^/]+)/retry$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/recoveryJobs/{recoveryJobName}/retry'");
                 }
 
                 // replace URI parameters with values from identity
@@ -23111,10 +21210,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/checkReadiness$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/checkReadiness'");
                 }
 
                 // replace URI parameters with values from identity
@@ -23167,10 +21266,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/checkReadiness$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/checkReadiness'");
                 }
 
                 // replace URI parameters with values from identity
@@ -23691,10 +21790,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/failoverCommit$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/failoverCommit'");
                 }
 
                 // replace URI parameters with values from identity
@@ -23746,10 +21845,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/failoverCommit$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/failoverCommit'");
                 }
 
                 // replace URI parameters with values from identity
@@ -24171,10 +22270,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/failover$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/failover'");
                 }
 
                 // replace URI parameters with values from identity
@@ -24232,10 +22331,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/failover$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/failover'");
                 }
 
                 // replace URI parameters with values from identity
@@ -24265,108 +22364,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlanActionsFailoverWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action triggers the failover operation on the recovery orchestration plan for the qualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsFailover operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsFailoverViaJsonString(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/failover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsFailover_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action triggers the failover operation on the recovery orchestration plan for the qualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsFailover operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse> RecoveryPlanActionsFailoverViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/failover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -24817,10 +22814,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/finalize$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/finalize'");
                 }
 
                 // replace URI parameters with values from identity
@@ -24872,10 +22869,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/finalize$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/finalize'");
                 }
 
                 // replace URI parameters with values from identity
@@ -25350,10 +23347,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/reprotect$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/reprotect'");
                 }
 
                 // replace URI parameters with values from identity
@@ -25411,10 +23408,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/reprotect$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/reprotect'");
                 }
 
                 // replace URI parameters with values from identity
@@ -25444,108 +23441,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlanActionsReprotectWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action triggers the reprotect operation on the recovery orchestration plan for the qualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsReprotect operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsReprotectViaJsonString(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/reprotect"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsReprotect_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action triggers the reprotect operation on the recovery orchestration plan for the qualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsReprotect operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse> RecoveryPlanActionsReprotectViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/reprotect"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -26057,10 +23952,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/testFailoverCleanup$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/testFailoverCleanup'");
                 }
 
                 // replace URI parameters with values from identity
@@ -26118,10 +24013,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/testFailoverCleanup$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/testFailoverCleanup'");
                 }
 
                 // replace URI parameters with values from identity
@@ -26151,108 +24046,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlanActionsTestFailoverCleanupWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action triggers the test failover cleanup operation on the recovery orchestration plan for the qualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsTestFailoverCleanup operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsTestFailoverCleanupViaJsonString(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/testFailoverCleanup"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsTestFailoverCleanup_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action triggers the test failover cleanup operation on the recovery orchestration plan for the qualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsTestFailoverCleanup operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse> RecoveryPlanActionsTestFailoverCleanupViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/testFailoverCleanup"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -26660,10 +24453,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/testFailover$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/testFailover'");
                 }
 
                 // replace URI parameters with values from identity
@@ -26721,10 +24514,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/testFailover$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/testFailover'");
                 }
 
                 // replace URI parameters with values from identity
@@ -26754,108 +24547,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlanActionsTestFailoverWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action triggers the test failover operation on the recovery orchestration plan for the qualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsTestFailover operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsTestFailoverViaJsonString(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/testFailover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsTestFailover_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action triggers the test failover operation on the recovery orchestration plan for the qualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsTestFailover operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse>" /> that will be complete
-        /// when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlanActionBaseResponse> RecoveryPlanActionsTestFailoverViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/testFailover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -27314,10 +25005,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/updateResources$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/updateResources'");
                 }
 
                 // replace URI parameters with values from identity
@@ -27375,10 +25066,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/updateResources$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/updateResources'");
                 }
 
                 // replace URI parameters with values from identity
@@ -27408,108 +25099,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlanActionsUpdateResourcesWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action adds or update the resources to be included in the recovery orchestration plan.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsUpdateResources operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsUpdateResourcesViaJsonString(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IUpdateRecoveryResourcesResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/updateResources"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsUpdateResources_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action adds or update the resources to be included in the recovery orchestration plan.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsUpdateResources operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IUpdateRecoveryResourcesResponse>" /> that will be
-        /// complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IUpdateRecoveryResourcesResponse> RecoveryPlanActionsUpdateResourcesViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/updateResources"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -27893,60 +25482,6 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for failover operation, ensuring it meets the necessary
-        /// criteria and provides a list of qualified and unqualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="body">The content of the action request</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Sample.API.Runtime.SerializationMode"/>.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForFailover(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IFailoverRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForFailover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsValidateForFailover_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
         /// This action checks if the recovery orchestration plan is eligible for failover commit operation, ensuring it meets the
         /// necessary criteria and provides a list of qualified and unqualified resources.
         /// </summary>
@@ -27961,7 +25496,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForFailoverCommit(string serviceGroupName, string recoveryPlanName, string operationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task RecoveryPlanFailoverCommitValidationValidate(string serviceGroupName, string recoveryPlanName, string operationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -27990,7 +25525,7 @@ namespace Sample.API
 
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForFailoverCommit_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanFailoverCommitValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -28008,7 +25543,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForFailoverCommitViaIdentity(global::System.String viaIdentity, string operationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task RecoveryPlanFailoverCommitValidationValidateViaIdentity(global::System.String viaIdentity, string operationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -28016,10 +25551,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForFailoverCommit$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForFailoverCommit'");
                 }
 
                 // replace URI parameters with values from identity
@@ -28048,7 +25583,7 @@ namespace Sample.API
 
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForFailoverCommit_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanFailoverCommitValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -28064,7 +25599,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForFailoverCommitViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanFailoverCommitValidationValidateViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -28072,10 +25607,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForFailoverCommit$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForFailoverCommit'");
                 }
 
                 // replace URI parameters with values from identity
@@ -28104,7 +25639,7 @@ namespace Sample.API
 
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForFailoverCommitWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanFailoverCommitValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
@@ -28121,7 +25656,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForFailoverCommitWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanFailoverCommitValidationValidateWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -28150,12 +25685,12 @@ namespace Sample.API
 
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForFailoverCommitWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanFailoverCommitValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForFailoverCommitWithResult" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanFailoverCommitValidationValidateWithResult" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -28164,7 +25699,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForFailoverCommitWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanFailoverCommitValidationValidateWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -28310,7 +25845,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForFailoverCommit" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanFailoverCommitValidationValidate" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
@@ -28321,7 +25856,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForFailoverCommit_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanFailoverCommitValidationValidate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -28455,7 +25990,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Validation method for <see cref="RecoveryPlanActionsValidateForFailoverCommit" /> method. Call this like the actual call,
+        /// Validation method for <see cref="RecoveryPlanFailoverCommitValidationValidate" /> method. Call this like the actual call,
         /// but you will get validation events back.
         /// </summary>
         /// <param name="serviceGroupName">The name of the service group.</param>
@@ -28465,7 +26000,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForFailoverCommit_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanFailoverCommitValidationValidate_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
@@ -28481,6 +26016,60 @@ namespace Sample.API
         /// This action checks if the recovery orchestration plan is eligible for failover operation, ensuring it meets the necessary
         /// criteria and provides a list of qualified and unqualified resources.
         /// </summary>
+        /// <param name="serviceGroupName">The name of the service group.</param>
+        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
+        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
+        /// <param name="body">The content of the action request</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Sample.API.Runtime.SerializationMode"/>.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task RecoveryPlanFailoverValidationValidate(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IFailoverRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        {
+            var apiVersion = @"2026-08-31-preview";
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
+                        "/providers/Microsoft.Management/serviceGroups/"
+                        + global::System.Uri.EscapeDataString(serviceGroupName)
+                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
+                        + global::System.Uri.EscapeDataString(recoveryPlanName)
+                        + "/validateForFailover"
+                        + "?"
+                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
+
+                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
+                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
+                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // add headers parameters
+                request.Headers.Add("operation-id",operationId.ToString());
+
+                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.RecoveryPlanFailoverValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// This action checks if the recovery orchestration plan is eligible for failover operation, ensuring it meets the necessary
+        /// criteria and provides a list of qualified and unqualified resources.
+        /// </summary>
         /// <param name="viaIdentity"></param>
         /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
         /// <param name="body">The content of the action request</param>
@@ -28493,7 +26082,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForFailoverViaIdentity(global::System.String viaIdentity, string operationId, Sample.API.Models.IFailoverRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task RecoveryPlanFailoverValidationValidateViaIdentity(global::System.String viaIdentity, string operationId, Sample.API.Models.IFailoverRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -28501,10 +26090,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForFailover$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForFailover'");
                 }
 
                 // replace URI parameters with values from identity
@@ -28537,7 +26126,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForFailover_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanFailoverValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -28555,7 +26144,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForFailoverViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanFailoverValidationValidateViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -28563,10 +26152,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForFailover$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForFailover'");
                 }
 
                 // replace URI parameters with values from identity
@@ -28599,111 +26188,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForFailoverWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for failover operation, ensuring it meets the necessary
-        /// criteria and provides a list of qualified and unqualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsValidateForFailover operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForFailoverViaJsonString(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForFailover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsValidateForFailover_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for failover operation, ensuring it meets the necessary
-        /// criteria and provides a list of qualified and unqualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsValidateForFailover operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
-        /// will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForFailoverViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForFailover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlanActionsValidateForFailoverWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanFailoverValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
@@ -28722,7 +26207,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForFailoverWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanFailoverValidationValidateWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -28755,12 +26240,12 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForFailoverWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanFailoverValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForFailoverWithResult" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanFailoverValidationValidateWithResult" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -28769,7 +26254,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForFailoverWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanFailoverValidationValidateWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -28915,7 +26400,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForFailover" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanFailoverValidationValidate" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
@@ -28926,7 +26411,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForFailover_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanFailoverValidationValidate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -29060,7 +26545,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Validation method for <see cref="RecoveryPlanActionsValidateForFailover" /> method. Call this like the actual call, but
+        /// Validation method for <see cref="RecoveryPlanFailoverValidationValidate" /> method. Call this like the actual call, but
         /// you will get validation events back.
         /// </summary>
         /// <param name="serviceGroupName">The name of the service group.</param>
@@ -29071,7 +26556,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForFailover_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanFailoverValidationValidate_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
@@ -29102,7 +26587,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForOperation(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IValidateForOperationRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task RecoveryPlanOperationValidationValidate(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IValidateForOperationRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -29135,7 +26620,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForOperation_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanOperationValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -29155,7 +26640,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForOperationViaIdentity(global::System.String viaIdentity, string operationId, Sample.API.Models.IValidateForOperationRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task RecoveryPlanOperationValidationValidateViaIdentity(global::System.String viaIdentity, string operationId, Sample.API.Models.IValidateForOperationRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -29163,10 +26648,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForOperation$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForOperation'");
                 }
 
                 // replace URI parameters with values from identity
@@ -29199,7 +26684,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForOperation_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanOperationValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -29217,7 +26702,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>" /> that will be complete when handling
         /// of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse> RecoveryPlanActionsValidateForOperationViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Models.IValidateForOperationRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse> RecoveryPlanOperationValidationValidateViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Models.IValidateForOperationRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -29225,10 +26710,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForOperation$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForOperation'");
                 }
 
                 // replace URI parameters with values from identity
@@ -29261,111 +26746,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForOperationWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for operations like failover and reprotect, ensuring
-        /// it meets the necessary criteria.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsValidateForOperation operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForOperationViaJsonString(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForOperation"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsValidateForOperation_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for operations like failover and reprotect, ensuring
-        /// it meets the necessary criteria.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsValidateForOperation operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse> RecoveryPlanActionsValidateForOperationViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForOperation"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlanActionsValidateForOperationWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanOperationValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
@@ -29384,7 +26765,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>" /> that will be complete when handling
         /// of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse> RecoveryPlanActionsValidateForOperationWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IValidateForOperationRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse> RecoveryPlanOperationValidationValidateWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IValidateForOperationRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -29417,12 +26798,12 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForOperationWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanOperationValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForOperationWithResult" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanOperationValidationValidateWithResult" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -29431,7 +26812,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>" /> that will be complete when handling
         /// of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse> RecoveryPlanActionsValidateForOperationWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse> RecoveryPlanOperationValidationValidateWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -29577,7 +26958,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForOperation" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanOperationValidationValidate" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
@@ -29588,7 +26969,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForOperation_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanOperationValidationValidate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -29722,7 +27103,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Validation method for <see cref="RecoveryPlanActionsValidateForOperation" /> method. Call this like the actual call, but
+        /// Validation method for <see cref="RecoveryPlanOperationValidationValidate" /> method. Call this like the actual call, but
         /// you will get validation events back.
         /// </summary>
         /// <param name="serviceGroupName">The name of the service group.</param>
@@ -29733,7 +27114,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForOperation_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Models.IValidateForOperationRequest body, Sample.API.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanOperationValidationValidate_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Models.IValidateForOperationRequest body, Sample.API.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
@@ -29764,7 +27145,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForReprotect(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IReprotectRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task RecoveryPlanReprotectValidationValidate(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IReprotectRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -29797,7 +27178,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForReprotect_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanReprotectValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -29817,7 +27198,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForReprotectViaIdentity(global::System.String viaIdentity, string operationId, Sample.API.Models.IReprotectRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task RecoveryPlanReprotectValidationValidateViaIdentity(global::System.String viaIdentity, string operationId, Sample.API.Models.IReprotectRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -29825,10 +27206,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForReprotect$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForReprotect'");
                 }
 
                 // replace URI parameters with values from identity
@@ -29861,7 +27242,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForReprotect_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanReprotectValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -29879,7 +27260,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForReprotectViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Models.IReprotectRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanReprotectValidationValidateViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Models.IReprotectRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -29887,10 +27268,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForReprotect$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForReprotect'");
                 }
 
                 // replace URI parameters with values from identity
@@ -29923,111 +27304,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForReprotectWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for reprotect operation, ensuring it meets the necessary
-        /// criteria and provides a list of qualified and unqualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsValidateForReprotect operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForReprotectViaJsonString(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForReprotect"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsValidateForReprotect_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for reprotect operation, ensuring it meets the necessary
-        /// criteria and provides a list of qualified and unqualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsValidateForReprotect operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
-        /// will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForReprotectViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForReprotect"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlanActionsValidateForReprotectWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanReprotectValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
@@ -30046,7 +27323,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForReprotectWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IReprotectRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanReprotectValidationValidateWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IReprotectRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -30079,12 +27356,12 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForReprotectWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanReprotectValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForReprotectWithResult" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanReprotectValidationValidateWithResult" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -30093,7 +27370,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForReprotectWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanReprotectValidationValidateWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -30239,7 +27516,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForReprotect" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanReprotectValidationValidate" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
@@ -30250,7 +27527,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForReprotect_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanReprotectValidationValidate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -30384,7 +27661,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Validation method for <see cref="RecoveryPlanActionsValidateForReprotect" /> method. Call this like the actual call, but
+        /// Validation method for <see cref="RecoveryPlanReprotectValidationValidate" /> method. Call this like the actual call, but
         /// you will get validation events back.
         /// </summary>
         /// <param name="serviceGroupName">The name of the service group.</param>
@@ -30395,7 +27672,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForReprotect_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Models.IReprotectRequest body, Sample.API.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanReprotectValidationValidate_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Models.IReprotectRequest body, Sample.API.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
@@ -30410,60 +27687,6 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for test failover operation, ensuring it meets the necessary
-        /// criteria and provides a list of qualified and unqualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="body">The content of the action request</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Sample.API.Runtime.SerializationMode"/>.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForTestFailover(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IFailoverRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForTestFailover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsValidateForTestFailover_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
         /// This action checks if the recovery orchestration plan is eligible for test failover cleanup operation, ensuring it meets
         /// the necessary criteria and provides a list of qualified and unqualified resources.
         /// </summary>
@@ -30478,7 +27701,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForTestFailoverCleanup(string serviceGroupName, string recoveryPlanName, string operationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task RecoveryPlanTestFailoverCleanupValidationValidate(string serviceGroupName, string recoveryPlanName, string operationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -30507,7 +27730,7 @@ namespace Sample.API
 
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForTestFailoverCleanup_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanTestFailoverCleanupValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -30525,7 +27748,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForTestFailoverCleanupViaIdentity(global::System.String viaIdentity, string operationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task RecoveryPlanTestFailoverCleanupValidationValidateViaIdentity(global::System.String viaIdentity, string operationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -30533,10 +27756,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForTestFailoverCleanup$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForTestFailoverCleanup'");
                 }
 
                 // replace URI parameters with values from identity
@@ -30565,7 +27788,7 @@ namespace Sample.API
 
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForTestFailoverCleanup_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanTestFailoverCleanupValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -30581,7 +27804,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForTestFailoverCleanupViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanTestFailoverCleanupValidationValidateViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -30589,10 +27812,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForTestFailoverCleanup$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForTestFailoverCleanup'");
                 }
 
                 // replace URI parameters with values from identity
@@ -30621,7 +27844,7 @@ namespace Sample.API
 
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForTestFailoverCleanupWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanTestFailoverCleanupValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
@@ -30638,7 +27861,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForTestFailoverCleanupWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanTestFailoverCleanupValidationValidateWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -30667,12 +27890,12 @@ namespace Sample.API
 
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForTestFailoverCleanupWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanTestFailoverCleanupValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForTestFailoverCleanupWithResult" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanTestFailoverCleanupValidationValidateWithResult" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -30681,7 +27904,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForTestFailoverCleanupWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanTestFailoverCleanupValidationValidateWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -30827,7 +28050,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForTestFailoverCleanup" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanTestFailoverCleanupValidationValidate" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
@@ -30838,7 +28061,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForTestFailoverCleanup_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanTestFailoverCleanupValidationValidate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -30972,7 +28195,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Validation method for <see cref="RecoveryPlanActionsValidateForTestFailoverCleanup" /> method. Call this like the actual
+        /// Validation method for <see cref="RecoveryPlanTestFailoverCleanupValidationValidate" /> method. Call this like the actual
         /// call, but you will get validation events back.
         /// </summary>
         /// <param name="serviceGroupName">The name of the service group.</param>
@@ -30982,7 +28205,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForTestFailoverCleanup_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanTestFailoverCleanupValidationValidate_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
@@ -30998,6 +28221,60 @@ namespace Sample.API
         /// This action checks if the recovery orchestration plan is eligible for test failover operation, ensuring it meets the necessary
         /// criteria and provides a list of qualified and unqualified resources.
         /// </summary>
+        /// <param name="serviceGroupName">The name of the service group.</param>
+        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
+        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
+        /// <param name="body">The content of the action request</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Sample.API.Runtime.SerializationMode"/>.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task RecoveryPlanTestFailoverValidationValidate(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IFailoverRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        {
+            var apiVersion = @"2026-08-31-preview";
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
+                        "/providers/Microsoft.Management/serviceGroups/"
+                        + global::System.Uri.EscapeDataString(serviceGroupName)
+                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
+                        + global::System.Uri.EscapeDataString(recoveryPlanName)
+                        + "/validateForTestFailover"
+                        + "?"
+                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
+
+                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
+                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
+                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // add headers parameters
+                request.Headers.Add("operation-id",operationId.ToString());
+
+                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.RecoveryPlanTestFailoverValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// This action checks if the recovery orchestration plan is eligible for test failover operation, ensuring it meets the necessary
+        /// criteria and provides a list of qualified and unqualified resources.
+        /// </summary>
         /// <param name="viaIdentity"></param>
         /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
         /// <param name="body">The content of the action request</param>
@@ -31010,7 +28287,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForTestFailoverViaIdentity(global::System.String viaIdentity, string operationId, Sample.API.Models.IFailoverRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task RecoveryPlanTestFailoverValidationValidateViaIdentity(global::System.String viaIdentity, string operationId, Sample.API.Models.IFailoverRequest body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -31018,10 +28295,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForTestFailover$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForTestFailover'");
                 }
 
                 // replace URI parameters with values from identity
@@ -31054,7 +28331,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
-                await this.RecoveryPlanActionsValidateForTestFailover_Call (request, onOk,onDefault,eventListener,sender);
+                await this.RecoveryPlanTestFailoverValidationValidate_Call (request, onOk,onDefault,eventListener,sender);
             }
         }
 
@@ -31072,7 +28349,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForTestFailoverViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanTestFailoverValidationValidateViaIdentityWithResult(global::System.String viaIdentity, string operationId, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -31080,10 +28357,10 @@ namespace Sample.API
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/providers/Microsoft.Management/serviceGroups/(?<serviceGroupName>[^/]+)/providers/Microsoft.AzureResilienceManagement/recoveryPlans/(?<recoveryPlanName>[^/]+)/validateForTestFailover$", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}'");
+                    throw new global::System.Exception("Invalid identity for URI '/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/validateForTestFailover'");
                 }
 
                 // replace URI parameters with values from identity
@@ -31116,111 +28393,7 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForTestFailoverWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for test failover operation, ensuring it meets the necessary
-        /// criteria and provides a list of qualified and unqualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsValidateForTestFailover operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForTestFailoverViaJsonString(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForTestFailover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlanActionsValidateForTestFailover_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// This action checks if the recovery orchestration plan is eligible for test failover operation, ensuring it meets the necessary
-        /// criteria and provides a list of qualified and unqualified resources.
-        /// </summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="operationId">A GUID that represents the Long Running OperationId.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlanActionsValidateForTestFailover operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
-        /// will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForTestFailoverViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, string operationId, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "/validateForTestFailover"
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Post, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // add headers parameters
-                request.Headers.Add("operation-id",operationId.ToString());
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlanActionsValidateForTestFailoverWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanTestFailoverValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
@@ -31239,7 +28412,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForTestFailoverWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
+        public async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanTestFailoverValidationValidateWithResult(string serviceGroupName, string recoveryPlanName, string operationId, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender, Sample.API.Runtime.SerializationMode serializationMode = Sample.API.Runtime.SerializationMode.IncludeCreate|Sample.API.Runtime.SerializationMode.IncludeUpdate)
         {
             var apiVersion = @"2026-08-31-preview";
             // Constant Parameters
@@ -31272,12 +28445,12 @@ namespace Sample.API
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
-                return await this.RecoveryPlanActionsValidateForTestFailoverWithResult_Call (request, eventListener,sender);
+                return await this.RecoveryPlanTestFailoverValidationValidateWithResult_Call (request, eventListener,sender);
             }
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForTestFailoverWithResult" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanTestFailoverValidationValidateWithResult" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -31286,7 +28459,7 @@ namespace Sample.API
         /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>" /> that
         /// will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanActionsValidateForTestFailoverWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse> RecoveryPlanTestFailoverValidationValidateWithResult_Call(global::System.Net.Http.HttpRequestMessage request, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -31432,7 +28605,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Actual wire call for <see cref= "RecoveryPlanActionsValidateForTestFailover" /> method.
+        /// Actual wire call for <see cref= "RecoveryPlanTestFailoverValidationValidate" /> method.
         /// </summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
@@ -31443,7 +28616,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForTestFailover_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanTestFailoverValidationValidate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IValidateForRecoveryOperationBaseResponse>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -31577,7 +28750,7 @@ namespace Sample.API
         }
 
         /// <summary>
-        /// Validation method for <see cref="RecoveryPlanActionsValidateForTestFailover" /> method. Call this like the actual call,
+        /// Validation method for <see cref="RecoveryPlanTestFailoverValidationValidate" /> method. Call this like the actual call,
         /// but you will get validation events back.
         /// </summary>
         /// <param name="serviceGroupName">The name of the service group.</param>
@@ -31588,7 +28761,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RecoveryPlanActionsValidateForTestFailover_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task RecoveryPlanTestFailoverValidationValidate_Validate(string serviceGroupName, string operationId, string recoveryPlanName, Sample.API.Models.IFailoverRequest body, Sample.API.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
@@ -31751,94 +28924,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlansCreateOrUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update a RecoveryPlan</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlansCreateOrUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlansCreateOrUpdateViaJsonString(string serviceGroupName, string recoveryPlanName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlan>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlansCreateOrUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update a RecoveryPlan</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlansCreateOrUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlan>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlan> RecoveryPlansCreateOrUpdateViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -33254,94 +30339,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.RecoveryPlansUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update a RecoveryPlan</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlansUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task RecoveryPlansUpdateViaJsonString(string serviceGroupName, string recoveryPlanName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlan>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.RecoveryPlansUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update a RecoveryPlan</summary>
-        /// <param name="serviceGroupName">The name of the service group.</param>
-        /// <param name="recoveryPlanName">The name of the recovery orchestration plan.</param>
-        /// <param name="jsonString">Json string supplied to the RecoveryPlansUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlan>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IRecoveryPlan> RecoveryPlansUpdateViaJsonStringWithResult(string serviceGroupName, string recoveryPlanName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/providers/Microsoft.Management/serviceGroups/"
-                        + global::System.Uri.EscapeDataString(serviceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/recoveryPlans/"
-                        + global::System.Uri.EscapeDataString(recoveryPlanName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call
@@ -35151,100 +32148,6 @@ namespace Sample.API
         /// <param name="subscriptionId">The ID of the target subscription. The value must be an UUID.</param>
         /// <param name="resourceGroupName">The name of the resource group. The name is case insensitive.</param>
         /// <param name="usagePlanName">The name of the usage plan.</param>
-        /// <param name="jsonString">Json string supplied to the UsagePlansCreateOrUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task UsagePlansCreateOrUpdateViaJsonString(string subscriptionId, string resourceGroupName, string usagePlanName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IUsagePlan>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/subscriptions/"
-                        + global::System.Uri.EscapeDataString(subscriptionId)
-                        + "/resourceGroups/"
-                        + global::System.Uri.EscapeDataString(resourceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/usagePlans/"
-                        + global::System.Uri.EscapeDataString(usagePlanName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.UsagePlansCreateOrUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update a UsagePlan</summary>
-        /// <param name="subscriptionId">The ID of the target subscription. The value must be an UUID.</param>
-        /// <param name="resourceGroupName">The name of the resource group. The name is case insensitive.</param>
-        /// <param name="usagePlanName">The name of the usage plan.</param>
-        /// <param name="jsonString">Json string supplied to the UsagePlansCreateOrUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IUsagePlan>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IUsagePlan> UsagePlansCreateOrUpdateViaJsonStringWithResult(string subscriptionId, string resourceGroupName, string usagePlanName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/subscriptions/"
-                        + global::System.Uri.EscapeDataString(subscriptionId)
-                        + "/resourceGroups/"
-                        + global::System.Uri.EscapeDataString(resourceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/usagePlans/"
-                        + global::System.Uri.EscapeDataString(usagePlanName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Put, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.UsagePlansCreateOrUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update a UsagePlan</summary>
-        /// <param name="subscriptionId">The ID of the target subscription. The value must be an UUID.</param>
-        /// <param name="resourceGroupName">The name of the resource group. The name is case insensitive.</param>
-        /// <param name="usagePlanName">The name of the usage plan.</param>
         /// <param name="body">Resource create parameters.</param>
         /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
@@ -36976,100 +33879,6 @@ namespace Sample.API
                 await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // set body content
                 request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null, serializationMode).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // make the call
-                return await this.UsagePlansUpdateWithResult_Call (request, eventListener,sender);
-            }
-        }
-
-        /// <summary>update a UsagePlan</summary>
-        /// <param name="subscriptionId">The ID of the target subscription. The value must be an UUID.</param>
-        /// <param name="resourceGroupName">The name of the resource group. The name is case insensitive.</param>
-        /// <param name="usagePlanName">The name of the usage plan.</param>
-        /// <param name="jsonString">Json string supplied to the UsagePlansUpdate operation</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
-        /// elsewhere).</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task UsagePlansUpdateViaJsonString(string subscriptionId, string resourceGroupName, string usagePlanName, global::System.String jsonString, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IUsagePlan>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<Sample.API.Models.IErrorResponse>, global::System.Threading.Tasks.Task> onDefault, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/subscriptions/"
-                        + global::System.Uri.EscapeDataString(subscriptionId)
-                        + "/resourceGroups/"
-                        + global::System.Uri.EscapeDataString(resourceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/usagePlans/"
-                        + global::System.Uri.EscapeDataString(usagePlanName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.UsagePlansUpdate_Call (request, onOk,onDefault,eventListener,sender);
-            }
-        }
-
-        /// <summary>update a UsagePlan</summary>
-        /// <param name="subscriptionId">The ID of the target subscription. The value must be an UUID.</param>
-        /// <param name="resourceGroupName">The name of the resource group. The name is case insensitive.</param>
-        /// <param name="usagePlanName">The name of the usage plan.</param>
-        /// <param name="jsonString">Json string supplied to the UsagePlansUpdate operation</param>
-        /// <param name="eventListener">an <see cref="Sample.API.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an Sample.API.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task<Sample.API.Models.IUsagePlan>" /> that will be complete when handling
-        /// of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task<Sample.API.Models.IUsagePlan> UsagePlansUpdateViaJsonStringWithResult(string subscriptionId, string resourceGroupName, string usagePlanName, global::System.String jsonString, Sample.API.Runtime.IEventListener eventListener, Sample.API.Runtime.ISendAsync sender)
-        {
-            var apiVersion = @"2026-08-31-preview";
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var pathAndQuery = global::System.Text.RegularExpressions.Regex.Replace(
-                        "/subscriptions/"
-                        + global::System.Uri.EscapeDataString(subscriptionId)
-                        + "/resourceGroups/"
-                        + global::System.Uri.EscapeDataString(resourceGroupName)
-                        + "/providers/Microsoft.AzureResilienceManagement/usagePlans/"
-                        + global::System.Uri.EscapeDataString(usagePlanName)
-                        + "?"
-                        + "api-version=" + global::System.Uri.EscapeDataString(apiVersion)
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2");
-
-                await eventListener.Signal(Sample.API.Runtime.Events.URLCreated, pathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                // generate request object
-                var _url = new global::System.Uri($"https://management.azure.com{pathAndQuery}");
-                var request =  new global::System.Net.Http.HttpRequestMessage(Sample.API.Runtime.Method.Patch, _url);
-                await eventListener.Signal(Sample.API.Runtime.Events.RequestCreated, request.RequestUri.PathAndQuery); if( eventListener.Token.IsCancellationRequested ) { return null; }
-
-                await eventListener.Signal(Sample.API.Runtime.Events.HeaderParametersAdded); if( eventListener.Token.IsCancellationRequested ) { return null; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(jsonString, global::System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                 await eventListener.Signal(Sample.API.Runtime.Events.BodyContentSet); if( eventListener.Token.IsCancellationRequested ) { return null; }
                 // make the call

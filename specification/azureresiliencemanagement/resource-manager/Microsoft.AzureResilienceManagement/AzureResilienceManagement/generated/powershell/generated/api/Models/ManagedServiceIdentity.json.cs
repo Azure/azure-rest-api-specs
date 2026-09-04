@@ -76,7 +76,7 @@ namespace Sample.API.Models
             {_principalId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("principalId"), out var __jsonPrincipalId) ? (string)__jsonPrincipalId : (string)_principalId;}
             {_tenantId = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("tenantId"), out var __jsonTenantId) ? (string)__jsonTenantId : (string)_tenantId;}
             {_type = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("type"), out var __jsonType) ? (string)__jsonType : (string)_type;}
-            {_userAssignedIdentity = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("userAssignedIdentities"), out var __jsonUserAssignedIdentities) ? Sample.API.Models.ManagedServiceIdentityUserAssignedIdentities.FromJson(__jsonUserAssignedIdentities) : _userAssignedIdentity;}
+            {_userAssignedIdentities = If( json?.PropertyT<Sample.API.Runtime.Json.JsonObject>("userAssignedIdentities"), out var __jsonUserAssignedIdentities) ? Sample.API.Models.ManagedServiceIdentityUserAssignedIdentities.FromJson(__jsonUserAssignedIdentities) : _userAssignedIdentities;}
             AfterFromJson(json);
         }
 
@@ -108,7 +108,7 @@ namespace Sample.API.Models
                 AddIf( null != (((object)this._tenantId)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._tenantId.ToString()) : null, "tenantId" ,container.Add );
             }
             AddIf( null != (((object)this._type)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._type.ToString()) : null, "type" ,container.Add );
-            AddIf( null != this._userAssignedIdentity ? (Sample.API.Runtime.Json.JsonNode) this._userAssignedIdentity.ToJson(null,serializationMode) : null, "userAssignedIdentities" ,container.Add );
+            AddIf( null != this._userAssignedIdentities ? (Sample.API.Runtime.Json.JsonNode) this._userAssignedIdentities.ToJson(null,serializationMode) : null, "userAssignedIdentities" ,container.Add );
             AfterToJson(ref container);
             return container;
         }

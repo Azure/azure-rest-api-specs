@@ -35,7 +35,7 @@ namespace Sample.API.Models
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> RbacAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendation; }
+        public System.Collections.Generic.List<string> RbacAssignmentErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendations; }
 
         /// <summary>Backing field for <see cref="ResourceId" /> property.</summary>
         private string _resourceId;
@@ -53,8 +53,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for RbacAssignmentErrorMessage</summary>
         string Sample.API.Models.IFailedDrillResourceInternal.RbacAssignmentErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Message; set => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Message = value ?? null; }
 
-        /// <summary>Internal Acessors for RbacAssignmentErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IFailedDrillResourceInternal.RbacAssignmentErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for RbacAssignmentErrorRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IFailedDrillResourceInternal.RbacAssignmentErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendations; set => ((Sample.API.Models.IErrorDetailsInternal)RbacAssignmentError).Recommendations = value ?? null /* arrayOf */; }
 
         /// <summary>Creates an new <see cref="FailedDrillResource" /> instance.</summary>
         public FailedDrillResource()
@@ -109,7 +109,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RbacAssignmentErrorRecommendation { get;  }
+        System.Collections.Generic.List<string> RbacAssignmentErrorRecommendations { get;  }
         /// <summary>Resource Id of the underlying resource of the failed Drill resource.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -136,7 +136,7 @@ namespace Sample.API.Models
         /// <summary>Error message.</summary>
         string RbacAssignmentErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> RbacAssignmentErrorRecommendation { get; set; }
+        System.Collections.Generic.List<string> RbacAssignmentErrorRecommendations { get; set; }
         /// <summary>Resource Id of the underlying resource of the failed Drill resource.</summary>
         string ResourceId { get; set; }
 

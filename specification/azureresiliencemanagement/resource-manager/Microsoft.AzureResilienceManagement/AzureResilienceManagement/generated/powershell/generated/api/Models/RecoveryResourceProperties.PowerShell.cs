@@ -55,14 +55,6 @@ namespace Sample.API.Models
         partial void BeforeDeserializePSObject(global::System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// <c>OverrideToString</c> will be called if it is implemented. Implement this method in a partial class to enable this behavior
-        /// </summary>
-        /// <param name="stringResult">/// instance serialized to a string, normally it is a Json</param>
-        /// <param name="returnNow">/// set returnNow to true if you provide a customized OverrideToString function</param>
-
-        partial void OverrideToString(ref string stringResult, ref bool returnNow);
-
-        /// <summary>
         /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="Sample.API.Models.RecoveryResourceProperties"
         /// />.
         /// </summary>
@@ -113,9 +105,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AssociatedIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("AssociatedIdentity",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AssociatedIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("RecoveryResourceUniqueId"))
             {
@@ -133,9 +125,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceLocation = (string) content.GetValueForProperty("ResourceLocation",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceLocation, global::System.Convert.ToString);
             }
-            if (content.Contains("ResourcePhysicalZone"))
+            if (content.Contains("ResourcePhysicalZones"))
             {
-                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourcePhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourcePhysicalZone",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourcePhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourcePhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourcePhysicalZones",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourcePhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("InclusionState"))
             {
@@ -145,17 +137,17 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).NeedsAttention = (bool?) content.GetValueForProperty("NeedsAttention",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).NeedsAttention, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
             }
-            if (content.Contains("AttentionReason"))
+            if (content.Contains("AttentionReasons"))
             {
-                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AttentionReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("AttentionReason",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AttentionReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AttentionReasons = (System.Collections.Generic.List<string>) content.GetValueForProperty("AttentionReasons",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AttentionReasons, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("ProtectionStatus"))
             {
                 ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ProtectionStatus = (string) content.GetValueForProperty("ProtectionStatus",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ProtectionStatus, global::System.Convert.ToString);
             }
-            if (content.Contains("ResourceProtectionSolution"))
+            if (content.Contains("ResourceProtectionSolutions"))
             {
-                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceProtectionSolution = (System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>) content.GetValueForProperty("ResourceProtectionSolution",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceProtectionSolution, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceProtectionSolutionSettings>(__y, Sample.API.Models.ResourceProtectionSolutionSettingsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceProtectionSolutions = (System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>) content.GetValueForProperty("ResourceProtectionSolutions",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceProtectionSolutions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceProtectionSolutionSettings>(__y, Sample.API.Models.ResourceProtectionSolutionSettingsTypeConverter.ConvertFrom));
             }
             if (content.Contains("SelectedProtectionSolutionType"))
             {
@@ -222,9 +214,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AssociatedIdentity = (Sample.API.Models.IAssociatedIdentity) content.GetValueForProperty("AssociatedIdentity",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AssociatedIdentity, Sample.API.Models.AssociatedIdentityTypeConverter.ConvertFrom);
             }
-            if (content.Contains("ErrorDetail"))
+            if (content.Contains("ErrorDetails"))
             {
-                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ErrorDetail = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetail",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ErrorDetail, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
+                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ErrorDetails = (Sample.API.Models.IErrorDetail) content.GetValueForProperty("ErrorDetails",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ErrorDetails, Sample.API.Models.ErrorDetailTypeConverter.ConvertFrom);
             }
             if (content.Contains("RecoveryResourceUniqueId"))
             {
@@ -242,9 +234,9 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceLocation = (string) content.GetValueForProperty("ResourceLocation",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceLocation, global::System.Convert.ToString);
             }
-            if (content.Contains("ResourcePhysicalZone"))
+            if (content.Contains("ResourcePhysicalZones"))
             {
-                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourcePhysicalZone = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourcePhysicalZone",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourcePhysicalZone, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourcePhysicalZones = (System.Collections.Generic.List<string>) content.GetValueForProperty("ResourcePhysicalZones",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourcePhysicalZones, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("InclusionState"))
             {
@@ -254,17 +246,17 @@ namespace Sample.API.Models
             {
                 ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).NeedsAttention = (bool?) content.GetValueForProperty("NeedsAttention",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).NeedsAttention, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
             }
-            if (content.Contains("AttentionReason"))
+            if (content.Contains("AttentionReasons"))
             {
-                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AttentionReason = (System.Collections.Generic.List<string>) content.GetValueForProperty("AttentionReason",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AttentionReason, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
+                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AttentionReasons = (System.Collections.Generic.List<string>) content.GetValueForProperty("AttentionReasons",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).AttentionReasons, __y => TypeConverterExtensions.SelectToList<string>(__y, global::System.Convert.ToString));
             }
             if (content.Contains("ProtectionStatus"))
             {
                 ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ProtectionStatus = (string) content.GetValueForProperty("ProtectionStatus",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ProtectionStatus, global::System.Convert.ToString);
             }
-            if (content.Contains("ResourceProtectionSolution"))
+            if (content.Contains("ResourceProtectionSolutions"))
             {
-                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceProtectionSolution = (System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>) content.GetValueForProperty("ResourceProtectionSolution",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceProtectionSolution, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceProtectionSolutionSettings>(__y, Sample.API.Models.ResourceProtectionSolutionSettingsTypeConverter.ConvertFrom));
+                ((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceProtectionSolutions = (System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings>) content.GetValueForProperty("ResourceProtectionSolutions",((Sample.API.Models.IRecoveryResourcePropertiesInternal)this).ResourceProtectionSolutions, __y => TypeConverterExtensions.SelectToList<Sample.API.Models.IResourceProtectionSolutionSettings>(__y, Sample.API.Models.ResourceProtectionSolutionSettingsTypeConverter.ConvertFrom));
             }
             if (content.Contains("SelectedProtectionSolutionType"))
             {
@@ -313,18 +305,6 @@ namespace Sample.API.Models
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Sample.API.Runtime.SerializationMode.IncludeAll)?.ToString();
-
-        public override string ToString()
-        {
-            var returnNow = false;
-            var result = global::System.String.Empty;
-            OverrideToString(ref result, ref returnNow);
-            if (returnNow)
-            {
-                return result;
-            }
-            return ToJsonString();
-        }
     }
     /// Definition of recovery orchestration resource property associated with recovery orchestration plan.
     [System.ComponentModel.TypeConverter(typeof(RecoveryResourcePropertiesTypeConverter))]

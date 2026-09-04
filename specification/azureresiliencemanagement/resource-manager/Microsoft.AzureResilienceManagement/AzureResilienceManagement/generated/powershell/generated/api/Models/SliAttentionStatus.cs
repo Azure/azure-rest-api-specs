@@ -21,30 +21,30 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public string DrillRbacOnDestinationAmw { get => this._drillRbacOnDestinationAmw; }
 
-        /// <summary>Backing field for <see cref="Exist" /> property.</summary>
-        private string _exist;
+        /// <summary>Backing field for <see cref="Exists" /> property.</summary>
+        private string _exists;
 
         /// <summary>Whether the selected SLI still exists.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string Exist { get => this._exist; }
+        public string Exists { get => this._exists; }
 
-        /// <summary>Backing field for <see cref="RbacNeededOnDestinationAmw" /> property.</summary>
-        private System.Collections.Generic.List<string> _rbacNeededOnDestinationAmw;
+        /// <summary>Backing field for <see cref="RbacNeededOnDestinationAmws" /> property.</summary>
+        private System.Collections.Generic.List<string> _rbacNeededOnDestinationAmws;
 
         /// <summary>
         /// The destination Azure Monitor Workspaces that are still missing the Monitoring Reader grant for the Drill identity.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> RbacNeededOnDestinationAmw { get => this._rbacNeededOnDestinationAmw; }
+        public System.Collections.Generic.List<string> RbacNeededOnDestinationAmws { get => this._rbacNeededOnDestinationAmws; }
 
         /// <summary>Internal Acessors for DrillRbacOnDestinationAmw</summary>
         string Sample.API.Models.ISliAttentionStatusInternal.DrillRbacOnDestinationAmw { get => this._drillRbacOnDestinationAmw; set { {_drillRbacOnDestinationAmw = value;} } }
 
-        /// <summary>Internal Acessors for Exist</summary>
-        string Sample.API.Models.ISliAttentionStatusInternal.Exist { get => this._exist; set { {_exist = value;} } }
+        /// <summary>Internal Acessors for Exists</summary>
+        string Sample.API.Models.ISliAttentionStatusInternal.Exists { get => this._exists; set { {_exists = value;} } }
 
-        /// <summary>Internal Acessors for RbacNeededOnDestinationAmw</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.ISliAttentionStatusInternal.RbacNeededOnDestinationAmw { get => this._rbacNeededOnDestinationAmw; set { {_rbacNeededOnDestinationAmw = value;} } }
+        /// <summary>Internal Acessors for RbacNeededOnDestinationAmws</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.ISliAttentionStatusInternal.RbacNeededOnDestinationAmws { get => this._rbacNeededOnDestinationAmws; set { {_rbacNeededOnDestinationAmws = value;} } }
 
         /// <summary>Internal Acessors for TypeMatch</summary>
         string Sample.API.Models.ISliAttentionStatusInternal.TypeMatch { get => this._typeMatch; set { {_typeMatch = value;} } }
@@ -106,7 +106,7 @@ namespace Sample.API.Models
         SerializedName = @"exists",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string Exist { get;  }
+        string Exists { get;  }
         /// <summary>
         /// The destination Azure Monitor Workspaces that are still missing the Monitoring Reader grant for the Drill identity.
         /// </summary>
@@ -119,7 +119,7 @@ namespace Sample.API.Models
         Description = @"The destination Azure Monitor Workspaces that are still missing the Monitoring Reader grant for the Drill identity.",
         SerializedName = @"rbacNeededOnDestinationAmws",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> RbacNeededOnDestinationAmw { get;  }
+        System.Collections.Generic.List<string> RbacNeededOnDestinationAmws { get;  }
         /// <summary>Full ARM Id of the SLI this status refers to.</summary>
         [Sample.API.Runtime.Info(
         Required = true,
@@ -169,11 +169,11 @@ namespace Sample.API.Models
         string DrillRbacOnDestinationAmw { get; set; }
         /// <summary>Whether the selected SLI still exists.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Exists", "NotExists")]
-        string Exist { get; set; }
+        string Exists { get; set; }
         /// <summary>
         /// The destination Azure Monitor Workspaces that are still missing the Monitoring Reader grant for the Drill identity.
         /// </summary>
-        System.Collections.Generic.List<string> RbacNeededOnDestinationAmw { get; set; }
+        System.Collections.Generic.List<string> RbacNeededOnDestinationAmws { get; set; }
         /// <summary>Full ARM Id of the SLI this status refers to.</summary>
         string SliId { get; set; }
         /// <summary>User-declared category of the SLI.</summary>

@@ -14,12 +14,12 @@ namespace Sample.API.Models
         Sample.API.Models.IDrillReportSummaryInternal
     {
 
-        /// <summary>Backing field for <see cref="AvailableFormat" /> property.</summary>
-        private System.Collections.Generic.List<string> _availableFormat;
+        /// <summary>Backing field for <see cref="AvailableFormats" /> property.</summary>
+        private System.Collections.Generic.List<string> _availableFormats;
 
         /// <summary>Formats the report is currently available for download in.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<string> AvailableFormat { get => this._availableFormat; }
+        public System.Collections.Generic.List<string> AvailableFormats { get => this._availableFormats; }
 
         /// <summary>Backing field for <see cref="FinalizationState" /> property.</summary>
         private string _finalizationState;
@@ -52,7 +52,7 @@ namespace Sample.API.Models
 
         /// <summary>A list of recommendations to resolve the error.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> LastErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendation; }
+        public System.Collections.Generic.List<string> LastErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendations; }
 
         /// <summary>Backing field for <see cref="LastGeneratedTimestamp" /> property.</summary>
         private global::System.DateTime? _lastGeneratedTimestamp;
@@ -61,8 +61,8 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
         public global::System.DateTime? LastGeneratedTimestamp { get => this._lastGeneratedTimestamp; }
 
-        /// <summary>Internal Acessors for AvailableFormat</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillReportSummaryInternal.AvailableFormat { get => this._availableFormat; set { {_availableFormat = value;} } }
+        /// <summary>Internal Acessors for AvailableFormats</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillReportSummaryInternal.AvailableFormats { get => this._availableFormats; set { {_availableFormats = value;} } }
 
         /// <summary>Internal Acessors for FinalizationState</summary>
         string Sample.API.Models.IDrillReportSummaryInternal.FinalizationState { get => this._finalizationState; set { {_finalizationState = value;} } }
@@ -79,8 +79,8 @@ namespace Sample.API.Models
         /// <summary>Internal Acessors for LastErrorMessage</summary>
         string Sample.API.Models.IDrillReportSummaryInternal.LastErrorMessage { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Message; set => ((Sample.API.Models.IErrorDetailsInternal)LastError).Message = value ?? null; }
 
-        /// <summary>Internal Acessors for LastErrorRecommendation</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IDrillReportSummaryInternal.LastErrorRecommendation { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendation; set => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendation = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for LastErrorRecommendations</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IDrillReportSummaryInternal.LastErrorRecommendations { get => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendations; set => ((Sample.API.Models.IErrorDetailsInternal)LastError).Recommendations = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for LastGeneratedTimestamp</summary>
         global::System.DateTime? Sample.API.Models.IDrillReportSummaryInternal.LastGeneratedTimestamp { get => this._lastGeneratedTimestamp; set { {_lastGeneratedTimestamp = value;} } }
@@ -127,7 +127,7 @@ namespace Sample.API.Models
         SerializedName = @"availableFormats",
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("Html")]
-        System.Collections.Generic.List<string> AvailableFormat { get;  }
+        System.Collections.Generic.List<string> AvailableFormats { get;  }
         /// <summary>Finalization state of the report. A finalized report is immutable.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -184,7 +184,7 @@ namespace Sample.API.Models
         Description = @"A list of recommendations to resolve the error.",
         SerializedName = @"recommendations",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> LastErrorRecommendation { get;  }
+        System.Collections.Generic.List<string> LastErrorRecommendations { get;  }
         /// <summary>Timestamp of the last successful report generation.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -227,7 +227,7 @@ namespace Sample.API.Models
     {
         /// <summary>Formats the report is currently available for download in.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("Html")]
-        System.Collections.Generic.List<string> AvailableFormat { get; set; }
+        System.Collections.Generic.List<string> AvailableFormats { get; set; }
         /// <summary>Finalization state of the report. A finalized report is immutable.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("NotFinalized", "Finalized")]
         string FinalizationState { get; set; }
@@ -241,7 +241,7 @@ namespace Sample.API.Models
         /// <summary>Error message.</summary>
         string LastErrorMessage { get; set; }
         /// <summary>A list of recommendations to resolve the error.</summary>
-        System.Collections.Generic.List<string> LastErrorRecommendation { get; set; }
+        System.Collections.Generic.List<string> LastErrorRecommendations { get; set; }
         /// <summary>Timestamp of the last successful report generation.</summary>
         global::System.DateTime? LastGeneratedTimestamp { get; set; }
         /// <summary>Schema version of the generated report content.</summary>

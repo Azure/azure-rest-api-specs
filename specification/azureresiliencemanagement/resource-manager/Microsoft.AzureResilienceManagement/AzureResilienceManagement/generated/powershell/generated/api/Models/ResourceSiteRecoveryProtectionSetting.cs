@@ -23,49 +23,49 @@ namespace Sample.API.Models
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string ProtectionSolutionType { get => "AzureSiteRecovery"; set => ((Sample.API.Models.IResourceBaseProtectionSolutionSettingInternal)__resourceBaseProtectionSolutionSetting).ProtectionSolutionType = "AzureSiteRecovery"; }
 
-        /// <summary>Backing field for <see cref="ReprotectParam" /> property.</summary>
-        private Sample.API.Models.IResourceSiteRecoveryReprotectParams _reprotectParam;
+        /// <summary>Disk Reprotect Input Details</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> ReprotectParamDiskReprotectInputDetails { get => ((Sample.API.Models.IResourceSiteRecoveryReprotectParamsInternal)ReprotectParams).DiskReprotectInputDetails; set => ((Sample.API.Models.IResourceSiteRecoveryReprotectParamsInternal)ReprotectParams).DiskReprotectInputDetails = value ?? null /* arrayOf */; }
+
+        /// <summary>Backing field for <see cref="ReprotectParams" /> property.</summary>
+        private Sample.API.Models.IResourceSiteRecoveryReprotectParams _reprotectParams;
 
         /// <summary>Reprotect params for azure site recovery solution.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IResourceSiteRecoveryReprotectParams ReprotectParam { get => (this._reprotectParam = this._reprotectParam ?? new Sample.API.Models.ResourceSiteRecoveryReprotectParams()); set => this._reprotectParam = value; }
+        internal Sample.API.Models.IResourceSiteRecoveryReprotectParams ReprotectParams { get => (this._reprotectParams = this._reprotectParams ?? new Sample.API.Models.ResourceSiteRecoveryReprotectParams()); set => this._reprotectParams = value; }
 
-        /// <summary>Disk Reprotect Input Details</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> ReprotectParamDiskReprotectInputDetail { get => ((Sample.API.Models.IResourceSiteRecoveryReprotectParamsInternal)ReprotectParam).DiskReprotectInputDetail; set => ((Sample.API.Models.IResourceSiteRecoveryReprotectParamsInternal)ReprotectParam).DiskReprotectInputDetail = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ReprotectParams</summary>
+        Sample.API.Models.IResourceSiteRecoveryReprotectParams Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal.ReprotectParams { get => (this._reprotectParams = this._reprotectParams ?? new Sample.API.Models.ResourceSiteRecoveryReprotectParams()); set { {_reprotectParams = value;} } }
 
-        /// <summary>Internal Acessors for ReprotectParam</summary>
-        Sample.API.Models.IResourceSiteRecoveryReprotectParams Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal.ReprotectParam { get => (this._reprotectParam = this._reprotectParam ?? new Sample.API.Models.ResourceSiteRecoveryReprotectParams()); set { {_reprotectParam = value;} } }
+        /// <summary>Internal Acessors for TestFailoverCleanupParams</summary>
+        Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal.TestFailoverCleanupParams { get => (this._testFailoverCleanupParams = this._testFailoverCleanupParams ?? new Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParams()); set { {_testFailoverCleanupParams = value;} } }
 
-        /// <summary>Internal Acessors for TestFailoverCleanupParam</summary>
-        Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal.TestFailoverCleanupParam { get => (this._testFailoverCleanupParam = this._testFailoverCleanupParam ?? new Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParams()); set { {_testFailoverCleanupParam = value;} } }
-
-        /// <summary>Internal Acessors for TestFailoverParam</summary>
-        Sample.API.Models.IResourceSiteRecoveryTestFailoverParams Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal.TestFailoverParam { get => (this._testFailoverParam = this._testFailoverParam ?? new Sample.API.Models.ResourceSiteRecoveryTestFailoverParams()); set { {_testFailoverParam = value;} } }
-
-        /// <summary>Backing field for <see cref="TestFailoverCleanupParam" /> property.</summary>
-        private Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams _testFailoverCleanupParam;
-
-        /// <summary>Test failover params for azure site recovery solution.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams TestFailoverCleanupParam { get => (this._testFailoverCleanupParam = this._testFailoverCleanupParam ?? new Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParams()); set => this._testFailoverCleanupParam = value; }
+        /// <summary>Internal Acessors for TestFailoverParams</summary>
+        Sample.API.Models.IResourceSiteRecoveryTestFailoverParams Sample.API.Models.IResourceSiteRecoveryProtectionSettingInternal.TestFailoverParams { get => (this._testFailoverParams = this._testFailoverParams ?? new Sample.API.Models.ResourceSiteRecoveryTestFailoverParams()); set { {_testFailoverParams = value;} } }
 
         /// <summary>Comments for testfailover cleanup</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TestFailoverCleanupParamComment { get => ((Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParamsInternal)TestFailoverCleanupParam).Comment; set => ((Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParamsInternal)TestFailoverCleanupParam).Comment = value ?? null; }
+        public string TestFailoverCleanupParamComments { get => ((Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParamsInternal)TestFailoverCleanupParams).Comments; set => ((Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParamsInternal)TestFailoverCleanupParams).Comments = value ?? null; }
 
-        /// <summary>Backing field for <see cref="TestFailoverParam" /> property.</summary>
-        private Sample.API.Models.IResourceSiteRecoveryTestFailoverParams _testFailoverParam;
+        /// <summary>Backing field for <see cref="TestFailoverCleanupParams" /> property.</summary>
+        private Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams _testFailoverCleanupParams;
 
         /// <summary>Test failover params for azure site recovery solution.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IResourceSiteRecoveryTestFailoverParams TestFailoverParam { get => (this._testFailoverParam = this._testFailoverParam ?? new Sample.API.Models.ResourceSiteRecoveryTestFailoverParams()); set => this._testFailoverParam = value; }
+        internal Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams TestFailoverCleanupParams { get => (this._testFailoverCleanupParams = this._testFailoverCleanupParams ?? new Sample.API.Models.ResourceSiteRecoveryTestFailoverCleanupParams()); set => this._testFailoverCleanupParams = value; }
 
         /// <summary>
         /// The Azure network resource is which will be used for test failover virtual machine.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string TestFailoverParamNetworkResourceId { get => ((Sample.API.Models.IResourceSiteRecoveryTestFailoverParamsInternal)TestFailoverParam).NetworkResourceId; set => ((Sample.API.Models.IResourceSiteRecoveryTestFailoverParamsInternal)TestFailoverParam).NetworkResourceId = value ?? null; }
+        public string TestFailoverParamNetworkResourceId { get => ((Sample.API.Models.IResourceSiteRecoveryTestFailoverParamsInternal)TestFailoverParams).NetworkResourceId; set => ((Sample.API.Models.IResourceSiteRecoveryTestFailoverParamsInternal)TestFailoverParams).NetworkResourceId = value ?? null; }
+
+        /// <summary>Backing field for <see cref="TestFailoverParams" /> property.</summary>
+        private Sample.API.Models.IResourceSiteRecoveryTestFailoverParams _testFailoverParams;
+
+        /// <summary>Test failover params for azure site recovery solution.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
+        internal Sample.API.Models.IResourceSiteRecoveryTestFailoverParams TestFailoverParams { get => (this._testFailoverParams = this._testFailoverParams ?? new Sample.API.Models.ResourceSiteRecoveryTestFailoverParams()); set => this._testFailoverParams = value; }
 
         /// <summary>Creates an new <see cref="ResourceSiteRecoveryProtectionSetting" /> instance.</summary>
         public ResourceSiteRecoveryProtectionSetting()
@@ -100,7 +100,7 @@ namespace Sample.API.Models
         Description = @"Disk Reprotect Input Details",
         SerializedName = @"diskReprotectInputDetails",
         PossibleTypes = new [] { typeof(Sample.API.Models.IDiskReprotectInputDetails) })]
-        System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> ReprotectParamDiskReprotectInputDetail { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> ReprotectParamDiskReprotectInputDetails { get; set; }
         /// <summary>Comments for testfailover cleanup</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -111,7 +111,7 @@ namespace Sample.API.Models
         Description = @"Comments for testfailover cleanup",
         SerializedName = @"comments",
         PossibleTypes = new [] { typeof(string) })]
-        string TestFailoverCleanupParamComment { get; set; }
+        string TestFailoverCleanupParamComments { get; set; }
         /// <summary>
         /// The Azure network resource is which will be used for test failover virtual machine.
         /// </summary>
@@ -131,20 +131,20 @@ namespace Sample.API.Models
     internal partial interface IResourceSiteRecoveryProtectionSettingInternal :
         Sample.API.Models.IResourceBaseProtectionSolutionSettingInternal
     {
-        /// <summary>Reprotect params for azure site recovery solution.</summary>
-        Sample.API.Models.IResourceSiteRecoveryReprotectParams ReprotectParam { get; set; }
         /// <summary>Disk Reprotect Input Details</summary>
-        System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> ReprotectParamDiskReprotectInputDetail { get; set; }
-        /// <summary>Test failover params for azure site recovery solution.</summary>
-        Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams TestFailoverCleanupParam { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IDiskReprotectInputDetails> ReprotectParamDiskReprotectInputDetails { get; set; }
+        /// <summary>Reprotect params for azure site recovery solution.</summary>
+        Sample.API.Models.IResourceSiteRecoveryReprotectParams ReprotectParams { get; set; }
         /// <summary>Comments for testfailover cleanup</summary>
-        string TestFailoverCleanupParamComment { get; set; }
+        string TestFailoverCleanupParamComments { get; set; }
         /// <summary>Test failover params for azure site recovery solution.</summary>
-        Sample.API.Models.IResourceSiteRecoveryTestFailoverParams TestFailoverParam { get; set; }
+        Sample.API.Models.IResourceSiteRecoveryTestFailoverCleanupParams TestFailoverCleanupParams { get; set; }
         /// <summary>
         /// The Azure network resource is which will be used for test failover virtual machine.
         /// </summary>
         string TestFailoverParamNetworkResourceId { get; set; }
+        /// <summary>Test failover params for azure site recovery solution.</summary>
+        Sample.API.Models.IResourceSiteRecoveryTestFailoverParams TestFailoverParams { get; set; }
 
     }
 }

@@ -18,35 +18,35 @@ namespace Sample.API.Models
 
         /// <summary>Identity type linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string AssociatedIdentityType { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).AssociatedIdentityType; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).AssociatedIdentityType = value ?? null; }
+        public string AssociatedIdentityType { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).AssociatedIdentityType; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).AssociatedIdentityType = value ?? null; }
 
         /// <summary>User assigned identity id linked with the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string AssociatedIdentityUserAssignedIdentity { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).AssociatedIdentityUserAssignedIdentity; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).AssociatedIdentityUserAssignedIdentity = value ?? null; }
+        public string AssociatedIdentityUserAssignedIdentity { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).AssociatedIdentityUserAssignedIdentity; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).AssociatedIdentityUserAssignedIdentity = value ?? null; }
 
         /// <summary>Reason for the resource to be in need of attention</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> AttentionReason { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).AttentionReason; }
+        public System.Collections.Generic.List<string> AttentionReasons { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).AttentionReasons; }
 
         /// <summary>The error additional info.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailAdditionalInfo; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailAdditionalInfo; }
 
         /// <summary>The error code.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailCode { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailCode; }
+        public string ErrorDetailCode { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailCode; }
 
         /// <summary>The error details.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailDetails; }
+        public System.Collections.Generic.List<Sample.API.Models.IErrorDetail> ErrorDetailDetails { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailDetails; }
 
         /// <summary>The error message.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailMessage { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailMessage; }
+        public string ErrorDetailMessage { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailMessage; }
 
         /// <summary>The error target.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ErrorDetailTarget { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailTarget; }
+        public string ErrorDetailTarget { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailTarget; }
 
         /// <summary>
         /// Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -58,7 +58,7 @@ namespace Sample.API.Models
         /// A state that indicates the resource status with respect to the recovery orchestration plan.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string InclusionState { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).InclusionState; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).InclusionState = value ?? null; }
+        public string InclusionState { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).InclusionState; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).InclusionState = value ?? null; }
 
         /// <summary>The name of the resource</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
@@ -68,107 +68,107 @@ namespace Sample.API.Models
         /// Indicating if resource needs user attention and action, details will be found in attentionReasons
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public bool? NeedsAttention { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).NeedsAttention; }
+        public bool? NeedsAttention { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).NeedsAttention; }
 
-        /// <summary>Backing field for <see cref="Property" /> property.</summary>
-        private Sample.API.Models.IRecoveryResourceProperties _property;
+        /// <summary>Backing field for <see cref="Properties" /> property.</summary>
+        private Sample.API.Models.IRecoveryResourceProperties _properties;
 
         /// <summary>The resource-specific properties for this resource.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        internal Sample.API.Models.IRecoveryResourceProperties Property { get => (this._property = this._property ?? new Sample.API.Models.RecoveryResourceProperties()); set => this._property = value; }
+        internal Sample.API.Models.IRecoveryResourceProperties Properties { get => (this._properties = this._properties ?? new Sample.API.Models.RecoveryResourceProperties()); set => this._properties = value; }
 
         /// <summary>
         /// A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ProtectionStatus { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ProtectionStatus; }
+        public string ProtectionStatus { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ProtectionStatus; }
 
         /// <summary>Provisioning state</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ProvisioningState { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ProvisioningState; }
+        public string ProvisioningState { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ProvisioningState; }
 
         /// <summary>The recovery orchestration group id associated with the recovery resources.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string RecoveryGroupId { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).RecoveryGroupId; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).RecoveryGroupId = value ?? null; }
+        public string RecoveryGroupId { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).RecoveryGroupId; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).RecoveryGroupId = value ?? null; }
 
-        /// <summary>Gets the resource group name</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public string ResourceGroupName { get => (new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Success ? new global::System.Text.RegularExpressions.Regex("^/subscriptions/(?<subscriptionId>[^/]+)/resourceGroups/(?<resourceGroupName>[^/]+)/providers/", global::System.Text.RegularExpressions.RegexOptions.IgnoreCase).Match(this.Id).Groups["resourceGroupName"].Value : null); }
+        /// <summary>A unique id for the recovery resource, which is a GUID.</summary>
+        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
+        public string RecoveryResourceUniqueId { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).RecoveryResourceUniqueId; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).RecoveryResourceUniqueId = value ?? null; }
 
         /// <summary>
         /// Resource ID of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ResourceId { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourceId; }
+        public string ResourceId { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourceId; }
 
         /// <summary>
         /// Original location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string ResourceLocation { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourceLocation; }
+        public string ResourceLocation { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourceLocation; }
 
         /// <summary>
         /// Physical zones of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<string> ResourcePhysicalZone { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourcePhysicalZone; }
+        public System.Collections.Generic.List<string> ResourcePhysicalZones { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourcePhysicalZones; }
 
         /// <summary>
         /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolution { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourceProtectionSolution; }
+        public System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolutions { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourceProtectionSolutions; }
 
         /// <summary>Internal Acessors for AssociatedIdentity</summary>
-        Sample.API.Models.IAssociatedIdentity Sample.API.Models.IRecoveryResourceInternal.AssociatedIdentity { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).AssociatedIdentity; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).AssociatedIdentity = value ?? null /* model class */; }
+        Sample.API.Models.IAssociatedIdentity Sample.API.Models.IRecoveryResourceInternal.AssociatedIdentity { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).AssociatedIdentity; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).AssociatedIdentity = value ?? null /* model class */; }
 
-        /// <summary>Internal Acessors for AttentionReason</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryResourceInternal.AttentionReason { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).AttentionReason; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).AttentionReason = value ?? null /* arrayOf */; }
-
-        /// <summary>Internal Acessors for ErrorDetail</summary>
-        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryResourceInternal.ErrorDetail { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetail; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetail = value ?? null /* model class */; }
+        /// <summary>Internal Acessors for AttentionReasons</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryResourceInternal.AttentionReasons { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).AttentionReasons; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).AttentionReasons = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailAdditionalInfo</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryResourceInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> Sample.API.Models.IRecoveryResourceInternal.ErrorDetailAdditionalInfo { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailAdditionalInfo; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailAdditionalInfo = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailCode</summary>
-        string Sample.API.Models.IRecoveryResourceInternal.ErrorDetailCode { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailCode; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailCode = value ?? null; }
+        string Sample.API.Models.IRecoveryResourceInternal.ErrorDetailCode { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailCode; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailCode = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailDetails</summary>
-        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryResourceInternal.ErrorDetailDetails { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailDetails; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailDetails = value ?? null /* arrayOf */; }
+        System.Collections.Generic.List<Sample.API.Models.IErrorDetail> Sample.API.Models.IRecoveryResourceInternal.ErrorDetailDetails { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailDetails; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailDetails = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for ErrorDetailMessage</summary>
-        string Sample.API.Models.IRecoveryResourceInternal.ErrorDetailMessage { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailMessage; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailMessage = value ?? null; }
+        string Sample.API.Models.IRecoveryResourceInternal.ErrorDetailMessage { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailMessage; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailMessage = value ?? null; }
 
         /// <summary>Internal Acessors for ErrorDetailTarget</summary>
-        string Sample.API.Models.IRecoveryResourceInternal.ErrorDetailTarget { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailTarget; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ErrorDetailTarget = value ?? null; }
+        string Sample.API.Models.IRecoveryResourceInternal.ErrorDetailTarget { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailTarget; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetailTarget = value ?? null; }
+
+        /// <summary>Internal Acessors for ErrorDetails</summary>
+        Sample.API.Models.IErrorDetail Sample.API.Models.IRecoveryResourceInternal.ErrorDetails { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetails; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ErrorDetails = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for NeedsAttention</summary>
-        bool? Sample.API.Models.IRecoveryResourceInternal.NeedsAttention { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).NeedsAttention; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).NeedsAttention = value ?? default(bool); }
+        bool? Sample.API.Models.IRecoveryResourceInternal.NeedsAttention { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).NeedsAttention; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).NeedsAttention = value ?? default(bool); }
 
-        /// <summary>Internal Acessors for Property</summary>
-        Sample.API.Models.IRecoveryResourceProperties Sample.API.Models.IRecoveryResourceInternal.Property { get => (this._property = this._property ?? new Sample.API.Models.RecoveryResourceProperties()); set { {_property = value;} } }
+        /// <summary>Internal Acessors for Properties</summary>
+        Sample.API.Models.IRecoveryResourceProperties Sample.API.Models.IRecoveryResourceInternal.Properties { get => (this._properties = this._properties ?? new Sample.API.Models.RecoveryResourceProperties()); set { {_properties = value;} } }
 
         /// <summary>Internal Acessors for ProtectionStatus</summary>
-        string Sample.API.Models.IRecoveryResourceInternal.ProtectionStatus { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ProtectionStatus; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ProtectionStatus = value ?? null; }
+        string Sample.API.Models.IRecoveryResourceInternal.ProtectionStatus { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ProtectionStatus; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ProtectionStatus = value ?? null; }
 
         /// <summary>Internal Acessors for ProvisioningState</summary>
-        string Sample.API.Models.IRecoveryResourceInternal.ProvisioningState { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ProvisioningState; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ProvisioningState = value ?? null; }
+        string Sample.API.Models.IRecoveryResourceInternal.ProvisioningState { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ProvisioningState; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ProvisioningState = value ?? null; }
 
         /// <summary>Internal Acessors for ResourceId</summary>
-        string Sample.API.Models.IRecoveryResourceInternal.ResourceId { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourceId; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourceId = value ?? null; }
+        string Sample.API.Models.IRecoveryResourceInternal.ResourceId { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourceId; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourceId = value ?? null; }
 
         /// <summary>Internal Acessors for ResourceLocation</summary>
-        string Sample.API.Models.IRecoveryResourceInternal.ResourceLocation { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourceLocation; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourceLocation = value ?? null; }
+        string Sample.API.Models.IRecoveryResourceInternal.ResourceLocation { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourceLocation; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourceLocation = value ?? null; }
 
-        /// <summary>Internal Acessors for ResourcePhysicalZone</summary>
-        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryResourceInternal.ResourcePhysicalZone { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourcePhysicalZone; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourcePhysicalZone = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ResourcePhysicalZones</summary>
+        System.Collections.Generic.List<string> Sample.API.Models.IRecoveryResourceInternal.ResourcePhysicalZones { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourcePhysicalZones; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourcePhysicalZones = value ?? null /* arrayOf */; }
 
-        /// <summary>Internal Acessors for ResourceProtectionSolution</summary>
-        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> Sample.API.Models.IRecoveryResourceInternal.ResourceProtectionSolution { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourceProtectionSolution; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).ResourceProtectionSolution = value ?? null /* arrayOf */; }
+        /// <summary>Internal Acessors for ResourceProtectionSolutions</summary>
+        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> Sample.API.Models.IRecoveryResourceInternal.ResourceProtectionSolutions { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourceProtectionSolutions; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).ResourceProtectionSolutions = value ?? null /* arrayOf */; }
 
         /// <summary>Internal Acessors for SelectedProtectionSolutionSetting</summary>
-        Sample.API.Models.IResourceBaseProtectionSolutionSetting Sample.API.Models.IRecoveryResourceInternal.SelectedProtectionSolutionSetting { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).SelectedProtectionSolutionSetting; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).SelectedProtectionSolutionSetting = value ?? null /* model class */; }
+        Sample.API.Models.IResourceBaseProtectionSolutionSetting Sample.API.Models.IRecoveryResourceInternal.SelectedProtectionSolutionSetting { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).SelectedProtectionSolutionSetting; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).SelectedProtectionSolutionSetting = value ?? null /* model class */; }
 
         /// <summary>Internal Acessors for Id</summary>
         string Sample.API.Models.IResourceInternal.Id { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Id; set => ((Sample.API.Models.IResourceInternal)__proxyResource).Id = value ?? null; }
@@ -204,15 +204,15 @@ namespace Sample.API.Models
         /// Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public Sample.API.Models.IResourceBaseProtectionSolutionSetting SelectedProtectionSolutionSetting { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).SelectedProtectionSolutionSetting; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).SelectedProtectionSolutionSetting = value ?? null /* model class */; }
+        public Sample.API.Models.IResourceBaseProtectionSolutionSetting SelectedProtectionSolutionSetting { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).SelectedProtectionSolutionSetting; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).SelectedProtectionSolutionSetting = value ?? null /* model class */; }
 
         /// <summary>A setting that indicates the resource protected with which recovery solution.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string SelectedProtectionSolutionSettingProtectionSolutionType { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).SelectedProtectionSolutionSettingProtectionSolutionType; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).SelectedProtectionSolutionSettingProtectionSolutionType = value ?? null; }
+        public string SelectedProtectionSolutionSettingProtectionSolutionType { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).SelectedProtectionSolutionSettingProtectionSolutionType; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).SelectedProtectionSolutionSettingProtectionSolutionType = value ?? null; }
 
         /// <summary>A setting that indicates the protection solution selected.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string SelectedProtectionSolutionType { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).SelectedProtectionSolutionType; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).SelectedProtectionSolutionType = value ?? null; }
+        public string SelectedProtectionSolutionType { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).SelectedProtectionSolutionType; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Properties).SelectedProtectionSolutionType = value ?? null; }
 
         /// <summary>
         /// Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -249,10 +249,6 @@ namespace Sample.API.Models
         /// </summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Inherited)]
         public string Type { get => ((Sample.API.Models.IResourceInternal)__proxyResource).Type; }
-
-        /// <summary>A unique id for the recovery resource, which is a GUID.</summary>
-        [Sample.API.Origin(Sample.API.PropertyOrigin.Inlined)]
-        public string UniqueId { get => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).RecoveryResourceUniqueId; set => ((Sample.API.Models.IRecoveryResourcePropertiesInternal)Property).RecoveryResourceUniqueId = value ?? null; }
 
         /// <summary>Creates an new <see cref="RecoveryResource" /> instance.</summary>
         public RecoveryResource()
@@ -310,7 +306,7 @@ namespace Sample.API.Models
         Description = @"Reason for the resource to be in need of attention",
         SerializedName = @"attentionReasons",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> AttentionReason { get;  }
+        System.Collections.Generic.List<string> AttentionReasons { get;  }
         /// <summary>The error additional info.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -430,6 +426,17 @@ namespace Sample.API.Models
         SerializedName = @"recoveryGroupId",
         PossibleTypes = new [] { typeof(string) })]
         string RecoveryGroupId { get; set; }
+        /// <summary>A unique id for the recovery resource, which is a GUID.</summary>
+        [Sample.API.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Read = true,
+        Create = true,
+        Update = true,
+        Description = @"A unique id for the recovery resource, which is a GUID.",
+        SerializedName = @"recoveryResourceUniqueId",
+        PossibleTypes = new [] { typeof(string) })]
+        string RecoveryResourceUniqueId { get; set; }
         /// <summary>
         /// Resource ID of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.
         /// </summary>
@@ -468,7 +475,7 @@ namespace Sample.API.Models
         Description = @"Physical zones of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
         SerializedName = @"resourcePhysicalZones",
         PossibleTypes = new [] { typeof(string) })]
-        System.Collections.Generic.List<string> ResourcePhysicalZone { get;  }
+        System.Collections.Generic.List<string> ResourcePhysicalZones { get;  }
         /// <summary>
         /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
         /// </summary>
@@ -481,7 +488,7 @@ namespace Sample.API.Models
         Description = @"A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.",
         SerializedName = @"resourceProtectionSolutions",
         PossibleTypes = new [] { typeof(Sample.API.Models.IResourceProtectionSolutionSettings) })]
-        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolution { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolutions { get;  }
         /// <summary>A setting that indicates the resource protected with which recovery solution.</summary>
         [Sample.API.Runtime.Info(
         Required = false,
@@ -506,17 +513,6 @@ namespace Sample.API.Models
         PossibleTypes = new [] { typeof(string) })]
         [global::Sample.API.PSArgumentCompleterAttribute("None", "AzureNative", "AzureSiteRecovery", "CrossZoneVMRecovery", "CustomRunbook")]
         string SelectedProtectionSolutionType { get; set; }
-        /// <summary>A unique id for the recovery resource, which is a GUID.</summary>
-        [Sample.API.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Read = true,
-        Create = true,
-        Update = true,
-        Description = @"A unique id for the recovery resource, which is a GUID.",
-        SerializedName = @"recoveryResourceUniqueId",
-        PossibleTypes = new [] { typeof(string) })]
-        string UniqueId { get; set; }
 
     }
     /// RecoveryPlan Resource a AzureResilienceProviderHub resource
@@ -533,9 +529,7 @@ namespace Sample.API.Models
         /// <summary>User assigned identity id linked with the resource</summary>
         string AssociatedIdentityUserAssignedIdentity { get; set; }
         /// <summary>Reason for the resource to be in need of attention</summary>
-        System.Collections.Generic.List<string> AttentionReason { get; set; }
-        /// <summary>Error details associated with the resource.</summary>
-        Sample.API.Models.IErrorDetail ErrorDetail { get; set; }
+        System.Collections.Generic.List<string> AttentionReasons { get; set; }
         /// <summary>The error additional info.</summary>
         System.Collections.Generic.List<Sample.API.Models.IErrorAdditionalInfo> ErrorDetailAdditionalInfo { get; set; }
         /// <summary>The error code.</summary>
@@ -546,6 +540,8 @@ namespace Sample.API.Models
         string ErrorDetailMessage { get; set; }
         /// <summary>The error target.</summary>
         string ErrorDetailTarget { get; set; }
+        /// <summary>Error details associated with the resource.</summary>
+        Sample.API.Models.IErrorDetail ErrorDetails { get; set; }
         /// <summary>
         /// A state that indicates the resource status with respect to the recovery orchestration plan.
         /// </summary>
@@ -556,7 +552,7 @@ namespace Sample.API.Models
         /// </summary>
         bool? NeedsAttention { get; set; }
         /// <summary>The resource-specific properties for this resource.</summary>
-        Sample.API.Models.IRecoveryResourceProperties Property { get; set; }
+        Sample.API.Models.IRecoveryResourceProperties Properties { get; set; }
         /// <summary>
         /// A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.
         /// </summary>
@@ -567,6 +563,8 @@ namespace Sample.API.Models
         string ProvisioningState { get; set; }
         /// <summary>The recovery orchestration group id associated with the recovery resources.</summary>
         string RecoveryGroupId { get; set; }
+        /// <summary>A unique id for the recovery resource, which is a GUID.</summary>
+        string RecoveryResourceUniqueId { get; set; }
         /// <summary>
         /// Resource ID of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.
         /// </summary>
@@ -578,11 +576,11 @@ namespace Sample.API.Models
         /// <summary>
         /// Physical zones of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.
         /// </summary>
-        System.Collections.Generic.List<string> ResourcePhysicalZone { get; set; }
+        System.Collections.Generic.List<string> ResourcePhysicalZones { get; set; }
         /// <summary>
         /// A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.
         /// </summary>
-        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolution { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IResourceProtectionSolutionSettings> ResourceProtectionSolutions { get; set; }
         /// <summary>
         /// Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.
         /// </summary>
@@ -593,8 +591,6 @@ namespace Sample.API.Models
         /// <summary>A setting that indicates the protection solution selected.</summary>
         [global::Sample.API.PSArgumentCompleterAttribute("None", "AzureNative", "AzureSiteRecovery", "CrossZoneVMRecovery", "CustomRunbook")]
         string SelectedProtectionSolutionType { get; set; }
-        /// <summary>A unique id for the recovery resource, which is a GUID.</summary>
-        string UniqueId { get; set; }
 
     }
 }

@@ -75,8 +75,8 @@ namespace Sample.API.Models
             }
             {_drillQualificationState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("drillQualificationState"), out var __jsonDrillQualificationState) ? (string)__jsonDrillQualificationState : (string)_drillQualificationState;}
             {_recoveryQualificationState = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("recoveryQualificationState"), out var __jsonRecoveryQualificationState) ? (string)__jsonRecoveryQualificationState : (string)_recoveryQualificationState;}
-            {_recoveryNotQualifiedReason = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recoveryNotQualifiedReasons"), out var __jsonRecoveryNotQualifiedReasons) ? If( __jsonRecoveryNotQualifiedReasons as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _recoveryNotQualifiedReason;}
-            {_drillsNotQualifiedReason = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("drillsNotQualifiedReasons"), out var __jsonDrillsNotQualifiedReasons) ? If( __jsonDrillsNotQualifiedReasons as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _drillsNotQualifiedReason;}
+            {_recoveryNotQualifiedReasons = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recoveryNotQualifiedReasons"), out var __jsonRecoveryNotQualifiedReasons) ? If( __jsonRecoveryNotQualifiedReasons as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(string) (__u is Sample.API.Runtime.Json.JsonString __t ? (string)(__t.ToString()) : null)) ))() : null : _recoveryNotQualifiedReasons;}
+            {_drillsNotQualifiedReasons = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("drillsNotQualifiedReasons"), out var __jsonDrillsNotQualifiedReasons) ? If( __jsonDrillsNotQualifiedReasons as Sample.API.Runtime.Json.JsonArray, out var __q) ? new global::System.Func<System.Collections.Generic.List<string>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__q, (__p)=>(string) (__p is Sample.API.Runtime.Json.JsonString __o ? (string)(__o.ToString()) : null)) ))() : null : _drillsNotQualifiedReasons;}
             AfterFromJson(json);
         }
 
@@ -109,10 +109,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._recoveryNotQualifiedReason)
+                if (null != this._recoveryNotQualifiedReasons)
                 {
                     var __w = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __x in this._recoveryNotQualifiedReason )
+                    foreach( var __x in this._recoveryNotQualifiedReasons )
                     {
                         AddIf(null != (((object)__x)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__x.ToString()) : null ,__w.Add);
                     }
@@ -121,10 +121,10 @@ namespace Sample.API.Models
             }
             if (serializationMode.HasFlag(Sample.API.Runtime.SerializationMode.IncludeRead))
             {
-                if (null != this._drillsNotQualifiedReason)
+                if (null != this._drillsNotQualifiedReasons)
                 {
                     var __r = new Sample.API.Runtime.Json.XNodeArray();
-                    foreach( var __s in this._drillsNotQualifiedReason )
+                    foreach( var __s in this._drillsNotQualifiedReasons )
                     {
                         AddIf(null != (((object)__s)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(__s.ToString()) : null ,__r.Add);
                     }

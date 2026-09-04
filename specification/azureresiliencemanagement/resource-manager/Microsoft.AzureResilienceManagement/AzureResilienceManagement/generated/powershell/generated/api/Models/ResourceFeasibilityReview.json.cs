@@ -79,7 +79,7 @@ namespace Sample.API.Models
             {_feasibilityType = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("feasibilityType"), out var __jsonFeasibilityType) ? (string)__jsonFeasibilityType : (string)_feasibilityType;}
             {_resourceType = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("resourceType"), out var __jsonResourceType) ? (string)__jsonResourceType : (string)_resourceType;}
             {_status = If( json?.PropertyT<Sample.API.Runtime.Json.JsonString>("status"), out var __jsonStatus) ? (string)__jsonStatus : (string)_status;}
-            {_recommendedTargetSku = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recommendedTargetSkus"), out var __jsonRecommendedTargetSkus) ? If( __jsonRecommendedTargetSkus as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.ISkuDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.ISkuDetails) (Sample.API.Models.SkuDetails.FromJson(__u) )) ))() : null : _recommendedTargetSku;}
+            {_recommendedTargetSkus = If( json?.PropertyT<Sample.API.Runtime.Json.JsonArray>("recommendedTargetSkus"), out var __jsonRecommendedTargetSkus) ? If( __jsonRecommendedTargetSkus as Sample.API.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<System.Collections.Generic.List<Sample.API.Models.ISkuDetails>>(()=> global::System.Linq.Enumerable.ToList(global::System.Linq.Enumerable.Select(__v, (__u)=>(Sample.API.Models.ISkuDetails) (Sample.API.Models.SkuDetails.FromJson(__u) )) ))() : null : _recommendedTargetSkus;}
             AfterFromJson(json);
         }
 
@@ -106,10 +106,10 @@ namespace Sample.API.Models
             AddIf( null != (((object)this._feasibilityType)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._feasibilityType.ToString()) : null, "feasibilityType" ,container.Add );
             AddIf( null != (((object)this._resourceType)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._resourceType.ToString()) : null, "resourceType" ,container.Add );
             AddIf( null != (((object)this._status)?.ToString()) ? (Sample.API.Runtime.Json.JsonNode) new Sample.API.Runtime.Json.JsonString(this._status.ToString()) : null, "status" ,container.Add );
-            if (null != this._recommendedTargetSku)
+            if (null != this._recommendedTargetSkus)
             {
                 var __w = new Sample.API.Runtime.Json.XNodeArray();
-                foreach( var __x in this._recommendedTargetSku )
+                foreach( var __x in this._recommendedTargetSkus )
                 {
                     AddIf(__x?.ToJson(null, serializationMode) ,__w.Add);
                 }

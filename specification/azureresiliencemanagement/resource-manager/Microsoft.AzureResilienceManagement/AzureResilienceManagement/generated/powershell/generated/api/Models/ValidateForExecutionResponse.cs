@@ -11,15 +11,15 @@ namespace Sample.API.Models
         Sample.API.Models.IValidateForExecutionResponseInternal
     {
 
-        /// <summary>Backing field for <see cref="DrillResourceQualification" /> property.</summary>
-        private System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> _drillResourceQualification;
+        /// <summary>Backing field for <see cref="DrillResourceQualifications" /> property.</summary>
+        private System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> _drillResourceQualifications;
 
         /// <summary>Qualification details of resources for the operation.</summary>
         [Sample.API.Origin(Sample.API.PropertyOrigin.Owned)]
-        public System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> DrillResourceQualification { get => this._drillResourceQualification; }
+        public System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> DrillResourceQualifications { get => this._drillResourceQualifications; }
 
-        /// <summary>Internal Acessors for DrillResourceQualification</summary>
-        System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> Sample.API.Models.IValidateForExecutionResponseInternal.DrillResourceQualification { get => this._drillResourceQualification; set { {_drillResourceQualification = value;} } }
+        /// <summary>Internal Acessors for DrillResourceQualifications</summary>
+        System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> Sample.API.Models.IValidateForExecutionResponseInternal.DrillResourceQualifications { get => this._drillResourceQualifications; set { {_drillResourceQualifications = value;} } }
 
         /// <summary>Creates an new <see cref="ValidateForExecutionResponse" /> instance.</summary>
         public ValidateForExecutionResponse()
@@ -41,7 +41,7 @@ namespace Sample.API.Models
         Description = @"Qualification details of resources for the operation.",
         SerializedName = @"drillResourceQualifications",
         PossibleTypes = new [] { typeof(Sample.API.Models.IDrillResourceQualification) })]
-        System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> DrillResourceQualification { get;  }
+        System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> DrillResourceQualifications { get;  }
 
     }
     /// ValidateForExecution post action response.
@@ -49,7 +49,7 @@ namespace Sample.API.Models
 
     {
         /// <summary>Qualification details of resources for the operation.</summary>
-        System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> DrillResourceQualification { get; set; }
+        System.Collections.Generic.List<Sample.API.Models.IDrillResourceQualification> DrillResourceQualifications { get; set; }
 
     }
 }
