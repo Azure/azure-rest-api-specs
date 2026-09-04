@@ -2,12 +2,10 @@
   "operationId": "EduEnrollments_CreateOrUpdate",
   "title": "Create or update an edu enrollment",
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "testrg",
-    "api-version": "2026-03-01-preview",
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/12345678",
     "enrollmentName": "default",
+    "api-version": "2026-03-01-preview",
     "resource": {
-      "location": "eastus",
       "properties": {
         "domains": [
           {
@@ -24,10 +22,9 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ProgramEnrollment/eduEnrollments/default",
+        "id": "/providers/Microsoft.Billing/billingAccounts/12345678/providers/Microsoft.ProgramEnrollment/eduEnrollments/default",
         "name": "default",
         "type": "Microsoft.ProgramEnrollment/eduEnrollments",
-        "location": "eastus",
         "properties": {
           "provisioningState": "Succeeded",
           "domains": [
@@ -53,10 +50,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ProgramEnrollment/eduEnrollments/default",
+        "id": "/providers/Microsoft.Billing/billingAccounts/12345678/providers/Microsoft.ProgramEnrollment/eduEnrollments/default",
         "name": "default",
         "type": "Microsoft.ProgramEnrollment/eduEnrollments",
-        "location": "eastus",
         "properties": {
           "provisioningState": "Provisioning",
           "domains": [
