@@ -53,5 +53,6 @@ interface NamespaceDiscoveredDevices {
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDiscoveredDevice>;
-  listByResourceGroup is ArmResourceListByParent<NamespaceDiscoveredDevice>;
+  @renamedFrom(Versions.v2026_11_01, "listByResourceGroup")
+  listByNamespace is ArmResourceListByParent<NamespaceDiscoveredDevice>;
 }

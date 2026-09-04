@@ -1,0 +1,56 @@
+{
+  "title": "Disable Namespace Observability While Preserving Endpoints",
+  "operationId": "Namespaces_Update",
+  "description": "Disable new Live Data sessions without changing the configured Event Grid MQTT endpoints.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "mynamespace",
+    "properties": {
+      "properties": {
+        "observability": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/mynamespace",
+        "name": "mynamespace",
+        "type": "Microsoft.DeviceRegistry/namespaces",
+        "location": "eastus",
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000001",
+          "tenantId": "00000000-0000-0000-0000-000000000002",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "uuid": "00000000-0000-0000-0000-000000000003",
+          "observability": {
+            "enabled": false,
+            "endpoints": {
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ExtendedLocation/customLocations/myCustomLocation": {
+                "endpointType": "Microsoft.EventGrid/namespaces",
+                "address": "my-event-grid.eastus-1.ts.eventgrid.azure.net",
+                "scopeId": "my-aio-instance-scope",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.EventGrid/namespaces/myEventGridNamespace"
+              }
+            }
+          },
+          "outboundIdentity": {
+            "type": "SystemAssigned"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

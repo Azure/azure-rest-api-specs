@@ -186,6 +186,38 @@ using Microsoft.DeviceRegistry;
 @@clientName(BillingContainer.etag, "ETag", "csharp");
 @@clientName(MqttDestinationQos, "MqttDestinationQo", "csharp");
 
+// Rename models with reserved C# suffixes (Request -> Content, Response -> Result)
+// to satisfy @azure-tools/typespec-client-generator-core/csharp-model-suffix.
+@@clientName(
+  ActivateCertificateAuthorityRequest,
+  "ActivateCertificateAuthorityContent",
+  "csharp"
+);
+@@clientName(
+  NamespaceUpdateComplianceReportRequest,
+  "NamespaceUpdateComplianceReportContent",
+  "csharp"
+);
+@@clientName(
+  GroupBestUpdatesComplianceReportRequest,
+  "GroupBestUpdatesComplianceReportContent",
+  "csharp"
+);
+@@clientName(
+  GroupInstallableUpdatesReportRequest,
+  "GroupInstallableUpdatesReportContent",
+  "csharp"
+);
+@@clientName(GroupMemberCountResponse, "GroupMemberCountResult", "csharp");
+@@clientName(GroupListMembersRequest, "GroupListMembersContent", "csharp");
+@@clientName(JobRunResultsRequest, "JobRunResultsContent", "csharp");
+@@clientName(JobRunResultListResponse, "JobRunResultListResult", "csharp");
+@@clientName(
+  GetDeviceAuthenticationProfileKeysResponse,
+  "GetDeviceAuthenticationProfileKeysResult",
+  "csharp"
+);
+
 // JavaScript Client configuration
 @@clientName(
   Microsoft.DeviceRegistry,

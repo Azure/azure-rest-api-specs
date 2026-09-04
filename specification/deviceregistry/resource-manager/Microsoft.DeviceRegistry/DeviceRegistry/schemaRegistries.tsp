@@ -23,10 +23,16 @@ model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @path
   @minLength(3)
-  @maxLength(63)
+  @maxLength(64)
   name: string;
 
-  ...ManagedSystemAssignedIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Explicit identity property required for @typeChangedFrom versioning"
+  @doc("The managed service identities assigned to this resource.")
+  @typeChangedFrom(
+    Versions.v2026_11_01,
+    Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
+  )
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @added(Versions.v2024_09_01_preview)
@@ -54,6 +60,10 @@ model SchemaRegistryProperties {
   @doc("The Storage Account's Container URL where schemas will be stored.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   storageAccountContainerUrl: string;
+
+  @added(Versions.v2026_11_01)
+  @doc("The identity used for outbound calls from the ADR schema registry. If not specified and the schema registry has a system-assigned identity enabled, the system-assigned identity is used by default.")
+  outboundIdentity?: OutboundIdentity;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -120,6 +130,10 @@ union Format {
   @doc("Delta format")
   Delta_1_0: "Delta/1.0",
 
+  @added(Versions.v2026_11_01)
+  @doc("W3C Web of Things JSON-LD format")
+  JsonLD_1_1: "JsonLD/1.1",
+
   string,
 }
 
@@ -130,6 +144,14 @@ union Format {
 union SchemaType {
   @doc("Message Schema schema type")
   MessageSchema: "MessageSchema",
+
+  @added(Versions.v2026_11_01)
+  @doc("W3C Web of Things Thing Model document")
+  ThingModel: "ThingModel",
+
+  @added(Versions.v2026_11_01)
+  @doc("W3C Web of Things Thing Description document")
+  ThingDescription: "ThingDescription",
 
   string,
 }

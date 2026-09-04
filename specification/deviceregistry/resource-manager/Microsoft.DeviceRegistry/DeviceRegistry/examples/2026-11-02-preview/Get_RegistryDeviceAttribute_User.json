@@ -1,0 +1,26 @@
+{
+  "title": "Get a User-Defined Device Attribute",
+  "operationId": "RegistryDeviceAttributes_Get",
+  "description": "Get a user-defined device attribute.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "registryDeviceName": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+    "attributeName": "customConfig"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/registryDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab/attributes/customConfig",
+        "name": "customConfig",
+        "type": "Microsoft.DeviceRegistry/namespaces/registryDevices/attributes",
+        "properties": {
+          "reportedBy": "User",
+          "customProperty": "customValue"
+        }
+      }
+    }
+  }
+}

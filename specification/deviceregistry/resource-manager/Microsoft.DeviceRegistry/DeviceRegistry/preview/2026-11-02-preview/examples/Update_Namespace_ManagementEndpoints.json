@@ -1,0 +1,67 @@
+{
+  "title": "Link a Namespace to a Management Endpoint",
+  "operationId": "Namespaces_Update",
+  "description": "Link a namespace to a management endpoint.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "adr-namespace-gbk0925-n01",
+    "properties": {
+      "properties": {
+        "management": {
+          "endpoints": {
+            "customLocation1": {
+              "endpointType": "Microsoft.EventGrid/Namespaces",
+              "address": "eg-for-adr.eastus2-1.ts.eventgrid.azure.net",
+              "scopeId": "scope-id-for-management-endpoint-1",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.EventGrid/Namespaces/eg-for-adr"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1366-430f-0000-cc873bcf2d27/resourceGroups/gbktestRG/providers/Private.DeviceRegistry/namespaces/adr-namespace-gbk0925-n01",
+        "name": "adr-namespace-gbk0925-n01",
+        "type": "Private.DeviceRegistry/namespaces",
+        "location": "North Europe",
+        "identity": {
+          "principalId": "00000000-0000-0000-9d20-8a5570c3eb6e",
+          "tenantId": "0006f47a-0000-0000-0000-99be82dea000",
+          "type": "SystemAssigned"
+        },
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-09-25T23:41:41.8591157Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-10-01T21:03:33.5993192Z"
+        },
+        "properties": {
+          "uuid": "cbfe124a-6971-4c90-a7a9-99be82def1ab",
+          "provisioningState": "Succeeded",
+          "management": {
+            "endpoints": {
+              "customLocation1": {
+                "endpointType": "Microsoft.EventGrid/Namespaces",
+                "address": "eg-for-adr.eastus2-1.ts.eventgrid.azure.net",
+                "scopeId": "scope-id-for-management-endpoint-1",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.EventGrid/Namespaces/eg-for-adr"
+              }
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
