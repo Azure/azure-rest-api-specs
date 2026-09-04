@@ -39,10 +39,6 @@ using Microsoft.HanaOnAzure;
 
 @@clientName(ProviderInstanceProperties.type, "providerType", "csharp");
 
-@@access(Operations.list, Access.internal, "csharp");
-
-@@clientName(Operation, "HanaOnAzureOperationInfo", "csharp");
-
 @@clientName(HanaProvisioningStatesEnum, "HanaProvisioningState", "csharp");
 
 @@clientName(Display, "HanaOnAzureOperationDisplay", "csharp");
