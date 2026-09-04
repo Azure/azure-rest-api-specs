@@ -124,7 +124,43 @@ op listLedgerEntries is ConfidentialLedgerCommon.LedgerOperation<
  * A collection id may optionally be specified.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_07_31_preview)
+@renamedFrom(Versions.v2026_07_31_preview, "createLedgerEntry")
 @summary("Writes a ledger entry.")
+@sharedRoute
+@route("/app/transactions")
+@post
+op createLedgerEntryAsync is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /**
+     * The collection id.
+     */
+    @query("collectionId")
+    collectionId?: string;
+
+    /**
+     * Comma separated tags.
+     */
+    @query("tags")
+    tags?: string;
+
+    /**
+     * Ledger entry.
+     */
+    @bodyRoot
+    entry: LedgerEntry;
+  },
+  LedgerWriteResult
+>;
+
+/**
+ * A collection id may optionally be specified.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The versioned ledger write route requires both the service default error and a 503 TransactionRolledBack response."
+@added(Versions.v2026_07_31_preview)
+@summary("Writes a ledger entry.")
+@returnsDoc("Returned as a result of writing to the Confidential Ledger.")
+@sharedRoute
 @route("/app/transactions")
 @post
 op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
@@ -146,8 +182,17 @@ op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
      */
     @bodyRoot
     entry: LedgerEntry;
+
+    /**
+     * Whether to wait for the transaction to be globally committed before
+     * returning. When true, the response includes the transaction receipt.
+     */
+    @query("waitForCommit")
+    waitForCommit?: boolean = false;
   },
-  LedgerWriteResult
+  LedgerWriteResult,
+  | ConfidentialLedgerCommon.ConfidentialLedgerError
+  | TransactionRolledBackErrorResponse
 >;
 
 /**
