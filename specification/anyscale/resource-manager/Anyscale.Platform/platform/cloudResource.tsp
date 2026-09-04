@@ -87,10 +87,10 @@ union Provider {
   Generic: "Generic",
 
   /** Amazon Web Services */
-  Aws: "Aws",
+  Aws: "AWS",
 
   /** Google Cloud Platform */
-  Gcp: "Gcp",
+  Gcp: "GCP",
 }
 
 /** Compute stack associated with the cloud resource */
@@ -98,7 +98,7 @@ union ComputeStack {
   string,
 
   /** Kubernetes */
-  K8s: "K8s",
+  K8s: "K8S",
 }
 
 /** Cloud resource operations */

@@ -156,13 +156,13 @@ model NodeType {
 /** Market type of instances to use (on-demand vs spot). */
 union MarketType {
   /** Use on-demand instances only. */
-  OnDemand: "OnDemand",
+  OnDemand: "ON_DEMAND",
 
   /** Use spot instances only. */
-  Spot: "Spot",
+  Spot: "SPOT",
 
   /** Prefer to use spot instances but fall back to on-demand if necessary. */
-  PreferSpot: "PreferSpot",
+  PreferSpot: "PREFER_SPOT",
 
   string,
 }
