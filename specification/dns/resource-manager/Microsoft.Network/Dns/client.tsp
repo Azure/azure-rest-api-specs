@@ -11,6 +11,11 @@ using Microsoft.Network;
 
 // Add .NET SDK config
 @@scope(Microsoft.Network.Zones.listAllByDnsZone, "!csharp");
+@@alternateType(
+  Azure.ResourceManager.ProxyResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Customize generated C# resource names for expanded DNS record-set resources."
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Customize generated C# resource names for expanded DNS record-set resources."
