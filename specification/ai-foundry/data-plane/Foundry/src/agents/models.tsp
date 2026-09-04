@@ -537,6 +537,30 @@ union CodeDependencyResolution {
   remote_build: "remote_build",
 }
 
+@doc("Supported Voice Live Bridge application protocol versions.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview] }
+)
+union VoiceLiveBridgeProtocolVersion {
+  string,
+
+  @doc("Voice Live Bridge Protocol 1.0.")
+  v1_0: "1.0",
+}
+
+@doc("The Voice Live Bridge application protocol capability implemented by a hosted agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview] }
+)
+model VoiceLiveBridgeCapability {
+  ...Record<never>;
+
+  @doc("The exact Voice Live Bridge application protocol version implemented by the hosted agent. The service currently supports version `1.0`.")
+  version: VoiceLiveBridgeProtocolVersion;
+}
+
 @doc("""
   The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).
   Registration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)
@@ -588,6 +612,15 @@ model HostedAgentDefinition extends AgentDefinition {
     #{ protocol: "a2a", version: "v0.3.0" }
   ])
   protocol_versions?: ProtocolVersionRecord[];
+
+  @doc("The Voice Live Bridge application protocol capability implemented by this hosted agent. When provided, `protocol_versions` must include the `invocations_ws` endpoint protocol. The presence of this property selects the typed Bridge profile; no separate Bridge endpoint protocol is introduced.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
+    }
+  )
+  voice_live_bridge?: VoiceLiveBridgeCapability;
 
   @doc("Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.")
   code_configuration?: CodeConfiguration;
