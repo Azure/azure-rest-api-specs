@@ -2515,7 +2515,7 @@
         "tags": [
           "Services"
         ],
-        "description": "A long-running resource action.",
+        "description": "Restarts one or more replicas of a Service Fabric managed service.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -7148,7 +7148,7 @@
         },
         "skuProfile": {
           "$ref": "#/definitions/SkuProfile",
-          "description": "Specifies the sku profile for the node type. This allows specifying multiple VM sizes and an allocation strategy for Instance Mix scenarios."
+          "description": "Specifies the sku profile for the node type when vmSize is set to Mix. This allows specifying multiple VM sizes and an allocation strategy for Instance Mix scenarios."
         },
         "dataDiskCaching": {
           "$ref": "#/definitions/DiskCachingType",
@@ -8928,7 +8928,7 @@
         "rank": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the rank or priority of the VM size within the sku profile. Lower values indicate higher priority."
+          "description": "Specifies the rank or priority of the VM size when allocationStrategy is Prioritized. Lower values indicate higher priority."
         }
       },
       "required": [

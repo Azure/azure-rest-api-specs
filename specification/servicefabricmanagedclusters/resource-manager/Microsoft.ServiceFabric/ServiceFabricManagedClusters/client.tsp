@@ -32,6 +32,54 @@ namespace Azure.ResourceManager.Models {
   "javascript"
 );
 
+@@clientName(
+  HostEndpointSettings,
+  "ProxyAgentHostEndpointSettings",
+  "csharp"
+);
+@@clientName(
+  SfmcOperationStatus,
+  "ServiceFabricManagedClusterOperationStatus",
+  "csharp"
+);
+@@clientName(
+  FaultSimulationContentWrapper,
+  "StartFaultSimulationContent",
+  "csharp"
+);
+@@clientName(
+  SkuProfile,
+  "ServiceFabricManagedNodeTypeSkuProfile",
+  "csharp"
+);
+@@clientName(
+  SkuProfileVmSize,
+  "ServiceFabricManagedNodeTypeVmSize",
+  "csharp"
+);
+@@clientName(
+  AllocationStrategy,
+  "ServiceFabricManagedNodeTypeAllocationStrategy",
+  "csharp"
+);
+@@clientName(
+  DiskCachingType,
+  "ServiceFabricManagedDiskCachingType",
+  "csharp"
+);
+@@clientName(
+  NodeTypeProperties.dataDiskIOPSReadWrite,
+  "DataDiskIopsReadWrite",
+  "csharp"
+);
+@@clientName(
+  NodeTypeProperties.dataDiskMBpsReadWrite,
+  "DataDiskMbpsReadWrite",
+  "csharp"
+);
+@@clientName(VmssDataDisk.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
+@@clientName(VmssDataDisk.diskMBpsReadWrite, "DiskMbpsReadWrite", "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VMSSExtension.properties);
 
@@ -75,12 +123,6 @@ namespace Azure.ResourceManager.Models {
 @@clientName(Services.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Services.update::parameters.properties, "parameters");
 @@clientName(Services.restartReplica::parameters.body, "parameters");
-@@clientDoc(
-  Services.restartReplica,
-  "Restarts a replica of the Service Fabric managed service.",
-  DocumentationMode.replace,
-  "csharp"
-);
 
 @@clientName(ManagedClusters.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ManagedClusters.update::parameters.properties, "parameters");

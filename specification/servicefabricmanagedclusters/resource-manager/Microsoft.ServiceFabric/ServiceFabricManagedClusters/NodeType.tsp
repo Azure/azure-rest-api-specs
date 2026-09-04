@@ -581,7 +581,7 @@ model NodeTypeProperties {
   proxyAgentSettings?: ProxyAgentSettings;
 
   /**
-   * Specifies the sku profile for the node type. This allows specifying multiple VM sizes and an allocation strategy for Instance Mix scenarios.
+   * Specifies the sku profile for the node type when vmSize is set to Mix. This allows specifying multiple VM sizes and an allocation strategy for Instance Mix scenarios.
    */
   @added(Versions.v2026_09_01_preview)
   skuProfile?: SkuProfile;
@@ -1484,7 +1484,7 @@ model SkuProfileVmSize {
   name: string;
 
   /**
-   * Specifies the rank or priority of the VM size within the sku profile. Lower values indicate higher priority.
+   * Specifies the rank or priority of the VM size when allocationStrategy is Prioritized. Lower values indicate higher priority.
    */
   rank?: int32;
 }
