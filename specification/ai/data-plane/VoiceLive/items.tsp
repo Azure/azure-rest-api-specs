@@ -13,6 +13,9 @@ union ItemType {
   function_call_output: "function_call_output",
 
   @added(Versions.v2026_01_01_preview)
+  system_tool: "system_tool",
+
+  @added(Versions.v2026_01_01_preview)
   mcp_list_tools: "mcp_list_tools",
 
   @added(Versions.v2026_01_01_preview)
@@ -204,6 +207,27 @@ model ResponseFunctionCallItem extends ResponseItem {
   call_id: string;
   arguments: string;
   status: ResponseItemStatus;
+}
+
+/** A service-managed system-tool invocation emitted by VoiceLive. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
+@usage(ResponseUsage)
+model ResponseSystemToolItem extends ResponseItem {
+  /** The item type. Always `system_tool`. */
+  type: ItemType.system_tool;
+
+  /** The processing status of the system-tool invocation. */
+  status: ResponseItemStatus;
+
+  /** The service-managed system-tool name, such as `end_conversation`. */
+  name: string;
+
+  /** The model-generated identifier that correlates the tool item and its lifecycle events. */
+  call_id: string;
+
+  /** The JSON-encoded system-tool arguments. This value is empty while argument generation is in progress. */
+  arguments: string;
 }
 
 /** A function call output item within a conversation. */

@@ -1792,6 +1792,22 @@
         ]
       }
     },
+    "EndConversationTool": {
+      "type": "object",
+      "description": "A service-managed tool that gracefully ends the active conversation. The model supplies a required, non-empty\n`reason` argument when invoking the tool. VoiceLive waits for pending response output, including farewell audio,\nbefore closing the WebSocket.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Optional model-facing guidance for when and how to invoke the tool. Omit this property or use an empty string to\napply the service default, which instructs the model to speak a closing assistant message before invoking the\ntool. A non-empty value replaces the service default."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "end_conversation"
+    },
     "EouDetection": {
       "type": "object",
       "description": "Top-level union for end-of-utterance (EOU) semantic detection configuration.",
@@ -2208,6 +2224,7 @@
         "message",
         "function_call",
         "function_call_output",
+        "system_tool",
         "mcp_list_tools",
         "mcp_call",
         "mcp_approval_request",
@@ -2230,6 +2247,10 @@
           {
             "name": "function_call_output",
             "value": "function_call_output"
+          },
+          {
+            "name": "system_tool",
+            "value": "system_tool"
           },
           {
             "name": "mcp_list_tools",
@@ -3963,6 +3984,40 @@
         "type"
       ]
     },
+    "ResponseSystemToolItem": {
+      "type": "object",
+      "description": "A service-managed system-tool invocation emitted by VoiceLive.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ResponseItemStatus",
+          "description": "The processing status of the system-tool invocation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The service-managed system-tool name, such as `end_conversation`."
+        },
+        "call_id": {
+          "type": "string",
+          "description": "The model-generated identifier that correlates the tool item and its lifecycle events."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The JSON-encoded system-tool arguments. This value is empty while argument generation is in progress."
+        }
+      },
+      "required": [
+        "status",
+        "name",
+        "call_id",
+        "arguments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "system_tool"
+    },
     "ResponseTextContentPart": {
       "type": "object",
       "description": "A text content part for a response.",
@@ -5435,6 +5490,95 @@
       ],
       "x-ms-discriminator-value": "response.output_item.done"
     },
+    "ServerEventResponseSystemToolArgumentsDelta": {
+      "type": "object",
+      "description": "Returned when the model-generated arguments for a service-managed system tool are updated.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response containing the system-tool invocation."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the system-tool response item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based index of the system-tool item in the response output."
+        },
+        "call_id": {
+          "type": "string",
+          "description": "The model-generated ID of the system-tool invocation."
+        },
+        "delta": {
+          "type": "string",
+          "description": "An incremental fragment of the JSON-encoded system-tool arguments."
+        },
+        "obfuscation": {
+          "type": "string",
+          "description": "Optional upstream obfuscation metadata."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "call_id",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.system_tool_arguments.delta"
+    },
+    "ServerEventResponseSystemToolArgumentsDone": {
+      "type": "object",
+      "description": "Returned when the model-generated arguments for a service-managed system tool finish streaming.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response containing the system-tool invocation."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the system-tool response item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based index of the system-tool item in the response output."
+        },
+        "call_id": {
+          "type": "string",
+          "description": "The model-generated ID of the system-tool invocation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The service-managed system-tool name."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The complete JSON-encoded system-tool arguments."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "call_id",
+        "name",
+        "arguments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.system_tool_arguments.done"
+    },
     "ServerEventResponseTextDelta": {
       "type": "object",
       "description": "Returned when the text value of a \"text\" content part is updated.",
@@ -5724,6 +5868,44 @@
       ],
       "x-ms-discriminator-value": "session.created"
     },
+    "ServerEventSessionEndConversationCancelled": {
+      "type": "object",
+      "description": "Returned when new user input cancels a pending `end_conversation` close attempt. The session remains open and a\nlater tool invocation may begin another close attempt.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The `call_id` of the corresponding `system_tool` response item."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.end_conversation.cancelled"
+    },
+    "ServerEventSessionEndConversationCompleted": {
+      "type": "object",
+      "description": "Returned after pending farewell output has drained and VoiceLive commits to closing the WebSocket with close code\n`1001`.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The `call_id` of the corresponding `system_tool` response item."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.end_conversation.completed"
+    },
     "ServerEventSessionUpdated": {
       "type": "object",
       "description": "Returned when a session is updated with a `session.update` event, unless\nthere is an error.",
@@ -5782,6 +5964,10 @@
         "response.animation_viseme.done",
         "response.function_call_arguments.delta",
         "response.function_call_arguments.done",
+        "response.system_tool_arguments.delta",
+        "response.system_tool_arguments.done",
+        "session.end_conversation.cancelled",
+        "session.end_conversation.completed",
         "mcp_list_tools.in_progress",
         "mcp_list_tools.completed",
         "mcp_list_tools.failed",
@@ -5950,6 +6136,22 @@
           {
             "name": "response_function_call_arguments_done",
             "value": "response.function_call_arguments.done"
+          },
+          {
+            "name": "response_system_tool_arguments_delta",
+            "value": "response.system_tool_arguments.delta"
+          },
+          {
+            "name": "response_system_tool_arguments_done",
+            "value": "response.system_tool_arguments.done"
+          },
+          {
+            "name": "session_end_conversation_cancelled",
+            "value": "session.end_conversation.cancelled"
+          },
+          {
+            "name": "session_end_conversation_completed",
+            "value": "session.end_conversation.completed"
           },
           {
             "name": "mcp_list_tools_in_progress",
@@ -6310,10 +6512,11 @@
     },
     "ToolType": {
       "type": "string",
-      "description": "The supported tool type discriminators for voicelive tools.\nCurrently, only 'function' tools are supported.",
+      "description": "The supported tool type discriminators for voicelive tools.",
       "enum": [
         "function",
-        "mcp"
+        "mcp",
+        "end_conversation"
       ],
       "x-ms-enum": {
         "name": "ToolType",
@@ -6326,6 +6529,10 @@
           {
             "name": "mcp",
             "value": "mcp"
+          },
+          {
+            "name": "end_conversation",
+            "value": "end_conversation"
           }
         ]
       }
