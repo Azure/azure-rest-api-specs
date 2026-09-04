@@ -77,8 +77,18 @@ namespace Azure.ResourceManager.Models {
   "DataDiskMbpsReadWrite",
   "csharp"
 );
+@@clientName(
+  NodeTypeProperties.dataDiskWriteAcceleratorEnabled,
+  "IsDataDiskWriteAcceleratorEnabled",
+  "csharp"
+);
 @@clientName(VmssDataDisk.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
 @@clientName(VmssDataDisk.diskMBpsReadWrite, "DiskMbpsReadWrite", "csharp");
+@@clientName(
+  VmssDataDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VMSSExtension.properties);
