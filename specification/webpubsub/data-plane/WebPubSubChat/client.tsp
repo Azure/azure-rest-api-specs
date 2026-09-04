@@ -48,10 +48,6 @@ op generateClientToken(
   @apiVersion(false, "csharp, java, python, javascript")
   @query("api-version")
   apiVersion: "2024-12-01",
-
-  /** Web PubSub client protocol used by the Chat client. */
-  @query
-  clientType: "default",
 ): GenerateClientTokenResponse | Azure.Core.Foundations.ErrorResponse;
 
 /** Client options for Azure Web PubSub Chat. */
