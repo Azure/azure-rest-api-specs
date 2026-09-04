@@ -88,6 +88,10 @@ suppressions:
   - code: ParametersInPointGet
     from: vmssNetwork.json
     reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
+  # --- stable/2026-01-01/firewallPolicy.json ---
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: firewallPolicy.json
+    reason: The Network TypeSpec project targets ARM common types v5. Firewall Policy follows the same project-wide common-types version to avoid unrelated contract churn across the 2026-01-01 package.
   # --- stable/2026-01-01/networkGateway.json ---
   - code: ResourceNameRestriction
     from: networkGateway.json
@@ -210,6 +214,16 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].get.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/kubeSelectorGroups/{kubeSelectorGroupName}"].put.responses["201"].schema
+  - code: ProvisioningStateMustBeReadOnly
+    from: firewallPolicy.json
+    reason: provisioningState is read-only in the TypeSpec source through @visibility(Lifecycle.Read). The lint rule does not follow the referenced properties schema to detect the emitted readOnly constraint.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfileGroups/{securityProfileGroupName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/securityProfiles/{securityProfileName}"].put.responses["201"].schema
   - code: AvoidAdditionalProperties
     from: firewallPolicy.json
     reason: >-
