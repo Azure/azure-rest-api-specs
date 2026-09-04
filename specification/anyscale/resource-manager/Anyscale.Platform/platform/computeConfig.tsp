@@ -168,7 +168,7 @@ union MarketType {
 }
 
 /** Configuration for a worker node group. */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "WorkerNode intentionally inherits NodeType to share the common node configuration contract while adding worker-specific scaling and market settings."
 model WorkerNode extends NodeType {
   /** Minimum number of nodes of this type that will be kept running in the cluster. */
   minNodes?: int32;
