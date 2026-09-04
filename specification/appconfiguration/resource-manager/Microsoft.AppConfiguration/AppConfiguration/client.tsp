@@ -77,6 +77,7 @@ using Azure.ClientGenerator.Core;
   "AppConfigurationStoreEncryptionProperties",
   "csharp"
 );
+@@clientName(EncryptionStatus, "AppConfigurationEncryptionStatus", "csharp");
 @@clientName(
   NameAvailabilityStatus,
   "AppConfigurationNameAvailabilityResult",
