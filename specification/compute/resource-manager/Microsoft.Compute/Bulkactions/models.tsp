@@ -17,6 +17,7 @@ namespace Microsoft.Compute;
 // ------------------ Enums ---------------
 @doc("The types of deadlines supported by Bulkactions")
 union DeadlineType {
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Default value of Unknown.")
   Unknown: "Unknown",
 
@@ -31,6 +32,7 @@ union DeadlineType {
 
 @doc("The kind of bulk operation that can be performed on resources using Bulkactions API")
 union ResourceOperationType {
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("The default value for this enum type")
   Unknown: "Unknown",
 
@@ -50,6 +52,7 @@ union ResourceOperationType {
   Delete: "Delete",
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request")
   GetInstanceView: "GetInstanceView",
 
@@ -58,15 +61,18 @@ union ResourceOperationType {
 
 @doc("Values that define the states of operations in Bulkactions")
 union OperationState {
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("The default value for the operation state enum")
   Unknown: "Unknown",
 
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Operations that are pending scheduling")
   PendingScheduling: "PendingScheduling",
 
   @doc("Operations that have been scheduled")
   Scheduled: "Scheduled",
 
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Operations that are waiting to be executed")
   PendingExecution: "PendingExecution",
 
@@ -267,6 +273,11 @@ model ZonePreference {
 
   @doc("The rank of this zone in the priority order")
   rank: int32;
+
+  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @minValue(1)
+  @doc("The maximum capacity to place in this zone. The sum across capped zones must not exceed the requested capacity, and when every zone preference is capped the sum must equal the requested capacity.")
+  targetMaxCapacity?: int32;
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
@@ -390,6 +401,7 @@ model RetryPolicy {
 @doc("Extra details needed to run the user's request")
 model ExecutionParameters {
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
   @doc("Details that could optimize the user's request")
   optimizationPreference?: OptimizationPreference;
 
@@ -457,8 +469,14 @@ model ResourceOperationDetails {
   @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
   resourceId?: armResourceIdentifier;
 
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-09-06-preview`, "opType")
   @doc("Type of operation performed on the resources")
-  opType?: ResourceOperationType = ResourceOperationType.Unknown;
+  opTypeWithDefault?: ResourceOperationType = ResourceOperationType.Unknown;
+
+  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @doc("Type of operation performed on the resources")
+  opType?: ResourceOperationType;
 
   @doc("Subscription id attached to the request")
   subscriptionId?: string;
@@ -467,11 +485,23 @@ model ResourceOperationDetails {
   @doc("Deadline for the operation")
   deadline?: offsetDateTime;
 
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-09-06-preview`, "deadlineType")
   @doc("Type of deadline of the operation")
-  deadlineType?: DeadlineType = DeadlineType.Unknown;
+  deadlineTypeWithDefault?: DeadlineType = DeadlineType.Unknown;
 
+  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @doc("Type of deadline of the operation")
+  deadlineType?: DeadlineType;
+
+  @removed(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-09-06-preview`, "state")
   @doc("Current state of the operation")
-  state?: OperationState = OperationState.Unknown;
+  stateWithDefault?: OperationState = OperationState.Unknown;
+
+  @added(Microsoft.Compute.Versions.`2026-09-06-preview`)
+  @doc("Current state of the operation")
+  state?: OperationState;
 
   @doc("Timezone for the operation")
   timezone?: string;
