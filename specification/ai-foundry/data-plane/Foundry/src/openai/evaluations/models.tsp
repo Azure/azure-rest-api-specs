@@ -471,6 +471,9 @@ model SyntheticDataGenerationPreviewEvalRunDataSource
 
   /** Input messages template configuration applicable only if target is of type 'azure_ai_model' */
   input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate;
+
+  /** Optional conversation-simulation controls, supplied as a sibling of `item_generation_params`. Only meaningful for conversation-level synthetic runs, where the generated seed dataset feeds a downstream multi-turn simulation. */
+  conversation_generation_params?: ConversationGenerationParams;
 }
 
 /** Represents the parameters for synthetic data generation item generation. */
@@ -497,6 +500,22 @@ model SyntheticDataGenerationPreviewItemGenerationParams
 
   /** The optional seed data content source files for data generation. */
   sources: OpenAI.EvalJsonlFileIdSource[];
+}
+
+/** Conversation-simulation controls for a conversation-level synthetic run, carried on the synthetic data generation data source as a sibling of `item_generation_params`. These parameterize the downstream multi-turn simulation: the model that runs the simulation and how many conversations/turns to produce. All fields are optional; when omitted, service defaults apply. */
+model ConversationGenerationParams {
+  /** The name of the model deployment used to run the multi-turn conversation simulation. This is distinct from the `model_deployment_name` on `item_generation_params`, which generates the seed scenarios. When omitted, the simulation falls back to the seed-generation model. */
+  model_deployment_name?: string;
+
+  /** Number of simulated conversations to generate per synthetic seed scenario. When omitted, defaults to one conversation per seed row. */
+  @minValue(1)
+  @maxValue(5)
+  num_conversations?: int32;
+
+  /** Maximum number of turns per simulated conversation. When omitted, the shipped simulation default applies. */
+  @minValue(1)
+  @maxValue(20)
+  max_turns?: int32;
 }
 
 /** Represents a data source for evaluation runs that are specific to Continuous Evaluation scenarios. */
