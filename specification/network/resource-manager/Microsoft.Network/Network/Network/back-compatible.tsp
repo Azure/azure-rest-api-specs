@@ -677,6 +677,7 @@ using TypeSpec.Versioning;
 
 @@clientName(BastionHosts.createOrUpdate::parameters.resource, "parameters");
 @@clientName(BastionHosts.updateTags::parameters.properties, "parameters");
+@@clientName(BastionHosts.update::parameters.properties, "parameters");
 @@clientLocation(
   BastionHosts.putBastionShareableLink,
   Microsoft.Network,
