@@ -5,7 +5,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Sample.API.Runtime.Json
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.Json
 {
     internal class SerializationOptions
     {

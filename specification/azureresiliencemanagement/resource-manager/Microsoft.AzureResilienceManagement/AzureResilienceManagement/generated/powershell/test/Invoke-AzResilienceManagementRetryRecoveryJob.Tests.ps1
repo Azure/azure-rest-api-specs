@@ -19,6 +19,14 @@ Describe 'Invoke-AzResilienceManagementRetryRecoveryJob' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'RetryViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'RetryViaIdentityRecoveryPlan' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'RetryViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

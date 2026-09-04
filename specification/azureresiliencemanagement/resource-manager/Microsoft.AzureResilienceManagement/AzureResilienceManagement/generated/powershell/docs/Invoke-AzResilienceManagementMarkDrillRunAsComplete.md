@@ -15,28 +15,71 @@ This enables the user to mark this stage as complete, disabling further retries 
 ### MarkExpanded (Default)
 ```
 Invoke-AzResilienceManagementMarkDrillRunAsComplete -DrillName <String> -DrillRunName <String>
- -ServiceGroupName <String> -OperationId <String> -DrillRunStage <String> [-AsJob] [-NoWait] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ -ServiceGroupName <String> -OperationId <String> -DrillRunStage <String> [-DefaultProfile <PSObject>]
+ [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Mark
 ```
 Invoke-AzResilienceManagementMarkDrillRunAsComplete -DrillName <String> -DrillRunName <String>
- -ServiceGroupName <String> -OperationId <String> -Body <IMarkAsCompleteRequest> [-AsJob] [-NoWait] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ -ServiceGroupName <String> -OperationId <String> -Body <IMarkAsCompleteRequest> [-DefaultProfile <PSObject>]
+ [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### MarkViaIdentity
 ```
 Invoke-AzResilienceManagementMarkDrillRunAsComplete -InputObject <IResilienceManagementIdentity>
- -OperationId <String> -Body <IMarkAsCompleteRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -OperationId <String> -Body <IMarkAsCompleteRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### MarkViaIdentityDrill
+```
+Invoke-AzResilienceManagementMarkDrillRunAsComplete -DrillInputObject <IResilienceManagementIdentity>
+ -DrillRunName <String> -OperationId <String> -Body <IMarkAsCompleteRequest> [-DefaultProfile <PSObject>]
+ [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### MarkViaIdentityDrillExpanded
+```
+Invoke-AzResilienceManagementMarkDrillRunAsComplete -DrillInputObject <IResilienceManagementIdentity>
+ -DrillRunName <String> -OperationId <String> -DrillRunStage <String> [-DefaultProfile <PSObject>] [-AsJob]
+ [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### MarkViaIdentityExpanded
 ```
 Invoke-AzResilienceManagementMarkDrillRunAsComplete -InputObject <IResilienceManagementIdentity>
- -OperationId <String> -DrillRunStage <String> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -OperationId <String> -DrillRunStage <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### MarkViaIdentityServiceGroup
+```
+Invoke-AzResilienceManagementMarkDrillRunAsComplete -DrillName <String> -DrillRunName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String> -Body <IMarkAsCompleteRequest>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### MarkViaIdentityServiceGroupExpanded
+```
+Invoke-AzResilienceManagementMarkDrillRunAsComplete -DrillName <String> -DrillRunName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String> -DrillRunStage <String>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### MarkViaJsonFilePath
+```
+Invoke-AzResilienceManagementMarkDrillRunAsComplete -DrillName <String> -DrillRunName <String>
+ -ServiceGroupName <String> -OperationId <String> -JsonFilePath <String> [-DefaultProfile <PSObject>] [-AsJob]
+ [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### MarkViaJsonString
+```
+Invoke-AzResilienceManagementMarkDrillRunAsComplete -DrillName <String> -DrillRunName <String>
+ -ServiceGroupName <String> -OperationId <String> -JsonString <String> [-DefaultProfile <PSObject>] [-AsJob]
+ [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,10 +128,43 @@ Accept wildcard characters: False
 
 ### -Body
 Request body for MarkAsComplete API.
+To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IMarkAsCompleteRequest
-Parameter Sets: Mark, MarkViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IMarkAsCompleteRequest
+Parameter Sets: Mark, MarkViaIdentity, MarkViaIdentityDrill, MarkViaIdentityServiceGroup
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
+
+```yaml
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DrillInputObject
+Identity Parameter
+To construct, see NOTES section for DRILLINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: MarkViaIdentityDrill, MarkViaIdentityDrillExpanded
 Aliases:
 
 Required: True
@@ -103,7 +179,7 @@ The name of the Drill
 
 ```yaml
 Type: System.String
-Parameter Sets: Mark, MarkExpanded
+Parameter Sets: Mark, MarkExpanded, MarkViaIdentityServiceGroup, MarkViaIdentityServiceGroupExpanded, MarkViaJsonFilePath, MarkViaJsonString
 Aliases:
 
 Required: True
@@ -118,7 +194,7 @@ The name of the DrillRun (GUID).
 
 ```yaml
 Type: System.String
-Parameter Sets: Mark, MarkExpanded
+Parameter Sets: Mark, MarkExpanded, MarkViaIdentityDrill, MarkViaIdentityDrillExpanded, MarkViaIdentityServiceGroup, MarkViaIdentityServiceGroupExpanded, MarkViaJsonFilePath, MarkViaJsonString
 Aliases:
 
 Required: True
@@ -133,7 +209,7 @@ State of the Drill Run.
 
 ```yaml
 Type: System.String
-Parameter Sets: MarkExpanded, MarkViaIdentityExpanded
+Parameter Sets: MarkExpanded, MarkViaIdentityDrillExpanded, MarkViaIdentityExpanded, MarkViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: True
@@ -145,9 +221,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: MarkViaIdentity, MarkViaIdentityExpanded
 Aliases:
 
@@ -155,6 +232,36 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Mark operation
+
+```yaml
+Type: System.String
+Parameter Sets: MarkViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Mark operation
+
+```yaml
+Type: System.String
+Parameter Sets: MarkViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -188,12 +295,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: MarkViaIdentityServiceGroup, MarkViaIdentityServiceGroupExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -ServiceGroupName
 The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Mark, MarkExpanded
+Parameter Sets: Mark, MarkExpanded, MarkViaJsonFilePath, MarkViaJsonString
 Aliases:
 
 Required: True
@@ -239,44 +362,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IMarkAsCompleteRequest
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IMarkAsCompleteRequest
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
 ## OUTPUTS
 
-### Sample.API.Models.IMarkAsCompleteResponse
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IMarkAsCompleteResponse
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`BODY <IMarkAsCompleteRequest>`: Request body for MarkAsComplete API.
-  - `DrillRunStage <String>`: State of the Drill Run.
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
 
 ## RELATED LINKS
 

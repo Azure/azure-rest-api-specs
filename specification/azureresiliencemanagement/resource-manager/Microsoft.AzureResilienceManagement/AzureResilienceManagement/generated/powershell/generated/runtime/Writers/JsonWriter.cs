@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 
-namespace Sample.API.Runtime.Json
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.Json
 {
     internal class JsonWriter
     {

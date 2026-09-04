@@ -19,6 +19,22 @@ Describe 'Test-AzResilienceManagementRecoveryPlanActionFailoverCleanup' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'TestViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'TestViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'TestViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'TestViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Test' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

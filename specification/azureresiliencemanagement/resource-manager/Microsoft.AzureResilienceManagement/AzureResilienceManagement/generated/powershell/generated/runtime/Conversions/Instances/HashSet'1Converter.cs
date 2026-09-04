@@ -5,7 +5,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Sample.API.Runtime.Json
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.Json
 {
     public sealed class HashSetConverter<T> : JsonConverter<HashSet<T>>
     {

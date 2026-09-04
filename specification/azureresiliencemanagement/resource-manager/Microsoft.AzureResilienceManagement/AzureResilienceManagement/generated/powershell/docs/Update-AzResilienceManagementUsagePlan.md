@@ -14,27 +14,42 @@ Update a UsagePlan
 
 ### UpdateExpanded (Default)
 ```
-Update-AzResilienceManagementUsagePlan -ResourceGroupName <String> -SubscriptionId <String>
- -UsagePlanName <String> [-Tags <Hashtable>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-AzResilienceManagementUsagePlan -Name <String> -ResourceGroupName <String> -SubscriptionId <String>
+ [-Tag <Hashtable>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
-Update-AzResilienceManagementUsagePlan -ResourceGroupName <String> -SubscriptionId <String>
- -UsagePlanName <String> -Properties <IUsagePlanTagsUpdate> [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+Update-AzResilienceManagementUsagePlan -Name <String> -ResourceGroupName <String> -SubscriptionId <String>
+ -Property <IUsagePlanTagsUpdate> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
 Update-AzResilienceManagementUsagePlan -InputObject <IResilienceManagementIdentity>
- -Properties <IUsagePlanTagsUpdate> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Property <IUsagePlanTagsUpdate> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
-Update-AzResilienceManagementUsagePlan -InputObject <IResilienceManagementIdentity> [-Tags <Hashtable>]
- [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-AzResilienceManagementUsagePlan -InputObject <IResilienceManagementIdentity> [-Tag <Hashtable>]
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonFilePath
+```
+Update-AzResilienceManagementUsagePlan -Name <String> -ResourceGroupName <String> -SubscriptionId <String>
+ -JsonFilePath <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### UpdateViaJsonString
+```
+Update-AzResilienceManagementUsagePlan -Name <String> -ResourceGroupName <String> -SubscriptionId <String>
+ -JsonString <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,11 +96,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -InputObject
-Identity Parameter
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -InputObject
+Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -93,6 +125,51 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+The name of the usage plan.
+
+```yaml
+Type: System.String
+Parameter Sets: Update, UpdateExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
+Aliases: UsagePlanName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -111,11 +188,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Properties
+### -Property
 The type used for updating tags in UsagePlan resources.
+To construct, see NOTES section for PROPERTY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IUsagePlanTagsUpdate
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IUsagePlanTagsUpdate
 Parameter Sets: Update, UpdateViaIdentity
 Aliases:
 
@@ -132,7 +210,7 @@ The name is case insensitive.
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -148,7 +226,7 @@ The value must be an UUID.
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -158,7 +236,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Tags
+### -Tag
 Resource tags.
 
 ```yaml
@@ -167,21 +245,6 @@ Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UsagePlanName
-The name of the usage plan.
-
-```yaml
-Type: System.String
-Parameter Sets: Update, UpdateExpanded
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -224,45 +287,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
-### Sample.API.Models.IUsagePlanTagsUpdate
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IUsagePlanTagsUpdate
 
 ## OUTPUTS
 
-### Sample.API.Models.IUsagePlan
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IUsagePlan
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
-
-`PROPERTIES <IUsagePlanTagsUpdate>`: The type used for updating tags in UsagePlan resources.
-  - `[Tags <IUsagePlanTagsUpdateTags>]`: Resource tags.
-    - `[(Any) <String>]`: This indicates any property can be added to this object.
 
 ## RELATED LINKS
 

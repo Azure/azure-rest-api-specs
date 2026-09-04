@@ -16,9 +16,9 @@
         "parameterSets": [
           {
             "parameters": [
+              "-Name <String>",
               "-ResourceGroupName <String>",
-              "[-SubscriptionId <String>]",
-              "-UsagePlanName <String>"
+              "[-SubscriptionId <String[]>]"
             ]
           }
         ]
@@ -28,16 +28,16 @@
           "description": "Get a UsagePlan",
           "parameters": [
             {
+              "name": "-Name",
+              "value": "[Path.usagePlanName]"
+            },
+            {
               "name": "-ResourceGroupName",
               "value": "[Path.resourceGroupName]"
             },
             {
               "name": "-SubscriptionId",
               "value": "[Path.subscriptionId]"
-            },
-            {
-              "name": "-UsagePlanName",
-              "value": "[Path.usagePlanName]"
             }
           ]
         }
@@ -54,9 +54,9 @@
         "parameterSets": [
           {
             "parameters": [
+              "-Name <String>",
               "-ResourceGroupName <String>",
-              "[-SubscriptionId <String>]",
-              "-UsagePlanName <String>"
+              "[-SubscriptionId <String>]"
             ]
           }
         ]
@@ -66,16 +66,16 @@
           "description": "Delete a UsagePlan",
           "parameters": [
             {
+              "name": "-Name",
+              "value": "[Path.usagePlanName]"
+            },
+            {
               "name": "-ResourceGroupName",
               "value": "[Path.resourceGroupName]"
             },
             {
               "name": "-SubscriptionId",
               "value": "[Path.subscriptionId]"
-            },
-            {
-              "name": "-UsagePlanName",
-              "value": "[Path.usagePlanName]"
             }
           ]
         }

@@ -19,11 +19,11 @@ Describe 'Get-AzResilienceManagementUsagePlan' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'List1' -skip {
+    It 'Get' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Get' -skip {
+    It 'ListByResourceGroup' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

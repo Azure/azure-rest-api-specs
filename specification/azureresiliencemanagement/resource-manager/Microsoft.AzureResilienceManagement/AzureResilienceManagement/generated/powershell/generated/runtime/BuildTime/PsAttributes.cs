@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using System;
 
-namespace Sample.API
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class DescriptionAttribute : Attribute
@@ -19,11 +19,6 @@ namespace Sample.API
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
     public class DoNotExportAttribute : Attribute
-    {
-    }
-
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
-    public class ModelCmdletAttribute : Attribute
     {
     }
 

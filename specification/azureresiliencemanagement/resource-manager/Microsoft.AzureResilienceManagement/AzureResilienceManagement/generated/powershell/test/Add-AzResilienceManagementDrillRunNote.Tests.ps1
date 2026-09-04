@@ -19,7 +19,31 @@ Describe 'Add-AzResilienceManagementDrillRunNote' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'AddViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'AddViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'AddViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'AddViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Add' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'AddViaIdentityDrillExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'AddViaIdentityDrill' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Update-AzResilienceManagementDrillResource
 
 ## SYNOPSIS
-This enables the user to include, exclude or add resources from their Drill.
+This enables the user to include, exclude or update resources from their Drill.
 
 ## SYNTAX
 
@@ -16,35 +16,68 @@ This enables the user to include, exclude or add resources from their Drill.
 ```
 Update-AzResilienceManagementDrillResource -DrillName <String> -ServiceGroupName <String>
  -OperationId <String> -FaultDurationInMin <Int32> [-ForceInclusionAndUpdate <String>]
- [-ResourceListExcludeResources <String[]>] [-ResourceListIncludeResources <IIncludeOrUpdateResource[]>]
- [-ResourceListUpdateResources <IIncludeOrUpdateResource[]>] [-AsJob] [-NoWait] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-ResourceListExcludeResource <String[]>] [-ResourceListIncludeResource <IIncludeOrUpdateResource[]>]
+ [-ResourceListUpdateResource <IIncludeOrUpdateResource[]>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
 Update-AzResilienceManagementDrillResource -DrillName <String> -ServiceGroupName <String>
- -OperationId <String> -Body <IAddOrUpdateResourcesRequest> [-AsJob] [-NoWait] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ -OperationId <String> -Body <IAddOrUpdateResourcesRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
 Update-AzResilienceManagementDrillResource -InputObject <IResilienceManagementIdentity> -OperationId <String>
- -Body <IAddOrUpdateResourcesRequest> [-AsJob] [-NoWait] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IAddOrUpdateResourcesRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
 Update-AzResilienceManagementDrillResource -InputObject <IResilienceManagementIdentity> -OperationId <String>
- -FaultDurationInMin <Int32> [-ForceInclusionAndUpdate <String>] [-ResourceListExcludeResources <String[]>]
- [-ResourceListIncludeResources <IIncludeOrUpdateResource[]>]
- [-ResourceListUpdateResources <IIncludeOrUpdateResource[]>] [-AsJob] [-NoWait] [-PassThru] [-Confirm]
+ -FaultDurationInMin <Int32> [-ForceInclusionAndUpdate <String>] [-ResourceListExcludeResource <String[]>]
+ [-ResourceListIncludeResource <IIncludeOrUpdateResource[]>]
+ [-ResourceListUpdateResource <IIncludeOrUpdateResource[]>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroup
+```
+Update-AzResilienceManagementDrillResource -DrillName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String>
+ -Body <IAddOrUpdateResourcesRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
+### UpdateViaIdentityServiceGroupExpanded
+```
+Update-AzResilienceManagementDrillResource -DrillName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String> -FaultDurationInMin <Int32>
+ [-ForceInclusionAndUpdate <String>] [-ResourceListExcludeResource <String[]>]
+ [-ResourceListIncludeResource <IIncludeOrUpdateResource[]>]
+ [-ResourceListUpdateResource <IIncludeOrUpdateResource[]>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonFilePath
+```
+Update-AzResilienceManagementDrillResource -DrillName <String> -ServiceGroupName <String>
+ -OperationId <String> -JsonFilePath <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonString
+```
+Update-AzResilienceManagementDrillResource -DrillName <String> -ServiceGroupName <String>
+ -OperationId <String> -JsonString <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
 ## DESCRIPTION
-This enables the user to include, exclude or add resources from their Drill.
+This enables the user to include, exclude or update resources from their Drill.
 
 ## EXAMPLES
 
@@ -89,10 +122,11 @@ Accept wildcard characters: False
 
 ### -Body
 Request body of the AddOrUpdateResources API.
+To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IAddOrUpdateResourcesRequest
-Parameter Sets: Update, UpdateViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IAddOrUpdateResourcesRequest
+Parameter Sets: Update, UpdateViaIdentity, UpdateViaIdentityServiceGroup
 Aliases:
 
 Required: True
@@ -102,12 +136,28 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
+
+```yaml
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -DrillName
 The name of the Drill
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -122,7 +172,7 @@ Duration of faults.
 
 ```yaml
 Type: System.Int32
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: True
@@ -137,7 +187,7 @@ Whether to allow inclusion and update despite attention reasons.
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -149,9 +199,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -159,6 +210,36 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -207,12 +288,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ResourceListExcludeResources
+### -ResourceListExcludeResource
 Excluded resource
 
 ```yaml
 Type: System.String[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -222,12 +303,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ResourceListIncludeResources
+### -ResourceListIncludeResource
 Include resource
+To construct, see NOTES section for RESOURCELISTINCLUDERESOURCE properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IIncludeOrUpdateResource[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IIncludeOrUpdateResource[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -237,18 +319,35 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ResourceListUpdateResources
+### -ResourceListUpdateResource
 Update resource
+To construct, see NOTES section for RESOURCELISTUPDATERESOURCE properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IIncludeOrUpdateResource[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IIncludeOrUpdateResource[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -257,7 +356,7 @@ The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -303,70 +402,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IAddOrUpdateResourcesRequest
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IAddOrUpdateResourcesRequest
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
 ## OUTPUTS
 
 ### System.Boolean
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`BODY <IAddOrUpdateResourcesRequest>`: Request body of the AddOrUpdateResources API.
-  - `FaultDurationInMin <Int32>`: Duration of faults.
-  - `[ForceInclusionAndUpdate <String>]`: Whether to allow inclusion and update despite attention reasons.
-  - `[ResourceListExcludeResources <List<String>>]`: Excluded resource
-  - `[ResourceListIncludeResources <List<IIncludeOrUpdateResource>>]`: Include resource
-    - `Id <String>`: Id of the DrillResource to be included (NOT the ARM Id of the underlying resource).
-    - `[CustomFaultName <String>]`: fault name
-    - `[CustomFaultScriptResourceId <String>]`: ID of ARM resource used for automation (e.g. Automation runbook URL).
-    - `[OverriddenDefaultFaultName <String>]`: fault name
-    - `[OverriddenDefaultFaultTargetResourceId <String>]`: ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource and not the actual resource which is to be simulated for faulting.
-    - `[OverriddenDefaultFaultUrn <String>]`: fault urn.
-  - `[ResourceListUpdateResources <List<IIncludeOrUpdateResource>>]`: Update resource
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
-
-`RESOURCELISTINCLUDERESOURCES <IIncludeOrUpdateResource[]>`: Include resource
-  - `Id <String>`: Id of the DrillResource to be included (NOT the ARM Id of the underlying resource).
-  - `[CustomFaultName <String>]`: fault name
-  - `[CustomFaultScriptResourceId <String>]`: ID of ARM resource used for automation (e.g. Automation runbook URL).
-  - `[OverriddenDefaultFaultName <String>]`: fault name
-  - `[OverriddenDefaultFaultTargetResourceId <String>]`: ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource and not the actual resource which is to be simulated for faulting.
-  - `[OverriddenDefaultFaultUrn <String>]`: fault urn.
-
-`RESOURCELISTUPDATERESOURCES <IIncludeOrUpdateResource[]>`: Update resource
-  - `Id <String>`: Id of the DrillResource to be included (NOT the ARM Id of the underlying resource).
-  - `[CustomFaultName <String>]`: fault name
-  - `[CustomFaultScriptResourceId <String>]`: ID of ARM resource used for automation (e.g. Automation runbook URL).
-  - `[OverriddenDefaultFaultName <String>]`: fault name
-  - `[OverriddenDefaultFaultTargetResourceId <String>]`: ARMId of the target resource where fault will be applied. For non-NSG, same as ResourceId. For NSG, its the NSG resource and not the actual resource which is to be simulated for faulting.
-  - `[OverriddenDefaultFaultUrn <String>]`: fault urn.
 
 ## RELATED LINKS
 

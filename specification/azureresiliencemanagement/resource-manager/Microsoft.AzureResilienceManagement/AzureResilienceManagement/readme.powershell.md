@@ -15,12 +15,25 @@ Result:
 -->
 
 ``` yaml $(powershell)
+# --- Flags below mirror azure-powershell/src/readme.azure.noprofile.md.
+#     Without azure:true + powershell:true + namespace:, autorest.powershell
+#     emits the "sample" template: Module class under Sample.API with only
+#     EventListener wired, and no auth handlers. Az.Accounts.Register-AzModule
+#     then cannot wire OnNewRequest / GetParameterValue / etc., every call
+#     goes out without Authorization, and Register-AzModule silently no-ops.
+#     Setting these three flags switches autorest to the management-sdk
+#     template that emits Microsoft.Azure.PowerShell.Cmdlets.<Service>.Module
+#     with all 10 handlers exposed.
+azure: true
+powershell: true
+namespace: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement
 azure-powershell-sdk-type: management-sdk
 service-name: ResilienceManagement
 subject-prefix: AzResilienceManagement
 root-namespace: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement
 module-name: Az.ResilienceManagement
 output-folder: $(this-folder)/generated/powershell
+clear-output-folder: true
 preview-chk: true
 ```
 
@@ -35,6 +48,21 @@ self-explanatory.
 
 ``` yaml $(powershell)
 directive:
+# --- CODEGEN BUG WORKAROUND: DrillProperties.errorDetails ---
+# autorest.powershell 4.0.674 mis-generates the discriminated subtypes
+# (RegionalDrillProperties, ZonalDrillProperties). It renames the flattened
+# `errorDetails` property to `ErrorDetail` on the base, then in the subclass
+# emits a colliding `ErrorDetail : List<IErrorDetail>` (the flattened `.details`
+# sub-list) plus a stray `ErrorDetails : IErrorDetail`. Both fail to match
+# the parent interface (CS9333/CS0539/CS0535).
+# The property is readOnly / server-populated, so dropping it from the swagger
+# for PowerShell codegen is safe — cmdlet users still see the underlying error
+# via the operation's failure response, and the model stays clean.
+- from: swagger-document
+  where: $.definitions.DrillProperties.properties
+  transform: >-
+    delete $["errorDetails"];
+
 # --- UsagePlans: two `List` endpoints (by-subscription vs by-resource-group).
 #      AutoRest strips trailing PascalCase words from operationIds when computing
 #      the variant name, so `ListBySubscription` / `ListByResourceGroup` /

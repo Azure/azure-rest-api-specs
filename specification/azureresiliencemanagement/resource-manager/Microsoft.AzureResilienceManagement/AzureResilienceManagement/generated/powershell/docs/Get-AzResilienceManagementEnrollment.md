@@ -14,19 +14,26 @@ Get an Enrollment.
 
 ### List (Default)
 ```
-Get-AzResilienceManagementEnrollment -ResourceGroupName <String> -SubscriptionId <String>
- -UsagePlanName <String> [<CommonParameters>]
+Get-AzResilienceManagementEnrollment -ResourceGroupName <String> -SubscriptionId <String[]>
+ -UsagePlanName <String> [-DefaultProfile <PSObject>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-AzResilienceManagementEnrollment -EnrollmentName <String> -ResourceGroupName <String>
- -SubscriptionId <String> -UsagePlanName <String> [<CommonParameters>]
+Get-AzResilienceManagementEnrollment -Name <String> -ResourceGroupName <String> -SubscriptionId <String[]>
+ -UsagePlanName <String> [-DefaultProfile <PSObject>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-AzResilienceManagementEnrollment -InputObject <IResilienceManagementIdentity> [<CommonParameters>]
+Get-AzResilienceManagementEnrollment -InputObject <IResilienceManagementIdentity> [-DefaultProfile <PSObject>]
+ [<CommonParameters>]
+```
+
+### GetViaIdentityUsagePlan
+```
+Get-AzResilienceManagementEnrollment -Name <String> -UsagePlanInputObject <IResilienceManagementIdentity>
+ [-DefaultProfile <PSObject>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,15 +65,16 @@ Get an Enrollment.
 
 ## PARAMETERS
 
-### -EnrollmentName
-The name of the enrollment.
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
 
 ```yaml
-Type: System.String
-Parameter Sets: Get
-Aliases:
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -75,9 +83,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: GetViaIdentity
 Aliases:
 
@@ -85,6 +94,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Name
+The name of the enrollment.
+
+```yaml
+Type: System.String
+Parameter Sets: Get, GetViaIdentityUsagePlan
+Aliases: EnrollmentName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -109,7 +133,7 @@ The ID of the target subscription.
 The value must be an UUID.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: Get, List
 Aliases:
 
@@ -117,6 +141,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UsagePlanInputObject
+Identity Parameter
+To construct, see NOTES section for USAGEPLANINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: GetViaIdentityUsagePlan
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -140,39 +180,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
 ## OUTPUTS
 
-### Sample.API.Models.IEnrollment
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IEnrollment
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
 
 ## RELATED LINKS
 

@@ -16,15 +16,29 @@ The URL expires at the returned expiryTimestamp and grants access to that single
 ### ListExpanded (Default)
 ```
 Get-AzResilienceManagementDrillRunReportDownloadUrl -DrillName <String> -DrillRunName <String>
- -ServiceGroupName <String> -OperationId <String> [-Format <String>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -ServiceGroupName <String> -OperationId <String> [-Format <String>] [-DefaultProfile <PSObject>] [-AsJob]
+ [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### List
 ```
 Get-AzResilienceManagementDrillRunReportDownloadUrl -DrillName <String> -DrillRunName <String>
- -ServiceGroupName <String> -OperationId <String> -Body <IListReportDownloadUrlRequest> [-AsJob] [-NoWait]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ -ServiceGroupName <String> -OperationId <String> -Body <IListReportDownloadUrlRequest>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### ListViaJsonFilePath
+```
+Get-AzResilienceManagementDrillRunReportDownloadUrl -DrillName <String> -DrillRunName <String>
+ -ServiceGroupName <String> -OperationId <String> -JsonFilePath <String> [-DefaultProfile <PSObject>] [-AsJob]
+ [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### ListViaJsonString
+```
+Get-AzResilienceManagementDrillRunReportDownloadUrl -DrillName <String> -DrillRunName <String>
+ -ServiceGroupName <String> -OperationId <String> -JsonString <String> [-DefaultProfile <PSObject>] [-AsJob]
+ [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -74,9 +88,10 @@ Accept wildcard characters: False
 
 ### -Body
 Request to mint a short-lived, read-only download URL for a Drill Run report.
+To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IListReportDownloadUrlRequest
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IListReportDownloadUrlRequest
 Parameter Sets: List
 Aliases:
 
@@ -84,6 +99,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
+
+```yaml
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -127,6 +158,36 @@ Parameter Sets: ListExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the List operation
+
+```yaml
+Type: System.String
+Parameter Sets: ListViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the List operation
+
+```yaml
+Type: System.String
+Parameter Sets: ListViaJsonString
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -214,21 +275,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IListReportDownloadUrlRequest
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IListReportDownloadUrlRequest
 
 ## OUTPUTS
 
-### Sample.API.Models.IListReportDownloadUrlResponse
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IListReportDownloadUrlResponse
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`BODY <IListReportDownloadUrlRequest>`: Request to mint a short-lived, read-only download URL for a Drill Run report.
-  - `[Format <String>]`: Format of the report to download. Defaults to Html when not specified.
 
 ## RELATED LINKS
 

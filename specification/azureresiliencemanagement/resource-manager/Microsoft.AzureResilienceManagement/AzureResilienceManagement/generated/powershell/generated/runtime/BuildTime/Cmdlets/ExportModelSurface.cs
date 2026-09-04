@@ -10,7 +10,7 @@ using System.Management.Automation;
 using System.Reflection;
 using System.Text;
 
-namespace Sample.API.Runtime.PowerShell
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.PowerShell
 {
   [Cmdlet(VerbsData.Export, "ModelSurface")]
   [DoNotExport]
@@ -23,7 +23,7 @@ namespace Sample.API.Runtime.PowerShell
     [Parameter]
     public bool UseExpandedFormat { get; set; }
 
-    private const string ModelNamespace = @"Sample.API.Models";
+    private const string ModelNamespace = @"Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models";
     private const string SupportNamespace = @"${$project.supportNamespace.fullName}";
 
     protected override void ProcessRecord()

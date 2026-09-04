@@ -15,26 +15,71 @@ This enables the user to add notes on this Drill Run.
 ### AddExpanded (Default)
 ```
 Add-AzResilienceManagementDrillRunNote -DrillName <String> -DrillRunName <String> -ServiceGroupName <String>
- -OperationId <String> [-Notes <String>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -OperationId <String> [-Note <String>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Add
 ```
 Add-AzResilienceManagementDrillRunNote -DrillName <String> -DrillRunName <String> -ServiceGroupName <String>
- -OperationId <String> -Body <IDrillRunAddNotesRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -OperationId <String> -Body <IDrillRunAddNotesRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### AddViaIdentity
 ```
 Add-AzResilienceManagementDrillRunNote -InputObject <IResilienceManagementIdentity> -OperationId <String>
- -Body <IDrillRunAddNotesRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IDrillRunAddNotesRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### AddViaIdentityDrill
+```
+Add-AzResilienceManagementDrillRunNote -DrillInputObject <IResilienceManagementIdentity>
+ -DrillRunName <String> -OperationId <String> -Body <IDrillRunAddNotesRequest> [-DefaultProfile <PSObject>]
+ [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### AddViaIdentityDrillExpanded
+```
+Add-AzResilienceManagementDrillRunNote -DrillInputObject <IResilienceManagementIdentity>
+ -DrillRunName <String> -OperationId <String> [-Note <String>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### AddViaIdentityExpanded
 ```
 Add-AzResilienceManagementDrillRunNote -InputObject <IResilienceManagementIdentity> -OperationId <String>
- [-Notes <String>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Note <String>] [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### AddViaIdentityServiceGroup
+```
+Add-AzResilienceManagementDrillRunNote -DrillName <String> -DrillRunName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String>
+ -Body <IDrillRunAddNotesRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### AddViaIdentityServiceGroupExpanded
+```
+Add-AzResilienceManagementDrillRunNote -DrillName <String> -DrillRunName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String> [-Note <String>]
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### AddViaJsonFilePath
+```
+Add-AzResilienceManagementDrillRunNote -DrillName <String> -DrillRunName <String> -ServiceGroupName <String>
+ -OperationId <String> -JsonFilePath <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### AddViaJsonString
+```
+Add-AzResilienceManagementDrillRunNote -DrillName <String> -DrillRunName <String> -ServiceGroupName <String>
+ -OperationId <String> -JsonString <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -83,10 +128,43 @@ Accept wildcard characters: False
 
 ### -Body
 Request body for AddNotes API.
+To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IDrillRunAddNotesRequest
-Parameter Sets: Add, AddViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IDrillRunAddNotesRequest
+Parameter Sets: Add, AddViaIdentity, AddViaIdentityDrill, AddViaIdentityServiceGroup
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
+
+```yaml
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DrillInputObject
+Identity Parameter
+To construct, see NOTES section for DRILLINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: AddViaIdentityDrill, AddViaIdentityDrillExpanded
 Aliases:
 
 Required: True
@@ -101,7 +179,7 @@ The name of the Drill
 
 ```yaml
 Type: System.String
-Parameter Sets: Add, AddExpanded
+Parameter Sets: Add, AddExpanded, AddViaIdentityServiceGroup, AddViaIdentityServiceGroupExpanded, AddViaJsonFilePath, AddViaJsonString
 Aliases:
 
 Required: True
@@ -116,7 +194,7 @@ The name of the DrillRun (GUID).
 
 ```yaml
 Type: System.String
-Parameter Sets: Add, AddExpanded
+Parameter Sets: Add, AddExpanded, AddViaIdentityDrill, AddViaIdentityDrillExpanded, AddViaIdentityServiceGroup, AddViaIdentityServiceGroupExpanded, AddViaJsonFilePath, AddViaJsonString
 Aliases:
 
 Required: True
@@ -128,9 +206,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: AddViaIdentity, AddViaIdentityExpanded
 Aliases:
 
@@ -141,12 +220,42 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Notes
+### -JsonFilePath
+Path of Json file supplied to the Add operation
+
+```yaml
+Type: System.String
+Parameter Sets: AddViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Add operation
+
+```yaml
+Type: System.String
+Parameter Sets: AddViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Note
 The notes string.
 
 ```yaml
 Type: System.String
-Parameter Sets: AddExpanded, AddViaIdentityExpanded
+Parameter Sets: AddExpanded, AddViaIdentityDrillExpanded, AddViaIdentityExpanded, AddViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -186,12 +295,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: AddViaIdentityServiceGroup, AddViaIdentityServiceGroupExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -ServiceGroupName
 The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Add, AddExpanded
+Parameter Sets: Add, AddExpanded, AddViaJsonFilePath, AddViaJsonString
 Aliases:
 
 Required: True
@@ -237,44 +362,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IDrillRunAddNotesRequest
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IDrillRunAddNotesRequest
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
 ## OUTPUTS
 
-### Sample.API.Models.IDrillRunActionResponse
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IDrillRunActionResponse
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`BODY <IDrillRunAddNotesRequest>`: Request body for AddNotes API.
-  - `[Notes <String>]`: The notes string.
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
 
 ## RELATED LINKS
 

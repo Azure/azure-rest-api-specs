@@ -19,7 +19,15 @@ Describe 'Get-AzResilienceManagementGoalResource' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'GetViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Get' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentityGoalAssignment' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

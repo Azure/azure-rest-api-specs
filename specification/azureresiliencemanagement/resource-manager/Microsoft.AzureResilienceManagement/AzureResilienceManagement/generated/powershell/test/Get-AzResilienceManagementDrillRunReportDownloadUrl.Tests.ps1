@@ -22,4 +22,12 @@ Describe 'Get-AzResilienceManagementDrillRunReportDownloadUrl' {
     It 'List' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
+
+    It 'ListViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ListViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
 }

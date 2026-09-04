@@ -16,39 +16,77 @@ This operation scans for new resources under the scope of the assignment.
 ### Refresh (Default)
 ```
 Update-AzResilienceManagementGoalAssignmentGoalResource -GoalAssignmentName <String>
- -ServiceGroupName <String> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -ServiceGroupName <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### RefreshViaIdentity
 ```
-Update-AzResilienceManagementGoalAssignmentGoalResource -InputObject <IResilienceManagementIdentity> [-AsJob]
- [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-AzResilienceManagementGoalAssignmentGoalResource -InputObject <IResilienceManagementIdentity>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### RefreshViaIdentityServiceGroup
+```
+Update-AzResilienceManagementGoalAssignmentGoalResource -GoalAssignmentName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
 Update-AzResilienceManagementGoalAssignmentGoalResource -GoalAssignmentName <String>
- -ServiceGroupName <String> -Body <IUpdateGoalResourceRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -ServiceGroupName <String> -Body <IUpdateGoalResourceRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateExpanded
 ```
 Update-AzResilienceManagementGoalAssignmentGoalResource -GoalAssignmentName <String>
- -ServiceGroupName <String> -Resources <IGoalResource[]> [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -ServiceGroupName <String> -Resource <IGoalResource[]> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
 Update-AzResilienceManagementGoalAssignmentGoalResource -InputObject <IResilienceManagementIdentity>
- -Body <IUpdateGoalResourceRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IUpdateGoalResourceRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
 Update-AzResilienceManagementGoalAssignmentGoalResource -InputObject <IResilienceManagementIdentity>
- -Resources <IGoalResource[]> [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Resource <IGoalResource[]> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroup
+```
+Update-AzResilienceManagementGoalAssignmentGoalResource -GoalAssignmentName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -Body <IUpdateGoalResourceRequest>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroupExpanded
+```
+Update-AzResilienceManagementGoalAssignmentGoalResource -GoalAssignmentName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -Resource <IGoalResource[]>
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonFilePath
+```
+Update-AzResilienceManagementGoalAssignmentGoalResource -GoalAssignmentName <String>
+ -ServiceGroupName <String> -JsonFilePath <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonString
+```
+Update-AzResilienceManagementGoalAssignmentGoalResource -GoalAssignmentName <String>
+ -ServiceGroupName <String> -JsonString <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -98,10 +136,11 @@ Accept wildcard characters: False
 
 ### -Body
 Request model for update goal resource.
+To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IUpdateGoalResourceRequest
-Parameter Sets: Update, UpdateViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IUpdateGoalResourceRequest
+Parameter Sets: Update, UpdateViaIdentity, UpdateViaIdentityServiceGroup
 Aliases:
 
 Required: True
@@ -111,12 +150,28 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
+
+```yaml
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -GoalAssignmentName
 The name of the GoalAssignment
 
 ```yaml
 Type: System.String
-Parameter Sets: Refresh, Update, UpdateExpanded
+Parameter Sets: Refresh, RefreshViaIdentityServiceGroup, Update, UpdateExpanded, UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -128,9 +183,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: RefreshViaIdentity, UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -138,6 +194,36 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -156,12 +242,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Resources
+### -Resource
 List of update goal resource.
+To construct, see NOTES section for RESOURCE properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IGoalResource[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IGoalResource[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: True
@@ -171,12 +258,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: RefreshViaIdentityServiceGroup, UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -ServiceGroupName
 The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Refresh, Update, UpdateExpanded
+Parameter Sets: Refresh, Update, UpdateExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -222,72 +325,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
-### Sample.API.Models.IUpdateGoalResourceRequest
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IUpdateGoalResourceRequest
 
 ## OUTPUTS
 
-### Sample.API.Models.IRefreshGoalResourcesResponse
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRefreshGoalResourcesResponse
 
-### Sample.API.Models.IUpdateGoalResourceResponse
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IUpdateGoalResourceResponse
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`BODY <IUpdateGoalResourceRequest>`: Request model for update goal resource.
-  - `Resources <List<IGoalResource>>`: List of update goal resource.
-    - `[DisasterRecoveryAttestationStatus <String>]`: Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation.
-    - `[DisasterRecoveryGoalParticipation <String>]`: Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.
-    - `[HighAvailabilityAttestationStatus <String>]`: Flag which depicts whether the Arm resource is manually attested for high availability recommendation.
-    - `[HighAvailabilityGoalParticipation <String>]`: Flag which depicts whether the Arm resource is excluded for high availability recommendation.
-    - `[ResourceArmId <String>]`: Arm Id of resource under the SG for which the extension resource is maintained.
-    - `[UserConfirmationForHighAvailability <List<IUserConfirmationItem>>]`: List of user confirmations for high availability solutions.
-      - `ConfirmationStatus <String>`: The confirmation status of the high availability solution.
-      - `SolutionDisplayName <String>`: The solution display name of the high availability solution.
-      - `[ReasonForRequestingConfirmation <String>]`: The reason for requesting user confirmation for the high availability solution.
-    - `[ZonalResiliencyAttestationStatus <String>]`: Flag which depicts whether the Arm resource is manually attested for resiliency recommendation.
-    - `[ZonalResiliencyGoalParticipation <String>]`: Flag which depicts whether the Arm resource is excluded for resiliency recommendation.
-    - `[ZonalResiliencyUserConfirmation <List<IUserConfirmationItem>>]`: List of user confirmations for resiliency solutions.
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
-
-`RESOURCES <IGoalResource[]>`: List of update goal resource.
-  - `[DisasterRecoveryAttestationStatus <String>]`: Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation.
-  - `[DisasterRecoveryGoalParticipation <String>]`: Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.
-  - `[HighAvailabilityAttestationStatus <String>]`: Flag which depicts whether the Arm resource is manually attested for high availability recommendation.
-  - `[HighAvailabilityGoalParticipation <String>]`: Flag which depicts whether the Arm resource is excluded for high availability recommendation.
-  - `[ResourceArmId <String>]`: Arm Id of resource under the SG for which the extension resource is maintained.
-  - `[UserConfirmationForHighAvailability <List<IUserConfirmationItem>>]`: List of user confirmations for high availability solutions.
-    - `ConfirmationStatus <String>`: The confirmation status of the high availability solution.
-    - `SolutionDisplayName <String>`: The solution display name of the high availability solution.
-    - `[ReasonForRequestingConfirmation <String>]`: The reason for requesting user confirmation for the high availability solution.
-  - `[ZonalResiliencyAttestationStatus <String>]`: Flag which depicts whether the Arm resource is manually attested for resiliency recommendation.
-  - `[ZonalResiliencyGoalParticipation <String>]`: Flag which depicts whether the Arm resource is excluded for resiliency recommendation.
-  - `[ZonalResiliencyUserConfirmation <List<IUserConfirmationItem>>]`: List of user confirmations for resiliency solutions.
 
 ## RELATED LINKS
 

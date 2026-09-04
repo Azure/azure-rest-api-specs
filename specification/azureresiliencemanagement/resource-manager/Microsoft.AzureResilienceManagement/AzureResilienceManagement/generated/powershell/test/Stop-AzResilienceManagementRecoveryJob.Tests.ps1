@@ -19,6 +19,30 @@ Describe 'Stop-AzResilienceManagementRecoveryJob' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'CancelViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CancelViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CancelViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CancelViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CancelViaIdentityRecoveryPlanExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CancelViaIdentityRecoveryPlan' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Cancel' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

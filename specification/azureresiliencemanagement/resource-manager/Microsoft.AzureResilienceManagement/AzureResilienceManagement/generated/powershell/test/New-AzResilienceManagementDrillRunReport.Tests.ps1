@@ -19,6 +19,14 @@ Describe 'New-AzResilienceManagementDrillRunReport' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'GenerateViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'GenerateViaIdentityDrill' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'GenerateViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

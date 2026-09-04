@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sample.API.generated.runtime.Properties
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.generated.runtime.Properties
 {
     using System;
 
@@ -45,7 +45,7 @@ namespace Sample.API.generated.runtime.Properties
             {
                 if (object.ReferenceEquals(resourceMan, null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sample.API.generated.runtime.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.generated.runtime.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

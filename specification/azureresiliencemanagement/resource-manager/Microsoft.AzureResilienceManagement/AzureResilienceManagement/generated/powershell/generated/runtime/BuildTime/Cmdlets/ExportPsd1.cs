@@ -8,9 +8,9 @@ using System.Linq;
 using System.Management.Automation;
 using System.Text;
 using System.Text.RegularExpressions;
-using static Sample.API.Runtime.PowerShell.PsHelpers;
+using static Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.PowerShell.PsHelpers;
 
-namespace Sample.API.Runtime.PowerShell
+namespace Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Runtime.PowerShell
 {
     [Cmdlet(VerbsData.Export, "Psd1")]
     [DoNotExport]
@@ -31,7 +31,7 @@ namespace Sample.API.Runtime.PowerShell
         [Parameter(Mandatory = true)]
         public Guid ModuleGuid { get; set; }
 
-        private static readonly bool IsAzure = Convert.ToBoolean(@"false");
+        private static readonly bool IsAzure = Convert.ToBoolean(@"true");
         private const string CustomFolderRelative = "./custom";
         private const string Indent = Psd1Indent;
         private const string Undefined = "undefined";

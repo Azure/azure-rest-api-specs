@@ -1,6 +1,6 @@
 ---
 Module Name: Az.ResilienceManagement
-Module Guid: 172c9b04-13d9-4a01-b801-4e85514a42fb
+Module Guid: 97081c07-0f75-4a30-b315-99270db1a0ce
 Download Help Link: https://learn.microsoft.com/powershell/module/az.resiliencemanagement
 Help Version: 1.0.0.0
 Locale: en-US
@@ -12,7 +12,7 @@ Locale: en-US
 
 ## Az.ResilienceManagement Cmdlets
 ### [Add-AzResilienceManagementDrillResource](Add-AzResilienceManagementDrillResource.md)
-This enables the user to include, exclude or add resources from their Drill.
+This enables the user to include, exclude or update resources from their Drill.
 
 ### [Add-AzResilienceManagementDrillRunNote](Add-AzResilienceManagementDrillRunNote.md)
 This enables the user to add notes on this Drill Run.
@@ -142,22 +142,22 @@ This unblocks a Failover workflow that is paused after the Fault stage, to proce
 This action resumes the ongoing recovery orchestration job that was paused for required user intervention.
 
 ### [Set-AzResilienceManagementEnrollment](Set-AzResilienceManagementEnrollment.md)
-Update an Enrollment.
+Create an Enrollment.
 
 ### [Set-AzResilienceManagementGoalAssignment](Set-AzResilienceManagementGoalAssignment.md)
-Update a GoalAssignment
+Create a GoalAssignment
 
 ### [Set-AzResilienceManagementGoalTemplate](Set-AzResilienceManagementGoalTemplate.md)
-Update a GoalTemplate
+Create a GoalTemplate
 
 ### [Set-AzResilienceManagementRecoveryPlan](Set-AzResilienceManagementRecoveryPlan.md)
-Update a RecoveryPlan
+Create a RecoveryPlan
 
 ### [Set-AzResilienceManagementRecoveryPlanAction](Set-AzResilienceManagementRecoveryPlanAction.md)
 This action triggers the failover operation on the recovery orchestration plan for the qualified resources.
 
 ### [Set-AzResilienceManagementUsagePlan](Set-AzResilienceManagementUsagePlan.md)
-Update a UsagePlan
+Create a UsagePlan
 
 ### [Start-AzResilienceManagementDrill](Start-AzResilienceManagementDrill.md)
 This starts a new running instance of the Drill.
@@ -205,7 +205,10 @@ This action checks if the recovery orchestration plan is eligible for test failo
 Update a Drill
 
 ### [Update-AzResilienceManagementDrillResource](Update-AzResilienceManagementDrillResource.md)
-This enables the user to include, exclude or add resources from their Drill.
+This enables the user to include, exclude or update resources from their Drill.
+
+### [Update-AzResilienceManagementEnrollment](Update-AzResilienceManagementEnrollment.md)
+Create an Enrollment.
 
 ### [Update-AzResilienceManagementGoalAssignment](Update-AzResilienceManagementGoalAssignment.md)
 Update a GoalAssignment
@@ -221,7 +224,7 @@ Update a GoalTemplate
 Update a RecoveryPlan
 
 ### [Update-AzResilienceManagementRecoveryPlanActionResource](Update-AzResilienceManagementRecoveryPlanActionResource.md)
-This action adds or update the resources to be included in the recovery orchestration plan.
+This action adds or updates the resources to be included in the recovery orchestration plan.
 
 ### [Update-AzResilienceManagementUsagePlan](Update-AzResilienceManagementUsagePlan.md)
 Update a UsagePlan

@@ -19,6 +19,22 @@ Describe 'Test-AzResilienceManagementRecoveryPlanReprotectValidation' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'ValidateViaJsonString' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ValidateViaJsonFilePath' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ValidateViaIdentityServiceGroupExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ValidateViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Validate' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

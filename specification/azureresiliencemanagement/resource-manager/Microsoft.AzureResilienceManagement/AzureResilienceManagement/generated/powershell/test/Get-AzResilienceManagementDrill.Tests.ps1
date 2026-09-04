@@ -19,6 +19,10 @@ Describe 'Get-AzResilienceManagementDrill' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'GetViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'Get' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

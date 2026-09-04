@@ -19,6 +19,10 @@ Describe 'Test-AzResilienceManagementDrillResyncReadiness' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'CheckViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'CheckViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

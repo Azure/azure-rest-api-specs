@@ -3,6 +3,9 @@
 This directory contains the PowerShell module for the Resources service.
 
 ---
+## Status
+[![Az.Resources.TestSupport](https://img.shields.io/powershellgallery/v/Az.Resources.TestSupport.svg?style=flat-square&label=Az.Resources.TestSupport "Az.Resources.TestSupport")](https://www.powershellgallery.com/packages/Az.Resources.TestSupport/)
+
 ## Info
 - Modifiable: yes
 - Generated: all
@@ -71,7 +74,7 @@ clear-output-folder: true
 
 ``` yaml
 input-file:
-  - https://github.com/Azure/azure-rest-api-specs/blob/d55f30f41f04e712de101fc9c17a591ca410bfed/specification/resources/resource-manager/Microsoft.Resources/stable/2018-05-01/resources.json
+  - $(repo)/specification/resources/resource-manager/Microsoft.Resources/stable/2018-05-01/resources.json
 module-name: Az.Resources.TestSupport
 namespace: Microsoft.Azure.PowerShell.Cmdlets.Resources
 

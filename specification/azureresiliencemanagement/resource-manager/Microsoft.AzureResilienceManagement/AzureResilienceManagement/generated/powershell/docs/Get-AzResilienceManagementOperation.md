@@ -13,7 +13,7 @@ List the operations for the provider
 ## SYNTAX
 
 ```
-Get-AzResilienceManagementOperation [<CommonParameters>]
+Get-AzResilienceManagementOperation [-DefaultProfile <PSObject>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,6 +45,22 @@ List the operations for the provider
 
 ## PARAMETERS
 
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
+
+```yaml
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -52,7 +68,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Sample.API.Models.IOperation
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IOperation
 
 ## NOTES
 

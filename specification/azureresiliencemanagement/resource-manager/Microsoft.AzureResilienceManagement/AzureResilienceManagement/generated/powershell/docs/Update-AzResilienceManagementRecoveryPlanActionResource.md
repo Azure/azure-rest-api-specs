@@ -8,40 +8,70 @@ schema: 2.0.0
 # Update-AzResilienceManagementRecoveryPlanActionResource
 
 ## SYNOPSIS
-This action adds or update the resources to be included in the recovery orchestration plan.
+This action adds or updates the resources to be included in the recovery orchestration plan.
 
 ## SYNTAX
 
 ### UpdateExpanded (Default)
 ```
 Update-AzResilienceManagementRecoveryPlanActionResource -RecoveryPlanName <String> -ServiceGroupName <String>
- -OperationId <String> [-ResourcesToRemove <String[]>] [-ResourcesToUpdate <IRecoveryResource[]>] [-AsJob]
- [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -OperationId <String> [-ResourcesToRemove <String[]>] [-ResourcesToUpdate <IRecoveryResource[]>]
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
 Update-AzResilienceManagementRecoveryPlanActionResource -RecoveryPlanName <String> -ServiceGroupName <String>
- -OperationId <String> -Body <IUpdateRecoveryResourcesRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -OperationId <String> -Body <IUpdateRecoveryResourcesRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
 Update-AzResilienceManagementRecoveryPlanActionResource -InputObject <IResilienceManagementIdentity>
- -OperationId <String> -Body <IUpdateRecoveryResourcesRequest> [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -OperationId <String> -Body <IUpdateRecoveryResourcesRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
 Update-AzResilienceManagementRecoveryPlanActionResource -InputObject <IResilienceManagementIdentity>
- -OperationId <String> [-ResourcesToRemove <String[]>] [-ResourcesToUpdate <IRecoveryResource[]>] [-AsJob]
- [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -OperationId <String> [-ResourcesToRemove <String[]>] [-ResourcesToUpdate <IRecoveryResource[]>]
+ [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroup
+```
+Update-AzResilienceManagementRecoveryPlanActionResource -RecoveryPlanName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String>
+ -Body <IUpdateRecoveryResourcesRequest> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### UpdateViaIdentityServiceGroupExpanded
+```
+Update-AzResilienceManagementRecoveryPlanActionResource -RecoveryPlanName <String>
+ -ServiceGroupInputObject <IResilienceManagementIdentity> -OperationId <String>
+ [-ResourcesToRemove <String[]>] [-ResourcesToUpdate <IRecoveryResource[]>] [-DefaultProfile <PSObject>]
+ [-AsJob] [-NoWait] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonFilePath
+```
+Update-AzResilienceManagementRecoveryPlanActionResource -RecoveryPlanName <String> -ServiceGroupName <String>
+ -OperationId <String> -JsonFilePath <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaJsonString
+```
+Update-AzResilienceManagementRecoveryPlanActionResource -RecoveryPlanName <String> -ServiceGroupName <String>
+ -OperationId <String> -JsonString <String> [-DefaultProfile <PSObject>] [-AsJob] [-NoWait] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This action adds or update the resources to be included in the recovery orchestration plan.
+This action adds or updates the resources to be included in the recovery orchestration plan.
 
 ## EXAMPLES
 
@@ -86,10 +116,11 @@ Accept wildcard characters: False
 
 ### -Body
 RecoveryResources post action request to update in batch.
+To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IUpdateRecoveryResourcesRequest
-Parameter Sets: Update, UpdateViaIdentity
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IUpdateRecoveryResourcesRequest
+Parameter Sets: Update, UpdateViaIdentity, UpdateViaIdentityServiceGroup
 Aliases:
 
 Required: True
@@ -99,11 +130,28 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -InputObject
-Identity Parameter
+### -DefaultProfile
+The DefaultProfile parameter is not functional.
+Use the SubscriptionId parameter when available if executing the cmdlet against a different subscription.
 
 ```yaml
-Type: Sample.API.Models.IResilienceManagementIdentity
+Type: System.Management.Automation.PSObject
+Parameter Sets: (All)
+Aliases: AzureRMContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -InputObject
+Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -111,6 +159,36 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -JsonFilePath
+Path of Json file supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonFilePath
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -JsonString
+Json string supplied to the Update operation
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateViaJsonString
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -149,7 +227,7 @@ The name of the recovery orchestration plan.
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -164,7 +242,7 @@ A list of recovery orchestration resources that need to be removed from the reco
 
 ```yaml
 Type: System.String[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -176,10 +254,11 @@ Accept wildcard characters: False
 
 ### -ResourcesToUpdate
 A list of recovery orchestration resources whose properties need to be updated.
+To construct, see NOTES section for RESOURCESTOUPDATE properties and create a hash table.
 
 ```yaml
-Type: Sample.API.Models.IRecoveryResource[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IRecoveryResource[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded, UpdateViaIdentityServiceGroupExpanded
 Aliases:
 
 Required: False
@@ -189,12 +268,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ServiceGroupInputObject
+Identity Parameter
+To construct, see NOTES section for SERVICEGROUPINPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
+Parameter Sets: UpdateViaIdentityServiceGroup, UpdateViaIdentityServiceGroupExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -ServiceGroupName
 The name of the service group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaJsonFilePath, UpdateViaJsonString
 Aliases:
 
 Required: True
@@ -240,61 +335,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Sample.API.Models.IResilienceManagementIdentity
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IResilienceManagementIdentity
 
-### Sample.API.Models.IUpdateRecoveryResourcesRequest
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IUpdateRecoveryResourcesRequest
 
 ## OUTPUTS
 
-### Sample.API.Models.IUpdateRecoveryResourcesResponse
+### Microsoft.Azure.PowerShell.Cmdlets.ResilienceManagement.Models.IUpdateRecoveryResourcesResponse
 
 ## NOTES
-
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-
-`BODY <IUpdateRecoveryResourcesRequest>`: RecoveryResources post action request to update in batch.
-  - `[ResourcesToRemove <List<String>>]`: A list of recovery orchestration resources that need to be removed from the recovery orchestration plan.
-  - `[ResourcesToUpdate <List<IRecoveryResource>>]`: A list of recovery orchestration resources whose properties need to be updated.
-    - `[AssociatedIdentityType <String>]`: Identity type linked with the resource
-    - `[AssociatedIdentityUserAssignedIdentity <String>]`: User assigned identity id linked with the resource
-    - `[InclusionState <String>]`: A state that indicates the resource status with respect to the recovery orchestration plan.
-    - `[RecoveryGroupId <String>]`: The recovery orchestration group id associated with the recovery resources.
-    - `[RecoveryResourceUniqueId <String>]`: A unique id for the recovery resource, which is a GUID.
-    - `[SelectedProtectionSolutionSettingProtectionSolutionType <String>]`: A setting that indicates the resource protected with which recovery solution.
-    - `[SelectedProtectionSolutionType <String>]`: A setting that indicates the protection solution selected.
-
-`INPUTOBJECT <IResilienceManagementIdentity>`: Identity Parameter
-  - `[DrillName <String>]`: The name of the Drill
-  - `[DrillResourceName <String>]`: The name of the DrillResource (GUID).
-  - `[DrillRunName <String>]`: The name of the DrillRun (GUID).
-  - `[DrillRunResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[EnrollmentName <String>]`: The name of the enrollment.
-  - `[GoalAssignmentName <String>]`: The name of the GoalAssignment
-  - `[GoalResourceName <String>]`: The name of the GoalAssignment
-  - `[GoalTemplateName <String>]`: The name of the goalTemplate
-  - `[Location <String>]`: The name of the Azure region.
-  - `[OperationId <String>]`: The ID of an ongoing async operation.
-  - `[RecoveryJobName <String>]`: The unique name (GUID) of the recovery job.
-  - `[RecoveryJobResourceName <String>]`: The unique name (GUID) of the recovery job resource.
-  - `[RecoveryPlanName <String>]`: The name of the recovery orchestration plan.
-  - `[RecoveryResourceName <String>]`: The unique name (Guid) of the recovery resource
-  - `[ResourceGroupName <String>]`: The name of the resource group. The name is case insensitive.
-  - `[ServiceGroupName <String>]`: The name of the service group.
-  - `[SubscriptionId <String>]`: The ID of the target subscription. The value must be an UUID.
-  - `[UnifiedResilienceItemName <String>]`: The name of the unified resilience item.
-  - `[UsagePlanName <String>]`: The name of the usage plan.
-
-`RESOURCESTOUPDATE <IRecoveryResource[]>`: A list of recovery orchestration resources whose properties need to be updated.
-  - `[AssociatedIdentityType <String>]`: Identity type linked with the resource
-  - `[AssociatedIdentityUserAssignedIdentity <String>]`: User assigned identity id linked with the resource
-  - `[InclusionState <String>]`: A state that indicates the resource status with respect to the recovery orchestration plan.
-  - `[RecoveryGroupId <String>]`: The recovery orchestration group id associated with the recovery resources.
-  - `[RecoveryResourceUniqueId <String>]`: A unique id for the recovery resource, which is a GUID.
-  - `[SelectedProtectionSolutionSettingProtectionSolutionType <String>]`: A setting that indicates the resource protected with which recovery solution.
-  - `[SelectedProtectionSolutionType <String>]`: A setting that indicates the protection solution selected.
 
 ## RELATED LINKS
 

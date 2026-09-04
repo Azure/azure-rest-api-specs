@@ -19,6 +19,14 @@ Describe 'Resume-AzResilienceManagementDrillRun' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
+    It 'ResumeViaIdentityServiceGroup' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'ResumeViaIdentityDrill' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
     It 'ResumeViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
